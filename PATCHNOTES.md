@@ -71,6 +71,24 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.3.1] — 2026-06-07
+
+### Changed
+- Buy Me a Coffee CTA section moved above the About Azqato pitch card so the support ask is the first thing visitors see after the hero.
+- CTA paragraph replaced with the full buymeacoffee disclaimer: investment intent statement and fund-use caveat.
+- Removed the "Opens buymeacoffee.com/azqato, One-time or monthly, 100% goes to the journey" sub-line from the CTA.
+- Removed duplicate investment paragraph from the pitch card body since it now lives in the CTA above.
+- All em dashes replaced with commas across `support.html` for improved readability.
+
+---
+
+## [1.3.2] — 2026-06-07
+
+### Changed
+- CTA disclaimer paragraph left-aligned for improved readability, while the emoji, heading, and button remain centered.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
