@@ -84,6 +84,11 @@
       color: var(--text);
     }
 
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     /* ── HERO ── */
     .hero {
       max-width: 1100px;
@@ -457,7 +462,8 @@
     <div class="nav-inner">
       <a class="nav-logo" href="#">Azqato<span>.</span></a>
       <ul class="nav-links">
-        <li><a href="https://azqato.github.io/" target="_blank" rel="noopener">Index</a></li>
+        <li><a href="index.html" class="active">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
@@ -494,8 +500,7 @@
   </section>
 
   <footer>
-    Built by <a href="https://github.com/Azqato" target="_blank" rel="noopener">Azqato</a> &mdash;
-    <a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a>
+    Built by <a href="https://github.com/Azqato" target="_blank" rel="noopener">Azqato</a>
   </footer>
 
   <script>

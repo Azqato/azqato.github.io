@@ -72,7 +72,8 @@ Drop `index.html` into any static host:
 
 ```
 .
-├── index.html       — portfolio / project grid (self-contained)
+├── index.html       — portfolio / project grid
+├── about.html       — about page: bio, role, and personal pitch
 ├── support.html     — support page: Buy Me a Coffee CTA + affiliate partners grid
 ├── README.md        — this file
 ├── PRD.md           — product requirements document

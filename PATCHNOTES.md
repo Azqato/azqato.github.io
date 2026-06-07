@@ -89,6 +89,20 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.4.0] — 2026-06-07
+
+### Added
+- `about.html` — dedicated About page with hero section and the Azqato pitch card (bio, role line, signature).
+- "About" nav link added to all pages pointing to `about.html`, with active state highlighted on `about.html`.
+- `.nav-links a.active` CSS rule added to `index.html` to support active nav highlighting.
+
+### Changed
+- Nav standardised across all pages: Portfolio, About, GitHub, Support. "Index" (external azqato.github.io link) replaced with "Portfolio" (relative `index.html` link) on all pages.
+- About Azqato pitch card moved from `support.html` to `about.html`. `support.html` now focuses solely on the Buy Me a Coffee CTA and affiliate partners.
+- Footer simplified to "Built by Azqato" across all pages, removing the redundant GitHub link from footer text.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD

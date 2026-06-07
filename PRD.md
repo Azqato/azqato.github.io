@@ -60,12 +60,22 @@ A personal portfolio website that serves as a centralized showcase for all of Az
 - The site is plain HTML/CSS/JS files with no external scripts, stylesheets, or fonts loaded.
 - Works offline after the initial load.
 
-### F6 — Support Page (`support.html`)
+### F6 — About Page (`about.html`)
+- Linked from the main nav as "About".
+- Hero section with status badge, headline, and subtitle.
+- Pitch card: avatar, name, role line, bio paragraphs, and signature.
+- Active nav state highlights "About" when on `about.html`.
+
+### F7 — Support Page (`support.html`)
 - Linked from the main nav as "Support".
-- Personal pitch section: avatar card with bio, role line, body text, and signature.
-- Buy Me a Coffee CTA section: prominent branded button linking to `buymeacoffee.com/azqato`, sub-copy explaining fund intent.
+- Buy Me a Coffee CTA section: prominent branded button linking to `buymeacoffee.com/azqato`, left-aligned disclaimer with investment intent and fund-use caveat.
 - Affiliate partners grid: square logo cards each showing a branded icon area, company name, promo badge, description, and CTA button. Placeholder links are used until real affiliate URLs are supplied.
-- Active nav state highlights the "Support" link when on `support.html`.
+- Active nav state highlights "Support" when on `support.html`.
+
+### F8 — Consistent Navigation
+- All pages share an identical nav structure: Portfolio, About, GitHub, Support.
+- The current page's nav link is highlighted via the `.active` class.
+- Footer is consistent across all pages: "Built by Azqato" with a single GitHub profile link.
 
 ---
 
