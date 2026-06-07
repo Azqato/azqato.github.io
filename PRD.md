@@ -57,9 +57,15 @@ A personal portfolio website that serves as a centralized showcase for all of Az
 - No JavaScript required for this section.
 
 ### F5 — Zero Dependencies
-- The entire site is a single `index.html` file.
-- No external scripts, stylesheets, or fonts are loaded.
+- The site is plain HTML/CSS/JS files with no external scripts, stylesheets, or fonts loaded.
 - Works offline after the initial load.
+
+### F6 — Support Page (`support.html`)
+- Linked from the main nav as "Support".
+- Personal pitch section: avatar card with bio, role line, body text, and signature.
+- Buy Me a Coffee CTA section: prominent branded button linking to `buymeacoffee.com/azqato`, sub-copy explaining fund intent.
+- Affiliate partners grid: square logo cards each showing a branded icon area, company name, promo badge, description, and CTA button. Placeholder links are used until real affiliate URLs are supplied.
+- Active nav state highlights the "Support" link when on `support.html`.
 
 ---
 

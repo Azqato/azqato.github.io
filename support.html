@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azqato | Support</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #ffa657;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --card-hover: #1c2128;
+      --tag-bg: #21262d;
+      --coffee: #FFDD00;
+      --coffee-hover: #FFE84D;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ── PITCH CARD ── */
+    .pitch-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pitch-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--orange));
+    }
+
+    .pitch-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pitch-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .pitch-identity h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .pitch-identity p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .pitch-body {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .pitch-body p strong {
+      color: var(--text);
+    }
+
+    .pitch-signature {
+      margin-top: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      text-align: center;
+      padding: 1rem 2rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .cta-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--coffee), var(--orange));
+    }
+
+    .cta-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .cta-inner h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-inner p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--coffee);
+      color: #1a1a1a;
+      padding: 0.9rem 2.5rem;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .cta-btn:hover {
+      background: var(--coffee-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 221, 0, 0.25);
+    }
+
+    .cta-sub {
+      margin-top: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── AFFILIATES ── */
+    .affiliate-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      padding: 0.6rem 1rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .affiliate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .affiliate-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .affiliate-card:hover {
+      background: var(--card-hover);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(88, 166, 255, 0.08);
+    }
+
+    .affiliate-card:hover .affiliate-logo {
+      transform: scale(1.05);
+    }
+
+    .affiliate-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .affiliate-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .affiliate-promo {
+      font-size: 0.75rem;
+      color: var(--green);
+      font-weight: 600;
+      background: rgba(63, 185, 80, 0.1);
+      border: 1px solid rgba(63, 185, 80, 0.2);
+      border-radius: 999px;
+      padding: 0.15rem 0.55rem;
+    }
+
+    .affiliate-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .affiliate-link-btn {
+      margin-top: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .affiliate-card:hover .affiliate-link-btn {
+      border-color: var(--accent);
+      background: rgba(88, 166, 255, 0.08);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 2rem; }
+      .section { padding: 2rem 1.25rem; }
+      .cta-section { padding: 1rem 1.25rem 2rem; }
+      .nav-links { display: none; }
+      .pitch-card { padding: 1.5rem; }
+      .cta-inner { padding: 2rem 1.25rem; }
+      .affiliate-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Portfolio</a></li>
+        <li><a href="https://azqato.github.io/" target="_blank" rel="noopener">Index</a></li>
+        <li><a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="support.html" class="active">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Thank you for being here</div>
+    <h1>You Make This <span class="highlight">Possible.</span></h1>
+    <p>Every coffee, every referral, every share — it compounds. Here's a little about who you're supporting and how you can help.</p>
+  </section>
+
+  <!-- PITCH -->
+  <section class="section" style="padding-top: 0;">
+    <h2 class="section-title">About Azqato</h2>
+    <div class="pitch-card">
+      <div class="pitch-header">
+        <div class="pitch-avatar">⚡</div>
+        <div class="pitch-identity">
+          <h3>Azqato (Azz-Kah-Toe)</h3>
+          <p>Investor &middot; Developer &middot; Community Builder &middot; also known as zoop</p>
+        </div>
+      </div>
+      <div class="pitch-body">
+        <p>
+          I have a deep love for <strong>gaming, investing, and music production</strong>. I stream, create, and build spaces where people can connect, grow, and have a great time doing it. On the dev side, I'm always working on new projects centered around <strong>finance tools and social platforms</strong> — all built with creativity and purpose.
+        </p>
+        <p>
+          Your support means everything to me. It is my intention to contribute every dollar directly into the <strong>stock market for long-term growth</strong>, because I believe in turning generosity into something that compounds over time — just like the communities we build together.
+        </p>
+        <p>
+          If you vibe with gaming, finance, or just want to back someone building cool things from scratch, I would love your support. Even a single coffee fuels the journey. Thank you, genuinely.
+        </p>
+        <div class="pitch-signature">Let's grow together. ⚡</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="cta-emoji">☕</span>
+      <h2>Buy Me a Coffee</h2>
+      <p>
+        Every dollar you send goes directly toward long-term investments — compounding just like the community we're building. No pressure, no subscriptions, just genuine gratitude for whatever you can spare.
+      </p>
+      <a class="cta-btn" href="https://buymeacoffee.com/azqato" target="_blank" rel="noopener">
+        ☕ Support on Buy Me a Coffee
+      </a>
+      <p class="cta-sub">Opens buymeacoffee.com/azqato &nbsp;&middot;&nbsp; One-time or monthly &nbsp;&middot;&nbsp; 100% goes to the journey</p>
+    </div>
+  </section>
+
+  <!-- AFFILIATES -->
+  <section class="section">
+    <h2 class="section-title">Affiliate Partners</h2>
+    <p class="affiliate-note">&#9432; Placeholder links — real affiliate URLs coming soon. Supporting through these earns us both a bonus.</p>
+
+    <div class="affiliate-grid">
+
+      <a class="affiliate-card" href="#" target="_blank" rel="noopener">
+        <div class="affiliate-logo" style="background: rgba(204,17,17,0.15); border: 1px solid rgba(204,17,17,0.3);">🚗</div>
+        <span class="affiliate-name">Tesla</span>
+        <span class="affiliate-promo">Referral Bonus</span>
+        <p class="affiliate-desc">Order a new Tesla with my referral link and unlock exclusive benefits for both of us.</p>
+        <span class="affiliate-link-btn">Use Referral &rarr;</span>
+      </a>
+
+      <a class="affiliate-card" href="#" target="_blank" rel="noopener">
+        <div class="affiliate-logo" style="background: rgba(0,200,5,0.12); border: 1px solid rgba(0,200,5,0.3);">📈</div>
+        <span class="affiliate-name">Robinhood</span>
+        <span class="affiliate-promo">Free Stock</span>
+        <p class="affiliate-desc">Sign up with my link and we both get a free stock valued up to $200. Zero commission trading.</p>
+        <span class="affiliate-link-btn">Claim Free Stock &rarr;</span>
+      </a>
+
+      <a class="affiliate-card" href="#" target="_blank" rel="noopener">
+        <div class="affiliate-logo" style="background: rgba(27,63,106,0.3); border: 1px solid rgba(88,166,255,0.25);">💼</div>
+        <span class="affiliate-name">M1 Finance</span>
+        <span class="affiliate-promo">Up to $500 Bonus</span>
+        <p class="affiliate-desc">Open and fund an M1 account to earn a cash bonus. Automated investing with pie-based portfolios.</p>
+        <span class="affiliate-link-btn">Open Account &rarr;</span>
+      </a>
+
+      <a class="affiliate-card" href="#" target="_blank" rel="noopener">
+        <div class="affiliate-logo" style="background: rgba(0,91,233,0.15); border: 1px solid rgba(0,91,233,0.3);">📊</div>
+        <span class="affiliate-name">Webull</span>
+        <span class="affiliate-promo">Up to 12 Free Shares</span>
+        <p class="affiliate-desc">Deposit $100 into a new Webull account and receive up to 12 free fractional shares.</p>
+        <span class="affiliate-link-btn">Get Free Shares &rarr;</span>
+      </a>
+
+      <a class="affiliate-card" href="#" target="_blank" rel="noopener">
+        <div class="affiliate-logo" style="background: rgba(0,82,255,0.15); border: 1px solid rgba(0,82,255,0.3);">🪙</div>
+        <span class="affiliate-name">Coinbase</span>
+        <span class="affiliate-promo">$10 in Bitcoin</span>
+        <p class="affiliate-desc">Earn $10 in Bitcoin when you sign up and complete a $100 crypto buy or sell on Coinbase.</p>
+        <span class="affiliate-link-btn">Earn Bitcoin &rarr;</span>
+      </a>
+
+      <a class="affiliate-card" href="#" target="_blank" rel="noopener">
+        <div class="affiliate-logo" style="background: rgba(61,82,213,0.15); border: 1px solid rgba(61,82,213,0.3);">🌐</div>
+        <span class="affiliate-name">Public</span>
+        <span class="affiliate-promo">Free Stock Slice</span>
+        <p class="affiliate-desc">Open and fund a new Public account and receive a free stock slice valued up to $300.</p>
+        <span class="affiliate-link-btn">Get Free Slice &rarr;</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://github.com/Azqato" target="_blank" rel="noopener">Azqato</a> &mdash;
+    <a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+</body>
+</html>

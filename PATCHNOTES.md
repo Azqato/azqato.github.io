@@ -60,6 +60,17 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.3.0] — 2026-06-07
+
+### Added
+- `support.html` — dedicated support page with a personal pitch, Buy Me a Coffee CTA (buymeacoffee.com/azqato), and an affiliate partners grid (6 placeholder cards: Tesla, Robinhood, M1 Finance, Webull, Coinbase, Public).
+- "Support" nav link added to `index.html` pointing to `support.html`.
+- "Support" nav link on `support.html` highlights as active to signal current page.
+- Affiliate card design: square logo area, promo badge, description, and CTA button.
+- Pitch card on support page with gradient top border, avatar, bio, and signature pulled from the buymeacoffee About section.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
