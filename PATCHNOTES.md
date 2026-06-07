@@ -25,6 +25,17 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.1.0] — 2026-06-06
+
+### Added
+- Three live projects populated from their READMEs: Net Worth Tracker, VIX Strategy, and Lantern.
+
+### Changed
+- Project card title now links to the live GitHub Pages site (`demo` URL) instead of the GitHub repository, making the primary action open the running app.
+- GitHub repository link retained as a separate icon button on each card alongside the live-site (↗) button.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD

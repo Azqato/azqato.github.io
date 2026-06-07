@@ -14,15 +14,17 @@ Edit the `PROJECTS` array near the bottom of `index.html`:
 {
   name: "My Project",
   desc: "A short description of what this project does.",
-  github: "https://github.com/Azqato/my-project",
+  github: "https://github.com/Azqato/my-project",  // repo link (GitHub icon button)
+  demo: "https://azqato.github.io/my-project/",    // live site (card title + ↗ button)
   tags: ["JavaScript", "CLI"],
   langClass: "lang-js",   // drives the tag color
   icon: "⚡",             // optional emoji
-  demo: "https://...",    // optional live demo link
   stars: "42",            // optional star count
   updated: "Jun 2025",    // optional last-updated label
 }
 ```
+
+**Card link behaviour:** the project title and ↗ button open the `demo` URL (the live GitHub Pages site). The GitHub icon button opens the `github` repo URL. If no `demo` is set, the title falls back to the `github` URL.
 
 ### `langClass` options
 
