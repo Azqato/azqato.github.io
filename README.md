@@ -28,7 +28,7 @@ Edit the `PROJECTS` array near the bottom of `index.html`:
 
 **Card link behaviour:** the project title and ↗ button open the `demo` URL (the live GitHub Pages site). The GitHub icon button opens the `github` repo URL. If no `demo` is set, the title falls back to the `github` URL.
 
-**Tags:** use broad category labels rather than tech-stack specifics so the filter bar stays clean. Current categories: `Finance`, `Social`.
+**Tags:** use broad category labels rather than tech-stack specifics so the filter bar stays clean. Current categories: `Finance`, `Gaming`, `Social`.
 
 ### `langClass` options
 

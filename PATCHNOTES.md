@@ -112,6 +112,14 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.5.0] — 2026-06-07
+
+### Added
+- Clan B5TA project card: community website for the RuneScape clan founded in 2014, tagged `Social` and `Gaming`, linking to the live GitHub Pages site and repo.
+- `Gaming` added as a new filter tag category.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
