@@ -103,6 +103,15 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.4.1] — 2026-06-07
+
+### Changed
+- About page bio expanded with full background story: gaming origins, Twitch and YouTube content creation, B5TA community on RuneScape and Discord, web development work, and closing call to join the journey.
+- Role line updated from "Investor, Developer, Community Builder" to "Content Creator, Web Developer, Community Leader" to better reflect the full bio.
+- Em dash removed from closing paragraph ("adventure, one built on...").
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
