@@ -589,7 +589,7 @@
               </a>
             </div>
           </div>
-          <a class="card-name" href="${p.github}" target="_blank" rel="noopener">${p.name}</a>
+          <a class="card-name" href="${p.demo || p.github}" target="_blank" rel="noopener">${p.name}</a>
           <p class="card-desc">${p.desc}</p>
           <div class="card-tags">${tags}</div>
           ${stars || updated ? `<div class="card-footer">${stars}${updated}</div>` : ''}
