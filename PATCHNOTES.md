@@ -53,6 +53,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.2.2] — 2026-06-06
+
+### Added
+- ⚡ emoji favicon added to all pages via inline SVG data URI — no external image file required.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD

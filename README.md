@@ -44,6 +44,16 @@ Edit the `PROJECTS` array near the bottom of `index.html`:
 | `lang-rust` | Rust       |
 | `lang-java` | Java       |
 
+## Favicon
+
+The site uses a ⚡ emoji favicon defined as an inline SVG data URI in the `<head>` — no image file needed. To change it, replace the emoji in this line in `index.html`:
+
+```html
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+```
+
+Add the same line to any future pages to keep the favicon consistent.
+
 ## Customizing
 
 All design tokens live in `:root` at the top of the `<style>` block in `index.html`. Change `--accent`, `--bg`, `--surface`, etc. to retheme instantly.
