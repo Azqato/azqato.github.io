@@ -45,6 +45,14 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.2.1] — 2026-06-06
+
+### Changed
+- README title updated from "Azqato Portfolio" to "Azqato's Portfolio".
+- Added live site link (`https://azqato.github.io/`) directly below the README title.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
