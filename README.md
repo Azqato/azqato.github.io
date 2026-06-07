@@ -16,7 +16,7 @@ Edit the `PROJECTS` array near the bottom of `index.html`:
   desc: "A short description of what this project does.",
   github: "https://github.com/Azqato/my-project",  // repo link (GitHub icon button)
   demo: "https://azqato.github.io/my-project/",    // live site (card title + ↗ button)
-  tags: ["JavaScript", "CLI"],
+  tags: ["Finance"],      // keep tags to high-level categories (e.g. Finance, Social)
   langClass: "lang-js",   // drives the tag color
   icon: "⚡",             // optional emoji
   stars: "42",            // optional star count
@@ -25,6 +25,8 @@ Edit the `PROJECTS` array near the bottom of `index.html`:
 ```
 
 **Card link behaviour:** the project title and ↗ button open the `demo` URL (the live GitHub Pages site). The GitHub icon button opens the `github` repo URL. If no `demo` is set, the title falls back to the `github` URL.
+
+**Tags:** use broad category labels rather than tech-stack specifics so the filter bar stays clean. Current categories: `Finance`, `Social`.
 
 ### `langClass` options
 

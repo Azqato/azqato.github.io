@@ -36,6 +36,15 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.2.0] — 2026-06-06
+
+### Changed
+- Project tags simplified to category-only labels: Net Worth Tracker and VIX Strategy tagged `Finance`; Lantern tagged `Social`. Removed tech-stack tags (JavaScript, Chart.js, Dashboard, Privacy, Tailwind CSS) from the filter bar.
+- Nav "Projects" link replaced with "Index", pointing to `https://azqato.github.io/`.
+- Removed "Browse Projects" secondary CTA button from the hero section.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
