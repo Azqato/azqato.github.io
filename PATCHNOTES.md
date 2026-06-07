@@ -120,6 +120,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.5.1] — 2026-06-07
+
+### Changed
+- Clan B5TA tag simplified from `Social, Gaming` to `Social` only. `Gaming` filter category removed; current categories are `Finance` and `Social`.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
