@@ -70,7 +70,7 @@ A personal portfolio website that serves as a centralized showcase for all of Az
 - Linked from the main nav as "Support".
 - Buy Me a Coffee CTA section: prominent branded button linking to `buymeacoffee.com/azqato`, left-aligned disclaimer with investment intent and fund-use caveat.
 - Affiliate partners grid: square logo cards each showing a branded icon area, company name, promo badge, description, and CTA button.
-  - Live affiliate links: Tesla (`ts.la/robert459550`), Robinhood (`join.robinhood.com/robertg273/`), M1 Finance (`m1.finance/BVZBG3OqOfMj`), Public (`share.public.com/azqato`).
+  - Live affiliate links: Tesla (`ts.la/robert459550`), Robinhood (`join.robinhood.com/robertg273/`), M1 Finance (`m1.finance/BVZBG3OqOfMj`), Public (`share.public.com/azqato`), Lyft (`lyft.com/invite/ROBGOLDY630855`).
   - Affiliate note is a plain-English disclaimer explaining how referral links work; no placeholder cards are shown.
 - Active nav state highlights "Support" when on `support.html`.
 

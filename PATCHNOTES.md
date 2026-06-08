@@ -182,6 +182,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.7.4] — 2026-06-07
+
+### Added
+- Lyft affiliate card: 50% off first ride up to $10 (`lyft.com/invite/ROBGOLDY630855`).
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
