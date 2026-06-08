@@ -165,6 +165,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.7.2] — 2026-06-07
+
+### Changed
+- M1 Finance affiliate card description updated to exact wording specified.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
