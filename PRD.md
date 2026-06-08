@@ -69,7 +69,9 @@ A personal portfolio website that serves as a centralized showcase for all of Az
 ### F7 — Support Page (`support.html`)
 - Linked from the main nav as "Support".
 - Buy Me a Coffee CTA section: prominent branded button linking to `buymeacoffee.com/azqato`, left-aligned disclaimer with investment intent and fund-use caveat.
-- Affiliate partners grid: square logo cards each showing a branded icon area, company name, promo badge, description, and CTA button. Placeholder links are used until real affiliate URLs are supplied.
+- Affiliate partners grid: square logo cards each showing a branded icon area, company name, promo badge, description, and CTA button.
+  - Live links: Public (`share.public.com/azqato`), Robinhood (`join.robinhood.com/robertg273/`), M1 Finance (`m1.finance/BVZBG3OqOfMj`).
+  - Placeholder links (real URLs pending): Tesla, Webull, Coinbase.
 - Active nav state highlights "Support" when on `support.html`.
 
 ### F8 — Consistent Navigation

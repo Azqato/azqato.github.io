@@ -148,6 +148,16 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.7.0] — 2026-06-07
+
+### Changed
+- Public affiliate card: real referral link added (`share.public.com/azqato`), promo updated to "Free $20", description updated to match.
+- Robinhood affiliate card: real referral link added (`join.robinhood.com/robertg273/`), promo updated to "Free $5–$200 Stock", description updated to match.
+- M1 Finance affiliate card: real referral link added (`m1.finance/BVZBG3OqOfMj`), promo updated to "Free $75 Bonus", description updated to reflect $10,000 funding requirement and M1 Premium benefit.
+- Affiliate section note updated from "Placeholder links" to "Some links are live, others are coming soon."
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
