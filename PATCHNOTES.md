@@ -158,6 +158,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.7.1] — 2026-06-07
+
+### Changed
+- Tesla affiliate card: real referral link added (`ts.la/robert459550`), promo updated to "Free 3 Months FSD", description updated to reflect 3 months of Full Self-Driving or $400 off Solar or Powerwall.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
