@@ -189,6 +189,30 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.8.0] — 2026-06-08
+
+### Added
+- `/docs/` directory created to house all project documentation.
+- `docs/TRD.md` — Technical Reference Document covering system architecture, tech stack, data models, internal data flow, state management, third-party integrations, performance requirements, and known technical debt.
+- `docs/DESIGN.md` — Design system document covering color palette (all CSS custom properties), typography, spacing, breakpoints, component patterns, accessibility standards, and motion rules.
+- `docs/PRFAQ.md` — Press release and FAQ (internal and external).
+- `docs/TENETS.md` — Product principles with 5 prioritized tenets.
+- `docs/METRICS.md` — Success metrics, targets, measurement methods, and reporting cadence.
+- `docs/ROADMAP.md` — Milestone table with current phase, planned features, and deferred items.
+- `docs/SECURITY.md` — Security model covering auth, data storage, third-party trust, attack surface, and dependency policy.
+- `docs/RUNBOOK.md` — Operational runbook with local setup, build, deploy, rollback, environment configs, common errors, and monitoring.
+
+### Changed
+- `PRD.md` moved from project root to `docs/PRD.md` and expanded with problem statement, target user personas, assumptions, and measurable success criteria.
+- `PATCHNOTES.md` moved from project root to `docs/PATCHNOTES.md`.
+- `README.md` updated with tech stack table, prerequisites section, environment variable reference (none), expanded deploy instructions, link to `/docs/`, and updated file overview reflecting the new `docs/` structure.
+
+### Removed
+- `PRD.md` from project root (moved to `docs/PRD.md`).
+- `PATCHNOTES.md` from project root (moved to `docs/PATCHNOTES.md`).
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
