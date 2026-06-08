@@ -516,6 +516,7 @@
     //
     //  Optional fields:
     //    icon        - emoji icon (default: "📦")
+    //    iconUrl     - URL to an image/SVG; takes precedence over icon if set
     //    demo        - live demo URL
     //    stars       - star count string e.g. "42"
     //    updated     - last-updated string e.g. "Jun 2025"
@@ -561,7 +562,7 @@
         demo: "https://azqato.github.io/Cat-Food-Center/",
         tags: ["Tools"],
         langClass: "lang-js",
-        icon: "🐱",
+        iconUrl: "https://azqato.github.io/Cat-Food-Center/favicon.svg",
         updated: "2025",
       },
       {
@@ -578,7 +579,9 @@
 
     // ── Render ──────────────────────────────────
     function buildCard(p) {
-      const icon      = p.icon || "📦";
+      const icon      = p.iconUrl
+        ? `<img src="${p.iconUrl}" width="22" height="22" alt="" style="display:block;">`
+        : (p.icon || "📦");
       const tags      = (p.tags || []).map((t, i) =>
         `<span class="tag ${i === 0 && p.langClass ? p.langClass : ''}">${t}</span>`
       ).join('');

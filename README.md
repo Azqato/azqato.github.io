@@ -21,6 +21,7 @@ Edit the `PROJECTS` array near the bottom of `index.html`:
   tags: ["Finance"],      // keep tags to high-level categories (e.g. Finance, Social)
   langClass: "lang-js",   // drives the tag color
   icon: "⚡",             // optional emoji
+  iconUrl: "https://…/favicon.svg", // optional image/SVG URL; overrides icon when set
   stars: "42",            // optional star count
   updated: "Jun 2025",    // optional last-updated label
 }

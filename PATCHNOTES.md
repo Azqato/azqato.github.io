@@ -138,6 +138,16 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.6.1] — 2026-06-07
+
+### Changed
+- Cat Food Center icon updated from 🐱 emoji to the project's own `favicon.svg` via the new `iconUrl` field.
+
+### Added
+- `iconUrl` optional field on project entries: accepts a URL to an image or SVG and takes precedence over `icon` when set.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
