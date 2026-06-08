@@ -127,6 +127,17 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.6.0] — 2026-06-07
+
+### Added
+- Cat Food Center project card: mobile-first PWA for evaluating cat food via barcode scan or search, tagged `Tools`, linking to the live GitHub Pages site and repo.
+- `Tools` added as a new filter tag category.
+
+### Changed
+- Net Worth Tracker tagged with `Tools` in addition to `Finance`.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
