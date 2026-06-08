@@ -172,6 +172,16 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.7.3] — 2026-06-07
+
+### Changed
+- Affiliate section note replaced with a plain-English disclaimer explaining how referral links work.
+
+### Removed
+- Webull and Coinbase placeholder cards removed from the affiliate grid.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
