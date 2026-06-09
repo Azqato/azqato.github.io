@@ -216,6 +216,12 @@ Format: `[version] — YYYY-MM-DD`
 ### Added
 - ComposerAtlas project card: curated strategy library and education hub for Composer.trade investing, featuring strategy pages with plain-English logic breakdowns, risk profiles, metrics tables, and a glossary of systematic investing concepts. Tagged `Finance` and `Tools`.
 
+## [1.9.1] — 2026-06-08
+
+### Changed
+- ComposerAtlas and Cat Food Center tagged with `Education` to reflect their educational content.
+- `Education` added as a new filter tag category.
+
 ---
 
 <!-- Template for future entries:
