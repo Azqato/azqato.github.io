@@ -211,6 +211,11 @@ Format: `[version] — YYYY-MM-DD`
 - `PRD.md` from project root (moved to `docs/PRD.md`).
 - `PATCHNOTES.md` from project root (moved to `docs/PATCHNOTES.md`).
 
+## [1.9.0] — 2026-06-08
+
+### Added
+- ComposerAtlas project card: curated strategy library and education hub for Composer.trade investing, featuring strategy pages with plain-English logic breakdowns, risk profiles, metrics tables, and a glossary of systematic investing concepts. Tagged `Finance` and `Tools`.
+
 ---
 
 <!-- Template for future entries:

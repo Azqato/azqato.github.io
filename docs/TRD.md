@@ -69,12 +69,13 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 }
 ```
 
-**Current projects (v1.7.4):**
+**Current projects (v1.9.0):**
 
 | Name               | Tags            | Language  | Has Demo |
 |--------------------|-----------------|-----------|----------|
 | Net Worth Tracker  | Finance, Tools  | JS        | Yes      |
 | VIX Strategy       | Finance         | JS        | Yes      |
+| ComposerAtlas      | Finance, Tools  | JS        | Yes      |
 | Lantern            | Social          | JS        | Yes      |
 | Cat Food Center    | Tools           | JS        | Yes      |
 | Clan B5TA          | Social          | HTML      | Yes      |
