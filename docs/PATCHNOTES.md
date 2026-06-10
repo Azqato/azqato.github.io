@@ -224,6 +224,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.9.2] — 2026-06-09
+
+### Changed
+- Buy Me a Coffee CTA paragraph split: main text ends with `*` asterisk; disclaimer moved below the button in smaller italic text.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
