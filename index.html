@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azqato - Stock Picking Methodology</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-wrapper">
+    <div class="site-layout">
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <a href="index.html">Individual Stocks<span>.</span></a>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <ul>
+            <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+            <li><a href="metrics.html">Metrics</a></li>
+            <li><a href="screener.html">Screener</a></li>
+            <li><a href="watchlist.html">Watchlist</a></li>
+            <li><a href="indices.html">Indices</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="https://azqato.github.io/support.html" target="_blank" rel="noopener">Support</a></li>
+          </ul>
+        </nav>
+        <div class="sidebar-footer">
+          Educational use only.<br>Not financial advice.
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="content-inner">
+
+          <!-- Hero -->
+          <section class="hero">
+            <div class="hero-badge">📈 Methodology Documentation</div>
+            <p class="hero-thesis">Buy companies with strong growth fundamentals. Hold them. <span class="highlight">Do not sell.</span></p>
+            <p class="hero-sub">A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise.</p>
+          </section>
+
+          <!-- Strategy Overview -->
+          <section class="section">
+            <h2>The Strategy</h2>
+            <p>The core idea is simple: find companies with durable revenue growth, expanding earnings, and healthy balance sheets, then hold them long enough for compounding to work. Entry timing is guided by RSI and 52-week range positioning. Exit timing is, by design, almost never.</p>
+            <p>Stocks enter the portfolio only after passing a 10-metric evaluation screen. Stocks enter the watchlist when fundamentals are strong but the price is not yet at an attractive entry point. The portfolio is intentionally concentrated in high-conviction names where the underlying thesis is fully understood.</p>
+            <p>The biggest risk in long-term investing is not volatility. It is selling a great company too early because the price scared you. The Palantir story in the <a href="faq.html#palantir">FAQ</a> explains exactly how costly that mistake can be.</p>
+            <p>Holding positions for more than twelve months also unlocks a significant tax advantage. In most jurisdictions, assets held longer than one year qualify for long-term capital gains treatment -- a substantially lower tax rate than short-term gains, which are taxed at the ordinary income rate. For most investors, the difference is 10 to 20 percentage points. Selling a winning position too early does not just interrupt compounding -- it accelerates the tax bill on every dollar of gain. A strategy built around holding is not just a better investment philosophy; it is a more tax-efficient one.</p>
+          </section>
+
+          <!-- Metric Cards Grid -->
+          <section class="section">
+            <h2>The 10 Metrics</h2>
+            <p class="lead">Every position is evaluated against these ten signals before entry. <a href="metrics.html">Read the full glossary.</a></p>
+            <div class="metric-grid">
+              <div class="metric-card">
+                <div class="metric-card-name">Revenue Growth TTM</div>
+                <p class="metric-card-def">Actual top-line growth over the trailing twelve months. Confirms the business is growing in reality, not just in projections.</p>
+                <a href="metrics.html#metric-rev-ttm" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">Revenue Growth FWD</div>
+                <p class="metric-card-def">Analyst consensus estimate for next-year revenue growth. Shows the trajectory the market is currently pricing in.</p>
+                <a href="metrics.html#metric-rev-fwd" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">EPS Growth TTM</div>
+                <p class="metric-card-def">Earnings per share growth over the past twelve months. Confirms revenue growth is translating into actual profit growth.</p>
+                <a href="metrics.html#metric-eps-ttm" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">EPS Growth FWD</div>
+                <p class="metric-card-def">Consensus forward EPS growth estimate. The primary input into the PEG calculation and a key signal for future valuation.</p>
+                <a href="metrics.html#metric-eps-fwd" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">P/E FWD</div>
+                <p class="metric-card-def">What you are paying today for the next twelve months of estimated earnings. The primary valuation anchor, but requires growth context.</p>
+                <a href="metrics.html#metric-pe-fwd" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">PEG FWD</div>
+                <p class="metric-card-def">The single most important number in this methodology. Normalizes valuation by growth rate. Below 1.0 often signals an undervalued compounder.</p>
+                <a href="metrics.html#metric-peg-fwd" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">Total Cash</div>
+                <p class="metric-card-def">Cash, equivalents, and short-term investments. A strong cash position provides optionality: acquisitions, buybacks, R&amp;D, or surviving a downturn.</p>
+                <a href="metrics.html#metric-cash" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">Total Debt</div>
+                <p class="metric-card-def">All short and long-term debt obligations. High debt amplifies downside risk and eats into earnings through interest expense.</p>
+                <a href="metrics.html#metric-debt" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">RSI</div>
+                <p class="metric-card-def">Relative Strength Index. A momentum signal used only for entry timing. RSI below 40 often means a stock has been sold off relative to its fundamentals.</p>
+                <a href="metrics.html#metric-rsi" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+              <div class="metric-card">
+                <div class="metric-card-name">52-Week Range</div>
+                <p class="metric-card-def">Where the current price sits within its annual high and low. Buying near the 52W low on a quality company often improves long-term risk/reward.</p>
+                <a href="metrics.html#metric-52w" class="metric-card-link">Learn more &rarr;</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Target Metric Ranges -->
+          <section class="section">
+            <h2>What Strong Metrics Look Like</h2>
+            <p class="lead" style="margin-bottom: 16px;">A quick-reference guide to reading each metric. These are the target ranges and warning zones used when evaluating any position.</p>
+            <div class="table-wrap">
+              <table>
+                <caption class="visually-hidden">Target metric ranges and signals</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Metric</th>
+                    <th scope="col">Strong Signal</th>
+                    <th scope="col">Caution Zone</th>
+                    <th scope="col">What It Confirms</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="ticker-cell">Rev Growth FWD</td>
+                    <td><span class="badge badge-good">&gt; 15%</span></td>
+                    <td><span class="badge badge-caution">&lt; 8%</span></td>
+                    <td>Top-line momentum is real and expanding</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">EPS Growth FWD</td>
+                    <td><span class="badge badge-good">&gt; 15%</span></td>
+                    <td><span class="badge badge-caution">Flat or declining</span></td>
+                    <td>Revenue growth is converting into profit growth</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">PEG FWD</td>
+                    <td><span class="badge badge-good">&lt; 1.0</span></td>
+                    <td><span class="badge badge-caution">&gt; 2.0</span></td>
+                    <td>Growth is underpriced relative to the multiple paid</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">P/E FWD</td>
+                    <td><span class="badge badge-good">P/E &lt; EPS Growth %</span></td>
+                    <td><span class="badge badge-caution">P/E &gt; EPS Growth %</span></td>
+                    <td>Growth rate outpaces the multiple paid -- the stock is underpriced relative to its earnings trajectory. Also compare to 5Y avg and sector.</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">Cash / Debt</td>
+                    <td><span class="badge badge-good">Cash &gt; Debt</span></td>
+                    <td><span class="badge badge-caution">Debt &gt; 3x Cash</span></td>
+                    <td>Balance sheet can survive a downturn without dilution</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">RSI (entry)</td>
+                    <td><span class="badge badge-good">30 to 45</span></td>
+                    <td><span class="badge badge-caution">&gt; 70</span></td>
+                    <td>Stock has pulled back to a reasonable entry point</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">52W Range (entry)</td>
+                    <td><span class="badge badge-good">Lower 25%</span></td>
+                    <td><span class="badge badge-caution">Upper 90%</span></td>
+                    <td>Price is near a range low, improving risk/reward</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="table-note">These are directional guidelines, not hard rules. Each metric must be read in context of the others. A company can have a P/E above its 5-year average and still be a strong buy if the PEG is below 1.0 and growth is accelerating. The full picture matters more than any single number.</p>
+          </section>
+
+          <!-- Portfolio vs Watchlist -->
+          <section class="section">
+            <h2>Portfolio vs. Watchlist</h2>
+            <p>Not every company that passes the 10-metric screen belongs in the portfolio immediately. The distinction between a portfolio holding and a watchlist name comes down to timing.</p>
+            <p>A company earns a portfolio position when: the fundamentals pass the full evaluation, the business model is understood well enough to hold through a 50% drawdown without flinching, and the RSI and 52-week range suggest the current price is at or near a favorable entry point.</p>
+            <p>A company earns a watchlist position when: the fundamentals are strong but the stock is extended -- RSI is elevated, the price is near a 52-week high, or the PEG has temporarily moved above target because the stock ran ahead of its earnings growth. The watchlist is a patience queue. It prevents buying quality companies at the wrong price.</p>
+            <p>The transition from watchlist to portfolio happens when the market corrects, the stock pulls back, and the RSI and range positioning align with the entry criteria above. Patience here is a strategy, not a passive state.</p>
+          </section>
+
+          <!-- FAQ Teaser -->
+          <div class="faq-teaser">
+            <p>Why do I never sell? <a href="faq.html#palantir">Read the Palantir story.</a></p>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+
+    <footer class="site-footer">
+      Built by <a href="https://azqato.github.io/" target="_blank" rel="noopener">Azqato</a><span style="color: var(--color-text-secondary);">.</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

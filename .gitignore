@@ -1,0 +1,12 @@
+# Orphaned files (replaced by renamed versions)
+guide.html
+finviz.html
+indexes.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
