@@ -4,6 +4,8 @@
 
 The portfolio uses a GitHub Dark-inspired aesthetic to signal developer credibility without requiring any explanation. The visual language is intentional: if it looks at home on github.com, it belongs here. Motion is used only to confirm interactivity — never for decoration — and every element defaults to the minimum necessary complexity.
 
+The accent color follows the same brand green used across Azqato's projects (see [Net Worth Tracker design system](https://github.com/Azqato/net-worth-tracker/blob/main/docs/DESIGN.md)): a teal-green (`#00d4a0`) that replaces the previous GitHub blue. Green is used for all primary interactive elements — links, active nav states, CTA buttons, card hover borders, and tag highlights.
+
 ---
 
 ## Color Palette
@@ -15,8 +17,8 @@ All colors are defined as CSS custom properties in the `:root` block of each pag
 | `--bg`           | `#0d1117`   | Page background                                   |
 | `--surface`      | `#161b22`   | Card background, nav bar, pitch card              |
 | `--border`       | `#30363d`   | All borders and dividers                          |
-| `--accent`       | `#58a6ff`   | Primary interactive color (links, active states)  |
-| `--accent-hover` | `#79c0ff`   | Hover state for accent-colored elements           |
+| `--accent`       | `#00d4a0`   | Primary interactive color (links, active states)  |
+| `--accent-hover` | `#00e6b0`   | Hover state for accent-colored elements           |
 | `--green`        | `#3fb950`   | "Available" status badge, success states          |
 | `--purple`       | `#bc8cff`   | Secondary accent (role badge on About page)       |
 | `--orange`       | `#ffa657`   | Tertiary accent (used sparingly)                  |
