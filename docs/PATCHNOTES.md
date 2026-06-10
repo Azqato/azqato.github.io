@@ -282,6 +282,14 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [2.0.3] — 2026-06-09
+
+### Changed
+- Privacy Policy link moved from all page footers to the More section on `links.html` as a button.
+- Footers across all 9 pages simplified back to "Built by Azqato" only.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
