@@ -290,6 +290,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [2.0.4] — 2026-06-09
+
+### Changed
+- Footer byline updated to "Built by Azqato." on all pages — period is outside the link element so it renders in `--text-muted` rather than the accent green.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
