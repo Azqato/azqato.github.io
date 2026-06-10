@@ -1,4 +1,4 @@
-# PRD.md — TQQQ Strategies Site
+# PRD.md — Leveraged Strategies Site
 
 **Version:** 1.4
 **Status:** Active

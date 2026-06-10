@@ -1,7 +1,21 @@
-# PATCHNOTES.md — TQQQ Strategies Site
+# PATCHNOTES.md — Leveraged Strategies Site
 
 Format: each entry lists the version, date, milestone tag, and a flat list of what changed.
 Versions follow `M<milestone>.<patch>` until the site goes live, then switch to semver.
+
+---
+
+## [M3.2] — 2026-06-10 — Site rename to Leveraged Strategies
+
+Renamed the site from "TQQQ Strategies" to "Leveraged Strategies" across all HTML pages and documentation.
+
+### Changed
+- All 7 HTML pages — `<title>` and `.site-label` span updated from "TQQQ Strategies" to "Leveraged Strategies"
+- `index.html` — `<h1>` heading updated from "TQQQ Strategies" to "Leveraged Strategies"
+- `README.md` — top-level heading updated
+- `docs/design.md` — document title and sidebar site-label reference updated
+- `docs/prd.md` — document title updated
+- `docs/patchnotes.md` — document title updated; this entry
 
 ---
 

@@ -1,4 +1,4 @@
-# DESIGN.md — TQQQ Strategies Site
+# DESIGN.md — Leveraged Strategies Site
 
 **Version:** 1.2
 **Status:** Active
@@ -96,7 +96,7 @@ Sidebar collapses to sticky top bar with backdrop blur
 Persistent on desktop. Contents, top to bottom:
 
 - Logo: `Azqato.` with teal dot
-- Site label: "TQQQ Strategies"
+- Site label: "Leveraged Strategies"
 - Page links: Home, then one link per strategy (derived from `/strategies/*.md`), then Support (external link to `https://azqato.github.io/support.html`)
 - "On This Page" anchor links when on a strategy page (Overview, Rules and Logic, Performance Notes, Risks, Resources), highlighted on scroll via IntersectionObserver
 - Footer line: "Educational use only. Not financial advice."

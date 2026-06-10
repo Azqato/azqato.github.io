@@ -1,4 +1,4 @@
-# TQQQ Strategies
+# Leveraged Strategies
 
 A static, multi-page educational site covering six leveraged ETF strategies. Built with vanilla HTML, CSS, and JavaScript. No frameworks, no build tools. Hosted on GitHub Pages.
 
