@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9 Sig — TQQQ Strategies</title>
+  <meta name="description" content="The 9 Sig quarterly value-averaging strategy by Jason Kelly. A signal-based system using a 9% quarterly target with TQQQ, the 3x Nasdaq-100 ETF.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="top-bar" aria-label="Site navigation">
+    <div class="top-bar-inner">
+      <span class="logo-text">Azqato<span class="logo-dot">.</span></span>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
+        <svg width="20" height="15" viewBox="0 0 20 15" fill="none" aria-hidden="true">
+          <rect y="0" width="20" height="2" rx="1" fill="currentColor"/>
+          <rect y="6.5" width="20" height="2" rx="1" fill="currentColor"/>
+          <rect y="13" width="20" height="2" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <div class="top-bar-nav" id="mobile-nav" hidden>
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="3sig.html" class="nav-link">3 Sig</a></li>
+        <li><a href="6sig.html" class="nav-link">6 Sig</a></li>
+        <li><a href="9sig.html" class="nav-link active" aria-current="page">9 Sig</a></li>
+        <li><a href="tqqq-ftlt.html" class="nav-link">TQQQ FTLT</a></li>
+        <li><a href="holy-grail.html" class="nav-link">Holy Grail</a></li>
+        <li><a href="hfea.html" class="nav-link">HFEA</a></li>
+        <li><a href="https://azqato.github.io/support.html" class="nav-link">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Site navigation">
+      <div class="sidebar-logo">
+        <span class="logo-text">Azqato<span class="logo-dot">.</span></span>
+        <span class="site-label">TQQQ Strategies</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Pages">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="3sig.html" class="nav-link">3 Sig</a></li>
+          <li><a href="6sig.html" class="nav-link">6 Sig</a></li>
+          <li><a href="9sig.html" class="nav-link active" aria-current="page">9 Sig</a></li>
+          <li><a href="tqqq-ftlt.html" class="nav-link">TQQQ FTLT</a></li>
+          <li><a href="holy-grail.html" class="nav-link">Holy Grail</a></li>
+          <li><a href="hfea.html" class="nav-link">HFEA</a></li>
+          <li><a href="https://azqato.github.io/support.html" class="nav-link">Support</a></li>
+        </ul>
+        <div class="on-this-page">
+          <span class="on-this-page-label">On This Page</span>
+          <ul>
+            <li><a href="#overview" class="anchor-link">Overview</a></li>
+            <li><a href="#rules" class="anchor-link">Rules and Logic</a></li>
+            <li><a href="#performance" class="anchor-link">Performance Notes</a></li>
+            <li><a href="#risks" class="anchor-link">Risks and Caveats</a></li>
+            <li><a href="#resources" class="anchor-link">Resources</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p class="sidebar-disclaimer">Educational use only. Not financial advice.</p>
+    </aside>
+
+    <div class="content-wrap">
+      <main id="main-content">
+
+        <div class="hero">
+          <div class="hero-badge">
+            <span class="hero-badge-dot" style="background: var(--color-strat-9sig);"></span>
+            Quarterly Rebalancing
+          </div>
+          <h1>9 Sig</h1>
+          <p class="lead">A quarterly value-averaging strategy targeting 9% quarterly growth in <span class="ticker">TQQQ</span> against a bond buffer. The most aggressive tier of Jason Kelly's Signal plan family, with two additional safeguards — a 90% buying power throttle and a Spike Reset — designed to manage 3x leverage. Managed through the Kelly Letter subscription.</p>
+        </div>
+
+        <section id="overview" aria-labelledby="overview-heading">
+          <h2 id="overview-heading">Overview</h2>
+
+          <p>The 9% Signal (9 Sig) is the most aggressive tier of Jason Kelly's Signal plan family. It pairs <span class="ticker">TQQQ</span> — the ProShares UltraPro QQQ 3x leveraged Nasdaq-100 ETF — with a bond fund and rebalances quarterly to a 9% quarterly growth target.</p>
+
+          <p>The plan belongs to a three-tier family based on leverage multiplier. The quarterly target scales with the fund's leverage ratio: 3% &times; 1x (unleveraged, 3 Sig), 3% &times; 2x (6 Sig), 3% &times; 3x (9 Sig). The 9% target derives from the Nasdaq-100's historical annual return of approximately 12–14%, which corresponds to roughly 3% per quarter. Applied to a 3x leveraged fund, the equivalent quarterly target is 9%.</p>
+
+          <p>The core mechanics — value averaging, signal line calculation, quarterly execution, and the 30 Down Rule — are the same across all three plans. The differences are the fund used, the quarterly target percentage, the 30 Down Rule's ignore count, and some additional safeguards unique to 9 Sig that manage the extreme volatility of 3x leverage.</p>
+
+          <p>The system is described as purely reactive: there are no forecasts, no market timing decisions, and no macroeconomic analysis. Each quarter, the investor compares the current <span class="ticker">TQQQ</span> balance to a target balance that grows at 9% per quarter. If below target, buy. If above target, sell the excess. The bond fund serves as the reserve for purchases and the destination for profits.</p>
+
+          <p>Jason Kelly created 9 Sig as an extension of the 3 Sig system he introduced in his 2015 book <em>The 3% Signal</em>. The 9 Sig plan is managed through The Kelly Letter subscription service and is not covered in a standalone book. Kelly's own account following 9 Sig grew from approximately $733,000 in January 2018 to approximately $5.9 million by the end of December 2024.</p>
+        </section>
+
+        <section id="rules" aria-labelledby="rules-heading">
+          <h2 id="rules-heading">Rules and Logic</h2>
+
+          <h3>Starting allocation</h3>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">9 Sig starting allocation</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Asset</th>
+                  <th scope="col">Fund</th>
+                  <th scope="col">Weight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Stock fund</td>
+                  <td><span class="ticker">TQQQ</span> (ProShares UltraPro QQQ, 3x Nasdaq-100)</td>
+                  <td class="num">60%</td>
+                </tr>
+                <tr>
+                  <td>Bond fund</td>
+                  <td><span class="ticker">AGG</span> (or alternatives: <span class="ticker">SGOV</span>, <span class="ticker">USFR</span>, <span class="ticker">SPAXX</span>, <span class="ticker">BOXX</span>)</td>
+                  <td class="num">40%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The 60/40 allocation is both the starting position and the target to which the plan resets after the 30 Down phase ends. During normal operation, the actual ratio drifts continuously — it has ranged historically as high as 99% <span class="ticker">TQQQ</span> depending on market conditions.</p>
+
+          <p>The official plan uses <span class="ticker">AGG</span> as the bond fund. Community practitioners often substitute short-term Treasury ETFs (<span class="ticker">SGOV</span>, <span class="ticker">TBLL</span>), money market funds (<span class="ticker">SPAXX</span>), or other stable instruments to avoid the interest rate sensitivity of intermediate-term bond funds.</p>
+
+          <h3>Signal line calculation</h3>
+
+          <div class="callout callout-info">
+            <strong>Base formula:</strong>
+            Signal line = (Previous quarter-end TQQQ balance) &times; 1.09<br><br>
+            <strong>With new cash contributions:</strong>
+            Signal line = (Previous quarter-end TQQQ balance) &times; 1.09 + (Half of new quarterly contributions)
+          </div>
+
+          <p>All new cash contributed during a quarter goes entirely to the bond fund. At rebalancing time, half of those contributions is added to the signal line target.</p>
+
+          <h3>Quarterly rebalancing</h3>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">9 Sig quarterly rebalancing actions</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Outcome</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="ticker">TQQQ</span> balance &gt; signal line</td>
+                  <td>Sell the surplus; proceeds go to bond fund</td>
+                </tr>
+                <tr>
+                  <td><span class="ticker">TQQQ</span> balance &lt; signal line</td>
+                  <td>Buy the shortfall; funded from bond fund</td>
+                </tr>
+                <tr>
+                  <td><span class="ticker">TQQQ</span> balance = signal line</td>
+                  <td>No trade</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Additional safeguards (9 Sig only)</h3>
+
+          <p><strong>90% Buying Power Throttle:</strong> No single quarterly buy signal may use more than 90% of the current bond fund balance. This preserves a minimum reserve after large purchases and prevents a single extreme buy signal from exhausting the entire buffer.</p>
+
+          <p><strong>Spike Reset Trigger:</strong> If all three of the following conditions are true simultaneously, the plan resets <span class="ticker">TQQQ</span> to a 60% allocation:</p>
+          <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li>TQQQ's quarterly gain was 100% or more</li>
+            <li>The TQQQ balance after the quarterly rebalance is between 60% and 100% of total portfolio</li>
+            <li>The plan is not currently in a 30 Down no-sell period</li>
+          </ul>
+          <p>This rule books profits during extreme bull-market spikes and rebuilds the bond buffer while <span class="ticker">TQQQ</span> is at an elevated price.</p>
+
+          <h3>30 Down Rule</h3>
+
+          <p>The 30 Down Rule activates when <span class="ticker">TQQQ</span>'s quarterly closing price falls at least 30% below its quarterly closing price high within the rolling past two years. Only quarterly closing prices are monitored — intra-quarter prices do not trigger the rule.</p>
+
+          <p>When active: the next <strong>2 sell signals are ignored</strong>. Buy signals during the locked phase are followed as normal. After 2 sell signals have been ignored (within two years), the plan <strong>resets to the 60/40 base allocation</strong> and resumes normal operations.</p>
+
+          <p><strong>Historical 30 Down activations for 9 Sig:</strong></p>
+          <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li><strong>Spring 2020 (COVID crash):</strong> Plan locked through the 2020–2021 recovery. <span class="ticker">TQQQ</span> allocation ran as high as 99% while locked in. The lock prevented selling during the ascent. The plan eventually signaled a rebalance reset near the recovery peak and resumed normal operations.</li>
+            <li><strong>2022 (Federal Reserve rate hike cycle):</strong> <span class="ticker">TQQQ</span> dropped sharply. Plan locked in. Bond fund was exhausted by mid-2022, leaving the plan at 100% TQQQ with no buffer. The 30 Down rule prevented any sell signals during the subsequent recovery. The plan reset to 60/40 in January 2024 after the two ignored-sell threshold was reached.</li>
+          </ul>
+        </section>
+
+        <section id="performance" aria-labelledby="performance-heading">
+          <h2 id="performance-heading">Performance Notes</h2>
+
+          <p>The 9% quarterly signal projects to approximately 41.2% annually (1.09<sup>4</sup> &minus; 1 &asymp; 41.16%). This is the target growth rate for the <span class="ticker">TQQQ</span> position each quarter, funded from bonds when the market falls short.</p>
+
+          <h3>Kelly Letter official portfolio</h3>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">Kelly Letter 9 Sig portfolio tracking</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Period</th>
+                  <th scope="col">Portfolio value</th>
+                  <th scope="col">Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>January 2018</td>
+                  <td class="num">~$733,000</td>
+                  <td>Start of tracked period</td>
+                </tr>
+                <tr>
+                  <td>2022 (low)</td>
+                  <td class="num">Not disclosed</td>
+                  <td>Bond fund exhausted; 100% TQQQ during 2022 bear</td>
+                </tr>
+                <tr>
+                  <td>January 2023</td>
+                  <td class="num">~$1,500,000</td>
+                  <td>Start of 2023 tracking period</td>
+                </tr>
+                <tr>
+                  <td>December 2023</td>
+                  <td class="num positive">~$4,100,000</td>
+                  <td>+173% for the year; 99% TQQQ allocation all year</td>
+                </tr>
+                <tr>
+                  <td>December 2024</td>
+                  <td class="num positive">~$5,900,000</td>
+                  <td>End of tracked period</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The 2023 result was driven by two factors: <span class="ticker">TQQQ</span>'s recovery from 2022 lows, and the 30 Down lock-in that kept the plan at 99% TQQQ allocation through the entire year rather than selling into the recovery.</p>
+
+          <h3>Independent corrected backtest — BestFolio (2024, real data only)</h3>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">9 Sig corrected backtest results</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Metric</th>
+                  <th scope="col">9 Sig (<span class="ticker">TQQQ</span> + <span class="ticker">AGG</span>, 2010–2026)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CAGR</td>
+                  <td class="num positive">39.4%</td>
+                </tr>
+                <tr>
+                  <td>Max drawdown</td>
+                  <td class="num negative">&minus;72.1%</td>
+                </tr>
+                <tr>
+                  <td>Sharpe ratio</td>
+                  <td class="num">0.82</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>This window (2010–2026) is almost entirely within an exceptionally favorable period for the Nasdaq-100. 9 Sig's Sharpe ratio is higher than 6 Sig's despite its deeper leverage because TQQQ's risk-adjusted returns in the test window were exceptional.</p>
+
+          <h3>Simulated dot-com bubble scenario</h3>
+
+          <p>Without ongoing cash contributions, 9 Sig through the dot-com crash (2000–2002) would have taken approximately 18–20 years to recover to pre-crash levels. The 2004–2024 period (avoiding the crash) simulated a CAGR of approximately 25%. Note: simulated <span class="ticker">TQQQ</span> data for pre-2009 periods uses a mathematical approximation and cannot be verified with the same confidence as actual fund returns.</p>
+
+          <h3>Closed-system stress test (BestFolio bootstrap)</h3>
+
+          <p>Testing 2,000 resampled 27-year histories of 9 Sig's actual returns:</p>
+          <ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+            <li>Median outcome: &minus;98% maximum drawdown with 7.7&times; terminal multiple</li>
+            <li>Worst 5%: effectively total loss</li>
+            <li>Best 5%: &minus;82% drawdown with 3,665&times; terminal multiple</li>
+          </ul>
+          <p>The &minus;99.73% closed-system drawdown in an extended synthetic dot-com scenario is described as "not a tail event — it is essentially the median" without ongoing contributions.</p>
+        </section>
+
+        <section id="risks" aria-labelledby="risks-heading">
+          <h2 id="risks-heading">Risks and Caveats</h2>
+          <div class="callout callout-risk" role="note" aria-label="Risk notice">
+            <strong>Leveraged ETF Risk Notice</strong>
+            <span class="ticker">TQQQ</span> is a 3x leveraged ETF subject to daily reset and volatility decay. A 50% decline in the Nasdaq-100 does not produce a 150% loss — due to daily compounding, it produces a near-total wipeout. In 2022, TQQQ declined approximately 77% from its peak. The 9 Sig bond buffer was fully exhausted mid-year, leaving the plan at 100% TQQQ with no reserve. The corrected backtest maximum drawdown is &minus;72.1%. In a closed-system stress test without contributions, the median simulated outcome includes a &minus;98% drawdown.
+          </div>
+
+          <p><strong>The plan is not viable as a closed system without ongoing contributions.</strong> Regular contributions refill the bond buffer after bear market drawdowns, raise the signal line, and sustain the buy-low mechanic. Without contributions, a severe and extended bear market exhausts the bond fund, leaving 100% <span class="ticker">TQQQ</span> at a depressed price with nothing left to buy further dips. The dot-com simulation shows this can result in 18–20 years to break even.</p>
+
+          <p><strong>3x leverage amplifies losses at a non-linear rate.</strong> <span class="ticker">TQQQ</span> resets its 3x leverage ratio daily. A 50% decline in the Nasdaq-100 does not produce a 150% loss in TQQQ — it produces a near-total wipeout due to daily compounding of amplified moves. Recovering a 77% loss requires a 335% gain.</p>
+
+          <p><strong>Bond buffer depletion.</strong> In 2022, the 9 Sig plan exhausted its bond buffer mid-year. With no bonds remaining, every subsequent buy signal went unfunded. The plan held 100% <span class="ticker">TQQQ</span> through the rest of 2022 with no ability to buy at the lows. This occurred in a real live account.</p>
+
+          <p><strong>Bond fund losses in rising rate environments.</strong> <span class="ticker">AGG</span> lost value in 2022 due to the rate hiking cycle, simultaneously with TQQQ's decline. Community members have migrated to short-term Treasury ETFs (<span class="ticker">SGOV</span>, <span class="ticker">TBLL</span>) and money market funds for the bond sleeve precisely to avoid this correlation.</p>
+
+          <p><strong>TQQQ volatility decay.</strong> <span class="ticker">TQQQ</span> resets its leverage daily. In sideways, choppy markets, the mathematical effect of daily compounding produces a performance drag against the theoretical 3x return of the Nasdaq-100. The offset from quarterly rebalancing is partial, not complete.</p>
+
+          <p><strong>The 9% target does not adapt to market conditions.</strong> The signal line grows at 9% per quarter regardless of valuations or market regimes. In sustained bear markets, the plan keeps buying. There is no mechanism to recognize that recovery may be delayed.</p>
+
+          <p><strong>Sequence of returns risk at entry.</strong> Entering 9 Sig near a market peak with a large lump sum and immediately encountering a multi-year bear market is the worst-case scenario. New investors are sometimes advised to consider a scaled-in entry rather than immediate full deployment.</p>
+
+          <p><strong>Tax drag in taxable accounts.</strong> Quarterly sell signals on <span class="ticker">TQQQ</span> in a taxable account generate short-term capital gains at ordinary income rates. Tax-advantaged accounts are strongly preferred.</p>
+        </section>
+
+        <section id="resources" aria-labelledby="resources-heading">
+          <h2 id="resources-heading">Resources</h2>
+
+          <p><em>The 3% Signal</em> (Jason Kelly, 2015, Plume/Penguin) — covers the core signal mechanics in detail via the unleveraged 3 Sig plan; these apply directly to 9 Sig with <span class="ticker">TQQQ</span> and the 9% target substituted. ISBN: 978-0142180952.</p>
+
+          <p>The Kelly Letter (<a href="https://jasonkelly.com">jasonkelly.com</a>) — Jason Kelly's subscriber newsletter. Contains the official weekly plan status, current <span class="ticker">TQQQ</span> signal line value, 30 Down Rule state, and all plan rules including the Spike Reset and 90% throttle that are not publicly documented elsewhere.</p>
+
+          <p><a href="https://jasonkelly.com/resources/strategies/">jasonkelly.com/resources/strategies/</a> — Free public summary of all three plans.</p>
+
+          <p><a href="https://bestfolio.app/blog/kelly-signal-danger-v2">BestFolio corrected backtest</a> — Independent analysis with corrected implementation across all three plans; includes 9 Sig's closed-system stress test and the five simulation errors present in prior community tools.</p>
+        </section>
+
+      </main>
+
+      <footer>
+        <p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
