@@ -318,6 +318,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [2.2.1] — 2026-06-10
+
+### Changed
+- TQQQ Strategies card icon updated from ⚡ to 🚀 to match the site's favicon.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
