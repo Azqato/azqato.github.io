@@ -323,14 +323,33 @@ For the vanilla rebuild, target desktop-first with a basic mobile breakpoint at 
 
 ---
 
-## Assets Needed
+## Image Assets
 
-| Asset | Source | Notes |
-|---|---|---|
-| Cat avatar / logo | Google Sites CDN | Need to re-host or replace |
-| Home hero profile image | Google Sites CDN | Need to re-host or replace |
-| About profile image | Google Sites CDN | Different image from home |
-| YouTube channel thumbnails (4) | YouTube API or screenshot | Can fetch from YouTube directly |
-| Favicon | Same cat avatar | Circular crop |
+All images are saved in `oldwebsite/img/`. Use the table below as the definitive reference for which file goes where.
 
-> All original images are hosted on `lh3.googleusercontent.com/sitesv/` and will break once the domain migrates away from Google Sites. Images must be saved and self-hosted.
+| File | Page(s) | Placement | Notes |
+|---|---|---|---|
+| `logo-cat-avatar.jpg` | All pages | Nav bar — logo left of "Azqato" wordmark | Also used as favicon (circular crop) |
+| `home-hero-profile.jpg` | `/home` | Hero section left column | Cat avatar in front of YouTube play button backdrop |
+| `about-profile.jpg` | `/about` | Hero section left column | Different pose/background from home image |
+| `yt-thumb-azqato.jpg` | `/youtube` | Channel card 1 (Azqato) | Square crop; add green circular border ring |
+| `yt-thumb-streams.jpg` | `/youtube` | Channel card 2 (Azqato Streams) | Square crop; no special border |
+| `yt-thumb-mixes.jpg` | `/youtube` | Channel card 3 (Azqato Mixes) | Square crop; no special border |
+| `yt-thumb-chills.jpg` | `/youtube` | Channel card 4 (Azqato Chills) | Square crop; no special border |
+| `yt-channel-azqato.jpg` | `/youtube` | Alt avatar for Azqato channel card | 900px YouTube channel avatar; use if yt-thumb looks wrong |
+| `yt-channel-streams.jpg` | `/youtube` | Alt avatar for Streams channel card | 900px YouTube channel avatar |
+| `yt-channel-mixes.jpg` | `/youtube` | Alt avatar for Mixes channel card | 900px YouTube channel avatar |
+| `yt-channel-chills.jpg` | `/youtube` | Alt avatar for Chills channel card | 900px YouTube channel avatar |
+| `music-playlist-bangers.jpg` | `/music` | Playlist card — BANGERS | "Feat. Drops" playlist cover |
+| `music-playlist-addictions.jpg` | `/music` | Playlist card — ADDICTIONS | "Feat. Vocals" playlist cover |
+| `music-logo-small.jpg` | `/music` | Secondary image (small, 44 KB) | Likely the logo used again on the music page |
+
+### Favicon
+
+Use `logo-cat-avatar.jpg`, cropped to a circle, as the favicon. In HTML:
+
+```html
+<link rel="icon" href="img/logo-cat-avatar.jpg" />
+```
+
+Or convert to `.ico` / inline SVG for best browser support.
