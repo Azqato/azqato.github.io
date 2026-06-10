@@ -1,0 +1,472 @@
+:root {
+  --bg: #000000;
+  --text: #ffffff;
+  --text-muted: #cccccc;
+  --btn-bg: #6666cc;
+  --btn-hover: #7777dd;
+  --link: #7777dd;
+  --link-visited: #9966cc;
+  --footer-text: #888888;
+  --nav-active: #ffffff;
+  --nav-inactive: #cccccc;
+  --channel-ring: #00ff00;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+/* ── NAV ── */
+nav {
+  background: var(--bg);
+  padding: 0.7rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.nav-logo img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--nav-inactive);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+  color: var(--nav-active);
+}
+
+.nav-links a.active {
+  color: var(--nav-active);
+  font-weight: bold;
+}
+
+/* ── LAYOUT SHELL ── */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+/* ── HERO (Home + About) ── */
+.hero {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+.hero-img {
+  width: 290px;
+  height: 290px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.hero-text h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.hero-text p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-weight: bold;
+}
+
+.hero-text a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+/* ── BUTTON GRID ── */
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  background: var(--btn-bg);
+  color: var(--text);
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 0.5rem;
+  font-size: 0.88rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  transition: background 0.15s;
+  line-height: 1.3;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.btn:visited {
+  color: var(--text);
+}
+
+/* ── ABOUT PAGE ── */
+.about-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-weight: bold;
+}
+
+.about-bio a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.about-bio a:visited {
+  color: var(--link-visited);
+}
+
+/* ── YOUTUBE PAGE ── */
+.channel-grid {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.channel-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  text-align: center;
+}
+
+.channel-thumb {
+  width: 175px;
+  height: 175px;
+  object-fit: cover;
+  display: block;
+}
+
+.channel-thumb.ring {
+  border-radius: 50%;
+  border: 4px solid var(--channel-ring);
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.35);
+}
+
+.channel-card a {
+  color: var(--link);
+  text-decoration: underline;
+  font-size: 0.92rem;
+}
+
+.channel-card a:visited {
+  color: var(--link-visited);
+}
+
+/* ── INVESTS PAGE ── */
+.invests-intro {
+  color: var(--text-muted);
+  font-weight: bold;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.invests-intro a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.invests-section h3 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.invests-section ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.35rem;
+}
+
+.invests-section a {
+  color: var(--link);
+  text-decoration: underline;
+  font-size: 0.88rem;
+}
+
+.invests-section a:visited {
+  color: var(--link-visited);
+}
+
+.invests-section a:hover {
+  color: #aabbff;
+}
+
+/* ── MUSIC PAGE ── */
+.music-intro {
+  text-align: center;
+  color: var(--text-muted);
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+}
+
+.playlist-grid {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.playlist-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: opacity 0.15s;
+}
+
+.playlist-card:hover {
+  opacity: 0.8;
+}
+
+.playlist-card img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+.playlist-name {
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--text);
+  margin-top: 0.25rem;
+}
+
+.playlist-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ── ACCOUNTS PAGE ── */
+.accounts-platform {
+  margin-bottom: 2rem;
+}
+
+.accounts-platform h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.accounts-platform ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.accounts-platform a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.accounts-platform a:visited {
+  color: var(--link-visited);
+}
+
+/* ── PRIVACY PAGE ── */
+.privacy-content {
+  color: var(--text-muted);
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+}
+
+.privacy-content h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.privacy-content p {
+  font-size: 0.95rem;
+}
+
+/* ── FOOTER ── */
+footer {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem 2rem;
+  font-size: 0.75rem;
+  color: var(--footer-text);
+}
+
+footer ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+footer a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+footer a:visited {
+  color: var(--link-visited);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .btn-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .channel-grid {
+    gap: 1.5rem;
+  }
+
+  .channel-thumb {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 540px) {
+  nav {
+    padding: 0.6rem 1rem;
+  }
+
+  .nav-links {
+    gap: 0.9rem;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+  }
+
+  main {
+    padding: 1.75rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .btn-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer {
+    padding: 1rem 1rem 1.5rem;
+  }
+}
