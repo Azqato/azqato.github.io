@@ -231,6 +231,14 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [1.9.3] — 2026-06-09
+
+### Added
+- Boaty McBoatface Ventures project card: humorous marketing site for a fictional New England canvas exo-skeleton water displacement company, tagged `Meme`.
+- `Meme` added as a new filter tag category.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
