@@ -89,6 +89,7 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 | Cat Food Center           | Tools, Education           | JS        | Yes      |
 | Clan B5TA                 | Social                     | HTML      | Yes      |
 | Boaty McBoatface Ventures | Meme                       | HTML      | Yes      |
+| Stock Methodology         | Finance, Education         | HTML      | Yes      |
 
 ### Affiliate Card (defined in `support.html` markup)
 
