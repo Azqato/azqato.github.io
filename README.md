@@ -3,7 +3,9 @@
 A static, multi-page educational site covering six leveraged ETF strategies. Built with vanilla HTML, CSS, and JavaScript. No frameworks, no build tools. Hosted on GitHub Pages.
 
 **Author:** Azqato
-**Status:** Content drafted (M2 complete, M3 pending)
+**Status:** Live (M3 complete)
+**Live site:** https://azqato.github.io/leveraged-strategies/
+**Repository:** https://github.com/Azqato/leveraged-strategies
 
 ---
 
@@ -22,8 +24,6 @@ A methodology library for six distinct leveraged ETF strategies. Each strategy g
 | TQQQ For The Long Term | `tqqq-ftlt.html` | Rules-based daily algorithm using SMA regime switching and RSI mean reversion (u/derecknielsen) |
 | Holy Grail | `holy-grail.html` | TQQQ FTLT variant using TQQQ's own 200D SMA with SOXL mean reversion and 20% cash buffer |
 | HFEA | `hfea.html` | Hedgefundie's Excellent Adventure: 55% UPRO / 45% TMF quarterly rebalanced risk parity |
-
-Strategy pages currently show placeholder content blocks. Content is authored in `/strategies/*.md` and will be ported to HTML in M3.
 
 ## Project Structure
 
@@ -76,7 +76,9 @@ Then visit `http://localhost:8000`.
 
 ## Deploying
 
-Push to the `main` branch of the GitHub repo and enable GitHub Pages in repo settings (deploy from branch, root folder). The site is fully static and requires no configuration.
+The site is live at **https://azqato.github.io/leveraged-strategies/**
+
+To deploy updates: push to the `main` branch. GitHub Pages is configured to deploy from the repo root. The site is fully static and requires no additional configuration.
 
 ## Design
 

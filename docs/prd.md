@@ -1,6 +1,6 @@
 # PRD.md — TQQQ Strategies Site
 
-**Version:** 1.3
+**Version:** 1.4
 **Status:** Active
 **Author:** Azqato
 
@@ -137,7 +137,7 @@ This convention ensures research sources are preserved with the content without 
 
 ## 5. Success Criteria
 
-- Site is live on GitHub Pages with all seven pages navigable
+- Site is live at https://azqato.github.io/leveraged-strategies/ with all seven pages navigable
 - All six strategy pages share an identical section skeleton
 - Lighthouse accessibility score of 95+ on every page
 - Total page weight under 100KB per page (no images required in v1)
@@ -151,7 +151,7 @@ This convention ensures research sources are preserved with the content without 
 |-----------|--------|-------------|
 | M1: Skeleton | Complete | Seven pages, shared nav, placeholder strategy sections |
 | M2: Content drafts | Complete | All six `/strategies/*.md` files researched and fully written |
-| M3: Content port | Pending | Port strategy content from `.md` files into HTML pages; correct inaccurate hero badges and lead paragraphs flagged in tqqq-ftlt.md and holy-grail.md |
+| M3: Content port | Complete | All seven HTML pages rewritten with full strategy content. All placeholders replaced. Four badge/lead corrections applied. Site live at https://azqato.github.io/leveraged-strategies/ |
 | M4: Polish | Pending | Accessibility pass, responsive QA, Lighthouse audit |
 
 ---
@@ -168,6 +168,7 @@ This convention ensures research sources are preserved with the content without 
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 1.4 | June 2026 | Marked M3 milestone complete. Added live site URL. Updated success criteria with live URL |
 | 1.3 | June 2026 | Updated scope to reflect six strategies and seven pages. Marked M1 and M2 milestones complete. Updated F1, F6, and success criteria counts |
 | 1.2 | June 2026 | Added HFEA to pages table. Documented Research Sources Convention: URLs stored in `<!-- RESEARCH SOURCES -->` comment blocks in .md files, never ported to HTML |
 | 1.1 | June 2026 | Added 3 Sig and 6 Sig pages. Documented /strategies convention: each .md file drives a page, nav entry, and index card. Support link added as permanent last nav item |

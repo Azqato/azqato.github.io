@@ -5,6 +5,20 @@ Versions follow `M<milestone>.<patch>` until the site goes live, then switch to 
 
 ---
 
+## [M3.1] — 2026-06-10 — Docs sync and GitHub Pages launch
+
+Documentation updated to reflect M3 completion and the live site URL. Repository published to GitHub.
+
+### Changed
+- `README.md` — status updated to "Live (M3 complete)"; live site URL and repository URL added; stale placeholder-content notice removed from Pages table; Deploying section updated with live URL
+- `docs/prd.md` — version bumped to 1.4; M3 milestone marked Complete with live URL; success criteria updated with live URL; version history updated
+
+### Notes
+- Repository: https://github.com/Azqato/leveraged-strategies
+- Live site: https://azqato.github.io/leveraged-strategies/ (GitHub Pages, deploy from `main` root)
+
+---
+
 ## [M3.0] — 2026-06-10 — M3 Content Port (Major Release)
 
 All seven HTML pages rewritten with full strategy content ported from the six `/strategies/*.md` source files. Every placeholder block replaced. Four hero badge and lead paragraph corrections applied. This is the first release where the site is substantively usable as a strategy reference.
