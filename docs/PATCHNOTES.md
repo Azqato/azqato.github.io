@@ -304,6 +304,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [2.1.1] — 2026-06-10
+
+### Changed
+- All links to the GitHub profile (`github.com/Azqato`) now open in the same tab. Removed `target="_blank" rel="noopener"` from all 20 occurrences across 9 pages (nav links, footer bylines, hero CTA, and links page button).
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
