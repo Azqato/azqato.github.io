@@ -325,6 +325,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [2.2.2] — 2026-06-10
+
+### Changed
+- TQQQ Strategies project card renamed to "Leveraged Strategies" ahead of a planned site rename.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
