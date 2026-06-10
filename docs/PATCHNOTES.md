@@ -311,6 +311,13 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [2.2.0] — 2026-06-10
+
+### Added
+- TQQQ Strategies project card: educational wiki-style site documenting six leveraged ETF strategies side by side — 3 Sig, 6 Sig, 9 Sig, TQQQ For The Long Term, Holy Grail, and HFEA. Each strategy has a dedicated page covering rules and logic, performance notes, risks, and sources. Tagged `Finance` and `Education`. Live at `https://azqato.github.io/leveraged-strategies/`.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
