@@ -155,6 +155,31 @@ All buttons: `border-radius: 6px–8px`, `padding: 0.6rem 1.2rem`, `cursor: poin
 
 ---
 
+## Image Assets
+
+Image assets live in `img/` at the project root. All images were migrated from the old azqato.com website.
+
+| File                            | Use                                              |
+|---------------------------------|--------------------------------------------------|
+| `home-hero-profile.jpg`         | Hero avatar on `index.html`                      |
+| `about-profile.jpg`             | Pitch card avatar on `about.html`                |
+| `logo-cat-avatar.jpg`           | Original site logo (available for reuse)         |
+| `yt-thumb-azqato.jpg`           | YouTube channel thumbnail — Azqato               |
+| `yt-thumb-streams.jpg`          | YouTube channel thumbnail — Azqato Streams       |
+| `yt-thumb-mixes.jpg`            | YouTube channel thumbnail — Azqato Mixes         |
+| `yt-thumb-chills.jpg`           | YouTube channel thumbnail — Azqato Chills        |
+| `yt-channel-azqato.jpg`         | Larger YouTube channel image — Azqato            |
+| `yt-channel-streams.jpg`        | Larger YouTube channel image — Azqato Streams    |
+| `yt-channel-mixes.jpg`          | Larger YouTube channel image — Azqato Mixes      |
+| `yt-channel-chills.jpg`         | Larger YouTube channel image — Azqato Chills     |
+| `music-playlist-bangers.jpg`    | Spotify playlist cover — BANGERS                 |
+| `music-playlist-addictions.jpg` | Spotify playlist cover — ADDICTIONS              |
+| `music-logo-small.jpg`          | Small music logo (available for reuse)           |
+
+Profile photos and thumbnails are rendered as circles via `border-radius: 50%` and `object-fit: cover`.
+
+---
+
 ## Accessibility Standards
 
 **Target:** WCAG 2.1 Level AA where achievable within a no-dependency constraint.

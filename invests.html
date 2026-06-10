@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azqato | Invests</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #00d4a0;
+      --accent-hover: #00e6b0;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #ffa657;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --card-hover: #1c2128;
+      --tag-bg: #21262d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight { color: var(--accent); }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 620px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    /* ── RESOURCE GRID ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .resource-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .resource-card h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .resource-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .resource-card li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .resource-card li a::before {
+      content: '›';
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .resource-card li a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 2rem; }
+      .section { padding: 0 1.25rem 3rem; }
+      .nav-links { display: none; }
+      .resource-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="links.html">Links</a></li>
+        <li><a href="youtube.html">YouTube</a></li>
+        <li><a href="invests.html" class="active">Invests</a></li>
+        <li><a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Community investing resources</div>
+    <h1>Azqato <span class="highlight">Invests</span></h1>
+    <p>A curated resource hub for new and experienced traders. The mission is to equip new traders with knowledge while fostering networking opportunities. Join the <a href="https://discord.gg/39JrFNY7qS" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">Discord</a> to share your own recommendations.</p>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="section">
+    <div class="disclaimer">
+      <span>&#9432;</span>
+      <span>Azqato is not a licensed financial advisor. Nothing here is financial advice — all content is for informational and entertainment purposes only. Some links are affiliate/referral links.</span>
+    </div>
+
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <h3>🏦 Platforms</h3>
+        <ul>
+          <li><a href="http://join.robinhood.com/robertg273" target="_blank" rel="noopener">Robinhood</a></li>
+          <li><a href="https://m1.finance/BVZBG3OqOfMj" target="_blank" rel="noopener">M1 Finance</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>💼 Careers</h3>
+        <ul>
+          <li><a href="https://www.roberthalf.com/jobs/remote" target="_blank" rel="noopener">Remote Jobs</a></li>
+          <li><a href="https://remotive.com/" target="_blank" rel="noopener">Remotive</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>📊 ETFs</h3>
+        <ul>
+          <li><a href="https://m1.finance/lg6DhArFe7mR" target="_blank" rel="noopener">US Economy</a></li>
+          <li><a href="https://m1.finance/aYecv1jT7ATx" target="_blank" rel="noopener">Dividends</a></li>
+          <li><a href="https://m1.finance/AODxtLWiUWzS" target="_blank" rel="noopener">Growth</a></li>
+          <li><a href="https://m1.finance/wXPV0G6wQG9s" target="_blank" rel="noopener">Market Sentiment</a></li>
+          <li><a href="https://m1.finance/ZONqRA-E4jfh" target="_blank" rel="noopener">Vanguard</a></li>
+          <li><a href="https://m1.finance/Bded182o2HL5" target="_blank" rel="noopener">High Dividend &amp; Low Volatility</a></li>
+          <li><a href="https://m1.finance/qsKTrzlzfl6d" target="_blank" rel="noopener">US Government Bonds</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>🏢 Companies</h3>
+        <ul>
+          <li><a href="https://m1.finance/Ql1-1ZBHVG6T" target="_blank" rel="noopener">Software</a></li>
+          <li><a href="https://m1.finance/InXZI6AHxrEt" target="_blank" rel="noopener">Telecom</a></li>
+          <li><a href="https://m1.finance/GMRwAaWa07j_" target="_blank" rel="noopener">Networking</a></li>
+          <li><a href="https://m1.finance/Do0WxUtoL6A7" target="_blank" rel="noopener">Banks</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>⭐ Ratings</h3>
+        <ul>
+          <li><a href="https://www.thestreet.com/stock-market-news/10579592/top-rated-stocks/top-rated-stocks.html" target="_blank" rel="noopener">Top Rated Stocks</a></li>
+          <li><a href="https://www.thestreet.com/stock-market-news/10575864/top-rated-etfs/top-rated-etfs.html" target="_blank" rel="noopener">Top Rated ETFs</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>🔍 Screeners</h3>
+        <ul>
+          <li><a href="https://www.tradingview.com/screener/" target="_blank" rel="noopener">TradingView Stock Screener</a></li>
+          <li><a href="https://www.reddit.com/r/FluentInFinance/comments/mf7nk0/collection_of_finviz_screeners/" target="_blank" rel="noopener">Collection of Finviz Screeners</a></li>
+          <li><a href="https://finviz.com/screener.ashx" target="_blank" rel="noopener">Finviz Screener</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>🏠 Real Estate</h3>
+        <ul>
+          <li><a href="https://www.redfin.com/" target="_blank" rel="noopener">Redfin</a></li>
+          <li><a href="https://www.areavibes.com/" target="_blank" rel="noopener">Areavibes</a></li>
+          <li><a href="https://www.sacramentocondomania.com" target="_blank" rel="noopener">Sacramento</a></li>
+          <li><a href="https://www.denvercondomania.com" target="_blank" rel="noopener">Denver</a></li>
+          <li><a href="https://www.tempecondomania.com/" target="_blank" rel="noopener">Tempe</a></li>
+          <li><a href="https://www.lasvegascondomania.com/" target="_blank" rel="noopener">Las Vegas</a></li>
+          <li><a href="https://www.sandiegocondomania.com/" target="_blank" rel="noopener">San Diego</a></li>
+          <li><a href="https://www.orangecountycondomania.com/" target="_blank" rel="noopener">Orange County</a></li>
+          <li><a href="https://www.sanjosecondomania.com/" target="_blank" rel="noopener">San Jose</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>📈 Charts</h3>
+        <ul>
+          <li><a href="https://stockcharts.com/freecharts/" target="_blank" rel="noopener">Stock Charts — Free Charts</a></li>
+          <li><a href="https://robintrack.net/" target="_blank" rel="noopener">RobinTrack</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>🗄️ Databases</h3>
+        <ul>
+          <li><a href="https://etfdb.com/etfs/" target="_blank" rel="noopener">ETFDB.com</a></li>
+          <li><a href="https://www.dividend.com/" target="_blank" rel="noopener">Dividend.com</a></li>
+          <li><a href="https://dividendstocksonline.com/" target="_blank" rel="noopener">Dividend Stocks Online</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>📉 Economic Indicators</h3>
+        <ul>
+          <li><a href="https://truflation.com/" target="_blank" rel="noopener">Truflation</a></li>
+          <li><a href="https://www.investopedia.com/terms/e/economic_indicator.asp" target="_blank" rel="noopener">Investopedia Economic Indicator</a></li>
+          <li><a href="https://ycharts.com/indicators/us_investor_sentiment_bull_bear_spread" target="_blank" rel="noopener">YCharts Sentiment</a></li>
+          <li><a href="https://www.census.gov/economic-indicators/" target="_blank" rel="noopener">Census Economic Indicators</a></li>
+          <li><a href="https://tradingeconomics.com/indicators" target="_blank" rel="noopener">Trading Economics</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>🎓 Education</h3>
+        <ul>
+          <li><a href="https://www.investopedia.com/" target="_blank" rel="noopener">Investopedia</a></li>
+          <li><a href="https://www.coursera.org/specializations/investment-strategy" target="_blank" rel="noopener">Coursera Investment Strategy</a></li>
+          <li><a href="https://www.investopedia.com/terms/e/etf.asp" target="_blank" rel="noopener">Investopedia ETF Guide</a></li>
+          <li><a href="https://www.investopedia.com/terms/a/averagedown.asp" target="_blank" rel="noopener">Averaging Down</a></li>
+          <li><a href="https://www.investopedia.com/terms/e/eps.asp" target="_blank" rel="noopener">EPS Guide</a></li>
+          <li><a href="https://finance.zacks.com/make-money-trading-earnings-calendar-11148.html" target="_blank" rel="noopener">Zacks Earnings Calendar</a></li>
+          <li><a href="https://study.com/academy/lesson/what-is-a-leveraged-etf-decay-risk-volatility.html" target="_blank" rel="noopener">Leveraged ETF Decay</a></li>
+          <li><a href="https://www.investopedia.com/terms/i/inverse-etf.asp" target="_blank" rel="noopener">Inverse ETF</a></li>
+          <li><a href="https://www.investopedia.com/ask/answers/06/stoplossorderdetails.asp" target="_blank" rel="noopener">Stop Loss Orders</a></li>
+          <li><a href="https://www.investopedia.com/trading/support-and-resistance-basics/" target="_blank" rel="noopener">Support and Resistance</a></li>
+          <li><a href="https://www.investopedia.com/terms/m/movingaverage.asp" target="_blank" rel="noopener">Moving Average</a></li>
+          <li><a href="https://www.investopedia.com/terms/m/macd.asp" target="_blank" rel="noopener">MACD</a></li>
+          <li><a href="https://www.investopedia.com/terms/b/beta.asp" target="_blank" rel="noopener">Beta</a></li>
+          <li><a href="https://www.investopedia.com/terms/v/volatility.asp" target="_blank" rel="noopener">Volatility</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>📖 Guides</h3>
+        <ul>
+          <li><a href="https://docs.google.com/document/d/1pjHqe-QKjiutLtAnELCEonIEIJ4IrcVSE_ZJKbuBcMY/edit?usp=sharing" target="_blank" rel="noopener">Stock Ratios Guide</a></li>
+          <li><a href="https://www.investopedia.com/options-basics-tutorial-4583012" target="_blank" rel="noopener">Options Basics Tutorial</a></li>
+          <li><a href="https://www.lynalden.com/asset-allocation/" target="_blank" rel="noopener">Asset Allocation Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>📋 Indices</h3>
+        <ul>
+          <li><a href="https://www.tradingview.com/markets/indices/quotes-major/" target="_blank" rel="noopener">TradingView Major Indices</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>ℹ️ Information</h3>
+        <ul>
+          <li><a href="https://google.com/finance" target="_blank" rel="noopener">Google Finance</a></li>
+          <li><a href="https://finance.yahoo.com/" target="_blank" rel="noopener">Yahoo Finance</a></li>
+          <li><a href="https://wolframalpha.com/" target="_blank" rel="noopener">WolframAlpha</a></li>
+          <li><a href="https://www.investopedia.com/" target="_blank" rel="noopener">Investopedia</a></li>
+          <li><a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a></li>
+          <li><a href="https://finviz.com/" target="_blank" rel="noopener">Finviz</a></li>
+          <li><a href="https://seekingalpha.com/" target="_blank" rel="noopener">Seeking Alpha</a></li>
+        </ul>
+      </div>
+
+      <div class="resource-card">
+        <h3>📰 News</h3>
+        <ul>
+          <li><a href="https://renaissancecapital.com/IPO-Center/Calendar" target="_blank" rel="noopener">Renaissance Capital IPO Calendar</a></li>
+          <li><a href="https://www.newsnow.co.uk/h/Business+&amp;+Finance/Oil+Prices" target="_blank" rel="noopener">NewsNow Oil Prices</a></li>
+          <li><a href="https://seekingalpha.com/market-news/top-news" target="_blank" rel="noopener">Seeking Alpha Market News</a></li>
+          <li><a href="https://www.youtube.com/channel/UCIALMKvObZNtJ6AmdCLP7Lg" target="_blank" rel="noopener">YouTube Finance Channel</a></li>
+          <li><a href="https://www.youtube.com/channel/UCrp_UI8XtuYfpiqluWLD7Lw" target="_blank" rel="noopener">YouTube Finance Channel 2</a></li>
+          <li><a href="https://www.youtube.com/user/DailyFXNews" target="_blank" rel="noopener">Daily FX News</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://github.com/Azqato" target="_blank" rel="noopener">Azqato</a>
+    &nbsp;&middot;&nbsp; <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+
+</body>
+</html>

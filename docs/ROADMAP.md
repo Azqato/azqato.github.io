@@ -4,45 +4,47 @@
 
 ## Current Phase
 
-**Phase 1: Foundation Complete (v1.7.4)**
+**Phase 2: Site Merger Complete (v2.0.0)**
 
-The core portfolio is live with project discovery, personal bio, and a monetization layer. All MVP features from the PRD are shipped: project grid with tag filtering, About page, Support page with Buy Me a Coffee and 5 active affiliate links, consistent navigation, and responsive design. The site is deployed on GitHub Pages at azqato.github.io.
+The portfolio now incorporates all content from the old azqato.com website. Six new pages (Links, YouTube, Invests, Music, Accounts, Privacy Policy) have been added, 14 image assets migrated, and all existing pages updated with expanded navigation and footer links. The site has grown from a pure dev portfolio into a comprehensive personal hub.
 
 ---
 
 ## Milestone Table
 
-| Milestone          | Name                           | Target Date       | Status      |
-|--------------------|--------------------------------|-------------------|-------------|
-| v1.0.0             | Initial launch                 | 2026-06-06        | Complete    |
-| v1.1.0 – v1.2.2    | Projects + polish              | 2026-06-06        | Complete    |
-| v1.3.0 – v1.3.2    | Support page                   | 2026-06-07        | Complete    |
-| v1.4.0 – v1.4.1    | About page                     | 2026-06-07        | Complete    |
-| v1.5.0 – v1.6.1    | New projects + iconUrl field   | 2026-06-07        | Complete    |
-| v1.7.0 – v1.7.4    | Live affiliate links           | 2026-06-07        | Complete    |
-| v1.8.0             | Documentation audit            | 2026-06-08        | Complete    |
-| v2.0.0             | Code extraction + shared assets | TBD               | Planned     |
-| v2.1.0             | GitHub API integration         | TBD               | Planned     |
-| v2.2.0             | Dark/light mode toggle         | TBD               | Planned     |
-| v3.0.0             | Contact / hire-me section      | TBD               | Planned     |
+| Milestone          | Name                              | Target Date       | Status      |
+|--------------------|-----------------------------------|-------------------|-------------|
+| v1.0.0             | Initial launch                    | 2026-06-06        | Complete    |
+| v1.1.0 – v1.2.2    | Projects + polish                 | 2026-06-06        | Complete    |
+| v1.3.0 – v1.3.2    | Support page                      | 2026-06-07        | Complete    |
+| v1.4.0 – v1.4.1    | About page                        | 2026-06-07        | Complete    |
+| v1.5.0 – v1.6.1    | New projects + iconUrl field      | 2026-06-07        | Complete    |
+| v1.7.0 – v1.7.4    | Live affiliate links              | 2026-06-07        | Complete    |
+| v1.8.0             | Documentation audit               | 2026-06-08        | Complete    |
+| v1.9.0 – v1.9.3    | New projects + filter tags        | 2026-06-08        | Complete    |
+| v2.0.0             | Old-site merger (6 new pages)     | 2026-06-09        | Complete    |
+| v2.1.0             | Code extraction + shared assets   | TBD               | Planned     |
+| v2.2.0             | GitHub API integration            | TBD               | Planned     |
+| v2.3.0             | Dark/light mode toggle            | TBD               | Planned     |
+| v3.0.0             | Contact / hire-me section         | TBD               | Planned     |
 
 ---
 
 ## Feature Breakdown Per Milestone
 
-### v2.0.0 — Code Extraction + Shared Assets
+### v2.1.0 — Code Extraction + Shared Assets
 - Extract shared CSS into a single `styles.css` file to eliminate duplication across pages.
 - Extract shared nav JavaScript (active state detection) into a `nav.js` file.
 - Extract shared nav HTML using a consistent pattern (either JS injection or a build step).
 - Add `prefers-reduced-motion` media query to disable card hover transforms for users who prefer reduced motion.
 
-### v2.1.0 — GitHub API Integration
+### v2.2.0 — GitHub API Integration
 - Auto-fetch star counts for each project via GitHub REST API on page load (with graceful fallback to hardcoded values).
 - Auto-fetch last-pushed date per repository to keep "updated" fields current.
 - Cache API responses in `sessionStorage` to avoid repeated calls within one visit.
 - Add `X-RateLimit-Remaining` check and silent fallback if rate limit is hit.
 
-### v2.2.0 — Dark/Light Mode Toggle
+### v2.3.0 — Dark/Light Mode Toggle
 - Add a toggle button in the nav bar to switch between dark (current) and a light theme.
 - Persist preference in `localStorage`.
 - Respect `prefers-color-scheme` media query as the initial default.

@@ -44,9 +44,10 @@ If you ever want to check file sizes before pushing:
 ```bash
 # PowerShell
 Get-ChildItem *.html | Select-Object Name, Length
+Get-ChildItem img\ | Select-Object Name, Length
 ```
 
-Target: each HTML file should remain under 50,000 bytes uncompressed.
+Target: each HTML file should remain under 50,000 bytes uncompressed. Images in `img/` are static assets with no size target — keep them web-optimised (< 500 KB each).
 
 ---
 
@@ -65,7 +66,7 @@ The site is deployed automatically when changes are pushed to the `main` branch.
 
 **Routine deploy:**
 ```bash
-git add index.html about.html support.html docs/PATCHNOTES.md
+git add index.html about.html support.html links.html youtube.html invests.html music.html accounts.html privacy-policy.html img/ docs/
 git commit -m "Your commit message"
 git push origin main
 ```

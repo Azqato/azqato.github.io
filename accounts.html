@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azqato | Accounts</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #00d4a0;
+      --accent-hover: #00e6b0;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #ffa657;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --card-hover: #1c2128;
+      --tag-bg: #21262d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight { color: var(--accent); }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    /* ── PLATFORM GRID ── */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .platform-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .platform-icon {
+      font-size: 1.3rem;
+    }
+
+    .platform-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .account-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding-top: 0.25rem;
+    }
+
+    .account-list li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.15s;
+    }
+
+    .account-list li a::before {
+      content: '›';
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .account-list li a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 2rem; }
+      .section { padding: 0 1.25rem 3rem; }
+      .nav-links { display: none; }
+      .platform-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="links.html">Links</a></li>
+        <li><a href="youtube.html">YouTube</a></li>
+        <li><a href="invests.html">Invests</a></li>
+        <li><a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Gaming profiles</div>
+    <h1>Azqato's <span class="highlight">Accounts</span></h1>
+    <p>Find me on these gaming platforms. Say hi — I'm always down to play.</p>
+  </section>
+
+  <!-- ACCOUNTS -->
+  <section class="section">
+    <div class="platform-grid">
+
+      <div class="platform-card">
+        <div class="platform-header">
+          <span class="platform-icon">🎮</span>
+          <span class="platform-name">Steam</span>
+        </div>
+        <ul class="account-list">
+          <li><a href="https://steamcommunity.com/id/azqato/" target="_blank" rel="noopener">Azqato</a></li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header">
+          <span class="platform-icon">⚔️</span>
+          <span class="platform-name">League of Legends</span>
+        </div>
+        <ul class="account-list">
+          <li><a href="https://op.gg/lol/summoners/na/%EC%84%9C%EC%A3%BC%ED%94%84-zoop" target="_blank" rel="noopener">서주프#zoop</a></li>
+          <li><a href="https://op.gg/lol/summoners/na/Azqato-zoop" target="_blank" rel="noopener">Azqato#zoop</a></li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header">
+          <span class="platform-icon">♟️</span>
+          <span class="platform-name">Teamfight Tactics</span>
+        </div>
+        <ul class="account-list">
+          <li><a href="https://lolchess.gg/profile/na/ChiefRocka" target="_blank" rel="noopener">Chief Rocka</a></li>
+          <li><a href="https://lolchess.gg/profile/na/Azqato" target="_blank" rel="noopener">Azqato</a></li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-header">
+          <span class="platform-icon">🏹</span>
+          <span class="platform-name">RuneScape</span>
+        </div>
+        <ul class="account-list">
+          <li><a href="https://www.runeclan.com/user/zoop" target="_blank" rel="noopener">zoop</a></li>
+          <li><a href="https://www.runeclan.com/user/Hctibaru" target="_blank" rel="noopener">Hctibaru</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://github.com/Azqato" target="_blank" rel="noopener">Azqato</a>
+    &nbsp;&middot;&nbsp; <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+
+</body>
+</html>

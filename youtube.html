@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azqato | YouTube</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #00d4a0;
+      --accent-hover: #00e6b0;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #ffa657;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --card-hover: #1c2128;
+      --tag-bg: #21262d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight { color: var(--accent); }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    /* ── CHANNEL GRID ── */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .channel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .channel-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff0000, #cc0000);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .channel-card:hover {
+      background: var(--card-hover);
+      border-color: #cc3333;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(204, 0, 0, 0.12);
+    }
+
+    .channel-card:hover::before { opacity: 1; }
+
+    .channel-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .channel-card:hover .channel-thumb {
+      border-color: #cc3333;
+      transform: scale(1.05);
+    }
+
+    .channel-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .channel-card:hover .channel-name { color: #ff6666; }
+
+    .channel-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .channel-btn {
+      margin-top: 0.25rem;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .channel-card:hover .channel-btn {
+      border-color: #cc3333;
+      color: #ff6666;
+      background: rgba(204, 0, 0, 0.08);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 2rem; }
+      .section { padding: 0 1.25rem 3rem; }
+      .nav-links { display: none; }
+      .channel-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="links.html">Links</a></li>
+        <li><a href="youtube.html" class="active">YouTube</a></li>
+        <li><a href="invests.html">Invests</a></li>
+        <li><a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">▶ Subscribe &amp; watch</div>
+    <h1>Azqato on <span class="highlight">YouTube</span></h1>
+    <p>Four channels covering gaming, investing, music mixes, and chill content.</p>
+  </section>
+
+  <!-- CHANNELS -->
+  <section class="section">
+    <div class="channel-grid">
+
+      <a class="channel-card" href="https://www.youtube.com/@Azqato" target="_blank" rel="noopener">
+        <img class="channel-thumb" src="img/yt-thumb-azqato.jpg" alt="Azqato" />
+        <span class="channel-name">Azqato</span>
+        <span class="channel-sub">Main channel — gaming, investing &amp; more</span>
+        <span class="channel-btn">Subscribe &rarr;</span>
+      </a>
+
+      <a class="channel-card" href="https://www.youtube.com/channel/UCar9s_yiJUFWnM-20fLU5dw" target="_blank" rel="noopener">
+        <img class="channel-thumb" src="img/yt-thumb-streams.jpg" alt="Azqato Streams" />
+        <span class="channel-name">Azqato Streams</span>
+        <span class="channel-sub">Stream highlights and VODs</span>
+        <span class="channel-btn">Subscribe &rarr;</span>
+      </a>
+
+      <a class="channel-card" href="https://www.youtube.com/channel/UCV2X1axZ19iubEzgkouPSCQ" target="_blank" rel="noopener">
+        <img class="channel-thumb" src="img/yt-thumb-mixes.jpg" alt="Azqato Mixes" />
+        <span class="channel-name">Azqato Mixes</span>
+        <span class="channel-sub">DJ mixes and music sets</span>
+        <span class="channel-btn">Subscribe &rarr;</span>
+      </a>
+
+      <a class="channel-card" href="https://www.youtube.com/channel/UC1ytKNtxdBWCiiSQ6DGsxHA" target="_blank" rel="noopener">
+        <img class="channel-thumb" src="img/yt-thumb-chills.jpg" alt="Azqato Chills" />
+        <span class="channel-name">Azqato Chills</span>
+        <span class="channel-sub">Relaxed and chill content</span>
+        <span class="channel-btn">Subscribe &rarr;</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://github.com/Azqato" target="_blank" rel="noopener">Azqato</a>
+    &nbsp;&middot;&nbsp; <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azqato | Links</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #00d4a0;
+      --accent-hover: #00e6b0;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #ffa657;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --card-hover: #1c2128;
+      --tag-bg: #21262d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight { color: var(--accent); }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ── LINK GRID ── */
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.7rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .link-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .link-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 2rem; }
+      .section { padding: 1.5rem 1.25rem; }
+      .nav-links { display: none; }
+      .link-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="links.html" class="active">Links</a></li>
+        <li><a href="youtube.html">YouTube</a></li>
+        <li><a href="invests.html">Invests</a></li>
+        <li><a href="https://github.com/Azqato" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Find me everywhere</div>
+    <h1>Azqato's <span class="highlight">Links</span></h1>
+    <p>All my platforms, communities, and channels in one place.</p>
+  </section>
+
+  <!-- COMMUNITY & STREAMING -->
+  <section class="section">
+    <h2 class="section-title">Community &amp; Streaming</h2>
+    <div class="link-grid">
+      <a class="link-btn" href="https://discord.gg/39JrFNY7qS" target="_blank" rel="noopener">
+        <span class="link-icon">💬</span> Discord
+      </a>
+      <a class="link-btn" href="https://twitch.tv/azqato" target="_blank" rel="noopener">
+        <span class="link-icon">📺</span> Twitch
+      </a>
+      <a class="link-btn" href="https://twitch.tv/azqato/subscribe" target="_blank" rel="noopener">
+        <span class="link-icon">⭐</span> Twitch Subscribe
+      </a>
+      <a class="link-btn" href="https://patreon.com/Azqato" target="_blank" rel="noopener">
+        <span class="link-icon">🎁</span> Patreon
+      </a>
+      <a class="link-btn" href="https://b5ta.com" target="_blank" rel="noopener">
+        <span class="link-icon">⚔️</span> B5TA
+      </a>
+    </div>
+
+    <!-- YOUTUBE -->
+    <h2 class="section-title">YouTube</h2>
+    <div class="link-grid">
+      <a class="link-btn" href="https://youtube.com/@Azqato" target="_blank" rel="noopener">
+        <span class="link-icon">▶️</span> Azqato
+      </a>
+      <a class="link-btn" href="https://youtube.com/@AzqatoMixes" target="_blank" rel="noopener">
+        <span class="link-icon">🎧</span> Azqato Mixes
+      </a>
+      <a class="link-btn" href="https://youtube.com/@AzqatoStreams" target="_blank" rel="noopener">
+        <span class="link-icon">🎮</span> Azqato Streams
+      </a>
+      <a class="link-btn" href="https://youtube.com/@AzqatoChills" target="_blank" rel="noopener">
+        <span class="link-icon">😌</span> Azqato Chills
+      </a>
+      <a class="link-btn" href="youtube.html">
+        <span class="link-icon">📋</span> All Channels
+      </a>
+    </div>
+
+    <!-- MUSIC -->
+    <h2 class="section-title">Music</h2>
+    <div class="link-grid">
+      <a class="link-btn" href="https://last.fm/user/Azqato" target="_blank" rel="noopener">
+        <span class="link-icon">🎵</span> Last.fm
+      </a>
+      <a class="link-btn" href="https://mixcloud.com/Azqato" target="_blank" rel="noopener">
+        <span class="link-icon">🎛️</span> Mixcloud
+      </a>
+      <a class="link-btn" href="music.html">
+        <span class="link-icon">🎶</span> Spotify Playlists
+      </a>
+    </div>
+
+    <!-- SOCIAL -->
+    <h2 class="section-title">Social</h2>
+    <div class="link-grid">
+      <a class="link-btn" href="https://instagram.com/azqato" target="_blank" rel="noopener">
+        <span class="link-icon">📸</span> Instagram
+      </a>
+      <a class="link-btn" href="https://twitter.com/azqato" target="_blank" rel="noopener">
+        <span class="link-icon">🐦</span> Twitter
+      </a>
+      <a class="link-btn" href="https://reddit.com/r/Azqato" target="_blank" rel="noopener">
+        <span class="link-icon">🤖</span> Reddit
+      </a>
+      <a class="link-btn" href="https://facebook.com/azqato" target="_blank" rel="noopener">
+        <span class="link-icon">👥</span> Facebook
+      </a>
+      <a class="link-btn" href="https://azqato.tumblr.com" target="_blank" rel="noopener">
+        <span class="link-icon">📝</span> Tumblr
+      </a>
+      <a class="link-btn" href="https://medium.com/@azqato" target="_blank" rel="noopener">
+        <span class="link-icon">✍️</span> Medium
+      </a>
+    </div>
+
+    <!-- INVESTING -->
+    <h2 class="section-title">Investing</h2>
+    <div class="link-grid">
+      <a class="link-btn" href="https://m1.finance/BVZBG3OqOfMj" target="_blank" rel="noopener">
+        <span class="link-icon">💼</span> M1 Finance
+      </a>
+      <a class="link-btn" href="https://share.public.com/azqato" target="_blank" rel="noopener">
+        <span class="link-icon">🌐</span> Public.com
+      </a>
+      <a class="link-btn" href="invests.html">
+        <span class="link-icon">📊</span> Invests Hub
+      </a>
+    </div>
+
+    <!-- MORE -->
+    <h2 class="section-title">More</h2>
+    <div class="link-grid">
+      <a class="link-btn" href="accounts.html">
+        <span class="link-icon">🎮</span> Gaming Accounts
+      </a>
+      <a class="link-btn" href="https://github.com/Azqato" target="_blank" rel="noopener">
+        <span class="link-icon">💻</span> GitHub
+      </a>
+      <a class="link-btn" href="support.html">
+        <span class="link-icon">☕</span> Support
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://github.com/Azqato" target="_blank" rel="noopener">Azqato</a>
+    &nbsp;&middot;&nbsp; <a href="privacy-policy.html">Privacy Policy</a>
+  </footer>
+
+</body>
+</html>

@@ -239,6 +239,41 @@ Format: `[version] — YYYY-MM-DD`
 
 ---
 
+## [2.0.0] — 2026-06-09
+
+### Added
+- `links.html` — Social and platform links hub, organized into sections: Community & Streaming, YouTube, Music, Social, Investing, and More. All external links from the old website consolidated here.
+- `youtube.html` — YouTube channels page showcasing all four channels (Azqato, Azqato Streams, Azqato Mixes, Azqato Chills) as cards with thumbnail photos, channel descriptions, and subscribe buttons.
+- `invests.html` — Azqato Invests resource hub with 14 curated sections: Platforms, Careers, ETFs, Companies, Ratings, Screeners, Real Estate, Charts, Databases, Economic Indicators, Education, Guides, Indices, Information, and News.
+- `music.html` — Music page featuring the two Spotify playlists (BANGERS, ADDICTIONS) with cover art, plus links to Last.fm, Mixcloud, and YouTube Mixes.
+- `accounts.html` — Gaming accounts page listing Azqato's profiles across Steam, League of Legends, Teamfight Tactics, and RuneScape.
+- `privacy-policy.html` — Full privacy policy page covering Consent, Information Collection, Log Files, Cookies, DART Cookies, CCPA, GDPR, Children's Information, Affiliate Links, Financial Disclaimer, and Entertainment Purposes.
+- `img/` directory with 14 image assets migrated from the old website: profile photos (`home-hero-profile.jpg`, `about-profile.jpg`, `logo-cat-avatar.jpg`), YouTube channel thumbnails (`yt-thumb-azqato.jpg`, `yt-thumb-streams.jpg`, `yt-thumb-mixes.jpg`, `yt-thumb-chills.jpg`), larger channel images (`yt-channel-*.jpg`), Spotify playlist covers (`music-playlist-bangers.jpg`, `music-playlist-addictions.jpg`), and music logo (`music-logo-small.jpg`).
+- Profile photo (`home-hero-profile.jpg`) added to the `index.html` hero section as an 80px circular avatar.
+- "All Links →" secondary CTA button added to the `index.html` hero actions, pointing to `links.html`.
+- Profile photo (`about-profile.jpg`) added to the `about.html` pitch card avatar, replacing the ⚡ emoji.
+- `Links`, `YouTube`, and `Invests` nav links added to all pages.
+- Privacy Policy footer link added to all pages.
+
+### Changed
+- `index.html` hero description expanded to mention content creation, gaming, investing, music production, and streaming — preserving the intro text from the old website's landing page.
+- Nav expanded from 4 links (Portfolio, About, GitHub, Support) to 7 links (Portfolio, About, Links, YouTube, Invests, GitHub, Support) across all pages.
+- Footer on all pages updated from "Built by Azqato" to include a "Privacy Policy" link.
+- `about.html` pitch avatar size increased from 60px to 72px to better display the profile photo.
+
+### Removed
+- `oldwebsite/` directory and all its contents deleted after full content migration.
+
+---
+
+## [2.0.1] — 2026-06-09
+
+### Changed
+- League of Legends accounts on `accounts.html` updated to Riot ID format: `Chief Rocka` → `서주프#zoop` and `Azqato` → `Azqato#zoop`.
+- Both LoL op.gg links updated to the new URL format (`op.gg/lol/summoners/na/`).
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] — YYYY-MM-DD
