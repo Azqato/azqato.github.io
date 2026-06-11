@@ -2,14 +2,127 @@
 
 ---
 
+## v2.0.0 — June 2026 — Sitewide Punctuation Audit
+
+**Complete em dash and double hyphen removal across all seven active HTML pages and all three documentation files. No content changes; punctuation only. PRD.md updated with formal punctuation policy and audit checklist.**
+
+### Policy
+
+Per the punctuation policy documented in `docs/PRD.md` (Section 4), no em dashes or double hyphens (`--`) are permitted in copy. All instances replaced with contextually appropriate alternatives: comma (flowing continuation), colon (introducing an explanation or list), semicolon (two independent clauses), parentheses (aside or supplementary info), or period (sentence split).
+
+When auditing for em dashes, all three forms must be checked: ` -- ` (double hyphen), `—` (raw Unicode U+2014), and `&mdash;` (HTML entity).
+
+### Pages audited and cleaned
+
+| File | Instances fixed |
+|------|----------------|
+| `philosophy.html` | ~20 instances |
+| `metrics.html` | ~65 instances |
+| `screener.html` | 2 instances |
+| `watchlist.html` | 2 instances |
+| `indices.html` | ~19 instances |
+| `faq.html` | ~25 instances |
+| `index.html` | 0 (already clean) |
+
+### Docs audited and cleaned
+
+| File | Instances fixed |
+|------|----------------|
+| `docs/PATCHNOTES.md` | ~17 instances |
+| `docs/DESIGN.md` | 6 instances |
+| `docs/PRD.md` | 0 prose instances (policy section updated) |
+
+### docs/PRD.md
+
+- **Section 4 (Content Philosophy):** Punctuation policy statement updated to explicitly name all three em dash forms to audit: ` -- `, `—`, and `&mdash;`
+- **Punctuation style guide:** New "Audit checklist" block added at the top of the section, listing all three search targets with notes that `&mdash;` is especially easy to miss in HTML source
+
+### Other fixes
+
+- `screener.html`: Stale link `href="guide.html"` corrected to `href="watchlist.html"` (guide.html is an orphaned legacy page not in active nav)
+
+### Legacy files removed
+
+Three orphaned HTML files that were superseded by current pages and are not linked from the active nav were deleted:
+
+| File removed | Replaced by |
+|---|---|
+| `finviz.html` | `screener.html` |
+| `guide.html` | `watchlist.html` |
+| `indexes.html` | `indices.html` |
+
+### Notes
+
+- `&ndash;` (`–`) in numeric ranges (e.g., VIX table `15 &ndash; 25`) was left untouched; en dashes for numeric ranges are correct
+- CSS custom property names (`--color-text-primary`, `--color-text-secondary`, etc.) were left untouched; `--` is valid CSS variable syntax, not punctuation
+- Backtick-wrapped code literals showing `--` as a UI display value (e.g., "PEG shows `--` when not applicable") were left untouched
+
+---
+
+## v1.9.0 — June 2026 — Major Content Expansion
+
+**New Philosophy page. Two new business quality metrics (Gross Margin and Net Margin). Revenue deceleration signal added. Balance sheet rate-hiking advantage documented. FAQ expanded with four new questions. Strategy section deepened with diversification rule and market cap vs potential concept. All 30 concepts from video transcript analysis integrated into site content.**
+
+### New Pages
+
+| File | Description |
+|------|-------------|
+| `philosophy.html` | New full-length page covering the conceptual foundation of the methodology: stocks as ownership (Buffett farmland analogy), how to research a company (sequential evaluation and SWOT framework), the GVD framework (growth/value/dividend stocks and risk-on/risk-off environments), staying on offense as a psychological discipline, Wall Street incentive misalignment, market leadership cycles and complacency risk, and building investment knowledge through business model study and conference call discipline |
+
+### Navigation Changes (all pages)
+
+- `philosophy.html` added to sidebar nav between Home and Metrics on all seven pages
+- Final nav order: **Home → Philosophy → Metrics → Screener → Watchlist → Indices → FAQ → Support**
+
+### index.html
+
+- **Strategy Overview expanded:** Added paragraph on the 10-to-20 stock diversification rule (fewer than 10 concentrates risk, more than 20 dilutes conviction)
+- **Strategy Overview expanded:** Added paragraph on the market cap vs potential mental model, comparing current market cap to the addressable opportunity as an input to upside estimation
+- **"The 10 Metrics" section:** Added note pointing to Gross Margin and Net Margin entries in the Metrics glossary as supplementary business quality signals
+- **"What Strong Metrics Look Like" table:** Two new rows added: Gross Margin (strong: >50%, caution: <30%) and Net Margin (strong: >25%, caution: <10%)
+- **FAQ teaser:** Updated to include a link to the new Philosophy page alongside the existing Palantir story link
+
+### metrics.html
+
+- **Sidebar nav:** Anchor links for Gross Margin and Net Margin added to the "On This Page" sub-nav
+- **Revenue Growth TTM ("Why it matters"):** New paragraph added explaining the quarterly deceleration warning signal: a consistent pattern of declining quarterly growth rates (+20%, +15%, +10%, +5%) is one of the clearest warning signals available even when absolute growth is still positive
+- **Total Cash ("Why it matters"):** New paragraph added explaining the rate-hiking earnings advantage: cash-heavy companies earn interest income at elevated rates while debt-heavy companies face rising interest expense, creating an earnings-level competitive divergence
+- **New metric #11: Gross Margin.** Full metric block with what it measures, why it matters (margin direction as a signal of competitive position strength or weakness), how to read it (50%+ strong, 30-50% moderate, <30% caution, declining trend = red flag), gross margin by business type illustrative table, and caveat on cross-industry comparability
+- **New metric #12: Net Margin.** Full metric block with what it measures, why it matters (operating leverage as the engine of earnings compounding), how to read it (30%+ elite, 25-30% excellent, 10-25% good, <10% context-required, negative = investigate), trajectory table, and caveat on always researching why margins move
+
+### faq.html
+
+- **"How many stocks should I hold?":** 10-20 rule: below 10 concentrates risk, above 20 dilutes conviction; full construction rationale
+- **"When is the wrong time to buy a great company?":** Peak hype avoidance and the weak-hands cascade mechanism: late buyers without business conviction trigger selling cascades when prices pull back; the best entry points are before widespread attention arrives
+- **"What should I think about position sizing?":** Core positions (profitable, established companies) vs speculative positions (unprofitable, binary outcomes); keep speculative positions small regardless of prior wins
+- **"How does market environment affect which stocks perform best?":** Risk-on/risk-off states, how each affects growth vs value vs dividend stocks, dividends as crash-deployment capital; links to Philosophy page for full GVD framework
+
+### philosophy.html (new)
+
+Seven sections covering the full conceptual foundation of the methodology:
+
+1. **Stocks as Ownership, Not Symbols:** Farmland and franchise mental models; productive asset framing; explicit short-term vs long-term price driver distinction
+2. **How to Research a Company:** Sequential evaluation order (business model first, then financials, then valuation); SWOT framework; the double/lose-50% decision test
+3. **Growth, Value, and Dividend Stocks:** The three stock types; risk-on and risk-off market environments; dividends as crash-deployment capital; 2022 as the textbook example
+4. **Stay on Offense:** Why regular investing is psychologically critical; offensive vs defensive investor mindset; consistency over size
+5. **Wall Street vs the Individual Investor:** AUM fee incentive structure; herd mentality as volatility amplifier; the S&P 500 proof point; do your own research
+6. **Market Leadership Cycles:** No company stays dominant forever; the complacency mechanism; continuous thesis reassessment; the opportunity in next-generation companies
+7. **Building Investment Knowledge:** Business model study for pattern recognition; conference call discipline (twice-listen rule, 2x speed, 50-100 calls per season); always research why margins move
+
+### docs/PRD.md
+
+- Complete rewrite. Previous version described the v1.0.0 three-page site with live META data. Updated to reflect the current 7-page site, all 12 metrics, the philosophy framework, the full FAQ, and a full 30-concept concept tracking table preserving the transcript analysis before the temp file was deleted.
+
+---
+
 ## v1.8.0 — June 2026 — Launch Release
 
 **Initial public launch. Yield label generalized on indices page. README updated to reflect full site scope.**
 
 ### indices.html
 
-- **"4Y Avg Yield" renamed to "Yield"** throughout the page -- metric card description, introductory paragraph, "What Strong Signals Look Like" summary table. The label now reflects yield broadly (trailing 12-month, 30-day SEC, or multi-year average) rather than anchoring to a specific averaging window.
-- **"4Y Average Yield" section heading renamed to "Yield."** Section explanation updated: now describes yield as the dividend or distribution yield of an ETF, noting that the specific format (trailing 12-month, 30-day SEC, multi-year average) varies by platform and ETF type -- the operative test remains yield vs. expense ratio regardless of how it is expressed.
+- **"4Y Avg Yield" renamed to "Yield"** throughout the page: metric card description, introductory paragraph, "What Strong Signals Look Like" summary table. The label now reflects yield broadly (trailing 12-month, 30-day SEC, or multi-year average) rather than anchoring to a specific averaging window.
+- **"4Y Average Yield" section heading renamed to "Yield."** Section explanation updated: now describes yield as the dividend or distribution yield of an ETF, noting that the specific format (trailing 12-month, 30-day SEC, multi-year average) varies by platform and ETF type. The operative test remains yield vs. expense ratio regardless of how it is expressed.
 - **Seeking Alpha ETF watchlist setup table:** "Yield" row retains the label "4Y Avg Yield" in the watchlist column reference, since that is the actual column name in Seeking Alpha's interface.
 
 ### README.md
@@ -24,8 +137,8 @@
 
 ### style.css
 
-- `--color-text-primary` updated from `#e6edf3` to `#eef3f7` -- slightly brighter, cleaner white for body copy and headings
-- `--color-text-secondary` updated from `#e6edf3` to `#cbdae6` -- soft blue-gray for subtitles, captions, lead text, and metric card definitions; visually distinct from primary without being muted or hard to read
+- `--color-text-primary` updated from `#e6edf3` to `#eef3f7`: slightly brighter, cleaner white for body copy and headings
+- `--color-text-secondary` updated from `#e6edf3` to `#cbdae6`: soft blue-gray for subtitles, captions, lead text, and metric card definitions; visually distinct from primary without being muted or hard to read
 
 ---
 
@@ -37,7 +150,7 @@
 
 | File | Description |
 |------|-------------|
-| `indices.html` | Full index and ETF investing guide -- VIX action levels, fund types, structural quality metrics, Seeking Alpha ETF watchlist setup |
+| `indices.html` | Full index and ETF investing guide: VIX action levels, fund types, structural quality metrics, Seeking Alpha ETF watchlist setup |
 | `watchlist.html` | Renamed from `guide.html`. Seeking Alpha individual stocks watchlist setup guide (content unchanged). |
 
 ### Navigation Changes (all pages)
@@ -53,9 +166,9 @@ Final nav order: **Home → Metrics → Screener → Watchlist → Indices → F
 ### indices.html (new)
 
 - Full methodology page for index and ETF investing
-- **Fund Types section:** Six metric cards explaining broad market funds, growth funds, dividend funds, value funds, sector-specific funds, and international funds -- their role, risk profile, and how each is used in a diversified ETF strategy
+- **Fund Types section:** Six metric cards explaining broad market funds, growth funds, dividend funds, value funds, sector-specific funds, and international funds: their role, risk profile, and how each is used in a diversified ETF strategy
 - **Fundamentals vs. Technicals section:** Educational explanation of why technicals dominate index investing while fundamentals dominate individual stock picking. Core insight: indices cannot go to zero; individual stocks can. This asymmetry shifts the analytical framework.
-- **VIX -- The Fear Gauge:** Full explanation of what VIX measures, why it is contrarian and mean-reverting, and five action level ranges (< 15, 15-25, 25-35, 35-45, > 45) with educational market condition descriptions and recommended deployment postures
+- **VIX: The Fear Gauge:** Full explanation of what VIX measures, why it is contrarian and mean-reverting, and five action level ranges (< 15, 15-25, 25-35, 35-45, > 45) with educational market condition descriptions and recommended deployment postures
 - **Leveraged ETFs caveat:** Explanation of when to use 2x/3x ETFs (VIX > 45 recovery plays only, not long-term holds)
 - **RSI & 52W Range:** Applied to index/ETF context with how-to-read guidance
 - **Structural Quality Metrics:** YTD Performance, 5Y Total Return, 10Y Total Return, 4Y Avg Yield (yield > expense ratio test), Expense Ratio with full tier breakdown (< 0.10% to > 0.75%)
@@ -75,7 +188,7 @@ Final nav order: **Home → Metrics → Screener → Watchlist → Indices → F
 
 - **`.accordion-content`** color changed from `--color-text-secondary` to `--color-text-primary`. All FAQ accordion body text is now full-brightness readable.
 - **`td`** `white-space` changed from `nowrap` to `normal`. All table cell text now wraps rather than clipping. `white-space: nowrap` preserved on `td.num` (numbers) and `td.ticker-cell` (tickers) where truncation is not a concern.
-- **`--color-text-secondary` unified with `--color-text-primary`** in `:root`. Changed from `#8b949e` to `#e6edf3`. All elements using the secondary token -- metric card descriptions, accordion body text, lead paragraphs, captions, sidebar labels -- now render at full legibility. Both color tokens resolve to the same value. This is a root-level change that applies universally; individual class overrides are not needed.
+- **`--color-text-secondary` unified with `--color-text-primary`** in `:root`. Changed from `#8b949e` to `#e6edf3`. All elements using the secondary token (metric card descriptions, accordion body text, lead paragraphs, captions, sidebar labels) now render at full legibility. Both color tokens resolve to the same value. This is a root-level change that applies universally; individual class overrides are not needed.
 - **`.guide-note`** color set to `--color-text-primary` (explicit, pre-dating the root unification).
 
 ---
@@ -128,14 +241,14 @@ Final nav order: **Home → Metrics → Screener → Watchlist → Indices → F
 - **Guide step body text.** `.guide-step-body p` and `.guide-step-body li` also use `--color-text-primary` for consistency with the above change.
 - **New component classes added** for guide pages: `.guide-intro`, `.guide-steps`, `.guide-step`, `.guide-step-header`, `.step-num`, `.guide-step-title`, `.guide-step-body`, `.ui-text`, `.guide-note`, `.filter-strong`, `.filter-caution`
 
-#### metrics.html -- P/E FWD section
+#### metrics.html: P/E FWD section
 
-- **"Why it matters" section substantially expanded.** Added explicit explanation of the core P/E vs. EPS Growth comparison: when P/E FWD is lower than the EPS Growth FWD percentage, the growth rate outpaces the multiple paid -- a strong signal that the stock is underpriced relative to its earnings trajectory. When P/E is higher than the EPS growth rate, the multiple exceeds what earnings can currently justify.
+- **"Why it matters" section substantially expanded.** Added explicit explanation of the core P/E vs. EPS Growth comparison: when P/E FWD is lower than the EPS Growth FWD percentage, the growth rate outpaces the multiple paid: a strong signal that the stock is underpriced relative to its earnings trajectory. When P/E is higher than the EPS growth rate, the multiple exceeds what earnings can currently justify.
 - This concept was previously implied through the PEG ratio explanation. It is now stated directly as the primary criterion for reading P/E FWD.
 - **"How to read it" box updated.** First bullet now explicitly marks "P/E FWD below the forward EPS growth rate" as the primary signal. Secondary bullet covers sector/5Y comparison.
 - **Caveat box updated.** Reinforces the direct P/E vs. growth comparison as the operative test, not just PEG.
 
-#### index.html -- "What Strong Metrics Look Like" table
+#### index.html: "What Strong Metrics Look Like" table
 
 - **P/E FWD row updated.** Strong Signal changed from "Below 5Y avg + sector" to `P/E < EPS Growth %` as the primary criterion. Caution Zone updated to `P/E > EPS Growth %`. "What It Confirms" updated to reflect the growth-adjusted framing.
 
@@ -155,14 +268,14 @@ All three pages audited for real-time or company-specific data that would become
 
 - **Removed:** "Individual Stonks" holdings table (21 rows of live portfolio data with prices, P/E, PEG, RSI, and 52W range values)
 - **Removed:** "Potential Buys" watchlist ticker tag section
-- **Added:** "What Strong Metrics Look Like" reference table -- 7-row directional guide showing strong signal ranges, caution zones, and what each metric confirms. Uses no company-specific data.
-- **Added:** "Portfolio vs. Watchlist" section -- 4-paragraph educational explanation of entry criteria and the patience mechanism. Replaces the removed data tables with methodology context.
+- **Added:** "What Strong Metrics Look Like" reference table: 7-row directional guide showing strong signal ranges, caution zones, and what each metric confirms. Uses no company-specific data.
+- **Added:** "Portfolio vs. Watchlist" section: 4-paragraph educational explanation of entry criteria and the patience mechanism. Replaces the removed data tables with methodology context.
 
 #### metrics.html
 
 - **Rewrote all 10 metric blocks.** Every META-specific example table replaced with hypothetical illustrative examples using generic labels ("High-growth tech co.", "Slow-growth value co.", "Accelerating / Stable / Decelerating").
 - All real-time figures (META P/E 18.18, PEG 0.88, Cash $81.18B, Debt $86.77B, RSI 40, etc.) removed.
-- Expanded educational prose for each metric -- each block now explains what to look for across a range of companies, not how to read one company's current snapshot.
+- Expanded educational prose for each metric; each block now explains what to look for across a range of companies, not how to read one company's current snapshot.
 - PEG FWD illustrative table shows why P/E alone misleads using hypothetical growth rates.
 - 52W Range section includes a combined RSI + range positioning table showing how the two signals reinforce each other.
 - P/E FWD section includes two hypothetical tables: P/E compression over time (showing multiple expansion from growth), and P/E vs sector/5Y-average comparison.
@@ -217,7 +330,7 @@ All three pages audited for real-time or company-specific data that would become
 
 ### Summary
 
-Full visual redesign to match the GitHub Dark-inspired aesthetic used across all Azqato properties (portfolio, VIX Strategy, ComposerAtlas). No content changes -- all metric text, table data, and FAQ copy is unchanged. Changes are purely CSS, HTML head tags, and documentation.
+Full visual redesign to match the GitHub Dark-inspired aesthetic used across all Azqato properties (portfolio, VIX Strategy, ComposerAtlas). No content changes; all metric text, table data, and FAQ copy is unchanged. Changes are purely CSS, HTML head tags, and documentation.
 
 ### Changes
 

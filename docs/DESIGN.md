@@ -8,11 +8,11 @@
 
 ## 1. Design Direction
 
-**Aesthetic:** GitHub Dark-inspired. Clean, information-dense, developer-credible. The site should feel at home next to other Azqato properties (portfolio, VIX Strategy, ComposerAtlas) -- same visual language, same color tokens, same interaction patterns.
+**Aesthetic:** GitHub Dark-inspired. Clean, information-dense, developer-credible. The site should feel at home next to other Azqato properties (portfolio, VIX Strategy, ComposerAtlas), using the same visual language, same color tokens, same interaction patterns.
 
 **Tone:** Direct, educational, no hype. This is not a marketing page. It is a methodology document.
 
-**Audience reading mode:** Slow and deliberate. People come here to learn, not browse. The design should respect reading -- generous line height, clear hierarchy, anchor navigation that keeps users oriented in long content.
+**Audience reading mode:** Slow and deliberate. People come here to learn, not browse. The design should respect reading: generous line height, clear hierarchy, anchor navigation that keeps users oriented in long content.
 
 **Design lineage:** Follows the Azqato brand system established at `azqato.github.io`. The accent color (`#00d4a0`), surface colors, border tones, and interaction patterns are consistent with the portfolio site and ComposerAtlas.
 
@@ -242,7 +242,7 @@ All pages use an emoji SVG data URI favicon:
 
 As the user scrolls through the 10 metrics, the corresponding sidebar link highlights in `--color-accent` teal using a scroll-based `IntersectionObserver`. This gives the page "you are here" awareness without heavy UI. Borrowed from documentation sites like Stripe Docs or MDN, applied to a financial education context.
 
-The `h2::before` vertical accent bar is the secondary signature element -- it appears on every section heading site-wide and visually ties the stocks site to the Azqato portfolio design language.
+The `h2::before` vertical accent bar is the secondary signature element; it appears on every section heading site-wide and visually ties the stocks site to the Azqato portfolio design language.
 
 ---
 
@@ -328,7 +328,7 @@ style.css structure (in order):
 - No full-bleed hero images
 - No em dashes in any copy
 - No decorative animations or motion for motion's sake
-- Do not deviate from the `#00d4a0` teal accent -- it is the cross-site brand color
+- Do not deviate from the `#00d4a0` teal accent; it is the cross-site brand color
 
 ---
 
@@ -338,7 +338,7 @@ This site documents a methodology, not a live portfolio. All content should be w
 
 **Rules:**
 - No real-time data references. Do not use current prices, current RSI readings, or any value that will be stale within weeks.
-- No company-specific examples for educational illustrations unless the example refers to a specific historical event. The Palantir story (buy at $9, sell at $45, outcome $150) is the one named exception -- it is a first-person historical account, not a live recommendation.
+- No company-specific examples for educational illustrations unless the example refers to a specific historical event. The Palantir story (buy at $9, sell at $45, outcome $150) is the one named exception; it is a first-person historical account, not a live recommendation.
 - Metric examples must use clearly hypothetical labels ("High-growth tech co.", "Slow-growth value co.") or generic category descriptions ("enterprise software platforms", "cloud infrastructure").
 - Moat type examples should describe categories of companies, not name specific companies (e.g., "enterprise software platforms" rather than a specific ticker).
 - Historical references are acceptable when they clearly describe a past event: "a company that declined X% during a downturn and recovered" is fine; "Company X currently trades at Y" is not.
@@ -351,8 +351,8 @@ This site documents a methodology, not a live portfolio. All content should be w
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 1.0 | June 2026 | Initial design -- light wiki theme, IBM Plex fonts, deep green `#1A6B4A` accent |
-| 1.1 | June 2026 | Dark theme rebrand -- aligned to Azqato brand system. New teal accent `#00d4a0`, system fonts, GitHub Dark-inspired palette, h2 accent bars, card hover effects, emoji favicon |
+| 1.0 | June 2026 | Initial design: light wiki theme, IBM Plex fonts, deep green `#1A6B4A` accent |
+| 1.1 | June 2026 | Dark theme rebrand: aligned to Azqato brand system. New teal accent `#00d4a0`, system fonts, GitHub Dark-inspired palette, h2 accent bars, card hover effects, emoji favicon |
 | 1.4 | June 2026 | Content philosophy formalized. No real-time data in examples. Hypothetical labels for all illustrative tables. Named company moat examples replaced with category descriptions. Content Philosophy section added (Section 13). |
 | 1.5 | June 2026 | Two setup guide pages (watchlist.html, screener.html). Nav expanded to 6 items. Text readability: `.hero-sub`, `.lead`, `.guide-step-body` changed to `--color-text-primary`. New guide component CSS system (`.guide-step`, `.step-num`, `.ui-text`, `.guide-note`, etc.). P/E FWD section deepened with P/E vs EPS Growth comparison. |
 | 1.6 | June 2026 | indices.html added. Nav restructured to 7 items (Home, Metrics, Screener, Watchlist, Indices, FAQ, Support). Sitewide readability: `.accordion-content`, `.metric-card-def`, `.guide-note` changed to `--color-text-primary`. Global `td` nowrap removed (wrapping enabled); preserved on `.num` and `.ticker-cell`. FAQ Q5 rewritten; Q7 (capital gains) added. Capital gains content added to homepage. |

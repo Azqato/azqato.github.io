@@ -19,6 +19,7 @@
         <nav class="sidebar-nav" aria-label="Site navigation">
           <ul>
             <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+            <li><a href="philosophy.html">Philosophy</a></li>
             <li><a href="metrics.html">Metrics</a></li>
             <li><a href="screener.html">Screener</a></li>
             <li><a href="watchlist.html">Watchlist</a></li>
@@ -49,7 +50,9 @@
             <p>The core idea is simple: find companies with durable revenue growth, expanding earnings, and healthy balance sheets, then hold them long enough for compounding to work. Entry timing is guided by RSI and 52-week range positioning. Exit timing is, by design, almost never.</p>
             <p>Stocks enter the portfolio only after passing a 10-metric evaluation screen. Stocks enter the watchlist when fundamentals are strong but the price is not yet at an attractive entry point. The portfolio is intentionally concentrated in high-conviction names where the underlying thesis is fully understood.</p>
             <p>The biggest risk in long-term investing is not volatility. It is selling a great company too early because the price scared you. The Palantir story in the <a href="faq.html#palantir">FAQ</a> explains exactly how costly that mistake can be.</p>
-            <p>Holding positions for more than twelve months also unlocks a significant tax advantage. In most jurisdictions, assets held longer than one year qualify for long-term capital gains treatment -- a substantially lower tax rate than short-term gains, which are taxed at the ordinary income rate. For most investors, the difference is 10 to 20 percentage points. Selling a winning position too early does not just interrupt compounding -- it accelerates the tax bill on every dollar of gain. A strategy built around holding is not just a better investment philosophy; it is a more tax-efficient one.</p>
+            <p>Holding positions for more than twelve months also unlocks a significant tax advantage. In most jurisdictions, assets held longer than one year qualify for long-term capital gains treatment, a substantially lower rate than the ordinary income tax applied to short-term gains. For most investors, the difference is 10 to 20 percentage points. Selling a winning position too early does not just interrupt compounding; it also accelerates the tax bill on every dollar of gain. A strategy built around holding is not just a better investment philosophy; it is a more tax-efficient one.</p>
+            <p>Portfolio construction follows a simple rule: hold between 10 and 20 individual stocks. Fewer than 10 concentrates risk too heavily in a small number of outcomes. A single company failing, being disrupted, or undergoing a prolonged correction can significantly damage the portfolio. More than 20 dilutes conviction to the point where it becomes difficult to stay genuinely informed on each holding. The 10-to-20 range balances meaningful exposure to winners with protection against any one company underperforming.</p>
+            <p>When evaluating a new candidate, compare the current market cap to the company's realistic long-term potential. A company with a $25B market cap operating in a market where established competitors have already reached $200-500B suggests meaningful precedent for the path ahead. The size of the addressable opportunity relative to the company's current size is one of the most important inputs into how much appreciation is plausible over a long holding period.</p>
           </section>
 
           <!-- Metric Cards Grid -->
@@ -108,6 +111,7 @@
                 <a href="metrics.html#metric-52w" class="metric-card-link">Learn more &rarr;</a>
               </div>
             </div>
+            <p class="table-note" style="margin-top: 16px;">Gross Margin and Net Margin are two additional business quality signals evaluated during company research. They are not available as direct screener filters but are reviewed when analyzing any candidate in depth. See the <a href="metrics.html#metric-gross-margin">Metrics glossary</a> for thresholds and interpretation.</p>
           </section>
 
           <!-- Target Metric Ranges -->
@@ -148,7 +152,7 @@
                     <td class="ticker-cell">P/E FWD</td>
                     <td><span class="badge badge-good">P/E &lt; EPS Growth %</span></td>
                     <td><span class="badge badge-caution">P/E &gt; EPS Growth %</span></td>
-                    <td>Growth rate outpaces the multiple paid -- the stock is underpriced relative to its earnings trajectory. Also compare to 5Y avg and sector.</td>
+                    <td>Growth rate outpaces the multiple paid; the stock is underpriced relative to its earnings trajectory. Also compare to 5Y avg and sector.</td>
                   </tr>
                   <tr>
                     <td class="ticker-cell">Cash / Debt</td>
@@ -168,6 +172,18 @@
                     <td><span class="badge badge-caution">Upper 90%</span></td>
                     <td>Price is near a range low, improving risk/reward</td>
                   </tr>
+                  <tr>
+                    <td class="ticker-cell">Gross Margin</td>
+                    <td><span class="badge badge-good">&gt; 50%</span></td>
+                    <td><span class="badge badge-caution">&lt; 30%</span></td>
+                    <td>Business retains substantial revenue before operating expenses</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">Net Margin</td>
+                    <td><span class="badge badge-good">&gt; 25%</span></td>
+                    <td><span class="badge badge-caution">&lt; 10%</span></td>
+                    <td>Profit efficiency: revenue converting into earnings at scale</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -179,13 +195,13 @@
             <h2>Portfolio vs. Watchlist</h2>
             <p>Not every company that passes the 10-metric screen belongs in the portfolio immediately. The distinction between a portfolio holding and a watchlist name comes down to timing.</p>
             <p>A company earns a portfolio position when: the fundamentals pass the full evaluation, the business model is understood well enough to hold through a 50% drawdown without flinching, and the RSI and 52-week range suggest the current price is at or near a favorable entry point.</p>
-            <p>A company earns a watchlist position when: the fundamentals are strong but the stock is extended -- RSI is elevated, the price is near a 52-week high, or the PEG has temporarily moved above target because the stock ran ahead of its earnings growth. The watchlist is a patience queue. It prevents buying quality companies at the wrong price.</p>
+            <p>A company earns a watchlist position when: the fundamentals are strong but the stock is extended. RSI is elevated, the price is near a 52-week high, or the PEG has temporarily moved above target because the stock ran ahead of its earnings growth. The watchlist is a patience queue. It prevents buying quality companies at the wrong price.</p>
             <p>The transition from watchlist to portfolio happens when the market corrects, the stock pulls back, and the RSI and range positioning align with the entry criteria above. Patience here is a strategy, not a passive state.</p>
           </section>
 
           <!-- FAQ Teaser -->
           <div class="faq-teaser">
-            <p>Why do I never sell? <a href="faq.html#palantir">Read the Palantir story.</a></p>
+            <p>Why do I never sell? <a href="faq.html#palantir">Read the Palantir story.</a> The thinking behind every rule: <a href="philosophy.html">the methodology philosophy.</a></p>
           </div>
 
         </div>
