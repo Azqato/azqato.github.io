@@ -2,6 +2,50 @@
 
 ---
 
+## v2.3.0 — June 2026 — FAQ Expansion and Badge Text Corrections
+
+**faq.html expanded from 11 to 30 accordion items. Hero badge text corrected sitewide to be distinct from each page's H1 title.**
+
+### faq.html — Expanded Q&A (11 original, 19 new)
+
+19 new accordion items added covering topics derived from all site pages:
+
+| # | New Question |
+|---|---|
+| 3 | What is the "stocks as ownership" mental model? |
+| 4 | What does "staying on offense" mean and why does it matter? |
+| 5 | Can I trust Wall Street recommendations? |
+| 6 | What is market leadership cycle and why does it matter? |
+| 8 | How do you research a company before looking at any numbers? |
+| 9 | What is the double/lose-50% test? |
+| 11 | How do you build investment knowledge over time? |
+| 13 | What is market cap vs. potential and why does it matter? |
+| 14 | What does gross margin reveal about a business? |
+| 15 | How do you think about a company's balance sheet health? |
+| 16 | What is the revenue deceleration warning signal? |
+| 17 | Why is PEG a better valuation signal than P/E alone? |
+| 18 | What are Growth, Value, and Dividend stocks and how do they differ? |
+| 20 | What is RSI and how do you use it as an entry signal? |
+| 21 | What is the VIX and how should I use it when investing in indices? |
+| 22 | How is investing in ETFs different from picking individual stocks? |
+| 23 | What is an expense ratio and why does it matter for ETF investing? |
+| 24 | What are leveraged ETFs and when are they appropriate? |
+| 30 | Why do conference calls matter more than earnings press releases? |
+
+### Hero badge text corrections
+
+Five pages had badges that were identical or near-identical to their H1 title. Updated to purpose/type labels distinct from the page name:
+
+| Page | Old Badge | New Badge |
+|------|-----------|-----------|
+| `philosophy.html` | 📖 Investment Philosophy | 📖 Mindset &amp; Principles |
+| `metrics.html` | 📊 Metrics Glossary | 📊 The 12 Signals |
+| `screener.html` | 🔍 Screener Setup Guide | 🔍 Candidate Discovery |
+| `watchlist.html` | 📋 Watchlist Setup Guide | 📋 12-Column Tracking Setup |
+| `faq.html` | ❓ FAQ &amp; Philosophy | ❓ Strategy Q&amp;A |
+
+---
+
 ## v2.2.0 — June 2026 — Sitewide Hero Badge System
 
 **Hero badge added to all seven pages and repositioned consistently below the page description. Badge position is now: headline, then description, then badge.**
