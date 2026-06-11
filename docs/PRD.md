@@ -119,6 +119,8 @@ All copy across the site and documentation must be easy to read and free of em d
 
 This standard applies to all HTML pages, all files in `docs/`, and `README.md`. Em dashes (`—`) and double dashes (`--` used as punctuation) are not permitted anywhere in content or documentation.
 
+Em dashes can appear in two forms in HTML files: as the literal Unicode character (`—`) or as the HTML entity (`&mdash;`). Both are prohibited. Audits must search for both forms independently, as a search for one will not catch the other.
+
 ---
 
 ## Success Criteria

@@ -332,6 +332,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.2.4] - 2026-06-11
+
+### Changed
+- Fixed HTML-encoded em dash (`&mdash;`) in `index.html` hero bio paragraph. Previous audit only searched for the literal `—` character and missed the entity form.
+- `docs/PRD.md` Writing Style section updated to note that em dashes appear in two forms in HTML (`—` and `&mdash;`) and both are prohibited. Audits must search for each form independently.
+
+---
+
 ## [2.2.3] - 2026-06-11
 
 ### Changed
