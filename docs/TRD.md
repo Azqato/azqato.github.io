@@ -1,4 +1,4 @@
-# Technical Reference Document — Azqato Portfolio
+# Technical Reference Document: Azqato Portfolio
 
 ## System Architecture
 
@@ -10,7 +10,7 @@ Browser → GitHub Pages (CDN) → index.html / about.html / support.html
                                 music.html / accounts.html / privacy-policy.html
 ```
 
-Each page is self-contained. Navigation between pages is standard `<a href>` links — there is no client-side router. The browser performs a full page load on every navigation.
+Each page is self-contained. Navigation between pages is standard `<a href>` links; there is no client-side router. The browser performs a full page load on every navigation.
 
 ---
 
@@ -33,28 +33,28 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 
 ```
 .
-├── index.html           — Portfolio homepage: project grid, tag filter, hero
-├── about.html           — About page: bio, pitch card, profile photo
-├── support.html         — Support page: Buy Me a Coffee CTA, affiliate grid
-├── links.html           — Links hub: all social/platform links by category
-├── youtube.html         — YouTube channels: four channel cards with thumbnails
-├── invests.html         — Invests hub: curated investment resource directory
-├── music.html           — Music page: Spotify playlists + music platform links
-├── accounts.html        — Gaming accounts: Steam, LoL, TFT, RuneScape profiles
-├── privacy-policy.html  — Full privacy policy
-├── img/                 — Image assets (profile photos, YT thumbnails, playlist covers)
-├── README.md            — Developer setup and deployment guide
+├── index.html           - Portfolio homepage: project grid, tag filter, hero
+├── about.html           - About page: bio, pitch card, profile photo
+├── support.html         - Support page: Buy Me a Coffee CTA, affiliate grid
+├── links.html           - Links hub: all social/platform links by category
+├── youtube.html         - YouTube channels: four channel cards with thumbnails
+├── invests.html         - Invests hub: curated investment resource directory
+├── music.html           - Music page: Spotify playlists + music platform links
+├── accounts.html        - Gaming accounts: Steam, LoL, TFT, RuneScape profiles
+├── privacy-policy.html  - Full privacy policy
+├── img/                 - Image assets (profile photos, YT thumbnails, playlist covers)
+├── README.md            - Developer setup and deployment guide
 └── docs/
-    ├── PRD.md           — Product requirements
-    ├── TRD.md           — This file
-    ├── DESIGN.md        — Design system and visual tokens
-    ├── PATCHNOTES.md    — Versioned changelog
-    ├── PRFAQ.md         — Press release and FAQ
-    ├── TENETS.md        — Product principles
-    ├── METRICS.md       — Success metrics
-    ├── ROADMAP.md       — Milestones and planned features
-    ├── SECURITY.md      — Security model
-    └── RUNBOOK.md       — Operational runbook
+    ├── PRD.md           - Product requirements
+    ├── TRD.md           - This file
+    ├── DESIGN.md        - Design system and visual tokens
+    ├── PATCHNOTES.md    - Versioned changelog
+    ├── PRFAQ.md         - Press release and FAQ
+    ├── TENETS.md        - Product principles
+    ├── METRICS.md       - Success metrics
+    ├── ROADMAP.md       - Milestones and planned features
+    ├── SECURITY.md      - Security model
+    └── RUNBOOK.md       - Operational runbook
 ```
 
 ---
@@ -65,16 +65,16 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 
 ```js
 {
-  name: string,       // required — display name on the card
-  desc: string,       // required — one-sentence description
-  github: string,     // required — full GitHub repo URL
-  demo: string,       // optional — live site URL; card title links here if set
-  tags: string[],     // required — category labels (Finance, Social, Tools)
-  langClass: string,  // optional — CSS class for language tag color (e.g. "lang-js")
-  icon: string,       // optional — emoji displayed in the card icon area
-  iconUrl: string,    // optional — image/SVG URL; overrides icon when set
-  stars: string,      // optional — star count displayed as a badge
-  updated: string,    // optional — last-updated label (e.g. "Jun 2025")
+  name: string,       // required, display name on the card
+  desc: string,       // required, one-sentence description
+  github: string,     // required, full GitHub repo URL
+  demo: string,       // optional, live site URL; card title links here if set
+  tags: string[],     // required, category labels (Finance, Social, Tools)
+  langClass: string,  // optional, CSS class for language tag color (e.g. "lang-js")
+  icon: string,       // optional, emoji displayed in the card icon area
+  iconUrl: string,    // optional, image/SVG URL; overrides icon when set
+  stars: string,      // optional, star count displayed as a badge
+  updated: string,    // optional, last-updated label (e.g. "Jun 2025")
 }
 ```
 
@@ -97,10 +97,10 @@ Each affiliate card is static HTML; there is no JavaScript data model. Structure
 
 ```
 <div class="affiliate-card">
-  <div class="logo-area">         — brand color background + emoji/text logo
-  <span class="promo-badge">      — short promo text (e.g. "Free $20")
-  <p class="affiliate-desc">      — description of the offer
-  <a class="affiliate-btn">       — CTA button linking to the referral URL
+  <div class="logo-area">         (brand color background + emoji/text logo)
+  <span class="promo-badge">      (short promo text, e.g. "Free $20")
+  <p class="affiliate-desc">      (description of the offer)
+  <a class="affiliate-btn">       (CTA button linking to the referral URL)
 ```
 
 **Active affiliate cards:**
@@ -119,7 +119,7 @@ Each affiliate card is static HTML; there is no JavaScript data model. Structure
 
 This project has no backend API. The only "API" is the internal data flow for the project grid filter:
 
-### Internal Data Flow — Tag Filter (`index.html`)
+### Internal Data Flow: Tag Filter (`index.html`)
 
 ```
 PROJECTS array (static data)
@@ -176,7 +176,7 @@ No persistent state. No localStorage, sessionStorage, IndexedDB, or cookies.
 | Public          | Affiliate referral program                | None (link only)      | User navigates to public.com |
 | Lyft            | Affiliate referral program                | None (link only)      | User navigates to lyft.com |
 
-All third-party interactions are outbound navigation — the portfolio itself does not call any external API or load any external resource.
+All third-party interactions are outbound navigation; the portfolio itself does not call any external API or load any external resource.
 
 ---
 
@@ -199,7 +199,7 @@ All third-party interactions are outbound navigation — the portfolio itself do
 |-----------------------------------------|-------------------------------|----------------------------------------------|
 | Inline CSS repeated across pages        | Each page has its own full `<style>` block | Extract to a shared `styles.css` file |
 | Inline JS repeated across pages         | Active nav detection JS duplicated in each page | Extract to a shared `nav.js` file |
-| Hardcoded affiliate links in markup     | Links are static HTML strings | No change needed — deliberate for simplicity |
+| Hardcoded affiliate links in markup     | Links are static HTML strings | No change needed (deliberate for simplicity) |
 | No CSP headers                          | GitHub Pages does not support custom headers | Acceptable for a static content-only site |
 | No automated tests                      | Manual visual QA only         | Could add Playwright or Cypress smoke tests |
-| No build pipeline                       | Raw source files are deployed | Page count is now 9 — approaching the threshold where a shared nav include would justify a minimal build step |
+| No build pipeline                       | Raw source files are deployed | Page count is now 9, approaching the threshold where a shared nav include would justify a minimal build step |

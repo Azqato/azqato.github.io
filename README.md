@@ -1,6 +1,6 @@
 # Azqato's Portfolio
 
-A self-contained, zero-dependency portfolio site for displaying GitHub projects. Built with plain HTML, CSS, and vanilla JavaScript — no build tools, no frameworks, no npm.
+A self-contained, zero-dependency portfolio site for displaying GitHub projects. Built with plain HTML, CSS, and vanilla JavaScript. No build tools, no frameworks, no npm.
 
 **Live site:** https://azqato.github.io/
 
@@ -21,7 +21,7 @@ A self-contained, zero-dependency portfolio site for displaying GitHub projects.
 
 No build tools, package managers, or runtimes required. All you need is:
 
-- A modern browser (Chrome, Firefox, Edge, or Safari — latest version)
+- A modern browser (Chrome, Firefox, Edge, or Safari, latest version)
 - A text editor to modify project data
 
 ---
@@ -49,7 +49,7 @@ npx serve .          # serves at http://localhost:3000
 python -m http.server # serves at http://localhost:8000
 ```
 
-Default port depends on which local server you choose (see above). No port is required — the files work as file:// URLs.
+Default port depends on which local server you choose (see above). No port is required; the files work as file:// URLs.
 
 ---
 
@@ -100,7 +100,7 @@ Affiliate links and Buy Me a Coffee URLs are hardcoded directly in `support.html
 
 ## Favicon
 
-The ⚡ emoji favicon is defined as an inline SVG data URI in the `<head>` — no image file required. To change it, replace the emoji in this line in each HTML file:
+The ⚡ emoji favicon is defined as an inline SVG data URI in the `<head>`. No image file required. To change it, replace the emoji in this line in each HTML file:
 
 ```html
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
@@ -128,9 +128,9 @@ There is no build step. The source files are the deployed files.
 3. The site is live at `https://<username>.github.io/` within ~60 seconds.
 
 ### Other static hosts
-- **Vercel / Netlify** — drag and drop the project folder; no build command needed.
-- **Cloudflare Pages** — connect the repo; leave build command blank.
-- **Any static host** — upload all `.html` files and the `docs/` folder.
+- **Vercel / Netlify:** drag and drop the project folder; no build command needed.
+- **Cloudflare Pages:** connect the repo; leave build command blank.
+- **Any static host:** upload all `.html` files and the `docs/` folder.
 
 ---
 
@@ -138,21 +138,21 @@ There is no build step. The source files are the deployed files.
 
 ```
 .
-├── index.html       — portfolio / project grid
-├── about.html       — about page: bio, role, and personal pitch
-├── support.html     — support page: Buy Me a Coffee CTA + affiliate partners grid
-├── README.md        — this file
+├── index.html       - portfolio / project grid
+├── about.html       - about page: bio, role, and personal pitch
+├── support.html     - support page: Buy Me a Coffee CTA + affiliate partners grid
+├── README.md        - this file
 └── docs/
-    ├── PRD.md       — product requirements document
-    ├── TRD.md       — technical reference document
-    ├── DESIGN.md    — design system and visual tokens
-    ├── PATCHNOTES.md — version history / changelog
-    ├── PRFAQ.md     — press release and FAQ
-    ├── TENETS.md    — product principles
-    ├── METRICS.md   — success metrics and targets
-    ├── ROADMAP.md   — milestones and planned features
-    ├── SECURITY.md  — security model and considerations
-    └── RUNBOOK.md   — operational runbook
+    ├── PRD.md       - product requirements document
+    ├── TRD.md       - technical reference document
+    ├── DESIGN.md    - design system and visual tokens
+    ├── PATCHNOTES.md - version history / changelog
+    ├── PRFAQ.md     - press release and FAQ
+    ├── TENETS.md    - product principles
+    ├── METRICS.md   - success metrics and targets
+    ├── ROADMAP.md   - milestones and planned features
+    ├── SECURITY.md  - security model and considerations
+    └── RUNBOOK.md   - operational runbook
 ```
 
 ---

@@ -1,4 +1,4 @@
-# Product Requirements Document — Azqato Portfolio
+# Product Requirements Document: Azqato Portfolio
 
 ## Problem Statement
 
@@ -8,13 +8,13 @@ Developers and recruiters who find Azqato's GitHub profile have no single place 
 
 ## Target Users
 
-### Visitor — Developer / Recruiter
+### Visitor: Developer / Recruiter
 Someone who arrived from a GitHub profile link, a LinkedIn message, or a referral. They want to quickly assess the scope and quality of projects, find a live demo to try, and locate the source code if something looks promising. They are comfortable with dark themes and developer aesthetics. They have a limited time budget (30–90 seconds before deciding whether to engage further).
 
-### Visitor — Community Member / Fan
+### Visitor: Community Member / Fan
 Someone from Twitch, YouTube, or the RuneScape B5TA community who knows Azqato personally and wants to explore the projects, learn more about the person behind the content, or support the work through Buy Me a Coffee or affiliate links. Less technically focused; navigates by project name and description rather than tags or language.
 
-### Owner — Azqato (maintainer)
+### Owner: Azqato (maintainer)
 The sole developer of the portfolio. Needs to add new projects quickly without touching layout code, update affiliate links as they come in, and keep the site looking professional at all times. Values low-friction maintenance over automation.
 
 ---
@@ -23,7 +23,7 @@ The sole developer of the portfolio. Needs to add new projects quickly without t
 
 - Give visitors a fast, readable overview of all public projects in one place.
 - Make it trivially easy to add new projects without touching layout HTML.
-- Load instantly on any device or connection — no JavaScript frameworks, no CDN fonts.
+- Load instantly on any device or connection with no JavaScript frameworks and no CDN fonts.
 - Reflect a developer-first aesthetic (dark theme, code-adjacent visual language).
 - Provide a monetization path through Buy Me a Coffee and affiliate referral programs.
 - Tell the full story behind the brand: community, gaming roots, content creation, and web development.
@@ -62,15 +62,15 @@ The sole developer of the portfolio. Needs to add new projects quickly without t
 
 ### MVP (shipped in v1)
 
-- **F1 — Project Cards:** icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date.
-- **F2 — Tag Filtering:** auto-generated filter bar from `PROJECTS` array; real-time hide/show; project count updates.
-- **F3 — Navigation:** sticky nav with Portfolio, About, GitHub, Support links; active state per page; collapses on mobile.
-- **F4 — Hero Sections:** status badge, headline, bio blurb, and CTA buttons on each page.
-- **F5 — Zero Dependencies:** plain HTML/CSS/JS; works offline after first load.
-- **F6 — About Page:** bio with gaming origins, content creation, B5TA community, and web development; pitch card with avatar and signature.
-- **F7 — Support Page:** Buy Me a Coffee CTA with disclaimer; affiliate partner grid with 5 live referral links (Tesla, Robinhood, M1 Finance, Public, Lyft); FTC-compliant affiliate disclosure.
-- **F8 — Consistent Navigation:** identical nav and footer structure across all pages.
-- **F9 — `iconUrl` field:** optional image/SVG URL per project card that overrides the emoji icon.
+- **F1: Project Cards:** icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date.
+- **F2: Tag Filtering:** auto-generated filter bar from `PROJECTS` array; real-time hide/show; project count updates.
+- **F3: Navigation:** sticky nav with Portfolio, About, GitHub, Support links; active state per page; collapses on mobile.
+- **F4: Hero Sections:** status badge, headline, bio blurb, and CTA buttons on each page.
+- **F5: Zero Dependencies:** plain HTML/CSS/JS; works offline after first load.
+- **F6: About Page:** bio with gaming origins, content creation, B5TA community, and web development; pitch card with avatar and signature.
+- **F7: Support Page:** Buy Me a Coffee CTA with disclaimer; affiliate partner grid with 5 live referral links (Tesla, Robinhood, M1 Finance, Public, Lyft); FTC-compliant affiliate disclosure.
+- **F8: Consistent Navigation:** identical nav and footer structure across all pages.
+- **F9: `iconUrl` field:** optional image/SVG URL per project card that overrides the emoji icon.
 
 ### Future (post-launch, not committed)
 
@@ -101,7 +101,23 @@ The sole developer of the portfolio. Needs to add new projects quickly without t
 - Visitors have JavaScript enabled (filtering requires JS; static content degrades gracefully without it).
 - Affiliate programs (Tesla, Robinhood, M1 Finance, Public, Lyft) will honor the referral links for their stated promotional periods.
 - The owner will manually maintain the `PROJECTS` array; no automation is needed for v1.
-- Buy Me a Coffee does not require integration code — a direct link is sufficient.
+- Buy Me a Coffee does not require integration code; a direct link is sufficient.
+
+---
+
+## Writing Style
+
+All copy across the site and documentation must be easy to read and free of em dashes and double dashes. These punctuation marks interrupt reading flow and often obscure meaning. Use the following alternatives instead.
+
+| Situation | Preferred punctuation | Example |
+|---|---|---|
+| Continuing a thought naturally | Comma | "Fast, clean, and honest about what it is." |
+| Introducing a list or explanation after a complete clause | Colon | "Each strategy gets a dedicated page covering: rules, risks, and sources." |
+| Connecting two closely related independent clauses | Semicolon | "Buy Me a Coffee does not require integration code; a direct link is sufficient." |
+| Adding supplementary or aside information | Parentheses | "The portfolio is open source (MIT licensed) and hosted on GitHub." |
+| Separating two ideas that are better as their own sentences | Period | "Fully client-side. All data stays in your browser's localStorage." |
+
+This standard applies to all HTML pages, all files in `docs/`, and `README.md`. Em dashes (`—`) and double dashes (`--` used as punctuation) are not permitted anywhere in content or documentation.
 
 ---
 

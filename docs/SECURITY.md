@@ -1,4 +1,4 @@
-# Security — Azqato Portfolio
+# Security: Azqato Portfolio
 
 ---
 
@@ -39,7 +39,7 @@ This data is public by design and contains no personal information about visitor
 
 There are no environment variables. The project has no server, no build pipeline, and no configuration files that reference secrets.
 
-Affiliate link URLs are hardcoded directly in `support.html` as plain HTML `href` attributes. These are not secrets — they are public referral URLs intended to be shared. No API keys, tokens, or credentials exist in this codebase.
+Affiliate link URLs are hardcoded directly in `support.html` as plain HTML `href` attributes. These are not secrets; they are public referral URLs intended to be shared. No API keys, tokens, or credentials exist in this codebase.
 
 **Confirmation:** no `.env` files, no secrets in git history, no hardcoded passwords or tokens.
 
@@ -47,7 +47,7 @@ Affiliate link URLs are hardcoded directly in `support.html` as plain HTML `href
 
 ## Third-Party Trust
 
-Every external navigation link opens in a new tab. The portfolio itself makes zero outbound HTTP requests on page load — no external resources are fetched, no scripts are loaded from CDNs, and no analytics pixels fire.
+Every external navigation link opens in a new tab. The portfolio itself makes zero outbound HTTP requests on page load; no external resources are fetched, no scripts are loaded from CDNs, and no analytics pixels fire.
 
 When a visitor clicks a link, they navigate to a third-party site. Data they share with those sites is governed by those sites' privacy policies, not by this portfolio.
 
@@ -61,7 +61,7 @@ When a visitor clicks a link, they navigate to a third-party site. Data they sha
 | Public            | User-provided data on their platform | public.com/privacy                              |
 | Lyft              | User-provided data on their platform | lyft.com/legal/privacy-policy                   |
 
-The portfolio is a referral gateway — it links to these services but does not transmit visitor data to them in any automated way.
+The portfolio is a referral gateway; it links to these services but does not transmit visitor data to them in any automated way.
 
 ---
 

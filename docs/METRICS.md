@@ -1,4 +1,4 @@
-# Metrics — Azqato Portfolio
+# Metrics: Azqato Portfolio
 
 ---
 
@@ -48,9 +48,9 @@ This is the single number that best represents whether the portfolio is deliveri
 
 | Metric                         | Description                                               | Measurement Method                            |
 |--------------------------------|-----------------------------------------------------------|------------------------------------------------|
-| Page weight — index.html       | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
-| Page weight — about.html       | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
-| Page weight — support.html     | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
+| Page weight: index.html        | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
+| Page weight: about.html        | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
+| Page weight: support.html      | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
 | Time to First Contentful Paint | How fast the first content appears                        | Chrome DevTools → Lighthouse or PageSpeed      |
 | External HTTP requests         | Count of requests to external domains on page load        | Browser DevTools → Network tab (0 is target)   |
 | GitHub Pages uptime            | Site availability                                         | GitHub Status page / manual spot checks        |

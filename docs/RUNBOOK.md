@@ -1,4 +1,4 @@
-# Runbook — Azqato Portfolio
+# Runbook: Azqato Portfolio
 
 ---
 
@@ -47,13 +47,13 @@ Get-ChildItem *.html | Select-Object Name, Length
 Get-ChildItem img\ | Select-Object Name, Length
 ```
 
-Target: each HTML file should remain under 50,000 bytes uncompressed. Images in `img/` are static assets with no size target — keep them web-optimised (< 500 KB each).
+Target: each HTML file should remain under 50,000 bytes uncompressed. Images in `img/` are static assets with no size target; keep them web-optimised (< 500 KB each).
 
 ---
 
 ## Deploy
 
-### Production — GitHub Pages
+### Production: GitHub Pages
 
 The site is deployed automatically when changes are pushed to the `main` branch.
 
@@ -91,14 +91,14 @@ GitHub Pages picks up the push automatically. Propagation time is typically 30�
 
 Because there is no server and no database, a rollback is a git operation.
 
-### Option A — Revert the last commit
+### Option A: Revert the last commit
 ```bash
 git revert HEAD
 git push origin main
 ```
 This creates a new commit that undoes the last change. GitHub Pages deploys the revert within ~60 seconds.
 
-### Option B — Reset to a specific commit (destructive — confirm before using)
+### Option B: Reset to a specific commit (destructive, confirm before using)
 ```bash
 git log --oneline          # find the target commit hash
 git reset --hard <hash>
@@ -106,7 +106,7 @@ git push --force-with-lease origin main
 ```
 Use this only if `git revert` is not practical (e.g., reverting many commits at once).
 
-### Option C — Manually restore a file from a previous commit
+### Option C: Manually restore a file from a previous commit
 ```bash
 git checkout <hash> -- index.html     # restore index.html from a specific commit
 git commit -m "Restore index.html to <hash>"

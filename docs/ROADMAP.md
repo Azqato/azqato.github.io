@@ -1,4 +1,4 @@
-# Roadmap — Azqato Portfolio
+# Roadmap: Azqato Portfolio
 
 ---
 
@@ -32,25 +32,25 @@ The portfolio now incorporates all content from the old azqato.com website. Six 
 
 ## Feature Breakdown Per Milestone
 
-### v2.1.0 — Code Extraction + Shared Assets
+### v2.1.0: Code Extraction + Shared Assets
 - Extract shared CSS into a single `styles.css` file to eliminate duplication across pages.
 - Extract shared nav JavaScript (active state detection) into a `nav.js` file.
 - Extract shared nav HTML using a consistent pattern (either JS injection or a build step).
 - Add `prefers-reduced-motion` media query to disable card hover transforms for users who prefer reduced motion.
 
-### v2.2.0 — GitHub API Integration
+### v2.2.0: GitHub API Integration
 - Auto-fetch star counts for each project via GitHub REST API on page load (with graceful fallback to hardcoded values).
 - Auto-fetch last-pushed date per repository to keep "updated" fields current.
 - Cache API responses in `sessionStorage` to avoid repeated calls within one visit.
 - Add `X-RateLimit-Remaining` check and silent fallback if rate limit is hit.
 
-### v2.3.0 — Dark/Light Mode Toggle
+### v2.3.0: Dark/Light Mode Toggle
 - Add a toggle button in the nav bar to switch between dark (current) and a light theme.
 - Persist preference in `localStorage`.
 - Respect `prefers-color-scheme` media query as the initial default.
 - Define light-mode versions of all CSS custom properties.
 
-### v3.0.0 — Contact / Hire-Me Section
+### v3.0.0: Contact / Hire-Me Section
 - Add a new page or section with a contact CTA.
 - Options under evaluation: email obfuscation link, Calendly embed, or GitHub Discussions link. No server-side form.
 - Add "Hire Me" or "Contact" nav link.

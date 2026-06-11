@@ -1,10 +1,10 @@
-# Design Document — Azqato Portfolio
+# Design Document: Azqato Portfolio
 
 ## Design Philosophy
 
-The portfolio uses a GitHub Dark-inspired aesthetic to signal developer credibility without requiring any explanation. The visual language is intentional: if it looks at home on github.com, it belongs here. Motion is used only to confirm interactivity — never for decoration — and every element defaults to the minimum necessary complexity.
+The portfolio uses a GitHub Dark-inspired aesthetic to signal developer credibility without requiring any explanation. The visual language is intentional: if it looks at home on github.com, it belongs here. Motion is used only to confirm interactivity, never for decoration, and every element defaults to the minimum necessary complexity.
 
-The accent color follows the same brand green used across Azqato's projects (see [Net Worth Tracker design system](https://github.com/Azqato/net-worth-tracker/blob/main/docs/DESIGN.md)): a teal-green (`#00d4a0`) that replaces the previous GitHub blue. Green is used for all primary interactive elements — links, active nav states, CTA buttons, card hover borders, and tag highlights.
+The accent color follows the same brand green used across Azqato's projects (see [Net Worth Tracker design system](https://github.com/Azqato/net-worth-tracker/blob/main/docs/DESIGN.md)): a teal-green (`#00d4a0`) that replaces the previous GitHub blue. Green is used for all primary interactive elements: links, active nav states, CTA buttons, card hover borders, and tag highlights.
 
 ---
 
@@ -49,7 +49,7 @@ Language tags use inline color values, not CSS custom properties:
 
 ## Typography
 
-The site uses the system font stack — no external font loading.
+The site uses the system font stack with no external font loading.
 
 ```css
 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -164,16 +164,16 @@ Image assets live in `img/` at the project root. All images were migrated from t
 | `home-hero-profile.jpg`         | Hero avatar on `index.html`                      |
 | `about-profile.jpg`             | Pitch card avatar on `about.html`                |
 | `logo-cat-avatar.jpg`           | Original site logo (available for reuse)         |
-| `yt-thumb-azqato.jpg`           | YouTube channel thumbnail — Azqato               |
-| `yt-thumb-streams.jpg`          | YouTube channel thumbnail — Azqato Streams       |
-| `yt-thumb-mixes.jpg`            | YouTube channel thumbnail — Azqato Mixes         |
-| `yt-thumb-chills.jpg`           | YouTube channel thumbnail — Azqato Chills        |
-| `yt-channel-azqato.jpg`         | Larger YouTube channel image — Azqato            |
-| `yt-channel-streams.jpg`        | Larger YouTube channel image — Azqato Streams    |
-| `yt-channel-mixes.jpg`          | Larger YouTube channel image — Azqato Mixes      |
-| `yt-channel-chills.jpg`         | Larger YouTube channel image — Azqato Chills     |
-| `music-playlist-bangers.jpg`    | Spotify playlist cover — BANGERS                 |
-| `music-playlist-addictions.jpg` | Spotify playlist cover — ADDICTIONS              |
+| `yt-thumb-azqato.jpg`           | YouTube channel thumbnail for Azqato             |
+| `yt-thumb-streams.jpg`          | YouTube channel thumbnail for Azqato Streams     |
+| `yt-thumb-mixes.jpg`            | YouTube channel thumbnail for Azqato Mixes       |
+| `yt-thumb-chills.jpg`           | YouTube channel thumbnail for Azqato Chills      |
+| `yt-channel-azqato.jpg`         | Larger YouTube channel image for Azqato          |
+| `yt-channel-streams.jpg`        | Larger YouTube channel image for Azqato Streams  |
+| `yt-channel-mixes.jpg`          | Larger YouTube channel image for Azqato Mixes    |
+| `yt-channel-chills.jpg`         | Larger YouTube channel image for Azqato Chills   |
+| `music-playlist-bangers.jpg`    | Spotify playlist cover for BANGERS               |
+| `music-playlist-addictions.jpg` | Spotify playlist cover for ADDICTIONS            |
 | `music-logo-small.jpg`          | Small music logo (available for reuse)           |
 
 Profile photos and thumbnails are rendered as circles via `border-radius: 50%` and `object-fit: cover`.
@@ -202,7 +202,7 @@ No ARIA roles are used beyond what is implicit in semantic HTML.
 
 ## Animation and Motion
 
-All motion is functional — it confirms interactivity or directs attention. No decorative animations.
+All motion is functional: it confirms interactivity and directs attention. No decorative animations.
 
 | Element          | Animation                                          | Duration   | Easing    |
 |------------------|----------------------------------------------------|------------|-----------|
@@ -212,4 +212,4 @@ All motion is functional — it confirms interactivity or directs attention. No 
 | Nav links        | Color transition on hover                          | `0.2s`     | `ease`    |
 | All buttons      | Background/border color transition on hover        | `0.2s`     | `ease`    |
 
-Motion is not reduced for `prefers-reduced-motion` currently — this is a known gap. The animations are subtle enough (3px translate, color transitions) that they are unlikely to cause issues, but a `@media (prefers-reduced-motion: reduce)` rule disabling transforms would be the correct fix.
+Motion is not reduced for `prefers-reduced-motion` currently. This is a known gap. The animations are subtle enough (3px translate, color transitions) that they are unlikely to cause issues, but a `@media (prefers-reduced-motion: reduce)` rule disabling transforms would be the correct fix.

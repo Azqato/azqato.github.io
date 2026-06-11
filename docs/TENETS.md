@@ -1,4 +1,4 @@
-# Product Tenets — Azqato Portfolio
+# Product Tenets: Azqato Portfolio
 
 These are the guiding principles for every decision made on this project. When two options conflict, the tenet higher on this list takes priority.
 
@@ -6,7 +6,7 @@ These are the guiding principles for every decision made on this project. When t
 
 ## 1. Speed Is a Feature; Everything Else Is Optional
 
-A page that loads in under a second with five project cards is more valuable than a page that loads in three seconds with ten. Every addition — a library, a font, a third-party widget — must pay for itself in load time. If it can't, it doesn't ship.
+A page that loads in under a second with five project cards is more valuable than a page that loads in three seconds with ten. Every addition (a library, a font, a third-party widget) must pay for itself in load time. If it can't, it doesn't ship.
 
 *This tenet wins when debating whether to add a dependency, a new CDN resource, or a feature that requires external data.*
 
@@ -16,7 +16,7 @@ A page that loads in under a second with five project cards is more valuable tha
 
 The default answer to "should we use a library for this?" is no. Vanilla HTML, CSS, and JavaScript can handle everything this portfolio needs. Dependencies rot, have security vulnerabilities, and create maintenance burden. The burden of proof is on adding a dependency, not on avoiding one.
 
-*This tenet will conflict with Tenet 5 (low maintenance) — when a library would genuinely reduce ongoing manual work, prefer the no-dependency solution unless the maintenance cost is severe and sustained.*
+*This tenet will conflict with Tenet 5 (low maintenance). When a library would genuinely reduce ongoing manual work, prefer the no-dependency solution unless the maintenance cost is severe and sustained.*
 
 ---
 

@@ -550,7 +550,7 @@
     const PROJECTS = [
       {
         name: "Net Worth Tracker",
-        desc: "Browser-based personal finance tool for tracking monthly net worth across four asset categories. Fully client-side — all data stays in your browser's localStorage with no accounts or servers required.",
+        desc: "Browser-based personal finance tool for tracking monthly net worth across four asset categories. Fully client-side; all data stays in your browser's localStorage with no accounts or servers required.",
         github: "https://github.com/Azqato/net-worth-tracker",
         demo: "https://azqato.github.io/net-worth-tracker/",
         tags: ["Finance", "Tools"],
@@ -590,7 +590,7 @@
       },
       {
         name: "Leveraged Strategies",
-        desc: "Educational reference site documenting six leveraged ETF strategies side by side — 3 Sig, 6 Sig, 9 Sig, TQQQ For The Long Term, Holy Grail, and HFEA. Each strategy gets a dedicated wiki-style page covering rules and logic, performance notes, risks, and sources.",
+        desc: "Educational reference site documenting six leveraged ETF strategies side by side: 3 Sig, 6 Sig, 9 Sig, TQQQ For The Long Term, Holy Grail, and HFEA. Each strategy gets a dedicated wiki-style page covering rules and logic, performance notes, risks, and sources.",
         github: "https://github.com/Azqato/leveraged-strategies",
         demo: "https://azqato.github.io/leveraged-strategies/",
         tags: ["Finance", "Education"],
@@ -705,7 +705,7 @@
       const grid = document.getElementById('project-grid');
       grid.innerHTML = PROJECTS.length
         ? PROJECTS.map(buildCard).join('')
-        : '<div class="empty-state">No projects yet — add some to the PROJECTS array in the script!</div>';
+        : '<div class="empty-state">No projects yet. Add some to the PROJECTS array in the script!</div>';
 
       document.getElementById('project-count').textContent = `${PROJECTS.length} project${PROJECTS.length !== 1 ? 's' : ''}`;
       buildFilters(PROJECTS);
