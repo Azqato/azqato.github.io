@@ -24,10 +24,11 @@ document.querySelectorAll('.accordion-trigger').forEach(trigger => {
   });
 });
 
-// IntersectionObserver for sidebar metric links on metrics.html
+// IntersectionObserver for sidebar On This Page links (all pages)
 const metricLinks = document.querySelectorAll('.metric-links a');
 if (metricLinks.length > 0) {
-  const sections = document.querySelectorAll('.metric-block');
+  const sectionIds = Array.from(metricLinks).map(a => a.getAttribute('href').slice(1));
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {

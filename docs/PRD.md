@@ -275,6 +275,23 @@ When a dash would normally appear in copy, use the following alternatives based 
 - Responsive: sidebar collapses to sticky top nav below 1024px
 - Full design specification in `docs/DESIGN.md`
 
+### "On This Page" sidebar navigation
+
+Every page with multiple named sections includes an "On This Page" anchor-link block in the sidebar navigation. This block appears below the Support link (last item in the main nav) and is consistent across all pages. On mobile (below 1024px) the block is hidden alongside the rest of the sidebar sub-navigation.
+
+**Pages and their section IDs:**
+
+| Page | Section IDs |
+|------|-------------|
+| `index.html` | `#section-strategy`, `#section-metrics-grid`, `#section-reference`, `#section-portfolio` |
+| `philosophy.html` | `#section-ownership`, `#section-research`, `#section-gvd`, `#section-offense`, `#section-wall-street`, `#section-leadership`, `#section-knowledge` |
+| `metrics.html` | `#metric-rev-ttm`, `#metric-rev-fwd`, `#metric-eps-ttm`, `#metric-eps-fwd`, `#metric-pe-fwd`, `#metric-peg-fwd`, `#metric-cash`, `#metric-debt`, `#metric-rsi`, `#metric-52w`, `#metric-gross-margin`, `#metric-net-margin` |
+| `screener.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
+| `watchlist.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
+| `indices.html` | `#section-types`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
+
+**Implementation:** The `IntersectionObserver` in `script.js` automatically highlights the active section link as the user scrolls. It derives section targets from the hrefs of `.metric-links a` elements on the page, so it works for all pages without per-page configuration. The FAQ page (`faq.html`) uses an accordion pattern and does not have an "On This Page" block.
+
 ---
 
 ## 6. Success Criteria

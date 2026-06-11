@@ -89,8 +89,8 @@ Sidebar collapses to a sticky top nav bar
 
 Persistent on desktop. Contains:
 - Site logo (`Azqato.` with teal dot accent)
-- Page nav links: Home, Metrics, FAQ
-- On `metrics.html`: in-page anchor links for each of the 10 metrics (nested under "On This Page" label)
+- Page nav links: Home, Philosophy, Metrics, Screener, Watchlist, Indices, FAQ, Support
+- On pages with multiple named sections: an "On This Page" anchor block below the Support link (see below)
 - Small footer: "Educational use only. Not financial advice."
 
 **Sidebar width:** 220px  
@@ -238,9 +238,11 @@ All pages use an emoji SVG data URI favicon:
 
 ## 6. Signature Element
 
-**The signature design element is the left sidebar anchor navigation on `metrics.html`.**
+**The signature design element is the left sidebar "On This Page" anchor navigation, present on all content pages.**
 
-As the user scrolls through the 10 metrics, the corresponding sidebar link highlights in `--color-accent` teal using a scroll-based `IntersectionObserver`. This gives the page "you are here" awareness without heavy UI. Borrowed from documentation sites like Stripe Docs or MDN, applied to a financial education context.
+As the user scrolls, the corresponding sidebar link highlights in `--color-accent` teal using a scroll-based `IntersectionObserver`. This gives every page "you are here" awareness without heavy UI. Borrowed from documentation sites like Stripe Docs or MDN, applied to a financial education context.
+
+The "On This Page" block appears below the Support link (bottom of the main nav list) on every page that has named sections. The observer in `script.js` derives which sections to watch from the hrefs of `.metric-links a` elements, so no per-page configuration is needed.
 
 The `h2::before` vertical accent bar is the secondary signature element; it appears on every section heading site-wide and visually ties the stocks site to the Azqato portfolio design language.
 
@@ -253,7 +255,7 @@ The `h2::before` vertical accent bar is the secondary signature element; it appe
 - **Inactive:** `--color-text-secondary`, weight 500
 - **Hover:** `--color-text-primary`
 - **Active / current page:** `--color-accent`, weight 600, 3px left border in accent
-- **Metric sub-links:** Smaller, indented, highlighted via IntersectionObserver on scroll
+- **"On This Page" sub-links:** Smaller, indented, highlighted via IntersectionObserver on scroll. Appear below Support on any page with named sections.
 
 ### Tablet / Mobile (below 1024px)
 
@@ -357,3 +359,4 @@ This site documents a methodology, not a live portfolio. All content should be w
 | 1.5 | June 2026 | Two setup guide pages (watchlist.html, screener.html). Nav expanded to 6 items. Text readability: `.hero-sub`, `.lead`, `.guide-step-body` changed to `--color-text-primary`. New guide component CSS system (`.guide-step`, `.step-num`, `.ui-text`, `.guide-note`, etc.). P/E FWD section deepened with P/E vs EPS Growth comparison. |
 | 1.6 | June 2026 | indices.html added. Nav restructured to 7 items (Home, Metrics, Screener, Watchlist, Indices, FAQ, Support). Sitewide readability: `.accordion-content`, `.metric-card-def`, `.guide-note` changed to `--color-text-primary`. Global `td` nowrap removed (wrapping enabled); preserved on `.num` and `.ticker-cell`. FAQ Q5 rewritten; Q7 (capital gains) added. Capital gains content added to homepage. |
 | 1.7 | June 2026 | Text color refinement: `--color-text-primary` updated to `#eef3f7` (brighter white), `--color-text-secondary` differentiated to `#cbdae6` (soft blue-gray for subtitles/captions). |
+| 1.8 | June 2026 | "On This Page" sidebar nav extended sitewide. Philosophy page gains 7 section anchor links. All content pages (index, screener, watchlist, indices) gain section IDs and "On This Page" blocks. Block position moved from nested under the active page nav link to a standalone `<li>` after the Support link. `IntersectionObserver` in `script.js` generalized to derive section targets from link hrefs, eliminating the hardcoded `.metric-block` selector. |
