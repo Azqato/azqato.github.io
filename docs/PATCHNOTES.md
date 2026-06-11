@@ -2,6 +2,34 @@
 
 ---
 
+## v2.2.0 — June 2026 — Sitewide Hero Badge System
+
+**Hero badge added to all seven pages and repositioned consistently below the page description. Badge position is now: headline, then description, then badge.**
+
+### index.html
+
+- `<div class="hero-badge">` moved from the top of the `.hero` section to after `.hero-sub`
+- `margin-top: 16px` added inline to create consistent spacing between the description and the badge
+- `.hero` `padding-bottom` reduced from `36px` to `16px` in `style.css` to visually center the badge between the description and the section divider
+
+### Badges added (new)
+
+| Page | Badge |
+|------|-------|
+| `philosophy.html` | 📖 Investment Philosophy |
+| `metrics.html` | 📊 Metrics Glossary |
+| `screener.html` | 🔍 Screener Setup Guide |
+| `watchlist.html` | 📋 Watchlist Setup Guide |
+| `faq.html` | ❓ FAQ & Philosophy |
+
+All new badges use `margin-top: 16px` inline and appear after the page description inside the intro container (`.metrics-intro`, `.guide-intro`, or `.faq-intro`).
+
+### indices.html
+
+- Existing badge moved from above the `<h1>` to after the description paragraph, consistent with the sitewide pattern. `margin-bottom: 16px` replaced with `margin-top: 16px`.
+
+---
+
 ## v2.1.0 — June 2026 — Sitewide "On This Page" Navigation
 
 **"On This Page" sidebar anchor navigation extended from metrics.html to all content pages. Block repositioned to appear below the Support link on every page with named sections. IntersectionObserver generalized to work across all pages without per-page configuration.**

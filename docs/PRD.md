@@ -61,7 +61,7 @@ Home → Philosophy → Metrics → Screener → Watchlist → Indices → FAQ �
 
 **Sections (in order):**
 
-1. **Hero:** One-line thesis statement. "Buy companies with strong growth fundamentals. Hold them. Do not sell."
+1. **Hero:** Headline thesis ("Buy companies with strong growth fundamentals. Hold them. Do not sell."), sub-description, then the "📈 Methodology Documentation" badge below the description.
 
 2. **Strategy Overview:** 6-paragraph overview covering: the core approach (buy quality, hold, compounding), watchlist vs portfolio distinction, the cost of early selling, long-term capital gains tax advantage, diversification rule (10-20 stocks), and market cap vs potential mental model.
 

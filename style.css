@@ -371,7 +371,7 @@ td.ticker-cell {
 
 /* === Hero === */
 .hero {
-  padding: 44px 0 36px;
+  padding: 44px 0 16px;
   border-bottom: 1px solid var(--color-border);
 }
 

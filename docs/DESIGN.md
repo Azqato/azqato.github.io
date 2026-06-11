@@ -204,7 +204,8 @@ text: --color-text-secondary, strong labels in --color-warning
 ### Hero Badge
 
 ```
-Pill badge above hero headline
+Pill badge below hero headline and description (after .hero-sub)
+margin-top: 16px (inline, separates badge from description above)
 bg: --color-tag-bg
 border: 1px solid --color-border
 border-radius: 999px
@@ -360,3 +361,4 @@ This site documents a methodology, not a live portfolio. All content should be w
 | 1.6 | June 2026 | indices.html added. Nav restructured to 7 items (Home, Metrics, Screener, Watchlist, Indices, FAQ, Support). Sitewide readability: `.accordion-content`, `.metric-card-def`, `.guide-note` changed to `--color-text-primary`. Global `td` nowrap removed (wrapping enabled); preserved on `.num` and `.ticker-cell`. FAQ Q5 rewritten; Q7 (capital gains) added. Capital gains content added to homepage. |
 | 1.7 | June 2026 | Text color refinement: `--color-text-primary` updated to `#eef3f7` (brighter white), `--color-text-secondary` differentiated to `#cbdae6` (soft blue-gray for subtitles/captions). |
 | 1.8 | June 2026 | "On This Page" sidebar nav extended sitewide. Philosophy page gains 7 section anchor links. All content pages (index, screener, watchlist, indices) gain section IDs and "On This Page" blocks. Block position moved from nested under the active page nav link to a standalone `<li>` after the Support link. `IntersectionObserver` in `script.js` generalized to derive section targets from link hrefs, eliminating the hardcoded `.metric-block` selector. |
+| 1.9 | June 2026 | Hero badge repositioned on `index.html`: moved from above the headline to below `.hero-sub`. `.hero` padding-bottom reduced from 36px to 16px for visual balance. |
