@@ -2,6 +2,51 @@
 
 ---
 
+## v2.1.0 — June 2026 — Sitewide "On This Page" Navigation
+
+**"On This Page" sidebar anchor navigation extended from metrics.html to all content pages. Block repositioned to appear below the Support link on every page with named sections. IntersectionObserver generalized to work across all pages without per-page configuration.**
+
+### Navigation changes
+
+The "On This Page" anchor block was previously nested inside the Metrics nav item on `metrics.html` only. It is now:
+
+- A standalone `<li>` element positioned below the Support link (bottom of the main nav list) on every page with named sections
+- Present on six pages: index, philosophy, metrics, screener, watchlist, indices
+- Hidden on mobile alongside other sidebar sub-navigation (existing behavior unchanged)
+- Absent on `faq.html` where the accordion pattern is not suited to anchor-link navigation
+
+### Pages updated
+
+| Page | Sections added to "On This Page" |
+|------|----------------------------------|
+| `philosophy.html` | Stocks as Ownership, How to Research a Company, Growth/Value/Dividend, Stay on Offense, Wall Street vs the Individual, Market Leadership Cycles, Building Investment Knowledge |
+| `index.html` | The Strategy, The 10 Metrics, What Strong Metrics Look Like, Portfolio vs. Watchlist |
+| `screener.html` | What Finviz Is For, Step 1, Step 2, Step 3, Finviz Free Tier Coverage, Quick-Reference Summary |
+| `watchlist.html` | Step 1: Create Account, Step 2: Create Portfolio, Step 3: Add Tickers, Step 4: Configure Columns, Step 5: Sort Order, Your Watchlist Is Ready |
+| `indices.html` | Types of Index Funds, Fundamentals vs. Technicals, The VIX, Timing Signals, Structural Quality Metrics, What Strong Signals Look Like, Seeking Alpha Setup |
+| `metrics.html` | Block moved from nested under Metrics link to after Support (position change only; links and IDs unchanged) |
+
+### Section IDs added
+
+All section IDs follow the `section-*` prefix convention (e.g., `section-ownership`, `section-strategy`). Existing `metrics.html` IDs (`metric-rev-ttm`, etc.) are unchanged.
+
+### script.js
+
+`IntersectionObserver` generalized. Previously hardcoded to observe `.metric-block` elements (metrics.html only). Now derives section targets from the `href` attributes of `.metric-links a` elements present on the page. Works across all pages with no per-page configuration. No behavioral change on `metrics.html`.
+
+### docs/PRD.md
+
+Section 5 updated with an "On This Page" sidebar navigation reference table listing all section IDs by page, plus implementation notes for the observer.
+
+### docs/DESIGN.md
+
+- Section 4 (Sidebar) updated: nav item list corrected to all 8 nav items; "On This Page" pattern documented
+- Section 6 (Signature Element) updated: block now described as sitewide rather than metrics-only
+- Section 7 (Navigation) sub-link description updated
+- Version history: v1.8.0 entry added
+
+---
+
 ## v2.0.0 — June 2026 — Sitewide Punctuation Audit
 
 **Complete em dash and double hyphen removal across all seven active HTML pages and all three documentation files. No content changes; punctuation only. PRD.md updated with formal punctuation policy and audit checklist.**
