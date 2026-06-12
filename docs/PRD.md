@@ -291,13 +291,13 @@ Every page must include Open Graph and Twitter Card meta tags in the `<head>` so
 
 | Page | `og:url` | `og:title` | `og:description` |
 |------|----------|------------|-----------------|
-| `index.html` | `.../stocks/` | Stock Picking Methodology | A fundamentals-first, buy-and-hold framework for individual stock selection. Covers 12 evaluation metrics, Finviz screener setup, Seeking Alpha watchlist configuration, and the philosophy behind long-term conviction investing. |
-| `philosophy.html` | `.../stocks/philosophy.html` | Philosophy | The conceptual foundation of the methodology: stocks as ownership, sequential research, growth/value/dividend framework, market environments, Wall Street incentive structure, and how to build lasting investment knowledge. |
-| `metrics.html` | `.../stocks/metrics.html` | Metrics Glossary | Deep explanations of all 12 evaluation metrics: revenue growth, EPS growth, forward P/E, PEG, total cash, total debt, RSI, 52-week range, gross margin, and net margin. |
-| `screener.html` | `.../stocks/screener.html` | Screener Setup | Step-by-step guide to configuring the Finviz stock screener with the filters used in Azqato's methodology. Free tier, no account required. |
-| `watchlist.html` | `.../stocks/watchlist.html` | Watchlist Setup | How to configure a 12-column Seeking Alpha watchlist to track the metrics that matter: revenue growth, EPS growth, P/E, PEG, cash, debt, RSI, and 52-week range. |
-| `indices.html` | `.../stocks/indices.html` | Indices and ETF Investing | A separate methodology for evaluating index funds and ETFs, including VIX interpretation, structural quality metrics, and Seeking Alpha ETF watchlist setup. |
-| `faq.html` | `.../stocks/faq.html` | FAQ | Philosophy and practice Q&A: why to never sell winners, the Palantir story, position sizing, market environments, entry timing mistakes, and how to build a watchlist. |
+| `index.html` | `.../stocks/` | Buy Quality. Hold Long. A Stock Picking Methodology. | A fundamentals-first, buy-and-hold framework for individual stock selection. Covers 12 evaluation metrics, Finviz screener setup, Seeking Alpha watchlist configuration, and the philosophy behind long-term conviction investing. |
+| `philosophy.html` | `.../stocks/philosophy.html` | The Philosophy of Long-Term Conviction Investing | The conceptual foundation of the methodology: stocks as ownership, sequential research, growth/value/dividend framework, market environments, Wall Street incentive structure, and how to build lasting investment knowledge. |
+| `metrics.html` | `.../stocks/metrics.html` | 12 Stock Evaluation Metrics Explained | Deep explanations of all 12 evaluation metrics: revenue growth, EPS growth, forward P/E, PEG, total cash, total debt, RSI, 52-week range, gross margin, and net margin. |
+| `screener.html` | `.../stocks/screener.html` | How to Set Up a Finviz Stock Screener | Step-by-step guide to configuring the Finviz stock screener with the filters used in Azqato's methodology. Free tier, no account required. |
+| `watchlist.html` | `.../stocks/watchlist.html` | How to Build a 12-Column Stock Watchlist in Seeking Alpha | How to configure a 12-column Seeking Alpha watchlist to track the metrics that matter: revenue growth, EPS growth, P/E, PEG, cash, debt, RSI, and 52-week range. |
+| `indices.html` | `.../stocks/indices.html` | How to Evaluate Index Funds and ETFs | A separate methodology for evaluating index funds and ETFs, including VIX interpretation, structural quality metrics, and Seeking Alpha ETF watchlist setup. |
+| `faq.html` | `.../stocks/faq.html` | Stock Investing Q&A: Philosophy, Timing, and Position Sizing | Philosophy and practice Q&A: why to never sell winners, the Palantir story, position sizing, market environments, entry timing mistakes, and how to build a watchlist. |
 
 ### Image
 
