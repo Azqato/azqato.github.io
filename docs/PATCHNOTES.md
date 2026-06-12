@@ -2,6 +2,20 @@
 
 ---
 
+## v2.7.0 — June 2026 — H1 and Copy Corrections on Metrics, Watchlist, and FAQ Pages
+
+**H1 headings corrected on three pages. Two additional corruptions on faq.html fixed: nav link label and an inline body copy reference.**
+
+| File | Element | Old | New |
+|------|---------|-----|-----|
+| `metrics.html` | H1 | 12 Stock Evaluation Metrics Explained | Stock Evaluation Metrics Explained |
+| `watchlist.html` | H1 | How to Build a Stock Watchlist For Free in Seeking Alpha | How to Build a Stock Watchlist in Seeking Alpha For Free |
+| `faq.html` | H1 | Stock Investing Q&A: Philosophy, Timing, and Position Sizing &amp; Philosophy | Stock Investing Q&A |
+| `faq.html` | Nav link | Stock Investing Q&A: Philosophy, Timing, and Position Sizing | FAQ |
+| `faq.html` | Body copy | "The Palantir story at the top of this Stock Investing Q&A: Philosophy, Timing, and Position Sizing documents..." | "The Palantir story at the top of this page documents..." |
+
+---
+
 ## v2.6.0 — June 2026 — H1 Heading Corrections on Screener and Watchlist Pages
 
 **Two page H1 headings corrected after being corrupted by a prior sitewide replace operation.**
