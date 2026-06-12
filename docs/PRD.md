@@ -272,6 +272,12 @@ When a dash would normally appear in copy, use the following alternatives based 
 
 Every page must include Open Graph and Twitter Card meta tags in the `<head>` so that links shared on Discord, X, Slack, and similar platforms render a preview card.
 
+### Title and description convention
+
+- **`<title>` and `og:title`:** Both equal the page H1 text exactly. No brand suffix. "- Azqato" is never used anywhere. `<title>` and `og:title` are always identical.
+- **`og:description` and `<meta name="description">`:** Both equal the lead paragraph on the page exactly. They are always identical.
+- `twitter:title` and `twitter:description` always mirror `og:title` and `og:description`.
+
 ### Required tags (all pages)
 
 ```html
@@ -279,27 +285,29 @@ Every page must include Open Graph and Twitter Card meta tags in the `<head>` so
 <!-- Open Graph / Discord -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://azqato.github.io/stocks/PAGE.html">
-<meta property="og:title" content="Page Title - Azqato">
+<meta property="og:title" content="Page Title">
 <meta property="og:description" content="...">
 <meta property="og:image" content="https://azqato.github.io/stocks/og-image.png">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Page Title - Azqato">
+<meta name="twitter:title" content="Page Title">
 <meta name="twitter:description" content="...">
 <meta name="twitter:image" content="https://azqato.github.io/stocks/og-image.png">
 ```
 
 ### Per-page values
 
-| Page | `og:url` | `og:title` | `og:description` |
+`og:title` and `<title>` are identical. `og:description` and `<meta name="description">` are identical.
+
+| Page | `og:url` | `og:title` / `<title>` | `og:description` / `<meta name="description">` |
 |------|----------|------------|-----------------|
-| `index.html` | `.../stocks/` | Buy Quality. Hold Long. A Stock Picking Methodology. | A fundamentals-first, buy-and-hold framework for individual stock selection. Covers 12 evaluation metrics, Finviz screener setup, Seeking Alpha watchlist configuration, and the philosophy behind long-term conviction investing. |
-| `philosophy.html` | `.../stocks/philosophy.html` | The Philosophy of Long-Term Conviction Investing | The conceptual foundation of the methodology: stocks as ownership, sequential research, growth/value/dividend framework, market environments, Wall Street incentive structure, and how to build lasting investment knowledge. |
-| `metrics.html` | `.../stocks/metrics.html` | 12 Stock Evaluation Metrics Explained | Deep explanations of all 12 evaluation metrics: revenue growth, EPS growth, forward P/E, PEG, total cash, total debt, RSI, 52-week range, gross margin, and net margin. |
-| `screener.html` | `.../stocks/screener.html` | How to Set Up a Finviz Stock Screener | Step-by-step guide to configuring the Finviz stock screener with the filters used in Azqato's methodology. Free tier, no account required. |
-| `watchlist.html` | `.../stocks/watchlist.html` | How to Build a 12-Column Stock Watchlist in Seeking Alpha | How to configure a 12-column Seeking Alpha watchlist to track the metrics that matter: revenue growth, EPS growth, P/E, PEG, cash, debt, RSI, and 52-week range. |
-| `indices.html` | `.../stocks/indices.html` | How to Evaluate Index Funds and ETFs | A separate methodology for evaluating index funds and ETFs, including VIX interpretation, structural quality metrics, and Seeking Alpha ETF watchlist setup. |
-| `faq.html` | `.../stocks/faq.html` | Stock Investing Q&A: Philosophy, Timing, and Position Sizing | Philosophy and practice Q&A: why to never sell winners, the Palantir story, position sizing, market environments, entry timing mistakes, and how to build a watchlist. |
+| `index.html` | `.../stocks/` | Stock Picking Methodology | A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise. |
+| `philosophy.html` | `.../stocks/philosophy.html` | The Philosophy of Long-Term Conviction Investing | The concepts that sit behind every rule in this methodology. Understanding why the rules exist makes them easier to follow when markets are moving fast and the temptation to react is strongest. |
+| `metrics.html` | `.../stocks/metrics.html` | Stock Evaluation Metrics Explained | Ten metrics. Each one earns its place. This page explains what each signal measures, why it matters for long-term investing decisions, and how to interpret the numbers. All examples are illustrative and use hypothetical figures to demonstrate how each metric works in practice. |
+| `screener.html` | `.../stocks/screener.html` | How to Set Up a Finviz Stock Screener For Free | How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha. |
+| `watchlist.html` | `.../stocks/watchlist.html` | How to Build a Stock Watchlist in Seeking Alpha For Free | Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology. |
+| `indices.html` | `.../stocks/indices.html` | Indices & ETF Investing | A separate methodology for evaluating broad market indices and ETFs. Different assets require different frameworks. Where individual stock picking is driven primarily by company fundamentals, index investing is driven primarily by market sentiment, timing signals, and structural efficiency. |
+| `faq.html` | `.../stocks/faq.html` | Stock Investing Q&A | The thinking behind the strategy. Questions about how decisions are made, why certain rules exist, and what the long-term mindset actually looks like in practice. |
 
 ### Image
 

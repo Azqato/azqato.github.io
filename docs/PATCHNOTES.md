@@ -2,6 +2,49 @@
 
 ---
 
+## v2.8.0 — June 2026 — Sitewide Title, Social Card, and Description Alignment
+
+**`<title>`, `og:title`, and `og:description` now match the H1 and lead paragraph on each page exactly. "- Azqato" brand suffix removed from all `<title>` tags sitewide.**
+
+### Convention established
+
+- `<title>` = page H1 text (no brand suffix)
+- `og:title` = page H1 text (identical to `<title>`)
+- `og:description` = lead paragraph on the page (identical to `<meta name="description">`)
+- `twitter:title` and `twitter:description` mirror the OG values
+
+### Changes per page
+
+| Page | Element | Old | New |
+|------|---------|-----|-----|
+| `index.html` | `<title>` | Azqato - Stock Picking Methodology | Stock Picking Methodology |
+| `index.html` | `og:title` | Buy Quality. Hold Long. A Stock Picking Methodology. | Stock Picking Methodology |
+| `index.html` | `og:description` | A fundamentals-first, buy-and-hold framework... | A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise. |
+| `philosophy.html` | `<title>` | Philosophy - Azqato | The Philosophy of Long-Term Conviction Investing |
+| `philosophy.html` | `og:description` | The conceptual foundation of the methodology... | The concepts that sit behind every rule in this methodology. Understanding why the rules exist makes them easier to follow when markets are moving fast and the temptation to react is strongest. |
+| `metrics.html` | `<title>` | Metrics Glossary - Azqato | Stock Evaluation Metrics Explained |
+| `metrics.html` | `og:title` | 12 Stock Evaluation Metrics Explained | Stock Evaluation Metrics Explained |
+| `metrics.html` | `og:description` | Deep explanations of all 12 evaluation metrics... | Ten metrics. Each one earns its place. This page explains what each signal measures, why it matters for long-term investing decisions, and how to interpret the numbers. |
+| `screener.html` | `<title>` | Finviz Screener Setup - Azqato | How to Set Up a Finviz Stock Screener For Free |
+| `screener.html` | `og:title` | How to Set Up a Finviz Stock Screener | How to Set Up a Finviz Stock Screener For Free |
+| `screener.html` | `og:description` | Step-by-step guide to configuring the Finviz stock screener... | How to configure Finviz's free stock screener to surface candidates that align with the methodology. |
+| `watchlist.html` | `<title>` | Watchlist Setup - Azqato | How to Build a Stock Watchlist in Seeking Alpha For Free |
+| `watchlist.html` | `og:title` | How to Build a 12-Column Stock Watchlist in Seeking Alpha | How to Build a Stock Watchlist in Seeking Alpha For Free |
+| `watchlist.html` | `og:description` | How to configure a 12-column Seeking Alpha watchlist... | Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout. |
+| `indices.html` | `<title>` | Indices &amp; ETF Investing - Azqato | Indices &amp; ETF Investing |
+| `indices.html` | `og:title` | How to Evaluate Index Funds and ETFs | Indices &amp; ETF Investing |
+| `indices.html` | `og:description` | A separate methodology for evaluating index funds and ETFs... | A separate methodology for evaluating broad market indices and ETFs. Different assets require different frameworks. Where individual stock picking is driven primarily by fundamentals, index investing is driven by market sentiment, timing signals, and structural efficiency. |
+| `faq.html` | `<title>` | FAQ - Azqato | Stock Investing Q&amp;A |
+| `faq.html` | `og:title` | Stock Investing Q&amp;A: Philosophy, Timing, and Position Sizing | Stock Investing Q&amp;A |
+| `faq.html` | `og:description` | Philosophy and practice Q&amp;A: why to never sell winners... | The thinking behind the strategy. Questions about how decisions are made, why certain rules exist, and what the long-term mindset actually looks like in practice. |
+
+### Docs updated
+
+- `docs/PRD.md` — Section 5 updated: convention rule added, required tags template updated, per-page values table updated with new titles and descriptions
+- `docs/DESIGN.md` — Section 12 updated: "no - Azqato suffix" rule added
+
+---
+
 ## v2.7.0 — June 2026 — H1 and Copy Corrections on Metrics, Watchlist, and FAQ Pages
 
 **H1 headings corrected on three pages. Two additional corruptions on faq.html fixed: nav link label and an inline body copy reference.**

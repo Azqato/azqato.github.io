@@ -332,6 +332,7 @@ style.css structure (in order):
 - No em dashes in any copy
 - No decorative animations or motion for motion's sake
 - Do not deviate from the `#00d4a0` teal accent; it is the cross-site brand color
+- No "- Azqato" brand suffix on `<title>` tags or `og:title` values. The `<title>` tag uses only the page H1 text. `og:title` is always identical to `<title>`.
 
 ---
 
