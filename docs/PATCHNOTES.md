@@ -2,6 +2,17 @@
 
 ---
 
+## v2.6.0 — June 2026 — H1 Heading Corrections on Screener and Watchlist Pages
+
+**Two page H1 headings corrected after being corrupted by a prior sitewide replace operation.**
+
+| Page | Old H1 | New H1 |
+|------|--------|--------|
+| `screener.html` | Finviz How to Set Up a Finviz Stock Screener | How to Set Up a Finviz Stock Screener For Free |
+| `watchlist.html` | Seeking Alpha How to Build a 12-Column Stock Watchlist in Seeking Alpha | How to Build a Stock Watchlist For Free in Seeking Alpha |
+
+---
+
 ## v2.5.0 — June 2026 — Social Cards Rolled Out Sitewide
 
 **Open Graph and Twitter Card meta tags added to all remaining six pages. Every page on the site now renders a preview card when shared on Discord, X, Slack, or any OG-compatible platform.**
