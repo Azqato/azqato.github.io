@@ -2,6 +2,25 @@
 
 ---
 
+## v2.5.0 — June 2026 — Social Cards Rolled Out Sitewide
+
+**Open Graph and Twitter Card meta tags added to all remaining six pages. Every page on the site now renders a preview card when shared on Discord, X, Slack, or any OG-compatible platform.**
+
+### Pages updated
+
+| Page | `og:title` |
+|------|-----------|
+| `philosophy.html` | Philosophy - Azqato |
+| `metrics.html` | Metrics Glossary - Azqato |
+| `screener.html` | Screener Setup - Azqato |
+| `watchlist.html` | Watchlist Setup - Azqato |
+| `indices.html` | Indices and ETF Investing - Azqato |
+| `faq.html` | FAQ - Azqato |
+
+Each page received: `<meta name="description">`, five Open Graph tags (`og:type`, `og:url`, `og:title`, `og:description`, `og:image`), and three Twitter Card tags (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`). All pages share `og-image.png`.
+
+---
+
 ## v2.4.0 — June 2026 — Open Graph Social Cards
 
 **Open Graph and Twitter Card meta tags added to `index.html` so Discord, X, Slack, and similar platforms render a preview card when the link is shared. `og-image.png` (1200x630) added to the site root. PRD updated with Section 5 documenting the full requirement for all seven pages.**
