@@ -53,6 +53,8 @@ A static educational website documenting Azqato's individual stock picking metho
 
 Home → Philosophy → Metrics → Screener → Watchlist → Indices → FAQ → Support
 
+**Nav link label rule:** Every sidebar navigation link must be a single word. The labels are: Home, Philosophy, Metrics, Screener, Watchlist, Indices, FAQ, Support. OG titles and page H1 headings may be longer; the nav label must never be.
+
 ---
 
 ## 3. Page-by-Page Requirements
