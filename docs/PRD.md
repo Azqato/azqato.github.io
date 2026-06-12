@@ -266,7 +266,63 @@ When a dash would normally appear in copy, use the following alternatives based 
 
 ---
 
-## 5. Design System
+## 5. Social Cards (Open Graph)
+
+Every page must include Open Graph and Twitter Card meta tags in the `<head>` so that links shared on Discord, X, Slack, and similar platforms render a preview card.
+
+### Required tags (all pages)
+
+```html
+<meta name="description" content="...">
+<!-- Open Graph / Discord -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://azqato.github.io/stocks/PAGE.html">
+<meta property="og:title" content="Page Title - Azqato">
+<meta property="og:description" content="...">
+<meta property="og:image" content="https://azqato.github.io/stocks/og-image.png">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Page Title - Azqato">
+<meta name="twitter:description" content="...">
+<meta name="twitter:image" content="https://azqato.github.io/stocks/og-image.png">
+```
+
+### Per-page values
+
+| Page | `og:url` | `og:title` | `og:description` |
+|------|----------|------------|-----------------|
+| `index.html` | `.../stocks/` | Azqato - Stock Picking Methodology | A fundamentals-first, buy-and-hold framework for individual stock selection. Covers 12 evaluation metrics, Finviz screener setup, Seeking Alpha watchlist configuration, and the philosophy behind long-term conviction investing. |
+| `philosophy.html` | `.../stocks/philosophy.html` | Philosophy - Azqato | The conceptual foundation of the methodology: stocks as ownership, sequential research, growth/value/dividend framework, market environments, Wall Street incentive structure, and how to build lasting investment knowledge. |
+| `metrics.html` | `.../stocks/metrics.html` | Metrics Glossary - Azqato | Deep explanations of all 12 evaluation metrics: revenue growth, EPS growth, forward P/E, PEG, total cash, total debt, RSI, 52-week range, gross margin, and net margin. |
+| `screener.html` | `.../stocks/screener.html` | Screener Setup - Azqato | Step-by-step guide to configuring the Finviz stock screener with the filters used in Azqato's methodology. Free tier, no account required. |
+| `watchlist.html` | `.../stocks/watchlist.html` | Watchlist Setup - Azqato | How to configure a 12-column Seeking Alpha watchlist to track the metrics that matter: revenue growth, EPS growth, P/E, PEG, cash, debt, RSI, and 52-week range. |
+| `indices.html` | `.../stocks/indices.html` | Indices and ETF Investing - Azqato | A separate methodology for evaluating index funds and ETFs, including VIX interpretation, structural quality metrics, and Seeking Alpha ETF watchlist setup. |
+| `faq.html` | `.../stocks/faq.html` | FAQ - Azqato | Philosophy and practice Q&A: why to never sell winners, the Palantir story, position sizing, market environments, entry timing mistakes, and how to build a watchlist. |
+
+### Image
+
+`og-image.png` is a static 1200x630 PNG stored at the site root. It shows the site favicon (📈, U+1F4C8) centered on the `#0d1117` background, rendered as a white monochrome icon via Segoe UI Emoji. Discord uses `summary_large_image` format (minimum 600x315, recommended 1200x630). The image must exist at the declared URL; a missing image silently produces a card with no preview.
+
+To regenerate the image, run this PowerShell snippet from the site root:
+
+```powershell
+Add-Type -AssemblyName System.Drawing
+$bmp = New-Object System.Drawing.Bitmap(1200, 630)
+$g = [System.Drawing.Graphics]::FromImage($bmp)
+$g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
+$g.Clear([System.Drawing.Color]::FromArgb(255, 13, 17, 23))
+$font = New-Object System.Drawing.Font("Segoe UI Emoji", 380, [System.Drawing.FontStyle]::Regular, [System.Drawing.GraphicsUnit]::Pixel)
+$sf = New-Object System.Drawing.StringFormat
+$sf.Alignment = [System.Drawing.StringAlignment]::Center
+$sf.LineAlignment = [System.Drawing.StringAlignment]::Center
+$g.DrawString([System.Char]::ConvertFromUtf32(0x1F4C8), $font, (New-Object System.Drawing.SolidBrush([System.Drawing.Color]::White)), (New-Object System.Drawing.RectangleF(0,0,1200,630)), $sf)
+$bmp.Save("og-image.png", [System.Drawing.Imaging.ImageFormat]::Png)
+$g.Dispose(); $bmp.Dispose()
+```
+
+---
+
+## 6. Design System
 
 - GitHub Dark-inspired palette: background `#0d1117`, surface `#161b22`, teal accent `#00d4a0`
 - Text primary `#eef3f7`, text secondary `#cbdae6`
