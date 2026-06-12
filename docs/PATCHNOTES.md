@@ -2,6 +2,28 @@
 
 ---
 
+## v2.4.0 — June 2026 — Open Graph Social Cards
+
+**Open Graph and Twitter Card meta tags added to `index.html` so Discord, X, Slack, and similar platforms render a preview card when the link is shared. `og-image.png` (1200x630) added to the site root. PRD updated with Section 5 documenting the full requirement for all seven pages.**
+
+### index.html
+
+- `<meta name="description">` added
+- Open Graph tags added: `og:type`, `og:url`, `og:title`, `og:description`, `og:image`
+- Twitter Card tags added: `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
+
+### og-image.png (new)
+
+- 1200x630 PNG at the site root
+- Site favicon (📈, U+1F4C8) centered on `#0d1117` background, rendered as a white monochrome icon
+- Referenced by all OG/Twitter image tags across the site
+
+### docs/PRD.md
+
+- Section 5 "Social Cards (Open Graph)" added: required tag template, per-page values table for all seven pages, image spec, and PowerShell regeneration snippet
+
+---
+
 ## v2.3.0 — June 2026 — FAQ Expansion and Badge Text Corrections
 
 **faq.html expanded from 11 to 30 accordion items. Hero badge text corrected sitewide to be distinct from each page's H1 title.**
