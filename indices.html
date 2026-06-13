@@ -45,6 +45,7 @@
                 <li><a href="#section-framework">Fundamentals vs. Technicals</a></li>
                 <li><a href="#section-vix">The VIX: Fear Gauge</a></li>
                 <li><a href="#section-timing">Timing Signals</a></li>
+                <li><a href="#section-aaii">AAII Investor Sentiment</a></li>
                 <li><a href="#section-quality">Structural Quality Metrics</a></li>
                 <li><a href="#section-signals">What Strong Signals Look Like</a></li>
                 <li><a href="#section-sa-setup">Seeking Alpha Setup</a></li>
@@ -124,7 +125,7 @@
               </ul>
             </div>
 
-            <p>The eight metrics on this page split into two groups. Three are timing signals (VIX, RSI, 52W Range) that tell you when to increase exposure. Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio) that help you choose which ETF to hold. The timing signals do most of the work.</p>
+            <p>The nine metrics on this page split into two groups. Four are timing signals (VIX, RSI, 52W Range, AAII Sentiment) that tell you when to increase exposure. Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio) that help you choose which ETF to hold. The timing signals do most of the work.</p>
           </section>
 
           <!-- VIX Section -->
@@ -223,6 +224,175 @@
             </div>
           </section>
 
+          <!-- AAII Investor Sentiment Survey -->
+          <section id="section-aaii" class="section">
+            <h2>AAII Investor Sentiment Survey</h2>
+
+            <p>The American Association of Individual Investors (AAII) has conducted a weekly investor sentiment survey since 1987. Each week, AAII polls a sample of individual investors on a single question: what direction do you expect the stock market to move over the next six months? Responses fall into three categories: bullish (expecting the market to rise), bearish (expecting it to fall), or neutral (expecting little change). Results are tallied and published every Thursday morning at <a href="https://www.aaii.com/sentimentsurvey" target="_blank" rel="noopener">aaii.com/sentimentsurvey</a>.</p>
+
+            <p>Since 1987, the long-run averages have settled into a consistent baseline: approximately 37.5% bullish, 31.5% neutral, and 31.0% bearish. Any reading that departs significantly from these averages represents a measurable shift in collective mood. The key metric most practitioners track is the bull-bear spread: the bullish percentage minus the bearish percentage. The long-run average spread is approximately +6.5 percentage points. When that spread collapses into deeply negative territory, meaning far more bears than bulls, the contrarian signal is activated.</p>
+
+            <p>The survey polls AAII's membership base of approximately 150,000 self-directed retail investors, not institutional managers or professional traders. This distinction matters. Retail investors tend to react emotionally to recent price action, extrapolating recent trends forward rather than positioning ahead of change. When retail investors are overwhelmingly bearish, they have typically already reduced their equity exposure and the selling is largely done. When they are overwhelmingly bullish, they are likely already fully invested. Understanding who is responding to the survey is what gives it predictive power as a contrarian tool.</p>
+
+            <div class="how-to-read">
+              <p style="font-size: 0.875rem; font-weight: 600; margin-bottom: 8px;">How to access the data</p>
+              <ul>
+                <li>The current week's reading is published every Thursday morning at <a href="https://www.aaii.com/sentimentsurvey" target="_blank" rel="noopener">aaii.com/sentimentsurvey</a>. A free AAII account provides access to the current figures and recent readings.</li>
+                <li>Historical data going back to 1987 is available to AAII members. The current reading is also widely covered by financial media each Thursday morning shortly after release.</li>
+                <li>Track the bull-bear spread alongside the raw bearish percentage. Subtract the bearish reading from the bullish reading. A deeply negative spread (far more bears than bulls) is the most direct quantification of extreme pessimism.</li>
+              </ul>
+            </div>
+
+            <h3>Why It Is a Contrarian Indicator</h3>
+
+            <p>Contrarian investing rests on a straightforward premise: when the majority of market participants expect one outcome, that expectation is already reflected in prices. If nearly everyone is bearish, they have likely already sold. The selling is largely done, and there are few sellers left to push prices substantially lower. Conversely, if nearly everyone is bullish, they have likely already bought. Few new buyers remain to push prices meaningfully higher. Sentiment extremes mark the exhaustion of a trend, not its continuation.</p>
+
+            <p>Retail investors are known for behavioral tendencies that make their aggregate sentiment a reliable contrary signal. They sell after a decline has already happened and buy after a rally has already matured. The AAII survey captures this behavioral pattern directly. At a 60% bearish reading, most retail investors have already repositioned defensively. Their fear is real, but the selling pressure that drove prices lower is already largely exhausted. That is precisely when the setup for a recovery becomes most favorable. The survey does not predict the future; it measures how much of the downside is already priced into behavior.</p>
+
+            <h3>Historical Evidence</h3>
+
+            <p style="margin-bottom: 16px;">The pattern across more than 35 years of data is consistent: the most extreme bearish readings have clustered at or very near major market bottoms, and the most extreme bullish readings have appeared at or near major market tops.</p>
+
+            <div class="table-wrap">
+              <table>
+                <caption class="visually-hidden">Historical AAII bearish readings and subsequent market performance</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">AAII Bearish %</th>
+                    <th scope="col">Market Context</th>
+                    <th scope="col">What Followed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="white-space: nowrap;">March 2000</td>
+                    <td class="num" style="color: var(--color-negative); font-weight: 700;">~17%</td>
+                    <td>Dot-com bull market peak. Bullishness was overwhelming; very few investors expected a decline.</td>
+                    <td>S&amp;P 500 declined more than 50% over the following 2.5 years as the dot-com bubble unwound.</td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;">February 2003</td>
+                    <td class="num" style="color: var(--color-positive); font-weight: 700;">~58%</td>
+                    <td>Post-dot-com bear market approaching its low. Fear was persistent across months of sustained decline.</td>
+                    <td>S&amp;P 500 bottomed shortly after and began a five-year bull market that nearly doubled from the low.</td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;">March 2009</td>
+                    <td class="num" style="color: var(--color-positive); font-weight: 700;">~70%</td>
+                    <td>Global Financial Crisis low. Maximum panic. The S&amp;P 500 had fallen more than 50% from its 2007 peak. The highest bearish reading in the survey's history.</td>
+                    <td>S&amp;P 500 began its recovery from approximately 666. It gained more than 400% over the following decade, one of the longest bull markets on record.</td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;">December 2018</td>
+                    <td class="num" style="color: var(--color-positive); font-weight: 700;">~50%</td>
+                    <td>Q4 2018 correction. The S&amp;P 500 declined nearly 20% from its September high through Christmas Eve on Federal Reserve tightening concerns.</td>
+                    <td>S&amp;P 500 bottomed on December 24, 2018 and gained approximately 30% over 2019.</td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;">November 2021</td>
+                    <td class="num" style="color: var(--color-warning); font-weight: 700;">~36%</td>
+                    <td>Late-stage bull market. Bearishness was slightly above its historical average, not extreme. Omicron variant concerns beginning to build.</td>
+                    <td>S&amp;P 500 peaked within weeks. The 2022 bear market brought a 25%+ broad market decline, with growth stocks falling 50 to 80%.</td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;">September 2022</td>
+                    <td class="num" style="color: var(--color-positive); font-weight: 700;">~61%</td>
+                    <td>2022 bear market. Persistent inflation and aggressive Federal Reserve rate hikes. Bearishness reached near-maximum levels.</td>
+                    <td>S&amp;P 500 formed its bear market low in October 2022 and began a multi-year recovery that regained all losses and reached new highs.</td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;">February 27, 2025</td>
+                    <td class="num" style="color: var(--color-positive); font-weight: 700;">~61%</td>
+                    <td>2025 correction driven by tariff uncertainty and macro concern. Bearishness matched levels seen at prior major cycle bottoms.</td>
+                    <td>Consistent with the historical pattern at the time. The correction appeared to establish a near-term low in the weeks that followed.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="caveat-box">
+              <p><strong>Historical pattern, not a mechanical rule.</strong> Extreme readings do not guarantee an immediate reversal. A reading of 60% bearish has historically been associated with the bottoming process, not necessarily the exact bottom. Bottoms can take weeks or months to form after an extreme reading appears. A single week at an extreme level carries less weight than multiple consecutive weeks above that threshold. Use AAII as one confirming signal among several, not as a standalone trigger.</p>
+            </div>
+
+            <h3>AAII Sentiment Action Levels</h3>
+
+            <p>The framework below treats bearish sentiment as the primary metric. Extreme bearishness has historically been the more reliable and actionable signal of the two extremes. Extreme bullishness is a useful warning to reduce new purchases, not a direct signal to sell existing holdings.</p>
+
+            <div class="table-wrap">
+              <table>
+                <caption class="visually-hidden">AAII bearish sentiment action levels and recommended ETF posture</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Bearish %</th>
+                    <th scope="col">Market Condition</th>
+                    <th scope="col">What It Signals</th>
+                    <th scope="col">Recommended Posture</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="num" style="color: var(--color-negative); font-weight: 700; white-space: nowrap;">&lt; 25%</td>
+                    <td style="white-space: nowrap;"><span class="badge badge-negative">Extreme Optimism</span></td>
+                    <td>Retail investors are overwhelmingly bullish. Most equity exposure has already been deployed. Few buyers remain to push prices meaningfully higher. March 2000 is the clearest historical example at ~17% bearish.</td>
+                    <td><strong>Build cash. Defer new entries.</strong> Risk/reward on new broad market and growth ETF positions is unfavorable at this level. Not a signal to liquidate existing holdings; a signal to stop adding aggressively and let cash accumulate for better opportunities ahead.</td>
+                  </tr>
+                  <tr>
+                    <td class="num" style="color: var(--color-text-secondary); font-weight: 700; white-space: nowrap;">25% &ndash; 35%</td>
+                    <td style="white-space: nowrap;"><span class="badge">Historical Average</span></td>
+                    <td>Near the long-run baseline of approximately 31% bearish. No significant contrarian signal in either direction. Conditions are within the normal range of investor sentiment.</td>
+                    <td><strong>Maintain current positioning.</strong> Standard sizing. No urgency in either direction. Continue systematic investing at a regular cadence if that is your approach.</td>
+                  </tr>
+                  <tr>
+                    <td class="num" style="color: var(--color-warning); font-weight: 700; white-space: nowrap;">35% &ndash; 50%</td>
+                    <td style="white-space: nowrap;"><span class="badge badge-caution">Elevated Concern</span></td>
+                    <td>Sentiment is drifting above the historical average. Investors are becoming cautious. Prices and sentiment are beginning to diverge from the bullish zone.</td>
+                    <td><strong>Begin monitoring for entries.</strong> Conditions are becoming more favorable. Broad market ETFs at this level offer better risk/reward than they did below 25%. Not yet a high-conviction setup, but worth initiating measured positions on meaningful pullbacks.</td>
+                  </tr>
+                  <tr>
+                    <td class="num" style="color: var(--color-positive); font-weight: 700; white-space: nowrap;">50% &ndash; 60%</td>
+                    <td style="white-space: nowrap;"><span class="badge badge-good">Significant Fear</span></td>
+                    <td>More investors expect a market decline than at any point in the historical average range. This level has historically preceded meaningful recoveries across multiple cycles, including December 2018 and February 2003.</td>
+                    <td><strong>Build broad market and growth ETF positions.</strong> Use pullbacks to initiate and add. Standard to above-standard sizing is warranted. Broad market ETFs first for maximum recovery capture; growth ETFs second for amplified upside during the recovery phase.</td>
+                  </tr>
+                  <tr>
+                    <td class="num" style="color: var(--color-positive); font-weight: 700; white-space: nowrap;">&gt; 60%</td>
+                    <td style="white-space: nowrap;"><span class="badge badge-good">Extreme Fear</span></td>
+                    <td>Readings above 60% are historically rare and have clustered at or near major market bottoms: 2009 (~70%), 2022 (~61%), 2025 (~61%). Retail investors are at or near maximum pessimism. The selling is largely exhausted.</td>
+                    <td><strong>Maximum deployment posture.</strong> Broad market ETFs and growth ETFs at the highest conviction sizing. If VIX is also above 35, the combined signal is among the most powerful in this methodology. When VIX exceeds 45 at the same time, leveraged broad market ETFs may be appropriate as a recovery vehicle per the VIX action level framework above.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Combining AAII with VIX</h3>
+
+            <p>The AAII survey and the VIX measure the same underlying phenomenon from independent angles. The VIX quantifies market-implied fear through options pricing. The AAII survey quantifies self-reported fear through retail investor polling. They are independent data sources that do not share a methodology. When both are elevated simultaneously, every layer of the signal is pointing in the same direction and the historical evidence for a favorable entry is strongest.</p>
+
+            <div class="how-to-read">
+              <ul>
+                <li><strong>Tier 1 (Moderate signal):</strong> Either VIX above 25, or AAII bearishness above 50%, but not both simultaneously. Begin building broad market ETF positions at measured sizing. Conditions are better than average but not yet exceptional.</li>
+                <li><strong>Tier 2 (Strong signal):</strong> VIX above 35 and AAII bearishness above 55%. This combination has historically preceded strong multi-month recoveries. Increase allocation beyond standard sizing. Growth ETFs become a meaningful position alongside broad market funds.</li>
+                <li><strong>Tier 3 (Maximum signal):</strong> VIX above 45 and AAII bearishness above 60%. This is the rarest and highest-conviction setup in this methodology. It has appeared at the most significant market bottoms of the modern era: 2002-2003, 2008-2009, and 2022. Maximum deployment across broad market and growth ETFs. Leveraged broad market ETFs are appropriate as a recovery vehicle in this window, per the VIX section above.</li>
+              </ul>
+            </div>
+
+            <h3>Conclusion and Next Steps</h3>
+
+            <p>The AAII Sentiment Survey has tracked retail investor psychology through every major market event since 1987: the dot-com bubble, the Global Financial Crisis, the 2018 correction, the COVID crash, the 2022 bear market, and multiple smaller cycles. Its value is not in predicting the precise timing of a market turn, which no single indicator can do reliably, but in identifying when the emotional environment is lopsided enough that the directional probability of the next significant move is historically above average. Extreme bearishness confirms that the participants most likely to panic-sell have already sold, that the selling pressure driving prices lower is largely exhausted, and that the risk/reward of new entries is historically favorable. It does not tell you when. It tells you that the when is closer than sentiment alone would suggest.</p>
+
+            <div class="how-to-read">
+              <p style="font-size: 0.875rem; font-weight: 600; margin-bottom: 8px;">Where to go next</p>
+              <ul>
+                <li><strong>Track the reading weekly:</strong> Check the AAII data at <a href="https://www.aaii.com/sentimentsurvey" target="_blank" rel="noopener">aaii.com/sentimentsurvey</a> every Thursday. Develop a sense of what normal looks like before acting on extremes. The signal is most useful when you have personal context for what 50% bearish feels like relative to 35%.</li>
+                <li><strong>Pair it with the VIX:</strong> If you are already tracking the VIX weekly, add the Thursday AAII reading to the same check-in. The combined reading is substantially more informative than either alone. Two independent measures of fear pointing in the same direction carry far more weight than one.</li>
+                <li><strong>Read the GVD framework:</strong> The <a href="philosophy.html#section-gvd">Growth, Value, and Dividend section on the Philosophy page</a> explains how market environments determine which ETF categories lead recoveries. Understanding which fund types perform best in different phases of a market cycle helps you position across categories as a bottom forms, not just into the broad market.</li>
+                <li><strong>Look for persistence, not single-week spikes:</strong> A single week at 60% bearish is notable. Multiple consecutive weeks above 55% carries substantially more signal weight. The major bottoms documented in the historical table above were all preceded by sustained periods of elevated bearishness, not single-week spikes. Duration of the extreme reading is part of the signal.</li>
+                <li><strong>Confirm with RSI and 52W range:</strong> When AAII bearishness is extreme and the VIX is elevated, check whether the ETF you are considering is also in the lower 25% of its 52-week range with RSI below 40. When all four timing signals align, the entry setup is as high-conviction as this methodology produces.</li>
+              </ul>
+            </div>
+          </section>
+
           <!-- Structural Quality Metrics -->
           <section id="section-quality" class="section">
             <h2>Structural Quality Metrics</h2>
@@ -270,7 +440,7 @@
           <!-- What Strong Signals Look Like -->
           <section id="section-signals" class="section">
             <h2>What Strong Signals Look Like</h2>
-            <p style="margin-bottom: 16px;">A quick-reference guide to all eight index and ETF metrics. Timing signals tell you when to buy; structural quality signals tell you what to hold.</p>
+            <p style="margin-bottom: 16px;">A quick-reference guide to all nine index and ETF metrics. Timing signals tell you when to buy; structural quality signals tell you what to hold.</p>
 
             <div class="table-wrap">
               <table>
@@ -305,6 +475,13 @@
                     <td><span class="badge badge-good">Lower 25%</span></td>
                     <td><span class="badge badge-caution">Upper 90%</span></td>
                     <td>Price near a range low improves risk/reward. Confirms the pullback is meaningful, not cosmetic.</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">AAII Bear %</td>
+                    <td><span class="badge">Timing</span></td>
+                    <td><span class="badge badge-good">&gt; 60% bearish</span></td>
+                    <td><span class="badge badge-caution">&lt; 25% bearish</span></td>
+                    <td>Retail investor pessimism at extremes. Historically marks or precedes major market bottoms. Most powerful when combined with VIX above 35.</td>
                   </tr>
                   <tr>
                     <td class="ticker-cell">YTD Perf.</td>
@@ -344,7 +521,7 @@
                 </tbody>
               </table>
             </div>
-            <p class="table-note">The three timing signals (VIX, RSI, 52W Range) carry the most decision weight for when to act. The five structural signals carry the most weight for which ETF to hold. Use both layers together; the best entry is one where the timing is right and the instrument is structurally sound.</p>
+            <p class="table-note">The four timing signals (VIX, RSI, 52W Range, AAII Sentiment) carry the most decision weight for when to act. The five structural signals carry the most weight for which ETF to hold. Use both layers together; the best entry is one where the timing is right and the instrument is structurally sound.</p>
           </section>
 
           <!-- Seeking Alpha Watchlist Setup -->

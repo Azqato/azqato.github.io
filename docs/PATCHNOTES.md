@@ -2,6 +2,42 @@
 
 ---
 
+## v2.9.0 — June 2026 — AAII Investor Sentiment Survey Section
+
+**New comprehensive section on `indices.html` covering the AAII Investor Sentiment Survey as a contrarian indicator. Related FAQ entry and documentation updates.**
+
+### indices.html changes
+
+- Added sidebar "On This Page" link: `AAII Investor Sentiment` pointing to `#section-aaii` (placed between Timing Signals and Structural Quality Metrics)
+- Updated framework intro paragraph: nine metrics (was eight), four timing signals listed as "VIX, RSI, 52W Range, AAII Sentiment" (was three)
+- Added new section `#section-aaii` between `#section-timing` and `#section-quality` containing:
+  - H2: AAII Investor Sentiment Survey
+  - Intro paragraphs: what the survey is (weekly poll since 1987, ~150K members, Thursday publication, historical averages 37.5% bullish / 31.5% neutral / 31.0% bearish, bull-bear spread ~+6.5 points)
+  - How-to-read box: how to access current readings at aaii.com/sentimentsurvey
+  - H3: Why It Is a Contrarian Indicator (mechanism explanation)
+  - H3: Historical Evidence — 7-row table (March 2000 dot-com peak through Feb 2025 correction)
+  - Caveat box: "Historical pattern, not a mechanical rule"
+  - H3: AAII Sentiment Action Levels — 5-row table (< 25% through > 60% bearish)
+  - H3: Combining AAII with VIX — three-tier framework (Tier 1: either elevated; Tier 2: both elevated; Tier 3: both at extremes with VIX > 35 and AAII > 60%)
+  - H3: Conclusion and Next Steps with links to aaii.com and philosophy.html#section-gvd
+- Added AAII Bear % row to "What Strong Signals Look Like" signals table (between 52W Range and YTD Perf rows): Strong Signal `> 60% bearish`, Caution Zone `< 25% bearish`
+- Updated signals table note: "four timing signals (VIX, RSI, 52W Range, AAII Sentiment)" (was three)
+- Updated signals section intro count: "nine" (was eight)
+
+### faq.html changes
+
+- Added Q22: "What is the AAII Investor Sentiment Survey and how do I use it when investing in indices?" with `id="answer-aaii"` (placed immediately after Q21 VIX question)
+  - Covers: what the survey is, contrarian mechanism, action levels with historical examples, combined VIX + AAII three-tier framework, link to full indices.html#section-aaii
+
+### docs/PRD.md changes
+
+- Section 3.6 (Indices & ETF Investing): added AAII Investor Sentiment Survey to sections list with description of contrarian use and three-tier combined signal
+- Section 3.6 signals table note updated: nine signals, four timing
+- Section 3.7 (FAQ): added Q12 entry for AAII FAQ question
+- Section 5 (On This Page): added `#section-aaii` to indices.html section IDs between `#section-timing` and `#section-quality`
+
+---
+
 ## v2.8.0 — June 2026 — Sitewide Title, Social Card, and Description Alignment
 
 **`<title>`, `og:title`, and `og:description` now match the H1 and lead paragraph on each page exactly. "- Azqato" brand suffix removed from all `<title>` tags sitewide.**

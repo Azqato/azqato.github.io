@@ -208,8 +208,9 @@ Separate methodology for evaluating broad market indices and ETFs. Key insight: 
 - VIX: The Fear Gauge: five action level ranges with market condition descriptions and deployment postures
 - Leveraged ETFs caveat: when to use 2x/3x ETFs (VIX > 45 recovery plays only)
 - RSI and 52W Range for index/ETF context
+- AAII Investor Sentiment Survey: weekly retail investor poll (since 1987, ~150K members, published Thursdays). Used as a contrarian indicator: bearish readings above 60% historically mark or precede major market bottoms; below 25% bearish signals elevated optimism and caution for new entries. Highest-conviction entries combine elevated AAII bearish readings with elevated VIX (three-tier framework: either elevated, both elevated, both at extremes).
 - Structural Quality Metrics: YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio
-- "What Strong Signals Look Like" reference table
+- "What Strong Signals Look Like" reference table (nine signals: four timing, five structural)
 - Seeking Alpha ETF watchlist setup
 
 ---
@@ -239,6 +240,8 @@ Accordion-style Q&A covering philosophy and practice. Ten questions:
 10. **What should I think about position sizing?** Core positions (profitable, established) get meaningful allocations. Speculative positions (unprofitable, binary outcomes) get small allocations regardless of prior wins.
 
 11. **How does market environment affect which stocks perform best?** Risk-on favors growth; risk-off hits growth stocks hardest (50-80% drawdowns possible). Value and dividend stocks hold up better in risk-off. Understanding this cycle does not mean avoiding growth. It means holding through volatility with understanding and having structure to deploy capital at discounts. Links to Philosophy page for the full GVD framework.
+
+12. **What is the AAII Investor Sentiment Survey and how do I use it when investing in indices?** Weekly retail investor poll (since 1987, ~150K members). Used as a contrarian indicator: bearish above 60% historically marks or precedes major bottoms. Action levels parallel the VIX framework. Highest-conviction entries combine elevated AAII bearish readings with elevated VIX. Links to the full `#section-aaii` framework on indices.html.
 
 ---
 
@@ -354,7 +357,7 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 | `metrics.html` | `#metric-rev-ttm`, `#metric-rev-fwd`, `#metric-eps-ttm`, `#metric-eps-fwd`, `#metric-pe-fwd`, `#metric-peg-fwd`, `#metric-cash`, `#metric-debt`, `#metric-rsi`, `#metric-52w`, `#metric-gross-margin`, `#metric-net-margin` |
 | `screener.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
 | `watchlist.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
-| `indices.html` | `#section-types`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
+| `indices.html` | `#section-types`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-aaii`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
 
 **Implementation:** The `IntersectionObserver` in `script.js` automatically highlights the active section link as the user scrolls. It derives section targets from the hrefs of `.metric-links a` elements on the page, so it works for all pages without per-page configuration. The FAQ page (`faq.html`) uses an accordion pattern and does not have an "On This Page" block.
 
