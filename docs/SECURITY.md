@@ -25,7 +25,7 @@ The only authorization boundary is GitHub repository access:
 The portfolio stores no user data. There are no databases, no server-side storage, no cookies, no `localStorage`, no `sessionStorage`, and no `IndexedDB` in use.
 
 The only data in the project is static content hardcoded in HTML files:
-- Project metadata in the `PROJECTS` array in `index.html`
+- Project metadata in the `PROJECTS` array in `projects.html`
 - Affiliate link URLs in `support.html`
 - Bio content in `about.html`
 
@@ -71,7 +71,7 @@ The portfolio is a referral gateway; it links to these services but does not tra
 
 **Risk level: Low**
 
-The `PROJECTS` array is hardcoded in `index.html` and rendered via `innerHTML` template literals. If the array were ever populated from user input or an external API, this would be a critical XSS vector. Currently, only the owner can modify the array (via repository push), so the attack surface is limited to the repository itself.
+The `PROJECTS` array is hardcoded in `projects.html` and rendered via `innerHTML` template literals. If the array were ever populated from user input or an external API, this would be a critical XSS vector. Currently, only the owner can modify the array (via repository push), so the attack surface is limited to the repository itself.
 
 **Mitigation:** The array is maintainer-controlled. If GitHub API integration is added in a future version (see ROADMAP.md), all API-sourced strings must be escaped with `textContent` assignments or a sanitizer before being inserted into the DOM.
 

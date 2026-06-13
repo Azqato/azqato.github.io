@@ -48,7 +48,8 @@ This is the single number that best represents whether the portfolio is deliveri
 
 | Metric                         | Description                                               | Measurement Method                            |
 |--------------------------------|-----------------------------------------------------------|------------------------------------------------|
-| Page weight: index.html        | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
+| Page weight: index.html (landing) | Uncompressed HTML size                                 | Browser DevTools → Network tab                 |
+| Page weight: projects.html     | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
 | Page weight: about.html        | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
 | Page weight: support.html      | Uncompressed HTML size                                    | Browser DevTools → Network tab                 |
 | Time to First Contentful Paint | How fast the first content appears                        | Chrome DevTools → Lighthouse or PageSpeed      |

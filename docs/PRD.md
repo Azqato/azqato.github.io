@@ -21,6 +21,7 @@ The sole developer of the portfolio. Needs to add new projects quickly without t
 
 ## Goals
 
+- Welcome first-time visitors with an introductory landing page that explains who Azqato is and routes them to the community Discord and the rest of the site.
 - Give visitors a fast, readable overview of all public projects in one place.
 - Make it trivially easy to add new projects without touching layout HTML.
 - Load instantly on any device or connection with no JavaScript frameworks and no CDN fonts.
@@ -41,10 +42,31 @@ The sole developer of the portfolio. Needs to add new projects quickly without t
 
 ---
 
+## Site Structure
+
+The site opens with an introductory landing page (`index.html`) that welcomes first-time visitors, introduces Azqato across gaming, content creation, investing, music, and community, and routes them onward. Its primary call to action is joining the community Discord; a secondary "Explore the site" grid links to every other page. The project grid, formerly the homepage, now lives at `projects.html` and is labeled "Projects" in the navigation.
+
+| Page           | File                  | Purpose                                              |
+|----------------|-----------------------|------------------------------------------------------|
+| Landing        | `index.html`          | Introductory front door: Discord CTA + explore grid  |
+| Projects       | `projects.html`       | Filterable grid of open-source projects              |
+| About          | `about.html`          | Bio and personal pitch                               |
+| Links          | `links.html`          | All platforms and channels in one place              |
+| YouTube        | `youtube.html`        | Four YouTube channels                                |
+| Invests        | `invests.html`        | Curated investing resource hub                       |
+| Music          | `music.html`          | Spotify playlists and mixes                          |
+| Accounts       | `accounts.html`       | Gaming profiles                                      |
+| Support        | `support.html`        | Buy Me a Coffee CTA + affiliate partners             |
+| Privacy Policy | `privacy-policy.html` | Full privacy policy                                  |
+
+---
+
 ## User Stories
 
 | As a…          | I want to…                                          | So that…                                               |
 |----------------|-----------------------------------------------------|--------------------------------------------------------|
+| First-time visitor | Land on an introductory page explaining who Azqato is | I understand the brand before diving into specifics |
+| First-time visitor | Join the Discord straight from the landing page | I can become part of the community right away          |
 | Visitor        | Browse all projects in a grid                       | I get a quick overview without reading a wall of text  |
 | Visitor        | Filter projects by category tag                     | I can find projects relevant to my interests           |
 | Visitor        | Click a card title to open the live demo            | I can try the project without cloning it               |
@@ -64,13 +86,14 @@ The sole developer of the portfolio. Needs to add new projects quickly without t
 
 - **F1: Project Cards:** icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date.
 - **F2: Tag Filtering:** auto-generated filter bar from `PROJECTS` array; real-time hide/show; project count updates.
-- **F3: Navigation:** sticky nav with Portfolio, About, GitHub, Support links; active state per page; collapses on mobile.
+- **F3: Navigation:** sticky nav in this order: Home, About, Discord, Invests, Links, Projects, YouTube, GitHub, and Support; active state per page; collapses on mobile. The Discord link points to the community invite; like GitHub, it opens in the same tab. The logo links home to the landing page (`index.html`).
 - **F4: Hero Sections:** status badge, headline, bio blurb, and CTA buttons on each page.
 - **F5: Zero Dependencies:** plain HTML/CSS/JS; works offline after first load.
 - **F6: About Page:** bio with gaming origins, content creation, B5TA community, and web development; pitch card with avatar and signature.
 - **F7: Support Page:** Buy Me a Coffee CTA with disclaimer; affiliate partner grid with 5 live referral links (Tesla, Robinhood, M1 Finance, Public, Lyft); FTC-compliant affiliate disclosure.
 - **F8: Consistent Navigation:** identical nav and footer structure across all pages.
 - **F9: `iconUrl` field:** optional image/SVG URL per project card that overrides the emoji icon.
+- **F10: Introductory Landing Page:** `index.html` is an introductory front door for first-time visitors. It introduces Azqato across gaming, content creation, investing, music, and community, with the community Discord as the primary call to action and an "Explore the site" grid linking to every other page. The filterable project grid lives at `projects.html`.
 
 ### Future (post-launch, not committed)
 

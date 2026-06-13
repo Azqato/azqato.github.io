@@ -37,7 +37,7 @@ Getting the project running from a fresh machine requires no installations.
 There is no build step. The source files are the deployed files.
 
 ```bash
-# Nothing to run. index.html, about.html, and support.html are the production artifacts.
+# Nothing to run. The .html files (index.html landing page, projects.html, and the rest) are the production artifacts.
 ```
 
 If you ever want to check file sizes before pushing:
@@ -66,7 +66,7 @@ The site is deployed automatically when changes are pushed to the `main` branch.
 
 **Routine deploy:**
 ```bash
-git add index.html about.html support.html links.html youtube.html invests.html music.html accounts.html privacy-policy.html img/ docs/
+git add index.html projects.html about.html support.html links.html youtube.html invests.html music.html accounts.html privacy-policy.html img/ docs/
 git commit -m "Your commit message"
 git push origin main
 ```
@@ -137,7 +137,7 @@ No `.env` files. No environment variables. No feature flags.
 | Site shows old version after push    | GitHub Pages CDN cache                                    | Hard-refresh (Ctrl+Shift+R). Wait 2–5 minutes for full propagation.         |
 | 404 on `azqato.github.io`            | GitHub Pages not enabled or wrong branch configured       | Settings → Pages → ensure source is `main` / `root`                         |
 | Affiliate card shows wrong promo     | Outdated hardcoded text in `support.html`                 | Edit the `promo-badge` span and description in the relevant card in `support.html` |
-| Filter bar shows unexpected tags     | New project added with an unintended tag value            | Check the `tags` array in the new project object in `index.html`             |
+| Filter bar shows unexpected tags     | New project added with an unintended tag value            | Check the `tags` array in the new project object in `projects.html`          |
 | Project count is wrong               | `renderProjects()` filter logic                           | Open DevTools Console; check for JS errors; verify `PROJECTS` array syntax   |
 | Nav active state not highlighting    | Active nav JS uses `pathname` matching                    | Check that the `href` in the nav link exactly matches the page filename      |
 | `iconUrl` image not loading          | URL is unreachable or cross-origin blocked                | Check the URL in DevTools → Network; use an absolute URL to a stable host    |

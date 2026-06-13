@@ -2,12 +2,13 @@
 
 ## System Architecture
 
-The portfolio is a fully static site with no server, no build step, and no runtime. It consists of nine plain HTML pages, each containing all of its own CSS and JavaScript inline. There is no bundler, no transpiler, and no dependency graph.
+The portfolio is a fully static site with no server, no build step, and no runtime. It consists of ten plain HTML pages, each containing all of its own CSS and JavaScript inline. There is no bundler, no transpiler, and no dependency graph. The introductory landing page (`index.html`) is the default entry point; the filterable project grid lives at `projects.html`.
 
 ```
-Browser → GitHub Pages (CDN) → index.html / about.html / support.html
-                                links.html / youtube.html / invests.html
-                                music.html / accounts.html / privacy-policy.html
+Browser → GitHub Pages (CDN) → index.html / projects.html / about.html
+                                support.html / links.html / youtube.html
+                                invests.html / music.html / accounts.html
+                                privacy-policy.html
 ```
 
 Each page is self-contained. Navigation between pages is standard `<a href>` links; there is no client-side router. The browser performs a full page load on every navigation.
@@ -33,7 +34,8 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 
 ```
 .
-├── index.html           - Portfolio homepage: project grid, tag filter, hero
+├── index.html           - Introductory landing page: intro, Discord CTA, explore grid
+├── projects.html        - Project grid: project cards, tag filter, hero
 ├── about.html           - About page: bio, pitch card, profile photo
 ├── support.html         - Support page: Buy Me a Coffee CTA, affiliate grid
 ├── links.html           - Links hub: all social/platform links by category
@@ -61,7 +63,7 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 
 ## Data Models
 
-### Project Entry (defined in `index.html` `PROJECTS` array)
+### Project Entry (defined in `projects.html` `PROJECTS` array)
 
 ```js
 {
@@ -119,7 +121,7 @@ Each affiliate card is static HTML; there is no JavaScript data model. Structure
 
 This project has no backend API. The only "API" is the internal data flow for the project grid filter:
 
-### Internal Data Flow: Tag Filter (`index.html`)
+### Internal Data Flow: Tag Filter (`projects.html`)
 
 ```
 PROJECTS array (static data)
@@ -158,7 +160,7 @@ State is minimal and lives entirely in memory within each page load:
 
 | State variable | Location              | Type    | Description                           |
 |----------------|-----------------------|---------|---------------------------------------|
-| `activeTag`    | `index.html` JS scope | string  | Currently selected filter tag ("All" by default) |
+| `activeTag`    | `projects.html` JS scope | string  | Currently selected filter tag ("All" by default) |
 
 No persistent state. No localStorage, sessionStorage, IndexedDB, or cookies.
 
@@ -184,7 +186,7 @@ All third-party interactions are outbound navigation; the portfolio itself does 
 
 | Metric                        | Target                    | Current Status |
 |-------------------------------|---------------------------|----------------|
-| Page weight (uncompressed)    | < 50 KB per page          | index.html ~19 KB, about.html ~8 KB, support.html ~14 KB |
+| Page weight (uncompressed)    | < 50 KB per page          | projects.html ~19 KB, index.html (landing) ~10 KB, about.html ~8 KB, support.html ~14 KB |
 | Time to first meaningful paint | < 1 second on 4G         | Met (no blocking resources) |
 | No external requests          | 0 external HTTP calls     | Met             |
 | Offline functionality         | Fully usable after first load | Met (no CDN dependencies) |
@@ -202,4 +204,4 @@ All third-party interactions are outbound navigation; the portfolio itself does 
 | Hardcoded affiliate links in markup     | Links are static HTML strings | No change needed (deliberate for simplicity) |
 | No CSP headers                          | GitHub Pages does not support custom headers | Acceptable for a static content-only site |
 | No automated tests                      | Manual visual QA only         | Could add Playwright or Cypress smoke tests |
-| No build pipeline                       | Raw source files are deployed | Page count is now 9, approaching the threshold where a shared nav include would justify a minimal build step |
+| No build pipeline                       | Raw source files are deployed | Page count is now 10, past the threshold where a shared nav include would justify a minimal build step |

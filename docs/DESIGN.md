@@ -28,6 +28,10 @@ All colors are defined as CSS custom properties in the `:root` block of each pag
 | `--tag-bg`       | `#21262d`   | Tag pill background                               |
 | `--coffee`       | `#FFDD00`   | Buy Me a Coffee button background                 |
 | `--coffee-hover` | `#FFE84D`   | Buy Me a Coffee button hover background           |
+| `--discord`      | `#5865f2`   | Discord button background (landing page CTA)      |
+| `--discord-hover`| `#6b76f5`   | Discord button hover background                   |
+
+The `--discord` and `--discord-hover` tokens are defined only on the landing page (`index.html`), where the Discord join is the primary call to action.
 
 ### Language Tag Colors
 
@@ -140,6 +144,7 @@ The affiliate card grid on `support.html` uses `minmax(250px, 1fr)`, following t
 | Primary     | `--accent`   | none          | `#0d1117`     | Main CTAs                   |
 | Outlined    | transparent  | `--accent`    | `--accent`    | Secondary actions            |
 | Coffee      | `--coffee`   | none          | `#1a1a1a`     | Buy Me a Coffee only         |
+| Discord     | `--discord`  | none          | `#ffffff`     | Join the Discord CTA (landing page hero and closing band) |
 | Affiliate   | `--accent`   | none          | `#0d1117`     | Affiliate card CTA buttons   |
 | Icon button | `--surface`  | `--border`    | `--text-muted` | Card action icons (GitHub, ↗) |
 
@@ -161,7 +166,7 @@ Image assets live in `img/` at the project root. All images were migrated from t
 
 | File                            | Use                                              |
 |---------------------------------|--------------------------------------------------|
-| `home-hero-profile.jpg`         | Hero avatar on `index.html`                      |
+| `home-hero-profile.jpg`         | Hero avatar on `projects.html`                   |
 | `about-profile.jpg`             | Pitch card avatar on `about.html`                |
 | `logo-cat-avatar.jpg`           | Original site logo (available for reuse)         |
 | `yt-thumb-azqato.jpg`           | YouTube channel thumbnail for Azqato             |

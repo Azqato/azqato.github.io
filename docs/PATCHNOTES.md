@@ -349,6 +349,40 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.3.0] - 2026-06-13
+
+### Added
+- New introductory landing page at `index.html`, designed as the front door for first-time visitors. It introduces who Azqato is across gaming, content creation, investing, music, and community, then routes visitors onward rather than opening straight into the project grid.
+- Discord join as the primary call to action, featured both in the hero and in a dedicated closing CTA band (`discord.gg/39JrFNY7qS`), styled with the official Discord brand color (`#5865f2`) and logo.
+- "Explore the site" card grid linking to all eight key destinations: Projects, About, YouTube, Music, Invests, Gaming Accounts, Links, and Support, each with an icon and one-line description.
+- Hero with an easygoing introduction and a secondary "Explore the site" anchor button, plus an intro blurb with a short bio and category pills (Gaming, Investing, Music, Web Dev, Community).
+- `--discord` and `--discord-hover` CSS custom properties on the landing page.
+
+### Changed
+- Site structure reworked so the landing page is the default entry point. The project grid (cards, tag filter, hero) moved from `index.html` to `projects.html`; the new introductory landing page now occupies `index.html`.
+- Navigation label renamed from "Portfolio" to "Projects" across all pages, and the link now points to `projects.html`.
+- Nav logo on every page links home to `index.html` (the new landing page). The project grid page's logo, previously `href="#"`, now also points to `index.html`.
+- `projects.html` page title updated from "Azqato | Portfolio" to "Azqato | Projects".
+
+### Notes
+- The landing page follows the existing design system (GitHub dark theme, `#00d4a0` accent, system font stack, zero dependencies) and is self-contained with inline CSS.
+- The site now comprises 10 pages.
+
+---
+
+## [2.3.1] - 2026-06-13
+
+### Added
+- "Home" and "Discord" links added to the global navigation. Home points to the landing page (`index.html`); Discord points to the community invite (`discord.gg/39JrFNY7qS`) and opens in the same tab, matching the GitHub link convention.
+
+### Changed
+- Navigation reordered across all 10 pages to: Home, About, Discord, Invests, Links, Projects, YouTube, GitHub, Support.
+- Landing page hero introduction reworded for a more confident, knowledgeable first impression (removed the "music nerd" phrasing and the "front door / come hang out" close).
+- Landing page intro blurb refined for tone: now notes B5TA has thrived on RuneScape and Discord for over a decade, and splits "music production" and "DJ mixes" into separate highlighted lanes.
+- Highlighted the connecting "and" before "web development" in the intro lanes so it carries the same accent styling as the other lanes.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD

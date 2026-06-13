@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azqato | Projects</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #00d4a0;
+      --accent-hover: #00e6b0;
+      --green: #3fb950;
+      --purple: #bc8cff;
+      --orange: #ffa657;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --card-hover: #1c2128;
+      --tag-bg: #21262d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .hero-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      width: fit-content;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface);
+      border-color: var(--accent);
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0d1117;
+    }
+
+    /* ── PROJECT GRID ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover {
+      background: var(--card-hover);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 212, 160, 0.08);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card[data-hidden="true"] {
+      display: none;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .card-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .card-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .card-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0, 212, 160, 0.08);
+    }
+
+    .card-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .card-name:hover {
+      color: var(--accent);
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .tag.lang-js    { color: #e8c840; border-color: rgba(232,200,64,0.3); background: rgba(232,200,64,0.08); }
+    .tag.lang-ts    { color: #3178c6; border-color: rgba(49,120,198,0.3); background: rgba(49,120,198,0.08); }
+    .tag.lang-py    { color: #3572a5; border-color: rgba(53,114,165,0.3); background: rgba(53,114,165,0.08); }
+    .tag.lang-cs    { color: #178600; border-color: rgba(23,134,0,0.3);   background: rgba(23,134,0,0.08);   }
+    .tag.lang-html  { color: #e34c26; border-color: rgba(227,76,38,0.3);  background: rgba(227,76,38,0.08);  }
+    .tag.lang-css   { color: #563d7c; border-color: rgba(86,61,124,0.3);  background: rgba(86,61,124,0.08);  }
+    .tag.lang-go    { color: #00add8; border-color: rgba(0,173,216,0.3);  background: rgba(0,173,216,0.08);  }
+    .tag.lang-rust  { color: #dea584; border-color: rgba(222,165,132,0.3);background: rgba(222,165,132,0.08);}
+    .tag.lang-java  { color: #b07219; border-color: rgba(176,114,25,0.3); background: rgba(176,114,25,0.08); }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-stat {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 2rem; }
+      .section { padding: 2rem 1.25rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="https://discord.gg/39JrFNY7qS">Discord</a></li>
+        <li><a href="invests.html">Invests</a></li>
+        <li><a href="links.html">Links</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="youtube.html">YouTube</a></li>
+        <li><a href="https://github.com/Azqato">GitHub</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-avatar">
+      <img src="img/home-hero-profile.jpg" alt="Azqato" />
+    </div>
+    <div class="hero-badge">Available for collaboration</div>
+    <h1>Hi, I'm <span class="highlight">Azqato</span>.<br>I build things.</h1>
+    <p>A passionate content creator with a love for gaming, investing, music production, and streaming. Below is a collection of my open-source projects, experiments, and tools. Browse by tag or explore everything.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://github.com/Azqato">
+        &#9679; View GitHub Profile
+      </a>
+      <a class="btn btn-secondary" href="links.html">All Links &rarr;</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <h2 class="section-title">Projects</h2>
+      <span class="section-meta" id="project-count"></span>
+    </div>
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <!-- Tag filter buttons are generated automatically from project data -->
+    </div>
+
+    <div class="project-grid" id="project-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </section>
+
+  <footer>
+    Built by <a href="https://github.com/Azqato">Azqato</a>.
+  </footer>
+
+  <script>
+    // ─────────────────────────────────────────────
+    //  ADD YOUR PROJECTS HERE
+    //  Each object represents one project card.
+    //
+    //  Required fields:
+    //    name        - display name
+    //    desc        - short description (1-2 sentences)
+    //    github      - full GitHub URL
+    //    tags        - array of strings; first tag drives the filter color
+    //
+    //  Optional fields:
+    //    icon        - emoji icon (default: "📦")
+    //    iconUrl     - URL to an image/SVG; takes precedence over icon if set
+    //    demo        - live demo URL
+    //    stars       - star count string e.g. "42"
+    //    updated     - last-updated string e.g. "Jun 2025"
+    //    langClass   - CSS class for the primary language tag
+    //                  options: lang-js, lang-ts, lang-py, lang-cs,
+    //                           lang-html, lang-css, lang-go, lang-rust, lang-java
+    // ─────────────────────────────────────────────
+    const PROJECTS = [
+      {
+        name: "Net Worth Tracker",
+        desc: "Browser-based personal finance tool for tracking monthly net worth across four asset categories. Fully client-side; all data stays in your browser's localStorage with no accounts or servers required.",
+        github: "https://github.com/Azqato/net-worth-tracker",
+        demo: "https://azqato.github.io/net-worth-tracker/",
+        tags: ["Finance", "Tools"],
+        langClass: "lang-js",
+        icon: "💰",
+        updated: "2025",
+      },
+      {
+        name: "VIX Strategy",
+        desc: "Rules-based contrarian investment dashboard that dynamically rebalances a portfolio across ETFs (BIL, SPY, QQQ, TQQQ) based on live CBOE VIX volatility tiers. Increases growth exposure at peak market fear.",
+        github: "https://github.com/Azqato/VIX",
+        demo: "https://azqato.github.io/VIX/",
+        tags: ["Finance"],
+        langClass: "lang-js",
+        icon: "📈",
+        updated: "2025",
+      },
+      {
+        name: "ComposerAtlas",
+        desc: "Curated strategy library and education hub for Composer.trade investing. Browse strategy pages with plain-English logic breakdowns, risk profiles, and metrics tables, plus a glossary of systematic investing concepts including RSI, VIX tiers, and leveraged ETFs.",
+        github: "https://github.com/Azqato/ComposerAtlas",
+        demo: "https://azqato.github.io/ComposerAtlas/",
+        tags: ["Finance", "Tools", "Education"],
+        langClass: "lang-js",
+        icon: "🗺️",
+        updated: "2026",
+      },
+      {
+        name: "Stock Methodology",
+        desc: "Educational site documenting a fundamentals-driven individual stock and ETF investing methodology. Covers 10 core evaluation metrics (PEG, P/E FWD, RSI, and more), a Finviz screener guide, Seeking Alpha watchlist setup, and VIX-based index investing strategies.",
+        github: "https://github.com/Azqato/stocks",
+        demo: "https://azqato.github.io/stocks/",
+        tags: ["Finance", "Education"],
+        langClass: "lang-html",
+        icon: "📊",
+        updated: "2026",
+      },
+      {
+        name: "Leveraged Strategies",
+        desc: "Educational reference site documenting six leveraged ETF strategies side by side: 3 Sig, 6 Sig, 9 Sig, TQQQ For The Long Term, Holy Grail, and HFEA. Each strategy gets a dedicated wiki-style page covering rules and logic, performance notes, risks, and sources.",
+        github: "https://github.com/Azqato/leveraged-strategies",
+        demo: "https://azqato.github.io/leveraged-strategies/",
+        tags: ["Finance", "Education"],
+        langClass: "lang-html",
+        icon: "🚀",
+        updated: "2026",
+      },
+      {
+        name: "Lantern",
+        desc: "Culture-based social platform for discovering your taste profile across books, film, music, games, and podcasts. Generates Cultural Archetypes, Taste Dimensions, and surfaces users with overlapping interests via AI-powered Smart Cohorts.",
+        github: "https://github.com/Azqato/Lantern",
+        demo: "https://azqato.github.io/Lantern/",
+        tags: ["Social"],
+        langClass: "lang-js",
+        icon: "🏮",
+        updated: "2025",
+      },
+      {
+        name: "Cat Food Center",
+        desc: "Mobile-first web app that evaluates cat food products via barcode scan or catalog search. Provides ingredient breakdowns, additive safety flags, and a 0–100 CFC health score grounded in feline veterinary nutritional standards.",
+        github: "https://github.com/Azqato/Cat-Food-Center",
+        demo: "https://azqato.github.io/Cat-Food-Center/",
+        tags: ["Tools", "Education"],
+        langClass: "lang-js",
+        iconUrl: "https://azqato.github.io/Cat-Food-Center/favicon.svg",
+        updated: "2025",
+      },
+      {
+        name: "Clan B5TA",
+        desc: "Community website for Clan B5TA, a RuneScape clan founded in 2014. Covers clan rules, membership requirements, and Discord join links for a drama-free skilling, flipping, and bossing community.",
+        github: "https://github.com/Azqato/B5TA",
+        demo: "https://azqato.github.io/B5TA/",
+        tags: ["Social"],
+        langClass: "lang-html",
+        icon: "⚔️",
+        updated: "2014",
+      },
+      {
+        name: "Boaty McBoatface Ventures",
+        desc: "Humorous marketing website for New England's premier canvas exo-skeleton water displacement experience company. Features an interactive eject demo with animations and sound effects, animated CSS boat, parody investor pitch deck, SVG service area map with shark risk levels, and an absurdist FAQ.",
+        github: "https://github.com/Azqato/mcboat",
+        demo: "https://azqato.github.io/mcboat/",
+        tags: ["Meme"],
+        langClass: "lang-html",
+        icon: "🛥️",
+        updated: "2026",
+      },
+    ];
+
+    // ── Render ──────────────────────────────────
+    function buildCard(p) {
+      const icon      = p.iconUrl
+        ? `<img src="${p.iconUrl}" width="22" height="22" alt="" style="display:block;">`
+        : (p.icon || "📦");
+      const tags      = (p.tags || []).map((t, i) =>
+        `<span class="tag ${i === 0 && p.langClass ? p.langClass : ''}">${t}</span>`
+      ).join('');
+
+      const demoLink  = p.demo
+        ? `<a class="card-link" href="${p.demo}" target="_blank" rel="noopener" title="Live demo">&#8599;</a>`
+        : '';
+
+      const stars     = p.stars
+        ? `<span class="card-stat">&#9733; ${p.stars}</span>`
+        : '';
+
+      const updated   = p.updated
+        ? `<span class="card-stat">&#128337; ${p.updated}</span>`
+        : '';
+
+      return `
+        <div class="project-card" data-tags="${(p.tags || []).join(',').toLowerCase()}">
+          <div class="card-top">
+            <span class="card-icon">${icon}</span>
+            <div class="card-links">
+              ${demoLink}
+              <a class="card-link" href="${p.github}" target="_blank" rel="noopener" title="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="${p.demo || p.github}" target="_blank" rel="noopener">${p.name}</a>
+          <p class="card-desc">${p.desc}</p>
+          <div class="card-tags">${tags}</div>
+          ${stars || updated ? `<div class="card-footer">${stars}${updated}</div>` : ''}
+        </div>`;
+    }
+
+    function buildFilters(projects) {
+      const tagSet = new Set();
+      projects.forEach(p => (p.tags || []).forEach(t => tagSet.add(t)));
+      const bar = document.getElementById('filter-bar');
+      [...tagSet].sort().forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = tag.toLowerCase();
+        btn.textContent = tag;
+        bar.appendChild(btn);
+      });
+    }
+
+    function render() {
+      const grid = document.getElementById('project-grid');
+      grid.innerHTML = PROJECTS.length
+        ? PROJECTS.map(buildCard).join('')
+        : '<div class="empty-state">No projects yet. Add some to the PROJECTS array in the script!</div>';
+
+      document.getElementById('project-count').textContent = `${PROJECTS.length} project${PROJECTS.length !== 1 ? 's' : ''}`;
+      buildFilters(PROJECTS);
+      bindFilters();
+    }
+
+    function bindFilters() {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.dataset.filter;
+          document.querySelectorAll('.project-card').forEach(card => {
+            const match = filter === 'all' || card.dataset.tags.includes(filter);
+            card.dataset.hidden = match ? 'false' : 'true';
+          });
+
+          const visible = document.querySelectorAll('.project-card:not([data-hidden="true"])').length;
+          document.getElementById('project-count').textContent =
+            `${visible} project${visible !== 1 ? 's' : ''}`;
+        });
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>

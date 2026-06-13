@@ -28,7 +28,7 @@ The site is live today at **https://azqato.github.io/**.
 A: The goal is a developer-first aesthetic and zero maintenance overhead. Existing platforms don't let you control the visual language precisely, and page builders add bloat. A hand-coded site is the fastest and most credible signal to other developers.
 
 **Q: Why inline CSS and JS instead of separate files?**
-A: With only three HTML pages, separate files add deployment complexity with no benefit. Each page is self-contained, which makes it easier to read and modify. The trade-off is some CSS repetition across pages, acceptable at this scale and worth addressing if the page count grows past ~8.
+A: Early on, with only a few pages, separate files added deployment complexity with no benefit, and each page being self-contained made it easier to read and modify. The site has since grown to ten pages, so the CSS repetition across pages is now the leading item of known technical debt; extracting a shared stylesheet and nav include is planned (see ROADMAP and TRD).
 
 **Q: Why no analytics?**
 A: The PRD explicitly excludes analytics and tracking. The portfolio represents a developer who cares about privacy, and tracking visitors would contradict that. GitHub Pages provides basic traffic data (clones, referrers) in the repository Insights tab as a lightweight alternative.
@@ -49,7 +49,7 @@ A: GitHub profile and the linked repositories already provide contact paths (Git
 A: The entire site is plain HTML files; it can be deployed to Vercel, Netlify, or Cloudflare Pages in under five minutes with no configuration changes. There is no lock-in.
 
 **Q: How will new projects be added after launch?**
-A: The owner edits the `PROJECTS` array in `index.html`, adds the project object, commits, and pushes. GitHub Pages deploys within ~60 seconds. Estimated time per new project: 2–5 minutes.
+A: The owner edits the `PROJECTS` array in `projects.html`, adds the project object, commits, and pushes. GitHub Pages deploys within ~60 seconds. Estimated time per new project: 2–5 minutes.
 
 **Q: Is there a roadmap for v2?**
 A: Yes. See [ROADMAP.md](ROADMAP.md) for the full milestone plan. Prioritized future features include a dark/light mode toggle, GitHub API star count sync, and a contact/hire-me section.
@@ -59,10 +59,13 @@ A: Yes. See [ROADMAP.md](ROADMAP.md) for the full milestone plan. Prioritized fu
 ## External FAQ
 
 **Q: What is this site?**
-A: It's Azqato's personal portfolio: a one-stop place to see all public projects, read about the person who built them, and find ways to support the work.
+A: It's Azqato's personal hub: it opens with a short introduction to who Azqato is, then points you to the projects, the community Discord, content channels, investing resources, and ways to support the work.
+
+**Q: I just landed here. Where do I start?**
+A: The landing page introduces Azqato and links to every part of the site. The best place to jump in is the community Discord (the main button on the landing page); from there you can also explore Projects, About, YouTube, Music, Invests, and more.
 
 **Q: How do I find a specific project?**
-A: Use the filter buttons above the project grid to narrow by category (Finance, Social, Tools). Click a card title or the ↗ button to open the live version of the project.
+A: Open the Projects page, then use the filter buttons above the project grid to narrow by category (Finance, Social, Tools). Click a card title or the ↗ button to open the live version of the project.
 
 **Q: What are the affiliate links on the Support page?**
 A: They are referral links for services Azqato personally uses or recommends. If you sign up through one, you get a signup bonus (like free stock or a ride discount), and Azqato earns a referral commission. There's no extra cost to you.

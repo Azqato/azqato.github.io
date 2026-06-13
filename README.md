@@ -1,6 +1,6 @@
 # Azqato's Portfolio
 
-A self-contained, zero-dependency portfolio site for displaying GitHub projects. Built with plain HTML, CSS, and vanilla JavaScript. No build tools, no frameworks, no npm.
+A self-contained, zero-dependency personal site for Azqato. It opens with an introductory landing page and routes visitors to a project showcase plus hubs for content, music, investing, and community. Built with plain HTML, CSS, and vanilla JavaScript. No build tools, no frameworks, no npm.
 
 **Live site:** https://azqato.github.io/
 
@@ -55,7 +55,7 @@ Default port depends on which local server you choose (see above). No port is re
 
 ## Adding a Project
 
-Edit the `PROJECTS` array near the bottom of `index.html`:
+Edit the `PROJECTS` array near the bottom of `projects.html`:
 
 ```js
 {
@@ -138,10 +138,18 @@ There is no build step. The source files are the deployed files.
 
 ```
 .
-├── index.html       - portfolio / project grid
-├── about.html       - about page: bio, role, and personal pitch
-├── support.html     - support page: Buy Me a Coffee CTA + affiliate partners grid
-├── README.md        - this file
+├── index.html          - introductory landing page: intro, Discord CTA, explore grid
+├── projects.html       - project grid: cards, tag filter, hero
+├── about.html          - about page: bio, role, and personal pitch
+├── support.html        - support page: Buy Me a Coffee CTA + affiliate partners grid
+├── links.html          - links hub: all social/platform links by category
+├── youtube.html        - YouTube channels page
+├── invests.html        - curated investing resource hub
+├── music.html          - Spotify playlists + music platform links
+├── accounts.html       - gaming accounts (Steam, LoL, TFT, RuneScape)
+├── privacy-policy.html - full privacy policy
+├── img/                - image assets (profile photos, YT thumbnails, playlist covers)
+├── README.md           - this file
 └── docs/
     ├── PRD.md       - product requirements document
     ├── TRD.md       - technical reference document
@@ -154,6 +162,12 @@ There is no build step. The source files are the deployed files.
     ├── SECURITY.md  - security model and considerations
     └── RUNBOOK.md   - operational runbook
 ```
+
+---
+
+## Navigation
+
+Every page shares the same sticky nav, in this order: **Home, About, Discord, Invests, Links, Projects, YouTube, GitHub, Support**. The logo links to the landing page (`index.html`). The Discord link (`discord.gg/39JrFNY7qS`) and the GitHub link both open in the same tab. The nav collapses on viewports under 600 px. When updating the nav, edit it consistently across all 10 HTML pages (there is no shared include yet; see the code-extraction milestone in [ROADMAP.md](docs/ROADMAP.md)).
 
 ---
 

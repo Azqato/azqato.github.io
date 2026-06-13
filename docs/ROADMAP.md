@@ -4,9 +4,9 @@
 
 ## Current Phase
 
-**Phase 2: Site Merger Complete (v2.0.0)**
+**Phase 3: Landing Page Restructure (v2.3.0)**
 
-The portfolio now incorporates all content from the old azqato.com website. Six new pages (Links, YouTube, Invests, Music, Accounts, Privacy Policy) have been added, 14 image assets migrated, and all existing pages updated with expanded navigation and footer links. The site has grown from a pure dev portfolio into a comprehensive personal hub.
+The site now opens with a dedicated introductory landing page (`index.html`) aimed at first-time visitors, with the community Discord as the primary call to action and an "Explore the site" grid linking to every page. The former homepage (the filterable project grid) moved to `projects.html`, and the navigation now labels it "Projects". The site comprises 10 pages and functions as a comprehensive personal hub rather than a pure dev portfolio.
 
 ---
 
@@ -23,28 +23,30 @@ The portfolio now incorporates all content from the old azqato.com website. Six 
 | v1.8.0             | Documentation audit               | 2026-06-08        | Complete    |
 | v1.9.0 – v1.9.3    | New projects + filter tags        | 2026-06-08        | Complete    |
 | v2.0.0             | Old-site merger (6 new pages)     | 2026-06-09        | Complete    |
-| v2.1.0             | Code extraction + shared assets   | TBD               | Planned     |
-| v2.2.0             | GitHub API integration            | TBD               | Planned     |
-| v2.3.0             | Dark/light mode toggle            | TBD               | Planned     |
+| v2.1.0 – v2.2.x    | New projects (Stock Methodology, Leveraged Strategies) | 2026-06-10 | Complete |
+| v2.3.0             | Introductory landing page + Projects rename | 2026-06-13 | Complete    |
+| v2.4.0             | Code extraction + shared assets   | TBD               | Planned     |
+| v2.5.0             | GitHub API integration            | TBD               | Planned     |
+| v2.6.0             | Dark/light mode toggle            | TBD               | Planned     |
 | v3.0.0             | Contact / hire-me section         | TBD               | Planned     |
 
 ---
 
 ## Feature Breakdown Per Milestone
 
-### v2.1.0: Code Extraction + Shared Assets
+### v2.4.0: Code Extraction + Shared Assets
 - Extract shared CSS into a single `styles.css` file to eliminate duplication across pages.
 - Extract shared nav JavaScript (active state detection) into a `nav.js` file.
 - Extract shared nav HTML using a consistent pattern (either JS injection or a build step).
 - Add `prefers-reduced-motion` media query to disable card hover transforms for users who prefer reduced motion.
 
-### v2.2.0: GitHub API Integration
+### v2.5.0: GitHub API Integration
 - Auto-fetch star counts for each project via GitHub REST API on page load (with graceful fallback to hardcoded values).
 - Auto-fetch last-pushed date per repository to keep "updated" fields current.
 - Cache API responses in `sessionStorage` to avoid repeated calls within one visit.
 - Add `X-RateLimit-Remaining` check and silent fallback if rate limit is hit.
 
-### v2.3.0: Dark/Light Mode Toggle
+### v2.6.0: Dark/Light Mode Toggle
 - Add a toggle button in the nav bar to switch between dark (current) and a light theme.
 - Persist preference in `localStorage`.
 - Respect `prefers-color-scheme` media query as the initial default.
@@ -67,4 +69,4 @@ The portfolio now incorporates all content from the old azqato.com website. Six 
 | Multi-page routing / SPA          | Three pages do not justify a router; full page loads are simpler and more reliable |
 | Project detail modals / pages     | Current project descriptions are sufficient; deferred until there is a specific project that needs extended documentation |
 | RSS / changelog feed              | No audience for it yet; revisit when monthly visitors exceed 2,000 |
-| Automated testing (CI)            | Manual QA is sufficient at this scale; worth adding if the page count exceeds ~8 or if multiple contributors join |
+| Automated testing (CI)            | Manual QA still in use; at 10 pages the original ~8-page threshold for adding smoke tests is now met, so this is a candidate for the next code-quality milestone |

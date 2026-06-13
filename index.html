@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Azqato | Portfolio</title>
+  <title>Azqato | Welcome</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
   <style>
     :root {
@@ -19,13 +19,11 @@
       --text-muted: #8b949e;
       --card-hover: #1c2128;
       --tag-bg: #21262d;
+      --discord: #5865f2;
+      --discord-hover: #6b76f5;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--bg);
@@ -63,9 +61,7 @@
       letter-spacing: 0.5px;
     }
 
-    .nav-logo span {
-      color: var(--accent);
-    }
+    .nav-logo span { color: var(--accent); }
 
     .nav-links {
       display: flex;
@@ -80,14 +76,8 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-links a.active {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
 
     /* ── HERO ── */
     .hero {
@@ -96,12 +86,12 @@
       padding: 5rem 2rem 3rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.1rem;
     }
 
     .hero-avatar {
-      width: 80px;
-      height: 80px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid var(--border);
@@ -143,53 +133,55 @@
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.1rem, 6vw, 3.6rem);
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.12;
       letter-spacing: -0.5px;
     }
 
-    .hero h1 .highlight {
-      color: var(--accent);
-    }
+    .hero h1 .highlight { color: var(--accent); }
 
-    .hero p {
+    .hero p.lead {
       color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 560px;
+      font-size: 1.15rem;
+      max-width: 620px;
     }
 
     .hero-actions {
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.55rem 1.2rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
       text-decoration: none;
       border: 1px solid transparent;
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #0d1117;
-      border-color: var(--accent);
+    .btn-discord {
+      background: var(--discord);
+      color: #fff;
+      border-color: var(--discord);
     }
 
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      border-color: var(--accent-hover);
+    .btn-discord:hover {
+      background: var(--discord-hover);
+      border-color: var(--discord-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(88, 101, 242, 0.3);
     }
+
+    .btn-discord svg { width: 20px; height: 20px; fill: currentColor; }
 
     .btn-secondary {
       background: transparent;
@@ -200,22 +192,50 @@
     .btn-secondary:hover {
       background: var(--surface);
       border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── INTRO BLURB ── */
+    .intro-block {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem 2rem;
+    }
+
+    .intro-text {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      max-width: 720px;
+      line-height: 1.8;
+    }
+
+    .intro-text strong { color: var(--text); font-weight: 600; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
     }
 
     /* ── SECTION ── */
     .section {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 0.75rem;
+      padding: 2.5rem 2rem;
     }
 
     .section-title {
@@ -224,6 +244,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .section-title::before {
@@ -235,59 +256,35 @@
       border-radius: 2px;
     }
 
-    .section-meta {
-      font-size: 0.82rem;
+    .section-sub {
       color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
     }
 
-    /* ── FILTER BAR ── */
-    .filter-bar {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .filter-btn {
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #0d1117;
-    }
-
-    /* ── PROJECT GRID ── */
-    .project-grid {
+    /* ── EXPLORE GRID ── */
+    .explore-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1rem;
     }
 
-    .project-card {
+    .explore-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem;
+      border-radius: 12px;
+      padding: 1.4rem 1.4rem 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
       transition: all 0.2s;
       position: relative;
       overflow: hidden;
     }
 
-    .project-card::before {
+    .explore-card::before {
       content: '';
       position: absolute;
       top: 0;
@@ -299,154 +296,92 @@
       transition: opacity 0.2s;
     }
 
-    .project-card:hover {
+    .explore-card:hover {
       background: var(--card-hover);
       border-color: var(--accent);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: 0 8px 24px rgba(0, 212, 160, 0.08);
     }
 
-    .project-card:hover::before {
-      opacity: 1;
-    }
+    .explore-card:hover::before { opacity: 1; }
 
-    .project-card[data-hidden="true"] {
-      display: none;
-    }
-
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.5rem;
-    }
-
-    .card-icon {
-      font-size: 1.4rem;
+    .explore-icon {
+      font-size: 1.6rem;
       line-height: 1;
     }
 
-    .card-links {
+    .explore-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
       display: flex;
+      align-items: center;
       gap: 0.4rem;
     }
 
-    .card-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+    .explore-card:hover .explore-name { color: var(--accent); }
+
+    .explore-name .arrow {
       color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: all 0.2s;
+      transition: transform 0.2s, color 0.2s;
     }
 
-    .card-link:hover {
-      border-color: var(--accent);
+    .explore-card:hover .explore-name .arrow {
       color: var(--accent);
-      background: rgba(0, 212, 160, 0.08);
+      transform: translateX(3px);
     }
 
-    .card-name {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .card-name:hover {
-      color: var(--accent);
-    }
-
-    .card-desc {
+    .explore-desc {
       font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.55;
-      flex: 1;
     }
 
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
+    /* ── DISCORD CTA BAND ── */
+    .cta-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem 4rem;
     }
 
-    .tag {
-      padding: 0.18rem 0.6rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-    }
-
-    .tag.lang-js    { color: #e8c840; border-color: rgba(232,200,64,0.3); background: rgba(232,200,64,0.08); }
-    .tag.lang-ts    { color: #3178c6; border-color: rgba(49,120,198,0.3); background: rgba(49,120,198,0.08); }
-    .tag.lang-py    { color: #3572a5; border-color: rgba(53,114,165,0.3); background: rgba(53,114,165,0.08); }
-    .tag.lang-cs    { color: #178600; border-color: rgba(23,134,0,0.3);   background: rgba(23,134,0,0.08);   }
-    .tag.lang-html  { color: #e34c26; border-color: rgba(227,76,38,0.3);  background: rgba(227,76,38,0.08);  }
-    .tag.lang-css   { color: #563d7c; border-color: rgba(86,61,124,0.3);  background: rgba(86,61,124,0.08);  }
-    .tag.lang-go    { color: #00add8; border-color: rgba(0,173,216,0.3);  background: rgba(0,173,216,0.08);  }
-    .tag.lang-rust  { color: #dea584; border-color: rgba(222,165,132,0.3);background: rgba(222,165,132,0.08);}
-    .tag.lang-java  { color: #b07219; border-color: rgba(176,114,25,0.3); background: rgba(176,114,25,0.08); }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      padding-top: 0.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .card-stat {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    /* ── STATS ROW ── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .stat-card {
+    .cta-inner {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.25rem;
+      border-radius: 16px;
+      padding: 3rem 2rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .stat-num {
-      font-size: 2rem;
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--discord), var(--purple));
+    }
+
+    .cta-inner .cta-emoji {
+      font-size: 2.75rem;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-inner h2 {
+      font-size: 1.7rem;
       font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
+      margin-bottom: 0.75rem;
     }
 
-    .stat-label {
-      font-size: 0.8rem;
+    .cta-inner p {
       color: var(--text-muted);
-      margin-top: 0.25rem;
-    }
-
-    /* ── EMPTY STATE ── */
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 3rem;
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 1rem;
+      max-width: 540px;
+      margin: 0 auto 1.75rem;
+      line-height: 1.7;
     }
 
     /* ── FOOTER ── */
@@ -458,16 +393,16 @@
       color: var(--text-muted);
     }
 
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    footer a { color: var(--accent); text-decoration: none; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       .hero { padding: 3rem 1.25rem 2rem; }
+      .intro-block { padding: 0.5rem 1.25rem 1.5rem; }
       .section { padding: 2rem 1.25rem; }
+      .cta-section { padding: 1rem 1.25rem 3rem; }
       .nav-links { display: none; }
+      .cta-inner { padding: 2.25rem 1.25rem; }
     }
   </style>
 </head>
@@ -476,13 +411,15 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a class="nav-logo" href="#">Azqato<span>.</span></a>
+      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Portfolio</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="links.html">Links</a></li>
-        <li><a href="youtube.html">YouTube</a></li>
+        <li><a href="https://discord.gg/39JrFNY7qS">Discord</a></li>
         <li><a href="invests.html">Invests</a></li>
+        <li><a href="links.html">Links</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="youtube.html">YouTube</a></li>
         <li><a href="https://github.com/Azqato">GitHub</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
@@ -491,34 +428,99 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-avatar">
-      <img src="img/home-hero-profile.jpg" alt="Azqato" />
-    </div>
-    <div class="hero-badge">Available for collaboration</div>
-    <h1>Hi, I'm <span class="highlight">Azqato</span>.<br>I build things.</h1>
-    <p>A passionate content creator with a love for gaming, investing, music production, and streaming. Below is a collection of my open-source projects, experiments, and tools. Browse by tag or explore everything.</p>
+    <h1>Hey, I'm <span class="highlight">Azqato</span>.<br>Glad you found me.</h1>
+    <p class="lead">Content creator and investor living at the crossroads of gaming, music, and the markets. I build communities and tools that people actually use, and I break down what I learn along the way.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="https://github.com/Azqato">
-        &#9679; View GitHub Profile
+      <a class="btn btn-discord" href="https://discord.gg/39JrFNY7qS" target="_blank" rel="noopener">
+        <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"/></svg>
+        Join the Discord
       </a>
-      <a class="btn btn-secondary" href="links.html">All Links &rarr;</a>
+      <a class="btn btn-secondary" href="#explore">Explore the site &darr;</a>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section class="section" id="projects">
-    <div class="section-header">
-      <h2 class="section-title">Projects</h2>
-      <span class="section-meta" id="project-count"></span>
+  <!-- INTRO BLURB -->
+  <section class="intro-block">
+    <p class="intro-text">
+      My world spans a few lanes: <strong>streaming and YouTube</strong>, <strong>investing</strong>, <strong>music production</strong>, <strong>DJ mixes</strong>, <strong>and web development</strong>. It all started with a love of games and the people you meet through them, which grew into B5TA, a community that has thrived on RuneScape and Discord for over a decade. I pour that same energy into open-source projects, finance tools, and a space where people can learn, share, and build together.
+    </p>
+    <div class="pill-row">
+      <span class="pill">🎮 Gaming</span>
+      <span class="pill">📈 Investing</span>
+      <span class="pill">🎧 Music</span>
+      <span class="pill">💻 Web Dev</span>
+      <span class="pill">🤝 Community</span>
     </div>
+  </section>
 
-    <div class="filter-bar" id="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <!-- Tag filter buttons are generated automatically from project data -->
+  <!-- EXPLORE -->
+  <section class="section" id="explore">
+    <h2 class="section-title">Explore the site</h2>
+    <p class="section-sub">Wherever your interests land, there's a corner of the site for it. Take your pick.</p>
+
+    <div class="explore-grid">
+
+      <a class="explore-card" href="about.html">
+        <span class="explore-icon">👋</span>
+        <span class="explore-name">About <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">The story behind the name: where I started, what I'm building, and where it's all going.</span>
+      </a>
+
+      <a class="explore-card" href="projects.html">
+        <span class="explore-icon">🛠️</span>
+        <span class="explore-name">Projects <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">Open-source apps, finance tools, and experiments I've built. Browse by tag and try the live demos.</span>
+      </a>
+
+      <a class="explore-card" href="youtube.html">
+        <span class="explore-icon">▶️</span>
+        <span class="explore-name">YouTube <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">Four channels covering gaming, stream highlights, DJ mixes, and chill content.</span>
+      </a>
+
+      <a class="explore-card" href="music.html">
+        <span class="explore-icon">🎶</span>
+        <span class="explore-name">Music <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">Spotify playlists, plus my mixes on Last.fm and Mixcloud for when you need a soundtrack.</span>
+      </a>
+
+      <a class="explore-card" href="invests.html">
+        <span class="explore-icon">📊</span>
+        <span class="explore-name">Invests <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">A curated hub of investing resources, screeners, and guides for new and experienced traders.</span>
+      </a>
+
+      <a class="explore-card" href="accounts.html">
+        <span class="explore-icon">🎮</span>
+        <span class="explore-name">Gaming Accounts <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">Find me on Steam, League, TFT, and RuneScape. Add me and say hi, I'm always down to play.</span>
+      </a>
+
+      <a class="explore-card" href="links.html">
+        <span class="explore-icon">🔗</span>
+        <span class="explore-name">All Links <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">Every platform, community, and channel I'm on, gathered in one tidy place.</span>
+      </a>
+
+      <a class="explore-card" href="support.html">
+        <span class="explore-icon">☕</span>
+        <span class="explore-name">Support <span class="arrow">&rarr;</span></span>
+        <span class="explore-desc">Buy me a coffee or use a referral link. Every bit helps keep the projects going.</span>
+      </a>
+
     </div>
+  </section>
 
-    <div class="project-grid" id="project-grid">
-      <!-- Cards injected by JS -->
+  <!-- DISCORD CTA BAND -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="cta-emoji">💬</span>
+      <h2>The best place to start is the Discord</h2>
+      <p>It's the heart of everything: gaming, investing talk, music, and good people. Drop in, introduce yourself, and become part of the community.</p>
+      <a class="btn btn-discord" href="https://discord.gg/39JrFNY7qS" target="_blank" rel="noopener">
+        <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"/></svg>
+        Join the Discord
+      </a>
     </div>
   </section>
 
@@ -526,212 +528,5 @@
     Built by <a href="https://github.com/Azqato">Azqato</a>.
   </footer>
 
-  <script>
-    // ─────────────────────────────────────────────
-    //  ADD YOUR PROJECTS HERE
-    //  Each object represents one project card.
-    //
-    //  Required fields:
-    //    name        - display name
-    //    desc        - short description (1-2 sentences)
-    //    github      - full GitHub URL
-    //    tags        - array of strings; first tag drives the filter color
-    //
-    //  Optional fields:
-    //    icon        - emoji icon (default: "📦")
-    //    iconUrl     - URL to an image/SVG; takes precedence over icon if set
-    //    demo        - live demo URL
-    //    stars       - star count string e.g. "42"
-    //    updated     - last-updated string e.g. "Jun 2025"
-    //    langClass   - CSS class for the primary language tag
-    //                  options: lang-js, lang-ts, lang-py, lang-cs,
-    //                           lang-html, lang-css, lang-go, lang-rust, lang-java
-    // ─────────────────────────────────────────────
-    const PROJECTS = [
-      {
-        name: "Net Worth Tracker",
-        desc: "Browser-based personal finance tool for tracking monthly net worth across four asset categories. Fully client-side; all data stays in your browser's localStorage with no accounts or servers required.",
-        github: "https://github.com/Azqato/net-worth-tracker",
-        demo: "https://azqato.github.io/net-worth-tracker/",
-        tags: ["Finance", "Tools"],
-        langClass: "lang-js",
-        icon: "💰",
-        updated: "2025",
-      },
-      {
-        name: "VIX Strategy",
-        desc: "Rules-based contrarian investment dashboard that dynamically rebalances a portfolio across ETFs (BIL, SPY, QQQ, TQQQ) based on live CBOE VIX volatility tiers. Increases growth exposure at peak market fear.",
-        github: "https://github.com/Azqato/VIX",
-        demo: "https://azqato.github.io/VIX/",
-        tags: ["Finance"],
-        langClass: "lang-js",
-        icon: "📈",
-        updated: "2025",
-      },
-      {
-        name: "ComposerAtlas",
-        desc: "Curated strategy library and education hub for Composer.trade investing. Browse strategy pages with plain-English logic breakdowns, risk profiles, and metrics tables, plus a glossary of systematic investing concepts including RSI, VIX tiers, and leveraged ETFs.",
-        github: "https://github.com/Azqato/ComposerAtlas",
-        demo: "https://azqato.github.io/ComposerAtlas/",
-        tags: ["Finance", "Tools", "Education"],
-        langClass: "lang-js",
-        icon: "🗺️",
-        updated: "2026",
-      },
-      {
-        name: "Stock Methodology",
-        desc: "Educational site documenting a fundamentals-driven individual stock and ETF investing methodology. Covers 10 core evaluation metrics (PEG, P/E FWD, RSI, and more), a Finviz screener guide, Seeking Alpha watchlist setup, and VIX-based index investing strategies.",
-        github: "https://github.com/Azqato/stocks",
-        demo: "https://azqato.github.io/stocks/",
-        tags: ["Finance", "Education"],
-        langClass: "lang-html",
-        icon: "📊",
-        updated: "2026",
-      },
-      {
-        name: "Leveraged Strategies",
-        desc: "Educational reference site documenting six leveraged ETF strategies side by side: 3 Sig, 6 Sig, 9 Sig, TQQQ For The Long Term, Holy Grail, and HFEA. Each strategy gets a dedicated wiki-style page covering rules and logic, performance notes, risks, and sources.",
-        github: "https://github.com/Azqato/leveraged-strategies",
-        demo: "https://azqato.github.io/leveraged-strategies/",
-        tags: ["Finance", "Education"],
-        langClass: "lang-html",
-        icon: "🚀",
-        updated: "2026",
-      },
-      {
-        name: "Lantern",
-        desc: "Culture-based social platform for discovering your taste profile across books, film, music, games, and podcasts. Generates Cultural Archetypes, Taste Dimensions, and surfaces users with overlapping interests via AI-powered Smart Cohorts.",
-        github: "https://github.com/Azqato/Lantern",
-        demo: "https://azqato.github.io/Lantern/",
-        tags: ["Social"],
-        langClass: "lang-js",
-        icon: "🏮",
-        updated: "2025",
-      },
-      {
-        name: "Cat Food Center",
-        desc: "Mobile-first web app that evaluates cat food products via barcode scan or catalog search. Provides ingredient breakdowns, additive safety flags, and a 0–100 CFC health score grounded in feline veterinary nutritional standards.",
-        github: "https://github.com/Azqato/Cat-Food-Center",
-        demo: "https://azqato.github.io/Cat-Food-Center/",
-        tags: ["Tools", "Education"],
-        langClass: "lang-js",
-        iconUrl: "https://azqato.github.io/Cat-Food-Center/favicon.svg",
-        updated: "2025",
-      },
-      {
-        name: "Clan B5TA",
-        desc: "Community website for Clan B5TA, a RuneScape clan founded in 2014. Covers clan rules, membership requirements, and Discord join links for a drama-free skilling, flipping, and bossing community.",
-        github: "https://github.com/Azqato/B5TA",
-        demo: "https://azqato.github.io/B5TA/",
-        tags: ["Social"],
-        langClass: "lang-html",
-        icon: "⚔️",
-        updated: "2014",
-      },
-      {
-        name: "Boaty McBoatface Ventures",
-        desc: "Humorous marketing website for New England's premier canvas exo-skeleton water displacement experience company. Features an interactive eject demo with animations and sound effects, animated CSS boat, parody investor pitch deck, SVG service area map with shark risk levels, and an absurdist FAQ.",
-        github: "https://github.com/Azqato/mcboat",
-        demo: "https://azqato.github.io/mcboat/",
-        tags: ["Meme"],
-        langClass: "lang-html",
-        icon: "🛥️",
-        updated: "2026",
-      },
-    ];
-
-    // ── Render ──────────────────────────────────
-    function buildCard(p) {
-      const icon      = p.iconUrl
-        ? `<img src="${p.iconUrl}" width="22" height="22" alt="" style="display:block;">`
-        : (p.icon || "📦");
-      const tags      = (p.tags || []).map((t, i) =>
-        `<span class="tag ${i === 0 && p.langClass ? p.langClass : ''}">${t}</span>`
-      ).join('');
-
-      const demoLink  = p.demo
-        ? `<a class="card-link" href="${p.demo}" target="_blank" rel="noopener" title="Live demo">&#8599;</a>`
-        : '';
-
-      const stars     = p.stars
-        ? `<span class="card-stat">&#9733; ${p.stars}</span>`
-        : '';
-
-      const updated   = p.updated
-        ? `<span class="card-stat">&#128337; ${p.updated}</span>`
-        : '';
-
-      return `
-        <div class="project-card" data-tags="${(p.tags || []).join(',').toLowerCase()}">
-          <div class="card-top">
-            <span class="card-icon">${icon}</span>
-            <div class="card-links">
-              ${demoLink}
-              <a class="card-link" href="${p.github}" target="_blank" rel="noopener" title="View on GitHub">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
-                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
-                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
-                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
-                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
-                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
-                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          <a class="card-name" href="${p.demo || p.github}" target="_blank" rel="noopener">${p.name}</a>
-          <p class="card-desc">${p.desc}</p>
-          <div class="card-tags">${tags}</div>
-          ${stars || updated ? `<div class="card-footer">${stars}${updated}</div>` : ''}
-        </div>`;
-    }
-
-    function buildFilters(projects) {
-      const tagSet = new Set();
-      projects.forEach(p => (p.tags || []).forEach(t => tagSet.add(t)));
-      const bar = document.getElementById('filter-bar');
-      [...tagSet].sort().forEach(tag => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.dataset.filter = tag.toLowerCase();
-        btn.textContent = tag;
-        bar.appendChild(btn);
-      });
-    }
-
-    function render() {
-      const grid = document.getElementById('project-grid');
-      grid.innerHTML = PROJECTS.length
-        ? PROJECTS.map(buildCard).join('')
-        : '<div class="empty-state">No projects yet. Add some to the PROJECTS array in the script!</div>';
-
-      document.getElementById('project-count').textContent = `${PROJECTS.length} project${PROJECTS.length !== 1 ? 's' : ''}`;
-      buildFilters(PROJECTS);
-      bindFilters();
-    }
-
-    function bindFilters() {
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-
-          const filter = btn.dataset.filter;
-          document.querySelectorAll('.project-card').forEach(card => {
-            const match = filter === 'all' || card.dataset.tags.includes(filter);
-            card.dataset.hidden = match ? 'false' : 'true';
-          });
-
-          const visible = document.querySelectorAll('.project-card:not([data-hidden="true"])').length;
-          document.getElementById('project-count').textContent =
-            `${visible} project${visible !== 1 ? 's' : ''}`;
-        });
-      });
-    }
-
-    render();
-  </script>
 </body>
 </html>
