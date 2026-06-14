@@ -1,0 +1,5 @@
+{
+    "chat.titleBar.signIn.enabled": false,
+    "chat.growthNotification.enabled": true,
+    "chat.disableAIFeatures": false
+}

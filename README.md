@@ -1,6 +1,6 @@
-# Azqato's Portfolio
+# Azqato Portfolio
 
-A self-contained, zero-dependency personal site for Azqato. It opens with an introductory landing page and routes visitors to a project showcase plus hubs for content, music, investing, and community. Built with plain HTML, CSS, and vanilla JavaScript. No build tools, no frameworks, no npm.
+Personal site for Azqato. Eleven self-contained HTML pages, zero dependencies, deployed via GitHub Pages.
 
 **Live site:** https://azqato.github.io/
 
@@ -8,21 +8,22 @@ A self-contained, zero-dependency personal site for Azqato. It opens with an int
 
 ## Tech Stack
 
-| Layer      | Technology          | Version / Notes              |
-|------------|---------------------|------------------------------|
-| Markup     | HTML5               | Semantic elements throughout |
-| Styling    | CSS3                | Custom properties, Grid, Flexbox |
-| Scripting  | JavaScript          | ES6+ (vanilla, no framework) |
-| Hosting    | GitHub Pages        | Deployed from `main` branch root |
+| Layer           | Technology      | Version / Notes                          |
+|-----------------|-----------------|------------------------------------------|
+| Markup          | HTML5           | Semantic elements throughout             |
+| Styling         | CSS3            | Custom properties, Grid, Flexbox         |
+| Scripting       | JavaScript      | ES6+ (vanilla, no framework)             |
+| Hosting         | GitHub Pages    | Deployed from `main` branch root         |
 
 ---
 
 ## Prerequisites
 
-No build tools, package managers, or runtimes required. All you need is:
+- Git
+- A modern browser (Chrome, Firefox, Edge, or Safari, latest)
+- A text editor
 
-- A modern browser (Chrome, Firefox, Edge, or Safari, latest version)
-- A text editor to modify project data
+No Node.js, no npm, no build tools required.
 
 ---
 
@@ -33,23 +34,58 @@ git clone https://github.com/Azqato/Azqato.git
 cd Azqato
 ```
 
-That's it. No `npm install`, no compilation step.
+No `npm install`. No compilation step.
 
 ---
 
 ## Running Locally
 
-Open `index.html` directly in a browser:
-
-```
-# Option 1: double-click index.html in your file manager
-# Option 2: drag index.html into a browser window
-# Option 3: use a local server (any will work)
-npx serve .          # serves at http://localhost:3000
-python -m http.server # serves at http://localhost:8000
+```bash
+# Option 1: open index.html directly in any browser (works as a file:// URL)
+# Option 2: local server (avoids file:// edge cases on some browsers)
+npx serve .            # http://localhost:3000
+python -m http.server  # http://localhost:8000
 ```
 
-Default port depends on which local server you choose (see above). No port is required; the files work as file:// URLs.
+No required port. All pages work as file:// URLs with no server.
+
+---
+
+## Environment Variables
+
+None. No server, no build step, no secrets. Affiliate links and Buy Me a Coffee URLs are hardcoded directly in `support.html`.
+
+---
+
+## Build
+
+No build step. Source files are the deployed files.
+
+---
+
+## Deploy
+
+### GitHub Pages (current)
+
+1. Push to `main`.
+2. In repository Settings → Pages, set source to `main` branch / `root`.
+3. Live at `https://<username>.github.io/` within ~60 seconds.
+
+Routine deploy:
+
+```bash
+git add <changed files>
+git commit -m "Description of change"
+git push origin main
+```
+
+### Alternative static hosts
+
+| Host             | Steps                                                       |
+|------------------|-------------------------------------------------------------|
+| Vercel           | Drag and drop the project folder at vercel.com/new; no build command |
+| Netlify          | Drag and drop at app.netlify.com/drop                       |
+| Cloudflare Pages | Connect repo; leave build command blank                     |
 
 ---
 
@@ -60,24 +96,22 @@ Edit the `PROJECTS` array near the bottom of `projects.html`:
 ```js
 {
   name: "My Project",
-  desc: "A short description of what this project does.",
-  github: "https://github.com/Azqato/my-project",  // repo link (GitHub icon button)
-  demo: "https://azqato.github.io/my-project/",    // live site (card title + ↗ button)
-  tags: ["Finance"],      // keep tags to high-level categories (Finance, Social, Tools)
-  langClass: "lang-js",   // drives the language tag color
-  icon: "⚡",             // optional emoji
-  iconUrl: "https://…/favicon.svg", // optional image/SVG URL; overrides icon when set
-  stars: "42",            // optional star count
-  updated: "Jun 2025",    // optional last-updated label
+  desc: "One-sentence description.",
+  github: "https://github.com/Azqato/my-project",
+  demo: "https://azqato.github.io/my-project/",
+  tags: ["Finance"],
+  langClass: "lang-js",
+  icon: "⚡",
+  updated: "2026",
 }
 ```
 
-**Card link behavior:** the project title and ↗ button open the `demo` URL. The GitHub icon button opens the `github` repo URL. If no `demo` is set, the title falls back to the `github` URL.
+The card title and ↗ button link to `demo`. The GitHub icon button links to `github`. If no `demo` is set, the title falls back to `github`.
 
 ### `langClass` options
 
-| Class       | Language   | Color    |
-|-------------|------------|----------|
+| Class       | Language   | Color     |
+|-------------|------------|-----------|
 | `lang-js`   | JavaScript | `#e8c840` |
 | `lang-ts`   | TypeScript | `#3178c6` |
 | `lang-py`   | Python     | `#3572a5` |
@@ -90,47 +124,9 @@ Edit the `PROJECTS` array near the bottom of `projects.html`:
 
 ---
 
-## Environment Variables
+## Adding a Discord Server
 
-None. This project has no server, no build step, and no secrets. There are no `.env` files and nothing to configure.
-
-Affiliate links and Buy Me a Coffee URLs are hardcoded directly in `support.html`.
-
----
-
-## Favicon
-
-The ⚡ emoji favicon is defined as an inline SVG data URI in the `<head>`. No image file required. To change it, replace the emoji in this line in each HTML file:
-
-```html
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
-```
-
----
-
-## Customizing the Theme
-
-All design tokens are CSS custom properties in `:root` at the top of each file's `<style>` block. Change `--accent`, `--bg`, `--surface`, etc. to retheme instantly. See [/docs/DESIGN.md](docs/DESIGN.md) for the full token reference.
-
----
-
-## Build
-
-There is no build step. The source files are the deployed files.
-
----
-
-## Deploy
-
-### GitHub Pages (current)
-1. Push to the `main` branch.
-2. In repository Settings → Pages, set source to `main` branch / `root`.
-3. The site is live at `https://<username>.github.io/` within ~60 seconds.
-
-### Other static hosts
-- **Vercel / Netlify:** drag and drop the project folder; no build command needed.
-- **Cloudflare Pages:** connect the repo; leave build command blank.
-- **Any static host:** upload all `.html` files and the `docs/` folder.
+Edit `discord.html` directly. Each server is a static `.server-card` block. Copy an existing card, update the icon, name, description, and `href` on the `.btn-join` anchor.
 
 ---
 
@@ -138,39 +134,35 @@ There is no build step. The source files are the deployed files.
 
 ```
 .
-├── index.html          - introductory landing page: intro, Discord CTA, explore grid
-├── projects.html       - project grid: cards, tag filter, hero
-├── about.html          - about page: bio, role, and personal pitch
-├── support.html        - support page: Buy Me a Coffee CTA + affiliate partners grid
-├── links.html          - links hub: all social/platform links by category
-├── youtube.html        - YouTube channels page
-├── invests.html        - curated investing resource hub
-├── music.html          - Spotify playlists + music platform links
-├── accounts.html       - gaming accounts (Steam, LoL, TFT, RuneScape)
-├── privacy-policy.html - full privacy policy
-├── img/                - image assets (profile photos, YT thumbnails, playlist covers)
-├── README.md           - this file
+├── index.html           - landing page: intro, Discord CTA, explore grid
+├── projects.html        - project grid: cards, tag filter, hero
+├── about.html           - bio and personal pitch
+├── discord.html         - Discord server directory: four community servers
+├── support.html         - Buy Me a Coffee CTA + affiliate partners grid
+├── links.html           - all social/platform links by category
+├── youtube.html         - four YouTube channels
+├── invests.html         - curated investing resource hub
+├── music.html           - Spotify playlists + music platform links
+├── accounts.html        - gaming accounts (Steam, LoL, TFT, RuneScape)
+├── privacy-policy.html  - full privacy policy
+├── img/                 - image assets (profile photos, YT thumbnails, covers)
+├── README.md            - this file
 └── docs/
-    ├── PRD.md       - product requirements document
-    ├── TRD.md       - technical reference document
-    ├── DESIGN.md    - design system and visual tokens
-    ├── PATCHNOTES.md - version history / changelog
-    ├── PRFAQ.md     - press release and FAQ
-    ├── TENETS.md    - product principles
-    ├── METRICS.md   - success metrics and targets
-    ├── ROADMAP.md   - milestones and planned features
-    ├── SECURITY.md  - security model and considerations
-    └── RUNBOOK.md   - operational runbook
+    ├── PRD.md           - product requirements and all project documentation
+    ├── DESIGN.md        - design system and visual tokens
+    └── PATCHNOTES.md    - versioned changelog
 ```
 
 ---
 
 ## Navigation
 
-Every page shares the same sticky nav, in this order: **Home, About, Discord, Invests, Links, Projects, YouTube, GitHub, Support**. The logo links to the landing page (`index.html`). The Discord link (`discord.gg/39JrFNY7qS`) and the GitHub link both open in the same tab. The nav collapses on viewports under 600 px. When updating the nav, edit it consistently across all 10 HTML pages (there is no shared include yet; see the code-extraction milestone in [ROADMAP.md](docs/ROADMAP.md)).
+All 11 pages share the same sticky nav: **Home, About, Discord, Invests, Links, Projects, YouTube, GitHub, Support**. The Discord nav link points to `discord.html`. The GitHub nav link opens `github.com/Azqato` in the same tab. Nav collapses on viewports under 600 px. The active page link has `class="active"` set directly in the HTML; there is no JS routing.
+
+When updating the nav, edit it consistently across all 11 HTML files. There is no shared include yet; see the Roadmap in `docs/PRD.md` for the planned shared-asset extraction milestone.
 
 ---
 
-## Full Documentation
+## Documentation
 
-See [/docs/](docs/) for the complete documentation set.
+See [/docs/](docs/) for full documentation: PRD (requirements + architecture + runbook + all reference material), design system, and patch notes.
