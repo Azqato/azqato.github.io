@@ -311,7 +311,7 @@ content: "Built by Azqato." where "Azqato" is a link to azqato.github.io
 ## 11. CSS File Structure
 
 ```
-style.css structure (in order):
+css/style.css structure (in order):
   :root (CSS variables)
   Reset / base
   Layout (site-wrapper flex, site-layout grid)
@@ -344,7 +344,7 @@ There is one HTML file, `index.html`. It is a static shell: sidebar, empty conte
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Azqato's Prompts</title>
   <link rel="icon" href="data:image/svg+xml,...">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="site-wrapper">
@@ -360,8 +360,8 @@ There is one HTML file, `index.html`. It is a static shell: sidebar, empty conte
   <footer>
     <p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
   </footer>
-  <script src="prompts-data.js"></script>
-  <script src="script.js"></script>
+  <script src="js/prompts-data.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
 ```
@@ -431,5 +431,6 @@ Loading `prompts/*.md` with `fetch()` would require an HTTP server, because brow
 
 | Version | Date | Summary |
 | --- | --- | --- |
+| 1.4 | 2026-06-13 | Static assets reorganized into subfolders: `css/style.css` and `js/script.js`, `js/prompts-data.js`. `index.html` references updated. Shell template and CSS file structure section updated. |
 | 1.3 | 2026-06-13 | Sidebar logo updated to "Azqato's Prompts.". Homepage h1 updated to "Claude Code Prompts.". Browser tab title updated to "Azqato's Prompts" on home; prompt pages show only the prompt name. Support button added to bottom of sidebar, pinned via flex column layout on `.sidebar-sticky`. |
 | 1.0 | 2026-06-13 | Initial design spec. Inherited Azqato brand system. Sidebar layout, code block with copy button defined. Markdown-driven, single-shell architecture with `prompts-data.js` for dependency-free `file://` loading. Footer set to "Built by Azqato.". |

@@ -27,9 +27,9 @@ Browsers block `fetch()` of local files when a page is opened from disk (`file:/
 | File | Description |
 | --- | --- |
 | `index.html` | Single-page shell: sidebar, content area, footer. Renders all views. |
-| `prompts-data.js` | Embedded copy of every prompt markdown file, loaded via `<script>` so the site works offline and on `file://`. |
-| `script.js` | Parses the embedded markdown, builds the sidebar, handles routing and copy-to-clipboard. |
-| `style.css` | Full design system stylesheet shared across all views. |
+| `css/style.css` | Full design system stylesheet shared across all views. |
+| `js/prompts-data.js` | Embedded copy of every prompt markdown file, loaded via `<script>` so the site works offline and on `file://`. |
+| `js/script.js` | Parses the embedded markdown, builds the sidebar, handles routing and copy-to-clipboard. |
 | `prompts/add-prompt.md` | Add Prompt prompt: add a new prompt to the site by providing the raw text; Claude Code generates the title, description, and updates all required files. |
 | `prompts/em-dash-audit.md` | Em dash audit prompt: find and replace em dashes in all forms across all project files. |
 | `prompts/consolidate-documents.md` | Consolidate Documents prompt: consolidate all documentation into four core files and enforce the correct folder structure. |
@@ -52,10 +52,12 @@ Browsers block `fetch()` of local files when a page is opened from disk (`file:/
 ```
 prompts/
 ├── index.html
-├── prompts-data.js
-├── style.css
-├── script.js
 ├── README.md
+├── css/
+│   └── style.css
+├── js/
+│   ├── prompts-data.js
+│   └── script.js
 ├── prompts/
 │   ├── add-prompt.md
 │   ├── em-dash-audit.md

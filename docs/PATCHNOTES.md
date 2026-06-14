@@ -4,6 +4,19 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
+## v1.6.0 — 2026-06-13
+
+### Changed
+
+- `style.css` → `css/style.css`: Moved stylesheet into a dedicated `css/` subfolder.
+- `prompts-data.js` → `js/prompts-data.js`: Moved prompt data file into a dedicated `js/` subfolder.
+- `script.js` → `js/script.js`: Moved main script into the `js/` subfolder.
+- `index.html`: Updated `<link>` and `<script>` references to reflect new asset paths (`css/style.css`, `js/prompts-data.js`, `js/script.js`).
+- `README.md`: Updated Files table and file structure tree to reflect new `css/` and `js/` folder layout.
+- `docs/DESIGN.md`: Updated shell template, CSS file structure heading, and version history.
+
+---
+
 ## v1.5.0 — 2026-06-13
 
 ### Added
