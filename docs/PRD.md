@@ -1,0 +1,180 @@
+# PRD.md — Prompts
+
+**Version:** 1.0
+**Status:** Active
+**Author:** Azqato
+
+---
+
+## 1. Overview
+
+Prompts is a static, GitHub Pages-hosted personal library for collecting and reusing Claude Code prompts. It provides a single, always-available reference point for prompt patterns that solve recurring tasks across development, documentation, writing, and maintenance workflows.
+
+---
+
+## 2. Problem
+
+Useful Claude Code prompts are written once and then lost: buried in old chat threads, scattered across notes apps, or simply forgotten. There is no structured way to retrieve, read, or reuse them. The cost is time spent rewriting prompts from scratch or accepting lower-quality output when a known-good prompt cannot be found.
+
+---
+
+## 3. Solution
+
+A minimal static website where each prompt is authored as a markdown file in `prompts/` and rendered into its own dedicated page. Each page provides a plain-language description of what the prompt does and a copyable code block containing the full prompt text. A persistent left sidebar lists all available prompts for instant access.
+
+There are no per-prompt HTML files. A single `index.html` shell reads the prompt markdown and renders every view using hash-based routing.
+
+---
+
+## 4. Goals
+
+- Provide a fast, frictionless way to find and copy any saved prompt
+- Keep the site lightweight: no frameworks, no build tools, no dependencies
+- Make adding a new prompt as low-effort as possible
+- Maintain a consistent page structure across all prompt entries so the site is scannable
+
+---
+
+## 5. Non-Goals
+
+- This is not a prompt marketplace or community resource
+- This is not a search engine or tagging system (at v1.0; may be revisited)
+- This is not a tool for generating or editing prompts inline
+- This does not connect to any API or external service
+
+---
+
+## 6. Audience
+
+Personal use only. The site is public (GitHub Pages default) but is built for a single author who knows what they are looking for.
+
+---
+
+## 7. Technical Requirements
+
+- Pure HTML, CSS, and vanilla JavaScript
+- No npm, no build step, no compile step
+- No dependencies of any kind. The site must run by opening `index.html` directly from disk (the `file://` protocol) with no server
+- Each prompt is a markdown file in `prompts/`. These files are the readable, editable source
+- Because browsers block `fetch()` on `file://`, prompt markdown is also embedded in `prompts-data.js` and loaded with a `<script>` tag. This is the only way to read prompt content with no server while keeping markdown as the source format
+- Single shared `index.html`, `style.css`, and `script.js`
+- No external font loading; system font stack only
+- No external JavaScript libraries
+- Hosted on GitHub Pages under the azqato account; runs identically there and from local disk
+- Works offline (no runtime dependencies, no network calls)
+
+---
+
+## 8. Page Structure
+
+### Home View (index.html, no hash)
+
+- Site title and one-paragraph description of what the library contains
+- A scannable list of all prompts with their titles and one-line descriptions
+- Each item links to that prompt's view (`index.html#/<slug>`)
+
+### Prompt View (index.html#/<slug>)
+
+Rendered from the matching markdown file in `prompts/`. Each prompt view contains exactly three sections in this order:
+
+1. **Title**: the name of the prompt as an `h1`, from the markdown frontmatter
+2. **Description**: one or more paragraphs explaining what the prompt does, when to use it, and any important behavior the user should know before running it
+3. **Code Block**: the full prompt text in a `<pre><code>` block with a one-click copy button
+
+No other sections. No decorative content. No padding between the prompt and the rest of the page beyond standard spacing.
+
+### Prompt Markdown Files (prompts/*.md)
+
+The source for each prompt. Frontmatter (`title`, `description`, `meta`) plus a body: a description, then a `## Prompt` heading, then the full prompt inside a fenced code block. These files are mirrored into `prompts-data.js` for in-browser loading.
+
+### /docs/ Pages
+
+Not rendered as navigable pages on the site. These are documentation files for contributors and for Claude Code context:
+
+- `docs/PRD.md` — product requirements (this file)
+- `docs/DESIGN.md` — full design specification
+- `docs/PATCHNOTES.md` — version history
+
+---
+
+## 9. Navigation
+
+- Left sidebar persists on all views on desktop (above 1024px)
+- Sidebar contains the site logo, a Home link, one link per prompt, and a Support button pinned to the bottom
+- Sidebar links are built dynamically from the prompt data; navigation uses hash routing, so switching views does not reload the page
+- Active view is visually distinguished (teal text, 3px left border)
+- The Support button links to `https://azqato.github.io/support.html` and opens in a new tab
+- On mobile (below 1024px), sidebar collapses to a sticky top nav bar; the support button flows inline with the nav links
+- In-page anchors are not used at v1.0
+
+---
+
+## 10. Copy Button Behavior
+
+- Each prompt page has exactly one copy button, positioned above the code block
+- On click: copies the full code block contents to clipboard
+- Visual feedback: button text changes to "Copied!" for 2 seconds, then resets
+- Requires no external library; uses the native Clipboard API
+
+---
+
+## 11. Writing Style
+
+All copy on this site follows these rules. These rules apply to HTML pages, markdown documentation, and inline comments.
+
+### Em Dashes
+
+Em dashes are prohibited in all forms:
+
+- Literal Unicode character: `—`
+- HTML entity: `&mdash;`
+- Double dash used as punctuation: `--` (note: this does NOT apply to CSS custom properties such as `--color-bg` or `--color-accent`, which are valid CSS variable syntax and must not be changed)
+
+Both the Unicode character and the HTML entity must be searched independently when auditing, because a search for one will not catch the other.
+
+Replace every instance using the most contextually appropriate alternative:
+
+| Replacement | When to use |
+| --- | --- |
+| Comma | The most natural replacement in most cases; keeps the sentence flowing |
+| Colon | Good when introducing a list, explanation, or elaboration after a complete clause |
+| Semicolon | Useful when connecting two closely related independent clauses |
+| Parentheses | Work well for asides or supplementary information |
+| Period | Sometimes the cleanest fix is splitting into two sentences |
+
+### General Tone
+
+- Direct and functional. No marketing language.
+- Descriptions explain what a prompt does and when to use it. Nothing more.
+- Avoid filler phrases ("This prompt is designed to...", "Feel free to...").
+- Write in plain declarative sentences.
+
+### Prompt Content Rules
+
+Prompts on this site are shared publicly and may be reused by anyone. Every prompt must follow these rules:
+
+- **No GitHub push instructions.** Prompts must not instruct the user to push, commit, or publish to any remote repository. The user decides when and whether to push. Audit every new prompt for phrases such as "push everything to GitHub", "push to GitHub", "commit and push", or any equivalent before publishing.
+- **No account-specific actions.** Prompts must not reference specific services, accounts, or credentials that belong to the author. Instructions should be portable across any project and any user.
+
+Before adding a new prompt, review the full prompt text and remove any language that would cause it to take actions on behalf of a specific person or external service.
+
+---
+
+## 12. Adding Prompts
+
+To add a new prompt to the site:
+
+1. Create a new `.md` file in `prompts/` (e.g. `prompts/my-prompt.md`)
+2. Fill in the frontmatter (`title`, `description`, `meta`), the description body, and the prompt inside a fenced code block under a `## Prompt` heading
+3. Mirror the file's content into `prompts-data.js` and add its slug to the display-order list there. The sidebar and home list update automatically
+4. Add a version entry to `docs/PATCHNOTES.md`
+
+No HTML editing is required to add a prompt.
+
+---
+
+## 13. Version History
+
+| Version | Date | Summary |
+| --- | --- | --- |
+| 1.0 | June 2026 | Initial release. Markdown-driven structure: prompts authored as `.md` files in `prompts/`, rendered by a single `index.html` shell with hash routing. Runs with no server or dependencies (`file://` compatible) via `prompts-data.js`. Em dash audit prompt added as first example. Writing style rules documented. |

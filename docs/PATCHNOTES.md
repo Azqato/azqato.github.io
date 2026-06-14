@@ -1,0 +1,72 @@
+# PATCHNOTES.md — Prompts
+
+All notable changes to this project are documented here. Entries are listed in reverse chronological order. Each version entry includes the version number, date, and a summary of what changed.
+
+---
+
+## v1.3.0 — 2026-06-13
+
+### Changed
+
+- `index.html`: Sidebar logo updated from "Prompts." to "Azqato's Prompts." Added Support button to the bottom of the sidebar, linking to `https://azqato.github.io/support.html` in a new tab.
+- `script.js`: Homepage h1 updated from "Prompts." to "Claude Code Prompts." (teal dot preserved). Browser tab title updated to "Azqato's Prompts" on home view. Prompt pages now set the tab title to just the prompt name, with no site suffix.
+- `style.css`: `.sidebar-sticky` changed from `max-height: 100vh` to `height: 100vh` with `display: flex; flex-direction: column` so the Support button pins to the bottom via `margin-top: auto`. `.sidebar-nav` gains `flex: 1` to fill available space. Added `.sidebar-support` and `.support-btn` styles with hover state matching the site's teal accent. Mobile breakpoint updated to flow the support button inline with nav links.
+- `docs/DESIGN.md`: Updated sidebar spec, navigation spec (support button added), hero section spec, shell template, and version history.
+- `docs/PRD.md`: Updated navigation section to document the support button.
+- `README.md`: Project title updated to "Azqato's Prompts".
+
+---
+
+## v1.2.0 — 2026-06-13
+
+### Changed
+
+- `prompts/em-dash-audit.md`: Removed "Finally, push everything to GitHub." from the prompt text. Prompts are shared publicly and must not instruct users to push to any remote repository. Rewrote the closing instruction to: "After making these changes, ensure the patch notes and documentation files are all up to date describing the changes you just made." Updated the frontmatter description and on-page description paragraph to remove all mention of pushing to GitHub.
+- `prompts-data.js`: Regenerated to mirror the updated `em-dash-audit.md`.
+- `docs/PRD.md`: Added a Prompt Content Rules section to the Writing Style rules. Documents that prompts must not include GitHub push instructions or any account-specific actions, and requires this to be audited before any new prompt is published.
+
+---
+
+## v1.1.0 — 2026-06-13
+
+### Added
+
+- `prompts/documentation-audit.md`: Second prompt. Runs a full documentation audit on any project: reads all source files and existing docs, then creates or updates the complete suite of eleven documents (README, PRD, TRD, DESIGN, PATCHNOTES, PRFAQ, TENETS, METRICS, ROADMAP, SECURITY, RUNBOOK) to their required specifications. Also enforces the correct folder structure, moving any misplaced files into `/docs`.
+
+### Removed
+
+- `first prompt example.txt.txt`: Source text for the first prompt. Content is now canonical in `prompts/em-dash-audit.md`. No longer needed.
+- `message.txt`: Source text for the documentation audit prompt. Content is now canonical in `prompts/documentation-audit.md`. No longer needed.
+
+### Changed
+
+- `prompts-data.js`: Regenerated to include both `em-dash-audit` and `documentation-audit`.
+- `docs/PATCHNOTES.md`: Corrected v1.0.0 design decisions note about footer (period is not teal; it inherits the muted text color).
+
+---
+
+## v1.0.0 — 2026-06-13
+
+**Initial release.**
+
+### Added
+
+- `index.html`: Single-page shell (sidebar, content area, footer). Renders the home view and every prompt view via hash-based routing. No per-prompt HTML files.
+- `prompts/em-dash-audit.md`: First prompt, authored in markdown. Documents the full em dash audit workflow for Claude Code projects, covering both the literal Unicode character and the `&mdash;` HTML entity form, double dash punctuation handling, CSS custom property exceptions, and context-sensitive replacement rules (comma, colon, semicolon, parentheses, period). Includes instructions to update `docs/PRD.md` with a Writing Style section and push all changes to GitHub after the audit is complete.
+- `prompts-data.js`: Embedded copy of every prompt markdown file as `window.PROMPTS_DATA`, loaded via a `<script>` tag. This lets the site read prompt content with no server, so it runs by opening `index.html` directly (`file://`) while keeping the `.md` files as the readable source.
+- `style.css`: Full design system stylesheet. Implements the Azqato brand system: `#0d1117` background, `#161b22` surface, `#00d4a0` teal accent, system font stack, CSS Grid sidebar layout, code block component, copy button with state transitions, home page prompt list, hero section, responsive breakpoints at 1024px and 768px, reduced motion support.
+- `script.js`: Parses the embedded prompt markdown (frontmatter, description, fenced prompt block), builds the sidebar dynamically, handles hash routing, and provides copy-to-clipboard behavior using the native Clipboard API. On click, reads the rendered `<code>` element's text content, writes it to clipboard, updates the button label to "Copied!" for 2 seconds, then resets to "Copy".
+- `README.md`: Project overview, how-it-works, files table, docs table, file structure, prompt markdown format, design summary, running locally instructions, and instructions for adding new prompts.
+- `docs/PRD.md`: Product requirements. Covers problem statement, solution, goals, non-goals, audience, technical requirements, page structure, navigation, copy button behavior, writing style rules (em dash prohibition in all forms, replacement guidelines, general tone), and prompt addition workflow.
+- `docs/DESIGN.md`: Full design specification. Covers design direction, color system with all CSS custom property tokens, typography scale, layout grid, sidebar spec, content area spec, code block component spec, copy button spec, home page prompt list spec, hero section spec, favicon, signature elements, navigation states, footer, responsive behavior, accessibility requirements, CSS file structure, architecture and templates, and what-not-to-do rules.
+- `docs/PATCHNOTES.md`: This file.
+
+### Design Decisions
+
+- Prompts are authored as markdown files in `prompts/`, not as hand-written HTML. Adding a prompt is a content task, not an HTML task.
+- The site runs with zero dependencies and no server. Because browsers block `fetch()` on `file://`, prompt markdown is embedded in `prompts-data.js` and loaded with a `<script>` tag, which the browser permits from local disk. The `.md` files remain the canonical, readable source and `prompts-data.js` mirrors them.
+- Inherited the Azqato brand system directly from the Stocks methodology site and ComposerAtlas. Consistent accent color (`#00d4a0`), surface colors, sidebar layout, and `h2::before` vertical bar are intentional cross-site design continuity.
+- Footer reads "Built by Azqato." with only the wordmark "Azqato" as a teal link. The trailing period sits outside the link and inherits the muted text color, so it is neither colored nor clickable.
+- No syntax highlighting at v1.0. Prompt text is plain monospace. The goal is readability and copy speed, not code presentation.
+- Code block header bar pattern (label left, copy button right) mirrors common documentation site conventions (Stripe, Tailwind, GitHub) and provides instant affordance for the primary user action.
+- Emoji favicon (`💬`) chosen to distinguish the Prompts site from other Azqato properties visually in browser tabs while remaining zero-dependency.
