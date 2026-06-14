@@ -101,6 +101,8 @@ The frontmatter supplies the title, the home-list description, and the small met
 
 No build step and no server required. Open `index.html` directly in a browser. It also works unchanged when hosted on GitHub Pages.
 
+Live site: [azqato.github.io/prompts](https://azqato.github.io/prompts/)
+
 ---
 
 ## Adding a New Prompt
