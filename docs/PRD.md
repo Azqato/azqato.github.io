@@ -51,6 +51,7 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 | Landing        | `index.html`          | Introductory front door: Discord CTA + explore grid  |
 | Projects       | `projects.html`       | Filterable grid of open-source projects              |
 | About          | `about.html`          | Bio and personal pitch                               |
+| Discord        | `discord.html`        | Four Discord server cards with permanent invite links |
 | Links          | `links.html`          | All platforms and channels in one place              |
 | YouTube        | `youtube.html`        | Four YouTube channels                                |
 | Invests        | `invests.html`        | Curated investing resource hub                       |

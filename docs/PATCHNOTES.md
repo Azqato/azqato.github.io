@@ -397,6 +397,28 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.4.0] - 2026-06-13
+
+### Added
+- `discord.html`: dedicated Discord page listing all four community servers (Azqato, Azqato Invests, B5TA, League of Azqato) as cards with permanent invite links, descriptions, and Discord-blue Join Server buttons.
+- `--discord` and `--discord-hover` CSS custom properties on `discord.html`.
+
+### Changed
+- Nav Discord link updated from the external `discord.gg` invite URL to `discord.html` across all 11 pages, so visitors browse all servers before choosing one to join.
+- Azqato main Discord invite updated from the temporary link (`discord.gg/39JrFNY7qS`) to the permanent invite (`discord.gg/sKGKC3JFSE`) in `index.html` and `links.html`.
+- `docs/PRD.md` site structure table updated to include `discord.html`.
+- The site now comprises 11 pages.
+
+---
+
+## [2.4.1] - 2026-06-13
+
+### Changed
+- Discord server card icons updated: Azqato 🐱, Azqato Invests 💸, B5TA ⚔️ (unchanged), League of Azqato 🖥️.
+- `discord.html` hero description rewritten as a general community pitch, removing per-server references in favour of a broader invitation.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
