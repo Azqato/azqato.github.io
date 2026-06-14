@@ -30,7 +30,9 @@ Browsers block `fetch()` of local files when a page is opened from disk (`file:/
 | `prompts-data.js` | Embedded copy of every prompt markdown file, loaded via `<script>` so the site works offline and on `file://`. |
 | `script.js` | Parses the embedded markdown, builds the sidebar, handles routing and copy-to-clipboard. |
 | `style.css` | Full design system stylesheet shared across all views. |
+| `prompts/add-prompt.md` | Add Prompt prompt: add a new prompt to the site by providing the raw text; Claude Code generates the title, description, and updates all required files. |
 | `prompts/em-dash-audit.md` | Em dash audit prompt: find and replace em dashes in all forms across all project files. |
+| `prompts/consolidate-documents.md` | Consolidate Documents prompt: consolidate all documentation into four core files and enforce the correct folder structure. |
 | `prompts/documentation-audit.md` | Documentation audit prompt: create or update the full documentation suite for any project. |
 
 ---
@@ -55,7 +57,9 @@ prompts/
 ├── script.js
 ├── README.md
 ├── prompts/
+│   ├── add-prompt.md
 │   ├── em-dash-audit.md
+│   ├── consolidate-documents.md
 │   └── documentation-audit.md
 └── docs/
     ├── PRD.md

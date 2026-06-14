@@ -4,6 +4,32 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
+## v1.5.0 — 2026-06-13
+
+### Added
+
+- `prompts/add-prompt.md`: Fourth prompt. A meta-prompt for adding new prompts to the site. Accepts a raw prompt text and instructs Claude Code to generate the title and one-line description, create the markdown file in `prompts/`, mirror it into `prompts-data.js`, update the Files table in `README.md`, and add a version entry to `docs/PATCHNOTES.md`.
+- `prompts-data.js`: Regenerated to include `add-prompt`.
+
+### Changed
+
+- `README.md`: Added `prompts/add-prompt.md` to the Files table and file structure tree.
+
+---
+
+## v1.4.0 — 2026-06-13
+
+### Added
+
+- `prompts/consolidate-documents.md`: Third prompt. Consolidates all project documentation into four core files: README.md at the root, and PRD.md, DESIGN.md, and PATCHNOTES.md inside `/docs`. Creates any missing files with required sections. Enforces the correct folder structure and moves misplaced files. A leaner alternative to the Documentation Audit prompt, targeting four documents instead of eleven.
+- `prompts-data.js`: Regenerated to include `consolidate-documents`.
+
+### Changed
+
+- `README.md`: Added `prompts/consolidate-documents.md` to the Files table and file structure tree.
+
+---
+
 ## v1.3.0 — 2026-06-13
 
 ### Changed
