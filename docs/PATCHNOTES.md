@@ -4,6 +4,19 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
+## v1.7.0 — 2026-06-14
+
+### Added
+
+- `prompts/docs-folder-audit.md`: Fifth prompt. Audits every document in `/docs` against the current codebase. Crawls all files first to build a complete picture of the project, then reviews each doc in `/docs` for outdated, missing, or inaccurate content and rewrites it. Ends with a per-file summary of what changed and why.
+- `js/prompts-data.js`: Regenerated to include `docs-folder-audit`.
+
+### Changed
+
+- `README.md`: Added `prompts/docs-folder-audit.md` to the Files table and file structure tree.
+
+---
+
 ## v1.6.0 — 2026-06-13
 
 ### Changed

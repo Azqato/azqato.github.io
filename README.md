@@ -33,6 +33,7 @@ Browsers block `fetch()` of local files when a page is opened from disk (`file:/
 | `prompts/add-prompt.md` | Add Prompt prompt: add a new prompt to the site by providing the raw text; Claude Code generates the title, description, and updates all required files. |
 | `prompts/em-dash-audit.md` | Em dash audit prompt: find and replace em dashes in all forms across all project files. |
 | `prompts/consolidate-documents.md` | Consolidate Documents prompt: consolidate all documentation into four core files and enforce the correct folder structure. |
+| `prompts/docs-folder-audit.md` | Docs Folder Audit prompt: crawl the entire codebase, then audit and rewrite every document in /docs to match the current state of the project. |
 | `prompts/documentation-audit.md` | Documentation audit prompt: create or update the full documentation suite for any project. |
 
 ---
@@ -62,6 +63,7 @@ prompts/
 │   ├── add-prompt.md
 │   ├── em-dash-audit.md
 │   ├── consolidate-documents.md
+│   ├── docs-folder-audit.md
 │   └── documentation-audit.md
 └── docs/
     ├── PRD.md
