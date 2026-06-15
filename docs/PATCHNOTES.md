@@ -454,6 +454,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.2] - 2026-06-15
+
+### Added
+- "Azqato Projects" resource card added as the first card on `invests.html`, listing all five finance-related projects: Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, and Leveraged Strategies.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
