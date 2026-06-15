@@ -461,6 +461,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.3] - 2026-06-15
+
+### Fixed
+- "Azqato's Projects" card title in `invests.html` corrected from "⚡ Azqato Projects".
+
+---
+
+## [2.6.4] - 2026-06-15
+
+### Fixed
+- Discord link in the `invests.html` hero paragraph updated from the direct `discord.gg` invite URL to `discord.html`, consistent with the rest of the site.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
