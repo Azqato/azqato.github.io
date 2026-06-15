@@ -447,6 +447,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.1] - 2026-06-15
+
+### Changed
+- ComposerAtlas demo link updated from `https://azqato.github.io/ComposerAtlas/` to `https://azqato.github.io/composer` to match the new deployment directory.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
