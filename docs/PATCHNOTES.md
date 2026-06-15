@@ -440,6 +440,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.0] - 2026-06-14
+
+### Added
+- Prompts project card: personal reference library of reusable Claude Code prompts for recurring development, documentation, and maintenance tasks. Zero-dependency, hash-based routing, one-click copy; works offline from any browser. Tagged `Tools` and `Education`. Live at `https://azqato.github.io/prompts/`.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD

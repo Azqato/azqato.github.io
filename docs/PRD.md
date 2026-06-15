@@ -224,7 +224,7 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 }
 ```
 
-Current projects: Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, Leveraged Strategies, Lantern, Cat Food Center, Clan B5TA, Boaty McBoatface Ventures, No Fee Apartments, LV Guest List.
+Current projects: Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, Leveraged Strategies, Lantern, Cat Food Center, Clan B5TA, Boaty McBoatface Ventures, No Fee Apartments, LV Guest List, Prompts.
 
 Active filter tag categories: Finance, Social, Tools, Education, Meme, Real Estate.
 
@@ -764,6 +764,7 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 | v2.3.0 – v2.3.2   | Introductory landing page, nav Home/Discord, two new projects | 2026-06-13 |
 | v2.4.0 – v2.4.1   | discord.html: four server cards, sitewide nav update | 2026-06-13 |
 | v2.5.0            | Documentation consolidation (4-file audit) | 2026-06-13 |
+| v2.6.0            | Prompts project card                        | 2026-06-14 |
 
 ---
 
@@ -771,26 +772,26 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 
 | Milestone  | Name                              | Status   |
 |------------|-----------------------------------|----------|
-| v2.6.0     | Code extraction + shared assets   | Planned  |
-| v2.7.0     | GitHub API integration            | Planned  |
-| v2.8.0     | Dark / light mode toggle          | Planned  |
+| v2.7.0     | Code extraction + shared assets   | Planned  |
+| v2.8.0     | GitHub API integration            | Planned  |
+| v2.9.0     | Dark / light mode toggle          | Planned  |
 | v3.0.0     | Contact / hire-me section         | Planned  |
 
-### v2.6.0: Code Extraction + Shared Assets
+### v2.7.0: Code Extraction + Shared Assets
 
 - Extract shared CSS into a single `styles.css` to eliminate duplication across 11 pages.
 - Extract shared nav HTML using JS injection or a minimal build step.
 - Extract active-state detection into `nav.js` (using `window.location.pathname`).
 - Add `@media (prefers-reduced-motion: reduce)` rule to disable card hover transforms.
 
-### v2.7.0: GitHub API Integration
+### v2.8.0: GitHub API Integration
 
 - Auto-fetch star counts for each project via GitHub REST API on page load.
 - Auto-fetch last-pushed date per repository.
 - Cache responses in `sessionStorage` to avoid repeated calls within one visit.
 - Silent fallback to hardcoded values if rate limit is hit.
 
-### v2.8.0: Dark / Light Mode Toggle
+### v2.9.0: Dark / Light Mode Toggle
 
 - Toggle button in nav bar.
 - Persist preference in `localStorage`.
@@ -814,7 +815,7 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 | Multi-page routing / SPA          | Full page loads are simpler and more reliable for a static site        |
 | Project detail modals             | Current descriptions are sufficient; revisit when a project needs extended docs |
 | RSS / changelog feed              | No audience yet; revisit when monthly visitors exceed 2,000            |
-| Automated testing (CI)            | Manual QA currently in use; threshold for smoke tests met at 11 pages, candidate for v2.6.0 |
+| Automated testing (CI)            | Manual QA currently in use; threshold for smoke tests met at 11 pages, candidate for v2.7.0 |
 
 ---
 
