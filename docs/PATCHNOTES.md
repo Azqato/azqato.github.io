@@ -2,6 +2,17 @@
 
 ---
 
+## v3.0.0 — June 2026 — Leveraged Strategies Nav Link
+
+**"Leveraged Strategies" added to the left sidebar navigation on all eight pages, immediately above the Support link. Links to the external Leveraged Strategies site in the same tab.**
+
+### Navigation changes (all pages)
+
+- Added `<li><a href="https://azqato.github.io/leveraged-strategies/">Leveraged Strategies</a></li>` above the Support link on all eight HTML files: `index.html`, `philosophy.html`, `metrics.html`, `screener.html`, `watchlist.html`, `indices.html`, `faq.html`
+- Final nav order: **Home → Philosophy → Metrics → Screener → Watchlist → Indices → FAQ → Leveraged Strategies → Support**
+
+---
+
 ## v2.9.0 — June 2026 — AAII Investor Sentiment Survey Section
 
 **New comprehensive section on `indices.html` covering the AAII Investor Sentiment Survey as a contrarian indicator. Related FAQ entry and documentation updates.**
