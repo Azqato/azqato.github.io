@@ -5,6 +5,15 @@ Versions follow `M<milestone>.<patch>` until the site goes live, then switch to 
 
 ---
 
+## [M3.3] — 2026-06-15 — Cross-site nav links
+
+Added two external nav links above Support on all pages, connecting the site to the broader Azqato site family.
+
+### Changed
+- All 7 HTML pages — two nav items added above Support in both sidebar and top-bar nav: "Individual Stocks" (linking to `https://azqato.github.io/stocks/`) and "ComposerAtlas" (linking to `https://azqato.github.io/composer/`)
+
+---
+
 ## [M3.2] — 2026-06-10 — Site rename to Leveraged Strategies
 
 Renamed the site from "TQQQ Strategies" to "Leveraged Strategies" across all HTML pages and documentation.
