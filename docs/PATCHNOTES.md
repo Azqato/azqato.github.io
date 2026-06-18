@@ -2,6 +2,44 @@
 
 ---
 
+## v3.1.0 — June 2026 — Philosophy Page Expansion (Second Transcript)
+
+**`philosophy.html` expanded from seven to nine sections, integrating new concepts from a second video transcript ("How to Get Filthy Rich in the Stock Market"). Two new sections added; three existing sections deepened with new subsections. Content only; no new components or design changes.**
+
+### philosophy.html changes
+
+**New sections (2):**
+
+- **`#section-possible` — "It Is Possible, and the Game Is Long"** (added as the first section, before Stocks as Ownership). Covers: belief as a structural prerequisite for wealth-building; ordinary starting points reaching large outcomes; the plan-to-one-hundred time-horizon framing (a 40-year-old is past the first quarter, a 50-year-old at halftime); people underestimating multi-decade compounding (city-skyline analogy); caveat box on the short-termism / dopamine-culture trap.
+- **`#section-hype` — "Hype, Sentiment, and the Weak-Hands Cascade"** (added after Wall Street vs the Individual, before Market Leadership Cycles). Covers: saturating attention as a late-stage signal rather than a buy signal; the weak-hands cascade mechanism (late buyers near a peak sell on the first slip, pushing successive cohorts underwater); the defense (build before broad attention; anchor to long-term fundamentals over sentiment). Cross-references the short-term vs long-term price-driver framing in the ownership section.
+
+**Existing sections deepened (3):**
+
+- **How to Research a Company:** new subsection "Read the balance sheet like a person's finances" added after the double/lose-50% test (the cousin analogy: heavy debt and little cash = fragile; high cash/investments and low debt = resilient and able to go on offense in downturns).
+- **Stay on Offense:** new paragraph on a concrete buy cadence (at least twice a month regardless of conditions) and growing income over cutting expenses (floor on cutting, no ceiling on earning).
+- **Building Investment Knowledge:** new subsection "Margins reveal competitive position" added between Study business models and Conference call discipline (multi-year margin direction signals power vs weakness; Wall Street pays up for margin expansion and sells compression; durable margin trends are the quantified version of SWOT strengths and threats).
+
+### Navigation
+
+- "On This Page" sidebar block on `philosophy.html` updated: added `The Long Game` (`#section-possible`) at the top and `Hype & the Weak Hands` (`#section-hype`) after Wall Street. Now nine anchor links.
+
+### docs/PRD.md changes
+
+- Section 3.2 retitled "Nine sections" (was Seven); new Section 0 and Section 5.5 documented; balance-sheet, buy-cadence, income-focus, and margins-as-competitive-position bullets added to existing sections
+- Section 5 "On This Page" table: `#section-possible` and `#section-hype` added to the philosophy.html row
+- Section 7 concept tracking table: new rows for belief, plan-to-100 horizon, short-termism trap, buy cadence, income focus, and margins-as-competitive-position; existing peak-hype, weak-hands, and balance-sheet rows updated to cite philosophy.html; intro note records the second transcript analysis
+
+### docs/DESIGN.md changes
+
+- Section 4 (Sidebar): nav link list updated to 9 items (Leveraged Strategies added; reflects v3.0.0)
+- Section 14 (Version History): v3.0 and v3.1 entries added
+
+### README.md changes
+
+- Pages table: `philosophy.html` row added (was previously missing), summarizing all nine sections
+
+---
+
 ## v3.0.0 — June 2026 — Leveraged Strategies Nav Link
 
 **"Leveraged Strategies" added to the left sidebar navigation on all eight pages, immediately above the Support link. Links to the external Leveraged Strategies site in the same tab.**

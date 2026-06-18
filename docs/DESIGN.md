@@ -89,7 +89,7 @@ Sidebar collapses to a sticky top nav bar
 
 Persistent on desktop. Contains:
 - Site logo (`Azqato.` with teal dot accent)
-- Page nav links: Home, Philosophy, Metrics, Screener, Watchlist, Indices, FAQ, Support
+- Page nav links: Home, Philosophy, Metrics, Screener, Watchlist, Indices, FAQ, Leveraged Strategies, Support
 - On pages with multiple named sections: an "On This Page" anchor block below the Support link (see below)
 - Small footer: "Educational use only. Not financial advice."
 
@@ -363,3 +363,5 @@ This site documents a methodology, not a live portfolio. All content should be w
 | 1.7 | June 2026 | Text color refinement: `--color-text-primary` updated to `#eef3f7` (brighter white), `--color-text-secondary` differentiated to `#cbdae6` (soft blue-gray for subtitles/captions). |
 | 1.8 | June 2026 | "On This Page" sidebar nav extended sitewide. Philosophy page gains 7 section anchor links. All content pages (index, screener, watchlist, indices) gain section IDs and "On This Page" blocks. Block position moved from nested under the active page nav link to a standalone `<li>` after the Support link. `IntersectionObserver` in `script.js` generalized to derive section targets from link hrefs, eliminating the hardcoded `.metric-block` selector. |
 | 1.9 | June 2026 | Hero badge repositioned on `index.html`: moved from above the headline to below `.hero-sub`. `.hero` padding-bottom reduced from 36px to 16px for visual balance. |
+| 3.0 | June 2026 | "Leveraged Strategies" nav link added sitewide above Support (external link to `azqato.github.io/leveraged-strategies/`). Nav is now 9 items. |
+| 3.1 | June 2026 | Philosophy page expanded from 7 to 9 sections (new: "It Is Possible, and the Game Is Long" at top; "Hype, Sentiment, and the Weak-Hands Cascade" after Wall Street). Existing sections gained subsections (balance-sheet-as-personal-finance in Research; margins-as-competitive-position in Building Investment Knowledge; buy cadence and income focus in Stay on Offense). Content-only; no new components. |

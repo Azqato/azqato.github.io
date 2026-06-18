@@ -79,7 +79,14 @@ Home → Philosophy → Metrics → Screener → Watchlist → Indices → FAQ �
 
 ### 3.2 Philosophy Page (`philosophy.html`)
 
-Seven sections covering the conceptual and philosophical foundation of the methodology. This page preserves all concepts from the transcript analysis that do not fit neatly into the quantitative metrics framework.
+Nine sections covering the conceptual and philosophical foundation of the methodology. This page preserves all concepts from the transcript analysis that do not fit neatly into the quantitative metrics framework.
+
+**0. It Is Possible, and the Game Is Long** (`#section-possible`)
+- Belief as a structural prerequisite: no one builds significant wealth without first believing it is achievable; belief sustains consistency through years of unremarkable progress
+- Ordinary starting points reach large outcomes; starting size determines how long it takes, not whether it works
+- Plan-to-one-hundred framing: assume you live to 100 and reverse-calculate; a 40-year-old is past the first quarter, a 50-year-old at halftime; no long-term fortune was built on short-term thinking
+- People underestimate multi-decade compounding: the city-skyline analogy (impossible in one year, routine over twenty)
+- The short-termism trap: instant-results culture and dopamine incentives push against the long horizon and trigger destructive impatience
 
 **1. Stocks as Ownership, Not Symbols**
 - The Buffett farmland analogy: buy productive assets, think in years not days
@@ -93,6 +100,7 @@ Seven sections covering the conceptual and philosophical foundation of the metho
 - SWOT analysis framework: Strengths, Weaknesses, Opportunities, Threats (Opportunities and Threats are the most investment-relevant dimensions)
 - SWOT application: every major technological shift disrupts some businesses and accelerates others; SWOT forces positioning relative to the current environment
 - The double/lose-50% test: what are the realistic odds of doubling in 3-5 years vs losing 50%? Opportunities drive the first number; threats and balance sheet health drive the second.
+- Read the balance sheet like a person's finances: the cousin analogy (heavy debt and little cash = fragile; high cash/investments and low debt = resilient); strong balance sheets create the optionality to go on offense when others are forced to retrench
 
 **3. Growth, Value, and Dividend Stocks**
 - Growth stocks: high revenue growth, high P/E multiples, best in risk-on environments, worst in risk-off (50-80% drawdowns possible)
@@ -107,6 +115,8 @@ Seven sections covering the conceptual and philosophical foundation of the metho
 - The offensive investor: adds consistently, never desperate to time entries, does not panic-sell because they are always planning the next buy
 - The defensive investor: no capital to deploy, every price movement becomes a fear-driven decision, produces destructive behavior
 - Amount matters less than consistency: $200/month for 20 years outperforms $2,000/month with panic behavior
+- Concrete cadence: buy at least twice a month regardless of market conditions; a fixed schedule removes the timing question and replaces it with which quality business to add next
+- Grow income over cutting expenses: there is a floor on how much you can cut, no ceiling on what you can earn; the offensive mindset depends on having capital to deploy
 
 **5. Wall Street vs the Individual Investor**
 - AUM fee structure: income grows with assets managed, not returns generated; this misaligns incentives with client wealth building
@@ -114,6 +124,11 @@ Seven sections covering the conceptual and philosophical foundation of the metho
 - Herd mentality: institutional managers go risk-off together (amplifying downside) and risk-on together (amplifying upside)
 - The S&P 500 embarrassment: most actively managed funds cannot consistently beat a mechanical index fund over time
 - Practical implication: do not outsource conviction; volatility is not evidence of error; the people generating volatility are playing a different game
+
+**5.5. Hype, Sentiment, and the Weak-Hands Cascade** (`#section-hype`)
+- Saturating attention is not a buy signal: when a stock is the topic everywhere, the easy upside is usually gone and the valuation is typically stretched; broad ownership leaves little marginal buying and a lot of positioning that can unwind
+- The weak-hands cascade mechanism: late buyers near a peak hold no conviction, sell as price slips, push the next cohort underwater, and trigger successive waves of selling; a stock can fall for months while the company keeps posting record numbers (business and price decouple in the short term)
+- The defense: build positions before broad attention arrives; anchor decisions to long-term fundamentals (revenue growth, EPS growth, margins) rather than sentiment, narrative, or momentum-list status; sentiment sets price this quarter, fundamentals set it over years
 
 **6. Market Leadership Cycles**
 - No company stays at the top of the market cap rankings for 30-40 years
@@ -124,6 +139,7 @@ Seven sections covering the conceptual and philosophical foundation of the metho
 **7. Building Investment Knowledge**
 - Studying historical and current business models: pattern recognition that lets you identify quality before it is widely priced in
 - Why sectors beyond technology matter: great long-term compounders exist in consumer brands, specialty retail, financial services, and other non-tech categories
+- Margins reveal competitive position: the multi-year direction of gross and net margins signals a position of power (rising: pricing power, cost control, defensible) or weakness (eroding: forced price cuts, rising cost to win sales); Wall Street pays up for margin expansion and sells margin compression as evidence of an emerging threat; durable margin trends are the quantified version of SWOT strengths and threats
 - Conference call discipline: free, public, and almost universally ignored by casual investors. The texture of what is happening is in the call, not the press release.
 - The twice-listen rule: first listen misses nuance; second listen surfaces it; every time
 - 2x playback speed: doubles research capacity without information loss; build the tolerance for it
@@ -353,7 +369,7 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 | Page | Section IDs |
 |------|-------------|
 | `index.html` | `#section-strategy`, `#section-metrics-grid`, `#section-reference`, `#section-portfolio` |
-| `philosophy.html` | `#section-ownership`, `#section-research`, `#section-gvd`, `#section-offense`, `#section-wall-street`, `#section-leadership`, `#section-knowledge` |
+| `philosophy.html` | `#section-possible`, `#section-ownership`, `#section-research`, `#section-gvd`, `#section-offense`, `#section-wall-street`, `#section-hype`, `#section-leadership`, `#section-knowledge` |
 | `metrics.html` | `#metric-rev-ttm`, `#metric-rev-fwd`, `#metric-eps-ttm`, `#metric-eps-fwd`, `#metric-pe-fwd`, `#metric-peg-fwd`, `#metric-cash`, `#metric-debt`, `#metric-rsi`, `#metric-52w`, `#metric-gross-margin`, `#metric-net-margin` |
 | `screener.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
 | `watchlist.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
@@ -366,7 +382,7 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 ## 6. Success Criteria
 
 - All 12 metrics explained in plain language with hypothetical illustrative examples
-- Philosophy page covers all major conceptual content from the transcript analysis
+- Philosophy page covers all major conceptual content from the transcript analyses
 - FAQ includes practical Q&A on portfolio construction, timing mistakes, market environments, and position sizing
 - Site loads with no dependencies and no errors in any modern browser
 - Mobile-readable at 375px minimum width
@@ -375,24 +391,30 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 
 ---
 
-## 7. Key Concepts Documented (Source: Video Transcript Analysis, June 2026)
+## 7. Key Concepts Documented (Source: Video Transcript Analyses, June 2026)
 
-The following 30 concepts were analyzed from video transcripts and integrated into the site. This section preserves the full concept list for future reference since the original temp analysis file has been deleted.
+The following concepts were analyzed from video transcripts and integrated into the site. This section preserves the full concept list for future reference since the original temp analysis file has been deleted. A second transcript ("How to Get Filthy Rich in the Stock Market") was analyzed in the v3.1.0 pass, adding the belief/long-game, hype/weak-hands, margins-as-competitive-position, balance-sheet-as-personal-finance, and buy-cadence concepts to the philosophy page.
 
 | Concept | Site Location |
 |---|---|
-| Long-term thinking / compounding mindset | Philosophy (Stay on Offense), index.html strategy |
+| Long-term thinking / compounding mindset | philosophy.html (Section 0: The Long Game, Stay on Offense), index.html strategy |
+| Belief that significant wealth-building is possible | philosophy.html (Section 0) |
+| Plan-to-100 time horizon / underestimating multi-decade compounding | philosophy.html (Section 0) |
+| Short-termism / dopamine-culture trap | philosophy.html (Section 0) |
 | Stay on offense: regular investing discipline | philosophy.html (Section 4) |
 | SWOT analysis framework | philosophy.html (Section 2) |
 | Sequential evaluation: business → financials → valuation | philosophy.html (Section 2) |
 | Revenue growth as primary screener | metrics.html (Revenue TTM + FWD) |
 | Revenue deceleration warning signal (quarterly trend) | metrics.html (Revenue TTM) |
-| Peak hype avoidance | faq.html (Q9) |
-| Weak hands cascade mechanics | faq.html (Q9) |
-| Balance sheet strength (cash > debt) | metrics.html (Total Cash, Total Debt) |
+| Peak hype avoidance | philosophy.html (Section 5.5: Hype, Sentiment, and the Weak-Hands Cascade), faq.html (Q9) |
+| Weak hands cascade mechanics | philosophy.html (Section 5.5), faq.html (Q9) |
+| Buy cadence: at least twice a month | philosophy.html (Section 4) |
+| Grow income over cutting expenses | philosophy.html (Section 4) |
+| Balance sheet strength (cash > debt) | metrics.html (Total Cash, Total Debt), philosophy.html (Section 2: balance sheet like a person's finances) |
 | Balance sheet advantage in rate-hiking cycles | metrics.html (Total Cash) |
 | Gross margin trends and thresholds | metrics.html (Gross Margin), index.html reference table |
 | Net margin trends and thresholds | metrics.html (Net Margin), index.html reference table |
+| Margins as competitive-position signal (power vs weakness); Wall Street prices margin trends | philosophy.html (Section 7: Margins reveal competitive position) |
 | CEO and management quality | philosophy.html (Building Investment Knowledge), faq.html (Q4 moat) |
 | Market cap vs potential mental model | index.html (Strategy section) |
 | Short-term vs long-term price drivers | philosophy.html (Section 1) |

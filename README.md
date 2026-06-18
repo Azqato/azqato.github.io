@@ -17,6 +17,7 @@ No frameworks, no build tools, no dependencies. Pure HTML, CSS, and vanilla Java
 | File | Description |
 |------|-------------|
 | `index.html` | Home -- strategy overview, 10-metric summary, key reference table |
+| `philosophy.html` | Conceptual foundation -- the long game and belief, stocks as ownership, research and SWOT, GVD framework, stay on offense, Wall Street context, hype and the weak-hands cascade, market leadership cycles, building investment knowledge |
 | `metrics.html` | Full glossary of all 10 evaluation metrics with examples and how-to-read guidance |
 | `screener.html` | Finviz stock screener setup guide -- recommended filters and values for candidate discovery |
 | `watchlist.html` | Seeking Alpha 12-column watchlist setup guide -- free account, exact column configuration |
