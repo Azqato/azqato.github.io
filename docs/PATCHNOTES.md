@@ -2,6 +2,39 @@
 
 ---
 
+## v3.3.0 — June 2026 — DCA and Lump-Sum Investing Sections (Indices Page)
+
+**Two new sections added to `indices.html` covering how to time getting cash into the market: Dollar-Cost Averaging and Lump-Sum Investing. Placed between "Types of Index Funds" and "Fundamentals vs. Technicals." Focus on broad-market vehicles VT and VTI + VXUS. Related FAQ entry and documentation updates.**
+
+> Scope note: the request named `index.html`, but the two anchor sections it referenced ("Types of Index Funds" and "Fundamentals vs. Technicals") exist only on `indices.html`, and the content (VT, VTI + VXUS, broad-market timing) is index/ETF material. The sections were therefore added to `indices.html`, the only page where the placement is executable.
+
+### indices.html changes
+
+- Added sidebar "On This Page" links: `Dollar-Cost Averaging` (`#section-dca`) and `Lump-Sum Investing` (`#section-lumpsum`), placed between Types of Index Funds and Fundamentals vs. Technicals
+- New section `#section-dca` — **Dollar-Cost Averaging**: DCA defined; VT and VTI + VXUS presented as the broad-market vehicles in a two-card grid; why broad funds are ideal DCA vehicles (the what-to-buy question is already solved); a "why DCA is the right default for most investors" how-to-read list (removes emotion, removes timing, matches paycheck investing, builds the habit); explicit statement that this holds regardless of the page's timing signals (regular contributions should not be paused waiting for fear); caveat box on terminology (paycheck investing is closer to repeated small lump sums than formal DCA)
+- New section `#section-lumpsum` — **Lump-Sum Investing**: LSI defined; the on-average superiority of LSI (Vanguard: ~2/3 of the time over a 12-month window, ~90% at 36 months) because markets trend up and money invested sooner compounds longer; how-to-read list (the math, the timing/regret risk, who it is best for); H3 "Do not hold cash as dry powder" (waiting for a dip underperforms; reconciles the VIX/AAII signals as tools for deploying earmarked cash, not for indefinite cash-holding); H3 "The hybrid approach" (invest 1/2 to 1/3 now, DCA the rest over 3-6 months, keep the window short); bottom-line caveat box
+
+### faq.html changes
+
+- Added question "Should I invest all at once or spread it out over time?" (`answer-dca`, placed after the leveraged ETF question). Covers DCA as the default for income-stream investing, LSI superiority for a one-time pool, the hybrid, the dry-powder trap, and reconciliation with the VIX/AAII signals. Links to `indices.html#section-dca` and `indices.html#section-lumpsum`.
+
+### docs/PRD.md changes
+
+- Section 3.6 (Indices & ETF Investing): Dollar-Cost Averaging and Lump-Sum Investing added to the sections list with descriptions
+- Section 3.7 (FAQ): new question 13 (DCA vs lump sum) documented
+- Section 5 (On This Page): `#section-dca` and `#section-lumpsum` added to the indices.html row
+- Section 7 concept tracking table: new rows for DCA, LSI/dry-powder/hybrid, and the VT / VTI + VXUS vehicles
+
+### docs/DESIGN.md changes
+
+- Section 14 (Version History): v3.3 entry added
+
+### README.md changes
+
+- Pages table: `indices.html` row updated to mention DCA and lump-sum timing
+
+---
+
 ## v3.2.0 — June 2026 — FAQ Aligned with Philosophy v3.1.0
 
 **`faq.html` updated to reflect the v3.1.0 philosophy-page expansion. One new accordion question added; three existing answers deepened; one cross-link added. No design or component changes.**

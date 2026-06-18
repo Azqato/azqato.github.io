@@ -21,7 +21,7 @@ No frameworks, no build tools, no dependencies. Pure HTML, CSS, and vanilla Java
 | `metrics.html` | Full glossary of all 10 evaluation metrics with examples and how-to-read guidance |
 | `screener.html` | Finviz stock screener setup guide -- recommended filters and values for candidate discovery |
 | `watchlist.html` | Seeking Alpha 12-column watchlist setup guide -- free account, exact column configuration |
-| `indices.html` | Index and ETF investing guide -- VIX action levels, fund types, structural quality metrics, ETF watchlist setup |
+| `indices.html` | Index and ETF investing guide -- fund types, dollar-cost averaging and lump-sum timing (VT, VTI + VXUS), VIX action levels, AAII sentiment, structural quality metrics, ETF watchlist setup |
 | `faq.html` | FAQ and philosophy -- the Palantir story, capital gains strategy, technical analysis, long-term mindset |
 | `style.css` | Full design system stylesheet |
 | `script.js` | Accordion behavior, IntersectionObserver sidebar highlighting (metrics page) |

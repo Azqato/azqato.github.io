@@ -220,6 +220,8 @@ Separate methodology for evaluating broad market indices and ETFs. Key insight: 
 
 **Sections:**
 - Types of index funds: Broad Market, Growth, Dividend, Value, Sector-Specific, International
+- Dollar-Cost Averaging: DCA as the right default for most investors regardless of the timing signals; VT and VTI + VXUS as the broad-market vehicles (what-to-buy is already solved, so only the schedule matters); removes emotion, removes timing, matches paycheck investing, builds the habit; terminology note (paycheck investing is closer to repeated small lump sums than formal DCA)
+- Lump-Sum Investing: LSI beats DCA on average (~2/3 over a 12-month window, ~90% at 36 months per Vanguard) because markets trend up and money invested sooner compounds longer; timing/regret risk; the "dry powder" trap (waiting for a dip underperforms); the hybrid approach (invest 1/2 to 1/3 now, DCA the rest over 3-6 months); reconciled with the VIX/AAII framework (signals are for deploying cash already earmarked to invest, not for pausing regular contributions)
 - Fundamentals vs. Technicals: why the question is different for indices
 - VIX: The Fear Gauge: five action level ranges with market condition descriptions and deployment postures
 - Leveraged ETFs caveat: when to use 2x/3x ETFs (VIX > 45 recovery plays only)
@@ -258,6 +260,8 @@ Accordion-style Q&A covering philosophy and practice. Ten questions:
 11. **How does market environment affect which stocks perform best?** Risk-on favors growth; risk-off hits growth stocks hardest (50-80% drawdowns possible). Value and dividend stocks hold up better in risk-off. Understanding this cycle does not mean avoiding growth. It means holding through volatility with understanding and having structure to deploy capital at discounts. Links to Philosophy page for the full GVD framework.
 
 12. **Is getting wealthy in the stock market realistic, and how long does it take?** (`answer-longgame`) Belief as a prerequisite; the plan-to-one-hundred horizon (40 is the first quarter, 50 is halftime); underestimating multi-decade compounding (city-skyline analogy); the short-termism trap. Mirrors the philosophy.html "It Is Possible, and the Game Is Long" section; links to `philosophy.html#section-possible`.
+
+13. **Should I invest all at once or spread it out over time?** (`answer-dca`) DCA as the default for regular income-stream investing (VT or VTI + VXUS); LSI mathematically superior on average for a one-time pool; the hybrid (1/2 to 1/3 now, DCA the rest over 3-6 months); the dry-powder trap; reconciliation with the VIX/AAII signals. Links to `indices.html#section-dca` and `indices.html#section-lumpsum`.
 
 > Note: the FAQ has grown well beyond this list (currently ~30 accordion items; see PATCHNOTES v2.3.0 and later). This numbered summary is not exhaustive. The v3.2.0 pass also aligned several existing answers with the philosophy v3.1.0 additions: the offense answer gained the buy-at-least-twice-a-month cadence and income-over-expenses focus; the balance-sheet answer gained the personal-finance (cousin) analogy; the gross-margin answer gained the position-of-power vs weakness framing and why Wall Street prices margin trends; and the "wrong time to buy a great company" answer now links to `philosophy.html#section-hype`.
 
@@ -377,7 +381,7 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 | `metrics.html` | `#metric-rev-ttm`, `#metric-rev-fwd`, `#metric-eps-ttm`, `#metric-eps-fwd`, `#metric-pe-fwd`, `#metric-peg-fwd`, `#metric-cash`, `#metric-debt`, `#metric-rsi`, `#metric-52w`, `#metric-gross-margin`, `#metric-net-margin` |
 | `screener.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
 | `watchlist.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
-| `indices.html` | `#section-types`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-aaii`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
+| `indices.html` | `#section-types`, `#section-dca`, `#section-lumpsum`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-aaii`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
 
 **Implementation:** The `IntersectionObserver` in `script.js` automatically highlights the active section link as the user scrolls. It derives section targets from the hrefs of `.metric-links a` elements on the page, so it works for all pages without per-page configuration. The FAQ page (`faq.html`) uses an accordion pattern and does not have an "On This Page" block.
 
@@ -438,3 +442,6 @@ The following concepts were analyzed from video transcripts and integrated into 
 | Unprofitable stocks: position sizing rules | faq.html (Q10) |
 | Study business models for pattern recognition | philosophy.html (Section 7) |
 | Conference call discipline (listen twice, 2x speed) | philosophy.html (Section 7) |
+| Dollar-cost averaging as the default for most investors | indices.html (DCA section), faq.html (DCA vs lump sum) |
+| Lump-sum investing superiority on average; the dry-powder trap; hybrid deployment | indices.html (Lump-Sum section), faq.html (DCA vs lump sum) |
+| Broad-market vehicles: VT, VTI + VXUS | indices.html (DCA section) |
