@@ -2,6 +2,36 @@
 
 ---
 
+## v3.2.0 — June 2026 — FAQ Aligned with Philosophy v3.1.0
+
+**`faq.html` updated to reflect the v3.1.0 philosophy-page expansion. One new accordion question added; three existing answers deepened; one cross-link added. No design or component changes.**
+
+### faq.html changes
+
+**New question (1):**
+
+- **"Is getting wealthy in the stock market realistic, and how long does it take?"** (`answer-longgame`, inserted after the Stay-on-Offense question). Covers belief as a prerequisite for consistency, the plan-to-one-hundred time-horizon framing (a 40-year-old is past the first quarter, a 50-year-old at halftime), people underestimating multi-decade compounding (city-skyline analogy), and the short-termism / instant-gratification trap. Links to `philosophy.html#section-possible`.
+
+**Existing answers deepened (3):**
+
+- **"What does staying on offense mean..." (`answer-offense`):** new paragraph on a concrete buy cadence (at least twice a month, regardless of conditions) and growing income over cutting expenses (floor on cutting, no ceiling on earning).
+- **"How do you think about a company's balance sheet health?" (`answer-balancesheet`):** new paragraph adding the personal-finance (cousin) analogy: heavy debt and little cash = fragile; high cash and low debt = resilient and able to go on offense in downturns.
+- **"What does gross margin reveal about a business?" (`answer-grossmargin`):** new paragraph framing margins as a window into a position of power vs weakness, why Wall Street pays up for margin expansion and sells compression, and how a durable margin trend is the quantified version of SWOT strengths and threats.
+
+**Cross-link added (1):**
+
+- **"When is the wrong time to buy a great company?" (`answer-hype`):** now links to `philosophy.html#section-hype` (the hype / weak-hands cascade concept was already covered here; this ties it to the new philosophy section).
+
+### docs/PRD.md changes
+
+- Section 3.7 (FAQ): new question 12 documented; note added recording that the numbered list is not exhaustive and summarizing the v3.2.0 answer enhancements and cross-links
+
+### docs/DESIGN.md changes
+
+- Section 14 (Version History): v3.2 entry added
+
+---
+
 ## v3.1.0 — June 2026 — Philosophy Page Expansion (Second Transcript)
 
 **`philosophy.html` expanded from seven to nine sections, integrating new concepts from a second video transcript ("How to Get Filthy Rich in the Stock Market"). Two new sections added; three existing sections deepened with new subsections. Content only; no new components or design changes.**

@@ -257,6 +257,10 @@ Accordion-style Q&A covering philosophy and practice. Ten questions:
 
 11. **How does market environment affect which stocks perform best?** Risk-on favors growth; risk-off hits growth stocks hardest (50-80% drawdowns possible). Value and dividend stocks hold up better in risk-off. Understanding this cycle does not mean avoiding growth. It means holding through volatility with understanding and having structure to deploy capital at discounts. Links to Philosophy page for the full GVD framework.
 
+12. **Is getting wealthy in the stock market realistic, and how long does it take?** (`answer-longgame`) Belief as a prerequisite; the plan-to-one-hundred horizon (40 is the first quarter, 50 is halftime); underestimating multi-decade compounding (city-skyline analogy); the short-termism trap. Mirrors the philosophy.html "It Is Possible, and the Game Is Long" section; links to `philosophy.html#section-possible`.
+
+> Note: the FAQ has grown well beyond this list (currently ~30 accordion items; see PATCHNOTES v2.3.0 and later). This numbered summary is not exhaustive. The v3.2.0 pass also aligned several existing answers with the philosophy v3.1.0 additions: the offense answer gained the buy-at-least-twice-a-month cadence and income-over-expenses focus; the balance-sheet answer gained the personal-finance (cousin) analogy; the gross-margin answer gained the position-of-power vs weakness framing and why Wall Street prices margin trends; and the "wrong time to buy a great company" answer now links to `philosophy.html#section-hype`.
+
 12. **What is the AAII Investor Sentiment Survey and how do I use it when investing in indices?** Weekly retail investor poll (since 1987, ~150K members). Used as a contrarian indicator: bearish above 60% historically marks or precedes major bottoms. Action levels parallel the VIX framework. Highest-conviction entries combine elevated AAII bearish readings with elevated VIX. Links to the full `#section-aaii` framework on indices.html.
 
 ---
