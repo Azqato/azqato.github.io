@@ -2,6 +2,17 @@
 
 ---
 
+## v3.8.0 — June 2026 — Cash/Debt Ratio Column on the Screener
+
+**Added a sortable Cash/Debt ratio to the Balance Sheet column group in `screener.html`, sitting after Total Cash and Total Debt.**
+
+- New **Cash/Debt** column shows `cash ÷ debt` as a multiple (e.g. `4.15x`). Click the header to sort like any other column
+- Color-coded to the methodology's balance-sheet thresholds: green when cash ≥ debt (ratio ≥ 1.0), amber when debt is under 3× cash (ratio > 0.33), red when debt exceeds 3× cash (ratio ≤ 0.33)
+- Zero-debt companies (e.g. ISRG) show `∞` and sort to the top. The sort comparator was updated to treat `Infinity` as a valid high value rather than missing data; missing values still sink to the bottom
+- Belongs to the existing **Balance Sheet** column group, so the Columns toggle shows/hides it alongside Total Cash and Total Debt. Group header colspan and header/body cell counts kept in sync (16 columns)
+
+---
+
 ## v3.7.0 — June 2026 — Screener Data Pipeline Moved to yfinance + Nasdaq 100 Constituent Fix
 
 **The screener's daily data pipeline was switched from Financial Modeling Prep to yfinance, which fixed both a coverage bug and a wasted-quota bug. The constituent list was also fact-checked against authoritative sources and corrected — most notably, NVIDIA (the largest component) had been missing.**

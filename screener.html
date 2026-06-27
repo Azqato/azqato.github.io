@@ -507,7 +507,7 @@
             <th class="g-screen group-start" colspan="3">Azqato Screen</th>
             <th class="grp-growth group-start" colspan="4">Growth</th>
             <th class="grp-valuation group-start" colspan="2">Valuation</th>
-            <th class="grp-balance group-start" colspan="2">Balance Sheet</th>
+            <th class="grp-balance group-start" colspan="3">Balance Sheet</th>
             <th class="grp-snapshot group-start" colspan="3">Snapshot</th>
           </tr>
           <tr class="head-row">
@@ -523,6 +523,7 @@
             <th class="grp-valuation" data-sort="pegFwd">PEG FWD</th>
             <th class="grp-balance group-start" data-sort="cash">Total Cash</th>
             <th class="grp-balance" data-sort="debt">Total Debt</th>
+            <th class="grp-balance" data-sort="cashDebt">Cash/Debt</th>
             <th class="grp-snapshot group-start" data-sort="price">Price</th>
             <th class="grp-snapshot" data-sort="marketCap">Mkt Cap</th>
             <th class="grp-snapshot" data-sort="updated">Updated</th>
@@ -739,6 +740,22 @@
       if (d.debt < d.cash * 3) return "cau";
       return "neg";
     }
+    function cashDebtRatio(d) {
+      if (!isNum(d.cash) || !isNum(d.debt)) return null;
+      if (d.debt > 0) return d.cash / d.debt;
+      return d.cash > 0 ? Infinity : null; // no debt = effectively unbounded
+    }
+    function fmtRatio(n) {
+      if (n === null || n === undefined || (typeof n === "number" && isNaN(n))) return "—";
+      if (!isFinite(n)) return "∞"; // no debt
+      return n.toFixed(2) + "x";
+    }
+    function clsRatio(n) {
+      if (n === null || n === undefined || (typeof n === "number" && isNaN(n))) return "muted";
+      if (n >= 1) return "pos";       // cash >= debt
+      if (n > 1 / 3) return "cau";    // debt < 3x cash
+      return "neg";                   // debt > 3x cash
+    }
     function scoreColor(pct) {
       if (pct === null) return "var(--color-border)";
       if (pct >= 80) return "var(--color-positive)";
@@ -758,6 +775,7 @@
           verdict: verdictOf(sc.pct),
           revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
           peFwd: d.peFwd, pegFwd: d.pegFwd, cash: d.cash, debt: d.debt,
+          cashDebt: cashDebtRatio(d),
           price: d.price, marketCap: d.marketCap,
           updated: freshestMs(d.priceUpdated, d.fundamentalsUpdated)
         };
@@ -774,10 +792,13 @@
         if (k === "verdict") { av = VERDICT_RANK[a.verdict]; bv = VERDICT_RANK[b.verdict]; }
         else if (k === "factors") { av = a.total ? a.passes / a.total : -1; bv = b.total ? b.passes / b.total : -1; }
         else { av = a[k]; bv = b[k]; }
-        var an = isNum(av), bn = isNum(bv);
+        // "present" = a real number, including Infinity (e.g. cash/debt with no debt)
+        var an = typeof av === "number" && !isNaN(av);
+        var bn = typeof bv === "number" && !isNaN(bv);
         if (!an && !bn) return 0;
         if (!an) return 1;   // missing always sinks to bottom
         if (!bn) return -1;
+        if (av === bv) return 0;
         return (av - bv) * dir;
       });
     }
@@ -890,6 +911,7 @@
         '<td class="grp-valuation ' + clsPeg(r.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
         '<td class="grp-balance group-start ' + clsCash(d) + '">' + fmtMoney(r.cash) + '</td>' +
         '<td class="grp-balance">' + fmtMoney(r.debt) + '</td>' +
+        '<td class="grp-balance ' + clsRatio(r.cashDebt) + '">' + fmtRatio(r.cashDebt) + '</td>' +
         '<td class="grp-snapshot group-start">' + fmtPrice(r.price) + '</td>' +
         '<td class="grp-snapshot">' + fmtMoney(r.marketCap) + '</td>' +
         '<td class="grp-snapshot ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
