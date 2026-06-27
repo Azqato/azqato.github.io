@@ -20,11 +20,16 @@ No frameworks, no build tools, no dependencies. Pure HTML, CSS, and vanilla Java
 | `philosophy.html` | Conceptual foundation -- the long game and belief, stocks as ownership, research and SWOT, GVD framework, stay on offense, Wall Street context, hype and the weak-hands cascade, market leadership cycles, building investment knowledge |
 | `metrics.html` | Full glossary of all 10 evaluation metrics with examples and how-to-read guidance |
 | `screener.html` | Finviz stock screener setup guide -- recommended filters and values for candidate discovery |
+| `screenapp.html` | Interactive Nasdaq 100 screener -- rates every constituent against the methodology factors (score + Pass/Watch/Fail verdict). Shows the daily data feed if present, with an optional bring-your-own-key (FMP) refresh |
 | `watchlist.html` | Seeking Alpha 12-column watchlist setup guide -- free account, exact column configuration |
 | `indices.html` | Index and ETF investing guide -- fund types, dollar-cost averaging and lump-sum timing (VT, VTI + VXUS), VIX action levels, AAII sentiment, structural quality metrics, ETF watchlist setup |
 | `faq.html` | FAQ and philosophy -- the Palantir story, capital gains strategy, technical analysis, long-term mindset |
 | `style.css` | Full design system stylesheet |
 | `script.js` | Accordion behavior, IntersectionObserver sidebar highlighting (metrics page) |
+| `scripts/fetch-screener-data.mjs` | Node 20 script (no dependencies) that pulls Nasdaq 100 metrics from the FMP stable API into `data/screener.json` |
+| `.github/workflows/screener-data.yml` | Daily GitHub Action that runs the fetch script and commits the refreshed data feed |
+| `data/nasdaq100.json` | Canonical Nasdaq 100 constituent list (ticker + name) |
+| `data/screener.json` | Generated data feed consumed by `screenapp.html` |
 
 ---
 
@@ -82,6 +87,8 @@ python3 -m http.server 8080
 ## Content Philosophy
 
 No real-time data. No live portfolio snapshots. All illustrative examples use hypothetical labels or category descriptions. The Palantir story ($9 buy, $45 sell, $150 outcome) is the one named historical exception -- a first-person account, not a recommendation.
+
+This applies to the site's editorial/teaching content. `screenapp.html` is a separate interactive tool: it presents live third-party metrics (Financial Modeling Prep) that are clearly labeled, timestamped, opt-in, and carry an educational-use disclaimer. The factor scores it computes are a mechanical application of the documented methodology, not buy/sell recommendations.
 
 This site does not provide financial advice. It documents one investor's personal framework for evaluating equities over a long time horizon.
 

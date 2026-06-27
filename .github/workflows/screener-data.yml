@@ -1,0 +1,51 @@
+name: Update Screener Data
+
+# Daily refresh of data/screener.json for the Nasdaq 100 screener.
+# Refreshes all prices each run plus a rotating slice of fundamentals,
+# keeping a single run under the FMP free tier's 250 requests/day.
+
+on:
+  schedule:
+    - cron: "0 11 * * *"   # 11:00 UTC daily
+  workflow_dispatch:        # allow manual runs (useful for backfilling fundamentals)
+    inputs:
+      fund_slice:
+        description: "Symbols to refresh fundamentals for this run"
+        required: false
+        default: "15"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: screener-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch screener data
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          FUND_SLICE: ${{ github.event.inputs.fund_slice || '15' }}
+          REQ_BUDGET: "240"
+        run: node scripts/fetch-screener-data.mjs
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/screener.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update screener data [skip ci]"
+            git push
+          fi

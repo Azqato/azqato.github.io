@@ -2,6 +2,40 @@
 
 ---
 
+## v3.4.0 — June 2026 — Interactive Nasdaq 100 Screener (`screenapp.html`) + Daily Data Pipeline
+
+**New interactive tool that rates every Nasdaq 100 company against the methodology factors, scored and ranked in the browser. Ships as a new standalone page (`screenapp.html`) plus an optional zero-config data pipeline: a daily GitHub Action regenerates `data/screener.json` so the public page shows live data with no setup. A bring-your-own-key loader (Financial Modeling Prep) remains available as a manual refresh and as the fallback whenever the published data is more than 24 hours old. The existing `screener.html` Finviz guide is unchanged.**
+
+> Scope / content-philosophy note: the site's editorial content uses hypothetical examples only (no real-time data). This addition is an interactive *tool*, not editorial copy — it presents live third-party metrics that are clearly labeled, timestamped ("as of"), opt-in, and carry an educational-use disclaimer. The distinction (hypothetical teaching content vs. a labeled live tool) is intentional and documented in README's Content Philosophy.
+
+### New file: `screenapp.html`
+
+- Full-width dense screener modeled on the Screener3000 layout (top bar with brand + `Azqato` screen pill + "as of" timestamp + symbol filter; toolbar with verdict filter chips, a Columns group toggle, Settings, and Load Data; grouped sticky header — Azqato Screen / Growth / Valuation / Balance Sheet / Snapshot; sortable columns; sticky ticker column), styled with the site's existing `style.css` tokens (teal `#00d4a0`, `#0d1117` bg, SF Mono numerics, badge styles)
+- **Scoring** — seven factors drawn from the "What Strong Metrics Look Like" reference table: Revenue Growth TTM, Revenue Growth FWD, EPS Growth TTM, EPS Growth FWD, P/E FWD vs EPS Growth % (primary signal), PEG FWD, and Cash vs Debt. Each factor scores 2 (strong) / 1 (acceptable) / 0 (weak); the score is the percentage of available points earned. Verdicts: Pass (80%+), Watch (60–79%), Fail (under 60%), plus a `passes/total` factor chip
+- Columns: Ticker, Verdict, Score, Factors, Rev TTM, Rev FWD, EPS TTM, EPS FWD, P/E FWD, PEG FWD, Total Cash, Total Debt, Price, Mkt Cap. Cell coloring keyed to the methodology thresholds
+- Filter chips (All / Pass / Watch / Fail with live counts), client-side symbol/name search, click-to-sort headers, and a Columns dropdown to show/hide the Growth / Valuation / Balance Sheet / Snapshot groups
+- **Data sources, in priority order:** (1) the published `data/screener.json` feed if present and current; (2) the user's own most-recent bring-your-own-key pull (stored in `localStorage`); whichever is newer wins
+- Bring-your-own-key loader uses the Financial Modeling Prep **stable** API (the legacy `/api/v3/` endpoints were retired by FMP on 2025-08-31). Per symbol: quote, balance-sheet, financial-growth, analyst-estimates (4 requests). Concurrency pool, incremental save to `localStorage` (resume across days), progress bar, and graceful handling of auth (401/403), rate-limit (429), and premium (402) responses including FMP's JSON-object and plain-text error bodies. Defaults to 60 symbols per run to stay under the free tier's 250 requests/day
+- Stale-data banner: when the active data is more than 24 hours old, a banner surfaces the "Refresh with your API key" action. API key and pulled data live only in the browser's local storage
+
+### New: daily data pipeline (zero-config public data)
+
+- `scripts/fetch-screener-data.mjs` — dependency-free Node 20 script (global `fetch`, no `npm install`). Refreshes **all** symbol prices each run (recomputing forward P/E and PEG from cached forward EPS) plus a **rotating slice of the stalest fundamentals** (default 15/run). This yields daily prices and a roughly weekly fundamentals cadence while keeping a single run under the 250/day free limit (~145 requests). Writes `data/screener.json`; stops gracefully and saves progress on rate-limit/auth/budget
+- `.github/workflows/screener-data.yml` — daily cron (11:00 UTC) plus manual `workflow_dispatch` (with a `fund_slice` input for backfilling). Reads the `FMP_API_KEY` repo secret, runs the script, and commits `data/screener.json` when it changes (`contents: write`, concurrency-guarded)
+- `data/nasdaq100.json` — canonical Nasdaq 100 constituent list (ticker + name) read by the script; the page keeps an embedded copy as a structural fallback. Both are static and may differ from the live index; edit as the index reconstitutes
+- `data/screener.json` — generated data feed. Committed initially as an empty placeholder (`{ "updated": null, "stocks": {} }`) so the page does not 404 before the first Action run
+
+### README.md changes
+
+- Pages table: added `screenapp.html` row; added `data/` and `scripts/` rows for the pipeline
+- Content Philosophy: added a carve-out distinguishing the hypothetical editorial content from the new labeled, opt-in live screener tool
+
+### Setup required (one-time, by the site owner)
+
+- Add the FMP API key as a GitHub repository secret named `FMP_API_KEY` (Settings → Secrets and variables → Actions). Until then, the page still works via the bring-your-own-key loader. Rotate any key that has been shared in plaintext
+
+---
+
 ## v3.3.0 — June 2026 — DCA and Lump-Sum Investing Sections (Indices Page)
 
 **Two new sections added to `indices.html` covering how to time getting cash into the market: Dollar-Cost Averaging and Lump-Sum Investing. Placed between "Types of Index Funds" and "Fundamentals vs. Technicals." Focus on broad-market vehicles VT and VTI + VXUS. Related FAQ entry and documentation updates.**
