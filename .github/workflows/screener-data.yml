@@ -6,10 +6,10 @@ name: Update Screener Data
 
 on:
   schedule:
-    # 22:00 UTC = 6:00pm US Eastern during daylight saving (EDT).
-    # GitHub cron is UTC-only and does not follow DST: in winter (EST) this
-    # fires at 5:00pm Eastern. For 6:00pm in winter instead, use "0 23 * * *".
-    - cron: "0 22 * * *"
+    # 23:00 UTC = 6:00pm US Eastern in winter (EST).
+    # GitHub cron is UTC-only and does not follow DST: in summer (EDT) this
+    # fires at 7:00pm Eastern. For 6:00pm during summer instead, use "0 22 * * *".
+    - cron: "0 23 * * *"
   workflow_dispatch:        # allow manual runs (e.g. to backfill faster)
     inputs:
       daily_count:
