@@ -1,8 +1,9 @@
 name: Update Screener Data
 
 # Daily refresh of data/screener.json for the Nasdaq 100 screener.
-# Refreshes all prices each run plus a rotating slice of fundamentals,
-# keeping a single run under the FMP free tier's 250 requests/day.
+# Each run fully refreshes a rotating slice of the stalest symbols
+# (DAILY_COUNT, default 50; 4 requests each), keeping a single run under
+# the FMP free tier's 250 requests/day. The full list cycles every ~2 days.
 
 on:
   schedule:
