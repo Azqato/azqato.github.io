@@ -1,5 +1,498 @@
 {
-  "updated": null,
+  "updated": "2026-06-27T06:11:05.881Z",
   "source": "fmp",
-  "stocks": {}
+  "requests": 71,
+  "stocks": {
+    "ADBE": {
+      "t": "ADBE",
+      "name": "Adobe",
+      "price": 202.73,
+      "marketCap": 80585175811,
+      "priceUpdated": "2026-06-27T06:10:56.659Z",
+      "cash": 6595000000,
+      "debt": 6648000000,
+      "revTTM": 10.527784236224134,
+      "epsTTM": 34.48553054662381,
+      "fwdEps": 24.34879,
+      "epsFwd": 12.764207174155274,
+      "revFwd": 9.073693965318563,
+      "peFwd": 8.326081090682534,
+      "pegFwd": 0.6522991187060193,
+      "fundamentalsUpdated": "2026-06-27T06:10:56.899Z"
+    },
+    "ADP": {
+      "t": "ADP",
+      "name": "Automatic Data Processing"
+    },
+    "ABNB": {
+      "t": "ABNB",
+      "name": "Airbnb"
+    },
+    "GOOGL": {
+      "t": "GOOGL",
+      "name": "Alphabet (A)",
+      "price": 337.39,
+      "marketCap": 4080688288155.0005,
+      "priceUpdated": "2026-06-27T06:10:57.368Z",
+      "cash": 126843000000,
+      "debt": 59291000000,
+      "revTTM": 15.126364929803609,
+      "epsTTM": 34.194341943419424,
+      "fwdEps": 14.24199,
+      "epsFwd": 3.315547897449722,
+      "revFwd": 19.31255384598003,
+      "peFwd": 23.689807393489254,
+      "pegFwd": 7.145065650148248,
+      "fundamentalsUpdated": "2026-06-27T06:10:58.176Z"
+    },
+    "GOOG": {
+      "t": "GOOG",
+      "name": "Alphabet (C)"
+    },
+    "AMZN": {
+      "t": "AMZN",
+      "name": "Amazon",
+      "price": 232.69,
+      "marketCap": 2503069599000,
+      "priceUpdated": "2026-06-27T06:10:58.541Z",
+      "cash": 123029000000,
+      "debt": 152987000000,
+      "revTTM": 12.377754683294695,
+      "epsTTM": 28.79858657243816,
+      "fwdEps": 8.79617,
+      "epsFwd": 14.26882381763881,
+      "revFwd": 13.166233884419443,
+      "peFwd": 26.45355876478058,
+      "pegFwd": 1.853941088828868,
+      "fundamentalsUpdated": "2026-06-27T06:10:58.783Z"
+    },
+    "AMD": {
+      "t": "AMD",
+      "name": "Advanced Micro Devices",
+      "price": 521.58,
+      "marketCap": 850488348000,
+      "priceUpdated": "2026-06-27T06:10:58.866Z",
+      "cash": 10552000000,
+      "debt": 4472000000,
+      "revTTM": 34.33779329067288,
+      "epsTTM": 164.35643564356434,
+      "fwdEps": 7.47462,
+      "epsFwd": 78.0608244967637,
+      "revFwd": 53.64308025737472,
+      "peFwd": 69.78013598015686,
+      "pegFwd": 0.8939200479883459,
+      "fundamentalsUpdated": "2026-06-27T06:10:59.107Z"
+    },
+    "AEP": {
+      "t": "AEP",
+      "name": "American Electric Power"
+    },
+    "AMGN": {
+      "t": "AMGN",
+      "name": "Amgen"
+    },
+    "ADI": {
+      "t": "ADI",
+      "name": "Analog Devices"
+    },
+    "ANSS": {
+      "t": "ANSS",
+      "name": "Ansys"
+    },
+    "AAPL": {
+      "t": "AAPL",
+      "name": "Apple",
+      "price": 283.78,
+      "marketCap": 4167977885680,
+      "priceUpdated": "2026-06-27T06:10:59.509Z",
+      "cash": 54697000000,
+      "debt": 112377000000,
+      "revTTM": 6.425511782832739,
+      "epsTTM": 22.585924713584284,
+      "fwdEps": 8.7583,
+      "epsFwd": 10.149914937830395,
+      "revFwd": 8.558277291400373,
+      "peFwd": 32.40126508569014,
+      "pegFwd": 3.192269618430527,
+      "fundamentalsUpdated": "2026-06-27T06:10:59.744Z"
+    },
+    "AMAT": {
+      "t": "AMAT",
+      "name": "Applied Materials"
+    },
+    "APP": {
+      "t": "APP",
+      "name": "AppLovin"
+    },
+    "ARM": {
+      "t": "ARM",
+      "name": "Arm Holdings"
+    },
+    "ASML": {
+      "t": "ASML",
+      "name": "ASML"
+    },
+    "AZN": {
+      "t": "AZN",
+      "name": "AstraZeneca"
+    },
+    "TEAM": {
+      "t": "TEAM",
+      "name": "Atlassian"
+    },
+    "ADSK": {
+      "t": "ADSK",
+      "name": "Autodesk"
+    },
+    "AVGO": {
+      "t": "AVGO",
+      "name": "Broadcom"
+    },
+    "BKR": {
+      "t": "BKR",
+      "name": "Baker Hughes"
+    },
+    "BIIB": {
+      "t": "BIIB",
+      "name": "Biogen"
+    },
+    "BKNG": {
+      "t": "BKNG",
+      "name": "Booking Holdings"
+    },
+    "CDNS": {
+      "t": "CDNS",
+      "name": "Cadence Design"
+    },
+    "CDW": {
+      "t": "CDW",
+      "name": "CDW"
+    },
+    "CHTR": {
+      "t": "CHTR",
+      "name": "Charter Communications"
+    },
+    "CTAS": {
+      "t": "CTAS",
+      "name": "Cintas"
+    },
+    "CSCO": {
+      "t": "CSCO",
+      "name": "Cisco",
+      "price": 113.77,
+      "marketCap": 448417021837,
+      "priceUpdated": "2026-06-27T06:11:01.479Z",
+      "cash": 16110000000,
+      "debt": 28093000000,
+      "revTTM": 5.298961024478189,
+      "epsTTM": 0.39215686274510714,
+      "fwdEps": 4.27564,
+      "epsFwd": 11.89576297349635,
+      "revFwd": 9.25830845480975,
+      "peFwd": 26.608881945159087,
+      "pegFwd": 2.2368369313043166,
+      "fundamentalsUpdated": "2026-06-27T06:11:01.832Z"
+    },
+    "CCEP": {
+      "t": "CCEP",
+      "name": "Coca-Cola Europacific"
+    },
+    "CTSH": {
+      "t": "CTSH",
+      "name": "Cognizant"
+    },
+    "CMCSA": {
+      "t": "CMCSA",
+      "name": "Comcast"
+    },
+    "CEG": {
+      "t": "CEG",
+      "name": "Constellation Energy"
+    },
+    "CPRT": {
+      "t": "CPRT",
+      "name": "Copart"
+    },
+    "CSGP": {
+      "t": "CSGP",
+      "name": "CoStar Group"
+    },
+    "COST": {
+      "t": "COST",
+      "name": "Costco",
+      "price": 952.54,
+      "marketCap": 422431486660,
+      "priceUpdated": "2026-06-27T06:11:04.029Z",
+      "cash": 15284000000,
+      "debt": 8173000000,
+      "revTTM": 8.167323631476146,
+      "epsTTM": 9.879518072289137,
+      "fwdEps": 20.52674,
+      "epsFwd": 10.470537455046426,
+      "revFwd": 8.302219350883444,
+      "peFwd": 46.404835838520874,
+      "pegFwd": 4.431944017941065,
+      "fundamentalsUpdated": "2026-06-27T06:11:04.418Z"
+    },
+    "CRWD": {
+      "t": "CRWD",
+      "name": "CrowdStrike"
+    },
+    "CSX": {
+      "t": "CSX",
+      "name": "CSX"
+    },
+    "DDOG": {
+      "t": "DDOG",
+      "name": "Datadog"
+    },
+    "DXCM": {
+      "t": "DXCM",
+      "name": "Dexcom"
+    },
+    "FANG": {
+      "t": "FANG",
+      "name": "Diamondback Energy"
+    },
+    "DASH": {
+      "t": "DASH",
+      "name": "DoorDash"
+    },
+    "EA": {
+      "t": "EA",
+      "name": "Electronic Arts"
+    },
+    "EXC": {
+      "t": "EXC",
+      "name": "Exelon"
+    },
+    "FAST": {
+      "t": "FAST",
+      "name": "Fastenal"
+    },
+    "FTNT": {
+      "t": "FTNT",
+      "name": "Fortinet"
+    },
+    "GEHC": {
+      "t": "GEHC",
+      "name": "GE HealthCare"
+    },
+    "GILD": {
+      "t": "GILD",
+      "name": "Gilead Sciences"
+    },
+    "GFS": {
+      "t": "GFS",
+      "name": "GlobalFoundries"
+    },
+    "HON": {
+      "t": "HON",
+      "name": "Honeywell"
+    },
+    "IDXX": {
+      "t": "IDXX",
+      "name": "Idexx Laboratories"
+    },
+    "INTC": {
+      "t": "INTC",
+      "name": "Intel"
+    },
+    "INTU": {
+      "t": "INTU",
+      "name": "Intuit"
+    },
+    "ISRG": {
+      "t": "ISRG",
+      "name": "Intuitive Surgical"
+    },
+    "KDP": {
+      "t": "KDP",
+      "name": "Keurig Dr Pepper"
+    },
+    "KLAC": {
+      "t": "KLAC",
+      "name": "KLA"
+    },
+    "KHC": {
+      "t": "KHC",
+      "name": "Kraft Heinz"
+    },
+    "LRCX": {
+      "t": "LRCX",
+      "name": "Lam Research"
+    },
+    "LIN": {
+      "t": "LIN",
+      "name": "Linde"
+    },
+    "LULU": {
+      "t": "LULU",
+      "name": "Lululemon"
+    },
+    "MAR": {
+      "t": "MAR",
+      "name": "Marriott"
+    },
+    "MRVL": {
+      "t": "MRVL",
+      "name": "Marvell"
+    },
+    "MELI": {
+      "t": "MELI",
+      "name": "MercadoLibre"
+    },
+    "META": {
+      "t": "META",
+      "name": "Meta Platforms"
+    },
+    "MCHP": {
+      "t": "MCHP",
+      "name": "Microchip Technology"
+    },
+    "MU": {
+      "t": "MU",
+      "name": "Micron Technology"
+    },
+    "MSFT": {
+      "t": "MSFT",
+      "name": "Microsoft"
+    },
+    "MSTR": {
+      "t": "MSTR",
+      "name": "MicroStrategy"
+    },
+    "MDLZ": {
+      "t": "MDLZ",
+      "name": "Mondelez"
+    },
+    "MNST": {
+      "t": "MNST",
+      "name": "Monster Beverage"
+    },
+    "NFLX": {
+      "t": "NFLX",
+      "name": "Netflix"
+    },
+    "NXPI": {
+      "t": "NXPI",
+      "name": "NXP Semiconductors"
+    },
+    "ORLY": {
+      "t": "ORLY",
+      "name": "O'Reilly Automotive"
+    },
+    "ODFL": {
+      "t": "ODFL",
+      "name": "Old Dominion Freight"
+    },
+    "ON": {
+      "t": "ON",
+      "name": "ON Semiconductor"
+    },
+    "PCAR": {
+      "t": "PCAR",
+      "name": "PACCAR"
+    },
+    "PLTR": {
+      "t": "PLTR",
+      "name": "Palantir"
+    },
+    "PANW": {
+      "t": "PANW",
+      "name": "Palo Alto Networks"
+    },
+    "PAYX": {
+      "t": "PAYX",
+      "name": "Paychex"
+    },
+    "PYPL": {
+      "t": "PYPL",
+      "name": "PayPal"
+    },
+    "PDD": {
+      "t": "PDD",
+      "name": "PDD Holdings"
+    },
+    "PEP": {
+      "t": "PEP",
+      "name": "PepsiCo"
+    },
+    "QCOM": {
+      "t": "QCOM",
+      "name": "Qualcomm"
+    },
+    "REGN": {
+      "t": "REGN",
+      "name": "Regeneron"
+    },
+    "ROP": {
+      "t": "ROP",
+      "name": "Roper Technologies"
+    },
+    "ROST": {
+      "t": "ROST",
+      "name": "Ross Stores"
+    },
+    "SBUX": {
+      "t": "SBUX",
+      "name": "Starbucks"
+    },
+    "SNPS": {
+      "t": "SNPS",
+      "name": "Synopsys"
+    },
+    "TMUS": {
+      "t": "TMUS",
+      "name": "T-Mobile US"
+    },
+    "TTWO": {
+      "t": "TTWO",
+      "name": "Take-Two Interactive"
+    },
+    "TXN": {
+      "t": "TXN",
+      "name": "Texas Instruments"
+    },
+    "TTD": {
+      "t": "TTD",
+      "name": "The Trade Desk"
+    },
+    "TSLA": {
+      "t": "TSLA",
+      "name": "Tesla"
+    },
+    "VRSK": {
+      "t": "VRSK",
+      "name": "Verisk Analytics"
+    },
+    "VRTX": {
+      "t": "VRTX",
+      "name": "Vertex Pharmaceuticals"
+    },
+    "WBD": {
+      "t": "WBD",
+      "name": "Warner Bros Discovery"
+    },
+    "WDAY": {
+      "t": "WDAY",
+      "name": "Workday"
+    },
+    "XEL": {
+      "t": "XEL",
+      "name": "Xcel Energy"
+    },
+    "ZS": {
+      "t": "ZS",
+      "name": "Zscaler"
+    },
+    "MRNA": {
+      "t": "MRNA",
+      "name": "Moderna"
+    },
+    "SMCI": {
+      "t": "SMCI",
+      "name": "Super Micro Computer"
+    }
+  }
 }
