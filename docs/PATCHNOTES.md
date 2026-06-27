@@ -2,6 +2,16 @@
 
 ---
 
+## v3.10.0 — June 2026 — Consolidate Dual-Class Listings (GOOG → GOOGL)
+
+**Removed the duplicate Alphabet listing so each company appears once. The screener now holds 100 tickers (was 101).**
+
+- Removed **GOOG** (Alphabet Class C, non-voting); kept **GOOGL** (Alphabet Class A, voting), renamed to "Alphabet (Class A)"
+- Established a **multi-class rule**: when a company has more than one share class in the index, the screener lists only the **Class A voting** shares. Documented in `README.md` (data files) and `docs/PRD.md` (Screener page)
+- Synced all three sources — `data/nasdaq100.json`, the embedded fallback list in `screener.html`, and the generated `data/screener.json` — to the identical 100-ticker set
+
+---
+
 ## v3.9.0 — June 2026 — Forward Metrics Aligned to Seeking Alpha's Current-Year Basis
 
 **Fixed the screener's forward valuation/growth figures to match Seeking Alpha. The pipeline was reading the wrong forward period — yfinance's `forwardPE` / "+1y" rows, which look one fiscal year further out than Seeking Alpha's "FWD" convention — so P/E FWD (and the growth figures) read systematically low.**

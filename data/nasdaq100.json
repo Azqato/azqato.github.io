@@ -1,8 +1,7 @@
 [
   { "t": "NVDA", "n": "NVIDIA" },
   { "t": "AAPL", "n": "Apple" },
-  { "t": "GOOGL", "n": "Alphabet (A)" },
-  { "t": "GOOG", "n": "Alphabet (C)" },
+  { "t": "GOOGL", "n": "Alphabet (Class A)" },
   { "t": "MSFT", "n": "Microsoft" },
   { "t": "AMZN", "n": "Amazon" },
   { "t": "AVGO", "n": "Broadcom" },

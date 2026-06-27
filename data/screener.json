@@ -36,7 +36,7 @@
     },
     "GOOGL": {
       "t": "GOOGL",
-      "name": "Alphabet (A)",
+      "name": "Alphabet (Class A)",
       "price": 337.39,
       "marketCap": 4117026308096.0,
       "cash": 126839996416.0,
@@ -47,22 +47,6 @@
       "epsFwd": 31.55,
       "revFwd": 21.069999,
       "pegFwd": 0.7520060514788874,
-      "priceUpdated": "2026-06-27T16:24:49.183276Z",
-      "fundamentalsUpdated": "2026-06-27T16:24:49.183276Z"
-    },
-    "GOOG": {
-      "t": "GOOG",
-      "name": "Alphabet (C)",
-      "price": 334.69,
-      "marketCap": 4084079001600.0,
-      "cash": 126839996416.0,
-      "debt": 95875997696.0,
-      "revTTM": 21.8,
-      "epsTTM": 82.0,
-      "peFwd": 23.536965462145634,
-      "epsFwd": 31.540000000000003,
-      "revFwd": 21.069999,
-      "pegFwd": 0.7462576240375913,
       "priceUpdated": "2026-06-27T16:24:49.183276Z",
       "fundamentalsUpdated": "2026-06-27T16:24:49.183276Z"
     },

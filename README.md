@@ -28,7 +28,7 @@ No frameworks, no build tools, no dependencies. Pure HTML, CSS, and vanilla Java
 | `script.js` | Accordion behavior, IntersectionObserver sidebar highlighting (metrics page) |
 | `scripts/fetch_screener_data.py` | Python 3 script using `yfinance` (no API key) that pulls Nasdaq 100 metrics from Yahoo Finance into `data/screener.json` |
 | `.github/workflows/screener-data.yml` | Daily GitHub Action that runs the fetch script and commits the refreshed data feed |
-| `data/nasdaq100.json` | Canonical Nasdaq 100 constituent list (ticker + name), kept in sync with the authoritative index |
+| `data/nasdaq100.json` | Canonical Nasdaq 100 constituent list (ticker + name), kept in sync with the authoritative index. **Multi-class rule:** when a company has more than one share class in the index (e.g. Alphabet GOOGL/GOOG), the screener lists only the **Class A voting** shares to avoid duplicate companies |
 | `data/screener.json` | Generated data feed consumed by `screener.html` |
 
 ---
