@@ -6,9 +6,11 @@ Runs in GitHub Actions on a daily cron. Uses yfinance (public Yahoo Finance
 data) so there is no API key and no per-symbol subscription restriction -- the
 whole Nasdaq 100 is refreshed every run.
 
-Forward metrics (P/E FWD, Revenue/EPS Growth FWD) use the CURRENT fiscal-year
-("0y") analyst consensus to match Seeking Alpha's "FWD" convention, rather than
-yfinance's forwardPE / "+1y" rows which look one fiscal year further out.
+Forward metrics use the CURRENT fiscal-year ("0y") analyst consensus to match
+Seeking Alpha's "FWD" convention (not yfinance's forwardPE / "+1y" rows, which
+look a year further out). P/E FWD uses Yahoo's priceEpsCurrentYear and PEG FWD
+uses Yahoo's pegRatio, both of which track Seeking Alpha. EPS Growth FWD is
+GAAP-basis and will differ from SA's Non-GAAP figure.
 
 Output schema matches what screener.html reads:
   { "updated": ISO, "source": "yahoo", "stocks": { TICKER: {...}, ... } }
@@ -86,27 +88,37 @@ def fetch(symbol):
     except Exception:
         pass
 
-    # P/E FWD = price / current-FY EPS estimate (falls back to forwardPE).
+    # P/E FWD: Yahoo's priceEpsCurrentYear (price / current-FY EPS) matches
+    # Seeking Alpha's "P/E FWD" to the cent. Fall back to price / 0y estimate,
+    # then to forwardPE.
     price = rec["price"]
-    eps_cur = estimate_avg(earn, "0y")
-    if price is not None and eps_cur is not None and eps_cur > 0:
-        rec["peFwd"] = price / eps_cur
-    else:
-        rec["peFwd"] = num(info.get("forwardPE"))
+    pe = num(info.get("priceEpsCurrentYear"))
+    if pe is None:
+        eps_cur = estimate_avg(earn, "0y")
+        if price is not None and eps_cur is not None and eps_cur > 0:
+            pe = price / eps_cur
+        else:
+            pe = num(info.get("forwardPE"))
+    rec["peFwd"] = pe
 
-    # EPS / Revenue Growth FWD = current-FY ("0y") consensus growth.
+    # Revenue / EPS Growth FWD = current-FY ("0y") consensus growth.
+    # NOTE: EPS Growth FWD is GAAP-basis and will differ from Seeking Alpha,
+    # which uses Non-GAAP consensus (not exposed by yfinance).
     eg_fwd = estimate_growth(earn, "0y")
     rec["epsFwd"] = eg_fwd * 100 if eg_fwd is not None else None
     rg_fwd = estimate_growth(rev, "0y")
     rec["revFwd"] = rg_fwd * 100 if rg_fwd is not None else None
 
-    # PEG (1-yr forward) = forward P/E / forward EPS growth %. NOTE: Seeking
-    # Alpha's PEG divides by a 3-5yr long-term growth rate, which yfinance does
-    # not expose; this is the 1-year forward approximation.
-    if rec["peFwd"] is not None and rec["epsFwd"] is not None and rec["epsFwd"] > 0:
-        rec["pegFwd"] = rec["peFwd"] / rec["epsFwd"]
-    else:
-        rec["pegFwd"] = None
+    # PEG FWD: Yahoo's pegRatio incorporates a longer-term growth rate and
+    # tracks Seeking Alpha's PEG (FWD) closely (SA's exact 3-5yr long-term
+    # growth input is not exposed by yfinance). Fall back to trailingPegRatio,
+    # then to the 1-yr forward PEG (P/E / EPS growth).
+    peg = num(info.get("pegRatio"))
+    if peg is None or peg == 0:
+        peg = num(info.get("trailingPegRatio"))
+    if (peg is None or peg == 0) and rec["peFwd"] is not None and rec["epsFwd"] not in (None, 0) and rec["epsFwd"] > 0:
+        peg = rec["peFwd"] / rec["epsFwd"]
+    rec["pegFwd"] = peg
 
     return rec
 

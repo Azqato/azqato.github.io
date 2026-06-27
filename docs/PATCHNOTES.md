@@ -2,6 +2,29 @@
 
 ---
 
+## v3.11.0 — June 2026 — P/E FWD and PEG FWD Now Track Seeking Alpha (Direct Yahoo Fields)
+
+**A yfinance coverage probe found that Yahoo exposes purpose-built fields that match Seeking Alpha better than our computed values. Switched P/E FWD and PEG FWD to those fields.**
+
+### Pipeline (`scripts/fetch_screener_data.py`)
+
+- **P/E FWD** → now uses Yahoo's `priceEpsCurrentYear` (price ÷ current-FY EPS), which matches Seeking Alpha **to the cent** (NVDA 21.48, META 17.10, AMD 70.65, ADBE 8.30, GOOGL 23.73, TEAM 14.30). Falls back to `price ÷ 0y estimate`, then `forwardPE`
+- **PEG FWD** → now uses Yahoo's `pegRatio` (which incorporates a longer-term growth rate, à la Seeking Alpha's PEG), falling back to `trailingPegRatio`, then the 1-yr forward PEG. Lands within ~0.1 of SA (e.g. META 0.80 vs 0.82, NOW 0.95 vs 0.96). SA's exact 3–5yr long-term growth input is not exposed by yfinance, so this is the closest available
+- **EPS Growth FWD** → unchanged (current-FY GAAP-basis growth). Per the chosen approach, it is now **labeled** rather than re-sourced: SA's Non-GAAP forward EPS growth is not available from yfinance
+- Regenerated `data/screener.json` (100/100, no missing P/E or PEG)
+
+### Screener UI (`screener.html`)
+
+- The **EPS FWD** column header is marked with `*` and a tooltip: "GAAP-basis forward EPS growth … may differ from Seeking Alpha, which uses Non-GAAP consensus"
+- Footer disclaimer corrected: the daily feed is **Yahoo Finance** (it previously still credited Financial Modeling Prep, which is now only the manual bring-your-own-key fallback), and it notes the forward-figure basis and the EPS-growth GAAP caveat
+
+### Probe takeaways (for the record)
+
+- Yahoo's `LTG` (long-term growth) row is `NaN` for essentially all tickers — the raw 3–5yr rate cannot be shown — but `pegRatio` bakes it in and is a good proxy
+- The forward EPS *level* from Yahoo is effectively Non-GAAP (hence P/E matches SA), but there is no Non-GAAP trailing *base* to reproduce SA's EPS growth *rate* without a second data source
+
+---
+
 ## v3.10.0 — June 2026 — Consolidate Dual-Class Listings (GOOG → GOOGL)
 
 **Removed the duplicate Alphabet listing so each company appears once. The screener now holds 100 tickers (was 101).**
