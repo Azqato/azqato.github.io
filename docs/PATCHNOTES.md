@@ -2,6 +2,29 @@
 
 ---
 
+## v3.9.0 — June 2026 — Forward Metrics Aligned to Seeking Alpha's Current-Year Basis
+
+**Fixed the screener's forward valuation/growth figures to match Seeking Alpha. The pipeline was reading the wrong forward period — yfinance's `forwardPE` / "+1y" rows, which look one fiscal year further out than Seeking Alpha's "FWD" convention — so P/E FWD (and the growth figures) read systematically low.**
+
+### The fix (`scripts/fetch_screener_data.py`)
+
+- **P/E FWD** now = `price ÷ current fiscal-year ("0y") EPS estimate` (falls back to `forwardPE` only if the estimate is unavailable). Previously used yfinance `forwardPE`, which divides by the *next* fiscal year's EPS
+- **Revenue Growth FWD** and **EPS Growth FWD** now use the current-FY ("0y") consensus growth instead of the "+1y" row
+- **PEG FWD** continues to be computed as forward P/E ÷ forward EPS growth %, now on the corrected current-year basis (still a 1-year PEG — see caveat below)
+- Added an `estimate_avg()` helper; documented the convention in the script docstring
+
+### Verification vs the Seeking Alpha screenshot
+
+P/E FWD now matches almost exactly: NVDA 21.48 (was 15.1), AMD 70.65 (was 39.6), ADBE 8.30 (was 7.4), GOOGL 23.73 (was 23.2), TEAM 14.30 (was 12.7). Revenue Growth FWD moved much closer to SA across the board. Regenerated `data/screener.json` (101/101 populated) with the corrected values.
+
+### Known remaining gaps (not addressed here)
+
+- **EPS Growth FWD** still differs from SA because SA uses **Non-GAAP** consensus EPS while yfinance exposes a GAAP-basis figure; the forward EPS *level* matches (hence P/E matches), but the growth *base year* differs. yfinance has no Non-GAAP consensus to close this
+- **PEG FWD** differs because SA divides forward P/E by a **3–5yr long-term growth CAGR**, not the 1-year growth; yfinance's long-term-growth field is usually empty
+- **Total Cash / Total Debt** already matched SA and were unchanged
+
+---
+
 ## v3.8.0 — June 2026 — Cash/Debt Ratio Column on the Screener
 
 **Added a sortable Cash/Debt ratio to the Balance Sheet column group in `screener.html`, sitting after Total Cash and Total Debt.**

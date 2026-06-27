@@ -6,6 +6,10 @@ Runs in GitHub Actions on a daily cron. Uses yfinance (public Yahoo Finance
 data) so there is no API key and no per-symbol subscription restriction -- the
 whole Nasdaq 100 is refreshed every run.
 
+Forward metrics (P/E FWD, Revenue/EPS Growth FWD) use the CURRENT fiscal-year
+("0y") analyst consensus to match Seeking Alpha's "FWD" convention, rather than
+yfinance's forwardPE / "+1y" rows which look one fiscal year further out.
+
 Output schema matches what screener.html reads:
   { "updated": ISO, "source": "yahoo", "stocks": { TICKER: {...}, ... } }
 
@@ -38,9 +42,17 @@ def num(x):
 
 
 def estimate_growth(df, period):
-    """Pull the analyst 'growth' value (a decimal) for a period row, e.g. '+1y'."""
+    """Pull the analyst 'growth' value (a decimal) for a period row, e.g. '0y'."""
     try:
         return num(df.loc[period, "growth"])
+    except Exception:
+        return None
+
+
+def estimate_avg(df, period):
+    """Pull the analyst average estimate (e.g. EPS or revenue) for a period row."""
+    try:
+        return num(df.loc[period, "avg"])
     except Exception:
         return None
 
@@ -60,26 +72,39 @@ def fetch(symbol):
     eg = num(info.get("earningsGrowth"))
     rec["epsTTM"] = eg * 100 if eg is not None else None
 
-    rec["peFwd"] = num(info.get("forwardPE"))
-
-    eps_fwd = None
+    # Forward figures use the CURRENT fiscal-year ("0y") consensus estimate to
+    # match Seeking Alpha's "FWD" convention. yfinance's forwardPE / "+1y" rows
+    # are one fiscal year further out, which reads systematically too low.
+    earn = None
+    rev = None
     try:
-        g = estimate_growth(t.earnings_estimate, "+1y")
-        eps_fwd = g * 100 if g is not None else None
+        earn = t.earnings_estimate
     except Exception:
         pass
-    rec["epsFwd"] = eps_fwd
-
-    rev_fwd = None
     try:
-        g = estimate_growth(t.revenue_estimate, "+1y")
-        rev_fwd = g * 100 if g is not None else None
+        rev = t.revenue_estimate
     except Exception:
         pass
-    rec["revFwd"] = rev_fwd
 
-    if rec["peFwd"] is not None and eps_fwd is not None and eps_fwd > 0:
-        rec["pegFwd"] = rec["peFwd"] / eps_fwd
+    # P/E FWD = price / current-FY EPS estimate (falls back to forwardPE).
+    price = rec["price"]
+    eps_cur = estimate_avg(earn, "0y")
+    if price is not None and eps_cur is not None and eps_cur > 0:
+        rec["peFwd"] = price / eps_cur
+    else:
+        rec["peFwd"] = num(info.get("forwardPE"))
+
+    # EPS / Revenue Growth FWD = current-FY ("0y") consensus growth.
+    eg_fwd = estimate_growth(earn, "0y")
+    rec["epsFwd"] = eg_fwd * 100 if eg_fwd is not None else None
+    rg_fwd = estimate_growth(rev, "0y")
+    rec["revFwd"] = rg_fwd * 100 if rg_fwd is not None else None
+
+    # PEG (1-yr forward) = forward P/E / forward EPS growth %. NOTE: Seeking
+    # Alpha's PEG divides by a 3-5yr long-term growth rate, which yfinance does
+    # not expose; this is the 1-year forward approximation.
+    if rec["peFwd"] is not None and rec["epsFwd"] is not None and rec["epsFwd"] > 0:
+        rec["pegFwd"] = rec["peFwd"] / rec["epsFwd"]
     else:
         rec["pegFwd"] = None
 
