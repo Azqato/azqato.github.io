@@ -403,6 +403,14 @@
       text-align: center;
     }
 
+    /* Below 1023px the shared sidebar (style.css) collapses to a top bar.
+       Let the app flow and scroll with the page instead of locking to 100vh. */
+    @media (max-width: 1023px) {
+      body { overflow: auto; }
+      .app { height: auto; }
+      .app-table-wrap { max-height: 80vh; }
+    }
+
     @media (max-width: 720px) {
       .app-search { width: 130px; }
       .tkr-name { display: none; }
@@ -410,20 +418,43 @@
   </style>
 </head>
 <body>
-  <div class="app">
+  <div class="site-wrapper">
+    <div class="site-layout">
 
-    <!-- Top bar -->
+      <!-- Sidebar (shared site navigation) -->
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <a href="index.html">Individual Stocks<span>.</span></a>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="philosophy.html">Philosophy</a></li>
+            <li><a href="metrics.html">Metrics</a></li>
+            <li><a href="screener.html" class="active" aria-current="page">Screener</a></li>
+            <li><a href="finviz.html">Finviz</a></li>
+            <li><a href="seekingalpha.html">SeekingAlpha</a></li>
+            <li><a href="indices.html">Indices</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="https://azqato.github.io/leveraged-strategies/">Leveraged Strategies</a></li>
+            <li><a href="https://azqato.github.io/support.html" target="_blank" rel="noopener">Support</a></li>
+          </ul>
+        </nav>
+        <div class="sidebar-footer">
+          Educational use only.<br>Not financial advice.
+        </div>
+      </aside>
+
+      <!-- Screener app -->
+      <main class="app">
+
+    <!-- App header -->
     <header class="app-bar">
       <div class="app-brand">
         <span class="logo">📈</span>
-        <a href="index.html">Nasdaq 100 Screener</a>
+        Nasdaq 100 Screener
       </div>
       <span class="screen-pill">Azqato</span>
-      <nav class="app-links">
-        <a href="metrics.html">Methodology</a>
-        <a href="finviz.html">Finviz Guide</a>
-        <a href="index.html">Home</a>
-      </nav>
       <span class="spacer"></span>
       <span class="as-of" id="asOf">no data loaded</span>
       <input type="text" class="app-search" id="search" placeholder="Filter by symbol or name…" aria-label="Filter stocks">
@@ -511,6 +542,10 @@
 
     <div class="disclaimer-bar">
       Educational use only. Not financial advice. Metric values are pulled from Financial Modeling Prep and may be delayed or incomplete. The Nasdaq 100 constituent list is static and may differ from the current index.
+    </div>
+
+      </main>
+
     </div>
   </div>
 

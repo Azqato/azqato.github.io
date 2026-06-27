@@ -37,6 +37,7 @@ A static educational website documenting Azqato's individual stock picking metho
 | Home | `index.html` | Strategy overview, 10-metric summary grid, reference table, portfolio vs watchlist framework |
 | Philosophy | `philosophy.html` | Full conceptual foundation: stocks as ownership, research methodology, GVD framework, market environments, Wall Street context, market leadership cycles, building investment knowledge |
 | Metrics Glossary | `metrics.html` | Deep explanations of all 12 metrics with illustrative examples and how-to-read guidance |
+| Screener | `screener.html` | Interactive Nasdaq 100 screener that scores every constituent against the methodology factors. Uses the shared sidebar navigation; data from the daily feed or a bring-your-own-key FMP pull |
 | Finviz Screener Setup | `finviz.html` | Finviz stock screener filter configuration guide |
 | Seeking Alpha Watchlist | `seekingalpha.html` | Seeking Alpha 12-column watchlist configuration guide |
 | Indices & ETF | `indices.html` | VIX, RSI, structural quality metrics, and ETF watchlist setup for index investing |
@@ -51,9 +52,9 @@ A static educational website documenting Azqato's individual stock picking metho
 
 ### Navigation Order
 
-Home → Philosophy → Metrics → Screener → Watchlist → Indices → FAQ → Support
+Home → Philosophy → Metrics → Screener → Finviz → SeekingAlpha → Indices → FAQ → Leveraged Strategies → Support
 
-**Nav link label rule:** Every sidebar navigation link must be a single word. The labels are: Home, Philosophy, Metrics, Screener, Watchlist, Indices, FAQ, Support. OG titles and page H1 headings may be longer; the nav label must never be.
+**Nav link label rule:** Every sidebar navigation link is a single token (no spaces). The labels are: Home, Philosophy, Metrics, Screener, Finviz, SeekingAlpha, Indices, FAQ, Support. The two trailing external links (Leveraged Strategies, Support) are the only exceptions to the single-token rule. OG titles and page H1 headings may be longer; the nav label must stay short. Note: `Screener` is the interactive in-site screener (`screener.html`); the Finviz and Seeking Alpha setup guides are reached via the `Finviz` (`finviz.html`) and `SeekingAlpha` (`seekingalpha.html`) labels.
 
 ---
 
@@ -383,7 +384,7 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 | `seekingalpha.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
 | `indices.html` | `#section-types`, `#section-dca`, `#section-lumpsum`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-aaii`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
 
-**Implementation:** The `IntersectionObserver` in `script.js` automatically highlights the active section link as the user scrolls. It derives section targets from the hrefs of `.metric-links a` elements on the page, so it works for all pages without per-page configuration. The FAQ page (`faq.html`) uses an accordion pattern and does not have an "On This Page" block.
+**Implementation:** The `IntersectionObserver` in `script.js` automatically highlights the active section link as the user scrolls. It derives section targets from the hrefs of `.metric-links a` elements on the page, so it works for all pages without per-page configuration. The FAQ page (`faq.html`) uses an accordion pattern and does not have an "On This Page" block. The Screener page (`screener.html`) is an interactive app with no long-form sections, so it also has no "On This Page" block (its sidebar shows the main nav only).
 
 ---
 
@@ -395,7 +396,7 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 - Site loads with no dependencies and no errors in any modern browser
 - Mobile-readable at 375px minimum width
 - No real-time data, no company-specific current recommendations, no financial advice language
-- Navigation consistent and correct on all 7 pages (8 items including Support)
+- Navigation consistent and correct on all 8 pages (10 items including Leveraged Strategies and Support)
 
 ---
 

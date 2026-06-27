@@ -2,6 +2,39 @@
 
 ---
 
+## v3.6.0 — June 2026 — Navigation: Screener in Nav, Relabeled Links, Shared Sidebar in the App
+
+**The interactive screener is now part of the site navigation, the two setup-guide links were relabeled to their destinations, and the screener app adopted the shared site sidebar so it navigates like every other page.**
+
+### Navigation label changes (all pages)
+
+- Sidebar nav label **"Screener" → "Finviz"** (points to `finviz.html`, the Finviz setup guide)
+- Sidebar nav label **"Watchlist" → "SeekingAlpha"** (points to `seekingalpha.html`, the Seeking Alpha setup guide)
+- Labels only; hrefs were already correct from v3.5.0
+
+### Screener added to the nav
+
+- New sidebar item **"Screener" → `screener.html`** (the interactive Nasdaq 100 screener), inserted **after Metrics** on all pages
+- Nav order is now: Home → Philosophy → Metrics → Screener → Finviz → SeekingAlpha → Indices → FAQ → Leveraged Strategies → Support (10 items)
+
+### Screener app uses the shared sidebar
+
+- `screener.html` replaced its custom top-bar navigation with the standard site sidebar (same brand, nav, and footer as every other page; the **Screener** item is marked active)
+- The app keeps a slim header inside the main column: title + `Azqato` screen pill + "as of" timestamp + symbol filter (the old in-bar nav links were removed)
+- Layout wrapped in the standard `.site-wrapper` / `.site-layout` grid; the dense table and toolbar live in a `<main class="app">` column
+- Added a `max-width: 1023px` CSS override so that when the shared sidebar collapses to a top bar on mobile, the app flows and scrolls with the page (the table area caps at `80vh`) instead of being locked to `100vh`
+
+### Link audit (post-rename verification)
+
+- Swept every page: all internal `.html` link targets resolve to existing files, all anchor targets (`#…`) exist in their pages, and no stale names remain (`watchlist.html`, `screenapp.html`, `guide.html`, `indexes.html`)
+
+### Docs
+
+- `docs/PRD.md`: page table adds the Screener app; Navigation Order and nav-label rule updated; success-criteria page/item counts updated (8 pages, 10 nav items); "On This Page" note records that the Screener app has no section block
+- `docs/DESIGN.md`: version-history row v3.6 added
+
+---
+
 ## v3.5.0 — June 2026 — Page Renames (Finviz / Seeking Alpha / Screener)
 
 **Three pages renamed to clearer, destination-named files, with every reference updated sitewide. No content or layout changes — purely filenames and the links/metadata that point to them.**
