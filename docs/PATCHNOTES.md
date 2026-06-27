@@ -2,6 +2,39 @@
 
 ---
 
+## v3.7.0 — June 2026 — Screener Data Pipeline Moved to yfinance + Nasdaq 100 Constituent Fix
+
+**The screener's daily data pipeline was switched from Financial Modeling Prep to yfinance, which fixed both a coverage bug and a wasted-quota bug. The constituent list was also fact-checked against authoritative sources and corrected — most notably, NVIDIA (the largest component) had been missing.**
+
+### Why the change
+
+FMP's free tier only serves a small subset of symbols. A manual workflow run revealed the problem: of ~50 symbols attempted, only ~7 returned data and the rest came back `HTTP 402 "this symbol is not available under your current subscription"`, each burning an API call (71 calls for 7 populated rows). Throttling could not fix this — the blocked symbols are simply unavailable on the free plan.
+
+### New pipeline (yfinance)
+
+- `scripts/fetch_screener_data.py` — Python 3.12 script using `yfinance` (public Yahoo Finance data). No API key, no per-symbol subscription limits, so **all constituents refresh every run**. Maps Yahoo fields to the same `data/screener.json` schema: price/market cap, total cash/debt, TTM revenue & earnings growth, forward P/E, and forward revenue/EPS growth + PEG from the `+1y` analyst estimates. Per-symbol retries and a polite delay between symbols
+- `.github/workflows/screener-data.yml` — now runs `setup-python` + `pip install yfinance` + the Python script (was Node + FMP). Same daily cron (23:00 UTC), same commit-and-push of `data/screener.json`. **No secret required** — the `FMP_API_KEY` secret is no longer used by the pipeline and can be deleted
+- Removed the superseded Node fetcher `scripts/fetch-screener-data.mjs`
+- The in-browser "Load Data" (bring-your-own-key) path in `screener.html` still uses FMP as a manual fallback; it inherits FMP's free-tier symbol limitation, but it is now secondary since the daily feed covers everything
+
+### Nasdaq 100 constituent fix
+
+- Fact-checked `data/nasdaq100.json` against stockanalysis.com and Wikipedia. Rebuilt it to match the authoritative current index (101 tickers = 100 companies + GOOGL/GOOG dual class)
+- **Added (were missing):** NVDA (NVIDIA — the largest component), WMT, SHOP, STX, WDC, FER, ALNY, AXON, INSM, MPWR, TRI
+- **Removed (no longer in the index):** ANSS (acquired/delisted), AZN, BIIB, CDW, GFS, LULU, MRNA, ON, SMCI, TTD
+- Kept the page's embedded fallback list (`screener.html`) in sync with `data/nasdaq100.json`; verified all three (canonical list, embedded list, generated feed) hold the identical 101 tickers
+- Committed a freshly generated `data/screener.json` (101/101 symbols populated) so the screener shows full data immediately
+
+### Infra
+
+- `.gitignore`: removed `finviz.html` (it is now an active page, not an orphan) and added `__pycache__/`
+
+### Docs
+
+- `README.md`, `docs/PRD.md`, `docs/DESIGN.md` updated to describe the yfinance pipeline and the corrected constituent list
+
+---
+
 ## v3.6.0 — June 2026 — Navigation: Screener in Nav, Relabeled Links, Shared Sidebar in the App
 
 **The interactive screener is now part of the site navigation, the two setup-guide links were relabeled to their destinations, and the screener app adopted the shared site sidebar so it navigates like every other page.**

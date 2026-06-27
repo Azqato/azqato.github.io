@@ -26,9 +26,9 @@ No frameworks, no build tools, no dependencies. Pure HTML, CSS, and vanilla Java
 | `faq.html` | FAQ and philosophy -- the Palantir story, capital gains strategy, technical analysis, long-term mindset |
 | `style.css` | Full design system stylesheet |
 | `script.js` | Accordion behavior, IntersectionObserver sidebar highlighting (metrics page) |
-| `scripts/fetch-screener-data.mjs` | Node 20 script (no dependencies) that pulls Nasdaq 100 metrics from the FMP stable API into `data/screener.json` |
+| `scripts/fetch_screener_data.py` | Python 3 script using `yfinance` (no API key) that pulls Nasdaq 100 metrics from Yahoo Finance into `data/screener.json` |
 | `.github/workflows/screener-data.yml` | Daily GitHub Action that runs the fetch script and commits the refreshed data feed |
-| `data/nasdaq100.json` | Canonical Nasdaq 100 constituent list (ticker + name) |
+| `data/nasdaq100.json` | Canonical Nasdaq 100 constituent list (ticker + name), kept in sync with the authoritative index |
 | `data/screener.json` | Generated data feed consumed by `screener.html` |
 
 ---

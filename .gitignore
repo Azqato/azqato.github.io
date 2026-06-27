@@ -1,6 +1,5 @@
 # Orphaned files (replaced by renamed versions)
 guide.html
-finviz.html
 indexes.html
 
 # OS
@@ -10,3 +9,7 @@ Thumbs.db
 # Editor
 .vscode/
 *.swp
+
+# Python
+__pycache__/
+*.pyc

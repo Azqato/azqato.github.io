@@ -1,9 +1,8 @@
 name: Update Screener Data
 
 # Daily refresh of data/screener.json for the Nasdaq 100 screener.
-# Each run fully refreshes a rotating slice of the stalest symbols
-# (DAILY_COUNT, default 50; 4 requests each), keeping a single run under
-# the FMP free tier's 250 requests/day. The full list cycles every ~2 days.
+# Uses yfinance (public Yahoo Finance data) -- no API key, no per-symbol
+# subscription limits, so the whole list is refreshed every run.
 
 on:
   schedule:
@@ -11,12 +10,7 @@ on:
     # GitHub cron is UTC-only and does not follow DST: in summer (EDT) this
     # fires at 7:00pm Eastern. For 6:00pm during summer instead, use "0 22 * * *".
     - cron: "0 23 * * *"
-  workflow_dispatch:        # allow manual runs (e.g. to backfill faster)
-    inputs:
-      daily_count:
-        description: "Symbols to fully refresh this run"
-        required: false
-        default: "50"
+  workflow_dispatch: {}   # allow manual runs
 
 permissions:
   contents: write
@@ -31,16 +25,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-python@v5
         with:
-          node-version: "20"
+          python-version: "3.12"
 
       - name: Fetch screener data
-        env:
-          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
-          DAILY_COUNT: ${{ github.event.inputs.daily_count || '50' }}
-          REQ_BUDGET: "240"
-        run: node scripts/fetch-screener-data.mjs
+        run: |
+          pip install --quiet --upgrade yfinance
+          python scripts/fetch_screener_data.py
 
       - name: Commit updated data
         run: |

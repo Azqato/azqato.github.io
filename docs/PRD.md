@@ -37,7 +37,7 @@ A static educational website documenting Azqato's individual stock picking metho
 | Home | `index.html` | Strategy overview, 10-metric summary grid, reference table, portfolio vs watchlist framework |
 | Philosophy | `philosophy.html` | Full conceptual foundation: stocks as ownership, research methodology, GVD framework, market environments, Wall Street context, market leadership cycles, building investment knowledge |
 | Metrics Glossary | `metrics.html` | Deep explanations of all 12 metrics with illustrative examples and how-to-read guidance |
-| Screener | `screener.html` | Interactive Nasdaq 100 screener that scores every constituent against the methodology factors. Uses the shared sidebar navigation; data from the daily feed or a bring-your-own-key FMP pull |
+| Screener | `screener.html` | Interactive Nasdaq 100 screener that scores every constituent against the methodology factors. Uses the shared sidebar navigation; data from the daily yfinance feed (`data/screener.json`), with a bring-your-own-key FMP pull as a manual fallback |
 | Finviz Screener Setup | `finviz.html` | Finviz stock screener filter configuration guide |
 | Seeking Alpha Watchlist | `seekingalpha.html` | Seeking Alpha 12-column watchlist configuration guide |
 | Indices & ETF | `indices.html` | VIX, RSI, structural quality metrics, and ETF watchlist setup for index investing |
