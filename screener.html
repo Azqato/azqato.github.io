@@ -3,408 +3,1157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Set Up a Finviz Stock Screener For Free</title>
-  <meta name="description" content="How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha.">
+  <title>Nasdaq 100 Screener</title>
+  <meta name="description" content="An interactive Nasdaq 100 screener that rates each stock against the Azqato methodology factors. Runs entirely in your browser. Bring your own free Financial Modeling Prep API key to load live metrics.">
   <!-- Open Graph / Discord -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://azqato.github.io/stocks/screener.html">
-  <meta property="og:title" content="How to Set Up a Finviz Stock Screener For Free">
-  <meta property="og:description" content="How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha.">
+  <meta property="og:title" content="Nasdaq 100 Screener">
+  <meta property="og:description" content="An interactive Nasdaq 100 screener that rates each stock against the Azqato methodology factors. Runs entirely in your browser.">
   <meta property="og:image" content="https://azqato.github.io/stocks/og-image.png">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="How to Set Up a Finviz Stock Screener For Free">
-  <meta name="twitter:description" content="How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha.">
+  <meta name="twitter:title" content="Nasdaq 100 Screener">
+  <meta name="twitter:description" content="An interactive Nasdaq 100 screener that rates each stock against the Azqato methodology factors. Runs entirely in your browser.">
   <meta name="twitter:image" content="https://azqato.github.io/stocks/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== screener.html — dense screener layout (full width, uses shared tokens) ===== */
+    html, body { height: 100%; }
+    body {
+      font-size: 0.875rem;
+      overflow: hidden; /* app owns its own scroll regions */
+    }
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* --- Top bar --- */
+    .app-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 18px;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+    }
+    .app-brand .logo { color: var(--color-accent); }
+    .app-brand a { color: var(--color-text-primary); }
+    .app-brand a:hover { text-decoration: none; color: var(--color-accent); }
+    .app-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.8rem;
+    }
+    .app-links a { color: var(--color-text-secondary); }
+    .app-links a:hover { color: var(--color-accent); text-decoration: none; }
+    .screen-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      border: 1px solid rgba(0, 212, 160, 0.25);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+    .screen-pill::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+    .as-of { font-size: 0.75rem; color: var(--color-text-secondary); white-space: nowrap; }
+    .app-bar .spacer { flex: 1; }
+    .app-search {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 0.8rem;
+      width: 200px;
+    }
+    .app-search:focus { outline: none; border-color: var(--color-accent); }
+    .app-search::placeholder { color: var(--color-text-secondary); }
+
+    /* --- Toolbar --- */
+    .app-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 18px;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .summary-text { font-size: 0.8rem; color: var(--color-text-secondary); }
+    .summary-text b { color: var(--color-text-primary); }
+    .app-toolbar .spacer { flex: 1; }
+
+    .chip-group { display: inline-flex; border: 1px solid var(--color-border); border-radius: 7px; overflow: hidden; }
+    .chip {
+      background: var(--color-surface);
+      border: none;
+      border-right: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .chip:last-child { border-right: none; }
+    .chip:hover { background: var(--color-card-hover); color: var(--color-text-primary); }
+    .chip.active { background: var(--color-accent-light); color: var(--color-accent); }
+    .chip .count {
+      font-size: 0.68rem;
+      color: var(--color-text-secondary);
+      background: var(--color-tag-bg);
+      border-radius: 999px;
+      padding: 0 6px;
+      font-weight: 600;
+    }
+    .chip.active .count { color: var(--color-accent); background: rgba(0,212,160,0.12); }
+
+    .btn {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .btn-primary { background: var(--color-accent); color: #06231c; border-color: var(--color-accent); }
+    .btn-primary:hover { background: var(--color-accent-hover); color: #06231c; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Columns dropdown */
+    .menu-wrap { position: relative; }
+    .menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 6px);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 8px;
+      min-width: 190px;
+      z-index: 30;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .menu[hidden] { display: none; }
+    .menu label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--color-text-primary);
+    }
+    .menu label:hover { background: var(--color-accent-light); }
+    .menu input { accent-color: var(--color-accent); }
+
+    /* --- Table --- */
+    .app-table-wrap {
+      flex: 1;
+      overflow: auto;
+      position: relative;
+    }
+    table.screener {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--color-bg);
+      min-width: 900px;
+    }
+    table.screener thead th {
+      position: sticky;
+      background: var(--color-card-hover);
+      z-index: 5;
+    }
+    tr.group-row th {
+      top: 0;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      font-weight: 700;
+      padding: 7px 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+      border-left: 1px solid var(--color-border);
+    }
+    tr.group-row th.g-screen { color: var(--color-accent); }
+    tr.head-row th {
+      top: 30px;
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      font-weight: 600;
+      padding: 8px 14px;
+      text-align: right;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+    tr.head-row th.left { text-align: left; }
+    tr.head-row th:hover { color: var(--color-text-primary); }
+    tr.head-row th .arrow { color: var(--color-accent); font-size: 0.7rem; margin-left: 3px; }
+    .group-start { border-left: 1px solid var(--color-border); }
+
+    /* sticky first column (ticker) */
+    th.col-ticker, td.col-ticker {
+      position: sticky;
+      left: 0;
+      z-index: 6;
+      background: var(--color-bg);
+      border-right: 1px solid var(--color-border);
+    }
+    tr.group-row th.col-ticker, tr.head-row th.col-ticker { z-index: 8; background: var(--color-card-hover); }
+
+    tbody td {
+      padding: 9px 14px;
+      font-size: 0.82rem;
+      text-align: right;
+      white-space: nowrap;
+      border-bottom: 1px solid var(--color-border);
+      font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
+    }
+    tbody tr:hover td { background: var(--color-accent-light); }
+    tbody tr:hover td.col-ticker { background: #11201b; }
+
+    td.col-ticker { text-align: left; }
+    .tkr { font-weight: 700; color: var(--color-accent); font-size: 0.85rem; }
+    .tkr-name {
+      display: block;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 0.68rem;
+      color: var(--color-text-secondary);
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+
+    .verdict {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .v-pass  { background: rgba(63,185,80,0.12);  color: var(--color-positive); border: 1px solid rgba(63,185,80,0.3); }
+    .v-watch { background: rgba(255,166,87,0.12); color: var(--color-warning);  border: 1px solid rgba(255,166,87,0.3); }
+    .v-fail  { background: rgba(248,81,73,0.12);  color: var(--color-negative); border: 1px solid rgba(248,81,73,0.3); }
+    .v-none  { background: var(--color-tag-bg);   color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+
+    .factors {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--color-tag-bg);
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border);
+    }
+
+    .score-bar-wrap { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
+    .score-val { font-weight: 700; min-width: 34px; text-align: right; }
+    .score-track { width: 46px; height: 5px; background: var(--color-border); border-radius: 3px; overflow: hidden; }
+    .score-fill { height: 100%; border-radius: 3px; }
+
+    .pos { color: var(--color-positive); }
+    .cau { color: var(--color-warning); }
+    .neg { color: var(--color-negative); }
+    .muted { color: var(--color-text-secondary); }
+
+    .col-hidden { display: none; }
+
+    /* --- Empty / loading state --- */
+    .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .placeholder-card {
+      max-width: 460px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 28px 30px;
+      pointer-events: auto;
+    }
+    .placeholder-card h2 { margin: 0 0 8px; font-size: 1.1rem; }
+    .placeholder-card h2::before { display: none; }
+    .placeholder-card p { color: var(--color-text-secondary); font-size: 0.85rem; margin-bottom: 14px; }
+
+    /* --- Progress bar --- */
+    .progress-wrap { display: none; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--color-text-secondary); }
+    .progress-wrap.on { display: inline-flex; }
+    .progress-track { width: 120px; height: 5px; background: var(--color-border); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: var(--color-accent); transition: width 0.2s; }
+
+    /* --- Stale-data banner --- */
+    .stale-banner {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 18px;
+      background: rgba(255, 166, 87, 0.10);
+      border-bottom: 1px solid rgba(255, 166, 87, 0.3);
+      color: var(--color-warning);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .stale-banner.on { display: flex; }
+    .stale-banner .spacer { flex: 1; }
+    .stale-banner b { color: var(--color-warning); }
+
+    /* --- Modal --- */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; padding: 20px;
+    }
+    .modal-backdrop[hidden] { display: none; }
+    .modal {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      width: 100%; max-width: 540px;
+      max-height: 90vh; overflow-y: auto;
+      padding: 26px 28px;
+    }
+    .modal h2 { margin-top: 0; font-size: 1.15rem; }
+    .modal h2::before { display: none; }
+    .modal h3 { margin-top: 22px; font-size: 0.95rem; }
+    .modal label.field { display: block; font-size: 0.8rem; font-weight: 600; margin: 14px 0 6px; color: var(--color-text-primary); }
+    .modal input[type=text], .modal input[type=password], .modal input[type=number] {
+      width: 100%;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 7px;
+      padding: 9px 11px;
+      color: var(--color-text-primary);
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 0.82rem;
+    }
+    .modal input:focus { outline: none; border-color: var(--color-accent); }
+    .modal .hint { font-size: 0.74rem; color: var(--color-text-secondary); margin-top: 6px; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+    .modal-close { position: relative; float: right; background: none; border: none; color: var(--color-text-secondary); font-size: 1.4rem; cursor: pointer; line-height: 1; }
+    .modal-close:hover { color: var(--color-text-primary); }
+    .status-msg { font-size: 0.78rem; margin-top: 14px; padding: 10px 12px; border-radius: 7px; display: none; }
+    .status-msg.on { display: block; }
+    .status-msg.err { background: rgba(248,81,73,0.1); color: var(--color-negative); border: 1px solid rgba(248,81,73,0.3); }
+    .status-msg.ok  { background: rgba(63,185,80,0.1); color: var(--color-positive); border: 1px solid rgba(63,185,80,0.3); }
+    .modal ul { padding-left: 18px; }
+    .modal li { font-size: 0.82rem; color: var(--color-text-secondary); margin-bottom: 6px; line-height: 1.5; }
+
+    .disclaimer-bar {
+      flex-shrink: 0;
+      padding: 6px 18px;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      font-size: 0.7rem;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .app-search { width: 130px; }
+      .tkr-name { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <div class="site-wrapper">
-    <div class="site-layout">
+  <div class="app">
 
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="sidebar-brand">
-          <a href="index.html">Individual Stocks<span>.</span></a>
+    <!-- Top bar -->
+    <header class="app-bar">
+      <div class="app-brand">
+        <span class="logo">📈</span>
+        <a href="index.html">Nasdaq 100 Screener</a>
+      </div>
+      <span class="screen-pill">Azqato</span>
+      <nav class="app-links">
+        <a href="metrics.html">Methodology</a>
+        <a href="finviz.html">Finviz Guide</a>
+        <a href="index.html">Home</a>
+      </nav>
+      <span class="spacer"></span>
+      <span class="as-of" id="asOf">no data loaded</span>
+      <input type="text" class="app-search" id="search" placeholder="Filter by symbol or name…" aria-label="Filter stocks">
+    </header>
+
+    <!-- Toolbar -->
+    <div class="app-toolbar">
+      <span class="summary-text" id="summary">100 Nasdaq 100 names &middot; load data to score them</span>
+      <span class="spacer"></span>
+
+      <div class="progress-wrap" id="progress">
+        <span id="progressLabel">Loading…</span>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="chip-group" role="group" aria-label="Filter by verdict">
+        <button class="chip active" data-filter="all">All <span class="count" id="cnt-all">0</span></button>
+        <button class="chip" data-filter="pass">Pass <span class="count" id="cnt-pass">0</span></button>
+        <button class="chip" data-filter="watch">Watch <span class="count" id="cnt-watch">0</span></button>
+        <button class="chip" data-filter="fail">Fail <span class="count" id="cnt-fail">0</span></button>
+      </div>
+
+      <div class="menu-wrap">
+        <button class="btn" id="colsBtn" aria-haspopup="true">Columns ▾</button>
+        <div class="menu" id="colsMenu" hidden>
+          <label><input type="checkbox" data-group="growth" checked> Growth</label>
+          <label><input type="checkbox" data-group="valuation" checked> Valuation</label>
+          <label><input type="checkbox" data-group="balance" checked> Balance Sheet</label>
+          <label><input type="checkbox" data-group="snapshot" checked> Snapshot</label>
         </div>
-        <nav class="sidebar-nav" aria-label="Site navigation">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="philosophy.html">Philosophy</a></li>
-            <li><a href="metrics.html">Metrics</a></li>
-            <li><a href="screener.html" class="active" aria-current="page">Screener</a></li>
-            <li><a href="watchlist.html">Watchlist</a></li>
-            <li><a href="indices.html">Indices</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="https://azqato.github.io/leveraged-strategies/">Leveraged Strategies</a></li>
-            <li><a href="https://azqato.github.io/support.html" target="_blank" rel="noopener">Support</a></li>
-            <li>
-              <span class="nav-section-label">On This Page</span>
-              <ul class="metric-links">
-                <li><a href="#section-purpose">What Finviz Is For</a></li>
-                <li><a href="#section-step1">Step 1: Open the Screener</a></li>
-                <li><a href="#section-step2">Step 2: Set the Filters</a></li>
-                <li><a href="#section-step3">Step 3: Read the Results</a></li>
-                <li><a href="#section-coverage">Finviz Free Tier Coverage</a></li>
-                <li><a href="#section-quickref">Quick-Reference Summary</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <div class="sidebar-footer">
-          Educational use only.<br>Not financial advice.
-        </div>
-      </aside>
+      </div>
 
-      <!-- Main Content -->
-      <main class="main-content">
-        <div class="content-inner">
-
-          <div class="guide-intro">
-            <h1>How to Set Up a Finviz Stock Screener For Free</h1>
-            <p>How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha.</p>
-            <div class="hero-badge" style="margin-top: 16px;">🔍 Candidate Discovery</div>
-          </div>
-
-          <div class="guide-note" style="margin-top: 28px;">
-            <p><strong>Free screener, no account required.</strong> The Finviz screener at <a href="https://finviz.com/screener" target="_blank" rel="noopener">finviz.com/screener</a> is fully usable without creating an account. No sign-up, no credit card, no trial. The filters covered in this guide are all available on the free tier.</p>
-          </div>
-
-          <!-- What Finviz Is For -->
-          <section id="section-purpose" class="section">
-            <h2>What Finviz Is For</h2>
-            <p>Finviz is a stock screener, not a portfolio tracker. Its purpose in this methodology is different from Seeking Alpha's. Finviz answers the question: "Which companies across the entire market currently look like candidates worth evaluating?" Seeking Alpha then answers: "Do the full 12 metrics on this specific company confirm that it is worth holding?"</p>
-            <p>Finviz does not perfectly replicate every column from the Seeking Alpha watchlist. It does not have a direct Revenue Growth FWD filter, does not show Total Cash and Total Debt as standalone dollar amounts, and uses a slightly different PEG calculation. These limitations are why Finviz is a starting point, not a final answer. Every company the Finviz screener surfaces should be verified against all 10 metrics in Seeking Alpha before adding it to the watchlist.</p>
-            <div class="how-to-read">
-              <ul>
-                <li><strong>Finviz role:</strong> cast a wide net across all stocks, filter down to candidates with strong growth metrics and favorable technical positioning</li>
-                <li><strong>Seeking Alpha role:</strong> verify the full 12-metric picture on each specific candidate before adding to the watchlist</li>
-                <li><strong>Portfolio role:</strong> companies that pass the full 12-metric evaluation and are at a favorable entry point</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- Step 1: Navigate -->
-          <section id="section-step1" class="section">
-            <h2>Step 1: Open the Screener</h2>
-
-            <div class="guide-steps">
-              <div class="guide-step">
-                <div class="guide-step-header">
-                  <span class="step-num">1</span>
-                  <h3 class="guide-step-title">Go to the Finviz screener</h3>
-                </div>
-                <div class="guide-step-body">
-                  <p>Navigate to <a href="https://finviz.com/screener" target="_blank" rel="noopener">finviz.com/screener</a>. No account or login is required.</p>
-                  <p>The screener page has two main areas: a filter panel at the top (rows of dropdown menus organized by category) and a results table at the bottom showing stocks that match the active filters.</p>
-                </div>
-              </div>
-
-              <div class="guide-step">
-                <div class="guide-step-header">
-                  <span class="step-num">2</span>
-                  <h3 class="guide-step-title">Understand the filter layout</h3>
-                </div>
-                <div class="guide-step-body">
-                  <p>The filter dropdowns are organized into rows. Key rows for this methodology:</p>
-                  <ul>
-                    <li><strong>Descriptors row:</strong> Exchange, Market Cap, Price, Volume</li>
-                    <li><strong>Fundamental row:</strong> Forward P/E, PEG, EPS Growth Next Year, EPS Growth Next 5Y, Sales Growth, Debt/Equity</li>
-                    <li><strong>Technical row:</strong> RSI (14), 52-Week High/Low</li>
-                  </ul>
-                  <p>Each filter is a dropdown. Click any dropdown to see the available options. By default all filters are set to <span class="ui-text">Any</span>, meaning no filter is applied.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Step 2: Set Filters -->
-          <section id="section-step2" class="section">
-            <h2>Step 2: Set the Filters</h2>
-
-            <p>The table below shows the recommended filter settings for surfacing candidates that align with this methodology. Set each filter using the dropdown menus in the screener. You do not need to set all of them at once. Start with the most important filters (PEG, EPS Growth, RSI) and add more to narrow results if needed.</p>
-
-            <div class="table-wrap">
-              <table>
-                <caption class="visually-hidden">Recommended Finviz screener filter settings</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Filter</th>
-                    <th scope="col">Row</th>
-                    <th scope="col">Recommended Setting</th>
-                    <th scope="col">Methodology Rationale</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Market Cap</td>
-                    <td>Descriptors</td>
-                    <td><span class="badge badge-good">Mid or Large</span></td>
-                    <td>Filters out micro/nano caps that lack analyst coverage and liquidity</td>
-                  </tr>
-                  <tr>
-                    <td>Forward P/E</td>
-                    <td>Fundamental</td>
-                    <td><span class="badge badge-good">Under 50</span></td>
-                    <td>Broad filter; removes extremely overpriced stocks. PEG refines this further</td>
-                  </tr>
-                  <tr>
-                    <td>PEG</td>
-                    <td>Fundamental</td>
-                    <td><span class="badge badge-good">Under 1</span></td>
-                    <td>Growth-adjusted valuation. PEG below 1.0 is the primary signal in this methodology</td>
-                  </tr>
-                  <tr>
-                    <td>EPS Growth Next Year</td>
-                    <td>Fundamental</td>
-                    <td><span class="badge badge-good">Over 15%</span></td>
-                    <td>Maps directly to the EPS Growth FWD target. Screens for earnings momentum</td>
-                  </tr>
-                  <tr>
-                    <td>EPS Growth Next 5 Years</td>
-                    <td>Fundamental</td>
-                    <td><span class="badge badge-good">Over 10%</span></td>
-                    <td>Confirms sustained earnings trajectory, not just a single-year spike</td>
-                  </tr>
-                  <tr>
-                    <td>Sales Growth Qtr/Qtr</td>
-                    <td>Fundamental</td>
-                    <td><span class="badge badge-good">Over 10%</span></td>
-                    <td>Revenue momentum proxy. Finviz does not have a direct Revenue FWD filter; QoQ growth confirms current top-line expansion</td>
-                  </tr>
-                  <tr>
-                    <td>Total Debt/Equity</td>
-                    <td>Fundamental</td>
-                    <td><span class="badge badge-good">Under 1</span></td>
-                    <td>Balance sheet proxy. Total Debt/Equity under 1.0 means debt does not exceed equity. Verify exact cash and debt amounts in Seeking Alpha</td>
-                  </tr>
-                  <tr>
-                    <td>RSI (14)</td>
-                    <td>Technical</td>
-                    <td><span class="badge badge-good">Near Oversold (30&ndash;40)</span></td>
-                    <td>Entry timing signal. RSI in the 30&ndash;45 range suggests a recent pullback on a stock that may still have strong fundamentals</td>
-                  </tr>
-                  <tr>
-                    <td>52-Week Low</td>
-                    <td>Technical</td>
-                    <td><span class="badge badge-good">0&ndash;30% above Low</span></td>
-                    <td>Approximates the lower 25&ndash;30% of the 52W range. Confirms price is near a range low, improving the risk/reward of entry</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="table-note">These are starting point filter settings, not hard rules. If results are too few, loosen the RSI or 52W Low filter first. If results are too many, tighten PEG to "Low (&lt;1)" and raise EPS Growth Next Year to "Over 20%".</p>
-
-            <div class="caveat-box" style="margin-top: 16px;">
-              <p><strong>Finviz PEG vs. Seeking Alpha PEG:</strong> Finviz calculates PEG using trailing earnings growth estimates, which may differ slightly from the forward-based PEG used in Seeking Alpha. Treat the Finviz PEG as a directional filter. Always verify the PEG Non-GAAP (FWD) value in Seeking Alpha before making a final evaluation.</p>
-            </div>
-          </section>
-
-          <!-- Step 3: Read Results -->
-          <section id="section-step3" class="section">
-            <h2>Step 3: Read the Results Table</h2>
-
-            <div class="guide-steps">
-              <div class="guide-step">
-                <div class="guide-step-header">
-                  <span class="step-num">1</span>
-                  <h3 class="guide-step-title">Switch the results view to Valuation</h3>
-                </div>
-                <div class="guide-step-body">
-                  <p>Below the filter panel, the results table has view tabs: <span class="ui-text">Overview</span>, <span class="ui-text">Valuation</span>, <span class="ui-text">Financial</span>, <span class="ui-text">Ownership</span>, <span class="ui-text">Technical</span>, <span class="ui-text">Performance</span>, <span class="ui-text">Custom</span>.</p>
-                  <p>Click <span class="ui-text">Valuation</span> to see Forward P/E, PEG, EPS growth estimates, and sales growth alongside each ticker. This is the most useful view for this methodology.</p>
-                </div>
-              </div>
-
-              <div class="guide-step">
-                <div class="guide-step-header">
-                  <span class="step-num">2</span>
-                  <h3 class="guide-step-title">Sort results by PEG</h3>
-                </div>
-                <div class="guide-step-body">
-                  <p>Click the <span class="ui-text">PEG</span> column header to sort results by PEG ascending. This puts the most growth-efficient valuations at the top. Scan down the list and note any tickers with PEG values below 1.0 that also have strong EPS growth figures.</p>
-                </div>
-              </div>
-
-              <div class="guide-step">
-                <div class="guide-step-header">
-                  <span class="step-num">3</span>
-                  <h3 class="guide-step-title">Check the Technical view for RSI and range</h3>
-                </div>
-                <div class="guide-step-body">
-                  <p>Switch to the <span class="ui-text">Technical</span> view to see RSI and 52-week range positioning. A candidate worth evaluating further should show RSI below 50 and be positioned in the lower half of its 52-week range.</p>
-                </div>
-              </div>
-
-              <div class="guide-step">
-                <div class="guide-step-header">
-                  <span class="step-num">4</span>
-                  <h3 class="guide-step-title">Move promising candidates to Seeking Alpha</h3>
-                </div>
-                <div class="guide-step-body">
-                  <p>Any ticker that looks compelling from the Finviz screen should be evaluated against the full 10-metric scorecard in Seeking Alpha before being added to the watchlist. Finviz surfaces the candidates; Seeking Alpha closes the evaluation.</p>
-                  <div class="how-to-read">
-                    <ul>
-                      <li>Click any ticker in the Finviz results to open its Finviz summary page for a quick overview</li>
-                      <li>For full evaluation, search the ticker on Seeking Alpha and check Revenue Growth FWD, Total Cash, Total Debt, and the full RSI + 52W Range data</li>
-                      <li>Only add to your Seeking Alpha watchlist after confirming all 12 columns</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Filter Limits -->
-          <section id="section-coverage" class="section">
-            <h2>Finviz Free Tier Coverage</h2>
-
-            <p>The free Finviz screener covers every filter needed for this methodology. The limitations worth knowing:</p>
-
-            <div class="table-wrap">
-              <table>
-                <caption class="visually-hidden">Finviz free tier coverage for methodology metrics</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Methodology Metric</th>
-                    <th scope="col">Finviz Coverage</th>
-                    <th scope="col">Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Revenue Growth FWD</td>
-                    <td><span class="badge badge-caution">Proxy only</span></td>
-                    <td>Use Sales Growth QoQ as a substitute. Verify FWD figure in Seeking Alpha</td>
-                  </tr>
-                  <tr>
-                    <td>EPS Growth FWD</td>
-                    <td><span class="badge badge-good">Available</span></td>
-                    <td>"EPS Growth Next Year" in the Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>P/E FWD</td>
-                    <td><span class="badge badge-good">Available</span></td>
-                    <td>"Forward P/E" in the Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>PEG FWD</td>
-                    <td><span class="badge badge-caution">Close match</span></td>
-                    <td>Finviz PEG uses different growth inputs than Seeking Alpha Non-GAAP FWD. Use directionally; verify in SA</td>
-                  </tr>
-                  <tr>
-                    <td>Total Cash</td>
-                    <td><span class="badge badge-caution">Proxy only</span></td>
-                    <td>No standalone filter. Use Current Ratio or Debt/Equity as a balance sheet proxy</td>
-                  </tr>
-                  <tr>
-                    <td>Total Debt</td>
-                    <td><span class="badge badge-caution">Proxy only</span></td>
-                    <td>Use Total Debt/Equity ratio. Absolute dollar amounts must be verified in Seeking Alpha</td>
-                  </tr>
-                  <tr>
-                    <td>RSI (14)</td>
-                    <td><span class="badge badge-good">Available</span></td>
-                    <td>"RSI (14)" in the Technical row. Dropdown options include Near Oversold (30&ndash;40)</td>
-                  </tr>
-                  <tr>
-                    <td>52W Range</td>
-                    <td><span class="badge badge-good">Available</span></td>
-                    <td>"52-Week Low" filter in the Technical row gives range positioning</td>
-                  </tr>
-                  <tr>
-                    <td>Market Cap</td>
-                    <td><span class="badge badge-good">Available</span></td>
-                    <td>"Market Cap" in the Descriptors row</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="table-note">Finviz Elite adds more columns and real-time data. For the purposes of this methodology, the free screener is sufficient for candidate discovery. All final evaluations happen in Seeking Alpha.</p>
-          </section>
-
-          <!-- Quick Reference -->
-          <section id="section-quickref" class="section">
-            <h2>Quick-Reference Filter Summary</h2>
-
-            <p>The complete filter configuration for a first-pass screen. Apply these settings at <a href="https://finviz.com/screener" target="_blank" rel="noopener">finviz.com/screener</a> to surface initial candidates.</p>
-
-            <div class="table-wrap">
-              <table>
-                <caption class="visually-hidden">Quick reference filter values</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Filter</th>
-                    <th scope="col">Set To</th>
-                    <th scope="col">Where to Find It</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Market Cap</td>
-                    <td><span class="filter-strong">Mid ($2B&ndash;$10B) or Large ($10B+)</span></td>
-                    <td>Descriptors row</td>
-                  </tr>
-                  <tr>
-                    <td>Forward P/E</td>
-                    <td><span class="filter-strong">Under 50</span></td>
-                    <td>Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>PEG</td>
-                    <td><span class="filter-strong">Under 1</span></td>
-                    <td>Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>EPS Growth Next Year</td>
-                    <td><span class="filter-strong">Over 15%</span></td>
-                    <td>Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>EPS Growth Next 5 Years</td>
-                    <td><span class="filter-strong">Over 10%</span></td>
-                    <td>Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>Sales Growth Qtr/Qtr</td>
-                    <td><span class="filter-strong">Over 10%</span></td>
-                    <td>Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>Total Debt/Equity</td>
-                    <td><span class="filter-strong">Under 1</span></td>
-                    <td>Fundamental row</td>
-                  </tr>
-                  <tr>
-                    <td>RSI (14)</td>
-                    <td><span class="filter-strong">Near Oversold (30&ndash;40)</span></td>
-                    <td>Technical row</td>
-                  </tr>
-                  <tr>
-                    <td>52-Week Low</td>
-                    <td><span class="filter-strong">0&ndash;30% above Low</span></td>
-                    <td>Technical row</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="faq-teaser" style="margin-top: 28px;">
-              <p>Found a candidate? <a href="watchlist.html">Set up your Seeking Alpha watchlist</a> to track it against all 12 methodology metrics.</p>
-            </div>
-          </section>
-
-        </div>
-      </main>
-
+      <button class="btn" id="settingsBtn" aria-label="Settings">⚙ Settings</button>
+      <button class="btn btn-primary" id="loadBtn">Load Data</button>
     </div>
 
-    <footer class="site-footer">
-      Built by <a href="https://azqato.github.io/" target="_blank" rel="noopener">Azqato</a><span style="color: var(--color-text-secondary);">.</span>
-    </footer>
+    <!-- Stale data notice -->
+    <div class="stale-banner" id="staleBanner">
+      <span id="staleText">Data is more than 24 hours old.</span>
+      <span class="spacer"></span>
+      <button class="btn" id="staleLoadBtn">Refresh with your API key</button>
+    </div>
+
+    <!-- Table -->
+    <div class="app-table-wrap">
+      <table class="screener" id="table">
+        <thead>
+          <tr class="group-row">
+            <th class="col-ticker"></th>
+            <th class="g-screen group-start" colspan="3">Azqato Screen</th>
+            <th class="grp-growth group-start" colspan="4">Growth</th>
+            <th class="grp-valuation group-start" colspan="2">Valuation</th>
+            <th class="grp-balance group-start" colspan="2">Balance Sheet</th>
+            <th class="grp-snapshot group-start" colspan="3">Snapshot</th>
+          </tr>
+          <tr class="head-row">
+            <th class="left col-ticker" data-sort="ticker">Ticker</th>
+            <th class="left group-start" data-sort="verdict">Verdict</th>
+            <th data-sort="score">Score</th>
+            <th data-sort="factors">Factors</th>
+            <th class="grp-growth group-start" data-sort="revTTM">Rev TTM</th>
+            <th class="grp-growth" data-sort="revFwd">Rev FWD</th>
+            <th class="grp-growth" data-sort="epsTTM">EPS TTM</th>
+            <th class="grp-growth" data-sort="epsFwd">EPS FWD</th>
+            <th class="grp-valuation group-start" data-sort="peFwd">P/E FWD</th>
+            <th class="grp-valuation" data-sort="pegFwd">PEG FWD</th>
+            <th class="grp-balance group-start" data-sort="cash">Total Cash</th>
+            <th class="grp-balance" data-sort="debt">Total Debt</th>
+            <th class="grp-snapshot group-start" data-sort="price">Price</th>
+            <th class="grp-snapshot" data-sort="marketCap">Mkt Cap</th>
+            <th class="grp-snapshot" data-sort="updated">Updated</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+
+      <div class="placeholder" id="placeholder">
+        <div class="placeholder-card">
+          <h2>No data loaded yet</h2>
+          <p>This screener rates each Nasdaq 100 company against the Azqato methodology factors. It runs entirely in your browser. To populate live metrics, add a free Financial Modeling Prep API key and click <b>Load Data</b>.</p>
+          <button class="btn btn-primary" id="placeholderBtn">Add API key &amp; load</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer-bar">
+      Educational use only. Not financial advice. Metric values are pulled from Financial Modeling Prep and may be delayed or incomplete. The Nasdaq 100 constituent list is static and may differ from the current index.
+    </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Settings / Load modal -->
+  <div class="modal-backdrop" id="modal" hidden>
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <h2>Screener Settings</h2>
+      <p class="hint">Everything runs in your browser. Your API key and the loaded data are stored only in this browser's local storage. Nothing is sent to any server except Financial Modeling Prep.</p>
+
+      <label class="field" for="apiKey">Financial Modeling Prep API key</label>
+      <input type="password" id="apiKey" placeholder="paste your free FMP key" autocomplete="off" spellcheck="false">
+      <p class="hint">Don't have one? Get a free key at <a href="https://site.financialmodelingprep.com/developer/docs" target="_blank" rel="noopener">financialmodelingprep.com</a>. The free tier allows 250 requests per day.</p>
+
+      <label class="field" for="maxLoad">Max symbols to load this run</label>
+      <input type="number" id="maxLoad" min="1" max="110" value="60">
+      <p class="hint">Each symbol uses 4 API requests (quote, balance sheet, financial growth, analyst estimates). The free tier allows 250 requests per day, so the default of 60 keeps a single run under that limit. Already-loaded symbols are skipped, so you can resume on another day to fill in the rest of the 100.</p>
+
+      <div class="status-msg" id="statusMsg"></div>
+
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="modalLoadBtn">Load / Refresh Data</button>
+        <button class="btn" id="modalSaveBtn">Save Key</button>
+        <button class="btn" id="clearBtn">Clear Loaded Data</button>
+      </div>
+
+      <h3>How stocks are scored</h3>
+      <p class="hint">Each company is graded on seven factors drawn from the methodology. A factor scores 2 (strong), 1 (acceptable), or 0 (weak). The score is the percentage of available points earned, and the verdict follows from it.</p>
+      <ul>
+        <li><b>Revenue Growth TTM &amp; FWD</b> — strong above 15%, acceptable 8&ndash;15%.</li>
+        <li><b>EPS Growth TTM &amp; FWD</b> — strong above 15%, acceptable when positive.</li>
+        <li><b>P/E FWD vs EPS Growth</b> — strong when P/E FWD is below the forward EPS growth rate (the primary signal).</li>
+        <li><b>PEG FWD</b> — strong below 1.0, acceptable up to 2.0.</li>
+        <li><b>Cash vs Debt</b> — strong when cash exceeds debt, acceptable when debt is under 3&times; cash.</li>
+      </ul>
+      <p class="hint"><b>Verdict:</b> Pass = score 80%+, Watch = 60&ndash;79%, Fail = under 60%. Verdicts reflect fundamentals only; entry timing (RSI, 52-week range) is a separate step covered in the <a href="metrics.html" target="_blank" rel="noopener">methodology</a>.</p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    // ---- Nasdaq 100 constituent list (static; edit as the index changes) ----
+    var NASDAQ100 = [
+      ["ADBE","Adobe"],["ADP","Automatic Data Processing"],["ABNB","Airbnb"],
+      ["GOOGL","Alphabet (A)"],["GOOG","Alphabet (C)"],["AMZN","Amazon"],
+      ["AMD","Advanced Micro Devices"],["AEP","American Electric Power"],["AMGN","Amgen"],
+      ["ADI","Analog Devices"],["ANSS","Ansys"],["AAPL","Apple"],
+      ["AMAT","Applied Materials"],["APP","AppLovin"],["ARM","Arm Holdings"],
+      ["ASML","ASML"],["AZN","AstraZeneca"],["TEAM","Atlassian"],
+      ["ADSK","Autodesk"],["AVGO","Broadcom"],["BKR","Baker Hughes"],
+      ["BIIB","Biogen"],["BKNG","Booking Holdings"],["CDNS","Cadence Design"],
+      ["CDW","CDW"],["CHTR","Charter Communications"],["CTAS","Cintas"],
+      ["CSCO","Cisco"],["CCEP","Coca-Cola Europacific"],["CTSH","Cognizant"],
+      ["CMCSA","Comcast"],["CEG","Constellation Energy"],["CPRT","Copart"],
+      ["CSGP","CoStar Group"],["COST","Costco"],["CRWD","CrowdStrike"],
+      ["CSX","CSX"],["DDOG","Datadog"],["DXCM","Dexcom"],
+      ["FANG","Diamondback Energy"],["DASH","DoorDash"],["EA","Electronic Arts"],
+      ["EXC","Exelon"],["FAST","Fastenal"],["FTNT","Fortinet"],
+      ["GEHC","GE HealthCare"],["GILD","Gilead Sciences"],["GFS","GlobalFoundries"],
+      ["HON","Honeywell"],["IDXX","Idexx Laboratories"],["INTC","Intel"],
+      ["INTU","Intuit"],["ISRG","Intuitive Surgical"],["KDP","Keurig Dr Pepper"],
+      ["KLAC","KLA"],["KHC","Kraft Heinz"],["LRCX","Lam Research"],
+      ["LIN","Linde"],["LULU","Lululemon"],["MAR","Marriott"],
+      ["MRVL","Marvell"],["MELI","MercadoLibre"],["META","Meta Platforms"],
+      ["MCHP","Microchip Technology"],["MU","Micron Technology"],["MSFT","Microsoft"],
+      ["MSTR","MicroStrategy"],["MDLZ","Mondelez"],["MNST","Monster Beverage"],
+      ["NFLX","Netflix"],["NXPI","NXP Semiconductors"],["ORLY","O'Reilly Automotive"],
+      ["ODFL","Old Dominion Freight"],["ON","ON Semiconductor"],["PCAR","PACCAR"],
+      ["PLTR","Palantir"],["PANW","Palo Alto Networks"],["PAYX","Paychex"],
+      ["PYPL","PayPal"],["PDD","PDD Holdings"],["PEP","PepsiCo"],
+      ["QCOM","Qualcomm"],["REGN","Regeneron"],["ROP","Roper Technologies"],
+      ["ROST","Ross Stores"],["SBUX","Starbucks"],["SNPS","Synopsys"],
+      ["TMUS","T-Mobile US"],["TTWO","Take-Two Interactive"],["TXN","Texas Instruments"],
+      ["TTD","The Trade Desk"],["TSLA","Tesla"],["VRSK","Verisk Analytics"],
+      ["VRTX","Vertex Pharmaceuticals"],["WBD","Warner Bros Discovery"],["WDAY","Workday"],
+      ["XEL","Xcel Energy"],["ZS","Zscaler"],["MRNA","Moderna"],["SMCI","Super Micro Computer"]
+    ];
+
+    var FMP = "https://financialmodelingprep.com/stable";
+    var LS_KEY = "azq_fmp_key";
+    var LS_DATA = "azq_screener_data";
+    var LS_META = "azq_screener_meta";
+
+    // ---- State ----
+    var data = {};       // ticker -> metrics object
+    var meta = {};       // { updated: ISOString }
+    var filter = "all";
+    var sortKey = "score";
+    var sortDir = -1;    // -1 desc, 1 asc
+    var query = "";
+    var loading = false;
+
+    // ---- DOM ----
+    var $ = function (id) { return document.getElementById(id); };
+    var tbody = $("tbody");
+
+    // ---- Persistence ----
+    function loadState() {
+      try { data = JSON.parse(localStorage.getItem(LS_DATA)) || {}; } catch (e) { data = {}; }
+      try { meta = JSON.parse(localStorage.getItem(LS_META)) || {}; } catch (e) { meta = {}; }
+      $("apiKey").value = localStorage.getItem(LS_KEY) || "";
+    }
+    function saveData() {
+      localStorage.setItem(LS_DATA, JSON.stringify(data));
+      localStorage.setItem(LS_META, JSON.stringify(meta));
+    }
+    function getKey() { return (localStorage.getItem(LS_KEY) || "").trim(); }
+
+    // ---- Number helpers ----
+    function isNum(n) { return typeof n === "number" && isFinite(n); }
+    function fmtPct(n) { return isNum(n) ? n.toFixed(1) + "%" : "—"; }
+    function fmtNum(n) { return isNum(n) ? n.toFixed(2) : "—"; }
+    function fmtMoney(n) {
+      if (!isNum(n)) return "—";
+      var a = Math.abs(n);
+      if (a >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
+      if (a >= 1e9)  return "$" + (n / 1e9).toFixed(2) + "B";
+      if (a >= 1e6)  return "$" + (n / 1e6).toFixed(1) + "M";
+      if (a >= 1e3)  return "$" + (n / 1e3).toFixed(1) + "K";
+      return "$" + n.toFixed(0);
+    }
+    function fmtPrice(n) { return isNum(n) ? "$" + n.toFixed(2) : "—"; }
+    function freshestMs(a, b) {
+      var ta = a ? Date.parse(a) : 0, tb = b ? Date.parse(b) : 0;
+      var m = Math.max(ta, tb);
+      return m || null;
+    }
+    function fmtAge(ms) {
+      if (!ms) return "—";
+      var diff = Math.max(0, Date.now() - ms);
+      var mins = Math.floor(diff / 60000);
+      if (mins < 60) return mins + "m";
+      var hrs = Math.floor(mins / 60);
+      if (hrs < 24) return hrs + "h";
+      return Math.floor(hrs / 24) + "d";
+    }
+    function clsAge(ms) { return (ms && Date.now() - ms > 8 * 86400000) ? "cau" : "muted"; }
+    function ageTitle(d) {
+      var p = d.priceUpdated ? new Date(d.priceUpdated).toLocaleString() : "—";
+      var f = d.fundamentalsUpdated ? new Date(d.fundamentalsUpdated).toLocaleString() : "—";
+      return "Price: " + p + "  •  Fundamentals: " + f;
+    }
+
+    // ---- Scoring (Azqato methodology factors) ----
+    function score(d) {
+      if (!d) return { pct: null, passes: 0, total: 0 };
+      var pts = 0, max = 0, passes = 0, total = 0;
+      function factor(ok, strong) {
+        max += 2; total += 1;
+        if (strong) { pts += 2; passes += 1; }
+        else if (ok) { pts += 1; }
+      }
+      if (isNum(d.revTTM)) factor(d.revTTM >= 8, d.revTTM > 15);
+      if (isNum(d.revFwd)) factor(d.revFwd >= 8, d.revFwd > 15);
+      if (isNum(d.epsTTM)) factor(d.epsTTM > 0, d.epsTTM > 15);
+      if (isNum(d.epsFwd)) factor(d.epsFwd > 0, d.epsFwd > 15);
+      if (isNum(d.peFwd) && isNum(d.epsFwd) && d.epsFwd > 0) {
+        factor(d.peFwd < d.epsFwd * 1.5, d.peFwd < d.epsFwd);
+      }
+      if (isNum(d.pegFwd) && d.pegFwd > 0) factor(d.pegFwd <= 2, d.pegFwd < 1);
+      if (isNum(d.cash) && isNum(d.debt)) factor(d.debt < d.cash * 3, d.cash > d.debt);
+      var pct = max > 0 ? Math.round((pts / max) * 100) : null;
+      return { pct: pct, passes: passes, total: total };
+    }
+    function verdictOf(pct) {
+      if (pct === null) return "none";
+      if (pct >= 80) return "pass";
+      if (pct >= 60) return "watch";
+      return "fail";
+    }
+
+    // ---- Cell coloring ----
+    function clsGrowth(n) { return !isNum(n) ? "muted" : (n > 15 ? "pos" : (n >= 8 ? "cau" : "neg")); }
+    function clsEps(n)    { return !isNum(n) ? "muted" : (n > 15 ? "pos" : (n > 0 ? "cau" : "neg")); }
+    function clsPeg(n)    { return !isNum(n) ? "muted" : (n > 0 && n < 1 ? "pos" : (n <= 2 && n > 0 ? "cau" : "neg")); }
+    function clsPe(d) {
+      if (!isNum(d.peFwd)) return "muted";
+      if (isNum(d.epsFwd) && d.epsFwd > 0) {
+        if (d.peFwd < d.epsFwd) return "pos";
+        if (d.peFwd < d.epsFwd * 1.5) return "cau";
+        return "neg";
+      }
+      return "";
+    }
+    function clsCash(d) {
+      if (!isNum(d.cash) || !isNum(d.debt)) return "muted";
+      if (d.cash > d.debt) return "pos";
+      if (d.debt < d.cash * 3) return "cau";
+      return "neg";
+    }
+    function scoreColor(pct) {
+      if (pct === null) return "var(--color-border)";
+      if (pct >= 80) return "var(--color-positive)";
+      if (pct >= 60) return "var(--color-warning)";
+      return "var(--color-negative)";
+    }
+
+    // ---- Build a renderable row model ----
+    function rows() {
+      return NASDAQ100.map(function (s) {
+        var t = s[0];
+        var d = data[t] || {};
+        var sc = score(d);
+        return {
+          ticker: t, name: s[1], d: d,
+          score: sc.pct, passes: sc.passes, total: sc.total,
+          verdict: verdictOf(sc.pct),
+          revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
+          peFwd: d.peFwd, pegFwd: d.pegFwd, cash: d.cash, debt: d.debt,
+          price: d.price, marketCap: d.marketCap,
+          updated: freshestMs(d.priceUpdated, d.fundamentalsUpdated)
+        };
+      });
+    }
+
+    var VERDICT_RANK = { pass: 3, watch: 2, fail: 1, none: 0 };
+
+    function sortRows(rs) {
+      var k = sortKey, dir = sortDir;
+      return rs.slice().sort(function (a, b) {
+        var av, bv;
+        if (k === "ticker") { return a.ticker.localeCompare(b.ticker) * dir; }
+        if (k === "verdict") { av = VERDICT_RANK[a.verdict]; bv = VERDICT_RANK[b.verdict]; }
+        else if (k === "factors") { av = a.total ? a.passes / a.total : -1; bv = b.total ? b.passes / b.total : -1; }
+        else { av = a[k]; bv = b[k]; }
+        var an = isNum(av), bn = isNum(bv);
+        if (!an && !bn) return 0;
+        if (!an) return 1;   // missing always sinks to bottom
+        if (!bn) return -1;
+        return (av - bv) * dir;
+      });
+    }
+
+    // ---- Render ----
+    function render() {
+      var rs = rows();
+
+      // verdict counts
+      var counts = { all: rs.length, pass: 0, watch: 0, fail: 0 };
+      rs.forEach(function (r) { if (counts[r.verdict] !== undefined) counts[r.verdict]++; });
+      $("cnt-all").textContent = counts.all;
+      $("cnt-pass").textContent = counts.pass;
+      $("cnt-watch").textContent = counts.watch;
+      $("cnt-fail").textContent = counts.fail;
+
+      // filter
+      var view = rs.filter(function (r) {
+        if (filter !== "all" && r.verdict !== filter) return false;
+        if (query) {
+          var q = query.toLowerCase();
+          if (r.ticker.toLowerCase().indexOf(q) === -1 && r.name.toLowerCase().indexOf(q) === -1) return false;
+        }
+        return true;
+      });
+      view = sortRows(view);
+
+      tbody.innerHTML = view.map(rowHtml).join("");
+
+      // summary + placeholder
+      var loaded = Object.keys(data).length;
+      $("placeholder").style.display = loaded === 0 ? "flex" : "none";
+      var scored = rs.filter(function (r) { return r.score !== null; }).length;
+      if (loaded === 0) {
+        $("summary").innerHTML = NASDAQ100.length + " Nasdaq 100 names &middot; load data to score them";
+      } else {
+        $("summary").innerHTML = "<b>" + counts.pass + "</b> pass &middot; <b>" + counts.watch +
+          "</b> watch &middot; <b>" + counts.fail + "</b> fail &middot; " + scored + "/" + NASDAQ100.length + " scored";
+      }
+      $("asOf").textContent = meta.updated ? "as of " + new Date(meta.updated).toLocaleString() : "no data loaded";
+
+      applyColumnVisibility();
+      updateSortIndicators();
+      checkStale();
+    }
+
+    // ---- Pre-built data feed (data/screener.json from the daily GitHub Action) ----
+    var FEED_URL = "data/screener.json";
+
+    function isStale(ts) {
+      if (!ts) return true;
+      return (Date.now() - new Date(ts).getTime()) > 24 * 3600 * 1000;
+    }
+
+    function checkStale() {
+      var has = Object.keys(data).length > 0;
+      var stale = has && isStale(meta.updated);
+      $("staleBanner").classList.toggle("on", stale);
+      if (stale) {
+        $("staleText").innerHTML = meta.updated
+          ? "Data is from " + new Date(meta.updated).toLocaleString() + " — more than 24 hours old."
+          : "This data has no timestamp and may be out of date.";
+      }
+    }
+
+    async function initFeed() {
+      try {
+        var res = await fetch(FEED_URL, { cache: "no-store" });
+        if (!res.ok) { checkStale(); return; }
+        var feed = await res.json();
+        if (feed && feed.stocks && feed.updated && Object.keys(feed.stocks).length) {
+          var feedTime = new Date(feed.updated).getTime();
+          var localTime = meta.updated ? new Date(meta.updated).getTime() : 0;
+          // Use the feed unless the user has a newer bring-your-own-key pull.
+          if (feedTime >= localTime) {
+            data = {};
+            Object.keys(feed.stocks).forEach(function (k) { data[k] = feed.stocks[k]; });
+            meta = { updated: feed.updated, source: "feed" };
+            render();
+            return;
+          }
+        }
+      } catch (e) { /* no feed yet / offline: fall back to local data + the BYO-key loader */ }
+      checkStale();
+    }
+
+    function rowHtml(r) {
+      var d = r.d;
+      var verdictLabel = { pass: "✓ PASS", watch: "WATCH", fail: "✕ FAIL", none: "NO DATA" }[r.verdict];
+      var scoreCell;
+      if (r.score === null) {
+        scoreCell = '<span class="muted">—</span>';
+      } else {
+        scoreCell = '<span class="score-bar-wrap"><span class="score-val">' + r.score + '</span>' +
+          '<span class="score-track"><span class="score-fill" style="width:' + r.score + '%;background:' +
+          scoreColor(r.score) + '"></span></span></span>';
+      }
+      var factorsCell = r.total ? '<span class="factors">' + r.passes + "/" + r.total + "</span>" : '<span class="muted">—</span>';
+
+      return '<tr>' +
+        '<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>' +
+        '<td class="left group-start"><span class="verdict v-' + r.verdict + '">' + verdictLabel + '</span></td>' +
+        '<td>' + scoreCell + '</td>' +
+        '<td>' + factorsCell + '</td>' +
+        '<td class="grp-growth group-start ' + clsGrowth(r.revTTM) + '">' + fmtPct(r.revTTM) + '</td>' +
+        '<td class="grp-growth ' + clsGrowth(r.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
+        '<td class="grp-growth ' + clsEps(r.epsTTM) + '">' + fmtPct(r.epsTTM) + '</td>' +
+        '<td class="grp-growth ' + clsEps(r.epsFwd) + '">' + fmtPct(r.epsFwd) + '</td>' +
+        '<td class="grp-valuation group-start ' + clsPe(d) + '">' + fmtNum(r.peFwd) + '</td>' +
+        '<td class="grp-valuation ' + clsPeg(r.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
+        '<td class="grp-balance group-start ' + clsCash(d) + '">' + fmtMoney(r.cash) + '</td>' +
+        '<td class="grp-balance">' + fmtMoney(r.debt) + '</td>' +
+        '<td class="grp-snapshot group-start">' + fmtPrice(r.price) + '</td>' +
+        '<td class="grp-snapshot">' + fmtMoney(r.marketCap) + '</td>' +
+        '<td class="grp-snapshot ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
+        '</tr>';
+    }
+
+    function updateSortIndicators() {
+      var ths = document.querySelectorAll("tr.head-row th");
+      ths.forEach(function (th) {
+        var k = th.getAttribute("data-sort");
+        var existing = th.querySelector(".arrow");
+        if (existing) existing.remove();
+        if (k === sortKey) {
+          var span = document.createElement("span");
+          span.className = "arrow";
+          span.textContent = sortDir === -1 ? "▼" : "▲";
+          th.appendChild(span);
+        }
+      });
+    }
+
+    // ---- Column visibility ----
+    function applyColumnVisibility() {
+      ["growth", "valuation", "balance", "snapshot"].forEach(function (g) {
+        var cb = document.querySelector('#colsMenu input[data-group="' + g + '"]');
+        var show = cb ? cb.checked : true;
+        document.querySelectorAll(".grp-" + g).forEach(function (el) {
+          el.classList.toggle("col-hidden", !show);
+        });
+      });
+    }
+
+    // ---- API loading ----
+    function setProgress(on, done, totalN, label) {
+      var p = $("progress");
+      p.classList.toggle("on", on);
+      if (on) {
+        $("progressLabel").textContent = label || (done + "/" + totalN);
+        $("progressFill").style.width = totalN ? Math.round((done / totalN) * 100) + "%" : "0%";
+      }
+    }
+    function setStatus(msg, kind) {
+      var el = $("statusMsg");
+      el.textContent = msg;
+      el.className = "status-msg on " + (kind || "");
+    }
+
+    function nearestForwardPair(estimates) {
+      // estimates: [{date, revenueAvg, epsAvg}, ...]
+      if (!Array.isArray(estimates) || !estimates.length) return null;
+      var sorted = estimates.slice().sort(function (a, b) {
+        return new Date(a.date) - new Date(b.date);
+      });
+      var now = Date.now();
+      var idx = -1;
+      for (var i = 0; i < sorted.length; i++) {
+        if (new Date(sorted[i].date).getTime() >= now) { idx = i; break; }
+      }
+      if (idx === -1) idx = sorted.length - 1; // all in the past; use last two available
+      var fy0 = sorted[idx];
+      var fy1 = sorted[idx + 1] || null;
+      // If we fell back to the last entry, step back one so we still have a pair.
+      if (!fy1 && idx > 0) { fy1 = fy0; fy0 = sorted[idx - 1]; }
+      return { fy0: fy0, fy1: fy1 };
+    }
+
+    // FMP returns errors either as a JSON object with "Error Message", or as a
+    // plain-text string ("Restricted Endpoint: …", "Query Error: …"), and the
+    // HTTP status is not always an error code. Classify both shapes.
+    function classifyBody(body) {
+      var msg = "";
+      if (typeof body === "string") msg = body;
+      else if (body && typeof body === "object" && !Array.isArray(body)) {
+        msg = body["Error Message"] || body.message || body.error || "";
+      } else { return null; } // array = success
+      if (/invalid api key|legacy endpoint/i.test(msg)) return "auth";
+      if (/limit reached|rate limit|too many requests/i.test(msg)) return "rate";
+      if (/restricted|premium|subscription|special endpoint|not available under/i.test(msg)) return "premium";
+      if (msg) return "http";
+      return null;
+    }
+
+    function fetchJson(url) {
+      return fetch(url).then(function (res) {
+        return res.text().then(function (txt) {
+          var body;
+          try { body = JSON.parse(txt); } catch (e) { body = txt; }
+          var code = classifyBody(body);
+          if (!code) {
+            if (res.status === 401 || res.status === 403) code = "auth";
+            else if (res.status === 429) code = "rate";
+            else if (res.status === 402) code = "premium";
+            else if (!res.ok) code = "http";
+          }
+          if (code) {
+            var err = new Error(
+              (typeof body === "string" ? body : (body && body["Error Message"])) || ("HTTP " + res.status)
+            );
+            err.code = code;
+            throw err;
+          }
+          return body;
+        });
+      });
+    }
+
+    async function loadData() {
+      if (loading) return;
+      var key = getKey();
+      if (!key) { openModal(); setStatus("Add your free API key first, then click Load.", "err"); return; }
+
+      var maxLoad = parseInt($("maxLoad").value, 10) || NASDAQ100.length;
+      loading = true;
+      $("loadBtn").disabled = true;
+      setStatus("", "");
+
+      var symbols = NASDAQ100.map(function (s) { return s[0]; });
+
+      // Decide which symbols to process: those missing data first, capped by maxLoad.
+      var pending = symbols.filter(function (t) { return !data[t] || data[t].peFwd === undefined; });
+      var queue = pending.concat(symbols.filter(function (t) { return pending.indexOf(t) === -1; }));
+      queue = queue.slice(0, maxLoad);
+
+      var done = 0, stopped = null;
+
+      var KQ = "&apikey=" + encodeURIComponent(key);
+
+      async function processSymbol(t) {
+        if (stopped) return;
+        var rec = data[t] || {};
+        rec.name = (NASDAQ100.find(function (s) { return s[0] === t; }) || [])[1];
+
+        // quote -> price, market cap
+        try {
+          var q = await fetchJson(FMP + "/quote?symbol=" + t + KQ);
+          if (q && q[0]) {
+            rec.price = isNum(q[0].price) ? q[0].price : rec.price;
+            rec.marketCap = isNum(q[0].marketCap) ? q[0].marketCap : rec.marketCap;
+          }
+        } catch (e) { if (e.code === "auth" || e.code === "rate") { stopped = e; return; } }
+
+        // balance sheet -> cash, debt
+        try {
+          var bs = await fetchJson(FMP + "/balance-sheet-statement?symbol=" + t + "&period=annual&limit=1" + KQ);
+          if (bs && bs[0]) {
+            rec.cash = isNum(bs[0].cashAndShortTermInvestments) ? bs[0].cashAndShortTermInvestments : null;
+            rec.debt = isNum(bs[0].totalDebt) ? bs[0].totalDebt : null;
+          }
+        } catch (e) { if (e.code === "auth" || e.code === "rate") { stopped = e; return; } }
+
+        // financial growth -> revenue & eps growth TTM (latest annual YoY)
+        try {
+          var fg = await fetchJson(FMP + "/financial-growth?symbol=" + t + "&period=annual&limit=1" + KQ);
+          if (fg && fg[0]) {
+            rec.revTTM = isNum(fg[0].revenueGrowth) ? fg[0].revenueGrowth * 100 : null;
+            rec.epsTTM = isNum(fg[0].epsgrowth) ? fg[0].epsgrowth * 100 : null;
+          }
+        } catch (e) { if (e.code === "auth" || e.code === "rate") { stopped = e; return; } }
+
+        // analyst estimates -> forward revenue/eps growth, forward P/E, PEG
+        try {
+          var est = await fetchJson(FMP + "/analyst-estimates?symbol=" + t + "&period=annual&limit=8" + KQ);
+          var pair = nearestForwardPair(est);
+          if (pair && pair.fy0) {
+            var e0 = pair.fy0, e1 = pair.fy1;
+            if (isNum(rec.price) && isNum(e0.epsAvg) && e0.epsAvg > 0) {
+              rec.peFwd = rec.price / e0.epsAvg;
+            }
+            if (e1 && isNum(e0.epsAvg) && e0.epsAvg !== 0 && isNum(e1.epsAvg)) {
+              rec.epsFwd = (e1.epsAvg / Math.abs(e0.epsAvg) - 1) * 100;
+            }
+            if (e1 && isNum(e0.revenueAvg) && e0.revenueAvg > 0 && isNum(e1.revenueAvg)) {
+              rec.revFwd = (e1.revenueAvg / e0.revenueAvg - 1) * 100;
+            }
+            if (isNum(rec.peFwd) && isNum(rec.epsFwd) && rec.epsFwd > 0) {
+              rec.pegFwd = rec.peFwd / rec.epsFwd;
+            }
+          }
+        } catch (e) {
+          if (e.code === "auth" || e.code === "rate") { stopped = e; return; }
+          // premium/other: leave forward fields undefined -> shown as —
+        }
+
+        var nowIso = new Date().toISOString();
+        rec.priceUpdated = nowIso;
+        rec.fundamentalsUpdated = nowIso;
+        if (rec.peFwd === undefined) rec.peFwd = null; // mark as processed even if empty
+        data[t] = rec;
+        done++;
+        saveData();
+        setProgress(true, done, queue.length, "Loading " + done + "/" + queue.length + " — " + t);
+        render();
+      }
+
+      // Simple concurrency pool
+      var POOL = 4, i = 0;
+      async function worker() {
+        while (i < queue.length && !stopped) {
+          var t = queue[i++];
+          await processSymbol(t);
+        }
+      }
+      var workers = [];
+      for (var w = 0; w < POOL; w++) workers.push(worker());
+      await Promise.all(workers);
+
+      meta.updated = new Date().toISOString();
+      saveData();
+      finishLoad(stopped);
+    }
+
+    function finishLoad(err) {
+      loading = false;
+      $("loadBtn").disabled = false;
+      setProgress(false, 0, 0);
+      render();
+      if (!err) {
+        setStatus("Done. Loaded " + Object.keys(data).length + " symbols.", "ok");
+        return;
+      }
+      if (err.code === "auth") setStatus("Invalid or unauthorized API key. Check your key and try again.", "err");
+      else if (err.code === "rate") setStatus("Hit the API rate limit (250/day on the free tier). Progress was saved — resume tomorrow to finish the rest.", "err");
+      else if (err.code === "premium") setStatus("Some endpoints require a paid FMP plan; those columns are left blank.", "err");
+      else setStatus("Could not reach the API: " + (err.message || "network error") + ".", "err");
+    }
+
+    // ---- Modal ----
+    function openModal() { $("modal").hidden = false; }
+    function closeModal() { $("modal").hidden = true; }
+
+    // ---- Events ----
+    function bind() {
+      // verdict filter chips
+      document.querySelectorAll(".chip").forEach(function (c) {
+        c.addEventListener("click", function () {
+          document.querySelectorAll(".chip").forEach(function (x) { x.classList.remove("active"); });
+          c.classList.add("active");
+          filter = c.getAttribute("data-filter");
+          render();
+        });
+      });
+
+      // sort
+      document.querySelectorAll("tr.head-row th").forEach(function (th) {
+        th.addEventListener("click", function () {
+          var k = th.getAttribute("data-sort");
+          if (!k) return;
+          if (sortKey === k) { sortDir = -sortDir; }
+          else { sortKey = k; sortDir = (k === "ticker") ? 1 : -1; }
+          render();
+        });
+      });
+
+      // search
+      $("search").addEventListener("input", function () { query = this.value.trim(); render(); });
+
+      // columns menu
+      $("colsBtn").addEventListener("click", function (e) {
+        e.stopPropagation();
+        $("colsMenu").hidden = !$("colsMenu").hidden;
+      });
+      document.addEventListener("click", function () { $("colsMenu").hidden = true; });
+      $("colsMenu").addEventListener("click", function (e) { e.stopPropagation(); });
+      document.querySelectorAll("#colsMenu input").forEach(function (cb) {
+        cb.addEventListener("change", applyColumnVisibility);
+      });
+
+      // buttons
+      $("settingsBtn").addEventListener("click", openModal);
+      $("loadBtn").addEventListener("click", loadData);
+      $("placeholderBtn").addEventListener("click", openModal);
+      $("staleLoadBtn").addEventListener("click", openModal);
+      $("modalClose").addEventListener("click", closeModal);
+      $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) closeModal(); });
+      $("modalSaveBtn").addEventListener("click", function () {
+        localStorage.setItem(LS_KEY, $("apiKey").value.trim());
+        setStatus("API key saved in this browser.", "ok");
+      });
+      $("modalLoadBtn").addEventListener("click", function () {
+        localStorage.setItem(LS_KEY, $("apiKey").value.trim());
+        loadData();
+      });
+      $("clearBtn").addEventListener("click", function () {
+        if (!confirm("Clear all loaded metric data? Your API key is kept.")) return;
+        data = {}; meta = {};
+        localStorage.removeItem(LS_DATA);
+        localStorage.removeItem(LS_META);
+        setStatus("Loaded data cleared.", "ok");
+        render();
+      });
+
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+    }
+
+    // ---- Init ----
+    loadState();
+    bind();
+    render();
+    initFeed();
+  })();
+  </script>
 </body>
 </html>

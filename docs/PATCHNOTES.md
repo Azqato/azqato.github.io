@@ -2,6 +2,35 @@
 
 ---
 
+## v3.5.0 — June 2026 — Page Renames (Finviz / Seeking Alpha / Screener)
+
+**Three pages renamed to clearer, destination-named files, with every reference updated sitewide. No content or layout changes — purely filenames and the links/metadata that point to them.**
+
+> Note on history: earlier entries below are left unchanged on purpose. They are an accurate changelog of what each release touched at the time (e.g., v1.5 created `screener.html` and `watchlist.html`; a still-earlier rename moved `finviz.html` → `screener.html`). This entry records the current renames rather than rewriting that history.
+
+### Renames
+
+| Old name | New name | What it is |
+|----------|----------|------------|
+| `screener.html` | `finviz.html` | Finviz stock screener setup guide |
+| `watchlist.html` | `seekingalpha.html` | Seeking Alpha 12-column watchlist setup guide |
+| `screenapp.html` | `screener.html` | Interactive Nasdaq 100 screener (introduced in v3.4.0) |
+
+Renames were performed with `git mv` (history preserved). Reference updates were applied in order — `screener.html` → `finviz.html` first, then `screenapp.html` → `screener.html` — so the reused `screener.html` name never collided.
+
+### References updated
+
+- **All HTML pages:** sidebar nav hrefs (`Screener` → `finviz.html`, `Watchlist` → `seekingalpha.html`), cross-links, faq/teaser links, `og:url` / canonical metadata, and the active-page marker on the renamed guide
+- **Interactive screener (`screener.html`, formerly `screenapp.html`):** `og:url` updated; its in-app "Finviz Guide" link now points to `finviz.html`. The data feed path (`data/screener.json`) is unchanged
+- **Data pipeline:** header comment in `scripts/fetch-screener-data.mjs` updated. The workflow and `data/screener.json` filename were unaffected (no `.html` references)
+- **Docs:** `README.md` pages table and Content Philosophy carve-out; `docs/PRD.md` page tables, section headers (3.4 Finviz Setup, 3.5 Seeking Alpha), `og:url` table, and anchor map; `docs/DESIGN.md` version history (v3.4 and v3.5 rows added)
+
+### Nav note
+
+Nav labels are unchanged. The "Screener" nav item points to `finviz.html`, and the interactive screener at `screener.html` deliberately remains out of the nav (per request). Adding a nav entry for it is a future step.
+
+---
+
 ## v3.4.0 — June 2026 — Interactive Nasdaq 100 Screener (`screenapp.html`) + Daily Data Pipeline
 
 **New interactive tool that rates every Nasdaq 100 company against the methodology factors, scored and ranked in the browser. Ships as a new standalone page (`screenapp.html`) plus an optional zero-config data pipeline: a daily GitHub Action regenerates `data/screener.json` so the public page shows live data with no setup. A bring-your-own-key loader (Financial Modeling Prep) remains available as a manual refresh and as the fallback whenever the published data is more than 24 hours old. The existing `screener.html` Finviz guide is unchanged.**

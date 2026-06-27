@@ -37,8 +37,8 @@ A static educational website documenting Azqato's individual stock picking metho
 | Home | `index.html` | Strategy overview, 10-metric summary grid, reference table, portfolio vs watchlist framework |
 | Philosophy | `philosophy.html` | Full conceptual foundation: stocks as ownership, research methodology, GVD framework, market environments, Wall Street context, market leadership cycles, building investment knowledge |
 | Metrics Glossary | `metrics.html` | Deep explanations of all 12 metrics with illustrative examples and how-to-read guidance |
-| Screener Setup | `screener.html` | Finviz stock screener filter configuration guide |
-| Watchlist Setup | `watchlist.html` | Seeking Alpha 12-column watchlist configuration guide |
+| Finviz Screener Setup | `finviz.html` | Finviz stock screener filter configuration guide |
+| Seeking Alpha Watchlist | `seekingalpha.html` | Seeking Alpha 12-column watchlist configuration guide |
 | Indices & ETF | `indices.html` | VIX, RSI, structural quality metrics, and ETF watchlist setup for index investing |
 | FAQ | `faq.html` | Philosophy and practice Q&A in accordion format |
 
@@ -186,7 +186,7 @@ These are evaluated during research but not available as direct Finviz screener 
 
 ---
 
-### 3.4 Screener Setup (`screener.html`)
+### 3.4 Finviz Screener Setup (`finviz.html`)
 
 Finviz stock screener configuration guide for discovering candidates. Free tier, no account required.
 
@@ -205,7 +205,7 @@ Finviz stock screener configuration guide for discovering candidates. Free tier,
 
 ---
 
-### 3.5 Watchlist Setup (`watchlist.html`)
+### 3.5 Seeking Alpha Watchlist (`seekingalpha.html`)
 
 Seeking Alpha 12-column individual stocks watchlist configuration. Free account, no credit card required.
 
@@ -331,8 +331,8 @@ Every page must include Open Graph and Twitter Card meta tags in the `<head>` so
 | `index.html` | `.../stocks/` | Stock Picking Methodology | A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise. |
 | `philosophy.html` | `.../stocks/philosophy.html` | The Philosophy of Long-Term Conviction Investing | The concepts that sit behind every rule in this methodology. Understanding why the rules exist makes them easier to follow when markets are moving fast and the temptation to react is strongest. |
 | `metrics.html` | `.../stocks/metrics.html` | Stock Evaluation Metrics Explained | Ten metrics. Each one earns its place. This page explains what each signal measures, why it matters for long-term investing decisions, and how to interpret the numbers. All examples are illustrative and use hypothetical figures to demonstrate how each metric works in practice. |
-| `screener.html` | `.../stocks/screener.html` | How to Set Up a Finviz Stock Screener For Free | How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha. |
-| `watchlist.html` | `.../stocks/watchlist.html` | How to Build a Stock Watchlist in Seeking Alpha For Free | Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology. |
+| `finviz.html` | `.../stocks/finviz.html` | How to Set Up a Finviz Stock Screener For Free | How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha. |
+| `seekingalpha.html` | `.../stocks/seekingalpha.html` | How to Build a Stock Watchlist in Seeking Alpha For Free | Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology. |
 | `indices.html` | `.../stocks/indices.html` | Indices & ETF Investing | A separate methodology for evaluating broad market indices and ETFs. Different assets require different frameworks. Where individual stock picking is driven primarily by company fundamentals, index investing is driven primarily by market sentiment, timing signals, and structural efficiency. |
 | `faq.html` | `.../stocks/faq.html` | Stock Investing Q&A | The thinking behind the strategy. Questions about how decisions are made, why certain rules exist, and what the long-term mindset actually looks like in practice. |
 
@@ -379,8 +379,8 @@ Every page with multiple named sections includes an "On This Page" anchor-link b
 | `index.html` | `#section-strategy`, `#section-metrics-grid`, `#section-reference`, `#section-portfolio` |
 | `philosophy.html` | `#section-possible`, `#section-ownership`, `#section-research`, `#section-gvd`, `#section-offense`, `#section-wall-street`, `#section-hype`, `#section-leadership`, `#section-knowledge` |
 | `metrics.html` | `#metric-rev-ttm`, `#metric-rev-fwd`, `#metric-eps-ttm`, `#metric-eps-fwd`, `#metric-pe-fwd`, `#metric-peg-fwd`, `#metric-cash`, `#metric-debt`, `#metric-rsi`, `#metric-52w`, `#metric-gross-margin`, `#metric-net-margin` |
-| `screener.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
-| `watchlist.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
+| `finviz.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
+| `seekingalpha.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
 | `indices.html` | `#section-types`, `#section-dca`, `#section-lumpsum`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-aaii`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
 
 **Implementation:** The `IntersectionObserver` in `script.js` automatically highlights the active section link as the user scrolls. It derives section targets from the hrefs of `.metric-links a` elements on the page, so it works for all pages without per-page configuration. The FAQ page (`faq.html`) uses an accordion pattern and does not have an "On This Page" block.

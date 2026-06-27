@@ -1,6 +1,6 @@
 // fetch-screener-data.mjs
 //
-// Builds data/screener.json for the Nasdaq 100 screener (screenapp.html).
+// Builds data/screener.json for the Nasdaq 100 screener (screener.html).
 // Runs in GitHub Actions on a daily cron. No npm dependencies — uses Node 20+
 // global fetch and the Financial Modeling Prep "stable" API.
 //
