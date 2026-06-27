@@ -514,7 +514,7 @@
             <th class="left col-ticker" data-sort="ticker">Ticker</th>
             <th class="left group-start" data-sort="verdict">Verdict</th>
             <th data-sort="score">Score</th>
-            <th data-sort="factors">Factors</th>
+            <th data-sort="factors" title="Number of factors scoring strong (15+/20) out of those graded">Factors</th>
             <th class="grp-growth group-start" data-sort="revTTM">Rev TTM</th>
             <th class="grp-growth" data-sort="revFwd">Rev FWD</th>
             <th class="grp-growth" data-sort="epsTTM">EPS TTM</th>
@@ -574,15 +574,15 @@
       </div>
 
       <h3>How stocks are scored</h3>
-      <p class="hint">Each company is graded on seven factors drawn from the methodology. A factor scores 2 (strong), 1 (acceptable), or 0 (weak). The score is the percentage of available points earned, and the verdict follows from it.</p>
+      <p class="hint">Each company is graded on five forward-looking factors, each worth up to 20 points, summing to a score out of 100. Points scale granularly within each factor (not just pass/fail). If a metric is missing, the score is rescaled across the factors that are available.</p>
       <ul>
-        <li><b>Revenue Growth TTM &amp; FWD</b> — strong above 15%, acceptable 8&ndash;15%.</li>
-        <li><b>EPS Growth TTM &amp; FWD</b> — strong above 15%, acceptable when positive.</li>
-        <li><b>P/E FWD vs EPS Growth</b> — strong when P/E FWD is below the forward EPS growth rate (the primary signal).</li>
-        <li><b>PEG FWD</b> — strong below 1.0, acceptable up to 2.0.</li>
-        <li><b>Cash vs Debt</b> — strong when cash exceeds debt, acceptable when debt is under 3&times; cash.</li>
+        <li><b>Revenue Growth FWD</b> — 1 point per 1% of growth, up to 20 (20%+ growth = full marks).</li>
+        <li><b>EPS Growth FWD</b> — 1 point per 1% of growth, up to 20.</li>
+        <li><b>P/E FWD vs EPS Growth</b> — full 20 when P/E is at or below half the growth rate, scaling to 0 when P/E reaches 2&times; the growth rate.</li>
+        <li><b>PEG FWD</b> — full 20 at PEG 0.5 or below, scaling to 0 at PEG 2.0.</li>
+        <li><b>Cash vs Debt</b> — full 20 when cash is 1.5&times; debt or more (or no debt), about 13 when cash equals debt, scaling to 0 as debt dominates.</li>
       </ul>
-      <p class="hint"><b>Verdict:</b> Pass = score 80%+, Watch = 60&ndash;79%, Fail = under 60%. Verdicts reflect fundamentals only; entry timing (RSI, 52-week range) is a separate step covered in the <a href="metrics.html" target="_blank" rel="noopener">methodology</a>.</p>
+      <p class="hint">The <b>Factors</b> chip counts how many factors score strong (15+/20) out of those graded. <b>Verdict:</b> Pass = 70+, Watch = 40&ndash;69, Fail = under 40. Verdicts reflect fundamentals only; entry timing (RSI, 52-week range) is a separate step covered in the <a href="metrics.html" target="_blank" rel="noopener">methodology</a>.</p>
     </div>
   </div>
 
@@ -694,30 +694,42 @@
     }
 
     // ---- Scoring (Azqato methodology factors) ----
+    function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
+
+    // Five forward-looking factors, each scored granularly 0-20 (summing to 100
+    // when all are present). A missing factor is dropped and the rest rescaled.
     function score(d) {
       if (!d) return { pct: null, passes: 0, total: 0 };
-      var pts = 0, max = 0, passes = 0, total = 0;
-      function factor(ok, strong) {
-        max += 2; total += 1;
-        if (strong) { pts += 2; passes += 1; }
-        else if (ok) { pts += 1; }
-      }
-      if (isNum(d.revTTM)) factor(d.revTTM >= 8, d.revTTM > 15);
-      if (isNum(d.revFwd)) factor(d.revFwd >= 8, d.revFwd > 15);
-      if (isNum(d.epsTTM)) factor(d.epsTTM > 0, d.epsTTM > 15);
-      if (isNum(d.epsFwd)) factor(d.epsFwd > 0, d.epsFwd > 15);
-      if (isNum(d.peFwd) && isNum(d.epsFwd) && d.epsFwd > 0) {
-        factor(d.peFwd < d.epsFwd * 1.5, d.peFwd < d.epsFwd);
-      }
-      if (isNum(d.pegFwd) && d.pegFwd > 0) factor(d.pegFwd <= 2, d.pegFwd < 1);
-      if (isNum(d.cash) && isNum(d.debt)) factor(d.debt < d.cash * 3, d.cash > d.debt);
-      var pct = max > 0 ? Math.round((pts / max) * 100) : null;
-      return { pct: pct, passes: passes, total: total };
+      var parts = [];
+
+      // 1. Revenue Growth FWD: 1 pt per 1%, cap 20.
+      parts.push(isNum(d.revFwd) ? clamp(d.revFwd, 0, 20) : null);
+      // 2. EPS Growth FWD: 1 pt per 1%, cap 20.
+      parts.push(isNum(d.epsFwd) ? clamp(d.epsFwd, 0, 20) : null);
+      // 3. P/E FWD vs EPS Growth: full at P/E <= 0.5x growth, 0 at >= 2x.
+      if (isNum(d.peFwd) && isNum(d.epsFwd)) {
+        parts.push(d.epsFwd > 0 ? clamp(20 * (2 - d.peFwd / d.epsFwd) / 1.5, 0, 20) : 0);
+      } else { parts.push(null); }
+      // 4. PEG FWD: full at <= 0.5, 0 at >= 2.0.
+      if (isNum(d.pegFwd)) {
+        parts.push(d.pegFwd > 0 ? clamp(20 * (2 - d.pegFwd) / 1.5, 0, 20) : 0);
+      } else { parts.push(null); }
+      // 5. Cash vs Debt: full at cash >= 1.5x debt (or no debt), 0 as debt dominates.
+      if (isNum(d.cash) && isNum(d.debt)) {
+        parts.push(d.debt === 0 ? (d.cash > 0 ? 20 : null) : clamp(20 * (d.cash / d.debt) / 1.5, 0, 20));
+      } else { parts.push(null); }
+
+      var avail = parts.filter(function (p) { return p !== null; });
+      if (!avail.length) return { pct: null, passes: 0, total: 0 };
+      var sum = avail.reduce(function (a, b) { return a + b; }, 0);
+      var pct = Math.round(sum / (avail.length * 20) * 100);
+      var passes = avail.filter(function (p) { return p >= 15; }).length;
+      return { pct: pct, passes: passes, total: avail.length };
     }
     function verdictOf(pct) {
       if (pct === null) return "none";
-      if (pct >= 80) return "pass";
-      if (pct >= 60) return "watch";
+      if (pct >= 70) return "pass";
+      if (pct >= 40) return "watch";
       return "fail";
     }
 
@@ -758,8 +770,8 @@
     }
     function scoreColor(pct) {
       if (pct === null) return "var(--color-border)";
-      if (pct >= 80) return "var(--color-positive)";
-      if (pct >= 60) return "var(--color-warning)";
+      if (pct >= 70) return "var(--color-positive)";
+      if (pct >= 40) return "var(--color-warning)";
       return "var(--color-negative)";
     }
 

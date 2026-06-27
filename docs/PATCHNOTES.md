@@ -2,6 +2,32 @@
 
 ---
 
+## v3.12.0 — June 2026 — New Screener Scoring Model (5 Factors, Granular, /100)
+
+**Replaced the screener's 7-factor pass/acceptable/weak score with a leaner, granular 5-factor model. The two trailing (TTM) growth factors were dropped; each of the five remaining forward-looking factors now scores continuously 0–20, summing to 100.**
+
+### The model (`score()` in `screener.html`)
+
+Each factor is worth up to 20 points, scaled granularly (not bucketed):
+
+1. **Revenue Growth FWD** — 1 pt per 1% of growth, capped at 20 (20%+ = full)
+2. **EPS Growth FWD** — 1 pt per 1% of growth, capped at 20
+3. **P/E FWD vs EPS Growth** — `20 × (2 − r) / 1.5`, r = P/E ÷ growth%; full at r ≤ 0.5, zero at r ≥ 2.0
+4. **PEG FWD** — `20 × (2 − PEG) / 1.5`; full at PEG ≤ 0.5, zero at PEG ≥ 2.0
+5. **Cash vs Debt** — `20 × (cash/debt) / 1.5`; full at cash ≥ 1.5× debt (or no debt), ~13 at cash = debt, zero as debt dominates
+
+Total = sum → 0–100. If a metric is missing, that factor is dropped and the rest are rescaled to /100.
+
+### Changes
+
+- **Dropped Revenue Growth TTM and EPS Growth TTM from scoring** (they remain visible as columns, just no longer scored)
+- **Verdict bands** changed to fit the new distribution: **Pass ≥ 70, Watch 40–69, Fail < 40** (was 80/60)
+- **Factors chip** redefined: count of factors scoring strong (**15+/20**) out of those graded; header tooltip added
+- Settings "How stocks are scored" text rewritten to describe the granular model
+- No data change — scoring is computed client-side from the existing feed. Calibration on the live 100: Pass 27 / Watch 33 / Fail 40; examples MU 100, NVDA 99, TEAM 91, META 88, AMD 84, AAPL 45 (Watch), COST 37 (Fail)
+
+---
+
 ## v3.11.0 — June 2026 — P/E FWD and PEG FWD Now Track Seeking Alpha (Direct Yahoo Fields)
 
 **A yfinance coverage probe found that Yahoo exposes purpose-built fields that match Seeking Alpha better than our computed values. Switched P/E FWD and PEG FWD to those fields.**
