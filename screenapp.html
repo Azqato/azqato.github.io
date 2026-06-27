@@ -477,7 +477,7 @@
             <th class="grp-growth group-start" colspan="4">Growth</th>
             <th class="grp-valuation group-start" colspan="2">Valuation</th>
             <th class="grp-balance group-start" colspan="2">Balance Sheet</th>
-            <th class="grp-snapshot group-start" colspan="2">Snapshot</th>
+            <th class="grp-snapshot group-start" colspan="3">Snapshot</th>
           </tr>
           <tr class="head-row">
             <th class="left col-ticker" data-sort="ticker">Ticker</th>
@@ -494,6 +494,7 @@
             <th class="grp-balance" data-sort="debt">Total Debt</th>
             <th class="grp-snapshot group-start" data-sort="price">Price</th>
             <th class="grp-snapshot" data-sort="marketCap">Mkt Cap</th>
+            <th class="grp-snapshot" data-sort="updated">Updated</th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -634,6 +635,26 @@
       return "$" + n.toFixed(0);
     }
     function fmtPrice(n) { return isNum(n) ? "$" + n.toFixed(2) : "—"; }
+    function freshestMs(a, b) {
+      var ta = a ? Date.parse(a) : 0, tb = b ? Date.parse(b) : 0;
+      var m = Math.max(ta, tb);
+      return m || null;
+    }
+    function fmtAge(ms) {
+      if (!ms) return "—";
+      var diff = Math.max(0, Date.now() - ms);
+      var mins = Math.floor(diff / 60000);
+      if (mins < 60) return mins + "m";
+      var hrs = Math.floor(mins / 60);
+      if (hrs < 24) return hrs + "h";
+      return Math.floor(hrs / 24) + "d";
+    }
+    function clsAge(ms) { return (ms && Date.now() - ms > 8 * 86400000) ? "cau" : "muted"; }
+    function ageTitle(d) {
+      var p = d.priceUpdated ? new Date(d.priceUpdated).toLocaleString() : "—";
+      var f = d.fundamentalsUpdated ? new Date(d.fundamentalsUpdated).toLocaleString() : "—";
+      return "Price: " + p + "  •  Fundamentals: " + f;
+    }
 
     // ---- Scoring (Azqato methodology factors) ----
     function score(d) {
@@ -701,7 +722,8 @@
           verdict: verdictOf(sc.pct),
           revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
           peFwd: d.peFwd, pegFwd: d.pegFwd, cash: d.cash, debt: d.debt,
-          price: d.price, marketCap: d.marketCap
+          price: d.price, marketCap: d.marketCap,
+          updated: freshestMs(d.priceUpdated, d.fundamentalsUpdated)
         };
       });
     }
@@ -834,6 +856,7 @@
         '<td class="grp-balance">' + fmtMoney(r.debt) + '</td>' +
         '<td class="grp-snapshot group-start">' + fmtPrice(r.price) + '</td>' +
         '<td class="grp-snapshot">' + fmtMoney(r.marketCap) + '</td>' +
+        '<td class="grp-snapshot ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
         '</tr>';
     }
 
@@ -1014,6 +1037,9 @@
           // premium/other: leave forward fields undefined -> shown as —
         }
 
+        var nowIso = new Date().toISOString();
+        rec.priceUpdated = nowIso;
+        rec.fundamentalsUpdated = nowIso;
         if (rec.peFwd === undefined) rec.peFwd = null; // mark as processed even if empty
         data[t] = rec;
         done++;

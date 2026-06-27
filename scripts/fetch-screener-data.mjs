@@ -130,23 +130,26 @@ async function main() {
 
   let stopped = null;
 
-  // --- PRICE phase: all symbols ---
-  for (const item of list) {
+  const byOldest = (field) => (a, b) => {
+    const ta = stocks[a][field] ? Date.parse(stocks[a][field]) : 0;
+    const tb = stocks[b][field] ? Date.parse(stocks[b][field]) : 0;
+    return ta - tb; // oldest / never-fetched first
+  };
+
+  // --- PRICE phase: all symbols, stalest price first ---
+  const priceOrder = list.map((i) => i.t).sort(byOldest("priceUpdated"));
+  for (const t of priceOrder) {
     if (stopped) break;
-    try { await updatePrice(stocks[item.t]); }
+    try { await updatePrice(stocks[t]); }
     catch (e) {
       if (e.code === "auth" || e.code === "rate" || e.code === "budget") { stopped = e; break; }
-      console.warn(`price ${item.t}: ${e.code || ""} ${e.message}`);
+      console.warn(`price ${t}: ${e.code || ""} ${e.message}`);
     }
   }
 
   // --- FUNDAMENTALS phase: stalest slice ---
   if (!stopped) {
-    const order = list.map((i) => i.t).sort((a, b) => {
-      const ta = stocks[a].fundamentalsUpdated ? Date.parse(stocks[a].fundamentalsUpdated) : 0;
-      const tb = stocks[b].fundamentalsUpdated ? Date.parse(stocks[b].fundamentalsUpdated) : 0;
-      return ta - tb; // oldest / never-fetched first
-    });
+    const order = list.map((i) => i.t).sort(byOldest("fundamentalsUpdated"));
     const slice = order.slice(0, FUND_SLICE);
     for (const t of slice) {
       if (stopped) break;
