@@ -5,16 +5,14 @@
 // global fetch and the Financial Modeling Prep "stable" API.
 //
 // Strategy (keeps a single daily run under the FMP free tier's 250 req/day):
-//   - PRICE phase: refresh price + market cap for ALL symbols (1 req each, ~100).
-//     Forward P/E and PEG are recomputed from the cached forward EPS so they
-//     track the latest price every day.
-//   - FUNDAMENTALS phase: refresh a rotating slice of the symbols whose
-//     fundamentals are stalest (default 15/run, 3 reqs each, ~45). Over ~7 runs
-//     every symbol's fundamentals refresh, i.e. a weekly cadence.
+//   Each run fully refreshes a rotating slice of the stalest symbols, oldest
+//   first. A full refresh is 4 requests/symbol (quote, balance-sheet,
+//   financial-growth, analyst-estimates). At the default of 50 symbols/run that
+//   is ~200 requests, and the whole 100-name list cycles every ~2 days.
 //
 // Env:
 //   FMP_API_KEY  (required)  - your FMP key (a GitHub Actions secret)
-//   FUND_SLICE   (optional)  - symbols to refresh fundamentals for per run (default 15)
+//   DAILY_COUNT  (optional)  - symbols to fully refresh per run (default 50)
 //   REQ_BUDGET   (optional)  - hard cap on API requests this run (default 240)
 
 import fs from "node:fs/promises";
@@ -23,7 +21,7 @@ const KEY = process.env.FMP_API_KEY;
 if (!KEY) { console.error("ERROR: FMP_API_KEY is not set."); process.exit(1); }
 
 const BASE = "https://financialmodelingprep.com/stable";
-const FUND_SLICE = parseInt(process.env.FUND_SLICE || "15", 10);
+const DAILY_COUNT = parseInt(process.env.DAILY_COUNT || "50", 10);
 const REQ_BUDGET = parseInt(process.env.REQ_BUDGET || "240", 10);
 const LIST_PATH = "data/nasdaq100.json";
 const OUT_PATH = "data/screener.json";
@@ -130,34 +128,26 @@ async function main() {
 
   let stopped = null;
 
-  const byOldest = (field) => (a, b) => {
-    const ta = stocks[a][field] ? Date.parse(stocks[a][field]) : 0;
-    const tb = stocks[b][field] ? Date.parse(stocks[b][field]) : 0;
-    return ta - tb; // oldest / never-fetched first
+  // Order by the stalest of a symbol's two timestamps (0 = never fetched), so
+  // each run fully refreshes the least-recently-updated names first.
+  const stalestMs = (t) => {
+    const s = stocks[t];
+    const a = s.priceUpdated ? Date.parse(s.priceUpdated) : 0;
+    const b = s.fundamentalsUpdated ? Date.parse(s.fundamentalsUpdated) : 0;
+    return Math.min(a, b);
   };
+  const slice = list.map((i) => i.t).sort((a, b) => stalestMs(a) - stalestMs(b)).slice(0, DAILY_COUNT);
 
-  // --- PRICE phase: all symbols, stalest price first ---
-  const priceOrder = list.map((i) => i.t).sort(byOldest("priceUpdated"));
-  for (const t of priceOrder) {
+  let refreshed = 0;
+  for (const t of slice) {
     if (stopped) break;
-    try { await updatePrice(stocks[t]); }
-    catch (e) {
+    try {
+      await updatePrice(stocks[t]);
+      await updateFundamentals(stocks[t]);
+      refreshed++;
+    } catch (e) {
       if (e.code === "auth" || e.code === "rate" || e.code === "budget") { stopped = e; break; }
-      console.warn(`price ${t}: ${e.code || ""} ${e.message}`);
-    }
-  }
-
-  // --- FUNDAMENTALS phase: stalest slice ---
-  if (!stopped) {
-    const order = list.map((i) => i.t).sort(byOldest("fundamentalsUpdated"));
-    const slice = order.slice(0, FUND_SLICE);
-    for (const t of slice) {
-      if (stopped) break;
-      try { await updateFundamentals(stocks[t]); }
-      catch (e) {
-        if (e.code === "auth" || e.code === "rate" || e.code === "budget") { stopped = e; break; }
-        console.warn(`fundamentals ${t}: ${e.code || ""} ${e.message}`);
-      }
+      console.warn(`${t}: ${e.code || ""} ${e.message}`);
     }
   }
 
@@ -165,7 +155,7 @@ async function main() {
   await fs.writeFile(OUT_PATH, JSON.stringify(out, null, 2) + "\n");
 
   const withFund = Object.values(stocks).filter((s) => s.fundamentalsUpdated).length;
-  console.log(`Wrote ${OUT_PATH}: ${Object.keys(stocks).length} symbols, ${withFund} with fundamentals, ${reqs} API requests.`);
+  console.log(`Wrote ${OUT_PATH}: refreshed ${refreshed}/${slice.length} this run, ${withFund}/${Object.keys(stocks).length} have fundamentals, ${reqs} API requests.`);
   if (stopped) {
     console.log(`Stopped early (${stopped.code}: ${stopped.message}). Progress saved; the next run resumes.`);
     if (stopped.code === "auth") process.exit(1); // surface bad key as a failed job
