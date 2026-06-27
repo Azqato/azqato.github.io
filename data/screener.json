@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-27T16:52:55.766839Z",
+  "updated": "2026-06-27T23:51:56.164931Z",
   "source": "yahoo",
   "stocks": {
     "NVDA": {
@@ -14,9 +14,9 @@
       "peFwd": 21.483,
       "epsFwd": 87.88,
       "revFwd": 81.39999999999999,
-      "pegFwd": 0.61,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 0.59,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AAPL": {
       "t": "AAPL",
@@ -31,8 +31,8 @@
       "epsFwd": 17.419999999999998,
       "revFwd": 14.930001,
       "pegFwd": 2.29,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "GOOGL": {
       "t": "GOOGL",
@@ -47,8 +47,8 @@
       "epsFwd": 31.55,
       "revFwd": 21.069999,
       "pegFwd": 1.33,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MSFT": {
       "t": "MSFT",
@@ -62,9 +62,9 @@
       "peFwd": 22.175358,
       "epsFwd": 23.31,
       "revFwd": 16.96,
-      "pegFwd": 1.13,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 1.15,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AMZN": {
       "t": "AMZN",
@@ -79,8 +79,8 @@
       "epsFwd": 20.849999999999998,
       "revFwd": 14.860000000000001,
       "pegFwd": 1.83,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AVGO": {
       "t": "AVGO",
@@ -95,8 +95,8 @@
       "epsFwd": 70.44,
       "revFwd": 65.98000499999999,
       "pegFwd": 0.66,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "TSLA": {
       "t": "TSLA",
@@ -107,12 +107,12 @@
       "debt": 15889999872.0,
       "revTTM": 15.8,
       "epsTTM": 8.3,
-      "peFwd": 184.37178,
-      "epsFwd": 24.069999,
-      "revFwd": 8.129999999999999,
-      "pegFwd": 5.36,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "peFwd": 184.10808,
+      "epsFwd": 24.239999,
+      "revFwd": 8.17,
+      "pegFwd": 5.56,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "META": {
       "t": "META",
@@ -127,8 +127,8 @@
       "epsFwd": 39.78,
       "revFwd": 25.81,
       "pegFwd": 0.8,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MU": {
       "t": "MU",
@@ -139,12 +139,12 @@
       "debt": 6376000000.0,
       "revTTM": 345.7,
       "epsTTM": 1368.5,
-      "peFwd": 15.4199095,
-      "epsFwd": 785.8,
+      "peFwd": 15.434645,
+      "epsFwd": 784.96003,
       "revFwd": 246.17999,
-      "pegFwd": 0.31,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 0.17,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "WMT": {
       "t": "WMT",
@@ -159,8 +159,8 @@
       "epsFwd": 10.05,
       "revFwd": 6.47,
       "pegFwd": 4.4,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AMD": {
       "t": "AMD",
@@ -175,8 +175,8 @@
       "epsFwd": 77.03999999999999,
       "revFwd": 42.730000000000004,
       "pegFwd": 1.25,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ASML": {
       "t": "ASML",
@@ -191,8 +191,8 @@
       "epsFwd": 27.989998,
       "revFwd": 19.73,
       "pegFwd": 2.69,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "INTC": {
       "t": "INTC",
@@ -207,8 +207,8 @@
       "epsFwd": 160.08999,
       "revFwd": 11.06,
       "pegFwd": 1.36,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AMAT": {
       "t": "AMAT",
@@ -222,9 +222,9 @@
       "peFwd": 51.230877,
       "epsFwd": 29.89,
       "revFwd": 17.69,
-      "pegFwd": 1.96,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 2.08,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "LRCX": {
       "t": "LRCX",
@@ -239,8 +239,8 @@
       "epsFwd": 37.2,
       "revFwd": 25.8,
       "pegFwd": 2.19,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CSCO": {
       "t": "CSCO",
@@ -255,8 +255,8 @@
       "epsFwd": 12.2600004,
       "revFwd": 11.04,
       "pegFwd": 1.58,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "COST": {
       "t": "COST",
@@ -271,8 +271,8 @@
       "epsFwd": 12.989999999999998,
       "revFwd": 9.42,
       "pegFwd": 4.65,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ARM": {
       "t": "ARM",
@@ -287,8 +287,8 @@
       "epsFwd": 22.799999,
       "revFwd": 21.48,
       "pegFwd": 2.91,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "KLAC": {
       "t": "KLAC",
@@ -303,8 +303,8 @@
       "epsFwd": 11.63,
       "revFwd": 11.18,
       "pegFwd": 2.57,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "NFLX": {
       "t": "NFLX",
@@ -319,8 +319,8 @@
       "epsFwd": 41.990003,
       "revFwd": 13.77,
       "pegFwd": 1.45,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "PLTR": {
       "t": "PLTR",
@@ -335,8 +335,8 @@
       "epsFwd": 96.33,
       "revFwd": 72.42,
       "pegFwd": 1.62,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "TXN": {
       "t": "TXN",
@@ -351,8 +351,8 @@
       "epsFwd": 40.94,
       "revFwd": 18.790000000000003,
       "pegFwd": 1.36,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "PANW": {
       "t": "PANW",
@@ -367,8 +367,8 @@
       "epsFwd": 12.9,
       "revFwd": 23.86,
       "pegFwd": 4.96,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "LIN": {
       "t": "LIN",
@@ -382,15 +382,15 @@
       "peFwd": 28.948189,
       "epsFwd": 9.0500005,
       "revFwd": 7.6899999999999995,
-      "pegFwd": 2.18,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 2.2,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MRVL": {
       "t": "MRVL",
       "name": "Marvell",
       "price": 266.77,
-      "marketCap": 233571303424.0,
+      "marketCap": 233370386432.0,
       "cash": 3843599872.0,
       "debt": 5277199872.0,
       "revTTM": 27.6,
@@ -399,14 +399,14 @@
       "epsFwd": 42.580003,
       "revFwd": 40.67,
       "pegFwd": 1.51,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "STX": {
       "t": "STX",
       "name": "Seagate Technology",
       "price": 899.9,
-      "marketCap": 201783672832.0,
+      "marketCap": 203604279296.0,
       "cash": 1146000000.0,
       "debt": 4177999872.0,
       "revTTM": 44.1,
@@ -415,8 +415,8 @@
       "epsFwd": 83.809996,
       "revFwd": 32.459998,
       "pegFwd": 0.62,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "WDC": {
       "t": "WDC",
@@ -431,8 +431,8 @@
       "epsFwd": 101.63,
       "revFwd": 35.189998,
       "pegFwd": 0.52,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "QCOM": {
       "t": "QCOM",
@@ -443,12 +443,12 @@
       "debt": 15269999616.0,
       "revTTM": -3.5000000000000004,
       "epsTTM": 173.0,
-      "peFwd": 17.541748,
-      "epsFwd": -10.25,
+      "peFwd": 17.536339,
+      "epsFwd": -10.229999600000001,
       "revFwd": -3.56,
-      "pegFwd": 0.84,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 0.6,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "TMUS": {
       "t": "TMUS",
@@ -463,8 +463,8 @@
       "epsFwd": 7.61,
       "revFwd": 7.12,
       "pegFwd": 0.72,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AMGN": {
       "t": "AMGN",
@@ -479,8 +479,8 @@
       "epsFwd": 2.5100000000000002,
       "revFwd": 2.7999999,
       "pegFwd": 1.96,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "PEP": {
       "t": "PEP",
@@ -495,8 +495,8 @@
       "epsFwd": 6.21,
       "revFwd": 5.37,
       "pegFwd": 1.52,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ADI": {
       "t": "ADI",
@@ -511,8 +511,8 @@
       "epsFwd": 58.419997,
       "revFwd": 33.720002,
       "pegFwd": 0.85,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CRWD": {
       "t": "CRWD",
@@ -527,8 +527,8 @@
       "epsFwd": 32.129999999999995,
       "revFwd": 23.51,
       "pegFwd": 5.71,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "APP": {
       "t": "APP",
@@ -542,9 +542,9 @@
       "peFwd": 28.61873,
       "epsFwd": 65.029997,
       "revFwd": 49.650002,
-      "pegFwd": 1.28,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 1.31,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "GILD": {
       "t": "GILD",
@@ -559,8 +559,8 @@
       "epsFwd": -109.68,
       "revFwd": 3.4799999999999995,
       "pegFwd": 2.14,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "SHOP": {
       "t": "SHOP",
@@ -575,8 +575,8 @@
       "epsFwd": 28.499999999999996,
       "revFwd": 28.050000000000004,
       "pegFwd": 2.1,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "HON": {
       "t": "HON",
@@ -587,12 +587,12 @@
       "debt": 37751001088.0,
       "revTTM": 2.4,
       "epsTTM": -41.9,
-      "peFwd": 22.072775,
-      "epsFwd": 7.57,
-      "revFwd": 5.29,
-      "pegFwd": 2.08,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "peFwd": 22.071075,
+      "epsFwd": 7.580000000000001,
+      "revFwd": 5.2699998,
+      "pegFwd": 2.13,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ISRG": {
       "t": "ISRG",
@@ -607,8 +607,8 @@
       "epsFwd": 16.68,
       "revFwd": 16.299999,
       "pegFwd": 2.12,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "BKNG": {
       "t": "BKNG",
@@ -623,8 +623,8 @@
       "epsFwd": 14.6,
       "revFwd": 9.13,
       "pegFwd": 0.78,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "VRTX": {
       "t": "VRTX",
@@ -639,8 +639,8 @@
       "epsFwd": 4.05,
       "revFwd": 8.64,
       "pegFwd": 1.82,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "SBUX": {
       "t": "SBUX",
@@ -654,9 +654,9 @@
       "peFwd": 43.920788,
       "epsFwd": 11.81,
       "revFwd": 1.16,
-      "pegFwd": 1.38,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 1.39,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "FTNT": {
       "t": "FTNT",
@@ -671,8 +671,8 @@
       "epsFwd": 14.38,
       "revFwd": 14.89,
       "pegFwd": 3.41,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "PDD": {
       "t": "PDD",
@@ -687,8 +687,8 @@
       "epsFwd": -5.74,
       "revFwd": 11.08,
       "pegFwd": 0.71,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CDNS": {
       "t": "CDNS",
@@ -703,8 +703,8 @@
       "epsFwd": 10.83,
       "revFwd": 17.19,
       "pegFwd": 3.58,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MAR": {
       "t": "MAR",
@@ -719,8 +719,8 @@
       "epsFwd": 15.76,
       "revFwd": 6.529999999999999,
       "pegFwd": 2.24,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CEG": {
       "t": "CEG",
@@ -735,8 +735,8 @@
       "epsFwd": 24.32,
       "revFwd": 35.15,
       "pegFwd": 3.74,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MNST": {
       "t": "MNST",
@@ -751,8 +751,8 @@
       "epsFwd": 16.59,
       "revFwd": 15.17,
       "pegFwd": 2.8,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ADP": {
       "t": "ADP",
@@ -767,8 +767,8 @@
       "epsFwd": 10.6300004,
       "revFwd": 6.15,
       "pegFwd": 2.09,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CSX": {
       "t": "CSX",
@@ -783,8 +783,8 @@
       "epsFwd": 19.229999,
       "revFwd": 5.2699998,
       "pegFwd": 2.17,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "SNPS": {
       "t": "SNPS",
@@ -799,8 +799,8 @@
       "epsFwd": 14.56,
       "revFwd": 37.21,
       "pegFwd": 2.88,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ABNB": {
       "t": "ABNB",
@@ -815,8 +815,8 @@
       "epsFwd": 26.139998,
       "revFwd": 14.09,
       "pegFwd": 1.35,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "DDOG": {
       "t": "DDOG",
@@ -831,8 +831,8 @@
       "epsFwd": 18.120001,
       "revFwd": 26.860001999999998,
       "pegFwd": 1.49,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MELI": {
       "t": "MELI",
@@ -847,8 +847,8 @@
       "epsFwd": 1.4099999,
       "revFwd": 40.03,
       "pegFwd": 1.03,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CMCSA": {
       "t": "CMCSA",
@@ -863,8 +863,8 @@
       "epsFwd": -18.61,
       "revFwd": -1.59,
       "pegFwd": 142.98,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ADBE": {
       "t": "ADBE",
@@ -879,8 +879,8 @@
       "epsFwd": 16.66,
       "revFwd": 11.560000500000001,
       "pegFwd": 0.55,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "DASH": {
       "t": "DASH",
@@ -894,9 +894,9 @@
       "peFwd": 32.691666,
       "epsFwd": 19.709998000000002,
       "revFwd": 28.29,
-      "pegFwd": 3.97,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 4.08,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MDLZ": {
       "t": "MDLZ",
@@ -911,8 +911,8 @@
       "epsFwd": 4.5700002,
       "revFwd": 3.65,
       "pegFwd": 1.0,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AEP": {
       "t": "AEP",
@@ -927,8 +927,8 @@
       "epsFwd": 6.45,
       "revFwd": 7.66,
       "pegFwd": 2.54,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ORLY": {
       "t": "ORLY",
@@ -943,8 +943,8 @@
       "epsFwd": 9.629999999999999,
       "revFwd": 7.21,
       "pegFwd": 1.91,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "INTU": {
       "t": "INTU",
@@ -959,8 +959,8 @@
       "epsFwd": 18.280001000000002,
       "revFwd": 13.469999999999999,
       "pegFwd": 0.7,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "NXPI": {
       "t": "NXPI",
@@ -975,8 +975,8 @@
       "epsFwd": 25.35,
       "revFwd": 14.760000000000002,
       "pegFwd": 0.71,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CTAS": {
       "t": "CTAS",
@@ -991,8 +991,8 @@
       "epsFwd": 11.1099996,
       "revFwd": 8.559999999999999,
       "pegFwd": 2.73,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ROST": {
       "t": "ROST",
@@ -1007,8 +1007,8 @@
       "epsFwd": 17.950001,
       "revFwd": 10.5100006,
       "pegFwd": 2.52,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "WBD": {
       "t": "WBD",
@@ -1023,8 +1023,8 @@
       "epsFwd": -529.89,
       "revFwd": -0.97,
       "pegFwd": 216.92,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MPWR": {
       "t": "MPWR",
@@ -1038,9 +1038,9 @@
       "peFwd": 54.671432,
       "epsFwd": 35.18,
       "revFwd": 32.569999,
-      "pegFwd": 1.89,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 1.73,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "REGN": {
       "t": "REGN",
@@ -1055,8 +1055,8 @@
       "epsFwd": 4.37,
       "revFwd": 10.7200004,
       "pegFwd": 1.09,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "PCAR": {
       "t": "PCAR",
@@ -1071,8 +1071,8 @@
       "epsFwd": 26.169999999999998,
       "revFwd": 8.36,
       "pegFwd": 1.23,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "BKR": {
       "t": "BKR",
@@ -1087,8 +1087,8 @@
       "epsFwd": -10.79,
       "revFwd": -1.77,
       "pegFwd": 2.27,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "FAST": {
       "t": "FAST",
@@ -1103,8 +1103,8 @@
       "epsFwd": 13.51,
       "revFwd": 11.2799995,
       "pegFwd": 3.4,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "EA": {
       "t": "EA",
@@ -1119,8 +1119,8 @@
       "epsFwd": 59.36000299999999,
       "revFwd": 2.7,
       "pegFwd": 1.27,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "XEL": {
       "t": "XEL",
@@ -1135,8 +1135,8 @@
       "epsFwd": 8.2100004,
       "revFwd": 7.829999999999999,
       "pegFwd": 2.24,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "FANG": {
       "t": "FANG",
@@ -1147,12 +1147,12 @@
       "debt": 13898000384.0,
       "revTTM": 4.2,
       "epsTTM": -98.4,
-      "peFwd": 8.82359,
-      "epsFwd": 52.5,
-      "revFwd": 23.5,
+      "peFwd": 8.896676,
+      "epsFwd": 51.24999999999999,
+      "revFwd": 22.09,
       "pegFwd": 56.78,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "FER": {
       "t": "FER",
@@ -1166,9 +1166,9 @@
       "peFwd": 60.519142,
       "epsFwd": 19.299999,
       "revFwd": 4.14,
-      "pegFwd": 5.37,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 5.31,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "EXC": {
       "t": "EXC",
@@ -1183,8 +1183,8 @@
       "epsFwd": 3.09,
       "revFwd": 4.62,
       "pegFwd": 3.05,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MCHP": {
       "t": "MCHP",
@@ -1199,8 +1199,8 @@
       "epsFwd": 92.78999999999999,
       "revFwd": 31.129997999999997,
       "pegFwd": 0.32,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ODFL": {
       "t": "ODFL",
@@ -1215,8 +1215,8 @@
       "epsFwd": 12.72,
       "revFwd": 5.42,
       "pegFwd": 2.95,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "KDP": {
       "t": "KDP",
@@ -1230,9 +1230,9 @@
       "peFwd": 14.616237,
       "epsFwd": 11.4700004,
       "revFwd": 58.07,
-      "pegFwd": 1.05,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 1.12,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CCEP": {
       "t": "CCEP",
@@ -1247,8 +1247,8 @@
       "epsFwd": 4.0700004,
       "revFwd": 2.8299998,
       "pegFwd": 2.94,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "TTWO": {
       "t": "TTWO",
@@ -1263,8 +1263,8 @@
       "epsFwd": 208.6,
       "revFwd": 27.87,
       "pegFwd": 3.33,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "IDXX": {
       "t": "IDXX",
@@ -1279,8 +1279,8 @@
       "epsFwd": 11.81,
       "revFwd": 9.35,
       "pegFwd": 3.53,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ADSK": {
       "t": "ADSK",
@@ -1295,8 +1295,8 @@
       "epsFwd": 20.94,
       "revFwd": 13.76,
       "pegFwd": 0.75,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "PYPL": {
       "t": "PYPL",
@@ -1311,8 +1311,8 @@
       "epsFwd": -0.09000000400000001,
       "revFwd": 3.46,
       "pegFwd": 0.8,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ALNY": {
       "t": "ALNY",
@@ -1327,8 +1327,8 @@
       "epsFwd": 87.11,
       "revFwd": 51.35999999999999,
       "pegFwd": 0.5,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "AXON": {
       "t": "AXON",
@@ -1343,8 +1343,8 @@
       "epsFwd": 12.25,
       "revFwd": 31.540000000000003,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "TRI": {
       "t": "TRI",
@@ -1359,8 +1359,8 @@
       "epsFwd": 11.129999999999999,
       "revFwd": 8.17,
       "pegFwd": 1.29,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "PAYX": {
       "t": "PAYX",
@@ -1375,8 +1375,8 @@
       "epsFwd": 8.28,
       "revFwd": 5.41,
       "pegFwd": 1.76,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ROP": {
       "t": "ROP",
@@ -1391,8 +1391,8 @@
       "epsFwd": 9.659999599999999,
       "revFwd": 8.129999999999999,
       "pegFwd": 1.38,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "WDAY": {
       "t": "WDAY",
@@ -1407,8 +1407,8 @@
       "epsFwd": 16.259999999999998,
       "revFwd": 11.67,
       "pegFwd": 0.49,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "GEHC": {
       "t": "GEHC",
@@ -1423,8 +1423,8 @@
       "epsFwd": 6.21,
       "revFwd": 5.63,
       "pegFwd": 1.85,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "MSTR": {
       "t": "MSTR",
@@ -1439,14 +1439,14 @@
       "epsFwd": 303.65999999999997,
       "revFwd": 4.93,
       "pegFwd": 2.85,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CPRT": {
       "t": "CPRT",
       "name": "Copart",
       "price": 30.55,
-      "marketCap": 29429071872.0,
+      "marketCap": 28283539456.0,
       "cash": 4199712000.0,
       "debt": 93116000.0,
       "revTTM": 2.1,
@@ -1455,8 +1455,8 @@
       "epsFwd": -0.32,
       "revFwd": -0.02,
       "pegFwd": 3.67,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "KHC": {
       "t": "KHC",
@@ -1471,8 +1471,8 @@
       "epsFwd": -20.93,
       "revFwd": -2.0,
       "pegFwd": 0.99,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "DXCM": {
       "t": "DXCM",
@@ -1486,9 +1486,9 @@
       "peFwd": 27.05267,
       "epsFwd": 24.049999,
       "revFwd": 12.0699994,
-      "pegFwd": 1.3,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 1.31,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "VRSK": {
       "t": "VRSK",
@@ -1503,8 +1503,8 @@
       "epsFwd": 7.0700005,
       "revFwd": 4.95,
       "pegFwd": 1.77,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "INSM": {
       "t": "INSM",
@@ -1519,8 +1519,8 @@
       "epsFwd": 58.209999999999994,
       "revFwd": 178.25999,
       "pegFwd": 1.09,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "ZS": {
       "t": "ZS",
@@ -1535,8 +1535,8 @@
       "epsFwd": 25.85,
       "revFwd": 24.64,
       "pegFwd": 1.44,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "TEAM": {
       "t": "TEAM",
@@ -1550,9 +1550,9 @@
       "peFwd": 14.303854,
       "epsFwd": 49.59,
       "revFwd": 24.03,
-      "pegFwd": 0.62,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "pegFwd": 0.6,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CTSH": {
       "t": "CTSH",
@@ -1567,8 +1567,8 @@
       "epsFwd": 7.870000000000001,
       "revFwd": 5.6999996,
       "pegFwd": 0.66,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CHTR": {
       "t": "CHTR",
@@ -1583,8 +1583,8 @@
       "epsFwd": 15.950000000000001,
       "revFwd": -0.8999999999999999,
       "pegFwd": 0.25,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     },
     "CSGP": {
       "t": "CSGP",
@@ -1599,8 +1599,8 @@
       "epsFwd": 56.14,
       "revFwd": 17.03,
       "pegFwd": 0.11,
-      "priceUpdated": "2026-06-27T16:52:55.766839Z",
-      "fundamentalsUpdated": "2026-06-27T16:52:55.766839Z"
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
     }
   }
 }
