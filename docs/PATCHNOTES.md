@@ -2,6 +2,52 @@
 
 ---
 
+## v3.15.0 — 2026-06-27 — Relative Percentile Scoring Model
+
+**The screener's scoring model changed from absolute thresholds to a relative, percentile-based ranking. Each stock is now graded against its Nasdaq 100 peers rather than against fixed cut-offs.**
+
+### Changed
+
+- `screener.html`: replaced the absolute `score()` (five factors with fixed thresholds, each scaled 0–20) with `computeScoreMap()`, which ranks every loaded stock on each of the five forward metrics (Revenue Growth FWD, EPS Growth FWD, P/E vs EPS Growth, PEG FWD, Cash vs Debt) and converts the percentile rank to points: `points = clamp(40 × (percentile − 0.25), 0, 20)` — bottom quartile scores 0, the median 10, the top quartile 20. The five sum to a score out of 100, rescaled across whichever metrics a stock has. `rows()` now reads from the precomputed map.
+- Verdict bands recalibrated for the new distribution: **Pass ≥ 65, Watch 40–64, Fail < 40** (was 70 / 40).
+- Methodology popup rewritten to explain the relative/percentile model, the percentile-to-points curve, and a worked example (Apple's PEG); the old absolute worked examples (AMD/AAPL point tables) were removed. Settings "How stocks are scored" pointer updated. Kept em-dash-free per the content rules.
+- `docs/PRD.md` (to v3.1): Screener Scoring Model section rewritten for v3.15; feature list, External FAQ #7, roadmap line, milestone table, internal data-flow step, and known-technical-debt entry updated.
+- `docs/DESIGN.md`: version-history row added.
+
+### Notes
+
+- No data change — scoring is computed client-side from the existing feed. Live calibration: Pass 36 / Watch 25 / Fail 39; top names WDC, NVDA, MU at 100, INSM 99, META 95; bottom WBD, EXC, CMCSA, CCEP at 0.
+- Trade-off, documented in the popup and PRD: scores are now peer-relative, so a stock's grade can move when *other* companies' numbers change, and roughly the bottom third of the index always lands in Fail. The educational methodology pages (absolute thresholds such as PEG < 1) are unchanged; only the screener tool's scoring is relative.
+
+---
+
+## v3.14.0 — 2026-06-27 — Documentation Consolidation Audit
+
+**Full documentation audit and consolidation. All prior docs merged into four canonical files: README.md (root), docs/PRD.md, docs/DESIGN.md, and docs/PATCHNOTES.md. Every file rewritten to reflect the current state of the codebase at v3.13.0.**
+
+### Added
+
+- `docs/PRD.md` rewritten from v2.0 to v3.0: added Problem Statement, Target Users, Goals, Non-Goals, User Stories, Feature List (MVP/Future), Constraints, Assumptions, Success Criteria, Tenets (7), Roadmap (milestone table), Metrics (north star + acquisition + engagement + retention + performance), Runbook (local setup, build, deploy, pipeline, rollback, common errors, monitoring), Technical Requirements (architecture, tech stack, folder structure, data models, API design, scoring model, state management, third-party integrations, performance requirements, known technical debt), Security (authentication, authorization, data storage, environment variables, third-party trust, attack surface, dependency policy), Press Release, External FAQ (25 questions), Internal Stakeholder FAQ, Site Structure Reference (section IDs table, concept inventory), and Documentation Process guide
+- `docs/DESIGN.md` rewritten from v1.1 to v2.0: added Spacing System, Breakpoints, Modals component, complete Social Cards section (with per-page values table and og-image regeneration snippet), Content Philosophy enforcement rules, updated CSS File Structure map, and brought Version History current through v3.13.0
+- `README.md` rewritten: added Tech Stack table, Prerequisites, Installation steps, Running Locally note (screener requires local server), Environment Variables table, Build and Deploy section, and annotated Project Structure tree
+
+### Changed
+
+- `README.md`: restructured for developer audience; removed marketing language; added explicit note that screener requires a local server for JSON fetch; added full annotated directory tree
+- `docs/PRD.md`: consolidated all previously separate sections (social cards, OG meta tags, concept tracking table, nav label rules, section ID maps, content philosophy rules) that were scattered across PRD.md sections into a unified reference document
+- `docs/DESIGN.md`: consolidated all design rules, social card specs, and content philosophy into a single coherent spec; removed redundant version-history entries that were already in PATCHNOTES.md
+- `docs/PATCHNOTES.md`: no content changes to existing entries; this entry added at top
+
+### Removed
+
+- Nothing deleted from the codebase; only documentation restructured
+
+### Notes
+
+Going forward, all documentation changes must be reflected in PATCHNOTES.md as a versioned entry. PRD.md is the single source of truth for product requirements, architecture, and process. DESIGN.md is the single source of truth for visual and UX decisions. README.md is the developer entry point. If information belongs in one of these four files, it does not belong anywhere else.
+
+---
+
 ## v3.13.0 — June 2026 — "Methodology" Popup on the Screener
 
 **Added a Methodology button to the screener toolbar that opens a plain-language popup explaining exactly how the score is calculated.**

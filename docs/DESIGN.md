@@ -1,235 +1,292 @@
 # DESIGN.md — Azqato Stock Methodology Site
 
-**Version:** 1.1  
-**Status:** Active  
-**Author:** Azqato
+**Version:** 2.0
+**Status:** Active
+**Last Updated:** 2026-06-27
 
 ---
 
-## 1. Design Direction
+## 1. Design Philosophy
 
-**Aesthetic:** GitHub Dark-inspired. Clean, information-dense, developer-credible. The site should feel at home next to other Azqato properties (portfolio, VIX Strategy, ComposerAtlas), using the same visual language, same color tokens, same interaction patterns.
+This site is a methodology document, not a marketing page. The design should feel like infrastructure: something a developer or serious investor trusts because it does not try to impress them. Every visual decision defers to legibility and information density over decoration.
 
-**Tone:** Direct, educational, no hype. This is not a marketing page. It is a methodology document.
+The aesthetic is GitHub Dark-inspired: deep backgrounds, high-contrast text, a single teal accent that carries all interactive meaning. This is the same visual language used across all Azqato properties (portfolio site, ComposerAtlas, leveraged strategies). Consistency across projects is a feature. The design should feel at home in that family.
 
-**Audience reading mode:** Slow and deliberate. People come here to learn, not browse. The design should respect reading: generous line height, clear hierarchy, anchor navigation that keeps users oriented in long content.
-
-**Design lineage:** Follows the Azqato brand system established at `azqato.github.io`. The accent color (`#00d4a0`), surface colors, border tones, and interaction patterns are consistent with the portfolio site and ComposerAtlas.
+Readers come here to learn. The typography, spacing, and navigation all serve slow, deliberate reading. Long-form content pages get anchor navigation, generous line height, and clear heading hierarchy. The screener app gets density and keyboard-friendly sortable columns. Different pages optimize for different tasks within the same visual system.
 
 ---
 
-## 2. Color System
+## 2. Color Palette
 
-All colors are defined as CSS custom properties in `:root`.
+All colors are defined as CSS custom properties in `:root` in `style.css`. Never hardcode hex values outside of `:root`.
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--color-bg` | `#0d1117` | Page background |
-| `--color-surface` | `#161b22` | Card and sidebar backgrounds |
+| `--color-bg` | `#0d1117` | Page background on all pages |
+| `--color-surface` | `#161b22` | Cards, sidebar background, modal backgrounds |
 | `--color-border` | `#30363d` | All borders and dividers |
-| `--color-accent` | `#00d4a0` | Primary interactive color: links, active nav, hover borders, section bar |
-| `--color-accent-hover` | `#00e6b0` | Hover state for accent elements |
-| `--color-accent-light` | `rgba(0,212,160,0.08)` | Subtle tinted backgrounds (how-to-read boxes, accordion hover, FAQ teaser) |
-| `--color-tag-bg` | `#21262d` | Tag pill and watchlist badge backgrounds |
-| `--color-card-hover` | `#1c2128` | Card/table-header hover background |
-| `--color-text-primary` | `#eef3f7` | Body copy, headings |
-| `--color-text-secondary` | `#cbdae6` | Subtitles, captions, lead text, metric card definitions. Slightly cooler/softer than primary. |
-| `--color-positive` | `#3fb950` | Positive values, good badges |
-| `--color-negative` | `#f85149` | Negative values, red flag badges |
-| `--color-warning` | `#ffa657` | Caution flags, caveat boxes, amber values |
-| `--color-purple` | `#bc8cff` | Gradient accent on card hover (top border) |
+| `--color-accent` | `#00d4a0` | Primary interactive color: active nav links, hover borders, h2 accent bars, badge teal, range dot |
+| `--color-accent-hover` | `#00e6b0` | Hover state for any accent-colored element |
+| `--color-accent-light` | `rgba(0, 212, 160, 0.08)` | Tinted backgrounds: how-to-read boxes, accordion hover, FAQ teaser, card hover tint |
+| `--color-tag-bg` | `#21262d` | Tag pills, hero badges, ticker tag backgrounds |
+| `--color-card-hover` | `#1c2128` | Card hover background, table header background |
+| `--color-text-primary` | `#eef3f7` | Body copy, headings, all primary reading text |
+| `--color-text-secondary` | `#cbdae6` | Subtitles, captions, lead paragraphs, metric card definitions, sidebar inactive links |
+| `--color-positive` | `#3fb950` | Positive values in tables, good-signal badges, hero badge text |
+| `--color-negative` | `#f85149` | Negative values, red-flag badges, screener Fail verdict |
+| `--color-warning` | `#ffa657` | Caution values, amber badges, caveat box borders, screener Watch verdict |
+| `--color-purple` | `#bc8cff` | Gradient endpoint on metric card hover top border only |
 
-**Rationale:** The `#00d4a0` teal-green is the Azqato brand signature across all projects. It replaces the previous `#1A6B4A` deep green used in v1.0.0. The dark background palette is drawn directly from the azqato.github.io DESIGN.md. Text on background passes ~15:1 contrast ratio; muted text on background is ~4.8:1, meeting WCAG AA.
+**Contrast:** Primary text on background is approximately 15:1. Secondary text on background is approximately 4.8:1. Both meet WCAG AA. Do not introduce new text colors that fall below 4.5:1.
+
+**Do not deviate from `#00d4a0` as the accent.** It is the cross-project Azqato brand color. Changing it breaks visual continuity with the portfolio site and other Azqato properties.
 
 ---
 
 ## 3. Typography
 
-**Font stack:** System fonts only. No external font loading.
+### Font Stacks
 
 ```css
+/* Sans-serif (body, UI, headings) */
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-```
 
-**Monospace (data, tickers, numbers):**
-
-```css
+/* Monospace (data values, ticker symbols, code) */
 font-family: 'SF Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
 ```
 
-| Role | Size | Weight | Color | Notes |
-|------|------|--------|-------|-------|
-| H1 (page title) | 1.875rem | 700 | `--color-text-primary` | Letter-spacing -0.3px |
-| H2 (section title) | 1.375rem | 700 | `--color-text-primary` | Has `::before` vertical accent bar |
-| H2 (metric block) | 1.5rem | 700 | `--color-text-primary` | Same accent bar; slightly larger |
-| H3 (subsection) | 1.0625rem | 600 | `--color-text-primary` | |
-| Body | 1rem | 400 | `--color-text-primary` | Line height 1.6 |
-| Lead / intro | 1rem | 400 | `--color-text-secondary` | Line height 1.65 |
-| Caption / note | 0.78rem | 400 | `--color-text-secondary` | |
-| Metric value / num | 0.85rem | 400 | Contextual | Monospace stack |
-| Ticker symbol | 0.875rem | 600 | `--color-accent` | Monospace stack |
+No external font loading. No Google Fonts. No web font requests.
 
-**Note on v1.0.0 fonts:** The original design used IBM Plex Serif (headings), IBM Plex Sans (body), and IBM Plex Mono (data) from Google Fonts. This was replaced in v1.1.0 with the system font stack to align with the broader Azqato brand and eliminate the external font dependency.
+### Type Scale
 
----
+| Role | Size | Weight | Line Height | Letter Spacing | Color | Notes |
+|------|------|--------|-------------|----------------|-------|-------|
+| H1 (page title) | 1.875rem | 700 | 1.2 | -0.3px | `--color-text-primary` | One per page |
+| H2 (section) | 1.375rem | 700 | 1.3 | normal | `--color-text-primary` | Has `::before` teal accent bar |
+| H2 (metric block) | 1.5rem | 700 | 1.3 | normal | `--color-text-primary` | Larger variant for metrics.html full entries |
+| H3 (subsection) | 1.0625rem | 600 | 1.4 | normal | `--color-text-primary` | |
+| Body | 1rem | 400 | 1.6 | normal | `--color-text-primary` | Default for all paragraph text |
+| Lead / intro | 1rem | 400 | 1.65 | normal | `--color-text-secondary` | First paragraph of a page or section |
+| Caption / note | 0.78rem | 400 | 1.5 | normal | `--color-text-secondary` | Table footnotes, small labels |
+| Metric value / data | 0.85rem | 400 | 1.6 | normal | Contextual | Monospace stack |
+| Ticker symbol | 0.875rem | 600 | 1.6 | normal | `--color-accent` | Monospace stack |
+| Table header label | 0.6875rem | varies | — | uppercase | `--color-text-secondary` | Screener column headers |
 
-## 4. Layout
-
-### Grid
-
-```
-Desktop (>= 1024px): 2-column grid
-[ Sidebar (220px) | Content (1fr) ]
-
-Tablet / Mobile (< 1024px): Single column
-Sidebar collapses to a sticky top nav bar
-```
-
-### Sidebar (Left Navigation)
-
-Persistent on desktop. Contains:
-- Site logo (`Azqato.` with teal dot accent)
-- Page nav links: Home, Philosophy, Metrics, Screener, Watchlist, Indices, FAQ, Leveraged Strategies, Support
-- On pages with multiple named sections: an "On This Page" anchor block below the Support link (see below)
-- Small footer: "Educational use only. Not financial advice."
-
-**Sidebar width:** 220px  
-**Sidebar background:** `--color-surface` (`#161b22`)  
-**Sidebar border:** 1px solid `--color-border` on the right  
-**Active nav link:** `--color-accent` text, 3px left border in accent, weight 600  
-**Inactive link color:** `--color-text-secondary`
-
-### Content Area
-
-**Max width:** 820px  
-**Padding:** 32px top/bottom, 28px left/right on desktop; 20px on mobile
+**Mobile reduction:** H1 drops to 1.5rem below 768px. H2 drops to 1.2rem below 768px.
 
 ---
 
-## 5. Component Specs
+## 4. Spacing System
+
+The design does not use a rigid 4px or 8px grid, but follows consistent spacing conventions:
+
+| Use | Value |
+|-----|-------|
+| Page padding (desktop) | 32px top/bottom, 28px left/right |
+| Page padding (mobile) | 20px top/bottom, 16px left/right |
+| Between sections (margin-top h2) | 44px |
+| Between elements in a card | 8px–16px |
+| Card padding | 18px |
+| Table cell padding | 10px 14px |
+| Sidebar width | 220px (fixed) |
+| Content max-width | 820px |
+| Gap between flex/grid items | 6px, 8px, 12px, or 16px depending on context |
+| Border radius (cards, modals) | 10px |
+| Border radius (buttons, badges) | 999px (pill) |
+| Border radius (table wrapper) | 8px |
+| Border radius (info boxes) | 0 6px 6px 0 (left-flush) |
+
+---
+
+## 5. Breakpoints
+
+| Breakpoint | Trigger | Changes |
+|------------|---------|---------|
+| Desktop | `>= 1024px` | 2-column grid (220px sidebar + 1fr content), sticky sidebar, active left-border on nav links, "On This Page" block visible |
+| Tablet / Mobile | `< 1024px` | Sidebar collapses to sticky top nav bar with `backdrop-filter: blur(12px)`, "On This Page" block hidden, active state uses bottom border instead of left border, screener app area caps at `80vh` |
+| Mobile | `< 768px` | Metric cards grid collapses to 1 column, H1 → 1.5rem, H2 → 1.2rem, padding reduces to 20px/16px |
+
+---
+
+## 6. Component Patterns
 
 ### Section Heading (h2)
 
-All h2 elements include a `::before` pseudo-element: a 3px wide, 1.1em tall vertical bar in `--color-accent`, rendered inline via `display: flex; align-items: center; gap: 0.5rem`. This is the signature section delineation from the Azqato portfolio site.
+Every `h2` renders a 3px wide, 1.1em tall vertical bar in `--color-accent` via `::before` pseudo-element using `display: flex; align-items: center; gap: 0.5rem`. This is the signature visual element shared with azqato.github.io. Do not suppress it.
+
+---
+
+### Metric Cards (index.html grid)
+
+10 cards in a 2-column grid on desktop, 1-column on mobile.
+
+```
+Background:       --color-surface
+Border:           1px solid --color-border
+Border radius:    10px
+Padding:          18px
+Hover background: --color-card-hover
+Hover border:     rgba(0, 212, 160, 0.5)
+Hover transform:  translateY(-2px)
+Hover shadow:     0 4px 12px rgba(0, 212, 160, 0.08)
+Hover top border: 2px gradient (--color-accent → --color-purple) via ::before
+Card name:        0.9375rem, weight 700, --color-accent
+Card definition:  0.85rem, --color-text-secondary
+```
 
 ---
 
 ### Tables
 
-Used for: holdings snapshot, metric data comparisons.
+Used for metric comparisons, reference data, illustrative examples.
 
 ```
-- Header row: bg --color-card-hover (#1c2128), text uppercase 0.6875rem, color --color-text-secondary
-- Body rows: alternating via rgba(255,255,255,0.02) on even rows
-- Wrapper: border 1px solid --color-border, border-radius 8px, overflow: hidden
-- Padding: 10px 14px per cell
-- Number columns: right-aligned, monospace font
-- Ticker column: --color-accent, bold, monospace
-- Positive values: --color-positive (#3fb950)
-- Negative values: --color-negative (#f85149)
-- Caution values: --color-warning (#ffa657)
-- Hover row: bg --color-accent-light (rgba teal tint)
-```
-
-### 52W Range Bar
-
-Inline range visualization using a 4px track with an 8px dot positioned via `left: var(--pos)` CSS custom property set inline. Dot color `--color-accent`. Track color `--color-border`.
-
----
-
-### Metric Cards (Index Page Grid)
-
-10 cards in a 2-column grid on desktop, 1-column on mobile.
-
-```
-- bg: --color-surface
-- border: 1px solid --color-border
-- border-radius: 10px
-- padding: 18px
-- Hover: bg --color-card-hover, border rgba(0,212,160,0.5), translateY(-2px), box-shadow with teal tint
-- Hover top border: 2px gradient (--color-accent to --color-purple) via ::before
-- Card name: 0.9375rem, weight 700, --color-accent
-- Card def: 0.85rem, --color-text-secondary
+Wrapper:          border 1px solid --color-border, border-radius 8px, overflow hidden
+Header row:       background --color-card-hover, text 0.6875rem uppercase, --color-text-secondary
+Body rows:        alternating rgba(255, 255, 255, 0.02) on even rows
+Row hover:        background --color-accent-light (teal tint)
+Cell padding:     10px 14px
+Number columns:   right-aligned, monospace font
+Ticker column:    --color-accent, bold, monospace, nowrap
+Positive values:  --color-positive (#3fb950)
+Negative values:  --color-negative (#f85149)
+Caution values:   --color-warning (#ffa657)
 ```
 
 ---
 
-### Accordion (FAQ Page)
+### 52-Week Range Bar
+
+Inline range visualization used in tables.
 
 ```
-- Container: border 1px --color-border, border-radius 10px, overflow hidden
-- Trigger: bg --color-surface, no border, font 0.9375rem weight 500
-- Trigger hover: bg --color-accent-light
-- Icon: "+" / "-" in --color-accent, right-aligned
-- Body: max-height 0 → max-height 6000px, 200ms ease-in-out
-- Content: padding 22px 20px, bg rgba(0,212,160,0.04), --color-text-secondary text
-- Palantir story: border-left 3px solid --color-accent, --color-text-primary text
+Track:  4px height, background --color-border, border-radius 2px
+Dot:    8px × 8px circle, background --color-accent, border-radius 50%
+Position: left: var(--pos) CSS custom property set inline per row
+Calculation: (price − low) / (high − low) as a percentage
+```
+
+---
+
+### Accordion (faq.html)
+
+```
+Container:        border 1px solid --color-border, border-radius 10px, overflow hidden
+Trigger:          background --color-surface, font 0.9375rem weight 500, no border
+Trigger hover:    background --color-accent-light
+Icon:             "+" / "−" in --color-accent, right-aligned
+Transition:       max-height 0 → 6000px, 200ms ease-in-out
+Content bg:       rgba(0, 212, 160, 0.04)
+Content text:     --color-text-secondary
+Palantir story:   border-left 3px solid --color-accent, text --color-text-primary
+Behavior:         One item open at a time; opening one closes others
+ARIA:             aria-expanded toggled on trigger; aria-controls links to body id
 ```
 
 ---
 
 ### Status Badges
 
-Pill-shaped badges with 999px border-radius.
+Pill-shaped. Used for verdict labels, signal ranges, and descriptive tags.
 
 ```
-Good:     bg rgba(63,185,80,0.12),  text --color-positive, border rgba(63,185,80,0.3)
-Caution:  bg rgba(255,166,87,0.12), text --color-warning,  border rgba(255,166,87,0.3)
-Negative: bg rgba(248,81,73,0.12),  text --color-negative, border rgba(248,81,73,0.3)
-Neutral:  bg --color-tag-bg,        text --color-text-secondary, border --color-border
+Good:     background rgba(63, 185, 80, 0.12),  text --color-positive, border rgba(63, 185, 80, 0.3)
+Caution:  background rgba(255, 166, 87, 0.12), text --color-warning,  border rgba(255, 166, 87, 0.3)
+Negative: background rgba(248, 81, 73, 0.12),  text --color-negative, border rgba(248, 81, 73, 0.3)
+Neutral:  background --color-tag-bg,            text --color-text-secondary, border --color-border
+Border radius: 999px
+Padding: 2px 10px (small) or 4px 12px (normal)
 ```
 
 ---
 
 ### How-to-Read Box
 
+Used to explain how to interpret a metric or tool. Teal-tinted.
+
 ```
-bg: --color-accent-light (rgba teal)
-border-left: 3px solid --color-accent
-border-radius: 0 6px 6px 0
-padding: 14px 18px
+Background:   --color-accent-light (rgba teal 8%)
+Border-left:  3px solid --color-accent
+Border-radius: 0 6px 6px 0
+Padding:      14px 18px
 ```
+
+---
 
 ### Caveat Box
 
+Used for warnings, edge cases, and limitations. Amber-tinted.
+
 ```
-bg: rgba(255,166,87,0.08)
-border-left: 3px solid --color-warning
-border-radius: 0 6px 6px 0
-text: --color-text-secondary, strong labels in --color-warning
+Background:   rgba(255, 166, 87, 0.08)
+Border-left:  3px solid --color-warning
+Border-radius: 0 6px 6px 0
+Text:         --color-text-secondary
+Strong labels: --color-warning
 ```
 
 ---
 
 ### Hero Badge
 
+Pill badge appearing below the page description on every page.
+
 ```
-Pill badge below hero headline and description (after .hero-sub)
-margin-top: 16px (inline, separates badge from description above)
-bg: --color-tag-bg
-border: 1px solid --color-border
-border-radius: 999px
-text: --color-positive, 0.75rem
+Position:     Below .hero-sub, margin-top: 16px
+Background:   --color-tag-bg
+Border:       1px solid --color-border
+Border-radius: 999px
+Text:         --color-positive, 0.75rem
 ```
 
 ---
 
 ### Watchlist Ticker Tags
 
+Used to display ticker symbols as interactive tags.
+
 ```
-font-family: monospace
-bg: --color-tag-bg
-border: 1px solid --color-border
-border-radius: 6px
-text: --color-accent, weight 600
-Hover: border rgba(0,212,160,0.5), bg --color-accent-light
+Font:         monospace
+Background:   --color-tag-bg
+Border:       1px solid --color-border
+Border-radius: 6px
+Text:         --color-accent, weight 600
+Hover border: rgba(0, 212, 160, 0.5)
+Hover bg:     --color-accent-light
+```
+
+---
+
+### Modals (Screener)
+
+Used for the Settings and Methodology popups on `screener.html`.
+
+```
+Backdrop:     fixed overlay, rgba(0,0,0,0.6)
+Modal:        --color-surface background, 1px border --color-border, border-radius 10px
+Width:        max 560px, 90vw
+Close button: top-right × button in --color-text-secondary
+Behavior:     close on click outside, close on Escape key
+```
+
+---
+
+### Sidebar Navigation
+
+```
+Inactive links:    --color-text-secondary, weight 500
+Hover:             --color-text-primary
+Active / current:  --color-accent, weight 600, 3px left border in --color-accent
+"On This Page":    Smaller, indented sub-links; highlighted via IntersectionObserver scroll
+Brand ("Azqato."): teal dot on period via <span>
+Footer:            "Educational use only. Not financial advice." in --color-text-secondary
 ```
 
 ---
 
 ### Favicon
 
-All pages use an emoji SVG data URI favicon:
+All pages use an emoji SVG data URI favicon. No external file required.
 
 ```html
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
@@ -237,117 +294,162 @@ All pages use an emoji SVG data URI favicon:
 
 ---
 
-## 6. Signature Element
+## 7. Accessibility Standards
 
-**The signature design element is the left sidebar "On This Page" anchor navigation, present on all content pages.**
+**Target:** WCAG 2.1 AA.
 
-As the user scrolls, the corresponding sidebar link highlights in `--color-accent` teal using a scroll-based `IntersectionObserver`. This gives every page "you are here" awareness without heavy UI. Borrowed from documentation sites like Stripe Docs or MDN, applied to a financial education context.
-
-The "On This Page" block appears below the Support link (bottom of the main nav list) on every page that has named sections. The observer in `script.js` derives which sections to watch from the hrefs of `.metric-links a` elements, so no per-page configuration is needed.
-
-The `h2::before` vertical accent bar is the secondary signature element; it appears on every section heading site-wide and visually ties the stocks site to the Azqato portfolio design language.
-
----
-
-## 7. Navigation
-
-### Sidebar Links
-
-- **Inactive:** `--color-text-secondary`, weight 500
-- **Hover:** `--color-text-primary`
-- **Active / current page:** `--color-accent`, weight 600, 3px left border in accent
-- **"On This Page" sub-links:** Smaller, indented, highlighted via IntersectionObserver on scroll. Appear below Support on any page with named sections.
-
-### Tablet / Mobile (below 1024px)
-
-Sidebar collapses to a sticky top bar with light blur backdrop (`backdrop-filter: blur(12px)`). Metric sub-links are hidden. Active state uses bottom border instead of left border.
-
----
-
-## 8. Footer
-
-```
-Border-top: 1px solid --color-border
-Background: --color-bg (#0d1117)
-Text: --color-text-secondary, 0.8rem, center-aligned
-Links: --color-accent
-Padding: 28px 32px
-```
-
----
-
-## 9. Responsive Behavior
-
-| Breakpoint | Changes |
-|------------|---------|
-| `< 1024px` | Sidebar becomes top nav bar, backdrop blur, metric sub-links hidden, bottom-border active state |
-| `< 768px` | Cards become 1-column, h1 reduces to 1.5rem, h2 reduces to 1.2rem, padding reduces to 20px/16px |
-
----
-
-## 10. Accessibility
-
-- All color combinations meet WCAG AA contrast minimums (primary text ~15:1, muted text ~4.8:1)
+- Primary text on background: approximately 15:1 contrast ratio
+- Secondary text on background: approximately 4.8:1 contrast ratio
+- All interactive elements have visible `:focus-visible` outline in `--color-accent`
 - Accordion items use `aria-expanded` and `aria-controls` attributes
 - Tables include `<caption class="visually-hidden">` and `<th scope>` attributes
-- Focus styles preserved on all interactive elements (`focus-visible` outline in `--color-accent`)
-- `prefers-reduced-motion` disables card transforms and accordion transitions
+- Emoji favicon is presentational only; no alt text required
+- `prefers-reduced-motion`: disables card `translateY` transforms and accordion max-height transitions
 
 ---
 
-## 11. File Map
+## 8. Animation and Motion
 
+Keep motion minimal and purposeful. Three allowed animations:
+
+1. **Card hover lift** (`translateY(-2px)`) — signals interactivity on metric cards
+2. **Accordion expand/collapse** (`max-height` transition, 200ms ease-in-out) — reveals content without layout jump
+3. **Sidebar link highlight** (IntersectionObserver, no transition) — "you are here" scroll tracking
+
+No other animations. No decorative motion. No loading spinners. No auto-playing anything.
+
+`prefers-reduced-motion` disables items 1 and 2. Item 3 (IntersectionObserver highlight) is not animated and is unaffected.
+
+---
+
+## 9. Sidebar "On This Page" Navigation
+
+The "On This Page" anchor block is the signature interaction pattern of the site. As the user scrolls, the corresponding sidebar link highlights in `--color-accent` teal.
+
+**Implementation:** `script.js` uses `IntersectionObserver` with a root margin of `-15% 0 -65% 0`. It derives which sections to observe from the `href` attributes of `.metric-links a` elements on the page. No per-page configuration is needed.
+
+**Present on:** index.html, philosophy.html, metrics.html, finviz.html, seekingalpha.html, indices.html.
+**Absent on:** faq.html (accordion pattern), screener.html (app with no long-form sections).
+
+Block position: below the Support link (last item in the main nav list), as a standalone `<li>`.
+
+---
+
+## 10. Social Cards (Open Graph)
+
+Every page has Open Graph and Twitter Card meta tags so links render preview cards on Discord, X, and Slack.
+
+**Convention:**
+- `<title>` = page H1 text exactly. No "- Azqato" suffix. Ever.
+- `og:title` = identical to `<title>`
+- `og:description` = lead paragraph on the page exactly
+- `<meta name="description">` = identical to `og:description`
+- `twitter:title` and `twitter:description` mirror OG values
+
+**Required tags (all pages):**
+
+```html
+<meta name="description" content="...">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://azqato.github.io/stocks/PAGE.html">
+<meta property="og:title" content="Page Title">
+<meta property="og:description" content="...">
+<meta property="og:image" content="https://azqato.github.io/stocks/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Page Title">
+<meta name="twitter:description" content="...">
+<meta name="twitter:image" content="https://azqato.github.io/stocks/og-image.png">
 ```
-style.css structure (in order):
-  :root (CSS variables)
-  Reset / base
-  Layout (site-wrapper flex, site-layout grid)
-  Sidebar
-  Main content
-  Footer
-  Typography (h1, h2 with ::before bar, h3, body, lead, caption)
-  Tables (wrap, thead, tbody, ticker, value coloring, range bar)
-  Hero (badge, thesis, sub)
-  Section container
-  Metric cards (index page grid)
-  Metric blocks (metrics page full entries)
-  Accordion (faq page)
-  Badges (good/caution/negative/neutral)
-  FAQ teaser
-  Ticker tags (watchlist)
-  Media queries (tablet < 1024px, mobile < 768px)
-  Reduced motion
+
+**Per-page values:**
+
+| Page | `og:title` / `<title>` | `og:description` / `<meta name="description">` |
+|------|----------------------|-----------------------------------------------|
+| `index.html` | Stock Picking Methodology | A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise. |
+| `philosophy.html` | The Philosophy of Long-Term Conviction Investing | The concepts that sit behind every rule in this methodology. Understanding why the rules exist makes them easier to follow when markets are moving fast and the temptation to react is strongest. |
+| `metrics.html` | Stock Evaluation Metrics Explained | Ten metrics. Each one earns its place. This page explains what each signal measures, why it matters for long-term investing decisions, and how to interpret the numbers. All examples are illustrative and use hypothetical figures to demonstrate how each metric works in practice. |
+| `finviz.html` | How to Set Up a Finviz Stock Screener For Free | How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha. |
+| `seekingalpha.html` | How to Build a Stock Watchlist in Seeking Alpha For Free | Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology. |
+| `screener.html` | (screener page title) | (screener page description) |
+| `indices.html` | Indices & ETF Investing | A separate methodology for evaluating broad market indices and ETFs. Different assets require different frameworks. Where individual stock picking is driven primarily by company fundamentals, index investing is driven primarily by market sentiment, timing signals, and structural efficiency. |
+| `faq.html` | Stock Investing Q&A | The thinking behind the strategy. Questions about how decisions are made, why certain rules exist, and what the long-term mindset actually looks like in practice. |
+
+**Social card image:** `og-image.png` is a 1200x630 PNG at the site root. The 📈 emoji centered on `#0d1117` background, white monochrome. To regenerate:
+
+```powershell
+Add-Type -AssemblyName System.Drawing
+$bmp = New-Object System.Drawing.Bitmap(1200, 630)
+$g = [System.Drawing.Graphics]::FromImage($bmp)
+$g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
+$g.Clear([System.Drawing.Color]::FromArgb(255, 13, 17, 23))
+$font = New-Object System.Drawing.Font("Segoe UI Emoji", 380, [System.Drawing.FontStyle]::Regular, [System.Drawing.GraphicsUnit]::Pixel)
+$sf = New-Object System.Drawing.StringFormat
+$sf.Alignment = [System.Drawing.StringAlignment]::Center
+$sf.LineAlignment = [System.Drawing.StringAlignment]::Center
+$g.DrawString([System.Char]::ConvertFromUtf32(0x1F4C8), $font, (New-Object System.Drawing.SolidBrush([System.Drawing.Color]::White)), (New-Object System.Drawing.RectangleF(0,0,1200,630)), $sf)
+$bmp.Save("og-image.png", [System.Drawing.Imaging.ImageFormat]::Png)
+$g.Dispose(); $bmp.Dispose()
 ```
+
+---
+
+## 11. Content Philosophy
+
+This site documents a methodology, not a live portfolio. All content is written to remain accurate indefinitely.
+
+**Rules:**
+- No real-time data references. No current prices, current RSI readings, or any value that will be stale within weeks.
+- All illustrative examples use clearly hypothetical labels: "High-growth tech co.", "Slow-growth value co.", "Accelerating", "Decelerating".
+- Moat-type examples use category descriptions, not named companies: "enterprise software platforms" not a specific ticker.
+- The Palantir story ($9 buy, $45 sell, $150 outcome) is the one named historical exception. It is a first-person account, not a live recommendation.
+- Historical references are acceptable when they clearly describe a past event.
+- No em dashes anywhere in copy. All three forms are prohibited: ` -- ` (double hyphen with spaces), `—` (raw Unicode U+2014), and `&mdash;` (HTML entity). Use commas, colons, semicolons, parentheses, or periods instead.
+- No "- Azqato" brand suffix on `<title>` or `og:title`. Title = H1 only.
 
 ---
 
 ## 12. What Not To Do
 
-- No light/white backgrounds (dark theme only, consistent with Azqato brand)
-- No gradient backgrounds (the only gradient is the 2px top border on card hover)
-- No external font loading (system fonts only)
-- No stock chart widgets or live data embeds
-- No animations beyond: card hover lift, accordion expand/collapse, sidebar link highlight
+- No light or white backgrounds anywhere (dark theme only)
+- No gradient backgrounds (the only gradient is the 2px card-hover top border)
+- No external font loading
+- No stock chart widgets or live data embeds in editorial content
+- No animations beyond the three listed in Section 8
 - No full-bleed hero images
-- No em dashes in any copy
-- No decorative animations or motion for motion's sake
-- Do not deviate from the `#00d4a0` teal accent; it is the cross-site brand color
-- No "- Azqato" brand suffix on `<title>` tags or `og:title` values. The `<title>` tag uses only the page H1 text. `og:title` is always identical to `<title>`.
+- No em dashes in any copy (any form)
+- No decorative motion or transitions for motion's sake
+- Do not deviate from `#00d4a0` as the accent color
+- No "- Azqato" suffix on any `<title>` or `og:title` tag
 
 ---
 
-## 13. Content Philosophy (v1.4.0+)
+## 13. CSS File Structure
 
-This site documents a methodology, not a live portfolio. All content should be written to remain accurate over time regardless of current market conditions.
-
-**Rules:**
-- No real-time data references. Do not use current prices, current RSI readings, or any value that will be stale within weeks.
-- No company-specific examples for educational illustrations unless the example refers to a specific historical event. The Palantir story (buy at $9, sell at $45, outcome $150) is the one named exception; it is a first-person historical account, not a live recommendation.
-- Metric examples must use clearly hypothetical labels ("High-growth tech co.", "Slow-growth value co.") or generic category descriptions ("enterprise software platforms", "cloud infrastructure").
-- Moat type examples should describe categories of companies, not name specific companies (e.g., "enterprise software platforms" rather than a specific ticker).
-- Historical references are acceptable when they clearly describe a past event: "a company that declined X% during a downturn and recovered" is fine; "Company X currently trades at Y" is not.
-
-**Why:** The site is educational. Naming specific companies as live examples implies ongoing endorsement and creates stale content as market conditions change. Category descriptions teach the concept without anchoring to a specific stock's current situation.
+```
+style.css (in order):
+  :root                   → CSS custom properties (14 color tokens, sidebar width)
+  Reset / base            → box-sizing, body, margins
+  Layout                  → .site-wrapper flex, .site-layout grid
+  Sidebar                 → brand, nav links, active states, footer
+  Main content            → .main wrapper, content max-width
+  Footer                  → border-top, text size, links
+  Typography              → h1, h2 (::before bar), h3, body, lead, caption
+  Tables                  → wrapper, thead, tbody, .ticker-cell, .num, value coloring, range bar
+  Hero                    → .hero, .hero-badge, .hero-thesis, .hero-sub
+  Section container       → .section-container spacing
+  Metric cards            → index.html 2-column grid, hover effects
+  Metric blocks           → metrics.html full entries
+  Accordion               → faq.html expand/collapse, Palantir accent
+  Badges                  → .badge-good, .badge-caution, .badge-negative, .badge
+  How-to-read box         → .how-to-read
+  Caveat box              → .caveat-box
+  FAQ teaser              → .faq-teaser
+  Guide components        → .guide-step, .step-num, .ui-text, .guide-note
+  Ticker tags             → .watchlist-tickers, .ticker-tag
+  Screener app            → .app, .screener-toolbar, .modal
+  Media queries           → < 1024px (tablet), < 768px (mobile)
+  Reduced motion          → @media (prefers-reduced-motion: reduce)
+```
 
 ---
 
@@ -355,25 +457,27 @@ This site documents a methodology, not a live portfolio. All content should be w
 
 | Version | Date | Summary |
 |---------|------|---------|
-| 1.0 | June 2026 | Initial design: light wiki theme, IBM Plex fonts, deep green `#1A6B4A` accent |
-| 1.1 | June 2026 | Dark theme rebrand: aligned to Azqato brand system. New teal accent `#00d4a0`, system fonts, GitHub Dark-inspired palette, h2 accent bars, card hover effects, emoji favicon |
-| 1.4 | June 2026 | Content philosophy formalized. No real-time data in examples. Hypothetical labels for all illustrative tables. Named company moat examples replaced with category descriptions. Content Philosophy section added (Section 13). |
-| 1.5 | June 2026 | Two setup guide pages (watchlist.html, screener.html). Nav expanded to 6 items. Text readability: `.hero-sub`, `.lead`, `.guide-step-body` changed to `--color-text-primary`. New guide component CSS system (`.guide-step`, `.step-num`, `.ui-text`, `.guide-note`, etc.). P/E FWD section deepened with P/E vs EPS Growth comparison. |
-| 1.6 | June 2026 | indices.html added. Nav restructured to 7 items (Home, Metrics, Screener, Watchlist, Indices, FAQ, Support). Sitewide readability: `.accordion-content`, `.metric-card-def`, `.guide-note` changed to `--color-text-primary`. Global `td` nowrap removed (wrapping enabled); preserved on `.num` and `.ticker-cell`. FAQ Q5 rewritten; Q7 (capital gains) added. Capital gains content added to homepage. |
-| 1.7 | June 2026 | Text color refinement: `--color-text-primary` updated to `#eef3f7` (brighter white), `--color-text-secondary` differentiated to `#cbdae6` (soft blue-gray for subtitles/captions). |
-| 1.8 | June 2026 | "On This Page" sidebar nav extended sitewide. Philosophy page gains 7 section anchor links. All content pages (index, screener, watchlist, indices) gain section IDs and "On This Page" blocks. Block position moved from nested under the active page nav link to a standalone `<li>` after the Support link. `IntersectionObserver` in `script.js` generalized to derive section targets from link hrefs, eliminating the hardcoded `.metric-block` selector. |
-| 1.9 | June 2026 | Hero badge repositioned on `index.html`: moved from above the headline to below `.hero-sub`. `.hero` padding-bottom reduced from 36px to 16px for visual balance. |
-| 3.0 | June 2026 | "Leveraged Strategies" nav link added sitewide above Support (external link to `azqato.github.io/leveraged-strategies/`). Nav is now 9 items. |
-| 3.1 | June 2026 | Philosophy page expanded from 7 to 9 sections (new: "It Is Possible, and the Game Is Long" at top; "Hype, Sentiment, and the Weak-Hands Cascade" after Wall Street). Existing sections gained subsections (balance-sheet-as-personal-finance in Research; margins-as-competitive-position in Building Investment Knowledge; buy cadence and income focus in Stay on Offense). Content-only; no new components. |
-| 3.2 | June 2026 | FAQ aligned with philosophy v3.1.0: one new accordion question ("Is getting wealthy in the stock market realistic, and how long does it take?"); three existing answers deepened (offense cadence/income, balance-sheet cousin analogy, gross-margin position-of-power framing); cross-link added from the hype question to `philosophy.html#section-hype`. Content-only. |
-| 3.3 | June 2026 | Two new sections on `indices.html`: Dollar-Cost Averaging (`#section-dca`) and Lump-Sum Investing (`#section-lumpsum`), placed between Types of Index Funds and Fundamentals vs. Technicals; focus on VT and VTI + VXUS. New FAQ question (`answer-dca`). Reuses existing components (`.metric-grid`/`.metric-card`, `.how-to-read`, `.caveat-box`, `h3`); no new CSS. |
-| 3.4 | June 2026 | Interactive Nasdaq 100 screener added as a new standalone page (introduced as `screenapp.html`) plus a daily data pipeline (`scripts/fetch-screener-data.mjs`, `.github/workflows/screener-data.yml`, `data/`). Dense full-width app layout distinct from the sidebar template, built on existing `style.css` tokens. |
-| 3.5 | June 2026 | File renames: the Finviz guide `screener.html` → `finviz.html`; the watchlist guide `watchlist.html` → `seekingalpha.html`; the interactive screener `screenapp.html` → `screener.html`. All sitewide nav hrefs, cross-links, `og:url` metas, and references in the data pipeline and docs updated to match. Nav labels unchanged (the "Screener" nav item points to `finviz.html`; the interactive screener at `screener.html` remains out of nav by request). |
-| 3.6 | June 2026 | Nav labels renamed: "Screener" → **Finviz**, "Watchlist" → **SeekingAlpha**. The interactive screener added to the sidebar nav as **Screener** (after Metrics) on all pages; nav is now 10 items. `screener.html` adopted the shared site sidebar in place of its custom top-bar nav — the app header trimmed to title + screen pill + "as of" + search, with a `max-width: 1023px` override so the app flows/scrolls normally when the sidebar collapses to a top bar. |
-| 3.7 | June 2026 | Screener data pipeline moved from FMP (Node) to **yfinance** (Python) — no API key, full Nasdaq 100 coverage, all symbols refreshed daily. Nasdaq 100 constituent list fact-checked and corrected against stockanalysis.com / Wikipedia (added NVDA + 10 others; removed 10 delisted/dropped names). Not a visual-design change; pipeline/data only. |
-| 3.8 | June 2026 | Screener gains a sortable **Cash/Debt** ratio column in the Balance Sheet group (after Total Cash/Debt), color-coded to the cash-vs-debt thresholds; zero-debt names show `∞` and sort to the top. |
-| 3.9 | June 2026 | Forward metrics aligned to Seeking Alpha's current-fiscal-year ("0y") basis: P/E FWD = price ÷ current-FY EPS estimate (was yfinance `forwardPE` / next-year); Revenue & EPS Growth FWD use the 0y consensus growth. P/E FWD now matches SA. Pipeline/data only; no visual change. |
-| 3.10 | June 2026 | Consolidated dual-class listings: removed GOOG (Class C), kept GOOGL (Class A voting). Multi-class rule documented (list only Class A voting shares). Screener now 100 tickers. |
-| 3.11 | June 2026 | P/E FWD switched to Yahoo `priceEpsCurrentYear` (exact Seeking Alpha match); PEG FWD switched to Yahoo `pegRatio` (SA-style, long-term-growth based, ~±0.1). EPS Growth FWD kept GAAP-basis but labeled with a `*` tooltip; footer disclaimer corrected to credit Yahoo Finance. |
-| 3.12 | June 2026 | New screener scoring model: 5 forward factors (Rev Gro FWD, EPS Gro FWD, P/E-vs-Growth, PEG FWD, Cash vs Debt), each scored granularly 0–20 to a total of 100 (TTM growth factors dropped from scoring). Verdict bands Pass 70 / Watch 40. Factors chip = strong (15+/20) count. Client-side only; no data change. |
-| 3.13 | June 2026 | Added a "📊 Methodology" toolbar button on the screener opening a popup (reuses the `.modal-backdrop`/`.modal` component) with a plain-language scoring breakdown, the sliding-scale formula, and two worked examples. Settings' scoring section reduced to a pointer. |
+| 1.0 | 2026-06 | Initial design: light wiki theme, IBM Plex fonts, deep green `#1A6B4A` accent |
+| 1.1 | 2026-06 | Dark theme rebrand: Azqato brand system, teal `#00d4a0` accent, system fonts, GitHub Dark palette, h2 accent bars, card hover, emoji favicon |
+| 1.4 | 2026-06 | Content philosophy formalized: no real-time data in examples, hypothetical labels required, named company examples replaced with category descriptions |
+| 1.5 | 2026-06 | Two setup guide pages (watchlist, screener). Nav expanded. Text readability improved. Guide component CSS system added. |
+| 1.6 | 2026-06 | indices.html added. Nav restructured to 7 items. Sitewide readability: accordion/card/guide text to --color-text-primary. Capital gains content. |
+| 1.7 | 2026-06 | Text color differentiation: --color-text-primary → #eef3f7, --color-text-secondary → #cbdae6 |
+| 1.8 | 2026-06 | "On This Page" sidebar nav extended sitewide. IntersectionObserver generalized. Block moved to below Support link. |
+| 1.9 | 2026-06 | Hero badge repositioned below .hero-sub. .hero padding-bottom reduced. |
+| 3.0 | 2026-06 | "Leveraged Strategies" external nav link added sitewide. Nav is now 9 items. |
+| 3.1 | 2026-06 | Philosophy page expanded from 7 to 9 sections (belief/long-game, hype/weak-hands). Content only. |
+| 3.2 | 2026-06 | FAQ aligned with philosophy v3.1.0. 1 new question, 3 answers deepened, 1 cross-link added. |
+| 3.3 | 2026-06 | DCA and Lump-Sum sections added to indices.html. New FAQ question. |
+| 3.4 | 2026-06 | Interactive Nasdaq 100 screener added (screenapp.html). Dense full-width app layout using existing style.css tokens. Daily data pipeline introduced. |
+| 3.5 | 2026-06 | File renames: screener.html → finviz.html, watchlist.html → seekingalpha.html, screenapp.html → screener.html. All references updated. |
+| 3.6 | 2026-06 | Nav relabeled (Finviz, SeekingAlpha). Screener added to nav. Screener app adopts shared sidebar. Nav now 10 items. |
+| 3.7 | 2026-06 | Data pipeline moved from FMP (Node) to yfinance (Python). Nasdaq 100 constituent list corrected. |
+| 3.8 | 2026-06 | Cash/Debt ratio column added to screener Balance Sheet group. |
+| 3.9 | 2026-06 | Forward metrics aligned to Seeking Alpha current-year basis. Pipeline/data only. |
+| 3.10 | 2026-06 | Dual-class consolidation: removed GOOG, kept GOOGL. Multi-class rule established. Screener now 100 tickers. |
+| 3.11 | 2026-06 | P/E FWD and PEG FWD switched to Yahoo direct fields for closer Seeking Alpha match. |
+| 3.12 | 2026-06 | New scoring model: 5 forward factors, each 0–20, total /100. Verdict bands Pass 70 / Watch 40 / Fail <40. |
+| 3.13 | 2026-06 | Methodology popup added to screener toolbar. Reuses modal component. Settings section reduced to pointer. |
+| 3.15 | 2026-06-27 | Screener scoring switched to a relative percentile model (each stock ranked vs Nasdaq 100 peers, 0–20 per metric, bands Pass 65 / Watch 40 / Fail <40). Methodology popup rewritten to explain ranking. |
+| 2.0 | 2026-06-27 | Full DESIGN.md rewrite consolidating all design decisions, adding missing sections (spacing, breakpoints, motion, social cards, content philosophy), and bringing documentation to v3.13.0 parity. |

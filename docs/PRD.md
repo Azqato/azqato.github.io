@@ -1,448 +1,842 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 2.0  
-**Status:** Current  
-**Author:** Azqato  
-**Last Updated:** June 2026
+**Version:** 3.1
+**Status:** Current
+**Author:** Azqato
+**Last Updated:** 2026-06-27
 
 ---
 
-## 1. Overview
+## Problem Statement
 
-### 1.1 Goal
+Retail investors face a fundamental problem: markets are noisy, opinions are everywhere, and financial media profits from attention rather than accuracy. Beginner and intermediate investors have no structured, opinionated, non-commercial resource that explains not just what metrics to use, but why each one matters, how to read it, and what a complete evaluation actually looks like end-to-end.
 
-A static educational website documenting Azqato's individual stock picking methodology. The site serves as both a personal reference and a public educational resource. It covers the quantitative evaluation framework (12 metrics), the qualitative research process, the philosophical foundations of long-term conviction investing, and practical tool setup guides for Finviz and Seeking Alpha.
-
-### 1.2 Target Audience
-
-- Beginner to intermediate retail investors
-- People who follow Azqato's content across Twitch, YouTube, or Discord (B5TA community)
-- Anyone interested in a fundamentals-first, buy-and-hold approach to long-term equity investing
-
-### 1.3 Non-Goals
-
-- No trading signals or real-time data
-- No financial advice or personalized recommendations
-- No user accounts or backend of any kind
-- No third-party charting widgets or paid APIs
+Most investing resources either oversimplify (buy low, sell high) or overwhelm (Bloomberg Terminal). Neither helps a motivated person build a repeatable process. Azqato's methodology exists to fill that gap: a documented, first-person framework for long-term equity investing built from years of practice, refined through mistakes, and presented without any commercial incentive.
 
 ---
 
-## 2. Site Structure
+## Target Users
 
-### Pages
+**Primary: Self-directed retail investor, beginner to intermediate**
+- Has a brokerage account or is close to opening one
+- Has heard terms like P/E ratio and RSI but cannot apply them confidently
+- Invests from income (regular contributions), not a lump-sum windfall
+- Is prone to panic-selling or chasing hype stocks without a framework to anchor decisions
+- Follows Azqato on Twitch, YouTube, or Discord (B5TA community)
 
-| Page | File | Purpose |
-|------|------|---------|
-| Home | `index.html` | Strategy overview, 10-metric summary grid, reference table, portfolio vs watchlist framework |
-| Philosophy | `philosophy.html` | Full conceptual foundation: stocks as ownership, research methodology, GVD framework, market environments, Wall Street context, market leadership cycles, building investment knowledge |
-| Metrics Glossary | `metrics.html` | Deep explanations of all 12 metrics with illustrative examples and how-to-read guidance |
-| Screener | `screener.html` | Interactive Nasdaq 100 screener that scores every constituent against the methodology factors. Uses the shared sidebar navigation; data from the daily yfinance feed (`data/screener.json`), with a bring-your-own-key FMP pull as a manual fallback. Constituent rule: when a company has multiple share classes in the index (e.g. Alphabet GOOGL/GOOG), only the **Class A voting** shares are listed, so each company appears once (100 tickers) |
-| Finviz Screener Setup | `finviz.html` | Finviz stock screener filter configuration guide |
-| Seeking Alpha Watchlist | `seekingalpha.html` | Seeking Alpha 12-column watchlist configuration guide |
-| Indices & ETF | `indices.html` | VIX, RSI, structural quality metrics, and ETF watchlist setup for index investing |
-| FAQ | `faq.html` | Philosophy and practice Q&A in accordion format |
+**Secondary: Intermediate investor looking to formalize a process**
+- Already investing but decisions are ad hoc
+- Wants a structured methodology to compare against their current approach
+- Comfortable with spreadsheets but not with coding or professional research tools
 
-### Shared Assets
+**Not the target user:**
+- Day traders or swing traders (this methodology is explicitly buy-and-hold)
+- Professional fund managers or analysts (this is not Bloomberg or FactSet)
+- People seeking hot tips or stock picks
 
-| File | Purpose |
-|------|---------|
-| `style.css` | Full design system stylesheet |
-| `script.js` | Accordion behavior and IntersectionObserver sidebar highlight (metrics page) |
+---
 
-### Navigation Order
+## Goals
+
+1. Give any motivated reader enough understanding to evaluate a stock using the 12-metric framework
+2. Explain the philosophical foundation so readers internalize the rules rather than mechanically applying them
+3. Provide practical tool setup guides so readers can replicate the workflow (Finviz + Seeking Alpha)
+4. Offer a live Nasdaq 100 screener that applies the methodology's scoring model transparently
+5. Cover index/ETF investing separately with appropriate timing-signal frameworks
+6. Remain accurate and trustworthy long-term without requiring constant editorial updates
+
+---
+
+## Non-Goals
+
+- Not providing financial advice or personalized recommendations
+- Not providing real-time data in editorial content (the screener is a labeled, separate tool)
+- Not building a trading platform, portfolio tracker, or brokerage integration
+- Not supporting user accounts, authentication, or any backend
+- Not covering options, futures, crypto, forex, or any non-equity asset class
+- Not covering day trading, swing trading, or technical pattern trading
+
+---
+
+## User Stories
+
+- As a beginner investor, I want to understand what PEG ratio means so that I can evaluate whether a stock's valuation is justified by its growth.
+- As an investor who bought at the wrong time, I want to learn when not to buy so that I stop entering positions at peak hype.
+- As someone who panicked and sold winners, I want to understand the cost of selling so that I never make that mistake again.
+- As a Seeking Alpha user, I want to know exactly which columns to configure so that my watchlist matches the methodology.
+- As someone with a lump sum to invest, I want to understand when and how to deploy it into index funds so that I make the mathematically sound decision.
+- As a Finviz user, I want the exact filter settings for the methodology so that I can find candidates without doing manual research from scratch.
+- As someone overwhelmed by market noise, I want a philosophical framework so that I can distinguish signal from sentiment.
+- As an investor wanting to see all 100 Nasdaq companies scored, I want the interactive screener so that I can identify which ones pass or fail the methodology.
+
+---
+
+## Feature List
+
+### MVP (shipped)
+
+- 8 educational pages with sidebar navigation (Home, Philosophy, Metrics, Screener, Finviz, Seeking Alpha, Indices, FAQ)
+- 12-metric evaluation framework documented with examples, how-to-read guides, and caveats
+- 9-section philosophy page (belief and long game, ownership model, research process, GVD framework, offense cadence, Wall Street critique, hype/weak-hands, leadership cycles, knowledge building)
+- 30-item FAQ accordion
+- Step-by-step Finviz screener setup guide
+- Step-by-step Seeking Alpha watchlist setup guide (12-column layout)
+- Index/ETF methodology with VIX action levels, AAII sentiment, RSI, 52W range, structural quality metrics, DCA vs lump sum
+- Interactive Nasdaq 100 screener with relative percentile scoring model (100 tickers, daily data feed)
+- Scoring model: 5 forward metrics ranked against peers, each scored 0–20 by percentile, total /100, Pass/Watch/Fail verdicts
+- Methodology popup explaining the scoring model in plain language with worked examples
+- Daily yfinance data pipeline via GitHub Actions (no API key required)
+- Bring-your-own-key FMP fallback loader in the screener UI
+- Responsive design (desktop, tablet, mobile)
+- "On This Page" anchor navigation with IntersectionObserver scroll tracking
+- Open Graph and Twitter Card social cards on all pages
+- Accessibility: WCAG AA contrast, aria attributes, focus styles, reduced motion support
+
+### Future (post-launch)
+
+- Deeper coverage of index fund types (sector ETFs, international allocation, bond tent strategy)
+- Historical backtests of the scoring model showing Pass/Watch/Fail predictive power
+- Email or RSS changelog subscription for site updates
+- Mobile hamburger menu for sidebar navigation
+- Additional illustrative examples using historical market events
+- Separate pages for Growth, Value, and Dividend stock frameworks
+- Conference call research guide (how to listen, what to note, how to log insights)
+
+---
+
+## Constraints
+
+- No backend, no server, no database. Static files only.
+- No paid APIs or subscriptions in the primary data path (yfinance is free)
+- No external font loading (system fonts only)
+- No frontend JavaScript libraries or frameworks
+- Content must remain accurate without date-bound updates (no "as of today" editorial references)
+- Data pipeline must run within GitHub Actions free tier limits
+- FMP free tier: 250 API calls/day (relevant only for the optional bring-your-own-key fallback)
+- Site must be instantly servable by opening index.html in a browser (screener requires a local server for JSON fetch)
+
+---
+
+## Assumptions
+
+- GitHub Pages will remain free for this use case indefinitely
+- yfinance will remain a viable data source for Nasdaq 100 tickers
+- Yahoo Finance data quality is sufficient for educational screening purposes (not institutional-grade)
+- The Nasdaq 100 constituent list changes infrequently enough that annual manual review is acceptable
+- Seeking Alpha's column configuration UI will not change frequently enough to invalidate the setup guide
+- Finviz's free tier filter set will remain available without requiring an account
+
+---
+
+## Success Criteria
+
+- All 12 metrics explained clearly enough that a reader with no finance background can apply them
+- Philosophy content covers all major behavioral and conceptual foundations of the strategy
+- FAQ answers the most common investor questions (30+ items) without requiring outside research
+- Screener shows all 100 Nasdaq 100 tickers with current scores, updated daily automatically
+- Site loads with no errors and no external requests in any modern browser
+- Mobile-readable at 375px minimum width
+- No real-time data, no company-specific live recommendations, no financial advice language
+- Navigation is consistent and correct on all 8 pages (10 nav items total)
+- All pages render a preview card when shared on Discord, X, or Slack
+
+---
+
+## Tenets
+
+Listed in priority order. When two tenets conflict, the higher one wins.
+
+**1. Accuracy over coverage**
+Document fewer things correctly than more things loosely. A reader who trusts this site trusts it because every claim they can verify turns out to be right. One wrong statement costs more than ten missing ones.
+
+**2. Permanence over freshness**
+Every page should be as useful in five years as it is today. Real-time data, current prices, and company-specific snapshots age immediately. Conceptual frameworks, calibrated thresholds, and illustrative examples do not. When choosing between a vivid current example and a durable hypothetical one, choose the hypothetical.
+
+**3. The reader is motivated, not passive**
+Someone reading this site has already decided to learn. Do not pad content to hold attention. Dense, accurate prose is better than diluted prose with callouts. Respect the reader's time by getting to the point.
+
+**4. Tools serve the methodology, methodology does not serve the tools**
+Finviz and Seeking Alpha are referenced because they are the best free tools for this workflow, not because they are partners or sponsors. If better tools emerge, the guides should be rewritten without sentiment. The scoring model exists to make the methodology testable, not to make the screener impressive.
+
+**5. Simplicity is a feature**
+Zero frontend dependencies, no build tools, no login. This is a deliberate choice. Every dependency is a maintenance burden and a failure point. The site works by opening a file in a browser. That is worth protecting.
+
+**6. Separate the tool from the editorial**
+The screener presents live third-party data. The educational pages use hypothetical examples. These are different things and must never be confused. The distinction preserves the integrity of both: live data is labeled and timestamped; educational content is durable and non-specific.
+
+**7. Opinions over hedging**
+This methodology has a point of view. It says to buy quality and hold it. It says to ignore short-term price movements. It says selling winners early is almost always wrong. These are controversial positions that real investors disagree with. State them directly. A hedged methodology is not useful to anyone.
+
+---
+
+## Roadmap
+
+### Current Phase: Operational (v3.x)
+
+The site is live, fully featured, and running automated daily data refreshes. The core methodology is documented end-to-end. The screener is scoring all 100 Nasdaq 100 tickers daily. Documentation has been consolidated into four files (README, PRD, DESIGN, PATCHNOTES).
+
+### Milestone Table
+
+| Milestone | Target | Status |
+|-----------|--------|--------|
+| v1.0.0 — Initial release (3 pages, light theme) | 2026-06 | Complete |
+| v1.9.0 — Philosophy page, 12 metrics, content expansion | 2026-06 | Complete |
+| v2.x — Social cards, FAQ expansion, punctuation audit, sitewide nav | 2026-06 | Complete |
+| v3.0.0 — Leveraged Strategies nav link | 2026-06 | Complete |
+| v3.4.0 — Interactive screener + data pipeline | 2026-06 | Complete |
+| v3.7.0 — yfinance pipeline, constituent fix | 2026-06 | Complete |
+| v3.12.0 — New 5-factor scoring model | 2026-06 | Complete |
+| v3.13.0 — Methodology popup on screener | 2026-06 | Complete |
+| v3.14.0 — Documentation consolidation (this audit) | 2026-06-27 | Complete |
+| v3.15.0 — Relative percentile scoring model | 2026-06-27 | Complete |
+| v4.0.0 — Mobile nav, additional philosophy sections | TBD | Planned |
+| Historical screener performance backtest | TBD | Planned |
+| Conference call research guide | TBD | Planned |
+
+### Feature Breakdown by Phase
+
+**v3.x (current):** Screener with daily data, relative percentile scoring, methodology popup, documentation consolidation.
+
+**v4.x (planned):** Mobile hamburger nav, additional philosophy content, potential Growth/Value/Dividend standalone pages.
+
+**Post-v4:** Backtests, conference call guide, deeper index/ETF content.
+
+### Explicitly Deferred
+
+- Email/RSS subscription: low priority, no backend, static site constraint makes this complex
+- Historical backtests: valuable but requires a separate data collection effort
+- Options/crypto/forex coverage: out of scope permanently; this methodology is equities-only
+
+---
+
+## Metrics
+
+### North Star Metric
+
+**Return visit rate:** The percentage of readers who come back within 30 days. A reader who returns has found the content trustworthy and useful enough to consult again. One-time visitors may be curious; return visitors are building a habit.
+
+### Acquisition Metrics
+
+| Metric | Target | Timeframe | Measurement |
+|--------|--------|-----------|-------------|
+| Monthly unique visitors | 1,000+ | 6 months post-launch | GitHub Pages analytics or Plausible |
+| Referral traffic from Discord/Twitch | 30% of sessions | Ongoing | UTM parameters on shared links |
+| Organic search impressions | 5,000/month | 12 months | Google Search Console |
+
+### Engagement Metrics
+
+| Metric | Target | Timeframe | Measurement |
+|--------|--------|-----------|-------------|
+| Average session duration | 4+ minutes | Ongoing | Analytics |
+| Pages per session | 2.5+ | Ongoing | Analytics |
+| Screener usage rate | 20% of visitors open screener | Ongoing | Analytics (page views) |
+| FAQ engagement | 40% of FAQ visitors expand 3+ items | Ongoing | Analytics (events) |
+
+### Retention Metrics
+
+| Metric | Target | Timeframe | Measurement |
+|--------|--------|-----------|-------------|
+| Return visitor rate (30-day) | 25%+ | Ongoing | Analytics |
+| Screener return rate | 40% of screener users return within 7 days | Ongoing | Analytics |
+
+### Performance Metrics
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| Page load time (LCP) | Under 1.5s on 3G | Lighthouse / PageSpeed Insights |
+| JavaScript bundle | Under 5KB | File inspection |
+| CSS bundle | Under 50KB | File inspection |
+| Time to Interactive | Under 2s | Lighthouse |
+| Uptime | 99.9% (GitHub Pages SLA) | GitHub status page |
+| screener.json freshness | Updated within 25 hours of previous | GitHub Actions run log |
+
+### Reporting Cadence
+
+- Performance metrics: monthly Lighthouse audit
+- Acquisition and engagement: monthly review
+- Retention: monthly review
+- screener.json freshness: visible in screener "as of" timestamp, checked ad hoc
+
+---
+
+## Runbook
+
+### Local Setup (from a fresh machine)
+
+1. Install a modern browser (Chrome, Firefox, Safari, or Edge)
+2. Install Python 3.12+ (only needed for the data pipeline)
+3. Clone the repository: `git clone https://github.com/Azqato/stocks.git && cd stocks`
+4. Install the pipeline dependency: `pip install yfinance`
+5. Open `index.html` in a browser — the site works immediately for all pages except the screener data fetch
+6. For the screener to load live data locally, run: `python3 -m http.server 8080` and visit `http://localhost:8080/screener.html`
+
+### Build
+
+There is no build step. The site is pure static files.
+
+### Deploy
+
+1. Commit changes to the `main` branch
+2. Push to GitHub: `git push origin main`
+3. GitHub Pages automatically serves the updated files within 1–2 minutes
+4. Verify deployment at `https://azqato.github.io/stocks/`
+
+GitHub Pages is configured to serve from the repository root. No additional configuration is needed.
+
+### Data Pipeline (Automated)
+
+The screener data feed (`data/screener.json`) is refreshed automatically:
+
+- **Schedule:** Daily at 23:00 UTC via `.github/workflows/screener-data.yml`
+- **Trigger manually:** GitHub Actions tab → "Refresh Screener Data" → Run workflow
+- **Run locally:** `python3 scripts/fetch_screener_data.py` (writes to `data/screener.json`)
+- **Output:** 100 tickers with price, market cap, cash, debt, growth metrics, P/E, PEG, and timestamps
+- **No API key required** for the yfinance pipeline
+
+### Rollback
+
+To revert to a previous version of the site:
+
+```bash
+git log --oneline        # find the commit hash
+git revert <hash>        # creates a new revert commit
+git push origin main     # deploys the revert
+```
+
+To revert `data/screener.json` to a known-good version:
+
+```bash
+git checkout <hash> -- data/screener.json
+git commit -m "revert screener.json to <hash>"
+git push origin main
+```
+
+### Environment Configs
+
+| Environment | URL | Notes |
+|-------------|-----|-------|
+| Production | `https://azqato.github.io/stocks/` | Served by GitHub Pages from `main` |
+| Local | `http://localhost:8080` | `python3 -m http.server 8080` from repo root |
+
+No staging environment. Changes are previewed locally before pushing to main.
+
+### Common Errors
+
+| Error | Likely Cause | Fix |
+|-------|-------------|-----|
+| Screener shows no data | `data/screener.json` missing or empty | Run the pipeline manually or wait for the next 23:00 UTC cron run |
+| Screener shows stale data banner | screener.json older than 24 hours | Check GitHub Actions — if last run failed, trigger manually |
+| GitHub Action fails with HTTP 429 | yfinance rate limit (Yahoo Finance throttling) | Wait and re-run; the pipeline has per-symbol retry logic |
+| Page shows unstyled HTML | `style.css` path wrong | Check that style.css is in the same directory as the HTML file |
+| Social card image missing | `og-image.png` not at site root | Verify the file exists at root; regenerate with the PowerShell snippet in DESIGN.md |
+| Screener sorts wrong | `Infinity` (debt-free companies) sort logic | Cast to Number before comparison in `sort()` |
+| FMP bring-your-own-key fails with 402 | Symbol not on FMP free tier | Expected — yfinance pipeline covers all 100; FMP fallback has free-tier limits |
+
+### Monitoring
+
+- **Uptime:** GitHub Pages status at `githubstatus.com`
+- **Pipeline runs:** GitHub Actions tab in the repository
+- **Data freshness:** The screener "as of" timestamp in the top bar
+- **Errors:** Browser DevTools console on any page
+
+---
+
+## Technical Requirements
+
+### System Architecture
+
+The site is a fully static architecture. No server processes any requests. No database stores any state. All computation (screener scoring, sorting, filtering) happens client-side in the browser.
+
+```
+[GitHub Repository]
+       │
+       ├── main branch (HTML, CSS, JS, data/)
+       │         │
+       │    GitHub Pages → serves static files at azqato.github.io/stocks/
+       │
+       └── GitHub Actions (cron 23:00 UTC)
+                 │
+                 └── scripts/fetch_screener_data.py (yfinance)
+                           │
+                           └── commits data/screener.json → main branch
+```
+
+### Tech Stack
+
+| Component | Technology | Version |
+|-----------|-----------|---------|
+| HTML | HTML5 semantic | Browser-native |
+| CSS | CSS3 custom properties | Browser-native |
+| JavaScript | ES6 (vanilla) | Browser-native |
+| Data pipeline | Python 3 | 3.12+ |
+| Data library | yfinance | Latest |
+| Hosting | GitHub Pages | Free tier |
+| CI/CD | GitHub Actions | Free tier |
+| Data format | JSON | — |
+| Version control | Git | — |
+
+### Folder Structure
+
+```
+stocks/
+├── README.md                          ← Developer front door
+├── index.html                         ← Home page
+├── philosophy.html                    ← Philosophy (9 sections)
+├── metrics.html                       ← 12-metric glossary
+├── screener.html                      ← Interactive Nasdaq 100 screener (app)
+├── finviz.html                        ← Finviz setup guide
+├── seekingalpha.html                  ← Seeking Alpha setup guide
+├── indices.html                       ← Index/ETF methodology
+├── faq.html                           ← FAQ accordion (30 items)
+├── style.css                          ← Design system stylesheet
+├── script.js                          ← Accordion + IntersectionObserver
+├── og-image.png                       ← Social card image (1200×630)
+├── data/
+│   ├── nasdaq100.json                 ← 100-ticker constituent list
+│   └── screener.json                  ← Daily generated metrics feed
+├── scripts/
+│   └── fetch_screener_data.py         ← yfinance → screener.json
+├── img/
+│   ├── og-image.png                   ← Duplicate / legacy (root copy is canonical)
+│   └── *.png                          ← Historical screenshots
+├── .github/
+│   └── workflows/
+│       └── screener-data.yml          ← Daily cron job
+└── docs/
+    ├── PRD.md                         ← This file
+    ├── DESIGN.md                      ← Design specification
+    └── PATCHNOTES.md                  ← Full changelog
+```
+
+### Data Models
+
+**nasdaq100.json**
+
+```json
+[
+  { "t": "NVDA", "n": "NVIDIA" },
+  { "t": "AAPL", "n": "Apple" }
+]
+```
+
+Array of 100 objects. `t` = ticker symbol (string), `n` = company name (string). Multi-class rule: when a company has multiple share classes in the index (e.g., Alphabet GOOGL/GOOG), only the Class A voting shares are listed.
+
+**screener.json**
+
+```json
+{
+  "updated": "2026-06-27T23:51:56.164931Z",
+  "source": "yahoo",
+  "stocks": {
+    "NVDA": {
+      "t": "NVDA",
+      "name": "NVIDIA",
+      "price": 192.53,
+      "marketCap": 4663269130240.0,
+      "cash": 53171998720.0,
+      "debt": 12814000128.0,
+      "revTTM": 85.2,
+      "epsTTM": 214.5,
+      "peFwd": 21.483,
+      "epsFwd": 87.88,
+      "revFwd": 81.4,
+      "pegFwd": 0.59,
+      "priceUpdated": "2026-06-27T23:51:56.164931Z",
+      "fundamentalsUpdated": "2026-06-27T23:51:56.164931Z"
+    }
+  }
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `updated` | ISO 8601 string | Timestamp of the pipeline run |
+| `source` | string | Data source identifier ("yahoo") |
+| `t` | string | Ticker symbol |
+| `name` | string | Company name |
+| `price` | number | Current stock price (USD) |
+| `marketCap` | number | Market capitalization (USD) |
+| `cash` | number | Total cash and equivalents (USD) |
+| `debt` | number | Total debt (USD) |
+| `revTTM` | number | Revenue growth TTM (%) |
+| `epsTTM` | number | EPS growth TTM (%) |
+| `peFwd` | number | Forward P/E (price ÷ current-FY EPS) |
+| `epsFwd` | number | Forward EPS growth (%) — GAAP basis |
+| `revFwd` | number | Forward revenue growth (%) |
+| `pegFwd` | number | PEG ratio (Yahoo `pegRatio` field, long-term growth based) |
+| `priceUpdated` | ISO 8601 string | Timestamp of price data |
+| `fundamentalsUpdated` | ISO 8601 string | Timestamp of fundamentals data |
+
+### API Design (Internal Data Flow)
+
+The site has no traditional API. The internal data flow for the screener is:
+
+1. `screener.html` loads in the browser
+2. On load, it fetches `data/screener.json` (published daily by the pipeline)
+3. If screener.json is more than 24 hours old, a stale banner prompts the user to use the bring-your-own-key loader
+4. Bring-your-own-key: user enters FMP API key → browser makes requests to FMP API directly → results stored in `localStorage` → merged with or replacing screener.json data
+5. `computeScoreMap()` ranks the loaded stocks and computes each one's relative percentile score client-side
+6. `render()` applies sort, filter, and column visibility to produce the table DOM
+7. No data is sent to any Azqato server
+
+### Screener Scoring Model (v3.15+)
+
+A relative, percentile-based model. Each stock is ranked against its loaded Nasdaq 100 peers on five forward metrics; each metric awards 0–20 points by percentile rank; the five sum to a score of 0–100. (This replaced the v3.12 absolute-threshold model.)
+
+| Metric | Direction | Value ranked |
+|--------|-----------|--------------|
+| Revenue Growth FWD | higher is better | `revFwd` |
+| EPS Growth FWD | higher is better | `epsFwd` |
+| P/E vs EPS Growth | lower is better | `peFwd / epsFwd` (only when `epsFwd > 0`) |
+| PEG FWD | lower is better | `pegFwd` (only when `> 0`) |
+| Cash vs Debt | higher is better | `cash / debt` (no debt ranks best) |
+
+**Percentile → points:** `points = clamp(40 × (percentile − 0.25), 0, 20)`. Bottom quartile (≤ 25th percentile) scores 0; top quartile (≥ 75th) scores 20; the median scores 10. Ties take the average rank.
+
+**Score:** sum of the five metric points, rescaled to /100 across whichever metrics a stock has (missing metrics are dropped). A stock at the median on all five scores 50.
+
+**Verdict bands:** Pass ≥ 65, Watch 40–64, Fail < 40.
+
+**Factors chip:** count of metrics scoring 15+/20 (roughly the top third of the peer group on that metric).
+
+**Relative-scoring caveats:** because grades are peer-relative, a stock's score can change when *other* companies' numbers change, and roughly the bottom third of the index always lands in Fail. Scores are computed over the currently loaded set (normally all 100 from the daily feed).
+
+### State Management
+
+Client-side state lives in two places:
+
+1. **DOM:** Sort column, sort direction, active filter chip, column visibility, search query — all derived from UI interactions and re-applied on each render
+2. **localStorage:** Bring-your-own-key FMP data, FMP API key — persists across page loads
+
+No cookies. No session storage. No server-side state.
+
+### Third-Party Integrations
+
+| Service | Purpose | Authentication | Data Sent |
+|---------|---------|---------------|-----------|
+| Yahoo Finance (via yfinance) | Daily data pipeline | None (public) | Ticker symbols in HTTP requests |
+| GitHub Pages | Static hosting | GitHub account (owner only) | Repository contents |
+| GitHub Actions | CI/CD scheduling | GitHub account (owner only) | None from users |
+| Financial Modeling Prep (FMP) | Optional bring-your-own-key fallback | User's own API key (not shared) | Ticker symbols |
+
+### Performance Requirements
+
+| Metric | Target |
+|--------|--------|
+| Largest Contentful Paint (LCP) | Under 1.5s on 3G |
+| Time to Interactive (TTI) | Under 2s on 3G |
+| JavaScript total | Under 5KB (script.js: 49 lines) |
+| CSS total | Under 50KB (style.css: ~850 lines) |
+| screener.json size | Under 100KB for 100 tickers |
+| Font requests | 0 (system fonts only) |
+
+### Known Technical Debt
+
+| Debt | Description | Correct Solution |
+|------|-------------|-----------------|
+| Screener scoring in-HTML | The `computeScoreMap()` scoring and screener logic live inline in `screener.html` | Move to a separate `screener.js` file for maintainability |
+| No constituent auto-sync | `data/nasdaq100.json` is manually maintained and may drift from the actual index | Add a pipeline step that fetches the current index from a reliable source and diffs against the stored list |
+| FMP fallback has free-tier limits | The bring-your-own-key path hits the FMP 250-call/day cap, limiting full refreshes | Either document the limit clearly or find a free-tier-compatible alternative |
+| screener.json committed to repo | The data file is versioned alongside code, bloating git history over time | Move to GitHub Releases or a separate artifact storage for generated data files |
+| `og-image.png` duplicated | Root and `img/` both have copies | Delete the `img/` copy; root copy is canonical |
+
+---
+
+## Security
+
+### Authentication Model
+
+None. The site is fully public. There are no user accounts, no sessions, no login flows. The only "credential" is the optional FMP API key, which lives only in the user's own browser localStorage and is never sent to any Azqato-controlled server.
+
+### Authorization Model
+
+No role-based access. All content is publicly readable. The only write access is the GitHub Actions workflow committing `screener.json`, which is governed by GitHub's repository permissions (owner-only push to main).
+
+### Data Storage
+
+The site stores no user data. The only browser storage is:
+
+- **localStorage:** FMP API key and bring-your-own-key screener data. Both live only in the user's browser. Never transmitted to Azqato.
+- **No cookies.**
+- **No analytics that collect PII** (if analytics are added, use a privacy-preserving tool like Plausible).
+
+### Environment Variables
+
+No secrets are hardcoded in any file. The `FMP_API_KEY` is a GitHub Actions secret and is only injected into the pipeline environment at run time. It is not used by the primary yfinance pipeline and is only available to the user's own browser session via their local input.
+
+### Third-Party Trust
+
+| Service | Data Received | Notes |
+|---------|--------------|-------|
+| Yahoo Finance | Ticker symbols (in HTTP request paths) | Public endpoints, no user PII |
+| GitHub Pages | None from end users | Serves static files only |
+| GitHub Actions | None from end users | Repository automation only |
+| FMP | User's ticker symbols (when user uses their own key) | User's own API key; user controls the data sent |
+
+### Known Attack Surface
+
+| Area | Risk | Mitigation |
+|------|------|------------|
+| screener.json injection | Malicious content in the data file could be rendered as HTML | All screener cell values are set via `textContent` or explicit number formatting, not `innerHTML`. No user-supplied HTML is rendered. |
+| FMP API key exposure | User's API key stored in localStorage is readable by browser extensions and XSS | The key is user-supplied and user-controlled; the site cannot protect it beyond scope. The risk is documented in the screener UI. |
+| Dependency supply chain | yfinance is a third-party library | Pin yfinance version in the Actions workflow; monitor for new releases. |
+| GitHub Pages serving | Cached stale content | GitHub Pages cache is controlled by GitHub; not a controllable risk at this layer. |
+
+### Dependency Policy
+
+- Frontend: zero dependencies. No monitoring required.
+- Backend: one dependency (yfinance). Monitor the yfinance GitHub repository for security advisories. Pin to a specific version in the Actions workflow rather than using `latest` for production stability.
+
+---
+
+## Press Release
+
+**FOR IMMEDIATE RELEASE**
+
+### Free Tool Lets Everyday Investors Apply a Proven Fundamentals Framework to the Entire Nasdaq 100
+
+**New site from independent investor Azqato gives retail investors a complete methodology, interactive screener, and step-by-step guides — all without paying for a subscription or selling their data**
+
+*Seattle, WA — June 2026* — Azqato, an independent long-term investor and content creator, today launched a comprehensive public resource at `azqato.github.io/stocks` documenting the complete individual stock picking methodology he has refined over years of active investing. The site combines in-depth educational content, practical tool setup guides, and a live interactive screener that evaluates every Nasdaq 100 company against a 5-factor scoring model, updated daily.
+
+The site addresses a real gap in publicly available investing education. While financial media is abundant, structured, non-commercial investing frameworks are rare. Most free resources either oversimplify or exist to sell something. Azqato's site does neither: it documents a real methodology built from practice, presented with the same directness he brings to his Twitch streams and YouTube videos.
+
+The site covers twelve evaluation metrics (revenue growth, EPS growth, P/E, PEG, cash, debt, RSI, 52-week range, gross margin, and net margin), a nine-section philosophy page on long-term conviction investing, thirty Q&A items in an interactive accordion, and setup guides for both Finviz and Seeking Alpha. For index investors, a separate methodology covers VIX action levels, AAII sentiment signals, dollar-cost averaging, and lump-sum deployment strategy. The interactive Nasdaq 100 screener scores all 100 constituents daily using a transparent algorithm and shows each stock's Pass, Watch, or Fail verdict at a glance.
+
+"I kept explaining the same framework to the same questions over and over in streams and Discord," said Azqato. "Building this site meant I could say: here, read this. It is everything I know about how to evaluate a stock, written down in one place, for free."
+
+The site is available now at `azqato.github.io/stocks`. No account required. No email address. No subscription.
+
+**About Azqato**
+Azqato is an independent investor and content creator focused on long-term, fundamentals-driven equity investing. He publishes investing methodology content on Twitch, YouTube, and Discord (B5TA community), and maintains a suite of free public tools and sites at `azqato.github.io`.
+
+---
+
+## Frequently Asked Questions
+
+### External FAQ (User-Facing)
+
+**1. What is this site?**
+A free educational resource documenting Azqato's individual stock picking methodology. It explains which metrics to evaluate, how to read them, how to find candidates using Finviz, how to track them in Seeking Alpha, and how to think about index/ETF investing alongside individual stocks.
+
+**2. Who is this for?**
+Beginner to intermediate retail investors who want a structured, non-commercial framework for long-term equity investing. Especially useful for people who follow Azqato on Twitch, YouTube, or Discord (B5TA community).
+
+**3. Is this financial advice?**
+No. This site documents one investor's personal methodology. Nothing here is a recommendation to buy or sell any specific security. Every page includes an "Educational use only. Not financial advice." disclaimer.
+
+**4. How do I use the site?**
+Start at the Home page to see the strategy overview and the 10-metric framework. Read Philosophy if you want to understand the mindset behind the rules. Use Metrics as a reference when evaluating a specific signal. Use Finviz and Seeking Alpha pages to set up your research tools. Use the Screener to see how all 100 Nasdaq companies score against the methodology today. Use FAQ when you have questions about the strategy.
+
+**5. What are the 12 metrics?**
+Revenue Growth TTM, Revenue Growth FWD, EPS Growth TTM, EPS Growth FWD, P/E FWD, PEG FWD, Total Cash, Total Debt, RSI, 52-Week Range, Gross Margin, and Net Margin. The first 10 are tracked in the screener. Gross Margin and Net Margin are evaluated during research.
+
+**6. What is the Nasdaq 100 screener?**
+An interactive tool that applies the methodology's 5-factor scoring model to all 100 Nasdaq 100 companies. Data is updated daily from Yahoo Finance. Each company receives a score from 0 to 100 and a Pass, Watch, or Fail verdict. This is a screening and educational tool, not a buy/sell signal generator.
+
+**7. How does the screener score stocks?**
+Each stock is ranked against the other Nasdaq 100 companies on five forward metrics: Revenue Growth FWD, EPS Growth FWD, P/E vs EPS Growth, PEG FWD, and Cash vs Debt. Each metric awards 0–20 points by percentile (bottom quarter scores 0, the median 10, the top quarter 20), and the five sum to a score of 0–100. Pass is 65+, Watch is 40–64, Fail is under 40. It is a relative ranking, so a high score means a stock looks better than most of the index right now rather than that it cleared a fixed target. The Methodology button on the screener explains it with a worked example.
+
+**8. How often is the screener data updated?**
+Every day at 23:00 UTC via an automated pipeline. The "as of" timestamp in the screener header shows when the data was last refreshed.
+
+**9. Where does the screener data come from?**
+Yahoo Finance, fetched daily by a Python script using the free yfinance library. No API key is required for the daily feed. Users can also enter a Financial Modeling Prep API key to manually refresh data, but the daily feed covers all 100 tickers automatically.
+
+**10. Does the screener use real-time data?**
+No. It uses data from the most recent daily pipeline run (updated once per day at 23:00 UTC). Prices shown reflect the close or after-hours price at the time of the last fetch.
+
+**11. What is the Palantir story?**
+A first-person account where Azqato bought Palantir at $9, sold at $45, and watched it go to $150. It is the single most important lesson documented on the site: selling a business because the price went up is a category mistake. Price and value are not the same thing. It lives on the FAQ page.
+
+**12. Do I need to pay for anything?**
+No. The site is free. Finviz's screener is free (no account needed). Seeking Alpha has a free account tier that covers the 12-column watchlist setup described. The screener's daily data feed is free. The only paid option is an FMP API key for manual screener refreshes, which is entirely optional.
+
+**13. Do you cover short selling, options, or crypto?**
+No. This methodology covers long-only equity investing with a buy-and-hold time horizon. Derivatives and crypto are outside scope.
+
+**14. What is the recommended portfolio size?**
+10–20 stocks. Fewer than 10 concentrates risk; more than 20 dilutes conviction. Every position should be high-conviction within that range.
+
+**15. When should I sell a stock?**
+The short answer: rarely. The methodology's default posture is to hold quality positions through volatility. Selling is appropriate when the fundamental thesis has changed (not just because the price moved), or when the balance sheet or margins have deteriorated materially over multiple quarters.
+
+**16. How do I find stocks to evaluate?**
+Use the Finviz guide to set up a screener that filters for candidates meeting the methodology's basic thresholds. Then move candidates to a Seeking Alpha watchlist (12-column setup guide on the site) to track them over time.
+
+**17. Is Dollar-Cost Averaging or lump-sum investing better?**
+For regular income-stream investing (each paycheck), DCA-style contributions are the right default. For a one-time pool of money, lump-sum investing beats DCA on average in about 2/3 of historical 12-month windows, rising to roughly 90% at 36 months. The Indices page covers both approaches in detail.
+
+**18. What does the VIX have to do with investing?**
+VIX is a fear gauge: it measures implied volatility in S&P 500 options. When VIX is elevated (25+), fear is high, and broad market prices are typically lower. This makes it a useful contrarian indicator for timing index and ETF purchases. The Indices page covers VIX action levels (5 bands from below 15 to above 45).
+
+**19. What is AAII sentiment?**
+The AAII Investor Sentiment Survey is a weekly poll of retail investor outlook (bullish, neutral, or bearish). Published Thursdays since 1987. It is used as a contrarian indicator: when more than 60% of respondents are bearish, that historically marks or precedes major market bottoms. The Indices page has the full framework.
+
+**20. Why does holding for more than 12 months matter?**
+Tax treatment. In the US, positions held more than 12 months qualify for long-term capital gains tax rates (15–20%) rather than short-term rates (22–37% ordinary income). The hidden cost of impatience includes paying the higher rate on every gain realized too early.
+
+**21. How is this different from just buying an S&P 500 index fund?**
+An index fund is a valid and often superior choice for most investors. This methodology adds a layer: identifying individual companies with above-average growth trajectories at reasonable valuations, which may outperform a broad index over long periods if the fundamentals thesis is correct. Both approaches have a place: the Indices page covers ETF investing as a distinct and complementary strategy.
+
+**22. Is the site code open source?**
+Yes. The repository is public on GitHub. The code is simple enough to read directly: one CSS file, one JS file, one Python script.
+
+**23. What sites does Azqato also run?**
+The portfolio site at `azqato.github.io`, ComposerAtlas (a strategy research tool), and a Leveraged Strategies site. The stock methodology site links to Leveraged Strategies in the sidebar nav.
+
+**24. What if I disagree with the methodology?**
+The methodology is opinionated by design. It says to buy quality and hold it, to ignore short-term price movements, and to treat selling winners as almost always wrong. These are real positions that real investors disagree with. If you have a different framework, this site may still be useful as a reference for how to evaluate specific metrics, even if the overall philosophy does not match yours.
+
+**25. How do I get help or report an issue?**
+Reach out in Azqato's Discord (B5TA community) or open a GitHub issue on the repository.
+
+---
+
+### Internal Stakeholder FAQ
+
+**What is the return on investment for maintaining this site?**
+The site serves two functions: it converts interested viewers into engaged community members who understand the methodology deeply, and it serves as a reference that reduces repetitive explanation in streams and Discord. Both contribute to the quality of the community around Azqato's content.
+
+**What are the success metrics?**
+Return visitor rate (25%+ within 30 days) and average session duration (4+ minutes). These indicate that readers are finding the content trustworthy and useful enough to consult repeatedly. See the Metrics section above for the full table.
+
+**What is the roadmap direction?**
+Deepen existing content before adding new content. The philosophy and metrics pages are more valuable when they are exceptionally thorough than when new pages are added at average quality. The next meaningful additions are a mobile navigation improvement and a conference call research guide.
+
+**How do we ensure the methodology stays accurate over time?**
+The site is deliberately designed to avoid time-sensitive claims. All editorial content uses hypothetical examples, conceptual frameworks, and calibrated thresholds rather than current prices or live company data. Threshold updates (e.g., "strong gross margin is 50%+") require review when market structures change, but this is infrequent.
+
+**How is the screener data quality monitored?**
+The "as of" timestamp in the screener header shows the last refresh time. If the daily pipeline fails, GitHub sends an email notification to the repository owner. The pipeline is designed to retry failed symbol fetches automatically and commit whatever data was successfully retrieved.
+
+**What is the documentation strategy going forward?**
+Four files: README.md (developer front door), PRD.md (this file, the comprehensive reference), DESIGN.md (design system), PATCHNOTES.md (full changelog). All major changes are documented in PATCHNOTES.md. PRD.md is updated when product requirements, architecture, or process changes significantly. Documentation changes are included in version increments.
+
+---
+
+## Site Structure Reference
+
+### Navigation Order (10 items)
 
 Home → Philosophy → Metrics → Screener → Finviz → SeekingAlpha → Indices → FAQ → Leveraged Strategies → Support
 
-**Nav link label rule:** Every sidebar navigation link is a single token (no spaces). The labels are: Home, Philosophy, Metrics, Screener, Finviz, SeekingAlpha, Indices, FAQ, Support. The two trailing external links (Leveraged Strategies, Support) are the only exceptions to the single-token rule. OG titles and page H1 headings may be longer; the nav label must stay short. Note: `Screener` is the interactive in-site screener (`screener.html`); the Finviz and Seeking Alpha setup guides are reached via the `Finviz` (`finviz.html`) and `SeekingAlpha` (`seekingalpha.html`) labels.
+**Nav label rule:** Every sidebar nav label is a single token (no spaces) except the two trailing external links. Labels: Home, Philosophy, Metrics, Screener, Finviz, SeekingAlpha, Indices, FAQ, Leveraged Strategies, Support.
 
----
+### Pages and Their Section IDs
 
-## 3. Page-by-Page Requirements
-
-### 3.1 Home Page (`index.html`)
-
-**Sections (in order):**
-
-1. **Hero:** Headline thesis ("Buy companies with strong growth fundamentals. Hold them. Do not sell."), sub-description, then the "📈 Methodology Documentation" badge below the description.
-
-2. **Strategy Overview:** 6-paragraph overview covering: the core approach (buy quality, hold, compounding), watchlist vs portfolio distinction, the cost of early selling, long-term capital gains tax advantage, diversification rule (10-20 stocks), and market cap vs potential mental model.
-
-3. **The 10 Metrics:** 10 metric cards in a 2-column grid, each linking to the full entry on `metrics.html`. Note: Gross Margin and Net Margin are supplementary signals that appear in the glossary but not in the core screener grid. A footer note links to those metric entries.
-
-4. **What Strong Metrics Look Like:** 9-row reference table with Strong Signal, Caution Zone, and What It Confirms for each key metric including Gross Margin and Net Margin rows.
-
-5. **Portfolio vs. Watchlist:** 4-paragraph explanation of entry criteria for portfolio positions vs watchlist names and how to manage the transition between them.
-
-6. **FAQ Teaser:** Links to the Palantir story on `faq.html` and to the Philosophy page.
-
----
-
-### 3.2 Philosophy Page (`philosophy.html`)
-
-Nine sections covering the conceptual and philosophical foundation of the methodology. This page preserves all concepts from the transcript analysis that do not fit neatly into the quantitative metrics framework.
-
-**0. It Is Possible, and the Game Is Long** (`#section-possible`)
-- Belief as a structural prerequisite: no one builds significant wealth without first believing it is achievable; belief sustains consistency through years of unremarkable progress
-- Ordinary starting points reach large outcomes; starting size determines how long it takes, not whether it works
-- Plan-to-one-hundred framing: assume you live to 100 and reverse-calculate; a 40-year-old is past the first quarter, a 50-year-old at halftime; no long-term fortune was built on short-term thinking
-- People underestimate multi-decade compounding: the city-skyline analogy (impossible in one year, routine over twenty)
-- The short-termism trap: instant-results culture and dopamine incentives push against the long horizon and trigger destructive impatience
-
-**1. Stocks as Ownership, Not Symbols**
-- The Buffett farmland analogy: buy productive assets, think in years not days
-- The franchise mental model: same logic as owning an operating business
-- Why the ownership frame creates noise immunity
-- Explicit framing of short-term vs long-term price drivers: short-term is driven by narrative, sentiment, hype, institutional flows, options mechanics, and macro news; long-term is driven by revenue growth, EPS growth, and margin expansion
-
-**2. How to Research a Company**
-- Sequential evaluation: business model first, then financials, then valuation
-- Why the order matters: starting with numbers creates rationalization bias toward businesses that may be fundamentally flawed
-- SWOT analysis framework: Strengths, Weaknesses, Opportunities, Threats (Opportunities and Threats are the most investment-relevant dimensions)
-- SWOT application: every major technological shift disrupts some businesses and accelerates others; SWOT forces positioning relative to the current environment
-- The double/lose-50% test: what are the realistic odds of doubling in 3-5 years vs losing 50%? Opportunities drive the first number; threats and balance sheet health drive the second.
-- Read the balance sheet like a person's finances: the cousin analogy (heavy debt and little cash = fragile; high cash/investments and low debt = resilient); strong balance sheets create the optionality to go on offense when others are forced to retrench
-
-**3. Growth, Value, and Dividend Stocks**
-- Growth stocks: high revenue growth, high P/E multiples, best in risk-on environments, worst in risk-off (50-80% drawdowns possible)
-- Value stocks: below intrinsic value, slower growth, stable cash flows, resilient in risk-off (lower multiples compress less)
-- Dividend stocks: consistent income payments, fall only 20-30% in conditions that drop growth stocks 50-80%, provide deployment capital during crashes
-- Risk-on vs risk-off environments: definition, triggers, which stock types win in each
-- Dividends as crash-deployment capital: income continues during price declines, providing buying power at exactly the moments when quality companies are most discounted
-- 2022 as the textbook example: Fed rate hikes caused 50-80% drawdowns in growth stocks; value and dividend stocks held; an investor who understood all three types both preserved capital and had cash to buy discounts
-
-**4. Stay on Offense**
-- Regular investing is psychologically critical, not just mathematically important
-- The offensive investor: adds consistently, never desperate to time entries, does not panic-sell because they are always planning the next buy
-- The defensive investor: no capital to deploy, every price movement becomes a fear-driven decision, produces destructive behavior
-- Amount matters less than consistency: $200/month for 20 years outperforms $2,000/month with panic behavior
-- Concrete cadence: buy at least twice a month regardless of market conditions; a fixed schedule removes the timing question and replaces it with which quality business to add next
-- Grow income over cutting expenses: there is a floor on how much you can cut, no ceiling on what you can earn; the offensive mindset depends on having capital to deploy
-
-**5. Wall Street vs the Individual Investor**
-- AUM fee structure: income grows with assets managed, not returns generated; this misaligns incentives with client wealth building
-- Short-term performance management: quarter-to-quarter appearance matters more than long-term outcomes for client retention
-- Herd mentality: institutional managers go risk-off together (amplifying downside) and risk-on together (amplifying upside)
-- The S&P 500 embarrassment: most actively managed funds cannot consistently beat a mechanical index fund over time
-- Practical implication: do not outsource conviction; volatility is not evidence of error; the people generating volatility are playing a different game
-
-**5.5. Hype, Sentiment, and the Weak-Hands Cascade** (`#section-hype`)
-- Saturating attention is not a buy signal: when a stock is the topic everywhere, the easy upside is usually gone and the valuation is typically stretched; broad ownership leaves little marginal buying and a lot of positioning that can unwind
-- The weak-hands cascade mechanism: late buyers near a peak hold no conviction, sell as price slips, push the next cohort underwater, and trigger successive waves of selling; a stock can fall for months while the company keeps posting record numbers (business and price decouple in the short term)
-- The defense: build positions before broad attention arrives; anchor decisions to long-term fundamentals (revenue growth, EPS growth, margins) rather than sentiment, narrative, or momentum-list status; sentiment sets price this quarter, fundamentals set it over years
-
-**6. Market Leadership Cycles**
-- No company stays at the top of the market cap rankings for 30-40 years
-- The complacency mechanism: near-monopoly status shifts organizational culture from builders to protectors; engineers lose influence; product quality declines slowly; by the time a disruption arrives, the company lacks the culture to respond
-- Implications for holding: continuous reassessment of whether the moat is intact, whether management is building or protecting, whether competitors are taking share
-- The opportunity: the next generation of dominant companies likely already exists as small or mid-cap names; studying patterns of past market leaders builds the pattern recognition to identify them early
-
-**7. Building Investment Knowledge**
-- Studying historical and current business models: pattern recognition that lets you identify quality before it is widely priced in
-- Why sectors beyond technology matter: great long-term compounders exist in consumer brands, specialty retail, financial services, and other non-tech categories
-- Margins reveal competitive position: the multi-year direction of gross and net margins signals a position of power (rising: pricing power, cost control, defensible) or weakness (eroding: forced price cuts, rising cost to win sales); Wall Street pays up for margin expansion and sells margin compression as evidence of an emerging threat; durable margin trends are the quantified version of SWOT strengths and threats
-- Conference call discipline: free, public, and almost universally ignored by casual investors. The texture of what is happening is in the call, not the press release.
-- The twice-listen rule: first listen misses nuance; second listen surfaces it; every time
-- 2x playback speed: doubles research capacity without information loss; build the tolerance for it
-- 50-100 calls per earnings season: the information advantage compounds over time
-- Always research why margins move: never accept a gross or net margin change without finding the explanation in the call; is it durable or a one-time event?
-
----
-
-### 3.3 Metrics Glossary (`metrics.html`)
-
-Twelve metrics in full educational format. Each metric entry includes: what it measures, why it matters, how to read it (range badges), at least one illustrative example table with hypothetical data, and a caveat box.
-
-**Metrics 1-10: Core Screener Metrics**
-
-These are the primary signals reviewed when evaluating any position and are available as Finviz screener filters (or equivalents).
-
-1. **Revenue Growth TTM:** Trailing 12-month actual revenue growth. Ground truth on business momentum. Includes the quarterly deceleration warning signal: a pattern of +20%, +15%, +10%, +5% across four quarters signals a business approaching plateau even when absolute growth is still positive.
-
-2. **Revenue Growth FWD:** Analyst consensus forward revenue estimate. The relationship between FWD and TTM reveals whether growth is accelerating or decelerating. Strong FWD + strong TTM = high-conviction setup.
-
-3. **EPS Growth TTM:** Trailing 12-month earnings per share growth. Confirms that revenue growth is compounding into profit growth. Revenue growing but EPS declining signals margin compression.
-
-4. **EPS Growth FWD:** Consensus forward EPS estimate. Primary input to the PEG ratio. Accelerating FWD trajectory signals operating leverage that will compound returns even without price movement.
-
-5. **P/E FWD:** Forward price-to-earnings ratio. Primary valuation anchor. Most important signal: P/E below the EPS growth rate means the stock is underpriced relative to its earnings trajectory. Also compare to 5-year average and sector median.
-
-6. **PEG FWD:** Forward price/earnings-to-growth ratio. The single most important number in this methodology. Below 1.0 = potentially undervalued relative to growth. Above 2.0 = growth already priced in.
-
-7. **Total Cash:** Cash, equivalents, and short-term investments. Net cash positive (cash > debt) = maximum optionality. Important nuance: cash-heavy balance sheets also provide an earnings advantage during Fed rate hiking cycles (interest income vs zero interest expense for debt-free companies).
-
-8. **Total Debt:** All short and long-term debt obligations. Risk assessed relative to cash and free cash flow. High fixed-rate long-term debt differs significantly from high-rate short-term floating obligations.
-
-9. **RSI:** Relative Strength Index. Entry timing signal only. Below 30 = significantly oversold, high priority review. Above 70 = overbought, not the moment to initiate.
-
-10. **52-Week Range:** Annual price range. Entry timing signal. Lower 25% of range = favorable entry context when paired with low RSI. Upper 90% = do not initiate.
-
-**Metrics 11-12: Business Quality Metrics**
-
-These are evaluated during research but not available as direct Finviz screener filters.
-
-11. **Gross Margin:** Revenue minus cost of goods sold as a percentage of revenue. 50%+ = strong (typical of software, premium brands). Under 30% = elevated risk. Direction matters: rising = position of strength; falling = competitive pressure or pricing deterioration.
-
-12. **Net Margin:** Net income as a percentage of revenue. 30%+ = elite. 25-30% = excellent. 10-25% = good. Under 10% = requires context. Rising trajectory signals operating leverage. Always research why margins move.
-
----
-
-### 3.4 Finviz Screener Setup (`finviz.html`)
-
-Finviz stock screener configuration guide for discovering candidates. Free tier, no account required.
-
-**Filters covered:**
-- Market Cap (Mid to Large)
-- Forward P/E
-- PEG
-- EPS Growth Next Year
-- EPS Growth Next 5 Years
-- Sales Growth Quarter over Quarter
-- Total Debt/Equity
-- RSI (14)
-- 52-Week Low
-
-**Purpose:** Discovery tool that generates a candidate list for deeper evaluation in Seeking Alpha. Not a buy signal generator.
-
----
-
-### 3.5 Seeking Alpha Watchlist (`seekingalpha.html`)
-
-Seeking Alpha 12-column individual stocks watchlist configuration. Free account, no credit card required.
-
-**Columns configured:**
-Symbol, Market Cap, Price, Change %, Revenue Growth FWD, EPS Growth FWD, P/E Non-GAAP FWD, PEG Non-GAAP FWD, Total Cash, Total Debt, RSI (14), 52 Week Range
-
----
-
-### 3.6 Indices & ETF Investing (`indices.html`)
-
-Separate methodology for evaluating broad market indices and ETFs. Key insight: indices cannot go to zero; individual stocks can. This asymmetry makes technicals the primary framework for index investing (when to buy) vs fundamentals for individual stocks (what to buy).
-
-**Sections:**
-- Types of index funds: Broad Market, Growth, Dividend, Value, Sector-Specific, International
-- Dollar-Cost Averaging: DCA as the right default for most investors regardless of the timing signals; VT and VTI + VXUS as the broad-market vehicles (what-to-buy is already solved, so only the schedule matters); removes emotion, removes timing, matches paycheck investing, builds the habit; terminology note (paycheck investing is closer to repeated small lump sums than formal DCA)
-- Lump-Sum Investing: LSI beats DCA on average (~2/3 over a 12-month window, ~90% at 36 months per Vanguard) because markets trend up and money invested sooner compounds longer; timing/regret risk; the "dry powder" trap (waiting for a dip underperforms); the hybrid approach (invest 1/2 to 1/3 now, DCA the rest over 3-6 months); reconciled with the VIX/AAII framework (signals are for deploying cash already earmarked to invest, not for pausing regular contributions)
-- Fundamentals vs. Technicals: why the question is different for indices
-- VIX: The Fear Gauge: five action level ranges with market condition descriptions and deployment postures
-- Leveraged ETFs caveat: when to use 2x/3x ETFs (VIX > 45 recovery plays only)
-- RSI and 52W Range for index/ETF context
-- AAII Investor Sentiment Survey: weekly retail investor poll (since 1987, ~150K members, published Thursdays). Used as a contrarian indicator: bearish readings above 60% historically mark or precede major market bottoms; below 25% bearish signals elevated optimism and caution for new entries. Highest-conviction entries combine elevated AAII bearish readings with elevated VIX (three-tier framework: either elevated, both elevated, both at extremes).
-- Structural Quality Metrics: YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio
-- "What Strong Signals Look Like" reference table (nine signals: four timing, five structural)
-- Seeking Alpha ETF watchlist setup
-
----
-
-### 3.7 FAQ (`faq.html`)
-
-Accordion-style Q&A covering philosophy and practice. Ten questions:
-
-1. **Why do you never sell your stocks?** Asymmetric cost of selling: holding a loser leaves the asset; selling a winner loses the gain permanently.
-
-2. **The Palantir Story:** First-person account. Bought at $9, sold at $45, watched it go to $150. The rule that came out of it: selling a business because the price went up is a category mistake. Price and value are not the same thing. (Visually distinguished with accent treatment.)
-
-3. **How do you build a watchlist?** Fundamentals must pass the full screen; timing must be right. Patience is a strategy.
-
-4. **What makes a company worth holding long-term?** Four things: durable revenue growth, expanding or stable margins, strong balance sheet (or credible path), and a moat.
-
-5. **Do you use technical analysis?** Minimally for individual stocks (RSI and 52W range for entry timing only). Significantly more for indices (VIX + RSI + range as primary framework, because indices cannot go to zero).
-
-6. **Why does holding for over 12 months matter beyond investment returns?** Long-term capital gains tax treatment (15-20% vs 22-37% ordinary income rate). Tax-deferred compounding. The hidden cost of impatience is paying the higher rate.
-
-7. **What is the biggest mistake beginner investors make?** Selling winners too early and holding losers too long. Compounding requires time in quality assets.
-
-8. **How many stocks should I hold?** 10-20. Fewer concentrates risk; more dilutes conviction. Every position should still be high-conviction within that range.
-
-9. **When is the wrong time to buy a great company?** When everyone is talking about it. Peak coverage = peak valuation. Late buyers without business conviction create weak-hands cascades when prices pull back.
-
-10. **What should I think about position sizing?** Core positions (profitable, established) get meaningful allocations. Speculative positions (unprofitable, binary outcomes) get small allocations regardless of prior wins.
-
-11. **How does market environment affect which stocks perform best?** Risk-on favors growth; risk-off hits growth stocks hardest (50-80% drawdowns possible). Value and dividend stocks hold up better in risk-off. Understanding this cycle does not mean avoiding growth. It means holding through volatility with understanding and having structure to deploy capital at discounts. Links to Philosophy page for the full GVD framework.
-
-12. **Is getting wealthy in the stock market realistic, and how long does it take?** (`answer-longgame`) Belief as a prerequisite; the plan-to-one-hundred horizon (40 is the first quarter, 50 is halftime); underestimating multi-decade compounding (city-skyline analogy); the short-termism trap. Mirrors the philosophy.html "It Is Possible, and the Game Is Long" section; links to `philosophy.html#section-possible`.
-
-13. **Should I invest all at once or spread it out over time?** (`answer-dca`) DCA as the default for regular income-stream investing (VT or VTI + VXUS); LSI mathematically superior on average for a one-time pool; the hybrid (1/2 to 1/3 now, DCA the rest over 3-6 months); the dry-powder trap; reconciliation with the VIX/AAII signals. Links to `indices.html#section-dca` and `indices.html#section-lumpsum`.
-
-> Note: the FAQ has grown well beyond this list (currently ~30 accordion items; see PATCHNOTES v2.3.0 and later). This numbered summary is not exhaustive. The v3.2.0 pass also aligned several existing answers with the philosophy v3.1.0 additions: the offense answer gained the buy-at-least-twice-a-month cadence and income-over-expenses focus; the balance-sheet answer gained the personal-finance (cousin) analogy; the gross-margin answer gained the position-of-power vs weakness framing and why Wall Street prices margin trends; and the "wrong time to buy a great company" answer now links to `philosophy.html#section-hype`.
-
-12. **What is the AAII Investor Sentiment Survey and how do I use it when investing in indices?** Weekly retail investor poll (since 1987, ~150K members). Used as a contrarian indicator: bearish above 60% historically marks or precedes major bottoms. Action levels parallel the VIX framework. Highest-conviction entries combine elevated AAII bearish readings with elevated VIX. Links to the full `#section-aaii` framework on indices.html.
-
----
-
-## 4. Content Philosophy
-
-- No real-time data. No live portfolio snapshots. All illustrative examples use hypothetical labels or category descriptions.
-- The Palantir story ($9 buy, $45 sell, $150 outcome) is the one named historical exception, presented as a first-person account rather than a recommendation.
-- All examples use generic descriptors ("High-growth tech co.", "Quality compounder", "Accelerating", "Decelerating").
-- No em dashes or double hyphens in copy. Punctuation alternatives (commas, colons, semicolons, parentheses, and periods) are used instead to improve readability and flow. This applies to all HTML pages and documentation files. When auditing, search for all three forms: ` -- ` (double hyphen with spaces), `—` (raw Unicode em dash, U+2014), and `&mdash;` (HTML entity). The `&mdash;` entity is easy to overlook in HTML source and must be explicitly included in any audit search.
-- No financial advice language. Disclaimer in sidebar footer on every page: "Educational use only. Not financial advice."
-- The methodology explicitly covers all three stock types (growth, value, dividend) even though the primary focus is on growth stock selection. This breadth prevents the site from appearing to be a single-strategy prescription.
-
-### Punctuation style guide
-
-**Audit checklist:** When checking any file for prohibited em dashes, search for all three forms:
-1. ` -- ` (double hyphen with surrounding spaces)
-2. `—` (raw Unicode em dash, U+2014)
-3. `&mdash;` (HTML entity; especially easy to miss in HTML source)
-
-When a dash would normally appear in copy, use the following alternatives based on context:
-
-- **Comma:** The default replacement in most cases. Keeps the sentence flowing without drawing attention to itself.
-- **Colon:** Used when introducing a list, explanation, or elaboration after a complete clause.
-- **Semicolon:** Used when connecting two closely related independent clauses that could each stand alone.
-- **Parentheses:** Used for asides or supplementary information that is not central to the main point.
-- **Period:** Used when splitting a sentence into two produces a cleaner result. Shorter sentences are often clearer.
-
----
-
-## 5. Social Cards (Open Graph)
-
-Every page must include Open Graph and Twitter Card meta tags in the `<head>` so that links shared on Discord, X, Slack, and similar platforms render a preview card.
-
-### Title and description convention
-
-- **`<title>` and `og:title`:** Both equal the page H1 text exactly. No brand suffix. "- Azqato" is never used anywhere. `<title>` and `og:title` are always identical.
-- **`og:description` and `<meta name="description">`:** Both equal the lead paragraph on the page exactly. They are always identical.
-- `twitter:title` and `twitter:description` always mirror `og:title` and `og:description`.
-
-### Required tags (all pages)
-
-```html
-<meta name="description" content="...">
-<!-- Open Graph / Discord -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://azqato.github.io/stocks/PAGE.html">
-<meta property="og:title" content="Page Title">
-<meta property="og:description" content="...">
-<meta property="og:image" content="https://azqato.github.io/stocks/og-image.png">
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Page Title">
-<meta name="twitter:description" content="...">
-<meta name="twitter:image" content="https://azqato.github.io/stocks/og-image.png">
-```
-
-### Per-page values
-
-`og:title` and `<title>` are identical. `og:description` and `<meta name="description">` are identical.
-
-| Page | `og:url` | `og:title` / `<title>` | `og:description` / `<meta name="description">` |
-|------|----------|------------|-----------------|
-| `index.html` | `.../stocks/` | Stock Picking Methodology | A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise. |
-| `philosophy.html` | `.../stocks/philosophy.html` | The Philosophy of Long-Term Conviction Investing | The concepts that sit behind every rule in this methodology. Understanding why the rules exist makes them easier to follow when markets are moving fast and the temptation to react is strongest. |
-| `metrics.html` | `.../stocks/metrics.html` | Stock Evaluation Metrics Explained | Ten metrics. Each one earns its place. This page explains what each signal measures, why it matters for long-term investing decisions, and how to interpret the numbers. All examples are illustrative and use hypothetical figures to demonstrate how each metric works in practice. |
-| `finviz.html` | `.../stocks/finviz.html` | How to Set Up a Finviz Stock Screener For Free | How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha. |
-| `seekingalpha.html` | `.../stocks/seekingalpha.html` | How to Build a Stock Watchlist in Seeking Alpha For Free | Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology. |
-| `indices.html` | `.../stocks/indices.html` | Indices & ETF Investing | A separate methodology for evaluating broad market indices and ETFs. Different assets require different frameworks. Where individual stock picking is driven primarily by company fundamentals, index investing is driven primarily by market sentiment, timing signals, and structural efficiency. |
-| `faq.html` | `.../stocks/faq.html` | Stock Investing Q&A | The thinking behind the strategy. Questions about how decisions are made, why certain rules exist, and what the long-term mindset actually looks like in practice. |
-
-### Image
-
-`og-image.png` is a static 1200x630 PNG stored at the site root. It shows the site favicon (📈, U+1F4C8) centered on the `#0d1117` background, rendered as a white monochrome icon via Segoe UI Emoji. Discord uses `summary_large_image` format (minimum 600x315, recommended 1200x630). The image must exist at the declared URL; a missing image silently produces a card with no preview.
-
-To regenerate the image, run this PowerShell snippet from the site root:
-
-```powershell
-Add-Type -AssemblyName System.Drawing
-$bmp = New-Object System.Drawing.Bitmap(1200, 630)
-$g = [System.Drawing.Graphics]::FromImage($bmp)
-$g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
-$g.Clear([System.Drawing.Color]::FromArgb(255, 13, 17, 23))
-$font = New-Object System.Drawing.Font("Segoe UI Emoji", 380, [System.Drawing.FontStyle]::Regular, [System.Drawing.GraphicsUnit]::Pixel)
-$sf = New-Object System.Drawing.StringFormat
-$sf.Alignment = [System.Drawing.StringAlignment]::Center
-$sf.LineAlignment = [System.Drawing.StringAlignment]::Center
-$g.DrawString([System.Char]::ConvertFromUtf32(0x1F4C8), $font, (New-Object System.Drawing.SolidBrush([System.Drawing.Color]::White)), (New-Object System.Drawing.RectangleF(0,0,1200,630)), $sf)
-$bmp.Save("og-image.png", [System.Drawing.Imaging.ImageFormat]::Png)
-$g.Dispose(); $bmp.Dispose()
-```
-
----
-
-## 6. Design System
-
-- GitHub Dark-inspired palette: background `#0d1117`, surface `#161b22`, teal accent `#00d4a0`
-- Text primary `#eef3f7`, text secondary `#cbdae6`
-- System font stack, no external font loading
-- CSS Grid sidebar layout with sticky positioning on desktop
-- Responsive: sidebar collapses to sticky top nav below 1024px
-- Full design specification in `docs/DESIGN.md`
-
-### "On This Page" sidebar navigation
-
-Every page with multiple named sections includes an "On This Page" anchor-link block in the sidebar navigation. This block appears below the Support link (last item in the main nav) and is consistent across all pages. On mobile (below 1024px) the block is hidden alongside the rest of the sidebar sub-navigation.
-
-**Pages and their section IDs:**
-
-| Page | Section IDs |
-|------|-------------|
+| Page | Section IDs ("On This Page") |
+|------|------------------------------|
 | `index.html` | `#section-strategy`, `#section-metrics-grid`, `#section-reference`, `#section-portfolio` |
 | `philosophy.html` | `#section-possible`, `#section-ownership`, `#section-research`, `#section-gvd`, `#section-offense`, `#section-wall-street`, `#section-hype`, `#section-leadership`, `#section-knowledge` |
 | `metrics.html` | `#metric-rev-ttm`, `#metric-rev-fwd`, `#metric-eps-ttm`, `#metric-eps-fwd`, `#metric-pe-fwd`, `#metric-peg-fwd`, `#metric-cash`, `#metric-debt`, `#metric-rsi`, `#metric-52w`, `#metric-gross-margin`, `#metric-net-margin` |
 | `finviz.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
 | `seekingalpha.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |
 | `indices.html` | `#section-types`, `#section-dca`, `#section-lumpsum`, `#section-framework`, `#section-vix`, `#section-timing`, `#section-aaii`, `#section-quality`, `#section-signals`, `#section-sa-setup` |
+| `faq.html` | No "On This Page" block (accordion pattern) |
+| `screener.html` | No "On This Page" block (app page, no long-form sections) |
 
-**Implementation:** The `IntersectionObserver` in `script.js` automatically highlights the active section link as the user scrolls. It derives section targets from the hrefs of `.metric-links a` elements on the page, so it works for all pages without per-page configuration. The FAQ page (`faq.html`) uses an accordion pattern and does not have an "On This Page" block. The Screener page (`screener.html`) is an interactive app with no long-form sections, so it also has no "On This Page" block (its sidebar shows the main nav only).
+### Content Philosophy (Enforced Rules)
 
----
+- No real-time data in editorial content
+- All illustrative examples use hypothetical labels ("High-growth tech co.", "Accelerating")
+- No company-specific live examples (the Palantir story is the one named historical exception)
+- No em dashes in any form: ` -- `, `—`, or `&mdash;`
+- No "- Azqato" suffix on `<title>` or `og:title`
+- No financial advice language
+- "Educational use only. Not financial advice." in every page's sidebar footer
 
-## 6. Success Criteria
+### Key Concepts Documented (Video Transcript Analysis)
 
-- All 12 metrics explained in plain language with hypothetical illustrative examples
-- Philosophy page covers all major conceptual content from the transcript analyses
-- FAQ includes practical Q&A on portfolio construction, timing mistakes, market environments, and position sizing
-- Site loads with no dependencies and no errors in any modern browser
-- Mobile-readable at 375px minimum width
-- No real-time data, no company-specific current recommendations, no financial advice language
-- Navigation consistent and correct on all 8 pages (10 items including Leveraged Strategies and Support)
-
----
-
-## 7. Key Concepts Documented (Source: Video Transcript Analyses, June 2026)
-
-The following concepts were analyzed from video transcripts and integrated into the site. This section preserves the full concept list for future reference since the original temp analysis file has been deleted. A second transcript ("How to Get Filthy Rich in the Stock Market") was analyzed in the v3.1.0 pass, adding the belief/long-game, hype/weak-hands, margins-as-competitive-position, balance-sheet-as-personal-finance, and buy-cadence concepts to the philosophy page.
+The following concepts were integrated from video transcript analyses. This table preserves the full concept inventory.
 
 | Concept | Site Location |
-|---|---|
-| Long-term thinking / compounding mindset | philosophy.html (Section 0: The Long Game, Stay on Offense), index.html strategy |
+|---------|--------------|
+| Long-term thinking / compounding mindset | philosophy.html (Section 0, Stay on Offense), index.html |
 | Belief that significant wealth-building is possible | philosophy.html (Section 0) |
 | Plan-to-100 time horizon / underestimating multi-decade compounding | philosophy.html (Section 0) |
 | Short-termism / dopamine-culture trap | philosophy.html (Section 0) |
 | Stay on offense: regular investing discipline | philosophy.html (Section 4) |
 | SWOT analysis framework | philosophy.html (Section 2) |
-| Sequential evaluation: business → financials → valuation | philosophy.html (Section 2) |
+| Sequential evaluation: business first, then financials, then valuation | philosophy.html (Section 2) |
 | Revenue growth as primary screener | metrics.html (Revenue TTM + FWD) |
 | Revenue deceleration warning signal (quarterly trend) | metrics.html (Revenue TTM) |
-| Peak hype avoidance | philosophy.html (Section 5.5: Hype, Sentiment, and the Weak-Hands Cascade), faq.html (Q9) |
-| Weak hands cascade mechanics | philosophy.html (Section 5.5), faq.html (Q9) |
+| Peak hype avoidance | philosophy.html (Section 5.5), faq.html |
+| Weak-hands cascade mechanics | philosophy.html (Section 5.5), faq.html |
 | Buy cadence: at least twice a month | philosophy.html (Section 4) |
 | Grow income over cutting expenses | philosophy.html (Section 4) |
-| Balance sheet strength (cash > debt) | metrics.html (Total Cash, Total Debt), philosophy.html (Section 2: balance sheet like a person's finances) |
+| Balance sheet strength (cash > debt) | metrics.html (Cash, Debt), philosophy.html (Section 2) |
 | Balance sheet advantage in rate-hiking cycles | metrics.html (Total Cash) |
 | Gross margin trends and thresholds | metrics.html (Gross Margin), index.html reference table |
 | Net margin trends and thresholds | metrics.html (Net Margin), index.html reference table |
-| Margins as competitive-position signal (power vs weakness); Wall Street prices margin trends | philosophy.html (Section 7: Margins reveal competitive position) |
-| CEO and management quality | philosophy.html (Building Investment Knowledge), faq.html (Q4 moat) |
-| Market cap vs potential mental model | index.html (Strategy section) |
+| Margins as competitive-position signal | philosophy.html (Section 7) |
+| Wall Street prices margin trends | philosophy.html (Section 7) |
+| Market cap vs potential mental model | index.html |
 | Short-term vs long-term price drivers | philosophy.html (Section 1) |
 | Opportunities outside tech | philosophy.html (Section 7) |
 | Double/lose-50% decision framework | philosophy.html (Section 2) |
-| Diversification: 10-20 stocks | index.html (Strategy section), faq.html (Q8) |
+| Diversification: 10–20 stocks | index.html, faq.html |
 | GVD framework: growth/value/dividend stocks | philosophy.html (Section 3) |
-| Risk-on vs risk-off market environments | philosophy.html (Section 3), faq.html (Q11) |
-| Stocks as ownership, not symbols (farmland analogy) | philosophy.html (Section 1) |
+| Risk-on vs risk-off market environments | philosophy.html (Section 3), faq.html |
+| Stocks as ownership (farmland analogy) | philosophy.html (Section 1) |
 | Wall Street incentive misalignment | philosophy.html (Section 5) |
-| Recurring revenue / SaaS business model premium | philosophy.html (implied in business model study), faq.html (Q4 moat) |
-| Revenue and net income up and to the right TTM | metrics.html (Revenue TTM, EPS TTM), philosophy.html |
+| Revenue and net income up and to the right TTM | metrics.html, philosophy.html |
 | Dividends as crash-deployment capital | philosophy.html (Section 3) |
-| Always research why margins move | metrics.html (Net Margin caveat), philosophy.html (Section 7) |
-| Monopoly risk / competitive complacency | philosophy.html (Section 6: Market Leadership Cycles) |
-| Market leadership cycles | philosophy.html (Section 6) |
-| Unprofitable stocks: position sizing rules | faq.html (Q10) |
+| Always research why margins move | metrics.html (Net Margin), philosophy.html (Section 7) |
+| Competitive complacency / market leadership cycles | philosophy.html (Section 6) |
+| Unprofitable stocks: position sizing rules | faq.html |
 | Study business models for pattern recognition | philosophy.html (Section 7) |
-| Conference call discipline (listen twice, 2x speed) | philosophy.html (Section 7) |
-| Dollar-cost averaging as the default for most investors | indices.html (DCA section), faq.html (DCA vs lump sum) |
-| Lump-sum investing superiority on average; the dry-powder trap; hybrid deployment | indices.html (Lump-Sum section), faq.html (DCA vs lump sum) |
+| Conference call discipline | philosophy.html (Section 7) |
+| Dollar-cost averaging as the default | indices.html (DCA section), faq.html |
+| Lump-sum superiority on average; dry-powder trap; hybrid | indices.html (Lump-Sum), faq.html |
 | Broad-market vehicles: VT, VTI + VXUS | indices.html (DCA section) |
+
+---
+
+## Documentation Process
+
+### How This File Is Maintained
+
+This PRD is the comprehensive reference for the project. It should be updated whenever:
+- A new feature ships that changes the product requirements, architecture, or user stories
+- A new page or major section is added to the site
+- The scoring model or methodology thresholds change materially
+- The data pipeline changes in a way that affects data model fields or quality
+- The roadmap or metrics targets change
+
+Updates to this file are versioned in PATCHNOTES.md like any other change.
+
+### How PATCHNOTES.md Is Maintained
+
+Every code change, content change, or documentation change gets a new entry. Format:
+
+```
+## v<MAJOR>.<MINOR>.<PATCH> — YYYY-MM-DD — Title
+
+Brief summary sentence.
+
+### Added
+- What was added
+
+### Changed
+- What was changed
+
+### Fixed
+- What was fixed
+
+### Removed
+- What was removed
+```
+
+Version bumps follow semantic versioning:
+- MAJOR: breaking changes, complete redesigns, migration events
+- MINOR: new features, new pages, new sections
+- PATCH: bug fixes, copy corrections, small improvements
+
+### What NEVER Goes in Memory or Documentation as a Standalone File
+
+- Ephemeral task lists or in-progress work
+- PR descriptions (these belong in the commit and PR)
+- Debugging sessions (the fix is in the code; the commit message has the context)
+- Time-sensitive market commentary
+- Specific current stock data or prices

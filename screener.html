@@ -575,7 +575,7 @@
       </div>
 
       <h3>How stocks are scored</h3>
-      <p class="hint">Each company is graded on five forward-looking factors, each worth up to 20 points, for a score out of 100. For the full breakdown with worked examples, open <b>📊 Methodology</b> from the toolbar.</p>
+      <p class="hint">Each company is graded relative to the Nasdaq 100 on five forward-looking metrics, for a score out of 100. For the full breakdown with a worked example, open <b>📊 Methodology</b> from the toolbar.</p>
     </div>
   </div>
 
@@ -584,67 +584,51 @@
     <div class="modal">
       <button class="modal-close" id="methodologyClose" aria-label="Close">&times;</button>
       <h2>Scoring Methodology</h2>
-      <p class="hint">Each stock is graded like a report card with five subjects. Every one of the five forward-looking factors is worth up to <b>20 points</b>, so the total <b>Score</b> is out of <b>100</b>.</p>
+      <p class="hint">Each stock is graded <b>relative to the rest of the Nasdaq 100</b> on five forward-looking metrics. For each metric a stock earns 0 to 20 points based on where it ranks against its peers, and the five add up to a <b>Score out of 100</b>. This is a ranking, not a fixed-threshold test: a high score means a stock looks better than most of the index right now, not that it cleared a specific target.</p>
       <p class="hint" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-        <span><span class="verdict v-pass">PASS</span> 70&ndash;100</span>
-        <span><span class="verdict v-watch">WATCH</span> 40&ndash;69</span>
+        <span><span class="verdict v-pass">PASS</span> 65&ndash;100</span>
+        <span><span class="verdict v-watch">WATCH</span> 40&ndash;64</span>
         <span><span class="verdict v-fail">FAIL</span> below 40</span>
       </p>
 
-      <h3>The five factors (each 0&ndash;20)</h3>
+      <h3>The five metrics</h3>
       <div class="table-wrap">
         <table>
-          <thead><tr><th scope="col">Factor</th><th scope="col">How points are earned</th></tr></thead>
+          <thead><tr><th scope="col">Metric</th><th scope="col">Better means</th></tr></thead>
           <tbody>
-            <tr><td>Revenue Growth FWD</td><td>1 point per 1% of expected sales growth (20%+ = full 20)</td></tr>
-            <tr><td>EPS Growth FWD</td><td>1 point per 1% of expected profit-per-share growth (20%+ = full 20)</td></tr>
-            <tr><td>P/E FWD vs EPS Growth</td><td>Full 20 when P/E is ≤ half the growth rate; slides to 0 when P/E is ≥ 2× the growth rate</td></tr>
-            <tr><td>PEG FWD</td><td>Full 20 at PEG ≤ 0.5; slides to 0 at PEG ≥ 2.0</td></tr>
-            <tr><td>Cash vs Debt</td><td>Full 20 when cash ≥ 1.5× debt (or no debt); about 13 when cash = debt; slides to 0 as debt grows</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="table-note">A single factor never goes below 0 or above 20.</p>
-
-      <h3>What the valuation factors mean</h3>
-      <p class="hint"><b>P/E</b> is the price you pay for $1 of yearly profit (a P/E of 20 means $20 for $1 of annual earnings — lower is cheaper). A fast grower deserves a higher P/E, so factor 3 divides them: <b>P/E ÷ growth%</b>, where lower is better. The points use a sliding scale, <b>20 × (2 − ratio) ÷ 1.5</b>, so a ratio of 0.5 earns the full 20 and a ratio of 2.0 earns 0.</p>
-      <p class="hint"><b>PEG</b> packages that same "price vs. growth" idea into one number (below 1.0 = cheap for the growth, above 2.0 = expensive) and uses the same sliding scale.</p>
-      <p class="hint"><b>Cash vs Debt</b> divides cash by debt — more cash than debt is healthier. A ratio of 1.5 or higher (or having no debt at all) earns the full 20.</p>
-
-      <h3>Worked example — AMD (Score 84 = Pass)</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th scope="col">Factor</th><th scope="col">Value</th><th scope="col" class="num">Points</th></tr></thead>
-          <tbody>
-            <tr><td>Revenue Growth FWD</td><td>+42.7%</td><td class="num">20.0</td></tr>
-            <tr><td>EPS Growth FWD</td><td>+77%</td><td class="num">20.0</td></tr>
-            <tr><td>P/E vs Growth</td><td>70.7 ÷ 77 = 0.92</td><td class="num">14.4</td></tr>
-            <tr><td>PEG FWD</td><td>1.25</td><td class="num">10.0</td></tr>
-            <tr><td>Cash vs Debt</td><td>12.3 ÷ 3.9 = 3.19</td><td class="num">20.0</td></tr>
-            <tr><td><b>Total</b></td><td></td><td class="num"><b>84</b></td></tr>
+            <tr><td>Revenue Growth FWD</td><td>higher (faster sales growth)</td></tr>
+            <tr><td>EPS Growth FWD</td><td>higher (faster profit growth)</td></tr>
+            <tr><td>P/E FWD vs EPS Growth</td><td>lower (cheaper for the growth)</td></tr>
+            <tr><td>PEG FWD</td><td>lower (cheaper for the growth)</td></tr>
+            <tr><td>Cash vs Debt</td><td>higher (more cash than debt)</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h3>Worked example — AAPL (Score 45 = Watch)</h3>
+      <h3>How a rank becomes points</h3>
+      <p class="hint">For each metric, every stock is ranked against the others and given a <b>percentile</b>: the share of peers it beats (for "lower is better" metrics, being cheaper counts as beating). The percentile maps to points on this curve.</p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th scope="col">Factor</th><th scope="col">Value</th><th scope="col" class="num">Points</th></tr></thead>
+          <thead><tr><th scope="col">Where it ranks</th><th scope="col" class="num">Points</th></tr></thead>
           <tbody>
-            <tr><td>Revenue Growth FWD</td><td>+14.9%</td><td class="num">14.9</td></tr>
-            <tr><td>EPS Growth FWD</td><td>+17.4%</td><td class="num">17.4</td></tr>
-            <tr><td>P/E vs Growth</td><td>32.4 ÷ 17.4 = 1.86</td><td class="num">1.8</td></tr>
-            <tr><td>PEG FWD</td><td>2.29 (worse than 2.0)</td><td class="num">0.0</td></tr>
-            <tr><td>Cash vs Debt</td><td>68.5 ÷ 84.7 = 0.81</td><td class="num">10.8</td></tr>
-            <tr><td><b>Total</b></td><td></td><td class="num"><b>45</b></td></tr>
+            <tr><td>Bottom 25% (0 to 25th percentile)</td><td class="num">0</td></tr>
+            <tr><td>40th percentile</td><td class="num">6</td></tr>
+            <tr><td>Median (50th percentile)</td><td class="num">10</td></tr>
+            <tr><td>60th percentile</td><td class="num">14</td></tr>
+            <tr><td>Top 25% (75th percentile and up)</td><td class="num">20</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="hint">Apple is healthy and growing (factors 1, 2, 5 are fine) but expensive for its growth right now (factors 3, 4 score low) — which is why it lands in Watch, not Pass.</p>
+      <p class="table-note">Formula: points = 40 &times; (percentile - 0.25), capped between 0 and 20. The middle half does the sliding; the top and bottom quarters are flat.</p>
 
-      <h3>The Factors chip &amp; missing data</h3>
-      <p class="hint">The <b>Factors</b> column (e.g. <span class="factors">3/5</span>) counts how many factors score <b>strong — 15 or more out of 20</b>. If a metric is unavailable, that factor is skipped and the score is rescaled across the rest (like a teacher dropping a question).</p>
-      <p class="hint">Scores reflect fundamentals only. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). Entry timing (RSI, 52-week range) is covered in the <a href="metrics.html" target="_blank" rel="noopener">Metrics methodology</a>.</p>
+      <h3>Worked example: Apple's PEG</h3>
+      <p class="hint">Apple's PEG of about 2.3 is cheaper than roughly 29% of the index. Because 29% sits just above the bottom quarter, that earns about <b>1.7 of 20</b> on the PEG metric. Not because 2.3 fails a fixed bar, but because almost every other Nasdaq 100 name is cheaper. A stock with a PEG near the cheapest in the group (top 25%) would earn the full 20.</p>
+
+      <h3>Adding up and the Factors chip</h3>
+      <p class="hint">A stock that is exactly average on all five metrics scores 5 &times; 10 = <b>50</b>. The <b>Factors</b> column (for example <span class="factors">3/5</span>) counts how many metrics land in the upper part of the pack (15+ of 20, roughly the top third). If a metric is unavailable, it is dropped and the score is rescaled across the rest.</p>
+
+      <h3>Good to know</h3>
+      <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design roughly the bottom third of the index always lands in Fail. Scores are computed across whichever stocks are currently loaded (normally all 100 from the daily feed). Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). Entry timing (RSI, 52-week range) is covered in the <a href="metrics.html" target="_blank" rel="noopener">Metrics methodology</a>.</p>
     </div>
   </div>
 
@@ -755,42 +739,69 @@
       return "Price: " + p + "  •  Fundamentals: " + f;
     }
 
-    // ---- Scoring (Azqato methodology factors) ----
+    // ---- Scoring: relative percentile model ----
+    // Each of five forward metrics is scored 0-20 by a stock's percentile rank
+    // among its loaded peers. Points ramp from 0 (bottom quartile) to 20 (top
+    // quartile); the median sits at 10. The five sum to a score out of 100,
+    // rescaled across whichever metrics a stock actually has.
     function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
+    function pointsFromPct(p) { return clamp(40 * (p - 0.25), 0, 20); } // 0-25% -> 0, 75%+ -> 20
 
-    // Five forward-looking factors, each scored granularly 0-20 (summing to 100
-    // when all are present). A missing factor is dropped and the rest rescaled.
-    function score(d) {
-      if (!d) return { pct: null, passes: 0, total: 0 };
-      var parts = [];
+    var SCORE_METRICS = [
+      { key: "revFwd",   higher: true,  get: function (d) { return isNum(d.revFwd) ? d.revFwd : null; } },
+      { key: "epsFwd",   higher: true,  get: function (d) { return isNum(d.epsFwd) ? d.epsFwd : null; } },
+      { key: "peVsG",    higher: false, get: function (d) { return (isNum(d.peFwd) && isNum(d.epsFwd) && d.epsFwd > 0) ? d.peFwd / d.epsFwd : null; } },
+      { key: "pegFwd",   higher: false, get: function (d) { return (isNum(d.pegFwd) && d.pegFwd > 0) ? d.pegFwd : null; } },
+      { key: "cashDebt", higher: true,  get: function (d) { if (!isNum(d.cash) || !isNum(d.debt)) return null; return d.debt === 0 ? (d.cash > 0 ? Infinity : null) : d.cash / d.debt; } }
+    ];
 
-      // 1. Revenue Growth FWD: 1 pt per 1%, cap 20.
-      parts.push(isNum(d.revFwd) ? clamp(d.revFwd, 0, 20) : null);
-      // 2. EPS Growth FWD: 1 pt per 1%, cap 20.
-      parts.push(isNum(d.epsFwd) ? clamp(d.epsFwd, 0, 20) : null);
-      // 3. P/E FWD vs EPS Growth: full at P/E <= 0.5x growth, 0 at >= 2x.
-      if (isNum(d.peFwd) && isNum(d.epsFwd)) {
-        parts.push(d.epsFwd > 0 ? clamp(20 * (2 - d.peFwd / d.epsFwd) / 1.5, 0, 20) : 0);
-      } else { parts.push(null); }
-      // 4. PEG FWD: full at <= 0.5, 0 at >= 2.0.
-      if (isNum(d.pegFwd)) {
-        parts.push(d.pegFwd > 0 ? clamp(20 * (2 - d.pegFwd) / 1.5, 0, 20) : 0);
-      } else { parts.push(null); }
-      // 5. Cash vs Debt: full at cash >= 1.5x debt (or no debt), 0 as debt dominates.
-      if (isNum(d.cash) && isNum(d.debt)) {
-        parts.push(d.debt === 0 ? (d.cash > 0 ? 20 : null) : clamp(20 * (d.cash / d.debt) / 1.5, 0, 20));
-      } else { parts.push(null); }
+    // Rank every loaded stock on each metric, convert ranks to points, and sum.
+    function computeScoreMap() {
+      var tickers = NASDAQ100.map(function (s) { return s[0]; });
+      var pts = {};
+      tickers.forEach(function (t) { pts[t] = {}; });
 
-      var avail = parts.filter(function (p) { return p !== null; });
-      if (!avail.length) return { pct: null, passes: 0, total: 0 };
-      var sum = avail.reduce(function (a, b) { return a + b; }, 0);
-      var pct = Math.round(sum / (avail.length * 20) * 100);
-      var passes = avail.filter(function (p) { return p >= 15; }).length;
-      return { pct: pct, passes: passes, total: avail.length };
+      SCORE_METRICS.forEach(function (m) {
+        var vals = [];
+        tickers.forEach(function (t) {
+          var d = data[t];
+          if (!d) return;
+          var v = m.get(d);
+          if (v === null || v === undefined) return;
+          vals.push({ t: t, v: v });
+        });
+        var n = vals.length;
+        if (!n) return;
+        vals.sort(function (a, b) { return a.v === b.v ? 0 : (a.v < b.v ? -1 : 1); });
+        var i = 0;
+        while (i < n) {
+          var j = i;
+          while (j + 1 < n && vals[j + 1].v === vals[i].v) j++; // average-rank ties
+          var perc = n > 1 ? ((i + j) / 2) / (n - 1) : 0.5;
+          if (!m.higher) perc = 1 - perc; // lower-is-better metrics invert
+          var p = pointsFromPct(perc);
+          for (var k = i; k <= j; k++) pts[vals[k].t][m.key] = p;
+          i = j + 1;
+        }
+      });
+
+      var out = {};
+      tickers.forEach(function (t) {
+        var got = [];
+        SCORE_METRICS.forEach(function (m) { if (pts[t][m.key] !== undefined) got.push(pts[t][m.key]); });
+        if (!got.length) { out[t] = { pct: null, passes: 0, total: 0 }; return; }
+        var sum = got.reduce(function (a, b) { return a + b; }, 0);
+        out[t] = {
+          pct: Math.round(sum / (got.length * 20) * 100),
+          passes: got.filter(function (p) { return p >= 15; }).length,
+          total: got.length
+        };
+      });
+      return out;
     }
     function verdictOf(pct) {
       if (pct === null) return "none";
-      if (pct >= 70) return "pass";
+      if (pct >= 65) return "pass";
       if (pct >= 40) return "watch";
       return "fail";
     }
@@ -832,17 +843,18 @@
     }
     function scoreColor(pct) {
       if (pct === null) return "var(--color-border)";
-      if (pct >= 70) return "var(--color-positive)";
+      if (pct >= 65) return "var(--color-positive)";
       if (pct >= 40) return "var(--color-warning)";
       return "var(--color-negative)";
     }
 
     // ---- Build a renderable row model ----
     function rows() {
+      var sm = computeScoreMap();
       return NASDAQ100.map(function (s) {
         var t = s[0];
         var d = data[t] || {};
-        var sc = score(d);
+        var sc = sm[t] || { pct: null, passes: 0, total: 0 };
         return {
           ticker: t, name: s[1], d: d,
           score: sc.pct, passes: sc.passes, total: sc.total,

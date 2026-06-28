@@ -1,99 +1,129 @@
 # Azqato — Individual Stock Methodology
 
-A static educational website documenting Azqato's individual stock picking and index/ETF investing methodology. Built as a personal knowledge base and public resource for investors interested in a fundamentals-driven approach to long-term equity investing.
+A static educational website documenting Azqato's fundamentals-driven, long-term equity investing methodology. Covers stock evaluation, index/ETF timing signals, setup guides for Finviz and Seeking Alpha, and an interactive Nasdaq 100 screener.
+
+**Live site:** [azqato.github.io/stocks](https://azqato.github.io/stocks/)
 
 ---
 
-## What This Is
+## Tech Stack
 
-This site explains the research framework used to build and maintain a long-term stock portfolio. It covers how to evaluate individual stocks using 10 core metrics, how to use Finviz to screen for candidates, how to configure a Seeking Alpha watchlist, how to approach index and ETF investing using technical signals, and why patient conviction defines the strategy.
+| Layer | Technology | Version / Notes |
+|-------|-----------|----------------|
+| HTML | HTML5 semantic | 8 pages, no preprocessor |
+| CSS | CSS3 custom properties | 850+ lines, single file |
+| JavaScript | Vanilla ES6 | 49 lines, no framework |
+| Fonts | System fonts only | No external loading |
+| Data pipeline | Python 3 + yfinance | Python 3.12, yfinance (latest) |
+| Hosting | GitHub Pages | Serves from repo root |
+| CI/CD | GitHub Actions | Daily cron at 23:00 UTC |
+| Data format | JSON | `data/screener.json`, `data/nasdaq100.json` |
 
-No frameworks, no build tools, no dependencies. Pure HTML, CSS, and vanilla JavaScript.
-
----
-
-## Pages
-
-| File | Description |
-|------|-------------|
-| `index.html` | Home -- strategy overview, 10-metric summary, key reference table |
-| `philosophy.html` | Conceptual foundation -- the long game and belief, stocks as ownership, research and SWOT, GVD framework, stay on offense, Wall Street context, hype and the weak-hands cascade, market leadership cycles, building investment knowledge |
-| `metrics.html` | Full glossary of all 10 evaluation metrics with examples and how-to-read guidance |
-| `finviz.html` | Finviz stock screener setup guide -- recommended filters and values for candidate discovery |
-| `screener.html` | Interactive Nasdaq 100 screener -- rates every constituent against the methodology factors (score + Pass/Watch/Fail verdict). Shows the daily data feed if present, with an optional bring-your-own-key (FMP) refresh |
-| `seekingalpha.html` | Seeking Alpha 12-column watchlist setup guide -- free account, exact column configuration |
-| `indices.html` | Index and ETF investing guide -- fund types, dollar-cost averaging and lump-sum timing (VT, VTI + VXUS), VIX action levels, AAII sentiment, structural quality metrics, ETF watchlist setup |
-| `faq.html` | FAQ and philosophy -- the Palantir story, capital gains strategy, technical analysis, long-term mindset |
-| `style.css` | Full design system stylesheet |
-| `script.js` | Accordion behavior, IntersectionObserver sidebar highlighting (metrics page) |
-| `scripts/fetch_screener_data.py` | Python 3 script using `yfinance` (no API key) that pulls Nasdaq 100 metrics from Yahoo Finance into `data/screener.json` |
-| `.github/workflows/screener-data.yml` | Daily GitHub Action that runs the fetch script and commits the refreshed data feed |
-| `data/nasdaq100.json` | Canonical Nasdaq 100 constituent list (ticker + name), kept in sync with the authoritative index. **Multi-class rule:** when a company has more than one share class in the index (e.g. Alphabet GOOGL/GOOG), the screener lists only the **Class A voting** shares to avoid duplicate companies |
-| `data/screener.json` | Generated data feed consumed by `screener.html` |
+No npm. No build tools. No frontend dependencies.
 
 ---
 
-## Metrics Covered
+## Prerequisites
 
-1. Revenue Growth TTM
-2. Revenue Growth FWD
-3. EPS Growth TTM
-4. EPS Growth FWD
-5. P/E FWD (primary signal: P/E below EPS Growth % = underpriced relative to trajectory)
-6. PEG FWD
-7. Total Cash
-8. Total Debt
-9. RSI (Relative Strength Index)
-10. 52-Week Range
+- Any modern browser (Chrome, Firefox, Safari, Edge) for local viewing
+- Python 3.12+ only if running or modifying the data pipeline
+- `pip` for the single backend dependency (`yfinance`)
+
+Node.js is not required.
 
 ---
 
-## Index / ETF Metrics
+## Installation
 
-| Metric | Type | Purpose |
-|--------|------|---------|
-| VIX | Timing | Fear gauge -- high VIX = buy signal for broad market exposure |
-| RSI | Timing | Oversold positioning for index entry |
-| 52W Range | Timing | Price positioning within annual range |
-| YTD Performance | Structural | Relative ranking vs peer ETFs |
-| 5Y Total Return | Structural | Medium-term track record |
-| 10Y Total Return | Structural | Long-term structural advantage |
-| Yield | Structural | Income vs cost of holding (yield > expense ratio test) |
-| Expense Ratio | Structural | Annual fee drag -- under 0.25% is cheap |
+```bash
+git clone https://github.com/Azqato/stocks.git
+cd stocks
+```
 
----
+For the data pipeline only:
 
-## Design
-
-- GitHub Dark-inspired palette. Teal accent `#00d4a0`, background `#0d1117`, surface `#161b22`
-- System fonts only -- no external font loading
-- CSS Grid sidebar layout with sticky positioning on desktop
-- Responsive: sidebar collapses to sticky top nav below 1024px
-- IntersectionObserver scroll-tracking sidebar on metrics.html
-- Full design spec in `docs/DESIGN.md`
+```bash
+pip install yfinance
+```
 
 ---
 
 ## Running Locally
 
-No build step required. Open `index.html` in a browser or serve locally:
+No build step required. Open `index.html` directly in a browser, or serve with Python:
 
 ```bash
 python3 -m http.server 8080
 ```
 
----
-
-## Content Philosophy
-
-No real-time data. No live portfolio snapshots. All illustrative examples use hypothetical labels or category descriptions. The Palantir story ($9 buy, $45 sell, $150 outcome) is the one named historical exception -- a first-person account, not a recommendation.
-
-This applies to the site's editorial/teaching content. `screener.html` is a separate interactive tool: it presents live third-party metrics (Financial Modeling Prep) that are clearly labeled, timestamped, opt-in, and carry an educational-use disclaimer. The factor scores it computes are a mechanical application of the documented methodology, not buy/sell recommendations.
-
-This site does not provide financial advice. It documents one investor's personal framework for evaluating equities over a long time horizon.
+Then visit `http://localhost:8080`. The screener loads `data/screener.json` from the same origin, so a local server is needed for the screener to read the data file (direct `file://` access blocks cross-origin JSON reads in most browsers).
 
 ---
 
-## Author
+## Environment Variables
 
-**Azqato** -- [azqato.github.io](https://azqato.github.io)
+The frontend has no environment variables. The data pipeline has one optional secret.
+
+| Variable | Location | Required | Purpose |
+|----------|----------|----------|---------|
+| `FMP_API_KEY` | GitHub Actions secret | No | Enables the bring-your-own-key Financial Modeling Prep fallback in the screener UI. The primary yfinance pipeline does not use this key. |
+
+No environment variables are needed to run the site or the yfinance pipeline locally.
+
+---
+
+## Build and Deploy
+
+This is a static site. There is no build step.
+
+**Deploy:** Push to `main`. GitHub Pages serves directly from the repository root.
+
+**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` daily at 23:00 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately.
+
+**Data pipeline (manual):** Go to Actions → "Refresh Screener Data" → Run workflow. Or run locally:
+
+```bash
+python3 scripts/fetch_screener_data.py
+```
+
+Output is written to `data/screener.json`.
+
+---
+
+## Project Structure
+
+```
+stocks/
+├── README.md                         ← This file
+├── index.html                        ← Home: strategy overview, metric grid, reference table
+├── philosophy.html                   ← Conceptual foundation (9 sections)
+├── metrics.html                      ← 12-metric glossary with examples
+├── screener.html                     ← Interactive Nasdaq 100 screener (app page)
+├── finviz.html                       ← Finviz screener setup guide
+├── seekingalpha.html                 ← Seeking Alpha watchlist setup guide
+├── indices.html                      ← Index/ETF methodology and timing signals
+├── faq.html                          ← Q&A accordion (30 items)
+├── style.css                         ← Full design system stylesheet
+├── script.js                         ← Accordion + IntersectionObserver sidebar
+├── og-image.png                      ← Social card image (1200x630)
+├── data/
+│   ├── nasdaq100.json                ← Canonical Nasdaq 100 constituent list (100 tickers)
+│   └── screener.json                 ← Generated daily feed (live metrics)
+├── scripts/
+│   └── fetch_screener_data.py        ← Python pipeline: yfinance → screener.json
+├── .github/
+│   └── workflows/
+│       └── screener-data.yml         ← Daily GitHub Action (23:00 UTC)
+└── docs/
+    ├── PRD.md                        ← Product requirements, architecture, runbook
+    ├── DESIGN.md                     ← Design system specification
+    └── PATCHNOTES.md                 ← Full changelog (v1.0.0 → present)
+```
+
+---
+
+## Full Documentation
+
+- [docs/PRD.md](docs/PRD.md) — Product requirements, architecture, runbook, roadmap, FAQ
+- [docs/DESIGN.md](docs/DESIGN.md) — Design system, color tokens, typography, component patterns
+- [docs/PATCHNOTES.md](docs/PATCHNOTES.md) — Full changelog (v1.0.0 to present)
