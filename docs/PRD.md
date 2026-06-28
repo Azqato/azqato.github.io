@@ -224,7 +224,7 @@ No npm packages. No CDN scripts. No external fonts. Zero runtime dependencies.
 }
 ```
 
-Current projects: Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, Leveraged Strategies, Lantern, Cat Food Center, Clan B5TA, Boaty McBoatface Ventures, No Fee Apartments, LV Guest List, Prompts.
+Current projects: Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, Leveraged Strategies, Lantern, Cat Food Center, Clan B5TA, Boaty McBoatface Ventures, No Fee Apartments, LV Guest List, Prompts, Azqato's Tools.
 
 Active filter tag categories: Finance, Social, Tools, Education, Meme, Real Estate.
 
@@ -765,6 +765,7 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 | v2.4.0 – v2.4.1   | discord.html: four server cards, sitewide nav update | 2026-06-13 |
 | v2.5.0            | Documentation consolidation (4-file audit) | 2026-06-13 |
 | v2.6.0            | Prompts project card                        | 2026-06-14 |
+| v2.6.1 – v2.6.5   | Project card fixes and additions            | 2026-06-27 |
 
 ---
 

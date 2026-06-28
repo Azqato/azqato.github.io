@@ -475,6 +475,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.5] - 2026-06-27
+
+### Added
+- Azqato's Tools project card: collection of free, browser-based utilities including a Markdown editor with live preview and HTML export, a Favicon Downloader, a Link Cleaner that strips tracking parameters, and a Nasdaq 100 Screener. Tagged `Tools`. Live at `https://azqato.github.io/tools/`.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
