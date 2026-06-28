@@ -2,6 +2,16 @@
 
 ---
 
+## v3.15.4 — 2026-06-27 — Negative Forward P/E Cell Now Renders Red
+
+**Color fix in the screener table. A negative forward P/E was rendering green (because `peFwd < epsFwd` is trivially true when P/E is negative). `clsPe()` now returns red for any forward P/E ≤ 0.**
+
+### Fixed
+
+- `screener.html` `clsPe()`: forward P/E ≤ 0 colors the P/E FWD cell red instead of green/default, matching how the scoring treats unprofitable names (e.g. INSM, GILD, WBD).
+
+---
+
 ## v3.15.3 — 2026-06-27 — Shrinking Forward Earnings Now Rank Worst on P/E vs Growth
 
 **The "P/E vs Growth" factor previously dropped (excused) a company whose forward EPS growth was ≤ 0. It now ranks those companies worst, consistent with how unprofitable (negative P/E) names are handled.**

@@ -820,6 +820,7 @@
     function clsPeg(n)    { return !isNum(n) ? "muted" : (n > 0 && n < 1 ? "pos" : (n <= 2 && n > 0 ? "cau" : "neg")); }
     function clsPe(d) {
       if (!isNum(d.peFwd)) return "muted";
+      if (d.peFwd <= 0) return "neg"; // negative forward P/E (unprofitable) = red
       if (isNum(d.epsFwd) && d.epsFwd > 0) {
         if (d.peFwd < d.epsFwd) return "pos";
         if (d.peFwd < d.epsFwd * 1.5) return "cau";
