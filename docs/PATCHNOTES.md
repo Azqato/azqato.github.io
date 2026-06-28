@@ -2,6 +2,18 @@
 
 ---
 
+## v3.15.3 — 2026-06-27 — Shrinking Forward Earnings Now Rank Worst on P/E vs Growth
+
+**The "P/E vs Growth" factor previously dropped (excused) a company whose forward EPS growth was ≤ 0. It now ranks those companies worst, consistent with how unprofitable (negative P/E) names are handled.**
+
+### Fixed
+
+- `screener.html` `computeScoreMap()`: the "P/E vs Growth" metric returns `Infinity` (worst rank) when forward EPS growth is ≤ 0, instead of `null` (dropped/rescaled). A company with shrinking expected earnings no longer gets a free pass on that factor.
+- Impact: 7 profitable-but-declining names were re-scored — PDD 61 → 49, PYPL 40 → 32 (Watch → Fail), QCOM 36 → 29, BKR 23 → 18, CPRT 25 → 20, KHC 25 → 20, GILD 7 → 6. Other names shifted +1 to +3 from the percentile reshuffle. Verdict spread Pass 37 / Watch 24 / Fail 39.
+- Documented in the Methodology popup note and `docs/PRD.md` scoring metric table.
+
+---
+
 ## v3.15.2 — 2026-06-27 — Negative-P/E Fix Extended to PEG
 
 **Follow-up to v3.15.1. The PEG factor had the same unprofitable-company flaw: Yahoo's `pegRatio` reports a positive (cheap-looking) PEG even when forward earnings are negative, so INSM was still scoring near-top on PEG.**
