@@ -4,6 +4,20 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
+## v1.8.0 — 2026-06-27
+
+### Added
+
+- `prompts/documentation.md`: Sixth prompt. The most comprehensive of the documentation prompts. Crawls the entire codebase first, then consolidates all documentation into four core files (README.md at the root; PRD.md, DESIGN.md, and PATCHNOTES.md in `/docs`), creates any missing files, and enforces the correct folder structure. Folds the full depth of a larger doc suite into a single PRD with required sections for Tenets, Roadmap, Metrics, Runbook, Technical Requirements, Security, a Press Release, and an FAQ, so the project can be understood from `/docs` alone without reading code.
+- `js/prompts-data.js`: Regenerated to include `documentation`.
+
+### Changed
+
+- `README.md`: Added `prompts/documentation.md` to the Files table and file structure tree.
+- `docs/PRD.md`: Added an "Adding Prompts" process note documenting the standing workflow for adding a new prompt and keeping documentation in sync, and recorded this release in the version history.
+
+---
+
 ## v1.7.0 — 2026-06-14
 
 ### Added

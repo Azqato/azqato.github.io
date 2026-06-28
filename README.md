@@ -35,6 +35,7 @@ Browsers block `fetch()` of local files when a page is opened from disk (`file:/
 | `prompts/consolidate-documents.md` | Consolidate Documents prompt: consolidate all documentation into four core files and enforce the correct folder structure. |
 | `prompts/docs-folder-audit.md` | Docs Folder Audit prompt: crawl the entire codebase, then audit and rewrite every document in /docs to match the current state of the project. |
 | `prompts/documentation-audit.md` | Documentation audit prompt: create or update the full documentation suite for any project. |
+| `prompts/documentation.md` | Documentation prompt: crawl the codebase, then consolidate all docs into four core files with every supporting document folded into a deeply sectioned PRD. |
 
 ---
 
@@ -64,7 +65,8 @@ prompts/
 │   ├── em-dash-audit.md
 │   ├── consolidate-documents.md
 │   ├── docs-folder-audit.md
-│   └── documentation-audit.md
+│   ├── documentation-audit.md
+│   └── documentation.md
 └── docs/
     ├── PRD.md
     ├── DESIGN.md

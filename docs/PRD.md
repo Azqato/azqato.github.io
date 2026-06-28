@@ -162,14 +162,16 @@ Before adding a new prompt, review the full prompt text and remove any language 
 
 ## 12. Adding Prompts
 
-To add a new prompt to the site:
+This is the canonical process for adding a new prompt, and how additions should be handled moving forward. Every new prompt follows the same steps so the site, the data file, and the docs never drift apart.
 
 1. Create a new `.md` file in `prompts/` (e.g. `prompts/my-prompt.md`)
 2. Fill in the frontmatter (`title`, `description`, `meta`), the description body, and the prompt inside a fenced code block under a `## Prompt` heading
-3. Mirror the file's content into `prompts-data.js` and add its slug to the display-order list there. The sidebar and home list update automatically
-4. Add a version entry to `docs/PATCHNOTES.md`
+3. Audit the prompt text against the Prompt Content Rules in section 11 before publishing. Remove any GitHub push or commit instructions and any account-specific actions. The `.md` file is the readable source of truth
+4. Mirror the file's content verbatim into `js/prompts-data.js` as a `{ slug, raw }` entry, appended to the end of the `window.PROMPTS_DATA` array. The array order is the display order, so appending places the new prompt last in the sidebar and home list. Both update automatically with no HTML editing
+5. Add a row to the Files table and the file structure tree in `README.md`
+6. Add a version entry to `docs/PATCHNOTES.md` using the next semantic version, dated `YYYY-MM-DD`
 
-No HTML editing is required to add a prompt.
+When publishing the new prompt to GitHub Pages, that push is the author's decision and an action taken on the repository, not an instruction embedded in any prompt. The embedded prompt text must never tell its own reader to push or publish (section 11).
 
 ---
 
@@ -177,4 +179,5 @@ No HTML editing is required to add a prompt.
 
 | Version | Date | Summary |
 | --- | --- | --- |
+| 1.8.0 | 2026-06-27 | Added the Documentation prompt (`prompts/documentation.md`), the most comprehensive of the documentation prompts: crawls the codebase, consolidates docs into four core files, and folds a full doc suite into a single deeply sectioned PRD. Expanded the Adding Prompts section into the canonical add-a-prompt workflow. |
 | 1.0 | June 2026 | Initial release. Markdown-driven structure: prompts authored as `.md` files in `prompts/`, rendered by a single `index.html` shell with hash routing. Runs with no server or dependencies (`file://` compatible) via `prompts-data.js`. Em dash audit prompt added as first example. Writing style rules documented. |
