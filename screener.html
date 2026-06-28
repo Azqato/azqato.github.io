@@ -604,7 +604,7 @@
           </tbody>
         </table>
       </div>
-      <p class="table-note">A company with negative forward earnings (a negative P/E) ranks worst on P/E vs Growth, not best, since "cheap relative to earnings" has no meaning when there are no earnings.</p>
+      <p class="table-note">A company with negative forward earnings (a negative P/E) ranks worst on both P/E vs Growth and PEG, not best, since "cheap relative to earnings" has no meaning when there are no earnings. For those names the PEG column shows a negative value (computed from forward P/E and growth) rather than the data provider's misleading positive figure.</p>
 
       <h3>How a rank becomes points</h3>
       <p class="hint">For each metric, every stock is ranked against the others and given a <b>percentile</b>: the share of peers it beats (for "lower is better" metrics, being cheaper counts as beating). The percentile maps to points on this curve.</p>
@@ -755,7 +755,10 @@
           if (!isNum(d.peFwd) || !isNum(d.epsFwd) || d.epsFwd <= 0) return null;
           return d.peFwd <= 0 ? Infinity : d.peFwd / d.epsFwd; // negative P/E (unprofitable) ranks worst, not best
         } },
-      { key: "pegFwd",   higher: false, get: function (d) { return (isNum(d.pegFwd) && d.pegFwd > 0) ? d.pegFwd : null; } },
+      { key: "pegFwd",   higher: false, get: function (d) {
+          if (isNum(d.peFwd) && d.peFwd <= 0) return Infinity; // unprofitable: Yahoo PEG is unreliable, rank worst
+          return (isNum(d.pegFwd) && d.pegFwd > 0) ? d.pegFwd : null;
+        } },
       { key: "cashDebt", higher: true,  get: function (d) { if (!isNum(d.cash) || !isNum(d.debt)) return null; return d.debt === 0 ? (d.cash > 0 ? Infinity : null) : d.cash / d.debt; } }
     ];
 
@@ -829,6 +832,12 @@
       if (d.debt < d.cash * 3) return "cau";
       return "neg";
     }
+    // For unprofitable companies (negative forward P/E), Yahoo's positive PEG is
+    // misleading, so display our own forward PEG = P/E / EPS growth (negative).
+    function pegDisplay(d) {
+      if (isNum(d.peFwd) && d.peFwd <= 0 && isNum(d.epsFwd) && d.epsFwd > 0) return d.peFwd / d.epsFwd;
+      return isNum(d.pegFwd) ? d.pegFwd : null;
+    }
     function cashDebtRatio(d) {
       if (!isNum(d.cash) || !isNum(d.debt)) return null;
       if (d.debt > 0) return d.cash / d.debt;
@@ -864,7 +873,7 @@
           score: sc.pct, passes: sc.passes, total: sc.total,
           verdict: verdictOf(sc.pct),
           revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
-          peFwd: d.peFwd, pegFwd: d.pegFwd, cash: d.cash, debt: d.debt,
+          peFwd: d.peFwd, pegFwd: pegDisplay(d), cash: d.cash, debt: d.debt,
           cashDebt: cashDebtRatio(d),
           price: d.price, marketCap: d.marketCap,
           updated: freshestMs(d.priceUpdated, d.fundamentalsUpdated)

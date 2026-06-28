@@ -479,5 +479,5 @@ style.css (in order):
 | 3.11 | 2026-06 | P/E FWD and PEG FWD switched to Yahoo direct fields for closer Seeking Alpha match. |
 | 3.12 | 2026-06 | New scoring model: 5 forward factors, each 0–20, total /100. Verdict bands Pass 70 / Watch 40 / Fail <40. |
 | 3.13 | 2026-06 | Methodology popup added to screener toolbar. Reuses modal component. Settings section reduced to pointer. |
-| 3.15 | 2026-06-27 | Screener scoring switched to a relative percentile model (each stock ranked vs Nasdaq 100 peers, 0–20 per metric, bands Pass 65 / Watch 40 / Fail <40). Methodology popup rewritten to explain ranking. v3.15.1: negative forward P/E (unprofitable) now ranks worst on P/E vs Growth, not best. |
+| 3.15 | 2026-06-27 | Screener scoring switched to a relative percentile model (each stock ranked vs Nasdaq 100 peers, 0–20 per metric, bands Pass 65 / Watch 40 / Fail <40). Methodology popup rewritten to explain ranking. v3.15.1: negative forward P/E (unprofitable) now ranks worst on P/E vs Growth, not best. v3.15.2: same fix extended to PEG (ranks worst; column shows our own negative PEG instead of Yahoo's misleading positive). |
 | 2.0 | 2026-06-27 | Full DESIGN.md rewrite consolidating all design decisions, adding missing sections (spacing, breakpoints, motion, social cards, content philosophy), and bringing documentation to v3.13.0 parity. |

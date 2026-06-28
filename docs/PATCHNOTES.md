@@ -2,6 +2,19 @@
 
 ---
 
+## v3.15.2 — 2026-06-27 — Negative-P/E Fix Extended to PEG
+
+**Follow-up to v3.15.1. The PEG factor had the same unprofitable-company flaw: Yahoo's `pegRatio` reports a positive (cheap-looking) PEG even when forward earnings are negative, so INSM was still scoring near-top on PEG.**
+
+### Fixed
+
+- `screener.html`: when forward P/E ≤ 0, the **PEG metric now ranks worst** in scoring (same `Infinity` sentinel as P/E vs Growth), regardless of Yahoo's reported value.
+- **Display:** for those unprofitable names the PEG column now shows our own forward PEG (`peFwd / epsFwd`, a negative number) instead of Yahoo's misleading positive, via the new `pegDisplay()` helper. The negative value renders red automatically, so display and score now agree.
+- Impact: INSM's PEG shows ≈ −0.66 and scores 0, dropping its total from 79 to **60 (now Watch, was Pass)** — the honest grade for a pre-profit, hyper-growth name (scored on its real strengths: revenue growth and balance sheet). Only INSM affected; ±1 reshuffle elsewhere.
+- Documented in the Methodology popup note and `docs/PRD.md` scoring metric table.
+
+---
+
 ## v3.15.1 — 2026-06-27 — Fix: Negative P/E No Longer Scores Best
 
 **Bug fix in the relative scoring model. A negative forward P/E (an unprofitable company) was ranking as the cheapest possible on the "P/E vs Growth" metric and earning full marks, when it should rank worst.**

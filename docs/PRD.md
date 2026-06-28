@@ -488,7 +488,7 @@ A relative, percentile-based model. Each stock is ranked against its loaded Nasd
 | Revenue Growth FWD | higher is better | `revFwd` |
 | EPS Growth FWD | higher is better | `epsFwd` |
 | P/E vs EPS Growth | lower is better | `peFwd / epsFwd` (needs `epsFwd > 0`; a negative `peFwd`, i.e. an unprofitable company, ranks worst rather than cheapest) |
-| PEG FWD | lower is better | `pegFwd` (only when `> 0`) |
+| PEG FWD | lower is better | `pegFwd` (Yahoo); when forward P/E ≤ 0, ranks worst and the column shows our own negative `peFwd / epsFwd` instead of Yahoo's misleading positive |
 | Cash vs Debt | higher is better | `cash / debt` (no debt ranks best) |
 
 **Percentile → points:** `points = clamp(40 × (percentile − 0.25), 0, 20)`. Bottom quartile (≤ 25th percentile) scores 0; top quartile (≥ 75th) scores 20; the median scores 10. Ties take the average rank.
