@@ -20,6 +20,7 @@ function parsePrompt(raw, slug) {
   let title = slug;
   let description = '';
   let meta = 'Claude Code Prompt';
+  let hidden = false;
   let body = raw;
 
   const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -33,6 +34,7 @@ function parsePrompt(raw, slug) {
       if (key === 'title') title = value;
       else if (key === 'description') description = value;
       else if (key === 'meta') meta = value;
+      else if (key === 'hidden') hidden = /^(true|yes|1)$/i.test(value);
     });
   }
 
@@ -52,6 +54,7 @@ function parsePrompt(raw, slug) {
     title: title,
     description: description,
     meta: meta,
+    hidden: hidden,
     prompt: prompt,
     descHtml: renderMarkdown(descSource)
   };
@@ -107,6 +110,7 @@ function buildSidebar() {
   const nav = document.getElementById('sidebar-nav');
   let html = '<a href="#/" data-slug="">Home</a>';
   PROMPTS.forEach(function (p) {
+    if (p.hidden) return; // hidden prompts stay reachable by direct link, but off the nav
     html += '<a href="#/' + p.slug + '" data-slug="' + p.slug + '">' + escapeHtml(p.title) + '</a>';
   });
   nav.innerHTML = html;
@@ -128,6 +132,7 @@ function renderHome() {
   html += '<h2>Prompts</h2>';
   html += '<div class="prompt-list">';
   PROMPTS.forEach(function (p) {
+    if (p.hidden) return; // hidden prompts stay reachable by direct link, but off the home list
     html += '<a class="prompt-list-item" href="#/' + p.slug + '">';
     html += '<span class="prompt-list-title">' + escapeHtml(p.title) + '</span>';
     html += '<span class="prompt-list-desc">' + escapeHtml(p.description) + '</span>';

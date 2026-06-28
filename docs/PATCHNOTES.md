@@ -4,6 +4,22 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
+## v1.9.0 — 2026-06-27
+
+### Added
+
+- `js/script.js`: Support for an optional `hidden` frontmatter flag on prompts. `parsePrompt` reads `hidden` (true/yes/1), and `buildSidebar` and `renderHome` skip any prompt where it is set. `findPrompt` and routing are unchanged, so hidden prompts stay reachable by direct link (`index.html#/<slug>`).
+
+### Changed
+
+- `prompts/consolidate-documents.md`, `prompts/docs-folder-audit.md`, `prompts/documentation-audit.md`: Added `hidden: true` to the frontmatter. These three prompts are retired from the sidebar and home list but kept on the backend; existing direct links still resolve. The newer Documentation prompt supersedes them in the navigation.
+- `js/prompts-data.js`: Regenerated to mirror the three `hidden: true` frontmatter additions.
+- `README.md`: Noted which prompts are hidden from navigation and still reachable by direct link.
+- `docs/PRD.md`: Documented the `hidden` frontmatter flag in the navigation and prompt markdown sections, and recorded the release in the version history.
+- `docs/DESIGN.md`: Documented the optional `hidden: true` key in the prompt markdown template and version history.
+
+---
+
 ## v1.8.0 — 2026-06-27
 
 ### Added

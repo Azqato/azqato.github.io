@@ -2,6 +2,7 @@
 title: Consolidate Documents
 description: Read all project source files, then consolidate all documentation into four core files and enforce the correct folder structure.
 meta: Claude Code Prompt
+hidden: true
 ---
 
 Reads every source file, config, and existing doc in a project, then consolidates all documentation into four core files: README.md at the root, and PRD.md, DESIGN.md, and PATCHNOTES.md inside `/docs`. Creates any missing files populated with the required sections. Moves misplaced files into the correct locations.

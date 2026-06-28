@@ -2,6 +2,7 @@
 title: Documentation Audit
 description: Read all project source files, then create or update the full set of documentation in the correct folder structure.
 meta: Claude Code Prompt
+hidden: true
 ---
 
 Reads every source file, config, and existing doc in a project, then writes or rewrites the complete documentation suite. Covers ten documents: README, PRD, TRD, DESIGN, PATCHNOTES, PRFAQ, TENETS, METRICS, ROADMAP, SECURITY, and RUNBOOK. Each document is written to a required spec with the sections listed in the prompt.

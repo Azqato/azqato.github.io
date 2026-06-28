@@ -85,7 +85,7 @@ No other sections. No decorative content. No padding between the prompt and the 
 
 ### Prompt Markdown Files (prompts/*.md)
 
-The source for each prompt. Frontmatter (`title`, `description`, `meta`) plus a body: a description, then a `## Prompt` heading, then the full prompt inside a fenced code block. These files are mirrored into `prompts-data.js` for in-browser loading.
+The source for each prompt. Frontmatter (`title`, `description`, `meta`, plus an optional `hidden`) plus a body: a description, then a `## Prompt` heading, then the full prompt inside a fenced code block. These files are mirrored into `prompts-data.js` for in-browser loading. Setting `hidden: true` keeps the prompt page live but removes it from the sidebar and home list.
 
 ### /docs/ Pages
 
@@ -100,8 +100,9 @@ Not rendered as navigable pages on the site. These are documentation files for c
 ## 9. Navigation
 
 - Left sidebar persists on all views on desktop (above 1024px)
-- Sidebar contains the site logo, a Home link, one link per prompt, and a Support button pinned to the bottom
+- Sidebar contains the site logo, a Home link, one link per visible prompt, and a Support button pinned to the bottom
 - Sidebar links are built dynamically from the prompt data; navigation uses hash routing, so switching views does not reload the page
+- A prompt whose frontmatter sets `hidden: true` is excluded from both the sidebar and the home list, but its page stays reachable by direct link (`index.html#/<slug>`). This retires a prompt from navigation without breaking any existing link to it
 - Active view is visually distinguished (teal text, 3px left border)
 - The Support button links to `https://azqato.github.io/support.html` and opens in a new tab
 - On mobile (below 1024px), sidebar collapses to a sticky top nav bar; the support button flows inline with the nav links
@@ -179,5 +180,6 @@ When publishing the new prompt to GitHub Pages, that push is the author's decisi
 
 | Version | Date | Summary |
 | --- | --- | --- |
+| 1.9.0 | 2026-06-27 | Added an optional `hidden` frontmatter flag. Hidden prompts are dropped from the sidebar and home list but stay reachable by direct link. Retired Consolidate Documents, Docs Folder Audit, and Documentation Audit from navigation while preserving their pages. |
 | 1.8.0 | 2026-06-27 | Added the Documentation prompt (`prompts/documentation.md`), the most comprehensive of the documentation prompts: crawls the codebase, consolidates docs into four core files, and folds a full doc suite into a single deeply sectioned PRD. Expanded the Adding Prompts section into the canonical add-a-prompt workflow. |
 | 1.0 | June 2026 | Initial release. Markdown-driven structure: prompts authored as `.md` files in `prompts/`, rendered by a single `index.html` shell with hash routing. Runs with no server or dependencies (`file://` compatible) via `prompts-data.js`. Em dash audit prompt added as first example. Writing style rules documented. |

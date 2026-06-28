@@ -377,6 +377,7 @@ Each prompt is a file in `prompts/`:
 title: [Prompt Name]
 description: [One-line summary for the home list]
 meta: Claude Code Prompt
+hidden: true   # optional; omit for normal prompts
 ---
 
 [Description of what the prompt does and when to use it.]
@@ -386,7 +387,7 @@ meta: Claude Code Prompt
 [fenced code block containing the full prompt text]
 ```
 
-`script.js` parses the frontmatter, renders the description (a minimal markdown subset: paragraphs, lists, inline code, bold, links), and renders the first fenced code block as the copyable prompt.
+`script.js` parses the frontmatter, renders the description (a minimal markdown subset: paragraphs, lists, inline code, bold, links), and renders the first fenced code block as the copyable prompt. The optional `hidden: true` key removes the prompt from the sidebar and home list while leaving its page reachable by direct link; omit the key for a normal, visible prompt.
 
 ### Rendered Prompt View
 
@@ -431,6 +432,7 @@ Loading `prompts/*.md` with `fetch()` would require an HTTP server, because brow
 
 | Version | Date | Summary |
 | --- | --- | --- |
+| 1.5 | 2026-06-27 | Documented the optional `hidden: true` frontmatter key in the prompt markdown template. Hidden prompts are excluded from the sidebar and home list but remain reachable by direct link. |
 | 1.4 | 2026-06-13 | Static assets reorganized into subfolders: `css/style.css` and `js/script.js`, `js/prompts-data.js`. `index.html` references updated. Shell template and CSS file structure section updated. |
 | 1.3 | 2026-06-13 | Sidebar logo updated to "Azqato's Prompts.". Homepage h1 updated to "Claude Code Prompts.". Browser tab title updated to "Azqato's Prompts" on home; prompt pages show only the prompt name. Support button added to bottom of sidebar, pinned via flex column layout on `.sidebar-sticky`. |
 | 1.0 | 2026-06-13 | Initial design spec. Inherited Azqato brand system. Sidebar layout, code block with copy button defined. Markdown-driven, single-shell architecture with `prompts-data.js` for dependency-free `file://` loading. Footer set to "Built by Azqato.". |

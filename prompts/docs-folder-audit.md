@@ -2,6 +2,7 @@
 title: Docs Folder Audit
 description: Crawl the entire codebase, then audit and rewrite every document in /docs to match the current state of the project.
 meta: Claude Code Prompt
+hidden: true
 ---
 
 Scans the entire codebase first to build a complete picture of the project, then opens every document in `/docs` and compares it against what was found. Anything outdated, missing, inaccurate, or incomplete gets rewritten. Every file in `/docs` is reviewed without exception.
