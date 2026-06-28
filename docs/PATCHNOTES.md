@@ -2,6 +2,18 @@
 
 ---
 
+## v3.15.1 — 2026-06-27 — Fix: Negative P/E No Longer Scores Best
+
+**Bug fix in the relative scoring model. A negative forward P/E (an unprofitable company) was ranking as the cheapest possible on the "P/E vs Growth" metric and earning full marks, when it should rank worst.**
+
+### Fixed
+
+- `screener.html` `computeScoreMap()`: the "P/E vs Growth" value function now returns `Infinity` (worst rank) when forward P/E is ≤ 0, instead of a negative ratio that sorted to the best end. "Cheap relative to earnings" has no meaning when there are no earnings, so unprofitable names now land at the bottom of that metric.
+- Impact on the current feed: only INSM (Insmed, negative forward P/E) was affected — its score drops from 99 to 79 (still a Pass on its real strengths: ~178% revenue growth, healthy cash/debt, mid PEG). About 20 other stocks shifted by ±1 from the percentile reshuffle; the Pass/Watch/Fail spread is unchanged.
+- Documented in the Methodology popup (a note under the metrics table) and `docs/PRD.md` (scoring model metric table).
+
+---
+
 ## v3.15.0 — 2026-06-27 — Relative Percentile Scoring Model
 
 **The screener's scoring model changed from absolute thresholds to a relative, percentile-based ranking. Each stock is now graded against its Nasdaq 100 peers rather than against fixed cut-offs.**

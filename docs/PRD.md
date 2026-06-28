@@ -487,7 +487,7 @@ A relative, percentile-based model. Each stock is ranked against its loaded Nasd
 |--------|-----------|--------------|
 | Revenue Growth FWD | higher is better | `revFwd` |
 | EPS Growth FWD | higher is better | `epsFwd` |
-| P/E vs EPS Growth | lower is better | `peFwd / epsFwd` (only when `epsFwd > 0`) |
+| P/E vs EPS Growth | lower is better | `peFwd / epsFwd` (needs `epsFwd > 0`; a negative `peFwd`, i.e. an unprofitable company, ranks worst rather than cheapest) |
 | PEG FWD | lower is better | `pegFwd` (only when `> 0`) |
 | Cash vs Debt | higher is better | `cash / debt` (no debt ranks best) |
 
