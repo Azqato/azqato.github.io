@@ -157,7 +157,7 @@ Edit `discord.html` directly. Each server is a static `.server-card` block. Copy
 
 ## Navigation
 
-All 11 pages share the same sticky nav: **Home, About, Discord, Invests, Links, Projects, YouTube, GitHub, Support**. The Discord nav link points to `discord.html`. The GitHub nav link opens `github.com/Azqato` in the same tab. Nav collapses on viewports under 600 px. The active page link has `class="active"` set directly in the HTML; there is no JS routing.
+All 11 pages share the same sticky nav: **Home, About, Discord, Invests, Links, Projects, Tools, YouTube, GitHub, Support**. The Discord nav link points to `discord.html`. The Tools nav link points to `https://azqato.github.io/tools/`. The GitHub nav link opens `github.com/Azqato` in the same tab. Nav collapses on viewports under 600 px. The active page link has `class="active"` set directly in the HTML; there is no JS routing.
 
 When updating the nav, edit it consistently across all 11 HTML files. There is no shared include yet; see the Roadmap in `docs/PRD.md` for the planned shared-asset extraction milestone.
 

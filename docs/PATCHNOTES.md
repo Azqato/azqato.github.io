@@ -482,6 +482,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.6] - 2026-06-27
+
+### Changed
+- "Tools" nav link added to all 11 pages after "Projects", pointing to `https://azqato.github.io/tools/` and opening in the same tab. Nav order is now: Home, About, Discord, Invests, Links, Projects, Tools, YouTube, GitHub, Support.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
