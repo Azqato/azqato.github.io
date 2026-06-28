@@ -487,6 +487,7 @@
         </div>
       </div>
 
+      <button class="btn" id="methodologyBtn">📊 Methodology</button>
       <button class="btn" id="settingsBtn" aria-label="Settings">⚙ Settings</button>
       <button class="btn btn-primary" id="loadBtn">Load Data</button>
     </div>
@@ -574,15 +575,76 @@
       </div>
 
       <h3>How stocks are scored</h3>
-      <p class="hint">Each company is graded on five forward-looking factors, each worth up to 20 points, summing to a score out of 100. Points scale granularly within each factor (not just pass/fail). If a metric is missing, the score is rescaled across the factors that are available.</p>
-      <ul>
-        <li><b>Revenue Growth FWD</b> — 1 point per 1% of growth, up to 20 (20%+ growth = full marks).</li>
-        <li><b>EPS Growth FWD</b> — 1 point per 1% of growth, up to 20.</li>
-        <li><b>P/E FWD vs EPS Growth</b> — full 20 when P/E is at or below half the growth rate, scaling to 0 when P/E reaches 2&times; the growth rate.</li>
-        <li><b>PEG FWD</b> — full 20 at PEG 0.5 or below, scaling to 0 at PEG 2.0.</li>
-        <li><b>Cash vs Debt</b> — full 20 when cash is 1.5&times; debt or more (or no debt), about 13 when cash equals debt, scaling to 0 as debt dominates.</li>
-      </ul>
-      <p class="hint">The <b>Factors</b> chip counts how many factors score strong (15+/20) out of those graded. <b>Verdict:</b> Pass = 70+, Watch = 40&ndash;69, Fail = under 40. Verdicts reflect fundamentals only; entry timing (RSI, 52-week range) is a separate step covered in the <a href="metrics.html" target="_blank" rel="noopener">methodology</a>.</p>
+      <p class="hint">Each company is graded on five forward-looking factors, each worth up to 20 points, for a score out of 100. For the full breakdown with worked examples, open <b>📊 Methodology</b> from the toolbar.</p>
+    </div>
+  </div>
+
+  <!-- Methodology modal -->
+  <div class="modal-backdrop" id="methodologyModal" hidden>
+    <div class="modal">
+      <button class="modal-close" id="methodologyClose" aria-label="Close">&times;</button>
+      <h2>Scoring Methodology</h2>
+      <p class="hint">Each stock is graded like a report card with five subjects. Every one of the five forward-looking factors is worth up to <b>20 points</b>, so the total <b>Score</b> is out of <b>100</b>.</p>
+      <p class="hint" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+        <span><span class="verdict v-pass">PASS</span> 70&ndash;100</span>
+        <span><span class="verdict v-watch">WATCH</span> 40&ndash;69</span>
+        <span><span class="verdict v-fail">FAIL</span> below 40</span>
+      </p>
+
+      <h3>The five factors (each 0&ndash;20)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Factor</th><th scope="col">How points are earned</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue Growth FWD</td><td>1 point per 1% of expected sales growth (20%+ = full 20)</td></tr>
+            <tr><td>EPS Growth FWD</td><td>1 point per 1% of expected profit-per-share growth (20%+ = full 20)</td></tr>
+            <tr><td>P/E FWD vs EPS Growth</td><td>Full 20 when P/E is ≤ half the growth rate; slides to 0 when P/E is ≥ 2× the growth rate</td></tr>
+            <tr><td>PEG FWD</td><td>Full 20 at PEG ≤ 0.5; slides to 0 at PEG ≥ 2.0</td></tr>
+            <tr><td>Cash vs Debt</td><td>Full 20 when cash ≥ 1.5× debt (or no debt); about 13 when cash = debt; slides to 0 as debt grows</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">A single factor never goes below 0 or above 20.</p>
+
+      <h3>What the valuation factors mean</h3>
+      <p class="hint"><b>P/E</b> is the price you pay for $1 of yearly profit (a P/E of 20 means $20 for $1 of annual earnings — lower is cheaper). A fast grower deserves a higher P/E, so factor 3 divides them: <b>P/E ÷ growth%</b>, where lower is better. The points use a sliding scale, <b>20 × (2 − ratio) ÷ 1.5</b>, so a ratio of 0.5 earns the full 20 and a ratio of 2.0 earns 0.</p>
+      <p class="hint"><b>PEG</b> packages that same "price vs. growth" idea into one number (below 1.0 = cheap for the growth, above 2.0 = expensive) and uses the same sliding scale.</p>
+      <p class="hint"><b>Cash vs Debt</b> divides cash by debt — more cash than debt is healthier. A ratio of 1.5 or higher (or having no debt at all) earns the full 20.</p>
+
+      <h3>Worked example — AMD (Score 84 = Pass)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Factor</th><th scope="col">Value</th><th scope="col" class="num">Points</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue Growth FWD</td><td>+42.7%</td><td class="num">20.0</td></tr>
+            <tr><td>EPS Growth FWD</td><td>+77%</td><td class="num">20.0</td></tr>
+            <tr><td>P/E vs Growth</td><td>70.7 ÷ 77 = 0.92</td><td class="num">14.4</td></tr>
+            <tr><td>PEG FWD</td><td>1.25</td><td class="num">10.0</td></tr>
+            <tr><td>Cash vs Debt</td><td>12.3 ÷ 3.9 = 3.19</td><td class="num">20.0</td></tr>
+            <tr><td><b>Total</b></td><td></td><td class="num"><b>84</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Worked example — AAPL (Score 45 = Watch)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Factor</th><th scope="col">Value</th><th scope="col" class="num">Points</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue Growth FWD</td><td>+14.9%</td><td class="num">14.9</td></tr>
+            <tr><td>EPS Growth FWD</td><td>+17.4%</td><td class="num">17.4</td></tr>
+            <tr><td>P/E vs Growth</td><td>32.4 ÷ 17.4 = 1.86</td><td class="num">1.8</td></tr>
+            <tr><td>PEG FWD</td><td>2.29 (worse than 2.0)</td><td class="num">0.0</td></tr>
+            <tr><td>Cash vs Debt</td><td>68.5 ÷ 84.7 = 0.81</td><td class="num">10.8</td></tr>
+            <tr><td><b>Total</b></td><td></td><td class="num"><b>45</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">Apple is healthy and growing (factors 1, 2, 5 are fine) but expensive for its growth right now (factors 3, 4 score low) — which is why it lands in Watch, not Pass.</p>
+
+      <h3>The Factors chip &amp; missing data</h3>
+      <p class="hint">The <b>Factors</b> column (e.g. <span class="factors">3/5</span>) counts how many factors score <b>strong — 15 or more out of 20</b>. If a metric is unavailable, that factor is skipped and the score is rescaled across the rest (like a teacher dropping a question).</p>
+      <p class="hint">Scores reflect fundamentals only. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). Entry timing (RSI, 52-week range) is covered in the <a href="metrics.html" target="_blank" rel="noopener">Metrics methodology</a>.</p>
     </div>
   </div>
 
@@ -1153,6 +1215,8 @@
     // ---- Modal ----
     function openModal() { $("modal").hidden = false; }
     function closeModal() { $("modal").hidden = true; }
+    function openMethodology() { $("methodologyModal").hidden = false; }
+    function closeMethodology() { $("methodologyModal").hidden = true; }
 
     // ---- Events ----
     function bind() {
@@ -1198,6 +1262,9 @@
       $("staleLoadBtn").addEventListener("click", openModal);
       $("modalClose").addEventListener("click", closeModal);
       $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) closeModal(); });
+      $("methodologyBtn").addEventListener("click", openMethodology);
+      $("methodologyClose").addEventListener("click", closeMethodology);
+      $("methodologyModal").addEventListener("click", function (e) { if (e.target === $("methodologyModal")) closeMethodology(); });
       $("modalSaveBtn").addEventListener("click", function () {
         localStorage.setItem(LS_KEY, $("apiKey").value.trim());
         setStatus("API key saved in this browser.", "ok");
@@ -1215,7 +1282,7 @@
         render();
       });
 
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeModal(); closeMethodology(); } });
     }
 
     // ---- Init ----

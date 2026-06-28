@@ -2,6 +2,17 @@
 
 ---
 
+## v3.13.0 — June 2026 — "Methodology" Popup on the Screener
+
+**Added a Methodology button to the screener toolbar that opens a plain-language popup explaining exactly how the score is calculated.**
+
+- New **📊 Methodology** button in the toolbar (next to Settings), opening a modal that reuses the existing `.modal-backdrop` / `.modal` component
+- Content: the five factors and their point rules (as a table), what P/E / PEG / Cash-vs-Debt mean and the sliding-scale formula in beginner terms, two fully worked examples (AMD = 84 Pass, AAPL = 45 Watch), the Factors-chip definition, and the missing-data rescaling rule. Uses the site's verdict badges and table styling
+- The Settings modal's "How stocks are scored" section was slimmed to a one-line pointer to the new popup (no more duplicated explanation)
+- Standard modal behavior: close button, click-outside, and Escape (Escape now closes either modal)
+
+---
+
 ## v3.12.0 — June 2026 — New Screener Scoring Model (5 Factors, Granular, /100)
 
 **Replaced the screener's 7-factor pass/acceptable/weak score with a leaner, granular 5-factor model. The two trailing (TTM) growth factors were dropped; each of the five remaining forward-looking factors now scores continuously 0–20, summing to 100.**
