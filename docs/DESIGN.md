@@ -103,7 +103,7 @@ The design does not use a rigid 4px or 8px grid, but follows consistent spacing 
 | Breakpoint | Trigger | Changes |
 |------------|---------|---------|
 | Desktop | `>= 1024px` | 2-column grid (220px sidebar + 1fr content), sticky sidebar, active left-border on nav links, "On This Page" block visible |
-| Tablet / Mobile | `< 1024px` | Sidebar collapses to sticky top nav bar with `backdrop-filter: blur(12px)`, "On This Page" block hidden, active state uses bottom border instead of left border, screener app area caps at `80vh` |
+| Tablet / Mobile | `< 1024px` | Sidebar collapses to a sticky top bar with `backdrop-filter: blur(12px)` and a **hamburger toggle** (CSS-only checkbox hack: ☰ / ✕) that drops the nav down as a vertical list; "On This Page" block hidden; screener app area caps at `80vh`; modals go full-width below 900px |
 | Mobile | `< 768px` | Metric cards grid collapses to 1 column, H1 → 1.5rem, H2 → 1.2rem, padding reduces to 20px/16px |
 
 ---
@@ -483,4 +483,5 @@ style.css (in order):
 | 3.16 | 2026-06-27 | Screener cell colors switched from absolute thresholds to the relative percentile ranking (top quartile green, bottom red, middle amber). New per-stock breakdown popup (click a row; reuses the modal component). Data now loads directly from GitHub raw (works as a local file) with a localStorage offline cache. Removed the FMP bring-your-own-key UI (Settings modal, API-key input, Load Data button, progress bar). Negative P/E / PEG sort as worst (expensive), not cheap. |
 | 3.17 | 2026-06-27 | Constituent list auto-syncs weekly from Wikipedia (`update_constituents.py` + `constituents.yml`). Screener derives its ticker universe from the feed (`universe()`), removing the embedded list — single source of truth. |
 | 3.18 | 2026-06-27 | Screener's inline JS extracted to `screener.js` (`screener.html` is now markup + CSS). No behavior change. |
+| 3.19 | 2026-06-28 | Mobile hamburger nav (CSS-only checkbox toggle; ☰/✕) replaces the cramped wrapping top bar on all pages under 1024px. Methodology/stock popups widened to 65% (max 1100px; full-width under 900px). |
 | 2.0 | 2026-06-27 | Full DESIGN.md rewrite consolidating all design decisions, adding missing sections (spacing, breakpoints, motion, social cards, content philosophy), and bringing documentation to v3.13.0 parity. |

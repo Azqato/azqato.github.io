@@ -102,6 +102,9 @@ a:hover {
 
 .sidebar-brand a:hover { text-decoration: none; }
 
+/* Mobile hamburger toggle: hidden on desktop, revealed under 1024px */
+.nav-toggle, .nav-burger { display: none; }
+
 .sidebar-nav { flex: 1; }
 
 .sidebar-nav ul { list-style: none; }
@@ -844,43 +847,59 @@ td.ticker-cell {
   }
 
   .sidebar {
-    position: static;
+    position: sticky;
+    top: 0;
+    z-index: 30;
     height: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0 16px;
-    align-items: center;
+    flex-direction: column;
+    padding: 0;
     border-right: none;
     border-bottom: 1px solid var(--color-border);
     backdrop-filter: blur(12px);
-    background: rgba(22, 27, 34, 0.9);
+    background: rgba(22, 27, 34, 0.92);
   }
 
   .sidebar-brand {
-    padding: 12px 16px 12px 0;
+    padding: 14px 16px;
     border-bottom: none;
-    border-right: 1px solid var(--color-border);
-    margin-bottom: 0;
-    margin-right: 8px;
+    margin: 0;
   }
 
-  .sidebar-nav { padding: 0; }
-
-  .sidebar-nav > ul {
-    display: flex;
-    flex-wrap: wrap;
+  /* Hamburger button, top-right of the bar */
+  .nav-burger {
+    display: block;
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0;            /* hide any stray text node */
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    user-select: none;
   }
+  .nav-burger::before { content: "\2630"; font-size: 1.4rem; }       /* hamburger */
+  .nav-toggle:checked ~ .nav-burger::before { content: "\2715"; }    /* close (x) */
+
+  /* Nav collapses by default; revealed when the toggle is checked */
+  .sidebar-nav {
+    display: none;
+    padding: 4px 0 8px;
+    border-top: 1px solid var(--color-border);
+  }
+  .nav-toggle:checked ~ .sidebar-nav { display: block; }
+
+  .sidebar-nav > ul { display: block; }
 
   .sidebar-nav > ul > li > a {
-    padding: 8px 12px;
-    font-size: 0.85rem;
+    display: block;
+    padding: 11px 18px;
+    font-size: 0.9rem;
   }
 
   .sidebar-nav > ul > li > a.active {
-    border-left: none;
-    border-bottom: 2px solid var(--color-accent);
-    padding-left: 12px;
-    padding-bottom: 6px;
+    border-left: 3px solid var(--color-accent);
+    padding-left: 15px;
     color: var(--color-accent);
   }
 

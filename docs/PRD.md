@@ -98,7 +98,6 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 - Deeper coverage of index fund types (sector ETFs, international allocation, bond tent strategy)
 - Historical backtests of the scoring model showing Pass/Watch/Fail predictive power
 - Email or RSS changelog subscription for site updates
-- Mobile hamburger menu for sidebar navigation
 - Additional illustrative examples using historical market events
 - Separate pages for Growth, Value, and Dividend stock frameworks
 - Conference call research guide (how to listen, what to note, how to log insights)
@@ -191,7 +190,9 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.14.0 — Documentation consolidation (this audit) | 2026-06-27 | Complete |
 | v3.15.0 — Relative percentile scoring model | 2026-06-27 | Complete |
 | v3.16.0 — Per-stock popup, GitHub-direct loading, FMP removed | 2026-06-27 | Complete |
-| v4.0.0 — Mobile nav, additional philosophy sections | TBD | Planned |
+| v3.17.0–v3.18.0 — Constituent auto-sync; screener.js extraction | 2026-06-27 | Complete |
+| v3.19.0 — Mobile hamburger nav; wider popups | 2026-06-28 | Complete |
+| v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
 

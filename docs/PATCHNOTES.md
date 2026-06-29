@@ -2,6 +2,24 @@
 
 ---
 
+## v3.19.0 — 2026-06-28 — Mobile Hamburger Nav + Wider Popups
+
+**The cramped wrapping top-bar nav on phones/tablets is replaced with a proper hamburger menu, and the screener popups are wider so they're easier to read.**
+
+### Added
+
+- **Mobile hamburger navigation** on all pages. Below 1024px the sidebar shows a ☰ button (top-right); tapping it drops the nav down as a full-width vertical list, and the icon becomes ✕. Pure CSS (a hidden checkbox + label toggle in `style.css`), so no JavaScript is needed and it works identically on the content pages and the screener. A `<input class="nav-toggle">` + `<label class="nav-burger">` were added to each page's sidebar.
+
+### Changed
+
+- **Methodology and per-stock popups widened** from a fixed 540px to **65% of the viewport** (max 1100px), with more padding; they go full-width below 900px. Much easier to read the tables and worked examples.
+
+### Docs
+
+- DESIGN (responsive table + version history) updated.
+
+---
+
 ## v3.18.0 — 2026-06-27 — Extract Screener JS to `screener.js`
 
 **Housekeeping. The screener's ~490 lines of inline JavaScript moved out of `screener.html` into a dedicated `screener.js`, addressing the "scoring lives in-HTML" technical debt. No behavior change.**
