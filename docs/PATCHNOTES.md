@@ -2,6 +2,22 @@
 
 ---
 
+## v3.23.0 — 2026-06-29 — Trading-day refresh schedule
+
+**The automated data jobs now run only on trading days (Mon-Fri), and the weekly constituent sync moved to Saturday. Schedule housekeeping only: no change to the site, the scoring model, or the data format.**
+
+### Changed
+
+- **Screener feeds run Mon-Fri.** Both daily jobs (Nasdaq 100 at 23:00 UTC, S&P 500 at 23:30 UTC) now fire Monday through Friday only (`* * 1-5`). Weekends are skipped because the US market is closed and the figures do not move, so the prior Saturday/Sunday runs were redundant.
+- **Constituent sync moved to Saturday 23:00 UTC.** `constituents.yml` previously ran Mondays at 06:00 UTC; it now runs Saturdays at 23:00 UTC, matching the time-of-day of the weekday feeds and landing on the one day those feed jobs are idle (so the shared `screener-data` concurrency group never contends).
+
+### Notes
+
+- `workflow_dispatch` (manual run) is unchanged on all three workflows, so any feed can still be regenerated on demand.
+- GitHub cron is UTC-only and does not follow DST; the 23:00 UTC slot is ~6pm US Eastern in winter (EST), ~7pm in summer (EDT).
+
+---
+
 ## v3.22.0 — 2026-06-29 — Expand to S&P 500
 
 **The screener can now widen its universe from the Nasdaq 100 to the full S&P 500. A new "Expand to S&P 500" button (right of the Azqato label) lazy-loads a second daily feed and re-ranks every stock against the ~500-name index; clicking again returns to the Nasdaq 100. On-screen labels swap to match the active view.**

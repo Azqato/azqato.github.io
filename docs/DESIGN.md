@@ -487,4 +487,5 @@ style.css (in order):
 | 3.20 | 2026-06-28 | Verdict bands tightened to Pass ≥ 80, Watch 50–79, Fail < 50 (was 65 / 40), applied to both verdict labels and score cell colors. |
 | 3.21 | 2026-06-29 | Per-stock popup now lists only the five scored metrics; the two unscored TTM "(context)" rows (Revenue/EPS Growth TTM) were removed from the popup. |
 | 3.22 | 2026-06-29 | "Expand to S&P 500" toggle added to the screener app-bar (right of the Azqato pill). Lazy-loads a second daily feed (`data/screener_sp500.json`) and re-ranks against the full S&P 500; toggles back to the Nasdaq 100. On-screen labels swap via `.universe-name` spans. New `data/sp500.json` constituent list; staggered CI (Nasdaq 23:00, S&P 500 23:30). |
+| 3.23 | 2026-06-29 | CI schedule only: screener feeds run Mon-Fri (trading days); the weekly constituent sync moved to Saturday 23:00 UTC. No visual or UX change. |
 | 2.0 | 2026-06-27 | Full DESIGN.md rewrite consolidating all design decisions, adding missing sections (spacing, breakpoints, motion, social cards, content philosophy), and bringing documentation to v3.13.0 parity. |

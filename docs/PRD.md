@@ -195,6 +195,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.20.0 — Tighter verdict bands (Pass 80 / Watch 50 / Fail <50) | 2026-06-28 | Complete |
 | v3.21.0 — Per-stock popup shows only scored metrics | 2026-06-29 | Complete |
 | v3.22.0 — Expand to S&P 500 toggle (second daily feed) | 2026-06-29 | Complete |
+| v3.23.0 — Trading-day (Mon-Fri) refresh; constituents moved to Saturday | 2026-06-29 | Complete |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
@@ -293,8 +294,9 @@ GitHub Pages is configured to serve from the repository root. No additional conf
 
 Two screener data feeds are refreshed automatically, staggered so the default Nasdaq 100 view always has priority:
 
-- **Nasdaq 100** (`data/screener.json`): daily at 23:00 UTC via `.github/workflows/screener-data.yml`
-- **S&P 500** (`data/screener_sp500.json`): daily at 23:30 UTC via `.github/workflows/screener-data-sp500.yml` (the larger ~500-symbol fetch runs second so it never delays the Nasdaq 100 refresh)
+- **Nasdaq 100** (`data/screener.json`): trading days (Mon-Fri) at 23:00 UTC via `.github/workflows/screener-data.yml`
+- **S&P 500** (`data/screener_sp500.json`): trading days (Mon-Fri) at 23:30 UTC via `.github/workflows/screener-data-sp500.yml` (the larger ~500-symbol fetch runs second so it never delays the Nasdaq 100 refresh)
+- **Constituent sync** (`data/nasdaq100.json` + `data/sp500.json`): Saturdays at 23:00 UTC via `.github/workflows/constituents.yml`; regenerates a feed only if that index's membership changed
 - **Trigger manually:** GitHub Actions tab → the relevant workflow → Run workflow (use this to seed the S&P 500 feed the first time)
 - **Run locally:** `python3 scripts/fetch_screener_data.py --list data/nasdaq100.json --out data/screener.json` (the `--list`/`--out` args default to the Nasdaq 100; point them at `data/sp500.json` / `data/screener_sp500.json` for the S&P 500)
 - **Output:** each feed holds its index's tickers with price, market cap, cash, debt, growth metrics, P/E, PEG, and timestamps
@@ -331,7 +333,7 @@ No staging environment. Changes are previewed locally before pushing to main.
 
 | Error | Likely Cause | Fix |
 |-------|-------------|-----|
-| Screener shows no data | `data/screener.json` missing or empty | Run the pipeline manually or wait for the next 23:00 UTC cron run |
+| Screener shows no data | `data/screener.json` missing or empty | Run the pipeline manually or wait for the next 23:00 UTC weekday cron run |
 | Screener shows stale data banner | screener.json older than 24 hours | Check GitHub Actions — if last run failed, trigger manually |
 | GitHub Action fails with HTTP 429 | yfinance rate limit (Yahoo Finance throttling) | Wait and re-run; the pipeline has per-symbol retry logic |
 | Page shows unstyled HTML | `style.css` path wrong | Check that style.css is in the same directory as the HTML file |
@@ -363,9 +365,11 @@ The site is a fully static architecture. No server processes any requests. No da
        │
        └── GitHub Actions (cron)
                  │
-                 ├── 23:00 UTC → fetch_screener_data.py --list nasdaq100.json → commits data/screener.json
+                 ├── Mon-Fri 23:00 UTC → fetch_screener_data.py --list nasdaq100.json → commits data/screener.json
                  │
-                 └── 23:30 UTC → fetch_screener_data.py --list sp500.json    → commits data/screener_sp500.json
+                 ├── Mon-Fri 23:30 UTC → fetch_screener_data.py --list sp500.json     → commits data/screener_sp500.json
+                 │
+                 └── Sat 23:00 UTC     → update_constituents.py → regenerates changed feed(s)
 ```
 
 ### Tech Stack
@@ -410,8 +414,9 @@ stocks/
 ├── img/                               ← Historical screenshots
 ├── .github/
 │   └── workflows/
-│       ├── screener-data.yml          ← Daily data cron job
-│       └── constituents.yml           ← Weekly constituent sync
+│       ├── screener-data.yml          ← Nasdaq 100 feed (Mon-Fri 23:00 UTC)
+│       ├── screener-data-sp500.yml    ← S&P 500 feed (Mon-Fri 23:30 UTC)
+│       └── constituents.yml           ← Constituent sync (Sat 23:00 UTC)
 └── docs/
     ├── PRD.md                         ← This file
     ├── DESIGN.md                      ← Design specification
@@ -644,16 +649,16 @@ Revenue Growth TTM, Revenue Growth FWD, EPS Growth TTM, EPS Growth FWD, P/E FWD,
 An interactive tool that applies the methodology's 5-factor scoring model to all 100 Nasdaq 100 companies. Data is updated daily from Yahoo Finance. Each company receives a score from 0 to 100 and a Pass, Watch, or Fail verdict. This is a screening and educational tool, not a buy/sell signal generator.
 
 **7. How does the screener score stocks?**
-Each stock is ranked against the other Nasdaq 100 companies on five forward metrics: Revenue Growth FWD, EPS Growth FWD, P/E vs EPS Growth, PEG FWD, and Cash vs Debt. Each metric awards 0–20 points by percentile (bottom quarter scores 0, the median 10, the top quarter 20), and the five sum to a score of 0–100. Pass is 65+, Watch is 40–64, Fail is under 40. It is a relative ranking, so a high score means a stock looks better than most of the index right now rather than that it cleared a fixed target. The Methodology button on the screener explains it with a worked example.
+Each stock is ranked against the other Nasdaq 100 companies on five forward metrics: Revenue Growth FWD, EPS Growth FWD, P/E vs EPS Growth, PEG FWD, and Cash vs Debt. Each metric awards 0–20 points by percentile (bottom quarter scores 0, the median 10, the top quarter 20), and the five sum to a score of 0–100. Pass is 80+, Watch is 50–79, Fail is under 50. It is a relative ranking, so a high score means a stock looks better than most of the index right now rather than that it cleared a fixed target. The Methodology button on the screener explains it with a worked example.
 
 **8. How often is the screener data updated?**
-Every day at 23:00 UTC via an automated pipeline. The "as of" timestamp in the screener header shows when the data was last refreshed.
+On trading days (Monday through Friday) at 23:00 UTC via an automated pipeline. Weekends are skipped because the US market is closed. The "as of" timestamp in the screener header shows when the data was last refreshed.
 
 **9. Where does the screener data come from?**
-Yahoo Finance, fetched daily by a Python script (using the free yfinance library) that runs in GitHub Actions and commits the result. No API key is required, and there is nothing to configure — the page just reads the published feed from GitHub.
+Yahoo Finance, fetched on trading days by a Python script (using the free yfinance library) that runs in GitHub Actions and commits the result. No API key is required, and there is nothing to configure — the page just reads the published feed from GitHub.
 
 **10. Does the screener use real-time data?**
-No. It uses data from the most recent daily pipeline run (updated once per day at 23:00 UTC). Prices shown reflect the close or after-hours price at the time of the last fetch.
+No. It uses data from the most recent pipeline run (refreshed once per trading day at 23:00 UTC). Prices shown reflect the close or after-hours price at the time of the last fetch.
 
 **11. What is the Palantir story?**
 A first-person account where Azqato bought Palantir at $9, sold at $45, and watched it go to $150. It is the single most important lesson documented on the site: selling a business because the price went up is a category mistake. Price and value are not the same thing. It lives on the FAQ page.
