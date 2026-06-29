@@ -104,10 +104,12 @@ stocks/
 │   ├── nasdaq100.json                ← Canonical Nasdaq 100 constituent list (100 tickers)
 │   └── screener.json                 ← Generated daily feed (live metrics)
 ├── scripts/
-│   └── fetch_screener_data.py        ← Python pipeline: yfinance → screener.json
+│   ├── fetch_screener_data.py        ← Python pipeline: yfinance → screener.json
+│   └── update_constituents.py        ← Weekly auto-sync: Wikipedia → nasdaq100.json
 ├── .github/
 │   └── workflows/
-│       └── screener-data.yml         ← Daily GitHub Action (23:00 UTC)
+│       ├── screener-data.yml         ← Daily GitHub Action (23:00 UTC)
+│       └── constituents.yml          ← Weekly constituent sync (Mon 06:00 UTC)
 └── docs/
     ├── PRD.md                        ← Product requirements, architecture, runbook
     ├── DESIGN.md                     ← Design system specification

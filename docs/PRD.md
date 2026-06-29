@@ -397,13 +397,15 @@ stocks/
 │   ├── nasdaq100.json                 ← 100-ticker constituent list
 │   └── screener.json                  ← Daily generated metrics feed
 ├── scripts/
-│   └── fetch_screener_data.py         ← yfinance → screener.json
+│   ├── fetch_screener_data.py         ← yfinance → screener.json (daily)
+│   └── update_constituents.py         ← Wikipedia → nasdaq100.json (weekly auto-sync)
 ├── img/
 │   ├── og-image.png                   ← Duplicate / legacy (root copy is canonical)
 │   └── *.png                          ← Historical screenshots
 ├── .github/
 │   └── workflows/
-│       └── screener-data.yml          ← Daily cron job
+│       ├── screener-data.yml          ← Daily data cron job
+│       └── constituents.yml           ← Weekly constituent sync
 └── docs/
     ├── PRD.md                         ← This file
     ├── DESIGN.md                      ← Design specification
@@ -540,7 +542,7 @@ No cookies. No session storage. No server-side state.
 | Debt | Description | Correct Solution |
 |------|-------------|-----------------|
 | Screener scoring in-HTML | The `computeScoreMap()` scoring and screener logic live inline in `screener.html` | Move to a separate `screener.js` file for maintainability |
-| No constituent auto-sync | `data/nasdaq100.json` is manually maintained and may drift from the actual index | Add a pipeline step that fetches the current index from a reliable source and diffs against the stored list |
+| Constituent name quality | New tickers added by the auto-sync use cleaned Wikipedia names, which may be slightly longer than the curated short names | Hand-edit `data/nasdaq100.json` names after a sync if desired (existing names are preserved automatically) |
 | screener.json committed to repo | The data file is versioned alongside code, bloating git history over time | Move to GitHub Releases or a separate artifact storage for generated data files |
 | `og-image.png` duplicated | Root and `img/` both have copies | Delete the `img/` copy; root copy is canonical |
 

@@ -2,6 +2,26 @@
 
 ---
 
+## v3.17.0 — 2026-06-27 — Nasdaq 100 Constituent Auto-Sync
+
+**The constituent list is now maintained automatically instead of by hand, and the screener derives its universe from the feed so there's a single source of truth.**
+
+### Added
+
+- `scripts/update_constituents.py` — fetches the live Nasdaq 100 from Wikipedia, applies the dual-class rule (keeps only the Class A voting share, e.g. GOOGL over GOOG), sanity-checks the result (count 90–105, valid tickers, no dupes), preserves existing curated short names, and rewrites `data/nasdaq100.json` only if membership changed (printing the add/remove diff).
+- `.github/workflows/constituents.yml` — runs the sync weekly (Mondays 06:00 UTC) plus manual dispatch; if the list changed, it regenerates `data/screener.json` and commits both. Shares the data workflow's concurrency group so commits never race.
+
+### Changed
+
+- **`screener.html` now derives its ticker universe from the loaded feed** (`Object.keys(data)`) via a `universe()` helper, instead of a hardcoded array. `data/nasdaq100.json` → daily feed → page is now a single source of truth; the ~100-line embedded list was removed, eliminating the dual-list drift that previously let the constituents go stale.
+- Ran the new sync: the list synced to the current index — **added** ALAB (Astera Labs), CRWV (CoreWeave), LITE (Lumentum), NBIS (Nebius), RKLB (Rocket Lab), SNDK (Sandisk), TER (Teradyne); **removed** VRSK, INSM, ZS, TEAM, CTSH, CHTR, CSGP. Regenerated the feed (100/100 populated).
+
+### Docs
+
+- PRD (folder structure, pipeline, tech-debt), README (project structure) updated.
+
+---
+
 ## v3.16.0 — 2026-06-27 — Screener: Per-Stock Popup, GitHub-Direct Loading, FMP Removed
 
 **A round of screener improvements: cell colors now track the relative score, clicking a row opens a per-stock breakdown, the data loads straight from GitHub (so it works locally), and the bring-your-own-key Financial Modeling Prep path was removed entirely.**

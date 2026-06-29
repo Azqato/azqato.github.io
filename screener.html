@@ -617,43 +617,12 @@
   (function () {
     "use strict";
 
-    // ---- Nasdaq 100 constituent list (static; edit as the index changes) ----
-    var NASDAQ100 = [
-      ["NVDA","NVIDIA"],["AAPL","Apple"],["GOOGL","Alphabet (Class A)"],
-      ["MSFT","Microsoft"],["AMZN","Amazon"],
-      ["AVGO","Broadcom"],["TSLA","Tesla"],["META","Meta Platforms"],
-      ["MU","Micron Technology"],["WMT","Walmart"],["AMD","Advanced Micro Devices"],
-      ["ASML","ASML"],["INTC","Intel"],["AMAT","Applied Materials"],
-      ["LRCX","Lam Research"],["CSCO","Cisco"],["COST","Costco"],
-      ["ARM","Arm Holdings"],["KLAC","KLA"],["NFLX","Netflix"],
-      ["PLTR","Palantir"],["TXN","Texas Instruments"],["PANW","Palo Alto Networks"],
-      ["LIN","Linde"],["MRVL","Marvell"],["STX","Seagate Technology"],
-      ["WDC","Western Digital"],["QCOM","Qualcomm"],["TMUS","T-Mobile US"],
-      ["AMGN","Amgen"],["PEP","PepsiCo"],["ADI","Analog Devices"],
-      ["CRWD","CrowdStrike"],["APP","AppLovin"],["GILD","Gilead Sciences"],
-      ["SHOP","Shopify"],["HON","Honeywell"],["ISRG","Intuitive Surgical"],
-      ["BKNG","Booking Holdings"],["VRTX","Vertex Pharmaceuticals"],["SBUX","Starbucks"],
-      ["FTNT","Fortinet"],["PDD","PDD Holdings"],["CDNS","Cadence Design"],
-      ["MAR","Marriott"],["CEG","Constellation Energy"],["MNST","Monster Beverage"],
-      ["ADP","Automatic Data Processing"],["CSX","CSX"],["SNPS","Synopsys"],
-      ["ABNB","Airbnb"],["DDOG","Datadog"],["MELI","MercadoLibre"],
-      ["CMCSA","Comcast"],["ADBE","Adobe"],["DASH","DoorDash"],
-      ["MDLZ","Mondelez"],["AEP","American Electric Power"],["ORLY","O'Reilly Automotive"],
-      ["INTU","Intuit"],["NXPI","NXP Semiconductors"],["CTAS","Cintas"],
-      ["ROST","Ross Stores"],["WBD","Warner Bros Discovery"],["MPWR","Monolithic Power Systems"],
-      ["REGN","Regeneron"],["PCAR","PACCAR"],["BKR","Baker Hughes"],
-      ["FAST","Fastenal"],["EA","Electronic Arts"],["XEL","Xcel Energy"],
-      ["FANG","Diamondback Energy"],["FER","Ferrovial"],["EXC","Exelon"],
-      ["MCHP","Microchip Technology"],["ODFL","Old Dominion Freight"],["KDP","Keurig Dr Pepper"],
-      ["CCEP","Coca-Cola Europacific"],["TTWO","Take-Two Interactive"],["IDXX","Idexx Laboratories"],
-      ["ADSK","Autodesk"],["PYPL","PayPal"],["ALNY","Alnylam Pharmaceuticals"],
-      ["AXON","Axon Enterprise"],["TRI","Thomson Reuters"],["PAYX","Paychex"],
-      ["ROP","Roper Technologies"],["WDAY","Workday"],["GEHC","GE HealthCare"],
-      ["MSTR","MicroStrategy"],["CPRT","Copart"],["KHC","Kraft Heinz"],
-      ["DXCM","Dexcom"],["VRSK","Verisk Analytics"],["INSM","Insmed"],
-      ["ZS","Zscaler"],["TEAM","Atlassian"],["CTSH","Cognizant"],
-      ["CHTR","Charter Communications"],["CSGP","CoStar Group"]
-    ];
+    // The ticker universe comes from the loaded feed (data/screener.json), whose
+    // constituents are sourced from data/nasdaq100.json -- a single source of truth,
+    // so there is no embedded list to drift out of sync.
+    function universe() {
+      return Object.keys(data).map(function (t) { return [t, (data[t] && data[t].name) || t]; });
+    }
 
     // The daily feed is the single source of truth. Pull it straight from GitHub
     // (raw) so it works even when this file is opened locally; fall back to the
@@ -751,7 +720,7 @@
 
     // Rank every loaded stock on each metric, convert ranks to points, and sum.
     function computeScoreMap() {
-      var tickers = NASDAQ100.map(function (s) { return s[0]; });
+      var tickers = Object.keys(data);
       var pts = {};   // ticker -> { metricKey: points }
       var pcts = {};  // ticker -> { metricKey: percentile 0..1 }
       tickers.forEach(function (t) { pts[t] = {}; pcts[t] = {}; });
@@ -837,7 +806,7 @@
     // ---- Build a renderable row model ----
     function rows() {
       var sm = computeScoreMap();
-      return NASDAQ100.map(function (s) {
+      return universe().map(function (s) {
         var t = s[0];
         var d = data[t] || {};
         var sc = sm[t] || { pct: null, passes: 0, total: 0, parts: {} };
@@ -911,10 +880,10 @@
       $("placeholder").style.display = (feedDone && loaded === 0) ? "flex" : "none";
       var scored = rs.filter(function (r) { return r.score !== null; }).length;
       if (loaded === 0) {
-        $("summary").innerHTML = NASDAQ100.length + " Nasdaq 100 names &middot; load data to score them";
+        $("summary").innerHTML = feedDone ? "No data" : "Loading the Nasdaq 100&hellip;";
       } else {
         $("summary").innerHTML = "<b>" + counts.pass + "</b> pass &middot; <b>" + counts.watch +
-          "</b> watch &middot; <b>" + counts.fail + "</b> fail &middot; " + scored + "/" + NASDAQ100.length + " scored";
+          "</b> watch &middot; <b>" + counts.fail + "</b> fail &middot; " + scored + "/" + loaded + " scored";
       }
       $("asOf").textContent = meta.updated ? "as of " + new Date(meta.updated).toLocaleString() : "no data loaded";
 
@@ -1043,7 +1012,7 @@
     function openStock(ticker) {
       var d = data[ticker];
       if (!d || !Object.keys(d).length) return;
-      var nm = (NASDAQ100.find(function (s) { return s[0] === ticker; }) || [])[1] || "";
+      var nm = (data[ticker] && data[ticker].name) || ticker;
       var sc = computeScoreMap()[ticker] || { pct: null, parts: {}, pctiles: {}, total: 0 };
       var verdict = verdictOf(sc.pct);
       var vlabel = { pass: "PASS", watch: "WATCH", fail: "FAIL", none: "NO DATA" }[verdict];
