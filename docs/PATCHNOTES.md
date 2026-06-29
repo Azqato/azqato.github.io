@@ -2,6 +2,20 @@
 
 ---
 
+## v3.20.0 — 2026-06-28 — Tighter Verdict Bands
+
+**The screener's Pass/Watch/Fail thresholds are raised so the labels are more demanding. A median-on-everything stock (score 50) now sits at the very bottom of Watch rather than mid-Watch, and a clear majority of the index reads Watch or Fail.**
+
+### Changed
+
+- **Verdict bands recalibrated to Pass ≥ 80, Watch 50–79, Fail < 50** (was Pass ≥ 65, Watch 40–64, Fail < 40). Applied in `screener.js` to both `verdictOf()` (the PASS/WATCH/FAIL label) and `scoreColor()` (the green/amber/red score-cell color), and to the legend in `screener.html`. No data or scoring-math change — only the thresholds that map a score to a verdict.
+
+### Docs
+
+- PRD (verdict bands), DESIGN (version history) updated.
+
+---
+
 ## v3.19.0 — 2026-06-28 — Mobile Hamburger Nav + Wider Popups
 
 **The cramped wrapping top-bar nav on phones/tablets is replaced with a proper hamburger menu, and the screener popups are wider so they're easier to read.**

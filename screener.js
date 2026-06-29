@@ -158,8 +158,8 @@
     }
     function verdictOf(pct) {
       if (pct === null) return "none";
-      if (pct >= 65) return "pass";
-      if (pct >= 40) return "watch";
+      if (pct >= 80) return "pass";
+      if (pct >= 50) return "watch";
       return "fail";
     }
 
@@ -182,8 +182,8 @@
     }
     function scoreColor(pct) {
       if (pct === null) return "var(--color-border)";
-      if (pct >= 65) return "var(--color-positive)";
-      if (pct >= 40) return "var(--color-warning)";
+      if (pct >= 80) return "var(--color-positive)";
+      if (pct >= 50) return "var(--color-warning)";
       return "var(--color-negative)";
     }
 

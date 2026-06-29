@@ -499,7 +499,7 @@ A relative, percentile-based model. Each stock is ranked against its loaded Nasd
 
 **Score:** sum of the five metric points, rescaled to /100 across whichever metrics a stock has (missing metrics are dropped). A stock at the median on all five scores 50.
 
-**Verdict bands:** Pass ≥ 65, Watch 40–64, Fail < 40.
+**Verdict bands:** Pass ≥ 80, Watch 50–79, Fail < 50.
 
 **Factors chip:** count of metrics scoring 15+/20 (roughly the top third of the peer group on that metric).
 

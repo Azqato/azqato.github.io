@@ -484,4 +484,5 @@ style.css (in order):
 | 3.17 | 2026-06-27 | Constituent list auto-syncs weekly from Wikipedia (`update_constituents.py` + `constituents.yml`). Screener derives its ticker universe from the feed (`universe()`), removing the embedded list — single source of truth. |
 | 3.18 | 2026-06-27 | Screener's inline JS extracted to `screener.js` (`screener.html` is now markup + CSS). No behavior change. |
 | 3.19 | 2026-06-28 | Mobile hamburger nav (CSS-only checkbox toggle; ☰/✕) replaces the cramped wrapping top bar on all pages under 1024px. Methodology/stock popups widened to 65% (max 1100px; full-width under 900px). |
+| 3.20 | 2026-06-28 | Verdict bands tightened to Pass ≥ 80, Watch 50–79, Fail < 50 (was 65 / 40), applied to both verdict labels and score cell colors. |
 | 2.0 | 2026-06-27 | Full DESIGN.md rewrite consolidating all design decisions, adding missing sections (spacing, breakpoints, motion, social cards, content philosophy), and bringing documentation to v3.13.0 parity. |
