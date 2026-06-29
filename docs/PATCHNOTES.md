@@ -2,6 +2,20 @@
 
 ---
 
+## v3.21.0 — 2026-06-29 — Per-Stock Popup Shows Only Scored Metrics
+
+**The per-stock breakdown popup now lists only the five metrics that actually feed the score. The two TTM "(context)" rows — Revenue Growth TTM and EPS Growth TTM — are removed so the popup reads as a clean scorecard.**
+
+### Changed
+
+- **Per-stock popup filtered to scored metrics only.** `openStock()` in `screener.js` now renders `POPUP_METRICS.filter(m => m.scored)`, dropping the two unscored context rows (Revenue Growth TTM, EPS Growth TTM). The `(context)` tag markup and the note's "(TTM growth is shown as context, not scored)" parenthetical were removed since they no longer apply. The TTM columns remain in the main screener table; only the popup changed.
+
+### Docs
+
+- PRD (per-stock popup), DESIGN (version history) updated.
+
+---
+
 ## v3.20.0 — 2026-06-28 — Tighter Verdict Bands
 
 **The screener's Pass/Watch/Fail thresholds are raised so the labels are more demanding. A median-on-everything stock (score 50) now sits at the very bottom of Watch rather than mid-Watch, and a clear majority of the index reads Watch or Fail.**

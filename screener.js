@@ -405,20 +405,19 @@
       $("stockSub").innerHTML = nm + ' &middot; <span class="verdict v-' + verdict + '">' + vlabel +
         '</span> &middot; Score ' + (sc.pct === null ? "—" : sc.pct) + "/100";
 
-      $("stockRows").innerHTML = POPUP_METRICS.map(function (m) {
+      $("stockRows").innerHTML = POPUP_METRICS.filter(function (m) { return m.scored; }).map(function (m) {
         var pp = sc.parts[m.key];
         var color = colorFromPts(pp);
         var ptsTxt = (pp === undefined || pp === null) ? "—" : pp.toFixed(1);
-        var tag = m.scored ? "" : ' <span class="muted" style="font-size:0.85em">(context)</span>';
         return "<tr>" +
-          "<td>" + m.label + tag + "</td>" +
+          "<td>" + m.label + "</td>" +
           '<td class="num ' + color + '">' + m.fmt(d) + "</td>" +
           '<td class="num">' + ordinal(sc.pctiles[m.key]) + "</td>" +
           '<td class="num ' + color + '">' + ptsTxt + "</td>" +
           "</tr>";
       }).join("");
 
-      $("stockNote").innerHTML = "Scored on <b>" + sc.total + "</b> of the 5 forward metrics (TTM growth is shown as context, not scored). " +
+      $("stockNote").innerHTML = "Scored on <b>" + sc.total + "</b> of the 5 forward metrics. " +
         "Each metric's points come from its percentile rank vs the Nasdaq 100 (green = top quartile, red = bottom). " +
         'Open <b>Methodology</b> for the full method.';
 

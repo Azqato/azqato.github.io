@@ -3,7 +3,7 @@
 **Version:** 3.2
 **Status:** Current
 **Author:** Azqato
-**Last Updated:** 2026-06-27
+**Last Updated:** 2026-06-29
 
 ---
 
@@ -192,6 +192,8 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.16.0 — Per-stock popup, GitHub-direct loading, FMP removed | 2026-06-27 | Complete |
 | v3.17.0–v3.18.0 — Constituent auto-sync; screener.js extraction | 2026-06-27 | Complete |
 | v3.19.0 — Mobile hamburger nav; wider popups | 2026-06-28 | Complete |
+| v3.20.0 — Tighter verdict bands (Pass 80 / Watch 50 / Fail <50) | 2026-06-28 | Complete |
+| v3.21.0 — Per-stock popup shows only scored metrics | 2026-06-29 | Complete |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
@@ -507,7 +509,7 @@ A relative, percentile-based model. Each stock is ranked against its loaded Nasd
 
 **Cell colors:** every colored cell follows the same percentile ranking, not absolute thresholds — green = top quartile on that metric, red = bottom quartile, amber = middle half, gray = no data. The TTM growth columns are ranked for color only (they do not feed the score). A negative forward P/E or PEG renders red and sorts as a worst (expensive) value, never a cheap one.
 
-**Per-stock popup:** clicking any row opens a focused breakdown for that stock — each metric's value, its percentile, and its 0–20 points, color-coded, with the total score and verdict. Reuses the modal component.
+**Per-stock popup:** clicking any row opens a focused breakdown for that stock — for each of the five scored metrics, its value, percentile, and 0–20 points, color-coded, with the total score and verdict. The unscored TTM context rows are not shown in the popup (they remain in the main table). Reuses the modal component.
 
 ### State Management
 
