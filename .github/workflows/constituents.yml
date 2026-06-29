@@ -7,7 +7,7 @@ name: Update Constituents
 
 on:
   schedule:
-    - cron: "0 6 * * 6"   # Saturdays 06:00 UTC
+    - cron: "0 23 * * 6"   # Saturdays 23:00 UTC (same time as the weekday data jobs)
   workflow_dispatch: {}
 
 permissions:
