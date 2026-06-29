@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nasdaq 100 Screener</title>
-  <meta name="description" content="An interactive Nasdaq 100 screener that rates each stock against the Azqato methodology factors. Runs entirely in your browser. Bring your own free Financial Modeling Prep API key to load live metrics.">
+  <meta name="description" content="An interactive Nasdaq 100 screener that ranks each stock against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
   <!-- Open Graph / Discord -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://azqato.github.io/stocks/screener.html">
@@ -252,6 +252,7 @@
       border-bottom: 1px solid var(--color-border);
       font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
     }
+    tbody tr { cursor: pointer; }
     tbody tr:hover td { background: var(--color-accent-light); }
     tbody tr:hover td.col-ticker { background: #11201b; }
 
@@ -462,13 +463,8 @@
 
     <!-- Toolbar -->
     <div class="app-toolbar">
-      <span class="summary-text" id="summary">100 Nasdaq 100 names &middot; load data to score them</span>
+      <span class="summary-text" id="summary">Loading the Nasdaq 100&hellip;</span>
       <span class="spacer"></span>
-
-      <div class="progress-wrap" id="progress">
-        <span id="progressLabel">Loading…</span>
-        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      </div>
 
       <div class="chip-group" role="group" aria-label="Filter by verdict">
         <button class="chip active" data-filter="all">All <span class="count" id="cnt-all">0</span></button>
@@ -488,15 +484,11 @@
       </div>
 
       <button class="btn" id="methodologyBtn">📊 Methodology</button>
-      <button class="btn" id="settingsBtn" aria-label="Settings">⚙ Settings</button>
-      <button class="btn btn-primary" id="loadBtn">Load Data</button>
     </div>
 
     <!-- Stale data notice -->
     <div class="stale-banner" id="staleBanner">
       <span id="staleText">Data is more than 24 hours old.</span>
-      <span class="spacer"></span>
-      <button class="btn" id="staleLoadBtn">Refresh with your API key</button>
     </div>
 
     <!-- Table -->
@@ -535,9 +527,9 @@
 
       <div class="placeholder" id="placeholder">
         <div class="placeholder-card">
-          <h2>No data loaded yet</h2>
-          <p>This screener rates each Nasdaq 100 company against the Azqato methodology factors. It runs entirely in your browser. To populate live metrics, add a free Financial Modeling Prep API key and click <b>Load Data</b>.</p>
-          <button class="btn btn-primary" id="placeholderBtn">Add API key &amp; load</button>
+          <h2>Couldn't load the data</h2>
+          <p>The screener pulls its daily data from GitHub. This usually means you're offline or GitHub is unreachable. Check your connection and refresh the page.</p>
+          <button class="btn btn-primary" onclick="location.reload()">Refresh</button>
         </div>
       </div>
     </div>
@@ -551,31 +543,19 @@
     </div>
   </div>
 
-  <!-- Settings / Load modal -->
-  <div class="modal-backdrop" id="modal" hidden>
+  <!-- Per-stock breakdown modal -->
+  <div class="modal-backdrop" id="stockModal" hidden>
     <div class="modal">
-      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-      <h2>Screener Settings</h2>
-      <p class="hint">Everything runs in your browser. Your API key and the loaded data are stored only in this browser's local storage. Nothing is sent to any server except Financial Modeling Prep.</p>
-
-      <label class="field" for="apiKey">Financial Modeling Prep API key</label>
-      <input type="password" id="apiKey" placeholder="paste your free FMP key" autocomplete="off" spellcheck="false">
-      <p class="hint">Don't have one? Get a free key at <a href="https://site.financialmodelingprep.com/developer/docs" target="_blank" rel="noopener">financialmodelingprep.com</a>. The free tier allows 250 requests per day.</p>
-
-      <label class="field" for="maxLoad">Max symbols to load this run</label>
-      <input type="number" id="maxLoad" min="1" max="110" value="60">
-      <p class="hint">Each symbol uses 4 API requests (quote, balance sheet, financial growth, analyst estimates). The free tier allows 250 requests per day, so the default of 60 keeps a single run under that limit. Already-loaded symbols are skipped, so you can resume on another day to fill in the rest of the 100.</p>
-
-      <div class="status-msg" id="statusMsg"></div>
-
-      <div class="modal-actions">
-        <button class="btn btn-primary" id="modalLoadBtn">Load / Refresh Data</button>
-        <button class="btn" id="modalSaveBtn">Save Key</button>
-        <button class="btn" id="clearBtn">Clear Loaded Data</button>
+      <button class="modal-close" id="stockClose" aria-label="Close">&times;</button>
+      <h2 id="stockTitle">Ticker</h2>
+      <p class="hint" id="stockSub"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Metric</th><th scope="col" class="num">Value</th><th scope="col" class="num">Percentile</th><th scope="col" class="num">Points</th></tr></thead>
+          <tbody id="stockRows"></tbody>
+        </table>
       </div>
-
-      <h3>How stocks are scored</h3>
-      <p class="hint">Each company is graded relative to the Nasdaq 100 on five forward-looking metrics, for a score out of 100. For the full breakdown with a worked example, open <b>📊 Methodology</b> from the toolbar.</p>
+      <p class="hint" id="stockNote"></p>
     </div>
   </div>
 
@@ -620,7 +600,7 @@
           </tbody>
         </table>
       </div>
-      <p class="table-note">Formula: points = 40 &times; (percentile - 0.25), capped between 0 and 20. The middle half does the sliding; the top and bottom quarters are flat.</p>
+      <p class="table-note">Formula: points = 40 &times; (percentile - 0.25), capped between 0 and 20. The middle half does the sliding; the top and bottom quarters are flat. The table's <b>cell colors follow the same ranking</b>: a green cell is top-quartile on that metric, red is bottom-quartile, and amber is in between.</p>
 
       <h3>Worked example: Apple's PEG</h3>
       <p class="hint">Apple's PEG of about 2.3 is cheaper than roughly 29% of the index. Because 29% sits just above the bottom quarter, that earns about <b>1.7 of 20</b> on the PEG metric. Not because 2.3 fails a fixed bar, but because almost every other Nasdaq 100 name is cheaper. A stock with a PEG near the cheapest in the group (top 25%) would earn the full 20.</p>
@@ -675,35 +655,37 @@
       ["CHTR","Charter Communications"],["CSGP","CoStar Group"]
     ];
 
-    var FMP = "https://financialmodelingprep.com/stable";
-    var LS_KEY = "azq_fmp_key";
-    var LS_DATA = "azq_screener_data";
-    var LS_META = "azq_screener_meta";
+    // The daily feed is the single source of truth. Pull it straight from GitHub
+    // (raw) so it works even when this file is opened locally; fall back to the
+    // same-origin copy, then to a localStorage cache if the network is down.
+    var RAW_URL = "https://raw.githubusercontent.com/Azqato/stocks/main/data/screener.json";
+    var FEED_PATHS = [RAW_URL, "data/screener.json"];
+    var LS_CACHE = "azq_screener_cache";
 
     // ---- State ----
     var data = {};       // ticker -> metrics object
-    var meta = {};       // { updated: ISOString }
+    var meta = {};       // { updated: ISOString, source }
     var filter = "all";
     var sortKey = "score";
     var sortDir = -1;    // -1 desc, 1 asc
     var query = "";
-    var loading = false;
+    var feedDone = false; // true once the network fetch has finished (success or failure)
 
     // ---- DOM ----
     var $ = function (id) { return document.getElementById(id); };
     var tbody = $("tbody");
 
-    // ---- Persistence ----
+    // ---- Cache (offline fallback only) ----
+    function readCache() {
+      try { var c = JSON.parse(localStorage.getItem(LS_CACHE)); return (c && c.stocks) ? c : null; } catch (e) { return null; }
+    }
+    function writeCache(feed) {
+      try { localStorage.setItem(LS_CACHE, JSON.stringify({ updated: feed.updated, source: feed.source, stocks: feed.stocks })); } catch (e) {}
+    }
     function loadState() {
-      try { data = JSON.parse(localStorage.getItem(LS_DATA)) || {}; } catch (e) { data = {}; }
-      try { meta = JSON.parse(localStorage.getItem(LS_META)) || {}; } catch (e) { meta = {}; }
-      $("apiKey").value = localStorage.getItem(LS_KEY) || "";
+      var c = readCache();
+      if (c) { data = c.stocks; meta = { updated: c.updated, source: "cache" }; }
     }
-    function saveData() {
-      localStorage.setItem(LS_DATA, JSON.stringify(data));
-      localStorage.setItem(LS_META, JSON.stringify(meta));
-    }
-    function getKey() { return (localStorage.getItem(LS_KEY) || "").trim(); }
 
     // ---- Number helpers ----
     function isNum(n) { return typeof n === "number" && isFinite(n); }
@@ -748,28 +730,33 @@
     function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
     function pointsFromPct(p) { return clamp(40 * (p - 0.25), 0, 20); } // 0-25% -> 0, 75%+ -> 20
 
-    var SCORE_METRICS = [
-      { key: "revFwd",   higher: true,  get: function (d) { return isNum(d.revFwd) ? d.revFwd : null; } },
-      { key: "epsFwd",   higher: true,  get: function (d) { return isNum(d.epsFwd) ? d.epsFwd : null; } },
-      { key: "peVsG",    higher: false, get: function (d) {
+    // `scored` metrics feed the Score; the others (TTM growth) are ranked only
+    // so their cells can be colored by percentile like everything else.
+    var METRICS = [
+      { key: "revTTM",   scored: false, higher: true,  get: function (d) { return isNum(d.revTTM) ? d.revTTM : null; } },
+      { key: "revFwd",   scored: true,  higher: true,  get: function (d) { return isNum(d.revFwd) ? d.revFwd : null; } },
+      { key: "epsTTM",   scored: false, higher: true,  get: function (d) { return isNum(d.epsTTM) ? d.epsTTM : null; } },
+      { key: "epsFwd",   scored: true,  higher: true,  get: function (d) { return isNum(d.epsFwd) ? d.epsFwd : null; } },
+      { key: "peVsG",    scored: true,  higher: false, get: function (d) {
           if (!isNum(d.peFwd) || !isNum(d.epsFwd)) return null;
           // Unprofitable (P/E <= 0) or shrinking earnings (growth <= 0) rank worst, not best/dropped.
           return (d.peFwd <= 0 || d.epsFwd <= 0) ? Infinity : d.peFwd / d.epsFwd;
         } },
-      { key: "pegFwd",   higher: false, get: function (d) {
+      { key: "pegFwd",   scored: true,  higher: false, get: function (d) {
           if (isNum(d.peFwd) && d.peFwd <= 0) return Infinity; // unprofitable: Yahoo PEG is unreliable, rank worst
           return (isNum(d.pegFwd) && d.pegFwd > 0) ? d.pegFwd : null;
         } },
-      { key: "cashDebt", higher: true,  get: function (d) { if (!isNum(d.cash) || !isNum(d.debt)) return null; return d.debt === 0 ? (d.cash > 0 ? Infinity : null) : d.cash / d.debt; } }
+      { key: "cashDebt", scored: true,  higher: true,  get: function (d) { if (!isNum(d.cash) || !isNum(d.debt)) return null; return d.debt === 0 ? (d.cash > 0 ? Infinity : null) : d.cash / d.debt; } }
     ];
 
     // Rank every loaded stock on each metric, convert ranks to points, and sum.
     function computeScoreMap() {
       var tickers = NASDAQ100.map(function (s) { return s[0]; });
-      var pts = {};
-      tickers.forEach(function (t) { pts[t] = {}; });
+      var pts = {};   // ticker -> { metricKey: points }
+      var pcts = {};  // ticker -> { metricKey: percentile 0..1 }
+      tickers.forEach(function (t) { pts[t] = {}; pcts[t] = {}; });
 
-      SCORE_METRICS.forEach(function (m) {
+      METRICS.forEach(function (m) {
         var vals = [];
         tickers.forEach(function (t) {
           var d = data[t];
@@ -788,7 +775,7 @@
           var perc = n > 1 ? ((i + j) / 2) / (n - 1) : 0.5;
           if (!m.higher) perc = 1 - perc; // lower-is-better metrics invert
           var p = pointsFromPct(perc);
-          for (var k = i; k <= j; k++) pts[vals[k].t][m.key] = p;
+          for (var k = i; k <= j; k++) { pts[vals[k].t][m.key] = p; pcts[vals[k].t][m.key] = perc; }
           i = j + 1;
         }
       });
@@ -796,16 +783,25 @@
       var out = {};
       tickers.forEach(function (t) {
         var got = [];
-        SCORE_METRICS.forEach(function (m) { if (pts[t][m.key] !== undefined) got.push(pts[t][m.key]); });
-        if (!got.length) { out[t] = { pct: null, passes: 0, total: 0 }; return; }
+        METRICS.forEach(function (m) { if (m.scored && pts[t][m.key] !== undefined) got.push(pts[t][m.key]); });
+        if (!got.length) { out[t] = { pct: null, passes: 0, total: 0, parts: pts[t], pctiles: pcts[t] }; return; }
         var sum = got.reduce(function (a, b) { return a + b; }, 0);
         out[t] = {
           pct: Math.round(sum / (got.length * 20) * 100),
           passes: got.filter(function (p) { return p >= 15; }).length,
-          total: got.length
+          total: got.length,
+          parts: pts[t],   // percentile points per metric, for cell coloring
+          pctiles: pcts[t] // raw percentiles, for the per-stock breakdown popup
         };
       });
       return out;
+    }
+    // Cell color from a metric's percentile points: top quartile green, bottom red, middle amber.
+    function colorFromPts(p) {
+      if (p === undefined || p === null) return "muted";
+      if (p >= 20) return "pos";
+      if (p <= 0) return "neg";
+      return "cau";
     }
     function verdictOf(pct) {
       if (pct === null) return "none";
@@ -814,26 +810,7 @@
       return "fail";
     }
 
-    // ---- Cell coloring ----
-    function clsGrowth(n) { return !isNum(n) ? "muted" : (n > 15 ? "pos" : (n >= 8 ? "cau" : "neg")); }
-    function clsEps(n)    { return !isNum(n) ? "muted" : (n > 15 ? "pos" : (n > 0 ? "cau" : "neg")); }
-    function clsPeg(n)    { return !isNum(n) ? "muted" : (n > 0 && n < 1 ? "pos" : (n <= 2 && n > 0 ? "cau" : "neg")); }
-    function clsPe(d) {
-      if (!isNum(d.peFwd)) return "muted";
-      if (d.peFwd <= 0) return "neg"; // negative forward P/E (unprofitable) = red
-      if (isNum(d.epsFwd) && d.epsFwd > 0) {
-        if (d.peFwd < d.epsFwd) return "pos";
-        if (d.peFwd < d.epsFwd * 1.5) return "cau";
-        return "neg";
-      }
-      return "";
-    }
-    function clsCash(d) {
-      if (!isNum(d.cash) || !isNum(d.debt)) return "muted";
-      if (d.cash > d.debt) return "pos";
-      if (d.debt < d.cash * 3) return "cau";
-      return "neg";
-    }
+    // ---- Value + format helpers (cell colors are percentile-based; see colorFromPts) ----
     // For unprofitable companies (negative forward P/E), Yahoo's positive PEG is
     // misleading, so display our own forward PEG = P/E / EPS growth (negative).
     function pegDisplay(d) {
@@ -850,12 +827,6 @@
       if (!isFinite(n)) return "∞"; // no debt
       return n.toFixed(2) + "x";
     }
-    function clsRatio(n) {
-      if (n === null || n === undefined || (typeof n === "number" && isNaN(n))) return "muted";
-      if (n >= 1) return "pos";       // cash >= debt
-      if (n > 1 / 3) return "cau";    // debt < 3x cash
-      return "neg";                   // debt > 3x cash
-    }
     function scoreColor(pct) {
       if (pct === null) return "var(--color-border)";
       if (pct >= 65) return "var(--color-positive)";
@@ -869,9 +840,9 @@
       return NASDAQ100.map(function (s) {
         var t = s[0];
         var d = data[t] || {};
-        var sc = sm[t] || { pct: null, passes: 0, total: 0 };
+        var sc = sm[t] || { pct: null, passes: 0, total: 0, parts: {} };
         return {
-          ticker: t, name: s[1], d: d,
+          ticker: t, name: s[1], d: d, parts: sc.parts || {},
           score: sc.pct, passes: sc.passes, total: sc.total,
           verdict: verdictOf(sc.pct),
           revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
@@ -893,6 +864,12 @@
         if (k === "verdict") { av = VERDICT_RANK[a.verdict]; bv = VERDICT_RANK[b.verdict]; }
         else if (k === "factors") { av = a.total ? a.passes / a.total : -1; bv = b.total ? b.passes / b.total : -1; }
         else { av = a[k]; bv = b[k]; }
+        // For valuation columns a negative P/E or PEG is "worst" (unprofitable),
+        // so sort it like a very high value rather than a cheap low one.
+        if (k === "peFwd" || k === "pegFwd") {
+          if (typeof av === "number" && av <= 0) av = Infinity;
+          if (typeof bv === "number" && bv <= 0) bv = Infinity;
+        }
         // "present" = a real number, including Infinity (e.g. cash/debt with no debt)
         var an = typeof av === "number" && !isNaN(av);
         var bn = typeof bv === "number" && !isNaN(bv);
@@ -931,7 +908,7 @@
 
       // summary + placeholder
       var loaded = Object.keys(data).length;
-      $("placeholder").style.display = loaded === 0 ? "flex" : "none";
+      $("placeholder").style.display = (feedDone && loaded === 0) ? "flex" : "none";
       var scored = rs.filter(function (r) { return r.score !== null; }).length;
       if (loaded === 0) {
         $("summary").innerHTML = NASDAQ100.length + " Nasdaq 100 names &middot; load data to score them";
@@ -946,9 +923,7 @@
       checkStale();
     }
 
-    // ---- Pre-built data feed (data/screener.json from the daily GitHub Action) ----
-    var FEED_URL = "data/screener.json";
-
+    // ---- Daily feed (data/screener.json, refreshed by the GitHub Action) ----
     function isStale(ts) {
       if (!ts) return true;
       return (Date.now() - new Date(ts).getTime()) > 24 * 3600 * 1000;
@@ -960,30 +935,32 @@
       $("staleBanner").classList.toggle("on", stale);
       if (stale) {
         $("staleText").innerHTML = meta.updated
-          ? "Data is from " + new Date(meta.updated).toLocaleString() + " — more than 24 hours old."
+          ? "This data is from " + new Date(meta.updated).toLocaleString() + " (more than 24 hours old). The daily refresh may not have run yet."
           : "This data has no timestamp and may be out of date.";
       }
     }
 
-    async function initFeed() {
-      try {
-        var res = await fetch(FEED_URL, { cache: "no-store" });
-        if (!res.ok) { checkStale(); return; }
-        var feed = await res.json();
-        if (feed && feed.stocks && feed.updated && Object.keys(feed.stocks).length) {
-          var feedTime = new Date(feed.updated).getTime();
-          var localTime = meta.updated ? new Date(meta.updated).getTime() : 0;
-          // Use the feed unless the user has a newer bring-your-own-key pull.
-          if (feedTime >= localTime) {
+    // Fetch the latest feed from GitHub (works locally too), caching it for offline use.
+    async function loadFeed() {
+      for (var i = 0; i < FEED_PATHS.length; i++) {
+        try {
+          var res = await fetch(FEED_PATHS[i], { cache: "no-store" });
+          if (!res.ok) continue;
+          var feed = await res.json();
+          if (feed && feed.stocks && Object.keys(feed.stocks).length) {
             data = {};
             Object.keys(feed.stocks).forEach(function (k) { data[k] = feed.stocks[k]; });
-            meta = { updated: feed.updated, source: "feed" };
+            meta = { updated: feed.updated, source: feed.source || "feed" };
+            writeCache(feed);
+            feedDone = true;
             render();
             return;
           }
-        }
-      } catch (e) { /* no feed yet / offline: fall back to local data + the BYO-key loader */ }
-      checkStale();
+        } catch (e) { /* try the next source */ }
+      }
+      // Network failed on every source: keep whatever the cache gave us at startup.
+      feedDone = true;
+      render();
     }
 
     function rowHtml(r) {
@@ -999,20 +976,20 @@
       }
       var factorsCell = r.total ? '<span class="factors">' + r.passes + "/" + r.total + "</span>" : '<span class="muted">—</span>';
 
-      return '<tr>' +
+      return '<tr data-ticker="' + r.ticker + '">' +
         '<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>' +
         '<td class="left group-start"><span class="verdict v-' + r.verdict + '">' + verdictLabel + '</span></td>' +
         '<td>' + scoreCell + '</td>' +
         '<td>' + factorsCell + '</td>' +
-        '<td class="grp-growth group-start ' + clsGrowth(r.revTTM) + '">' + fmtPct(r.revTTM) + '</td>' +
-        '<td class="grp-growth ' + clsGrowth(r.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
-        '<td class="grp-growth ' + clsEps(r.epsTTM) + '">' + fmtPct(r.epsTTM) + '</td>' +
-        '<td class="grp-growth ' + clsEps(r.epsFwd) + '">' + fmtPct(r.epsFwd) + '</td>' +
-        '<td class="grp-valuation group-start ' + clsPe(d) + '">' + fmtNum(r.peFwd) + '</td>' +
-        '<td class="grp-valuation ' + clsPeg(r.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
-        '<td class="grp-balance group-start ' + clsCash(d) + '">' + fmtMoney(r.cash) + '</td>' +
+        '<td class="grp-growth group-start ' + colorFromPts(r.parts.revTTM) + '">' + fmtPct(r.revTTM) + '</td>' +
+        '<td class="grp-growth ' + colorFromPts(r.parts.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
+        '<td class="grp-growth ' + colorFromPts(r.parts.epsTTM) + '">' + fmtPct(r.epsTTM) + '</td>' +
+        '<td class="grp-growth ' + colorFromPts(r.parts.epsFwd) + '">' + fmtPct(r.epsFwd) + '</td>' +
+        '<td class="grp-valuation group-start ' + colorFromPts(r.parts.peVsG) + '">' + fmtNum(r.peFwd) + '</td>' +
+        '<td class="grp-valuation ' + colorFromPts(r.parts.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
+        '<td class="grp-balance group-start ' + colorFromPts(r.parts.cashDebt) + '">' + fmtMoney(r.cash) + '</td>' +
         '<td class="grp-balance">' + fmtMoney(r.debt) + '</td>' +
-        '<td class="grp-balance ' + clsRatio(r.cashDebt) + '">' + fmtRatio(r.cashDebt) + '</td>' +
+        '<td class="grp-balance ' + colorFromPts(r.parts.cashDebt) + '">' + fmtRatio(r.cashDebt) + '</td>' +
         '<td class="grp-snapshot group-start">' + fmtPrice(r.price) + '</td>' +
         '<td class="grp-snapshot">' + fmtMoney(r.marketCap) + '</td>' +
         '<td class="grp-snapshot ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
@@ -1045,203 +1022,58 @@
       });
     }
 
-    // ---- API loading ----
-    function setProgress(on, done, totalN, label) {
-      var p = $("progress");
-      p.classList.toggle("on", on);
-      if (on) {
-        $("progressLabel").textContent = label || (done + "/" + totalN);
-        $("progressFill").style.width = totalN ? Math.round((done / totalN) * 100) + "%" : "0%";
-      }
-    }
-    function setStatus(msg, kind) {
-      var el = $("statusMsg");
-      el.textContent = msg;
-      el.className = "status-msg on " + (kind || "");
-    }
+    // ---- Per-stock breakdown popup ----
+    var POPUP_METRICS = [
+      { key: "revTTM",   label: "Revenue Growth TTM", scored: false, fmt: function (d) { return fmtPct(d.revTTM); } },
+      { key: "revFwd",   label: "Revenue Growth FWD", scored: true,  fmt: function (d) { return fmtPct(d.revFwd); } },
+      { key: "epsTTM",   label: "EPS Growth TTM",     scored: false, fmt: function (d) { return fmtPct(d.epsTTM); } },
+      { key: "epsFwd",   label: "EPS Growth FWD",     scored: true,  fmt: function (d) { return fmtPct(d.epsFwd); } },
+      { key: "peVsG",    label: "P/E vs Growth",      scored: true,  fmt: function (d) { return fmtNum(d.peFwd); } },
+      { key: "pegFwd",   label: "PEG FWD",            scored: true,  fmt: function (d) { return fmtNum(pegDisplay(d)); } },
+      { key: "cashDebt", label: "Cash vs Debt",       scored: true,  fmt: function (d) { return fmtRatio(cashDebtRatio(d)); } }
+    ];
 
-    function nearestForwardPair(estimates) {
-      // estimates: [{date, revenueAvg, epsAvg}, ...]
-      if (!Array.isArray(estimates) || !estimates.length) return null;
-      var sorted = estimates.slice().sort(function (a, b) {
-        return new Date(a.date) - new Date(b.date);
-      });
-      var now = Date.now();
-      var idx = -1;
-      for (var i = 0; i < sorted.length; i++) {
-        if (new Date(sorted[i].date).getTime() >= now) { idx = i; break; }
-      }
-      if (idx === -1) idx = sorted.length - 1; // all in the past; use last two available
-      var fy0 = sorted[idx];
-      var fy1 = sorted[idx + 1] || null;
-      // If we fell back to the last entry, step back one so we still have a pair.
-      if (!fy1 && idx > 0) { fy1 = fy0; fy0 = sorted[idx - 1]; }
-      return { fy0: fy0, fy1: fy1 };
+    function ordinal(p) {
+      if (p === undefined || p === null) return "—";
+      var n = Math.round(p * 100);
+      var s = (n % 10 === 1 && n % 100 !== 11) ? "st" : (n % 10 === 2 && n % 100 !== 12) ? "nd" : (n % 10 === 3 && n % 100 !== 13) ? "rd" : "th";
+      return n + s;
     }
 
-    // FMP returns errors either as a JSON object with "Error Message", or as a
-    // plain-text string ("Restricted Endpoint: …", "Query Error: …"), and the
-    // HTTP status is not always an error code. Classify both shapes.
-    function classifyBody(body) {
-      var msg = "";
-      if (typeof body === "string") msg = body;
-      else if (body && typeof body === "object" && !Array.isArray(body)) {
-        msg = body["Error Message"] || body.message || body.error || "";
-      } else { return null; } // array = success
-      if (/invalid api key|legacy endpoint/i.test(msg)) return "auth";
-      if (/limit reached|rate limit|too many requests/i.test(msg)) return "rate";
-      if (/restricted|premium|subscription|special endpoint|not available under/i.test(msg)) return "premium";
-      if (msg) return "http";
-      return null;
+    function openStock(ticker) {
+      var d = data[ticker];
+      if (!d || !Object.keys(d).length) return;
+      var nm = (NASDAQ100.find(function (s) { return s[0] === ticker; }) || [])[1] || "";
+      var sc = computeScoreMap()[ticker] || { pct: null, parts: {}, pctiles: {}, total: 0 };
+      var verdict = verdictOf(sc.pct);
+      var vlabel = { pass: "PASS", watch: "WATCH", fail: "FAIL", none: "NO DATA" }[verdict];
+
+      $("stockTitle").textContent = ticker;
+      $("stockSub").innerHTML = nm + ' &middot; <span class="verdict v-' + verdict + '">' + vlabel +
+        '</span> &middot; Score ' + (sc.pct === null ? "—" : sc.pct) + "/100";
+
+      $("stockRows").innerHTML = POPUP_METRICS.map(function (m) {
+        var pp = sc.parts[m.key];
+        var color = colorFromPts(pp);
+        var ptsTxt = (pp === undefined || pp === null) ? "—" : pp.toFixed(1);
+        var tag = m.scored ? "" : ' <span class="muted" style="font-size:0.85em">(context)</span>';
+        return "<tr>" +
+          "<td>" + m.label + tag + "</td>" +
+          '<td class="num ' + color + '">' + m.fmt(d) + "</td>" +
+          '<td class="num">' + ordinal(sc.pctiles[m.key]) + "</td>" +
+          '<td class="num ' + color + '">' + ptsTxt + "</td>" +
+          "</tr>";
+      }).join("");
+
+      $("stockNote").innerHTML = "Scored on <b>" + sc.total + "</b> of the 5 forward metrics (TTM growth is shown as context, not scored). " +
+        "Each metric's points come from its percentile rank vs the Nasdaq 100 (green = top quartile, red = bottom). " +
+        'Open <b>Methodology</b> for the full method.';
+
+      $("stockModal").hidden = false;
     }
+    function closeStock() { $("stockModal").hidden = true; }
 
-    function fetchJson(url) {
-      return fetch(url).then(function (res) {
-        return res.text().then(function (txt) {
-          var body;
-          try { body = JSON.parse(txt); } catch (e) { body = txt; }
-          var code = classifyBody(body);
-          if (!code) {
-            if (res.status === 401 || res.status === 403) code = "auth";
-            else if (res.status === 429) code = "rate";
-            else if (res.status === 402) code = "premium";
-            else if (!res.ok) code = "http";
-          }
-          if (code) {
-            var err = new Error(
-              (typeof body === "string" ? body : (body && body["Error Message"])) || ("HTTP " + res.status)
-            );
-            err.code = code;
-            throw err;
-          }
-          return body;
-        });
-      });
-    }
-
-    async function loadData() {
-      if (loading) return;
-      var key = getKey();
-      if (!key) { openModal(); setStatus("Add your free API key first, then click Load.", "err"); return; }
-
-      var maxLoad = parseInt($("maxLoad").value, 10) || NASDAQ100.length;
-      loading = true;
-      $("loadBtn").disabled = true;
-      setStatus("", "");
-
-      var symbols = NASDAQ100.map(function (s) { return s[0]; });
-
-      // Decide which symbols to process: those missing data first, capped by maxLoad.
-      var pending = symbols.filter(function (t) { return !data[t] || data[t].peFwd === undefined; });
-      var queue = pending.concat(symbols.filter(function (t) { return pending.indexOf(t) === -1; }));
-      queue = queue.slice(0, maxLoad);
-
-      var done = 0, stopped = null;
-
-      var KQ = "&apikey=" + encodeURIComponent(key);
-
-      async function processSymbol(t) {
-        if (stopped) return;
-        var rec = data[t] || {};
-        rec.name = (NASDAQ100.find(function (s) { return s[0] === t; }) || [])[1];
-
-        // quote -> price, market cap
-        try {
-          var q = await fetchJson(FMP + "/quote?symbol=" + t + KQ);
-          if (q && q[0]) {
-            rec.price = isNum(q[0].price) ? q[0].price : rec.price;
-            rec.marketCap = isNum(q[0].marketCap) ? q[0].marketCap : rec.marketCap;
-          }
-        } catch (e) { if (e.code === "auth" || e.code === "rate") { stopped = e; return; } }
-
-        // balance sheet -> cash, debt
-        try {
-          var bs = await fetchJson(FMP + "/balance-sheet-statement?symbol=" + t + "&period=annual&limit=1" + KQ);
-          if (bs && bs[0]) {
-            rec.cash = isNum(bs[0].cashAndShortTermInvestments) ? bs[0].cashAndShortTermInvestments : null;
-            rec.debt = isNum(bs[0].totalDebt) ? bs[0].totalDebt : null;
-          }
-        } catch (e) { if (e.code === "auth" || e.code === "rate") { stopped = e; return; } }
-
-        // financial growth -> revenue & eps growth TTM (latest annual YoY)
-        try {
-          var fg = await fetchJson(FMP + "/financial-growth?symbol=" + t + "&period=annual&limit=1" + KQ);
-          if (fg && fg[0]) {
-            rec.revTTM = isNum(fg[0].revenueGrowth) ? fg[0].revenueGrowth * 100 : null;
-            rec.epsTTM = isNum(fg[0].epsgrowth) ? fg[0].epsgrowth * 100 : null;
-          }
-        } catch (e) { if (e.code === "auth" || e.code === "rate") { stopped = e; return; } }
-
-        // analyst estimates -> forward revenue/eps growth, forward P/E, PEG
-        try {
-          var est = await fetchJson(FMP + "/analyst-estimates?symbol=" + t + "&period=annual&limit=8" + KQ);
-          var pair = nearestForwardPair(est);
-          if (pair && pair.fy0) {
-            var e0 = pair.fy0, e1 = pair.fy1;
-            if (isNum(rec.price) && isNum(e0.epsAvg) && e0.epsAvg > 0) {
-              rec.peFwd = rec.price / e0.epsAvg;
-            }
-            if (e1 && isNum(e0.epsAvg) && e0.epsAvg !== 0 && isNum(e1.epsAvg)) {
-              rec.epsFwd = (e1.epsAvg / Math.abs(e0.epsAvg) - 1) * 100;
-            }
-            if (e1 && isNum(e0.revenueAvg) && e0.revenueAvg > 0 && isNum(e1.revenueAvg)) {
-              rec.revFwd = (e1.revenueAvg / e0.revenueAvg - 1) * 100;
-            }
-            if (isNum(rec.peFwd) && isNum(rec.epsFwd) && rec.epsFwd > 0) {
-              rec.pegFwd = rec.peFwd / rec.epsFwd;
-            }
-          }
-        } catch (e) {
-          if (e.code === "auth" || e.code === "rate") { stopped = e; return; }
-          // premium/other: leave forward fields undefined -> shown as —
-        }
-
-        var nowIso = new Date().toISOString();
-        rec.priceUpdated = nowIso;
-        rec.fundamentalsUpdated = nowIso;
-        if (rec.peFwd === undefined) rec.peFwd = null; // mark as processed even if empty
-        data[t] = rec;
-        done++;
-        saveData();
-        setProgress(true, done, queue.length, "Loading " + done + "/" + queue.length + " — " + t);
-        render();
-      }
-
-      // Simple concurrency pool
-      var POOL = 4, i = 0;
-      async function worker() {
-        while (i < queue.length && !stopped) {
-          var t = queue[i++];
-          await processSymbol(t);
-        }
-      }
-      var workers = [];
-      for (var w = 0; w < POOL; w++) workers.push(worker());
-      await Promise.all(workers);
-
-      meta.updated = new Date().toISOString();
-      saveData();
-      finishLoad(stopped);
-    }
-
-    function finishLoad(err) {
-      loading = false;
-      $("loadBtn").disabled = false;
-      setProgress(false, 0, 0);
-      render();
-      if (!err) {
-        setStatus("Done. Loaded " + Object.keys(data).length + " symbols.", "ok");
-        return;
-      }
-      if (err.code === "auth") setStatus("Invalid or unauthorized API key. Check your key and try again.", "err");
-      else if (err.code === "rate") setStatus("Hit the API rate limit (250/day on the free tier). Progress was saved — resume tomorrow to finish the rest.", "err");
-      else if (err.code === "premium") setStatus("Some endpoints require a paid FMP plan; those columns are left blank.", "err");
-      else setStatus("Could not reach the API: " + (err.message || "network error") + ".", "err");
-    }
-
-    // ---- Modal ----
-    function openModal() { $("modal").hidden = false; }
-    function closeModal() { $("modal").hidden = true; }
+    // ---- Modals ----
     function openMethodology() { $("methodologyModal").hidden = false; }
     function closeMethodology() { $("methodologyModal").hidden = true; }
 
@@ -1271,6 +1103,12 @@
       // search
       $("search").addEventListener("input", function () { query = this.value.trim(); render(); });
 
+      // row click -> per-stock breakdown
+      tbody.addEventListener("click", function (e) {
+        var tr = e.target.closest("tr");
+        if (tr && tr.dataset.ticker) openStock(tr.dataset.ticker);
+      });
+
       // columns menu
       $("colsBtn").addEventListener("click", function (e) {
         e.stopPropagation();
@@ -1282,41 +1120,21 @@
         cb.addEventListener("change", applyColumnVisibility);
       });
 
-      // buttons
-      $("settingsBtn").addEventListener("click", openModal);
-      $("loadBtn").addEventListener("click", loadData);
-      $("placeholderBtn").addEventListener("click", openModal);
-      $("staleLoadBtn").addEventListener("click", openModal);
-      $("modalClose").addEventListener("click", closeModal);
-      $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) closeModal(); });
+      // modals
       $("methodologyBtn").addEventListener("click", openMethodology);
       $("methodologyClose").addEventListener("click", closeMethodology);
       $("methodologyModal").addEventListener("click", function (e) { if (e.target === $("methodologyModal")) closeMethodology(); });
-      $("modalSaveBtn").addEventListener("click", function () {
-        localStorage.setItem(LS_KEY, $("apiKey").value.trim());
-        setStatus("API key saved in this browser.", "ok");
-      });
-      $("modalLoadBtn").addEventListener("click", function () {
-        localStorage.setItem(LS_KEY, $("apiKey").value.trim());
-        loadData();
-      });
-      $("clearBtn").addEventListener("click", function () {
-        if (!confirm("Clear all loaded metric data? Your API key is kept.")) return;
-        data = {}; meta = {};
-        localStorage.removeItem(LS_DATA);
-        localStorage.removeItem(LS_META);
-        setStatus("Loaded data cleared.", "ok");
-        render();
-      });
+      $("stockClose").addEventListener("click", closeStock);
+      $("stockModal").addEventListener("click", function (e) { if (e.target === $("stockModal")) closeStock(); });
 
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeModal(); closeMethodology(); } });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeMethodology(); closeStock(); } });
     }
 
     // ---- Init ----
     loadState();
     bind();
     render();
-    initFeed();
+    loadFeed();
   })();
   </script>
 </body>

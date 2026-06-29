@@ -56,19 +56,13 @@ No build step required. Open `index.html` directly in a browser, or serve with P
 python3 -m http.server 8080
 ```
 
-Then visit `http://localhost:8080`. The screener loads `data/screener.json` from the same origin, so a local server is needed for the screener to read the data file (direct `file://` access blocks cross-origin JSON reads in most browsers).
+Then visit `http://localhost:8080`. The screener fetches its data feed directly from GitHub (`raw.githubusercontent.com`), so it also works when `screener.html` is opened straight from disk as a `file://` URL — no local server required.
 
 ---
 
 ## Environment Variables
 
-The frontend has no environment variables. The data pipeline has one optional secret.
-
-| Variable | Location | Required | Purpose |
-|----------|----------|----------|---------|
-| `FMP_API_KEY` | GitHub Actions secret | No | Enables the bring-your-own-key Financial Modeling Prep fallback in the screener UI. The primary yfinance pipeline does not use this key. |
-
-No environment variables are needed to run the site or the yfinance pipeline locally.
+None. The frontend has no environment variables, and the yfinance data pipeline needs no API key or secret. (A legacy `FMP_API_KEY` GitHub Actions secret from an earlier version is no longer referenced and can be deleted.)
 
 ---
 

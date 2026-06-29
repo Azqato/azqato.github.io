@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.1
+**Version:** 3.2
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-06-27
@@ -86,7 +86,8 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 - Scoring model: 5 forward metrics ranked against peers, each scored 0–20 by percentile, total /100, Pass/Watch/Fail verdicts
 - Methodology popup explaining the scoring model in plain language with worked examples
 - Daily yfinance data pipeline via GitHub Actions (no API key required)
-- Bring-your-own-key FMP fallback loader in the screener UI
+- Screener loads its feed directly from GitHub (works even when the file is opened locally), with an offline localStorage cache
+- Per-stock breakdown popup (click any row) and percentile-based cell colors that track the score
 - Responsive design (desktop, tablet, mobile)
 - "On This Page" anchor navigation with IntersectionObserver scroll tracking
 - Open Graph and Twitter Card social cards on all pages
@@ -112,8 +113,8 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 - No frontend JavaScript libraries or frameworks
 - Content must remain accurate without date-bound updates (no "as of today" editorial references)
 - Data pipeline must run within GitHub Actions free tier limits
-- FMP free tier: 250 API calls/day (relevant only for the optional bring-your-own-key fallback)
-- Site must be instantly servable by opening index.html in a browser (screener requires a local server for JSON fetch)
+- No user-facing API keys or credentials of any kind
+- Site must be instantly servable by opening index.html in a browser. The screener reads its feed from GitHub raw, so it also works when opened as a local `file://`
 
 ---
 
@@ -189,6 +190,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.13.0 — Methodology popup on screener | 2026-06 | Complete |
 | v3.14.0 — Documentation consolidation (this audit) | 2026-06-27 | Complete |
 | v3.15.0 — Relative percentile scoring model | 2026-06-27 | Complete |
+| v3.16.0 — Per-stock popup, GitHub-direct loading, FMP removed | 2026-06-27 | Complete |
 | v4.0.0 — Mobile nav, additional philosophy sections | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
@@ -329,8 +331,8 @@ No staging environment. Changes are previewed locally before pushing to main.
 | GitHub Action fails with HTTP 429 | yfinance rate limit (Yahoo Finance throttling) | Wait and re-run; the pipeline has per-symbol retry logic |
 | Page shows unstyled HTML | `style.css` path wrong | Check that style.css is in the same directory as the HTML file |
 | Social card image missing | `og-image.png` not at site root | Verify the file exists at root; regenerate with the PowerShell snippet in DESIGN.md |
-| Screener sorts wrong | `Infinity` (debt-free companies) sort logic | Cast to Number before comparison in `sort()` |
-| FMP bring-your-own-key fails with 402 | Symbol not on FMP free tier | Expected — yfinance pipeline covers all 100; FMP fallback has free-tier limits |
+| Screener sorts wrong | `Infinity`/negative sentinels in sort logic | Negative P/E and PEG are mapped to worst-rank; debt-free companies sort to top of Cash/Debt |
+| Screener shows "Couldn't load the data" | Offline, or `raw.githubusercontent.com` unreachable | Check connectivity; the page retries the same-origin copy and a localStorage cache |
 
 ### Monitoring
 
@@ -472,12 +474,12 @@ Array of 100 objects. `t` = ticker symbol (string), `n` = company name (string).
 The site has no traditional API. The internal data flow for the screener is:
 
 1. `screener.html` loads in the browser
-2. On load, it fetches `data/screener.json` (published daily by the pipeline)
-3. If screener.json is more than 24 hours old, a stale banner prompts the user to use the bring-your-own-key loader
-4. Bring-your-own-key: user enters FMP API key → browser makes requests to FMP API directly → results stored in `localStorage` → merged with or replacing screener.json data
-5. `computeScoreMap()` ranks the loaded stocks and computes each one's relative percentile score client-side
-6. `render()` applies sort, filter, and column visibility to produce the table DOM
-7. No data is sent to any Azqato server
+2. On load it reads any cached copy of the feed from `localStorage` and renders it immediately, then fetches the latest `screener.json` from GitHub — `raw.githubusercontent.com/.../data/screener.json` first (so it works even when the file is opened locally), falling back to the same-origin `data/screener.json`
+3. On success the fresh feed replaces the data and is written back to the localStorage cache; if every source fails, the last cached copy is kept (or a "Couldn't load" message is shown)
+4. If the feed is more than 24 hours old, an informational stale banner is shown (the daily refresh likely hasn't run)
+5. `computeScoreMap()` ranks the loaded stocks and computes each one's relative percentile score and per-metric points client-side
+6. `render()` applies sort, filter, and column visibility to produce the table DOM; clicking a row opens a per-stock breakdown popup
+7. No data is sent to any server; the only network request is the read-only fetch of the public feed
 
 ### Screener Scoring Model (v3.15+)
 
@@ -501,12 +503,16 @@ A relative, percentile-based model. Each stock is ranked against its loaded Nasd
 
 **Relative-scoring caveats:** because grades are peer-relative, a stock's score can change when *other* companies' numbers change, and roughly the bottom third of the index always lands in Fail. Scores are computed over the currently loaded set (normally all 100 from the daily feed).
 
+**Cell colors:** every colored cell follows the same percentile ranking, not absolute thresholds — green = top quartile on that metric, red = bottom quartile, amber = middle half, gray = no data. The TTM growth columns are ranked for color only (they do not feed the score). A negative forward P/E or PEG renders red and sorts as a worst (expensive) value, never a cheap one.
+
+**Per-stock popup:** clicking any row opens a focused breakdown for that stock — each metric's value, its percentile, and its 0–20 points, color-coded, with the total score and verdict. Reuses the modal component.
+
 ### State Management
 
 Client-side state lives in two places:
 
 1. **DOM:** Sort column, sort direction, active filter chip, column visibility, search query — all derived from UI interactions and re-applied on each render
-2. **localStorage:** Bring-your-own-key FMP data, FMP API key — persists across page loads
+2. **localStorage:** A cached copy of the public daily feed, used only as an offline fallback. No credentials are stored.
 
 No cookies. No session storage. No server-side state.
 
@@ -514,10 +520,9 @@ No cookies. No session storage. No server-side state.
 
 | Service | Purpose | Authentication | Data Sent |
 |---------|---------|---------------|-----------|
-| Yahoo Finance (via yfinance) | Daily data pipeline | None (public) | Ticker symbols in HTTP requests |
-| GitHub Pages | Static hosting | GitHub account (owner only) | Repository contents |
+| Yahoo Finance (via yfinance) | Daily data pipeline (server-side, in GitHub Actions) | None (public) | Ticker symbols in HTTP requests |
+| GitHub (raw + Pages) | Static hosting and the screener's data feed | None for reads | None (read-only fetch of a public JSON file) |
 | GitHub Actions | CI/CD scheduling | GitHub account (owner only) | None from users |
-| Financial Modeling Prep (FMP) | Optional bring-your-own-key fallback | User's own API key (not shared) | Ticker symbols |
 
 ### Performance Requirements
 
@@ -536,7 +541,6 @@ No cookies. No session storage. No server-side state.
 |------|-------------|-----------------|
 | Screener scoring in-HTML | The `computeScoreMap()` scoring and screener logic live inline in `screener.html` | Move to a separate `screener.js` file for maintainability |
 | No constituent auto-sync | `data/nasdaq100.json` is manually maintained and may drift from the actual index | Add a pipeline step that fetches the current index from a reliable source and diffs against the stored list |
-| FMP fallback has free-tier limits | The bring-your-own-key path hits the FMP 250-call/day cap, limiting full refreshes | Either document the limit clearly or find a free-tier-compatible alternative |
 | screener.json committed to repo | The data file is versioned alongside code, bloating git history over time | Move to GitHub Releases or a separate artifact storage for generated data files |
 | `og-image.png` duplicated | Root and `img/` both have copies | Delete the `img/` copy; root copy is canonical |
 
@@ -546,7 +550,7 @@ No cookies. No session storage. No server-side state.
 
 ### Authentication Model
 
-None. The site is fully public. There are no user accounts, no sessions, no login flows. The only "credential" is the optional FMP API key, which lives only in the user's own browser localStorage and is never sent to any Azqato-controlled server.
+None. The site is fully public. There are no user accounts, no sessions, no login flows, and no credentials of any kind. The screener only performs a read-only fetch of a public JSON feed.
 
 ### Authorization Model
 
@@ -556,29 +560,27 @@ No role-based access. All content is publicly readable. The only write access is
 
 The site stores no user data. The only browser storage is:
 
-- **localStorage:** FMP API key and bring-your-own-key screener data. Both live only in the user's browser. Never transmitted to Azqato.
+- **localStorage:** a cached copy of the public daily feed (offline fallback only). No credentials, no PII.
 - **No cookies.**
 - **No analytics that collect PII** (if analytics are added, use a privacy-preserving tool like Plausible).
 
 ### Environment Variables
 
-No secrets are hardcoded in any file. The `FMP_API_KEY` is a GitHub Actions secret and is only injected into the pipeline environment at run time. It is not used by the primary yfinance pipeline and is only available to the user's own browser session via their local input.
+No secrets are used or hardcoded. (A legacy `FMP_API_KEY` GitHub Actions secret from an earlier version is no longer referenced by any workflow and can be deleted.)
 
 ### Third-Party Trust
 
 | Service | Data Received | Notes |
 |---------|--------------|-------|
-| Yahoo Finance | Ticker symbols (in HTTP request paths) | Public endpoints, no user PII |
-| GitHub Pages | None from end users | Serves static files only |
+| Yahoo Finance | Ticker symbols (server-side, in the pipeline) | Public endpoints, no user PII |
+| GitHub (raw + Pages) | Read-only file fetches | Serves static files / the public JSON feed |
 | GitHub Actions | None from end users | Repository automation only |
-| FMP | User's ticker symbols (when user uses their own key) | User's own API key; user controls the data sent |
 
 ### Known Attack Surface
 
 | Area | Risk | Mitigation |
 |------|------|------------|
-| screener.json injection | Malicious content in the data file could be rendered as HTML | All screener cell values are set via `textContent` or explicit number formatting, not `innerHTML`. No user-supplied HTML is rendered. |
-| FMP API key exposure | User's API key stored in localStorage is readable by browser extensions and XSS | The key is user-supplied and user-controlled; the site cannot protect it beyond scope. The risk is documented in the screener UI. |
+| screener.json injection | Malicious content in the data file could be rendered as HTML | The data file is owner-controlled (only the GitHub Action writes it). Cell values come from number formatting; ticker/name come from the static constituent list. No user-supplied HTML is rendered. |
 | Dependency supply chain | yfinance is a third-party library | Pin yfinance version in the Actions workflow; monitor for new releases. |
 | GitHub Pages serving | Cached stale content | GitHub Pages cache is controlled by GitHub; not a controllable risk at this layer. |
 
@@ -641,7 +643,7 @@ Each stock is ranked against the other Nasdaq 100 companies on five forward metr
 Every day at 23:00 UTC via an automated pipeline. The "as of" timestamp in the screener header shows when the data was last refreshed.
 
 **9. Where does the screener data come from?**
-Yahoo Finance, fetched daily by a Python script using the free yfinance library. No API key is required for the daily feed. Users can also enter a Financial Modeling Prep API key to manually refresh data, but the daily feed covers all 100 tickers automatically.
+Yahoo Finance, fetched daily by a Python script (using the free yfinance library) that runs in GitHub Actions and commits the result. No API key is required, and there is nothing to configure — the page just reads the published feed from GitHub.
 
 **10. Does the screener use real-time data?**
 No. It uses data from the most recent daily pipeline run (updated once per day at 23:00 UTC). Prices shown reflect the close or after-hours price at the time of the last fetch.
@@ -650,7 +652,7 @@ No. It uses data from the most recent daily pipeline run (updated once per day a
 A first-person account where Azqato bought Palantir at $9, sold at $45, and watched it go to $150. It is the single most important lesson documented on the site: selling a business because the price went up is a category mistake. Price and value are not the same thing. It lives on the FAQ page.
 
 **12. Do I need to pay for anything?**
-No. The site is free. Finviz's screener is free (no account needed). Seeking Alpha has a free account tier that covers the 12-column watchlist setup described. The screener's daily data feed is free. The only paid option is an FMP API key for manual screener refreshes, which is entirely optional.
+No. The site is entirely free with nothing to configure. Finviz's screener is free (no account needed). Seeking Alpha has a free account tier that covers the 12-column watchlist setup described. The screener's daily data feed is free and requires no API key.
 
 **13. Do you cover short selling, options, or crypto?**
 No. This methodology covers long-only equity investing with a buy-and-hold time horizon. Derivatives and crypto are outside scope.

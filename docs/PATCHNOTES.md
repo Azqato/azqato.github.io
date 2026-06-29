@@ -2,6 +2,31 @@
 
 ---
 
+## v3.16.0 — 2026-06-27 — Screener: Per-Stock Popup, GitHub-Direct Loading, FMP Removed
+
+**A round of screener improvements: cell colors now track the relative score, clicking a row opens a per-stock breakdown, the data loads straight from GitHub (so it works locally), and the bring-your-own-key Financial Modeling Prep path was removed entirely.**
+
+### Added
+
+- **Per-stock breakdown popup.** Clicking any row opens a focused modal for that stock: each metric's value, its percentile rank vs the Nasdaq 100, and its 0–20 points, color-coded, with the total score and verdict. Reuses the existing modal component (`openStock()` / `#stockModal`).
+- **Offline cache.** The last successfully fetched feed is stored in `localStorage` and shown instantly on load (and as a fallback if the network is down).
+
+### Changed
+
+- **Cell colors now track the relative percentiles**, not absolute thresholds: green = top quartile on that metric, red = bottom quartile, amber = the middle half, gray = no data. The TTM growth columns are ranked for color only (they still don't feed the score). `computeScoreMap()` now also returns per-metric percentiles (`pctiles`) for the popup, and a generic `colorFromPts()` replaced the old `cls*` threshold functions.
+- **Data loads directly from GitHub.** The screener fetches `raw.githubusercontent.com/.../data/screener.json` first (CORS-enabled, so it works even when `screener.html` is opened as a local `file://`), falling back to the same-origin copy, then the localStorage cache. Always shows the latest published feed.
+- **Sort:** a negative forward P/E or PEG now sorts like a high (expensive) value rather than a cheap one, so unprofitable names group with the worst, matching their red cells and zero score.
+
+### Removed
+
+- **Financial Modeling Prep bring-your-own-key loader**, the Settings modal, the API-key input, the "Load Data" / "Refresh with your API key" buttons, the progress bar, and all related code (`loadData`, `fetchJson`, `nearestForwardPair`, etc.). The screener is now purely the cached daily feed — nothing to configure. The legacy `FMP_API_KEY` GitHub Actions secret is unused and can be deleted.
+
+### Docs
+
+- `docs/PRD.md`, `README.md`, and `docs/DESIGN.md` updated to drop all FMP/bring-your-own-key references and describe the GitHub-direct loading, percentile colors, and per-stock popup.
+
+---
+
 ## v3.15.4 — 2026-06-27 — Negative Forward P/E Cell Now Renders Red
 
 **Color fix in the screener table. A negative forward P/E was rendering green (because `peFwd < epsFwd` is trivially true when P/E is negative). `clsPe()` now returns red for any forward P/E ≤ 0.**
