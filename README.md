@@ -12,7 +12,7 @@ A static educational website documenting Azqato's fundamentals-driven, long-term
 |-------|-----------|----------------|
 | HTML | HTML5 semantic | 8 pages, no preprocessor |
 | CSS | CSS3 custom properties | 850+ lines, single file |
-| JavaScript | Vanilla ES6 | 49 lines, no framework |
+| JavaScript | Vanilla ES6 | `script.js` (content pages) + `screener.js` (screener app), no framework |
 | Fonts | System fonts only | No external loading |
 | Data pipeline | Python 3 + yfinance | Python 3.12, yfinance (latest) |
 | Hosting | GitHub Pages | Serves from repo root |
@@ -92,7 +92,8 @@ stocks/
 ├── index.html                        ← Home: strategy overview, metric grid, reference table
 ├── philosophy.html                   ← Conceptual foundation (9 sections)
 ├── metrics.html                      ← 12-metric glossary with examples
-├── screener.html                     ← Interactive Nasdaq 100 screener (app page)
+├── screener.html                     ← Interactive Nasdaq 100 screener (markup + CSS)
+├── screener.js                       ← Screener logic (data load, scoring, render, popup)
 ├── finviz.html                       ← Finviz screener setup guide
 ├── seekingalpha.html                 ← Seeking Alpha watchlist setup guide
 ├── indices.html                      ← Index/ETF methodology and timing signals

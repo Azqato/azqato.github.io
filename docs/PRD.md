@@ -385,23 +385,22 @@ stocks/
 ├── index.html                         ← Home page
 ├── philosophy.html                    ← Philosophy (9 sections)
 ├── metrics.html                       ← 12-metric glossary
-├── screener.html                      ← Interactive Nasdaq 100 screener (app)
+├── screener.html                      ← Interactive Nasdaq 100 screener (app: markup + CSS)
+├── screener.js                        ← Screener logic (data load, scoring, render, popup)
 ├── finviz.html                        ← Finviz setup guide
 ├── seekingalpha.html                  ← Seeking Alpha setup guide
 ├── indices.html                       ← Index/ETF methodology
 ├── faq.html                           ← FAQ accordion (30 items)
 ├── style.css                          ← Design system stylesheet
-├── script.js                          ← Accordion + IntersectionObserver
+├── script.js                          ← Accordion + IntersectionObserver (content pages)
 ├── og-image.png                       ← Social card image (1200×630)
 ├── data/
-│   ├── nasdaq100.json                 ← 100-ticker constituent list
+│   ├── nasdaq100.json                 ← 100-ticker constituent list (auto-synced)
 │   └── screener.json                  ← Daily generated metrics feed
 ├── scripts/
 │   ├── fetch_screener_data.py         ← yfinance → screener.json (daily)
 │   └── update_constituents.py         ← Wikipedia → nasdaq100.json (weekly auto-sync)
-├── img/
-│   ├── og-image.png                   ← Duplicate / legacy (root copy is canonical)
-│   └── *.png                          ← Historical screenshots
+├── img/                               ← Historical screenshots
 ├── .github/
 │   └── workflows/
 │       ├── screener-data.yml          ← Daily data cron job
@@ -532,7 +531,7 @@ No cookies. No session storage. No server-side state.
 |--------|--------|
 | Largest Contentful Paint (LCP) | Under 1.5s on 3G |
 | Time to Interactive (TTI) | Under 2s on 3G |
-| JavaScript total | Under 5KB (script.js: 49 lines) |
+| JavaScript | `script.js` ~49 lines (content pages); `screener.js` ~490 lines (loaded only on the screener page) |
 | CSS total | Under 50KB (style.css: ~850 lines) |
 | screener.json size | Under 100KB for 100 tickers |
 | Font requests | 0 (system fonts only) |
@@ -541,10 +540,8 @@ No cookies. No session storage. No server-side state.
 
 | Debt | Description | Correct Solution |
 |------|-------------|-----------------|
-| Screener scoring in-HTML | The `computeScoreMap()` scoring and screener logic live inline in `screener.html` | Move to a separate `screener.js` file for maintainability |
 | Constituent name quality | New tickers added by the auto-sync use cleaned Wikipedia names, which may be slightly longer than the curated short names | Hand-edit `data/nasdaq100.json` names after a sync if desired (existing names are preserved automatically) |
 | screener.json committed to repo | The data file is versioned alongside code, bloating git history over time | Move to GitHub Releases or a separate artifact storage for generated data files |
-| `og-image.png` duplicated | Root and `img/` both have copies | Delete the `img/` copy; root copy is canonical |
 
 ---
 

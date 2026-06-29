@@ -2,6 +2,25 @@
 
 ---
 
+## v3.18.0 — 2026-06-27 — Extract Screener JS to `screener.js`
+
+**Housekeeping. The screener's ~490 lines of inline JavaScript moved out of `screener.html` into a dedicated `screener.js`, addressing the "scoring lives in-HTML" technical debt. No behavior change.**
+
+### Changed
+
+- `screener.html` now loads `<script src="screener.js"></script>` instead of an inline `<script>` block. The page is markup + CSS; all logic (data loading, `computeScoreMap`, render, sort, the per-stock popup) lives in `screener.js`.
+
+### Removed (tech debt closed)
+
+- "Screener scoring in-HTML" debt resolved.
+- The "`og-image.png` duplicated" debt entry was stale — `img/` contains only historical screenshots, no duplicate image. Cleaned up the docs accordingly.
+
+### Docs
+
+- PRD (folder structure, tech-stack JS line, tech-debt table) and README (tech stack, structure) updated for the new file.
+
+---
+
 ## v3.17.0 — 2026-06-27 — Nasdaq 100 Constituent Auto-Sync
 
 **The constituent list is now maintained automatically instead of by hand, and the screener derives its universe from the feed so there's a single source of truth.**
