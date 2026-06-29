@@ -8,10 +8,10 @@ name: Update Screener Data (Nasdaq 100)
 
 on:
   schedule:
-    # 23:00 UTC = 6:00pm US Eastern in winter (EST).
+    # 23:00 UTC = 6:00pm US Eastern in winter (EST). Mon-Fri only (trading days).
     # GitHub cron is UTC-only and does not follow DST: in summer (EDT) this
-    # fires at 7:00pm Eastern. For 6:00pm during summer instead, use "0 22 * * *".
-    - cron: "0 23 * * *"
+    # fires at 7:00pm Eastern. For 6:00pm during summer instead, use "0 22 * * 1-5".
+    - cron: "0 23 * * 1-5"
   workflow_dispatch: {}   # allow manual runs
 
 permissions:

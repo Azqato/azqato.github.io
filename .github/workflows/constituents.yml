@@ -2,11 +2,12 @@ name: Update Constituents
 
 # Weekly sync of data/nasdaq100.json and data/sp500.json with the live indices
 # (from Wikipedia). For whichever list's membership changed, regenerates the
-# matching data feed and commits the lists + feeds.
+# matching data feed and commits the lists + feeds. Runs Saturday, when the daily
+# screener-data jobs are idle (those run Mon-Fri only).
 
 on:
   schedule:
-    - cron: "0 6 * * 1"   # Mondays 06:00 UTC
+    - cron: "0 6 * * 6"   # Saturdays 06:00 UTC
   workflow_dispatch: {}
 
 permissions:
