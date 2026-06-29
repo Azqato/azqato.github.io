@@ -1,7 +1,8 @@
 name: Update Constituents
 
-# Weekly sync of data/nasdaq100.json with the live Nasdaq-100 index (from
-# Wikipedia). If membership changed, regenerates the data feed and commits both.
+# Weekly sync of data/nasdaq100.json and data/sp500.json with the live indices
+# (from Wikipedia). For whichever list's membership changed, regenerates the
+# matching data feed and commits the lists + feeds.
 
 on:
   schedule:
@@ -25,21 +26,32 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Sync constituent list
+      - name: Sync constituent lists
         run: |
           pip install --quiet requests pandas lxml
           python scripts/update_constituents.py
 
-      - name: Regenerate feed and commit if the list changed
+      - name: Regenerate changed feeds and commit
         run: |
-          if git diff --quiet data/nasdaq100.json; then
+          changed=0
+          pip install --quiet yfinance
+          if ! git diff --quiet data/nasdaq100.json; then
+            echo "Nasdaq 100 membership changed; regenerating feed."
+            python scripts/fetch_screener_data.py --list data/nasdaq100.json --out data/screener.json
+            git add data/nasdaq100.json data/screener.json
+            changed=1
+          fi
+          if ! git diff --quiet data/sp500.json || [ -n "$(git status --porcelain data/sp500.json)" ]; then
+            echo "S&P 500 membership changed (or list is new); regenerating feed."
+            python scripts/fetch_screener_data.py --list data/sp500.json --out data/screener_sp500.json
+            git add data/sp500.json data/screener_sp500.json
+            changed=1
+          fi
+          if [ "$changed" -eq 0 ]; then
             echo "Constituents unchanged; nothing to do."
             exit 0
           fi
-          pip install --quiet yfinance
-          python scripts/fetch_screener_data.py
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/nasdaq100.json data/screener.json
-          git commit -m "chore: update Nasdaq 100 constituents [skip ci]"
+          git commit -m "chore: update index constituents [skip ci]"
           git push

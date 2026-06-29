@@ -82,7 +82,7 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 - Step-by-step Finviz screener setup guide
 - Step-by-step Seeking Alpha watchlist setup guide (12-column layout)
 - Index/ETF methodology with VIX action levels, AAII sentiment, RSI, 52W range, structural quality metrics, DCA vs lump sum
-- Interactive Nasdaq 100 screener with relative percentile scoring model (100 tickers, daily data feed)
+- Interactive Nasdaq 100 screener with relative percentile scoring model (100 tickers, daily data feed), expandable to the full S&P 500 on demand via a toggle
 - Scoring model: 5 forward metrics ranked against peers, each scored 0–20 by percentile, total /100, Pass/Watch/Fail verdicts
 - Methodology popup explaining the scoring model in plain language with worked examples
 - Daily yfinance data pipeline via GitHub Actions (no API key required)
@@ -194,6 +194,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.19.0 — Mobile hamburger nav; wider popups | 2026-06-28 | Complete |
 | v3.20.0 — Tighter verdict bands (Pass 80 / Watch 50 / Fail <50) | 2026-06-28 | Complete |
 | v3.21.0 — Per-stock popup shows only scored metrics | 2026-06-29 | Complete |
+| v3.22.0 — Expand to S&P 500 toggle (second daily feed) | 2026-06-29 | Complete |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
@@ -290,12 +291,13 @@ GitHub Pages is configured to serve from the repository root. No additional conf
 
 ### Data Pipeline (Automated)
 
-The screener data feed (`data/screener.json`) is refreshed automatically:
+Two screener data feeds are refreshed automatically, staggered so the default Nasdaq 100 view always has priority:
 
-- **Schedule:** Daily at 23:00 UTC via `.github/workflows/screener-data.yml`
-- **Trigger manually:** GitHub Actions tab → "Refresh Screener Data" → Run workflow
-- **Run locally:** `python3 scripts/fetch_screener_data.py` (writes to `data/screener.json`)
-- **Output:** 100 tickers with price, market cap, cash, debt, growth metrics, P/E, PEG, and timestamps
+- **Nasdaq 100** (`data/screener.json`): daily at 23:00 UTC via `.github/workflows/screener-data.yml`
+- **S&P 500** (`data/screener_sp500.json`): daily at 23:30 UTC via `.github/workflows/screener-data-sp500.yml` (the larger ~500-symbol fetch runs second so it never delays the Nasdaq 100 refresh)
+- **Trigger manually:** GitHub Actions tab → the relevant workflow → Run workflow (use this to seed the S&P 500 feed the first time)
+- **Run locally:** `python3 scripts/fetch_screener_data.py --list data/nasdaq100.json --out data/screener.json` (the `--list`/`--out` args default to the Nasdaq 100; point them at `data/sp500.json` / `data/screener_sp500.json` for the S&P 500)
+- **Output:** each feed holds its index's tickers with price, market cap, cash, debt, growth metrics, P/E, PEG, and timestamps
 - **No API key required** for the yfinance pipeline
 
 ### Rollback
@@ -359,11 +361,11 @@ The site is a fully static architecture. No server processes any requests. No da
        │         │
        │    GitHub Pages → serves static files at azqato.github.io/stocks/
        │
-       └── GitHub Actions (cron 23:00 UTC)
+       └── GitHub Actions (cron)
                  │
-                 └── scripts/fetch_screener_data.py (yfinance)
-                           │
-                           └── commits data/screener.json → main branch
+                 ├── 23:00 UTC → fetch_screener_data.py --list nasdaq100.json → commits data/screener.json
+                 │
+                 └── 23:30 UTC → fetch_screener_data.py --list sp500.json    → commits data/screener_sp500.json
 ```
 
 ### Tech Stack
@@ -398,11 +400,13 @@ stocks/
 ├── script.js                          ← Accordion + IntersectionObserver (content pages)
 ├── og-image.png                       ← Social card image (1200×630)
 ├── data/
-│   ├── nasdaq100.json                 ← 100-ticker constituent list (auto-synced)
-│   └── screener.json                  ← Daily generated metrics feed
+│   ├── nasdaq100.json                 ← Nasdaq 100 constituent list (auto-synced)
+│   ├── sp500.json                     ← S&P 500 constituent list (auto-synced)
+│   ├── screener.json                  ← Nasdaq 100 daily metrics feed
+│   └── screener_sp500.json            ← S&P 500 daily metrics feed
 ├── scripts/
-│   ├── fetch_screener_data.py         ← yfinance → screener.json (daily)
-│   └── update_constituents.py         ← Wikipedia → nasdaq100.json (weekly auto-sync)
+│   ├── fetch_screener_data.py         ← yfinance → screener feed (--list/--out; runs per index)
+│   └── update_constituents.py         ← Wikipedia → nasdaq100.json + sp500.json (weekly auto-sync)
 ├── img/                               ← Historical screenshots
 ├── .github/
 │   └── workflows/
@@ -477,13 +481,14 @@ Array of 100 objects. `t` = ticker symbol (string), `n` = company name (string).
 
 The site has no traditional API. The internal data flow for the screener is:
 
-1. `screener.html` loads in the browser
-2. On load it reads any cached copy of the feed from `localStorage` and renders it immediately, then fetches the latest `screener.json` from GitHub — `raw.githubusercontent.com/.../data/screener.json` first (so it works even when the file is opened locally), falling back to the same-origin `data/screener.json`
+1. `screener.html` loads in the browser, defaulting to the Nasdaq 100 universe
+2. On load it reads any cached copy of the active feed from `localStorage` and renders it immediately, then fetches the latest `screener.json` from GitHub — `raw.githubusercontent.com/.../data/screener.json` first (so it works even when the file is opened locally), falling back to the same-origin `data/screener.json`
 3. On success the fresh feed replaces the data and is written back to the localStorage cache; if every source fails, the last cached copy is kept (or a "Couldn't load" message is shown)
-4. If the feed is more than 24 hours old, an informational stale banner is shown (the daily refresh likely hasn't run)
-5. `computeScoreMap()` ranks the loaded stocks and computes each one's relative percentile score and per-metric points client-side
-6. `render()` applies sort, filter, and column visibility to produce the table DOM; clicking a row opens a per-stock breakdown popup
-7. No data is sent to any server; the only network request is the read-only fetch of the public feed
+4. **Expand to S&P 500:** clicking the toggle lazy-fetches `data/screener_sp500.json` the same way (separate localStorage cache key) and swaps it into the table; both datasets are held in memory so toggling back to the Nasdaq 100 is instant. On-screen labels (`.universe-name` spans, page title) swap to match. If the S&P 500 feed hasn't been generated yet, the view stays on the Nasdaq 100 with an explanatory message
+5. If the feed is more than 24 hours old, an informational stale banner is shown (the daily refresh likely hasn't run)
+6. `computeScoreMap()` ranks the loaded stocks and computes each one's relative percentile score and per-metric points client-side — so scores are relative to whichever universe is active
+7. `render()` applies sort, filter, and column visibility to produce the table DOM; clicking a row opens a per-stock breakdown popup
+8. No data is sent to any server; the only network requests are the read-only fetches of the public feeds
 
 ### Screener Scoring Model (v3.15+)
 

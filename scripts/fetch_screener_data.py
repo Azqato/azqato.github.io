@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """
-Builds data/screener.json for the Nasdaq 100 screener (screener.html).
+Builds a screener data feed from a constituent list.
 
 Runs in GitHub Actions on a daily cron. Uses yfinance (public Yahoo Finance
 data) so there is no API key and no per-symbol subscription restriction -- the
-whole Nasdaq 100 is refreshed every run.
+whole list is refreshed every run.
+
+Two feeds are produced by two staggered runs so the Nasdaq 100 (the screener's
+default view) always refreshes first and never waits on the larger S&P 500 job:
+  --list data/nasdaq100.json --out data/screener.json          (23:00 UTC)
+  --list data/sp500.json     --out data/screener_sp500.json     (23:30 UTC)
+Defaults reproduce the original Nasdaq 100 behavior when run with no args.
 
 Forward metrics use the CURRENT fiscal-year ("0y") analyst consensus to match
 Seeking Alpha's "FWD" convention (not yfinance's forwardPE / "+1y" rows, which
@@ -19,6 +25,7 @@ Env:
   PAUSE   seconds to wait between symbols (default 0.8) -- be polite to Yahoo
 """
 
+import argparse
 import datetime
 import json
 import os
@@ -27,9 +34,14 @@ import time
 
 import yfinance as yf
 
-LIST_PATH = "data/nasdaq100.json"
-OUT_PATH = "data/screener.json"
+DEFAULT_LIST = "data/nasdaq100.json"
+DEFAULT_OUT = "data/screener.json"
 PAUSE = float(os.environ.get("PAUSE", "0.8"))
+
+
+def yahoo_symbol(sym):
+    """Yahoo uses a dash for share classes that Wikipedia writes with a dot."""
+    return sym.replace(".", "-")
 
 
 def num(x):
@@ -60,7 +72,7 @@ def estimate_avg(df, period):
 
 
 def fetch(symbol):
-    t = yf.Ticker(symbol)
+    t = yf.Ticker(yahoo_symbol(symbol))
     info = t.info or {}
 
     rec = {}
@@ -124,7 +136,14 @@ def fetch(symbol):
 
 
 def main():
-    with open(LIST_PATH, encoding="utf-8") as f:
+    ap = argparse.ArgumentParser(description="Build a screener data feed from a constituent list.")
+    ap.add_argument("--list", dest="list_path", default=DEFAULT_LIST,
+                    help=f"constituent list JSON (default {DEFAULT_LIST})")
+    ap.add_argument("--out", dest="out_path", default=DEFAULT_OUT,
+                    help=f"output feed JSON (default {DEFAULT_OUT})")
+    args = ap.parse_args()
+
+    with open(args.list_path, encoding="utf-8") as f:
         listing = json.load(f)
 
     now = datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
@@ -151,11 +170,11 @@ def main():
         time.sleep(PAUSE)
 
     out = {"updated": now, "source": "yahoo", "stocks": stocks}
-    with open(OUT_PATH, "w", encoding="utf-8") as f:
+    with open(args.out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2)
         f.write("\n")
 
-    print(f"Wrote {OUT_PATH}: {ok}/{len(listing)} symbols with price data.")
+    print(f"Wrote {args.out_path}: {ok}/{len(listing)} symbols with price data.")
 
 
 if __name__ == "__main__":

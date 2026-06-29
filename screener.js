@@ -8,36 +8,59 @@
       return Object.keys(data).map(function (t) { return [t, (data[t] && data[t].name) || t]; });
     }
 
-    // The daily feed is the single source of truth. Pull it straight from GitHub
-    // (raw) so it works even when this file is opened locally; fall back to the
-    // same-origin copy, then to a localStorage cache if the network is down.
-    var RAW_URL = "https://raw.githubusercontent.com/Azqato/stocks/main/data/screener.json";
-    var FEED_PATHS = [RAW_URL, "data/screener.json"];
-    var LS_CACHE = "azq_screener_cache";
+    // The daily feeds are the single source of truth. Pull them straight from
+    // GitHub (raw) so they work even when this file is opened locally; fall back
+    // to the same-origin copy, then to a localStorage cache if the network is down.
+    // The Nasdaq 100 is the default view; the S&P 500 feed is lazy-loaded only
+    // when the user clicks "Expand to S&P 500".
+    var RAW_BASE = "https://raw.githubusercontent.com/Azqato/stocks/main/data/";
+    var UNIVERSES = {
+      nasdaq100: {
+        label: "Nasdaq 100",
+        paths: [RAW_BASE + "screener.json", "data/screener.json"],
+        cacheKey: "azq_screener_cache",
+        store: null    // { stocks, updated, source } once loaded this session
+      },
+      sp500: {
+        label: "S&P 500",
+        paths: [RAW_BASE + "screener_sp500.json", "data/screener_sp500.json"],
+        cacheKey: "azq_screener_sp500_cache",
+        store: null
+      }
+    };
 
     // ---- State ----
-    var data = {};       // ticker -> metrics object
+    var universeMode = "nasdaq100"; // active universe key
+    var data = {};       // ticker -> metrics object (active universe)
     var meta = {};       // { updated: ISOString, source }
     var filter = "all";
     var sortKey = "score";
     var sortDir = -1;    // -1 desc, 1 asc
     var query = "";
-    var feedDone = false; // true once the network fetch has finished (success or failure)
+    var feedDone = false; // true once the active universe's fetch has finished
+    var toggling = false; // guard against double-clicks while a feed loads
 
     // ---- DOM ----
     var $ = function (id) { return document.getElementById(id); };
     var tbody = $("tbody");
 
-    // ---- Cache (offline fallback only) ----
-    function readCache() {
-      try { var c = JSON.parse(localStorage.getItem(LS_CACHE)); return (c && c.stocks) ? c : null; } catch (e) { return null; }
+    // ---- Cache (offline fallback only; one key per universe) ----
+    function readCache(key) {
+      try { var c = JSON.parse(localStorage.getItem(key)); return (c && c.stocks) ? c : null; } catch (e) { return null; }
     }
-    function writeCache(feed) {
-      try { localStorage.setItem(LS_CACHE, JSON.stringify({ updated: feed.updated, source: feed.source, stocks: feed.stocks })); } catch (e) {}
+    function writeCache(key, feed) {
+      try { localStorage.setItem(key, JSON.stringify({ updated: feed.updated, source: feed.source, stocks: feed.stocks })); } catch (e) {}
     }
     function loadState() {
-      var c = readCache();
-      if (c) { data = c.stocks; meta = { updated: c.updated, source: "cache" }; }
+      // Seed the active universe from its offline cache so the table isn't blank
+      // while the network fetch is in flight.
+      var u = UNIVERSES[universeMode];
+      var c = readCache(u.cacheKey);
+      if (c) {
+        u.store = { stocks: c.stocks, updated: c.updated, source: "cache" };
+        data = c.stocks;
+        meta = { updated: c.updated, source: "cache" };
+      }
     }
 
     // ---- Number helpers ----
@@ -264,7 +287,7 @@
       $("placeholder").style.display = (feedDone && loaded === 0) ? "flex" : "none";
       var scored = rs.filter(function (r) { return r.score !== null; }).length;
       if (loaded === 0) {
-        $("summary").innerHTML = feedDone ? "No data" : "Loading the Nasdaq 100&hellip;";
+        $("summary").innerHTML = feedDone ? "No data" : "Loading the " + UNIVERSES[universeMode].label + "&hellip;";
       } else {
         $("summary").innerHTML = "<b>" + counts.pass + "</b> pass &middot; <b>" + counts.watch +
           "</b> watch &middot; <b>" + counts.fail + "</b> fail &middot; " + scored + "/" + loaded + " scored";
@@ -293,27 +316,83 @@
       }
     }
 
-    // Fetch the latest feed from GitHub (works locally too), caching it for offline use.
-    async function loadFeed() {
-      for (var i = 0; i < FEED_PATHS.length; i++) {
+    // Fetch a universe's feed from GitHub (works locally too), caching it for
+    // offline use. Returns the in-memory store {stocks, updated, source} or null
+    // if every source failed. Does not change the active view by itself.
+    async function fetchUniverse(key) {
+      var u = UNIVERSES[key];
+      for (var i = 0; i < u.paths.length; i++) {
         try {
-          var res = await fetch(FEED_PATHS[i], { cache: "no-store" });
+          var res = await fetch(u.paths[i], { cache: "no-store" });
           if (!res.ok) continue;
           var feed = await res.json();
           if (feed && feed.stocks && Object.keys(feed.stocks).length) {
-            data = {};
-            Object.keys(feed.stocks).forEach(function (k) { data[k] = feed.stocks[k]; });
-            meta = { updated: feed.updated, source: feed.source || "feed" };
-            writeCache(feed);
-            feedDone = true;
-            render();
-            return;
+            u.store = { stocks: feed.stocks, updated: feed.updated, source: feed.source || "feed" };
+            writeCache(u.cacheKey, feed);
+            return u.store;
           }
         } catch (e) { /* try the next source */ }
       }
-      // Network failed on every source: keep whatever the cache gave us at startup.
-      feedDone = true;
+      return null;
+    }
+
+    // Point data/meta at a universe's dataset, swap the on-screen labels, repaint.
+    function activate(key, store) {
+      universeMode = key;
+      data = {};
+      Object.keys(store.stocks).forEach(function (k) { data[k] = store.stocks[k]; });
+      meta = { updated: store.updated, source: store.source };
+      setUniverseLabel(UNIVERSES[key].label);
+      updateToggleButton();
       render();
+    }
+
+    // Swap every "Nasdaq 100"/"S&P 500" label (and the page title) to match the view.
+    function setUniverseLabel(label) {
+      document.querySelectorAll(".universe-name").forEach(function (el) { el.textContent = label; });
+      document.title = label + " Screener";
+    }
+
+    function updateToggleButton() {
+      $("universeToggle").textContent =
+        universeMode === "nasdaq100" ? "Expand to S&P 500" : "Back to Nasdaq 100";
+    }
+
+    // Initial page load: fetch the default Nasdaq 100 feed.
+    async function loadInitial() {
+      var store = await fetchUniverse("nasdaq100");
+      feedDone = true;
+      if (store) activate("nasdaq100", store);
+      else render(); // network failed: keep whatever the startup cache gave us
+    }
+
+    // Button: switch between the Nasdaq 100 and S&P 500 universes, lazy-loading
+    // the S&P 500 feed on first use.
+    async function toggleUniverse() {
+      if (toggling) return;
+      var target = universeMode === "nasdaq100" ? "sp500" : "nasdaq100";
+      var u = UNIVERSES[target];
+
+      if (u.store) { activate(target, u.store); return; } // already in memory -> instant
+
+      toggling = true;
+      var btn = $("universeToggle");
+      var prevLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "Loading " + u.label + "…";
+
+      var store = await fetchUniverse(target);
+      toggling = false;
+      btn.disabled = false;
+
+      if (store) {
+        activate(target, store);
+      } else {
+        // Feed not generated yet (or offline): stay on the current view, explain why.
+        btn.textContent = prevLabel;
+        $("summary").innerHTML = u.label + " data isn’t available yet — it’s generated by " +
+          "the daily update. Check back after the next refresh.";
+      }
     }
 
     function rowHtml(r) {
@@ -472,6 +551,9 @@
         cb.addEventListener("change", applyColumnVisibility);
       });
 
+      // universe toggle (Nasdaq 100 <-> S&P 500)
+      $("universeToggle").addEventListener("click", toggleUniverse);
+
       // modals
       $("methodologyBtn").addEventListener("click", openMethodology);
       $("methodologyClose").addEventListener("click", closeMethodology);
@@ -486,5 +568,5 @@
     loadState();
     bind();
     render();
-    loadFeed();
+    loadInitial();
   })();
