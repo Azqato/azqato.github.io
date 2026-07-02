@@ -97,7 +97,7 @@ stocks/
 ├── finviz.html                       ← Finviz screener setup guide
 ├── seekingalpha.html                 ← Seeking Alpha watchlist setup guide
 ├── indices.html                      ← Index/ETF methodology and timing signals
-├── faq.html                          ← Q&A accordion (30 items)
+├── faq.html                          ← Q&A accordion (31 items)
 ├── style.css                         ← Full design system stylesheet
 ├── script.js                         ← Accordion + IntersectionObserver sidebar
 ├── og-image.png                      ← Social card image (1200x630)

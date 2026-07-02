@@ -2,6 +2,23 @@
 
 ---
 
+## v3.24.0 — 2026-07-02 — Protecting gains after a strong run
+
+**Added a new "don't blow up your portfolio" theme (self-inflicted risk, escalation traps, forcing trades, structure as protection) and threaded it across the FAQ, home, philosophy, and indices pages. Content only: no code, data, or design changes.**
+
+### Added
+
+- **New FAQ question: "How do you avoid blowing up your portfolio after a big run?"** (faq.html, inserted before the conference-calls item, id `answer-blowup`). Covers the three self-inflicted-risk safeguards: diversify across growth/value/dividend types, refuse to escalate risk with margin or options after a win, and stay patient with new capital (let opportunities come to you, judge purchases on a decade horizon). Cross-links to the existing Growth/Value/Dividend and "staying on offense" answers.
+- **New Philosophy section: "Do Not Blow Yourself Up"** (philosophy.html, id `section-protect`, inserted after "Stay on Offense", with a new "On This Page" nav link). Fullest treatment of the theme: the escalation trap, "do not force it," and structure as the real protection. Cross-links to the GVD section and the FAQ checklist.
+- **Home page strategy paragraph** (index.html, "The Strategy" section) on self-inflicted risk after a run, cross-linking the FAQ and the new Philosophy section.
+- **Indices caveat box** (indices.html, Dollar-Cost Averaging section) applying the same "do not escalate after a strong run" discipline to index/ETF exposure (no dumping earmarked lump sums, oversizing, or reaching for leverage), cross-linking the FAQ.
+
+### Notes
+
+- All additions use the site's editorial voice: hypothetical framing only, no live company examples, no real-time data, no em dashes.
+
+---
+
 ## v3.23.0 — 2026-06-29 — Trading-day refresh schedule
 
 **The automated data jobs now run only on trading days (Mon-Fri), and the weekly constituent sync moved to Saturday. Schedule housekeeping only: no change to the site, the scoring model, or the data format.**

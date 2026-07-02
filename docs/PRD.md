@@ -1,9 +1,9 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.2
+**Version:** 3.24.0
 **Status:** Current
 **Author:** Azqato
-**Last Updated:** 2026-06-29
+**Last Updated:** 2026-07-02
 
 ---
 
@@ -78,7 +78,7 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 - 8 educational pages with sidebar navigation (Home, Philosophy, Metrics, Screener, Finviz, Seeking Alpha, Indices, FAQ)
 - 12-metric evaluation framework documented with examples, how-to-read guides, and caveats
 - 9-section philosophy page (belief and long game, ownership model, research process, GVD framework, offense cadence, Wall Street critique, hype/weak-hands, leadership cycles, knowledge building)
-- 30-item FAQ accordion
+- 31-item FAQ accordion
 - Step-by-step Finviz screener setup guide
 - Step-by-step Seeking Alpha watchlist setup guide (12-column layout)
 - Index/ETF methodology with VIX action levels, AAII sentiment, RSI, 52W range, structural quality metrics, DCA vs lump sum
@@ -132,7 +132,7 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 
 - All 12 metrics explained clearly enough that a reader with no finance background can apply them
 - Philosophy content covers all major behavioral and conceptual foundations of the strategy
-- FAQ answers the most common investor questions (30+ items) without requiring outside research
+- FAQ answers the most common investor questions (31 items) without requiring outside research
 - Screener shows all 100 Nasdaq 100 tickers with current scores, updated daily automatically
 - Site loads with no errors and no external requests in any modern browser
 - Mobile-readable at 375px minimum width
@@ -196,6 +196,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.21.0 — Per-stock popup shows only scored metrics | 2026-06-29 | Complete |
 | v3.22.0 — Expand to S&P 500 toggle (second daily feed) | 2026-06-29 | Complete |
 | v3.23.0 — Trading-day (Mon-Fri) refresh; constituents moved to Saturday | 2026-06-29 | Complete |
+| v3.24.0 — "Protecting gains after a strong run" theme (FAQ + home + philosophy + indices) | 2026-07-02 | Complete |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
@@ -399,7 +400,7 @@ stocks/
 ├── finviz.html                        ← Finviz setup guide
 ├── seekingalpha.html                  ← Seeking Alpha setup guide
 ├── indices.html                       ← Index/ETF methodology
-├── faq.html                           ← FAQ accordion (30 items)
+├── faq.html                           ← FAQ accordion (31 items)
 ├── style.css                          ← Design system stylesheet
 ├── script.js                          ← Accordion + IntersectionObserver (content pages)
 ├── og-image.png                       ← Social card image (1200×630)
