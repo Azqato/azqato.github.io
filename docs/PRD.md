@@ -259,7 +259,7 @@ Each affiliate card is static HTML. Structure:
   <a class="affiliate-btn">       <!-- CTA button linking to the referral URL -->
 ```
 
-Active affiliate cards: Tesla (`ts.la/robert459550`), Robinhood (`join.robinhood.com/robertg273/`), M1 Finance (`m1.finance/BVZBG3OqOfMj`), Public (`share.public.com/azqato`), Lyft (`lyft.com/invite/ROBGOLDY630855`).
+Active affiliate cards: Tesla (`ts.la/robert459550`), Robinhood (`join.robinhood.com/robertg273/`), M1 Finance (`m1.finance/BVZBG3OqOfMj`), Public (`share.public.com/azqato`), Lyft (`lyft.com/invite/ROBGOLDY630855`), Twitch Prime (`twitch.tv/azqato`).
 
 ---
 

@@ -489,6 +489,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.5.1] - 2026-07-02
+
+### Added
+- Twitch Prime affiliate card on `support.html`: explains that Amazon Prime members can use their one free monthly Twitch channel subscription on Azqato's channel at no extra cost. Links to `twitch.tv/azqato`.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
