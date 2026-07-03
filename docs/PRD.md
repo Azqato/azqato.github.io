@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.27.3
+**Version:** 3.27.4
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -199,20 +199,20 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.25.0 — Educational rewrite (first-position investor) + technicals-for-indices doctrine | 2026-07-02 | Complete |
 | v3.26.0 — Screener: Daily Change % column + snapshot-first column reorder | 2026-07-02 | Complete |
 | v3.27.0 — SEO/discoverability pass (FAQ schema, sitemap.xml, canonicals, meta review) | 2026-07-03 | Complete |
-| v3.28.0 — Screener: Growth and Dividend universes. Two new selectable datasets alongside the Nasdaq 100 and S&P 500: Growth = top 100 holdings of VUG (Vanguard Growth ETF), Dividend = top 100 holdings of VIG (Vanguard Dividend Appreciation ETF). Both ship in a single combined feed file (`data/screener_gd.json`) refreshed on trading days 30 minutes after the S&P 500 feed (Mon-Fri 24:00 UTC); constituents auto-synced from the ETFs' published holdings | Next | Planned |
-| v3.29.0 — Pipeline hardening (pin yfinance, remove legacy FMP secret; data files stay in git intentionally as score history) | After v3.28 | Planned |
+| Google Search Console setup (owner-only: verify `azqato.github.io/stocks/` property, submit sitemap.xml, optional root robots.txt Sitemap line; walkthrough in PATCHNOTES v3.27.0) | Next | Outstanding |
+| v3.28.0 — Screener: Growth and Dividend universes. Two new selectable datasets alongside the Nasdaq 100 and S&P 500: Growth = top 100 holdings of VUG (Vanguard Growth ETF), Dividend = top 100 holdings of VIG (Vanguard Dividend Appreciation ETF). Both ship in a single combined feed file (`data/screener_gd.json`) refreshed on trading days 30 minutes after the S&P 500 feed (Mon-Fri 24:00 UTC); constituents auto-synced from the ETFs' published holdings. Includes pinning the yfinance version across all data workflows (folded in from pipeline hardening, since this release touches every workflow anyway) | Next dev item | Planned |
+| v3.29.0 — Pipeline cleanup (delete legacy FMP_API_KEY secret from repo settings, owner step; reclassify data-files-in-git from tech debt to intentional score-history design) | After v3.28 | Planned |
 | v4.0.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.29 | Planned |
 | v4.1.0 — Deeper index fund coverage (sector ETFs, international allocation, bond tent strategy) | TBD | Planned |
 | v4.2.0 — Additional illustrative examples using historical market events | TBD | Planned |
 | v4.3.0 — Additional philosophy sections | TBD | Planned |
 | v4.4.0 — Conference call research guide | TBD | Planned |
-| Google Search Console setup (owner-only: verify `azqato.github.io/stocks/` property, submit sitemap.xml, optional root robots.txt Sitemap line; walkthrough in PATCHNOTES v3.27.0) | Paused 2026-07-03 | Outstanding |
 
 ### Feature Breakdown by Phase
 
 **v3.x (current):** Screener with daily data, relative percentile scoring, methodology popup, documentation consolidation.
 
-**v3.28-v3.29 (committed order, decided 2026-07-03):** Growth and Dividend screener universes first, then pipeline hardening. Note the dependency: the v4.0.0 sparklines mine the git history of the committed data feeds, so keeping generated data files in the repo is an intentional design choice, not tech debt.
+**Queue head (decided 2026-07-03):** the owner-only Search Console setup runs first (it gates nothing and its SEO benefit compounds from submission date), then v3.28.0 Growth/Dividend universes with yfinance pinning folded in, then v3.29.0 pipeline cleanup. Note the dependency: the v4.0.0 sparklines mine the git history of the committed data feeds, so keeping generated data files in the repo is an intentional design choice, not tech debt.
 
 **v4.x (committed order, decided 2026-07-03):** v4.0.0 score history sparklines, v4.1.0 deeper index fund coverage, v4.2.0 additional historical illustrative examples, v4.3.0 additional philosophy sections, v4.4.0 conference call research guide. Potential Growth/Value/Dividend standalone framework pages remain unversioned backlog.
 

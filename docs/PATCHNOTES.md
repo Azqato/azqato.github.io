@@ -2,6 +2,12 @@
 
 ---
 
+## v3.27.4 — 2026-07-03 — Roadmap: Search Console to #1; yfinance pinning folded into v3.28.0
+
+**Docs only. The owner-only Google Search Console setup moves to the head of the queue (nothing gates it and its SEO benefit compounds from submission date). Pinning the yfinance version is folded into v3.28.0 (the Growth/Dividend universes release touches every data workflow anyway), leaving v3.29.0 as pipeline cleanup: delete the legacy FMP secret and reclassify data-files-in-git as intentional score-history design.**
+
+---
+
 ## v3.27.3 — 2026-07-03 — Roadmap reordered (owner priority)
 
 **Docs only. New queue order: v3.28.0 Growth/Dividend screener universes (VUG/VIG), v3.29.0 pipeline hardening, v4.0.0 score history sparklines, v4.1.0 deeper index fund coverage, v4.2.0 additional historical illustrative examples, v4.3.0 additional philosophy sections, v4.4.0 conference call research guide, then the outstanding owner-only Search Console setup. Email/RSS changelog removed from the roadmap entirely. Sub-items renumbered as MINOR versions (v4.1.0-v4.4.0 rather than v4.0.x patches) per this file's own semver rules: new pages and sections are MINOR bumps, PATCH is reserved for fixes.**
