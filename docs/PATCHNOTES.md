@@ -2,6 +2,12 @@
 
 ---
 
+## v3.27.5 — 2026-07-03 — Google Search Console verification tag
+
+**The owner's google-site-verification meta tag added to the head of all 8 pages (after the canonical link), unblocking Search Console property verification and sitemap submission for the outstanding roadmap item.**
+
+---
+
 ## v3.27.4 — 2026-07-03 — Roadmap: Search Console to #1; yfinance pinning folded into v3.28.0
 
 **Docs only. The owner-only Google Search Console setup moves to the head of the queue (nothing gates it and its SEO benefit compounds from submission date). Pinning the yfinance version is folded into v3.28.0 (the Growth/Dividend universes release touches every data workflow anyway), leaving v3.29.0 as pipeline cleanup: delete the legacy FMP secret and reclassify data-files-in-git as intentional score-history design.**
