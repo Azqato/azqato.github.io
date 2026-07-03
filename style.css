@@ -14,6 +14,12 @@
   --color-negative: #f85149;
   --color-warning: #ffa657;
   --color-purple: #bc8cff;
+  /* Screener tier scale (v3.29.0): S dark green, A light green, B yellow,
+     C light red; tier F uses --color-negative (dark red). */
+  --color-tier-s: #2ea043;
+  --color-tier-a: #7ee787;
+  --color-tier-b: #e3b341;
+  --color-tier-c: #ffa198;
   --sidebar-width: 220px;
 }
 

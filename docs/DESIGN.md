@@ -33,9 +33,13 @@ All colors are defined as CSS custom properties in `:root` in `style.css`. Never
 | `--color-text-primary` | `#eef3f7` | Body copy, headings, all primary reading text |
 | `--color-text-secondary` | `#cbdae6` | Subtitles, captions, lead paragraphs, metric card definitions, sidebar inactive links |
 | `--color-positive` | `#3fb950` | Positive values in tables, good-signal badges, hero badge text |
-| `--color-negative` | `#f85149` | Negative values, red-flag badges, screener Fail verdict |
-| `--color-warning` | `#ffa657` | Caution values, amber badges, caveat box borders, screener Watch verdict |
+| `--color-negative` | `#f85149` | Negative values, red-flag badges, screener F tier (dark red) |
+| `--color-warning` | `#ffa657` | Caution values, amber badges, caveat box borders |
 | `--color-purple` | `#bc8cff` | Gradient endpoint on metric card hover top border only |
+| `--color-tier-s` | `#2ea043` | Screener S tier (dark green): badge, score bar |
+| `--color-tier-a` | `#7ee787` | Screener A tier (light green): badge, score bar |
+| `--color-tier-b` | `#e3b341` | Screener B tier (yellow): badge, score bar |
+| `--color-tier-c` | `#ffa198` | Screener C tier (light red): badge, score bar |
 
 **Contrast:** Primary text on background is approximately 15:1. Secondary text on background is approximately 4.8:1. Both meet WCAG AA. Do not introduce new text colors that fall below 4.5:1.
 

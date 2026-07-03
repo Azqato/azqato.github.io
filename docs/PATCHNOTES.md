@@ -2,6 +2,29 @@
 
 ---
 
+## v3.29.0 — 2026-07-03 — Screener: rank-based S/A/B/C/F tier scale
+
+**Pass/Watch/Fail is replaced by a five-tier, rank-based grade. Tiers are assigned by position within the loaded universe, not by fixed score cuts: S = top 10% of the list, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%, with boundary ties rounding up into the higher tier. Pulled ahead of pipeline cleanup by owner priority (planned as v3.31.0, shipped as v3.29.0).**
+
+### Added
+
+- **Tier column** (replacing Verdict) with S/A/B/C/F badges; filter chips relabeled All/S/A/B/C/F with live counts; summary line shows the tier distribution.
+- **Four color tokens** in style.css and DESIGN.md: `--color-tier-s` #2ea043 (dark green), `--color-tier-a` #7ee787 (light green), `--color-tier-b` #e3b341 (yellow), `--color-tier-c` #ffa198 (light red); tier F reuses `--color-negative` (dark red). Score-bar fill and badges are colored by tier, so the same score can carry a different color in a different universe.
+- **Methodology popup**: tier legend (percent bands, not score ranges), the tie round-up rule, and the fixed-distribution property (~10/10/30/25/25 per 100 stocks, scaling to any universe size).
+
+### Changed
+
+- `screener.js`: `verdictOf()` (fixed cuts) replaced by `computeTierMap()` (sorts scored stocks, slices at 10/20/50/75% with tie promotion); per-stock popup shows "Tier S" style labels; "bottom third always lands in Fail" caveat rewritten ("an F means the bottom of this particular list, not a broken company").
+- Rank-based bands were chosen over the initially planned fixed score cuts (80/65/50/35) after the owner reviewed live distributions: score clustering at the top quartile put 19 stocks in S and 37 in F on the Nasdaq 100; rank bands fix the sizes structurally (verified live: Nasdaq 100 = 10/10/32/23/25 with tie stretch, S&P 500 = 52/49/149/131/119, Dividend = 10/10/30/25/25).
+- Decision history preserved: the owner's first proposal (Strong Buy through Strong Sell) was dropped for conflicting with the PRD's no-advice-language rules; S/A/B/C/F tier-list vocabulary carries the relative-ranking meaning natively.
+
+### Notes
+
+- Roadmap renumbered: pipeline cleanup is now v3.30.0, the International (VXUS) universe v3.31.0.
+- A scoring-model revision (points curve, TTM metrics in the score, missing-data handling) is under owner review as a separate follow-up.
+
+---
+
 ## v3.28.2 — 2026-07-03 — Roadmap: v3.31.0 tier labels decided (S/A/B/C/F)
 
 **Docs only. The v3.31.0 five-tier scale's open label question is resolved: S / A / B / C / F tiers under a "Tier" column header, cuts at 80/65/50/35, dark green through dark red. Chosen over the original Strong Buy-to-Strong Sell proposal, which conflicted with the PRD's no-advice-language rules; tier-list vocabulary carries the relative-ranking meaning natively for the site's audience.**

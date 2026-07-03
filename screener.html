@@ -291,10 +291,12 @@
       padding: 3px 10px;
       border-radius: 999px;
     }
-    .v-pass  { background: rgba(63,185,80,0.12);  color: var(--color-positive); border: 1px solid rgba(63,185,80,0.3); }
-    .v-watch { background: rgba(255,166,87,0.12); color: var(--color-warning);  border: 1px solid rgba(255,166,87,0.3); }
-    .v-fail  { background: rgba(248,81,73,0.12);  color: var(--color-negative); border: 1px solid rgba(248,81,73,0.3); }
-    .v-none  { background: var(--color-tag-bg);   color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+    .v-s    { background: rgba(46,160,67,0.15);   color: var(--color-tier-s);  border: 1px solid rgba(46,160,67,0.45); }
+    .v-a    { background: rgba(126,231,135,0.10); color: var(--color-tier-a);  border: 1px solid rgba(126,231,135,0.3); }
+    .v-b    { background: rgba(227,179,65,0.10);  color: var(--color-tier-b);  border: 1px solid rgba(227,179,65,0.3); }
+    .v-c    { background: rgba(255,161,152,0.10); color: var(--color-tier-c);  border: 1px solid rgba(255,161,152,0.3); }
+    .v-f    { background: rgba(248,81,73,0.12);   color: var(--color-negative); border: 1px solid rgba(248,81,73,0.35); }
+    .v-none { background: var(--color-tag-bg);    color: var(--color-text-secondary); border: 1px solid var(--color-border); }
 
     .factors {
       font-size: 0.72rem;
@@ -490,11 +492,13 @@
       <span class="summary-text" id="summary">Loading the <span class="universe-name">Nasdaq 100</span>&hellip;</span>
       <span class="spacer"></span>
 
-      <div class="chip-group" role="group" aria-label="Filter by verdict">
+      <div class="chip-group" role="group" aria-label="Filter by tier">
         <button class="chip active" data-filter="all">All <span class="count" id="cnt-all">0</span></button>
-        <button class="chip" data-filter="pass">Pass <span class="count" id="cnt-pass">0</span></button>
-        <button class="chip" data-filter="watch">Watch <span class="count" id="cnt-watch">0</span></button>
-        <button class="chip" data-filter="fail">Fail <span class="count" id="cnt-fail">0</span></button>
+        <button class="chip" data-filter="s">S <span class="count" id="cnt-s">0</span></button>
+        <button class="chip" data-filter="a">A <span class="count" id="cnt-a">0</span></button>
+        <button class="chip" data-filter="b">B <span class="count" id="cnt-b">0</span></button>
+        <button class="chip" data-filter="c">C <span class="count" id="cnt-c">0</span></button>
+        <button class="chip" data-filter="f">F <span class="count" id="cnt-f">0</span></button>
       </div>
 
       <div class="menu-wrap">
@@ -530,7 +534,7 @@
           </tr>
           <tr class="head-row">
             <th class="left col-ticker" data-sort="ticker">Ticker</th>
-            <th class="left group-start" data-sort="verdict">Verdict</th>
+            <th class="left group-start" data-sort="tier" title="Rank within the loaded list: S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>
             <th data-sort="score">Score</th>
             <th data-sort="factors" title="Number of factors scoring strong (15+/20) out of those graded">Factors</th>
             <th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>
@@ -590,12 +594,15 @@
     <div class="modal">
       <button class="modal-close" id="methodologyClose" aria-label="Close">&times;</button>
       <h2>Scoring Methodology</h2>
-      <p class="hint">Each stock is graded <b>relative to the rest of the <span class="universe-name">Nasdaq 100</span></b> on five forward-looking metrics. For each metric a stock earns 0 to 20 points based on where it ranks against its peers, and the five add up to a <b>Score out of 100</b>. This is a ranking, not a fixed-threshold test: a high score means a stock looks better than most of the index right now, not that it cleared a specific target.</p>
+      <p class="hint">Each stock is graded <b>relative to the rest of the <span class="universe-name">Nasdaq 100</span></b> on five forward-looking metrics. For each metric a stock earns 0 to 20 points based on where it ranks against its peers, and the five add up to a <b>Score out of 100</b>. The score's rank within the list then maps to a <b>Tier</b>, exactly like a tier list: S is the top tenth of this list right now, F is its bottom quarter. This is a ranking, not a fixed-threshold test and not a buy or sell rating: a high tier means a stock looks better than most of the list right now, not that it cleared a specific target.</p>
       <p class="hint" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-        <span><span class="verdict v-pass">PASS</span> 80&ndash;100</span>
-        <span><span class="verdict v-watch">WATCH</span> 50&ndash;79</span>
-        <span><span class="verdict v-fail">FAIL</span> below 50</span>
+        <span><span class="verdict v-s">S</span> top 10%</span>
+        <span><span class="verdict v-a">A</span> next 10%</span>
+        <span><span class="verdict v-b">B</span> 20&ndash;50%</span>
+        <span><span class="verdict v-c">C</span> 50&ndash;75%</span>
+        <span><span class="verdict v-f">F</span> bottom 25%</span>
       </p>
+      <p class="hint">Tier sizes are fixed by rank, so a 100-stock list always has about 10 S, 10 A, 30 B, 25 C, and 25 F stocks, and the S&amp;P 500 scales the same percentages to 500. The only exception is a tie: when stocks at a boundary share the same rounded score, they all round up into the higher tier.</p>
 
       <h3>The five metrics</h3>
       <div class="table-wrap">
@@ -635,7 +642,7 @@
       <p class="hint">A stock that is exactly average on all five metrics scores 5 &times; 10 = <b>50</b>. The <b>Factors</b> column (for example <span class="factors">3/5</span>) counts how many metrics land in the upper part of the pack (15+ of 20, roughly the top third). If a metric is unavailable, it is dropped and the score is rescaled across the rest.</p>
 
       <h3>Good to know</h3>
-      <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design roughly the bottom third of the list always lands in Fail. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). The Growth, Value, and Dividend universes are the top 100 holdings of Vanguard's VUG, VTV, and VIG funds, so the same stock can earn a different score in different universes: a dividend payer that looks slow next to the Nasdaq 100 can rank near the top of the Dividend 100, because its peers changed, not its numbers. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="metrics.html" target="_blank" rel="noopener">Metrics glossary</a> and the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>.</p>
+      <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design some of every list always lands in the bottom tiers: an F here means the bottom of this particular list, not a broken company. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). The Growth, Value, and Dividend universes are the top 100 holdings of Vanguard's VUG, VTV, and VIG funds, so the same stock can earn a different score in different universes: a dividend payer that looks slow next to the Nasdaq 100 can rank near the top of the Dividend 100, because its peers changed, not its numbers. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="metrics.html" target="_blank" rel="noopener">Metrics glossary</a> and the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>.</p>
     </div>
   </div>
 

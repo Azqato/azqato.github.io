@@ -204,11 +204,33 @@
       if (p <= 0) return "neg";
       return "cau";
     }
-    function verdictOf(pct) {
-      if (pct === null) return "none";
-      if (pct >= 80) return "pass";
-      if (pct >= 50) return "watch";
-      return "fail";
+    // Tier list by rank (v3.29.0): S = top 10% of the scored stocks in the
+    // loaded list, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%.
+    // A ranking, not a buy/sell rating. Boundary ties round UP: every stock
+    // whose (rounded) score matches the last stock inside a band joins that
+    // band, so a tier only stretches past its quota on identical scores.
+    var TIER_CUTS = [["s", 0.10], ["a", 0.20], ["b", 0.50], ["c", 0.75]]; // f = the rest
+    function computeTierMap(sm) {
+      var order = Object.keys(sm)
+        .filter(function (t) { return sm[t].pct !== null; })
+        .sort(function (a, b) { return sm[b].pct - sm[a].pct; });
+      var n = order.length;
+      var tiers = {};
+      if (!n) return tiers;
+      var cuts = TIER_CUTS.map(function (c) { return Math.max(1, Math.round(c[1] * n)); });
+      for (var k = 0; k < cuts.length; k++) {
+        var j = Math.min(cuts[k], n) - 1;              // last stock inside the band
+        var boundary = sm[order[j]].pct;
+        while (j + 1 < n && sm[order[j + 1]].pct === boundary) j++; // ties round up
+        cuts[k] = j + 1;
+        if (k > 0 && cuts[k] < cuts[k - 1]) cuts[k] = cuts[k - 1];
+      }
+      var ci = 0;
+      for (var i = 0; i < n; i++) {
+        while (ci < cuts.length && i >= cuts[ci]) ci++;
+        tiers[order[i]] = ci < TIER_CUTS.length ? TIER_CUTS[ci][0] : "f";
+      }
+      return tiers;
     }
 
     // ---- Value + format helpers (cell colors are percentile-based; see colorFromPts) ----
@@ -228,16 +250,17 @@
       if (!isFinite(n)) return "∞"; // no debt
       return n.toFixed(2) + "x";
     }
-    function scoreColor(pct) {
-      if (pct === null) return "var(--color-border)";
-      if (pct >= 80) return "var(--color-positive)";
-      if (pct >= 50) return "var(--color-warning)";
-      return "var(--color-negative)";
-    }
+    // The score bar takes its color from the stock's tier (tiers are ranks,
+    // so the same score can be a different color in a different universe).
+    var TIER_COLOR = {
+      s: "var(--color-tier-s)", a: "var(--color-tier-a)", b: "var(--color-tier-b)",
+      c: "var(--color-tier-c)", f: "var(--color-negative)", none: "var(--color-border)"
+    };
 
     // ---- Build a renderable row model ----
     function rows() {
       var sm = computeScoreMap();
+      var tiers = computeTierMap(sm);
       return universe().map(function (s) {
         var t = s[0];
         var d = data[t] || {};
@@ -245,7 +268,7 @@
         return {
           ticker: t, name: s[1], d: d, parts: sc.parts || {},
           score: sc.pct, passes: sc.passes, total: sc.total,
-          verdict: verdictOf(sc.pct),
+          tier: sc.pct === null ? "none" : tiers[t],
           revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
           peFwd: d.peFwd, pegFwd: pegDisplay(d), cash: d.cash, debt: d.debt,
           cashDebt: cashDebtRatio(d),
@@ -256,14 +279,14 @@
       });
     }
 
-    var VERDICT_RANK = { pass: 3, watch: 2, fail: 1, none: 0 };
+    var TIER_RANK = { s: 5, a: 4, b: 3, c: 2, f: 1, none: 0 };
 
     function sortRows(rs) {
       var k = sortKey, dir = sortDir;
       return rs.slice().sort(function (a, b) {
         var av, bv;
         if (k === "ticker") { return a.ticker.localeCompare(b.ticker) * dir; }
-        if (k === "verdict") { av = VERDICT_RANK[a.verdict]; bv = VERDICT_RANK[b.verdict]; }
+        if (k === "tier") { av = TIER_RANK[a.tier]; bv = TIER_RANK[b.tier]; }
         else if (k === "factors") { av = a.total ? a.passes / a.total : -1; bv = b.total ? b.passes / b.total : -1; }
         else { av = a[k]; bv = b[k]; }
         // For valuation columns a negative P/E or PEG is "worst" (unprofitable),
@@ -287,17 +310,15 @@
     function render() {
       var rs = rows();
 
-      // verdict counts
-      var counts = { all: rs.length, pass: 0, watch: 0, fail: 0 };
-      rs.forEach(function (r) { if (counts[r.verdict] !== undefined) counts[r.verdict]++; });
+      // tier counts
+      var counts = { all: rs.length, s: 0, a: 0, b: 0, c: 0, f: 0 };
+      rs.forEach(function (r) { if (counts[r.tier] !== undefined) counts[r.tier]++; });
       $("cnt-all").textContent = counts.all;
-      $("cnt-pass").textContent = counts.pass;
-      $("cnt-watch").textContent = counts.watch;
-      $("cnt-fail").textContent = counts.fail;
+      ["s", "a", "b", "c", "f"].forEach(function (t) { $("cnt-" + t).textContent = counts[t]; });
 
       // filter
       var view = rs.filter(function (r) {
-        if (filter !== "all" && r.verdict !== filter) return false;
+        if (filter !== "all" && r.tier !== filter) return false;
         if (query) {
           var q = query.toLowerCase();
           if (r.ticker.toLowerCase().indexOf(q) === -1 && r.name.toLowerCase().indexOf(q) === -1) return false;
@@ -315,8 +336,9 @@
       if (loaded === 0) {
         $("summary").innerHTML = feedDone ? "No data" : "Loading the " + UNIVERSES[universeMode].label + "&hellip;";
       } else {
-        $("summary").innerHTML = "<b>" + counts.pass + "</b> pass &middot; <b>" + counts.watch +
-          "</b> watch &middot; <b>" + counts.fail + "</b> fail &middot; " + scored + "/" + loaded + " scored";
+        $("summary").innerHTML = "<b>" + counts.s + "</b> S &middot; <b>" + counts.a + "</b> A &middot; <b>" +
+          counts.b + "</b> B &middot; <b>" + counts.c + "</b> C &middot; <b>" + counts.f + "</b> F &middot; " +
+          scored + "/" + loaded + " scored";
       }
       $("asOf").textContent = meta.updated ? "as of " + new Date(meta.updated).toLocaleString() : "no data loaded";
 
@@ -438,22 +460,24 @@
       }
     }
 
+    var TIER_LABEL = { s: "S", a: "A", b: "B", c: "C", f: "F", none: "NO DATA" };
+
     function rowHtml(r) {
       var d = r.d;
-      var verdictLabel = { pass: "✓ PASS", watch: "WATCH", fail: "✕ FAIL", none: "NO DATA" }[r.verdict];
+      var tierLabel = TIER_LABEL[r.tier];
       var scoreCell;
       if (r.score === null) {
         scoreCell = '<span class="muted">—</span>';
       } else {
         scoreCell = '<span class="score-bar-wrap"><span class="score-val">' + r.score + '</span>' +
           '<span class="score-track"><span class="score-fill" style="width:' + r.score + '%;background:' +
-          scoreColor(r.score) + '"></span></span></span>';
+          TIER_COLOR[r.tier] + '"></span></span></span>';
       }
       var factorsCell = r.total ? '<span class="factors">' + r.passes + "/" + r.total + "</span>" : '<span class="muted">—</span>';
 
       return '<tr data-ticker="' + r.ticker + '">' +
         '<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>' +
-        '<td class="left group-start"><span class="verdict v-' + r.verdict + '">' + verdictLabel + '</span></td>' +
+        '<td class="left group-start"><span class="verdict v-' + r.tier + '">' + tierLabel + '</span></td>' +
         '<td>' + scoreCell + '</td>' +
         '<td>' + factorsCell + '</td>' +
         '<td class="grp-snapshot group-start">' + fmtMoney(r.marketCap) + '</td>' +
@@ -520,12 +544,13 @@
       var d = data[ticker];
       if (!d || !Object.keys(d).length) return;
       var nm = (data[ticker] && data[ticker].name) || ticker;
-      var sc = computeScoreMap()[ticker] || { pct: null, parts: {}, pctiles: {}, total: 0 };
-      var verdict = verdictOf(sc.pct);
-      var vlabel = { pass: "PASS", watch: "WATCH", fail: "FAIL", none: "NO DATA" }[verdict];
+      var sm = computeScoreMap();
+      var sc = sm[ticker] || { pct: null, parts: {}, pctiles: {}, total: 0 };
+      var tier = sc.pct === null ? "none" : computeTierMap(sm)[ticker];
+      var tlabel = tier === "none" ? "NO DATA" : "Tier " + TIER_LABEL[tier];
 
       $("stockTitle").textContent = ticker;
-      $("stockSub").innerHTML = nm + ' &middot; <span class="verdict v-' + verdict + '">' + vlabel +
+      $("stockSub").innerHTML = nm + ' &middot; <span class="verdict v-' + tier + '">' + tlabel +
         '</span> &middot; Score ' + (sc.pct === null ? "—" : sc.pct) + "/100";
 
       $("stockRows").innerHTML = POPUP_METRICS.filter(function (m) { return m.scored; }).map(function (m) {
@@ -554,7 +579,7 @@
 
     // ---- Events ----
     function bind() {
-      // verdict filter chips
+      // tier filter chips
       document.querySelectorAll(".chip").forEach(function (c) {
         c.addEventListener("click", function () {
           document.querySelectorAll(".chip").forEach(function (x) { x.classList.remove("active"); });
