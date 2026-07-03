@@ -201,6 +201,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.25.0 — Educational rewrite (first-position investor) + technicals-for-indices doctrine | 2026-07-02 | Complete |
 | v3.26.0 — Screener: Daily Change % column + snapshot-first column reorder | 2026-07-02 | Complete |
 | v3.27.0 — SEO/discoverability pass (FAQ schema, sitemap.xml, canonicals, meta review) | 2026-07-03 | Complete |
+| Google Search Console setup (owner-only: verify `azqato.github.io/stocks/` property, submit sitemap.xml, optional root robots.txt Sitemap line; walkthrough in PATCHNOTES v3.27.0) | Paused 2026-07-03 | Outstanding |
 | v3.28.0 — Pipeline hardening (pin yfinance, remove legacy FMP secret; data files stay in git intentionally as score history) | After v3.27 | Planned |
 | v3.29.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.28 | Planned |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
