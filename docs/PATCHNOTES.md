@@ -2,6 +2,12 @@
 
 ---
 
+## v3.27.3 — 2026-07-03 — Roadmap reordered (owner priority)
+
+**Docs only. New queue order: v3.28.0 Growth/Dividend screener universes (VUG/VIG), v3.29.0 pipeline hardening, v4.0.0 score history sparklines, v4.1.0 deeper index fund coverage, v4.2.0 additional historical illustrative examples, v4.3.0 additional philosophy sections, v4.4.0 conference call research guide, then the outstanding owner-only Search Console setup. Email/RSS changelog removed from the roadmap entirely. Sub-items renumbered as MINOR versions (v4.1.0-v4.4.0 rather than v4.0.x patches) per this file's own semver rules: new pages and sections are MINOR bumps, PATCH is reserved for fixes.**
+
+---
+
 ## v3.27.2 — 2026-07-03 — Roadmap: backtesting removed
 
 **Docs only. All backtesting items removed from the roadmap by owner decision: the standalone "Historical screener performance backtest" milestone, the scoring-backtest half of v4.0.0, and the Future-list entry. The Explicitly Deferred section records the decision.**
