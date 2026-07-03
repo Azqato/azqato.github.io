@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.27.5
+**Version:** 3.27.6
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -199,7 +199,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.25.0 — Educational rewrite (first-position investor) + technicals-for-indices doctrine | 2026-07-02 | Complete |
 | v3.26.0 — Screener: Daily Change % column + snapshot-first column reorder | 2026-07-02 | Complete |
 | v3.27.0 — SEO/discoverability pass (FAQ schema, sitemap.xml, canonicals, meta review) | 2026-07-03 | Complete |
-| Google Search Console setup (owner-only: verify `azqato.github.io/stocks/` property, submit sitemap.xml, optional root robots.txt Sitemap line; walkthrough in PATCHNOTES v3.27.0) | Next | Outstanding |
+| Google Search Console setup — property verified 2026-07-03 (meta tag, v3.27.5), sitemap.xml submitted; awaiting first Google fetch (new-property "Couldn't fetch" is normal for up to ~48h; sitemap confirmed serving HTTP 200 application/xml) | 2026-07-03 | Complete (pending Google fetch) |
 | v3.28.0 — Screener: Growth and Dividend universes. Two new selectable datasets alongside the Nasdaq 100 and S&P 500: Growth = top 100 holdings of VUG (Vanguard Growth ETF), Dividend = top 100 holdings of VIG (Vanguard Dividend Appreciation ETF). Both ship in a single combined feed file (`data/screener_gd.json`) refreshed on trading days 30 minutes after the S&P 500 feed (Mon-Fri 24:00 UTC); constituents auto-synced from the ETFs' published holdings. Includes pinning the yfinance version across all data workflows (folded in from pipeline hardening, since this release touches every workflow anyway) | Next dev item | Planned |
 | v3.29.0 — Pipeline cleanup (delete legacy FMP_API_KEY secret from repo settings, owner step; reclassify data-files-in-git from tech debt to intentional score-history design) | After v3.28 | Planned |
 | v4.0.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.29 | Planned |

@@ -2,6 +2,12 @@
 
 ---
 
+## v3.27.6 — 2026-07-03 — Search Console verified; sitemap submitted
+
+**Docs only. The Search Console property for azqato.github.io/stocks/ is verified and sitemap.xml is submitted. Google shows "Couldn't fetch" pending its first crawl (normal for a new property; the sitemap serves HTTP 200 with application/xml). Roadmap item marked complete pending Google's fetch.**
+
+---
+
 ## v3.27.5 — 2026-07-03 — Google Search Console verification tag
 
 **The owner's google-site-verification meta tag added to the head of all 8 pages (after the canonical link), unblocking Search Console property verification and sitemap submission for the outstanding roadmap item.**
