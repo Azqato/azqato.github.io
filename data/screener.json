@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03T00:08:14.338833Z",
+  "updated": "2026-07-03T05:45:16.924907Z",
   "source": "yahoo",
   "stocks": {
     "ADBE": {
@@ -9,14 +9,16 @@
       "marketCap": 87338696704.0,
       "cash": 5625999872.0,
       "debt": 7077000192.0,
+      "prevClose": 210.98,
+      "changePct": 4.142572755711438,
       "revTTM": 12.7,
       "epsTTM": 7.9,
       "peFwd": 8.994696,
       "epsFwd": 16.66,
       "revFwd": 11.560000500000001,
       "pegFwd": 0.56,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AMD": {
       "t": "AMD",
@@ -25,14 +27,16 @@
       "marketCap": 844357632000.0,
       "cash": 12346999808.0,
       "debt": 3871000064.0,
+      "prevClose": 540.88,
+      "changePct": -4.263422570625641,
       "revTTM": 37.8,
       "epsTTM": 91.2,
       "peFwd": 70.12085,
       "epsFwd": 77.089995,
       "revFwd": 42.76,
       "pegFwd": 1.3,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ABNB": {
       "t": "ABNB",
@@ -41,14 +45,16 @@
       "marketCap": 88390680576.0,
       "cash": 12005000192.0,
       "debt": 2534000128.0,
+      "prevClose": 147.31,
+      "changePct": 1.0997216753784622,
       "revTTM": 17.9,
       "epsTTM": 6.0,
       "peFwd": 29.487642,
       "epsFwd": 26.209998000000002,
       "revFwd": 14.09,
       "pegFwd": 1.32,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ALNY": {
       "t": "ALNY",
@@ -57,14 +63,16 @@
       "marketCap": 41760063488.0,
       "cash": 3009222912.0,
       "debt": 2970230016.0,
+      "prevClose": 301.67,
+      "changePct": 3.682832233897959,
       "revTTM": 96.39999999999999,
       "epsTTM": null,
       "peFwd": 33.20167,
       "epsFwd": 85.45,
       "revFwd": 51.11,
       "pegFwd": 0.52,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "GOOGL": {
       "t": "GOOGL",
@@ -73,14 +81,16 @@
       "marketCap": 4391827931136.0,
       "cash": 126839996416.0,
       "debt": 95875997696.0,
+      "prevClose": 361.21,
+      "changePct": -0.35990144237423305,
       "revTTM": 21.8,
       "epsTTM": 82.0,
       "peFwd": 25.304754,
       "epsFwd": 31.59,
       "revFwd": 21.139999,
       "pegFwd": 1.41,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AMZN": {
       "t": "AMZN",
@@ -89,14 +99,16 @@
       "marketCap": 2610427854848.0,
       "cash": 143088992256.0,
       "debt": 235540004864.0,
+      "prevClose": 241.7,
+      "changePct": 0.40132395531651266,
       "revTTM": 16.6,
       "epsTTM": 74.8,
       "peFwd": 27.913605,
       "epsFwd": 20.86,
       "revFwd": 14.860000000000001,
       "pegFwd": 1.83,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AEP": {
       "t": "AEP",
@@ -105,14 +117,16 @@
       "marketCap": 75363983360.0,
       "cash": 516000000.0,
       "debt": 51808002048.0,
+      "prevClose": 135.05,
+      "changePct": 2.562014068863361,
       "revTTM": 10.2,
       "epsTTM": 6.7,
       "peFwd": 21.79516,
       "epsFwd": 6.45,
       "revFwd": 7.66,
       "pegFwd": 2.33,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AMGN": {
       "t": "AMGN",
@@ -121,14 +135,16 @@
       "marketCap": 201931849728.0,
       "cash": 12037999616.0,
       "debt": 57322999808.0,
+      "prevClose": 361.33,
+      "changePct": 3.5480032103617276,
       "revTTM": 5.800000000000001,
       "epsTTM": 4.3999999999999995,
       "peFwd": 16.711084,
       "epsFwd": 2.52,
       "revFwd": 2.75,
       "pegFwd": 1.98,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ADI": {
       "t": "ADI",
@@ -137,14 +153,16 @@
       "marketCap": 183709745152.0,
       "cash": 3439308032.0,
       "debt": 8708730880.0,
+      "prevClose": 388.98,
+      "changePct": -3.0387166435292268,
       "revTTM": 37.2,
       "epsTTM": 110.5,
       "peFwd": 30.562634,
       "epsFwd": 58.419997,
       "revFwd": 33.720002,
       "pegFwd": 0.87,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AAPL": {
       "t": "AAPL",
@@ -153,14 +171,16 @@
       "marketCap": 4532958920704.0,
       "cash": 68507000832.0,
       "debt": 84710998016.0,
+      "prevClose": 294.38,
+      "changePct": 4.840682111556482,
       "revTTM": 16.6,
       "epsTTM": 21.8,
       "peFwd": 35.253628,
       "epsFwd": 17.419999999999998,
       "revFwd": 14.89,
       "pegFwd": 2.34,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AMAT": {
       "t": "AMAT",
@@ -169,14 +189,16 @@
       "marketCap": 478789271552.0,
       "cash": 8240999936.0,
       "debt": 7267999744.0,
+      "prevClose": 650.91,
+      "changePct": -7.354319337542825,
       "revTTM": 11.4,
       "epsTTM": 33.5,
       "peFwd": 49.271114,
       "epsFwd": 29.930001,
       "revFwd": 17.7,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "APP": {
       "t": "APP",
@@ -185,14 +207,16 @@
       "marketCap": 177060282368.0,
       "cash": 2758671104.0,
       "debt": 3849840128.0,
+      "prevClose": 564.61,
+      "changePct": -6.65060838454864,
       "revTTM": 59.0,
       "epsTTM": 113.1,
       "peFwd": 31.808086,
       "epsFwd": 64.9,
       "revFwd": 49.54,
       "pegFwd": 1.41,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ARM": {
       "t": "ARM",
@@ -201,14 +225,16 @@
       "marketCap": 336743890944.0,
       "cash": 3600999936.0,
       "debt": 491000000.0,
+      "prevClose": 337.47,
+      "changePct": -6.575399294752138,
       "revTTM": 20.1,
       "epsTTM": 47.9,
       "peFwd": 145.04701,
       "epsFwd": 22.799999,
       "revFwd": 21.48,
       "pegFwd": 3.08,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ASML": {
       "t": "ASML",
@@ -217,14 +243,16 @@
       "marketCap": 681927180288.0,
       "cash": 8376300032.0,
       "debt": 2705600000.0,
+      "prevClose": 1843.04,
+      "changePct": -3.999913186908588,
       "revTTM": 13.200000000000001,
       "epsTTM": 19.2,
       "peFwd": 55.603725,
       "epsFwd": 28.77,
       "revFwd": 20.23,
       "pegFwd": 2.97,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ALAB": {
       "t": "ALAB",
@@ -233,14 +261,16 @@
       "marketCap": 69663612928.0,
       "cash": 1184473984.0,
       "debt": 41850000.0,
+      "prevClose": 430.86,
+      "changePct": -5.672376177876803,
       "revTTM": 93.4,
       "epsTTM": 144.4,
       "peFwd": 135.0134,
       "epsFwd": 63.6,
       "revFwd": 81.66,
       "pegFwd": 2.1228522012578614,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ADSK": {
       "t": "ADSK",
@@ -249,14 +279,16 @@
       "marketCap": 43808415744.0,
       "cash": 2924000000.0,
       "debt": 2724000000.0,
+      "prevClose": 199.76,
+      "changePct": 3.8646375650780884,
       "revTTM": 18.4,
       "epsTTM": 231.4,
       "peFwd": 16.447674,
       "epsFwd": 20.94,
       "revFwd": 13.76,
       "pegFwd": 0.75,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ADP": {
       "t": "ADP",
@@ -265,14 +297,16 @@
       "marketCap": 96843620352.0,
       "cash": 3228400128.0,
       "debt": 4398000128.0,
+      "prevClose": 235.73,
+      "changePct": 2.774360497178985,
       "revTTM": 7.000000000000001,
       "epsTTM": 10.5,
       "peFwd": 21.878141,
       "epsFwd": 10.6300004,
       "revFwd": 6.15,
       "pegFwd": 2.09,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AXON": {
       "t": "AXON",
@@ -281,14 +315,16 @@
       "marketCap": 48122662912.0,
       "cash": 736972992.0,
       "debt": 1840359040.0,
+      "prevClose": 593.96,
+      "changePct": 0.5185534379419376,
       "revTTM": 33.7,
       "epsTTM": 89.8,
       "peFwd": 77.65031,
       "epsFwd": 12.25,
       "revFwd": 31.540000000000003,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "BKR": {
       "t": "BKR",
@@ -297,14 +333,16 @@
       "marketCap": 52361383936.0,
       "cash": 15934000128.0,
       "debt": 16163999744.0,
+      "prevClose": 53.82,
+      "changePct": -1.9323671497584516,
       "revTTM": 2.5,
       "epsTTM": 132.5,
       "peFwd": 22.907688,
       "epsFwd": -11.3800004,
       "revFwd": -1.9900000000000002,
       "pegFwd": 2.23,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "BKNG": {
       "t": "BKNG",
@@ -313,14 +351,16 @@
       "marketCap": 143011561472.0,
       "cash": 16024000512.0,
       "debt": 19175999488.0,
+      "prevClose": 182.64,
+      "changePct": 1.0512483574244502,
       "revTTM": 16.2,
       "epsTTM": 240.0,
       "peFwd": 17.673286,
       "epsFwd": 14.479999,
       "revFwd": 9.060001,
       "pegFwd": 0.77,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "AVGO": {
       "t": "AVGO",
@@ -329,14 +369,16 @@
       "marketCap": 1714869895168.0,
       "cash": 19627999232.0,
       "debt": 64907001856.0,
+      "prevClose": 369.34,
+      "changePct": -2.4069962636053432,
       "revTTM": 47.9,
       "epsTTM": 85.39999999999999,
       "peFwd": 31.00992,
       "epsFwd": 70.44,
       "revFwd": 65.98000499999999,
       "pegFwd": 0.69,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CDNS": {
       "t": "CDNS",
@@ -345,14 +387,16 @@
       "marketCap": 102917988352.0,
       "cash": 1546153984.0,
       "debt": 3083354112.0,
+      "prevClose": 377.73,
+      "changePct": -1.2151536812008645,
       "revTTM": 18.7,
       "epsTTM": 23.0,
       "peFwd": 46.881363,
       "epsFwd": 10.83,
       "revFwd": 17.19,
       "pegFwd": 3.56,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CTAS": {
       "t": "CTAS",
@@ -361,14 +405,16 @@
       "marketCap": 72572829696.0,
       "cash": 183204000.0,
       "debt": 2918187008.0,
+      "prevClose": 174.23,
+      "changePct": 4.0980313378867095,
       "revTTM": 8.9,
       "epsTTM": 9.700000000000001,
       "peFwd": 37.0291,
       "epsFwd": 11.1099996,
       "revFwd": 8.559999999999999,
       "pegFwd": 2.7,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CSCO": {
       "t": "CSCO",
@@ -377,14 +423,16 @@
       "marketCap": 444160278528.0,
       "cash": 16640000000.0,
       "debt": 33001000960.0,
+      "prevClose": 117.01,
+      "changePct": -3.6919921374241604,
       "revTTM": 12.0,
       "epsTTM": 37.1,
       "peFwd": 26.348341,
       "epsFwd": 12.2600004,
       "revFwd": 11.04,
       "pegFwd": 1.63,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CCEP": {
       "t": "CCEP",
@@ -393,14 +441,16 @@
       "marketCap": 47204462592.0,
       "cash": 972000000.0,
       "debt": 10794000384.0,
+      "prevClose": 106.1,
+      "changePct": 0.4806786050895351,
       "revTTM": 0.2,
       "epsTTM": 68.30000000000001,
       "peFwd": 23.878319,
       "epsFwd": 4.19,
       "revFwd": 2.86,
       "pegFwd": 2.9,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CMCSA": {
       "t": "CMCSA",
@@ -409,14 +459,16 @@
       "marketCap": 84983324672.0,
       "cash": 9468000256.0,
       "debt": 94611996672.0,
+      "prevClose": 23.73,
+      "changePct": 0.25284450063209896,
       "revTTM": 5.3,
       "epsTTM": -32.6,
       "peFwd": 6.7957063,
       "epsFwd": -18.78,
       "revFwd": -1.59,
       "pegFwd": 142.98,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CEG": {
       "t": "CEG",
@@ -425,30 +477,34 @@
       "marketCap": 85436653568.0,
       "cash": 864000000.0,
       "debt": 22466000896.0,
+      "prevClose": 236.5,
+      "changePct": 1.1627906976744207,
       "revTTM": 63.800000000000004,
       "epsTTM": 1091.0,
       "peFwd": 20.421785,
       "epsFwd": 24.759999999999998,
       "revFwd": 35.699999999999996,
       "pegFwd": 3.74,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CPRT": {
       "t": "CPRT",
       "name": "Copart",
       "price": 30.01,
-      "marketCap": 27783602176.0,
+      "marketCap": 28908886016.0,
       "cash": 4199712000.0,
       "debt": 93116000.0,
+      "prevClose": 28.79,
+      "changePct": 4.237582493921499,
       "revTTM": 2.1,
       "epsTTM": 2.3,
       "peFwd": 18.934948,
       "epsFwd": -0.32,
       "revFwd": -0.02,
       "pegFwd": 3.39,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CRWV": {
       "t": "CRWV",
@@ -457,14 +513,16 @@
       "marketCap": 44597649408.0,
       "cash": 2265999872.0,
       "debt": 35147001856.0,
+      "prevClose": 85.685,
+      "changePct": -4.59823773122483,
       "revTTM": 111.60000000000001,
       "epsTTM": null,
       "peFwd": -24.154896,
       "epsFwd": -67.77,
       "revFwd": 146.99,
       "pegFwd": null,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "COST": {
       "t": "COST",
@@ -473,14 +531,16 @@
       "marketCap": 422045483008.0,
       "cash": 11125999616.0,
       "debt": 10227999744.0,
+      "prevClose": 924.67,
+      "changePct": 2.919960634604779,
       "revTTM": 21.5,
       "epsTTM": 45.5,
       "peFwd": 46.29076,
       "epsFwd": 12.989999999999998,
       "revFwd": 9.42,
       "pegFwd": 4.56,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CRWD": {
       "t": "CRWD",
@@ -489,14 +549,16 @@
       "marketCap": 197521932288.0,
       "cash": 4552800768.0,
       "debt": 821342976.0,
+      "prevClose": 193.185,
+      "changePct": 0.411522633744843,
       "revTTM": 25.6,
       "epsTTM": null,
       "peFwd": 157.43468,
       "epsFwd": 32.129999999999995,
       "revFwd": 23.56,
       "pegFwd": 1.57,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "CSX": {
       "t": "CSX",
@@ -505,14 +567,16 @@
       "marketCap": 90844405760.0,
       "cash": 1108999936.0,
       "debt": 19428999168.0,
+      "prevClose": 48.33,
+      "changePct": 1.1587006000413957,
       "revTTM": 1.7000000000000002,
       "epsTTM": 26.5,
       "peFwd": 25.439293,
       "epsFwd": 19.370002,
       "revFwd": 5.2600004,
       "pegFwd": 2.17,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "DDOG": {
       "t": "DDOG",
@@ -521,14 +585,16 @@
       "marketCap": 92677791744.0,
       "cash": 4758617088.0,
       "debt": 1285052032.0,
+      "prevClose": 264.48,
+      "changePct": -1.557773744706592,
       "revTTM": 32.2,
       "epsTTM": 104.0,
       "peFwd": 107.522354,
       "epsFwd": 18.120001,
       "revFwd": 26.860001999999998,
       "pegFwd": 1.62,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "DXCM": {
       "t": "DXCM",
@@ -537,14 +603,16 @@
       "marketCap": 27493449728.0,
       "cash": 2415200000.0,
       "debt": 1384800000.0,
+      "prevClose": 68.86,
+      "changePct": 3.4708103398199297,
       "revTTM": 15.0,
       "epsTTM": 92.2,
       "peFwd": 27.480791,
       "epsFwd": 24.049999,
       "revFwd": 12.0699994,
       "pegFwd": 1.28,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "FANG": {
       "t": "FANG",
@@ -553,14 +621,16 @@
       "marketCap": 48397139968.0,
       "cash": 174000000.0,
       "debt": 13898000384.0,
+      "prevClose": 171.96,
+      "changePct": 0.04652244708069908,
       "revTTM": 4.2,
       "epsTTM": -98.4,
       "peFwd": 8.507498,
       "epsFwd": 51.24999999999999,
       "revFwd": 21.47,
       "pegFwd": 56.78,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "DASH": {
       "t": "DASH",
@@ -569,14 +639,16 @@
       "marketCap": 83662348288.0,
       "cash": 5533000192.0,
       "debt": 3287000064.0,
+      "prevClose": 188.87,
+      "changePct": 1.6625191930957683,
       "revTTM": 33.1,
       "epsTTM": -6.1,
       "peFwd": 34.29938,
       "epsFwd": 19.97,
       "revFwd": 28.27,
       "pegFwd": 4.11,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "EA": {
       "t": "EA",
@@ -585,14 +657,16 @@
       "marketCap": 51456712704.0,
       "cash": 2980000000.0,
       "debt": 1854000000.0,
+      "prevClose": 205.45,
+      "changePct": -0.11681674373326123,
       "revTTM": 11.899999999999999,
       "epsTTM": 85.3,
       "peFwd": 22.98193,
       "epsFwd": 60.080003999999995,
       "revFwd": 2.74,
       "pegFwd": 1.27,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "EXC": {
       "t": "EXC",
@@ -601,14 +675,16 @@
       "marketCap": 48991207424.0,
       "cash": 713000000.0,
       "debt": 51241000960.0,
+      "prevClose": 46.26,
+      "changePct": 3.5019455252918386,
       "revTTM": 7.9,
       "epsTTM": -0.3,
       "peFwd": 16.766525,
       "epsFwd": 3.09,
       "revFwd": 4.62,
       "pegFwd": 3.0,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "FAST": {
       "t": "FAST",
@@ -617,14 +693,16 @@
       "marketCap": 55794503680.0,
       "cash": 308600000.0,
       "debt": 445500000.0,
+      "prevClose": 47.75,
+      "changePct": 1.7801047120418856,
       "revTTM": 12.4,
       "epsTTM": 13.8,
       "peFwd": 39.163544,
       "epsFwd": 13.51,
       "revFwd": 11.29,
       "pegFwd": 3.46,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "FER": {
       "t": "FER",
@@ -633,14 +711,16 @@
       "marketCap": 48466276352.0,
       "cash": 4241999872.0,
       "debt": 10732000256.0,
+      "prevClose": 67.26,
+      "changePct": 0.6839131727623959,
       "revTTM": 5.7,
       "epsTTM": -87.6,
       "peFwd": 59.95255,
       "epsFwd": 19.299999,
       "revFwd": 4.14,
       "pegFwd": 5.21,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "FTNT": {
       "t": "FTNT",
@@ -649,14 +729,16 @@
       "marketCap": 114476310528.0,
       "cash": 3294899968.0,
       "debt": 567200000.0,
+      "prevClose": 158.98,
+      "changePct": -1.7171971317146761,
       "revTTM": 20.1,
       "epsTTM": 28.599999999999998,
       "peFwd": 49.49601,
       "epsFwd": 14.38,
       "revFwd": 14.89,
       "pegFwd": 3.47,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "GEHC": {
       "t": "GEHC",
@@ -665,14 +747,16 @@
       "marketCap": 29824980992.0,
       "cash": 2260999936.0,
       "debt": 10577000448.0,
+      "prevClose": 64.86,
+      "changePct": 1.0869565217391353,
       "revTTM": 7.3999999999999995,
       "epsTTM": -30.9,
       "peFwd": 13.461216,
       "epsFwd": 6.1100002,
       "revFwd": 5.63,
       "pegFwd": 1.81,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "GILD": {
       "t": "GILD",
@@ -681,14 +765,16 @@
       "marketCap": 162980888576.0,
       "cash": 9816999936.0,
       "debt": 22173999104.0,
+      "prevClose": 125.97,
+      "changePct": 4.207350956576983,
       "revTTM": 4.3999999999999995,
       "epsTTM": 54.800000000000004,
       "peFwd": -165.79729,
       "epsFwd": -109.71,
       "revFwd": 3.47,
       "pegFwd": 2.14,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "HON": {
       "t": "HON",
@@ -697,14 +783,16 @@
       "marketCap": 72825749504.0,
       "cash": 12389999616.0,
       "debt": 37751001088.0,
+      "prevClose": 221.75,
+      "changePct": 3.657271702367537,
       "revTTM": 2.4,
       "epsTTM": -41.9,
       "peFwd": 27.895632,
       "epsFwd": -57.87,
       "revFwd": -46.050000000000004,
       "pegFwd": 6.84,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "IDXX": {
       "t": "IDXX",
@@ -713,14 +801,16 @@
       "marketCap": 44000935936.0,
       "cash": 200528000.0,
       "debt": 1105451008.0,
+      "prevClose": 537.58,
+      "changePct": 3.7613006436251206,
       "revTTM": 14.299999999999999,
       "epsTTM": 17.2,
       "peFwd": 38.13983,
       "epsFwd": 11.81,
       "revFwd": 9.35,
       "pegFwd": 3.37,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "INTC": {
       "t": "INTC",
@@ -729,14 +819,16 @@
       "marketCap": 604879060992.0,
       "cash": 32789000192.0,
       "debt": 45030998016.0,
+      "prevClose": 127.02,
+      "changePct": -5.2511415525114185,
       "revTTM": 7.199999999999999,
       "epsTTM": null,
       "peFwd": 110.32377,
       "epsFwd": 159.72999000000002,
       "revFwd": 11.07,
       "pegFwd": 1.36,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "INTU": {
       "t": "INTU",
@@ -745,14 +837,16 @@
       "marketCap": 75318411264.0,
       "cash": 6780000256.0,
       "debt": 6899999744.0,
+      "prevClose": 267.08,
+      "changePct": 3.0964505017223365,
       "revTTM": 10.4,
       "epsTTM": 10.7,
       "peFwd": 11.553269,
       "epsFwd": 18.280001000000002,
       "revFwd": 13.469999999999999,
       "pegFwd": 0.68,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ISRG": {
       "t": "ISRG",
@@ -761,14 +855,16 @@
       "marketCap": 150876913664.0,
       "cash": 4517300224.0,
       "debt": 0.0,
+      "prevClose": 402.38,
+      "changePct": 5.872558278244444,
       "revTTM": 23.0,
       "epsTTM": 18.8,
       "peFwd": 40.887135,
       "epsFwd": 16.68,
       "revFwd": 16.299999,
       "pegFwd": 2.08,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "KDP": {
       "t": "KDP",
@@ -777,14 +873,16 @@
       "marketCap": 45306630144.0,
       "cash": 898000000.0,
       "debt": 28891000832.0,
+      "prevClose": 33.37,
+      "changePct": -0.2097692538208018,
       "revTTM": 9.4,
       "epsTTM": -47.699999999999996,
       "peFwd": 14.55935,
       "epsFwd": 11.57,
       "revFwd": 58.07,
       "pegFwd": 1.12,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "KLAC": {
       "t": "KLAC",
@@ -793,14 +891,16 @@
       "marketCap": 307693125632.0,
       "cash": 4957938176.0,
       "debt": 6145359872.0,
+      "prevClose": 266.19,
+      "changePct": -11.510575153086133,
       "revTTM": 11.5,
       "epsTTM": 11.799999999999999,
       "peFwd": 63.403408,
       "epsFwd": 11.63,
       "revFwd": 11.18,
       "pegFwd": 3.12,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "KHC": {
       "t": "KHC",
@@ -809,14 +909,16 @@
       "marketCap": 30083180544.0,
       "cash": 4091000064.0,
       "debt": 21133000704.0,
+      "prevClose": 25.01,
+      "changePct": 1.439424230307873,
       "revTTM": 0.8,
       "epsTTM": 13.600000000000001,
       "peFwd": 12.345079,
       "epsFwd": -20.959999,
       "revFwd": -2.0299999,
       "pegFwd": 0.99,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "LRCX": {
       "t": "LRCX",
@@ -825,14 +927,16 @@
       "marketCap": 439463149568.0,
       "cash": 4750936064.0,
       "debt": 3734479104.0,
+      "prevClose": 391.26,
+      "changePct": -10.185043193784171,
       "revTTM": 23.799999999999997,
       "epsTTM": 40.8,
       "peFwd": 61.869263,
       "epsFwd": 37.2,
       "revFwd": 25.8,
       "pegFwd": 2.5,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "LIN": {
       "t": "LIN",
@@ -841,14 +945,16 @@
       "marketCap": 252737536000.0,
       "cash": 3959000064.0,
       "debt": 26317000704.0,
+      "prevClose": 533.55,
+      "changePct": 2.453378315059518,
       "revTTM": 8.200000000000001,
       "epsTTM": 13.4,
       "peFwd": 30.453482,
       "epsFwd": 9.0500005,
       "revFwd": 7.6899999999999995,
       "pegFwd": 2.26,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "LITE": {
       "t": "LITE",
@@ -857,14 +963,16 @@
       "marketCap": 56663298048.0,
       "cash": 3172300032.0,
       "debt": 3313700096.0,
+      "prevClose": 801.16,
+      "changePct": -9.091816865544954,
       "revTTM": 90.10000000000001,
       "epsTTM": null,
       "peFwd": 88.549324,
       "epsFwd": 299.26999,
       "revFwd": 81.93,
       "pegFwd": 0.63,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MAR": {
       "t": "MAR",
@@ -873,30 +981,34 @@
       "marketCap": 98342674432.0,
       "cash": 454000000.0,
       "debt": 17405999104.0,
+      "prevClose": 368.32,
+      "changePct": 1.2570590790616842,
       "revTTM": 12.6,
       "epsTTM": 1.7000000000000002,
       "peFwd": 32.151974,
       "epsFwd": 15.76,
       "revFwd": 6.529999999999999,
       "pegFwd": 2.2,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MRVL": {
       "t": "MRVL",
       "name": "Marvell",
       "price": 245.29,
-      "marketCap": 214579691520.0,
+      "marketCap": 214764421120.0,
       "cash": 3843599872.0,
       "debt": 5277199872.0,
+      "prevClose": 272.05,
+      "changePct": -9.8364271273663,
       "revTTM": 27.6,
       "epsTTM": -80.4,
       "peFwd": 60.575447,
       "epsFwd": 42.580003,
       "revFwd": 40.67,
       "pegFwd": 1.68,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MELI": {
       "t": "MELI",
@@ -905,14 +1017,16 @@
       "marketCap": 89397387264.0,
       "cash": 5664000000.0,
       "debt": 12376000512.0,
+      "prevClose": 1742.19,
+      "changePct": 1.2151372697581708,
       "revTTM": 49.0,
       "epsTTM": -15.6,
       "peFwd": 43.616096,
       "epsFwd": 1.4099999,
       "revFwd": 40.12,
       "pegFwd": 1.05,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "META": {
       "t": "META",
@@ -921,14 +1035,16 @@
       "marketCap": 1479647035392.0,
       "cash": 81180000256.0,
       "debt": 86769000448.0,
+      "prevClose": 612.91,
+      "changePct": -4.896314303894533,
       "revTTM": 33.1,
       "epsTTM": 62.4,
       "peFwd": 18.094471,
       "epsFwd": 39.89,
       "revFwd": 25.82,
       "pegFwd": 0.81,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MCHP": {
       "t": "MCHP",
@@ -937,14 +1053,16 @@
       "marketCap": 45881589760.0,
       "cash": 240300000.0,
       "debt": 5642200064.0,
+      "prevClose": 88.69,
+      "changePct": -4.566467470966284,
       "revTTM": 35.099999999999994,
       "epsTTM": null,
       "peFwd": 26.770153,
       "epsFwd": 92.78999999999999,
       "revFwd": 31.129997999999997,
       "pegFwd": 0.33,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MU": {
       "t": "MU",
@@ -953,14 +1071,16 @@
       "marketCap": 1101790838784.0,
       "cash": 26022000640.0,
       "debt": 6376000000.0,
+      "prevClose": 1032.28,
+      "changePct": -5.494633239043678,
       "revTTM": 345.7,
       "epsTTM": 1368.5,
       "peFwd": 13.30465,
       "epsFwd": 784.5,
       "revFwd": 246.69,
       "pegFwd": 0.15,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MSFT": {
       "t": "MSFT",
@@ -969,14 +1089,16 @@
       "marketCap": 2900729528320.0,
       "cash": 78227996672.0,
       "debt": 125431996416.0,
+      "prevClose": 384.28,
+      "changePct": 1.6160091599875193,
       "revTTM": 18.3,
       "epsTTM": 23.400000000000002,
       "peFwd": 23.217028,
       "epsFwd": 23.31,
       "revFwd": 16.96,
       "pegFwd": 1.15,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MSTR": {
       "t": "MSTR",
@@ -985,14 +1107,16 @@
       "marketCap": 36052332544.0,
       "cash": 2207218944.0,
       "debt": 8257384960.0,
+      "prevClose": 93.39,
+      "changePct": 7.902345004818501,
       "revTTM": 11.899999999999999,
       "epsTTM": null,
       "peFwd": 4.64672315407228,
       "epsFwd": 242.39000000000001,
       "revFwd": 4.36,
       "pegFwd": 2.85,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MDLZ": {
       "t": "MDLZ",
@@ -1001,14 +1125,16 @@
       "marketCap": 78187110400.0,
       "cash": 1524000000.0,
       "debt": 21621999616.0,
+      "prevClose": 59.35,
+      "changePct": 2.628475147430498,
       "revTTM": 8.200000000000001,
       "epsTTM": 41.3,
       "peFwd": 19.956228,
       "epsFwd": 4.5300003,
       "revFwd": 3.5999999999999996,
       "pegFwd": 0.95,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MPWR": {
       "t": "MPWR",
@@ -1017,14 +1143,16 @@
       "marketCap": 63287304192.0,
       "cash": 1367108992.0,
       "debt": 19968000.0,
+      "prevClose": 1331.73,
+      "changePct": -3.2716842002508018,
       "revTTM": 26.1,
       "epsTTM": 39.5,
       "peFwd": 53.624065,
       "epsFwd": 35.18,
       "revFwd": 32.569999,
       "pegFwd": 1.82,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "MNST": {
       "t": "MNST",
@@ -1033,14 +1161,16 @@
       "marketCap": 95453593600.0,
       "cash": 2984993024.0,
       "debt": 94469000.0,
+      "prevClose": 97.35,
+      "changePct": 0.2568053415511029,
       "revTTM": 26.900000000000002,
       "epsTTM": 28.9,
       "peFwd": 42.59572,
       "epsFwd": 16.59,
       "revFwd": 15.17,
       "pegFwd": 2.79,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "NBIS": {
       "t": "NBIS",
@@ -1049,14 +1179,16 @@
       "marketCap": 54745526272.0,
       "cash": 9373200384.0,
       "debt": 9590400000.0,
+      "prevClose": 229.18,
+      "changePct": -5.916746662012395,
       "revTTM": 683.9000000000001,
       "epsTTM": null,
       "peFwd": -81.67424,
       "epsFwd": null,
       "revFwd": 547.09,
       "pegFwd": 0.63,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "NFLX": {
       "t": "NFLX",
@@ -1065,14 +1197,16 @@
       "marketCap": 326968508416.0,
       "cash": 12288449536.0,
       "debt": 16742200320.0,
+      "prevClose": 74.19,
+      "changePct": 4.663701307453838,
       "revTTM": 16.2,
       "epsTTM": 86.4,
       "peFwd": 21.644901,
       "epsFwd": 41.990003,
       "revFwd": 13.77,
       "pegFwd": 1.4,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "NVDA": {
       "t": "NVDA",
@@ -1081,14 +1215,16 @@
       "marketCap": 4718977351680.0,
       "cash": 53171998720.0,
       "debt": 12814000128.0,
+      "prevClose": 197.58,
+      "changePct": -1.3918412794817314,
       "revTTM": 85.2,
       "epsTTM": 214.5,
       "peFwd": 21.713545,
       "epsFwd": 88.11,
       "revFwd": 81.83,
       "pegFwd": 0.61,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "NXPI": {
       "t": "NXPI",
@@ -1097,14 +1233,16 @@
       "marketCap": 69015486464.0,
       "cash": 3708000000.0,
       "debt": 11724000256.0,
+      "prevClose": 279.18,
+      "changePct": -2.084676552761655,
       "revTTM": 12.2,
       "epsTTM": 130.7,
       "peFwd": 18.464891,
       "epsFwd": 25.35,
       "revFwd": 14.760000000000002,
       "pegFwd": 0.71,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ORLY": {
       "t": "ORLY",
@@ -1113,14 +1251,16 @@
       "marketCap": 74791534592.0,
       "cash": 252632000.0,
       "debt": 8731225088.0,
+      "prevClose": 92.69,
+      "changePct": -2.6324306829215605,
       "revTTM": 10.2,
       "epsTTM": 16.1,
       "peFwd": 27.715675,
       "epsFwd": 9.629999999999999,
       "revFwd": 7.21,
       "pegFwd": 1.97,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ODFL": {
       "t": "ODFL",
@@ -1129,14 +1269,16 @@
       "marketCap": 45264297984.0,
       "cash": 288081984.0,
       "debt": 39996000.0,
+      "prevClose": 217.96,
+      "changePct": -0.14222793173059856,
       "revTTM": -2.9000000000000004,
       "epsTTM": -4.2,
       "peFwd": 39.782127,
       "epsFwd": 12.94,
       "revFwd": 5.4899998,
       "pegFwd": 3.22,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "PCAR": {
       "t": "PCAR",
@@ -1145,14 +1287,16 @@
       "marketCap": 62891204608.0,
       "cash": 8595399680.0,
       "debt": 15047300096.0,
+      "prevClose": 121.24,
+      "changePct": -1.4351699109204863,
       "revTTM": -8.9,
       "epsTTM": 19.7,
       "peFwd": 21.028772,
       "epsFwd": 26.169999999999998,
       "revFwd": 8.36,
       "pegFwd": 1.23,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "PLTR": {
       "t": "PLTR",
@@ -1161,14 +1305,16 @@
       "marketCap": 309972434944.0,
       "cash": 8026413056.0,
       "debt": 211976992.0,
+      "prevClose": 125.73,
+      "changePct": 2.8394178000477277,
       "revTTM": 84.7,
       "epsTTM": 325.0,
       "peFwd": 87.80926,
       "epsFwd": 96.33,
       "revFwd": 72.42,
       "pegFwd": 1.68,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "PANW": {
       "t": "PANW",
@@ -1177,14 +1323,16 @@
       "marketCap": 283668905984.0,
       "cash": 3111000064.0,
       "debt": 2130000000.0,
+      "prevClose": 352.04,
+      "changePct": -1.130553346210661,
       "revTTM": 31.1,
       "epsTTM": null,
       "peFwd": 92.25216,
       "epsFwd": 12.959999999999999,
       "revFwd": 23.87,
       "pegFwd": 5.57,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "PAYX": {
       "t": "PAYX",
@@ -1193,14 +1341,16 @@
       "marketCap": 37818060800.0,
       "cash": 1124499968.0,
       "debt": 4608300032.0,
+      "prevClose": 102.71,
+      "changePct": 3.5439587187226174,
       "revTTM": 12.5,
       "epsTTM": 42.6,
       "peFwd": 17.820995,
       "epsFwd": 8.3100006,
       "revFwd": 5.41,
       "pegFwd": 1.73,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "PYPL": {
       "t": "PYPL",
@@ -1209,14 +1359,16 @@
       "marketCap": 40109338624.0,
       "cash": 9342000128.0,
       "debt": 11669999616.0,
+      "prevClose": 44.07,
+      "changePct": 3.1767642387111383,
       "revTTM": 7.199999999999999,
       "epsTTM": -6.2,
       "peFwd": 8.561718,
       "epsFwd": 0.02,
       "revFwd": 3.5000000000000004,
       "pegFwd": 0.78,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "PDD": {
       "t": "PDD",
@@ -1225,14 +1377,16 @@
       "marketCap": 117273632768.0,
       "cash": 436071006208.0,
       "debt": 5121999872.0,
+      "prevClose": 82.52,
+      "changePct": -0.15753756665050078,
       "revTTM": 11.0,
       "epsTTM": -14.899999999999999,
       "peFwd": 1.2075939,
       "epsFwd": -5.74,
       "revFwd": 11.08,
       "pegFwd": 0.71,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "PEP": {
       "t": "PEP",
@@ -1241,14 +1395,16 @@
       "marketCap": 197140217856.0,
       "cash": 10828000256.0,
       "debt": 52728000512.0,
+      "prevClose": 141.16,
+      "changePct": 2.1677529045055266,
       "revTTM": 8.5,
       "epsTTM": 27.800000000000004,
       "peFwd": 16.687572,
       "epsFwd": 6.17,
       "revFwd": 5.35,
       "pegFwd": 1.46,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "QCOM": {
       "t": "QCOM",
@@ -1257,14 +1413,16 @@
       "marketCap": 185767493632.0,
       "cash": 9799000064.0,
       "debt": 15269999616.0,
+      "prevClose": 181.92,
+      "changePct": -3.1167546174142413,
       "revTTM": -3.5000000000000004,
       "epsTTM": 173.0,
       "peFwd": 16.319656,
       "epsFwd": -10.229999600000001,
       "revFwd": -3.56,
       "pegFwd": 0.58,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "REGN": {
       "t": "REGN",
@@ -1273,14 +1431,16 @@
       "marketCap": 68593037312.0,
       "cash": 8753699840.0,
       "debt": 2706200064.0,
+      "prevClose": 624.72,
+      "changePct": 4.730119093353813,
       "revTTM": 19.0,
       "epsTTM": -7.199999999999999,
       "peFwd": 14.158146,
       "epsFwd": 4.29,
       "revFwd": 10.7200004,
       "pegFwd": 1.08,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "RKLB": {
       "t": "RKLB",
@@ -1289,14 +1449,16 @@
       "marketCap": 62769291264.0,
       "cash": 1383351040.0,
       "debt": 138670000.0,
+      "prevClose": 100.07,
+      "changePct": 0.3897271909663269,
       "revTTM": 63.5,
       "epsTTM": null,
       "peFwd": -744.14813,
       "epsFwd": 32.209998,
       "revFwd": 52.0,
       "pegFwd": -23.103016957653956,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ROP": {
       "t": "ROP",
@@ -1305,14 +1467,16 @@
       "marketCap": 36754104320.0,
       "cash": 382900000.0,
       "debt": 10464000000.0,
+      "prevClose": 354.68,
+      "changePct": 2.6841096199391012,
       "revTTM": 11.3,
       "epsTTM": 59.199999999999996,
       "peFwd": 16.605865,
       "epsFwd": 9.659999599999999,
       "revFwd": 8.129999999999999,
       "pegFwd": 1.38,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "ROST": {
       "t": "ROST",
@@ -1321,14 +1485,16 @@
       "marketCap": 68464304128.0,
       "cash": 4130980096.0,
       "debt": 4723149824.0,
+      "prevClose": 211.9,
+      "changePct": 0.722038697498828,
       "revTTM": 20.599999999999998,
       "epsTTM": 37.4,
       "peFwd": 27.44512,
       "epsFwd": 17.950001,
       "revFwd": 10.5100006,
       "pegFwd": 2.52,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "SNDK": {
       "t": "SNDK",
@@ -1337,30 +1503,34 @@
       "marketCap": 258416623616.0,
       "cash": 3735000064.0,
       "debt": 207000000.0,
+      "prevClose": 2032.22,
+      "changePct": -14.133312338231097,
       "revTTM": 250.99999999999997,
       "epsTTM": null,
       "peFwd": 26.64408,
       "epsFwd": 2090.4,
       "revFwd": 166.64000000000001,
       "pegFwd": 0.012745924225028701,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "STX": {
       "t": "STX",
       "name": "Seagate Technology",
       "price": 820.16,
-      "marketCap": 185562923008.0,
+      "marketCap": 183903649792.0,
       "cash": 1146000000.0,
       "debt": 4177999872.0,
+      "prevClose": 915.19,
+      "changePct": -10.383636184835943,
       "revTTM": 44.1,
       "epsTTM": 108.3,
       "peFwd": 55.08648,
       "epsFwd": 83.809996,
       "revFwd": 32.459998,
       "pegFwd": 0.67,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "SHOP": {
       "t": "SHOP",
@@ -1369,14 +1539,16 @@
       "marketCap": 155017822208.0,
       "cash": 5743000064.0,
       "debt": 179000000.0,
+      "prevClose": 121.63,
+      "changePct": -1.7840993176025721,
       "revTTM": 34.300000000000004,
       "epsTTM": null,
       "peFwd": 65.010826,
       "epsFwd": 28.499999999999996,
       "revFwd": 28.050000000000004,
       "pegFwd": 2.1,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "SBUX": {
       "t": "SBUX",
@@ -1385,14 +1557,16 @@
       "marketCap": 118836510720.0,
       "cash": 1700300032.0,
       "debt": 24408500224.0,
+      "prevClose": 103.39,
+      "changePct": 0.8511461456620628,
       "revTTM": 8.799999999999999,
       "epsTTM": 32.6,
       "peFwd": 43.782223,
       "epsFwd": 11.81,
       "revFwd": 1.16,
       "pegFwd": 1.38,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "SNPS": {
       "t": "SNPS",
@@ -1401,14 +1575,16 @@
       "marketCap": 83707101184.0,
       "cash": 2484438016.0,
       "debt": 10841960448.0,
+      "prevClose": 454.53,
+      "changePct": -3.8215299320176754,
       "revTTM": 41.9,
       "epsTTM": -96.0,
       "peFwd": 29.557169,
       "epsFwd": 14.56,
       "revFwd": 37.21,
       "pegFwd": 2.83,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "TMUS": {
       "t": "TMUS",
@@ -1417,14 +1593,16 @@
       "marketCap": 192112984064.0,
       "cash": 3520000000.0,
       "debt": 122134003712.0,
+      "prevClose": 173.06,
+      "changePct": 2.577140875996764,
       "revTTM": 10.6,
       "epsTTM": -12.0,
       "peFwd": 15.793398,
       "epsFwd": 7.61,
       "revFwd": 7.1100004,
       "pegFwd": 0.66,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "TTWO": {
       "t": "TTWO",
@@ -1433,14 +1611,16 @@
       "marketCap": 47343140864.0,
       "cash": 1989299968.0,
       "debt": 2958299904.0,
+      "prevClose": 250.32,
+      "changePct": 1.865612016618745,
       "revTTM": 6.1,
       "epsTTM": null,
       "peFwd": 37.35466,
       "epsFwd": 213.19,
       "revFwd": 27.87,
       "pegFwd": 3.49,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "TER": {
       "t": "TER",
@@ -1449,14 +1629,16 @@
       "marketCap": 57778143232.0,
       "cash": 245596992.0,
       "debt": 82398000.0,
+      "prevClose": 427.34,
+      "changePct": -13.630832592315256,
       "revTTM": 87.0,
       "epsTTM": 314.8,
       "peFwd": 50.641438,
       "epsFwd": 84.050006,
       "revFwd": 40.96,
       "pegFwd": 1.91,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "TSLA": {
       "t": "TSLA",
@@ -1465,14 +1647,16 @@
       "marketCap": 1477689606144.0,
       "cash": 44743000064.0,
       "debt": 15889999872.0,
+      "prevClose": 425.3,
+      "changePct": -7.488831413120156,
       "revTTM": 15.8,
       "epsTTM": 8.3,
       "peFwd": 190.77013,
       "epsFwd": 24.239999,
       "revFwd": 8.17,
       "pegFwd": 6.16,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "TXN": {
       "t": "TXN",
@@ -1481,14 +1665,16 @@
       "marketCap": 266729979904.0,
       "cash": 5103000064.0,
       "debt": 14049999872.0,
+      "prevClose": 298.41,
+      "changePct": -1.7861331724808305,
       "revTTM": 18.6,
       "epsTTM": 31.3,
       "peFwd": 37.68408,
       "epsFwd": 40.94,
       "revFwd": 18.790000000000003,
       "pegFwd": 1.42,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "TRI": {
       "t": "TRI",
@@ -1497,14 +1683,16 @@
       "marketCap": 38943629312.0,
       "cash": 489000000.0,
       "debt": 2699000064.0,
+      "prevClose": 84.91,
+      "changePct": 5.0641856082911385,
       "revTTM": 9.8,
       "epsTTM": 5.6000000000000005,
       "peFwd": 20.15986,
       "epsFwd": 11.14,
       "revFwd": 8.180001,
       "pegFwd": 1.29,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "VRTX": {
       "t": "VRTX",
@@ -1513,14 +1701,16 @@
       "marketCap": 134019407872.0,
       "cash": 7246700032.0,
       "debt": 1986499968.0,
+      "prevClose": 498.01,
+      "changePct": 6.029999397602448,
       "revTTM": 7.8,
       "epsTTM": 61.4,
       "peFwd": 27.57981,
       "epsFwd": 4.05,
       "revFwd": 8.64,
       "pegFwd": 1.84,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "WMT": {
       "t": "WMT",
@@ -1529,14 +1719,16 @@
       "marketCap": 890031505408.0,
       "cash": 10728999936.0,
       "debt": 75545001984.0,
+      "prevClose": 108.82,
+      "changePct": 2.7752251424370655,
       "revTTM": 7.3,
       "epsTTM": 19.400000000000002,
       "peFwd": 38.514915,
       "epsFwd": 9.99,
       "revFwd": 6.4899996,
       "pegFwd": 4.31,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "WBD": {
       "t": "WBD",
@@ -1545,14 +1737,16 @@
       "marketCap": 66388979712.0,
       "cash": 3296000000.0,
       "debt": 32465999872.0,
+      "prevClose": 26.81,
+      "changePct": -1.2308839985080144,
       "revTTM": -1.0,
       "epsTTM": null,
       "peFwd": -20.75235,
       "epsFwd": -529.89,
       "revFwd": -0.8,
       "pegFwd": 216.92,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "WDC": {
       "t": "WDC",
@@ -1561,14 +1755,16 @@
       "marketCap": 185783681024.0,
       "cash": 3236999936.0,
       "debt": 1724000000.0,
+      "prevClose": 598.37,
+      "changePct": -9.92195464344804,
       "revTTM": 45.5,
       "epsTTM": 482.9,
       "peFwd": 54.21428,
       "epsFwd": 101.66,
       "revFwd": 35.169998,
       "pegFwd": 0.57,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "WDAY": {
       "t": "WDAY",
@@ -1577,14 +1773,16 @@
       "marketCap": 33440206848.0,
       "cash": 4352999936.0,
       "debt": 3804999936.0,
+      "prevClose": 130.27,
+      "changePct": 3.9379749750518167,
       "revTTM": 13.5,
       "epsTTM": 248.0,
       "peFwd": 12.617932,
       "epsFwd": 16.259999999999998,
       "revFwd": 11.67,
       "pegFwd": 0.48,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     },
     "XEL": {
       "t": "XEL",
@@ -1593,14 +1791,16 @@
       "marketCap": 51165134848.0,
       "cash": 1768000000.0,
       "debt": 39243001856.0,
+      "prevClose": 79.7,
+      "changePct": 2.8356336260978665,
       "revTTM": 2.9000000000000004,
       "epsTTM": 6.0,
       "peFwd": 19.9321,
       "epsFwd": 8.2100004,
       "revFwd": 7.829999999999999,
       "pegFwd": 2.19,
-      "priceUpdated": "2026-07-03T00:08:14.338833Z",
-      "fundamentalsUpdated": "2026-07-03T00:08:14.338833Z"
+      "priceUpdated": "2026-07-03T05:45:16.924907Z",
+      "fundamentalsUpdated": "2026-07-03T05:45:16.924907Z"
     }
   }
 }
