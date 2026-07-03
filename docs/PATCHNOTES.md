@@ -2,6 +2,12 @@
 
 ---
 
+## v3.28.2 — 2026-07-03 — Roadmap: v3.31.0 tier labels decided (S/A/B/C/F)
+
+**Docs only. The v3.31.0 five-tier scale's open label question is resolved: S / A / B / C / F tiers under a "Tier" column header, cuts at 80/65/50/35, dark green through dark red. Chosen over the original Strong Buy-to-Strong Sell proposal, which conflicted with the PRD's no-advice-language rules; tier-list vocabulary carries the relative-ranking meaning natively for the site's audience.**
+
+---
+
 ## v3.28.1 — 2026-07-03 — Roadmap: five-tier verdict scale planned
 
 **Docs only. New planned milestone v3.31.0: replace the screener's Pass/Watch/Fail verdicts with five bands on the existing score, colored dark green through dark red. The owner's proposed labels (Strong Buy through Strong Sell) are recorded alongside the open conflict with the PRD's no-advice-language rules; a screen-relative alternative label set is noted for decision at build time.**
