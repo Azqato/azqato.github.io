@@ -2,6 +2,12 @@
 
 ---
 
+## v3.27.2 — 2026-07-03 — Roadmap: backtesting removed
+
+**Docs only. All backtesting items removed from the roadmap by owner decision: the standalone "Historical screener performance backtest" milestone, the scoring-backtest half of v4.0.0, and the Future-list entry. The Explicitly Deferred section records the decision.**
+
+---
+
 ## v3.27.1 — 2026-07-03 — Roadmap: Growth and Dividend screener universes planned
 
 **Docs only. New planned milestone v3.30.0 added to the PRD roadmap: two additional screener universes, Growth (top 100 VUG holdings) and Dividend (top 100 VIG holdings), delivered as one combined feed file refreshing on trading days 30 minutes after the S&P 500 feed. Also marks the owner-only Google Search Console setup as Outstanding/paused.**

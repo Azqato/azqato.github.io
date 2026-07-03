@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.27.1
+**Version:** 3.27.2
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -97,7 +97,6 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 ### Future (post-launch)
 
 - Deeper coverage of index fund types (sector ETFs, international allocation, bond tent strategy)
-- Historical backtests of the scoring model showing Pass/Watch/Fail predictive power
 - Email or RSS changelog subscription for site updates
 - Additional illustrative examples using historical market events
 - Separate pages for Growth, Value, and Dividend stock frameworks
@@ -205,24 +204,23 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.28.0 — Pipeline hardening (pin yfinance, remove legacy FMP secret; data files stay in git intentionally as score history) | After v3.27 | Planned |
 | v3.29.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.28 | Planned |
 | v3.30.0 — Screener: Growth and Dividend universes. Two new selectable datasets alongside the Nasdaq 100 and S&P 500: Growth = top 100 holdings of VUG (Vanguard Growth ETF), Dividend = top 100 holdings of VIG (Vanguard Dividend Appreciation ETF). Both ship in a single combined feed file (`data/screener_gd.json`) refreshed on trading days 30 minutes after the S&P 500 feed (Mon-Fri 24:00 UTC); constituents auto-synced from the ETFs' published holdings | After v3.29 | Planned |
-| v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
-| Historical screener performance backtest | TBD | Planned |
+| v4.0.0 — Additional philosophy sections | TBD | Planned |
 | Conference call research guide | TBD | Planned |
 
 ### Feature Breakdown by Phase
 
 **v3.x (current):** Screener with daily data, relative percentile scoring, methodology popup, documentation consolidation.
 
-**v3.27-v3.29 (committed order, decided 2026-07-02):** SEO/discoverability pass first, then pipeline hardening, then screener score history sparklines. Note the dependency: the sparklines (and the future backtest) mine the git history of the committed data feeds, so keeping generated data files in the repo is now an intentional design choice, not tech debt.
+**v3.27-v3.29 (committed order, decided 2026-07-02):** SEO/discoverability pass first, then pipeline hardening, then screener score history sparklines. Note the dependency: the sparklines mine the git history of the committed data feeds, so keeping generated data files in the repo is now an intentional design choice, not tech debt.
 
 **v4.x (planned):** Additional philosophy content, potential Growth/Value/Dividend standalone pages, conference call guide.
 
-**Post-v4:** Backtests, conference call guide, deeper index/ETF content.
+**Post-v4:** Conference call guide, deeper index/ETF content.
 
 ### Explicitly Deferred
 
 - Email/RSS subscription: low priority, no backend, static site constraint makes this complex
-- Historical backtests: valuable but requires a separate data collection effort
+- Historical backtests of the scoring model: removed from the roadmap by owner decision (2026-07-03); not planned
 - Options/crypto/forex coverage: out of scope permanently; this methodology is equities-only
 
 ---
