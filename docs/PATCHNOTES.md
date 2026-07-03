@@ -2,6 +2,17 @@
 
 ---
 
+## v3.25.1 — 2026-07-02 — Documentation alignment audit
+
+**Post-rewrite audit of all four documentation files against the live site state. Docs only: no site changes.**
+
+### Fixed
+
+- **docs/PRD.md external FAQ:** "What are the 12 metrics?" no longer claims "the first 10 are tracked in the screener." It now states the accurate split: eight growth/valuation/balance-sheet metrics drive stock decisions (five scored by the screener), RSI and 52-Week Range time index/ETF purchases (context-only on stock watchlists), and the two margins are evaluated during research. "How do I use the site?" reworded to match.
+- **docs/PRD.md version** bumped to 3.25.1. README.md and DESIGN.md audited; no changes required (no tech-stack, structure, or visual changes in v3.25.x).
+
+---
+
 ## v3.25.0 — 2026-07-02 — Educational rewrite + technicals-for-indices doctrine
 
 **Sitewide editorial rewrite targeting the "first-position investor" (owns 1-3 stocks or an index fund, knows the terms but cannot apply them), plus a methodology stance change: RSI and the 52-week range are now index/ETF timing signals only; individual stocks are valued on fundamentals and valuation, never technicals. Core logic, thresholds, numbers, and examples are unchanged. Content and docs only: no code, data, or design changes.**

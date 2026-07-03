@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.25.0
+**Version:** 3.25.1
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-02
@@ -643,10 +643,10 @@ Beginner to intermediate retail investors who want a structured, non-commercial 
 No. This site documents one investor's personal methodology. Nothing here is a recommendation to buy or sell any specific security. Every page includes an "Educational use only. Not financial advice." disclaimer.
 
 **4. How do I use the site?**
-Start at the Home page to see the strategy overview and the 10-metric framework. Read Philosophy if you want to understand the mindset behind the rules. Use Metrics as a reference when evaluating a specific signal. Use Finviz and Seeking Alpha pages to set up your research tools. Use the Screener to see how all 100 Nasdaq companies score against the methodology today. Use FAQ when you have questions about the strategy.
+Start at the Home page to see the strategy overview and the metric grid. Read Philosophy if you want to understand the mindset behind the rules. Use Metrics as a reference when evaluating a specific signal. Use Finviz and Seeking Alpha pages to set up your research tools. Use the Screener to see how all 100 Nasdaq companies score against the methodology today. Use FAQ when you have questions about the strategy.
 
 **5. What are the 12 metrics?**
-Revenue Growth TTM, Revenue Growth FWD, EPS Growth TTM, EPS Growth FWD, P/E FWD, PEG FWD, Total Cash, Total Debt, RSI, 52-Week Range, Gross Margin, and Net Margin. The first 10 are tracked in the screener. Gross Margin and Net Margin are evaluated during research.
+Revenue Growth TTM, Revenue Growth FWD, EPS Growth TTM, EPS Growth FWD, P/E FWD, PEG FWD, Total Cash, Total Debt, RSI, 52-Week Range, Gross Margin, and Net Margin. The eight growth, valuation, and balance sheet metrics drive individual stock decisions (the screener scores five of them). RSI and the 52-Week Range are technical signals used to time index and ETF purchases, tracked on stock watchlists for context only. Gross Margin and Net Margin are evaluated during research.
 
 **6. What is the Nasdaq 100 screener?**
 An interactive tool that applies the methodology's 5-factor scoring model to all 100 Nasdaq 100 companies. Data is updated daily from Yahoo Finance. Each company receives a score from 0 to 100 and a Pass, Watch, or Fail verdict. This is a screening and educational tool, not a buy/sell signal generator.
