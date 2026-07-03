@@ -2,6 +2,12 @@
 
 ---
 
+## v3.29.1 — 2026-07-03 — Roadmap: scoring model v2 under review
+
+**Docs only. New planned milestone v3.32.0 documents the scoring-model revision under owner review: a full-range linear points curve (to end the crowd of 100/100 scores), a possible four-pillar metric restructure scoring Rev/EPS TTM and gross/net margins while removing the valuation double-count, and a missing-data rule so a "—" in a scored metric reads dark red and hurts the score instead of being dropped and rescaled. Decisions pending; priority TBD.**
+
+---
+
 ## v3.29.0 — 2026-07-03 — Screener: rank-based S/A/B/C/F tier scale
 
 **Pass/Watch/Fail is replaced by a five-tier, rank-based grade. Tiers are assigned by position within the loaded universe, not by fixed score cuts: S = top 10% of the list, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%, with boundary ties rounding up into the higher tier. Pulled ahead of pipeline cleanup by owner priority (planned as v3.31.0, shipped as v3.29.0).**
