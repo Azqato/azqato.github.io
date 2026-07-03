@@ -2,6 +2,12 @@
 
 ---
 
+## v3.28.1 — 2026-07-03 — Roadmap: five-tier verdict scale planned
+
+**Docs only. New planned milestone v3.31.0: replace the screener's Pass/Watch/Fail verdicts with five bands on the existing score, colored dark green through dark red. The owner's proposed labels (Strong Buy through Strong Sell) are recorded alongside the open conflict with the PRD's no-advice-language rules; a screen-relative alternative label set is noted for decision at build time.**
+
+---
+
 ## v3.28.0 — 2026-07-03 — Screener: Growth, Value & Dividend universes
 
 **The screener grows from two universes to five. New Growth, Value, and Dividend views cover the top 100 holdings of Vanguard's VUG, VTV, and VIG ETFs, refreshed daily from one combined feed. The "Expand to S&P 500" toggle is replaced by a five-button universe switcher. Scope note: the owner added Value (VTV) mid-build, turning the planned Growth/Dividend pair into the site's GVD framework trio.**
