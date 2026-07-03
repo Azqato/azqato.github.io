@@ -2,6 +2,22 @@
 
 ---
 
+## v3.26.0 — 2026-07-02 — Screener: Daily Change % column + column reorder
+
+**The screener table gains a Daily Change % column and the display order now leads with the market snapshot. New order after Ticker/Verdict/Score/Factors: Mkt Cap, Price, Chg %, Rev TTM, Rev FWD, EPS TTM, EPS FWD, P/E FWD, PEG FWD, Total Cash, Total Debt, Cash/Debt, Updated.**
+
+### Added
+
+- **Daily Change % (`changePct`)**: `scripts/fetch_screener_data.py` now fetches the prior session's close (`regularMarketPreviousClose`, fallback `previousClose`) and writes `prevClose` and `changePct` into both feeds. Verified locally against live Yahoo data before shipping. The screener renders the new `Chg %` column (signed, green/red by direction, sortable via the existing sort path); stocks show "—" until a feed refresh includes the field.
+- Both data workflows were triggered manually after deploy so the live feeds gain the field immediately rather than waiting for the next 23:00 UTC run.
+
+### Changed
+
+- **Column order (screener.html thead + screener.js rowHtml):** the Snapshot group (Mkt Cap, Price, Chg %) moved from the far right to directly after the Azqato Screen group; Growth, Valuation, and Balance Sheet follow unchanged; the per-row Updated age keeps a trailing slot (still governed by the Snapshot column toggle). Scoring, sorting semantics, and the per-stock popup are unchanged; Chg % is display-only and feeds nothing into the score.
+- **docs/PRD.md:** screener.json data-model table gains `prevClose` and `changePct`; roadmap renumbered (SEO pass → v3.27.0, pipeline hardening → v3.28.0, score sparklines → v3.29.0) since this release took the v3.26.0 slot.
+
+---
+
 ## v3.25.2 — 2026-07-02 — Roadmap: next three milestones committed
 
 **Docs only. The next three milestones are now committed in order: v3.26.0 SEO/discoverability pass, v3.27.0 pipeline hardening, v3.28.0 screener score history sparklines.**

@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.25.2
+**Version:** 3.26.0
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-02
@@ -199,9 +199,10 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.23.0 — Trading-day (Mon-Fri) refresh; constituents moved to Saturday | 2026-06-29 | Complete |
 | v3.24.0 — "Protecting gains after a strong run" theme (FAQ + home + philosophy + indices) | 2026-07-02 | Complete |
 | v3.25.0 — Educational rewrite (first-position investor) + technicals-for-indices doctrine | 2026-07-02 | Complete |
-| v3.26.0 — SEO/discoverability pass (FAQ schema, sitemap.xml, meta review) | Next | Planned |
-| v3.27.0 — Pipeline hardening (pin yfinance, remove legacy FMP secret; data files stay in git intentionally as score history) | After v3.26 | Planned |
-| v3.28.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.27 | Planned |
+| v3.26.0 — Screener: Daily Change % column + snapshot-first column reorder | 2026-07-02 | Complete |
+| v3.27.0 — SEO/discoverability pass (FAQ schema, sitemap.xml, meta review) | Next | Planned |
+| v3.28.0 — Pipeline hardening (pin yfinance, remove legacy FMP secret; data files stay in git intentionally as score history) | After v3.27 | Planned |
+| v3.29.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.28 | Planned |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
@@ -210,7 +211,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 
 **v3.x (current):** Screener with daily data, relative percentile scoring, methodology popup, documentation consolidation.
 
-**v3.26-v3.28 (committed order, decided 2026-07-02):** SEO/discoverability pass first, then pipeline hardening, then screener score history sparklines. Note the dependency: the sparklines (and the future backtest) mine the git history of the committed data feeds, so keeping generated data files in the repo is now an intentional design choice, not tech debt.
+**v3.27-v3.29 (committed order, decided 2026-07-02):** SEO/discoverability pass first, then pipeline hardening, then screener score history sparklines. Note the dependency: the sparklines (and the future backtest) mine the git history of the committed data feeds, so keeping generated data files in the repo is now an intentional design choice, not tech debt.
 
 **v4.x (planned):** Additional philosophy content, potential Growth/Value/Dividend standalone pages, conference call guide.
 
@@ -478,6 +479,8 @@ Array of 100 objects. `t` = ticker symbol (string), `n` = company name (string).
 | `t` | string | Ticker symbol |
 | `name` | string | Company name |
 | `price` | number | Current stock price (USD) |
+| `prevClose` | number | Prior session's closing price (USD) |
+| `changePct` | number | Daily change: price vs prior close (%) |
 | `marketCap` | number | Market capitalization (USD) |
 | `cash` | number | Total cash and equivalents (USD) |
 | `debt` | number | Total debt (USD) |

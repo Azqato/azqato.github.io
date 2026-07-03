@@ -81,6 +81,15 @@ def fetch(symbol):
     rec["cash"] = num(info.get("totalCash"))
     rec["debt"] = num(info.get("totalDebt"))
 
+    # Daily change: latest price vs the prior session's close. The pipeline runs
+    # after the US close, so this is that trading day's move.
+    prev = num(info.get("regularMarketPreviousClose")) or num(info.get("previousClose"))
+    rec["prevClose"] = prev
+    if rec["price"] is not None and prev not in (None, 0):
+        rec["changePct"] = (rec["price"] / prev - 1) * 100
+    else:
+        rec["changePct"] = None
+
     rg = num(info.get("revenueGrowth"))
     rec["revTTM"] = rg * 100 if rg is not None else None
     eg = num(info.get("earningsGrowth"))

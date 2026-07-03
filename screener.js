@@ -77,6 +77,11 @@
       return "$" + n.toFixed(0);
     }
     function fmtPrice(n) { return isNum(n) ? "$" + n.toFixed(2) : "—"; }
+    function fmtChange(n) { return isNum(n) ? (n > 0 ? "+" : "") + n.toFixed(2) + "%" : "—"; }
+    function clsChange(n) {
+      if (!isNum(n) || n === 0) return "muted";
+      return n > 0 ? "pos" : "neg";
+    }
     function freshestMs(a, b) {
       var ta = a ? Date.parse(a) : 0, tb = b ? Date.parse(b) : 0;
       var m = Math.max(ta, tb);
@@ -225,6 +230,7 @@
           peFwd: d.peFwd, pegFwd: pegDisplay(d), cash: d.cash, debt: d.debt,
           cashDebt: cashDebtRatio(d),
           price: d.price, marketCap: d.marketCap,
+          changePct: isNum(d.changePct) ? d.changePct : null,
           updated: freshestMs(d.priceUpdated, d.fundamentalsUpdated)
         };
       });
@@ -413,6 +419,9 @@
         '<td class="left group-start"><span class="verdict v-' + r.verdict + '">' + verdictLabel + '</span></td>' +
         '<td>' + scoreCell + '</td>' +
         '<td>' + factorsCell + '</td>' +
+        '<td class="grp-snapshot group-start">' + fmtMoney(r.marketCap) + '</td>' +
+        '<td class="grp-snapshot">' + fmtPrice(r.price) + '</td>' +
+        '<td class="grp-snapshot ' + clsChange(r.changePct) + '">' + fmtChange(r.changePct) + '</td>' +
         '<td class="grp-growth group-start ' + colorFromPts(r.parts.revTTM) + '">' + fmtPct(r.revTTM) + '</td>' +
         '<td class="grp-growth ' + colorFromPts(r.parts.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
         '<td class="grp-growth ' + colorFromPts(r.parts.epsTTM) + '">' + fmtPct(r.epsTTM) + '</td>' +
@@ -422,9 +431,7 @@
         '<td class="grp-balance group-start ' + colorFromPts(r.parts.cashDebt) + '">' + fmtMoney(r.cash) + '</td>' +
         '<td class="grp-balance">' + fmtMoney(r.debt) + '</td>' +
         '<td class="grp-balance ' + colorFromPts(r.parts.cashDebt) + '">' + fmtRatio(r.cashDebt) + '</td>' +
-        '<td class="grp-snapshot group-start">' + fmtPrice(r.price) + '</td>' +
-        '<td class="grp-snapshot">' + fmtMoney(r.marketCap) + '</td>' +
-        '<td class="grp-snapshot ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
+        '<td class="grp-snapshot group-start ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
         '</tr>';
     }
 
