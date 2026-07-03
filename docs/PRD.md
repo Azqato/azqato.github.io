@@ -1,9 +1,9 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.26.0
+**Version:** 3.27.0
 **Status:** Current
 **Author:** Azqato
-**Last Updated:** 2026-07-02
+**Last Updated:** 2026-07-03
 
 ---
 
@@ -79,7 +79,7 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 - 8 educational pages with sidebar navigation (Home, Philosophy, Metrics, Screener, Finviz, Seeking Alpha, Indices, FAQ)
 - 12-metric evaluation framework documented with examples, how-to-read guides, and caveats
 - 9-section philosophy page (belief and long game, ownership model, research process, GVD framework, offense cadence, Wall Street critique, hype/weak-hands, leadership cycles, knowledge building)
-- 31-item FAQ accordion
+- 34-item FAQ accordion
 - Step-by-step Finviz screener setup guide
 - Step-by-step Seeking Alpha watchlist setup guide (12-column layout)
 - Index/ETF methodology with VIX action levels, AAII sentiment, RSI, 52W range, structural quality metrics, DCA vs lump sum
@@ -133,7 +133,7 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 
 - All 12 metrics explained clearly enough that a reader with no finance background can apply them
 - Philosophy content covers all major behavioral and conceptual foundations of the strategy
-- FAQ answers the most common investor questions (31 items) without requiring outside research
+- FAQ answers the most common investor questions (34 items) without requiring outside research
 - Screener shows all 100 Nasdaq 100 tickers with current scores, updated daily automatically
 - Site loads with no errors and no external requests in any modern browser
 - Mobile-readable at 375px minimum width
@@ -200,7 +200,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.24.0 — "Protecting gains after a strong run" theme (FAQ + home + philosophy + indices) | 2026-07-02 | Complete |
 | v3.25.0 — Educational rewrite (first-position investor) + technicals-for-indices doctrine | 2026-07-02 | Complete |
 | v3.26.0 — Screener: Daily Change % column + snapshot-first column reorder | 2026-07-02 | Complete |
-| v3.27.0 — SEO/discoverability pass (FAQ schema, sitemap.xml, meta review) | Next | Planned |
+| v3.27.0 — SEO/discoverability pass (FAQ schema, sitemap.xml, canonicals, meta review) | 2026-07-03 | Complete |
 | v3.28.0 — Pipeline hardening (pin yfinance, remove legacy FMP secret; data files stay in git intentionally as score history) | After v3.27 | Planned |
 | v3.29.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.28 | Planned |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
@@ -408,7 +408,7 @@ stocks/
 ├── finviz.html                        ← Finviz setup guide
 ├── seekingalpha.html                  ← Seeking Alpha setup guide
 ├── indices.html                       ← Index/ETF methodology
-├── faq.html                           ← FAQ accordion (31 items)
+├── faq.html                           ← FAQ accordion (34 items)
 ├── style.css                          ← Design system stylesheet
 ├── script.js                          ← Accordion + IntersectionObserver (content pages)
 ├── og-image.png                       ← Social card image (1200×630)
@@ -626,7 +626,7 @@ No secrets are used or hardcoded. (A legacy `FMP_API_KEY` GitHub Actions secret 
 
 The site addresses a real gap in publicly available investing education. While financial media is abundant, structured, non-commercial investing frameworks are rare. Most free resources either oversimplify or exist to sell something. Azqato's site does neither: it documents a real methodology built from practice, presented with the same directness he brings to his Twitch streams and YouTube videos.
 
-The site covers twelve evaluation metrics (revenue growth, EPS growth, P/E, PEG, cash, debt, RSI, 52-week range, gross margin, and net margin), a nine-section philosophy page on long-term conviction investing, thirty Q&A items in an interactive accordion, and setup guides for both Finviz and Seeking Alpha. For index investors, a separate methodology covers VIX action levels, AAII sentiment signals, dollar-cost averaging, and lump-sum deployment strategy. The interactive Nasdaq 100 screener scores all 100 constituents daily using a transparent algorithm and shows each stock's Pass, Watch, or Fail verdict at a glance.
+The site covers twelve evaluation metrics (revenue growth, EPS growth, P/E, PEG, cash, debt, RSI, 52-week range, gross margin, and net margin), a nine-section philosophy page on long-term conviction investing, thirty-four Q&A items in an interactive accordion, and setup guides for both Finviz and Seeking Alpha. For index investors, a separate methodology covers VIX action levels, AAII sentiment signals, dollar-cost averaging, and lump-sum deployment strategy. The interactive Nasdaq 100 screener scores all 100 constituents daily using a transparent algorithm and shows each stock's Pass, Watch, or Fail verdict at a glance.
 
 "I kept explaining the same framework to the same questions over and over in streams and Discord," said Azqato. "Building this site meant I could say: here, read this. It is everything I know about how to evaluate a stock, written down in one place, for free."
 

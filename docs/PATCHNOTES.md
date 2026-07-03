@@ -2,6 +2,29 @@
 
 ---
 
+## v3.27.0 — 2026-07-03 — SEO/discoverability pass
+
+**Sitemap, canonical URLs, structured data, and search-intent meta descriptions across the site. No visual or content changes; aimed at the PRD's 5,000/month organic search impressions target.**
+
+### Added
+
+- **sitemap.xml** at the repo root listing all 8 pages with lastmod dates.
+- **Canonical `<link rel="canonical">` tags** on all 8 pages, pointing at the `azqato.github.io/stocks/` URLs (the home page canonicalizes to the trailing-slash root, not index.html).
+- **FAQPage JSON-LD** on faq.html: all 34 questions with first-paragraph answers, generated from the live accordion markup so schema and visible content cannot drift. Makes the FAQ eligible for rich results.
+- **WebSite JSON-LD** on index.html (site name, URL, author).
+
+### Changed
+
+- **Meta descriptions rewritten for search intent** on index, metrics, philosophy, faq, and indices (the old ones duplicated page leads; metrics' was 450+ characters). Screener, finviz, and seekingalpha descriptions were already appropriate and kept. Open Graph / Twitter descriptions unchanged (social copy is a different job).
+- **FAQ count corrected from 31 to 34** in PRD.md and README.md; the accordion has grown across v3.24-v3.25 and the docs were never recounted.
+
+### Notes
+
+- **robots.txt intentionally not shipped:** this site lives at a subpath, and crawlers only read robots.txt at the domain root, so a copy in /stocks/ would be a dead file. Sitemap discovery is handled by direct Search Console submission instead.
+- **Owner-only follow-ups:** (1) submit `https://azqato.github.io/stocks/sitemap.xml` in Google Search Console; (2) optionally add a `Sitemap:` line for it to the root `azqato.github.io` repo's robots.txt.
+
+---
+
 ## v3.26.1 — 2026-07-03 — Columns dropdown order matches the table
 
 **One-line fix: the screener's Columns visibility dropdown now lists the groups in on-screen order (Snapshot, Growth, Valuation, Balance Sheet) after v3.26.0 moved Snapshot to the front.**
