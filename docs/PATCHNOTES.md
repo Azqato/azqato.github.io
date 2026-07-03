@@ -2,6 +2,12 @@
 
 ---
 
+## v3.26.1 — 2026-07-03 — Columns dropdown order matches the table
+
+**One-line fix: the screener's Columns visibility dropdown now lists the groups in on-screen order (Snapshot, Growth, Valuation, Balance Sheet) after v3.26.0 moved Snapshot to the front.**
+
+---
+
 ## v3.26.0 — 2026-07-02 — Screener: Daily Change % column + column reorder
 
 **The screener table gains a Daily Change % column and the display order now leads with the market snapshot. New order after Ticker/Verdict/Score/Factors: Mkt Cap, Price, Chg %, Rev TTM, Rev FWD, EPS TTM, EPS FWD, P/E FWD, PEG FWD, Total Cash, Total Debt, Cash/Debt, Updated.**
