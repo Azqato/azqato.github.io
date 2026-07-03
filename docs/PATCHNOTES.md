@@ -2,6 +2,35 @@
 
 ---
 
+## v3.28.0 — 2026-07-03 — Screener: Growth, Value & Dividend universes
+
+**The screener grows from two universes to five. New Growth, Value, and Dividend views cover the top 100 holdings of Vanguard's VUG, VTV, and VIG ETFs, refreshed daily from one combined feed. The "Expand to S&P 500" toggle is replaced by a five-button universe switcher. Scope note: the owner added Value (VTV) mid-build, turning the planned Growth/Dividend pair into the site's GVD framework trio.**
+
+### Added
+
+- **Three ETF universes**: Growth (top 100 VUG holdings), Value (top 100 VTV holdings), Dividend (top 100 VIG holdings). Constituents come from Vanguard's own holdings API (authoritative for an ETF-defined universe; Vanguard publishes holdings monthly), synced weekly by the new `scripts/update_etf_constituents.py` into `data/vug.json` / `data/vtv.json` / `data/vig.json` with the same dual-class dedupe and never-clobber sanity guards as the index sync. New dual-class pairs handled: BRK.A→BRK.B, LEN.B→LEN, BF.B→BF.A, HEI.A→HEI. All 300 tickers (220 unique) were validated against Yahoo before shipping; names were aligned to the site's curated short forms.
+- **Combined feed** `data/screener_gvd.json`: `fetch_screener_data.py` gains a repeatable `--combined NAME=LIST` mode producing `{universes: {growth, value, dividend}}`, each entry shaped exactly like a single-list feed. Overlapping symbols are fetched from Yahoo once per run. New workflow `screener-data-gvd.yml` refreshes it 30 minutes after the S&P 500 job (00:00 UTC, Tue-Sat cron = Mon-Fri US trading days), sharing the `screener-data` concurrency group. The feed was seeded locally (100/100 price coverage in all three universes) so the views work immediately.
+- **Universe switcher**: five `.btn`-style buttons in the app bar (Nasdaq 100, S&P 500, Growth, Value, Dividend), active one lit in the accent color, with per-ETF tooltips. One fetch of the combined feed fills all three GVD stores, so switching among them is instant. Page title, `.universe-name` labels, and the per-stock popup's peer-group note all follow the active universe.
+- **Methodology popup**: a "Good to know" sentence explaining the ETF universes and why the same stock can score differently against different peer groups.
+
+### Changed
+
+- **yfinance pinned to 1.4.1 in all four data workflows** (folded in from pipeline hardening). The S&P 500 job previously installed `--upgrade yfinance`, making runs non-reproducible.
+- Saturday `constituents.yml` now also runs the ETF sync and regenerates the combined feed when any ETF list changes.
+- Screener meta description now mentions all five universes (page title stays "Nasdaq 100 Screener", the canonical default view).
+- Screener footer wording: constituent lists are "synced weekly", and may differ from "the current index or fund holdings".
+
+### Removed
+
+- The two-state "Expand to S&P 500" / "Back to Nasdaq 100" toggle button (replaced by the universe switcher).
+
+### Notes
+
+- Verified headlessly in Chrome against a local server: all five universes render fully scored (100/100 per GVD universe, 500/500 S&P) with correct titles, active buttons, and verdict counts.
+- Roadmap: v3.30.0 International universe added (top 100 VXUS holdings only; deliberately its own release because VXUS reports unsuffixed local-exchange tickers, local currencies, and sparser analyst estimates). Considered and rejected: sourcing the S&P 500 list from VOO holdings (Vanguard data lags ~1 month; Wikipedia updates within days).
+
+---
+
 ## v3.27.6 — 2026-07-03 — Search Console verified; sitemap submitted
 
 **Docs only. The Search Console property for azqato.github.io/stocks/ is verified and sitemap.xml is submitted. Google shows "Couldn't fetch" pending its first crawl (normal for a new property; the sitemap serves HTTP 200 with application/xml). Roadmap item marked complete pending Google's fetch.**

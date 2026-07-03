@@ -14,10 +14,10 @@ A static educational website documenting Azqato's fundamentals-driven, long-term
 | CSS | CSS3 custom properties | 850+ lines, single file |
 | JavaScript | Vanilla ES6 | `script.js` (content pages) + `screener.js` (screener app), no framework |
 | Fonts | System fonts only | No external loading |
-| Data pipeline | Python 3 + yfinance | Python 3.12, yfinance (latest) |
+| Data pipeline | Python 3 + yfinance | Python 3.12, yfinance 1.4.1 (pinned) |
 | Hosting | GitHub Pages | Serves from repo root |
-| CI/CD | GitHub Actions | Mon-Fri cron at 23:00 UTC |
-| Data format | JSON | `data/screener.json`, `data/nasdaq100.json` |
+| CI/CD | GitHub Actions | Staggered Mon-Fri crons from 23:00 UTC |
+| Data format | JSON | Feeds + constituent lists in `data/` |
 
 No npm. No build tools. No frontend dependencies.
 
@@ -72,7 +72,7 @@ This is a static site. There is no build step.
 
 **Deploy:** Push to `main`. GitHub Pages serves directly from the repository root.
 
-**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 23:00 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The S&P 500 feed follows at 23:30 UTC; the constituent sync runs Saturdays at 23:00 UTC.
+**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 23:00 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The S&P 500 feed follows at 23:30 UTC, and the combined Growth/Value/Dividend feed 30 minutes after that (00:00 UTC, next calendar day). The constituent sync (Wikipedia for the indices, Vanguard's holdings API for the ETF lists) runs Saturdays at 23:00 UTC.
 
 **Data pipeline (manual):** Go to Actions → "Refresh Screener Data" → Run workflow. Or run locally:
 
@@ -104,16 +104,22 @@ stocks/
 ├── data/
 │   ├── nasdaq100.json                ← Canonical Nasdaq 100 constituent list (100 tickers)
 │   ├── sp500.json                    ← Canonical S&P 500 constituent list (~500 tickers)
+│   ├── vug.json                      ← Growth list: top 100 VUG holdings
+│   ├── vtv.json                      ← Value list: top 100 VTV holdings
+│   ├── vig.json                      ← Dividend list: top 100 VIG holdings
 │   ├── screener.json                 ← Generated Nasdaq 100 feed (Mon-Fri metrics)
-│   └── screener_sp500.json           ← Generated S&P 500 feed (Mon-Fri metrics)
+│   ├── screener_sp500.json           ← Generated S&P 500 feed (Mon-Fri metrics)
+│   └── screener_gvd.json             ← Generated combined Growth/Value/Dividend feed
 ├── scripts/
-│   ├── fetch_screener_data.py        ← Python pipeline: yfinance → screener feed (--list/--out)
-│   └── update_constituents.py        ← Weekly auto-sync: Wikipedia → nasdaq100.json + sp500.json
+│   ├── fetch_screener_data.py        ← Python pipeline: yfinance → screener feed (--list/--out, --combined)
+│   ├── update_constituents.py        ← Weekly auto-sync: Wikipedia → nasdaq100.json + sp500.json
+│   └── update_etf_constituents.py    ← Weekly auto-sync: Vanguard API → vug/vtv/vig.json
 ├── .github/
 │   └── workflows/
 │       ├── screener-data.yml         ← Nasdaq 100 feed (Mon-Fri 23:00 UTC)
 │       ├── screener-data-sp500.yml   ← S&P 500 feed (Mon-Fri 23:30 UTC)
-│       └── constituents.yml          ← Constituent sync (Sat 23:00 UTC)
+│       ├── screener-data-gvd.yml     ← Growth/Value/Dividend feed (Tue-Sat 00:00 UTC)
+│       └── constituents.yml          ← Constituent sync, indices + ETFs (Sat 23:00 UTC)
 └── docs/
     ├── PRD.md                        ← Product requirements, architecture, runbook
     ├── DESIGN.md                     ← Design system specification

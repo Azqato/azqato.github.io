@@ -33,7 +33,7 @@ jobs:
 
       - name: Fetch screener data
         run: |
-          pip install --quiet --upgrade yfinance
+          pip install --quiet yfinance==1.4.1
           python scripts/fetch_screener_data.py --list data/nasdaq100.json --out data/screener.json
 
       - name: Commit updated data

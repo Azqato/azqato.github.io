@@ -6,11 +6,20 @@ Runs in GitHub Actions on a daily cron. Uses yfinance (public Yahoo Finance
 data) so there is no API key and no per-symbol subscription restriction -- the
 whole list is refreshed every run.
 
-Two feeds are produced by two staggered runs so the Nasdaq 100 (the screener's
-default view) always refreshes first and never waits on the larger S&P 500 job:
+Three feeds are produced by three staggered runs so the Nasdaq 100 (the
+screener's default view) always refreshes first and never waits on the larger
+jobs:
   --list data/nasdaq100.json --out data/screener.json          (23:00 UTC)
   --list data/sp500.json     --out data/screener_sp500.json     (23:30 UTC)
+  --combined growth=data/vug.json --combined value=data/vtv.json \
+      --combined dividend=data/vig.json --out data/screener_gvd.json  (00:00 UTC)
 Defaults reproduce the original Nasdaq 100 behavior when run with no args.
+
+Combined mode bundles several universes into one feed file, keyed by universe
+name, with each universe holding the same {updated, source, stocks} object a
+single-list feed has. Symbols appearing in more than one universe (the Growth,
+Value, and Dividend lists overlap heavily) are fetched from Yahoo only once
+per run.
 
 Forward metrics use the CURRENT fiscal-year ("0y") analyst consensus to match
 Seeking Alpha's "FWD" convention (not yfinance's forwardPE / "+1y" rows, which
@@ -144,23 +153,19 @@ def fetch(symbol):
     return rec
 
 
-def main():
-    ap = argparse.ArgumentParser(description="Build a screener data feed from a constituent list.")
-    ap.add_argument("--list", dest="list_path", default=DEFAULT_LIST,
-                    help=f"constituent list JSON (default {DEFAULT_LIST})")
-    ap.add_argument("--out", dest="out_path", default=DEFAULT_OUT,
-                    help=f"output feed JSON (default {DEFAULT_OUT})")
-    args = ap.parse_args()
-
-    with open(args.list_path, encoding="utf-8") as f:
-        listing = json.load(f)
-
-    now = datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
+def build_stocks(listing, now, cache):
+    """Fetch every symbol in a listing, reusing records already fetched this run."""
     stocks = {}
     ok = 0
-
     for item in listing:
         sym = item["t"]
+        if sym in cache:
+            rec = dict(cache[sym])
+            rec["name"] = item["n"]  # each list keeps its own curated name
+            stocks[sym] = rec
+            if rec.get("price") is not None:
+                ok += 1
+            continue
         rec = {"t": sym, "name": item["n"]}
         for attempt in range(3):
             try:
@@ -176,14 +181,51 @@ def main():
                 else:
                     time.sleep(2)
         stocks[sym] = rec
+        cache[sym] = rec
         time.sleep(PAUSE)
+    return stocks, ok
 
-    out = {"updated": now, "source": "yahoo", "stocks": stocks}
+
+def main():
+    ap = argparse.ArgumentParser(description="Build a screener data feed from a constituent list.")
+    ap.add_argument("--list", dest="list_path", default=DEFAULT_LIST,
+                    help=f"constituent list JSON (default {DEFAULT_LIST})")
+    ap.add_argument("--combined", action="append", default=[], metavar="NAME=LIST",
+                    help="bundle several universes into one feed keyed by NAME "
+                         "(repeatable, e.g. --combined growth=data/vug.json); overrides --list")
+    ap.add_argument("--out", dest="out_path", default=DEFAULT_OUT,
+                    help=f"output feed JSON (default {DEFAULT_OUT})")
+    args = ap.parse_args()
+
+    now = datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
+    cache = {}  # symbol -> fetched record, shared across universes in one run
+
+    if args.combined:
+        universes = {}
+        totals = []
+        for spec in args.combined:
+            name, _, list_path = spec.partition("=")
+            if not name or not list_path:
+                sys.exit(f"Bad --combined spec {spec!r}; expected NAME=LIST.")
+            with open(list_path, encoding="utf-8") as f:
+                listing = json.load(f)
+            stocks, ok = build_stocks(listing, now, cache)
+            universes[name] = {"updated": now, "source": "yahoo", "stocks": stocks}
+            totals.append(f"{name} {ok}/{len(listing)}")
+        out = {"updated": now, "source": "yahoo", "universes": universes}
+        summary = "; ".join(totals)
+    else:
+        with open(args.list_path, encoding="utf-8") as f:
+            listing = json.load(f)
+        stocks, ok = build_stocks(listing, now, cache)
+        out = {"updated": now, "source": "yahoo", "stocks": stocks}
+        summary = f"{ok}/{len(listing)}"
+
     with open(args.out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2)
         f.write("\n")
 
-    print(f"Wrote {args.out_path}: {ok}/{len(listing)} symbols with price data.")
+    print(f"Wrote {args.out_path}: {summary} symbols with price data.")
 
 
 if __name__ == "__main__":

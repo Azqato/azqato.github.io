@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nasdaq 100 Screener</title>
-  <meta name="description" content="An interactive Nasdaq 100 screener that ranks each stock against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
+  <meta name="description" content="An interactive stock screener that ranks the Nasdaq 100, S&P 500, and Vanguard Growth, Value, and Dividend top-100 lists against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
   <link rel="canonical" href="https://azqato.github.io/stocks/screener.html">
   <meta name="google-site-verification" content="p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4">
   <!-- Open Graph / Discord -->
@@ -157,6 +157,15 @@
     .btn-primary { background: var(--color-accent); color: #06231c; border-color: var(--color-accent); }
     .btn-primary:hover { background: var(--color-accent-hover); color: #06231c; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Universe switcher: one button per universe, active one lit in the accent */
+    .universe-group { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+    .u-btn.active {
+      background: var(--color-accent-light);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    .u-btn:disabled { opacity: 0.5; cursor: wait; }
 
     /* Columns dropdown */
     .menu-wrap { position: relative; }
@@ -464,7 +473,13 @@
         <span class="universe-name">Nasdaq 100</span>&nbsp;Screener
       </div>
       <span class="screen-pill">Azqato</span>
-      <button class="btn" id="universeToggle">Expand to S&amp;P 500</button>
+      <div class="universe-group" id="universeGroup" role="group" aria-label="Choose a stock universe">
+        <button class="btn u-btn active" data-universe="nasdaq100">Nasdaq 100</button>
+        <button class="btn u-btn" data-universe="sp500">S&amp;P 500</button>
+        <button class="btn u-btn" data-universe="growth" title="Top 100 holdings of VUG (Vanguard Growth ETF)">Growth</button>
+        <button class="btn u-btn" data-universe="value" title="Top 100 holdings of VTV (Vanguard Value ETF)">Value</button>
+        <button class="btn u-btn" data-universe="dividend" title="Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF)">Dividend</button>
+      </div>
       <span class="spacer"></span>
       <span class="as-of" id="asOf">no data loaded</span>
       <input type="text" class="app-search" id="search" placeholder="Filter by symbol or name…" aria-label="Filter stocks">
@@ -546,7 +561,7 @@
     </div>
 
     <div class="disclaimer-bar">
-      Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. Forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but <strong>*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure</strong>. The <span class="universe-name">Nasdaq 100</span> constituent list is static and may differ from the current index.
+      Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. Forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but <strong>*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure</strong>. The <span class="universe-name">Nasdaq 100</span> constituent list is synced weekly and may differ from the current index or fund holdings.
     </div>
 
       </main>
@@ -620,7 +635,7 @@
       <p class="hint">A stock that is exactly average on all five metrics scores 5 &times; 10 = <b>50</b>. The <b>Factors</b> column (for example <span class="factors">3/5</span>) counts how many metrics land in the upper part of the pack (15+ of 20, roughly the top third). If a metric is unavailable, it is dropped and the score is rescaled across the rest.</p>
 
       <h3>Good to know</h3>
-      <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design roughly the bottom third of the index always lands in Fail. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="metrics.html" target="_blank" rel="noopener">Metrics glossary</a> and the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>.</p>
+      <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design roughly the bottom third of the list always lands in Fail. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). The Growth, Value, and Dividend universes are the top 100 holdings of Vanguard's VUG, VTV, and VIG funds, so the same stock can earn a different score in different universes: a dividend payer that looks slow next to the Nasdaq 100 can rank near the top of the Dividend 100, because its peers changed, not its numbers. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="metrics.html" target="_blank" rel="noopener">Metrics glossary</a> and the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>.</p>
     </div>
   </div>
 

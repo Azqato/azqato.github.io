@@ -11,9 +11,11 @@
     // The daily feeds are the single source of truth. Pull them straight from
     // GitHub (raw) so they work even when this file is opened locally; fall back
     // to the same-origin copy, then to a localStorage cache if the network is down.
-    // The Nasdaq 100 is the default view; the S&P 500 feed is lazy-loaded only
-    // when the user clicks "Expand to S&P 500".
+    // The Nasdaq 100 is the default view; the other universes are lazy-loaded on
+    // first use. Growth, Value, and Dividend share one combined feed file
+    // (screener_gvd.json) keyed by `feedKey`, so one fetch fills all three.
     var RAW_BASE = "https://raw.githubusercontent.com/Azqato/stocks/main/data/";
+    var GVD_PATHS = [RAW_BASE + "screener_gvd.json", "data/screener_gvd.json"];
     var UNIVERSES = {
       nasdaq100: {
         label: "Nasdaq 100",
@@ -25,6 +27,24 @@
         label: "S&P 500",
         paths: [RAW_BASE + "screener_sp500.json", "data/screener_sp500.json"],
         cacheKey: "azq_screener_sp500_cache",
+        store: null
+      },
+      growth: {
+        label: "Growth 100",           // top 100 VUG holdings
+        paths: GVD_PATHS, feedKey: "growth",
+        cacheKey: "azq_screener_growth_cache",
+        store: null
+      },
+      value: {
+        label: "Value 100",            // top 100 VTV holdings
+        paths: GVD_PATHS, feedKey: "value",
+        cacheKey: "azq_screener_value_cache",
+        store: null
+      },
+      dividend: {
+        label: "Dividend 100",         // top 100 VIG holdings
+        paths: GVD_PATHS, feedKey: "dividend",
+        cacheKey: "azq_screener_dividend_cache",
         store: null
       }
     };
@@ -325,16 +345,31 @@
     // Fetch a universe's feed from GitHub (works locally too), caching it for
     // offline use. Returns the in-memory store {stocks, updated, source} or null
     // if every source failed. Does not change the active view by itself.
+    // Universes with a `feedKey` live inside the combined GVD file: the wanted
+    // universe is extracted, and the siblings that came along in the same file
+    // are stored and cached too, so switching between them needs no new fetch.
     async function fetchUniverse(key) {
       var u = UNIVERSES[key];
       for (var i = 0; i < u.paths.length; i++) {
         try {
           var res = await fetch(u.paths[i], { cache: "no-store" });
           if (!res.ok) continue;
-          var feed = await res.json();
+          var body = await res.json();
+          var feed = u.feedKey ? (body && body.universes && body.universes[u.feedKey]) : body;
           if (feed && feed.stocks && Object.keys(feed.stocks).length) {
             u.store = { stocks: feed.stocks, updated: feed.updated, source: feed.source || "feed" };
             writeCache(u.cacheKey, feed);
+            if (u.feedKey) {
+              Object.keys(UNIVERSES).forEach(function (k) {
+                var o = UNIVERSES[k];
+                if (k === key || !o.feedKey) return;
+                var sib = body.universes[o.feedKey];
+                if (sib && sib.stocks && Object.keys(sib.stocks).length) {
+                  o.store = { stocks: sib.stocks, updated: sib.updated, source: sib.source || "feed" };
+                  writeCache(o.cacheKey, sib);
+                }
+              });
+            }
             return u.store;
           }
         } catch (e) { /* try the next source */ }
@@ -349,19 +384,25 @@
       Object.keys(store.stocks).forEach(function (k) { data[k] = store.stocks[k]; });
       meta = { updated: store.updated, source: store.source };
       setUniverseLabel(UNIVERSES[key].label);
-      updateToggleButton();
+      updateUniverseButtons();
       render();
     }
 
-    // Swap every "Nasdaq 100"/"S&P 500" label (and the page title) to match the view.
+    // Swap every universe label (and the page title) to match the view.
     function setUniverseLabel(label) {
       document.querySelectorAll(".universe-name").forEach(function (el) { el.textContent = label; });
       document.title = label + " Screener";
     }
 
-    function updateToggleButton() {
-      $("universeToggle").textContent =
-        universeMode === "nasdaq100" ? "Expand to S&P 500" : "Back to Nasdaq 100";
+    // Light up the active universe's button.
+    function updateUniverseButtons() {
+      document.querySelectorAll("#universeGroup .u-btn").forEach(function (b) {
+        b.classList.toggle("active", b.getAttribute("data-universe") === universeMode);
+      });
+    }
+
+    function setUniverseButtonsDisabled(on) {
+      document.querySelectorAll("#universeGroup .u-btn").forEach(function (b) { b.disabled = on; });
     }
 
     // Initial page load: fetch the default Nasdaq 100 feed.
@@ -372,30 +413,26 @@
       else render(); // network failed: keep whatever the startup cache gave us
     }
 
-    // Button: switch between the Nasdaq 100 and S&P 500 universes, lazy-loading
-    // the S&P 500 feed on first use.
-    async function toggleUniverse() {
-      if (toggling) return;
-      var target = universeMode === "nasdaq100" ? "sp500" : "nasdaq100";
+    // Buttons: switch to a universe, lazy-loading its feed on first use.
+    async function selectUniverse(target) {
+      if (toggling || target === universeMode || !UNIVERSES[target]) return;
       var u = UNIVERSES[target];
 
       if (u.store) { activate(target, u.store); return; } // already in memory -> instant
 
       toggling = true;
-      var btn = $("universeToggle");
-      var prevLabel = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = "Loading " + u.label + "…";
+      setUniverseButtonsDisabled(true);
+      $("summary").innerHTML = "Loading the " + u.label + "&hellip;";
 
       var store = await fetchUniverse(target);
       toggling = false;
-      btn.disabled = false;
+      setUniverseButtonsDisabled(false);
 
       if (store) {
         activate(target, store);
       } else {
         // Feed not generated yet (or offline): stay on the current view, explain why.
-        btn.textContent = prevLabel;
+        render();
         $("summary").innerHTML = u.label + " data isn’t available yet — it’s generated by " +
           "the daily update. Check back after the next refresh.";
       }
@@ -504,8 +541,8 @@
       }).join("");
 
       $("stockNote").innerHTML = "Scored on <b>" + sc.total + "</b> of the 5 forward metrics. " +
-        "Each metric's points come from its percentile rank vs the Nasdaq 100 (green = top quartile, red = bottom). " +
-        'Open <b>Methodology</b> for the full method.';
+        "Each metric's points come from its percentile rank vs the " + UNIVERSES[universeMode].label +
+        " (green = top quartile, red = bottom). Open <b>Methodology</b> for the full method.";
 
       $("stockModal").hidden = false;
     }
@@ -558,8 +595,10 @@
         cb.addEventListener("change", applyColumnVisibility);
       });
 
-      // universe toggle (Nasdaq 100 <-> S&P 500)
-      $("universeToggle").addEventListener("click", toggleUniverse);
+      // universe buttons (Nasdaq 100 / S&P 500 / Growth / Value / Dividend)
+      document.querySelectorAll("#universeGroup .u-btn").forEach(function (b) {
+        b.addEventListener("click", function () { selectUniverse(b.getAttribute("data-universe")); });
+      });
 
       // modals
       $("methodologyBtn").addEventListener("click", openMethodology);

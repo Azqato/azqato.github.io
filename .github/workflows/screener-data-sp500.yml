@@ -30,7 +30,7 @@ jobs:
 
       - name: Fetch screener data
         run: |
-          pip install --quiet --upgrade yfinance
+          pip install --quiet yfinance==1.4.1
           python scripts/fetch_screener_data.py --list data/sp500.json --out data/screener_sp500.json
 
       - name: Commit updated data
