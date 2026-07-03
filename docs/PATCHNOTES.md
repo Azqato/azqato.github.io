@@ -2,6 +2,12 @@
 
 ---
 
+## v3.29.2 — 2026-07-03 — Roadmap: ETFs universe planned
+
+**Docs only. New planned milestone v3.32.0: an ETFs screener universe from a fixed, owner-provided list, rated on technicals (RSI, 52-week range), long-term performance, and expense ratios instead of fundamentals — the technical scoring the stock universes deliberately exclude, per the site's technicals-for-indices doctrine. Blocked on the owner's ETF list. The pending scoring-model-v2 milestone renumbers from v3.32.0 to v3.33.0.**
+
+---
+
 ## v3.29.1 — 2026-07-03 — Roadmap: scoring model v2 under review
 
 **Docs only. New planned milestone v3.32.0 documents the scoring-model revision under owner review: a full-range linear points curve (to end the crowd of 100/100 scores), a possible four-pillar metric restructure scoring Rev/EPS TTM and gross/net margins while removing the valuation double-count, and a missing-data rule so a "—" in a scored metric reads dark red and hurts the score instead of being dropped and rescaled. Decisions pending; priority TBD.**
