@@ -2,6 +2,16 @@
 
 ---
 
+## v3.25.2 — 2026-07-02 — Roadmap: next three milestones committed
+
+**Docs only. The next three milestones are now committed in order: v3.26.0 SEO/discoverability pass, v3.27.0 pipeline hardening, v3.28.0 screener score history sparklines.**
+
+### Changed
+
+- **docs/PRD.md roadmap:** three new planned milestone rows and a phase note. Pipeline hardening is scoped to pinning yfinance and deleting the legacy FMP secret; "move data files out of git" is dropped from the tech-debt plan because the sparklines feature (and the future backtest) mine that git history, making committed data feeds an intentional design choice.
+
+---
+
 ## v3.25.1 — 2026-07-02 — Documentation alignment audit
 
 **Post-rewrite audit of all four documentation files against the live site state. Docs only: no site changes.**
