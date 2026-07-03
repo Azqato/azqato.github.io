@@ -2,6 +2,12 @@
 
 ---
 
+## v3.27.1 — 2026-07-03 — Roadmap: Growth and Dividend screener universes planned
+
+**Docs only. New planned milestone v3.30.0 added to the PRD roadmap: two additional screener universes, Growth (top 100 VUG holdings) and Dividend (top 100 VIG holdings), delivered as one combined feed file refreshing on trading days 30 minutes after the S&P 500 feed. Also marks the owner-only Google Search Console setup as Outstanding/paused.**
+
+---
+
 ## v3.27.0 — 2026-07-03 — SEO/discoverability pass
 
 **Sitemap, canonical URLs, structured data, and search-intent meta descriptions across the site. No visual or content changes; aimed at the PRD's 5,000/month organic search impressions target.**

@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.27.0
+**Version:** 3.27.1
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -204,6 +204,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | Google Search Console setup (owner-only: verify `azqato.github.io/stocks/` property, submit sitemap.xml, optional root robots.txt Sitemap line; walkthrough in PATCHNOTES v3.27.0) | Paused 2026-07-03 | Outstanding |
 | v3.28.0 — Pipeline hardening (pin yfinance, remove legacy FMP secret; data files stay in git intentionally as score history) | After v3.27 | Planned |
 | v3.29.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.28 | Planned |
+| v3.30.0 — Screener: Growth and Dividend universes. Two new selectable datasets alongside the Nasdaq 100 and S&P 500: Growth = top 100 holdings of VUG (Vanguard Growth ETF), Dividend = top 100 holdings of VIG (Vanguard Dividend Appreciation ETF). Both ship in a single combined feed file (`data/screener_gd.json`) refreshed on trading days 30 minutes after the S&P 500 feed (Mon-Fri 24:00 UTC); constituents auto-synced from the ETFs' published holdings | After v3.29 | Planned |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
