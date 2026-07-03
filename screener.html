@@ -18,7 +18,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ===== screener.html — dense screener layout (full width, uses shared tokens) ===== */
+    /* ===== screener.html: dense screener layout (full width, uses shared tokens) ===== */
     html, body { height: 100%; }
     body {
       font-size: 0.875rem;
@@ -616,7 +616,7 @@
       <p class="hint">A stock that is exactly average on all five metrics scores 5 &times; 10 = <b>50</b>. The <b>Factors</b> column (for example <span class="factors">3/5</span>) counts how many metrics land in the upper part of the pack (15+ of 20, roughly the top third). If a metric is unavailable, it is dropped and the score is rescaled across the rest.</p>
 
       <h3>Good to know</h3>
-      <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design roughly the bottom third of the index always lands in Fail. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). Entry timing (RSI, 52-week range) is covered in the <a href="metrics.html" target="_blank" rel="noopener">Metrics methodology</a>.</p>
+      <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design roughly the bottom third of the index always lands in Fail. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="metrics.html" target="_blank" rel="noopener">Metrics glossary</a> and the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>.</p>
     </div>
   </div>
 

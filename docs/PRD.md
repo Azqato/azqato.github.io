@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.24.0
+**Version:** 3.25.0
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-02
@@ -17,12 +17,13 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 
 ## Target Users
 
-**Primary: Self-directed retail investor, beginner to intermediate**
-- Has a brokerage account or is close to opening one
-- Has heard terms like P/E ratio and RSI but cannot apply them confidently
+**Primary: The "first-position investor" (beginner to intermediate, self-directed)**
+- Owns 1-3 individual stocks or an index fund bought on gut feel, or is close to a first purchase
+- Has heard terms like P/E ratio and RSI but cannot apply them confidently; can read a quote page but glazes over at a financial summary
 - Invests from income (regular contributions), not a lump-sum windfall
-- Is prone to panic-selling or chasing hype stocks without a framework to anchor decisions
+- Has personally felt at least one of: buying at peak hype, panic-selling a dip, or selling a winner early and watching it run
 - Follows Azqato on Twitch, YouTube, or Discord (B5TA community)
+- All editorial content is written for this reader: teach before asserting, define terms in plain English at first use, and anchor concepts to decisions they have already faced
 
 **Secondary: Intermediate investor looking to formalize a process**
 - Already investing but decisions are ad hoc
@@ -152,8 +153,8 @@ Document fewer things correctly than more things loosely. A reader who trusts th
 **2. Permanence over freshness**
 Every page should be as useful in five years as it is today. Real-time data, current prices, and company-specific snapshots age immediately. Conceptual frameworks, calibrated thresholds, and illustrative examples do not. When choosing between a vivid current example and a durable hypothetical one, choose the hypothetical.
 
-**3. The reader is motivated, not passive**
-Someone reading this site has already decided to learn. Do not pad content to hold attention. Dense, accurate prose is better than diluted prose with callouts. Respect the reader's time by getting to the point.
+**3. Teach before asserting**
+Someone reading this site has already decided to learn, but has not yet used these tools in practice. Explain what a term means, in plain English at its first use on each page, before building an argument on it, and let opinionated conclusions land after the reader has the machinery to see why they hold. Added words must teach: scaffolding that earns its length (worked examples, analogies, inline definitions, takeaway boxes) is welcome; padding is not.
 
 **4. Tools serve the methodology, methodology does not serve the tools**
 Finviz and Seeking Alpha are referenced because they are the best free tools for this workflow, not because they are partners or sponsors. If better tools emerge, the guides should be rewritten without sentiment. The scoring model exists to make the methodology testable, not to make the screener impressive.
@@ -197,6 +198,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.22.0 — Expand to S&P 500 toggle (second daily feed) | 2026-06-29 | Complete |
 | v3.23.0 — Trading-day (Mon-Fri) refresh; constituents moved to Saturday | 2026-06-29 | Complete |
 | v3.24.0 — "Protecting gains after a strong run" theme (FAQ + home + philosophy + indices) | 2026-07-02 | Complete |
+| v3.25.0 — Educational rewrite (first-position investor) + technicals-for-indices doctrine | 2026-07-02 | Complete |
 | v4.0.0 — Additional philosophy sections; scoring backtest | TBD | Planned |
 | Historical screener performance backtest | TBD | Planned |
 | Conference call research guide | TBD | Planned |
@@ -754,6 +756,7 @@ Home → Philosophy → Metrics → Screener → Finviz → SeekingAlpha → Ind
 ### Content Philosophy (Enforced Rules)
 
 - No real-time data in editorial content
+- RSI and the 52-week range are index/ETF timing signals only. Editorial content must never present technicals as individual-stock buy or sell criteria; stocks are valued on fundamentals and valuation, with technicals at most providing context
 - All illustrative examples use hypothetical labels ("High-growth tech co.", "Accelerating")
 - No company-specific live examples (the Palantir story is the one named historical exception)
 - No em dashes in any form: ` -- `, `—`, or `&mdash;`

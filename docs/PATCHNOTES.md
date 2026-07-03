@@ -2,6 +2,30 @@
 
 ---
 
+## v3.25.0 — 2026-07-02 — Educational rewrite + technicals-for-indices doctrine
+
+**Sitewide editorial rewrite targeting the "first-position investor" (owns 1-3 stocks or an index fund, knows the terms but cannot apply them), plus a methodology stance change: RSI and the 52-week range are now index/ETF timing signals only; individual stocks are valued on fundamentals and valuation, never technicals. Core logic, thresholds, numbers, and examples are unchanged. Content and docs only: no code, data, or design changes.**
+
+### Changed
+
+- **metrics.html (educational pass):** every metric now defines itself in plain English at first use, most with a worked example (P/E: $110 ÷ $5 = 22; PEG: 26 ÷ 32 = 0.81; gross margin: $100M sales / $20M cost = 80%). New "How the twelve fit together" intro box groups the metrics into five teams. Lead fixed from "Ten metrics" to "Twelve metrics" (matching the 12 Signals badge and FAQ). Jargon glossed at first use: buybacks, dilution, free cash flow, balance sheet, moat, consensus estimate, operating leverage, multiple.
+- **metrics.html (doctrine):** RSI and 52-Week Range sections repositioned as index/ETF timing tools. All thresholds and levels unchanged; badge and table actions reframed from "initiate a position / review fundamentals" to "deployment window / index buys." Both caveats now explain the asymmetry: an index low usually reflects market-wide fear, a stock low can be deserved.
+- **philosophy.html:** jargon-dense passages unpacked (price drivers caveat, hype-section "stretched multiple" mechanics, options/margin clocks); new "What to remember" takeaway box in the research section; switching costs and P/E glossed; "entry-timing signals" watchlist sentence reworded to valuation-based patience.
+- **index.html:** strategy overview now states stocks are bought on fundamentals with technicals reserved for index timing (was "Entry timing is guided by RSI and 52-week range"); RSI/52W metric cards and reference-table rows relabeled "(index timing)"; Portfolio vs. Watchlist criteria rewritten from RSI/52W triggers to valuation triggers (PEG at/below target, P/E vs growth); market cap defined inline.
+- **faq.html:** watchlist answer rewritten to valuation triggers; "Do you use technical analysis?" now answers "Not for individual stocks. Deliberately for indices and ETFs"; RSI answer scoped to index timing with stocks as context-at-most; ETF-difference answer aligned; protective puts glossed; missing paren fixed in the AAII answer.
+- **indices.html:** three sentences tying RSI/52W to individual-stock entry timing reworded; the timing-signals section now states this page is where the two technical signals belong.
+- **screener.html:** methodology popup closing note now explains the screener grades fundamentals only and technicals time index purchases (was a pointer to "entry timing" on the Metrics page).
+- **finviz.html:** RSI and 52-Week Low filters reframed as optional context filters that surface beaten-down candidates for fundamental review, never buy criteria; Step 3 technical-view guidance rewritten accordingly.
+- **seekingalpha.html:** new note after the 12-column table clarifying the two Technical columns are context, not stock decision inputs.
+- **docs/PRD.md:** primary target user sharpened to the first-position investor profile; Tenet 3 revised from "The reader is motivated, not passive" to "Teach before asserting"; new enforced content rule for the technicals-for-indices doctrine; milestone row added.
+
+### Notes
+
+- Verified after each page: no em dashes introduced, all section IDs and anchors intact, every threshold/number byte-identical where logic was preserved (metrics.html tables verified byte-identical before the doctrine reframe of RSI/52W action labels).
+- Voice decision record: teacher-first hybrid; inline definitions, worked hypothetical examples, analogies, and takeaway boxes applied where they fit; pages allowed to grow 20-40% where scaffolding earns it.
+
+---
+
 ## v3.24.0 — 2026-07-02 — Protecting gains after a strong run
 
 **Added a new "don't blow up your portfolio" theme (self-inflicted risk, escalation traps, forcing trades, structure as protection) and threaded it across the FAQ, home, philosophy, and indices pages. Content only: no code, data, or design changes.**
