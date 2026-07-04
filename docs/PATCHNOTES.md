@@ -2,6 +2,21 @@
 
 ---
 
+## v3.32.3 — 2026-07-03 — Roadmap: v3.33.0 ETF Universe Scoring Model spec completed
+
+**Docs only. The owner picked Price vs 200-Day Moving Average for the last 10 scoring points, and asked for Price vs 20-Day and Price vs 100-Day Moving Average as additional display columns. The ETF Universe Scoring Model is now fully specced at 100/100. No code, workflow, or behavior changes.**
+
+### Added
+
+- **Price vs 200-Day Moving Average**, highest is best, 10 points — completes the 100-point scoring model (RSI 20, 52-Week Range 20, 1Y/5Y/10Y Total Return 10 each, Yield 10, Expense Ratio 10, Price vs 200DMA 10).
+- **Price vs 20-Day Moving Average** and **Price vs 100-Day Moving Average**, unscored display/context columns, giving short/medium/long trend context alongside the scored 200-day signal (same scored-vs-context pattern the stock universes use for P/E FWD).
+
+### Changed
+
+- Visible column count for the ETFs universe is now 14 (was 11): Price, Daily % Change, YTD/1Y/5Y/10Y Total Return, Yield, Expense Ratio, Yield − Expense Ratio, RSI, 52-Week Range, Price vs 20DMA, Price vs 100DMA, Price vs 200DMA.
+
+---
+
 ## v3.32.2 — 2026-07-03 — Roadmap: v3.33.0 ETF Universe Scoring Model spec locked
 
 **Docs only. The owner locked the fixed 10-fund ETF list, the visible column set, and 90 of 100 scoring points for the upcoming v3.33.0 ETFs universe. No code, workflow, or behavior changes.**
