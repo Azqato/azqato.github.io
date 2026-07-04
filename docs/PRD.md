@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.32.1
+**Version:** 3.32.2
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -206,7 +206,8 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.31.0 — Screener: margins removed from scoring, owner growth-forward weights (owner decision 2026-07-03, same day as v3.30.0). The owner had not intended gross/net margin to be scored: the Profitability pillar and its two columns are removed, leaving six metrics in three pillars with owner-set weights Rev TTM 10, Rev FWD 20, EPS TTM 10, EPS FWD 20 (forward growth counts double trailing), PEG FWD 20, Cash vs Debt 20 (Growth 60 / Valuation 20 / Balance sheet 20). Curve re-clamped to top/bottom 22%, recalibrated on the 6-metric model to the same target (~1 perfect 100 in the Nasdaq 100, ~5 in the S&P 500; live at ship: 2 tied and exactly 5). The `grossMargin`/`netMargin` feed fields stay in the pipeline and JSON (harmless, available for future use); Factors chip becomes /6 | 2026-07-03 | Complete |
 | v3.32.0 — Pipeline cleanup. Legacy `FMP_API_KEY` secret deleted from repo settings by the owner (unused since v3.16.0; verified no workflow, script, or page references FMP). Data-files-in-git reclassified from tech debt to intentional design: the committed feeds' git history is the score record that the v4.0.0 sparklines will mine | 2026-07-03 | Complete |
 | v3.32.1 — Docs only. ETFs universe pulled ahead of the International universe in the roadmap by owner priority; milestone numbers swapped (ETFs now v3.33.0, International now v3.34.0) | 2026-07-03 | Complete |
-| v3.33.0 — Screener: ETFs universe (owner-requested 2026-07-03; pulled ahead of the International universe by owner priority 2026-07-03). A fixed, owner-provided list of ETFs rated on an entirely different basis than the stock universes: **technicals (RSI, 52-week range position), long-term performance (multi-year returns), and expense ratios, not fundamentals**. This is doctrine-consistent by design: the methodology's own rule is that technicals time index/ETF purchases while stocks are judged on fundamentals, so the ETF universe gets the technical scoring the stock universes deliberately exclude. Needs its own scoring model, its own column set (no Rev/EPS/PEG columns; RSI, 52W range, expense ratio, trailing returns instead), feed fields from yfinance (price history for RSI and returns; expense ratio), and methodology popup section. Blocked on: the owner's ETF list | After v3.32 | Planned (awaiting owner's ETF list) |
+| v3.32.2 — Docs only. v3.33.0 ETF Universe Scoring Model spec locked: the 10-fund fixed list, the 11 visible columns, and 90 of 100 scoring points, per owner instruction. Last 10-point criterion still pending an owner decision | 2026-07-03 | Complete |
+| v3.33.0 — Screener: ETFs universe (owner-requested 2026-07-03; pulled ahead of the International universe by owner priority 2026-07-03; owner locked the fund list, visible fields, and 9 of 10 scoring criteria 2026-07-03, see the ETF Universe Scoring Model spec below). A **fixed** list of 10 owner-picked ETFs (QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO — no auto-sync, no Vanguard-holdings dependency) rated on an entirely different basis than the stock universes: **technicals (RSI, 52-week range), long-term performance (1/5/10-year returns), yield, and expense ratio, not fundamentals**. This is doctrine-consistent by design: the methodology's own rule is that technicals time index/ETF purchases while stocks are judged on fundamentals, so the ETF universe gets the technical scoring the stock universes deliberately exclude. Needs its own scoring model, its own column set (no Rev/EPS/PEG columns), feed fields from yfinance (price history for RSI/52W/returns; trailing yield; expense ratio, if available via yfinance `fundInfo`/`info` — needs verification per fund), and methodology popup section. Blocked on: the owner's decision on the last 10-point scoring criterion | After v3.32 | Planned (spec locked, one scoring decision pending) |
 | v3.34.0 — Screener: International universe, top 100 holdings of VXUS (Vanguard Total International Stock ETF) only. Deliberately its own release: VXUS reports local-exchange tickers with no exchange suffix (e.g. `2330`, `NESN`), so it needs an ISIN-driven mapping to Yahoo symbols, a decision on local-currency display in the $-formatted columns, and handling for the sparser analyst estimates on foreign listings that feed the scoring pillars. Same Vanguard holdings API and weekly sync as the GVD universes | After v3.33 | Planned |
 | v4.0.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.34 | Planned |
 | v4.1.0 — Deeper index fund coverage (sector ETFs, international allocation, bond tent strategy) | TBD | Planned |
@@ -569,6 +570,29 @@ The P/E-vs-growth ratio (`peFwd / epsFwd`, negative-P/E and shrinking-earnings r
 **Cell colors:** every colored cell follows the same percentile ranking, not absolute thresholds — green = top of the pack on that metric, red = bottom, amber = in between. A missing value in a scored metric renders dark red (it is a hard zero); only the unscored context column (P/E FWD) shows gray for missing. A negative forward P/E or PEG renders red and sorts as a worst (expensive) value, never a cheap one.
 
 **Per-stock popup:** clicking any row opens a focused breakdown for that stock — all six scored metrics with value, percentile, and weighted points (e.g. "7.2/10"), color-coded, with the total score and tier. Missing metrics show 0 points in dark red. Reuses the modal component.
+
+### ETF Universe Scoring Model (v3.33.0, spec locked 2026-07-03; not yet built)
+
+A sixth universe, entirely separate from the five stock universes above: a **fixed, owner-picked list of 10 ETFs**, not an auto-synced index or fund-holdings list. Doctrine-consistent by design — the site's own rule is that individual stocks are judged on fundamentals while index/ETF purchases are timed on technicals, so this universe scores exactly the technical and cost signals the stock universes deliberately exclude. Absolute thresholds are appropriate here (unlike the stock universes' peer-relative percentile model) because the fund list is small and fixed, not because the underlying rule differs; the final scoring mechanics (absolute vs. relative-to-the-10) are still to be worked out during implementation.
+
+**The 10 ETFs (fixed list, no auto-sync):** QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO.
+
+**Visible columns:** Price, Daily % Change, YTD Performance, 1 Year Total Return, 5 Year Total Return, 10 Year Total Return, Yield, Expense Ratio, Yield − Expense Ratio, RSI, 52-Week Range.
+
+**Scoring criteria (90 of 100 points decided 2026-07-03; last 10 points pending an owner decision):**
+
+| Metric | Direction | Points |
+|--------|-----------|--------|
+| RSI | lowest is best | 20 |
+| 52-Week Range (position within range) | lowest is best | 20 |
+| 1 Year Total Return | highest is best | 10 |
+| 5 Year Total Return | highest is best | 10 |
+| 10 Year Total Return | highest is best | 10 |
+| Yield | highest is best | 10 |
+| Expense Ratio | lowest is best | 10 |
+| *(undecided)* | — | 10 |
+
+**Open questions for implementation (not yet resolved):** the last 10-point criterion (see PATCHNOTES v3.32.2 for the options put to the owner and the decision once made); whether yfinance exposes expense ratio and trailing yield reliably for every fund in this list (needs per-ticker verification — ETF `info`/`fundInfo` fields are less consistent than equity fundamentals); how RSI and 52-Week Range position are computed for this universe (reuse the existing price-history-derived formulas from the indices-methodology doctrine, applied here as scored columns instead of context-only signals); whether scoring is absolute (fixed thresholds) or percentile-relative-to-the-10 like the stock universes; feed/pipeline design (separate `data/screener_etfs.json`, its own fetch script or an extension of `fetch_screener_data.py`, refresh cadence).
 
 ### State Management
 

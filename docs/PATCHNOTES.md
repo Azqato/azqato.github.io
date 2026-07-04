@@ -2,6 +2,17 @@
 
 ---
 
+## v3.32.2 — 2026-07-03 — Roadmap: v3.33.0 ETF Universe Scoring Model spec locked
+
+**Docs only. The owner locked the fixed 10-fund ETF list, the visible column set, and 90 of 100 scoring points for the upcoming v3.33.0 ETFs universe. No code, workflow, or behavior changes.**
+
+### Added
+
+- **PRD "ETF Universe Scoring Model" section**: fixed list (QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO, no auto-sync); 11 visible columns (Price, Daily % Change, YTD/1Y/5Y/10Y Total Return, Yield, Expense Ratio, Yield − Expense Ratio, RSI, 52-Week Range); scoring table for the 9 decided criteria: RSI (lowest best, 20), 52-Week Range (lowest best, 20), 1Y/5Y/10Y Total Return (highest best, 10 each), Yield (highest best, 10), Expense Ratio (lowest best, 10) — 90 of 100 points.
+- **Open question recorded:** the last 10-point criterion. Five options were put to the owner: (1) YTD Performance, highest best — already a visible column, fills the gap in the return-horizon ladder alongside 1Y/5Y/10Y, needs no new yfinance field; (2) Yield − Expense Ratio (net yield), highest best — also already a visible column, rewards funds whose distribution actually outpaces its cost to hold; (3) Price vs. 200-day moving average (trend/momentum), a technical signal in the same family as RSI; (4) Trailing volatility (e.g. 1-year return standard deviation), lowest best, a risk-adjusted/steadiness signal; (5) Average trading volume/liquidity, highest best, a practical tradability signal (weakest fit to the technicals/performance/cost doctrine of the other nine criteria).
+
+---
+
 ## v3.32.1 — 2026-07-03 — Roadmap: ETFs universe prioritized ahead of International
 
 **Docs only. The owner asked to ship the ETFs universe before the International (VXUS) universe. Milestone numbers swapped: ETFs is now v3.33.0 (still blocked on the owner's ETF list), International is now v3.34.0. No code, workflow, or behavior changes.**
