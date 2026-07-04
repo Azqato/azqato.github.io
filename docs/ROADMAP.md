@@ -1,6 +1,6 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.33.2
+**Version:** 3.33.3
 **Last Updated:** 2026-07-03
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
@@ -50,20 +50,20 @@ Deliverable (this section) presented to the owner 2026-07-03; Phase 3 decisions 
 2. New workflow **`screener-data-intl.yml`**: Tue-Sat 00:15 UTC (15 minutes after the GVD job, keeping the stagger), same `screener-data` concurrency group, same pinned `yfinance==1.4.1`, `[skip ci]` commit.
 3. Seed the feed with a local run before shipping, as with every prior universe.
 
-### Phase 3 — Owner decisions (gate between probe and build)
+### Phase 3 — Owner decisions (all locked 2026-07-03)
 
-Probe data is in; two of the three are now settled by the numbers, one remains a genuine preference call:
-
-1. **Currency display — recommendation confirmed by data, still needs an owner sign-off.** Keep numbers in native currency and label them (e.g. `2,445 TWD` or a `cur` suffix on the Price cell; the Cash/Debt column already renders a ratio so the label matters less there). Converting to USD would add an FX-rate feed dependency for purely cosmetic benefit, and scoring is unaffected either way — all six scored metrics are growth rates and ratios, currency-agnostic by construction. The probe found real diversity (TWD/KRW/EUR/GBP/JPY/CHF/HKD/CAD+ in just the top 15), so this isn't a corner case to special-case away.
+1. **Currency display — LOCKED: native currency, labeled with the currency symbol where one exists.** Numbers render in each stock's local currency using its **symbol**, not the 3-letter code, wherever a standard symbol exists (e.g. `NT$2,445` for TWD, `₩309,500` for KRW, `€284.10` for EUR, `£` for GBP, `¥` for JPY, `HK$` for HKD, `C$` for CAD). Fall back to the 3-letter ISO code (e.g. `CHF`) only for currencies with no widely recognized symbol or where the symbol is ambiguous with `$` alone (e.g. distinguish `HK$`/`NT$`/`C$` rather than a bare `$`, since the site's existing `$` always means USD elsewhere). No FX-rate feed dependency; scoring is unaffected either way — all six scored metrics are growth rates and ratios, currency-agnostic by construction.
 2. **Sparse estimates — resolved by the probe, no owner decision needed.** Coverage on all six scored inputs is 88-100% (worst case `earningsGrowth`/epsTTM at 88/100). Keep the hard-zero rule exactly as-is: no shrunk denominator, no dropped names. The methodology popup gets one added sentence noting that a small number of international names may show a lower Factors count where Yahoo's analyst coverage is thin, same framing as the existing hard-zero note for domestic stocks.
-3. **ADR preference — still an owner call, unaffected by the probe** (the probe resolved every top-100 name to its local listing without needing an ADR fallback, so this is about ranking philosophy, not data availability). Recommendation stands: rank the local listing that Vanguard actually holds (that's what the fund owns and what should be scored); use a liquid US ADR only as a manual-override fallback in `vxus_map.json` for the rare case where the local line has no Yahoo data at all — none of the top 100 needed this in the probe, so the fallback path may simply go unused at launch.
+3. **ADR preference — LOCKED: rank the local listing.** Rank the local listing that Vanguard actually holds (that's what the fund owns and what should be scored); use a liquid US ADR only as a manual-override fallback in `vxus_map.json` for the rare case where the local line has no Yahoo data at all — none of the top 100 needed this in the probe, so the fallback path may simply go unused at launch.
+
+**All three Phase 3 gates are now clear. Phase 1 (constituents and mapping) can begin.**
 
 ### Phase 4 — Frontend
 
 Small by design, because v3.33.0 pre-paid for it:
 
 1. Add `intl` to `UNIVERSES` in `screener.js` with `kind` omitted (stock kind), paths to `screener_intl.json`, its own cache key. Seventh button in `screener.html` plus meta/disclaimer updates.
-2. If the currency decision lands on labeling: thread the `cur` field through `rows()` and the Price cell formatter for stock mode (no-op for feeds without `cur`, so the five domestic universes render exactly as before).
+2. Thread the `cur` field (ISO code from `info["currency"]`) through `rows()` and the Price/Cash/Debt cell formatters for stock mode (no-op for feeds without `cur`, so the five domestic universes render exactly as before). Add a small `CURRENCY_SYMBOLS` lookup (ISO code → symbol: `TWD → "NT$"`, `KRW → "₩"`, `EUR → "€"`, `GBP → "£"`, `JPY → "¥"`, `HKD → "HK$"`, `CAD → "C$"`, `CHF` has no fallback so it prints the code, plus entries for any other currency the resolved top 100 turns up) so formatting is a plain object lookup, not per-currency branching logic. Unknown/unmapped codes fall back to printing the ISO code itself.
 3. Methodology popup: one paragraph in the stock section's universe-source table (VXUS top 100, Vanguard holdings API, local listings, currency note, estimates-coverage note).
 
 ### Verification and acceptance

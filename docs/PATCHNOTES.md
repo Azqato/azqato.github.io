@@ -2,6 +2,17 @@
 
 ---
 
+## v3.33.3 — 2026-07-03 — Docs: v3.34.0 Phase 3 owner decisions locked
+
+**Docs only. All three Phase 3 owner-decision gates for the v3.34.0 International universe are now locked: currency display (native currency, labeled with the currency symbol rather than the ISO code, per owner refinement), sparse estimates (hard-zero rule kept as-specced, already resolved by the probe), and ADR vs. local-listing ranking (rank the local listing). Phase 1 (constituents and mapping) is cleared to begin. No code, workflow, or behavior changes.**
+
+### Changed
+
+- ROADMAP.md Phase 3: currency-display decision refined from a plain ISO-code label (e.g. `2,445 TWD`) to a **currency-symbol** label (e.g. `NT$2,445`, `₩309,500`, `€284.10`) wherever a standard symbol exists, falling back to the ISO code only when no widely recognized symbol exists (e.g. `CHF`) or where a bare `$` would be ambiguous with the site's existing USD `$` convention (so `HK$`/`NT$`/`C$`, never a bare `$`).
+- ROADMAP.md Phase 4 (frontend): added a `CURRENCY_SYMBOLS` lookup design note (ISO code → symbol, plain object lookup) for the eventual `cur`-field formatter, so v3.34.0's build has this decided in advance.
+
+---
+
 ## v3.33.2 — 2026-07-03 — Docs: v3.34.0 Phase 0 probe findings
 
 **Docs only. Ran the v3.34.0 International-universe Phase 0 probe live (Vanguard holdings API shape, ISIN-to-Yahoo symbol resolution, yfinance field coverage on the six scored metrics) against real VXUS data, ahead of any production code. Findings logged in ROADMAP.md and the PRD milestone table. No code, workflow, or behavior changes.**
