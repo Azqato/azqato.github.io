@@ -2,6 +2,18 @@
 
 ---
 
+## v3.34.11 — 2026-07-04 — Roadmap restructure: screener scroll fix reframed as a responsive redesign, reprioritized
+
+**Owner clarified the real requirement behind the ongoing scroll reports: the screener should reflow so scrolling is never needed at all, not just that the existing (apparently invisible/overlay) scrollbar become easier to find. Also asked whether this should merge with the already-planned v4.5.0 mobile pass — reversing an earlier decision to keep them separate, since the design question (how should the table adapt across widths?) is now the same task, not a narrow bug fix plus a later broad audit. No code changes in this entry — a roadmap restructure only.**
+
+### Changed
+
+- **v3.34.10's scrollbar-visibility fix is superseded, never shipped.** Its diagnosis (confirmed via a live-site width sweep that the v3.34.8 box-sizing fix is correct everywhere, and that headless Chromium can't reproduce Chrome/Opera's default overlay-scrollbar behavior) is kept for the record but the planned CSS/JS fix itself is moot once columns auto-hide instead of overflowing.
+- **v4.5.0 reprioritized from the end of the roadmap to the front of the queue**, and rescoped: owner decided on auto-hiding column groups at narrower widths (Ticker/Tier/Score/Factors always visible; other groups progressively hide, extending the existing Columns menu with width-based defaults) over a card-view rebuild or fluid/shrink-to-fit sizing.
+- **Scope audit**: confirmed only `screener.html` has any fixed-width element causing this class of problem — the other 8 pages already reflow correctly with no changes needed. Also confirmed the toolbar row (chips, Columns/Methodology buttons) already wraps correctly via `flex-wrap` at narrow widths in headless Chrome — no fix needed there.
+
+---
+
 ## v3.34.10 — 2026-07-04 — Diagnosis: scrollbar still undiscoverable after v3.34.8 (plan only, not yet executed)
 
 **Two further reports after v3.34.8 shipped show the horizontal-scroll issue isn't fully resolved: the original friend still can't scroll on Opera at their native 1280×1024, and the owner reports the table "stops scaling" when narrowing a Chrome window. Diagnosed via a live-site width sweep (1030-1400px) in headless Chrome: the v3.34.8 box-sizing fix is confirmed correct at every width tested, but headless Chromium can't reproduce what two real users on two Chromium-family browsers are both seeing — pointing at Chrome/Opera's default overlay scrollbar (hover-only, invisible in a static look) as the real remaining cause. A three-part fix is drafted in ROADMAP.md (persistently-visible scrollbar styling, wheel-to-horizontal-scroll redirect, right-edge fade affordance) but intentionally not yet executed, per instruction to present the plan first. No code changed in this entry.**

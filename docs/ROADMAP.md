@@ -1,41 +1,32 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.10
+**Version:** 3.34.11
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.34.10 → v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
+Release order (updated 2026-07-04): **v4.5.0 (reprioritized to the front)** → v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
 
 ---
 
-## v3.34.10 — Screener: Scrollbar Undiscoverable/Invisible at Narrower Widths — PLANNED, NOT YET EXECUTED
+## v3.34.10 — Screener: Scrollbar Undiscoverable/Invisible at Narrower Widths — SUPERSEDED BY v4.5.0
 
-### Goal
+Diagnosis performed 2026-07-04 (kept below for the record); the fix itself never shipped. After the owner clarified the actual requirement is "the table should reflow/adapt so scrolling is never needed, not just that the existing scrollbar becomes easier to find," this item's scope was folded entirely into a reprioritized v4.5.0 (see below), since a scrollbar-visibility patch would be moot once the table auto-hides columns to fit instead of overflowing. The diagnosis below remains useful background for *why* v4.5.0 needed to happen now instead of later.
+
+<details>
+<summary>Original diagnosis (2026-07-04, read-only, no code shipped)</summary>
 
 The v3.34.8 fix resolved the *sizing* bug (the table-wrap escaping its container) but did not fully resolve the reported issue: the table still becomes unreachable past a certain window width, for more than one person and more than one browser. Two further reports the same day, both after v3.34.8 shipped:
 1. The original friend, on **Opera**, still can't scroll the ETFs table (only 10 rows — rules out vertical-height/row-count as a factor) at their native 1280×1024 resolution, maximized.
 2. The owner, on **Chrome** (Incognito), reports that narrowing the browser window from the right causes the table and toolbar to stop scaling — the table just cuts off after a point, with no visible way to reach the rest.
 
-### Diagnosis (2026-07-04, read-only — no code changed yet)
+**Diagnosis:**
+1. Confirmed the v3.34.8 fix is live on the deployed site (`min-height: 0` on `.app-table-wrap`, `minmax(0, 1fr)` on `.site-layout` both present) — rules out stale cache/deployment lag.
+2. Reproduced both reports' exact widths in headless Chrome against the live site (1280×1024 for the Opera report; a sweep from 1030px to 1400px for the Chrome resize report) — the scrollbar renders correctly and the box is properly sized at every width tested. Strong evidence the box-sizing bug is genuinely fixed.
+3. Headless Chromium was not reproducing what two different real users, on two different Chromium-family browsers, were both experiencing — pointing at Chrome/Opera's default `overflow: auto` scrollbar rendering as a thin overlay that only appears on hover/active scrolling (invisible in a static look, and in every headless screenshot). Confirmed via a separate check: the `.app-toolbar` row (chips, Columns/Methodology buttons) already wraps correctly onto a second line at narrow widths in headless Chrome (`flex-wrap: wrap` working as designed) — the site's existing responsive infrastructure works; it's specifically the *table's* horizontal-scroll affordance that's undiscoverable.
+4. The drafted (never-shipped) fix was: a persistently-visible non-overlay scrollbar via `::-webkit-scrollbar` styling, a wheel-to-horizontal-scroll redirect, and a right-edge fade affordance. **Superseded** — see v4.5.0.
 
-1. **Confirmed the v3.34.8 fix is live** on the deployed site (`min-height: 0` on `.app-table-wrap`, `minmax(0, 1fr)` on `.site-layout` both present) — rules out stale cache/deployment lag.
-2. **Reproduced both reports' exact widths in headless Chrome against the live site** (1280×1024 for the Opera report; a sweep from 1030px to 1400px for the Chrome resize report) — **the scrollbar renders correctly and the box is properly sized at every width tested.** This is strong, repeated evidence the box-sizing bug is genuinely fixed; the container is correctly bounded to the viewport at every width checked.
-3. **This is the key finding: headless Chromium is not reproducing what two different real users, on two different Chromium-family browsers (Opera and regular Chrome), are both experiencing.** The most consistent explanation across both reports: Chrome/Opera's default `overflow: auto` scrollbar on Windows renders as a **thin overlay that only appears on hover or while actively scrolling** — invisible in a static look at the page, and easy to miss entirely at the very bottom edge of a table sitting flush against the disclaimer bar. Headless Chrome's automated rendering environment does not reproduce this hover-dependent overlay behavior, which is exactly why every one of my headless screenshots "looks fixed" while two independent real users still can't find or use it. This reframes the remaining problem as **scrollbar visibility/discoverability, not box-sizing** — the sizing fix was necessary but not sufficient.
-4. The owner's "stops scaling" framing is the same bug, not a new one: at a given width the table needs horizontal scrolling, and the (invisible, hover-only) scrollbar is technically present but not something a user notices or can reliably grab — it isn't that the layout stops responding to resize, it's that the scroll affordance past that width isn't discoverable.
-
-### Owner's specific question, answered
-
-**"Would capping the table's max-width to his smaller resolution help?"** No — recommend against this. Two reasons:
-1. **The table isn't actually breaking the page anymore.** The v3.34.8 fix already bounds `.app-table-wrap` to the viewport correctly (verified above, at every width tested); it's not "making the page too big" in the sense of escaping its container. Capping the table's own width wouldn't address a sizing bug that no longer exists.
-2. **Capping width would trade one problem for a worse one.** With ~20 columns (stock universes) or the ETF universe's own wide layout, forcing the table to fit inside ~1024-1280px without scrolling would require columns to shrink to the point of being illegibly cramped or force awkward text-wrapping in numeric cells — worse than horizontal scrolling, and it still wouldn't fix the real problem (an invisible/undiscoverable scroll affordance), since the identical overlay-scrollbar issue would resurface the moment any future column set or narrower monitor exceeds whatever new fixed cap was chosen.
-
-### Plan (not yet executed — awaiting go-ahead)
-
-1. **Force a persistently-visible, non-overlay scrollbar** on `.app-table-wrap`: explicit `scrollbar-width: auto;` (Firefox) plus `::-webkit-scrollbar` / `::-webkit-scrollbar-thumb` / `::-webkit-scrollbar-track` sizing (Chromium/Opera respect this) with a generous height (e.g. 12-14px) and a clearly visible thumb color, overriding the browser's default auto-hide/overlay behavior. This directly targets the now-confirmed root cause.
-2. **Add a scroll-by-wheel enhancement**: a `wheel` event listener on `.app-table-wrap` that redirects a plain (non-Shift) vertical wheel delta into horizontal scroll once vertical scrolling is exhausted (or immediately for short tables like the 10-row ETFs universe, which has no meaningful vertical scroll need at all) — helps users whose mouse has no horizontal-scroll gesture and who wouldn't otherwise find a persistently-visible scrollbar's drag handle.
-3. **Add a lightweight "more columns" visual affordance**: a subtle fade/shadow on the table's right edge when there's unscrolled content to the right, so the presence of more columns is obvious before a user tries anything.
-4. **Verification plan**: headless Chromium cannot reproduce the overlay-scrollbar failure mode at all (confirmed across a full width sweep against the live site), so automated screenshot verification cannot prove this fix on its own. Verification will rely on: (a) confirming the CSS scrollbar override is present and non-default in the shipped code (headless can confirm the rule exists, just not that it "looks right" to a real user), and (b) an explicit ask for the owner or the friend to confirm on their actual machine after deploying. Flagging this now so a future "verified" claim doesn't overstate what headless testing can actually prove here.
+</details>
 
 ---
 
@@ -412,31 +403,43 @@ A new setup-guide page (peer to `finviz.html` and `seekingalpha.html`) teaching 
 
 ---
 
-## v4.5.0 — Site-Wide Mobile-Friendliness Pass
+## v4.5.0 — Screener Responsive Redesign & Site-Wide Mobile-Friendliness Pass — REPRIORITIZED TO THE FRONT (2026-07-04)
+
+### Why this moved to the front of the queue
+
+Originally the last item in the roadmap (a backlog hardening pass). Reprioritized the same day two real users hit the screener's horizontal-scroll problem (v3.34.8, v3.34.10): the owner clarified the actual requirement is **the screener should reflow so scrolling is never needed at all**, not just that the existing scroll mechanism become easier to find. That is fundamentally the same design question this pass was already scoped to answer ("should the table pin columns and reflow, or just scroll, at narrow widths?") — solving it once now, across the full width range (desktop-narrow through phone), avoids redoing the same design work twice and avoids shipping two different narrow-width behaviors a few weeks apart. v3.34.10's scrollbar-visibility fix is superseded and folded in here (see that entry for the diagnosis that led to this decision).
 
 ### Goal
 
-A dedicated review-and-fix pass for phone-width usage across every page, not just a spot fix. The site already has real responsive infrastructure (`<meta name="viewport">` present site-wide; sidebar nav collapses to a hamburger under 1024px in `style.css`; the screener's methodology modal drops to full width under 900px; the universe-switcher buttons already wrap via `flex-wrap`), so this is a **hardening and audit pass**, not a from-scratch mobile build.
+A dedicated redesign so the screener remains fully usable — no horizontal scrolling required — across the entire range from full desktop down to phone width, plus the original mobile-hardening scope for the other 8 content pages (which, per audit below, don't have this problem — they're normal flowing content with no fixed-width elements).
 
-### Known starting points (found by code inspection, 2026-07-04)
+### Owner decision (2026-07-04)
 
-1. **The screener's main data table** (`.app-table-wrap`, `min-width: 900px` on the inner table) is deliberately horizontal-scroll on phones, which is a defensible choice for a dense data grid, but has never been reviewed for whether it's the *right* choice — e.g. whether the Ticker/Tier/Score columns should stick to the left edge while the rest scrolls, so a phone user always has orientation context. Worth a deliberate decision, not just inherited behavior. (v3.34.8 already fixed the underlying bug where this scroll container silently broke at certain desktop resolutions — `min-height: 0` on `.app-table-wrap` plus `minmax(0, 1fr)` on the shared `.site-layout` grid — so this pass starts from "scrolling works everywhere," not "fix scrolling," and can focus purely on the UX decision.)
-2. **The universe switcher now has 7 buttons** (Nasdaq 100, S&P 500, Growth, Value, Dividend, ETFs, International, after v3.34.0) in a `flex-wrap` row — functional, but never checked for how many rows it wraps to on a 375px-wide phone or whether it pushes the summary/search controls down awkwardly.
-3. **The methodology modal's tables** share the same `.table-wrap` component flagged in v3.35.0; that fix should land first since the mobile pass would otherwise be reviewing tables that are known-broken for an unrelated reason.
-4. **Touch target sizing** has not been audited: chip filters, column-visibility checkboxes, and the sort-arrow click targets in table headers were sized for mouse pointers first.
-5. **Content pages** (`philosophy.html`, `metrics.html`, `indices.html`, `finviz.html`, `seekingalpha.html`, `faq.html`) have a `max-width: 767px` breakpoint that shrinks headings and collapses the metric grid to one column, but has not been checked against real device widths (iPhone SE-class 375px vs. a larger phone) for anything beyond that one breakpoint.
+**Auto-hide column groups at narrower widths**, extending the existing Columns menu rather than building a new component: below defined width breakpoints, lower-priority column groups progressively hide automatically (Ticker/Tier/Score/Factors and Snapshot always visible; Growth/Performance, then Valuation/Income, then Balance Sheet/Technicals drop off as the window narrows), with the existing Columns menu still available to manually override which groups show at any width. Rejected alternatives: a card-per-stock layout (real UI rebuild, loses at-a-glance column scanning) and pure fluid/shrink-to-fit sizing (hard legibility floor with 15-20 financial columns; wouldn't actually eliminate scrolling on its own).
+
+### Scope confirmed narrow (2026-07-04, read-only audit)
+
+Checked all 9 pages for fixed-width elements that could force horizontal overflow: **only `screener.html` has one** (the data table). The other 8 pages (`philosophy.html`, `metrics.html`, `indices.html`, `finviz.html`, `seekingalpha.html`, `faq.html`, `index.html`, plus the shared sidebar) are normal flowing prose/content with no wide fixed-width elements, and already reflow correctly — the `max-width: 767px` breakpoint (shrinks headings, collapses the metric grid) has not been checked against real device widths but is not expected to need structural changes, just verification. The `.app-toolbar` row (chips, Columns/Methodology buttons) already wraps correctly via `flex-wrap: wrap` at narrow widths (confirmed in headless Chrome at 1150px — Methodology button wraps to its own second line rather than being clipped) — no fix needed there, just inclusion in the width-sweep verification pass.
+
+### Known starting points (carried over from the original scope, still relevant)
+
+1. **The universe switcher has 7 buttons** (Nasdaq 100, S&P 500, Growth, Value, Dividend, ETFs, International) in a `flex-wrap` row — functional, but never checked for how many rows it wraps to on a 375px phone or whether it pushes other controls down awkwardly. May also need auto-collapse-to-dropdown treatment at some width, consistent with the column-hiding approach.
+2. **The methodology modal's tables** share the same `.table-wrap` component flagged in v3.35.0; sequence that fix in alongside this pass (or before it) since both touch table rendering.
+3. **Touch target sizing** has not been audited: chip filters, column-visibility checkboxes, and the sort-arrow click targets in table headers were sized for mouse pointers first.
 
 ### Plan
 
-1. **Sequence after v3.35.0** (the table CSS bug fix), since fixing `.table-wrap` changes what "currently broken" looks like for both the methodology tables and any content-page tables this pass would otherwise flag as a mobile-specific issue.
-2. **Device-width audit**: headless Chrome (or manual DevTools) pass at 375px, 414px, and 768px widths across all 9 pages (8 content + screener), cataloging concrete issues (not just "looks cramped") — overflow, overlapping elements, unreachable controls, text truncation that hides information.
-3. **Screener-specific decisions**: whether to pin the Ticker/Tier/Score columns while scrolling the rest of the table; whether the universe-switcher should become a dropdown below some width instead of an ever-taller wrapped button grid; whether the Columns menu and search box need resizing on narrow widths.
-4. **Fix and re-verify**: apply fixes page by page, re-running the same headless width audit to confirm each fix didn't regress desktop rendering (every page already works on desktop; this pass must not be a rewrite).
+1. **Define the column-group breakpoint tiers** for the stock table (Snapshot/Growth/Valuation/Balance Sheet groups) and the ETF table (Snapshot/Performance/Income/Technicals groups) separately, since they have different column counts and priorities. Ticker/Tier/Score/Factors always visible at every width (this is the information needed to answer "is this a good stock/fund," the core of the site's value).
+2. **Implement auto-hide via the existing Columns-menu infrastructure**: the checkboxes that already drive `applyColumnVisibility()` get their checked state driven by a width-based default in addition to manual user toggling, so a user's manual choice is still respected but the automatic default adapts to window width.
+3. **Universe-switcher and toolbar row**: decide whether the 7-button row needs its own narrow-width treatment (e.g. collapsing to a dropdown) or whether `flex-wrap` (already confirmed working) is sufficient — likely sufficient given confirmed correct wrapping behavior, revisit only if the width audit below finds it awkward.
+4. **Device/window-width audit**: headless Chrome sweep from ~375px (phone) up through ~1024-1280px (narrow desktop, matching both real reports) to ~1920px (full desktop) across the screener (both stock and ETF/International column sets) and spot-check the other 8 pages, cataloging concrete issues.
+5. **Fix and re-verify**: apply fixes, re-run the same width sweep to confirm no desktop regression (every page already works at full width; this must not be a rewrite of what's already correct).
 
 ### Verification
 
-- Headless Chrome screenshots or DOM checks at 375px/414px/768px for all 9 pages, before and after, kept as a before/after record in the PATCHNOTES entry.
-- Confirm no desktop regression: full click-through of the screener (universe switch, sort, filter, popup, methodology modal) at the existing desktop width after the pass.
+- Headless Chrome screenshots/DOM checks across the full width range (375px through ~1920px) for the screener in both stock-kind and ETF-kind modes, confirming Ticker/Tier/Score/Factors are always visible and no column group is ever clipped without also being hidden (i.e., never scroll-required, per the owner's requirement) — a real, provable check unlike the scrollbar-visibility dead end in v3.34.10.
+- Spot-check the other 8 pages at 375px/414px/768px, before/after, kept as a record in the PATCHNOTES entry.
+- Full click-through of the screener (universe switch, sort, filter, popup, methodology modal, Columns-menu manual override) at several widths after the pass, confirming manual overrides still work on top of the automatic width-based defaults.
 
 ---
 
