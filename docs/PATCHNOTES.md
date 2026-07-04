@@ -2,6 +2,12 @@
 
 ---
 
+## v3.34.10 — 2026-07-04 — Diagnosis: scrollbar still undiscoverable after v3.34.8 (plan only, not yet executed)
+
+**Two further reports after v3.34.8 shipped show the horizontal-scroll issue isn't fully resolved: the original friend still can't scroll on Opera at their native 1280×1024, and the owner reports the table "stops scaling" when narrowing a Chrome window. Diagnosed via a live-site width sweep (1030-1400px) in headless Chrome: the v3.34.8 box-sizing fix is confirmed correct at every width tested, but headless Chromium can't reproduce what two real users on two Chromium-family browsers are both seeing — pointing at Chrome/Opera's default overlay scrollbar (hover-only, invisible in a static look) as the real remaining cause. A three-part fix is drafted in ROADMAP.md (persistently-visible scrollbar styling, wheel-to-horizontal-scroll redirect, right-edge fade affordance) but intentionally not yet executed, per instruction to present the plan first. No code changed in this entry.**
+
+---
+
 ## v3.34.9 — 2026-07-04 — Flagged: ETF rating methodology needs review
 
 **Owner flagged that the ETFs universe scoring methodology needs a review; specifics to follow in a later prompt. No code changes in this entry — logged here and in ROADMAP.md as a placeholder so it isn't lost.**

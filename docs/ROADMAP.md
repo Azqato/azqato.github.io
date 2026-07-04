@@ -1,11 +1,41 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.9
+**Version:** 3.34.10
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
+Release order (updated 2026-07-04): v3.34.10 → v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
+
+---
+
+## v3.34.10 — Screener: Scrollbar Undiscoverable/Invisible at Narrower Widths — PLANNED, NOT YET EXECUTED
+
+### Goal
+
+The v3.34.8 fix resolved the *sizing* bug (the table-wrap escaping its container) but did not fully resolve the reported issue: the table still becomes unreachable past a certain window width, for more than one person and more than one browser. Two further reports the same day, both after v3.34.8 shipped:
+1. The original friend, on **Opera**, still can't scroll the ETFs table (only 10 rows — rules out vertical-height/row-count as a factor) at their native 1280×1024 resolution, maximized.
+2. The owner, on **Chrome** (Incognito), reports that narrowing the browser window from the right causes the table and toolbar to stop scaling — the table just cuts off after a point, with no visible way to reach the rest.
+
+### Diagnosis (2026-07-04, read-only — no code changed yet)
+
+1. **Confirmed the v3.34.8 fix is live** on the deployed site (`min-height: 0` on `.app-table-wrap`, `minmax(0, 1fr)` on `.site-layout` both present) — rules out stale cache/deployment lag.
+2. **Reproduced both reports' exact widths in headless Chrome against the live site** (1280×1024 for the Opera report; a sweep from 1030px to 1400px for the Chrome resize report) — **the scrollbar renders correctly and the box is properly sized at every width tested.** This is strong, repeated evidence the box-sizing bug is genuinely fixed; the container is correctly bounded to the viewport at every width checked.
+3. **This is the key finding: headless Chromium is not reproducing what two different real users, on two different Chromium-family browsers (Opera and regular Chrome), are both experiencing.** The most consistent explanation across both reports: Chrome/Opera's default `overflow: auto` scrollbar on Windows renders as a **thin overlay that only appears on hover or while actively scrolling** — invisible in a static look at the page, and easy to miss entirely at the very bottom edge of a table sitting flush against the disclaimer bar. Headless Chrome's automated rendering environment does not reproduce this hover-dependent overlay behavior, which is exactly why every one of my headless screenshots "looks fixed" while two independent real users still can't find or use it. This reframes the remaining problem as **scrollbar visibility/discoverability, not box-sizing** — the sizing fix was necessary but not sufficient.
+4. The owner's "stops scaling" framing is the same bug, not a new one: at a given width the table needs horizontal scrolling, and the (invisible, hover-only) scrollbar is technically present but not something a user notices or can reliably grab — it isn't that the layout stops responding to resize, it's that the scroll affordance past that width isn't discoverable.
+
+### Owner's specific question, answered
+
+**"Would capping the table's max-width to his smaller resolution help?"** No — recommend against this. Two reasons:
+1. **The table isn't actually breaking the page anymore.** The v3.34.8 fix already bounds `.app-table-wrap` to the viewport correctly (verified above, at every width tested); it's not "making the page too big" in the sense of escaping its container. Capping the table's own width wouldn't address a sizing bug that no longer exists.
+2. **Capping width would trade one problem for a worse one.** With ~20 columns (stock universes) or the ETF universe's own wide layout, forcing the table to fit inside ~1024-1280px without scrolling would require columns to shrink to the point of being illegibly cramped or force awkward text-wrapping in numeric cells — worse than horizontal scrolling, and it still wouldn't fix the real problem (an invisible/undiscoverable scroll affordance), since the identical overlay-scrollbar issue would resurface the moment any future column set or narrower monitor exceeds whatever new fixed cap was chosen.
+
+### Plan (not yet executed — awaiting go-ahead)
+
+1. **Force a persistently-visible, non-overlay scrollbar** on `.app-table-wrap`: explicit `scrollbar-width: auto;` (Firefox) plus `::-webkit-scrollbar` / `::-webkit-scrollbar-thumb` / `::-webkit-scrollbar-track` sizing (Chromium/Opera respect this) with a generous height (e.g. 12-14px) and a clearly visible thumb color, overriding the browser's default auto-hide/overlay behavior. This directly targets the now-confirmed root cause.
+2. **Add a scroll-by-wheel enhancement**: a `wheel` event listener on `.app-table-wrap` that redirects a plain (non-Shift) vertical wheel delta into horizontal scroll once vertical scrolling is exhausted (or immediately for short tables like the 10-row ETFs universe, which has no meaningful vertical scroll need at all) — helps users whose mouse has no horizontal-scroll gesture and who wouldn't otherwise find a persistently-visible scrollbar's drag handle.
+3. **Add a lightweight "more columns" visual affordance**: a subtle fade/shadow on the table's right edge when there's unscrolled content to the right, so the presence of more columns is obvious before a user tries anything.
+4. **Verification plan**: headless Chromium cannot reproduce the overlay-scrollbar failure mode at all (confirmed across a full width sweep against the live site), so automated screenshot verification cannot prove this fix on its own. Verification will rely on: (a) confirming the CSS scrollbar override is present and non-default in the shipped code (headless can confirm the rule exists, just not that it "looks right" to a real user), and (b) an explicit ask for the owner or the friend to confirm on their actual machine after deploying. Flagging this now so a future "verified" claim doesn't overstate what headless testing can actually prove here.
 
 ---
 
