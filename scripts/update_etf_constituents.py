@@ -82,6 +82,33 @@ VXUS_RAW_HI = 520
 # short exchange code -- much looser than the domestic BRK.B-style regex.
 VXUS_SYMBOL_RE = re.compile(r"^[A-Z0-9-]{1,10}(\.[A-Z]{1,3})?$")
 
+# Same-issuer entries Vanguard reports under multiple ISINs that should count
+# as ONE company for the top-100 cut (weight summed into the kept ISIN, the
+# other dropped before ranking). Three distinct reasons, all hand-verified by
+# inspecting Vanguard's raw response 2026-07-04 -- do NOT auto-detect this by
+# name similarity, since a naive name match also flags SoftBank Group Corp
+# and SoftBank Corp as "the same," which they are not (parent holding company
+# vs. a separately-traded, separately-run subsidiary):
+#   - A genuine duplicate custody record for the identical security: one line
+#     always has a blank ticker (Vanguard shortName ends "-PRIM" for Air
+#     Liquide), likely a French registered/bearer-share settlement split.
+#     Keep the ticker-bearing line.
+#   - A real dual share class (Samsung Electronics common/preferred, Investor
+#     AB and Atlas Copco A/B): keep the higher-weighted (more liquid) class.
+#   - A dual listing of the same underlying group across exchanges (Rio
+#     Tinto's London/Australia listings, CATL's Hong Kong/Shenzhen listings):
+#     keep the higher-weighted listing.
+VXUS_SAME_ISSUER_MERGE = {
+    "KR7005930003": ["KR7005931001"],   # Samsung Electronics: common kept, preferred merged in
+    "FR0000120073": ["FR0000053951"],   # Air Liquide: ticker-bearing line kept, blank-ticker duplicate merged in
+    "FR0000120321": ["FR0011149590"],   # L'Oreal: ticker-bearing line kept, blank-ticker duplicate merged in
+    "FR0010208488": ["FR0013215407"],   # Engie: ticker-bearing line kept, blank-ticker duplicate merged in
+    "SE0015811963": ["SE0015811955"],   # Investor AB: Class B (higher weight) kept, Class A merged in
+    "SE0017486889": ["SE0017486897"],   # Atlas Copco: Class A (higher weight) kept, Class B merged in
+    "GB0007188757": ["AU000000RIO1"],   # Rio Tinto: London plc (higher weight) kept, Australia Ltd merged in
+    "CNE100006WS8": ["CNE100003662"],   # CATL: Hong Kong listing (higher weight) kept, Shenzhen A-share merged in
+}
+
 
 def clean_name(n):
     n = str(n).strip()
@@ -160,7 +187,11 @@ def fetch_vxus_raw():
     Vanguard's raw response occasionally reports the same ISIN as two
     separate rows (observed for BHP Group and Barrick Gold) -- merge those
     before ranking so "top 100 by weight" means 100 distinct issuers, not
-    a split holding occupying two slots.
+    a split holding occupying two slots. Separately, VXUS_SAME_ISSUER_MERGE
+    folds in hand-verified same-company holdings reported under genuinely
+    different ISINs (dual share classes, dual listings, and a same-security
+    custody-record duplicate), so "top 100 by weight" also means 100 distinct
+    companies, not a company occupying two slots under two ISINs.
     """
     r = requests.get(API.format(fund=VXUS_FUND), headers=UA, timeout=60)
     r.raise_for_status()
@@ -183,6 +214,12 @@ def fetch_vxus_raw():
                 "name": str(e.get("longName") or e.get("shortName") or "").strip(),
                 "weight": wt,
             }
+    for kept, dropped_isins in VXUS_SAME_ISSUER_MERGE.items():
+        if kept not in by_isin:
+            continue
+        for dropped in dropped_isins:
+            if dropped in by_isin:
+                by_isin[kept]["weight"] += by_isin.pop(dropped)["weight"]
     rows = sorted(by_isin.values(), key=lambda x: -x["weight"])
     return rows[:TOP_N]
 

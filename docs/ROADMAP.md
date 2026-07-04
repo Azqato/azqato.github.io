@@ -1,11 +1,11 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.5
+**Version:** 3.34.6
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.34.6 → v3.34.7 → v3.35.0 → v3.36.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 and v3.34.5 shipped 2026-07-04.)
+Release order (updated 2026-07-04): v3.34.7 → v3.35.0 → v3.36.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, and v3.34.6 shipped 2026-07-04.)
 
 ---
 
@@ -39,29 +39,31 @@ All five daily workflow files updated (`screener-data.yml`, `screener-data-etfs.
 
 ---
 
-## v3.34.6 — International Feed: Same-Company Duplicate Holdings
+## v3.34.6 — International Feed: Same-Company Duplicate Holdings — DONE 2026-07-04
 
-### Goal
+Owner-flagged bug fixed the same day: `005930.KS` (Samsung Electronics common) and `005935.KS` (Samsung Electronics preferred) were both in the top-100 list under different ISINs, so the v3.34.0 dedup (built only for literal duplicate-ISIN rows like BHP/Barrick) never caught it.
 
-Owner-flagged bug: the International universe lists the same company twice under different share classes — e.g. `005930.KS` (Samsung Electronics common) and `005935.KS` (Samsung Electronics Co. Ltd. Preference Shares). Both are legitimate, separately-traded securities with **different ISINs**, so the v3.34.0 dedup (which only merges literal duplicate ISIN rows, like the BHP/Barrick case) let both through as distinct top-100 slots. Confirmed present in the committed `data/vxus.json` (`009150.KS`, Samsung Electro-Mechanics, is a genuinely different company and correctly stays separate — only the common/preferred pair is the problem).
+### Full scope found
 
-### Why this matters
+Scanned the full ~500-row raw Vanguard response by name-normalization (stripping legal suffixes, class markers, preference-share wording) and hand-verified every candidate — this confirmed the plan's caution against automatic name-matching was warranted: the same heuristic that correctly flagged Samsung also flagged **SoftBank Group Corp vs. SoftBank Corp**, which are genuinely different, separately-traded companies (parent holding company vs. its separately-listed telecom subsidiary) — a real false positive that would have wrongly merged two distinct securities if the matching had been automatic rather than hand-checked. Three real categories of same-company duplication were found:
 
-This is the same class of issue the domestic Growth/Value/Dividend lists already solve: `update_etf_constituents.py`'s `DUAL_CLASS` map (`{"GOOG": "GOOGL", "FOX": "FOXA", "NWS": "NWSA", "BF.B": "BF.A", "HEI.A": "HEI", "BRK.A": "BRK.B", "LEN.B": "LEN"}`) collapses multiple share classes of the same company to a single listing before the top-100 cut is taken, so VUG/VTV/VIG never double-count a company. `sync_vxus()` (v3.34.0) never got the equivalent treatment because the Phase 0 probe's ISIN-dedup step was built to solve a different problem (Vanguard reporting one ISIN twice), not to solve two-different-ISINs-same-issuer. Left unfixed, this both double-counts one company's weight in the "top 100" and pushes a legitimately distinct 100th company out of the list.
+1. **A duplicate custody record for the identical security** (not a different share class at all): Air Liquide, L'Oreal, and Engie each had one normal-ticker line and one **blank-ticker** line (Vanguard's shortName for the blank one ends "-PRIM" for Air Liquide) — almost certainly a French registered/bearer-share settlement split reported as two rows by Vanguard's custodian. Fix: sum the weight into the ticker-bearing line, drop the blank one.
+2. **A real dual share class**: Samsung Electronics common/preferred, Investor AB Class A/B, Atlas Copco Class A/B. Fix: keep the higher-weighted (more liquid) class, matching the domestic `DUAL_CLASS` convention.
+3. **A dual listing of the same underlying group across exchanges**: Rio Tinto's London (plc)/Australia (Ltd) listings, CATL's Hong Kong/Shenzhen listings (tie-broken by raw market value, not the rounded percentWeight, since both showed 0.04%). Fix: keep the higher-weighted listing.
 
-### Plan
+### Implementation
 
-1. **Confirm scope**: scan the full ~500-row raw Vanguard response (not just the top 100) for other common/preferred or multi-class pairs among VXUS holdings, the same way `DUAL_CLASS` was built by inspection for the domestic funds. International markets have more class variety than the US (ordinary vs. preference shares is common in Korea and Brazil in particular; Google/Alibaba-style dual listings are less common here since VXUS already excludes US names) — expect a short list, not a large one.
-2. **Decide the matching signal**: company name similarity (stripping "Preference Shares", "Pref", class-letter suffixes) is a reasonable heuristic but risks false positives (two unrelated companies with similar names) or false negatives (transliterated name variants). Cross-checking against a shared identifier Vanguard's data might expose (e.g. a common CUSIP-like issuer code, if present) would be more reliable than name-matching alone — check what identity fields the raw Vanguard response actually offers beyond ISIN/ticker/name before committing to a matching strategy.
-3. **Decide which class to keep**: unlike the domestic convention (keep the voting/Class A share, except Berkshire), the "right" share class to keep for a foreign preference-share pair isn't obviously Class A vs B — likely the higher-weighted (more liquid) class Vanguard holds more of, which the raw data's `percentWeight` already provides.
-4. **Implement as an explicit override map**, mirroring `DUAL_CLASS`: not an automatic name-matching rule at build time (too risky to get subtly wrong on a weekly unattended sync), but a small hand-verified `VXUS_DUAL_CLASS` (or extend `vxus_map.json` with a `skip`/`collapse` block) that the sync script checks before taking the top 100, consistent with how `manual` already overrides automatic resolution in that file.
-5. **Rebuild `data/vxus.json`** once the override list is in place, confirm the top 100 gains the previously-excluded company that should have made the cut, and re-verify field coverage on the newly-added name.
+Added `VXUS_SAME_ISSUER_MERGE` to `update_etf_constituents.py` — a hand-verified `{kept_isin: [dropped_isin, ...]}` map (8 entries, all three categories above), applied in `fetch_vxus_raw()` immediately after the existing exact-ISIN dedup and before the top-100 cut: each dropped ISIN's weight is summed into its kept ISIN, then removed entirely. No automatic name-matching ships in production code — exactly per the plan's caution, validated by the SoftBank false positive.
 
-### Verification
+### Result
 
-- Confirm `005935.KS` (or whichever class is dropped) no longer appears in `data/vxus.json`, and the company that should occupy that freed slot is added.
-- Headless Chrome check: row count still exactly 100, no duplicate company names visible in the rendered table.
-- `sync_vxus()` re-run against the live Vanguard API should reproduce the corrected list with no further changes (the same idempotency check used to verify the original v3.34.0 build).
+Rebuilding `data/vxus.json` against the live Vanguard API: Samsung preferred (`005935.KS`) dropped as expected, and correctly-combined weights promoted **L'Oreal** (`OR.PA`, 0.07%+0.14%=0.21%) and **Investor AB** (`INVE-B.ST`, 0.16%+0.04%=0.20%) into the true top 100, bumping out two lower-weighted names that had been ranked ahead of them under the old split-weight accounting (only Rio Tinto's Australian listing and CATL's Shenzhen listing were already below the cutoff on either side, so those two merges didn't change today's membership, just future-proof it). `data/vxus_map.json`'s now-unreachable manual override for Air Liquide's dropped ISIN was removed. `screener.js`'s `CURRENCY_SYMBOLS` gained `SEK` (Investor AB introduced Swedish krona to the feed).
+
+### Verified
+
+- `data/vxus.json`: 100 entries, 100 unique symbols, exactly one Samsung Electronics entry (Samsung Electro-Mechanics correctly remains separate — it's a genuinely different company).
+- Headless Chrome: 100/100 rows rendered, no duplicate company names, tiers sum to 100.
+- `sync_vxus()` re-run against the live Vanguard API twice (once before, once after removing the dead manual override) both reproduced the corrected list with zero further changes — full idempotency confirmed.
 
 ---
 

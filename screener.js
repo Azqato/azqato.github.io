@@ -108,7 +108,7 @@
     // CHF) fall back to printing the ISO code.
     var CURRENCY_SYMBOLS = {
       TWD: "NT$", KRW: "₩", EUR: "€", HKD: "HK$", GBP: "£",
-      CAD: "C$", AUD: "A$", JPY: "¥", DKK: "kr", SGD: "S$", INR: "₹"
+      CAD: "C$", AUD: "A$", JPY: "¥", DKK: "kr", SEK: "kr", SGD: "S$", INR: "₹"
     };
     function currencyPrefix(cur) {
       if (!cur || cur === "USD") return "$";

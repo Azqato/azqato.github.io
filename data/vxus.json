@@ -108,6 +108,10 @@
     "n": "TotalEnergies"
   },
   {
+    "t": "RIO.L",
+    "n": "Rio Tinto"
+  },
+  {
     "t": "RR.L",
     "n": "Rolls-Royce Holdings"
   },
@@ -216,16 +220,12 @@
     "n": "AIA Group"
   },
   {
-    "t": "RIO.L",
-    "n": "Rio Tinto"
-  },
-  {
     "t": "8411.T",
     "n": "Mizuho Financial Group"
   },
   {
-    "t": "005935.KS",
-    "n": "Samsung Electronics Co. Ltd. Preference Shares"
+    "t": "AI.PA",
+    "n": "Air Liquide"
   },
   {
     "t": "BNP.PA",
@@ -262,6 +262,10 @@
   {
     "t": "D05.SI",
     "n": "DBS Group Holdings"
+  },
+  {
+    "t": "OR.PA",
+    "n": "L'Oreal"
   },
   {
     "t": "BN.TO",
@@ -306,6 +310,10 @@
   {
     "t": "HDFCBANK.NS",
     "n": "HDFC Bank"
+  },
+  {
+    "t": "INVE-B.ST",
+    "n": "Investor AB Class B"
   },
   {
     "t": "6098.T",
@@ -390,13 +398,5 @@
   {
     "t": "SU.TO",
     "n": "Suncor Energy"
-  },
-  {
-    "t": "AI.PA",
-    "n": "Air Liquide"
-  },
-  {
-    "t": "402340.KS",
-    "n": "SK Square Co."
   }
 ]

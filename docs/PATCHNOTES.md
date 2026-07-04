@@ -2,6 +2,24 @@
 
 ---
 
+## v3.34.6 — 2026-07-04 — Screener: International feed same-company duplicate fix
+
+**Owner-flagged bug fixed the same day: the International universe listed Samsung Electronics twice (`005930.KS` common, `005935.KS` preferred) since they carry different ISINs and the v3.34.0 dedup only caught literal duplicate-ISIN rows. Scanned the full raw Vanguard response for other cases and hand-verified every candidate before writing any merge logic.**
+
+### Fixed
+
+- **`VXUS_SAME_ISSUER_MERGE`** added to `update_etf_constituents.py`: a hand-verified `{kept_isin: [dropped_isin, ...]}` map (8 entries) applied in `fetch_vxus_raw()` before the top-100 cut, covering three distinct categories found by inspection: a duplicate custody record for the identical security (Air Liquide, L'Oreal, Engie — each had a normal-ticker line and a blank-ticker line, likely a French registered/bearer-share settlement split), a real dual share class (Samsung Electronics common/preferred, Investor AB and Atlas Copco Class A/B), and a dual listing of the same group across exchanges (Rio Tinto London/Australia, CATL Hong Kong/Shenzhen, tie-broken by raw market value where the rounded weight was equal).
+- **No automatic name-matching ships in production**, per the original plan's caution — validated by a real false positive the scanning heuristic produced: SoftBank Group Corp and SoftBank Corp are genuinely different, separately-traded companies (parent vs. its separately-listed telecom subsidiary), not share classes of one issuer. Every merge entry was hand-checked against the raw data before being added.
+- **Rebuilding `data/vxus.json`** against the live Vanguard API correctly promoted L'Oreal (`OR.PA`) and Investor AB (`INVE-B.ST`) into the true top 100 on their properly-combined weight, bumping out two lower-weighted names that had only ranked ahead under the old split-weight accounting. `screener.js`'s `CURRENCY_SYMBOLS` gained `SEK` (Investor AB introduced Swedish krona). The now-dead manual override for Air Liquide's merged-away ISIN was removed from `vxus_map.json`.
+
+### Verified
+
+- `data/vxus.json`: 100 entries, 100 unique symbols, exactly one Samsung Electronics row (Samsung Electro-Mechanics correctly remains separate).
+- Headless Chrome: 100/100 rows, no duplicate company names, tiers sum to 100.
+- `sync_vxus()` re-run against the live Vanguard API reproduced the corrected list with zero further changes.
+
+---
+
 ## v3.34.5 — 2026-07-04 — Ops: data pipeline re-scheduled (owner decisions)
 
 **Following the workflow timing review logged in v3.34.2, the owner made two decisions and the full daily pipeline schedule is re-anchored and widened. All five daily workflow files updated; docs updated to match.**
