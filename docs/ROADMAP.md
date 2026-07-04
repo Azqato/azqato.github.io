@@ -1,11 +1,11 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.2
+**Version:** 3.34.3
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.34.5 → v3.35.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 shipped 2026-07-04.)
+Release order (updated 2026-07-04): v3.34.5 → v3.34.6 → v3.35.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 shipped 2026-07-04.)
 
 ---
 
@@ -39,6 +39,32 @@ All six share the `screener-data` concurrency group with `cancel-in-progress: fa
 1. Present the table and the three notes above to the owner for review.
 2. If the owner wants changes (e.g., DST-aware scheduling, wider gaps, a different stagger order), make the corresponding cron edits and re-verify via `workflow_dispatch` manual runs before the next scheduled trigger.
 3. If the owner confirms the current schedule is fine as-is, close this out with no code changes — the value was in having the compiled table for review, not necessarily in changing anything.
+
+---
+
+## v3.34.6 — International Feed: Same-Company Duplicate Holdings
+
+### Goal
+
+Owner-flagged bug: the International universe lists the same company twice under different share classes — e.g. `005930.KS` (Samsung Electronics common) and `005935.KS` (Samsung Electronics Co. Ltd. Preference Shares). Both are legitimate, separately-traded securities with **different ISINs**, so the v3.34.0 dedup (which only merges literal duplicate ISIN rows, like the BHP/Barrick case) let both through as distinct top-100 slots. Confirmed present in the committed `data/vxus.json` (`009150.KS`, Samsung Electro-Mechanics, is a genuinely different company and correctly stays separate — only the common/preferred pair is the problem).
+
+### Why this matters
+
+This is the same class of issue the domestic Growth/Value/Dividend lists already solve: `update_etf_constituents.py`'s `DUAL_CLASS` map (`{"GOOG": "GOOGL", "FOX": "FOXA", "NWS": "NWSA", "BF.B": "BF.A", "HEI.A": "HEI", "BRK.A": "BRK.B", "LEN.B": "LEN"}`) collapses multiple share classes of the same company to a single listing before the top-100 cut is taken, so VUG/VTV/VIG never double-count a company. `sync_vxus()` (v3.34.0) never got the equivalent treatment because the Phase 0 probe's ISIN-dedup step was built to solve a different problem (Vanguard reporting one ISIN twice), not to solve two-different-ISINs-same-issuer. Left unfixed, this both double-counts one company's weight in the "top 100" and pushes a legitimately distinct 100th company out of the list.
+
+### Plan
+
+1. **Confirm scope**: scan the full ~500-row raw Vanguard response (not just the top 100) for other common/preferred or multi-class pairs among VXUS holdings, the same way `DUAL_CLASS` was built by inspection for the domestic funds. International markets have more class variety than the US (ordinary vs. preference shares is common in Korea and Brazil in particular; Google/Alibaba-style dual listings are less common here since VXUS already excludes US names) — expect a short list, not a large one.
+2. **Decide the matching signal**: company name similarity (stripping "Preference Shares", "Pref", class-letter suffixes) is a reasonable heuristic but risks false positives (two unrelated companies with similar names) or false negatives (transliterated name variants). Cross-checking against a shared identifier Vanguard's data might expose (e.g. a common CUSIP-like issuer code, if present) would be more reliable than name-matching alone — check what identity fields the raw Vanguard response actually offers beyond ISIN/ticker/name before committing to a matching strategy.
+3. **Decide which class to keep**: unlike the domestic convention (keep the voting/Class A share, except Berkshire), the "right" share class to keep for a foreign preference-share pair isn't obviously Class A vs B — likely the higher-weighted (more liquid) class Vanguard holds more of, which the raw data's `percentWeight` already provides.
+4. **Implement as an explicit override map**, mirroring `DUAL_CLASS`: not an automatic name-matching rule at build time (too risky to get subtly wrong on a weekly unattended sync), but a small hand-verified `VXUS_DUAL_CLASS` (or extend `vxus_map.json` with a `skip`/`collapse` block) that the sync script checks before taking the top 100, consistent with how `manual` already overrides automatic resolution in that file.
+5. **Rebuild `data/vxus.json`** once the override list is in place, confirm the top 100 gains the previously-excluded company that should have made the cut, and re-verify field coverage on the newly-added name.
+
+### Verification
+
+- Confirm `005935.KS` (or whichever class is dropped) no longer appears in `data/vxus.json`, and the company that should occupy that freed slot is added.
+- Headless Chrome check: row count still exactly 100, no duplicate company names visible in the rendered table.
+- `sync_vxus()` re-run against the live Vanguard API should reproduce the corrected list with no further changes (the same idempotency check used to verify the original v3.34.0 build).
 
 ---
 

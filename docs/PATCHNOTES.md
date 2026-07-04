@@ -2,6 +2,17 @@
 
 ---
 
+## v3.34.3 — 2026-07-04 — Roadmap: International feed same-company duplicate bug logged
+
+**Docs only. Owner flagged that the International universe lists the same company twice under different share classes: `005930.KS` (Samsung Electronics common) and `005935.KS` (Samsung Electronics Co. Ltd. Preference Shares) — confirmed present in the live `data/vxus.json`. Different ISINs, so v3.34.0's ISIN-dedup (built to solve Vanguard reporting one ISIN twice, e.g. BHP/Barrick) never caught this. Logged as v3.34.6 in ROADMAP.md, right after the workflow timing review. No code, workflow, or behavior changes in this entry.**
+
+### Added
+
+- **Root cause and scope note**: the domestic Growth/Value/Dividend lists already solve this exact problem via `update_etf_constituents.py`'s `DUAL_CLASS` map, which collapses multiple share classes to one listing before the top-100 cut. `sync_vxus()` never got the equivalent treatment because its dedup step targets literal duplicate ISIN rows, not two-different-ISINs-same-issuer pairs.
+- **Plan in ROADMAP.md (v3.34.6)**: scan the full raw Vanguard response for other common/preferred or multi-class pairs (expect a short list, not a large one), decide a matching signal more reliable than name-similarity alone, decide which class to keep (likely the higher-weighted/more liquid one, using Vanguard's own `percentWeight`), and implement as a hand-verified override map mirroring `DUAL_CLASS` rather than an automatic name-matching rule running unattended on the weekly sync.
+
+---
+
 ## v3.34.2 — 2026-07-04 — Roadmap: GitHub Actions workflow timing review logged as the immediate next step
 
 **Docs only. Owner asked to review when every GitHub Actions workflow runs and the gaps between them, as the very next item ahead of v3.35.0. Logged in ROADMAP.md (v3.34.5) with the full schedule already compiled, so the review is ready without further digging. No code, workflow, or behavior changes in this entry.**
