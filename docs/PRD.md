@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.33.0
+**Version:** 3.33.1
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -172,7 +172,9 @@ This methodology has a point of view. It says to buy quality and hold it. It say
 
 ### Current Phase: Operational (v3.x)
 
-The site is live, fully featured, and running automated daily data refreshes. The core methodology is documented end-to-end. The screener is scoring all 100 Nasdaq 100 tickers daily. Documentation has been consolidated into four files (README, PRD, DESIGN, PATCHNOTES).
+The site is live, fully featured, and running automated daily data refreshes. The core methodology is documented end-to-end. The screener is scoring all 100 Nasdaq 100 tickers daily. Documentation has been consolidated into five files (README, PRD, DESIGN, PATCHNOTES, ROADMAP).
+
+Detailed implementation plans for every Planned milestone below live in [docs/ROADMAP.md](ROADMAP.md); this table remains the source of truth for what is planned and in what order.
 
 ### Milestone Table
 
@@ -210,6 +212,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.32.3 — Docs only. v3.33.0 ETF Universe Scoring Model spec completed: last 10 points assigned to Price vs 200-Day Moving Average (highest is best); Price vs 20-Day and Price vs 100-Day Moving Average added as unscored display/context columns. Full 100/100 scoring model and 14 visible columns now locked | 2026-07-03 | Complete |
 | v3.32.4 — Docs only. Four pre-implementation review concerns logged against the v3.33.0 ETF spec (yield double-count/style bias, 50 correlated timing points, tier bands vs a 10-fund list, percentile coarseness at N=10); spec unchanged, concerns to be resolved during implementation | 2026-07-03 | Complete |
 | v3.33.0 — Screener: ETFs universe (owner-requested 2026-07-03; pulled ahead of the International universe by owner priority 2026-07-03; owner locked the full spec, fund list, visible fields, and all 100 scoring points, 2026-07-03, see the ETF Universe Scoring Model spec below). A **fixed** list of 10 owner-picked ETFs (QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO — no auto-sync, no Vanguard-holdings dependency) rated on an entirely different basis than the stock universes: **technicals (RSI, 52-week range), long-term performance (1/5/10-year returns), yield, and expense ratio, not fundamentals**. This is doctrine-consistent by design: the methodology's own rule is that technicals time index/ETF purchases while stocks are judged on fundamentals, so the ETF universe gets the technical scoring the stock universes deliberately exclude. Needs its own scoring model, its own column set (no Rev/EPS/PEG columns), feed fields from yfinance (price history for RSI/52W/returns; trailing yield; expense ratio, if available via yfinance `fundInfo`/`info` — needs verification per fund), and methodology popup section. Shipped 2026-07-03: sixth universe button, new `data/etfs.json` fixed list + `scripts/fetch_etf_data.py` + `data/screener_etfs.json` feed + Mon-Fri 23:15 UTC workflow, config-driven table header (screener.js re-renders the `<thead>` and Columns menu per universe kind, pre-paying for future non-stock universes), rank-linear scoring, per-fund popup, methodology popup ETF section. Verified headless against the live local feed: 10/10 scored, tiers 1 S / 1 A / 3 B / 3 C / 2 F, stock universes unregressed | 2026-07-03 | Complete |
+| v3.33.1 — Docs only. New `docs/ROADMAP.md`: detailed implementation plans for every remaining roadmap item (v3.34.0 International with a probe-first phase plan, v4.0.0 sparklines with the recompute-from-git-history design and Python-port parity gate, v4.1.0-v4.4.0 content release plans with a shared release checklist), per owner request | 2026-07-03 | Complete |
 | v3.34.0 — Screener: International universe, top 100 holdings of VXUS (Vanguard Total International Stock ETF) only. Deliberately its own release: VXUS reports local-exchange tickers with no exchange suffix (e.g. `2330`, `NESN`), so it needs an ISIN-driven mapping to Yahoo symbols, a decision on local-currency display in the $-formatted columns, and handling for the sparser analyst estimates on foreign listings that feed the scoring pillars. Same Vanguard holdings API and weekly sync as the GVD universes | After v3.33 | Planned |
 | v4.0.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.34 | Planned |
 | v4.1.0 — Deeper index fund coverage (sector ETFs, international allocation, bond tent strategy) | TBD | Planned |
@@ -826,7 +829,7 @@ The site is deliberately designed to avoid time-sensitive claims. All editorial 
 The "as of" timestamp in the screener header shows the last refresh time. If the daily pipeline fails, GitHub sends an email notification to the repository owner. The pipeline is designed to retry failed symbol fetches automatically and commit whatever data was successfully retrieved.
 
 **What is the documentation strategy going forward?**
-Four files: README.md (developer front door), PRD.md (this file, the comprehensive reference), DESIGN.md (design system), PATCHNOTES.md (full changelog). All major changes are documented in PATCHNOTES.md. PRD.md is updated when product requirements, architecture, or process changes significantly. Documentation changes are included in version increments.
+Five files: README.md (developer front door), PRD.md (this file, the comprehensive reference), DESIGN.md (design system), PATCHNOTES.md (full changelog), ROADMAP.md (implementation plans for planned releases; plans are trimmed to pointers once shipped). All major changes are documented in PATCHNOTES.md. PRD.md is updated when product requirements, architecture, or process changes significantly. Documentation changes are included in version increments.
 
 ---
 

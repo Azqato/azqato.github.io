@@ -2,6 +2,23 @@
 
 ---
 
+## v3.33.1 — 2026-07-03 — Docs: ROADMAP.md implementation plans
+
+**Docs only. A fifth documentation file, `docs/ROADMAP.md`, holds a detailed implementation plan for every remaining roadmap item, per owner request. The PRD milestone table stays the source of truth for what is planned and in what order; ROADMAP.md is the reference for how each item will be built, and a shipped item's plan is trimmed to a pointer. No code, workflow, or behavior changes.**
+
+### Added
+
+- **v3.34.0 International (VXUS top 100) plan**: probe-first phasing (Vanguard API shape at ~8,500 holdings, ISIN-or-name symbol resolution to Yahoo suffixed symbols, six-metric field-coverage census on the real top 100 before any production code); `data/vxus.json` storing resolved Yahoo symbols plus a committed `data/vxus_map.json` resolution cache with manual overrides; feed via the existing `fetch_screener_data.py --list/--out` path and a Tue-Sat 00:15 UTC workflow; three owner decision gates (currency display, sparse-estimates handling under the hard-zero rule, local listing vs ADR) to be presented with the probe's coverage report; mandatory stock-universe regression against the v3.31.0 baseline.
+- **v4.0.0 score-history sparklines plan**: built around the central design fact that the feeds store raw metrics, not scores, so history must be recomputed by replaying git-history snapshots (`git log`/`git show`) through a Python port of the scoring model; a hard parity gate (the Python scorer must exactly reproduce the live headless-rendered scores for all universes, and the parity test runs in CI so future scoring drift fails loudly); `data/history.json` capped at 90 trading days per ticker with a size budget; inline SVG sparkline column plus popup chart, lazily fetched and gracefully degrading; recommended owner decisions recorded (replay under the current model, 90-day window, all six universes).
+- **v4.1.0-v4.4.0 content release plans**: deeper index fund coverage (sector ETFs, international allocation sequenced after v3.34.0 for cross-linking, bond tent), historical illustrative examples (candidate episodes, embed-in-context placement, hindsight-flagged format), additional philosophy sections (candidate topics including when to sell and position sizing), and the conference call research guide as a new `conferencecalls.html` guide page mapped to the six scored metrics; plus a shared release-mechanics checklist (persona/content rules, sidebar/FAQ/sitemap/meta touches, headless verification).
+
+### Changed
+
+- PRD: roadmap section links to ROADMAP.md; documentation strategy FAQ and the current-phase note now count five documentation files.
+- README: project structure and Full Documentation list gained ROADMAP.md.
+
+---
+
 ## v3.33.0 — 2026-07-03 — Screener: ETFs universe
 
 **A sixth screener universe: a fixed, owner-curated list of 10 ETFs (QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO), scored on technicals, long-term performance, yield, and cost instead of fundamentals — the technical scoring the stock universes deliberately exclude, per the site's technicals-time-ETF-purchases doctrine. Owner-specced same day (v3.32.2-v3.32.4), decisions resolved via review (rank-linear points, rank-band tiers kept, yield scored as specced).**

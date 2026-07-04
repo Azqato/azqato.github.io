@@ -127,7 +127,8 @@ stocks/
 └── docs/
     ├── PRD.md                        ← Product requirements, architecture, runbook
     ├── DESIGN.md                     ← Design system specification
-    └── PATCHNOTES.md                 ← Full changelog (v1.0.0 → present)
+    ├── PATCHNOTES.md                 ← Full changelog (v1.0.0 → present)
+    └── ROADMAP.md                    ← Implementation plans for planned releases
 ```
 
 ---
@@ -137,3 +138,4 @@ stocks/
 - [docs/PRD.md](docs/PRD.md) — Product requirements, architecture, runbook, roadmap, FAQ
 - [docs/DESIGN.md](docs/DESIGN.md) — Design system, color tokens, typography, component patterns
 - [docs/PATCHNOTES.md](docs/PATCHNOTES.md) — Full changelog (v1.0.0 to present)
+- [docs/ROADMAP.md](docs/ROADMAP.md) — Detailed implementation plans for every planned roadmap item
