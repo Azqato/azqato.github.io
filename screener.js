@@ -204,14 +204,19 @@
     // ---- ETFs universe scoring (v3.33.0): a different model for a different question ----
     // The stock universes grade fundamentals; the ETFs list is timed with
     // technicals, per the site doctrine (technicals time index/ETF purchases).
-    // Eight scored metrics: Technicals 50 (RSI 20, 52-week range position 20,
-    // price vs 200-day MA 10), Performance 30 (1/5/10-year total returns),
-    // Income & cost 20 (yield 10, expense ratio 10). YTD, net yield, and the
-    // 20/100-day MA columns are weight-0 context rankings (colored, no points),
-    // like P/E FWD in the stock model; AUM is display-only. With just 10 funds
-    // a percentile clamp is far too coarse, so points are straight rank-linear:
-    // the best fund on a metric earns 20, the worst 0, evenly spaced, ties
-    // averaged (see the curve selection in computeScoreMap).
+    // Six scored metrics (v3.37.0, owner decision 2026-07-04): Technicals 50
+    // (RSI 20, 52-week range position 20, price vs 200-day MA 10), Performance
+    // 50 (1-year total return 10, 5-year 20, 10-year 20 -- weighted toward the
+    // longer horizons since indices.html calls the 10-year return "the most
+    // durable signal," evidence the outperformance is structural, not luck).
+    // Yield and Expense Ratio were removed from scoring the same day (no
+    // longer aligned with the reviewed methodology) and demoted to weight-0
+    // context, alongside YTD, net yield, and the 20/100-day MA columns --
+    // colored rankings with no points, like P/E FWD in the stock model; AUM
+    // is display-only. With just 10 funds a percentile clamp is far too
+    // coarse, so points are straight rank-linear: the best fund on a metric
+    // earns 20, the worst 0, evenly spaced, ties averaged (see the curve
+    // selection in computeScoreMap).
     function wk52Pos(d) {
       if (!isNum(d.price) || !isNum(d.wk52Low) || !isNum(d.wk52High) || d.wk52High <= d.wk52Low) return null;
       return clamp((d.price - d.wk52Low) / (d.wk52High - d.wk52Low) * 100, 0, 100);
@@ -224,12 +229,12 @@
       { key: "rsi",          weight: 20, higher: false, get: function (d) { return isNum(d.rsi) ? d.rsi : null; } },
       { key: "wk52",         weight: 20, higher: false, get: function (d) { return wk52Pos(d); } },
       { key: "ret1y",        weight: 10, higher: true,  get: function (d) { return isNum(d.ret1y) ? d.ret1y : null; } },
-      { key: "ret5y",        weight: 10, higher: true,  get: function (d) { return isNum(d.ret5y) ? d.ret5y : null; } },
-      { key: "ret10y",       weight: 10, higher: true,  get: function (d) { return isNum(d.ret10y) ? d.ret10y : null; } },
-      { key: "yieldPct",     weight: 10, higher: true,  get: function (d) { return isNum(d.yieldPct) ? d.yieldPct : null; } },
-      { key: "expenseRatio", weight: 10, higher: false, get: function (d) { return isNum(d.expenseRatio) ? d.expenseRatio : null; } },
+      { key: "ret5y",        weight: 20, higher: true,  get: function (d) { return isNum(d.ret5y) ? d.ret5y : null; } },
+      { key: "ret10y",       weight: 20, higher: true,  get: function (d) { return isNum(d.ret10y) ? d.ret10y : null; } },
       { key: "pctVs200dma",  weight: 10, higher: true,  get: function (d) { return isNum(d.pctVs200dma) ? d.pctVs200dma : null; } },
       { key: "ytd",          weight: 0,  higher: true,  get: function (d) { return isNum(d.ytd) ? d.ytd : null; } },
+      { key: "yieldPct",     weight: 0,  higher: true,  get: function (d) { return isNum(d.yieldPct) ? d.yieldPct : null; } },
+      { key: "expenseRatio", weight: 0,  higher: false, get: function (d) { return isNum(d.expenseRatio) ? d.expenseRatio : null; } },
       { key: "netYield",     weight: 0,  higher: true,  get: function (d) { return netYield(d); } },
       { key: "pctVs20dma",   weight: 0,  higher: true,  get: function (d) { return isNum(d.pctVs20dma) ? d.pctVs20dma : null; } },
       { key: "pctVs100dma",  weight: 0,  higher: true,  get: function (d) { return isNum(d.pctVs100dma) ? d.pctVs100dma : null; } }
@@ -577,16 +582,16 @@
         head: '<th class="left col-ticker" data-sort="ticker">Fund</th>' +
           '<th class="left group-start" data-sort="tier" title="Rank within this 10-fund list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>' +
           '<th data-sort="score">Score</th>' +
-          '<th data-sort="factors" title="Number of the 8 scored metrics ranking in the upper part of the pack (15+ of 20 rank points)">Factors</th>' +
+          '<th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 rank points)">Factors</th>' +
           '<th class="grp-snapshot group-start" data-sort="aum" title="Assets under management">AUM</th>' +
           '<th class="grp-snapshot" data-sort="price">Price</th>' +
           '<th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session\'s close, as of the last daily data refresh">Chg %</th>' +
           '<th class="grp-performance group-start" data-sort="ytd" title="Year-to-date total return, distributions reinvested. Context only, not scored.">YTD</th>' +
           '<th class="grp-performance" data-sort="ret1y" title="1-year total return, distributions reinvested">1Y TR</th>' +
-          '<th class="grp-performance" data-sort="ret5y" title="5-year total return, distributions reinvested">5Y TR</th>' +
-          '<th class="grp-performance" data-sort="ret10y" title="10-year total return, distributions reinvested">10Y TR</th>' +
-          '<th class="grp-income group-start" data-sort="yieldPct" title="Trailing distribution yield">Yield</th>' +
-          '<th class="grp-income" data-sort="expenseRatio" title="Net expense ratio: the fund\'s annual cost">Exp Ratio</th>' +
+          '<th class="grp-performance" data-sort="ret5y" title="5-year total return, distributions reinvested. Weighted double the 1-year return -- a longer track record is stronger evidence of durable performance.">5Y TR</th>' +
+          '<th class="grp-performance" data-sort="ret10y" title="10-year total return, distributions reinvested. Weighted double the 1-year return -- indices.html calls the 10-year return the most durable signal that outperformance is structural, not luck.">10Y TR</th>' +
+          '<th class="grp-income group-start" data-sort="yieldPct" title="Trailing distribution yield. Context only, not scored.">Yield</th>' +
+          '<th class="grp-income" data-sort="expenseRatio" title="Net expense ratio: the fund\'s annual cost. Context only, not scored.">Exp Ratio</th>' +
           '<th class="grp-income" data-sort="netYield" title="Yield minus expense ratio: what the distribution pays after the fund\'s cost. Context only, not scored.">Yld&minus;ER</th>' +
           '<th class="grp-technicals group-start" data-sort="rsi" title="14-day RSI. In this methodology a low RSI marks the better index/ETF entry, so lower scores higher.">RSI</th>' +
           '<th class="grp-technicals" data-sort="wk52" title="Where the price sits in its 52-week range (0% = at the low, 100% = at the high). Lower scores higher.">52W Range</th>' +
@@ -751,8 +756,8 @@
         '<td class="grp-performance ' + colorScored(r.parts.ret1y) + '">' + fmtRet(r.ret1y) + '</td>' +
         '<td class="grp-performance ' + colorScored(r.parts.ret5y) + '">' + fmtRet(r.ret5y) + '</td>' +
         '<td class="grp-performance ' + colorScored(r.parts.ret10y) + '">' + fmtRet(r.ret10y) + '</td>' +
-        '<td class="grp-income group-start ' + colorScored(r.parts.yieldPct) + '">' + fmtPct2(r.yieldPct) + '</td>' +
-        '<td class="grp-income ' + colorScored(r.parts.expenseRatio) + '">' + fmtPct2(r.expenseRatio) + '</td>' +
+        '<td class="grp-income group-start ' + colorFromPts(r.parts.yieldPct) + '">' + fmtPct2(r.yieldPct) + '</td>' +
+        '<td class="grp-income ' + colorFromPts(r.parts.expenseRatio) + '">' + fmtPct2(r.expenseRatio) + '</td>' +
         '<td class="grp-income ' + colorFromPts(r.parts.netYield) + '">' + fmtPct2(r.netYield) + '</td>' +
         '<td class="grp-technicals group-start ' + colorScored(r.parts.rsi) + '">' + fmtRsi(r.rsi) + '</td>' +
         '<td class="grp-technicals ' + colorScored(r.parts.wk52) + '" title="' + rangeTitle + '">' + fmtRangePos(r.wk52) + '</td>' +
@@ -823,10 +828,8 @@
       { key: "rsi",          label: "RSI (14-day)",           weight: 20, fmt: function (d) { return fmtRsi(d.rsi); } },
       { key: "wk52",         label: "52-Week Range position", weight: 20, fmt: function (d) { return fmtRangePos(wk52Pos(d)); } },
       { key: "ret1y",        label: "1 Year Total Return",    weight: 10, fmt: function (d) { return fmtRet(d.ret1y); } },
-      { key: "ret5y",        label: "5 Year Total Return",    weight: 10, fmt: function (d) { return fmtRet(d.ret5y); } },
-      { key: "ret10y",       label: "10 Year Total Return",   weight: 10, fmt: function (d) { return fmtRet(d.ret10y); } },
-      { key: "yieldPct",     label: "Yield",                  weight: 10, fmt: function (d) { return fmtPct2(d.yieldPct); } },
-      { key: "expenseRatio", label: "Expense Ratio",          weight: 10, fmt: function (d) { return fmtPct2(d.expenseRatio); } },
+      { key: "ret5y",        label: "5 Year Total Return",    weight: 20, fmt: function (d) { return fmtRet(d.ret5y); } },
+      { key: "ret10y",       label: "10 Year Total Return",   weight: 20, fmt: function (d) { return fmtRet(d.ret10y); } },
       { key: "pctVs200dma",  label: "Price vs 200-Day MA",    weight: 10, fmt: function (d) { return fmtRet(d.pctVs200dma); } }
     ];
 
@@ -868,8 +871,8 @@
 
       $("stockNote").innerHTML = isEtf()
         ? "Each metric's points come from its rank among the 10 funds (best = full points, worst = 0, " +
-          "evenly spaced, ties averaged), weighted by pillar: Technicals 50, Performance 30, " +
-          "Income &amp; cost 20. A missing metric (—) scores zero. Open <b>Methodology</b> for the full method."
+          "evenly spaced, ties averaged), weighted by pillar: Technicals 50, Performance 50 " +
+          "(5-year and 10-year returns count double the 1-year return). A missing metric (—) scores zero. Open <b>Methodology</b> for the full method."
         : "Each metric's points come from its percentile rank vs the " +
           UNIVERSES[universeMode].label + " (green = top of the pack, red = bottom), weighted by pillar: " +
           "Growth 60, Valuation 20, Balance sheet 20. A missing metric (—) scores zero. " +

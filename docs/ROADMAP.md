@@ -1,11 +1,11 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.36.1
+**Version:** 3.37.1
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): **v3.37.0 (next up)** → v4.0.0 (absorbs the retired v3.35.0) → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, and v3.36.0 shipped 2026-07-04.)
+Release order (updated 2026-07-04): **v4.0.0 (next up, absorbs the retired v3.35.0)** → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, v3.36.0, and v3.37.0's scoring change shipped 2026-07-04; v3.37.0's `indices.html` doctrine write-up remains open, tracked in its own section below.)
 
 ---
 
@@ -140,9 +140,11 @@ This item's number is retired. Its scope (the `.table-wrap` CSS display bug in t
 
 ## v3.36.0 — "MAG 10" Filter — DONE 2026-07-04
 
-Implemented exactly per plan, no deviations. Hardcoded `MAG10_TICKERS` array in `screener.js` (no separate JSON file, per the plan's judgment call — 10 fixed tickers didn't warrant one). New `mag10Active` state, `#mag10Btn` toggle button next to the tier-chip group, `toggleMag10()` switches the active universe to S&P 500 (via the existing `selectUniverse()` lazy-load path) if not already active, then the filter ANDs into `render()`'s existing `view = rs.filter(...)` step alongside the tier chip and search box. Manually switching to a different universe button while the toggle is active turns it off automatically.
+Implemented exactly per plan, no deviations. Hardcoded `MAG10_TICKERS` array in `screener.js` (no separate JSON file, per the plan's judgment call — 10 fixed tickers didn't warrant one). New `mag10Active` state, `#mag10Btn` toggle button, `toggleMag10()` switches the active universe to S&P 500 (via the existing `selectUniverse()` lazy-load path) if not already active, then the filter ANDs into `render()`'s existing `view = rs.filter(...)` step alongside the tier chip and search box. Manually switching to a different universe button while the toggle is active turns it off automatically.
 
-**Verified** (headless Chrome, script-injected click since no Selenium/chromedriver was available in this environment): confirmed all 10 tickers exist in `data/sp500.json` first. Toggling on switches the universe label to "S&P 500", scores against the full 500-stock set (summary line unchanged: "5 S+ · 49 S · 51 A · 147 B · 124 C · 124 F · 500/500 scored"), and shows exactly the 10 MAG 10 rows (META, NVDA, AMD, GOOGL, AVGO, MSFT, NFLX, AMZN, AAPL, TSLA). Combined with the tier-S chip: correctly ANDs down to the 5 MAG 10 names that are also tier S (AMD, GOOGL, AVGO, MSFT, NFLX). Nasdaq 100 default-load regression check: exact match to the v3.31.0 baseline, confirming zero impact on existing behavior.
+**Button placement, revised same day**: originally placed next to the tier-chip group in the toolbar row; owner asked to move it to the top app-bar, to the right of the International universe button. Moved into `#universeGroup` (inherits the row's `flex-wrap` spacing) with a left-border/margin to visually separate it from the universe buttons, since it's a filter toggle, not an eighth universe. `#mag10Btn`'s ID-based click binding and CSS were unaffected by the DOM move.
+
+**Verified** (headless Chrome, script-injected click since no Selenium/chromedriver was available in this environment): confirmed all 10 tickers exist in `data/sp500.json` first. Toggling on switches the universe label to "S&P 500", scores against the full 500-stock set (summary line unchanged: "5 S+ · 49 S · 51 A · 147 B · 124 C · 124 F · 500/500 scored"), and shows exactly the 10 MAG 10 rows (META, NVDA, AMD, GOOGL, AVGO, MSFT, NFLX, AMZN, AAPL, TSLA). Combined with the tier-S chip: correctly ANDs down to the 5 MAG 10 names that are also tier S (AMD, GOOGL, AVGO, MSFT, NFLX). Re-verified after the button move with a screenshot: correctly positioned to the right of International, active-state highlight renders, universe switch and filter still work. Nasdaq 100 default-load regression check: exact match to the v3.31.0 baseline, confirming zero impact on existing behavior.
 
 ### Goal (original plan, retained below)
 
@@ -175,27 +177,29 @@ Requested as **a filter**, not a new universe — narrows the visible rows to ju
 
 ---
 
-## v3.37.0 — ETFs Universe: Rating Methodology Review — IN PROGRESS
+## v3.37.0 — ETFs Universe: Rating Methodology Review — SCORING CHANGE DONE 2026-07-04, DOCTRINE WRITE-UP STILL OPEN
 
-Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needs a review. Current methodology presented in full (table of every scored metric, weight, direction) and cross-checked against `indices.html`'s own doctrine. **Discussion in progress, no code changes yet.**
+Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needed a review. Current methodology presented in full and cross-checked against `indices.html`'s own doctrine, surfacing three gaps (below). Owner decided on the scoring change; **shipped the same day**. The `indices.html` doctrine write-up for Price vs 200-Day MA remains a separate open to-do (item 2 below).
 
 ### Findings from the `indices.html` doctrine review
 
-The page states its own framework explicitly: "The nine metrics on this page split into two groups. Four are timing signals (VIX, RSI, 52W Range, AAII Sentiment)... Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio)." Comparing to the shipped screener model surfaces three gaps:
+The page states its own framework explicitly: "The nine metrics on this page split into two groups. Four are timing signals (VIX, RSI, 52W Range, AAII Sentiment)... Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio)." Comparing to the shipped screener model surfaced three gaps:
 
 1. **VIX and AAII Sentiment are absent from the screener entirely** — both are market-wide signals (one reading, not one per fund), so they structurally can't differentiate scores across the 10-fund relative-ranking model. An accepted limitation, not a bug.
-2. **Price vs 200-Day MA (10 pts, scored) has no grounding in `indices.html`'s doctrine.** The page names only RSI and 52-Week Range as ETF timing technicals. **Owner decision (2026-07-04): document this metric on the indices page rather than remove it from the screener** — write a Price vs 200-Day Moving Average subsection into `indices.html`'s Timing Signals section (alongside RSI and 52W Range), so the screener's scored technicals fully match the site's documented doctrine instead of the doctrine lagging the implementation.
-3. **YTD Performance is named in doctrine as one of the five structural signals but is unscored context in the screener**, which instead scores 1-Year Total Return (not named in doctrine).
+2. **Price vs 200-Day MA (10 pts, scored) has no grounding in `indices.html`'s doctrine.** The page names only RSI and 52-Week Range as ETF timing technicals. **Owner decision (2026-07-04): document this metric on the indices page rather than remove it from the screener** — write a Price vs 200-Day Moving Average subsection into `indices.html`'s Timing Signals section (alongside RSI and 52W Range). **Still open** — not yet written.
+3. **YTD Performance is named in doctrine as one of the five structural signals but is unscored context in the screener**, which instead scores 1-Year Total Return (not named in doctrine). Owner declined to promote YTD (see decision below); this gap remains, unaddressed by design.
 
-### Owner's requested change: remove Yield and Expense Ratio
+### Scoring change — DONE 2026-07-04
 
-Recommendation presented: promote YTD Performance from context-only to a scored metric at 20 points (the weight Yield/Expense Ratio vacate) — Technicals 50 (unchanged) + Performance 50 (YTD 20, 1Y 10, 5Y 10, 10Y 10) = 100. Chosen because it directly closes the doctrine gap in point 3 above, rather than an arbitrary fractional-weight redistribution. Alternatives on the table: split the 20 points proportionally across all remaining metrics, or add them entirely to Technicals. **Awaiting owner's decision on which reallocation to implement.**
+Owner requested removing Yield and Expense Ratio from scoring. Recommendation presented (promote YTD to a scored metric) was declined; owner instead chose to weight up the two longest return horizons: **5-Year Total Return 10→20, 10-Year Total Return 10→20**, keeping 1-Year Total Return at 10. Final model: **Technicals 50 (unchanged: RSI 20, 52W Range 20, vs 200-Day MA 10) + Performance 50 (1Y 10, 5Y 20, 10Y 20) = 100.** Yield and Expense Ratio demoted to weight-0 context columns (same treatment as YTD, net yield, and the 20/100-day MAs) rather than removed from the table entirely, consistent with how the stock model demotes P/E FWD to context instead of deleting it.
 
-### Plan
+**Implementation**: `ETF_METRICS` in `screener.js` updated (weights only, no structural changes); `ETF_POPUP_METRICS` updated to match (Yield/Expense Ratio entries removed from the popup breakdown, matching how weight-0 metrics are already excluded from the stock model's `POPUP_METRICS`); column header titles updated to mark Yield/Expense Ratio "context only, not scored" and to explain the 5Y/10Y double-weighting; `#methodEtf` pillar table and lead paragraph rewritten (Technicals 50/Performance 50, "six scored metrics" not eight); Factors chip denominator auto-updates via existing `scoredCount` logic (no code change needed there).
 
-1. **Write the Price vs 200-Day Moving Average subsection into `indices.html`**, in the Timing Signals section alongside RSI and 52-Week Range (owner-decided, ready to execute independent of the Yield/Expense Ratio decision below).
-2. **Await owner's reallocation decision** for the Yield/Expense Ratio removal before touching `ETF_METRICS` in `screener.js` or the ETF methodology popup.
-3. Once decided: update `ETF_METRICS`, the ETF popup's `ETF_POPUP_METRICS`, the `#methodEtf` pillar table, and re-verify tier distribution across the 10 funds (headless Chrome, same pattern as prior ETF verifications).
+**Verified**: headless Chrome on the ETFs universe — 10/10 scored, tiers 1 S / 1 A / 3 B / 3 C / 2 F, Factors chip correctly shows `/6`, all context columns (Yield, Expense Ratio, Yld−ER, YTD) still visible and colored via `colorFromPts`. Nasdaq 100 regression: exact match to the v3.31.0 baseline, confirming zero impact on stock universes.
+
+### Plan (remaining)
+
+1. **Write the Price vs 200-Day Moving Average subsection into `indices.html`**, in the Timing Signals section alongside RSI and 52-Week Range. Not yet started.
 
 ---
 

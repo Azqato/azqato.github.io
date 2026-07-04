@@ -2,6 +2,44 @@
 
 ---
 
+## v3.37.1 — 2026-07-04 — Screener: "MAG 10" button moved to the top app-bar
+
+**Owner request: move the "MAG 10" filter toggle (v3.36.0) from the tier-chip toolbar row to the top app-bar, next to the universe buttons, to the right of International.**
+
+### Changed
+
+- `#mag10Btn` moved into `#universeGroup`, inheriting the row's `flex-wrap` spacing. A left border and margin visually separate it from the universe buttons, since it's a filter toggle, not an eighth universe to switch to. No JS changes needed — the button's click binding is by ID, unaffected by its position in the DOM.
+
+### Verified
+
+- Headless Chrome screenshot: button renders correctly to the right of International, active-state highlight works, universe-switch-to-S&P-500 and the 10-ticker filter still function correctly after the move.
+- Nasdaq 100 regression: exact match to the v3.31.0 baseline.
+
+---
+
+## v3.37.0 — 2026-07-04 — Screener: ETF scoring model reweighted (Yield/Expense Ratio removed)
+
+**Owner-requested change to the ETFs universe scoring model (v3.33.0). Yield and Expense Ratio are no longer scored; the freed 20 points went to weighting up the 5-year and 10-year return horizons instead of the recommended alternative (promoting YTD), which the owner declined.**
+
+### Changed
+
+- **`ETF_METRICS`**: Yield and Expense Ratio weights changed from 10 to 0 (demoted to context-only, same treatment as YTD/net yield/20-100-day MAs — still displayed and colored, just not scored). 5-Year Total Return and 10-Year Total Return weights changed from 10 to 20 each; 1-Year Total Return unchanged at 10. Final model: **Technicals 50 (unchanged) + Performance 50 (1Y 10, 5Y 20, 10Y 20) = 100**.
+- **`ETF_POPUP_METRICS`**: Yield and Expense Ratio entries removed from the per-fund popup breakdown (matching how the stock model already excludes its own weight-0 metrics from `POPUP_METRICS`); 5Y/10Y weights updated to 20.
+- **Column header titles**: Yield and Expense Ratio now say "Context only, not scored"; 5Y/10Y titles explain the double-weighting and reference `indices.html`'s framing of the 10-year return as "the most durable signal" of structural (not lucky) outperformance.
+- **`#methodEtf` popup**: pillar table and lead paragraph rewritten for Technicals 50/Performance 50 ("six scored metrics," not eight); notes the change and points to `indices.html`'s Structural Quality Metrics section.
+- Row rendering: Yield/Expense Ratio cells switched from `colorScored` (hard-zero-red on missing) to `colorFromPts` (muted on missing), matching every other context-only column.
+
+### Verified
+
+- Headless Chrome, ETFs universe: 10/10 scored, tiers 1 S / 1 A / 3 B / 3 C / 2 F, Factors chip correctly reads `/6`. Yield/Expense Ratio/Yld−ER/YTD columns all still visible and colored as context.
+- Nasdaq 100 regression: exact match to the v3.31.0 baseline, confirming zero impact on stock universes.
+
+### Still open
+
+- The `indices.html` doctrine write-up for Price vs 200-Day Moving Average (owner decided to document this metric there rather than remove it from the screener) has not been written yet — tracked separately in ROADMAP.md's v3.37.0 section.
+
+---
+
 ## v3.36.1 — 2026-07-04 — Roadmap: ETF rating methodology review in progress
 
 **Owner-requested review of the ETFs universe scoring methodology (v3.33.0). Current model presented in full and cross-checked against `indices.html`'s own documented doctrine, surfacing three gaps. Discussion in progress; no code changes in this entry.**

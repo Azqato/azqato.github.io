@@ -165,7 +165,15 @@
       border-color: var(--color-accent);
       color: var(--color-accent);
     }
-    /* MAG 10 watchlist toggle (v3.36.0): same active styling as .u-btn.active */
+    /* MAG 10 watchlist toggle (v3.36.0): sits to the right of the universe
+       buttons but is a filter, not a universe switch -- a left border
+       separates it visually so it doesn't read as an eighth universe. */
+    #mag10Btn {
+      margin-left: 6px;
+      padding-left: 12px;
+      border-left: 1px solid var(--color-border);
+      border-radius: 0 7px 7px 0;
+    }
     #mag10Btn.active {
       background: var(--color-accent-light);
       border-color: var(--color-accent);
@@ -514,6 +522,7 @@
         <button class="btn u-btn" data-universe="dividend" title="Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF)">Dividend</button>
         <button class="btn u-btn" data-universe="etfs" title="A fixed list of 10 broad-market and factor ETFs, scored on technicals, long-term performance, and cost instead of fundamentals">ETFs</button>
         <button class="btn u-btn" data-universe="intl" title="Top 100 holdings of VXUS (Vanguard Total International Stock ETF), scored on the same fundamentals model as the other stock universes">International</button>
+        <button class="btn" id="mag10Btn" title="Filter to a fixed 10-stock watchlist (AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA), scored against the S&amp;P 500">MAG 10</button>
       </div>
       <span class="spacer"></span>
       <span class="as-of" id="asOf">no data loaded</span>
@@ -534,8 +543,6 @@
         <button class="chip" data-filter="c">C <span class="count" id="cnt-c">0</span></button>
         <button class="chip" data-filter="f">F <span class="count" id="cnt-f">0</span></button>
       </div>
-
-      <button class="btn" id="mag10Btn" title="Filter to a fixed 10-stock watchlist (AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA), scored against the S&amp;P 500">MAG 10</button>
 
       <div class="menu-wrap">
         <button class="btn" id="colsBtn" aria-haspopup="true">Columns ▾</button>
@@ -698,9 +705,9 @@
       </div>
 
       <div id="methodEtf" hidden>
-      <p class="hint">The ETFs list is scored on an entirely different basis than the stock universes, and on purpose. This methodology's own rule is that individual stocks are judged on fundamentals while index and ETF purchases are timed with technical signals, so this universe grades exactly what the stock lists leave out: <b>Technicals 50 &middot; Performance 30 &middot; Income &amp; cost 20</b>, adding up to a <b>Score out of 100</b>. A high score means a fund with a strong long-term record that is currently sitting low relative to its own recent prices: the setup this methodology treats as the better moment to add to an index position.</p>
+      <p class="hint">The ETFs list is scored on an entirely different basis than the stock universes, and on purpose. This methodology's own rule is that individual stocks are judged on fundamentals while index and ETF purchases are timed with technical signals, so this universe grades exactly what the stock lists leave out: <b>Technicals 50 &middot; Performance 50</b>, adding up to a <b>Score out of 100</b>. A high score means a fund with a strong long-term record that is currently sitting low relative to its own recent prices: the setup this methodology treats as the better moment to add to an index position. Yield and Expense Ratio are shown for context but no longer scored (changed 2026-07-04): the freed weight went to the 5-year and 10-year return horizons, since a longer track record is stronger evidence that a fund's outperformance is structural rather than luck &mdash; see the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>'s Structural Quality Metrics section.</p>
 
-      <h3>The eight scored metrics</h3>
+      <h3>The six scored metrics</h3>
       <div class="table-wrap">
         <table>
           <thead><tr><th scope="col">Pillar</th><th scope="col">Metric</th><th scope="col" class="num">Weight</th><th scope="col">Better means</th></tr></thead>
@@ -709,14 +716,12 @@
             <tr><td>Technicals</td><td>52-Week Range position</td><td class="num">20</td><td>lower (near the 52-week low beats near the high)</td></tr>
             <tr><td>Technicals</td><td>Price vs 200-Day Moving Average</td><td class="num">10</td><td>higher (holding above its long-term trend)</td></tr>
             <tr><td>Performance</td><td>1 Year Total Return</td><td class="num">10</td><td>higher</td></tr>
-            <tr><td>Performance</td><td>5 Year Total Return</td><td class="num">10</td><td>higher</td></tr>
-            <tr><td>Performance</td><td>10 Year Total Return</td><td class="num">10</td><td>higher</td></tr>
-            <tr><td>Income &amp; cost</td><td>Yield</td><td class="num">10</td><td>higher</td></tr>
-            <tr><td>Income &amp; cost</td><td>Expense Ratio</td><td class="num">10</td><td>lower (a cheaper fund to hold)</td></tr>
+            <tr><td>Performance</td><td>5 Year Total Return</td><td class="num">20</td><td>higher</td></tr>
+            <tr><td>Performance</td><td>10 Year Total Return</td><td class="num">20</td><td>higher</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="table-note">Total returns include reinvested distributions. RSI, the range position, and the moving averages are computed from daily price history. Price vs the 20-day and 100-day moving averages, YTD, and Yield&minus;ER are shown and colored for context but carry no points, like the P/E FWD column in the stock universes; AUM is display-only.</p>
+      <p class="table-note">Total returns include reinvested distributions. RSI, the range position, and the moving averages are computed from daily price history. YTD Performance, Yield, Expense Ratio, Yield&minus;ER, and price vs the 20-day and 100-day moving averages are shown and colored for context but carry no points, like the P/E FWD column in the stock universes; AUM is display-only.</p>
 
       <h3>How a rank becomes points</h3>
       <p class="hint">With only 10 funds, the stock universes' percentile curve would be far too coarse, so this list uses straight rank points: on each metric the <b>best fund earns the full weight, the worst earns 0</b>, and the funds between are spaced evenly (ties share the average). A missing value (—) scores zero and renders dark red; the score is always out of the full 100. Cell colors follow the same ranks: green is the top of the pack on that metric (15 of 20 rank points or better), red is the bottom (5 or less), amber is in between.</p>
