@@ -2,6 +2,22 @@
 
 ---
 
+## v3.36.1 — 2026-07-04 — Roadmap: ETF rating methodology review in progress
+
+**Owner-requested review of the ETFs universe scoring methodology (v3.33.0). Current model presented in full and cross-checked against `indices.html`'s own documented doctrine, surfacing three gaps. Discussion in progress; no code changes in this entry.**
+
+### Findings
+
+- **VIX and AAII Sentiment**, which `indices.html` calls its two most actionable timing signals, are absent from the screener entirely — both are market-wide readings, not per-fund metrics, so they structurally can't differentiate scores across the 10-fund relative-ranking model. An accepted limitation.
+- **Price vs 200-Day Moving Average** (10 pts, scored) has no grounding in `indices.html`'s doctrine, which names only RSI and 52-Week Range as ETF timing technicals. **Owner decision: document this metric on `indices.html` rather than remove it from the screener** — logged as a to-do in ROADMAP.md's v3.37.0 section, ready to execute independent of the other changes below.
+- **YTD Performance** is named in doctrine as one of five structural quality signals but is unscored context in the screener, which instead scores 1-Year Total Return (not named in doctrine).
+
+### In progress
+
+- Owner requested removing Yield and Expense Ratio (20 points) from the ETF scoring model. Recommendation given: promote YTD Performance to a scored metric at the freed 20 points (Technicals 50 + Performance 50: YTD 20, 1Y 10, 5Y 10, 10Y 10), since it directly closes the doctrine gap above rather than an arbitrary redistribution. Awaiting the owner's decision before touching `ETF_METRICS` in `screener.js`.
+
+---
+
 ## v3.36.0 — 2026-07-04 — Screener: "MAG 10" filter
 
 **A fixed 10-stock watchlist toggle: AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA. Renamed from the original "FANG+" placeholder once the owner supplied the real list. Sourced specifically from S&P 500 data (owner instruction), so each stock's score and tier reflects its percentile rank among the full 500-stock universe, not a smaller or differently-composed one.**

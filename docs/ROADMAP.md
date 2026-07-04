@@ -1,6 +1,6 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.36.0
+**Version:** 3.36.1
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
@@ -175,9 +175,27 @@ Requested as **a filter**, not a new universe — narrows the visible rows to ju
 
 ---
 
-## v3.37.0 — ETFs Universe: Rating Methodology Review — UNSCOPED, AWAITING OWNER INPUT
+## v3.37.0 — ETFs Universe: Rating Methodology Review — IN PROGRESS
 
-Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needs a review. **No specifics given yet.** Current methodology to be presented to the owner in full (a table of every scored metric, weight, and direction) so they can specify exactly what to change. No design or implementation work starts until scoped.
+Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needs a review. Current methodology presented in full (table of every scored metric, weight, direction) and cross-checked against `indices.html`'s own doctrine. **Discussion in progress, no code changes yet.**
+
+### Findings from the `indices.html` doctrine review
+
+The page states its own framework explicitly: "The nine metrics on this page split into two groups. Four are timing signals (VIX, RSI, 52W Range, AAII Sentiment)... Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio)." Comparing to the shipped screener model surfaces three gaps:
+
+1. **VIX and AAII Sentiment are absent from the screener entirely** — both are market-wide signals (one reading, not one per fund), so they structurally can't differentiate scores across the 10-fund relative-ranking model. An accepted limitation, not a bug.
+2. **Price vs 200-Day MA (10 pts, scored) has no grounding in `indices.html`'s doctrine.** The page names only RSI and 52-Week Range as ETF timing technicals. **Owner decision (2026-07-04): document this metric on the indices page rather than remove it from the screener** — write a Price vs 200-Day Moving Average subsection into `indices.html`'s Timing Signals section (alongside RSI and 52W Range), so the screener's scored technicals fully match the site's documented doctrine instead of the doctrine lagging the implementation.
+3. **YTD Performance is named in doctrine as one of the five structural signals but is unscored context in the screener**, which instead scores 1-Year Total Return (not named in doctrine).
+
+### Owner's requested change: remove Yield and Expense Ratio
+
+Recommendation presented: promote YTD Performance from context-only to a scored metric at 20 points (the weight Yield/Expense Ratio vacate) — Technicals 50 (unchanged) + Performance 50 (YTD 20, 1Y 10, 5Y 10, 10Y 10) = 100. Chosen because it directly closes the doctrine gap in point 3 above, rather than an arbitrary fractional-weight redistribution. Alternatives on the table: split the 20 points proportionally across all remaining metrics, or add them entirely to Technicals. **Awaiting owner's decision on which reallocation to implement.**
+
+### Plan
+
+1. **Write the Price vs 200-Day Moving Average subsection into `indices.html`**, in the Timing Signals section alongside RSI and 52-Week Range (owner-decided, ready to execute independent of the Yield/Expense Ratio decision below).
+2. **Await owner's reallocation decision** for the Yield/Expense Ratio removal before touching `ETF_METRICS` in `screener.js` or the ETF methodology popup.
+3. Once decided: update `ETF_METRICS`, the ETF popup's `ETF_POPUP_METRICS`, the `#methodEtf` pillar table, and re-verify tier distribution across the 10 funds (headless Chrome, same pattern as prior ETF verifications).
 
 ---
 
