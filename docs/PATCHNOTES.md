@@ -2,6 +2,31 @@
 
 ---
 
+## v3.30.0 — 2026-07-03 — Scoring model v2: four pillars, margins, hard-zero missing data, S+ tier
+
+**The scoring model is rebuilt around four weighted pillars over eight metrics: Growth 40 (Rev TTM 10, Rev FWD 10, EPS TTM 10, EPS FWD 10), Valuation 20 (PEG FWD), Profitability 20 (Gross Margin 10, Net Margin 10), Balance sheet 20 (Cash vs Debt). A perfect 100/100 now earns a new S+ tier. Pulled ahead of pipeline cleanup by owner priority; all decisions owner-approved after live-data simulations.**
+
+### Added
+
+- **S+ tier for a perfect 100/100** (owner request): sits above the S/A/B/C/F rank bands, in purple (`--color-tier-splus` #bc8cff) so it stands apart from the green ramp. New S+ filter chip, badge, summary count (shown only when at least one exists), and methodology legend entry. S+ stocks come out of the S band's headcount. The clamp calibration keeps S+ rare: at ship, MU and NVDA (tied) in the Nasdaq 100 and ADSK, SCHW, META, MU, NVDA in the S&P 500.
+- **TTM growth is now scored** (owner request): Revenue Growth TTM and EPS Growth TTM join the Growth pillar at 10 points each, matching the doctrine's "revenue and net income up and to the right TTM".
+- **Profitability pillar**: `grossMargin` and `netMargin` (TTM, from yfinance `grossMargins`/`profitMargins`) added to the pipeline, all three feeds reseeded, and a new Profitability column group (Gross Mgn, Net Mgn) added to the table with its own Columns toggle. The screener now reflects doctrine metrics 11-12.
+- **Methodology popup: "Where each list comes from"** (owner request): a source table for all five universes (Nasdaq 100 / S&P 500 from the published index lists via weekly sync; Growth / Value / Dividend from the top 100 VUG / VTV / VIG holdings by weight, Vanguard-published, monthly cadence, dual classes collapsed).
+
+### Changed
+
+- **Points curve re-clamped from top/bottom 25% to top/bottom 28%**: `points = clamp(20 × (pct − 0.28) / 0.44, 0, 20)`, scaled by metric weight. Calibrated against the final live 8-metric feeds to the owner's target of ~1 stock at 100 in the Nasdaq 100 and ~5 in the S&P 500 (ties round up): live at ship, 2 tied at 100 in the Nasdaq 100 and exactly 5 in the S&P 500, vs 4 and 11 under the old quartile clamp, which handed a perfect 20/20 to a quarter of the list per metric. (An interim 15% clamp, fitted before the margin fields landed in the feeds, proved too tight with all eight metrics live: top scores stalled at 99 with zero perfect scores.)
+- **Valuation double-count removed**: P/E-vs-growth drops to a zero-weight context ranking that only colors the P/E FWD column; PEG FWD carries the full 20-point valuation pillar alone.
+- **Missing data is a hard zero** (owner decision): a "—" in any scored metric contributes 0 points, the /100 denominator never shrinks, and the cell renders dark red. Pre-v2, missing metrics were dropped and the score rescaled, letting stocks scored on 3 of 5 metrics reach 100 (several of the S&P 500's perfect scores had missing EPS TTM).
+- **Factors chip is now x/8 fixed-denominator** (missing = miss, never a pass); per-stock popup lists all eight metrics with weighted points (e.g. "7.2/10") and shows zeroed missing rows in dark red; methodology popup rewritten (pillar table, new curve table, updated Apple worked example).
+
+### Notes
+
+- Tiers are structurally unaffected: S/A/B/C/F sizes are rank-based and stay fixed; only scores, colors, and per-metric points change underneath.
+- The decision history (Strong Buy labels rejected, fixed cuts rejected, curve calibration data) is recorded in the PRD roadmap.
+
+---
+
 ## v3.29.2 — 2026-07-03 — Roadmap: ETFs universe planned
 
 **Docs only. New planned milestone v3.32.0: an ETFs screener universe from a fixed, owner-provided list, rated on technicals (RSI, 52-week range), long-term performance, and expense ratios instead of fundamentals — the technical scoring the stock universes deliberately exclude, per the site's technicals-for-indices doctrine. Blocked on the owner's ETF list. The pending scoring-model-v2 milestone renumbers from v3.32.0 to v3.33.0.**

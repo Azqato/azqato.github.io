@@ -1,9 +1,9 @@
 {
-  "updated": "2026-07-03T20:20:54.923253Z",
+  "updated": "2026-07-03T21:20:03.183571Z",
   "source": "yahoo",
   "universes": {
     "growth": {
-      "updated": "2026-07-03T20:20:54.923253Z",
+      "updated": "2026-07-03T21:20:03.183571Z",
       "source": "yahoo",
       "stocks": {
         "NVDA": {
@@ -17,12 +17,14 @@
           "changePct": -1.3918412794817314,
           "revTTM": 85.2,
           "epsTTM": 214.5,
+          "grossMargin": 74.14499500000001,
+          "netMargin": 62.966,
           "peFwd": 21.713545,
           "epsFwd": 88.11,
           "revFwd": 81.83,
           "pegFwd": 0.61,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AAPL": {
           "t": "AAPL",
@@ -35,12 +37,14 @@
           "changePct": 4.840682111556482,
           "revTTM": 16.6,
           "epsTTM": 21.8,
+          "grossMargin": 47.862,
+          "netMargin": 27.152001999999996,
           "peFwd": 35.253628,
           "epsFwd": 17.419999999999998,
           "revFwd": 14.89,
           "pegFwd": 2.34,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MSFT": {
           "t": "MSFT",
@@ -53,12 +57,14 @@
           "changePct": 1.6160091599875193,
           "revTTM": 18.3,
           "epsTTM": 23.400000000000002,
+          "grossMargin": 68.309,
+          "netMargin": 39.341998000000004,
           "peFwd": 23.217028,
           "epsFwd": 23.31,
           "revFwd": 16.96,
           "pegFwd": 1.15,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GOOGL": {
           "t": "GOOGL",
@@ -71,12 +77,14 @@
           "changePct": -0.35990144237423305,
           "revTTM": 21.8,
           "epsTTM": 82.0,
-          "peFwd": 25.304754,
+          "grossMargin": 60.368,
+          "netMargin": 37.919000000000004,
+          "peFwd": 25.305143,
           "epsFwd": 31.59,
-          "revFwd": 21.139999,
-          "pegFwd": 1.41,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "revFwd": 21.149999,
+          "pegFwd": 1.42,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AVGO": {
           "t": "AVGO",
@@ -89,12 +97,14 @@
           "changePct": -2.4069962636053432,
           "revTTM": 47.9,
           "epsTTM": 85.39999999999999,
+          "grossMargin": 76.28399999999999,
+          "netMargin": 38.848,
           "peFwd": 31.00992,
           "epsFwd": 70.44,
           "revFwd": 65.98000499999999,
           "pegFwd": 0.69,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AMZN": {
           "t": "AMZN",
@@ -107,12 +117,14 @@
           "changePct": 0.40132395531651266,
           "revTTM": 16.6,
           "epsTTM": 74.8,
+          "grossMargin": 50.604000000000006,
+          "netMargin": 12.224,
           "peFwd": 27.913605,
           "epsFwd": 20.86,
           "revFwd": 14.860000000000001,
           "pegFwd": 1.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "META": {
           "t": "META",
@@ -125,12 +137,14 @@
           "changePct": -4.896314303894533,
           "revTTM": 33.1,
           "epsTTM": 62.4,
+          "grossMargin": 81.941,
+          "netMargin": 32.836999999999996,
           "peFwd": 18.094471,
           "epsFwd": 39.89,
           "revFwd": 25.82,
           "pegFwd": 0.81,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TSLA": {
           "t": "TSLA",
@@ -143,12 +157,14 @@
           "changePct": -7.488831413120156,
           "revTTM": 15.8,
           "epsTTM": 8.3,
+          "grossMargin": 19.064999999999998,
+          "netMargin": 3.946,
           "peFwd": 190.77013,
           "epsFwd": 24.239999,
           "revFwd": 8.17,
           "pegFwd": 6.16,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LLY": {
           "t": "LLY",
@@ -161,12 +177,14 @@
           "changePct": 1.8603051001057302,
           "revTTM": 55.50000000000001,
           "epsTTM": 169.9,
+          "grossMargin": 82.832,
+          "netMargin": 34.986,
           "peFwd": 33.52082,
           "epsFwd": 49.580002,
           "revFwd": 30.85,
           "pegFwd": 1.54,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AMD": {
           "t": "AMD",
@@ -179,12 +197,14 @@
           "changePct": -4.263422570625641,
           "revTTM": 37.8,
           "epsTTM": 91.2,
+          "grossMargin": 53.059999999999995,
+          "netMargin": 13.374,
           "peFwd": 70.12085,
           "epsFwd": 77.089995,
           "revFwd": 42.76,
           "pegFwd": 1.3,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "V": {
           "t": "V",
@@ -197,12 +217,14 @@
           "changePct": 3.1474307850062777,
           "revTTM": 17.1,
           "epsTTM": 35.5,
+          "grossMargin": 97.77799999999999,
+          "netMargin": 51.679003,
           "peFwd": 27.551247,
           "epsFwd": 14.59,
           "revFwd": 13.919999999999998,
           "pegFwd": 1.51,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "COST": {
           "t": "COST",
@@ -215,12 +237,14 @@
           "changePct": 2.919960634604779,
           "revTTM": 21.5,
           "epsTTM": 45.5,
+          "grossMargin": 12.876001,
+          "netMargin": 3.01,
           "peFwd": 46.29076,
           "epsFwd": 12.989999999999998,
           "revFwd": 9.42,
           "pegFwd": 4.56,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LRCX": {
           "t": "LRCX",
@@ -233,12 +257,14 @@
           "changePct": -10.185043193784171,
           "revTTM": 23.799999999999997,
           "epsTTM": 40.8,
+          "grossMargin": 49.979,
+          "netMargin": 30.938998,
           "peFwd": 61.869263,
           "epsFwd": 37.2,
           "revFwd": 25.8,
           "pegFwd": 2.5,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MA": {
           "t": "MA",
@@ -251,12 +277,14 @@
           "changePct": 3.244391700482341,
           "revTTM": 15.8,
           "epsTTM": 21.2,
+          "grossMargin": 100.0,
+          "netMargin": 45.876,
           "peFwd": 27.43068,
           "epsFwd": 15.6,
           "revFwd": 13.100000000000001,
           "pegFwd": 1.58,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ORCL": {
           "t": "ORCL",
@@ -269,12 +297,14 @@
           "changePct": -1.5649122807017468,
           "revTTM": 20.599999999999998,
           "epsTTM": 21.9,
+          "grossMargin": 65.822,
+          "netMargin": 25.368000000000002,
           "peFwd": 17.43548,
           "epsFwd": 7.969999999999999,
           "revFwd": 17.1,
           "pegFwd": 0.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NFLX": {
           "t": "NFLX",
@@ -287,12 +317,14 @@
           "changePct": 4.663701307453838,
           "revTTM": 16.2,
           "epsTTM": 86.4,
+          "grossMargin": 49.029,
+          "netMargin": 28.521,
           "peFwd": 21.644901,
           "epsFwd": 41.990003,
           "revFwd": 13.77,
           "pegFwd": 1.4,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PLTR": {
           "t": "PLTR",
@@ -305,12 +337,14 @@
           "changePct": 2.8394178000477277,
           "revTTM": 84.7,
           "epsTTM": 325.0,
-          "peFwd": 87.80926,
-          "epsFwd": 96.33,
-          "revFwd": 72.42,
-          "pegFwd": 1.68,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "grossMargin": 84.073997,
+          "netMargin": 43.673,
+          "peFwd": 87.596886,
+          "epsFwd": 96.809995,
+          "revFwd": 72.480005,
+          "pegFwd": 1.86,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GEV": {
           "t": "GEV",
@@ -323,12 +357,14 @@
           "changePct": -1.8724379600652319,
           "revTTM": 16.3,
           "epsTTM": 1816.5,
+          "grossMargin": 20.282,
+          "netMargin": 23.809999,
           "peFwd": 72.88682,
           "epsFwd": 73.71,
           "revFwd": 19.489999,
           "pegFwd": 2.03,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SNDK": {
           "t": "SNDK",
@@ -341,12 +377,14 @@
           "changePct": -14.133312338231097,
           "revTTM": 250.99999999999997,
           "epsTTM": null,
+          "grossMargin": 56.038,
+          "netMargin": 34.185,
           "peFwd": 26.31461,
           "epsFwd": 2117.83,
           "revFwd": 168.57,
           "pegFwd": 0.012425270205823886,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "KLAC": {
           "t": "KLAC",
@@ -359,12 +397,14 @@
           "changePct": -11.510575153086133,
           "revTTM": 11.5,
           "epsTTM": 11.799999999999999,
+          "grossMargin": 61.446,
+          "netMargin": 35.661998,
           "peFwd": 63.403408,
           "epsFwd": 11.63,
           "revFwd": 11.18,
           "pegFwd": 3.12,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PANW": {
           "t": "PANW",
@@ -377,12 +417,14 @@
           "changePct": -1.130553346210661,
           "revTTM": 31.1,
           "epsTTM": null,
+          "grossMargin": 71.963996,
+          "netMargin": 7.947,
           "peFwd": 92.25216,
           "epsFwd": 12.959999999999999,
           "revFwd": 23.87,
           "pegFwd": 5.57,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "STX": {
           "t": "STX",
@@ -395,12 +437,14 @@
           "changePct": -10.383636184835943,
           "revTTM": 44.1,
           "epsTTM": 108.3,
+          "grossMargin": 41.571000000000005,
+          "netMargin": 21.599,
           "peFwd": 55.08648,
           "epsFwd": 83.809996,
           "revFwd": 32.459998,
-          "pegFwd": 0.67,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.57,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MCD": {
           "t": "MCD",
@@ -413,12 +457,14 @@
           "changePct": 4.156923876331509,
           "revTTM": 9.4,
           "epsTTM": 6.9,
+          "grossMargin": 57.348996,
+          "netMargin": 31.618000000000002,
           "peFwd": 21.617771,
           "epsFwd": 6.41,
           "revFwd": 5.96,
           "pegFwd": 2.48,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MRVL": {
           "t": "MRVL",
@@ -431,12 +477,14 @@
           "changePct": -9.8364271273663,
           "revTTM": 27.6,
           "epsTTM": -80.4,
+          "grossMargin": 51.50299699999999,
+          "netMargin": 28.986,
           "peFwd": 60.575447,
           "epsFwd": 42.580003,
           "revFwd": 40.67,
-          "pegFwd": 1.68,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.39,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "APH": {
           "t": "APH",
@@ -449,12 +497,14 @@
           "changePct": -4.430379746835444,
           "revTTM": 58.4,
           "epsTTM": 24.099999999999998,
+          "grossMargin": 37.919998,
+          "netMargin": 17.238999999999997,
           "peFwd": 34.1134,
           "epsFwd": 44.45,
           "revFwd": 44.86,
-          "pegFwd": 1.51,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.41,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BA": {
           "t": "BA",
@@ -467,12 +517,14 @@
           "changePct": 3.618812334156818,
           "revTTM": 14.000000000000002,
           "epsTTM": null,
+          "grossMargin": 4.8249997,
+          "netMargin": 2.4600001,
           "peFwd": -576.9564,
           "epsFwd": -132.99,
           "revFwd": 9.11,
-          "pegFwd": 23.45,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 24.54,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AMAT": {
           "t": "AMAT",
@@ -485,12 +537,14 @@
           "changePct": -7.354319337542825,
           "revTTM": 11.4,
           "epsTTM": 33.5,
+          "grossMargin": 48.956,
+          "netMargin": 29.314,
           "peFwd": 49.271114,
           "epsFwd": 29.930001,
           "revFwd": 17.7,
           "pegFwd": 1.64,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CRWD": {
           "t": "CRWD",
@@ -503,12 +557,14 @@
           "changePct": 0.411522633744843,
           "revTTM": 25.6,
           "epsTTM": null,
-          "peFwd": 157.43468,
-          "epsFwd": 32.129999999999995,
+          "grossMargin": 75.136,
+          "netMargin": -0.598,
+          "peFwd": 157.39893,
+          "epsFwd": 32.16,
           "revFwd": 23.56,
-          "pegFwd": 1.57,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 6.31,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TJX": {
           "t": "TJX",
@@ -521,12 +577,14 @@
           "changePct": 1.922695738354796,
           "revTTM": 9.2,
           "epsTTM": 29.299999999999997,
+          "grossMargin": 31.351998,
+          "netMargin": 9.402000000000001,
           "peFwd": 29.541536,
           "epsFwd": 6.890000000000001,
           "revFwd": 6.23,
           "pegFwd": 3.24,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ANET": {
           "t": "ANET",
@@ -539,12 +597,14 @@
           "changePct": -3.9791141519625484,
           "revTTM": 35.099999999999994,
           "epsTTM": 25.0,
+          "grossMargin": 63.537,
+          "netMargin": 38.317,
           "peFwd": 44.107918,
           "epsFwd": 21.72,
           "revFwd": 28.74,
-          "pegFwd": 2.17,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 2.04,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GE": {
           "t": "GE",
@@ -557,12 +617,14 @@
           "changePct": 0.688110097615624,
           "revTTM": 24.7,
           "epsTTM": -1.7999999999999998,
+          "grossMargin": 31.148999999999997,
+          "netMargin": 17.863001,
           "peFwd": 49.998474,
           "epsFwd": 18.530001,
           "revFwd": 14.850000999999999,
           "pegFwd": 8.99,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "APP": {
           "t": "APP",
@@ -575,12 +637,14 @@
           "changePct": -6.65060838454864,
           "revTTM": 59.0,
           "epsTTM": 113.1,
+          "grossMargin": 88.36699999999999,
+          "netMargin": 64.29,
           "peFwd": 31.808086,
           "epsFwd": 64.9,
           "revFwd": 49.54,
           "pegFwd": 1.41,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ISRG": {
           "t": "ISRG",
@@ -593,12 +657,14 @@
           "changePct": 5.872558278244444,
           "revTTM": 23.0,
           "epsTTM": 18.8,
+          "grossMargin": 66.292,
+          "netMargin": 28.152,
           "peFwd": 40.887135,
           "epsFwd": 16.68,
           "revFwd": 16.299999,
           "pegFwd": 2.08,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "UBER": {
           "t": "UBER",
@@ -611,12 +677,14 @@
           "changePct": 2.436003303055334,
           "revTTM": 14.499999999999998,
           "epsTTM": -84.6,
+          "grossMargin": 39.635,
+          "netMargin": 15.906999999999998,
           "peFwd": 22.349003,
-          "epsFwd": -35.799998,
-          "revFwd": 11.89,
-          "pegFwd": 5.85,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "epsFwd": -35.939997,
+          "revFwd": 11.8599996,
+          "pegFwd": 6.04,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WELL": {
           "t": "WELL",
@@ -629,12 +697,14 @@
           "changePct": 2.550067335679218,
           "revTTM": 38.3,
           "epsTTM": 157.9,
+          "grossMargin": 39.870998,
+          "netMargin": 11.961999500000001,
           "peFwd": 78.42525,
           "epsFwd": null,
           "revFwd": 30.020002,
           "pegFwd": 3.66,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TXN": {
           "t": "TXN",
@@ -647,12 +717,14 @@
           "changePct": -1.7861331724808305,
           "revTTM": 18.6,
           "epsTTM": 31.3,
+          "grossMargin": 57.321999999999996,
+          "netMargin": 29.108,
           "peFwd": 37.68408,
           "epsFwd": 40.94,
           "revFwd": 18.790000000000003,
           "pegFwd": 1.42,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BKNG": {
           "t": "BKNG",
@@ -665,12 +737,14 @@
           "changePct": 1.0512483574244502,
           "revTTM": 16.2,
           "epsTTM": 240.0,
+          "grossMargin": 86.98700000000001,
+          "netMargin": 22.227,
           "peFwd": 17.673286,
           "epsFwd": 14.479999,
           "revFwd": 9.060001,
           "pegFwd": 0.77,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NOW": {
           "t": "NOW",
@@ -683,12 +757,14 @@
           "changePct": 0.4914933837429025,
           "revTTM": 22.1,
           "epsTTM": 2.3,
+          "grossMargin": 76.562,
+          "netMargin": 12.586,
           "peFwd": 25.78561,
           "epsFwd": 17.469999,
           "revFwd": 22.0,
           "pegFwd": 0.96,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "VRT": {
           "t": "VRT",
@@ -701,12 +777,14 @@
           "changePct": -3.496885235373459,
           "revTTM": 30.099999999999998,
           "epsTTM": 135.7,
+          "grossMargin": 37.151,
+          "netMargin": 14.371999999999998,
           "peFwd": 46.28929,
           "epsFwd": 54.580003,
           "revFwd": 35.669996999999995,
           "pegFwd": 1.68,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "VRTX": {
           "t": "VRTX",
@@ -719,12 +797,14 @@
           "changePct": 6.029999397602448,
           "revTTM": 7.8,
           "epsTTM": 61.4,
+          "grossMargin": 54.390997,
+          "netMargin": 35.507,
           "peFwd": 27.57981,
           "epsFwd": 4.05,
           "revFwd": 8.64,
           "pegFwd": 1.84,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SBUX": {
           "t": "SBUX",
@@ -737,12 +817,14 @@
           "changePct": 0.8511461456620628,
           "revTTM": 8.799999999999999,
           "epsTTM": 32.6,
+          "grossMargin": 21.897,
+          "netMargin": 3.888,
           "peFwd": 43.782223,
           "epsFwd": 11.81,
           "revFwd": 1.16,
           "pegFwd": 1.38,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PWR": {
           "t": "PWR",
@@ -755,12 +837,14 @@
           "changePct": -3.3396008099508268,
           "revTTM": 26.3,
           "epsTTM": 51.0,
+          "grossMargin": 15.100000999999999,
+          "netMargin": 3.6679998,
           "peFwd": 47.651096,
           "epsFwd": 30.470000000000002,
           "revFwd": 23.0,
           "pegFwd": 1.98,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ADBE": {
           "t": "ADBE",
@@ -773,12 +857,14 @@
           "changePct": 4.142572755711438,
           "revTTM": 12.7,
           "epsTTM": 7.9,
+          "grossMargin": 89.404,
+          "netMargin": 28.688999999999997,
           "peFwd": 8.994696,
           "epsFwd": 16.66,
           "revFwd": 11.560000500000001,
           "pegFwd": 0.56,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "EQIX": {
           "t": "EQIX",
@@ -791,12 +877,14 @@
           "changePct": -1.1444130936642982,
           "revTTM": 12.1,
           "epsTTM": 20.0,
+          "grossMargin": 51.605999999999995,
+          "netMargin": 14.928000999999998,
           "peFwd": 56.462425,
           "epsFwd": 21.049999,
           "revFwd": 11.1,
           "pegFwd": 3.42,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CDNS": {
           "t": "CDNS",
@@ -809,12 +897,14 @@
           "changePct": -1.2151536812008645,
           "revTTM": 18.7,
           "epsTTM": 23.0,
+          "grossMargin": 86.07900000000001,
+          "netMargin": 21.180001,
           "peFwd": 46.881363,
           "epsFwd": 10.83,
           "revFwd": 17.19,
           "pegFwd": 3.56,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SYK": {
           "t": "SYK",
@@ -827,12 +917,14 @@
           "changePct": 4.196049650595124,
           "revTTM": 2.6,
           "epsTTM": 14.2,
+          "grossMargin": 64.697,
+          "netMargin": 13.205,
           "peFwd": 21.793364,
           "epsFwd": 9.9300005,
           "revFwd": 8.559999999999999,
           "pegFwd": 1.5,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "HWM": {
           "t": "HWM",
@@ -845,12 +937,14 @@
           "changePct": 1.1218727796267869,
           "revTTM": 19.1,
           "epsTTM": 71.39999999999999,
+          "grossMargin": 35.046002,
+          "netMargin": 20.225,
           "peFwd": 53.45867,
           "epsFwd": 34.17,
           "revFwd": 18.17,
           "pegFwd": 0.8,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WDC": {
           "t": "WDC",
@@ -863,12 +957,14 @@
           "changePct": -9.92195464344804,
           "revTTM": 45.5,
           "epsTTM": 482.9,
+          "grossMargin": 45.428002,
+          "netMargin": 55.286,
           "peFwd": 54.21428,
           "epsFwd": 101.66,
           "revFwd": 35.169998,
           "pegFwd": 0.57,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SNPS": {
           "t": "SNPS",
@@ -881,12 +977,14 @@
           "changePct": -3.8215299320176754,
           "revTTM": 41.9,
           "epsTTM": -96.0,
+          "grossMargin": 82.598996,
+          "netMargin": 8.9090005,
           "peFwd": 29.557169,
           "epsFwd": 14.56,
           "revFwd": 37.21,
           "pegFwd": 2.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "INTU": {
           "t": "INTU",
@@ -899,12 +997,14 @@
           "changePct": 3.0964505017223365,
           "revTTM": 10.4,
           "epsTTM": 10.7,
+          "grossMargin": 80.793,
+          "netMargin": 21.907,
           "peFwd": 11.553269,
           "epsFwd": 18.280001000000002,
           "revFwd": 13.469999999999999,
           "pegFwd": 0.68,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DDOG": {
           "t": "DDOG",
@@ -917,12 +1017,14 @@
           "changePct": -1.557773744706592,
           "revTTM": 32.2,
           "epsTTM": 104.0,
+          "grossMargin": 79.906,
+          "netMargin": 3.695,
           "peFwd": 107.522354,
           "epsFwd": 18.120001,
           "revFwd": 26.860001999999998,
           "pegFwd": 1.62,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SNOW": {
           "t": "SNOW",
@@ -935,12 +1037,14 @@
           "changePct": -0.3981775718825409,
           "revTTM": 33.5,
           "epsTTM": null,
+          "grossMargin": 67.144996,
+          "netMargin": -23.785999999999998,
           "peFwd": 134.68806,
           "epsFwd": 54.52,
           "revFwd": 30.25,
           "pegFwd": 6.58,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FTNT": {
           "t": "FTNT",
@@ -953,12 +1057,14 @@
           "changePct": -1.7171971317146761,
           "revTTM": 20.1,
           "epsTTM": 28.599999999999998,
+          "grossMargin": 80.304,
+          "netMargin": 27.491,
           "peFwd": 49.49601,
           "epsFwd": 14.38,
           "revFwd": 14.89,
           "pegFwd": 3.47,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CRM": {
           "t": "CRM",
@@ -971,12 +1077,14 @@
           "changePct": 1.7643815475096636,
           "revTTM": 13.3,
           "epsTTM": 52.2,
+          "grossMargin": 77.643996,
+          "netMargin": 18.733,
           "peFwd": 11.757894,
           "epsFwd": 12.839999999999998,
           "revFwd": 11.03,
           "pegFwd": 0.75,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MAR": {
           "t": "MAR",
@@ -989,12 +1097,14 @@
           "changePct": 1.2570590790616842,
           "revTTM": 12.6,
           "epsTTM": 1.7000000000000002,
+          "grossMargin": 79.03700500000001,
+          "netMargin": 35.969,
           "peFwd": 32.151974,
           "epsFwd": 15.76,
           "revFwd": 6.529999999999999,
           "pegFwd": 2.2,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "HOOD": {
           "t": "HOOD",
@@ -1007,12 +1117,14 @@
           "changePct": 3.755177174413249,
           "revTTM": 15.1,
           "epsTTM": 2.7,
+          "grossMargin": 92.239,
+          "netMargin": 41.123,
           "peFwd": 50.180504,
           "epsFwd": -8.92,
           "revFwd": 12.47,
           "pegFwd": 2.72,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "HLT": {
           "t": "HLT",
@@ -1025,12 +1137,14 @@
           "changePct": 1.8065759364085165,
           "revTTM": 11.0,
           "epsTTM": 35.0,
+          "grossMargin": 78.505,
+          "netMargin": 30.408,
           "peFwd": 37.438892,
           "epsFwd": 11.359999,
           "revFwd": 8.38,
           "pegFwd": 1.64,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MPWR": {
           "t": "MPWR",
@@ -1043,12 +1157,14 @@
           "changePct": -3.2716842002508018,
           "revTTM": 26.1,
           "epsTTM": 39.5,
+          "grossMargin": 55.175,
+          "netMargin": 22.983999999999998,
           "peFwd": 53.624065,
           "epsFwd": 35.18,
           "revFwd": 32.569999,
-          "pegFwd": 1.82,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.69,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NET": {
           "t": "NET",
@@ -1061,12 +1177,14 @@
           "changePct": -1.5833705493077832,
           "revTTM": 33.5,
           "epsTTM": null,
+          "grossMargin": 73.327005,
+          "netMargin": -3.7249997,
           "peFwd": 202.01338,
           "epsFwd": 29.03,
           "revFwd": 29.75,
           "pegFwd": 2.38,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ORLY": {
           "t": "ORLY",
@@ -1079,12 +1197,14 @@
           "changePct": -2.6324306829215605,
           "revTTM": 10.2,
           "epsTTM": 16.1,
+          "grossMargin": 51.632,
+          "netMargin": 14.302999999999999,
           "peFwd": 27.715675,
           "epsFwd": 9.629999999999999,
           "revFwd": 7.21,
           "pegFwd": 1.97,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SHW": {
           "t": "SHW",
@@ -1097,12 +1217,14 @@
           "changePct": 1.8581129894523984,
           "revTTM": 6.800000000000001,
           "epsTTM": 7.5,
+          "grossMargin": 49.036,
+          "netMargin": 10.86,
           "peFwd": 30.038946,
           "epsFwd": 2.6600001,
           "revFwd": 4.8699997,
           "pegFwd": 2.66,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TDG": {
           "t": "TDG",
@@ -1115,12 +1237,14 @@
           "changePct": 3.0026428756931844,
           "revTTM": 18.3,
           "epsTTM": 11.5,
+          "grossMargin": 59.718,
+          "netMargin": 21.909,
           "peFwd": 33.63609,
           "epsFwd": 7.3999999999999995,
           "revFwd": 17.51,
           "pegFwd": 3.05,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BSX": {
           "t": "BSX",
@@ -1133,12 +1257,14 @@
           "changePct": 4.830469112865754,
           "revTTM": 11.600000000000001,
           "epsTTM": 100.0,
+          "grossMargin": 68.943,
+          "netMargin": 17.294,
           "peFwd": 13.422818,
           "epsFwd": 9.9,
           "revFwd": 7.5600000000000005,
-          "pegFwd": 0.52,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.55,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MCO": {
           "t": "MCO",
@@ -1151,12 +1277,14 @@
           "changePct": 4.7247961057261145,
           "revTTM": 8.1,
           "epsTTM": 7.8,
+          "grossMargin": 74.432,
+          "netMargin": 31.691000000000003,
           "peFwd": 29.372473,
           "epsFwd": 11.78,
           "revFwd": 6.7,
           "pegFwd": 2.06,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MSI": {
           "t": "MSI",
@@ -1169,12 +1297,14 @@
           "changePct": 0.8879553157970177,
           "revTTM": 7.3999999999999995,
           "epsTTM": -13.8,
+          "grossMargin": 51.507999999999996,
+          "netMargin": 17.61,
           "peFwd": 24.90585,
           "epsFwd": 10.34,
           "revFwd": 9.629999999999999,
           "pegFwd": 2.24,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ECL": {
           "t": "ECL",
@@ -1187,12 +1317,14 @@
           "changePct": 1.7925782232280918,
           "revTTM": 10.0,
           "epsTTM": 7.8,
+          "grossMargin": 44.374,
+          "netMargin": 12.798999,
           "peFwd": 33.938496,
           "epsFwd": 10.879999999999999,
           "revFwd": 10.290000000000001,
           "pegFwd": 2.59,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SPGI": {
           "t": "SPGI",
@@ -1205,12 +1337,14 @@
           "changePct": 6.005253391811438,
           "revTTM": 10.4,
           "epsTTM": 32.5,
+          "grossMargin": 70.47,
+          "netMargin": 30.361998,
           "peFwd": 22.448315,
           "epsFwd": 9.9,
           "revFwd": 7.4499995,
           "pegFwd": 1.43,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MNST": {
           "t": "MNST",
@@ -1223,12 +1357,14 @@
           "changePct": 0.2568053415511029,
           "revTTM": 26.900000000000002,
           "epsTTM": 28.9,
+          "grossMargin": 55.471002999999996,
+          "netMargin": 23.108,
           "peFwd": 42.59572,
           "epsFwd": 16.59,
           "revFwd": 15.17,
           "pegFwd": 2.79,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TER": {
           "t": "TER",
@@ -1241,12 +1377,14 @@
           "changePct": -13.630832592315256,
           "revTTM": 87.0,
           "epsTTM": 314.8,
+          "grossMargin": 58.702,
+          "netMargin": 22.553,
           "peFwd": 50.641438,
           "epsFwd": 84.050006,
           "revFwd": 40.96,
           "pegFwd": 1.91,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CTAS": {
           "t": "CTAS",
@@ -1259,12 +1397,14 @@
           "changePct": 4.0980313378867095,
           "revTTM": 8.9,
           "epsTTM": 9.700000000000001,
+          "grossMargin": 50.361997,
+          "netMargin": 17.568001,
           "peFwd": 37.0291,
           "epsFwd": 11.1099996,
           "revFwd": 8.559999999999999,
           "pegFwd": 2.7,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GWW": {
           "t": "GWW",
@@ -1277,12 +1417,14 @@
           "changePct": 0.35419655667146,
           "revTTM": 10.100000000000001,
           "epsTTM": 18.2,
+          "grossMargin": 39.150003,
+          "netMargin": 9.696,
           "peFwd": 29.437267,
           "epsFwd": 15.560001000000002,
           "revFwd": 8.55,
           "pegFwd": 2.13,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TRGP": {
           "t": "TRGP",
@@ -1295,12 +1437,14 @@
           "changePct": 0.4150343276055901,
           "revTTM": -10.2,
           "epsTTM": 142.9,
+          "grossMargin": 41.766,
+          "netMargin": 12.873999999999999,
           "peFwd": 22.817698,
           "epsFwd": 26.13,
           "revFwd": 17.849999999999998,
           "pegFwd": 1.25,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DASH": {
           "t": "DASH",
@@ -1313,12 +1457,14 @@
           "changePct": 1.6625191930957683,
           "revTTM": 33.1,
           "epsTTM": -6.1,
+          "grossMargin": 51.763000000000005,
+          "netMargin": 6.29,
           "peFwd": 34.29938,
           "epsFwd": 19.97,
           "revFwd": 28.27,
           "pegFwd": 4.11,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "APO": {
           "t": "APO",
@@ -1331,12 +1477,14 @@
           "changePct": 0.1435325903411,
           "revTTM": -9.2,
           "epsTTM": null,
+          "grossMargin": 35.221999999999994,
+          "netMargin": 3.656,
           "peFwd": 13.366767,
           "epsFwd": 5.89,
           "revFwd": 22.81,
           "pegFwd": 0.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ABNB": {
           "t": "ABNB",
@@ -1349,12 +1497,14 @@
           "changePct": 1.0997216753784622,
           "revTTM": 17.9,
           "epsTTM": 6.0,
+          "grossMargin": 82.913,
+          "netMargin": 19.902,
           "peFwd": 29.487642,
           "epsFwd": 26.209998000000002,
           "revFwd": 14.09,
-          "pegFwd": 1.32,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.38,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FAST": {
           "t": "FAST",
@@ -1367,12 +1517,14 @@
           "changePct": 1.7801047120418856,
           "revTTM": 12.4,
           "epsTTM": 13.8,
+          "grossMargin": 44.893003,
+          "netMargin": 15.392,
           "peFwd": 39.163544,
           "epsFwd": 13.51,
           "revFwd": 11.29,
           "pegFwd": 3.46,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CVNA": {
           "t": "CVNA",
@@ -1385,12 +1537,14 @@
           "changePct": 1.0755856785030105,
           "revTTM": 52.0,
           "epsTTM": 11.899999999999999,
+          "grossMargin": 20.131001,
+          "netMargin": 6.398,
           "peFwd": 43.42844,
           "epsFwd": -7.06,
           "revFwd": 36.82,
           "pegFwd": null,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ADSK": {
           "t": "ADSK",
@@ -1403,12 +1557,14 @@
           "changePct": 3.8646375650780884,
           "revTTM": 18.4,
           "epsTTM": 231.4,
+          "grossMargin": 92.43400000000001,
+          "netMargin": 19.488001,
           "peFwd": 16.447674,
           "epsFwd": 20.94,
           "revFwd": 13.76,
-          "pegFwd": 0.75,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.8,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AZO": {
           "t": "AZO",
@@ -1421,12 +1577,14 @@
           "changePct": -1.8293118717275458,
           "revTTM": 8.4,
           "epsTTM": 7.7,
+          "grossMargin": 51.754003999999995,
+          "netMargin": 12.399000000000001,
           "peFwd": 20.824627,
           "epsFwd": 4.31,
           "revFwd": 8.1,
-          "pegFwd": 1.45,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.43,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "RKLB": {
           "t": "RKLB",
@@ -1439,12 +1597,14 @@
           "changePct": 0.3897271909663269,
           "revTTM": 63.5,
           "epsTTM": null,
+          "grossMargin": 36.556,
+          "netMargin": -26.872,
           "peFwd": -744.14813,
           "epsFwd": 32.209998,
           "revFwd": 52.0,
           "pegFwd": -23.103016957653956,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CIEN": {
           "t": "CIEN",
@@ -1457,12 +1617,14 @@
           "changePct": -8.645445895683768,
           "revTTM": 39.5,
           "epsTTM": 2383.2999999999997,
+          "grossMargin": 43.047002,
+          "netMargin": 7.870000000000001,
           "peFwd": 64.5986,
           "epsFwd": 147.72,
           "revFwd": 32.68,
           "pegFwd": 1.07,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MSCI": {
           "t": "MSCI",
@@ -1475,12 +1637,14 @@
           "changePct": 3.621806436094377,
           "revTTM": 14.099999999999998,
           "epsTTM": 49.1,
-          "peFwd": 30.636553,
-          "epsFwd": 13.919999999999998,
+          "grossMargin": 82.856005,
+          "netMargin": 40.737998,
+          "peFwd": 30.594671,
+          "epsFwd": 14.08,
           "revFwd": 11.37,
-          "pegFwd": 1.8,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.94,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "IDXX": {
           "t": "IDXX",
@@ -1493,12 +1657,14 @@
           "changePct": 3.7613006436251206,
           "revTTM": 14.299999999999999,
           "epsTTM": 17.2,
+          "grossMargin": 62.053000000000004,
+          "netMargin": 24.634,
           "peFwd": 38.13983,
           "epsFwd": 11.81,
           "revFwd": 9.35,
           "pegFwd": 3.37,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BE": {
           "t": "BE",
@@ -1511,12 +1677,14 @@
           "changePct": -6.42832469775475,
           "revTTM": 130.4,
           "epsTTM": null,
-          "peFwd": 126.75589,
-          "epsFwd": 181.19999,
-          "revFwd": 84.720004,
-          "pegFwd": 1.61,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "grossMargin": 30.09,
+          "netMargin": 0.246,
+          "peFwd": 125.505005,
+          "epsFwd": 184.0,
+          "revFwd": 84.99,
+          "pegFwd": 1.31,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BX": {
           "t": "BX",
@@ -1529,12 +1697,14 @@
           "changePct": 2.7017984107068127,
           "revTTM": 5.7,
           "epsTTM": 3.9,
+          "grossMargin": 100.0,
+          "netMargin": 21.213,
           "peFwd": 20.680756,
           "epsFwd": 6.59,
           "revFwd": 13.55,
           "pegFwd": 2.01,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ODFL": {
           "t": "ODFL",
@@ -1547,12 +1717,14 @@
           "changePct": -0.14222793173059856,
           "revTTM": -2.9000000000000004,
           "epsTTM": -4.2,
+          "grossMargin": 38.946,
+          "netMargin": 18.461001,
           "peFwd": 39.782127,
           "epsFwd": 12.94,
           "revFwd": 5.4899998,
           "pegFwd": 3.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "XYZ": {
           "t": "XYZ",
@@ -1565,12 +1737,14 @@
           "changePct": 2.20407104887852,
           "revTTM": 4.9,
           "epsTTM": null,
+          "grossMargin": 45.078,
+          "netMargin": 3.2969999999999997,
           "peFwd": 20.196508,
           "epsFwd": 64.69,
           "revFwd": 8.3100006,
           "pegFwd": 0.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CMG": {
           "t": "CMG",
@@ -1583,12 +1757,14 @@
           "changePct": 1.114285714285712,
           "revTTM": 7.3999999999999995,
           "epsTTM": -17.9,
+          "grossMargin": 39.648998,
+          "netMargin": 11.961999500000001,
           "peFwd": 31.207012,
           "epsFwd": -3.0700000000000003,
           "revFwd": 8.8599995,
           "pegFwd": 1.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TMUS": {
           "t": "TMUS",
@@ -1601,12 +1777,14 @@
           "changePct": 2.577140875996764,
           "revTTM": 10.6,
           "epsTTM": -12.0,
+          "grossMargin": 63.281,
+          "netMargin": 11.6459996,
           "peFwd": 15.793398,
           "epsFwd": 7.61,
           "revFwd": 7.1100004,
           "pegFwd": 0.66,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "YUM": {
           "t": "YUM",
@@ -1619,12 +1797,14 @@
           "changePct": 1.9431895538090105,
           "revTTM": 15.2,
           "epsTTM": 72.2,
+          "grossMargin": 45.663,
+          "netMargin": 20.481001,
           "peFwd": 24.34515,
           "epsFwd": 11.84,
           "revFwd": 11.88,
           "pegFwd": 1.98,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "COIN": {
           "t": "COIN",
@@ -1637,12 +1817,14 @@
           "changePct": 3.918613413715133,
           "revTTM": -30.8,
           "epsTTM": null,
+          "grossMargin": 85.475,
+          "netMargin": 12.736,
           "peFwd": 150.37894,
           "epsFwd": -75.27000000000001,
           "revFwd": -14.680000000000001,
           "pegFwd": 1.4,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TTWO": {
           "t": "TTWO",
@@ -1655,12 +1837,14 @@
           "changePct": 1.865612016618745,
           "revTTM": 6.1,
           "epsTTM": null,
+          "grossMargin": 57.67099999999999,
+          "netMargin": -4.4799999999999995,
           "peFwd": 37.35466,
           "epsFwd": 213.19,
           "revFwd": 27.87,
           "pegFwd": 3.49,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ALNY": {
           "t": "ALNY",
@@ -1673,12 +1857,14 @@
           "changePct": 3.682832233897959,
           "revTTM": 96.39999999999999,
           "epsTTM": null,
+          "grossMargin": 80.827004,
+          "netMargin": 12.550001,
           "peFwd": 33.20167,
           "epsFwd": 85.45,
           "revFwd": 51.11,
-          "pegFwd": 0.52,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.54,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WCN": {
           "t": "WCN",
@@ -1691,12 +1877,14 @@
           "changePct": 2.4952947604881315,
           "revTTM": 6.4,
           "epsTTM": -7.6,
+          "grossMargin": 42.504,
+          "netMargin": 10.972999999999999,
           "peFwd": 30.670734,
           "epsFwd": 6.88,
           "revFwd": 5.6199998,
           "pegFwd": 2.53,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "VMC": {
           "t": "VMC",
@@ -1709,12 +1897,14 @@
           "changePct": 2.765820425041521,
           "revTTM": 7.3999999999999995,
           "epsTTM": 29.7,
+          "grossMargin": 27.683999999999997,
+          "netMargin": 13.809,
           "peFwd": 32.901184,
           "epsFwd": 15.190000000000001,
           "revFwd": 2.48,
           "pegFwd": 2.54,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "COHR": {
           "t": "COHR",
@@ -1727,12 +1917,14 @@
           "changePct": -9.572765495727642,
           "revTTM": 20.5,
           "epsTTM": null,
+          "grossMargin": 36.990002,
+          "netMargin": 7.102,
           "peFwd": 61.14419,
           "epsFwd": 54.449999999999996,
           "revFwd": 21.41,
           "pegFwd": 0.92,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "RCL": {
           "t": "RCL",
@@ -1745,12 +1937,14 @@
           "changePct": -3.2647730982696688,
           "revTTM": 11.3,
           "epsTTM": 28.9,
+          "grossMargin": 50.914,
+          "netMargin": 24.358,
           "peFwd": 17.094805,
           "epsFwd": 10.82,
           "revFwd": 9.47,
           "pegFwd": 1.5,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FIX": {
           "t": "FIX",
@@ -1763,12 +1957,14 @@
           "changePct": -6.640216604562643,
           "revTTM": 1.0,
           "epsTTM": 38.800000000000004,
+          "grossMargin": 25.128,
+          "netMargin": 12.073,
           "peFwd": 40.357834,
           "epsFwd": 49.400002,
           "revFwd": 30.98,
           "pegFwd": 0.95,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CRWV": {
           "t": "CRWV",
@@ -1781,12 +1977,14 @@
           "changePct": -4.59823773122483,
           "revTTM": 111.60000000000001,
           "epsTTM": null,
+          "grossMargin": 69.375,
+          "netMargin": -25.566,
           "peFwd": -24.154896,
           "epsFwd": -67.77,
           "revFwd": 146.99,
           "pegFwd": null,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LITE": {
           "t": "LITE",
@@ -1799,17 +1997,19 @@
           "changePct": -9.091816865544954,
           "revTTM": 90.10000000000001,
           "epsTTM": null,
+          "grossMargin": 40.837002,
+          "netMargin": 17.678,
           "peFwd": 88.549324,
           "epsFwd": 299.26999,
           "revFwd": 81.93,
           "pegFwd": 0.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         }
       }
     },
     "value": {
-      "updated": "2026-07-03T20:20:54.923253Z",
+      "updated": "2026-07-03T21:20:03.183571Z",
       "source": "yahoo",
       "stocks": {
         "MU": {
@@ -1823,12 +2023,14 @@
           "changePct": -5.494633239043678,
           "revTTM": 345.7,
           "epsTTM": 1368.5,
+          "grossMargin": 72.56899999999999,
+          "netMargin": 55.906,
           "peFwd": 13.30465,
           "epsFwd": 784.5,
           "revFwd": 246.69,
           "pegFwd": 0.15,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "JPM": {
           "t": "JPM",
@@ -1841,12 +2043,14 @@
           "changePct": 0.11973538479961299,
           "revTTM": 12.7,
           "epsTTM": 17.2,
+          "grossMargin": 0.0,
+          "netMargin": 33.936,
           "peFwd": 14.826711,
           "epsFwd": 14.34,
           "revFwd": 8.3000004,
           "pegFwd": 1.73,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BRK.B": {
           "t": "BRK.B",
@@ -1859,12 +2063,14 @@
           "changePct": 1.608836595029417,
           "revTTM": 4.3999999999999995,
           "epsTTM": 119.6,
+          "grossMargin": 27.779999999999998,
+          "netMargin": 19.305,
           "peFwd": 24.470795,
           "epsFwd": 0.63,
           "revFwd": 4.66,
           "pegFwd": 10.06,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "XOM": {
           "t": "XOM",
@@ -1877,12 +2083,14 @@
           "changePct": 0.5943645435867451,
           "revTTM": 2.6,
           "epsTTM": -43.4,
+          "grossMargin": 29.768,
+          "netMargin": 7.7649995999999994,
           "peFwd": 12.138142,
           "epsFwd": 61.58,
           "revFwd": 21.01,
           "pegFwd": 1.13,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "JNJ": {
           "t": "JNJ",
@@ -1895,12 +2103,14 @@
           "changePct": 3.567210016536748,
           "revTTM": 9.9,
           "epsTTM": -52.900000000000006,
+          "grossMargin": 68.03500700000001,
+          "netMargin": 21.834,
           "peFwd": 22.727352,
           "epsFwd": 7.26,
           "revFwd": 7.17,
           "pegFwd": 4.88,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WMT": {
           "t": "WMT",
@@ -1913,12 +2123,14 @@
           "changePct": 2.7752251424370655,
           "revTTM": 7.3,
           "epsTTM": 19.400000000000002,
+          "grossMargin": 24.976000000000003,
+          "netMargin": 3.1350000000000002,
           "peFwd": 38.514915,
           "epsFwd": 9.99,
           "revFwd": 6.4899996,
           "pegFwd": 4.31,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "INTC": {
           "t": "INTC",
@@ -1931,12 +2143,14 @@
           "changePct": -5.2511415525114185,
           "revTTM": 7.199999999999999,
           "epsTTM": null,
+          "grossMargin": 37.2,
+          "netMargin": -5.904,
           "peFwd": 110.32377,
           "epsFwd": 159.72999000000002,
           "revFwd": 11.07,
           "pegFwd": 1.36,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CSCO": {
           "t": "CSCO",
@@ -1949,12 +2163,14 @@
           "changePct": -3.6919921374241604,
           "revTTM": 12.0,
           "epsTTM": 37.1,
+          "grossMargin": 64.296997,
+          "netMargin": 19.685,
           "peFwd": 26.348341,
           "epsFwd": 12.2600004,
           "revFwd": 11.04,
           "pegFwd": 1.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CAT": {
           "t": "CAT",
@@ -1967,12 +2183,14 @@
           "changePct": -2.8121564236794017,
           "revTTM": 22.2,
           "epsTTM": 30.2,
+          "grossMargin": 28.601998000000002,
+          "netMargin": 13.328000000000001,
           "peFwd": 39.164272,
           "epsFwd": 29.080000000000002,
           "revFwd": 12.740000000000002,
           "pegFwd": 2.35,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ABBV": {
           "t": "ABBV",
@@ -1985,12 +2203,14 @@
           "changePct": 3.987094718394002,
           "revTTM": 12.4,
           "epsTTM": -46.2,
+          "grossMargin": 72.026,
+          "netMargin": 5.7860000000000005,
           "peFwd": 18.325062,
           "epsFwd": 42.470002,
           "revFwd": 9.94,
           "pegFwd": 0.41,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CVX": {
           "t": "CVX",
@@ -2003,12 +2223,14 @@
           "changePct": 2.1184139054861495,
           "revTTM": 2.3,
           "epsTTM": -44.5,
+          "grossMargin": 42.421,
+          "netMargin": 5.9270002,
           "peFwd": 11.776136,
           "epsFwd": 97.089994,
           "revFwd": 22.84,
           "pegFwd": 0.67,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "UNH": {
           "t": "UNH",
@@ -2021,12 +2243,14 @@
           "changePct": -0.2766446288742008,
           "revTTM": 2.0,
           "epsTTM": 0.7000000000000001,
+          "grossMargin": 18.801000000000002,
+          "netMargin": 2.6780000000000004,
           "peFwd": 23.13157,
           "epsFwd": 12.47,
           "revFwd": -0.74,
           "pegFwd": 1.44,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PG": {
           "t": "PG",
@@ -2039,12 +2263,14 @@
           "changePct": 2.699586244319341,
           "revTTM": 7.3999999999999995,
           "epsTTM": 5.800000000000001,
+          "grossMargin": 50.983999999999995,
+          "netMargin": 19.162000000000003,
           "peFwd": 21.958467,
           "epsFwd": 0.9599999499999999,
           "revFwd": 3.4000000000000004,
           "pegFwd": 4.12,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BAC": {
           "t": "BAC",
@@ -2057,12 +2283,14 @@
           "changePct": 0.6339958875942298,
           "revTTM": 8.1,
           "epsTTM": 24.4,
+          "grossMargin": 0.0,
+          "netMargin": 28.956,
           "peFwd": 13.081081,
           "epsFwd": 17.62,
           "revFwd": 7.510000499999999,
           "pegFwd": 1.02,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "HD": {
           "t": "HD",
@@ -2075,12 +2303,14 @@
           "changePct": 2.012313305210345,
           "revTTM": 4.8,
           "epsTTM": -4.3,
+          "grossMargin": 33.126998,
+          "netMargin": 8.411,
           "peFwd": 23.9313,
           "epsFwd": 1.8099998999999998,
           "revFwd": 3.82,
           "pegFwd": 1.99,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MRK": {
           "t": "MRK",
@@ -2093,12 +2323,14 @@
           "changePct": 3.342107362207858,
           "revTTM": 4.9,
           "epsTTM": null,
+          "grossMargin": 76.725996,
+          "netMargin": 13.586001,
           "peFwd": 42.82126,
           "epsFwd": -66.31,
           "revFwd": 2.6400002,
           "pegFwd": 6.35,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GS": {
           "t": "GS",
@@ -2111,12 +2343,14 @@
           "changePct": 0.13632663469365092,
           "revTTM": 14.499999999999998,
           "epsTTM": 24.2,
+          "grossMargin": 82.271004,
+          "netMargin": 29.363,
           "peFwd": 17.060972,
           "epsFwd": 17.1,
           "revFwd": 10.4499996,
           "pegFwd": 1.56,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "IBM": {
           "t": "IBM",
@@ -2129,12 +2363,14 @@
           "changePct": 1.1423580786026122,
           "revTTM": 9.5,
           "epsTTM": 14.2,
+          "grossMargin": 58.358,
+          "netMargin": 15.606,
           "peFwd": 23.242838,
           "epsFwd": 7.470000000000001,
           "revFwd": 5.86,
           "pegFwd": 2.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PM": {
           "t": "PM",
@@ -2147,12 +2383,14 @@
           "changePct": 2.5775226518093275,
           "revTTM": 9.1,
           "epsTTM": -9.3,
+          "grossMargin": 67.280996,
+          "netMargin": 26.741999999999997,
           "peFwd": 21.669994,
           "epsFwd": 11.55,
           "revFwd": 6.8500000000000005,
           "pegFwd": 2.52,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "KO": {
           "t": "KO",
@@ -2165,12 +2403,14 @@
           "changePct": 3.5059662935170266,
           "revTTM": 12.1,
           "epsTTM": 18.2,
+          "grossMargin": 61.744,
+          "netMargin": 27.800000000000004,
           "peFwd": 25.751598,
           "epsFwd": 8.9099996,
           "revFwd": 2.15,
           "pegFwd": 4.15,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "QCOM": {
           "t": "QCOM",
@@ -2183,12 +2423,14 @@
           "changePct": -3.1167546174142413,
           "revTTM": -3.5000000000000004,
           "epsTTM": 173.0,
+          "grossMargin": 54.799,
+          "netMargin": 22.308001,
           "peFwd": 16.319656,
           "epsFwd": -10.229999600000001,
           "revFwd": -3.56,
           "pegFwd": 0.58,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MS": {
           "t": "MS",
@@ -2201,12 +2443,14 @@
           "changePct": 0.977060322854717,
           "revTTM": 16.3,
           "epsTTM": 31.900000000000002,
+          "grossMargin": 87.388,
+          "netMargin": 24.753,
           "peFwd": 17.88319,
           "epsFwd": 16.93,
           "revFwd": 10.3599995,
           "pegFwd": 2.51,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "RTX": {
           "t": "RTX",
@@ -2219,12 +2463,14 @@
           "changePct": 3.895088121806234,
           "revTTM": 8.7,
           "epsTTM": 32.5,
+          "grossMargin": 20.212999,
+          "netMargin": 8.0290005,
           "peFwd": 28.818756,
           "epsFwd": 9.92,
           "revFwd": 6.17,
           "pegFwd": 2.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WFC": {
           "t": "WFC",
@@ -2237,12 +2483,14 @@
           "changePct": -0.5003490807540034,
           "revTTM": 5.7,
           "epsTTM": 15.1,
+          "grossMargin": 0.0,
+          "netMargin": 26.741999999999997,
           "peFwd": 12.245296,
           "epsFwd": 11.8999995,
           "revFwd": 4.78,
           "pegFwd": 1.53,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LIN": {
           "t": "LIN",
@@ -2255,12 +2503,14 @@
           "changePct": 2.453378315059518,
           "revTTM": 8.200000000000001,
           "epsTTM": 13.4,
+          "grossMargin": 48.766,
+          "netMargin": 20.436001,
           "peFwd": 30.453482,
           "epsFwd": 9.0500005,
           "revFwd": 7.6899999999999995,
           "pegFwd": 2.26,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "C": {
           "t": "C",
@@ -2273,12 +2523,14 @@
           "changePct": -0.11417969028758579,
           "revTTM": 15.9,
           "epsTTM": 56.10000000000001,
+          "grossMargin": 0.0,
+          "netMargin": 20.356001000000003,
           "peFwd": 12.752625,
           "epsFwd": 45.78,
           "revFwd": 10.17,
           "pegFwd": 0.73,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ADI": {
           "t": "ADI",
@@ -2291,12 +2543,14 @@
           "changePct": -3.0387166435292268,
           "revTTM": 37.2,
           "epsTTM": 110.5,
+          "grossMargin": 64.491,
+          "netMargin": 26.007998,
           "peFwd": 30.562634,
           "epsFwd": 58.419997,
           "revFwd": 33.720002,
-          "pegFwd": 0.87,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.69,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PEP": {
           "t": "PEP",
@@ -2309,12 +2563,14 @@
           "changePct": 2.1677529045055266,
           "revTTM": 8.5,
           "epsTTM": 27.800000000000004,
+          "grossMargin": 54.383,
+          "netMargin": 9.149000000000001,
           "peFwd": 16.687572,
           "epsFwd": 6.17,
           "revFwd": 5.35,
           "pegFwd": 1.46,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TMO": {
           "t": "TMO",
@@ -2327,12 +2583,14 @@
           "changePct": 1.969493308398107,
           "revTTM": 6.2,
           "epsTTM": 11.3,
+          "grossMargin": 40.932,
+          "netMargin": 15.151,
           "peFwd": 21.059908,
           "epsFwd": 8.68,
           "revFwd": 7.19,
           "pegFwd": 1.65,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AMGN": {
           "t": "AMGN",
@@ -2345,12 +2603,14 @@
           "changePct": 3.5480032103617276,
           "revTTM": 5.800000000000001,
           "epsTTM": 4.3999999999999995,
+          "grossMargin": 71.443003,
+          "netMargin": 20.955999,
           "peFwd": 16.711084,
           "epsFwd": 2.52,
           "revFwd": 2.75,
           "pegFwd": 1.98,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "VZ": {
           "t": "VZ",
@@ -2363,12 +2623,14 @@
           "changePct": 1.3574660633484115,
           "revTTM": 2.9000000000000004,
           "epsTTM": 4.3,
+          "grossMargin": 58.909,
+          "netMargin": 12.462,
           "peFwd": 8.597025,
           "epsFwd": 5.11,
           "revFwd": 3.1600002000000003,
           "pegFwd": 0.79,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DIS": {
           "t": "DIS",
@@ -2381,12 +2643,14 @@
           "changePct": 3.959878800543315,
           "revTTM": 6.5,
           "epsTTM": -29.799999999999997,
+          "grossMargin": 37.16,
+          "netMargin": 11.540000000000001,
           "peFwd": 14.575423,
           "epsFwd": 15.120000000000001,
           "revFwd": 7.6799995999999995,
           "pegFwd": 2.23,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AMAT": {
           "t": "AMAT",
@@ -2399,12 +2663,14 @@
           "changePct": -7.354319337542825,
           "revTTM": 11.4,
           "epsTTM": 33.5,
+          "grossMargin": 48.956,
+          "netMargin": 29.314,
           "peFwd": 49.271114,
           "epsFwd": 29.930001,
           "revFwd": 17.7,
           "pegFwd": 1.64,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "T": {
           "t": "T",
@@ -2417,12 +2683,14 @@
           "changePct": 0.48828125,
           "revTTM": 2.9000000000000004,
           "epsTTM": -11.3,
+          "grossMargin": 59.414,
+          "netMargin": 16.938,
           "peFwd": 8.89592,
           "epsFwd": 9.120000000000001,
           "revFwd": 3.05,
           "pegFwd": 1.45,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NEE": {
           "t": "NEE",
@@ -2435,12 +2703,14 @@
           "changePct": 2.280884566400365,
           "revTTM": 7.3,
           "epsTTM": 160.0,
+          "grossMargin": 61.401004,
+          "netMargin": 29.369,
           "peFwd": 21.884644,
           "epsFwd": 8.799999999999999,
           "revFwd": 15.06,
           "pegFwd": 1.93,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GILD": {
           "t": "GILD",
@@ -2453,12 +2723,14 @@
           "changePct": 4.207350956576983,
           "revTTM": 4.3999999999999995,
           "epsTTM": 54.800000000000004,
+          "grossMargin": 79.36799500000001,
+          "netMargin": 30.993,
           "peFwd": -165.79729,
           "epsFwd": -109.71,
           "revFwd": 3.47,
           "pegFwd": 2.14,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GE": {
           "t": "GE",
@@ -2471,12 +2743,14 @@
           "changePct": 0.688110097615624,
           "revTTM": 24.7,
           "epsTTM": -1.7999999999999998,
+          "grossMargin": 31.148999999999997,
+          "netMargin": 17.863001,
           "peFwd": 49.998474,
           "epsFwd": 18.530001,
           "revFwd": 14.850000999999999,
           "pegFwd": 8.99,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "UNP": {
           "t": "UNP",
@@ -2489,12 +2763,14 @@
           "changePct": 1.6274799265473705,
           "revTTM": 3.2,
           "epsTTM": 6.2,
+          "grossMargin": 56.525999999999996,
+          "netMargin": 29.202,
           "peFwd": 22.34886,
           "epsFwd": 8.3100006,
           "revFwd": 6.239999999999999,
           "pegFwd": 3.32,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ETN": {
           "t": "ETN",
@@ -2507,12 +2783,14 @@
           "changePct": -3.344570832625937,
           "revTTM": 16.8,
           "epsTTM": -9.4,
+          "grossMargin": 37.105,
+          "netMargin": 13.986,
           "peFwd": 29.87144,
           "epsFwd": 10.5299994,
           "revFwd": 17.34,
           "pegFwd": 3.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AXP": {
           "t": "AXP",
@@ -2525,12 +2803,14 @@
           "changePct": 1.4147817317389233,
           "revTTM": 11.600000000000001,
           "epsTTM": 17.599999999999998,
+          "grossMargin": 62.759,
+          "netMargin": 16.305,
           "peFwd": 19.916138,
           "epsFwd": 15.07,
           "revFwd": 9.959999999999999,
           "pegFwd": 1.66,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "HON": {
           "t": "HON",
@@ -2543,12 +2823,14 @@
           "changePct": 3.657271702367537,
           "revTTM": 2.4,
           "epsTTM": -41.9,
+          "grossMargin": 36.925000000000004,
+          "netMargin": 10.89,
           "peFwd": 27.895632,
           "epsFwd": -57.87,
           "revFwd": -46.050000000000004,
           "pegFwd": 6.84,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PFE": {
           "t": "PFE",
@@ -2561,12 +2843,14 @@
           "changePct": 1.8425460636515956,
           "revTTM": 5.4,
           "epsTTM": -10.100000000000001,
+          "grossMargin": 74.801004,
+          "netMargin": 11.831000399999999,
           "peFwd": 8.219271,
           "epsFwd": -8.1099994,
           "revFwd": -1.4199998999999999,
           "pegFwd": 2.81,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ABT": {
           "t": "ABT",
@@ -2579,12 +2863,14 @@
           "changePct": 3.493165545671517,
           "revTTM": 7.8,
           "epsTTM": -19.7,
+          "grossMargin": 56.503,
+          "netMargin": 13.904999000000002,
           "peFwd": 17.401869,
           "epsFwd": 6.45,
           "revFwd": 13.38,
           "pegFwd": 1.35,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BLK": {
           "t": "BLK",
@@ -2597,12 +2883,14 @@
           "changePct": 1.565719414920741,
           "revTTM": 27.0,
           "epsTTM": 45.9,
+          "grossMargin": 46.890998,
+          "netMargin": 24.396999,
           "peFwd": 18.638723,
           "epsFwd": 11.09,
           "revFwd": 15.939999999999998,
           "pegFwd": 1.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SCHW": {
           "t": "SCHW",
@@ -2615,12 +2903,14 @@
           "changePct": 1.273752349133428,
           "revTTM": 15.8,
           "epsTTM": 38.6,
+          "grossMargin": 97.46000000000001,
+          "netMargin": 37.986,
           "peFwd": 15.683079,
           "epsFwd": 27.0,
           "revFwd": 14.29,
           "pegFwd": 1.1,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GLW": {
           "t": "GLW",
@@ -2633,12 +2923,14 @@
           "changePct": -10.8054208403209,
           "revTTM": 20.0,
           "epsTTM": 138.9,
+          "grossMargin": 36.382999999999996,
+          "netMargin": 11.09,
           "peFwd": 61.573265,
           "epsFwd": 26.83,
           "revFwd": 15.459999999999999,
           "pegFwd": 2.0,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "COP": {
           "t": "COP",
@@ -2651,12 +2943,14 @@
           "changePct": 1.4628947878318144,
           "revTTM": -5.3,
           "epsTTM": -20.200000000000003,
+          "grossMargin": 45.591,
+          "netMargin": 12.331,
           "peFwd": 10.840538,
           "epsFwd": 56.830000000000005,
           "revFwd": 15.15,
           "pegFwd": 0.88,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DE": {
           "t": "DE",
@@ -2669,12 +2963,14 @@
           "changePct": -1.0133358826059924,
           "revTTM": -11.1,
           "epsTTM": -8.5,
+          "grossMargin": 25.965,
+          "netMargin": 10.104000000000001,
           "peFwd": 34.426277,
           "epsFwd": -2.15,
           "revFwd": 6.5,
           "pegFwd": 1.93,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TXN": {
           "t": "TXN",
@@ -2687,12 +2983,14 @@
           "changePct": -1.7861331724808305,
           "revTTM": 18.6,
           "epsTTM": 31.3,
+          "grossMargin": 57.321999999999996,
+          "netMargin": 29.108,
           "peFwd": 37.68408,
           "epsFwd": 40.94,
           "revFwd": 18.790000000000003,
           "pegFwd": 1.42,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PLD": {
           "t": "PLD",
@@ -2705,12 +3003,14 @@
           "changePct": 1.9225146198830423,
           "revTTM": 8.3,
           "epsTTM": 65.2,
+          "grossMargin": 75.6,
+          "netMargin": 39.646,
           "peFwd": 58.338905,
           "epsFwd": -31.239998000000003,
           "revFwd": 6.329999999999999,
           "pegFwd": 105.38,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DELL": {
           "t": "DELL",
@@ -2723,12 +3023,14 @@
           "changePct": -7.273368606701947,
           "revTTM": 87.5,
           "epsTTM": 282.5,
+          "grossMargin": 19.212,
+          "netMargin": 6.2750004,
           "peFwd": 21.461681,
           "epsFwd": 78.37999500000001,
           "revFwd": 50.82,
-          "pegFwd": 0.71,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.65,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LMT": {
           "t": "LMT",
@@ -2741,12 +3043,14 @@
           "changePct": 4.616534437162234,
           "revTTM": 0.3,
           "epsTTM": -11.5,
+          "grossMargin": 9.905999999999999,
+          "netMargin": 6.382000000000001,
           "peFwd": 18.283634,
           "epsFwd": 39.099996999999995,
           "revFwd": 5.45,
           "pegFwd": 1.08,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LOW": {
           "t": "LOW",
@@ -2759,12 +3063,14 @@
           "changePct": 2.5144196106705152,
           "revTTM": 10.299999999999999,
           "epsTTM": -0.7000000000000001,
+          "grossMargin": 33.293,
+          "netMargin": 7.510000499999999,
           "peFwd": 18.204107,
           "epsFwd": 1.77,
           "revFwd": 7.95,
           "pegFwd": 1.44,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NEM": {
           "t": "NEM",
@@ -2777,12 +3083,14 @@
           "changePct": 4.008574490889605,
           "revTTM": 45.800000000000004,
           "epsTTM": 78.60000000000001,
+          "grossMargin": 67.35600000000001,
+          "netMargin": 33.87,
           "peFwd": 9.5790415,
           "epsFwd": 47.03,
           "revFwd": 24.959999999999997,
           "pegFwd": 2.78,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "COF": {
           "t": "COF",
@@ -2795,12 +3103,14 @@
           "changePct": 0.146470071282101,
           "revTTM": 46.300000000000004,
           "epsTTM": -3.2,
+          "grossMargin": 0.0,
+          "netMargin": 8.876000000000001,
           "peFwd": 10.404989,
           "epsFwd": 0.53,
           "revFwd": 19.299999,
           "pegFwd": 0.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BMY": {
           "t": "BMY",
@@ -2813,12 +3123,14 @@
           "changePct": 4.156961118079194,
           "revTTM": 2.6,
           "epsTTM": 9.2,
+          "grossMargin": 71.981,
+          "netMargin": 15.006,
           "peFwd": 9.213062,
           "epsFwd": 2.5899999,
           "revFwd": -1.8499999999999999,
           "pegFwd": 1.47,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MO": {
           "t": "MO",
@@ -2831,12 +3143,14 @@
           "changePct": 1.6354487000279416,
           "revTTM": 5.3,
           "epsTTM": 106.3,
+          "grossMargin": 87.378997,
+          "netMargin": 39.518002,
           "peFwd": 12.798802,
           "epsFwd": 4.82,
           "revFwd": 1.97,
           "pegFwd": 1.64,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DHR": {
           "t": "DHR",
@@ -2849,12 +3163,14 @@
           "changePct": 2.173239727441678,
           "revTTM": 3.6999999999999997,
           "epsTTM": 9.8,
+          "grossMargin": 58.992,
+          "netMargin": 14.887998999999999,
           "peFwd": 23.327047,
           "epsFwd": 8.7799996,
           "revFwd": 5.6799997,
           "pegFwd": 1.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CVS": {
           "t": "CVS",
@@ -2867,12 +3183,14 @@
           "changePct": -0.0858696689247207,
           "revTTM": 6.1,
           "epsTTM": 63.1,
+          "grossMargin": 13.387999,
+          "netMargin": 0.7230000000000001,
           "peFwd": 14.087046,
           "epsFwd": 10.13,
           "revFwd": 1.78,
           "pegFwd": 0.29,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ACN": {
           "t": "ACN",
@@ -2885,12 +3203,14 @@
           "changePct": 4.743384427667197,
           "revTTM": 5.6000000000000005,
           "epsTTM": 9.0,
+          "grossMargin": 32.013000000000005,
+          "netMargin": 10.656,
           "peFwd": 9.908919,
           "epsFwd": 7.199999999999999,
           "revFwd": 5.59,
           "pegFwd": 0.9,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PGR": {
           "t": "PGR",
@@ -2903,12 +3223,14 @@
           "changePct": 3.1172291296625243,
           "revTTM": 8.7,
           "epsTTM": 9.8,
+          "grossMargin": 18.562001,
+          "netMargin": 12.927,
           "peFwd": 13.420042,
           "epsFwd": -5.1599998000000005,
           "revFwd": 5.8999999999999995,
           "pegFwd": 33.32,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CB": {
           "t": "CB",
@@ -2921,12 +3243,14 @@
           "changePct": 2.6838768373468325,
           "revTTM": 10.2,
           "epsTTM": 78.7,
+          "grossMargin": 30.997999999999998,
+          "netMargin": 18.527001000000002,
           "peFwd": 13.326539,
           "epsFwd": 9.32,
           "revFwd": 5.050000000000001,
           "pegFwd": 3.0,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PH": {
           "t": "PH",
@@ -2939,12 +3263,14 @@
           "changePct": -0.09545449829322372,
           "revTTM": 10.6,
           "epsTTM": -4.2,
+          "grossMargin": 37.442002,
+          "netMargin": 16.582,
           "peFwd": 30.788914,
           "epsFwd": 14.430000000000001,
           "revFwd": 7.430000000000001,
           "pegFwd": 3.82,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SO": {
           "t": "SO",
@@ -2957,12 +3283,14 @@
           "changePct": 3.006728343145504,
           "revTTM": 8.0,
           "epsTTM": -0.8,
+          "grossMargin": 48.002997,
+          "netMargin": 14.458999,
           "peFwd": 21.466976,
           "epsFwd": 6.140000000000001,
           "revFwd": 5.29,
           "pegFwd": 2.72,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TT": {
           "t": "TT",
@@ -2975,12 +3303,14 @@
           "changePct": -1.3310495686986612,
           "revTTM": 6.0,
           "epsTTM": -2.1,
+          "grossMargin": 35.924998,
+          "netMargin": 13.415,
           "peFwd": 32.088165,
           "epsFwd": 14.09,
           "revFwd": 9.629999999999999,
           "pegFwd": 2.06,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CME": {
           "t": "CME",
@@ -2993,12 +3323,14 @@
           "changePct": 2.4242424242424176,
           "revTTM": 14.399999999999999,
           "epsTTM": 21.3,
-          "peFwd": 19.265219,
-          "epsFwd": 9.6499994,
-          "revFwd": 8.08,
-          "pegFwd": 3.87,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "grossMargin": 100.0,
+          "netMargin": 63.324000000000005,
+          "peFwd": 19.272547,
+          "epsFwd": 9.609999499999999,
+          "revFwd": 8.05,
+          "pegFwd": 4.15,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BNY": {
           "t": "BNY",
@@ -3011,12 +3343,14 @@
           "changePct": 0.4109026160799889,
           "revTTM": 13.4,
           "epsTTM": 41.8,
-          "peFwd": 16.512953,
-          "epsFwd": 18.39,
+          "grossMargin": 0.0,
+          "netMargin": 28.721999999999998,
+          "peFwd": 16.488977,
+          "epsFwd": 18.56,
           "revFwd": 7.739999999999999,
-          "pegFwd": 1.6,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.63,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DUK": {
           "t": "DUK",
@@ -3029,12 +3363,14 @@
           "changePct": 3.045241313508784,
           "revTTM": 11.3,
           "epsTTM": 12.0,
+          "grossMargin": 51.05,
+          "netMargin": 15.706000000000001,
           "peFwd": 19.33088,
           "epsFwd": 6.25,
           "revFwd": 4.2,
           "pegFwd": 2.68,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MDT": {
           "t": "MDT",
@@ -3047,12 +3383,14 @@
           "changePct": 5.03787878787878,
           "revTTM": 9.9,
           "epsTTM": 18.3,
+          "grossMargin": 65.309,
+          "netMargin": 13.203000000000001,
           "peFwd": 13.987179,
           "epsFwd": 7.550000399999999,
           "revFwd": 6.94,
           "pegFwd": 1.54,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FCX": {
           "t": "FCX",
@@ -3065,12 +3403,14 @@
           "changePct": 0.7269122749050005,
           "revTTM": 8.799999999999999,
           "epsTTM": 153.1,
+          "grossMargin": 38.636002000000005,
+          "netMargin": 10.344000000000001,
           "peFwd": 21.84248,
           "epsFwd": 57.699999999999996,
           "revFwd": 11.12,
           "pegFwd": 4.08,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MCK": {
           "t": "MCK",
@@ -3083,12 +3423,14 @@
           "changePct": 2.3748144676197125,
           "revTTM": 6.0,
           "epsTTM": 37.2,
+          "grossMargin": 3.601,
+          "netMargin": 1.17999995,
           "peFwd": 17.763567,
           "epsFwd": 13.18,
           "revFwd": 7.000000000000001,
           "pegFwd": 1.48,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WDC": {
           "t": "WDC",
@@ -3101,12 +3443,14 @@
           "changePct": -9.92195464344804,
           "revTTM": 45.5,
           "epsTTM": 482.9,
+          "grossMargin": 45.428002,
+          "netMargin": 55.286,
           "peFwd": 54.21428,
           "epsFwd": 101.66,
           "revFwd": 35.169998,
           "pegFwd": 0.57,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CMI": {
           "t": "CMI",
@@ -3119,12 +3463,14 @@
           "changePct": -3.0220424434283077,
           "revTTM": 2.7,
           "epsTTM": -21.0,
+          "grossMargin": 25.847998,
+          "netMargin": 7.886,
           "peFwd": 22.65279,
           "epsFwd": 38.24,
           "revFwd": 10.6400006,
           "pegFwd": 1.71,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ADP": {
           "t": "ADP",
@@ -3137,12 +3483,14 @@
           "changePct": 2.774360497178985,
           "revTTM": 7.000000000000001,
           "epsTTM": 10.5,
+          "grossMargin": 48.497,
+          "netMargin": 20.118,
           "peFwd": 21.878141,
           "epsFwd": 10.6300004,
           "revFwd": 6.15,
-          "pegFwd": 2.09,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 2.26,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CMCSA": {
           "t": "CMCSA",
@@ -3155,12 +3503,14 @@
           "changePct": 0.25284450063209896,
           "revTTM": 5.3,
           "epsTTM": -32.6,
+          "grossMargin": 70.129997,
+          "netMargin": 15.004000000000001,
           "peFwd": 6.7957063,
           "epsFwd": -18.78,
           "revFwd": -1.59,
           "pegFwd": 142.98,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PNC": {
           "t": "PNC",
@@ -3173,12 +3523,14 @@
           "changePct": -0.8465145854860467,
           "revTTM": 13.8,
           "epsTTM": 17.7,
+          "grossMargin": 0.0,
+          "netMargin": 31.312,
           "peFwd": 13.216677,
           "epsFwd": 11.1999996,
           "revFwd": 11.3299996,
           "pegFwd": 1.95,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CEG": {
           "t": "CEG",
@@ -3191,12 +3543,14 @@
           "changePct": 1.1627906976744207,
           "revTTM": 63.800000000000004,
           "epsTTM": 1091.0,
+          "grossMargin": 23.263,
+          "netMargin": 12.692999999999998,
           "peFwd": 20.421785,
           "epsFwd": 24.759999999999998,
           "revFwd": 35.699999999999996,
           "pegFwd": 3.74,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WMB": {
           "t": "WMB",
@@ -3209,12 +3563,14 @@
           "changePct": 0.5084512848701372,
           "revTTM": 9.0,
           "epsTTM": 25.0,
+          "grossMargin": 63.50599999999999,
+          "netMargin": 23.056999,
           "peFwd": 30.488718,
           "epsFwd": 14.23,
           "revFwd": 0.66000004,
           "pegFwd": 2.3,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FDX": {
           "t": "FDX",
@@ -3227,12 +3583,14 @@
           "changePct": -0.28353881933160796,
           "revTTM": 12.5,
           "epsTTM": -4.6,
+          "grossMargin": 27.317999999999998,
+          "netMargin": 4.68,
           "peFwd": 17.657011,
           "epsFwd": -2.55,
           "revFwd": 3.42,
           "pegFwd": 1.33,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AMT": {
           "t": "AMT",
@@ -3245,12 +3603,14 @@
           "changePct": -0.030105973025051913,
           "revTTM": 6.800000000000001,
           "epsTTM": 76.9,
+          "grossMargin": 73.964,
+          "netMargin": 26.806998,
           "peFwd": 25.150536,
           "epsFwd": 22.25,
           "revFwd": 2.5799999000000002,
-          "pegFwd": 1.72,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.74,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WM": {
           "t": "WM",
@@ -3263,12 +3623,14 @@
           "changePct": 2.8204212781149485,
           "revTTM": 3.5000000000000004,
           "epsTTM": 13.3,
+          "grossMargin": 40.605000000000004,
+          "netMargin": 10.994001,
           "peFwd": 28.082697,
           "epsFwd": 9.39,
           "revFwd": 5.1999997,
           "pegFwd": 2.27,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "USB": {
           "t": "USB",
@@ -3281,12 +3643,14 @@
           "changePct": -0.3712072304712821,
           "revTTM": 4.6,
           "epsTTM": 14.799999999999999,
+          "grossMargin": 0.0,
+          "netMargin": 29.294002000000003,
           "peFwd": 12.095811,
           "epsFwd": 10.459999999999999,
           "revFwd": 6.98,
           "pegFwd": 2.21,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CRM": {
           "t": "CRM",
@@ -3299,12 +3663,14 @@
           "changePct": 1.7643815475096636,
           "revTTM": 13.3,
           "epsTTM": 52.2,
+          "grossMargin": 77.643996,
+          "netMargin": 18.733,
           "peFwd": 11.757894,
           "epsFwd": 12.839999999999998,
           "revFwd": 11.03,
           "pegFwd": 0.75,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ELV": {
           "t": "ELV",
@@ -3317,12 +3683,14 @@
           "changePct": 0.4084672865758421,
           "revTTM": 2.6,
           "epsTTM": -16.8,
+          "grossMargin": 25.891,
+          "netMargin": 2.616,
           "peFwd": 15.533218,
           "epsFwd": -11.18,
           "revFwd": -1.66,
-          "pegFwd": 1.42,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.53,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GD": {
           "t": "GD",
@@ -3335,12 +3703,14 @@
           "changePct": 3.3963517590721803,
           "revTTM": 10.299999999999999,
           "epsTTM": 12.0,
+          "grossMargin": 15.241,
+          "netMargin": 8.068,
           "peFwd": 22.416916,
           "epsFwd": 7.93,
           "revFwd": 5.1999997,
           "pegFwd": 2.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CSX": {
           "t": "CSX",
@@ -3353,12 +3723,14 @@
           "changePct": 1.1587006000413957,
           "revTTM": 1.7000000000000002,
           "epsTTM": 26.5,
+          "grossMargin": 46.816003,
+          "netMargin": 21.553,
           "peFwd": 25.439293,
           "epsFwd": 19.370002,
           "revFwd": 5.2600004,
-          "pegFwd": 2.17,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 2.23,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ICE": {
           "t": "ICE",
@@ -3371,12 +3743,14 @@
           "changePct": 4.9396354454351865,
           "revTTM": 20.4,
           "epsTTM": 79.7,
+          "grossMargin": 100.0,
+          "netMargin": 37.671003,
           "peFwd": 16.344706,
           "epsFwd": 17.07,
           "revFwd": 10.47,
           "pegFwd": 1.91,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "JCI": {
           "t": "JCI",
@@ -3389,12 +3763,14 @@
           "changePct": -2.7900552486187946,
           "revTTM": 8.200000000000001,
           "epsTTM": 38.9,
+          "grossMargin": 36.561,
+          "netMargin": 14.452000000000002,
           "peFwd": 28.778212,
           "epsFwd": 30.09,
           "revFwd": 7.08,
           "pegFwd": 1.98,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SLB": {
           "t": "SLB",
@@ -3407,12 +3783,14 @@
           "changePct": 0.08871146595696988,
           "revTTM": 2.7,
           "epsTTM": -13.8,
+          "grossMargin": 17.802,
+          "netMargin": 9.263,
           "peFwd": 17.523085,
           "epsFwd": -12.100001,
           "revFwd": 2.2399999999999998,
           "pegFwd": 1.55,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "EMR": {
           "t": "EMR",
@@ -3425,12 +3803,14 @@
           "changePct": -0.33686926605503986,
           "revTTM": 2.9000000000000004,
           "epsTTM": 27.900000000000002,
+          "grossMargin": 52.669996,
+          "netMargin": 13.354,
           "peFwd": 21.37534,
           "epsFwd": 8.42,
           "revFwd": 4.5900002,
           "pegFwd": 2.0,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MMM": {
           "t": "MMM",
@@ -3443,12 +3823,14 @@
           "changePct": 0.30007501875468634,
           "revTTM": 1.3,
           "epsTTM": -39.7,
+          "grossMargin": 39.714,
+          "netMargin": 11.137,
           "peFwd": 18.418072,
           "epsFwd": 8.08,
           "revFwd": 3.39,
           "pegFwd": 1.69,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NOC": {
           "t": "NOC",
@@ -3461,12 +3843,14 @@
           "changePct": 5.588998942205969,
           "revTTM": 4.3999999999999995,
           "epsTTM": 84.89999999999999,
+          "grossMargin": 20.517999,
+          "netMargin": 10.8009994,
           "peFwd": 19.642822,
           "epsFwd": 6.1100002,
           "revFwd": 4.8499998,
           "pegFwd": 3.79,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "UPS": {
           "t": "UPS",
@@ -3479,12 +3863,14 @@
           "changePct": 1.0224575497534971,
           "revTTM": -1.6,
           "epsTTM": -27.200000000000003,
+          "grossMargin": 22.45,
+          "netMargin": 5.943,
           "peFwd": 15.527087,
           "epsFwd": -0.45999999999999996,
           "revFwd": 1.6,
           "pegFwd": 1.7,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MDLZ": {
           "t": "MDLZ",
@@ -3497,12 +3883,14 @@
           "changePct": 2.628475147430498,
           "revTTM": 8.200000000000001,
           "epsTTM": 41.3,
+          "grossMargin": 28.771,
+          "netMargin": 6.638,
           "peFwd": 19.956228,
           "epsFwd": 4.5300003,
           "revFwd": 3.5999999999999996,
           "pegFwd": 0.95,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MRSH": {
           "t": "MRSH",
@@ -3515,12 +3903,14 @@
           "changePct": 3.7179040316021927,
           "revTTM": 7.6,
           "epsTTM": -15.4,
+          "grossMargin": 43.852999999999994,
+          "netMargin": 14.264,
           "peFwd": 17.173367,
           "epsFwd": 6.6300004999999995,
           "revFwd": 5.33,
           "pegFwd": 1.61,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GM": {
           "t": "GM",
@@ -3533,12 +3923,14 @@
           "changePct": 0.6355932203389925,
           "revTTM": -0.8999999999999999,
           "epsTTM": -15.8,
+          "grossMargin": 11.1420006,
+          "netMargin": 1.37600005,
           "peFwd": 5.9584103,
           "epsFwd": 20.330000000000002,
           "revFwd": 0.34999999,
           "pegFwd": 0.34,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ROST": {
           "t": "ROST",
@@ -3551,12 +3943,14 @@
           "changePct": 0.722038697498828,
           "revTTM": 20.599999999999998,
           "epsTTM": 37.4,
+          "grossMargin": 32.740003,
+          "netMargin": 9.7399995,
           "peFwd": 27.44512,
           "epsFwd": 17.950001,
           "revFwd": 10.5100006,
           "pegFwd": 2.52,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MPC": {
           "t": "MPC",
@@ -3569,12 +3963,14 @@
           "changePct": 0.5587646770113697,
           "revTTM": 8.799999999999999,
           "epsTTM": null,
+          "grossMargin": 10.739,
+          "netMargin": 3.4070000000000005,
           "peFwd": 8.747856,
           "epsFwd": 184.56,
           "revFwd": 11.68,
           "pegFwd": 1.27,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "VLO": {
           "t": "VLO",
@@ -3587,12 +3983,14 @@
           "changePct": -0.6235154394299336,
           "revTTM": 6.6000000000000005,
           "epsTTM": null,
+          "grossMargin": 14.563,
+          "netMargin": 3.569,
           "peFwd": 8.686402,
           "epsFwd": 190.53,
           "revFwd": 9.94,
           "pegFwd": 4.08,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CI": {
           "t": "CI",
@@ -3605,17 +4003,19 @@
           "changePct": 3.861839968239078,
           "revTTM": 4.6,
           "epsTTM": 29.099999999999998,
+          "grossMargin": 9.149000000000001,
+          "netMargin": 2.263,
           "peFwd": 9.465959,
           "epsFwd": 1.8800000000000001,
           "revFwd": 3.4799999999999995,
-          "pegFwd": 0.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.86,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         }
       }
     },
     "dividend": {
-      "updated": "2026-07-03T20:20:54.923253Z",
+      "updated": "2026-07-03T21:20:03.183571Z",
       "source": "yahoo",
       "stocks": {
         "AVGO": {
@@ -3629,12 +4029,14 @@
           "changePct": -2.4069962636053432,
           "revTTM": 47.9,
           "epsTTM": 85.39999999999999,
+          "grossMargin": 76.28399999999999,
+          "netMargin": 38.848,
           "peFwd": 31.00992,
           "epsFwd": 70.44,
           "revFwd": 65.98000499999999,
           "pegFwd": 0.69,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AAPL": {
           "t": "AAPL",
@@ -3647,12 +4049,14 @@
           "changePct": 4.840682111556482,
           "revTTM": 16.6,
           "epsTTM": 21.8,
+          "grossMargin": 47.862,
+          "netMargin": 27.152001999999996,
           "peFwd": 35.253628,
           "epsFwd": 17.419999999999998,
           "revFwd": 14.89,
           "pegFwd": 2.34,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MSFT": {
           "t": "MSFT",
@@ -3665,12 +4069,14 @@
           "changePct": 1.6160091599875193,
           "revTTM": 18.3,
           "epsTTM": 23.400000000000002,
+          "grossMargin": 68.309,
+          "netMargin": 39.341998000000004,
           "peFwd": 23.217028,
           "epsFwd": 23.31,
           "revFwd": 16.96,
           "pegFwd": 1.15,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LLY": {
           "t": "LLY",
@@ -3683,12 +4089,14 @@
           "changePct": 1.8603051001057302,
           "revTTM": 55.50000000000001,
           "epsTTM": 169.9,
+          "grossMargin": 82.832,
+          "netMargin": 34.986,
           "peFwd": 33.52082,
           "epsFwd": 49.580002,
           "revFwd": 30.85,
           "pegFwd": 1.54,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "JPM": {
           "t": "JPM",
@@ -3701,12 +4109,14 @@
           "changePct": 0.11973538479961299,
           "revTTM": 12.7,
           "epsTTM": 17.2,
+          "grossMargin": 0.0,
+          "netMargin": 33.936,
           "peFwd": 14.826711,
           "epsFwd": 14.34,
           "revFwd": 8.3000004,
           "pegFwd": 1.73,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "XOM": {
           "t": "XOM",
@@ -3719,12 +4129,14 @@
           "changePct": 0.5943645435867451,
           "revTTM": 2.6,
           "epsTTM": -43.4,
+          "grossMargin": 29.768,
+          "netMargin": 7.7649995999999994,
           "peFwd": 12.138142,
           "epsFwd": 61.58,
           "revFwd": 21.01,
           "pegFwd": 1.13,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "JNJ": {
           "t": "JNJ",
@@ -3737,12 +4149,14 @@
           "changePct": 3.567210016536748,
           "revTTM": 9.9,
           "epsTTM": -52.900000000000006,
+          "grossMargin": 68.03500700000001,
+          "netMargin": 21.834,
           "peFwd": 22.727352,
           "epsFwd": 7.26,
           "revFwd": 7.17,
           "pegFwd": 4.88,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "V": {
           "t": "V",
@@ -3755,12 +4169,14 @@
           "changePct": 3.1474307850062777,
           "revTTM": 17.1,
           "epsTTM": 35.5,
+          "grossMargin": 97.77799999999999,
+          "netMargin": 51.679003,
           "peFwd": 27.551247,
           "epsFwd": 14.59,
           "revFwd": 13.919999999999998,
           "pegFwd": 1.51,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WMT": {
           "t": "WMT",
@@ -3773,12 +4189,14 @@
           "changePct": 2.7752251424370655,
           "revTTM": 7.3,
           "epsTTM": 19.400000000000002,
+          "grossMargin": 24.976000000000003,
+          "netMargin": 3.1350000000000002,
           "peFwd": 38.514915,
           "epsFwd": 9.99,
           "revFwd": 6.4899996,
           "pegFwd": 4.31,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CSCO": {
           "t": "CSCO",
@@ -3791,12 +4209,14 @@
           "changePct": -3.6919921374241604,
           "revTTM": 12.0,
           "epsTTM": 37.1,
+          "grossMargin": 64.296997,
+          "netMargin": 19.685,
           "peFwd": 26.348341,
           "epsFwd": 12.2600004,
           "revFwd": 11.04,
           "pegFwd": 1.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "COST": {
           "t": "COST",
@@ -3809,12 +4229,14 @@
           "changePct": 2.919960634604779,
           "revTTM": 21.5,
           "epsTTM": 45.5,
+          "grossMargin": 12.876001,
+          "netMargin": 3.01,
           "peFwd": 46.29076,
           "epsFwd": 12.989999999999998,
           "revFwd": 9.42,
           "pegFwd": 4.56,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CAT": {
           "t": "CAT",
@@ -3827,12 +4249,14 @@
           "changePct": -2.8121564236794017,
           "revTTM": 22.2,
           "epsTTM": 30.2,
+          "grossMargin": 28.601998000000002,
+          "netMargin": 13.328000000000001,
           "peFwd": 39.164272,
           "epsFwd": 29.080000000000002,
           "revFwd": 12.740000000000002,
           "pegFwd": 2.35,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MA": {
           "t": "MA",
@@ -3845,12 +4269,14 @@
           "changePct": 3.244391700482341,
           "revTTM": 15.8,
           "epsTTM": 21.2,
+          "grossMargin": 100.0,
+          "netMargin": 45.876,
           "peFwd": 27.43068,
           "epsFwd": 15.6,
           "revFwd": 13.100000000000001,
           "pegFwd": 1.58,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LRCX": {
           "t": "LRCX",
@@ -3863,12 +4289,14 @@
           "changePct": -10.185043193784171,
           "revTTM": 23.799999999999997,
           "epsTTM": 40.8,
+          "grossMargin": 49.979,
+          "netMargin": 30.938998,
           "peFwd": 61.869263,
           "epsFwd": 37.2,
           "revFwd": 25.8,
           "pegFwd": 2.5,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ABBV": {
           "t": "ABBV",
@@ -3881,12 +4309,14 @@
           "changePct": 3.987094718394002,
           "revTTM": 12.4,
           "epsTTM": -46.2,
+          "grossMargin": 72.026,
+          "netMargin": 5.7860000000000005,
           "peFwd": 18.325062,
           "epsFwd": 42.470002,
           "revFwd": 9.94,
           "pegFwd": 0.41,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ORCL": {
           "t": "ORCL",
@@ -3899,12 +4329,14 @@
           "changePct": -1.5649122807017468,
           "revTTM": 20.599999999999998,
           "epsTTM": 21.9,
+          "grossMargin": 65.822,
+          "netMargin": 25.368000000000002,
           "peFwd": 17.43548,
           "epsFwd": 7.969999999999999,
           "revFwd": 17.1,
           "pegFwd": 0.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "UNH": {
           "t": "UNH",
@@ -3917,12 +4349,14 @@
           "changePct": -0.2766446288742008,
           "revTTM": 2.0,
           "epsTTM": 0.7000000000000001,
+          "grossMargin": 18.801000000000002,
+          "netMargin": 2.6780000000000004,
           "peFwd": 23.13157,
           "epsFwd": 12.47,
           "revFwd": -0.74,
           "pegFwd": 1.44,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BAC": {
           "t": "BAC",
@@ -3935,12 +4369,14 @@
           "changePct": 0.6339958875942298,
           "revTTM": 8.1,
           "epsTTM": 24.4,
+          "grossMargin": 0.0,
+          "netMargin": 28.956,
           "peFwd": 13.081081,
           "epsFwd": 17.62,
           "revFwd": 7.510000499999999,
           "pegFwd": 1.02,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PG": {
           "t": "PG",
@@ -3953,12 +4389,14 @@
           "changePct": 2.699586244319341,
           "revTTM": 7.3999999999999995,
           "epsTTM": 5.800000000000001,
+          "grossMargin": 50.983999999999995,
+          "netMargin": 19.162000000000003,
           "peFwd": 21.958467,
           "epsFwd": 0.9599999499999999,
           "revFwd": 3.4000000000000004,
           "pegFwd": 4.12,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "HD": {
           "t": "HD",
@@ -3971,12 +4409,14 @@
           "changePct": 2.012313305210345,
           "revTTM": 4.8,
           "epsTTM": -4.3,
+          "grossMargin": 33.126998,
+          "netMargin": 8.411,
           "peFwd": 23.9313,
           "epsFwd": 1.8099998999999998,
           "revFwd": 3.82,
           "pegFwd": 1.99,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "KO": {
           "t": "KO",
@@ -3989,12 +4429,14 @@
           "changePct": 3.5059662935170266,
           "revTTM": 12.1,
           "epsTTM": 18.2,
+          "grossMargin": 61.744,
+          "netMargin": 27.800000000000004,
           "peFwd": 25.751598,
           "epsFwd": 8.9099996,
           "revFwd": 2.15,
           "pegFwd": 4.15,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MRK": {
           "t": "MRK",
@@ -4007,12 +4449,14 @@
           "changePct": 3.342107362207858,
           "revTTM": 4.9,
           "epsTTM": null,
+          "grossMargin": 76.725996,
+          "netMargin": 13.586001,
           "peFwd": 42.82126,
           "epsFwd": -66.31,
           "revFwd": 2.6400002,
           "pegFwd": 6.35,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GS": {
           "t": "GS",
@@ -4025,12 +4469,14 @@
           "changePct": 0.13632663469365092,
           "revTTM": 14.499999999999998,
           "epsTTM": 24.2,
+          "grossMargin": 82.271004,
+          "netMargin": 29.363,
           "peFwd": 17.060972,
           "epsFwd": 17.1,
           "revFwd": 10.4499996,
           "pegFwd": 1.56,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "IBM": {
           "t": "IBM",
@@ -4043,12 +4489,14 @@
           "changePct": 1.1423580786026122,
           "revTTM": 9.5,
           "epsTTM": 14.2,
+          "grossMargin": 58.358,
+          "netMargin": 15.606,
           "peFwd": 23.242838,
           "epsFwd": 7.470000000000001,
           "revFwd": 5.86,
           "pegFwd": 2.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TXN": {
           "t": "TXN",
@@ -4061,12 +4509,14 @@
           "changePct": -1.7861331724808305,
           "revTTM": 18.6,
           "epsTTM": 31.3,
+          "grossMargin": 57.321999999999996,
+          "netMargin": 29.108,
           "peFwd": 37.68408,
           "epsFwd": 40.94,
           "revFwd": 18.790000000000003,
           "pegFwd": 1.42,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "QCOM": {
           "t": "QCOM",
@@ -4079,12 +4529,14 @@
           "changePct": -3.1167546174142413,
           "revTTM": -3.5000000000000004,
           "epsTTM": 173.0,
+          "grossMargin": 54.799,
+          "netMargin": 22.308001,
           "peFwd": 16.319656,
           "epsFwd": -10.229999600000001,
           "revFwd": -3.56,
           "pegFwd": 0.58,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "KLAC": {
           "t": "KLAC",
@@ -4097,12 +4549,14 @@
           "changePct": -11.510575153086133,
           "revTTM": 11.5,
           "epsTTM": 11.799999999999999,
+          "grossMargin": 61.446,
+          "netMargin": 35.661998,
           "peFwd": 63.403408,
           "epsFwd": 11.63,
           "revFwd": 11.18,
           "pegFwd": 3.12,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MS": {
           "t": "MS",
@@ -4115,12 +4569,14 @@
           "changePct": 0.977060322854717,
           "revTTM": 16.3,
           "epsTTM": 31.900000000000002,
+          "grossMargin": 87.388,
+          "netMargin": 24.753,
           "peFwd": 17.88319,
           "epsFwd": 16.93,
           "revFwd": 10.3599995,
           "pegFwd": 2.51,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LIN": {
           "t": "LIN",
@@ -4133,12 +4589,14 @@
           "changePct": 2.453378315059518,
           "revTTM": 8.200000000000001,
           "epsTTM": 13.4,
+          "grossMargin": 48.766,
+          "netMargin": 20.436001,
           "peFwd": 30.453482,
           "epsFwd": 9.0500005,
           "revFwd": 7.6899999999999995,
           "pegFwd": 2.26,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ADI": {
           "t": "ADI",
@@ -4151,12 +4609,14 @@
           "changePct": -3.0387166435292268,
           "revTTM": 37.2,
           "epsTTM": 110.5,
+          "grossMargin": 64.491,
+          "netMargin": 26.007998,
           "peFwd": 30.562634,
           "epsFwd": 58.419997,
           "revFwd": 33.720002,
-          "pegFwd": 0.87,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.69,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MCD": {
           "t": "MCD",
@@ -4169,12 +4629,14 @@
           "changePct": 4.156923876331509,
           "revTTM": 9.4,
           "epsTTM": 6.9,
+          "grossMargin": 57.348996,
+          "netMargin": 31.618000000000002,
           "peFwd": 21.617771,
           "epsFwd": 6.41,
           "revFwd": 5.96,
           "pegFwd": 2.48,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PEP": {
           "t": "PEP",
@@ -4187,12 +4649,14 @@
           "changePct": 2.1677529045055266,
           "revTTM": 8.5,
           "epsTTM": 27.800000000000004,
+          "grossMargin": 54.383,
+          "netMargin": 9.149000000000001,
           "peFwd": 16.687572,
           "epsFwd": 6.17,
           "revFwd": 5.35,
           "pegFwd": 1.46,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "APH": {
           "t": "APH",
@@ -4205,12 +4669,14 @@
           "changePct": -4.430379746835444,
           "revTTM": 58.4,
           "epsTTM": 24.099999999999998,
+          "grossMargin": 37.919998,
+          "netMargin": 17.238999999999997,
           "peFwd": 34.1134,
           "epsFwd": 44.45,
           "revFwd": 44.86,
-          "pegFwd": 1.51,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.41,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AMGN": {
           "t": "AMGN",
@@ -4223,12 +4689,14 @@
           "changePct": 3.5480032103617276,
           "revTTM": 5.800000000000001,
           "epsTTM": 4.3999999999999995,
+          "grossMargin": 71.443003,
+          "netMargin": 20.955999,
           "peFwd": 16.711084,
           "epsFwd": 2.52,
           "revFwd": 2.75,
           "pegFwd": 1.98,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NEE": {
           "t": "NEE",
@@ -4241,12 +4709,14 @@
           "changePct": 2.280884566400365,
           "revTTM": 7.3,
           "epsTTM": 160.0,
+          "grossMargin": 61.401004,
+          "netMargin": 29.369,
           "peFwd": 21.884644,
           "epsFwd": 8.799999999999999,
           "revFwd": 15.06,
           "pegFwd": 1.93,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GILD": {
           "t": "GILD",
@@ -4259,12 +4729,14 @@
           "changePct": 4.207350956576983,
           "revTTM": 4.3999999999999995,
           "epsTTM": 54.800000000000004,
+          "grossMargin": 79.36799500000001,
+          "netMargin": 30.993,
           "peFwd": -165.79729,
           "epsFwd": -109.71,
           "revFwd": 3.47,
           "pegFwd": 2.14,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "UNP": {
           "t": "UNP",
@@ -4277,12 +4749,14 @@
           "changePct": 1.6274799265473705,
           "revTTM": 3.2,
           "epsTTM": 6.2,
+          "grossMargin": 56.525999999999996,
+          "netMargin": 29.202,
           "peFwd": 22.34886,
           "epsFwd": 8.3100006,
           "revFwd": 6.239999999999999,
           "pegFwd": 3.32,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ETN": {
           "t": "ETN",
@@ -4295,12 +4769,14 @@
           "changePct": -3.344570832625937,
           "revTTM": 16.8,
           "epsTTM": -9.4,
+          "grossMargin": 37.105,
+          "netMargin": 13.986,
           "peFwd": 29.87144,
           "epsFwd": 10.5299994,
           "revFwd": 17.34,
           "pegFwd": 3.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BLK": {
           "t": "BLK",
@@ -4313,12 +4789,14 @@
           "changePct": 1.565719414920741,
           "revTTM": 27.0,
           "epsTTM": 45.9,
+          "grossMargin": 46.890998,
+          "netMargin": 24.396999,
           "peFwd": 18.638723,
           "epsFwd": 11.09,
           "revFwd": 15.939999999999998,
           "pegFwd": 1.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "HON": {
           "t": "HON",
@@ -4331,12 +4809,14 @@
           "changePct": 3.657271702367537,
           "revTTM": 2.4,
           "epsTTM": -41.9,
+          "grossMargin": 36.925000000000004,
+          "netMargin": 10.89,
           "peFwd": 27.895632,
           "epsFwd": -57.87,
           "revFwd": -46.050000000000004,
           "pegFwd": 6.84,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ABT": {
           "t": "ABT",
@@ -4349,12 +4829,14 @@
           "changePct": 3.493165545671517,
           "revTTM": 7.8,
           "epsTTM": -19.7,
+          "grossMargin": 56.503,
+          "netMargin": 13.904999000000002,
           "peFwd": 17.401869,
           "epsFwd": 6.45,
           "revFwd": 13.38,
           "pegFwd": 1.35,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SPGI": {
           "t": "SPGI",
@@ -4367,12 +4849,14 @@
           "changePct": 6.005253391811438,
           "revTTM": 10.4,
           "epsTTM": 32.5,
+          "grossMargin": 70.47,
+          "netMargin": 30.361998,
           "peFwd": 22.448315,
           "epsFwd": 9.9,
           "revFwd": 7.4499995,
           "pegFwd": 1.43,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LOW": {
           "t": "LOW",
@@ -4385,12 +4869,14 @@
           "changePct": 2.5144196106705152,
           "revTTM": 10.299999999999999,
           "epsTTM": -0.7000000000000001,
+          "grossMargin": 33.293,
+          "netMargin": 7.510000499999999,
           "peFwd": 18.204107,
           "epsFwd": 1.77,
           "revFwd": 7.95,
           "pegFwd": 1.44,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ACN": {
           "t": "ACN",
@@ -4403,12 +4889,14 @@
           "changePct": 4.743384427667197,
           "revTTM": 5.6000000000000005,
           "epsTTM": 9.0,
+          "grossMargin": 32.013000000000005,
+          "netMargin": 10.656,
           "peFwd": 9.908919,
           "epsFwd": 7.199999999999999,
           "revFwd": 5.59,
           "pegFwd": 0.9,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "DHR": {
           "t": "DHR",
@@ -4421,12 +4909,14 @@
           "changePct": 2.173239727441678,
           "revTTM": 3.6999999999999997,
           "epsTTM": 9.8,
+          "grossMargin": 58.992,
+          "netMargin": 14.887998999999999,
           "peFwd": 23.327047,
           "epsFwd": 8.7799996,
           "revFwd": 5.6799997,
           "pegFwd": 1.22,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CB": {
           "t": "CB",
@@ -4439,12 +4929,14 @@
           "changePct": 2.6838768373468325,
           "revTTM": 10.2,
           "epsTTM": 78.7,
+          "grossMargin": 30.997999999999998,
+          "netMargin": 18.527001000000002,
           "peFwd": 13.326539,
           "epsFwd": 9.32,
           "revFwd": 5.050000000000001,
           "pegFwd": 3.0,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SBUX": {
           "t": "SBUX",
@@ -4457,12 +4949,14 @@
           "changePct": 0.8511461456620628,
           "revTTM": 8.799999999999999,
           "epsTTM": 32.6,
+          "grossMargin": 21.897,
+          "netMargin": 3.888,
           "peFwd": 43.782223,
           "epsFwd": 11.81,
           "revFwd": 1.16,
           "pegFwd": 1.38,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LMT": {
           "t": "LMT",
@@ -4475,12 +4969,14 @@
           "changePct": 4.616534437162234,
           "revTTM": 0.3,
           "epsTTM": -11.5,
+          "grossMargin": 9.905999999999999,
+          "netMargin": 6.382000000000001,
           "peFwd": 18.283634,
           "epsFwd": 39.099996999999995,
           "revFwd": 5.45,
           "pegFwd": 1.08,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SYK": {
           "t": "SYK",
@@ -4493,12 +4989,14 @@
           "changePct": 4.196049650595124,
           "revTTM": 2.6,
           "epsTTM": 14.2,
+          "grossMargin": 64.697,
+          "netMargin": 13.205,
           "peFwd": 21.793364,
           "epsFwd": 9.9300005,
           "revFwd": 8.559999999999999,
           "pegFwd": 1.5,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CME": {
           "t": "CME",
@@ -4511,12 +5009,14 @@
           "changePct": 2.4242424242424176,
           "revTTM": 14.399999999999999,
           "epsTTM": 21.3,
-          "peFwd": 19.265219,
-          "epsFwd": 9.6499994,
-          "revFwd": 8.08,
-          "pegFwd": 3.87,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "grossMargin": 100.0,
+          "netMargin": 63.324000000000005,
+          "peFwd": 19.272547,
+          "epsFwd": 9.609999499999999,
+          "revFwd": 8.05,
+          "pegFwd": 4.15,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BNY": {
           "t": "BNY",
@@ -4529,12 +5029,14 @@
           "changePct": 0.4109026160799889,
           "revTTM": 13.4,
           "epsTTM": 41.8,
-          "peFwd": 16.512953,
-          "epsFwd": 18.39,
+          "grossMargin": 0.0,
+          "netMargin": 28.721999999999998,
+          "peFwd": 16.488977,
+          "epsFwd": 18.56,
           "revFwd": 7.739999999999999,
-          "pegFwd": 1.6,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.63,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MDT": {
           "t": "MDT",
@@ -4547,12 +5049,14 @@
           "changePct": 5.03787878787878,
           "revTTM": 9.9,
           "epsTTM": 18.3,
+          "grossMargin": 65.309,
+          "netMargin": 13.203000000000001,
           "peFwd": 13.987179,
           "epsFwd": 7.550000399999999,
           "revFwd": 6.94,
           "pegFwd": 1.54,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "INTU": {
           "t": "INTU",
@@ -4565,12 +5069,14 @@
           "changePct": 3.0964505017223365,
           "revTTM": 10.4,
           "epsTTM": 10.7,
+          "grossMargin": 80.793,
+          "netMargin": 21.907,
           "peFwd": 11.553269,
           "epsFwd": 18.280001000000002,
           "revFwd": 13.469999999999999,
           "pegFwd": 0.68,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MCK": {
           "t": "MCK",
@@ -4583,12 +5089,14 @@
           "changePct": 2.3748144676197125,
           "revTTM": 6.0,
           "epsTTM": 37.2,
+          "grossMargin": 3.601,
+          "netMargin": 1.17999995,
           "peFwd": 17.763567,
           "epsFwd": 13.18,
           "revFwd": 7.000000000000001,
           "pegFwd": 1.48,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CMI": {
           "t": "CMI",
@@ -4601,12 +5109,14 @@
           "changePct": -3.0220424434283077,
           "revTTM": 2.7,
           "epsTTM": -21.0,
+          "grossMargin": 25.847998,
+          "netMargin": 7.886,
           "peFwd": 22.65279,
           "epsFwd": 38.24,
           "revFwd": 10.6400006,
           "pegFwd": 1.71,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ADP": {
           "t": "ADP",
@@ -4619,12 +5129,14 @@
           "changePct": 2.774360497178985,
           "revTTM": 7.000000000000001,
           "epsTTM": 10.5,
+          "grossMargin": 48.497,
+          "netMargin": 20.118,
           "peFwd": 21.878141,
           "epsFwd": 10.6300004,
           "revFwd": 6.15,
-          "pegFwd": 2.09,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 2.26,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GD": {
           "t": "GD",
@@ -4637,12 +5149,14 @@
           "changePct": 3.3963517590721803,
           "revTTM": 10.299999999999999,
           "epsTTM": 12.0,
+          "grossMargin": 15.241,
+          "netMargin": 8.068,
           "peFwd": 22.416916,
           "epsFwd": 7.93,
           "revFwd": 5.1999997,
           "pegFwd": 2.63,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PNC": {
           "t": "PNC",
@@ -4655,12 +5169,14 @@
           "changePct": -0.8465145854860467,
           "revTTM": 13.8,
           "epsTTM": 17.7,
+          "grossMargin": 0.0,
+          "netMargin": 31.312,
           "peFwd": 13.216677,
           "epsFwd": 11.1999996,
           "revFwd": 11.3299996,
           "pegFwd": 1.95,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ELV": {
           "t": "ELV",
@@ -4673,12 +5189,14 @@
           "changePct": 0.4084672865758421,
           "revTTM": 2.6,
           "epsTTM": -16.8,
+          "grossMargin": 25.891,
+          "netMargin": 2.616,
           "peFwd": 15.533218,
           "epsFwd": -11.18,
           "revFwd": -1.66,
-          "pegFwd": 1.42,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.53,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CSX": {
           "t": "CSX",
@@ -4691,12 +5209,14 @@
           "changePct": 1.1587006000413957,
           "revTTM": 1.7000000000000002,
           "epsTTM": 26.5,
+          "grossMargin": 46.816003,
+          "netMargin": 21.553,
           "peFwd": 25.439293,
           "epsFwd": 19.370002,
           "revFwd": 5.2600004,
-          "pegFwd": 2.17,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 2.23,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ICE": {
           "t": "ICE",
@@ -4709,12 +5229,14 @@
           "changePct": 4.9396354454351865,
           "revTTM": 20.4,
           "epsTTM": 79.7,
+          "grossMargin": 100.0,
+          "netMargin": 37.671003,
           "peFwd": 16.344706,
           "epsFwd": 17.07,
           "revFwd": 10.47,
           "pegFwd": 1.91,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "EMR": {
           "t": "EMR",
@@ -4727,12 +5249,14 @@
           "changePct": -0.33686926605503986,
           "revTTM": 2.9000000000000004,
           "epsTTM": 27.900000000000002,
+          "grossMargin": 52.669996,
+          "netMargin": 13.354,
           "peFwd": 21.37534,
           "epsFwd": 8.42,
           "revFwd": 4.5900002,
           "pegFwd": 2.0,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "WM": {
           "t": "WM",
@@ -4745,12 +5269,14 @@
           "changePct": 2.8204212781149485,
           "revTTM": 3.5000000000000004,
           "epsTTM": 13.3,
+          "grossMargin": 40.605000000000004,
+          "netMargin": 10.994001,
           "peFwd": 28.082697,
           "epsFwd": 9.39,
           "revFwd": 5.1999997,
           "pegFwd": 2.27,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MDLZ": {
           "t": "MDLZ",
@@ -4763,12 +5289,14 @@
           "changePct": 2.628475147430498,
           "revTTM": 8.200000000000001,
           "epsTTM": 41.3,
+          "grossMargin": 28.771,
+          "netMargin": 6.638,
           "peFwd": 19.956228,
           "epsFwd": 4.5300003,
           "revFwd": 3.5999999999999996,
           "pegFwd": 0.95,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MRSH": {
           "t": "MRSH",
@@ -4781,12 +5309,14 @@
           "changePct": 3.7179040316021927,
           "revTTM": 7.6,
           "epsTTM": -15.4,
+          "grossMargin": 43.852999999999994,
+          "netMargin": 14.264,
           "peFwd": 17.173367,
           "epsFwd": 6.6300004999999995,
           "revFwd": 5.33,
           "pegFwd": 1.61,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NOC": {
           "t": "NOC",
@@ -4799,12 +5329,14 @@
           "changePct": 5.588998942205969,
           "revTTM": 4.3999999999999995,
           "epsTTM": 84.89999999999999,
+          "grossMargin": 20.517999,
+          "netMargin": 10.8009994,
           "peFwd": 19.642822,
           "epsFwd": 6.1100002,
           "revFwd": 4.8499998,
           "pegFwd": 3.79,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CL": {
           "t": "CL",
@@ -4817,12 +5349,14 @@
           "changePct": 2.5549805950840776,
           "revTTM": 8.4,
           "epsTTM": -5.8999999999999995,
+          "grossMargin": 60.063,
+          "netMargin": 10.041001,
           "peFwd": 24.951345,
           "epsFwd": 3.32,
           "revFwd": 5.21,
           "pegFwd": 1.64,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "PSX": {
           "t": "PSX",
@@ -4835,12 +5369,14 @@
           "changePct": 1.100286532951289,
           "revTTM": 6.9,
           "epsTTM": -56.8,
+          "grossMargin": 12.520000000000001,
+          "netMargin": 3.066,
           "peFwd": 9.8255,
           "epsFwd": 178.81,
           "revFwd": 12.32,
           "pegFwd": 0.98,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SHW": {
           "t": "SHW",
@@ -4853,12 +5389,14 @@
           "changePct": 1.8581129894523984,
           "revTTM": 6.800000000000001,
           "epsTTM": 7.5,
+          "grossMargin": 49.036,
+          "netMargin": 10.86,
           "peFwd": 30.038946,
           "epsFwd": 2.6600001,
           "revFwd": 4.8699997,
           "pegFwd": 2.66,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MCO": {
           "t": "MCO",
@@ -4871,12 +5409,14 @@
           "changePct": 4.7247961057261145,
           "revTTM": 8.1,
           "epsTTM": 7.8,
+          "grossMargin": 74.432,
+          "netMargin": 31.691000000000003,
           "peFwd": 29.372473,
           "epsFwd": 11.78,
           "revFwd": 6.7,
           "pegFwd": 2.06,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AEP": {
           "t": "AEP",
@@ -4889,12 +5429,14 @@
           "changePct": 2.562014068863361,
           "revTTM": 10.2,
           "epsTTM": 6.7,
+          "grossMargin": 47.243,
+          "netMargin": 16.289,
           "peFwd": 21.79516,
           "epsFwd": 6.45,
           "revFwd": 7.66,
-          "pegFwd": 2.33,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 2.36,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AON": {
           "t": "AON",
@@ -4907,12 +5449,14 @@
           "changePct": 4.045872627779712,
           "revTTM": 6.5,
           "epsTTM": 27.1,
+          "grossMargin": 47.341,
+          "netMargin": 22.544000999999998,
           "peFwd": 18.700035,
           "epsFwd": 11.9799994,
           "revFwd": 4.8,
           "pegFwd": 2.82,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MSI": {
           "t": "MSI",
@@ -4925,12 +5469,14 @@
           "changePct": 0.8879553157970177,
           "revTTM": 7.3999999999999995,
           "epsTTM": -13.8,
+          "grossMargin": 51.507999999999996,
+          "netMargin": 17.61,
           "peFwd": 24.90585,
           "epsFwd": 10.34,
           "revFwd": 9.629999999999999,
           "pegFwd": 2.24,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ECL": {
           "t": "ECL",
@@ -4943,12 +5489,14 @@
           "changePct": 1.7925782232280918,
           "revTTM": 10.0,
           "epsTTM": 7.8,
+          "grossMargin": 44.374,
+          "netMargin": 12.798999,
           "peFwd": 33.938496,
           "epsFwd": 10.879999999999999,
           "revFwd": 10.290000000000001,
           "pegFwd": 2.59,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ITW": {
           "t": "ITW",
@@ -4961,12 +5509,14 @@
           "changePct": 1.4090790794512253,
           "revTTM": 4.6,
           "epsTTM": 11.799999999999999,
+          "grossMargin": 44.122002,
+          "netMargin": 19.320999,
           "peFwd": 24.05554,
           "epsFwd": 8.06,
           "revFwd": 3.5000000000000004,
           "pegFwd": 2.68,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FIX": {
           "t": "FIX",
@@ -4979,12 +5529,14 @@
           "changePct": -6.640216604562643,
           "revTTM": 1.0,
           "epsTTM": 38.800000000000004,
+          "grossMargin": 25.128,
+          "netMargin": 12.073,
           "peFwd": 40.357834,
           "epsFwd": 49.400002,
           "revFwd": 30.98,
           "pegFwd": 0.95,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TRV": {
           "t": "TRV",
@@ -4997,12 +5549,14 @@
           "changePct": 2.2981292212061355,
           "revTTM": 1.0,
           "epsTTM": 357.6,
+          "grossMargin": 32.878,
+          "netMargin": 15.537,
           "peFwd": 12.123816,
           "epsFwd": 2.34,
           "revFwd": -0.83,
           "pegFwd": 2.36,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "TEL": {
           "t": "TEL",
@@ -5015,12 +5569,14 @@
           "changePct": -1.9857029388403502,
           "revTTM": 14.499999999999998,
           "epsTTM": 7150.0,
+          "grossMargin": 36.071998,
+          "netMargin": 15.543000000000001,
           "peFwd": 17.560213,
           "epsFwd": 28.350002000000003,
           "revFwd": 13.469999999999999,
           "pegFwd": 0.91,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "APD": {
           "t": "APD",
@@ -5033,12 +5589,14 @@
           "changePct": 2.542428198433422,
           "revTTM": 8.799999999999999,
           "epsTTM": null,
+          "grossMargin": 31.983998000000003,
+          "netMargin": 16.906999,
           "peFwd": 23.771082,
           "epsFwd": 9.87,
           "revFwd": 6.1899999999999995,
-          "pegFwd": 2.18,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 2.33,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "LHX": {
           "t": "LHX",
@@ -5051,12 +5609,14 @@
           "changePct": 3.3672107586490085,
           "revTTM": 190.0,
           "epsTTM": -6.1,
+          "grossMargin": 30.414,
+          "netMargin": 10.3690006,
           "peFwd": 25.808067,
           "epsFwd": 9.08,
           "revFwd": 7.71,
           "pegFwd": 1.66,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CTAS": {
           "t": "CTAS",
@@ -5069,12 +5629,14 @@
           "changePct": 4.0980313378867095,
           "revTTM": 8.9,
           "epsTTM": 9.700000000000001,
+          "grossMargin": 50.361997,
+          "netMargin": 17.568001,
           "peFwd": 37.0291,
           "epsFwd": 11.1099996,
           "revFwd": 8.559999999999999,
           "pegFwd": 2.7,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "SRE": {
           "t": "SRE",
@@ -5087,12 +5649,14 @@
           "changePct": 1.8496224143591977,
           "revTTM": -3.9,
           "epsTTM": 13.700000000000001,
+          "grossMargin": 42.457,
+          "netMargin": 14.430000000000001,
           "peFwd": 18.19803,
           "epsFwd": 9.0299994,
           "revFwd": 1.87,
           "pegFwd": 0.83,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NUE": {
           "t": "NUE",
@@ -5105,12 +5669,14 @@
           "changePct": 0.7898822025385721,
           "revTTM": 21.3,
           "epsTTM": 382.1,
+          "grossMargin": 14.062999000000001,
+          "netMargin": 6.824,
           "peFwd": 13.081482,
           "epsFwd": 118.87001,
           "revFwd": 18.92,
           "pegFwd": 5.21,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "NKE": {
           "t": "NKE",
@@ -5123,12 +5689,14 @@
           "changePct": 2.392011147236417,
           "revTTM": -1.0999999999999999,
           "epsTTM": 428.3,
+          "grossMargin": 42.913000000000004,
+          "netMargin": 6.6989996,
           "peFwd": 26.096788,
           "epsFwd": -17.119999999999997,
           "revFwd": -1.2999999,
           "pegFwd": 1.43,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "GWW": {
           "t": "GWW",
@@ -5141,12 +5709,14 @@
           "changePct": 0.35419655667146,
           "revTTM": 10.100000000000001,
           "epsTTM": 18.2,
+          "grossMargin": 39.150003,
+          "netMargin": 9.696,
           "peFwd": 29.437267,
           "epsFwd": 15.560001000000002,
           "revFwd": 8.55,
           "pegFwd": 2.13,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ALL": {
           "t": "ALL",
@@ -5159,12 +5729,14 @@
           "changePct": 2.9656136887133977,
           "revTTM": 3.0,
           "epsTTM": 338.4,
+          "grossMargin": 34.428,
+          "netMargin": 17.813000000000002,
           "peFwd": 8.280349,
           "epsFwd": -13.200000000000001,
           "revFwd": 3.45,
-          "pegFwd": 2.85,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 3.0,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AFL": {
           "t": "AFL",
@@ -5177,12 +5749,14 @@
           "changePct": 2.017047852139431,
           "revTTM": 27.900000000000002,
           "epsTTM": 3860.0,
+          "grossMargin": 50.04999599999999,
+          "netMargin": 25.596002000000002,
           "peFwd": 17.161825,
           "epsFwd": -5.96,
           "revFwd": -3.08,
           "pegFwd": 1.18,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "COR": {
           "t": "COR",
@@ -5195,12 +5769,14 @@
           "changePct": 2.8049372442965126,
           "revTTM": 3.8,
           "epsTTM": 128.29999999999998,
+          "grossMargin": 3.7960000000000003,
+          "netMargin": 0.775,
           "peFwd": 16.683886,
           "epsFwd": 11.08,
           "revFwd": 4.97,
-          "pegFwd": 0.6,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 0.63,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "AJG": {
           "t": "AJG",
@@ -5213,12 +5789,14 @@
           "changePct": 5.328159552718326,
           "revTTM": 34.599999999999994,
           "epsTTM": 16.2,
+          "grossMargin": 42.929,
+          "netMargin": 11.354000000000001,
           "peFwd": 19.125574,
           "epsFwd": 23.47,
           "revFwd": 21.65,
           "pegFwd": 0.75,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MCHP": {
           "t": "MCHP",
@@ -5231,12 +5809,14 @@
           "changePct": -4.566467470966284,
           "revTTM": 35.099999999999994,
           "epsTTM": null,
+          "grossMargin": 57.735,
+          "netMargin": 4.8800003,
           "peFwd": 26.770153,
           "epsFwd": 92.78999999999999,
           "revFwd": 31.129997999999997,
           "pegFwd": 0.33,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FAST": {
           "t": "FAST",
@@ -5249,12 +5829,14 @@
           "changePct": 1.7801047120418856,
           "revTTM": 12.4,
           "epsTTM": 13.8,
+          "grossMargin": 44.893003,
+          "netMargin": 15.392,
           "peFwd": 39.163544,
           "epsFwd": 13.51,
           "revFwd": 11.29,
           "pegFwd": 3.46,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ROK": {
           "t": "ROK",
@@ -5267,12 +5849,14 @@
           "changePct": -2.303135744169671,
           "revTTM": 11.899999999999999,
           "epsTTM": 39.6,
+          "grossMargin": 48.921,
+          "netMargin": 12.357999999999999,
           "peFwd": 36.248173,
           "epsFwd": 23.580000000000002,
           "revFwd": 7.48,
           "pegFwd": 2.16,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "ETR": {
           "t": "ETR",
@@ -5285,12 +5869,14 @@
           "changePct": 1.9936204146730363,
           "revTTM": 12.0,
           "epsTTM": 1.2,
+          "grossMargin": 46.976003,
+          "netMargin": 13.414000000000001,
           "peFwd": 26.165407,
           "epsFwd": 12.509999999999998,
           "revFwd": 8.2399994,
           "pegFwd": 2.27,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "XEL": {
           "t": "XEL",
@@ -5303,12 +5889,14 @@
           "changePct": 2.8356336260978665,
           "revTTM": 2.9000000000000004,
           "epsTTM": 6.0,
+          "grossMargin": 45.928000000000004,
+          "netMargin": 14.144000000000002,
           "peFwd": 19.9321,
           "epsFwd": 8.2100004,
           "revFwd": 7.829999999999999,
           "pegFwd": 2.19,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MSCI": {
           "t": "MSCI",
@@ -5321,12 +5909,14 @@
           "changePct": 3.621806436094377,
           "revTTM": 14.099999999999998,
           "epsTTM": 49.1,
-          "peFwd": 30.636553,
-          "epsFwd": 13.919999999999998,
+          "grossMargin": 82.856005,
+          "netMargin": 40.737998,
+          "peFwd": 30.594671,
+          "epsFwd": 14.08,
           "revFwd": 11.37,
-          "pegFwd": 1.8,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "pegFwd": 1.94,
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "CAH": {
           "t": "CAH",
@@ -5339,12 +5929,14 @@
           "changePct": 0.5132088170957338,
           "revTTM": 11.0,
           "epsTTM": -19.5,
+          "grossMargin": 3.7550002,
+          "netMargin": 0.62,
           "peFwd": 22.189554,
           "epsFwd": 30.680000000000003,
           "revFwd": 14.99,
           "pegFwd": 1.47,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "MET": {
           "t": "MET",
@@ -5357,12 +5949,14 @@
           "changePct": 3.2798165137614577,
           "revTTM": 2.7,
           "epsTTM": 35.9,
+          "grossMargin": 23.754998999999998,
+          "netMargin": 4.665,
           "peFwd": 9.090028,
           "epsFwd": 12.2,
           "revFwd": 1.39,
           "pegFwd": 0.45,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "FITB": {
           "t": "FITB",
@@ -5375,12 +5969,14 @@
           "changePct": -0.5740128718037973,
           "revTTM": 33.0,
           "epsTTM": -78.9,
+          "grossMargin": 0.0,
+          "netMargin": 24.133,
           "peFwd": 13.876717,
           "epsFwd": -12.68,
           "revFwd": 42.400002,
           "pegFwd": 2.05,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "STT": {
           "t": "STT",
@@ -5393,12 +5989,14 @@
           "changePct": 0.6011669711793566,
           "revTTM": -2.8000000000000003,
           "epsTTM": -24.099999999999998,
+          "grossMargin": 0.0,
+          "netMargin": 21.295,
           "peFwd": 13.382949,
           "epsFwd": 23.830000000000002,
           "revFwd": 10.3599995,
           "pegFwd": 1.14,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         },
         "BDX": {
           "t": "BDX",
@@ -5411,12 +6009,14 @@
           "changePct": 3.3878351863963374,
           "revTTM": 5.2,
           "epsTTM": null,
+          "grossMargin": 47.090998,
+          "netMargin": 5.124,
           "peFwd": 12.601529,
           "epsFwd": -12.889999999999999,
           "revFwd": -12.060001,
           "pegFwd": 1.11,
-          "priceUpdated": "2026-07-03T20:20:54.923253Z",
-          "fundamentalsUpdated": "2026-07-03T20:20:54.923253Z"
+          "priceUpdated": "2026-07-03T21:20:03.183571Z",
+          "fundamentalsUpdated": "2026-07-03T21:20:03.183571Z"
         }
       }
     }

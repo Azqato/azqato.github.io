@@ -104,6 +104,12 @@ def fetch(symbol):
     eg = num(info.get("earningsGrowth"))
     rec["epsTTM"] = eg * 100 if eg is not None else None
 
+    # Margins (TTM), for the scoring model's profitability pillar (v3.30.0).
+    gm = num(info.get("grossMargins"))
+    rec["grossMargin"] = gm * 100 if gm is not None else None
+    nm = num(info.get("profitMargins"))
+    rec["netMargin"] = nm * 100 if nm is not None else None
+
     # Forward figures use the CURRENT fiscal-year ("0y") consensus estimate to
     # match Seeking Alpha's "FWD" convention. yfinance's forwardPE / "+1y" rows
     # are one fiscal year further out, which reads systematically too low.

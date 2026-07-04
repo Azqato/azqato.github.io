@@ -123,37 +123,50 @@
       return "Price: " + p + "  •  Fundamentals: " + f;
     }
 
-    // ---- Scoring: relative percentile model ----
-    // Each of five forward metrics is scored 0-20 by a stock's percentile rank
-    // among its loaded peers. Points ramp from 0 (bottom quartile) to 20 (top
-    // quartile); the median sits at 10. The five sum to a score out of 100,
-    // rescaled across whichever metrics a stock actually has.
+    // ---- Scoring: relative percentile model v2 (v3.30.0, four pillars) ----
+    // Eight metrics in four pillars: Growth 40 (Rev TTM 10, Rev FWD 10, EPS TTM
+    // 10, EPS FWD 10), Valuation 20 (PEG FWD), Profitability 20 (gross margin
+    // 10, net margin 10), Balance sheet 20 (cash vs debt). Each metric's points
+    // ramp with the stock's percentile rank among its loaded peers, clamped at
+    // the top/bottom 28%: only the top 28% of a metric earns full marks. The
+    // clamp is calibrated on live 8-metric feeds so a perfect 100 stays rare:
+    // roughly 1 stock in the Nasdaq 100 and 5 in the S&P 500, with more only
+    // when rounded scores tie. Missing data scores a hard ZERO for that metric
+    // -- the denominator stays 100, so an incomplete stock can never outscore
+    // a complete one (its missing cell renders dark red).
     function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
-    function pointsFromPct(p) { return clamp(40 * (p - 0.25), 0, 20); } // 0-25% -> 0, 75%+ -> 20
+    var CLAMP_Q = 0.28; // full marks at the (1-q)th percentile, zero below the qth
+    function pointsFromPct(p) { return clamp(20 * (p - CLAMP_Q) / (1 - 2 * CLAMP_Q), 0, 20); }
 
-    // `scored` metrics feed the Score; the others (TTM growth) are ranked only
-    // so their cells can be colored by percentile like everything else.
+    // `weight` > 0 metrics feed the Score; weight-0 metrics (the P/E-vs-growth
+    // context ratio) are ranked only so their cells can be colored by percentile.
     var METRICS = [
-      { key: "revTTM",   scored: false, higher: true,  get: function (d) { return isNum(d.revTTM) ? d.revTTM : null; } },
-      { key: "revFwd",   scored: true,  higher: true,  get: function (d) { return isNum(d.revFwd) ? d.revFwd : null; } },
-      { key: "epsTTM",   scored: false, higher: true,  get: function (d) { return isNum(d.epsTTM) ? d.epsTTM : null; } },
-      { key: "epsFwd",   scored: true,  higher: true,  get: function (d) { return isNum(d.epsFwd) ? d.epsFwd : null; } },
-      { key: "peVsG",    scored: true,  higher: false, get: function (d) {
+      { key: "revTTM",   weight: 10, higher: true,  get: function (d) { return isNum(d.revTTM) ? d.revTTM : null; } },
+      { key: "revFwd",   weight: 10, higher: true,  get: function (d) { return isNum(d.revFwd) ? d.revFwd : null; } },
+      { key: "epsTTM",   weight: 10, higher: true,  get: function (d) { return isNum(d.epsTTM) ? d.epsTTM : null; } },
+      { key: "epsFwd",   weight: 10, higher: true,  get: function (d) { return isNum(d.epsFwd) ? d.epsFwd : null; } },
+      { key: "peVsG",    weight: 0,  higher: false, get: function (d) {
           if (!isNum(d.peFwd) || !isNum(d.epsFwd)) return null;
           // Unprofitable (P/E <= 0) or shrinking earnings (growth <= 0) rank worst, not best/dropped.
           return (d.peFwd <= 0 || d.epsFwd <= 0) ? Infinity : d.peFwd / d.epsFwd;
         } },
-      { key: "pegFwd",   scored: true,  higher: false, get: function (d) {
+      { key: "pegFwd",   weight: 20, higher: false, get: function (d) {
           if (isNum(d.peFwd) && d.peFwd <= 0) return Infinity; // unprofitable: Yahoo PEG is unreliable, rank worst
           return (isNum(d.pegFwd) && d.pegFwd > 0) ? d.pegFwd : null;
         } },
-      { key: "cashDebt", scored: true,  higher: true,  get: function (d) { if (!isNum(d.cash) || !isNum(d.debt)) return null; return d.debt === 0 ? (d.cash > 0 ? Infinity : null) : d.cash / d.debt; } }
+      { key: "grossMargin", weight: 10, higher: true, get: function (d) { return isNum(d.grossMargin) ? d.grossMargin : null; } },
+      { key: "netMargin",   weight: 10, higher: true, get: function (d) { return isNum(d.netMargin) ? d.netMargin : null; } },
+      { key: "cashDebt", weight: 20, higher: true,  get: function (d) { if (!isNum(d.cash) || !isNum(d.debt)) return null; return d.debt === 0 ? (d.cash > 0 ? Infinity : null) : d.cash / d.debt; } }
     ];
+    var TOTAL_WEIGHT = METRICS.reduce(function (s, m) { return s + m.weight; }, 0); // 100
+    var SCORED_COUNT = METRICS.filter(function (m) { return m.weight > 0; }).length; // 8
 
     // Rank every loaded stock on each metric, convert ranks to points, and sum.
+    // `parts` keeps every metric's points on a 0-20 scale (for cell colors and
+    // the popup); the total applies each metric's weight.
     function computeScoreMap() {
       var tickers = Object.keys(data);
-      var pts = {};   // ticker -> { metricKey: points }
+      var pts = {};   // ticker -> { metricKey: points 0-20 }
       var pcts = {};  // ticker -> { metricKey: percentile 0..1 }
       tickers.forEach(function (t) { pts[t] = {}; pcts[t] = {}; });
 
@@ -183,32 +196,46 @@
 
       var out = {};
       tickers.forEach(function (t) {
-        var got = [];
-        METRICS.forEach(function (m) { if (m.scored && pts[t][m.key] !== undefined) got.push(pts[t][m.key]); });
-        if (!got.length) { out[t] = { pct: null, passes: 0, total: 0, parts: pts[t], pctiles: pcts[t] }; return; }
-        var sum = got.reduce(function (a, b) { return a + b; }, 0);
+        var sum = 0, have = 0, passes = 0;
+        METRICS.forEach(function (m) {
+          if (!m.weight) return;
+          var p = pts[t][m.key];
+          if (p === undefined) return; // missing = hard zero (adds nothing, denominator stays 100)
+          have++;
+          sum += p * (m.weight / 20);
+          if (p >= 15) passes++; // upper part of the pack on that metric
+        });
+        if (!have) { out[t] = { pct: null, passes: 0, total: 0, parts: pts[t], pctiles: pcts[t] }; return; }
         out[t] = {
-          pct: Math.round(sum / (got.length * 20) * 100),
-          passes: got.filter(function (p) { return p >= 15; }).length,
-          total: got.length,
-          parts: pts[t],   // percentile points per metric, for cell coloring
+          pct: Math.round(sum / TOTAL_WEIGHT * 100),
+          passes: passes,
+          total: SCORED_COUNT, // fixed /8: a missing metric is a miss, not a pass
+          parts: pts[t],   // percentile points per metric (0-20 scale), for cell coloring
           pctiles: pcts[t] // raw percentiles, for the per-stock breakdown popup
         };
       });
       return out;
     }
-    // Cell color from a metric's percentile points: top quartile green, bottom red, middle amber.
+    // Cell color from a metric's percentile points: top of the pack green,
+    // bottom red, middle amber.
     function colorFromPts(p) {
       if (p === undefined || p === null) return "muted";
       if (p >= 20) return "pos";
       if (p <= 0) return "neg";
       return "cau";
     }
+    // Scored metrics: missing data is a hard zero, so a "—" renders dark red.
+    function colorScored(p) {
+      if (p === undefined || p === null) return "neg";
+      return colorFromPts(p);
+    }
     // Tier list by rank (v3.29.0): S = top 10% of the scored stocks in the
     // loaded list, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%.
     // A ranking, not a buy/sell rating. Boundary ties round UP: every stock
     // whose (rounded) score matches the last stock inside a band joins that
     // band, so a tier only stretches past its quota on identical scores.
+    // On top of the bands, a perfect 100/100 earns S+ (v3.30.0) -- those
+    // stocks come out of the S band's headcount, they don't push it down.
     var TIER_CUTS = [["s", 0.10], ["a", 0.20], ["b", 0.50], ["c", 0.75]]; // f = the rest
     function computeTierMap(sm) {
       var order = Object.keys(sm)
@@ -228,7 +255,8 @@
       var ci = 0;
       for (var i = 0; i < n; i++) {
         while (ci < cuts.length && i >= cuts[ci]) ci++;
-        tiers[order[i]] = ci < TIER_CUTS.length ? TIER_CUTS[ci][0] : "f";
+        tiers[order[i]] = sm[order[i]].pct >= 100 ? "sp"
+          : (ci < TIER_CUTS.length ? TIER_CUTS[ci][0] : "f");
       }
       return tiers;
     }
@@ -253,6 +281,7 @@
     // The score bar takes its color from the stock's tier (tiers are ranks,
     // so the same score can be a different color in a different universe).
     var TIER_COLOR = {
+      sp: "var(--color-tier-splus)",
       s: "var(--color-tier-s)", a: "var(--color-tier-a)", b: "var(--color-tier-b)",
       c: "var(--color-tier-c)", f: "var(--color-negative)", none: "var(--color-border)"
     };
@@ -271,6 +300,7 @@
           tier: sc.pct === null ? "none" : tiers[t],
           revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
           peFwd: d.peFwd, pegFwd: pegDisplay(d), cash: d.cash, debt: d.debt,
+          grossMargin: d.grossMargin, netMargin: d.netMargin,
           cashDebt: cashDebtRatio(d),
           price: d.price, marketCap: d.marketCap,
           changePct: isNum(d.changePct) ? d.changePct : null,
@@ -279,7 +309,7 @@
       });
     }
 
-    var TIER_RANK = { s: 5, a: 4, b: 3, c: 2, f: 1, none: 0 };
+    var TIER_RANK = { sp: 6, s: 5, a: 4, b: 3, c: 2, f: 1, none: 0 };
 
     function sortRows(rs) {
       var k = sortKey, dir = sortDir;
@@ -311,10 +341,10 @@
       var rs = rows();
 
       // tier counts
-      var counts = { all: rs.length, s: 0, a: 0, b: 0, c: 0, f: 0 };
+      var counts = { all: rs.length, sp: 0, s: 0, a: 0, b: 0, c: 0, f: 0 };
       rs.forEach(function (r) { if (counts[r.tier] !== undefined) counts[r.tier]++; });
       $("cnt-all").textContent = counts.all;
-      ["s", "a", "b", "c", "f"].forEach(function (t) { $("cnt-" + t).textContent = counts[t]; });
+      ["sp", "s", "a", "b", "c", "f"].forEach(function (t) { $("cnt-" + t).textContent = counts[t]; });
 
       // filter
       var view = rs.filter(function (r) {
@@ -336,7 +366,8 @@
       if (loaded === 0) {
         $("summary").innerHTML = feedDone ? "No data" : "Loading the " + UNIVERSES[universeMode].label + "&hellip;";
       } else {
-        $("summary").innerHTML = "<b>" + counts.s + "</b> S &middot; <b>" + counts.a + "</b> A &middot; <b>" +
+        $("summary").innerHTML = (counts.sp ? "<b>" + counts.sp + "</b> S+ &middot; " : "") +
+          "<b>" + counts.s + "</b> S &middot; <b>" + counts.a + "</b> A &middot; <b>" +
           counts.b + "</b> B &middot; <b>" + counts.c + "</b> C &middot; <b>" + counts.f + "</b> F &middot; " +
           scored + "/" + loaded + " scored";
       }
@@ -460,7 +491,7 @@
       }
     }
 
-    var TIER_LABEL = { s: "S", a: "A", b: "B", c: "C", f: "F", none: "NO DATA" };
+    var TIER_LABEL = { sp: "S+", s: "S", a: "A", b: "B", c: "C", f: "F", none: "NO DATA" };
 
     function rowHtml(r) {
       var d = r.d;
@@ -483,15 +514,17 @@
         '<td class="grp-snapshot group-start">' + fmtMoney(r.marketCap) + '</td>' +
         '<td class="grp-snapshot">' + fmtPrice(r.price) + '</td>' +
         '<td class="grp-snapshot ' + clsChange(r.changePct) + '">' + fmtChange(r.changePct) + '</td>' +
-        '<td class="grp-growth group-start ' + colorFromPts(r.parts.revTTM) + '">' + fmtPct(r.revTTM) + '</td>' +
-        '<td class="grp-growth ' + colorFromPts(r.parts.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
-        '<td class="grp-growth ' + colorFromPts(r.parts.epsTTM) + '">' + fmtPct(r.epsTTM) + '</td>' +
-        '<td class="grp-growth ' + colorFromPts(r.parts.epsFwd) + '">' + fmtPct(r.epsFwd) + '</td>' +
+        '<td class="grp-growth group-start ' + colorScored(r.parts.revTTM) + '">' + fmtPct(r.revTTM) + '</td>' +
+        '<td class="grp-growth ' + colorScored(r.parts.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
+        '<td class="grp-growth ' + colorScored(r.parts.epsTTM) + '">' + fmtPct(r.epsTTM) + '</td>' +
+        '<td class="grp-growth ' + colorScored(r.parts.epsFwd) + '">' + fmtPct(r.epsFwd) + '</td>' +
         '<td class="grp-valuation group-start ' + colorFromPts(r.parts.peVsG) + '">' + fmtNum(r.peFwd) + '</td>' +
-        '<td class="grp-valuation ' + colorFromPts(r.parts.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
-        '<td class="grp-balance group-start ' + colorFromPts(r.parts.cashDebt) + '">' + fmtMoney(r.cash) + '</td>' +
+        '<td class="grp-valuation ' + colorScored(r.parts.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
+        '<td class="grp-margins group-start ' + colorScored(r.parts.grossMargin) + '">' + fmtPct(r.grossMargin) + '</td>' +
+        '<td class="grp-margins ' + colorScored(r.parts.netMargin) + '">' + fmtPct(r.netMargin) + '</td>' +
+        '<td class="grp-balance group-start ' + colorScored(r.parts.cashDebt) + '">' + fmtMoney(r.cash) + '</td>' +
         '<td class="grp-balance">' + fmtMoney(r.debt) + '</td>' +
-        '<td class="grp-balance ' + colorFromPts(r.parts.cashDebt) + '">' + fmtRatio(r.cashDebt) + '</td>' +
+        '<td class="grp-balance ' + colorScored(r.parts.cashDebt) + '">' + fmtRatio(r.cashDebt) + '</td>' +
         '<td class="grp-snapshot group-start ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
         '</tr>';
     }
@@ -513,7 +546,7 @@
 
     // ---- Column visibility ----
     function applyColumnVisibility() {
-      ["growth", "valuation", "balance", "snapshot"].forEach(function (g) {
+      ["growth", "valuation", "margins", "balance", "snapshot"].forEach(function (g) {
         var cb = document.querySelector('#colsMenu input[data-group="' + g + '"]');
         var show = cb ? cb.checked : true;
         document.querySelectorAll(".grp-" + g).forEach(function (el) {
@@ -524,13 +557,14 @@
 
     // ---- Per-stock breakdown popup ----
     var POPUP_METRICS = [
-      { key: "revTTM",   label: "Revenue Growth TTM", scored: false, fmt: function (d) { return fmtPct(d.revTTM); } },
-      { key: "revFwd",   label: "Revenue Growth FWD", scored: true,  fmt: function (d) { return fmtPct(d.revFwd); } },
-      { key: "epsTTM",   label: "EPS Growth TTM",     scored: false, fmt: function (d) { return fmtPct(d.epsTTM); } },
-      { key: "epsFwd",   label: "EPS Growth FWD",     scored: true,  fmt: function (d) { return fmtPct(d.epsFwd); } },
-      { key: "peVsG",    label: "P/E vs Growth",      scored: true,  fmt: function (d) { return fmtNum(d.peFwd); } },
-      { key: "pegFwd",   label: "PEG FWD",            scored: true,  fmt: function (d) { return fmtNum(pegDisplay(d)); } },
-      { key: "cashDebt", label: "Cash vs Debt",       scored: true,  fmt: function (d) { return fmtRatio(cashDebtRatio(d)); } }
+      { key: "revTTM",      label: "Revenue Growth TTM", weight: 10, fmt: function (d) { return fmtPct(d.revTTM); } },
+      { key: "revFwd",      label: "Revenue Growth FWD", weight: 10, fmt: function (d) { return fmtPct(d.revFwd); } },
+      { key: "epsTTM",      label: "EPS Growth TTM",     weight: 10, fmt: function (d) { return fmtPct(d.epsTTM); } },
+      { key: "epsFwd",      label: "EPS Growth FWD",     weight: 10, fmt: function (d) { return fmtPct(d.epsFwd); } },
+      { key: "pegFwd",      label: "PEG FWD",            weight: 20, fmt: function (d) { return fmtNum(pegDisplay(d)); } },
+      { key: "grossMargin", label: "Gross Margin",       weight: 10, fmt: function (d) { return fmtPct(d.grossMargin); } },
+      { key: "netMargin",   label: "Net Margin",         weight: 10, fmt: function (d) { return fmtPct(d.netMargin); } },
+      { key: "cashDebt",    label: "Cash vs Debt",       weight: 20, fmt: function (d) { return fmtRatio(cashDebtRatio(d)); } }
     ];
 
     function ordinal(p) {
@@ -553,10 +587,12 @@
       $("stockSub").innerHTML = nm + ' &middot; <span class="verdict v-' + tier + '">' + tlabel +
         '</span> &middot; Score ' + (sc.pct === null ? "—" : sc.pct) + "/100";
 
-      $("stockRows").innerHTML = POPUP_METRICS.filter(function (m) { return m.scored; }).map(function (m) {
+      $("stockRows").innerHTML = POPUP_METRICS.map(function (m) {
         var pp = sc.parts[m.key];
-        var color = colorFromPts(pp);
-        var ptsTxt = (pp === undefined || pp === null) ? "—" : pp.toFixed(1);
+        var color = colorScored(pp);
+        var ptsTxt = (pp === undefined || pp === null)
+          ? "0.0/" + m.weight                              // missing data = hard zero
+          : (pp / 20 * m.weight).toFixed(1) + "/" + m.weight;
         return "<tr>" +
           "<td>" + m.label + "</td>" +
           '<td class="num ' + color + '">' + m.fmt(d) + "</td>" +
@@ -565,9 +601,10 @@
           "</tr>";
       }).join("");
 
-      $("stockNote").innerHTML = "Scored on <b>" + sc.total + "</b> of the 5 forward metrics. " +
-        "Each metric's points come from its percentile rank vs the " + UNIVERSES[universeMode].label +
-        " (green = top quartile, red = bottom). Open <b>Methodology</b> for the full method.";
+      $("stockNote").innerHTML = "Each metric's points come from its percentile rank vs the " +
+        UNIVERSES[universeMode].label + " (green = top of the pack, red = bottom), weighted by pillar: " +
+        "Growth 40, Valuation 20, Profitability 20, Balance sheet 20. A missing metric (—) scores zero. " +
+        "Open <b>Methodology</b> for the full method.";
 
       $("stockModal").hidden = false;
     }

@@ -36,6 +36,7 @@ All colors are defined as CSS custom properties in `:root` in `style.css`. Never
 | `--color-negative` | `#f85149` | Negative values, red-flag badges, screener F tier (dark red) |
 | `--color-warning` | `#ffa657` | Caution values, amber badges, caveat box borders |
 | `--color-purple` | `#bc8cff` | Gradient endpoint on metric card hover top border only |
+| `--color-tier-splus` | `#bc8cff` | Screener S+ tier (purple, a perfect 100 score): badge, score bar |
 | `--color-tier-s` | `#2ea043` | Screener S tier (dark green): badge, score bar |
 | `--color-tier-a` | `#7ee787` | Screener A tier (light green): badge, score bar |
 | `--color-tier-b` | `#e3b341` | Screener B tier (yellow): badge, score bar |
