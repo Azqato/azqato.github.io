@@ -2,6 +2,17 @@
 
 ---
 
+## v3.34.2 — 2026-07-04 — Roadmap: GitHub Actions workflow timing review logged as the immediate next step
+
+**Docs only. Owner asked to review when every GitHub Actions workflow runs and the gaps between them, as the very next item ahead of v3.35.0. Logged in ROADMAP.md (v3.34.5) with the full schedule already compiled, so the review is ready without further digging. No code, workflow, or behavior changes in this entry.**
+
+### Added
+
+- **Full six-job schedule table** (all times UTC): Nasdaq 100 23:00 → ETFs 23:15 (+15m) → S&P 500 23:30 (+15m) → Growth/Value/Dividend 00:00 next day (+30m) → International 00:15 next day (+15m) → constituent sync Saturday 23:00 (weekly, not daily). All six share one concurrency group with `cancel-in-progress: false`, so overlapping runs queue rather than race.
+- **Three findings flagged for owner review**: (1) GitHub's cron scheduler is UTC-only and does not observe US daylight saving time, so the entire staggered chain shifts an hour relative to US market close twice a year (already a code comment in `screener-data.yml`, easy to miss); (2) the 15-minute gaps around the ETFs and International jobs are tighter than the 30-minute GVD gap, worth confirming against actual run durations if either job has run long; (3) the Saturday constituent sync lands at the same time-of-day as the weekday jobs but on a day none of them run, so it only looks like a collision on paper.
+
+---
+
 ## v3.34.1 — 2026-07-04 — Roadmap: methodology audit, table display bug, and a mobile-friendliness pass logged
 
 **Docs only, two owner requests logged as new roadmap items in ROADMAP.md. No code, workflow, or behavior changes in this entry.**

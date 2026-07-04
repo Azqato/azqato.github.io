@@ -1,11 +1,44 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.1
+**Version:** 3.34.2
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.35.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 shipped 2026-07-04.)
+Release order (updated 2026-07-04): v3.34.5 → v3.35.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 shipped 2026-07-04.)
+
+---
+
+## v3.34.5 — GitHub Actions Workflow Timing Review
+
+### Goal
+
+Owner requested review of when every GitHub Actions workflow runs and how much time sits between them, ahead of the next round of feature work — inserted as the immediate next step (before v3.35.0).
+
+### Current schedule (compiled 2026-07-04, all times UTC)
+
+| Order | Workflow | Cron | Days | Gap from previous |
+|-------|----------|------|------|--------------------|
+| 1 | Nasdaq 100 (`screener-data.yml`) | `0 23 * * 1-5` | Mon-Fri | — (first) |
+| 2 | ETFs (`screener-data-etfs.yml`) | `15 23 * * 1-5` | Mon-Fri | 15 min |
+| 3 | S&P 500 (`screener-data-sp500.yml`) | `30 23 * * 1-5` | Mon-Fri | 15 min |
+| 4 | Growth/Value/Dividend (`screener-data-gvd.yml`) | `0 0 * * 2-6` | Tue-Sat (= Mon-Fri trading days, next calendar day) | 30 min |
+| 5 | International (`screener-data-intl.yml`) | `15 0 * * 2-6` | Tue-Sat (= Mon-Fri trading days, next calendar day) | 15 min |
+| 6 | Constituent sync (`constituents.yml`) | `0 23 * * 6` | Saturday only | ~23h (weekly, not daily) |
+
+All six share the `screener-data` concurrency group with `cancel-in-progress: false`, so if one run is still going when the next is scheduled to start, GitHub queues the next one rather than running them in parallel or canceling either — a slow run delays the next job's actual start but never corrupts data or causes a race on the commit.
+
+### Things worth the owner's attention (found while compiling the table above, not yet acted on)
+
+1. **GitHub's cron scheduler is UTC-only and does not observe US daylight saving time** (this is already called out as a code comment in `screener-data.yml` but is easy to miss). `23:00 UTC` is **6:00pm US Eastern in winter (EST)** but **7:00pm Eastern in summer (EDT)** — the whole staggered chain silently shifts an hour twice a year relative to US market close (4:00pm Eastern), rather than staying pinned to "2-3 hours after close." If the owner wants the refresh to consistently land a fixed number of hours after the US close, the cron times need a DST-aware adjustment twice a year (there's no native DST cron support on GitHub Actions, so this would mean either two sets of cron lines swapped manually each March/November, or accepting the seasonal drift as-is, which is what today's setup does).
+2. **The 15-minute gaps (steps 2→3 and 4→5) are tighter than the 30-minute gap (steps 3→4).** The ETFs job (10 symbols) and the International job (100 symbols, foreign listings, possibly slower per-symbol due to network latency to non-US exchanges' underlying data) are the two after each 15-minute gap — worth confirming neither one has historically run long enough to bump into the next job's start (GitHub Actions run logs would show actual durations; not checked as part of this review, since it wasn't asked for a data-driven audit, just the schedule layout).
+3. **The Saturday constituent sync (23:00 UTC) lands at the same time-of-day as the Mon-Fri Nasdaq 100 job**, but on a day none of the daily jobs run, so there's no actual conflict — flagged only because it's easy to misread the table above as a same-day collision.
+
+### Plan
+
+1. Present the table and the three notes above to the owner for review.
+2. If the owner wants changes (e.g., DST-aware scheduling, wider gaps, a different stagger order), make the corresponding cron edits and re-verify via `workflow_dispatch` manual runs before the next scheduled trigger.
+3. If the owner confirms the current schedule is fine as-is, close this out with no code changes — the value was in having the compiled table for review, not necessarily in changing anything.
 
 ---
 
