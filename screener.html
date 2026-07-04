@@ -509,7 +509,6 @@
           <label><input type="checkbox" data-group="snapshot" checked> Snapshot</label>
           <label><input type="checkbox" data-group="growth" checked> Growth</label>
           <label><input type="checkbox" data-group="valuation" checked> Valuation</label>
-          <label><input type="checkbox" data-group="margins" checked> Profitability</label>
           <label><input type="checkbox" data-group="balance" checked> Balance Sheet</label>
         </div>
       </div>
@@ -532,7 +531,6 @@
             <th class="grp-snapshot group-start" colspan="3">Snapshot</th>
             <th class="grp-growth group-start" colspan="4">Growth</th>
             <th class="grp-valuation group-start" colspan="2">Valuation</th>
-            <th class="grp-margins group-start" colspan="2">Profitability</th>
             <th class="grp-balance group-start" colspan="3">Balance Sheet</th>
             <th class="grp-snapshot group-start" colspan="1"></th>
           </tr>
@@ -540,7 +538,7 @@
             <th class="left col-ticker" data-sort="ticker">Ticker</th>
             <th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>
             <th data-sort="score">Score</th>
-            <th data-sort="factors" title="Number of the 8 scored metrics ranking in the upper part of the pack (15+ of 20 percentile points)">Factors</th>
+            <th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 percentile points)">Factors</th>
             <th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>
             <th class="grp-snapshot" data-sort="price">Price</th>
             <th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session's close, as of the last daily data refresh">Chg %</th>
@@ -550,8 +548,6 @@
             <th class="grp-growth" data-sort="epsFwd" title="GAAP-basis forward EPS growth (current fiscal year). May differ from Seeking Alpha, which uses Non-GAAP consensus.">EPS FWD*</th>
             <th class="grp-valuation group-start" data-sort="peFwd" title="Shown for context and colored by the P/E-vs-growth ranking; the score's valuation points come from PEG FWD">P/E FWD</th>
             <th class="grp-valuation" data-sort="pegFwd">PEG FWD</th>
-            <th class="grp-margins group-start" data-sort="grossMargin" title="Gross profit as a share of revenue (TTM)">Gross Mgn</th>
-            <th class="grp-margins" data-sort="netMargin" title="Net income as a share of revenue (TTM)">Net Mgn</th>
             <th class="grp-balance group-start" data-sort="cash">Total Cash</th>
             <th class="grp-balance" data-sort="debt">Total Debt</th>
             <th class="grp-balance" data-sort="cashDebt">Cash/Debt</th>
@@ -600,7 +596,7 @@
     <div class="modal">
       <button class="modal-close" id="methodologyClose" aria-label="Close">&times;</button>
       <h2>Scoring Methodology</h2>
-      <p class="hint">Each stock is graded <b>relative to the rest of the <span class="universe-name">Nasdaq 100</span></b> on eight metrics in four weighted pillars: <b>Growth 40 &middot; Valuation 20 &middot; Profitability 20 &middot; Balance sheet 20</b>, adding up to a <b>Score out of 100</b>. For each metric a stock earns points based on where it ranks against its peers. The score's rank within the list then maps to a <b>Tier</b>, exactly like a tier list: S is the top tenth of this list right now, F is its bottom quarter. This is a ranking, not a fixed-threshold test and not a buy or sell rating: a high tier means a stock looks better than most of the list right now, not that it cleared a specific target.</p>
+      <p class="hint">Each stock is graded <b>relative to the rest of the <span class="universe-name">Nasdaq 100</span></b> on six metrics in three weighted pillars: <b>Growth 60 &middot; Valuation 20 &middot; Balance sheet 20</b>, adding up to a <b>Score out of 100</b>. For each metric a stock earns points based on where it ranks against its peers. The score's rank within the list then maps to a <b>Tier</b>, exactly like a tier list: S is the top tenth of this list right now, F is its bottom quarter. This is a ranking, not a fixed-threshold test and not a buy or sell rating: a high tier means a stock looks better than most of the list right now, not that it cleared a specific target.</p>
       <p class="hint" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
         <span><span class="verdict v-sp">S+</span> perfect 100</span>
         <span><span class="verdict v-s">S</span> top 10%</span>
@@ -611,14 +607,13 @@
       </p>
       <p class="hint">Tier sizes are fixed by rank, so a 100-stock list always has about 10 S, 10 A, 30 B, 25 C, and 25 F stocks, and the S&amp;P 500 scales the same percentages to 500. The only exception is a tie: when stocks at a boundary share the same rounded score, they all round up into the higher tier. <b>S+</b> sits above the bands: any stock that scores a perfect <b>100 of 100</b> earns it, and the scoring curve is calibrated so that is roughly one stock in the Nasdaq 100 and five in the S&amp;P 500 at a time.</p>
 
-      <h3>The four pillars</h3>
+      <h3>The three pillars</h3>
       <div class="table-wrap">
         <table>
           <thead><tr><th scope="col">Pillar</th><th scope="col">Metrics</th><th scope="col" class="num">Weight</th><th scope="col">Better means</th></tr></thead>
           <tbody>
-            <tr><td>Growth</td><td>Revenue Growth TTM &middot; Revenue Growth FWD &middot; EPS Growth TTM &middot; EPS Growth FWD</td><td class="num">10 each, 40 total</td><td>higher (faster sales and profit growth, both trailing and expected)</td></tr>
+            <tr><td>Growth</td><td>Revenue Growth TTM (10) &middot; Revenue Growth FWD (20) &middot; EPS Growth TTM (10) &middot; EPS Growth FWD (20)</td><td class="num">60 total</td><td>higher (faster sales and profit growth; expected growth counts double the trailing kind)</td></tr>
             <tr><td>Valuation</td><td>PEG FWD</td><td class="num">20</td><td>lower (a cheaper price for the growth you get)</td></tr>
-            <tr><td>Profitability</td><td>Gross Margin &middot; Net Margin</td><td class="num">10 each, 20 total</td><td>higher (keeps more of each dollar of revenue)</td></tr>
             <tr><td>Balance sheet</td><td>Cash vs Debt</td><td class="num">20</td><td>higher (more cash than debt)</td></tr>
           </tbody>
         </table>
@@ -631,21 +626,21 @@
         <table>
           <thead><tr><th scope="col">Where it ranks</th><th scope="col" class="num">Points (of 20)</th></tr></thead>
           <tbody>
-            <tr><td>Bottom 28% (0 to 28th percentile)</td><td class="num">0</td></tr>
-            <tr><td>40th percentile</td><td class="num">5</td></tr>
+            <tr><td>Bottom 22% (0 to 22nd percentile)</td><td class="num">0</td></tr>
+            <tr><td>36th percentile</td><td class="num">5</td></tr>
             <tr><td>Median (50th percentile)</td><td class="num">10</td></tr>
-            <tr><td>60th percentile</td><td class="num">15</td></tr>
-            <tr><td>Top 28% (72nd percentile and up)</td><td class="num">20</td></tr>
+            <tr><td>64th percentile</td><td class="num">15</td></tr>
+            <tr><td>Top 22% (78th percentile and up)</td><td class="num">20</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="table-note">Formula: points = 20 &times; (percentile - 0.28) &divide; 0.44, capped between 0 and 20, then scaled by the metric's weight. Only the top 28% of a metric earns full marks, so a perfect 100 (the S+ tier) still requires ranking near the top of the list on <i>everything</i>; the clamp is calibrated against the live data so roughly one Nasdaq 100 stock and five S&amp;P 500 stocks manage it, with more only when rounded scores tie. The table's <b>cell colors follow the same ranking</b>: a green cell is top-of-the-pack on that metric, red is bottom, and amber is in between. <b>A missing value (—) scores zero for that metric and renders dark red</b>: the score is always out of the full 100, so incomplete data can never help a stock.</p>
+      <p class="table-note">Formula: points = 20 &times; (percentile - 0.22) &divide; 0.56, capped between 0 and 20, then scaled by the metric's weight. Only the top 22% of a metric earns full marks, so a perfect 100 (the S+ tier) still requires ranking near the top of the list on <i>everything</i>; the clamp is calibrated against the live data so roughly one Nasdaq 100 stock and five S&amp;P 500 stocks manage it, with more only when rounded scores tie. The table's <b>cell colors follow the same ranking</b>: a green cell is top-of-the-pack on that metric, red is bottom, and amber is in between. <b>A missing value (—) scores zero for that metric and renders dark red</b>: the score is always out of the full 100, so incomplete data can never help a stock.</p>
 
       <h3>Worked example: Apple's PEG</h3>
-      <p class="hint">Apple's PEG of about 2.3 is cheaper than roughly 35% of the index. On the curve, the 35th percentile earns 20 &times; (0.35 - 0.28) &divide; 0.44 = <b>3 of 20</b>, and since PEG carries the full 20-point valuation pillar, that is about <b>3 of its 20 score points</b>. Not because 2.3 fails a fixed bar, but because most other <span class="universe-name">Nasdaq 100</span> names are cheaper. A stock with a PEG in the cheapest 28% of the group would earn the full 20.</p>
+      <p class="hint">Apple's PEG of about 2.3 is cheaper than roughly 35% of the index. On the curve, the 35th percentile earns 20 &times; (0.35 - 0.22) &divide; 0.56 = about <b>5 of 20</b>, and since PEG carries the full 20-point valuation pillar, that is about <b>5 of its 20 score points</b>. Not because 2.3 fails a fixed bar, but because most other <span class="universe-name">Nasdaq 100</span> names are cheaper. A stock with a PEG in the cheapest 22% of the group would earn the full 20.</p>
 
       <h3>Adding up and the Factors chip</h3>
-      <p class="hint">A stock that is exactly average on every metric scores <b>50</b>. The <b>Factors</b> column (for example <span class="factors">5/8</span>) counts how many of the eight scored metrics land in the upper part of the pack (15 of 20 percentile points or better). A metric with missing data counts as a miss, never a pass.</p>
+      <p class="hint">A stock that is exactly average on every metric scores <b>50</b>. The <b>Factors</b> column (for example <span class="factors">4/6</span>) counts how many of the six scored metrics land in the upper part of the pack (15 of 20 percentile points or better). A metric with missing data counts as a miss, never a pass.</p>
 
       <h3>Where each list comes from</h3>
       <div class="table-wrap">

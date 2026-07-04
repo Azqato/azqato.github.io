@@ -2,6 +2,19 @@
 
 ---
 
+## v3.31.0 — 2026-07-03 — Scoring: margins removed, owner growth-forward weights
+
+**Gross Margin and Net Margin are removed from the scoring model and the table, hours after v3.30.0 shipped them: the owner had not intended margins to be scored. The remaining six metrics carry owner-set weights with forward growth counting double trailing: Rev TTM 10, Rev FWD 20, EPS TTM 10, EPS FWD 20, PEG FWD 20, Cash vs Debt 20 (Growth 60 / Valuation 20 / Balance sheet 20).**
+
+### Changed
+
+- **Profitability pillar removed**: the Gross Mgn / Net Mgn columns, their Columns-menu toggle, and their 20 score points are gone. The `grossMargin`/`netMargin` feed fields stay in the pipeline and JSON (harmless, available for future use).
+- **Growth pillar re-weighted to 60** with the owner's asymmetric weights: forward revenue and EPS growth carry 20 points each, trailing 10 each.
+- **Points curve re-clamped from top/bottom 28% to top/bottom 22%**: `points = clamp(20 × (pct − 0.22) / 0.56, 0, 20)`. Recalibrated on the live feeds for the 6-metric weighted model against the same owner target (~1 perfect 100 in the Nasdaq 100, ~5 in the S&P 500, ties round up); live at ship: 2 tied at 100 in the Nasdaq 100, exactly 5 in the S&P 500.
+- **Factors chip is now x/6**; the per-stock popup lists the six scored metrics; the methodology popup's pillar table, curve table, Apple worked example, and factor text all updated.
+
+---
+
 ## v3.30.0 — 2026-07-03 — Scoring model v2: four pillars, margins, hard-zero missing data, S+ tier
 
 **The scoring model is rebuilt around four weighted pillars over eight metrics: Growth 40 (Rev TTM 10, Rev FWD 10, EPS TTM 10, EPS FWD 10), Valuation 20 (PEG FWD), Profitability 20 (Gross Margin 10, Net Margin 10), Balance sheet 20 (Cash vs Debt). A perfect 100/100 now earns a new S+ tier. Pulled ahead of pipeline cleanup by owner priority; all decisions owner-approved after live-data simulations.**
