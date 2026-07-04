@@ -1,6 +1,6 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.33.1
+**Version:** 3.33.2
 **Last Updated:** 2026-07-03
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
@@ -23,24 +23,25 @@ Three problems the domestic universes never had, each needing its own solution:
 2. **Currency display.** yfinance returns prices in each listing's local currency (TWD, CHF, JPY, EUR…). The screener's Price and Cash/Debt columns are currently formatted as dollars.
 3. **Sparse analyst estimates.** Forward revenue/EPS estimates and PEG are thinner for foreign listings. Under the hard-zero rule, poor coverage could zero out 50 of 100 points for a large share of the list.
 
-### Phase 0 — Probe (build nothing until this is done)
+### Phase 0 — Probe (complete 2026-07-03)
 
-Mirror the approach that de-risked v3.33.0: verify empirically before writing production code.
+Mirrored the approach that de-risked v3.33.0: verified empirically before writing production code. Findings:
 
-1. **Probe the Vanguard holdings API for VXUS** (`.../profile/api/VXUS/portfolio-holding/stock`, same endpoint `update_etf_constituents.py` uses). Record: raw holdings count (VXUS holds ~8,500 stocks, so the size-band guard needs a much wider window than the 110-500 used for VUG/VTV/VIG), and exactly which identity fields each entity carries (`ticker`, `longName`, and critically whether an **ISIN** or SEDOL field is present).
-2. **Probe symbol resolution** for the actual top 100 by weight. Strategy ladder, stopping at the first rung that works:
-   - If Vanguard provides ISINs: resolve ISIN → Yahoo symbol via Yahoo's search endpoint (`query2.finance.yahoo.com/v1/finance/search?q=<ISIN>`), which yfinance itself uses for ISIN lookups.
-   - If not: resolve by company name search against the same endpoint, then validate the hit by comparing market cap / country.
-   - Either way, expect a residue of ambiguous names (dual listings, ADR vs ordinary); these get manual overrides.
-3. **Probe field coverage** on the resolved top 100 with yfinance: for each of the six scored inputs (Rev TTM/FWD, EPS TTM/FWD, PEG FWD, cash & debt) plus price/market cap, count how many of the 100 names return data. This number decides the sparse-estimates question (Phase 3).
+1. **Vanguard holdings API shape.** The endpoint (`.../profile/api/VXUS/portfolio-holding/stock`) does **not** return all ~8,500 VXUS holdings — it caps at exactly **500** entities, weight-sorted. That's actually convenient (no pagination to build), but it changes the Phase 1 sanity-check band: the guard should assert **exactly 500** returned (or a tight band around it, e.g. 480-520), not the wide 110-500 band used for VUG/VTV/VIG. Every entity carries an **ISIN** directly (`"isin": "TW0002330008"`), plus a `sedol` field — no separate lookup call needed to get an identity key. Top-100-by-weight coverage sums to 37.4 of the fund's 65.5% visible weight in the 500-row response, consistent with a long, thin international tail below that.
+2. **Symbol resolution ladder, tested on the real top 100 holdings:**
+   - **Rung 1 — ISIN → Yahoo search** (`query2.finance.yahoo.com/v1/finance/search?q=<ISIN>`): resolved **99/100** with exactly one EQUITY hit each (2330 → `2330.TW`, NESN → `NESN.SW`, 8306 → `8306.T`, etc.). Three names returned more than one EQUITY match (dual-listing cases: Alibaba HK/Singapore, Siemens DE/Frankfurt-classic, Siemens Energy DE/Stuttgart) — first hit (primary listing) was correct in all three on inspection.
+   - **Rung 2 — name search fallback**: the one ISIN miss (Air Liquide, `FR0000053951` — Vanguard's raw entity had a blank `ticker` field) resolved cleanly by name search to `AI.PA`, its primary Paris listing.
+   - **Net result: 100/100 resolvable** with the two-rung ladder as planned. No case needed the market-cap/country validation step; it stays in as a guard for future weeks' new entrants, not because today's data needed it.
+3. **Field coverage on the resolved top 100**, using the exact yfinance fields `fetch_screener_data.py` reads (not approximations): `revenueGrowth` (revTTM) 94/100, `earningsGrowth` (epsTTM) 88/100, current-FY `revenue_estimate` growth (revFwd) 100/100, current-FY `earnings_estimate` growth (epsFwd) 98/100, `pegRatio`/`trailingPegRatio` (pegFwd) 100/100, `totalCash`/`totalDebt` 100/100. **This resolves the sparse-estimates worry**: coverage is 88-100% across all six scored inputs, and because the hard-zero rule already applies **per metric, not per stock** (screener.js `activeMetrics()`/`ETF_METRICS` pattern: a missing input zeros only its own weight, the /100 denominator never shrinks), the worst case is roughly a dozen names losing 10 of 100 points on `epsTTM` alone — a minor haircut, not the "zero out 50 of 100 points" scenario the original concern envisioned.
+4. **Currency diversity confirmed material**: even the top 15 holdings alone span TWD, KRW, EUR, GBP, JPY, CHF, HKD, CAD. This settles the currency-display decision in favor of the native-currency-with-label recommendation below — a single reporting currency was never realistic for this universe.
 
-Deliverable: a coverage report presented to the owner before any production code.
+Deliverable (this section) presented to the owner 2026-07-03; Phase 3 decisions below are now data-backed rather than speculative.
 
 ### Phase 1 — Constituents and mapping
 
 1. **`data/vxus.json`** — same `[{"t","n"}]` shape as the other lists, but `t` holds the **Yahoo symbol** (suffixed), so the data fetcher needs no special casing.
-2. **`data/vxus_map.json`** (new, committed) — the resolution cache: Vanguard identity (ISIN or ticker+name) → Yahoo symbol, plus a `manual` override block that the sync script always honors. This makes weekly syncs cheap (only newly added holdings need resolution) and makes bad auto-resolutions correctable by hand-editing one file.
-3. **Extend `update_etf_constituents.py`** with a `vxus` entry: fetch holdings, take top 100 by weight, resolve each through the cache (hitting Yahoo search only for cache misses), apply the same never-clobber sanity checks (count, duplicates, plus a new check: every symbol must have resolved; abort rather than write a partial list). The existing ticker regex `^[A-Z][A-Z.]{0,5}$` must be relaxed for this fund only (digits and exchange suffixes: `2330.TW`, `RELIANCE.NS`).
+2. **`data/vxus_map.json`** (new, committed) — the resolution cache: Vanguard identity (ISIN, keyed off the `isin` field Vanguard already returns) → Yahoo symbol, plus a `manual` override block that the sync script always honors (seed it with the Air Liquide case and the three confirmed dual-listing picks found in the probe). This makes weekly syncs cheap (only newly added holdings need resolution) and makes bad auto-resolutions correctable by hand-editing one file.
+3. **Extend `update_etf_constituents.py`** with a `vxus` entry: fetch holdings, take top 100 by weight, resolve each through the cache (hitting Yahoo search only for cache misses: ISIN first, name-search fallback second, per the tested ladder), apply the same never-clobber sanity checks (raw count in the 480-520 band per the probe finding above, no duplicates, plus a new check: every symbol must have resolved; abort rather than write a partial list). The existing ticker regex `^[A-Z][A-Z.]{0,5}$` must be relaxed for this fund only (digits and exchange suffixes: `2330.TW`, `005930.KS`, `AI.PA`).
 4. Weekly sync joins the existing Saturday 23:00 UTC `constituents.yml` job.
 
 ### Phase 2 — Feed
@@ -51,11 +52,11 @@ Deliverable: a coverage report presented to the owner before any production code
 
 ### Phase 3 — Owner decisions (gate between probe and build)
 
-To be put to the owner with the Phase 0 coverage report:
+Probe data is in; two of the three are now settled by the numbers, one remains a genuine preference call:
 
-1. **Currency display.** Recommendation: keep numbers in native currency and label them (e.g. `2,485 TWD` or a `cur` suffix on the Price cell; Cash/Debt column already renders a ratio-like pair so the label matters less). Converting to USD adds an FX feed dependency for purely cosmetic benefit; scoring is unaffected either way because all six scored metrics are growth rates and ratios, which are currency-agnostic.
-2. **Sparse estimates.** If probe coverage is decent (roughly 80%+ of names have forward estimates), recommendation: keep the hard-zero rule untouched, accept a larger F cohort, and say so in the methodology popup. If coverage is poor, the fallback options to present: score those names on the metrics they have with a shrunk denominator (breaks the fixed /100 rule), or drop chronically uncovered names below the top-100 cut. Do not decide this before seeing the data.
-3. **ADR preference.** Where a top holding has a liquid US ADR (TSM, NVO, ASML…), using the ADR would give USD pricing and better estimate coverage, but changes what is actually being ranked (ADR vs local line). Recommendation: rank the local listing that Vanguard actually holds, use the ADR only as a manual-override fallback when the local line has no Yahoo data.
+1. **Currency display — recommendation confirmed by data, still needs an owner sign-off.** Keep numbers in native currency and label them (e.g. `2,445 TWD` or a `cur` suffix on the Price cell; the Cash/Debt column already renders a ratio so the label matters less there). Converting to USD would add an FX-rate feed dependency for purely cosmetic benefit, and scoring is unaffected either way — all six scored metrics are growth rates and ratios, currency-agnostic by construction. The probe found real diversity (TWD/KRW/EUR/GBP/JPY/CHF/HKD/CAD+ in just the top 15), so this isn't a corner case to special-case away.
+2. **Sparse estimates — resolved by the probe, no owner decision needed.** Coverage on all six scored inputs is 88-100% (worst case `earningsGrowth`/epsTTM at 88/100). Keep the hard-zero rule exactly as-is: no shrunk denominator, no dropped names. The methodology popup gets one added sentence noting that a small number of international names may show a lower Factors count where Yahoo's analyst coverage is thin, same framing as the existing hard-zero note for domestic stocks.
+3. **ADR preference — still an owner call, unaffected by the probe** (the probe resolved every top-100 name to its local listing without needing an ADR fallback, so this is about ranking philosophy, not data availability). Recommendation stands: rank the local listing that Vanguard actually holds (that's what the fund owns and what should be scored); use a liquid US ADR only as a manual-override fallback in `vxus_map.json` for the rare case where the local line has no Yahoo data at all — none of the top 100 needed this in the probe, so the fallback path may simply go unused at launch.
 
 ### Phase 4 — Frontend
 

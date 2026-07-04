@@ -2,6 +2,20 @@
 
 ---
 
+## v3.33.2 — 2026-07-03 — Docs: v3.34.0 Phase 0 probe findings
+
+**Docs only. Ran the v3.34.0 International-universe Phase 0 probe live (Vanguard holdings API shape, ISIN-to-Yahoo symbol resolution, yfinance field coverage on the six scored metrics) against real VXUS data, ahead of any production code. Findings logged in ROADMAP.md and the PRD milestone table. No code, workflow, or behavior changes.**
+
+### Findings
+
+- **Vanguard API caps at exactly 500 holdings**, not the ~8,500 VXUS actually holds — a correction to the original plan's assumption. No pagination needed; every entity carries an **ISIN** directly, so no separate lookup call is needed to get an identity key.
+- **Symbol resolution: 100/100 on the real top 100 holdings** using the planned two-rung ladder — 99 resolved directly via ISIN → Yahoo search, 1 (Air Liquide, whose Vanguard entity had a blank ticker field) via the name-search fallback to its primary Paris listing. Three dual-listing cases (Alibaba, Siemens, Siemens Energy) returned multiple hits; the first (primary listing) was correct in all three.
+- **Field coverage on all six scored metrics is 88-100%** (worst case `earningsGrowth`/epsTTM at 88/100), using the exact yfinance fields `fetch_screener_data.py` reads. Because the hard-zero rule already applies per metric (not per stock), this resolves the sparse-estimates concern: keep the rule exactly as specified, no shrunk denominator, no dropped names — the methodology popup gets one added sentence instead.
+- **Currency diversity confirmed material**: 8+ currencies (TWD, KRW, EUR, GBP, JPY, CHF, HKD, CAD) in just the top 15 holdings, settling the currency-display decision toward native-currency-with-label over USD conversion.
+- Remaining owner decision, unaffected by the probe: ADR vs. local-listing ranking preference. Recommendation unchanged (rank the local listing Vanguard actually holds); none of the top 100 needed an ADR fallback in the probe.
+
+---
+
 ## v3.33.1 — 2026-07-03 — Docs: ROADMAP.md implementation plans
 
 **Docs only. A fifth documentation file, `docs/ROADMAP.md`, holds a detailed implementation plan for every remaining roadmap item, per owner request. The PRD milestone table stays the source of truth for what is planned and in what order; ROADMAP.md is the reference for how each item will be built, and a shipped item's plan is trimmed to a pointer. No code, workflow, or behavior changes.**
