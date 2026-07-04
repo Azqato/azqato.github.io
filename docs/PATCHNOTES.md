@@ -2,6 +2,12 @@
 
 ---
 
+## v3.32.4 — 2026-07-03 — Roadmap: v3.33.0 ETF spec review concerns logged
+
+**Docs only. Four pre-implementation review concerns are logged in the PRD's ETF Universe Scoring Model section, per owner request after a spec review. The spec itself is unchanged; the concerns are to be resolved during or before implementation: (1) yield is partially double-counted by total returns and tilts toward income-style funds; (2) RSI + 52W Range + Price vs 200DMA put 50 correlated dip-depth points in one factor, so scores will swing with selloffs; (3) S/A/B/C/F rank bands fit a 10-fund list badly (F badges on SPY/VTI, S+ nearly unreachable); (4) percentile scoring is coarse at N=10 and the 22% clamp was calibrated for 100+ stocks — absolute thresholds or rank-points recommended for this universe.**
+
+---
+
 ## v3.32.3 — 2026-07-03 — Roadmap: v3.33.0 ETF Universe Scoring Model spec completed
 
 **Docs only. The owner picked Price vs 200-Day Moving Average for the last 10 scoring points, and asked for Price vs 20-Day and Price vs 100-Day Moving Average as additional display columns. The ETF Universe Scoring Model is now fully specced at 100/100. No code, workflow, or behavior changes.**
