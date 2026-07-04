@@ -1,11 +1,11 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.3
+**Version:** 3.34.4
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.34.5 → v3.34.6 → v3.35.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 shipped 2026-07-04.)
+Release order (updated 2026-07-04): v3.34.5 → v3.34.6 → v3.34.7 → v3.35.0 → v3.36.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 shipped 2026-07-04.)
 
 ---
 
@@ -68,6 +68,35 @@ This is the same class of issue the domestic Growth/Value/Dividend lists already
 
 ---
 
+## v3.34.7 — International Universe: Lead with Company Name, Not Ticker
+
+### Goal
+
+Owner-requested: the International universe should primarily display each holding's **company name**, not its local-exchange ticker. Unlike Nasdaq 100/S&P 500 tickers (which most site visitors already recognize — AAPL, NVDA), International tickers are local-exchange codes like `005930.KS` or `7203.T` that are meaningless to most readers; the company name (Samsung Electronics, Toyota Motor) is what's actually informative.
+
+### Current behavior (code as of v3.34.0)
+
+`screenCells(r)` in `screener.js` renders the first table cell identically for every stock universe:
+```js
+'<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>'
+```
+`.tkr` (ticker) is the visually prominent span (bold, monospace, accent color per `style.css`/inline styles); `.tkr-name` is secondary (smaller, muted) and is hidden entirely under the 720px mobile breakpoint (`.tkr-name { display: none; }`). The column header reads "Ticker" for every stock universe (only the ETF mode's `HEADS.etf` renames it to "Fund"). This is shared code across all five stock universes plus International — there's currently no per-universe hook for "which is primary," only the coarser stock-vs-ETF `kind` split introduced in v3.33.0.
+
+### Plan
+
+1. **Add a per-universe display hint** beyond `kind`: e.g. a `nameFirst: true` flag on the `intl` entry in `UNIVERSES` (default falsy/absent for the other five stock universes, so nothing about them changes).
+2. **`screenCells(r)`** (or a small wrapper) checks this flag and, when true, swaps which span gets the prominent styling and which is secondary — likely swapping the DOM order too (name first) so it also reads correctly for screen readers and on the narrow-viewport case where `.tkr-name` currently disables entirely (that hidden-under-720px rule needs to become "hide whichever span is currently secondary," not hardcoded to always hide `.tkr-name`).
+3. **Header label**: the "Ticker" column header should read something more name-appropriate ("Company"?) when the International universe is active — this needs the same kind of small per-universe override, not a full `HEADS`/`renderHead()` rebuild (International reuses the stock `kind`, so today's `renderHead()` only fires on kind change, never for the nasdaq100↔intl switch). Simplest approach: a tiny DOM patch in `activate()` for this one header cell's text, gated on `universeMode === "intl"`, rather than growing `HEADS` into a third dimension.
+4. **Sorting**: confirm the ticker-column sort key (`data-sort="ticker"`, currently sorts by the ticker string) still makes sense once the visual lead is the name — either keep sorting by ticker under the hood (least change) or switch the sort comparator to `r.name` for this column when `nameFirst` is set, matching what a user visually scanning by company name would expect.
+5. **Per-stock popup title**: `openStock()` currently sets `$("stockTitle").textContent = ticker`. Decide whether the popup should also lead with the company name for International (`$("stockSub")` already shows the name second, so this may already read fine — check before changing).
+
+### Verification
+
+- Headless Chrome check: International universe rows show the company name prominently, ticker secondary (or vice versa per final design), at both desktop and the ~375px mobile width.
+- Confirm the other five stock universes are pixel-identical to before (the `nameFirst` flag must be a true no-op when absent).
+
+---
+
 ## v3.35.0 — Screener Methodology Audit & Table Display Fixes
 
 ### Goal
@@ -100,6 +129,36 @@ Two owner-flagged problems with the screener's Methodology popup: (1) the conten
 
 - Headless Chrome screenshot or DOM check of the methodology modal in both stock and ETF mode, at a standard desktop width and at a narrow (~375px) mobile width, confirming no clipped table content and no unexpected horizontal scrollbars on tables that should wrap.
 - Spot-check `metrics.html`/`indices.html`/guide pages (which also use `.table-wrap`) after the CSS fix to confirm no regression from removing the `overflow: hidden` line.
+
+---
+
+## v3.36.0 — "FANG+" Filter
+
+### Goal
+
+Owner-requested filter for the NYSE FANG+-style stock list. **Blocked on the owner supplying the actual ticker list** ("which i will provide to you later") — no composition should be guessed or hardcoded ahead of that, since FANG+-style lists vary in membership and the real NYSE FANG+ index itself changes constituents periodically.
+
+### Design direction
+
+This was requested as **a filter**, not a new universe — the simplest reading is: within whichever stock universe is currently loaded (most FANG+-style names live in the Nasdaq 100, but the mechanism should work against any loaded universe), add a way to narrow the visible rows to just the names on the curated list. This is far lighter than building an eighth universe/feed:
+
+1. **No new feed or scoring path needed.** The filter operates purely client-side against whichever universe's data is already loaded and already scored — a stock's score, tier, and every column stay exactly as computed for its actual universe; the filter only changes which rows are visible.
+2. **This is an orthogonal filter axis, not another tier chip.** The existing `.chip-group` (`data-filter="all"/"sp"/"s"/"a"/"b"/"c"/"f"`) is single-select and mutually exclusive by design (a stock has exactly one tier). A curated-list filter needs to **AND** with the tier filter and the search box, not replace them (a user should be able to see "FANG+ stocks that are also tier S", for example) — implement as a separate toggle button/chip near the tier group, not inserted into it.
+3. **Store the list in a small JSON file** (e.g. `data/fangplus.json`, a flat ticker array) once the owner provides it, structured to be reusable if other curated watchlists get requested later (a `{"name": "FANG+", "tickers": [...]}` shape rather than a single hardcoded array costs nothing extra and avoids a rewrite for the next one).
+4. **Membership check**: filter predicate becomes `tickers.includes(r.ticker)` alongside the existing tier/search predicates in `render()`'s `view = rs.filter(...)` step.
+
+### Plan
+
+1. **Wait for the owner's ticker list** — do not start implementation before it arrives, since the filter's only real content is that list.
+2. Add `data/fangplus.json` with the provided tickers (flat list, `{"name", "tickers"}` shape per above).
+3. Add a toggle control near the tier chip group (e.g. a single button/checkbox, "FANG+ only"), wired into `render()`'s filter predicate alongside `filter` (tier) and `query` (search).
+4. Decide behavior when the active universe contains none of the list's tickers (e.g. viewing Growth/Value/Dividend if FANG+ names aren't in that particular top-100 cut) — likely just show zero rows with the existing "no matches" empty state, no special-casing needed.
+5. Confirm interaction with universe switching: since this is a client-side filter over whatever's loaded, switching universes while the toggle is on should just re-filter the new universe's rows, no extra plumbing.
+
+### Verification
+
+- With the real list in place: toggle on, confirm only list members show; toggle off, confirm the full universe returns; combine with a tier chip and the search box to confirm all three filters AND correctly.
+- Switch universes with the toggle active; confirm the filter re-applies to the newly loaded universe without a stale row set.
 
 ---
 

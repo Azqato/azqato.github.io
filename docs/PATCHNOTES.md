@@ -2,6 +2,17 @@
 
 ---
 
+## v3.34.4 — 2026-07-04 — Roadmap: two owner-requested screener features logged
+
+**Docs only. Two new roadmap items in ROADMAP.md, both owner-requested. No code, workflow, or behavior changes in this entry.**
+
+### Added
+
+- **v3.34.7 — International universe: lead with company name, not ticker.** Local-exchange tickers (`005930.KS`, `7203.T`) are meaningless to most readers compared to the company name; the domestic universes keep ticker-primary since those tickers (AAPL, NVDA) are already recognizable. Needs a per-universe display hint beyond the existing stock/ETF `kind` split, since International shares "stock" kind with the five domestic universes and today's `screenCells()`/`renderHead()` have no hook for "which is primary" at that finer grain.
+- **v3.36.0 — "FANG+" filter.** Blocked on the owner supplying the actual ticker list (no composition guessed ahead of that). Designed as a client-side toggle over whichever universe is currently loaded, not a new universe or feed — ANDs with the existing tier filter and search box rather than replacing them, and the list is stored in a small reusable `{"name", "tickers"}` JSON shape rather than a single hardcoded array, in case future curated watchlists get requested.
+
+---
+
 ## v3.34.3 — 2026-07-04 — Roadmap: International feed same-company duplicate bug logged
 
 **Docs only. Owner flagged that the International universe lists the same company twice under different share classes: `005930.KS` (Samsung Electronics common) and `005935.KS` (Samsung Electronics Co. Ltd. Preference Shares) — confirmed present in the live `data/vxus.json`. Different ISINs, so v3.34.0's ISIN-dedup (built to solve Vanguard reporting one ISIN twice, e.g. BHP/Barrick) never caught this. Logged as v3.34.6 in ROADMAP.md, right after the workflow timing review. No code, workflow, or behavior changes in this entry.**
