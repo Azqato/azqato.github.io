@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.30.0
+**Version:** 3.32.0
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -661,7 +661,7 @@ No secrets are used or hardcoded. The legacy `FMP_API_KEY` GitHub Actions secret
 
 **New site from independent investor Azqato gives retail investors a complete methodology, interactive screener, and step-by-step guides — all without paying for a subscription or selling their data**
 
-*Seattle, WA — June 2026* — Azqato, an independent long-term investor and content creator, today launched a comprehensive public resource at `azqato.github.io/stocks` documenting the complete individual stock picking methodology he has refined over years of active investing. The site combines in-depth educational content, practical tool setup guides, and a live interactive screener that evaluates every Nasdaq 100 company against a four-pillar scoring model, updated daily.
+*Seattle, WA — June 2026* — Azqato, an independent long-term investor and content creator, today launched a comprehensive public resource at `azqato.github.io/stocks` documenting the complete individual stock picking methodology he has refined over years of active investing. The site combines in-depth educational content, practical tool setup guides, and a live interactive screener that evaluates every Nasdaq 100 company against a three-pillar scoring model, updated daily.
 
 The site addresses a real gap in publicly available investing education. While financial media is abundant, structured, non-commercial investing frameworks are rare. Most free resources either oversimplify or exist to sell something. Azqato's site does neither: it documents a real methodology built from practice, presented with the same directness he brings to his Twitch streams and YouTube videos.
 
@@ -696,7 +696,7 @@ Start at the Home page to see the strategy overview and the metric grid. Read Ph
 Revenue Growth TTM, Revenue Growth FWD, EPS Growth TTM, EPS Growth FWD, P/E FWD, PEG FWD, Total Cash, Total Debt, RSI, 52-Week Range, Gross Margin, and Net Margin. The ten growth, valuation, profitability, and balance sheet metrics drive individual stock decisions (the screener scores six of them across three weighted pillars). RSI and the 52-Week Range are technical signals used to time index and ETF purchases, tracked on stock watchlists for context only.
 
 **6. What is the Nasdaq 100 screener?**
-An interactive tool that applies the methodology's four-pillar scoring model to all 100 Nasdaq 100 companies. Data is updated daily from Yahoo Finance. Each company receives a score from 0 to 100 and a rank-based tier from S (top 10% of the list) to F (bottom 25%), with a rare S+ tier reserved for perfect 100 scores. This is a screening and educational tool, not a buy/sell signal generator.
+An interactive tool that applies the methodology's three-pillar scoring model to all 100 Nasdaq 100 companies. Data is updated daily from Yahoo Finance. Each company receives a score from 0 to 100 and a rank-based tier from S (top 10% of the list) to F (bottom 25%), with a rare S+ tier reserved for perfect 100 scores. This is a screening and educational tool, not a buy/sell signal generator.
 
 **7. How does the screener score stocks?**
 Each stock is ranked against the rest of the loaded universe on six metrics in three weighted pillars: Growth 60 (revenue and EPS growth, trailing and forward, with forward growth weighted double), Valuation 20 (PEG FWD), and Balance sheet 20 (cash vs debt). Points follow percentile rank (bottom 22% scores 0, the median half marks, the top 22% full marks), missing data scores zero, and the pillars sum to 0–100. The score's rank within the list maps to a tier: S is the top 10% of the list, A the next 10%, B 20–50%, C 50–75%, F the bottom 25% (boundary ties round up), and a perfect 100 earns S+. It is a relative ranking, so a high tier means a stock looks better than most of the list right now rather than that it cleared a fixed target. The Methodology button on the screener explains it with a worked example.
