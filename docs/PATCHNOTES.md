@@ -2,6 +2,21 @@
 
 ---
 
+## v3.37.2 — 2026-07-04 — Screener: stale-data banner threshold raised from 24 hours to a week
+
+**Owner feedback: the "this data is more than 24 hours old" banner fired too eagerly — a daily refresh slipping a day (a weekend, a rate-limited run) isn't worth alarming a user over. Raised the threshold to a week, which only surfaces the banner for a genuinely stuck pipeline.**
+
+### Changed
+
+- `isStale()` in `screener.js`: threshold changed from `24 * 3600 * 1000` to `7 * 24 * 3600 * 1000` milliseconds.
+- Banner copy updated to match: "This data is from [timestamp] (more than a week old). The daily refresh may not have run." Static HTML fallback text and PRD's runbook/API-design mentions of the 24-hour threshold updated for consistency.
+
+### Verified
+
+- Headless Chrome against the live feed (updated 2026-07-03, so >24h but <7 days old at test time): banner's `on` class is correctly absent — hidden under the new threshold, where it would have shown under the old one.
+
+---
+
 ## v3.37.1 — 2026-07-04 — Screener: "MAG 10" button moved to the top app-bar
 
 **Owner request: move the "MAG 10" filter toggle (v3.36.0) from the tier-chip toolbar row to the top app-bar, next to the universe buttons, to the right of International.**

@@ -1,11 +1,17 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.37.1
+**Version:** 3.37.2
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): **v4.0.0 (next up, absorbs the retired v3.35.0)** → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, v3.36.0, and v3.37.0's scoring change shipped 2026-07-04; v3.37.0's `indices.html` doctrine write-up remains open, tracked in its own section below.)
+Release order (updated 2026-07-04): **v4.0.0 (next up, absorbs the retired v3.35.0)** → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, v3.36.0, v3.37.0's scoring change, v3.37.1, and v3.37.2 shipped 2026-07-04; v3.37.0's `indices.html` doctrine write-up remains open, tracked in its own section below.)
+
+---
+
+## v3.37.2 — Stale-Data Banner Threshold: 24 Hours to a Week — DONE 2026-07-04
+
+Owner feedback: the "more than 24 hours old" banner fired too eagerly for a daily-refresh pipeline that can reasonably slip a day (weekends, a rate-limited Yahoo run) without anything actually being wrong. Raised `isStale()`'s threshold in `screener.js` from `24 * 3600 * 1000` to `7 * 24 * 3600 * 1000` ms, updated the banner copy ("more than a week old... may not have run"), the static HTML fallback text, and the two PRD mentions of the old 24-hour behavior (Common Errors table, API Design section). Verified via headless Chrome against the live feed (updated 2026-07-03, so >24h but <1 week old at test time): banner's `on` class is correctly absent under the new threshold.
 
 ---
 

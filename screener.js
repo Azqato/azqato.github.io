@@ -487,9 +487,12 @@
     }
 
     // ---- Daily feed (data/screener.json, refreshed by the GitHub Action) ----
+    // Threshold is 7 days, not 24 hours: the daily refresh can slip a day or
+    // two (weekends, a rate-limited run) without it being worth alarming the
+    // user -- only a genuinely stuck pipeline (a week+) warrants the banner.
     function isStale(ts) {
       if (!ts) return true;
-      return (Date.now() - new Date(ts).getTime()) > 24 * 3600 * 1000;
+      return (Date.now() - new Date(ts).getTime()) > 7 * 24 * 3600 * 1000;
     }
 
     function checkStale() {
@@ -498,7 +501,7 @@
       $("staleBanner").classList.toggle("on", stale);
       if (stale) {
         $("staleText").innerHTML = meta.updated
-          ? "This data is from " + new Date(meta.updated).toLocaleString() + " (more than 24 hours old). The daily refresh may not have run yet."
+          ? "This data is from " + new Date(meta.updated).toLocaleString() + " (more than a week old). The daily refresh may not have run."
           : "This data has no timestamp and may be out of date.";
       }
     }
