@@ -60,6 +60,11 @@
         // feed differs (adds a `cur` field for native-currency price display).
         paths: [RAW_BASE + "screener_intl.json", "data/screener_intl.json"],
         cacheKey: "azq_screener_intl_cache",
+        // Local-exchange tickers (005930.KS, 7203.T) aren't recognizable like
+        // domestic ones, so this universe leads with the company name in the
+        // ticker cell, popup title, and column header (v3.34.7). A no-op for
+        // every other universe, which all leave this unset.
+        nameFirst: true,
         store: null
       }
     };
@@ -401,7 +406,11 @@
       var k = sortKey, dir = sortDir;
       return rs.slice().sort(function (a, b) {
         var av, bv;
-        if (k === "ticker") { return a.ticker.localeCompare(b.ticker) * dir; }
+        // International sorts this column by the name it visually leads with;
+        // every other universe keeps sorting by ticker (unchanged behavior).
+        if (k === "ticker") {
+          return (isNameFirst() ? a.name.localeCompare(b.name) : a.ticker.localeCompare(b.ticker)) * dir;
+        }
         if (k === "tier") { av = TIER_RANK[a.tier]; bv = TIER_RANK[b.tier]; }
         else if (k === "factors") { av = a.total ? a.passes / a.total : -1; bv = b.total ? b.passes / b.total : -1; }
         else { av = a[k]; bv = b[k]; }
@@ -594,6 +603,19 @@
       }).join("");
     }
 
+    // International (v3.34.7) relabels the ticker column "Company" without a
+    // full HEADS/renderHead() rebuild -- it shares "stock" kind with the five
+    // domestic universes, so renderHead() only fires on nasdaq100<->etfs-style
+    // kind changes, never on a same-kind switch like nasdaq100<->intl. ETF
+    // mode's own "Fund" label comes from its own HEADS entry and is untouched
+    // here. Safe to call on every render(): the arrow indicator this might
+    // clobber is unconditionally rebuilt by updateSortIndicators() right after.
+    function updateTickerColumnLabel() {
+      if (isEtf()) return;
+      var th = document.querySelector('#table thead tr.head-row th[data-sort="ticker"]');
+      if (th) th.textContent = isNameFirst() ? "Company" : "Ticker";
+    }
+
     // Point data/meta at a universe's dataset, swap the on-screen labels, repaint.
     function activate(key, store) {
       var prevKind = modeKind();
@@ -606,6 +628,7 @@
         sortKey = "score";
         sortDir = -1;
       }
+      updateTickerColumnLabel();
       data = {};
       Object.keys(store.stocks).forEach(function (k) { data[k] = store.stocks[k]; });
       meta = { updated: store.updated, source: store.source };
@@ -666,6 +689,8 @@
 
     var TIER_LABEL = { sp: "S+", s: "S", a: "A", b: "B", c: "C", f: "F", none: "NO DATA" };
 
+    function isNameFirst() { return !!UNIVERSES[universeMode].nameFirst; }
+
     // The Ticker / Tier / Score / Factors cells are identical in both modes.
     function screenCells(r) {
       var scoreCell;
@@ -677,7 +702,12 @@
           TIER_COLOR[r.tier] + '"></span></span></span>';
       }
       var factorsCell = r.total ? '<span class="factors">' + r.passes + "/" + r.total + "</span>" : '<span class="muted">—</span>';
-      return '<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>' +
+      // International leads with the company name (local-exchange tickers like
+      // 005930.KS aren't recognizable); every other universe keeps ticker-first.
+      var tickerCellHtml = isNameFirst()
+        ? '<span class="tkr-name">' + r.name + '</span><span class="tkr">' + r.ticker + '</span>'
+        : '<span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span>';
+      return '<td class="col-ticker' + (isNameFirst() ? ' name-first' : '') + '">' + tickerCellHtml + '</td>' +
         '<td class="left group-start"><span class="verdict v-' + r.tier + '">' + TIER_LABEL[r.tier] + '</span></td>' +
         '<td>' + scoreCell + '</td>' +
         '<td>' + factorsCell + '</td>';
@@ -793,8 +823,10 @@
       var tier = sc.pct === null ? "none" : computeTierMap(sm)[ticker];
       var tlabel = tier === "none" ? "NO DATA" : "Tier " + TIER_LABEL[tier];
 
-      $("stockTitle").textContent = ticker;
-      $("stockSub").innerHTML = nm + ' &middot; <span class="verdict v-' + tier + '">' + tlabel +
+      // International leads the popup with the company name too, matching the
+      // table row; every other universe keeps the ticker as the title.
+      $("stockTitle").textContent = isNameFirst() ? nm : ticker;
+      $("stockSub").innerHTML = (isNameFirst() ? ticker : nm) + ' &middot; <span class="verdict v-' + tier + '">' + tlabel +
         '</span> &middot; Score ' + (sc.pct === null ? "—" : sc.pct) + "/100";
 
       $("stockRows").innerHTML = (isEtf() ? ETF_POPUP_METRICS : POPUP_METRICS).map(function (m) {

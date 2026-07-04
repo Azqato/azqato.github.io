@@ -1,11 +1,17 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.8
+**Version:** 3.34.9
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.34.7 → v3.35.0 → v3.36.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, and v3.34.8 shipped 2026-07-04.)
+Release order (updated 2026-07-04): v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
+
+---
+
+## v3.37.0 — ETFs Universe: Rating Methodology Review — UNSCOPED, AWAITING OWNER INPUT
+
+Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needs a review. **No specifics given yet** — the owner will prompt with exactly what to address in a follow-up message. Placeholder only: do not start design or implementation work on this until scoped. Given as the immediate concern to the owner, this is a strong candidate to move to the front of the queue once scoped, ahead of v3.35.0/v3.36.0, but its actual position depends entirely on what the review turns up.
 
 ---
 
@@ -91,32 +97,23 @@ Rebuilding `data/vxus.json` against the live Vanguard API: Samsung preferred (`0
 
 ---
 
-## v3.34.7 — International Universe: Lead with Company Name, Not Ticker
+## v3.34.7 — International Universe: Lead with Company Name, Not Ticker — DONE 2026-07-04
 
-### Goal
+Owner-requested display change shipped the same day, following the plan below exactly.
 
-Owner-requested: the International universe should primarily display each holding's **company name**, not its local-exchange ticker. Unlike Nasdaq 100/S&P 500 tickers (which most site visitors already recognize — AAPL, NVDA), International tickers are local-exchange codes like `005930.KS` or `7203.T` that are meaningless to most readers; the company name (Samsung Electronics, Toyota Motor) is what's actually informative.
+### Implementation
 
-### Current behavior (code as of v3.34.0)
+- **`UNIVERSES.intl`** gained `nameFirst: true` (absent/falsy on all five domestic universes, so nothing about them changes — verified below).
+- **`screenCells(r)`** now checks `isNameFirst()` and, when true, swaps both the DOM order (name span first, for screen readers) and adds a `name-first` class to the `<td class="col-ticker">` cell.
+- **CSS** (`screener.html`): new `.col-ticker.name-first .tkr-name` / `.tkr` rules swap which span gets the prominent styling (name: bold, proportional font, primary text color; ticker: small, muted, keeps the inherited monospace from `tbody td`). The 720px mobile breakpoint rule was generalized from unconditionally hiding `.tkr-name` to hiding whichever span is secondary in the active mode (`.col-ticker:not(.name-first) .tkr-name` vs. `.col-ticker.name-first .tkr`).
+- **Header label**: new `updateTickerColumnLabel()` in `screener.js`, called on every `activate()`, sets the `data-sort="ticker"` header cell to "Company" when `isNameFirst()` and "Ticker" otherwise — skipped entirely in ETF mode, whose own "Fund" label comes from its separate `HEADS.etf` entry via the existing kind-change `renderHead()` path. A tiny DOM patch rather than growing `HEADS` into a third dimension, exactly as planned.
+- **Sorting**: the `ticker` sort key now compares `a.name.localeCompare(b.name)` when `isNameFirst()`, matching what a user visually scanning company names would expect; every other universe is unchanged (still sorts by ticker string).
+- **Per-stock popup**: `openStock()` now sets the modal title to the company name and the subtitle to the ticker when `isNameFirst()`, mirroring the table row's lead/secondary swap; unchanged for every other universe.
 
-`screenCells(r)` in `screener.js` renders the first table cell identically for every stock universe:
-```js
-'<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>'
-```
-`.tkr` (ticker) is the visually prominent span (bold, monospace, accent color per `style.css`/inline styles); `.tkr-name` is secondary (smaller, muted) and is hidden entirely under the 720px mobile breakpoint (`.tkr-name { display: none; }`). The column header reads "Ticker" for every stock universe (only the ETF mode's `HEADS.etf` renames it to "Fund"). This is shared code across all five stock universes plus International — there's currently no per-universe hook for "which is primary," only the coarser stock-vs-ETF `kind` split introduced in v3.33.0.
+### Verified
 
-### Plan
-
-1. **Add a per-universe display hint** beyond `kind`: e.g. a `nameFirst: true` flag on the `intl` entry in `UNIVERSES` (default falsy/absent for the other five stock universes, so nothing about them changes).
-2. **`screenCells(r)`** (or a small wrapper) checks this flag and, when true, swaps which span gets the prominent styling and which is secondary — likely swapping the DOM order too (name first) so it also reads correctly for screen readers and on the narrow-viewport case where `.tkr-name` currently disables entirely (that hidden-under-720px rule needs to become "hide whichever span is currently secondary," not hardcoded to always hide `.tkr-name`).
-3. **Header label**: the "Ticker" column header should read something more name-appropriate ("Company"?) when the International universe is active — this needs the same kind of small per-universe override, not a full `HEADS`/`renderHead()` rebuild (International reuses the stock `kind`, so today's `renderHead()` only fires on kind change, never for the nasdaq100↔intl switch). Simplest approach: a tiny DOM patch in `activate()` for this one header cell's text, gated on `universeMode === "intl"`, rather than growing `HEADS` into a third dimension.
-4. **Sorting**: confirm the ticker-column sort key (`data-sort="ticker"`, currently sorts by the ticker string) still makes sense once the visual lead is the name — either keep sorting by ticker under the hood (least change) or switch the sort comparator to `r.name` for this column when `nameFirst` is set, matching what a user visually scanning by company name would expect.
-5. **Per-stock popup title**: `openStock()` currently sets `$("stockTitle").textContent = ticker`. Decide whether the popup should also lead with the company name for International (`$("stockSub")` already shows the name second, so this may already read fine — check before changing).
-
-### Verification
-
-- Headless Chrome check: International universe rows show the company name prominently, ticker secondary (or vice versa per final design), at both desktop and the ~375px mobile width.
-- Confirm the other five stock universes are pixel-identical to before (the `nameFirst` flag must be a true no-op when absent).
+- Headless Chrome, International universe: header reads "Company", first row's `col-ticker` cell is `<span class="tkr-name">Samsung Electronics Co.</span><span class="tkr">005930.KS</span>` with the `name-first` class present, 100/100 rows, no console errors.
+- Headless Chrome, Nasdaq 100 (regression): header still reads "Ticker", cell is the original `<span class="tkr">MU</span><span class="tkr-name">Micron Technology</span>` with no `name-first` class, tiers exactly match the v3.31.0 baseline (2 S+ / 10 S / 8 A / 32 B / 24 C / 24 F, MU at top) — the `nameFirst` flag is a confirmed no-op everywhere it's absent.
 
 ---
 

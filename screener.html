@@ -283,6 +283,24 @@
       text-overflow: ellipsis;
       max-width: 150px;
     }
+    /* International (v3.34.7): company name is primary, ticker secondary --
+       local-exchange codes like 005930.KS aren't recognizable like domestic
+       tickers. Swaps which span gets the prominent styling; DOM order is
+       swapped in screener.js so this also reads correctly for screen readers. */
+    .col-ticker.name-first .tkr-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      max-width: 220px;
+    }
+    .col-ticker.name-first .tkr {
+      display: block;
+      font-weight: 400;
+      font-size: 0.68rem;
+      color: var(--color-text-secondary);
+      /* font-family stays the inherited monospace from tbody td -- unchanged */
+    }
 
     .verdict {
       display: inline-flex;
@@ -435,7 +453,10 @@
 
     @media (max-width: 720px) {
       .app-search { width: 130px; }
-      .tkr-name { display: none; }
+      /* Hide whichever span is secondary at this width: the company name for
+         ticker-first universes, or the ticker for name-first International. */
+      .col-ticker:not(.name-first) .tkr-name { display: none; }
+      .col-ticker.name-first .tkr { display: none; }
     }
   </style>
 </head>

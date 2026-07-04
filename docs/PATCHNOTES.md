@@ -2,6 +2,12 @@
 
 ---
 
+## v3.34.9 — 2026-07-04 — Flagged: ETF rating methodology needs review
+
+**Owner flagged that the ETFs universe scoring methodology needs a review; specifics to follow in a later prompt. No code changes in this entry — logged here and in ROADMAP.md as a placeholder so it isn't lost.**
+
+---
+
 ## v3.34.8 — 2026-07-04 — Screener: fixed horizontal scroll broken at some resolutions
 
 **A friend of the owner's reported the screener table couldn't be scrolled left or right at all on their machine — it simply cut off after the Growth/Valuation columns with no visible scrollbar. Diagnosed and fixed the same day with two one-line CSS changes; kept as its own bug-fix item rather than folded into the later v4.5.0 mobile pass, since this is a desktop-resolution correctness bug, not a phone-layout design question.**
@@ -15,6 +21,25 @@
 ### Verified
 
 - Headless Chrome screenshots at a constrained 1366×700 viewport, before (bug reproduced by temporarily reverting both fixes) and after: before shows the table clipped mid-row with no scrollbar and the toolbar's right-hand buttons unreachable; after shows a full horizontal scrollbar and complete table/toolbar access.
+
+---
+
+## v3.34.7 — 2026-07-04 — Screener: International universe leads with company name
+
+**Owner-requested display change: the International universe now shows each holding's company name as the primary label, with the local-exchange ticker (e.g. `005930.KS`, `7203.T`) secondary — those codes aren't recognizable the way domestic tickers (AAPL, NVDA) are. Every other universe is unchanged.**
+
+### Added
+
+- **`nameFirst` flag** on `UNIVERSES.intl` in `screener.js` — absent on all five domestic universes, confirmed a true no-op there.
+- **Table cell**: `screenCells(r)` swaps DOM order (name first, for screen readers) and adds a `name-first` class; new CSS in `screener.html` swaps which span (`.tkr` / `.tkr-name`) gets the bold/primary styling. The 720px mobile-breakpoint rule, which previously unconditionally hid `.tkr-name`, now hides whichever span is secondary in the active mode.
+- **Column header**: reads "Company" for International, "Ticker" everywhere else, via a new `updateTickerColumnLabel()` called on every universe switch — a small DOM patch rather than growing the existing `HEADS` config into a third dimension (ETF mode's own "Fund" label is untouched, still driven by its separate `HEADS.etf` entry).
+- **Sorting**: the ticker column now sorts by company name for International, matching what a user visually scanning names would expect; unchanged (sorts by ticker) everywhere else.
+- **Per-stock popup**: title leads with the company name and subtitle shows the ticker for International, mirroring the table row.
+
+### Verified
+
+- Headless Chrome, International: header reads "Company", first row's cell is `<span class="tkr-name">Samsung Electronics Co.</span><span class="tkr">005930.KS</span>` with `name-first` present, 100/100 rows, no console errors.
+- Headless Chrome, Nasdaq 100 (regression): header still "Ticker", cell structure and DOM order unchanged, tiers exactly match the v3.31.0 baseline (2 S+ / 10 S / 8 A / 32 B / 24 C / 24 F, MU at top).
 
 ---
 
