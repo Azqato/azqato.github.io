@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03T21:24:03.752918Z",
+  "updated": "2026-07-04T01:05:02.329487Z",
   "source": "yahoo",
   "stocks": {
     "MMM": {
@@ -18,9 +18,9 @@
       "peFwd": 18.418072,
       "epsFwd": 8.08,
       "revFwd": 3.39,
-      "pegFwd": 1.69,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.7,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AOS": {
       "t": "AOS",
@@ -39,8 +39,8 @@
       "epsFwd": -2.01,
       "revFwd": 2.32,
       "pegFwd": 1.65,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ABT": {
       "t": "ABT",
@@ -58,9 +58,9 @@
       "peFwd": 17.401869,
       "epsFwd": 6.45,
       "revFwd": 13.38,
-      "pegFwd": 1.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.42,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ABBV": {
       "t": "ABBV",
@@ -78,9 +78,9 @@
       "peFwd": 18.325062,
       "epsFwd": 42.470002,
       "revFwd": 9.94,
-      "pegFwd": 0.41,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 0.43,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ACN": {
       "t": "ACN",
@@ -98,9 +98,9 @@
       "peFwd": 9.908919,
       "epsFwd": 7.199999999999999,
       "revFwd": 5.59,
-      "pegFwd": 0.9,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.0,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ADBE": {
       "t": "ADBE",
@@ -115,12 +115,12 @@
       "epsTTM": 7.9,
       "grossMargin": 89.404,
       "netMargin": 28.688999999999997,
-      "peFwd": 8.994696,
-      "epsFwd": 16.66,
+      "peFwd": 8.99688,
+      "epsFwd": 16.63,
       "revFwd": 11.560000500000001,
-      "pegFwd": 0.56,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 0.6,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AMD": {
       "t": "AMD",
@@ -139,8 +139,8 @@
       "epsFwd": 77.089995,
       "revFwd": 42.76,
       "pegFwd": 1.3,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AES": {
       "t": "AES",
@@ -159,8 +159,8 @@
       "epsFwd": -3.05,
       "revFwd": 7.5200000000000005,
       "pegFwd": 0.81,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AFL": {
       "t": "AFL",
@@ -179,8 +179,8 @@
       "epsFwd": -5.96,
       "revFwd": -3.08,
       "pegFwd": 1.18,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "A": {
       "t": "A",
@@ -199,8 +199,8 @@
       "epsFwd": 8.4,
       "revFwd": 7.180000000000001,
       "pegFwd": 1.16,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "APD": {
       "t": "APD",
@@ -219,8 +219,8 @@
       "epsFwd": 9.87,
       "revFwd": 6.1899999999999995,
       "pegFwd": 2.33,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ABNB": {
       "t": "ABNB",
@@ -239,8 +239,8 @@
       "epsFwd": 26.209998000000002,
       "revFwd": 14.09,
       "pegFwd": 1.38,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AKAM": {
       "t": "AKAM",
@@ -259,8 +259,8 @@
       "epsFwd": -5.75,
       "revFwd": 7.0199996,
       "pegFwd": 1.34,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ALB": {
       "t": "ALB",
@@ -279,8 +279,8 @@
       "epsFwd": 1670.6999,
       "revFwd": 22.12,
       "pegFwd": 0.79,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ARE": {
       "t": "ARE",
@@ -299,8 +299,8 @@
       "epsFwd": 121.92,
       "revFwd": -13.84,
       "pegFwd": 3.24,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ALGN": {
       "t": "ALGN",
@@ -319,8 +319,8 @@
       "epsFwd": 8.1,
       "revFwd": 3.6900000000000004,
       "pegFwd": 0.97,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ALLE": {
       "t": "ALLE",
@@ -339,8 +339,8 @@
       "epsFwd": 7.870000000000001,
       "revFwd": 7.75,
       "pegFwd": 2.16,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LNT": {
       "t": "LNT",
@@ -359,8 +359,8 @@
       "epsFwd": 6.25,
       "revFwd": 4.4099998000000005,
       "pegFwd": 2.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ALL": {
       "t": "ALL",
@@ -379,8 +379,8 @@
       "epsFwd": -13.200000000000001,
       "revFwd": 3.45,
       "pegFwd": 3.0,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GOOGL": {
       "t": "GOOGL",
@@ -399,8 +399,8 @@
       "epsFwd": 31.59,
       "revFwd": 21.149999,
       "pegFwd": 1.42,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MO": {
       "t": "MO",
@@ -419,8 +419,8 @@
       "epsFwd": 4.82,
       "revFwd": 1.97,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AMZN": {
       "t": "AMZN",
@@ -435,12 +435,12 @@
       "epsTTM": 74.8,
       "grossMargin": 50.604000000000006,
       "netMargin": 12.224,
-      "peFwd": 27.913605,
-      "epsFwd": 20.86,
-      "revFwd": 14.860000000000001,
+      "peFwd": 27.90818,
+      "epsFwd": 20.879998999999998,
+      "revFwd": 14.840000999999999,
       "pegFwd": 1.83,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AMCR": {
       "t": "AMCR",
@@ -459,8 +459,8 @@
       "epsFwd": 11.68,
       "revFwd": 54.03,
       "pegFwd": 0.61,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AEE": {
       "t": "AEE",
@@ -479,8 +479,8 @@
       "epsFwd": 0.38999999999999996,
       "revFwd": 5.42,
       "pegFwd": 2.67,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AEP": {
       "t": "AEP",
@@ -499,8 +499,8 @@
       "epsFwd": 6.45,
       "revFwd": 7.66,
       "pegFwd": 2.36,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AXP": {
       "t": "AXP",
@@ -519,8 +519,8 @@
       "epsFwd": 15.07,
       "revFwd": 9.959999999999999,
       "pegFwd": 1.66,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AIG": {
       "t": "AIG",
@@ -538,9 +538,9 @@
       "peFwd": 9.886774,
       "epsFwd": 13.260000999999999,
       "revFwd": 9.0500005,
-      "pegFwd": 0.61,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 0.65,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AMT": {
       "t": "AMT",
@@ -559,8 +559,8 @@
       "epsFwd": 22.25,
       "revFwd": 2.5799999000000002,
       "pegFwd": 1.74,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AWK": {
       "t": "AWK",
@@ -579,8 +579,8 @@
       "epsFwd": 7.829999999999999,
       "revFwd": 5.4,
       "pegFwd": 2.65,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AMP": {
       "t": "AMP",
@@ -599,8 +599,8 @@
       "epsFwd": 13.069999,
       "revFwd": 6.3100000000000005,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AME": {
       "t": "AME",
@@ -619,8 +619,8 @@
       "epsFwd": 9.51,
       "revFwd": 8.290000000000001,
       "pegFwd": 3.04,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AMGN": {
       "t": "AMGN",
@@ -638,9 +638,9 @@
       "peFwd": 16.711084,
       "epsFwd": 2.52,
       "revFwd": 2.75,
-      "pegFwd": 1.98,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 2.05,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "APH": {
       "t": "APH",
@@ -659,8 +659,8 @@
       "epsFwd": 44.45,
       "revFwd": 44.86,
       "pegFwd": 1.41,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ADI": {
       "t": "ADI",
@@ -679,8 +679,8 @@
       "epsFwd": 58.419997,
       "revFwd": 33.720002,
       "pegFwd": 0.69,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AON": {
       "t": "AON",
@@ -698,9 +698,9 @@
       "peFwd": 18.700035,
       "epsFwd": 11.9799994,
       "revFwd": 4.8,
-      "pegFwd": 2.82,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 3.04,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "APA": {
       "t": "APA",
@@ -719,8 +719,8 @@
       "epsFwd": 67.94,
       "revFwd": 1.52,
       "pegFwd": 0.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "APO": {
       "t": "APO",
@@ -739,8 +739,8 @@
       "epsFwd": 5.89,
       "revFwd": 22.81,
       "pegFwd": 0.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AAPL": {
       "t": "AAPL",
@@ -758,9 +758,9 @@
       "peFwd": 35.253628,
       "epsFwd": 17.419999999999998,
       "revFwd": 14.89,
-      "pegFwd": 2.34,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 2.49,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AMAT": {
       "t": "AMAT",
@@ -779,8 +779,8 @@
       "epsFwd": 29.930001,
       "revFwd": 17.7,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "APP": {
       "t": "APP",
@@ -798,9 +798,9 @@
       "peFwd": 31.808086,
       "epsFwd": 64.9,
       "revFwd": 49.54,
-      "pegFwd": 1.41,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.45,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "APTV": {
       "t": "APTV",
@@ -819,8 +819,8 @@
       "epsFwd": -21.72,
       "revFwd": -30.040001999999998,
       "pegFwd": 0.95,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ACGL": {
       "t": "ACGL",
@@ -839,8 +839,8 @@
       "epsFwd": -5.63,
       "revFwd": -0.84,
       "pegFwd": 1.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ADM": {
       "t": "ADM",
@@ -858,9 +858,9 @@
       "peFwd": 16.428656,
       "epsFwd": 36.270002,
       "revFwd": 6.78,
-      "pegFwd": 2.32,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 2.33,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ARES": {
       "t": "ARES",
@@ -875,12 +875,12 @@
       "epsTTM": 770.5,
       "grossMargin": 37.561,
       "netMargin": 10.539,
-      "peFwd": 19.683052,
-      "epsFwd": 24.77,
-      "revFwd": 15.97,
-      "pegFwd": 1.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "peFwd": 19.70093,
+      "epsFwd": 24.66,
+      "revFwd": 15.619999000000002,
+      "pegFwd": 1.08,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ANET": {
       "t": "ANET",
@@ -899,8 +899,8 @@
       "epsFwd": 21.72,
       "revFwd": 28.74,
       "pegFwd": 2.04,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AJG": {
       "t": "AJG",
@@ -918,9 +918,9 @@
       "peFwd": 19.125574,
       "epsFwd": 23.47,
       "revFwd": 21.65,
-      "pegFwd": 0.75,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 0.83,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AIZ": {
       "t": "AIZ",
@@ -939,8 +939,8 @@
       "epsFwd": 6.45,
       "revFwd": 8.129999999999999,
       "pegFwd": 2.16,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "T": {
       "t": "T",
@@ -958,9 +958,9 @@
       "peFwd": 8.89592,
       "epsFwd": 9.120000000000001,
       "revFwd": 3.05,
-      "pegFwd": 1.45,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.44,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ATO": {
       "t": "ATO",
@@ -979,8 +979,8 @@
       "epsFwd": 13.0,
       "revFwd": 11.540000000000001,
       "pegFwd": 2.09,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ADSK": {
       "t": "ADSK",
@@ -999,8 +999,8 @@
       "epsFwd": 20.94,
       "revFwd": 13.76,
       "pegFwd": 0.8,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ADP": {
       "t": "ADP",
@@ -1019,8 +1019,8 @@
       "epsFwd": 10.6300004,
       "revFwd": 6.15,
       "pegFwd": 2.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AZO": {
       "t": "AZO",
@@ -1039,8 +1039,8 @@
       "epsFwd": 4.31,
       "revFwd": 8.1,
       "pegFwd": 1.43,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AVB": {
       "t": "AVB",
@@ -1059,8 +1059,8 @@
       "epsFwd": -9.729999,
       "revFwd": 2.1999999999999997,
       "pegFwd": 7.17,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AVY": {
       "t": "AVY",
@@ -1079,8 +1079,8 @@
       "epsFwd": 5.21,
       "revFwd": 4.7399998,
       "pegFwd": 1.92,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AXON": {
       "t": "AXON",
@@ -1099,8 +1099,8 @@
       "epsFwd": 12.25,
       "revFwd": 31.540000000000003,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BKR": {
       "t": "BKR",
@@ -1119,8 +1119,8 @@
       "epsFwd": -11.1999996,
       "revFwd": -2.0299999,
       "pegFwd": 2.12,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BALL": {
       "t": "BALL",
@@ -1139,8 +1139,8 @@
       "epsFwd": 12.0,
       "revFwd": 9.810001,
       "pegFwd": 1.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BAC": {
       "t": "BAC",
@@ -1159,8 +1159,8 @@
       "epsFwd": 17.62,
       "revFwd": 7.510000499999999,
       "pegFwd": 1.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BAX": {
       "t": "BAX",
@@ -1179,8 +1179,8 @@
       "epsFwd": -15.58,
       "revFwd": 1.0299999,
       "pegFwd": 36.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BDX": {
       "t": "BDX",
@@ -1199,8 +1199,8 @@
       "epsFwd": -12.889999999999999,
       "revFwd": -12.060001,
       "pegFwd": 1.11,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BRK.B": {
       "t": "BRK.B",
@@ -1219,8 +1219,8 @@
       "epsFwd": 0.63,
       "revFwd": 4.66,
       "pegFwd": 10.06,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BBY": {
       "t": "BBY",
@@ -1239,8 +1239,8 @@
       "epsFwd": 1.91,
       "revFwd": 0.66000004,
       "pegFwd": 1.49,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TECH": {
       "t": "TECH",
@@ -1259,8 +1259,8 @@
       "epsFwd": -0.04,
       "revFwd": -0.86,
       "pegFwd": 0.95,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BIIB": {
       "t": "BIIB",
@@ -1279,8 +1279,8 @@
       "epsFwd": -12.8,
       "revFwd": 1.6400000000000001,
       "pegFwd": 4.55,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BLK": {
       "t": "BLK",
@@ -1299,8 +1299,8 @@
       "epsFwd": 11.21,
       "revFwd": 16.450001,
       "pegFwd": 1.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BX": {
       "t": "BX",
@@ -1315,12 +1315,12 @@
       "epsTTM": 3.9,
       "grossMargin": 100.0,
       "netMargin": 21.213,
-      "peFwd": 20.680756,
-      "epsFwd": 6.59,
+      "peFwd": 20.69484,
+      "epsFwd": 6.510000000000001,
       "revFwd": 13.55,
-      "pegFwd": 2.01,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 2.06,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "XYZ": {
       "t": "XYZ",
@@ -1338,9 +1338,9 @@
       "peFwd": 20.196508,
       "epsFwd": 64.69,
       "revFwd": 8.3100006,
-      "pegFwd": 0.83,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 0.85,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BNY": {
       "t": "BNY",
@@ -1359,8 +1359,8 @@
       "epsFwd": 18.56,
       "revFwd": 7.739999999999999,
       "pegFwd": 1.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BA": {
       "t": "BA",
@@ -1379,8 +1379,8 @@
       "epsFwd": -132.99,
       "revFwd": 9.11,
       "pegFwd": 24.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BKNG": {
       "t": "BKNG",
@@ -1399,8 +1399,8 @@
       "epsFwd": 14.479999,
       "revFwd": 9.060001,
       "pegFwd": 0.8,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BSX": {
       "t": "BSX",
@@ -1419,8 +1419,8 @@
       "epsFwd": 9.9,
       "revFwd": 7.5600000000000005,
       "pegFwd": 0.55,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BMY": {
       "t": "BMY",
@@ -1439,8 +1439,8 @@
       "epsFwd": 2.5899999,
       "revFwd": -1.8499999999999999,
       "pegFwd": 1.47,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "AVGO": {
       "t": "AVGO",
@@ -1459,8 +1459,8 @@
       "epsFwd": 70.44,
       "revFwd": 65.98000499999999,
       "pegFwd": 0.41,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BR": {
       "t": "BR",
@@ -1479,8 +1479,8 @@
       "epsFwd": 11.59,
       "revFwd": 7.7700000000000005,
       "pegFwd": 0.99,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BRO": {
       "t": "BRO",
@@ -1499,8 +1499,8 @@
       "epsFwd": 5.63,
       "revFwd": 19.27,
       "pegFwd": 1.51,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BF.B": {
       "t": "BF.B",
@@ -1519,8 +1519,8 @@
       "epsFwd": 11.18,
       "revFwd": 0.25,
       "pegFwd": 4.2,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BLDR": {
       "t": "BLDR",
@@ -1539,8 +1539,8 @@
       "epsFwd": -37.78,
       "revFwd": -2.35,
       "pegFwd": 2.02,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BG": {
       "t": "BG",
@@ -1559,8 +1559,8 @@
       "epsFwd": 22.37,
       "revFwd": 28.48,
       "pegFwd": 1.37,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BXP": {
       "t": "BXP",
@@ -1579,8 +1579,8 @@
       "epsFwd": null,
       "revFwd": 0.02,
       "pegFwd": 3.17,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CHRW": {
       "t": "CHRW",
@@ -1599,8 +1599,8 @@
       "epsFwd": 20.75,
       "revFwd": 4.2,
       "pegFwd": 2.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CDNS": {
       "t": "CDNS",
@@ -1619,8 +1619,8 @@
       "epsFwd": 10.83,
       "revFwd": 17.19,
       "pegFwd": 3.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CPT": {
       "t": "CPT",
@@ -1639,8 +1639,8 @@
       "epsFwd": -1.48,
       "revFwd": -0.76,
       "pegFwd": 9.17,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "COF": {
       "t": "COF",
@@ -1659,8 +1659,8 @@
       "epsFwd": 0.53,
       "revFwd": 19.299999,
       "pegFwd": 0.22,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CAH": {
       "t": "CAH",
@@ -1679,8 +1679,8 @@
       "epsFwd": 30.680000000000003,
       "revFwd": 14.99,
       "pegFwd": 1.48,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CCL": {
       "t": "CCL",
@@ -1699,8 +1699,8 @@
       "epsFwd": -0.22999999999999998,
       "revFwd": 3.92,
       "pegFwd": 1.12,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CARR": {
       "t": "CARR",
@@ -1715,12 +1715,12 @@
       "epsTTM": -40.699999999999996,
       "grossMargin": 25.180998,
       "netMargin": 5.9899997,
-      "peFwd": 25.038054,
-      "epsFwd": 8.05,
-      "revFwd": 2.39,
-      "pegFwd": 1.76,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "peFwd": 25.034388,
+      "epsFwd": 8.0699995,
+      "revFwd": 2.4300002000000003,
+      "pegFwd": 1.69,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CVNA": {
       "t": "CVNA",
@@ -1739,8 +1739,8 @@
       "epsFwd": -7.06,
       "revFwd": 36.82,
       "pegFwd": null,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CASY": {
       "t": "CASY",
@@ -1759,8 +1759,8 @@
       "epsFwd": 10.93,
       "revFwd": 8.59,
       "pegFwd": 3.43,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CAT": {
       "t": "CAT",
@@ -1775,12 +1775,12 @@
       "epsTTM": 30.2,
       "grossMargin": 28.601998000000002,
       "netMargin": 13.328000000000001,
-      "peFwd": 39.164272,
-      "epsFwd": 29.080000000000002,
-      "revFwd": 12.740000000000002,
-      "pegFwd": 2.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "peFwd": 39.124516,
+      "epsFwd": 29.209998,
+      "revFwd": 12.889999999999999,
+      "pegFwd": 2.29,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CBOE": {
       "t": "CBOE",
@@ -1799,8 +1799,8 @@
       "epsFwd": 28.849999999999998,
       "revFwd": 15.479999999999999,
       "pegFwd": 2.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CBRE": {
       "t": "CBRE",
@@ -1819,8 +1819,8 @@
       "epsFwd": 20.27,
       "revFwd": 14.399999999999999,
       "pegFwd": 0.76,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CDW": {
       "t": "CDW",
@@ -1839,8 +1839,8 @@
       "epsFwd": 7.19,
       "revFwd": 5.0300002,
       "pegFwd": 1.33,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "COR": {
       "t": "COR",
@@ -1859,8 +1859,8 @@
       "epsFwd": 11.08,
       "revFwd": 4.97,
       "pegFwd": 0.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CNC": {
       "t": "CNC",
@@ -1879,8 +1879,8 @@
       "epsFwd": 68.66,
       "revFwd": -2.26,
       "pegFwd": 1.31,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CNP": {
       "t": "CNP",
@@ -1899,8 +1899,8 @@
       "epsFwd": 8.51,
       "revFwd": 4.99,
       "pegFwd": 2.59,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CF": {
       "t": "CF",
@@ -1919,8 +1919,8 @@
       "epsFwd": 98.25,
       "revFwd": 21.41,
       "pegFwd": 3.28,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CRL": {
       "t": "CRL",
@@ -1939,8 +1939,8 @@
       "epsFwd": 7.93,
       "revFwd": -4.2,
       "pegFwd": 0.12,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SCHW": {
       "t": "SCHW",
@@ -1959,8 +1959,8 @@
       "epsFwd": 27.0,
       "revFwd": 14.29,
       "pegFwd": 1.16,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CHTR": {
       "t": "CHTR",
@@ -1979,8 +1979,8 @@
       "epsFwd": 15.560001000000002,
       "revFwd": -0.95,
       "pegFwd": 0.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CVX": {
       "t": "CVX",
@@ -1999,8 +1999,8 @@
       "epsFwd": 95.76,
       "revFwd": 22.770001,
       "pegFwd": 0.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CMG": {
       "t": "CMG",
@@ -2019,8 +2019,8 @@
       "epsFwd": -3.1,
       "revFwd": 8.8599995,
       "pegFwd": 1.9,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CB": {
       "t": "CB",
@@ -2039,8 +2039,8 @@
       "epsFwd": 9.32,
       "revFwd": 5.050000000000001,
       "pegFwd": 3.18,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CHD": {
       "t": "CHD",
@@ -2059,8 +2059,8 @@
       "epsFwd": 6.260000000000001,
       "revFwd": 0.04,
       "pegFwd": 3.08,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CIEN": {
       "t": "CIEN",
@@ -2079,8 +2079,8 @@
       "epsFwd": 147.72,
       "revFwd": 32.68,
       "pegFwd": 0.73,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CI": {
       "t": "CI",
@@ -2099,8 +2099,8 @@
       "epsFwd": 1.8800000000000001,
       "revFwd": 3.4799999999999995,
       "pegFwd": 0.86,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CINF": {
       "t": "CINF",
@@ -2119,8 +2119,8 @@
       "epsFwd": 10.280000000000001,
       "revFwd": -4.8499998,
       "pegFwd": 2.19,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CTAS": {
       "t": "CTAS",
@@ -2139,8 +2139,8 @@
       "epsFwd": 11.1099996,
       "revFwd": 8.559999999999999,
       "pegFwd": 2.88,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CSCO": {
       "t": "CSCO",
@@ -2159,8 +2159,8 @@
       "epsFwd": 12.2600004,
       "revFwd": 11.04,
       "pegFwd": 1.56,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "C": {
       "t": "C",
@@ -2179,8 +2179,8 @@
       "epsFwd": 45.78,
       "revFwd": 10.17,
       "pegFwd": 0.73,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CFG": {
       "t": "CFG",
@@ -2199,8 +2199,8 @@
       "epsFwd": 34.77,
       "revFwd": 10.4499996,
       "pegFwd": 1.65,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CLX": {
       "t": "CLX",
@@ -2219,8 +2219,8 @@
       "epsFwd": -28.280002,
       "revFwd": -5.9499998,
       "pegFwd": 2.21,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CME": {
       "t": "CME",
@@ -2239,8 +2239,8 @@
       "epsFwd": 9.609999499999999,
       "revFwd": 8.05,
       "pegFwd": 4.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CMS": {
       "t": "CMS",
@@ -2259,8 +2259,8 @@
       "epsFwd": 7.59,
       "revFwd": 4.7399998,
       "pegFwd": 3.0,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KO": {
       "t": "KO",
@@ -2279,8 +2279,8 @@
       "epsFwd": 8.9099996,
       "revFwd": 2.15,
       "pegFwd": 4.3,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CTSH": {
       "t": "CTSH",
@@ -2299,8 +2299,8 @@
       "epsFwd": 7.62,
       "revFwd": 5.6999996,
       "pegFwd": 0.69,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "COHR": {
       "t": "COHR",
@@ -2319,8 +2319,8 @@
       "epsFwd": 54.449999999999996,
       "revFwd": 21.41,
       "pegFwd": 0.92,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "COIN": {
       "t": "COIN",
@@ -2339,8 +2339,8 @@
       "epsFwd": -75.27000000000001,
       "revFwd": -14.680000000000001,
       "pegFwd": 1.4,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CL": {
       "t": "CL",
@@ -2359,8 +2359,8 @@
       "epsFwd": 3.32,
       "revFwd": 5.21,
       "pegFwd": 1.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CMCSA": {
       "t": "CMCSA",
@@ -2379,8 +2379,8 @@
       "epsFwd": -18.790000000000003,
       "revFwd": -1.59,
       "pegFwd": 142.98,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FIX": {
       "t": "FIX",
@@ -2399,8 +2399,8 @@
       "epsFwd": 49.400002,
       "revFwd": 30.98,
       "pegFwd": 0.95,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CAG": {
       "t": "CAG",
@@ -2419,8 +2419,8 @@
       "epsFwd": -26.229998,
       "revFwd": -2.9000001,
       "pegFwd": 10.86,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "COP": {
       "t": "COP",
@@ -2439,8 +2439,8 @@
       "epsFwd": 56.270003,
       "revFwd": 15.15,
       "pegFwd": 0.89,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ED": {
       "t": "ED",
@@ -2459,8 +2459,8 @@
       "epsFwd": 7.22,
       "revFwd": 3.11,
       "pegFwd": 3.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "STZ": {
       "t": "STZ",
@@ -2479,8 +2479,8 @@
       "epsFwd": -0.62,
       "revFwd": -0.49,
       "pegFwd": 2.65,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CEG": {
       "t": "CEG",
@@ -2499,8 +2499,8 @@
       "epsFwd": 24.759999999999998,
       "revFwd": 35.699999999999996,
       "pegFwd": 3.74,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "COO": {
       "t": "COO",
@@ -2519,8 +2519,8 @@
       "epsFwd": 12.33,
       "revFwd": 5.25,
       "pegFwd": 0.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CPRT": {
       "t": "CPRT",
@@ -2539,8 +2539,8 @@
       "epsFwd": -0.32,
       "revFwd": -0.02,
       "pegFwd": 3.61,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GLW": {
       "t": "GLW",
@@ -2559,8 +2559,8 @@
       "epsFwd": 26.83,
       "revFwd": 15.459999999999999,
       "pegFwd": 1.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CPAY": {
       "t": "CPAY",
@@ -2579,8 +2579,8 @@
       "epsFwd": 25.22,
       "revFwd": 17.1,
       "pegFwd": 0.85,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CTVA": {
       "t": "CTVA",
@@ -2599,8 +2599,8 @@
       "epsFwd": 12.21,
       "revFwd": 5.2600004,
       "pegFwd": 1.44,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CSGP": {
       "t": "CSGP",
@@ -2619,8 +2619,8 @@
       "epsFwd": 56.14,
       "revFwd": 17.03,
       "pegFwd": 0.11,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "COST": {
       "t": "COST",
@@ -2639,8 +2639,8 @@
       "epsFwd": 13.0,
       "revFwd": 9.46,
       "pegFwd": 4.64,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CRH": {
       "t": "CRH",
@@ -2659,8 +2659,8 @@
       "epsFwd": 6.140000000000001,
       "revFwd": 6.17,
       "pegFwd": 2.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CRWD": {
       "t": "CRWD",
@@ -2679,8 +2679,8 @@
       "epsFwd": 32.16,
       "revFwd": 23.56,
       "pegFwd": 6.31,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CCI": {
       "t": "CCI",
@@ -2699,8 +2699,8 @@
       "epsFwd": -4.25,
       "revFwd": -4.64,
       "pegFwd": 1.25,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CSX": {
       "t": "CSX",
@@ -2719,8 +2719,8 @@
       "epsFwd": 19.370002,
       "revFwd": 5.2600004,
       "pegFwd": 2.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CMI": {
       "t": "CMI",
@@ -2739,8 +2739,8 @@
       "epsFwd": 38.349998,
       "revFwd": 10.6300004,
       "pegFwd": 1.59,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CVS": {
       "t": "CVS",
@@ -2759,8 +2759,8 @@
       "epsFwd": 10.13,
       "revFwd": 1.78,
       "pegFwd": 0.29,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DHR": {
       "t": "DHR",
@@ -2779,8 +2779,8 @@
       "epsFwd": 8.7799996,
       "revFwd": 5.6799997,
       "pegFwd": 1.27,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DRI": {
       "t": "DRI",
@@ -2799,8 +2799,8 @@
       "epsFwd": 5.9499998,
       "revFwd": 3.63,
       "pegFwd": 1.82,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DDOG": {
       "t": "DDOG",
@@ -2819,8 +2819,8 @@
       "epsFwd": 18.120001,
       "revFwd": 26.860001999999998,
       "pegFwd": 1.62,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DVA": {
       "t": "DVA",
@@ -2839,8 +2839,8 @@
       "epsFwd": 37.269999999999996,
       "revFwd": 3.7100002,
       "pegFwd": 0.73,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DECK": {
       "t": "DECK",
@@ -2858,9 +2858,9 @@
       "peFwd": 14.001268,
       "epsFwd": 6.6199996,
       "revFwd": 7.84,
-      "pegFwd": 1.25,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.3,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DE": {
       "t": "DE",
@@ -2879,8 +2879,8 @@
       "epsFwd": -2.15,
       "revFwd": 6.5,
       "pegFwd": 1.45,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DELL": {
       "t": "DELL",
@@ -2899,8 +2899,8 @@
       "epsFwd": 78.37999500000001,
       "revFwd": 50.82,
       "pegFwd": 0.65,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DAL": {
       "t": "DAL",
@@ -2919,8 +2919,8 @@
       "epsFwd": -1.6400000000000001,
       "revFwd": 12.01,
       "pegFwd": 0.21,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DVN": {
       "t": "DVN",
@@ -2939,8 +2939,8 @@
       "epsFwd": 39.349996999999995,
       "revFwd": 46.1,
       "pegFwd": 2.92,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DXCM": {
       "t": "DXCM",
@@ -2959,8 +2959,8 @@
       "epsFwd": 24.049999,
       "revFwd": 12.0699994,
       "pegFwd": 1.33,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FANG": {
       "t": "FANG",
@@ -2975,12 +2975,12 @@
       "epsTTM": -98.4,
       "grossMargin": 72.246003,
       "netMargin": 1.9640000000000002,
-      "peFwd": 8.507498,
-      "epsFwd": 51.24999999999999,
+      "peFwd": 8.527529,
+      "epsFwd": 50.89,
       "revFwd": 21.47,
       "pegFwd": 56.78,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DLR": {
       "t": "DLR",
@@ -2999,8 +2999,8 @@
       "epsFwd": 88.58,
       "revFwd": 10.569999,
       "pegFwd": 11.69,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DG": {
       "t": "DG",
@@ -3019,8 +3019,8 @@
       "epsFwd": 7.580000000000001,
       "revFwd": 3.9600000000000004,
       "pegFwd": 1.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DLTR": {
       "t": "DLTR",
@@ -3039,8 +3039,8 @@
       "epsFwd": 20.899999,
       "revFwd": 6.47,
       "pegFwd": 1.55,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "D": {
       "t": "D",
@@ -3059,8 +3059,8 @@
       "epsFwd": 4.9399999999999995,
       "revFwd": 9.4799995,
       "pegFwd": 3.04,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DPZ": {
       "t": "DPZ",
@@ -3075,12 +3075,12 @@
       "epsTTM": -4.6,
       "grossMargin": 28.701,
       "netMargin": 11.8879996,
-      "peFwd": 16.24599,
-      "epsFwd": 9.19,
-      "revFwd": 5.53,
-      "pegFwd": 1.48,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "peFwd": 16.269117,
+      "epsFwd": 9.08,
+      "revFwd": 5.55,
+      "pegFwd": 1.51,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DASH": {
       "t": "DASH",
@@ -3099,8 +3099,8 @@
       "epsFwd": 19.97,
       "revFwd": 28.27,
       "pegFwd": 4.11,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DOV": {
       "t": "DOV",
@@ -3119,8 +3119,8 @@
       "epsFwd": 10.6300004,
       "revFwd": 6.8500000000000005,
       "pegFwd": 1.78,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DOW": {
       "t": "DOW",
@@ -3139,8 +3139,8 @@
       "epsFwd": 397.51,
       "revFwd": 12.0799996,
       "pegFwd": 38.89,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DHI": {
       "t": "DHI",
@@ -3159,8 +3159,8 @@
       "epsFwd": -8.63,
       "revFwd": -1.1199999999999999,
       "pegFwd": 1.32,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DTE": {
       "t": "DTE",
@@ -3179,8 +3179,8 @@
       "epsFwd": 4.78,
       "revFwd": 1.96,
       "pegFwd": 2.14,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DUK": {
       "t": "DUK",
@@ -3199,8 +3199,8 @@
       "epsFwd": 6.25,
       "revFwd": 4.2,
       "pegFwd": 2.74,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DD": {
       "t": "DD",
@@ -3219,8 +3219,8 @@
       "epsFwd": 42.060003,
       "revFwd": 4.66,
       "pegFwd": 1.72,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ETN": {
       "t": "ETN",
@@ -3239,8 +3239,8 @@
       "epsFwd": 10.5500005,
       "revFwd": 17.349999999999998,
       "pegFwd": 3.01,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EBAY": {
       "t": "EBAY",
@@ -3259,8 +3259,8 @@
       "epsFwd": 10.93,
       "revFwd": 9.32,
       "pegFwd": 1.79,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ECHO": {
       "t": "ECHO",
@@ -3279,8 +3279,8 @@
       "epsFwd": 9.379999999999999,
       "revFwd": -3.4099999999999997,
       "pegFwd": 1.33,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ECL": {
       "t": "ECL",
@@ -3299,8 +3299,8 @@
       "epsFwd": 10.879999999999999,
       "revFwd": 10.290000000000001,
       "pegFwd": 2.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EIX": {
       "t": "EIX",
@@ -3319,8 +3319,8 @@
       "epsFwd": -6.5600000000000005,
       "revFwd": 0.029999999000000003,
       "pegFwd": 3.57,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EW": {
       "t": "EW",
@@ -3339,8 +3339,8 @@
       "epsFwd": 17.48,
       "revFwd": 11.21,
       "pegFwd": 2.17,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EA": {
       "t": "EA",
@@ -3359,8 +3359,8 @@
       "epsFwd": 60.080003999999995,
       "revFwd": 2.74,
       "pegFwd": 1.27,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ELV": {
       "t": "ELV",
@@ -3379,8 +3379,8 @@
       "epsFwd": -11.18,
       "revFwd": -1.66,
       "pegFwd": 1.53,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EME": {
       "t": "EME",
@@ -3399,8 +3399,8 @@
       "epsFwd": 13.25,
       "revFwd": 11.89,
       "pegFwd": 0.44,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EMR": {
       "t": "EMR",
@@ -3419,8 +3419,8 @@
       "epsFwd": 8.42,
       "revFwd": 4.5900002,
       "pegFwd": 1.94,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ETR": {
       "t": "ETR",
@@ -3439,8 +3439,8 @@
       "epsFwd": 12.509999999999998,
       "revFwd": 8.2399994,
       "pegFwd": 2.27,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EOG": {
       "t": "EOG",
@@ -3459,8 +3459,8 @@
       "epsFwd": 67.300004,
       "revFwd": 26.56,
       "pegFwd": 1.04,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EQT": {
       "t": "EQT",
@@ -3479,8 +3479,8 @@
       "epsFwd": 48.04,
       "revFwd": 11.06,
       "pegFwd": 2.39,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EFX": {
       "t": "EFX",
@@ -3499,8 +3499,8 @@
       "epsFwd": 12.46,
       "revFwd": 11.37,
       "pegFwd": 1.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EQIX": {
       "t": "EQIX",
@@ -3519,8 +3519,8 @@
       "epsFwd": 21.049999,
       "revFwd": 11.1,
       "pegFwd": 3.29,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EQR": {
       "t": "EQR",
@@ -3539,8 +3539,8 @@
       "epsFwd": 33.67,
       "revFwd": 2.52,
       "pegFwd": 16.1,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ERIE": {
       "t": "ERIE",
@@ -3559,8 +3559,8 @@
       "epsFwd": 3.2,
       "revFwd": 2.73,
       "pegFwd": 2.67,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ESS": {
       "t": "ESS",
@@ -3579,8 +3579,8 @@
       "epsFwd": 2.3699999,
       "revFwd": 3.6199997999999995,
       "pegFwd": 7.02,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EL": {
       "t": "EL",
@@ -3599,8 +3599,8 @@
       "epsFwd": 60.260000000000005,
       "revFwd": 4.5500003,
       "pegFwd": 1.42,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EG": {
       "t": "EG",
@@ -3619,8 +3619,8 @@
       "epsFwd": 17.19,
       "revFwd": -13.819999999999999,
       "pegFwd": 0.97,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EVRG": {
       "t": "EVRG",
@@ -3639,8 +3639,8 @@
       "epsFwd": 11.04,
       "revFwd": 4.22,
       "pegFwd": 2.4,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ES": {
       "t": "ES",
@@ -3659,8 +3659,8 @@
       "epsFwd": -2.4,
       "revFwd": -0.95,
       "pegFwd": 3.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EXC": {
       "t": "EXC",
@@ -3679,8 +3679,8 @@
       "epsFwd": 3.09,
       "revFwd": 4.62,
       "pegFwd": 3.08,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EXE": {
       "t": "EXE",
@@ -3699,8 +3699,8 @@
       "epsFwd": 48.189998,
       "revFwd": 15.6,
       "pegFwd": 21.21,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EXPE": {
       "t": "EXPE",
@@ -3719,8 +3719,8 @@
       "epsFwd": 24.66,
       "revFwd": 8.59,
       "pegFwd": 0.88,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EXPD": {
       "t": "EXPD",
@@ -3739,8 +3739,8 @@
       "epsFwd": 14.42,
       "revFwd": 4.7,
       "pegFwd": 3.85,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "EXR": {
       "t": "EXR",
@@ -3759,8 +3759,8 @@
       "epsFwd": -1.2899999500000001,
       "revFwd": 2.4500001,
       "pegFwd": 6.45,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "XOM": {
       "t": "XOM",
@@ -3779,8 +3779,8 @@
       "epsFwd": 61.970000000000006,
       "revFwd": 21.43,
       "pegFwd": 1.13,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FFIV": {
       "t": "FFIV",
@@ -3799,8 +3799,8 @@
       "epsFwd": 4.31,
       "revFwd": 7.64,
       "pegFwd": 1.76,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FDS": {
       "t": "FDS",
@@ -3815,12 +3815,12 @@
       "epsTTM": -9.6,
       "grossMargin": 51.382000000000005,
       "netMargin": 23.21,
-      "peFwd": 14.115064,
-      "epsFwd": 4.35,
-      "revFwd": 6.22,
-      "pegFwd": 1.17,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "peFwd": 14.05462,
+      "epsFwd": 4.79,
+      "revFwd": 6.35,
+      "pegFwd": 1.19,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FICO": {
       "t": "FICO",
@@ -3839,8 +3839,8 @@
       "epsFwd": 44.13,
       "revFwd": 27.96,
       "pegFwd": 0.85,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FAST": {
       "t": "FAST",
@@ -3859,8 +3859,8 @@
       "epsFwd": 13.51,
       "revFwd": 11.29,
       "pegFwd": 3.5,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FRT": {
       "t": "FRT",
@@ -3879,8 +3879,8 @@
       "epsFwd": -15.359998999999998,
       "revFwd": 6.2,
       "pegFwd": 3.59,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FDX": {
       "t": "FDX",
@@ -3899,8 +3899,8 @@
       "epsFwd": -2.55,
       "revFwd": 3.42,
       "pegFwd": 1.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FDXF": {
       "t": "FDXF",
@@ -3919,8 +3919,8 @@
       "epsFwd": null,
       "revFwd": null,
       "pegFwd": null,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FIS": {
       "t": "FIS",
@@ -3939,8 +3939,8 @@
       "epsFwd": 9.13,
       "revFwd": 29.23,
       "pegFwd": 0.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FITB": {
       "t": "FITB",
@@ -3959,8 +3959,8 @@
       "epsFwd": -12.68,
       "revFwd": 42.400002,
       "pegFwd": 2.08,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FSLR": {
       "t": "FSLR",
@@ -3979,8 +3979,8 @@
       "epsFwd": 22.37,
       "revFwd": -2.4899999999999998,
       "pegFwd": 0.59,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FE": {
       "t": "FE",
@@ -3999,8 +3999,8 @@
       "epsFwd": 7.199999999999999,
       "revFwd": 4.8899997,
       "pegFwd": 1.73,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FISV": {
       "t": "FISV",
@@ -4019,8 +4019,8 @@
       "epsFwd": -6.0300004,
       "revFwd": 1.1900000000000002,
       "pegFwd": 0.8598,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FLEX": {
       "t": "FLEX",
@@ -4039,8 +4039,8 @@
       "epsFwd": 37.61,
       "revFwd": 19.530001,
       "pegFwd": 0.94,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "F": {
       "t": "F",
@@ -4059,8 +4059,8 @@
       "epsFwd": 50.33,
       "revFwd": 1.2899999500000001,
       "pegFwd": 8.48,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FTNT": {
       "t": "FTNT",
@@ -4079,8 +4079,8 @@
       "epsFwd": 14.38,
       "revFwd": 14.89,
       "pegFwd": 3.53,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FTV": {
       "t": "FTV",
@@ -4099,8 +4099,8 @@
       "epsFwd": 10.66,
       "revFwd": 4.33,
       "pegFwd": 0.98,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FOXA": {
       "t": "FOXA",
@@ -4119,8 +4119,8 @@
       "epsFwd": 4.71,
       "revFwd": 1.6400000000000001,
       "pegFwd": 24.88,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "BEN": {
       "t": "BEN",
@@ -4139,8 +4139,8 @@
       "epsFwd": 25.259999999999998,
       "revFwd": 5.43,
       "pegFwd": 0.41,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "FCX": {
       "t": "FCX",
@@ -4159,8 +4159,8 @@
       "epsFwd": 57.699999999999996,
       "revFwd": 11.12,
       "pegFwd": 4.08,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GRMN": {
       "t": "GRMN",
@@ -4179,8 +4179,8 @@
       "epsFwd": 11.92,
       "revFwd": 10.26,
       "pegFwd": 3.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IT": {
       "t": "IT",
@@ -4199,8 +4199,8 @@
       "epsFwd": 4.04,
       "revFwd": -1.09,
       "pegFwd": 0.55,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GE": {
       "t": "GE",
@@ -4219,8 +4219,8 @@
       "epsFwd": 18.530001,
       "revFwd": 14.850000999999999,
       "pegFwd": 8.99,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GEHC": {
       "t": "GEHC",
@@ -4239,8 +4239,8 @@
       "epsFwd": 6.1100002,
       "revFwd": 5.63,
       "pegFwd": 1.85,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GEV": {
       "t": "GEV",
@@ -4259,8 +4259,8 @@
       "epsFwd": 73.71,
       "revFwd": 19.489999,
       "pegFwd": 2.03,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GEN": {
       "t": "GEN",
@@ -4279,8 +4279,8 @@
       "epsFwd": 13.11,
       "revFwd": 7.53,
       "pegFwd": 1.53,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GNRC": {
       "t": "GNRC",
@@ -4299,8 +4299,8 @@
       "epsFwd": 42.259997,
       "revFwd": 17.02,
       "pegFwd": 1.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GD": {
       "t": "GD",
@@ -4319,8 +4319,8 @@
       "epsFwd": 7.93,
       "revFwd": 5.1999997,
       "pegFwd": 2.78,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GIS": {
       "t": "GIS",
@@ -4339,8 +4339,8 @@
       "epsFwd": 2072.8601000000003,
       "revFwd": -5.57,
       "pegFwd": 11.74,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GM": {
       "t": "GM",
@@ -4359,8 +4359,8 @@
       "epsFwd": 20.330000000000002,
       "revFwd": 0.34999999,
       "pegFwd": 0.34,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GPC": {
       "t": "GPC",
@@ -4379,8 +4379,8 @@
       "epsFwd": 4.5700002,
       "revFwd": 4.77,
       "pegFwd": 1.32,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GILD": {
       "t": "GILD",
@@ -4399,8 +4399,8 @@
       "epsFwd": -109.71,
       "revFwd": 3.47,
       "pegFwd": 2.14,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GPN": {
       "t": "GPN",
@@ -4419,8 +4419,8 @@
       "epsFwd": 13.229999000000001,
       "revFwd": 33.45,
       "pegFwd": 0.22,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GL": {
       "t": "GL",
@@ -4439,8 +4439,8 @@
       "epsFwd": 7.76,
       "revFwd": 6.83,
       "pegFwd": 1.3,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GDDY": {
       "t": "GDDY",
@@ -4459,8 +4459,8 @@
       "epsFwd": 14.360000000000001,
       "revFwd": 5.88,
       "pegFwd": 0.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GS": {
       "t": "GS",
@@ -4479,8 +4479,8 @@
       "epsFwd": 17.1,
       "revFwd": 10.4499996,
       "pegFwd": 1.58,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HAL": {
       "t": "HAL",
@@ -4499,8 +4499,8 @@
       "epsFwd": -1.82,
       "revFwd": 0.18000001,
       "pegFwd": 0.86,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HIG": {
       "t": "HIG",
@@ -4519,8 +4519,8 @@
       "epsFwd": -4.9099997,
       "revFwd": 2.15,
       "pegFwd": 0.12,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HAS": {
       "t": "HAS",
@@ -4539,8 +4539,8 @@
       "epsFwd": 7.630000000000001,
       "revFwd": 6.1,
       "pegFwd": 1.77,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HCA": {
       "t": "HCA",
@@ -4559,8 +4559,8 @@
       "epsFwd": 7.0300005,
       "revFwd": 3.95,
       "pegFwd": 1.24,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DOC": {
       "t": "DOC",
@@ -4579,8 +4579,8 @@
       "epsFwd": 938.4601,
       "revFwd": 3.15,
       "pegFwd": 4.32,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HSIC": {
       "t": "HSIC",
@@ -4599,8 +4599,8 @@
       "epsFwd": 7.6,
       "revFwd": 4.2700000000000005,
       "pegFwd": 1.84,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HSY": {
       "t": "HSY",
@@ -4619,8 +4619,8 @@
       "epsFwd": 33.580002,
       "revFwd": 4.78,
       "pegFwd": 1.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HPE": {
       "t": "HPE",
@@ -4639,8 +4639,8 @@
       "epsFwd": 75.94,
       "revFwd": 31.03,
       "pegFwd": 0.85,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HLT": {
       "t": "HLT",
@@ -4659,8 +4659,8 @@
       "epsFwd": 11.359999,
       "revFwd": 8.38,
       "pegFwd": 1.67,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HD": {
       "t": "HD",
@@ -4679,8 +4679,8 @@
       "epsFwd": 1.8099998999999998,
       "revFwd": 3.82,
       "pegFwd": 2.02,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HON": {
       "t": "HON",
@@ -4699,8 +4699,8 @@
       "epsFwd": -57.87,
       "revFwd": -46.050000000000004,
       "pegFwd": 6.84,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HRL": {
       "t": "HRL",
@@ -4719,8 +4719,8 @@
       "epsFwd": 9.0299994,
       "revFwd": 1.5800001000000001,
       "pegFwd": 1.75,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HST": {
       "t": "HST",
@@ -4739,8 +4739,8 @@
       "epsFwd": 16.18,
       "revFwd": -0.11999999,
       "pegFwd": 3.85,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HWM": {
       "t": "HWM",
@@ -4759,8 +4759,8 @@
       "epsFwd": 34.17,
       "revFwd": 18.17,
       "pegFwd": 0.8,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HPQ": {
       "t": "HPQ",
@@ -4779,8 +4779,8 @@
       "epsFwd": -3.3299996999999997,
       "revFwd": 4.4099998000000005,
       "pegFwd": 18.03,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HUBB": {
       "t": "HUBB",
@@ -4799,8 +4799,8 @@
       "epsFwd": 9.94,
       "revFwd": 14.32,
       "pegFwd": 2.36,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HUM": {
       "t": "HUM",
@@ -4819,8 +4819,8 @@
       "epsFwd": -48.400003000000005,
       "revFwd": 25.190002,
       "pegFwd": 2.25,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HBAN": {
       "t": "HBAN",
@@ -4839,8 +4839,8 @@
       "epsFwd": 4.6899999999999995,
       "revFwd": 37.99,
       "pegFwd": 2.08,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HII": {
       "t": "HII",
@@ -4859,8 +4859,8 @@
       "epsFwd": 12.91,
       "revFwd": 4.1199997,
       "pegFwd": 1.07,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IBM": {
       "t": "IBM",
@@ -4879,8 +4879,8 @@
       "epsFwd": 7.470000000000001,
       "revFwd": 5.86,
       "pegFwd": 2.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IEX": {
       "t": "IEX",
@@ -4898,9 +4898,9 @@
       "peFwd": 26.346241,
       "epsFwd": 6.859999999999999,
       "revFwd": 5.0300002,
-      "pegFwd": 1.92,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.91,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IDXX": {
       "t": "IDXX",
@@ -4919,8 +4919,8 @@
       "epsFwd": 11.81,
       "revFwd": 9.35,
       "pegFwd": 3.57,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ITW": {
       "t": "ITW",
@@ -4939,8 +4939,8 @@
       "epsFwd": 8.06,
       "revFwd": 3.5000000000000004,
       "pegFwd": 2.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "INCY": {
       "t": "INCY",
@@ -4959,8 +4959,8 @@
       "epsFwd": 13.76,
       "revFwd": 9.810001,
       "pegFwd": 12.0,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IR": {
       "t": "IR",
@@ -4979,8 +4979,8 @@
       "epsFwd": 4.9099997,
       "revFwd": 3.7900000000000005,
       "pegFwd": 0.78,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PODD": {
       "t": "PODD",
@@ -4998,9 +4998,9 @@
       "peFwd": 25.377234,
       "epsFwd": 30.409999999999997,
       "revFwd": 22.719998999999998,
-      "pegFwd": 1.41,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.45,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "INTC": {
       "t": "INTC",
@@ -5019,8 +5019,8 @@
       "epsFwd": 160.67000000000002,
       "revFwd": 11.12,
       "pegFwd": 1.36,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IBKR": {
       "t": "IBKR",
@@ -5039,8 +5039,8 @@
       "epsFwd": 15.6,
       "revFwd": 14.840000999999999,
       "pegFwd": 2.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ICE": {
       "t": "ICE",
@@ -5059,8 +5059,8 @@
       "epsFwd": 17.07,
       "revFwd": 10.47,
       "pegFwd": 2.06,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IFF": {
       "t": "IFF",
@@ -5079,8 +5079,8 @@
       "epsFwd": 7.049999999999999,
       "revFwd": -1.4400001,
       "pegFwd": 0.9,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IP": {
       "t": "IP",
@@ -5099,8 +5099,8 @@
       "epsFwd": 789.85,
       "revFwd": 4.5100003,
       "pegFwd": 1.58,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "INTU": {
       "t": "INTU",
@@ -5119,8 +5119,8 @@
       "epsFwd": 18.280001000000002,
       "revFwd": 13.469999999999999,
       "pegFwd": 0.71,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ISRG": {
       "t": "ISRG",
@@ -5139,8 +5139,8 @@
       "epsFwd": 16.68,
       "revFwd": 16.299999,
       "pegFwd": 2.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IVZ": {
       "t": "IVZ",
@@ -5159,8 +5159,8 @@
       "epsFwd": 29.07,
       "revFwd": 11.67,
       "pegFwd": 0.86,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "INVH": {
       "t": "INVH",
@@ -5179,8 +5179,8 @@
       "epsFwd": -0.91,
       "revFwd": 4.79,
       "pegFwd": 13.14,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IQV": {
       "t": "IQV",
@@ -5199,8 +5199,8 @@
       "epsFwd": 7.48,
       "revFwd": 5.9899997,
       "pegFwd": 0.83,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "IRM": {
       "t": "IRM",
@@ -5219,8 +5219,8 @@
       "epsFwd": 14.770000999999999,
       "revFwd": 14.729999,
       "pegFwd": 2.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "JBHT": {
       "t": "JBHT",
@@ -5239,8 +5239,8 @@
       "epsFwd": 20.729999,
       "revFwd": 7.76,
       "pegFwd": 2.78,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "JBL": {
       "t": "JBL",
@@ -5259,8 +5259,8 @@
       "epsFwd": 30.89,
       "revFwd": 17.559999,
       "pegFwd": 0.82,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "JKHY": {
       "t": "JKHY",
@@ -5279,8 +5279,8 @@
       "epsFwd": 10.319999600000001,
       "revFwd": 6.47,
       "pegFwd": 1.98,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "J": {
       "t": "J",
@@ -5299,8 +5299,8 @@
       "epsFwd": 18.450001,
       "revFwd": 18.17,
       "pegFwd": 0.4,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "JNJ": {
       "t": "JNJ",
@@ -5319,8 +5319,8 @@
       "epsFwd": 7.26,
       "revFwd": 7.17,
       "pegFwd": 5.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "JCI": {
       "t": "JCI",
@@ -5339,8 +5339,8 @@
       "epsFwd": 30.25,
       "revFwd": 7.090000000000001,
       "pegFwd": 1.9,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "JPM": {
       "t": "JPM",
@@ -5359,8 +5359,8 @@
       "epsFwd": 14.34,
       "revFwd": 8.3000004,
       "pegFwd": 1.77,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KVUE": {
       "t": "KVUE",
@@ -5379,8 +5379,8 @@
       "epsFwd": 9.4799995,
       "revFwd": 3.32,
       "pegFwd": 1.58,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KDP": {
       "t": "KDP",
@@ -5399,8 +5399,8 @@
       "epsFwd": 11.57,
       "revFwd": 58.07,
       "pegFwd": 1.11,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KEY": {
       "t": "KEY",
@@ -5419,8 +5419,8 @@
       "epsFwd": 21.6,
       "revFwd": 7.46,
       "pegFwd": 1.76,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KEYS": {
       "t": "KEYS",
@@ -5439,8 +5439,8 @@
       "epsFwd": 42.380002,
       "revFwd": 28.310000000000002,
       "pegFwd": 1.12,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KMB": {
       "t": "KMB",
@@ -5459,8 +5459,8 @@
       "epsFwd": 0.13,
       "revFwd": 3.2300000000000004,
       "pegFwd": 2.32,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KIM": {
       "t": "KIM",
@@ -5479,8 +5479,8 @@
       "epsFwd": 9.090000400000001,
       "revFwd": 3.5900000000000003,
       "pegFwd": 3.37,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KMI": {
       "t": "KMI",
@@ -5499,8 +5499,8 @@
       "epsFwd": 14.299999999999999,
       "revFwd": 6.79,
       "pegFwd": 3.8,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KKR": {
       "t": "KKR",
@@ -5519,8 +5519,8 @@
       "epsFwd": 24.280001000000002,
       "revFwd": 37.47,
       "pegFwd": 0.5,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KLAC": {
       "t": "KLAC",
@@ -5539,8 +5539,8 @@
       "epsFwd": 11.63,
       "revFwd": 11.18,
       "pegFwd": 2.44,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KHC": {
       "t": "KHC",
@@ -5559,8 +5559,8 @@
       "epsFwd": -20.959999,
       "revFwd": -2.0299999,
       "pegFwd": 0.99,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "KR": {
       "t": "KR",
@@ -5579,8 +5579,8 @@
       "epsFwd": 7.57,
       "revFwd": 2.3,
       "pegFwd": 0.56,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LHX": {
       "t": "LHX",
@@ -5599,8 +5599,8 @@
       "epsFwd": 9.08,
       "revFwd": 7.71,
       "pegFwd": 1.73,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LH": {
       "t": "LH",
@@ -5619,8 +5619,8 @@
       "epsFwd": 9.39,
       "revFwd": 5.5,
       "pegFwd": 1.21,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LRCX": {
       "t": "LRCX",
@@ -5639,8 +5639,8 @@
       "epsFwd": 37.2,
       "revFwd": 25.8,
       "pegFwd": 2.03,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LVS": {
       "t": "LVS",
@@ -5659,8 +5659,8 @@
       "epsFwd": 12.21,
       "revFwd": 8.709999999999999,
       "pegFwd": 0.95,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LDOS": {
       "t": "LDOS",
@@ -5679,8 +5679,8 @@
       "epsFwd": 2.7999999,
       "revFwd": 6.2,
       "pegFwd": 2.46,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LEN": {
       "t": "LEN",
@@ -5699,8 +5699,8 @@
       "epsFwd": -30.85,
       "revFwd": -4.71,
       "pegFwd": 12.01,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LII": {
       "t": "LII",
@@ -5719,8 +5719,8 @@
       "epsFwd": 5.33,
       "revFwd": 8.129999999999999,
       "pegFwd": 1.65,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LLY": {
       "t": "LLY",
@@ -5738,9 +5738,9 @@
       "peFwd": 33.52082,
       "epsFwd": 49.580002,
       "revFwd": 30.85,
-      "pegFwd": 1.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 1.57,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LIN": {
       "t": "LIN",
@@ -5758,9 +5758,9 @@
       "peFwd": 30.453482,
       "epsFwd": 9.0500005,
       "revFwd": 7.6899999999999995,
-      "pegFwd": 2.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 2.31,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LYV": {
       "t": "LYV",
@@ -5779,8 +5779,8 @@
       "epsFwd": -138.75,
       "revFwd": 10.17,
       "pegFwd": 17.88,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LMT": {
       "t": "LMT",
@@ -5799,8 +5799,8 @@
       "epsFwd": 39.099996999999995,
       "revFwd": 5.45,
       "pegFwd": 1.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "L": {
       "t": "L",
@@ -5819,8 +5819,8 @@
       "epsFwd": null,
       "revFwd": null,
       "pegFwd": 1.32,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LOW": {
       "t": "LOW",
@@ -5839,8 +5839,8 @@
       "epsFwd": 1.77,
       "revFwd": 7.95,
       "pegFwd": 1.49,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LULU": {
       "t": "LULU",
@@ -5859,8 +5859,8 @@
       "epsFwd": -16.700001,
       "revFwd": -0.47999998000000005,
       "pegFwd": 0.91,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LITE": {
       "t": "LITE",
@@ -5879,8 +5879,8 @@
       "epsFwd": 299.26999,
       "revFwd": 81.93,
       "pegFwd": 0.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LYB": {
       "t": "LYB",
@@ -5899,8 +5899,8 @@
       "epsFwd": 431.15,
       "revFwd": 14.78,
       "pegFwd": 1.53,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MTB": {
       "t": "MTB",
@@ -5919,8 +5919,8 @@
       "epsFwd": 10.34,
       "revFwd": 2.71,
       "pegFwd": 1.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MPC": {
       "t": "MPC",
@@ -5939,8 +5939,8 @@
       "epsFwd": 184.56,
       "revFwd": 11.68,
       "pegFwd": 1.32,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MAR": {
       "t": "MAR",
@@ -5959,8 +5959,8 @@
       "epsFwd": 15.76,
       "revFwd": 6.529999999999999,
       "pegFwd": 2.22,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MRSH": {
       "t": "MRSH",
@@ -5979,8 +5979,8 @@
       "epsFwd": 6.6300004999999995,
       "revFwd": 5.33,
       "pegFwd": 1.61,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MLM": {
       "t": "MLM",
@@ -5999,8 +5999,8 @@
       "epsFwd": 3.5700000000000003,
       "revFwd": 15.83,
       "pegFwd": 2.92,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MRVL": {
       "t": "MRVL",
@@ -6019,8 +6019,8 @@
       "epsFwd": 42.580003,
       "revFwd": 40.67,
       "pegFwd": 1.39,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MAS": {
       "t": "MAS",
@@ -6039,8 +6039,8 @@
       "epsFwd": 7.8600004000000006,
       "revFwd": 2.74,
       "pegFwd": 2.09,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MA": {
       "t": "MA",
@@ -6059,8 +6059,8 @@
       "epsFwd": 15.6,
       "revFwd": 13.100000000000001,
       "pegFwd": 1.66,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MKC": {
       "t": "MKC",
@@ -6079,8 +6079,8 @@
       "epsFwd": 2.97,
       "revFwd": 15.359998999999998,
       "pegFwd": 2.06,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MCD": {
       "t": "MCD",
@@ -6099,8 +6099,8 @@
       "epsFwd": 6.4,
       "revFwd": 5.96,
       "pegFwd": 2.57,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MCK": {
       "t": "MCK",
@@ -6119,8 +6119,8 @@
       "epsFwd": 13.18,
       "revFwd": 7.000000000000001,
       "pegFwd": 1.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MDT": {
       "t": "MDT",
@@ -6139,8 +6139,8 @@
       "epsFwd": 7.550000399999999,
       "revFwd": 6.94,
       "pegFwd": 1.64,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MRK": {
       "t": "MRK",
@@ -6159,8 +6159,8 @@
       "epsFwd": -66.800004,
       "revFwd": 2.5999999,
       "pegFwd": 6.4,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "META": {
       "t": "META",
@@ -6179,8 +6179,8 @@
       "epsFwd": 39.89,
       "revFwd": 25.82,
       "pegFwd": 0.84,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MET": {
       "t": "MET",
@@ -6199,8 +6199,8 @@
       "epsFwd": 12.2,
       "revFwd": 1.39,
       "pegFwd": 0.48,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MTD": {
       "t": "MTD",
@@ -6219,8 +6219,8 @@
       "epsFwd": 9.1800004,
       "revFwd": 5.1799998,
       "pegFwd": 2.74,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MGM": {
       "t": "MGM",
@@ -6239,8 +6239,8 @@
       "epsFwd": -41.169998,
       "revFwd": 0.97,
       "pegFwd": 1.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MCHP": {
       "t": "MCHP",
@@ -6259,8 +6259,8 @@
       "epsFwd": 92.78999999999999,
       "revFwd": 31.129997999999997,
       "pegFwd": 0.31,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MU": {
       "t": "MU",
@@ -6279,8 +6279,8 @@
       "epsFwd": 784.5,
       "revFwd": 246.69,
       "pegFwd": 0.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MSFT": {
       "t": "MSFT",
@@ -6299,8 +6299,8 @@
       "epsFwd": 23.31,
       "revFwd": 16.96,
       "pegFwd": 1.2,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MAA": {
       "t": "MAA",
@@ -6319,8 +6319,8 @@
       "epsFwd": -10.319999600000001,
       "revFwd": 1.3300001000000001,
       "pegFwd": 7.03,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MRNA": {
       "t": "MRNA",
@@ -6339,8 +6339,8 @@
       "epsFwd": -18.879999,
       "revFwd": 7.66,
       "pegFwd": null,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TAP": {
       "t": "TAP",
@@ -6359,8 +6359,8 @@
       "epsFwd": -12.3,
       "revFwd": -0.05,
       "pegFwd": 3.92,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MDLZ": {
       "t": "MDLZ",
@@ -6379,8 +6379,8 @@
       "epsFwd": 4.5500003,
       "revFwd": 3.5999999999999996,
       "pegFwd": 1.0,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MPWR": {
       "t": "MPWR",
@@ -6399,8 +6399,8 @@
       "epsFwd": 35.18,
       "revFwd": 32.569999,
       "pegFwd": 1.69,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MNST": {
       "t": "MNST",
@@ -6419,8 +6419,8 @@
       "epsFwd": 16.59,
       "revFwd": 15.17,
       "pegFwd": 2.83,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MCO": {
       "t": "MCO",
@@ -6439,8 +6439,8 @@
       "epsFwd": 11.92,
       "revFwd": 6.7,
       "pegFwd": 2.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MS": {
       "t": "MS",
@@ -6459,8 +6459,8 @@
       "epsFwd": 16.93,
       "revFwd": 10.42,
       "pegFwd": 2.57,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MOS": {
       "t": "MOS",
@@ -6479,8 +6479,8 @@
       "epsFwd": -62.36999600000001,
       "revFwd": 5.3100000000000005,
       "pegFwd": 2.02,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MSI": {
       "t": "MSI",
@@ -6499,8 +6499,8 @@
       "epsFwd": 10.34,
       "revFwd": 9.629999999999999,
       "pegFwd": 2.28,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "MSCI": {
       "t": "MSCI",
@@ -6519,8 +6519,8 @@
       "epsFwd": 14.08,
       "revFwd": 11.37,
       "pegFwd": 1.94,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NDAQ": {
       "t": "NDAQ",
@@ -6539,8 +6539,8 @@
       "epsFwd": 13.3,
       "revFwd": 9.86,
       "pegFwd": 2.06,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NTAP": {
       "t": "NTAP",
@@ -6559,8 +6559,8 @@
       "epsFwd": 9.53,
       "revFwd": 7.960000000000001,
       "pegFwd": 1.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NFLX": {
       "t": "NFLX",
@@ -6579,8 +6579,8 @@
       "epsFwd": 41.990003,
       "revFwd": 13.76,
       "pegFwd": 1.53,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NEM": {
       "t": "NEM",
@@ -6599,8 +6599,8 @@
       "epsFwd": 47.03,
       "revFwd": 24.959999999999997,
       "pegFwd": 2.78,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NWSA": {
       "t": "NWSA",
@@ -6619,8 +6619,8 @@
       "epsFwd": 21.540001,
       "revFwd": 5.54,
       "pegFwd": 3.07,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NEE": {
       "t": "NEE",
@@ -6639,8 +6639,8 @@
       "epsFwd": 8.799999999999999,
       "revFwd": 15.06,
       "pegFwd": 1.95,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NKE": {
       "t": "NKE",
@@ -6659,8 +6659,8 @@
       "epsFwd": -19.89,
       "revFwd": -0.08,
       "pegFwd": 1.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NI": {
       "t": "NI",
@@ -6679,8 +6679,8 @@
       "epsFwd": 8.290000000000001,
       "revFwd": 9.67,
       "pegFwd": 2.73,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NDSN": {
       "t": "NDSN",
@@ -6699,8 +6699,8 @@
       "epsFwd": 11.959999999999999,
       "revFwd": 6.83,
       "pegFwd": 1.79,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NSC": {
       "t": "NSC",
@@ -6719,8 +6719,8 @@
       "epsFwd": -1.87,
       "revFwd": 4.6,
       "pegFwd": 4.72,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NTRS": {
       "t": "NTRS",
@@ -6739,8 +6739,8 @@
       "epsFwd": 35.799998,
       "revFwd": 11.59,
       "pegFwd": 1.38,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NOC": {
       "t": "NOC",
@@ -6759,8 +6759,8 @@
       "epsFwd": 6.1100002,
       "revFwd": 4.8499998,
       "pegFwd": 4.09,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NCLH": {
       "t": "NCLH",
@@ -6779,8 +6779,8 @@
       "epsFwd": -21.33,
       "revFwd": 3.19,
       "pegFwd": 0.98,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NRG": {
       "t": "NRG",
@@ -6799,8 +6799,8 @@
       "epsFwd": 12.1800005,
       "revFwd": 13.22,
       "pegFwd": 0.47,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NUE": {
       "t": "NUE",
@@ -6819,8 +6819,8 @@
       "epsFwd": 118.87001,
       "revFwd": 18.92,
       "pegFwd": 5.21,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NVDA": {
       "t": "NVDA",
@@ -6839,8 +6839,8 @@
       "epsFwd": 88.11,
       "revFwd": 81.83,
       "pegFwd": 0.61,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NVR": {
       "t": "NVR",
@@ -6859,8 +6859,8 @@
       "epsFwd": -17.31,
       "revFwd": -9.2,
       "pegFwd": 4.97,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NXPI": {
       "t": "NXPI",
@@ -6879,8 +6879,8 @@
       "epsFwd": 25.35,
       "revFwd": 14.760000000000002,
       "pegFwd": 0.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ORLY": {
       "t": "ORLY",
@@ -6899,8 +6899,8 @@
       "epsFwd": 9.629999999999999,
       "revFwd": 7.21,
       "pegFwd": 1.93,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "OXY": {
       "t": "OXY",
@@ -6919,8 +6919,8 @@
       "epsFwd": 156.53,
       "revFwd": 17.599999999999998,
       "pegFwd": 1.03,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ODFL": {
       "t": "ODFL",
@@ -6939,8 +6939,8 @@
       "epsFwd": 12.94,
       "revFwd": 5.4899998,
       "pegFwd": 3.21,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "OMC": {
       "t": "OMC",
@@ -6959,8 +6959,8 @@
       "epsFwd": 25.129997999999997,
       "revFwd": 48.400003000000005,
       "pegFwd": 15.97,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ON": {
       "t": "ON",
@@ -6979,8 +6979,8 @@
       "epsFwd": 31.900000000000002,
       "revFwd": 8.05,
       "pegFwd": 0.3,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "OKE": {
       "t": "OKE",
@@ -6999,8 +6999,8 @@
       "epsFwd": 5.47,
       "revFwd": 14.770000999999999,
       "pegFwd": 2.12,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ORCL": {
       "t": "ORCL",
@@ -7019,8 +7019,8 @@
       "epsFwd": 5.4399999999999995,
       "revFwd": 32.459998,
       "pegFwd": 0.79,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "OTIS": {
       "t": "OTIS",
@@ -7039,8 +7039,8 @@
       "epsFwd": 3.6999999999999997,
       "revFwd": 4.8,
       "pegFwd": 1.39,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PCAR": {
       "t": "PCAR",
@@ -7059,8 +7059,8 @@
       "epsFwd": 26.07,
       "revFwd": 8.3500005,
       "pegFwd": 1.22,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PKG": {
       "t": "PKG",
@@ -7079,8 +7079,8 @@
       "epsFwd": 5.54,
       "revFwd": 11.3400005,
       "pegFwd": 1.81,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PLTR": {
       "t": "PLTR",
@@ -7099,8 +7099,8 @@
       "epsFwd": 96.809995,
       "revFwd": 72.480005,
       "pegFwd": 1.86,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PANW": {
       "t": "PANW",
@@ -7119,8 +7119,8 @@
       "epsFwd": 12.959999999999999,
       "revFwd": 23.87,
       "pegFwd": 5.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PSKY": {
       "t": "PSKY",
@@ -7139,8 +7139,8 @@
       "epsFwd": 22.919999999999998,
       "revFwd": 3.34,
       "pegFwd": 1.31,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PH": {
       "t": "PH",
@@ -7159,8 +7159,8 @@
       "epsFwd": 14.430000000000001,
       "revFwd": 7.430000000000001,
       "pegFwd": 3.77,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PAYX": {
       "t": "PAYX",
@@ -7179,8 +7179,8 @@
       "epsFwd": 8.3100006,
       "revFwd": 5.41,
       "pegFwd": 1.87,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PYPL": {
       "t": "PYPL",
@@ -7199,8 +7199,8 @@
       "epsFwd": 0.02,
       "revFwd": 3.5000000000000004,
       "pegFwd": 0.82,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PNR": {
       "t": "PNR",
@@ -7219,8 +7219,8 @@
       "epsFwd": 8.66,
       "revFwd": 2.6099999,
       "pegFwd": 1.14,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PEP": {
       "t": "PEP",
@@ -7239,8 +7239,8 @@
       "epsFwd": 6.1300002,
       "revFwd": 5.29,
       "pegFwd": 1.55,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PFE": {
       "t": "PFE",
@@ -7259,8 +7259,8 @@
       "epsFwd": -8.1099994,
       "revFwd": -1.4199998999999999,
       "pegFwd": 2.84,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PCG": {
       "t": "PCG",
@@ -7279,8 +7279,8 @@
       "epsFwd": 9.790000000000001,
       "revFwd": 5.9799999999999995,
       "pegFwd": 0.74,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PM": {
       "t": "PM",
@@ -7299,8 +7299,8 @@
       "epsFwd": 11.49,
       "revFwd": 6.81,
       "pegFwd": 2.54,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PSX": {
       "t": "PSX",
@@ -7319,8 +7319,8 @@
       "epsFwd": 178.29999999999998,
       "revFwd": 12.2200005,
       "pegFwd": 1.02,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PNW": {
       "t": "PNW",
@@ -7339,8 +7339,8 @@
       "epsFwd": -6.959999999999999,
       "revFwd": 3.5700000000000003,
       "pegFwd": 3.28,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PNC": {
       "t": "PNC",
@@ -7359,8 +7359,8 @@
       "epsFwd": 11.1999996,
       "revFwd": 11.3199994,
       "pegFwd": 1.98,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PPG": {
       "t": "PPG",
@@ -7379,8 +7379,8 @@
       "epsFwd": 3.9,
       "revFwd": 4.99,
       "pegFwd": 1.91,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PPL": {
       "t": "PPL",
@@ -7399,8 +7399,8 @@
       "epsFwd": 7.7700000000000005,
       "revFwd": 7.140000000000001,
       "pegFwd": 1.43,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PFG": {
       "t": "PFG",
@@ -7419,8 +7419,8 @@
       "epsFwd": 12.690000000000001,
       "revFwd": 2.42,
       "pegFwd": 1.06,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PG": {
       "t": "PG",
@@ -7439,8 +7439,8 @@
       "epsFwd": 0.9599999499999999,
       "revFwd": 3.4000000000000004,
       "pegFwd": 4.25,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PGR": {
       "t": "PGR",
@@ -7459,8 +7459,8 @@
       "epsFwd": -5.12,
       "revFwd": 5.8000002,
       "pegFwd": 35.42,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PLD": {
       "t": "PLD",
@@ -7479,8 +7479,8 @@
       "epsFwd": -31.239998000000003,
       "revFwd": 6.329999999999999,
       "pegFwd": 108.46,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PRU": {
       "t": "PRU",
@@ -7499,8 +7499,8 @@
       "epsFwd": -4.9399999999999995,
       "revFwd": 2.5700000000000003,
       "pegFwd": 1.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PEG": {
       "t": "PEG",
@@ -7519,8 +7519,8 @@
       "epsFwd": 8.1499994,
       "revFwd": 5.609999999999999,
       "pegFwd": 4.07,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PTC": {
       "t": "PTC",
@@ -7539,8 +7539,8 @@
       "epsFwd": 0.83,
       "revFwd": -0.33999999999999997,
       "pegFwd": 1.02,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PSA": {
       "t": "PSA",
@@ -7559,8 +7559,8 @@
       "epsFwd": -3.9600000000000004,
       "revFwd": 3.9100002000000003,
       "pegFwd": 4.8,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PHM": {
       "t": "PHM",
@@ -7579,8 +7579,8 @@
       "epsFwd": -9.8900005,
       "revFwd": -5.1599998000000005,
       "pegFwd": 1.21,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "PWR": {
       "t": "PWR",
@@ -7599,8 +7599,8 @@
       "epsFwd": 30.470000000000002,
       "revFwd": 23.0,
       "pegFwd": 1.84,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "QCOM": {
       "t": "QCOM",
@@ -7619,8 +7619,8 @@
       "epsFwd": -10.229999600000001,
       "revFwd": -3.56,
       "pegFwd": 0.58,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DGX": {
       "t": "DGX",
@@ -7639,8 +7639,8 @@
       "epsFwd": 9.33,
       "revFwd": 7.4200004,
       "pegFwd": 1.66,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "Q": {
       "t": "Q",
@@ -7659,8 +7659,8 @@
       "epsFwd": 22.81,
       "revFwd": 12.690000000000001,
       "pegFwd": 2.37,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RL": {
       "t": "RL",
@@ -7679,8 +7679,8 @@
       "epsFwd": 11.0,
       "revFwd": 6.18,
       "pegFwd": 2.29,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RJF": {
       "t": "RJF",
@@ -7699,8 +7699,8 @@
       "epsFwd": 11.219999999999999,
       "revFwd": 10.5900005,
       "pegFwd": 0.91,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RTX": {
       "t": "RTX",
@@ -7719,8 +7719,8 @@
       "epsFwd": 9.92,
       "revFwd": 6.17,
       "pegFwd": 2.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "O": {
       "t": "O",
@@ -7739,8 +7739,8 @@
       "epsFwd": 33.76,
       "revFwd": 6.77,
       "pegFwd": 5.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "REG": {
       "t": "REG",
@@ -7759,8 +7759,8 @@
       "epsFwd": -13.420000000000002,
       "revFwd": 8.64,
       "pegFwd": 2.61,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "REGN": {
       "t": "REGN",
@@ -7779,8 +7779,8 @@
       "epsFwd": 4.29,
       "revFwd": 10.7200004,
       "pegFwd": 1.13,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RF": {
       "t": "RF",
@@ -7799,8 +7799,8 @@
       "epsFwd": 12.189999,
       "revFwd": 4.03,
       "pegFwd": 1.91,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RSG": {
       "t": "RSG",
@@ -7819,8 +7819,8 @@
       "epsFwd": 3.8,
       "revFwd": 3.63,
       "pegFwd": 3.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RMD": {
       "t": "RMD",
@@ -7839,8 +7839,8 @@
       "epsFwd": 16.34,
       "revFwd": 9.8000005,
       "pegFwd": 1.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RVTY": {
       "t": "RVTY",
@@ -7859,8 +7859,8 @@
       "epsFwd": 3.6799999999999997,
       "revFwd": -0.8500000000000001,
       "pegFwd": 0.72,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "HOOD": {
       "t": "HOOD",
@@ -7879,8 +7879,8 @@
       "epsFwd": -8.92,
       "revFwd": 12.47,
       "pegFwd": 2.72,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ROK": {
       "t": "ROK",
@@ -7899,8 +7899,8 @@
       "epsFwd": 23.66,
       "revFwd": 7.53,
       "pegFwd": 2.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ROL": {
       "t": "ROL",
@@ -7919,8 +7919,8 @@
       "epsFwd": 11.14,
       "revFwd": 9.770001,
       "pegFwd": 3.01,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ROP": {
       "t": "ROP",
@@ -7939,8 +7939,8 @@
       "epsFwd": 9.659999599999999,
       "revFwd": 8.129999999999999,
       "pegFwd": 1.49,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ROST": {
       "t": "ROST",
@@ -7959,8 +7959,8 @@
       "epsFwd": 17.950001,
       "revFwd": 10.5100006,
       "pegFwd": 2.52,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "RCL": {
       "t": "RCL",
@@ -7979,8 +7979,8 @@
       "epsFwd": 10.8,
       "revFwd": 9.46,
       "pegFwd": 1.4,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SPGI": {
       "t": "SPGI",
@@ -7999,8 +7999,8 @@
       "epsFwd": 5.58,
       "revFwd": 1.46,
       "pegFwd": 1.55,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "CRM": {
       "t": "CRM",
@@ -8019,8 +8019,8 @@
       "epsFwd": 12.839999999999998,
       "revFwd": 11.03,
       "pegFwd": 0.79,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SNDK": {
       "t": "SNDK",
@@ -8039,8 +8039,8 @@
       "epsFwd": 2117.83,
       "revFwd": 168.57,
       "pegFwd": 0.012425270205823886,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SBAC": {
       "t": "SBAC",
@@ -8059,8 +8059,8 @@
       "epsFwd": -21.180001,
       "revFwd": 1.6199999999999999,
       "pegFwd": 7.67,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SLB": {
       "t": "SLB",
@@ -8079,8 +8079,8 @@
       "epsFwd": -12.100001,
       "revFwd": 2.2399999999999998,
       "pegFwd": 1.55,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "STX": {
       "t": "STX",
@@ -8099,8 +8099,8 @@
       "epsFwd": 83.809996,
       "revFwd": 32.459998,
       "pegFwd": 0.57,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SRE": {
       "t": "SRE",
@@ -8119,8 +8119,8 @@
       "epsFwd": 9.0299994,
       "revFwd": 1.87,
       "pegFwd": 0.83,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "NOW": {
       "t": "NOW",
@@ -8139,8 +8139,8 @@
       "epsFwd": 17.469999,
       "revFwd": 22.0,
       "pegFwd": 1.03,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SHW": {
       "t": "SHW",
@@ -8159,8 +8159,8 @@
       "epsFwd": 2.6600001,
       "revFwd": 4.8699997,
       "pegFwd": 2.72,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SPG": {
       "t": "SPG",
@@ -8179,8 +8179,8 @@
       "epsFwd": 8.959999999999999,
       "revFwd": 11.29,
       "pegFwd": 4.58,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SWKS": {
       "t": "SWKS",
@@ -8199,8 +8199,8 @@
       "epsFwd": -15.560001000000002,
       "revFwd": -4.21,
       "pegFwd": 1.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SJM": {
       "t": "SJM",
@@ -8219,8 +8219,8 @@
       "epsFwd": 9.34,
       "revFwd": -2.18,
       "pegFwd": 2.17,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SW": {
       "t": "SW",
@@ -8239,8 +8239,8 @@
       "epsFwd": 65.699995,
       "revFwd": 2.19,
       "pegFwd": 0.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SNA": {
       "t": "SNA",
@@ -8259,8 +8259,8 @@
       "epsFwd": 3.47,
       "revFwd": 3.47,
       "pegFwd": 2.31,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SOLV": {
       "t": "SOLV",
@@ -8279,8 +8279,8 @@
       "epsFwd": 7.1499999999999995,
       "revFwd": -1.54,
       "pegFwd": 1.22,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SO": {
       "t": "SO",
@@ -8299,8 +8299,8 @@
       "epsFwd": 6.140000000000001,
       "revFwd": 5.29,
       "pegFwd": 2.78,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "LUV": {
       "t": "LUV",
@@ -8319,8 +8319,8 @@
       "epsFwd": 218.63000000000002,
       "revFwd": 16.459998000000002,
       "pegFwd": 0.34,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SWK": {
       "t": "SWK",
@@ -8339,8 +8339,8 @@
       "epsFwd": 15.529999,
       "revFwd": 0.32,
       "pegFwd": 1.39,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SBUX": {
       "t": "SBUX",
@@ -8359,8 +8359,8 @@
       "epsFwd": 11.81,
       "revFwd": 1.16,
       "pegFwd": 1.38,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "STT": {
       "t": "STT",
@@ -8379,8 +8379,8 @@
       "epsFwd": 23.830000000000002,
       "revFwd": 10.3599995,
       "pegFwd": 1.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "STLD": {
       "t": "STLD",
@@ -8399,8 +8399,8 @@
       "epsFwd": 106.13999000000001,
       "revFwd": 24.200001,
       "pegFwd": 11.95,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "STE": {
       "t": "STE",
@@ -8419,8 +8419,8 @@
       "epsFwd": 9.71,
       "revFwd": 7.340000000000001,
       "pegFwd": 1.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SYK": {
       "t": "SYK",
@@ -8439,8 +8439,8 @@
       "epsFwd": 9.9300005,
       "revFwd": 8.559999999999999,
       "pegFwd": 1.56,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SMCI": {
       "t": "SMCI",
@@ -8459,8 +8459,8 @@
       "epsFwd": 26.040000000000003,
       "revFwd": 80.57,
       "pegFwd": 0.91,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SYF": {
       "t": "SYF",
@@ -8479,8 +8479,8 @@
       "epsFwd": -1.4099999,
       "revFwd": 2.3,
       "pegFwd": 0.98,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SNPS": {
       "t": "SNPS",
@@ -8499,8 +8499,8 @@
       "epsFwd": 14.56,
       "revFwd": 37.21,
       "pegFwd": 2.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "SYY": {
       "t": "SYY",
@@ -8519,8 +8519,8 @@
       "epsFwd": 2.8399997999999997,
       "revFwd": 3.6999999999999997,
       "pegFwd": 1.67,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TMUS": {
       "t": "TMUS",
@@ -8539,8 +8539,8 @@
       "epsFwd": 7.61,
       "revFwd": 7.1100004,
       "pegFwd": 0.7,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TROW": {
       "t": "TROW",
@@ -8559,8 +8559,8 @@
       "epsFwd": -0.98,
       "revFwd": 3.82,
       "pegFwd": 4.93,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TTWO": {
       "t": "TTWO",
@@ -8579,8 +8579,8 @@
       "epsFwd": 213.19,
       "revFwd": 27.87,
       "pegFwd": 3.56,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TPR": {
       "t": "TPR",
@@ -8599,8 +8599,8 @@
       "epsFwd": 36.71,
       "revFwd": 13.81,
       "pegFwd": 0.3,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TRGP": {
       "t": "TRGP",
@@ -8619,8 +8619,8 @@
       "epsFwd": 26.13,
       "revFwd": 17.849999999999998,
       "pegFwd": 1.25,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TGT": {
       "t": "TGT",
@@ -8639,8 +8639,8 @@
       "epsFwd": 10.35,
       "revFwd": 3.9100002000000003,
       "pegFwd": 2.42,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TEL": {
       "t": "TEL",
@@ -8659,8 +8659,8 @@
       "epsFwd": 28.350002000000003,
       "revFwd": 13.469999999999999,
       "pegFwd": 0.91,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TDY": {
       "t": "TDY",
@@ -8679,8 +8679,8 @@
       "epsFwd": 9.7799994,
       "revFwd": 5.050000000000001,
       "pegFwd": 1.4,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TER": {
       "t": "TER",
@@ -8699,8 +8699,8 @@
       "epsFwd": 84.050006,
       "revFwd": 40.96,
       "pegFwd": 1.46,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TSLA": {
       "t": "TSLA",
@@ -8719,8 +8719,8 @@
       "epsFwd": 27.629998,
       "revFwd": 9.15,
       "pegFwd": 5.76,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TXN": {
       "t": "TXN",
@@ -8739,8 +8739,8 @@
       "epsFwd": 40.94,
       "revFwd": 18.790000000000003,
       "pegFwd": 1.4,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TPL": {
       "t": "TPL",
@@ -8759,8 +8759,8 @@
       "epsFwd": 31.540000000000003,
       "revFwd": 26.16,
       "pegFwd": 7.33,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TXT": {
       "t": "TXT",
@@ -8779,8 +8779,8 @@
       "epsFwd": 6.69,
       "revFwd": 5.3600002,
       "pegFwd": 1.19,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TMO": {
       "t": "TMO",
@@ -8799,8 +8799,8 @@
       "epsFwd": 8.68,
       "revFwd": 7.19,
       "pegFwd": 1.73,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TJX": {
       "t": "TJX",
@@ -8819,8 +8819,8 @@
       "epsFwd": 6.890000000000001,
       "revFwd": 6.23,
       "pegFwd": 3.3,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TKO": {
       "t": "TKO",
@@ -8839,8 +8839,8 @@
       "epsFwd": 98.57000000000001,
       "revFwd": 21.700001,
       "pegFwd": 1.37,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TTD": {
       "t": "TTD",
@@ -8859,8 +8859,8 @@
       "epsFwd": 4.62,
       "revFwd": 9.68,
       "pegFwd": 0.91,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TSCO": {
       "t": "TSCO",
@@ -8879,8 +8879,8 @@
       "epsFwd": 2.55,
       "revFwd": 4.3,
       "pegFwd": 1.43,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TT": {
       "t": "TT",
@@ -8899,8 +8899,8 @@
       "epsFwd": 14.09,
       "revFwd": 9.629999999999999,
       "pegFwd": 2.06,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TDG": {
       "t": "TDG",
@@ -8919,8 +8919,8 @@
       "epsFwd": 7.3999999999999995,
       "revFwd": 17.51,
       "pegFwd": 3.05,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TRV": {
       "t": "TRV",
@@ -8939,8 +8939,8 @@
       "epsFwd": 2.34,
       "revFwd": -0.83,
       "pegFwd": 2.36,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TRMB": {
       "t": "TRMB",
@@ -8959,8 +8959,8 @@
       "epsFwd": 14.62,
       "revFwd": 8.5,
       "pegFwd": 1.48,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TFC": {
       "t": "TFC",
@@ -8979,8 +8979,8 @@
       "epsFwd": 13.28,
       "revFwd": 3.7100002,
       "pegFwd": 1.24,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TYL": {
       "t": "TYL",
@@ -8999,8 +8999,8 @@
       "epsFwd": 13.8,
       "revFwd": 9.67,
       "pegFwd": 1.42,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "TSN": {
       "t": "TSN",
@@ -9019,8 +9019,8 @@
       "epsFwd": -2.02,
       "revFwd": 4.18,
       "pegFwd": 1.04,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "USB": {
       "t": "USB",
@@ -9039,8 +9039,8 @@
       "epsFwd": 10.290000000000001,
       "revFwd": 7.199999999999999,
       "pegFwd": 2.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "UBER": {
       "t": "UBER",
@@ -9059,8 +9059,8 @@
       "epsFwd": -35.939997,
       "revFwd": 11.8599996,
       "pegFwd": 6.04,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "UDR": {
       "t": "UDR",
@@ -9079,8 +9079,8 @@
       "epsFwd": -24.110001,
       "revFwd": 0.58,
       "pegFwd": 8.17,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ULTA": {
       "t": "ULTA",
@@ -9099,8 +9099,8 @@
       "epsFwd": 12.189999,
       "revFwd": 6.88,
       "pegFwd": 1.6,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "UNP": {
       "t": "UNP",
@@ -9119,8 +9119,8 @@
       "epsFwd": 8.3100006,
       "revFwd": 6.239999999999999,
       "pegFwd": 3.45,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "UAL": {
       "t": "UAL",
@@ -9139,8 +9139,8 @@
       "epsFwd": -6.2700000000000005,
       "revFwd": 13.270001,
       "pegFwd": 6.5,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "UPS": {
       "t": "UPS",
@@ -9159,8 +9159,8 @@
       "epsFwd": -0.45999999999999996,
       "revFwd": 1.6,
       "pegFwd": 1.75,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "URI": {
       "t": "URI",
@@ -9179,8 +9179,8 @@
       "epsFwd": 12.3100005,
       "revFwd": 7.1499999999999995,
       "pegFwd": 1.8,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "UNH": {
       "t": "UNH",
@@ -9199,8 +9199,8 @@
       "epsFwd": 12.47,
       "revFwd": -0.74,
       "pegFwd": 1.47,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "UHS": {
       "t": "UHS",
@@ -9219,8 +9219,8 @@
       "epsFwd": 7.79,
       "revFwd": 6.6599995,
       "pegFwd": 1.1,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VLO": {
       "t": "VLO",
@@ -9239,8 +9239,8 @@
       "epsFwd": 188.21000999999998,
       "revFwd": 8.9499995,
       "pegFwd": 4.08,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VEEV": {
       "t": "VEEV",
@@ -9259,8 +9259,8 @@
       "epsFwd": 11.88,
       "revFwd": 14.000000000000002,
       "pegFwd": 0.87,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VTR": {
       "t": "VTR",
@@ -9279,8 +9279,8 @@
       "epsFwd": 18.57,
       "revFwd": 17.819999,
       "pegFwd": 1.72,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VLTO": {
       "t": "VLTO",
@@ -9299,8 +9299,8 @@
       "epsFwd": 9.0299994,
       "revFwd": 6.74,
       "pegFwd": 2.72,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VRSN": {
       "t": "VRSN",
@@ -9319,8 +9319,8 @@
       "epsFwd": 7.580000000000001,
       "revFwd": 5.29,
       "pegFwd": 3.1,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VRSK": {
       "t": "VRSK",
@@ -9339,8 +9339,8 @@
       "epsFwd": 7.06,
       "revFwd": 4.95,
       "pegFwd": 1.83,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VZ": {
       "t": "VZ",
@@ -9359,8 +9359,8 @@
       "epsFwd": 4.8899997,
       "revFwd": 3.1600002000000003,
       "pegFwd": 0.8,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VRTX": {
       "t": "VRTX",
@@ -9379,8 +9379,8 @@
       "epsFwd": 4.05,
       "revFwd": 8.64,
       "pegFwd": 1.96,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VRT": {
       "t": "VRT",
@@ -9399,8 +9399,8 @@
       "epsFwd": 54.580003,
       "revFwd": 35.669996999999995,
       "pegFwd": 1.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VTRS": {
       "t": "VTRS",
@@ -9419,8 +9419,8 @@
       "epsFwd": 4.8600003,
       "revFwd": 3.32,
       "pegFwd": 0.15,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VICI": {
       "t": "VICI",
@@ -9439,8 +9439,8 @@
       "epsFwd": 10.5399996,
       "revFwd": 4.3999999999999995,
       "pegFwd": 0.8910868933998821,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "V": {
       "t": "V",
@@ -9459,8 +9459,8 @@
       "epsFwd": 14.59,
       "revFwd": 13.919999999999998,
       "pegFwd": 1.59,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VST": {
       "t": "VST",
@@ -9479,8 +9479,8 @@
       "epsFwd": 356.44,
       "revFwd": 31.2,
       "pegFwd": 0.45,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "VMC": {
       "t": "VMC",
@@ -9499,8 +9499,8 @@
       "epsFwd": 15.190000000000001,
       "revFwd": 2.48,
       "pegFwd": 2.63,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WRB": {
       "t": "WRB",
@@ -9519,8 +9519,8 @@
       "epsFwd": 7.79,
       "revFwd": 3.3800002000000005,
       "pegFwd": 4.22,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "GWW": {
       "t": "GWW",
@@ -9539,8 +9539,8 @@
       "epsFwd": 15.560001000000002,
       "revFwd": 8.55,
       "pegFwd": 2.1,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WAB": {
       "t": "WAB",
@@ -9559,8 +9559,8 @@
       "epsFwd": 18.360001,
       "revFwd": 10.92,
       "pegFwd": 1.37,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WMT": {
       "t": "WMT",
@@ -9579,8 +9579,8 @@
       "epsFwd": 9.99,
       "revFwd": 6.4899996,
       "pegFwd": 4.26,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "DIS": {
       "t": "DIS",
@@ -9599,8 +9599,8 @@
       "epsFwd": 15.120000000000001,
       "revFwd": 7.6799995999999995,
       "pegFwd": 2.31,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WBD": {
       "t": "WBD",
@@ -9619,8 +9619,8 @@
       "epsFwd": -529.89,
       "revFwd": -0.8,
       "pegFwd": 216.92,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WM": {
       "t": "WM",
@@ -9639,8 +9639,8 @@
       "epsFwd": 9.39,
       "revFwd": 5.1999997,
       "pegFwd": 2.35,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WAT": {
       "t": "WAT",
@@ -9659,8 +9659,8 @@
       "epsFwd": 10.5399996,
       "revFwd": 103.45,
       "pegFwd": 1.67,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WEC": {
       "t": "WEC",
@@ -9679,8 +9679,8 @@
       "epsFwd": 16.309999,
       "revFwd": 5.239999699999999,
       "pegFwd": 2.64,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WFC": {
       "t": "WFC",
@@ -9699,8 +9699,8 @@
       "epsFwd": 11.8999995,
       "revFwd": 4.78,
       "pegFwd": 1.53,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WELL": {
       "t": "WELL",
@@ -9719,8 +9719,8 @@
       "epsFwd": null,
       "revFwd": 30.020002,
       "pegFwd": 3.66,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WST": {
       "t": "WST",
@@ -9739,8 +9739,8 @@
       "epsFwd": 18.110001,
       "revFwd": 8.37,
       "pegFwd": 3.52,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WDC": {
       "t": "WDC",
@@ -9759,8 +9759,8 @@
       "epsFwd": 101.66,
       "revFwd": 35.169998,
       "pegFwd": 0.48,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WY": {
       "t": "WY",
@@ -9779,8 +9779,8 @@
       "epsFwd": 57.52,
       "revFwd": 1.9900000000000002,
       "pegFwd": 1.86,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WSM": {
       "t": "WSM",
@@ -9799,8 +9799,8 @@
       "epsFwd": 6.16,
       "revFwd": 4.5100003,
       "pegFwd": 2.99,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WMB": {
       "t": "WMB",
@@ -9819,8 +9819,8 @@
       "epsFwd": 14.23,
       "revFwd": 0.58999998,
       "pegFwd": 2.3,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WTW": {
       "t": "WTW",
@@ -9839,8 +9839,8 @@
       "epsFwd": 14.180000000000001,
       "revFwd": 7.4200004,
       "pegFwd": 1.27,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WDAY": {
       "t": "WDAY",
@@ -9859,8 +9859,8 @@
       "epsFwd": 16.259999999999998,
       "revFwd": 11.67,
       "pegFwd": 0.53,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "WYNN": {
       "t": "WYNN",
@@ -9879,8 +9879,8 @@
       "epsFwd": 14.310001,
       "revFwd": 4.99,
       "pegFwd": 1.61,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "XEL": {
       "t": "XEL",
@@ -9899,8 +9899,8 @@
       "epsFwd": 8.2100004,
       "revFwd": 7.829999999999999,
       "pegFwd": 2.23,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "XYL": {
       "t": "XYL",
@@ -9919,8 +9919,8 @@
       "epsFwd": 8.8999994,
       "revFwd": 2.41,
       "pegFwd": 1.68,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "YUM": {
       "t": "YUM",
@@ -9939,8 +9939,8 @@
       "epsFwd": 11.84,
       "revFwd": 11.88,
       "pegFwd": 2.04,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ZBRA": {
       "t": "ZBRA",
@@ -9959,8 +9959,8 @@
       "epsFwd": 17.06,
       "revFwd": 12.29,
       "pegFwd": 0.57,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ZBH": {
       "t": "ZBH",
@@ -9978,9 +9978,9 @@
       "peFwd": 10.317474,
       "epsFwd": 3.39,
       "revFwd": 3.7800000000000002,
-      "pegFwd": 0.6,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "pegFwd": 0.62,
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     },
     "ZTS": {
       "t": "ZTS",
@@ -9999,8 +9999,8 @@
       "epsFwd": 7.22,
       "revFwd": 3.2,
       "pegFwd": 1.79,
-      "priceUpdated": "2026-07-03T21:24:03.752918Z",
-      "fundamentalsUpdated": "2026-07-03T21:24:03.752918Z"
+      "priceUpdated": "2026-07-04T01:05:02.329487Z",
+      "fundamentalsUpdated": "2026-07-04T01:05:02.329487Z"
     }
   }
 }
