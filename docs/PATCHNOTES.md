@@ -2,6 +2,17 @@
 
 ---
 
+## v3.32.0 — 2026-07-03 — Pipeline cleanup
+
+**Housekeeping only; no code, workflow, or behavior changes.**
+
+### Changed
+
+- **Legacy `FMP_API_KEY` secret deleted** from the repository settings (owner step). It dated from the pre-v3.16.0 Financial Modeling Prep integration; verified that no workflow, script, or page has referenced FMP since v3.16.0 removed that path.
+- **Data-files-in-git reclassified from tech debt to intentional design** in the PRD: the committed feeds (`screener.json`, `screener_sp500.json`, `screener_gvd.json`) are the site's only record of past scores, and their git history is the data source the planned v4.0.0 score-history sparklines will mine. Moving them to external artifact storage would delete the feature's raw material.
+
+---
+
 ## v3.31.0 — 2026-07-03 — Scoring: margins removed, owner growth-forward weights
 
 **Gross Margin and Net Margin are removed from the scoring model and the table, hours after v3.30.0 shipped them: the owner had not intended margins to be scored. The remaining six metrics carry owner-set weights with forward growth counting double trailing: Rev TTM 10, Rev FWD 20, EPS TTM 10, EPS FWD 20, PEG FWD 20, Cash vs Debt 20 (Growth 60 / Valuation 20 / Balance sheet 20).**
