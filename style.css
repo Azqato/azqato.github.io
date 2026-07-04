@@ -74,7 +74,7 @@ a:hover {
 
 .site-layout {
   display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
   flex: 1;
   align-items: start;
 }

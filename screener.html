@@ -198,6 +198,9 @@
     /* --- Table --- */
     .app-table-wrap {
       flex: 1;
+      min-height: 0;   /* without this, a flex:1 child with large content defaults to
+                          min-height:auto and overflows .app instead of scrolling itself --
+                          the classic nested-flexbox scroll bug (varies by browser/DPI/zoom) */
       overflow: auto;
       position: relative;
     }

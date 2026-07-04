@@ -1,11 +1,35 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.6
+**Version:** 3.34.8
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): v3.34.7 → v3.35.0 → v3.36.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, and v3.34.6 shipped 2026-07-04.)
+Release order (updated 2026-07-04): v3.34.7 → v3.35.0 → v3.36.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, and v3.34.8 shipped 2026-07-04.)
+
+---
+
+## v3.34.8 — Screener: Horizontal Scroll Broken at Some Resolutions — DONE 2026-07-04
+
+A friend of the owner's reported the screener table couldn't be scrolled left/right on their machine — the table simply cut off after the Growth/Valuation columns with no visible way to reach the rest, no scrollbar, no response to scroll gestures. Diagnosed and fixed the same day. **Kept as its own standalone bug-fix item, not folded into v4.5.0's mobile-friendliness pass** — this is a desktop-resolution CSS correctness bug (an existing feature silently breaking at certain DPI/zoom/window-size combinations), not a design question about phone-width layout; it needed to ship immediately rather than wait behind a broader redesign pass.
+
+### Root cause (two compounding bugs, both classic CSS gotchas)
+
+1. **Nested flexbox `min-height:auto`**: `.app` is `display:flex; flex-direction:column; height:100vh`, and `.app-table-wrap` (the `flex:1` child that owns the table's own scrolling) had no `min-height: 0`. A flex item's default `min-height` is `auto`, which for a large-content scroll container resolves to "big enough to fit all the content" rather than "shrink to the space I was actually given" — so the box overflowed its flex parent (fixed at `height: 100vh`) instead of triggering its own internal `overflow: auto` scrollbars. Since `body { overflow: hidden }` (screener.html relies on the app owning its own scroll regions), that overflow became invisible and unreachable.
+2. **CSS Grid implicit `min-width:auto`**: the shared `.site-layout` (used by every page, in `style.css`) declares `grid-template-columns: var(--sidebar-width) 1fr` — a bare `1fr` track has an implicit minimum size equal to its content's intrinsic width, not 0. The screener's wide table (20+ columns) could force the whole `1fr` grid column, and therefore the page, wider than the viewport, again trapped by `overflow: hidden`.
+
+Both are well-documented, browser-rounding-sensitive edge cases — exactly why this "worked on my machine" (the owner's) but broke on a different resolution: DPI scaling, zoom level, and window width all shift where the flex/grid sizing math lands relative to the content's intrinsic size, so the same page can render fine at one resolution and silently clip at another.
+
+### Fix
+
+- `screener.html`: added `min-height: 0;` to `.app-table-wrap`.
+- `style.css`: changed `.site-layout`'s grid-template-columns from `var(--sidebar-width) 1fr` to `var(--sidebar-width) minmax(0, 1fr)`. This is a site-wide shared rule but the change is a no-op for every other page (none of them have content wide enough to hit the implicit-minimum edge case) — only the screener's table exercises the difference.
+
+### Verified
+
+Headless Chrome screenshots at a constrained 1366×700 viewport (simulating reduced usable height from browser chrome/taskbar), before and after:
+- **Before** (bug reproduced by temporarily reverting both fixes): table clipped after the Valuation column group, chip filter counts cut off mid-row, no horizontal scrollbar visible anywhere, Columns/Methodology buttons not reachable.
+- **After** (fix applied): full horizontal scrollbar visible at the bottom of the table (classic Windows-style, with arrow buttons and a draggable thumb), entire table and toolbar reachable.
 
 ---
 
@@ -369,7 +393,7 @@ A dedicated review-and-fix pass for phone-width usage across every page, not jus
 
 ### Known starting points (found by code inspection, 2026-07-04)
 
-1. **The screener's main data table** (`.app-table-wrap`, `min-width: 900px` on the inner table) is deliberately horizontal-scroll on phones, which is a defensible choice for a dense data grid, but has never been reviewed for whether it's the *right* choice — e.g. whether the Ticker/Tier/Score columns should stick to the left edge while the rest scrolls, so a phone user always has orientation context. Worth a deliberate decision, not just inherited behavior.
+1. **The screener's main data table** (`.app-table-wrap`, `min-width: 900px` on the inner table) is deliberately horizontal-scroll on phones, which is a defensible choice for a dense data grid, but has never been reviewed for whether it's the *right* choice — e.g. whether the Ticker/Tier/Score columns should stick to the left edge while the rest scrolls, so a phone user always has orientation context. Worth a deliberate decision, not just inherited behavior. (v3.34.8 already fixed the underlying bug where this scroll container silently broke at certain desktop resolutions — `min-height: 0` on `.app-table-wrap` plus `minmax(0, 1fr)` on the shared `.site-layout` grid — so this pass starts from "scrolling works everywhere," not "fix scrolling," and can focus purely on the UX decision.)
 2. **The universe switcher now has 7 buttons** (Nasdaq 100, S&P 500, Growth, Value, Dividend, ETFs, International, after v3.34.0) in a `flex-wrap` row — functional, but never checked for how many rows it wraps to on a 375px-wide phone or whether it pushes the summary/search controls down awkwardly.
 3. **The methodology modal's tables** share the same `.table-wrap` component flagged in v3.35.0; that fix should land first since the mobile pass would otherwise be reviewing tables that are known-broken for an unrelated reason.
 4. **Touch target sizing** has not been audited: chip filters, column-visibility checkboxes, and the sort-arrow click targets in table headers were sized for mouse pointers first.

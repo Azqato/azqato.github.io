@@ -2,6 +2,22 @@
 
 ---
 
+## v3.34.8 — 2026-07-04 — Screener: fixed horizontal scroll broken at some resolutions
+
+**A friend of the owner's reported the screener table couldn't be scrolled left or right at all on their machine — it simply cut off after the Growth/Valuation columns with no visible scrollbar. Diagnosed and fixed the same day with two one-line CSS changes; kept as its own bug-fix item rather than folded into the later v4.5.0 mobile pass, since this is a desktop-resolution correctness bug, not a phone-layout design question.**
+
+### Fixed
+
+- **`screener.html`**: added `min-height: 0;` to `.app-table-wrap`. It's a `flex:1` child of a column flex container (`.app`, fixed at `height: 100vh`); without an explicit `min-height: 0`, a flex item's default `min-height: auto` resolves to "big enough to fit all the content" for a large scroll container, so it overflowed its parent instead of scrolling itself — and since `body { overflow: hidden }`, that overflow became invisible and unreachable.
+- **`style.css`**: changed the shared `.site-layout` grid from `grid-template-columns: var(--sidebar-width) 1fr` to `var(--sidebar-width) minmax(0, 1fr)`. A bare `1fr` track has an implicit minimum size equal to its content's intrinsic width, not 0 — the screener's wide table could force the whole grid column, and the page, wider than the viewport. This is a shared rule used by every page but a no-op everywhere except the screener, which is the only page with content wide enough to hit the edge case.
+- Both are classic, browser-rounding-sensitive flex/grid gotchas, which is why the bug was resolution/DPI/zoom-dependent rather than universal.
+
+### Verified
+
+- Headless Chrome screenshots at a constrained 1366×700 viewport, before (bug reproduced by temporarily reverting both fixes) and after: before shows the table clipped mid-row with no scrollbar and the toolbar's right-hand buttons unreachable; after shows a full horizontal scrollbar and complete table/toolbar access.
+
+---
+
 ## v3.34.6 — 2026-07-04 — Screener: International feed same-company duplicate fix
 
 **Owner-flagged bug fixed the same day: the International universe listed Samsung Electronics twice (`005930.KS` common, `005935.KS` preferred) since they carry different ISINs and the v3.34.0 dedup only caught literal duplicate-ISIN rows. Scanned the full raw Vanguard response for other cases and hand-verified every candidate before writing any merge logic.**
