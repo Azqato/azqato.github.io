@@ -1,17 +1,17 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.11
+**Version:** 3.34.12
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): **v4.5.0 (reprioritized to the front)** → v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
+Release order (updated 2026-07-04): **v4.0.0 (reprioritized to the front)** → v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
 
 ---
 
-## v3.34.10 — Screener: Scrollbar Undiscoverable/Invisible at Narrower Widths — SUPERSEDED BY v4.5.0
+## v3.34.10 — Screener: Scrollbar Undiscoverable/Invisible at Narrower Widths — SUPERSEDED BY v4.0.0
 
-Diagnosis performed 2026-07-04 (kept below for the record); the fix itself never shipped. After the owner clarified the actual requirement is "the table should reflow/adapt so scrolling is never needed, not just that the existing scrollbar becomes easier to find," this item's scope was folded entirely into a reprioritized v4.5.0 (see below), since a scrollbar-visibility patch would be moot once the table auto-hides columns to fit instead of overflowing. The diagnosis below remains useful background for *why* v4.5.0 needed to happen now instead of later.
+Diagnosis performed 2026-07-04 (kept below for the record); the fix itself never shipped. After the owner clarified the actual requirement is "the table should reflow/adapt so scrolling is never needed, not just that the existing scrollbar becomes easier to find," this item's scope was folded entirely into a reprioritized v4.0.0 (see below), since a scrollbar-visibility patch would be moot once the table auto-hides columns to fit instead of overflowing. The diagnosis below remains useful background for *why* v4.0.0 needed to happen now instead of later.
 
 <details>
 <summary>Original diagnosis (2026-07-04, read-only, no code shipped)</summary>
@@ -24,7 +24,7 @@ The v3.34.8 fix resolved the *sizing* bug (the table-wrap escaping its container
 1. Confirmed the v3.34.8 fix is live on the deployed site (`min-height: 0` on `.app-table-wrap`, `minmax(0, 1fr)` on `.site-layout` both present) — rules out stale cache/deployment lag.
 2. Reproduced both reports' exact widths in headless Chrome against the live site (1280×1024 for the Opera report; a sweep from 1030px to 1400px for the Chrome resize report) — the scrollbar renders correctly and the box is properly sized at every width tested. Strong evidence the box-sizing bug is genuinely fixed.
 3. Headless Chromium was not reproducing what two different real users, on two different Chromium-family browsers, were both experiencing — pointing at Chrome/Opera's default `overflow: auto` scrollbar rendering as a thin overlay that only appears on hover/active scrolling (invisible in a static look, and in every headless screenshot). Confirmed via a separate check: the `.app-toolbar` row (chips, Columns/Methodology buttons) already wraps correctly onto a second line at narrow widths in headless Chrome (`flex-wrap: wrap` working as designed) — the site's existing responsive infrastructure works; it's specifically the *table's* horizontal-scroll affordance that's undiscoverable.
-4. The drafted (never-shipped) fix was: a persistently-visible non-overlay scrollbar via `::-webkit-scrollbar` styling, a wheel-to-horizontal-scroll redirect, and a right-edge fade affordance. **Superseded** — see v4.5.0.
+4. The drafted (never-shipped) fix was: a persistently-visible non-overlay scrollbar via `::-webkit-scrollbar` styling, a wheel-to-horizontal-scroll redirect, and a right-edge fade affordance. **Superseded** — see v4.0.0.
 
 </details>
 
@@ -38,7 +38,7 @@ Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Te
 
 ## v3.34.8 — Screener: Horizontal Scroll Broken at Some Resolutions — DONE 2026-07-04
 
-A friend of the owner's reported the screener table couldn't be scrolled left/right on their machine — the table simply cut off after the Growth/Valuation columns with no visible way to reach the rest, no scrollbar, no response to scroll gestures. Diagnosed and fixed the same day. **Kept as its own standalone bug-fix item, not folded into v4.5.0's mobile-friendliness pass** — this is a desktop-resolution CSS correctness bug (an existing feature silently breaking at certain DPI/zoom/window-size combinations), not a design question about phone-width layout; it needed to ship immediately rather than wait behind a broader redesign pass.
+A friend of the owner's reported the screener table couldn't be scrolled left/right on their machine — the table simply cut off after the Growth/Valuation columns with no visible way to reach the rest, no scrollbar, no response to scroll gestures. Diagnosed and fixed the same day. **Kept as its own standalone bug-fix item, not folded into v4.0.0's mobile-friendliness pass** — this is a desktop-resolution CSS correctness bug (an existing feature silently breaking at certain DPI/zoom/window-size combinations), not a design question about phone-width layout; it needed to ship immediately rather than wait behind a broader redesign pass.
 
 ### Root cause (two compounding bugs, both classic CSS gotchas)
 
@@ -282,7 +282,7 @@ Small by design, because v3.33.0 pre-paid for it:
 
 ---
 
-## v4.0.0 — Screener Score History Sparklines
+## v4.1.0 — Screener Score History Sparklines
 
 ### Goal
 
@@ -318,7 +318,7 @@ A per-ticker score trend visual in the screener: a small inline sparkline column
 1. **Replay model**: recommend recomputing all history under the **current** model (consistent, comparable series). The alternative (as-shipped scores per era) is not reconstructible anyway; the historical rendered scores were never stored.
 2. **Window**: recommend 90 trading days shown; the miner can be re-run with a bigger window later since git history keeps everything.
 3. **Universes covered**: recommend all six including ETFs (rank-linear replays identically).
-4. Whether Trend ships as a **major** version: yes as planned (v4.0.0), it introduces the first derived-data artifact and a new default column across every universe.
+4. Whether Trend ships as a **major** version: yes as planned (v4.1.0), it introduces the first derived-data artifact and a new default column across every universe.
 
 ### Verification and acceptance
 
@@ -334,7 +334,7 @@ A per-ticker score trend visual in the screener: a small inline sparkline column
 
 ---
 
-## v4.1.0 — Deeper Index Fund Coverage
+## v4.2.0 — Deeper Index Fund Coverage
 
 ### Goal
 
@@ -347,7 +347,7 @@ Expand `indices.html` beyond the current core-index methodology with three new t
 3. **Bond tent strategy** — what it is (rising bond allocation approaching a goal date, descending after), why it exists (sequence-of-returns risk, defined at first use per content rules), and how it interacts with the income-contribution investing model the site teaches.
 4. Sequencing note: ship **after** v3.34.0 so the international section can link to the live International universe; the sector-ETF section already has the ETFs universe to point at.
 
-### Mechanics (applies to all four content releases, v4.1.0-v4.4.0)
+### Mechanics (applies to all four content releases, v4.2.0-v4.5.0)
 
 - Written for the primary persona (first-position investor): teach before asserting, define terms at first use, anchor to decisions the reader has faced.
 - Content rules: no em dashes, no advice language (educational framing only, no buy/sell verbs aimed at the reader), examples are descriptive not prescriptive.
@@ -357,7 +357,7 @@ Expand `indices.html` beyond the current core-index methodology with three new t
 
 ---
 
-## v4.2.0 — Additional Illustrative Examples (Historical Market Events)
+## v4.3.0 — Additional Illustrative Examples (Historical Market Events)
 
 ### Goal
 
@@ -369,11 +369,11 @@ Add worked historical examples across existing pages, showing the methodology ap
 2. Placement: each example embeds in the page whose concept it illustrates (metrics examples on `metrics.html`, timing examples on `indices.html`, temperament examples on `philosophy.html`) rather than a standalone examples page, so concepts and cases stay adjacent.
 3. Format per example: dated setup (what was knowable then, hindsight explicitly flagged), the metric readings at the time, what the methodology's rules said, what happened, and the teaching point. Historical figures verified against at least one primary-ish source before publishing; approximate figures rounded and labeled approximate.
 4. Constraint: examples must not read as track-record claims (no "this is what I bought"); they are illustrations of the rules, per the no-advice rule.
-5. Mechanics per the shared checklist in v4.1.0.
+5. Mechanics per the shared checklist in v4.2.0.
 
 ---
 
-## v4.3.0 — Additional Philosophy Sections
+## v4.4.0 — Additional Philosophy Sections
 
 ### Goal
 
@@ -384,11 +384,11 @@ Extend `philosophy.html` (currently 9 sections) with new conceptual material.
 1. Candidate sections (owner to pick at kickoff; these came out of prior roadmap discussion and PRD content-goals): when to sell (the hardest omission in most methodologies), position sizing and concentration for the income-contribution investor, drawdown temperament (what a 30% paper loss actually feels like and pre-committing behavior), the difference between conviction and stubbornness, and information diet (what to read daily vs quarterly vs never).
 2. Each section follows the existing philosophy-page pattern: concept, first-person grounding, the practical rule that falls out of it, cross-links to the metric/page that operationalizes it.
 3. FAQ additions for each new section (the FAQ page mirrors philosophy questions today).
-4. Mechanics per the shared checklist in v4.1.0.
+4. Mechanics per the shared checklist in v4.2.0.
 
 ---
 
-## v4.4.0 — Conference Call Research Guide
+## v4.5.0 — Conference Call Research Guide
 
 ### Goal
 
@@ -399,11 +399,11 @@ A new setup-guide page (peer to `finviz.html` and `seekingalpha.html`) teaching 
 1. **New page `conferencecalls.html`** following the existing guide-page pattern (step sections, sidebar nav, callout boxes): where calls live (IR pages, transcript sources incl. Seeking Alpha, cross-linking the existing guide), the anatomy of a call (prepared remarks vs Q&A and why Q&A matters more), what to listen for mapped to the site's six scored metrics (guidance vs the forward estimates the screener scores, margin commentary, balance-sheet language), red-flag phrasing patterns, and a simple insight log template (date, company, claim, metric affected, follow-up date).
 2. Navigation: header/footer nav additions across all pages (the one release in this set that touches every HTML file), sitemap entry, og/meta for the new page.
 3. Ties into the site loop: the guide should close the loop from screener score → "why is the forward estimate what it is" → hearing management's own version on the call.
-4. Mechanics per the shared checklist in v4.1.0, plus: full-site headless spot check since nav on every page changes.
+4. Mechanics per the shared checklist in v4.2.0, plus: full-site headless spot check since nav on every page changes.
 
 ---
 
-## v4.5.0 — Screener Responsive Redesign & Site-Wide Mobile-Friendliness Pass — REPRIORITIZED TO THE FRONT (2026-07-04)
+## v4.0.0 — Screener Responsive Redesign & Site-Wide Mobile-Friendliness Pass — REPRIORITIZED TO THE FRONT (2026-07-04)
 
 ### Why this moved to the front of the queue
 

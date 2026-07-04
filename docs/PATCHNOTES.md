@@ -2,6 +2,12 @@
 
 ---
 
+## v3.34.12 — 2026-07-04 — Roadmap renumbered: v4.5.0 mobile pass becomes v4.0.0
+
+**Following v3.34.11's reprioritization (mobile pass moved to the front of the queue), the owner asked to renumber it to v4.0.0 to match its new position, rather than keep the v4.5.0 label from when it was the last item on the roadmap. All five other v4.x items shift by one to keep the sequence contiguous: v4.0.0 (sparklines) → v4.1.0, v4.1.0 (index coverage) → v4.2.0, v4.2.0 (historical examples) → v4.3.0, v4.3.0 (philosophy) → v4.4.0, v4.4.0 (conference call guide) → v4.5.0. No code changes; ROADMAP.md and PRD.md updated to the new numbers. Earlier PATCHNOTES entries are left as originally written and still use the numbering that was current when each was published (e.g. v3.33.1 and v3.34.1 still correctly say "v4.0.0 sparklines" and "v4.5.0 mobile pass" — patch notes are a dated historical record, not a living document, so they aren't retroactively renumbered).**
+
+---
+
 ## v3.34.11 — 2026-07-04 — Roadmap restructure: screener scroll fix reframed as a responsive redesign, reprioritized
 
 **Owner clarified the real requirement behind the ongoing scroll reports: the screener should reflow so scrolling is never needed at all, not just that the existing (apparently invisible/overlay) scrollbar become easier to find. Also asked whether this should merge with the already-planned v4.5.0 mobile pass — reversing an earlier decision to keep them separate, since the design question (how should the table adapt across widths?) is now the same task, not a narrow bug fix plus a later broad audit. No code changes in this entry — a roadmap restructure only.**
