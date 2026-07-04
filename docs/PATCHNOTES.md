@@ -2,6 +2,12 @@
 
 ---
 
+## v3.32.1 — 2026-07-03 — Roadmap: ETFs universe prioritized ahead of International
+
+**Docs only. The owner asked to ship the ETFs universe before the International (VXUS) universe. Milestone numbers swapped: ETFs is now v3.33.0 (still blocked on the owner's ETF list), International is now v3.34.0. No code, workflow, or behavior changes.**
+
+---
+
 ## v3.32.0 — 2026-07-03 — Pipeline cleanup
 
 **Housekeeping only; no code, workflow, or behavior changes.**
