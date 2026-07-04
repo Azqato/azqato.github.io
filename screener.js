@@ -53,6 +53,14 @@
         paths: [RAW_BASE + "screener_etfs.json", "data/screener_etfs.json"],
         cacheKey: "azq_screener_etfs_cache",
         store: null
+      },
+      intl: {
+        label: "International",        // top 100 VXUS holdings (data/vxus.json)
+        // Same six-metric stock model as the domestic universes; only the
+        // feed differs (adds a `cur` field for native-currency price display).
+        paths: [RAW_BASE + "screener_intl.json", "data/screener_intl.json"],
+        cacheKey: "azq_screener_intl_cache",
+        store: null
       }
     };
 
@@ -94,16 +102,29 @@
     function isNum(n) { return typeof n === "number" && isFinite(n); }
     function fmtPct(n) { return isNum(n) ? n.toFixed(1) + "%" : "—"; }
     function fmtNum(n) { return isNum(n) ? n.toFixed(2) : "—"; }
-    function fmtMoney(n) {
-      if (!isNum(n)) return "—";
-      var a = Math.abs(n);
-      if (a >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
-      if (a >= 1e9)  return "$" + (n / 1e9).toFixed(2) + "B";
-      if (a >= 1e6)  return "$" + (n / 1e6).toFixed(1) + "M";
-      if (a >= 1e3)  return "$" + (n / 1e3).toFixed(1) + "K";
-      return "$" + n.toFixed(0);
+    // Currency symbol for $-formatted cells (v3.34.0 International universe).
+    // Domestic universes never set `cur` (or set "USD"), so they format
+    // exactly as before. Currencies with no widely recognized symbol (e.g.
+    // CHF) fall back to printing the ISO code.
+    var CURRENCY_SYMBOLS = {
+      TWD: "NT$", KRW: "₩", EUR: "€", HKD: "HK$", GBP: "£",
+      CAD: "C$", AUD: "A$", JPY: "¥", DKK: "kr", SGD: "S$", INR: "₹"
+    };
+    function currencyPrefix(cur) {
+      if (!cur || cur === "USD") return "$";
+      var sym = CURRENCY_SYMBOLS[cur];
+      return sym !== undefined ? sym : (cur + " ");
     }
-    function fmtPrice(n) { return isNum(n) ? "$" + n.toFixed(2) : "—"; }
+    function fmtMoney(n, cur) {
+      if (!isNum(n)) return "—";
+      var a = Math.abs(n), p = currencyPrefix(cur);
+      if (a >= 1e12) return p + (n / 1e12).toFixed(2) + "T";
+      if (a >= 1e9)  return p + (n / 1e9).toFixed(2) + "B";
+      if (a >= 1e6)  return p + (n / 1e6).toFixed(1) + "M";
+      if (a >= 1e3)  return p + (n / 1e3).toFixed(1) + "K";
+      return p + n.toFixed(0);
+    }
+    function fmtPrice(n, cur) { return isNum(n) ? currencyPrefix(cur) + n.toFixed(2) : "—"; }
     function fmtChange(n) { return isNum(n) ? (n > 0 ? "+" : "") + n.toFixed(2) + "%" : "—"; }
     function fmtRet(n) { return isNum(n) ? (n > 0 ? "+" : "") + n.toFixed(1) + "%" : "—"; }   // signed returns (YTD, 1/5/10y, vs-MA)
     function fmtPct2(n) { return isNum(n) ? n.toFixed(2) + "%" : "—"; }                        // yield / expense ratio
@@ -368,6 +389,7 @@
           r.revTTM = d.revTTM; r.revFwd = d.revFwd; r.epsTTM = d.epsTTM; r.epsFwd = d.epsFwd;
           r.peFwd = d.peFwd; r.pegFwd = pegDisplay(d); r.cash = d.cash; r.debt = d.debt;
           r.cashDebt = cashDebtRatio(d); r.marketCap = d.marketCap;
+          r.cur = d.cur; // native currency code (International universe only; USD elsewhere)
         }
         return r;
       });
@@ -692,8 +714,8 @@
       var d = r.d;
       return '<tr data-ticker="' + r.ticker + '">' +
         screenCells(r) +
-        '<td class="grp-snapshot group-start">' + fmtMoney(r.marketCap) + '</td>' +
-        '<td class="grp-snapshot">' + fmtPrice(r.price) + '</td>' +
+        '<td class="grp-snapshot group-start">' + fmtMoney(r.marketCap, r.cur) + '</td>' +
+        '<td class="grp-snapshot">' + fmtPrice(r.price, r.cur) + '</td>' +
         '<td class="grp-snapshot ' + clsChange(r.changePct) + '">' + fmtChange(r.changePct) + '</td>' +
         '<td class="grp-growth group-start ' + colorScored(r.parts.revTTM) + '">' + fmtPct(r.revTTM) + '</td>' +
         '<td class="grp-growth ' + colorScored(r.parts.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
@@ -701,8 +723,8 @@
         '<td class="grp-growth ' + colorScored(r.parts.epsFwd) + '">' + fmtPct(r.epsFwd) + '</td>' +
         '<td class="grp-valuation group-start ' + colorFromPts(r.parts.peVsG) + '">' + fmtNum(r.peFwd) + '</td>' +
         '<td class="grp-valuation ' + colorScored(r.parts.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
-        '<td class="grp-balance group-start ' + colorScored(r.parts.cashDebt) + '">' + fmtMoney(r.cash) + '</td>' +
-        '<td class="grp-balance">' + fmtMoney(r.debt) + '</td>' +
+        '<td class="grp-balance group-start ' + colorScored(r.parts.cashDebt) + '">' + fmtMoney(r.cash, r.cur) + '</td>' +
+        '<td class="grp-balance">' + fmtMoney(r.debt, r.cur) + '</td>' +
         '<td class="grp-balance ' + colorScored(r.parts.cashDebt) + '">' + fmtRatio(r.cashDebt) + '</td>' +
         '<td class="grp-snapshot group-start ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
         '</tr>';

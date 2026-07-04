@@ -48,9 +48,17 @@ DEFAULT_OUT = "data/screener.json"
 PAUSE = float(os.environ.get("PAUSE", "0.8"))
 
 
+# Domestic dual-class tickers Wikipedia writes with a dot but Yahoo expects a
+# dash. An explicit set rather than a blanket ".", "-" replace: International
+# (VXUS) symbols also contain dots as real exchange suffixes (e.g. "2330.TW",
+# "HSBA.L") that must NOT be touched, and a suffix-length heuristic can't tell
+# them apart (London's ".L" is one letter, same shape as a domestic ".B"/".A").
+DASH_TICKERS = {"BRK.B", "BF.B"}
+
+
 def yahoo_symbol(sym):
-    """Yahoo uses a dash for share classes that Wikipedia writes with a dot."""
-    return sym.replace(".", "-")
+    """Yahoo uses a dash for the small set of domestic tickers Wikipedia writes with a dot."""
+    return sym.replace(".", "-") if sym in DASH_TICKERS else sym
 
 
 def num(x):
@@ -89,10 +97,27 @@ def fetch(symbol):
     rec["marketCap"] = num(info.get("marketCap"))
     rec["cash"] = num(info.get("totalCash"))
     rec["debt"] = num(info.get("totalDebt"))
+    # ISO currency code (e.g. "TWD", "EUR"); USD for domestic listings. Used by
+    # the frontend to label $-formatted columns correctly for the International
+    # universe, where Yahoo returns prices in each listing's local currency.
+    cur = info.get("currency")
 
     # Daily change: latest price vs the prior session's close. The pipeline runs
     # after the US close, so this is that trading day's move.
     prev = num(info.get("regularMarketPreviousClose")) or num(info.get("previousClose"))
+
+    # Yahoo quotes London-listed stocks in pence ("GBp"/"GBX"), not pounds --
+    # but the SAME listing's marketCap/totalCash/totalDebt are already in
+    # pounds (verified: HSBA.L marketCap == price-in-pounds * sharesOutstanding).
+    # Normalize the quote fields here so nothing downstream needs to know
+    # about this trap; the rest of the record is unaffected.
+    if cur in ("GBp", "GBX"):
+        cur = "GBP"
+        if rec["price"] is not None:
+            rec["price"] /= 100
+        if prev is not None:
+            prev /= 100
+    rec["cur"] = cur
     rec["prevClose"] = prev
     if rec["price"] is not None and prev not in (None, 0):
         rec["changePct"] = (rec["price"] / prev - 1) * 100

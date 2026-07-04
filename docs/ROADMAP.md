@@ -1,15 +1,55 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.33.3
-**Last Updated:** 2026-07-03
+**Version:** 3.34.1
+**Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (committed 2026-07-03): v3.34.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0.
+Release order (updated 2026-07-04): v3.35.0 → v4.0.0 → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0 shipped 2026-07-04.)
 
 ---
 
-## v3.34.0 — Screener: International Universe (VXUS Top 100)
+## v3.35.0 — Screener Methodology Audit & Table Display Fixes
+
+### Goal
+
+Two owner-flagged problems with the screener's Methodology popup: (1) the content needs a pass to confirm it's fully current against the shipped model (the popup has been edited five times in one day across v3.30.0-v3.34.0 — scoring model v2, S+ tier, margins removal, the ETF section, and the International row just added — so it needs a fresh read-through, not just trust that each edit was locally correct), and (2) real display problems: tables in the popup visually break with clipped content and text that doesn't wrap properly.
+
+### Root cause found (code inspection, 2026-07-04)
+
+`style.css`'s `.table-wrap` rule is self-contradictory:
+
+```css
+.table-wrap {
+  overflow-x: auto;   /* intended: horizontal scrollbar for wide tables */
+  margin-bottom: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;    /* BUG: shorthand resets BOTH axes, silently cancels the line above */
+}
+```
+`overflow` is shorthand for `overflow-x` + `overflow-y`; the later `overflow: hidden` wins in the cascade and overrides the `overflow-x: auto` three lines above for both axes. The practical effect: a methodology table wider than the modal (the pillar tables have 4 columns including a long "Better means"/description column, and the International row added in v3.34.0 has a long single-paragraph cell) doesn't get a horizontal scrollbar — its overflow is just **clipped and invisible**, with no visual indication anything is cut off. Compounding it, `thead th { white-space: nowrap; }` (style.css) keeps header cells from wrapping at all, so a narrow modal width (or a narrow viewport under the 1023px breakpoint) can force the clipping even on shorter tables. This one CSS bug is likely the whole "display issues with the tables" report; the plan below still includes a review pass in case there's more (e.g. long `<td>` copy that should wrap rather than scroll, which is a design choice, not just a bug fix).
+
+### Plan
+
+1. **Fix the CSS bug**: remove the trailing `overflow: hidden` from `.table-wrap` (or reorder so `overflow-x: auto` is declared last and `overflow-y` is set explicitly if hiding vertical overflow was actually intended — check whether any table relies on vertical clipping before just deleting the line). This one change affects every `.table-wrap` site-wide (metrics.html, indices.html, guide pages, not just the screener), so verify none of those depended on the accidental `hidden` behavior.
+2. **Decide scroll vs. wrap per table**: the methodology's data tables (pillar weights, scoring curve, universe-source table) are naturally tabular and reasonable to let scroll horizontally on narrow viewports once the bug is fixed. But cells with long prose (the universe-source table's description column, e.g. the new International row) read better wrapping within a wider column than forcing the whole table into a horizontal scroll for one long sentence. Recommendation: keep scroll for the numeric/short-label tables, and either widen the description column or explicitly wrap long-text columns (`white-space: normal` already applies to plain `td`, so once the overflow bug is fixed this may resolve on its own — verify before adding overrides).
+3. **Audit methodology content for currency against the shipped model**: read `#methodStock` and `#methodEtf` end-to-end against the current `METRICS`/`ETF_METRICS` arrays and scoring code in `screener.js`, checking in particular: the pillar weight tables still say Growth 60/Valuation 20/Balance 20 and Technicals 50/Performance 30/Income&Cost 20 (correct as of v3.31.0/v3.33.0 — verify no later edit drifted); the "S+" and tier-band language matches `computeTierMap`; the International row reads correctly next to the other four universe-source rows without breaking the table's tone; the worked PEG example's numbers are still representative of live data, not stale from whenever it was written.
+4. **Visual polish pass beyond the bug fix**: with real content now spanning stock model + ETF model + six universe-source rows, re-check spacing, heading hierarchy, and mobile (under 1023px) rendering of the modal generally, since the modal's content volume has grown substantially since v3.29.0 without a matching visual review.
+
+### Verification
+
+- Headless Chrome screenshot or DOM check of the methodology modal in both stock and ETF mode, at a standard desktop width and at a narrow (~375px) mobile width, confirming no clipped table content and no unexpected horizontal scrollbars on tables that should wrap.
+- Spot-check `metrics.html`/`indices.html`/guide pages (which also use `.table-wrap`) after the CSS fix to confirm no regression from removing the `overflow: hidden` line.
+
+---
+
+## v3.34.0 — Screener: International Universe (VXUS Top 100) — SHIPPED 2026-07-04
+
+Fully built and verified; see [PRD.md](PRD.md#roadmap) (milestone table + Data Pipeline + Data Model sections) and [PATCHNOTES.md](PATCHNOTES.md) for the as-built record, including two data quirks the probe below didn't anticipate (a Vanguard split-ISIN duplicate and Yahoo's pence-not-pounds London quoting). The plan below is kept for historical reference.
+
+<details>
+<summary>Original plan (superseded by the as-built record above)</summary>
 
 ### Goal
 
@@ -78,6 +118,8 @@ Small by design, because v3.33.0 pre-paid for it:
 - Vanguard may paginate or shape the VXUS response differently at ~8,500 holdings (the sibling funds return a few hundred). The probe settles this.
 - Yahoo search rate limits during first-time resolution of 100 names: resolve with a pause and cache aggressively; this cost is paid once.
 - yfinance field names for foreign listings can differ in reliability (the v3.33.0 lesson: verify `dividendYield`-class traps per field, per market, before trusting them).
+
+</details>
 
 ---
 
@@ -199,6 +241,34 @@ A new setup-guide page (peer to `finviz.html` and `seekingalpha.html`) teaching 
 2. Navigation: header/footer nav additions across all pages (the one release in this set that touches every HTML file), sitemap entry, og/meta for the new page.
 3. Ties into the site loop: the guide should close the loop from screener score → "why is the forward estimate what it is" → hearing management's own version on the call.
 4. Mechanics per the shared checklist in v4.1.0, plus: full-site headless spot check since nav on every page changes.
+
+---
+
+## v4.5.0 — Site-Wide Mobile-Friendliness Pass
+
+### Goal
+
+A dedicated review-and-fix pass for phone-width usage across every page, not just a spot fix. The site already has real responsive infrastructure (`<meta name="viewport">` present site-wide; sidebar nav collapses to a hamburger under 1024px in `style.css`; the screener's methodology modal drops to full width under 900px; the universe-switcher buttons already wrap via `flex-wrap`), so this is a **hardening and audit pass**, not a from-scratch mobile build.
+
+### Known starting points (found by code inspection, 2026-07-04)
+
+1. **The screener's main data table** (`.app-table-wrap`, `min-width: 900px` on the inner table) is deliberately horizontal-scroll on phones, which is a defensible choice for a dense data grid, but has never been reviewed for whether it's the *right* choice — e.g. whether the Ticker/Tier/Score columns should stick to the left edge while the rest scrolls, so a phone user always has orientation context. Worth a deliberate decision, not just inherited behavior.
+2. **The universe switcher now has 7 buttons** (Nasdaq 100, S&P 500, Growth, Value, Dividend, ETFs, International, after v3.34.0) in a `flex-wrap` row — functional, but never checked for how many rows it wraps to on a 375px-wide phone or whether it pushes the summary/search controls down awkwardly.
+3. **The methodology modal's tables** share the same `.table-wrap` component flagged in v3.35.0; that fix should land first since the mobile pass would otherwise be reviewing tables that are known-broken for an unrelated reason.
+4. **Touch target sizing** has not been audited: chip filters, column-visibility checkboxes, and the sort-arrow click targets in table headers were sized for mouse pointers first.
+5. **Content pages** (`philosophy.html`, `metrics.html`, `indices.html`, `finviz.html`, `seekingalpha.html`, `faq.html`) have a `max-width: 767px` breakpoint that shrinks headings and collapses the metric grid to one column, but has not been checked against real device widths (iPhone SE-class 375px vs. a larger phone) for anything beyond that one breakpoint.
+
+### Plan
+
+1. **Sequence after v3.35.0** (the table CSS bug fix), since fixing `.table-wrap` changes what "currently broken" looks like for both the methodology tables and any content-page tables this pass would otherwise flag as a mobile-specific issue.
+2. **Device-width audit**: headless Chrome (or manual DevTools) pass at 375px, 414px, and 768px widths across all 9 pages (8 content + screener), cataloging concrete issues (not just "looks cramped") — overflow, overlapping elements, unreachable controls, text truncation that hides information.
+3. **Screener-specific decisions**: whether to pin the Ticker/Tier/Score columns while scrolling the rest of the table; whether the universe-switcher should become a dropdown below some width instead of an ever-taller wrapped button grid; whether the Columns menu and search box need resizing on narrow widths.
+4. **Fix and re-verify**: apply fixes page by page, re-running the same headless width audit to confirm each fix didn't regress desktop rendering (every page already works on desktop; this pass must not be a rewrite).
+
+### Verification
+
+- Headless Chrome screenshots or DOM checks at 375px/414px/768px for all 9 pages, before and after, kept as a before/after record in the PATCHNOTES entry.
+- Confirm no desktop regression: full click-through of the screener (universe switch, sort, filter, popup, methodology modal) at the existing desktop width after the pass.
 
 ---
 

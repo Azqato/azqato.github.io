@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nasdaq 100 Screener</title>
-  <meta name="description" content="An interactive screener that ranks the Nasdaq 100, S&P 500, Vanguard Growth, Value, and Dividend top-100 lists, and a curated ETF list against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
+  <meta name="description" content="An interactive screener that ranks the Nasdaq 100, S&P 500, Vanguard Growth, Value, Dividend, and International (VXUS) top-100 lists, and a curated ETF list against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
   <link rel="canonical" href="https://azqato.github.io/stocks/screener.html">
   <meta name="google-site-verification" content="p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4">
   <!-- Open Graph / Discord -->
@@ -483,6 +483,7 @@
         <button class="btn u-btn" data-universe="value" title="Top 100 holdings of VTV (Vanguard Value ETF)">Value</button>
         <button class="btn u-btn" data-universe="dividend" title="Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF)">Dividend</button>
         <button class="btn u-btn" data-universe="etfs" title="A fixed list of 10 broad-market and factor ETFs, scored on technicals, long-term performance, and cost instead of fundamentals">ETFs</button>
+        <button class="btn u-btn" data-universe="intl" title="Top 100 holdings of VXUS (Vanguard Total International Stock ETF), scored on the same fundamentals model as the other stock universes">International</button>
       </div>
       <span class="spacer"></span>
       <span class="as-of" id="asOf">no data loaded</span>
@@ -568,7 +569,7 @@
     </div>
 
     <div class="disclaimer-bar">
-      Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. In the stock universes, forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but <strong>*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure</strong>. Stock constituent lists are synced weekly and may differ from the current index or fund holdings; the ETFs list is a fixed set of 10 funds.
+      Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. In the stock universes, forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but <strong>*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure</strong>. Stock constituent lists are synced weekly and may differ from the current index or fund holdings; the ETFs list is a fixed set of 10 funds. The International universe shows each stock's price and balance-sheet figures in its own local currency, not U.S. dollars.
     </div>
 
       </main>
@@ -654,10 +655,11 @@
             <tr><td>Growth 100</td><td>Top 100 holdings of VUG (Vanguard Growth ETF), by portfolio weight, from Vanguard's published holdings</td></tr>
             <tr><td>Value 100</td><td>Top 100 holdings of VTV (Vanguard Value ETF), by portfolio weight, from Vanguard's published holdings</td></tr>
             <tr><td>Dividend 100</td><td>Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF), by portfolio weight, from Vanguard's published holdings</td></tr>
+            <tr><td>International</td><td>Top 100 holdings of VXUS (Vanguard Total International Stock ETF), by portfolio weight, from Vanguard's published holdings. Each holding trades on its own local exchange (e.g. Taiwan, Japan, the UK); Price, Mkt Cap, Total Cash, and Total Debt are shown in that listing's native currency, labeled with its symbol (&euro;, &yen;, &pound;, etc.), not converted to U.S. dollars. Scoring is unaffected by currency: all six scored metrics are growth rates and ratios.</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="table-note">Index lists update within days of membership changes. Vanguard publishes fund holdings monthly, so the ETF-based lists can lag the funds' live portfolios by a few weeks; dual share classes are collapsed to one listing per company. Scores are always relative to the active universe only.</p>
+      <p class="table-note">Index lists update within days of membership changes. Vanguard publishes fund holdings monthly, so the ETF-based lists can lag the funds' live portfolios by a few weeks; dual share classes are collapsed to one listing per company. Foreign analyst coverage is occasionally thinner than U.S. coverage, so a small number of International names may show a lower Factors count; a missing metric still scores a hard zero, same as any other stock universe. Scores are always relative to the active universe only.</p>
 
       <h3>Good to know</h3>
       <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design some of every list always lands in the bottom tiers: an F here means the bottom of this particular list, not a broken company. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). Because the universes overlap, the same stock can earn a different score in different universes: a dividend payer that looks slow next to the Nasdaq 100 can rank near the top of the Dividend 100, because its peers changed, not its numbers. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="metrics.html" target="_blank" rel="noopener">Metrics glossary</a> and the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>.</p>

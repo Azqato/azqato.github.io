@@ -2,6 +2,44 @@
 
 ---
 
+## v3.34.1 — 2026-07-04 — Roadmap: methodology audit, table display bug, and a mobile-friendliness pass logged
+
+**Docs only, two owner requests logged as new roadmap items in ROADMAP.md. No code, workflow, or behavior changes in this entry.**
+
+### Added
+
+- **v3.35.0** (next up): owner flagged display issues with the screener's Methodology popup tables and asked for a content-currency audit. The likely root cause was found by code inspection before any code changed: `style.css`'s `.table-wrap` rule sets `overflow-x: auto` and then a later `overflow: hidden` in the same block silently overrides it for both axes (the `overflow` shorthand resets both `overflow-x` and `overflow-y`), so a methodology table wider than the modal gets its content clipped instead of scrolling, with no visible scrollbar. `thead th { white-space: nowrap }` compounds this by keeping header cells from wrapping.
+- **v4.5.0** (appended to the end of the queue): a site-wide mobile-friendliness pass, owner-requested. Scoped as a hardening/audit pass rather than a rebuild, since real responsive infrastructure already exists (viewport meta, hamburger nav collapse, modal width breakpoint, wrapping universe-switcher buttons). Starting points already identified: whether the screener's main table should pin its Ticker/Tier/Score columns while scrolling the rest, how the now-7-button universe switcher behaves at phone widths, and that it should sequence after v3.35.0 so the table CSS fix isn't reviewed twice under two different roadmap items.
+
+---
+
+## v3.34.0 — 2026-07-04 — Screener: International universe
+
+**A seventh screener universe: the top 100 holdings of VXUS (Vanguard Total International Stock ETF), scored with the exact same six-metric stock model as the other stock universes — no new scoring logic, just a new feed and a currency-aware price/balance-sheet display. Built following the Phase 0-3 plan in ROADMAP.md (probed and decided in v3.33.2/v3.33.3); two real data quirks turned up during the build that weren't in the plan and are documented below.**
+
+### Added
+
+- **International universe button**, seventh in the switcher, reusing the domestic stock table, columns, scoring, and popup byte-for-byte (Growth 60 / Valuation 20 / Balance sheet 20, hard-zero missing data, S+/S/A/B/C/F tiers).
+- **`data/vxus.json`** (100 holdings, `t` already resolved to a Yahoo symbol) and **`data/vxus_map.json`** (ISIN → Yahoo symbol resolution cache with a `manual` override block), built from a live Vanguard + Yahoo run and verified idempotent by re-running the new sync logic against the live API with zero changes reported.
+- **`sync_vxus()`** in `update_etf_constituents.py`: fetches VXUS holdings, **dedupes two ISINs Vanguard reports as split rows** (BHP Group, Barrick Gold — summed by weight before ranking, or the top-100 cut silently admits only 98 distinct issuers), resolves each via ISIN search (99/100 direct) with a name-search fallback (1/100, a holding with a blank Vanguard ticker field), and never writes a partial list.
+- **`data/screener_intl.json`** feed and **`.github/workflows/screener-data-intl.yml`** (Tue-Sat 00:15 UTC, 15 minutes after the GVD job), plus VXUS membership + resolution-cache handling folded into the existing Saturday `constituents.yml` sync.
+- **`cur` field** added to every stock feed record (`fetch_screener_data.py`): the ISO currency code, used only by the frontend's International-universe price/balance-sheet formatting; harmless for the five USD universes (defaults display exactly as before).
+- **Currency-symbol display**: `screener.js` gained a `CURRENCY_SYMBOLS` lookup and a `cur`-aware `fmtPrice`/`fmtMoney` — Price, Mkt Cap, Total Cash, and Total Debt render in each stock's native currency labeled with its symbol (`NT$`, `₩`, `€`, `£`, `¥`, `HK$`, `C$`, etc.), falling back to the ISO code for symbol-less currencies (`CHF`).
+- Methodology popup: the stock section's universe-source table gained an International row (VXUS top 100, currency note, thin-foreign-coverage note); disclaimer bar updated.
+
+### Fixed / discovered during the build (not anticipated in the Phase 0-3 plan)
+
+- **Yahoo quotes London-listed stocks in pence (`GBp`/`GBX`), not pounds** — but that same listing's `marketCap`/`totalCash`/`totalDebt` are already reported in pounds (verified: HSBC's `marketCap` exactly equals its pence-converted price × `sharesOutstanding`). `fetch_screener_data.py` now normalizes `GBp`/`GBX` to `GBP` and divides `price`/`prevClose` by 100 at fetch time, so nothing downstream — including the currency-symbol display above — ever has to know about the pence convention.
+- **The domestic dot-to-dash ticker fix would have corrupted every International symbol.** `fetch_screener_data.py` previously replaced every `.` with `-` (for `BRK.B`-style dual-class tickers). That's fine for the two domestic tickers that actually need it, but would have turned `2330.TW` into the invalid `2330-TW`. Replaced with an explicit `{"BRK.B", "BF.B"}` set instead of a blanket replace, since a suffix-length heuristic can't distinguish a domestic `.B`/`.A` share class from London's one-letter `.L` exchange suffix.
+
+### Verified
+
+- Headless Chrome against the live local feed: 100/100 scored, tiers 1 S+ / 10 S / 13 A / 29 B / 22 C / 25 F, currency symbols render correctly per row (₩/NT$/¥/€/£ spot-checked), no console errors.
+- Nasdaq 100 regression still exactly matches the v3.31.0 baseline (2 S+ / 10 S / 8 A / 32 B / 24 C / 24 F, MU and NVDA at 100) — the `cur` parameter is additive and optional everywhere it was threaded through.
+- `sync_vxus()` re-run against the live Vanguard API reproduced the committed `data/vxus.json` with zero changes, confirming the sync logic matches what was hand-verified during the probe.
+
+---
+
 ## v3.33.3 — 2026-07-03 — Docs: v3.34.0 Phase 3 owner decisions locked
 
 **Docs only. All three Phase 3 owner-decision gates for the v3.34.0 International universe are now locked: currency display (native currency, labeled with the currency symbol rather than the ISO code, per owner refinement), sparse estimates (hard-zero rule kept as-specced, already resolved by the probe), and ADR vs. local-listing ranking (rank the local listing). Phase 1 (constituents and mapping) is cleared to begin. No code, workflow, or behavior changes.**
