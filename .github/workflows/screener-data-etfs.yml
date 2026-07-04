@@ -2,15 +2,17 @@ name: Update Screener Data (ETFs)
 
 # Daily refresh of data/screener_etfs.json for the ETFs screener universe: a
 # fixed, owner-curated list of 10 funds (data/etfs.json, hand-edited only, no
-# auto-sync). Runs at 23:15 UTC, between the Nasdaq 100 (23:00) and S&P 500
-# (23:30) jobs -- it is a 10-symbol fetch and finishes in about a minute.
+# auto-sync). Runs at 22:00 UTC, 30 minutes after the Nasdaq 100 (21:30) job --
+# it is a 10-symbol fetch and finishes in about a minute, but the 30-minute gap
+# is a safety margin against a slow prior run rather than a reflection of how
+# long this job actually takes.
 # Uses yfinance (public Yahoo Finance data) -- no API key.
 
 on:
   schedule:
-    # 23:15 UTC, Mon-Fri only (trading days). GitHub cron is UTC-only and does
-    # not follow DST; see screener-data.yml for the seasonal note.
-    - cron: "15 23 * * 1-5"
+    # 22:00 UTC, Mon-Fri only (trading days). GitHub cron is UTC-only and does
+    # not follow DST; see screener-data.yml for the anchor-to-latest-close note.
+    - cron: "0 22 * * 1-5"
   workflow_dispatch: {}   # allow manual runs
 
 permissions:

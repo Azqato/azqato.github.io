@@ -16,7 +16,7 @@ A static educational website documenting Azqato's fundamentals-driven, long-term
 | Fonts | System fonts only | No external loading |
 | Data pipeline | Python 3 + yfinance | Python 3.12, yfinance 1.4.1 (pinned) |
 | Hosting | GitHub Pages | Serves from repo root |
-| CI/CD | GitHub Actions | Staggered Mon-Fri crons from 23:00 UTC |
+| CI/CD | GitHub Actions | Staggered Mon-Fri crons from 21:30 UTC |
 | Data format | JSON | Feeds + constituent lists in `data/` |
 
 No npm. No build tools. No frontend dependencies.
@@ -72,7 +72,7 @@ This is a static site. There is no build step.
 
 **Deploy:** Push to `main`. GitHub Pages serves directly from the repository root.
 
-**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 23:00 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The ETFs feed (`scripts/fetch_etf_data.py`, a fixed 10-fund list) follows at 23:15 UTC, the S&P 500 feed at 23:30 UTC, the combined Growth/Value/Dividend feed 30 minutes after that (00:00 UTC, next calendar day), and the International feed (top 100 VXUS holdings) 15 minutes after that (00:15 UTC). The constituent sync (Wikipedia for the indices, Vanguard's holdings API for the VUG/VTV/VIG/VXUS lists — VXUS holdings are additionally resolved from ISIN to a Yahoo symbol via `data/vxus_map.json`; the ETFs list is hand-curated and never synced) runs Saturdays at 23:00 UTC.
+**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 21:30 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The schedule is deliberately anchored 30 minutes after the *latest* possible US market close in UTC terms (4:00pm US Eastern is 21:00 UTC in winter/EST, 20:00 UTC in summer/EDT — GitHub Actions cron doesn't observe DST, so this guarantees at least a 30-minute buffer after close year-round, growing to 90 minutes in summer). The ETFs feed (`scripts/fetch_etf_data.py`, a fixed 10-fund list) follows at 22:00 UTC, the S&P 500 feed at 22:30 UTC, the combined Growth/Value/Dividend feed at 23:00 UTC, and the International feed (top 100 VXUS holdings) at 23:30 UTC — each 30 minutes after the last, all same calendar day. The constituent sync (Wikipedia for the indices, Vanguard's holdings API for the VUG/VTV/VIG/VXUS lists — VXUS holdings are additionally resolved from ISIN to a Yahoo symbol via `data/vxus_map.json`; the ETFs list is hand-curated and never synced) runs Saturdays at 23:00 UTC.
 
 **Data pipeline (manual):** Go to Actions → "Refresh Screener Data" → Run workflow. Or run locally:
 
@@ -122,11 +122,11 @@ stocks/
 │   └── update_etf_constituents.py    ← Weekly auto-sync: Vanguard API → vug/vtv/vig/vxus.json
 ├── .github/
 │   └── workflows/
-│       ├── screener-data.yml         ← Nasdaq 100 feed (Mon-Fri 23:00 UTC)
-│       ├── screener-data-etfs.yml    ← ETFs feed (Mon-Fri 23:15 UTC)
-│       ├── screener-data-sp500.yml   ← S&P 500 feed (Mon-Fri 23:30 UTC)
-│       ├── screener-data-gvd.yml     ← Growth/Value/Dividend feed (Tue-Sat 00:00 UTC)
-│       ├── screener-data-intl.yml    ← International feed (Tue-Sat 00:15 UTC)
+│       ├── screener-data.yml         ← Nasdaq 100 feed (Mon-Fri 21:30 UTC)
+│       ├── screener-data-etfs.yml    ← ETFs feed (Mon-Fri 22:00 UTC)
+│       ├── screener-data-sp500.yml   ← S&P 500 feed (Mon-Fri 22:30 UTC)
+│       ├── screener-data-gvd.yml     ← Growth/Value/Dividend feed (Mon-Fri 23:00 UTC)
+│       ├── screener-data-intl.yml    ← International feed (Mon-Fri 23:30 UTC)
 │       └── constituents.yml          ← Constituent sync, indices + ETFs (Sat 23:00 UTC)
 └── docs/
     ├── PRD.md                        ← Product requirements, architecture, runbook

@@ -1,14 +1,14 @@
 name: Update Screener Data (S&P 500)
 
 # Refresh of data/screener_sp500.json for the screener's "Expand to S&P 500"
-# view. Runs Mon-Fri (trading days), 30 minutes AFTER the Nasdaq 100 job so the
-# default view always has priority; this larger ~500-symbol fetch takes ~20 minutes.
-# Shares the "screener-data" concurrency group so it never pushes at the same time
-# as the Nasdaq job or the constituent sync.
+# view. Runs 30 minutes AFTER the ETFs job (22:30 UTC), 60 minutes after the
+# Nasdaq 100 job. This larger ~500-symbol fetch takes ~20 minutes.
+# Shares the "screener-data" concurrency group so it never pushes at the same
+# time as the Nasdaq job or the constituent sync.
 
 on:
   schedule:
-    - cron: "30 23 * * 1-5"   # 30 min after the Nasdaq 100 run, Mon-Fri
+    - cron: "30 22 * * 1-5"   # 30 min after the ETFs run, Mon-Fri
   workflow_dispatch: {}      # allow manual runs (use this to seed the feed the first time)
 
 permissions:

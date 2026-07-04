@@ -2,14 +2,14 @@ name: Update Screener Data (International)
 
 # Refresh of data/screener_intl.json, the feed for the screener's International
 # universe (top 100 holdings of VXUS, Vanguard Total International Stock ETF).
-# Runs Mon-Fri (trading days), 15 minutes AFTER the Growth/Value/Dividend job --
-# which puts it at 00:15 UTC the NEXT calendar day, hence the Tue-Sat cron.
+# Runs Mon-Fri (trading days), 30 minutes AFTER the Growth/Value/Dividend job,
+# at 23:30 UTC -- the last job in the daily chain.
 # Shares the "screener-data" concurrency group so it never pushes at the same
 # time as the other data jobs or the constituent sync.
 
 on:
   schedule:
-    - cron: "15 0 * * 2-6"   # 15 min after the GVD run; Tue-Sat UTC = Mon-Fri US trading days
+    - cron: "30 23 * * 1-5"   # 30 min after the GVD run, Mon-Fri
   workflow_dispatch: {}       # allow manual runs (use this to seed the feed the first time)
 
 permissions:

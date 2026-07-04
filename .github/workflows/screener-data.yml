@@ -1,17 +1,23 @@
 name: Update Screener Data (Nasdaq 100)
 
 # Daily refresh of data/screener.json for the Nasdaq 100 screener (the default
-# view). Runs FIRST, 30 minutes ahead of the larger S&P 500 job, so the most-used
-# view always refreshes promptly and never waits on the 500-symbol fetch.
+# view). Runs FIRST, first in the whole chain, so the most-used view always
+# refreshes promptly and never waits on the larger fetches.
 # Uses yfinance (public Yahoo Finance data) -- no API key, no per-symbol
 # subscription limits, so the whole list is refreshed every run.
 
 on:
   schedule:
-    # 23:00 UTC = 6:00pm US Eastern in winter (EST). Mon-Fri only (trading days).
-    # GitHub cron is UTC-only and does not follow DST: in summer (EDT) this
-    # fires at 7:00pm Eastern. For 6:00pm during summer instead, use "0 22 * * 1-5".
-    - cron: "0 23 * * 1-5"
+    # 21:30 UTC, Mon-Fri only (trading days). GitHub cron is UTC-only and does
+    # not follow US daylight saving time, so this is deliberately anchored to
+    # the LATEST possible US market close in UTC terms rather than a fixed
+    # Eastern-clock offset (owner decision 2026-07-04, no DST-aware schedule):
+    # the close is always 4:00pm US Eastern, which is 21:00 UTC in winter
+    # (EST, UTC-5) but only 20:00 UTC in summer (EDT, UTC-4) -- winter is
+    # "later" in UTC. Anchoring 30 minutes after the winter close (21:30 UTC)
+    # guarantees at least a 30-minute buffer after close year-round: exactly
+    # 30 minutes in winter, a full 90 minutes in summer.
+    - cron: "30 21 * * 1-5"
   workflow_dispatch: {}   # allow manual runs
 
 permissions:

@@ -8,12 +8,12 @@ name: Update Constituents
 # Yahoo symbol via data/vxus_map.json (see update_etf_constituents.py). For
 # whichever list's membership changed, regenerates the matching data feed and
 # commits the lists + feeds. Runs Saturday, when the daily screener-data jobs
-# are idle (those run Mon-Fri / Tue-Sat only; 23:00 Sat is clear of the 00:00
-# Sat GVD run and the 00:15 Sat International run).
+# are idle (those run Mon-Fri only, 21:30-23:30 UTC, entirely same-calendar-day
+# as of the 2026-07-04 schedule; 23:00 UTC Saturday is clear of all of them).
 
 on:
   schedule:
-    - cron: "0 23 * * 6"   # Saturdays 23:00 UTC (same time as the weekday data jobs)
+    - cron: "0 23 * * 6"   # Saturdays 23:00 UTC (after the weekday data jobs' 21:30-23:30 UTC window)
   workflow_dispatch: {}
 
 permissions:

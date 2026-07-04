@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.34.4
+**Version:** 3.34.5
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-04
@@ -217,7 +217,7 @@ Detailed implementation plans for every Planned milestone below live in [docs/RO
 | v3.34.0 — Screener: International universe, top 100 holdings of VXUS (Vanguard Total International Stock ETF) only, scored with the **same six-metric stock model** as the other stock universes (no scoring changes; this is a stock universe, not a variant). Probed and built 2026-07-03/04. **Phase 0 probe** found: Vanguard's holdings API caps at exactly 500 entities (not ~8,500), every entity carries an ISIN; two ISINs (BHP Group, Barrick Gold) appear as **split duplicate rows that must be summed before ranking**, or the top-100 cut silently admits 98 unique issuers plus one double-counted holding; ISIN→Yahoo resolution hit 100/100 (99 direct via Yahoo search, 1 via name-search fallback for a holding with a blank Vanguard ticker field, 3 correctly auto-resolved dual-listing cases pinned into the manual-override cache for stability); yfinance field coverage on all six scored metrics is 88-100%. **Owner decisions locked**: native-currency display labeled with the **currency symbol** (NT$/₩/€/£/¥/HK$/C$ etc., ISO-code fallback for symbol-less currencies like CHF); hard-zero rule kept exactly as-specced (coverage was strong enough that no denominator change was needed); rank the local listing Vanguard actually holds, not a US ADR. **Build-time discovery not anticipated in the plan**: Yahoo quotes London-listed stocks (`HSBA.L`, `BP.L`, `RIO.L`, etc.) in **pence** (`GBp`), not pounds, while that same listing's market cap/cash/debt are already reported in pounds (verified: HSBC's marketCap == its pence-converted price &times; shares outstanding) — the pipeline normalizes this (divide by 100, relabel `GBP`) so the frontend never has to know about the quirk. Shipped: seventh universe button, `data/vxus.json` (100 resolved Yahoo symbols) + `data/vxus_map.json` (ISIN&rarr;symbol cache with manual overrides) + `update_etf_constituents.py` `sync_vxus()` (tested idempotent against the live Vanguard API) + `data/screener_intl.json` feed + Tue-Sat 00:15 UTC workflow, joined into the Saturday constituent-sync workflow; `screener.js` gained a `cur`-aware `fmtPrice`/`fmtMoney` (defaults to `$` when absent, so the five domestic universes are byte-for-byte unaffected) and a `CURRENCY_SYMBOLS` lookup; `fetch_screener_data.py`'s dot-to-dash ticker fix (for `BRK.B`-style dual classes) was narrowed from a blanket replace to an explicit 2-ticker set, since a blanket replace would have corrupted every International exchange suffix (e.g. `2330.TW` &rarr; `2330-TW`). Verified headless against the live local feed: 100/100 scored, tiers 1 S+ / 10 S / 13 A / 29 B / 22 C / 25 F, currency symbols render correctly per row, Nasdaq 100 regression still exactly matches the v3.31.0 baseline (2 S+ / 10 S / 8 A / 32 B / 24 C / 24 F, MU and NVDA at 100) | 2026-07-04 | Complete |
 | v3.34.1 — Docs only. New roadmap item logged: a screener Methodology audit (confirm popup content is current against the shipped model after five same-day edits) plus a table-display bug fix. Root cause already found by code inspection: `style.css`'s `.table-wrap` rule sets `overflow-x: auto` but a later `overflow: hidden` in the same block silently overrides it for both axes, clipping wide methodology tables instead of scrolling them; compounded by `thead th { white-space: nowrap }` forcing headers not to wrap. See ROADMAP.md v3.35.0 for the full plan | 2026-07-04 | Complete |
 | v3.34.2 — Docs only. Owner requested a GitHub Actions workflow timing review as the immediate next step, and a site-wide mobile-friendliness pass appended to the end of the roadmap (v4.5.0). Both logged in ROADMAP.md; the timing review's schedule table and findings were compiled the same day, see v3.34.5 below | 2026-07-04 | Complete |
-| v3.34.5 — Docs/ops. GitHub Actions workflow timing review, owner-requested as the immediate next step: compiled the full six-job schedule (Nasdaq 100 23:00 → ETFs 23:15 → S&P 500 23:30 → GVD 00:00 → International 00:15 UTC next day → constituent sync Sat 23:00) with the gap between each, and flagged that GitHub's cron scheduler is UTC-only and does not observe US DST, so the whole chain silently shifts an hour relative to US market close twice a year. See ROADMAP.md for the full table and notes | Next | Planned |
+| v3.34.5 — Ops. GitHub Actions workflow timing review, owner-requested. Owner decisions: keep a fixed non-DST-aware schedule, but re-anchor 30 minutes after the *latest possible* US market close in UTC terms (winter EST close is 21:00 UTC, later than summer EDT's 20:00 UTC) instead of a fixed Eastern-clock offset, guaranteeing at least a 30-minute post-close buffer year-round (up to 90 in summer); widen every gap in the chain to a uniform 30 minutes. New same-day schedule: Nasdaq 100 21:30 → ETFs 22:00 → S&P 500 22:30 → GVD 23:00 → International 23:30 UTC (all Mon-Fri; the day-rollover Tue-Sat cron pattern the GVD/International jobs needed is gone). All five daily workflow files updated; docs (README, PRD pipeline/architecture/FAQ) updated to match | 2026-07-04 | Complete |
 | v3.34.3 — Docs only. Owner-flagged bug logged: the International feed lists the same company twice under different share classes (`005930.KS`/`005935.KS`, Samsung Electronics common/preferred, different ISINs). Logged as v3.34.6 in ROADMAP.md, sequenced right after the workflow timing review | 2026-07-04 | Complete |
 | v3.34.6 — Screener/pipeline. International feed: same-company duplicate holdings (owner-flagged: `005930.KS`/`005935.KS` are both Samsung Electronics, common and preferred, different ISINs, so v3.34.0's ISIN-dedup didn't catch it). Needs a `VXUS_DUAL_CLASS`-style override map (mirroring the domestic `DUAL_CLASS` convention) to collapse same-issuer share classes before the top-100 cut. See ROADMAP.md for the full plan | After v3.34.5 | Planned |
 | v3.34.4 — Docs only. Two owner-requested screener features logged: International universe should lead with company name instead of ticker (v3.34.7), and a "FANG+" filter (v3.36.0, blocked on the owner supplying the ticker list — designed as a client-side filter over the currently loaded universe, not a new universe/feed) | 2026-07-04 | Complete |
@@ -235,7 +235,7 @@ Detailed implementation plans for every Planned milestone below live in [docs/RO
 
 **v3.x (current):** Screener with daily data, relative percentile scoring, methodology popup, documentation consolidation.
 
-**Queue head (updated 2026-07-04):** v3.28.0 GVD universes, v3.29.0 rank-based tier scale, v3.30.0 scoring model v2, v3.31.0 margins-out re-weighting, v3.32.0 pipeline cleanup, v3.33.0 ETFs universe, and v3.34.0 International universe are shipped — all seven screener universes are now live. Next (immediate): v3.34.5 GitHub Actions workflow timing review (owner-requested, schedule table already compiled), then v3.34.6 International feed same-company duplicate fix (owner-flagged, Samsung common/preferred), then v3.34.7 International name-primary display (owner-requested). Then: v3.35.0 methodology audit and table-display fixes (owner-flagged, root cause already identified), then v3.36.0 "FANG+" filter (owner-requested, blocked on the owner's ticker list), then v4.0.0 sparklines, v4.1.0-v4.4.0 content releases, then v4.5.0 mobile-friendliness pass (owner-requested 2026-07-04, appended to the end of the queue). Constituent sourcing decision (2026-07-03): index universes stay on Wikipedia (updates within days of index changes); ETF universes use Vanguard's holdings API (authoritative but month-lagged, acceptable because the fund's published holdings are the universe definition). Switching the S&P 500 to VOO holdings was considered and rejected for the freshness reason. Note the dependency: the v4.0.0 sparklines mine the git history of the committed data feeds, so keeping generated data files in the repo is an intentional design choice, not tech debt.
+**Queue head (updated 2026-07-04):** v3.28.0 GVD universes, v3.29.0 rank-based tier scale, v3.30.0 scoring model v2, v3.31.0 margins-out re-weighting, v3.32.0 pipeline cleanup, v3.33.0 ETFs universe, v3.34.0 International universe, and v3.34.5 workflow timing review are shipped — all seven screener universes are live and the daily pipeline is re-scheduled (Nasdaq 100 21:30 → ETFs 22:00 → S&P 500 22:30 → GVD 23:00 → International 23:30 UTC, all Mon-Fri, 30-min gaps throughout, anchored to the latest-possible market close so there's always at least a 30-minute post-close buffer year-round). Next (immediate): v3.34.6 International feed same-company duplicate fix (owner-flagged, Samsung common/preferred), then v3.34.7 International name-primary display (owner-requested). Then: v3.35.0 methodology audit and table-display fixes (owner-flagged, root cause already identified), then v3.36.0 "FANG+" filter (owner-requested, blocked on the owner's ticker list), then v4.0.0 sparklines, v4.1.0-v4.4.0 content releases, then v4.5.0 mobile-friendliness pass (owner-requested 2026-07-04, appended to the end of the queue). Constituent sourcing decision (2026-07-03): index universes stay on Wikipedia (updates within days of index changes); ETF universes use Vanguard's holdings API (authoritative but month-lagged, acceptable because the fund's published holdings are the universe definition). Switching the S&P 500 to VOO holdings was considered and rejected for the freshness reason. Note the dependency: the v4.0.0 sparklines mine the git history of the committed data feeds, so keeping generated data files in the repo is an intentional design choice, not tech debt.
 
 **v4.x (order updated 2026-07-04):** v4.0.0 score history sparklines, v4.1.0 deeper index fund coverage, v4.2.0 additional historical illustrative examples, v4.3.0 additional philosophy sections, v4.4.0 conference call research guide, v4.5.0 site-wide mobile-friendliness pass (owner-requested 2026-07-04). Potential Growth/Value/Dividend standalone framework pages remain unversioned backlog.
 
@@ -323,13 +323,13 @@ GitHub Pages is configured to serve from the repository root. No additional conf
 
 ### Data Pipeline (Automated)
 
-Five screener data feeds are refreshed automatically, staggered so the default Nasdaq 100 view always has priority:
+Five screener data feeds are refreshed automatically, staggered so the default Nasdaq 100 view always has priority. The whole daily chain (2026-07-04 schedule, owner-reviewed) is anchored 30 minutes after the **latest possible** US market close in UTC terms rather than a fixed Eastern-clock offset: close is always 4:00pm US Eastern, which is 21:00 UTC in winter (EST, UTC-5) but only 20:00 UTC in summer (EDT, UTC-4) — GitHub Actions cron is UTC-only and does not observe DST, so anchoring to the winter (later-in-UTC) close guarantees at least a 30-minute buffer after close year-round, growing to 90 minutes in summer. Every job in the chain now lands on the same calendar day (no more day-rollover crons):
 
-- **Nasdaq 100** (`data/screener.json`): trading days (Mon-Fri) at 23:00 UTC via `.github/workflows/screener-data.yml`
-- **ETFs** (`data/screener_etfs.json`): trading days (Mon-Fri) at 23:15 UTC via `.github/workflows/screener-data-etfs.yml` (a 10-symbol fetch that slots between the two index jobs; run by `scripts/fetch_etf_data.py`, which shares no field logic with the stock fetcher)
-- **S&P 500** (`data/screener_sp500.json`): trading days (Mon-Fri) at 23:30 UTC via `.github/workflows/screener-data-sp500.yml` (the larger ~500-symbol fetch runs after the small jobs so it never delays them)
-- **Growth/Value/Dividend** (`data/screener_gvd.json`): 30 minutes after the S&P 500 job via `.github/workflows/screener-data-gvd.yml`, which lands at 00:00 UTC on the next calendar day (Tue-Sat cron covering Mon-Fri trading days). One combined file holding all three universes; symbols shared between lists are fetched once (~220 unique of 300)
-- **International** (`data/screener_intl.json`): 15 minutes after the GVD job via `.github/workflows/screener-data-intl.yml`, landing at 00:15 UTC (Tue-Sat cron). Top 100 VXUS holdings, same `fetch_screener_data.py` stock fetcher as the domestic universes (`--list data/vxus.json --out data/screener_intl.json`), plus a `cur` field (native ISO currency code) that the frontend uses to label Price/Mkt Cap/Cash/Debt in the listing's own currency instead of USD
+- **Nasdaq 100** (`data/screener.json`): trading days (Mon-Fri) at 21:30 UTC via `.github/workflows/screener-data.yml`
+- **ETFs** (`data/screener_etfs.json`): trading days (Mon-Fri) at 22:00 UTC via `.github/workflows/screener-data-etfs.yml` (a 10-symbol fetch that slots between the two index jobs; run by `scripts/fetch_etf_data.py`, which shares no field logic with the stock fetcher)
+- **S&P 500** (`data/screener_sp500.json`): trading days (Mon-Fri) at 22:30 UTC via `.github/workflows/screener-data-sp500.yml` (the larger ~500-symbol fetch runs after the small jobs so it never delays them)
+- **Growth/Value/Dividend** (`data/screener_gvd.json`): trading days (Mon-Fri) at 23:00 UTC via `.github/workflows/screener-data-gvd.yml`, 30 minutes after the S&P 500 job. One combined file holding all three universes; symbols shared between lists are fetched once (~220 unique of 300)
+- **International** (`data/screener_intl.json`): trading days (Mon-Fri) at 23:30 UTC via `.github/workflows/screener-data-intl.yml`, 30 minutes after the GVD job — the last job in the daily chain. Top 100 VXUS holdings, same `fetch_screener_data.py` stock fetcher as the domestic universes (`--list data/vxus.json --out data/screener_intl.json`), plus a `cur` field (native ISO currency code) that the frontend uses to label Price/Mkt Cap/Cash/Debt in the listing's own currency instead of USD
 - **Constituent sync** (`data/nasdaq100.json` + `data/sp500.json` from Wikipedia; `data/vug.json` + `data/vtv.json` + `data/vig.json` + `data/vxus.json` from Vanguard's holdings API): Saturdays at 23:00 UTC via `.github/workflows/constituents.yml`; regenerates a feed only if a list's membership changed. VXUS holdings are additionally resolved from ISIN to a suffixed Yahoo symbol via `data/vxus_map.json` (a committed resolution cache with a `manual` override block). The ETFs list (`data/etfs.json`) is **not** synced: it is a fixed, owner-curated set of 10 funds, changed only by hand
 - **Trigger manually:** GitHub Actions tab → the relevant workflow → Run workflow (use this to seed a feed the first time)
 - **Run locally:** `python3 scripts/fetch_screener_data.py --list data/nasdaq100.json --out data/screener.json` (the `--list`/`--out` args default to the Nasdaq 100; point them at `data/sp500.json` / `data/screener_sp500.json` for the S&P 500, or `data/vxus.json` / `data/screener_intl.json` for International). For the combined feed: `python3 scripts/fetch_screener_data.py --combined growth=data/vug.json --combined value=data/vtv.json --combined dividend=data/vig.json --out data/screener_gvd.json`
@@ -367,7 +367,7 @@ No staging environment. Changes are previewed locally before pushing to main.
 
 | Error | Likely Cause | Fix |
 |-------|-------------|-----|
-| Screener shows no data | `data/screener.json` missing or empty | Run the pipeline manually or wait for the next 23:00 UTC weekday cron run |
+| Screener shows no data | `data/screener.json` missing or empty | Run the pipeline manually or wait for the next 21:30 UTC weekday cron run |
 | Screener shows stale data banner | screener.json older than 24 hours | Check GitHub Actions — if last run failed, trigger manually |
 | GitHub Action fails with HTTP 429 | yfinance rate limit (Yahoo Finance throttling) | Wait and re-run; the pipeline has per-symbol retry logic |
 | Page shows unstyled HTML | `style.css` path wrong | Check that style.css is in the same directory as the HTML file |
@@ -399,17 +399,18 @@ The site is a fully static architecture. No server processes any requests. No da
        │
        └── GitHub Actions (cron)
                  │
-                 ├── Mon-Fri 23:00 UTC → fetch_screener_data.py --list nasdaq100.json → commits data/screener.json
+                 ├── Mon-Fri 21:30 UTC → fetch_screener_data.py --list nasdaq100.json → commits data/screener.json
+                 │                       (30 min after the latest possible US market close, winter EST 21:00 UTC)
                  │
-                 ├── Mon-Fri 23:15 UTC → fetch_etf_data.py (fixed 10-fund list)       → commits data/screener_etfs.json
+                 ├── Mon-Fri 22:00 UTC → fetch_etf_data.py (fixed 10-fund list)       → commits data/screener_etfs.json
                  │
-                 ├── Mon-Fri 23:30 UTC → fetch_screener_data.py --list sp500.json     → commits data/screener_sp500.json
+                 ├── Mon-Fri 22:30 UTC → fetch_screener_data.py --list sp500.json     → commits data/screener_sp500.json
                  │
-                 ├── Tue-Sat 00:00 UTC → fetch_screener_data.py --combined growth/value/dividend → commits data/screener_gvd.json
-                 │                       (30 min after the S&P 500 run; lands on the next UTC calendar day)
+                 ├── Mon-Fri 23:00 UTC → fetch_screener_data.py --combined growth/value/dividend → commits data/screener_gvd.json
+                 │                       (30 min after the S&P 500 run)
                  │
-                 ├── Tue-Sat 00:15 UTC → fetch_screener_data.py --list vxus.json         → commits data/screener_intl.json
-                 │                       (15 min after the GVD run)
+                 ├── Mon-Fri 23:30 UTC → fetch_screener_data.py --list vxus.json         → commits data/screener_intl.json
+                 │                       (30 min after the GVD run; last job in the daily chain)
                  │
                  └── Sat 23:00 UTC     → update_constituents.py + update_etf_constituents.py → regenerates changed feed(s)
 ```
@@ -467,11 +468,11 @@ stocks/
 ├── img/                               ← Historical screenshots
 ├── .github/
 │   └── workflows/
-│       ├── screener-data.yml          ← Nasdaq 100 feed (Mon-Fri 23:00 UTC)
-│       ├── screener-data-etfs.yml     ← ETFs feed (Mon-Fri 23:15 UTC)
-│       ├── screener-data-sp500.yml    ← S&P 500 feed (Mon-Fri 23:30 UTC)
-│       ├── screener-data-gvd.yml      ← Growth/Value/Dividend feed (Tue-Sat 00:00 UTC)
-│       ├── screener-data-intl.yml     ← International feed (Tue-Sat 00:15 UTC)
+│       ├── screener-data.yml          ← Nasdaq 100 feed (Mon-Fri 21:30 UTC)
+│       ├── screener-data-etfs.yml     ← ETFs feed (Mon-Fri 22:00 UTC)
+│       ├── screener-data-sp500.yml    ← S&P 500 feed (Mon-Fri 22:30 UTC)
+│       ├── screener-data-gvd.yml      ← Growth/Value/Dividend feed (Mon-Fri 23:00 UTC)
+│       ├── screener-data-intl.yml     ← International feed (Mon-Fri 23:30 UTC)
 │       └── constituents.yml           ← Constituent sync, indices + ETFs (Sat 23:00 UTC)
 └── docs/
     ├── PRD.md                         ← This file
@@ -783,13 +784,13 @@ An interactive tool that applies the methodology's three-pillar scoring model to
 Each stock is ranked against the rest of the loaded universe on six metrics in three weighted pillars: Growth 60 (revenue and EPS growth, trailing and forward, with forward growth weighted double), Valuation 20 (PEG FWD), and Balance sheet 20 (cash vs debt). Points follow percentile rank (bottom 22% scores 0, the median half marks, the top 22% full marks), missing data scores zero, and the pillars sum to 0–100. The score's rank within the list maps to a tier: S is the top 10% of the list, A the next 10%, B 20–50%, C 50–75%, F the bottom 25% (boundary ties round up), and a perfect 100 earns S+. It is a relative ranking, so a high tier means a stock looks better than most of the list right now rather than that it cleared a fixed target. The Methodology button on the screener explains it with a worked example.
 
 **8. How often is the screener data updated?**
-On trading days (Monday through Friday) at 23:00 UTC via an automated pipeline. Weekends are skipped because the US market is closed. The "as of" timestamp in the screener header shows when the data was last refreshed.
+On trading days (Monday through Friday), starting at 21:30 UTC via an automated pipeline (30 minutes after the latest possible US market close in UTC terms, so there's always at least a 30-minute buffer after close). Weekends are skipped because the US market is closed. The "as of" timestamp in the screener header shows when the data was last refreshed.
 
 **9. Where does the screener data come from?**
 Yahoo Finance, fetched on trading days by a Python script (using the free yfinance library) that runs in GitHub Actions and commits the result. No API key is required, and there is nothing to configure — the page just reads the published feed from GitHub.
 
 **10. Does the screener use real-time data?**
-No. It uses data from the most recent pipeline run (refreshed once per trading day at 23:00 UTC). Prices shown reflect the close or after-hours price at the time of the last fetch.
+No. It uses data from the most recent pipeline run (refreshed once per trading day, starting at 21:30 UTC). Prices shown reflect the close or after-hours price at the time of the last fetch.
 
 **11. What is the Palantir story?**
 A first-person account where Azqato bought Palantir at $9, sold at $45, and watched it go to $150. It is the single most important lesson documented on the site: selling a business because the price went up is a category mistake. Price and value are not the same thing. It lives on the FAQ page.

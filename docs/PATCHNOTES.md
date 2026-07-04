@@ -2,6 +2,20 @@
 
 ---
 
+## v3.34.5 — 2026-07-04 — Ops: data pipeline re-scheduled (owner decisions)
+
+**Following the workflow timing review logged in v3.34.2, the owner made two decisions and the full daily pipeline schedule is re-anchored and widened. All five daily workflow files updated; docs updated to match.**
+
+### Changed
+
+- **Anchor changed from a fixed Eastern-clock offset to "30 minutes after the latest possible US market close in UTC terms."** US market close is always 4:00pm Eastern, which is 21:00 UTC in winter (EST) but only 20:00 UTC in summer (EDT) — winter is later in UTC. The old schedule (23:00 UTC start) drifted the post-close buffer between 2 and 3 hours depending on season with no clear guarantee; the new anchor (21:30 UTC start) guarantees **at least 30 minutes** after close in every season, growing to 90 minutes in summer. Owner decision: keep a fixed, non-DST-aware cron (no seasonal cron swaps), but pick the anchor point deliberately rather than inheriting whatever a round-number UTC time happened to imply.
+- **Every gap in the daily chain widened to a uniform 30 minutes** (previously a 15/15/30/15 mix), a safety margin against a slow prior run bumping into the next job's start.
+- **New schedule** (all Mon-Fri, all same calendar day): Nasdaq 100 21:30 UTC → ETFs 22:00 UTC → S&P 500 22:30 UTC → Growth/Value/Dividend 23:00 UTC → International 23:30 UTC. A side effect of the new anchor: since the whole chain now fits before midnight UTC, the Tue-Sat day-rollover cron pattern the GVD and International jobs previously needed is gone — all five daily crons are now a plain Mon-Fri (`1-5`).
+- Saturday constituent sync (23:00 UTC) is unchanged and still clear of the daily chain.
+- Docs updated to match: README (pipeline paragraph, tech stack table, project structure), PRD (Data Pipeline section, architecture diagram, folder structure, two FAQ entries), ROADMAP.md (v3.34.5 marked done with the old-vs-new schedule table).
+
+---
+
 ## v3.34.4 — 2026-07-04 — Roadmap: two owner-requested screener features logged
 
 **Docs only. Two new roadmap items in ROADMAP.md, both owner-requested. No code, workflow, or behavior changes in this entry.**

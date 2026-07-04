@@ -3,15 +3,14 @@ name: Update Screener Data (Growth, Value & Dividend)
 # Refresh of data/screener_gvd.json, the combined feed for the screener's
 # Growth (top 100 VUG holdings), Value (top 100 VTV holdings), and Dividend
 # (top 100 VIG holdings) universes. Runs Mon-Fri (trading days), 30 minutes
-# AFTER the S&P 500 job -- which puts it at 00:00 UTC the NEXT calendar day,
-# hence the Tue-Sat cron. The three lists overlap heavily, so the fetch
-# deduplicates symbols (~220 unique of 300) and runs in one pass. Shares the
-# "screener-data" concurrency group so it never pushes at the same time as the
-# other data jobs or the constituent sync.
+# AFTER the S&P 500 job, at 23:00 UTC. The three lists overlap heavily, so the
+# fetch deduplicates symbols (~220 unique of 300) and runs in one pass. Shares
+# the "screener-data" concurrency group so it never pushes at the same time as
+# the other data jobs or the constituent sync.
 
 on:
   schedule:
-    - cron: "0 0 * * 2-6"   # 30 min after the S&P 500 run; Tue-Sat UTC = Mon-Fri US trading days
+    - cron: "0 23 * * 1-5"   # 30 min after the S&P 500 run, Mon-Fri
   workflow_dispatch: {}      # allow manual runs (use this to seed the feed the first time)
 
 permissions:
