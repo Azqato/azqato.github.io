@@ -1,0 +1,48 @@
+name: Update Screener Data (ETFs)
+
+# Daily refresh of data/screener_etfs.json for the ETFs screener universe: a
+# fixed, owner-curated list of 10 funds (data/etfs.json, hand-edited only, no
+# auto-sync). Runs at 23:15 UTC, between the Nasdaq 100 (23:00) and S&P 500
+# (23:30) jobs -- it is a 10-symbol fetch and finishes in about a minute.
+# Uses yfinance (public Yahoo Finance data) -- no API key.
+
+on:
+  schedule:
+    # 23:15 UTC, Mon-Fri only (trading days). GitHub cron is UTC-only and does
+    # not follow DST; see screener-data.yml for the seasonal note.
+    - cron: "15 23 * * 1-5"
+  workflow_dispatch: {}   # allow manual runs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: screener-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Fetch ETF data
+        run: |
+          pip install --quiet yfinance==1.4.1
+          python scripts/fetch_etf_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/screener_etfs.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update screener data (ETFs) [skip ci]"
+            git push
+          fi

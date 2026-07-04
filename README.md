@@ -62,7 +62,7 @@ Then visit `http://localhost:8080`. The screener fetches its data feed directly 
 
 ## Environment Variables
 
-None. The frontend has no environment variables, and the yfinance data pipeline needs no API key or secret. (A legacy `FMP_API_KEY` GitHub Actions secret from an earlier version is no longer referenced and can be deleted.)
+None. The frontend has no environment variables, and the yfinance data pipeline needs no API key or secret. (The legacy `FMP_API_KEY` GitHub Actions secret from an earlier version was deleted on 2026-07-03.)
 
 ---
 
@@ -72,7 +72,7 @@ This is a static site. There is no build step.
 
 **Deploy:** Push to `main`. GitHub Pages serves directly from the repository root.
 
-**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 23:00 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The S&P 500 feed follows at 23:30 UTC, and the combined Growth/Value/Dividend feed 30 minutes after that (00:00 UTC, next calendar day). The constituent sync (Wikipedia for the indices, Vanguard's holdings API for the ETF lists) runs Saturdays at 23:00 UTC.
+**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 23:00 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The ETFs feed (`scripts/fetch_etf_data.py`, a fixed 10-fund list) follows at 23:15 UTC, the S&P 500 feed at 23:30 UTC, and the combined Growth/Value/Dividend feed 30 minutes after that (00:00 UTC, next calendar day). The constituent sync (Wikipedia for the indices, Vanguard's holdings API for the VUG/VTV/VIG lists; the ETFs list is hand-curated and never synced) runs Saturdays at 23:00 UTC.
 
 **Data pipeline (manual):** Go to Actions → "Refresh Screener Data" → Run workflow. Or run locally:
 
@@ -107,16 +107,20 @@ stocks/
 │   ├── vug.json                      ← Growth list: top 100 VUG holdings
 │   ├── vtv.json                      ← Value list: top 100 VTV holdings
 │   ├── vig.json                      ← Dividend list: top 100 VIG holdings
+│   ├── etfs.json                     ← ETFs list: fixed, owner-curated 10 funds (hand-edited only)
 │   ├── screener.json                 ← Generated Nasdaq 100 feed (Mon-Fri metrics)
 │   ├── screener_sp500.json           ← Generated S&P 500 feed (Mon-Fri metrics)
-│   └── screener_gvd.json             ← Generated combined Growth/Value/Dividend feed
+│   ├── screener_gvd.json             ← Generated combined Growth/Value/Dividend feed
+│   └── screener_etfs.json            ← Generated ETFs feed (technicals/returns/yield/cost)
 ├── scripts/
-│   ├── fetch_screener_data.py        ← Python pipeline: yfinance → screener feed (--list/--out, --combined)
+│   ├── fetch_screener_data.py        ← Python pipeline: yfinance → stock feeds (--list/--out, --combined)
+│   ├── fetch_etf_data.py             ← Python pipeline: yfinance → ETFs feed (returns, RSI, MAs, yield, ER, AUM)
 │   ├── update_constituents.py        ← Weekly auto-sync: Wikipedia → nasdaq100.json + sp500.json
 │   └── update_etf_constituents.py    ← Weekly auto-sync: Vanguard API → vug/vtv/vig.json
 ├── .github/
 │   └── workflows/
 │       ├── screener-data.yml         ← Nasdaq 100 feed (Mon-Fri 23:00 UTC)
+│       ├── screener-data-etfs.yml    ← ETFs feed (Mon-Fri 23:15 UTC)
 │       ├── screener-data-sp500.yml   ← S&P 500 feed (Mon-Fri 23:30 UTC)
 │       ├── screener-data-gvd.yml     ← Growth/Value/Dividend feed (Tue-Sat 00:00 UTC)
 │       └── constituents.yml          ← Constituent sync, indices + ETFs (Sat 23:00 UTC)

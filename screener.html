@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nasdaq 100 Screener</title>
-  <meta name="description" content="An interactive stock screener that ranks the Nasdaq 100, S&P 500, and Vanguard Growth, Value, and Dividend top-100 lists against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
+  <meta name="description" content="An interactive screener that ranks the Nasdaq 100, S&P 500, Vanguard Growth, Value, and Dividend top-100 lists, and a curated ETF list against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
   <link rel="canonical" href="https://azqato.github.io/stocks/screener.html">
   <meta name="google-site-verification" content="p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4">
   <!-- Open Graph / Discord -->
@@ -476,12 +476,13 @@
         <span class="universe-name">Nasdaq 100</span>&nbsp;Screener
       </div>
       <span class="screen-pill">Azqato</span>
-      <div class="universe-group" id="universeGroup" role="group" aria-label="Choose a stock universe">
+      <div class="universe-group" id="universeGroup" role="group" aria-label="Choose a universe">
         <button class="btn u-btn active" data-universe="nasdaq100">Nasdaq 100</button>
         <button class="btn u-btn" data-universe="sp500">S&amp;P 500</button>
         <button class="btn u-btn" data-universe="growth" title="Top 100 holdings of VUG (Vanguard Growth ETF)">Growth</button>
         <button class="btn u-btn" data-universe="value" title="Top 100 holdings of VTV (Vanguard Value ETF)">Value</button>
         <button class="btn u-btn" data-universe="dividend" title="Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF)">Dividend</button>
+        <button class="btn u-btn" data-universe="etfs" title="A fixed list of 10 broad-market and factor ETFs, scored on technicals, long-term performance, and cost instead of fundamentals">ETFs</button>
       </div>
       <span class="spacer"></span>
       <span class="as-of" id="asOf">no data loaded</span>
@@ -567,7 +568,7 @@
     </div>
 
     <div class="disclaimer-bar">
-      Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. Forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but <strong>*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure</strong>. The <span class="universe-name">Nasdaq 100</span> constituent list is synced weekly and may differ from the current index or fund holdings.
+      Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. In the stock universes, forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but <strong>*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure</strong>. Stock constituent lists are synced weekly and may differ from the current index or fund holdings; the ETFs list is a fixed set of 10 funds.
     </div>
 
       </main>
@@ -596,6 +597,7 @@
     <div class="modal">
       <button class="modal-close" id="methodologyClose" aria-label="Close">&times;</button>
       <h2>Scoring Methodology</h2>
+      <div id="methodStock">
       <p class="hint">Each stock is graded <b>relative to the rest of the <span class="universe-name">Nasdaq 100</span></b> on six metrics in three weighted pillars: <b>Growth 60 &middot; Valuation 20 &middot; Balance sheet 20</b>, adding up to a <b>Score out of 100</b>. For each metric a stock earns points based on where it ranks against its peers. The score's rank within the list then maps to a <b>Tier</b>, exactly like a tier list: S is the top tenth of this list right now, F is its bottom quarter. This is a ranking, not a fixed-threshold test and not a buy or sell rating: a high tier means a stock looks better than most of the list right now, not that it cleared a specific target.</p>
       <p class="hint" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
         <span><span class="verdict v-sp">S+</span> perfect 100</span>
@@ -659,6 +661,38 @@
 
       <h3>Good to know</h3>
       <p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design some of every list always lands in the bottom tiers: an F here means the bottom of this particular list, not a broken company. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). Because the universes overlap, the same stock can earn a different score in different universes: a dividend payer that looks slow next to the Nasdaq 100 can rank near the top of the Dividend 100, because its peers changed, not its numbers. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="metrics.html" target="_blank" rel="noopener">Metrics glossary</a> and the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a>.</p>
+      </div>
+
+      <div id="methodEtf" hidden>
+      <p class="hint">The ETFs list is scored on an entirely different basis than the stock universes, and on purpose. This methodology's own rule is that individual stocks are judged on fundamentals while index and ETF purchases are timed with technical signals, so this universe grades exactly what the stock lists leave out: <b>Technicals 50 &middot; Performance 30 &middot; Income &amp; cost 20</b>, adding up to a <b>Score out of 100</b>. A high score means a fund with a strong long-term record that is currently sitting low relative to its own recent prices: the setup this methodology treats as the better moment to add to an index position.</p>
+
+      <h3>The eight scored metrics</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Pillar</th><th scope="col">Metric</th><th scope="col" class="num">Weight</th><th scope="col">Better means</th></tr></thead>
+          <tbody>
+            <tr><td>Technicals</td><td>RSI (14-day)</td><td class="num">20</td><td>lower (an oversold fund is the better entry)</td></tr>
+            <tr><td>Technicals</td><td>52-Week Range position</td><td class="num">20</td><td>lower (near the 52-week low beats near the high)</td></tr>
+            <tr><td>Technicals</td><td>Price vs 200-Day Moving Average</td><td class="num">10</td><td>higher (holding above its long-term trend)</td></tr>
+            <tr><td>Performance</td><td>1 Year Total Return</td><td class="num">10</td><td>higher</td></tr>
+            <tr><td>Performance</td><td>5 Year Total Return</td><td class="num">10</td><td>higher</td></tr>
+            <tr><td>Performance</td><td>10 Year Total Return</td><td class="num">10</td><td>higher</td></tr>
+            <tr><td>Income &amp; cost</td><td>Yield</td><td class="num">10</td><td>higher</td></tr>
+            <tr><td>Income &amp; cost</td><td>Expense Ratio</td><td class="num">10</td><td>lower (a cheaper fund to hold)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">Total returns include reinvested distributions. RSI, the range position, and the moving averages are computed from daily price history. Price vs the 20-day and 100-day moving averages, YTD, and Yield&minus;ER are shown and colored for context but carry no points, like the P/E FWD column in the stock universes; AUM is display-only.</p>
+
+      <h3>How a rank becomes points</h3>
+      <p class="hint">With only 10 funds, the stock universes' percentile curve would be far too coarse, so this list uses straight rank points: on each metric the <b>best fund earns the full weight, the worst earns 0</b>, and the funds between are spaced evenly (ties share the average). A missing value (—) scores zero and renders dark red; the score is always out of the full 100. Cell colors follow the same ranks: green is the top of the pack on that metric (15 of 20 rank points or better), red is the bottom (5 or less), amber is in between.</p>
+
+      <h3>Tiers on a 10-fund list</h3>
+      <p class="hint">The same rank bands as the stock lists apply: <span class="verdict v-s">S</span> top 10% &middot; <span class="verdict v-a">A</span> next 10% &middot; <span class="verdict v-b">B</span> 20&ndash;50% &middot; <span class="verdict v-c">C</span> 50&ndash;75% &middot; <span class="verdict v-f">F</span> bottom 25%, ties round up, and a perfect 100 earns <span class="verdict v-sp">S+</span>. On 10 funds that is roughly 1 S, 1 A, 3 B, 3 C, and 2 F at any moment. An F here means the bottom of this list <i>right now</i>: usually a strong fund that has already run up (a high RSI, near the top of its range), not a broken product. Because half the score is timing, tiers in this universe move with the market: a broad selloff can lift a fund up the list without anything changing inside it. That is by design; the score doubles as a deployment-timing dial.</p>
+
+      <h3>Where the list comes from</h3>
+      <p class="hint">A fixed, owner-curated list of 10 funds: QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, and SPMO. It is not synced to any index; changes to it are deliberate edits. The data refreshes each trading day from Yahoo Finance. See the <a href="indices.html" target="_blank" rel="noopener">Indices methodology</a> for the doctrine behind the technical signals, including the RSI and 52-week-range frameworks these scores apply.</p>
+      </div>
     </div>
   </div>
 

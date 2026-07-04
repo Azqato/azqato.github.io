@@ -1,6 +1,6 @@
 # PRD — Azqato Stock Methodology Site
 
-**Version:** 3.32.4
+**Version:** 3.33.0
 **Status:** Current
 **Author:** Azqato
 **Last Updated:** 2026-07-03
@@ -83,7 +83,7 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 - Step-by-step Finviz screener setup guide
 - Step-by-step Seeking Alpha watchlist setup guide (12-column layout)
 - Index/ETF methodology with VIX action levels, AAII sentiment, RSI, 52W range, structural quality metrics, DCA vs lump sum
-- Interactive stock screener with relative percentile scoring model and five switchable universes: Nasdaq 100 (default), S&P 500, and the top 100 holdings of Vanguard's Growth (VUG), Value (VTV), and Dividend Appreciation (VIG) ETFs, each with its own daily data feed
+- Interactive screener with relative percentile scoring model and six switchable universes: Nasdaq 100 (default), S&P 500, the top 100 holdings of Vanguard's Growth (VUG), Value (VTV), and Dividend Appreciation (VIG) ETFs, and a fixed owner-curated ETFs list (10 funds) with its own column set and technicals-based scoring model, each with its own daily data feed
 - Scoring model v2: 6 metrics in three weighted pillars (Growth 60 with forward growth weighted double, Valuation 20, Balance sheet 20), ranked against peers with a top/bottom-22% points clamp, missing data scoring a hard zero, total /100, mapped to S+/S/A/B/C/F tiers (S+ = a perfect 100 score; S = top 10%, A = next 10%, B = 20–50%, C = 50–75%, F = bottom 25% by rank within the loaded list; boundary ties round up)
 - Methodology popup explaining the scoring model in plain language with worked examples
 - Daily yfinance data pipeline via GitHub Actions (no API key required)
@@ -209,7 +209,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 | v3.32.2 — Docs only. v3.33.0 ETF Universe Scoring Model spec locked: the 10-fund fixed list, the 11 visible columns, and 90 of 100 scoring points, per owner instruction. Last 10-point criterion still pending an owner decision | 2026-07-03 | Complete |
 | v3.32.3 — Docs only. v3.33.0 ETF Universe Scoring Model spec completed: last 10 points assigned to Price vs 200-Day Moving Average (highest is best); Price vs 20-Day and Price vs 100-Day Moving Average added as unscored display/context columns. Full 100/100 scoring model and 14 visible columns now locked | 2026-07-03 | Complete |
 | v3.32.4 — Docs only. Four pre-implementation review concerns logged against the v3.33.0 ETF spec (yield double-count/style bias, 50 correlated timing points, tier bands vs a 10-fund list, percentile coarseness at N=10); spec unchanged, concerns to be resolved during implementation | 2026-07-03 | Complete |
-| v3.33.0 — Screener: ETFs universe (owner-requested 2026-07-03; pulled ahead of the International universe by owner priority 2026-07-03; owner locked the full spec, fund list, visible fields, and all 100 scoring points, 2026-07-03, see the ETF Universe Scoring Model spec below). A **fixed** list of 10 owner-picked ETFs (QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO — no auto-sync, no Vanguard-holdings dependency) rated on an entirely different basis than the stock universes: **technicals (RSI, 52-week range), long-term performance (1/5/10-year returns), yield, and expense ratio, not fundamentals**. This is doctrine-consistent by design: the methodology's own rule is that technicals time index/ETF purchases while stocks are judged on fundamentals, so the ETF universe gets the technical scoring the stock universes deliberately exclude. Needs its own scoring model, its own column set (no Rev/EPS/PEG columns), feed fields from yfinance (price history for RSI/52W/returns; trailing yield; expense ratio, if available via yfinance `fundInfo`/`info` — needs verification per fund), and methodology popup section. Blocked on: nothing outstanding for spec; implementation not started | After v3.32 | Planned (full spec locked) |
+| v3.33.0 — Screener: ETFs universe (owner-requested 2026-07-03; pulled ahead of the International universe by owner priority 2026-07-03; owner locked the full spec, fund list, visible fields, and all 100 scoring points, 2026-07-03, see the ETF Universe Scoring Model spec below). A **fixed** list of 10 owner-picked ETFs (QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO — no auto-sync, no Vanguard-holdings dependency) rated on an entirely different basis than the stock universes: **technicals (RSI, 52-week range), long-term performance (1/5/10-year returns), yield, and expense ratio, not fundamentals**. This is doctrine-consistent by design: the methodology's own rule is that technicals time index/ETF purchases while stocks are judged on fundamentals, so the ETF universe gets the technical scoring the stock universes deliberately exclude. Needs its own scoring model, its own column set (no Rev/EPS/PEG columns), feed fields from yfinance (price history for RSI/52W/returns; trailing yield; expense ratio, if available via yfinance `fundInfo`/`info` — needs verification per fund), and methodology popup section. Shipped 2026-07-03: sixth universe button, new `data/etfs.json` fixed list + `scripts/fetch_etf_data.py` + `data/screener_etfs.json` feed + Mon-Fri 23:15 UTC workflow, config-driven table header (screener.js re-renders the `<thead>` and Columns menu per universe kind, pre-paying for future non-stock universes), rank-linear scoring, per-fund popup, methodology popup ETF section. Verified headless against the live local feed: 10/10 scored, tiers 1 S / 1 A / 3 B / 3 C / 2 F, stock universes unregressed | 2026-07-03 | Complete |
 | v3.34.0 — Screener: International universe, top 100 holdings of VXUS (Vanguard Total International Stock ETF) only. Deliberately its own release: VXUS reports local-exchange tickers with no exchange suffix (e.g. `2330`, `NESN`), so it needs an ISIN-driven mapping to Yahoo symbols, a decision on local-currency display in the $-formatted columns, and handling for the sparser analyst estimates on foreign listings that feed the scoring pillars. Same Vanguard holdings API and weekly sync as the GVD universes | After v3.33 | Planned |
 | v4.0.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v3.34 | Planned |
 | v4.1.0 — Deeper index fund coverage (sector ETFs, international allocation, bond tent strategy) | TBD | Planned |
@@ -221,7 +221,7 @@ The site is live, fully featured, and running automated daily data refreshes. Th
 
 **v3.x (current):** Screener with daily data, relative percentile scoring, methodology popup, documentation consolidation.
 
-**Queue head (updated 2026-07-03):** v3.28.0 GVD universes, v3.29.0 rank-based tier scale, v3.30.0 scoring model v2, v3.31.0 margins-out re-weighting, and v3.32.0 pipeline cleanup are shipped. Next: v3.33.0 ETFs universe (pulled ahead of International by owner priority 2026-07-03; blocked on the owner's ETF list), then v3.34.0 International (VXUS top 100), then v4.0.0 sparklines. Constituent sourcing decision (2026-07-03): index universes stay on Wikipedia (updates within days of index changes); ETF universes use Vanguard's holdings API (authoritative but month-lagged, acceptable because the fund's published holdings are the universe definition). Switching the S&P 500 to VOO holdings was considered and rejected for the freshness reason. Note the dependency: the v4.0.0 sparklines mine the git history of the committed data feeds, so keeping generated data files in the repo is an intentional design choice, not tech debt.
+**Queue head (updated 2026-07-03):** v3.28.0 GVD universes, v3.29.0 rank-based tier scale, v3.30.0 scoring model v2, v3.31.0 margins-out re-weighting, v3.32.0 pipeline cleanup, and v3.33.0 ETFs universe are shipped. Next: v3.34.0 International (VXUS top 100), then v4.0.0 sparklines. Constituent sourcing decision (2026-07-03): index universes stay on Wikipedia (updates within days of index changes); ETF universes use Vanguard's holdings API (authoritative but month-lagged, acceptable because the fund's published holdings are the universe definition). Switching the S&P 500 to VOO holdings was considered and rejected for the freshness reason. Note the dependency: the v4.0.0 sparklines mine the git history of the committed data feeds, so keeping generated data files in the repo is an intentional design choice, not tech debt.
 
 **v4.x (committed order, decided 2026-07-03):** v4.0.0 score history sparklines, v4.1.0 deeper index fund coverage, v4.2.0 additional historical illustrative examples, v4.3.0 additional philosophy sections, v4.4.0 conference call research guide. Potential Growth/Value/Dividend standalone framework pages remain unversioned backlog.
 
@@ -309,12 +309,13 @@ GitHub Pages is configured to serve from the repository root. No additional conf
 
 ### Data Pipeline (Automated)
 
-Three screener data feeds are refreshed automatically, staggered so the default Nasdaq 100 view always has priority:
+Four screener data feeds are refreshed automatically, staggered so the default Nasdaq 100 view always has priority:
 
 - **Nasdaq 100** (`data/screener.json`): trading days (Mon-Fri) at 23:00 UTC via `.github/workflows/screener-data.yml`
-- **S&P 500** (`data/screener_sp500.json`): trading days (Mon-Fri) at 23:30 UTC via `.github/workflows/screener-data-sp500.yml` (the larger ~500-symbol fetch runs second so it never delays the Nasdaq 100 refresh)
+- **ETFs** (`data/screener_etfs.json`): trading days (Mon-Fri) at 23:15 UTC via `.github/workflows/screener-data-etfs.yml` (a 10-symbol fetch that slots between the two index jobs; run by `scripts/fetch_etf_data.py`, which shares no field logic with the stock fetcher)
+- **S&P 500** (`data/screener_sp500.json`): trading days (Mon-Fri) at 23:30 UTC via `.github/workflows/screener-data-sp500.yml` (the larger ~500-symbol fetch runs after the small jobs so it never delays them)
 - **Growth/Value/Dividend** (`data/screener_gvd.json`): 30 minutes after the S&P 500 job via `.github/workflows/screener-data-gvd.yml`, which lands at 00:00 UTC on the next calendar day (Tue-Sat cron covering Mon-Fri trading days). One combined file holding all three universes; symbols shared between lists are fetched once (~220 unique of 300)
-- **Constituent sync** (`data/nasdaq100.json` + `data/sp500.json` from Wikipedia; `data/vug.json` + `data/vtv.json` + `data/vig.json` from Vanguard's holdings API): Saturdays at 23:00 UTC via `.github/workflows/constituents.yml`; regenerates a feed only if a list's membership changed
+- **Constituent sync** (`data/nasdaq100.json` + `data/sp500.json` from Wikipedia; `data/vug.json` + `data/vtv.json` + `data/vig.json` from Vanguard's holdings API): Saturdays at 23:00 UTC via `.github/workflows/constituents.yml`; regenerates a feed only if a list's membership changed. The ETFs list (`data/etfs.json`) is **not** synced: it is a fixed, owner-curated set of 10 funds, changed only by hand
 - **Trigger manually:** GitHub Actions tab → the relevant workflow → Run workflow (use this to seed a feed the first time)
 - **Run locally:** `python3 scripts/fetch_screener_data.py --list data/nasdaq100.json --out data/screener.json` (the `--list`/`--out` args default to the Nasdaq 100; point them at `data/sp500.json` / `data/screener_sp500.json` for the S&P 500). For the combined feed: `python3 scripts/fetch_screener_data.py --combined growth=data/vug.json --combined value=data/vtv.json --combined dividend=data/vig.json --out data/screener_gvd.json`
 - **Output:** each feed holds its list's tickers with price, market cap, cash, debt, growth metrics, P/E, PEG, and timestamps; the GVD feed nests one `{updated, source, stocks}` object per universe under a `universes` key
@@ -385,6 +386,8 @@ The site is a fully static architecture. No server processes any requests. No da
                  │
                  ├── Mon-Fri 23:00 UTC → fetch_screener_data.py --list nasdaq100.json → commits data/screener.json
                  │
+                 ├── Mon-Fri 23:15 UTC → fetch_etf_data.py (fixed 10-fund list)       → commits data/screener_etfs.json
+                 │
                  ├── Mon-Fri 23:30 UTC → fetch_screener_data.py --list sp500.json     → commits data/screener_sp500.json
                  │
                  ├── Tue-Sat 00:00 UTC → fetch_screener_data.py --combined growth/value/dividend → commits data/screener_gvd.json
@@ -430,17 +433,21 @@ stocks/
 │   ├── vug.json                       ← Growth list: top 100 VUG holdings (auto-synced from Vanguard)
 │   ├── vtv.json                       ← Value list: top 100 VTV holdings (auto-synced from Vanguard)
 │   ├── vig.json                       ← Dividend list: top 100 VIG holdings (auto-synced from Vanguard)
+│   ├── etfs.json                      ← ETFs list: fixed, owner-curated 10 funds (hand-edited only)
 │   ├── screener.json                  ← Nasdaq 100 daily metrics feed
 │   ├── screener_sp500.json            ← S&P 500 daily metrics feed
-│   └── screener_gvd.json              ← Combined Growth/Value/Dividend daily metrics feed
+│   ├── screener_gvd.json              ← Combined Growth/Value/Dividend daily metrics feed
+│   └── screener_etfs.json             ← ETFs daily metrics feed (technicals/returns/yield/cost)
 ├── scripts/
-│   ├── fetch_screener_data.py         ← yfinance → screener feed (--list/--out per index; --combined for GVD)
+│   ├── fetch_screener_data.py         ← yfinance → stock screener feeds (--list/--out per index; --combined for GVD)
+│   ├── fetch_etf_data.py              ← yfinance → ETFs feed (returns, RSI, MAs, yield, expense ratio, AUM)
 │   ├── update_constituents.py         ← Wikipedia → nasdaq100.json + sp500.json (weekly auto-sync)
 │   └── update_etf_constituents.py     ← Vanguard holdings API → vug/vtv/vig.json (weekly auto-sync)
 ├── img/                               ← Historical screenshots
 ├── .github/
 │   └── workflows/
 │       ├── screener-data.yml          ← Nasdaq 100 feed (Mon-Fri 23:00 UTC)
+│       ├── screener-data-etfs.yml     ← ETFs feed (Mon-Fri 23:15 UTC)
 │       ├── screener-data-sp500.yml    ← S&P 500 feed (Mon-Fri 23:30 UTC)
 │       ├── screener-data-gvd.yml      ← Growth/Value/Dividend feed (Tue-Sat 00:00 UTC)
 │       └── constituents.yml           ← Constituent sync, indices + ETFs (Sat 23:00 UTC)
@@ -529,6 +536,12 @@ Array of 100 objects. `t` = ticker symbol (string), `n` = company name (string).
 
 One file, three universes. Each entry under `universes` has exactly the shape of a single-list feed, so the screener can point at `universes.growth` (etc.) and reuse every code path. Stock records are identical in schema to screener.json above; a symbol held by more than one fund is fetched from Yahoo once per run and duplicated into each universe with that list's curated name.
 
+**screener_etfs.json (ETFs feed, v3.33.0)**
+
+Same `{updated, source, stocks}` envelope as the stock feeds (so the frontend reuses every load/cache path), but with fund-specific fields per record: `price`, `prevClose`, `changePct`, `aum` (total assets, USD), `yieldPct` (trailing distribution yield, %), `expenseRatio` (net, %), `ytd`/`ret1y`/`ret5y`/`ret10y` (total returns incl. reinvested distributions, %, computed from 11 years of dividend-adjusted daily closes), `rsi` (14-day Wilder), `wk52Low`/`wk52High` (unadjusted 1-year closes), `pctVs20dma`/`pctVs100dma`/`pctVs200dma` (price vs moving average, %, unadjusted basis), plus the standard timestamps. Sourced by `scripts/fetch_etf_data.py`; yield uses Yahoo's `dividendYield` (never `trailingAnnualDividendYield`, which is missing or wrong for several funds) and expense ratio uses `netExpenseRatio`.
+
+**etfs.json** follows the nasdaq100.json shape (array of `{"t", "n"}`) but holds exactly the 10 owner-picked funds and is never auto-synced.
+
 **vug.json / vtv.json / vig.json** follow the nasdaq100.json shape (array of `{"t", "n"}`), hold exactly 100 entries (top holdings by weight after the dual-class dedupe), and are synced weekly from Vanguard's holdings API (Vanguard publishes fund holdings monthly, so constituent freshness lags the Wikipedia-sourced index lists by up to a month; acceptable because the fund's published holdings are the universe definition).
 
 ### API Design (Internal Data Flow)
@@ -573,13 +586,13 @@ The P/E-vs-growth ratio (`peFwd / epsFwd`, negative-P/E and shrinking-earnings r
 
 **Per-stock popup:** clicking any row opens a focused breakdown for that stock — all six scored metrics with value, percentile, and weighted points (e.g. "7.2/10"), color-coded, with the total score and tier. Missing metrics show 0 points in dark red. Reuses the modal component.
 
-### ETF Universe Scoring Model (v3.33.0, spec locked 2026-07-03; not yet built)
+### ETF Universe Scoring Model (v3.33.0, shipped 2026-07-03)
 
-A sixth universe, entirely separate from the five stock universes above: a **fixed, owner-picked list of 10 ETFs**, not an auto-synced index or fund-holdings list. Doctrine-consistent by design — the site's own rule is that individual stocks are judged on fundamentals while index/ETF purchases are timed on technicals, so this universe scores exactly the technical and cost signals the stock universes deliberately exclude. Absolute thresholds are appropriate here (unlike the stock universes' peer-relative percentile model) because the fund list is small and fixed, not because the underlying rule differs; the final scoring mechanics (absolute vs. relative-to-the-10) are still to be worked out during implementation.
+A sixth universe, entirely separate from the five stock universes above: a **fixed, owner-picked list of 10 ETFs**, not an auto-synced index or fund-holdings list. Doctrine-consistent by design — the site's own rule is that individual stocks are judged on fundamentals while index/ETF purchases are timed on technicals, so this universe scores exactly the technical and cost signals the stock universes deliberately exclude.
 
 **The 10 ETFs (fixed list, no auto-sync):** QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO.
 
-**Visible columns:** Price, Daily % Change, YTD Performance, 1 Year Total Return, 5 Year Total Return, 10 Year Total Return, Yield, Expense Ratio, Yield − Expense Ratio, RSI, 52-Week Range, Price vs 20-Day Moving Average, Price vs 100-Day Moving Average, Price vs 200-Day Moving Average.
+**Visible columns:** Price, Daily % Change, YTD Performance, 1 Year Total Return, 5 Year Total Return, 10 Year Total Return, Yield, Expense Ratio, Yield − Expense Ratio, RSI, 52-Week Range, Price vs 20-Day Moving Average, Price vs 100-Day Moving Average, Price vs 200-Day Moving Average, AUM (owner-added 2026-07-03; unscored display, `info["totalAssets"]`, verified for all 10 funds).
 
 **Scoring criteria (100 of 100 points decided 2026-07-03):**
 
@@ -596,14 +609,16 @@ A sixth universe, entirely separate from the five stock universes above: a **fix
 
 The 20-day and 100-day moving-average columns are **display/context only** (unscored), giving a fuller trend picture (short, medium, long) alongside the scored 200-day signal, the same "scored vs. context-only" pattern the stock universes use for P/E FWD.
 
-**Open questions for implementation (not yet resolved):** whether yfinance exposes expense ratio and trailing yield reliably for every fund in this list (needs per-ticker verification — ETF `info`/`fundInfo` fields are less consistent than equity fundamentals); how RSI, 52-Week Range position, and the three moving-average columns are computed (all derived from yfinance price history — reuse the existing price-history-derived RSI/52W formulas from the indices-methodology doctrine, applied here as scored/display columns instead of context-only signals); whether scoring is absolute (fixed thresholds) or percentile-relative-to-the-10 like the stock universes; feed/pipeline design (separate `data/screener_etfs.json`, its own fetch script or an extension of `fetch_screener_data.py`, refresh cadence).
+**Data availability (verified live against yfinance 1.4.1, 2026-07-03, all 10 funds):** yield via `info["dividendYield"]` (do **not** use `trailingAnnualDividendYield` — missing or wrong for several funds, e.g. VUG); expense ratio via `info["netExpenseRatio"]` (present and correct for all 10); everything else (YTD/1Y/5Y/10Y total returns, RSI-14, 52-week range, 20/100/200-day MAs) computed from one 11-year daily history call. Convention: total returns use dividend-adjusted closes (`auto_adjust=True`), RSI/MAs/52W range use unadjusted prices (standard charting basis). SPMO (inception Oct 2015) is the youngest fund and just clears the 10-year return window; a missing return scores a hard zero, consistent with the stock model.
 
-**Review concerns logged 2026-07-03 (pre-implementation review; spec unchanged, to be resolved during or before implementation):**
+**Review concerns logged 2026-07-03 and owner resolutions (decided 2026-07-03 before implementation):**
 
-1. **Yield is partially double-counted and carries a style bias.** The 1/5/10-year *total* returns already include distributions, so scoring yield again gives income-style funds (VIG, VTV) a structural bonus while growth funds (QQQ, VUG, SPMO) are structurally penalized — a fund-style tilt, not a quality signal. Alternatives considered: score the Yield − Expense Ratio column instead of raw yield, or drop scored yield and raise Expense Ratio to 20 points. Owner may keep as-is if the income tilt is intentional.
-2. **50 of the 100 points move together.** RSI, 52-Week Range position, and Price vs 200DMA are all "how far below recent prices" measures; in a broad selloff all three fire at once, so half the score is effectively one dip-depth factor and scores will swing hard day to day. Possibly desirable (it makes the score a strong timing dial, per doctrine); logged so the behavior is expected, not surprising.
-3. **The S/A/B/C/F rank-band tier system does not fit a 10-fund list.** Rank bands give S = 1 fund, A = 1, B = 3, C = 2-3, F = 2-3; an F badge on SPY or VTI reads as "broken fund" regardless of caveats, and S+ (perfect 100) is nearly unreachable with 10 peers. Options: keep tiers anyway, show score only with no tier badge, or use absolute score cuts for this universe.
-4. **Relative percentiles are very coarse at N=10.** Funds sit ~11 percentile points apart and the 22% clamp was calibrated for 100+ stocks; reused unchanged, roughly the top 2 funds per metric get full marks and the bottom 2 get zero, with large jumps between neighbors. Recommendation on record: absolute thresholds (the indices page already defines RSI action levels) or simple rank-points for this universe rather than the percentile clamp.
+1. **Yield is partially double-counted and carries a style bias** (total returns already include distributions, so scoring yield again favors income-style VIG/VTV over growth-style QQQ/VUG/SPMO). Alternatives offered: score Yield − Expense Ratio instead, or drop yield and raise Expense Ratio to 20. **Resolved: keep as specced** — the income tilt is an accepted, intentional preference.
+2. **50 of the 100 points move together.** RSI, 52-Week Range position, and Price vs 200DMA are all "how far below recent prices" measures; in a broad selloff all three fire at once, so half the score is effectively one dip-depth factor and scores will swing hard day to day. **Accepted as designed** — it makes the score a strong timing dial, per the technicals-time-ETF-purchases doctrine.
+3. **The S/A/B/C/F rank-band tier system fits a 10-fund list oddly** (S = 1 fund, A = 1, B = 3, C = 2-3, F = 2-3; an F badge lands on household index funds; S+ is nearly unreachable with 10 peers). Alternatives offered: score-only with no tier badges, or absolute score cuts. **Resolved: keep the rank bands** — an F means "bottom of this list right now," consistent with every other universe, and the caveat language already covers it.
+4. **Relative percentiles are very coarse at N=10** (the 22% clamp was calibrated for 100+ stocks; reused unchanged, the top 2 funds per metric max out and the bottom 2 zero out). **Resolved: rank-based linear points for this universe** — on each metric the best fund earns full points and the worst earns 0, spaced evenly by rank (ties take the average rank), no clamp, no calibration to maintain.
+
+**As built (shipped 2026-07-03):** static `data/etfs.json` list (hand-edited only, no auto-sync); `scripts/fetch_etf_data.py` (the field set shares nothing with the stock fetcher); `data/screener_etfs.json` feed in the standard `{updated, source, stocks}` envelope; `.github/workflows/screener-data-etfs.yml` Mon-Fri 23:15 UTC (between the Nasdaq 100 and S&P 500 runs, same `screener-data` concurrency group). Frontend: sixth universe button ("ETFs"); screener.js routes by a per-universe `kind` flag — the `<thead>` and Columns menu are config-driven and re-render when the universe kind changes (a refactor that also pre-pays for the International universe), sort and Columns events moved to delegation to survive the re-render, and the stock universes' scoring/markup are unchanged (verified by a headless regression run matching the v3.31.0 baseline exactly). ETF pillars as displayed: **Technicals 50** (RSI 20, 52W range 20, vs-200DMA 10), **Performance 30** (1/5/10y returns), **Income & cost 20** (yield 10, expense ratio 10); rank-linear points (best fund 20, worst 0, evenly spaced, ties averaged, missing = hard zero); Factors chip /8; the same rank-band tiers (on 10 funds: 1 S, 1 A, 3 B, 3 C, 2 F, verified live); cell colors green at 15+ rank points and red at 5 or less (the stock thresholds of exactly 20/0 would color only the single best/worst fund); per-fund popup breakdown; a dedicated ETF section in the methodology popup shown when the ETFs universe is active.
 
 ### State Management
 
@@ -629,7 +644,7 @@ No cookies. No session storage. No server-side state.
 |--------|--------|
 | Largest Contentful Paint (LCP) | Under 1.5s on 3G |
 | Time to Interactive (TTI) | Under 2s on 3G |
-| JavaScript | `script.js` ~49 lines (content pages); `screener.js` ~490 lines (loaded only on the screener page) |
+| JavaScript | `script.js` ~49 lines (content pages); `screener.js` ~880 lines (loaded only on the screener page) |
 | CSS total | Under 50KB (style.css: ~850 lines) |
 | screener.json size | Under 100KB for 100 tickers |
 | Font requests | 0 (system fonts only) |

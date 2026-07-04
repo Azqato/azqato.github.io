@@ -46,6 +46,13 @@
         paths: GVD_PATHS, feedKey: "dividend",
         cacheKey: "azq_screener_dividend_cache",
         store: null
+      },
+      etfs: {
+        label: "ETFs",                 // fixed, owner-curated 10-fund list (data/etfs.json)
+        kind: "etf",                   // different columns and scoring model (see ETF_METRICS)
+        paths: [RAW_BASE + "screener_etfs.json", "data/screener_etfs.json"],
+        cacheKey: "azq_screener_etfs_cache",
+        store: null
       }
     };
 
@@ -98,6 +105,10 @@
     }
     function fmtPrice(n) { return isNum(n) ? "$" + n.toFixed(2) : "—"; }
     function fmtChange(n) { return isNum(n) ? (n > 0 ? "+" : "") + n.toFixed(2) + "%" : "—"; }
+    function fmtRet(n) { return isNum(n) ? (n > 0 ? "+" : "") + n.toFixed(1) + "%" : "—"; }   // signed returns (YTD, 1/5/10y, vs-MA)
+    function fmtPct2(n) { return isNum(n) ? n.toFixed(2) + "%" : "—"; }                        // yield / expense ratio
+    function fmtRsi(n) { return isNum(n) ? n.toFixed(1) : "—"; }
+    function fmtRangePos(n) { return isNum(n) ? Math.round(n) + "%" : "—"; }                   // position within the 52-week range
     function clsChange(n) {
       if (!isNum(n) || n === 0) return "muted";
       return n > 0 ? "pos" : "neg";
@@ -156,19 +167,62 @@
         } },
       { key: "cashDebt", weight: 20, higher: true,  get: function (d) { if (!isNum(d.cash) || !isNum(d.debt)) return null; return d.debt === 0 ? (d.cash > 0 ? Infinity : null) : d.cash / d.debt; } }
     ];
-    var TOTAL_WEIGHT = METRICS.reduce(function (s, m) { return s + m.weight; }, 0); // 100
-    var SCORED_COUNT = METRICS.filter(function (m) { return m.weight > 0; }).length; // 6
+
+    // ---- ETFs universe scoring (v3.33.0): a different model for a different question ----
+    // The stock universes grade fundamentals; the ETFs list is timed with
+    // technicals, per the site doctrine (technicals time index/ETF purchases).
+    // Eight scored metrics: Technicals 50 (RSI 20, 52-week range position 20,
+    // price vs 200-day MA 10), Performance 30 (1/5/10-year total returns),
+    // Income & cost 20 (yield 10, expense ratio 10). YTD, net yield, and the
+    // 20/100-day MA columns are weight-0 context rankings (colored, no points),
+    // like P/E FWD in the stock model; AUM is display-only. With just 10 funds
+    // a percentile clamp is far too coarse, so points are straight rank-linear:
+    // the best fund on a metric earns 20, the worst 0, evenly spaced, ties
+    // averaged (see the curve selection in computeScoreMap).
+    function wk52Pos(d) {
+      if (!isNum(d.price) || !isNum(d.wk52Low) || !isNum(d.wk52High) || d.wk52High <= d.wk52Low) return null;
+      return clamp((d.price - d.wk52Low) / (d.wk52High - d.wk52Low) * 100, 0, 100);
+    }
+    function netYield(d) {
+      if (!isNum(d.yieldPct) || !isNum(d.expenseRatio)) return null;
+      return d.yieldPct - d.expenseRatio;
+    }
+    var ETF_METRICS = [
+      { key: "rsi",          weight: 20, higher: false, get: function (d) { return isNum(d.rsi) ? d.rsi : null; } },
+      { key: "wk52",         weight: 20, higher: false, get: function (d) { return wk52Pos(d); } },
+      { key: "ret1y",        weight: 10, higher: true,  get: function (d) { return isNum(d.ret1y) ? d.ret1y : null; } },
+      { key: "ret5y",        weight: 10, higher: true,  get: function (d) { return isNum(d.ret5y) ? d.ret5y : null; } },
+      { key: "ret10y",       weight: 10, higher: true,  get: function (d) { return isNum(d.ret10y) ? d.ret10y : null; } },
+      { key: "yieldPct",     weight: 10, higher: true,  get: function (d) { return isNum(d.yieldPct) ? d.yieldPct : null; } },
+      { key: "expenseRatio", weight: 10, higher: false, get: function (d) { return isNum(d.expenseRatio) ? d.expenseRatio : null; } },
+      { key: "pctVs200dma",  weight: 10, higher: true,  get: function (d) { return isNum(d.pctVs200dma) ? d.pctVs200dma : null; } },
+      { key: "ytd",          weight: 0,  higher: true,  get: function (d) { return isNum(d.ytd) ? d.ytd : null; } },
+      { key: "netYield",     weight: 0,  higher: true,  get: function (d) { return netYield(d); } },
+      { key: "pctVs20dma",   weight: 0,  higher: true,  get: function (d) { return isNum(d.pctVs20dma) ? d.pctVs20dma : null; } },
+      { key: "pctVs100dma",  weight: 0,  higher: true,  get: function (d) { return isNum(d.pctVs100dma) ? d.pctVs100dma : null; } }
+    ];
+
+    function modeKind() { return UNIVERSES[universeMode].kind || "stock"; }
+    function isEtf() { return modeKind() === "etf"; }
+    function activeMetrics() { return isEtf() ? ETF_METRICS : METRICS; }
 
     // Rank every loaded stock on each metric, convert ranks to points, and sum.
     // `parts` keeps every metric's points on a 0-20 scale (for cell colors and
     // the popup); the total applies each metric's weight.
     function computeScoreMap() {
+      var ms = activeMetrics();
+      // ETFs use straight rank-linear points (best 20, worst 0); the stock
+      // universes use the calibrated percentile clamp above.
+      var curve = isEtf() ? function (p) { return 20 * p; } : pointsFromPct;
+      var totalWeight = ms.reduce(function (s, m) { return s + m.weight; }, 0);   // 100 in both modes
+      var scoredCount = ms.filter(function (m) { return m.weight > 0; }).length;  // 6 stocks, 8 ETFs
+
       var tickers = Object.keys(data);
       var pts = {};   // ticker -> { metricKey: points 0-20 }
       var pcts = {};  // ticker -> { metricKey: percentile 0..1 }
       tickers.forEach(function (t) { pts[t] = {}; pcts[t] = {}; });
 
-      METRICS.forEach(function (m) {
+      ms.forEach(function (m) {
         var vals = [];
         tickers.forEach(function (t) {
           var d = data[t];
@@ -186,7 +240,7 @@
           while (j + 1 < n && vals[j + 1].v === vals[i].v) j++; // average-rank ties
           var perc = n > 1 ? ((i + j) / 2) / (n - 1) : 0.5;
           if (!m.higher) perc = 1 - perc; // lower-is-better metrics invert
-          var p = pointsFromPct(perc);
+          var p = curve(perc);
           for (var k = i; k <= j; k++) { pts[vals[k].t][m.key] = p; pcts[vals[k].t][m.key] = perc; }
           i = j + 1;
         }
@@ -195,7 +249,7 @@
       var out = {};
       tickers.forEach(function (t) {
         var sum = 0, have = 0, passes = 0;
-        METRICS.forEach(function (m) {
+        ms.forEach(function (m) {
           if (!m.weight) return;
           var p = pts[t][m.key];
           if (p === undefined) return; // missing = hard zero (adds nothing, denominator stays 100)
@@ -205,9 +259,9 @@
         });
         if (!have) { out[t] = { pct: null, passes: 0, total: 0, parts: pts[t], pctiles: pcts[t] }; return; }
         out[t] = {
-          pct: Math.round(sum / TOTAL_WEIGHT * 100),
+          pct: Math.round(sum / totalWeight * 100),
           passes: passes,
-          total: SCORED_COUNT, // fixed /6: a missing metric is a miss, not a pass
+          total: scoredCount, // fixed denominator: a missing metric is a miss, not a pass
           parts: pts[t],   // percentile points per metric (0-20 scale), for cell coloring
           pctiles: pcts[t] // raw percentiles, for the per-stock breakdown popup
         };
@@ -215,11 +269,14 @@
       return out;
     }
     // Cell color from a metric's percentile points: top of the pack green,
-    // bottom red, middle amber.
+    // bottom red, middle amber. The stock clamp already sends its top/bottom
+    // 22% to exactly 20/0; ETF rank-linear points only hit those extremes for
+    // the single best/worst fund, so ETF mode colors the top and bottom ~3.
     function colorFromPts(p) {
       if (p === undefined || p === null) return "muted";
-      if (p >= 20) return "pos";
-      if (p <= 0) return "neg";
+      var hi = isEtf() ? 15 : 20, lo = isEtf() ? 5 : 0;
+      if (p >= hi) return "pos";
+      if (p <= lo) return "neg";
       return "cau";
     }
     // Scored metrics: missing data is a hard zero, so a "—" renders dark red.
@@ -288,21 +345,31 @@
     function rows() {
       var sm = computeScoreMap();
       var tiers = computeTierMap(sm);
+      var etf = isEtf();
       return universe().map(function (s) {
         var t = s[0];
         var d = data[t] || {};
         var sc = sm[t] || { pct: null, passes: 0, total: 0, parts: {} };
-        return {
+        var r = {
           ticker: t, name: s[1], d: d, parts: sc.parts || {},
           score: sc.pct, passes: sc.passes, total: sc.total,
           tier: sc.pct === null ? "none" : tiers[t],
-          revTTM: d.revTTM, revFwd: d.revFwd, epsTTM: d.epsTTM, epsFwd: d.epsFwd,
-          peFwd: d.peFwd, pegFwd: pegDisplay(d), cash: d.cash, debt: d.debt,
-          cashDebt: cashDebtRatio(d),
-          price: d.price, marketCap: d.marketCap,
+          price: d.price,
           changePct: isNum(d.changePct) ? d.changePct : null,
           updated: freshestMs(d.priceUpdated, d.fundamentalsUpdated)
         };
+        if (etf) {
+          r.aum = d.aum; r.ytd = d.ytd;
+          r.ret1y = d.ret1y; r.ret5y = d.ret5y; r.ret10y = d.ret10y;
+          r.yieldPct = d.yieldPct; r.expenseRatio = d.expenseRatio; r.netYield = netYield(d);
+          r.rsi = d.rsi; r.wk52 = wk52Pos(d);
+          r.pctVs20dma = d.pctVs20dma; r.pctVs100dma = d.pctVs100dma; r.pctVs200dma = d.pctVs200dma;
+        } else {
+          r.revTTM = d.revTTM; r.revFwd = d.revFwd; r.epsTTM = d.epsTTM; r.epsFwd = d.epsFwd;
+          r.peFwd = d.peFwd; r.pegFwd = pegDisplay(d); r.cash = d.cash; r.debt = d.debt;
+          r.cashDebt = cashDebtRatio(d); r.marketCap = d.marketCap;
+        }
+        return r;
       });
     }
 
@@ -427,9 +494,96 @@
       return null;
     }
 
+    // ---- Per-mode table header and column groups ----
+    // The stock and ETF universes show entirely different column sets, so the
+    // <thead> and the Columns menu are re-rendered when the mode kind changes
+    // (the static HTML ships the stock variant for first paint). Sort clicks
+    // and Columns-menu changes are bound by delegation in bind(), so they
+    // survive the re-render.
+    var HEADS = {
+      stock: {
+        group: '<th class="col-ticker"></th>' +
+          '<th class="g-screen group-start" colspan="3">Azqato Screen</th>' +
+          '<th class="grp-snapshot group-start" colspan="3">Snapshot</th>' +
+          '<th class="grp-growth group-start" colspan="4">Growth</th>' +
+          '<th class="grp-valuation group-start" colspan="2">Valuation</th>' +
+          '<th class="grp-balance group-start" colspan="3">Balance Sheet</th>' +
+          '<th class="grp-snapshot group-start" colspan="1"></th>',
+        head: '<th class="left col-ticker" data-sort="ticker">Ticker</th>' +
+          '<th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>' +
+          '<th data-sort="score">Score</th>' +
+          '<th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 percentile points)">Factors</th>' +
+          '<th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>' +
+          '<th class="grp-snapshot" data-sort="price">Price</th>' +
+          '<th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session\'s close, as of the last daily data refresh">Chg %</th>' +
+          '<th class="grp-growth group-start" data-sort="revTTM">Rev TTM</th>' +
+          '<th class="grp-growth" data-sort="revFwd">Rev FWD</th>' +
+          '<th class="grp-growth" data-sort="epsTTM">EPS TTM</th>' +
+          '<th class="grp-growth" data-sort="epsFwd" title="GAAP-basis forward EPS growth (current fiscal year). May differ from Seeking Alpha, which uses Non-GAAP consensus.">EPS FWD*</th>' +
+          '<th class="grp-valuation group-start" data-sort="peFwd" title="Shown for context and colored by the P/E-vs-growth ranking; the score\'s valuation points come from PEG FWD">P/E FWD</th>' +
+          '<th class="grp-valuation" data-sort="pegFwd">PEG FWD</th>' +
+          '<th class="grp-balance group-start" data-sort="cash">Total Cash</th>' +
+          '<th class="grp-balance" data-sort="debt">Total Debt</th>' +
+          '<th class="grp-balance" data-sort="cashDebt">Cash/Debt</th>' +
+          '<th class="grp-snapshot group-start" data-sort="updated">Updated</th>'
+      },
+      etf: {
+        group: '<th class="col-ticker"></th>' +
+          '<th class="g-screen group-start" colspan="3">Azqato Screen</th>' +
+          '<th class="grp-snapshot group-start" colspan="3">Snapshot</th>' +
+          '<th class="grp-performance group-start" colspan="4">Performance</th>' +
+          '<th class="grp-income group-start" colspan="3">Income &amp; Cost</th>' +
+          '<th class="grp-technicals group-start" colspan="5">Technicals</th>' +
+          '<th class="grp-snapshot group-start" colspan="1"></th>',
+        head: '<th class="left col-ticker" data-sort="ticker">Fund</th>' +
+          '<th class="left group-start" data-sort="tier" title="Rank within this 10-fund list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>' +
+          '<th data-sort="score">Score</th>' +
+          '<th data-sort="factors" title="Number of the 8 scored metrics ranking in the upper part of the pack (15+ of 20 rank points)">Factors</th>' +
+          '<th class="grp-snapshot group-start" data-sort="aum" title="Assets under management">AUM</th>' +
+          '<th class="grp-snapshot" data-sort="price">Price</th>' +
+          '<th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session\'s close, as of the last daily data refresh">Chg %</th>' +
+          '<th class="grp-performance group-start" data-sort="ytd" title="Year-to-date total return, distributions reinvested. Context only, not scored.">YTD</th>' +
+          '<th class="grp-performance" data-sort="ret1y" title="1-year total return, distributions reinvested">1Y TR</th>' +
+          '<th class="grp-performance" data-sort="ret5y" title="5-year total return, distributions reinvested">5Y TR</th>' +
+          '<th class="grp-performance" data-sort="ret10y" title="10-year total return, distributions reinvested">10Y TR</th>' +
+          '<th class="grp-income group-start" data-sort="yieldPct" title="Trailing distribution yield">Yield</th>' +
+          '<th class="grp-income" data-sort="expenseRatio" title="Net expense ratio: the fund\'s annual cost">Exp Ratio</th>' +
+          '<th class="grp-income" data-sort="netYield" title="Yield minus expense ratio: what the distribution pays after the fund\'s cost. Context only, not scored.">Yld&minus;ER</th>' +
+          '<th class="grp-technicals group-start" data-sort="rsi" title="14-day RSI. In this methodology a low RSI marks the better index/ETF entry, so lower scores higher.">RSI</th>' +
+          '<th class="grp-technicals" data-sort="wk52" title="Where the price sits in its 52-week range (0% = at the low, 100% = at the high). Lower scores higher.">52W Range</th>' +
+          '<th class="grp-technicals" data-sort="pctVs20dma" title="Price vs its 20-day moving average (short-term trend). Context only, not scored.">vs 20D</th>' +
+          '<th class="grp-technicals" data-sort="pctVs100dma" title="Price vs its 100-day moving average (medium-term trend). Context only, not scored.">vs 100D</th>' +
+          '<th class="grp-technicals" data-sort="pctVs200dma" title="Price vs its 200-day moving average (long-term trend). Scored: higher is better.">vs 200D</th>' +
+          '<th class="grp-snapshot group-start" data-sort="updated">Updated</th>'
+      }
+    };
+    var COL_GROUPS = {
+      stock: [["snapshot", "Snapshot"], ["growth", "Growth"], ["valuation", "Valuation"], ["balance", "Balance Sheet"]],
+      etf: [["snapshot", "Snapshot"], ["performance", "Performance"], ["income", "Income &amp; Cost"], ["technicals", "Technicals"]]
+    };
+    function renderHead() {
+      var h = HEADS[modeKind()];
+      document.querySelector("#table thead").innerHTML =
+        '<tr class="group-row">' + h.group + '</tr><tr class="head-row">' + h.head + '</tr>';
+    }
+    function renderColsMenu() {
+      $("colsMenu").innerHTML = COL_GROUPS[modeKind()].map(function (g) {
+        return '<label><input type="checkbox" data-group="' + g[0] + '" checked> ' + g[1] + '</label>';
+      }).join("");
+    }
+
     // Point data/meta at a universe's dataset, swap the on-screen labels, repaint.
     function activate(key, store) {
+      var prevKind = modeKind();
       universeMode = key;
+      if (modeKind() !== prevKind) {
+        // Different column set: rebuild the header and Columns menu, and drop
+        // any sort keyed to a column that no longer exists.
+        renderHead();
+        renderColsMenu();
+        sortKey = "score";
+        sortDir = -1;
+      }
       data = {};
       Object.keys(store.stocks).forEach(function (k) { data[k] = store.stocks[k]; });
       meta = { updated: store.updated, source: store.source };
@@ -490,9 +644,8 @@
 
     var TIER_LABEL = { sp: "S+", s: "S", a: "A", b: "B", c: "C", f: "F", none: "NO DATA" };
 
-    function rowHtml(r) {
-      var d = r.d;
-      var tierLabel = TIER_LABEL[r.tier];
+    // The Ticker / Tier / Score / Factors cells are identical in both modes.
+    function screenCells(r) {
       var scoreCell;
       if (r.score === null) {
         scoreCell = '<span class="muted">—</span>';
@@ -502,12 +655,43 @@
           TIER_COLOR[r.tier] + '"></span></span></span>';
       }
       var factorsCell = r.total ? '<span class="factors">' + r.passes + "/" + r.total + "</span>" : '<span class="muted">—</span>';
-
-      return '<tr data-ticker="' + r.ticker + '">' +
-        '<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>' +
-        '<td class="left group-start"><span class="verdict v-' + r.tier + '">' + tierLabel + '</span></td>' +
+      return '<td class="col-ticker"><span class="tkr">' + r.ticker + '</span><span class="tkr-name">' + r.name + '</span></td>' +
+        '<td class="left group-start"><span class="verdict v-' + r.tier + '">' + TIER_LABEL[r.tier] + '</span></td>' +
         '<td>' + scoreCell + '</td>' +
-        '<td>' + factorsCell + '</td>' +
+        '<td>' + factorsCell + '</td>';
+    }
+
+    function rowHtml(r) { return isEtf() ? rowHtmlEtf(r) : rowHtmlStock(r); }
+
+    function rowHtmlEtf(r) {
+      var d = r.d;
+      var rangeTitle = (isNum(d.wk52Low) && isNum(d.wk52High))
+        ? '52-week range: ' + fmtPrice(d.wk52Low) + ' to ' + fmtPrice(d.wk52High) : '';
+      return '<tr data-ticker="' + r.ticker + '">' +
+        screenCells(r) +
+        '<td class="grp-snapshot group-start">' + fmtMoney(r.aum) + '</td>' +
+        '<td class="grp-snapshot">' + fmtPrice(r.price) + '</td>' +
+        '<td class="grp-snapshot ' + clsChange(r.changePct) + '">' + fmtChange(r.changePct) + '</td>' +
+        '<td class="grp-performance group-start ' + colorFromPts(r.parts.ytd) + '">' + fmtRet(r.ytd) + '</td>' +
+        '<td class="grp-performance ' + colorScored(r.parts.ret1y) + '">' + fmtRet(r.ret1y) + '</td>' +
+        '<td class="grp-performance ' + colorScored(r.parts.ret5y) + '">' + fmtRet(r.ret5y) + '</td>' +
+        '<td class="grp-performance ' + colorScored(r.parts.ret10y) + '">' + fmtRet(r.ret10y) + '</td>' +
+        '<td class="grp-income group-start ' + colorScored(r.parts.yieldPct) + '">' + fmtPct2(r.yieldPct) + '</td>' +
+        '<td class="grp-income ' + colorScored(r.parts.expenseRatio) + '">' + fmtPct2(r.expenseRatio) + '</td>' +
+        '<td class="grp-income ' + colorFromPts(r.parts.netYield) + '">' + fmtPct2(r.netYield) + '</td>' +
+        '<td class="grp-technicals group-start ' + colorScored(r.parts.rsi) + '">' + fmtRsi(r.rsi) + '</td>' +
+        '<td class="grp-technicals ' + colorScored(r.parts.wk52) + '" title="' + rangeTitle + '">' + fmtRangePos(r.wk52) + '</td>' +
+        '<td class="grp-technicals ' + colorFromPts(r.parts.pctVs20dma) + '">' + fmtRet(r.pctVs20dma) + '</td>' +
+        '<td class="grp-technicals ' + colorFromPts(r.parts.pctVs100dma) + '">' + fmtRet(r.pctVs100dma) + '</td>' +
+        '<td class="grp-technicals ' + colorScored(r.parts.pctVs200dma) + '">' + fmtRet(r.pctVs200dma) + '</td>' +
+        '<td class="grp-snapshot group-start ' + clsAge(r.updated) + '" title="' + ageTitle(d) + '">' + fmtAge(r.updated) + '</td>' +
+        '</tr>';
+    }
+
+    function rowHtmlStock(r) {
+      var d = r.d;
+      return '<tr data-ticker="' + r.ticker + '">' +
+        screenCells(r) +
         '<td class="grp-snapshot group-start">' + fmtMoney(r.marketCap) + '</td>' +
         '<td class="grp-snapshot">' + fmtPrice(r.price) + '</td>' +
         '<td class="grp-snapshot ' + clsChange(r.changePct) + '">' + fmtChange(r.changePct) + '</td>' +
@@ -541,10 +725,10 @@
 
     // ---- Column visibility ----
     function applyColumnVisibility() {
-      ["growth", "valuation", "balance", "snapshot"].forEach(function (g) {
-        var cb = document.querySelector('#colsMenu input[data-group="' + g + '"]');
+      COL_GROUPS[modeKind()].forEach(function (g) {
+        var cb = document.querySelector('#colsMenu input[data-group="' + g[0] + '"]');
         var show = cb ? cb.checked : true;
-        document.querySelectorAll(".grp-" + g).forEach(function (el) {
+        document.querySelectorAll(".grp-" + g[0]).forEach(function (el) {
           el.classList.toggle("col-hidden", !show);
         });
       });
@@ -558,6 +742,17 @@
       { key: "epsFwd",      label: "EPS Growth FWD",     weight: 20, fmt: function (d) { return fmtPct(d.epsFwd); } },
       { key: "pegFwd",      label: "PEG FWD",            weight: 20, fmt: function (d) { return fmtNum(pegDisplay(d)); } },
       { key: "cashDebt",    label: "Cash vs Debt",       weight: 20, fmt: function (d) { return fmtRatio(cashDebtRatio(d)); } }
+    ];
+
+    var ETF_POPUP_METRICS = [
+      { key: "rsi",          label: "RSI (14-day)",           weight: 20, fmt: function (d) { return fmtRsi(d.rsi); } },
+      { key: "wk52",         label: "52-Week Range position", weight: 20, fmt: function (d) { return fmtRangePos(wk52Pos(d)); } },
+      { key: "ret1y",        label: "1 Year Total Return",    weight: 10, fmt: function (d) { return fmtRet(d.ret1y); } },
+      { key: "ret5y",        label: "5 Year Total Return",    weight: 10, fmt: function (d) { return fmtRet(d.ret5y); } },
+      { key: "ret10y",       label: "10 Year Total Return",   weight: 10, fmt: function (d) { return fmtRet(d.ret10y); } },
+      { key: "yieldPct",     label: "Yield",                  weight: 10, fmt: function (d) { return fmtPct2(d.yieldPct); } },
+      { key: "expenseRatio", label: "Expense Ratio",          weight: 10, fmt: function (d) { return fmtPct2(d.expenseRatio); } },
+      { key: "pctVs200dma",  label: "Price vs 200-Day MA",    weight: 10, fmt: function (d) { return fmtRet(d.pctVs200dma); } }
     ];
 
     function ordinal(p) {
@@ -580,7 +775,7 @@
       $("stockSub").innerHTML = nm + ' &middot; <span class="verdict v-' + tier + '">' + tlabel +
         '</span> &middot; Score ' + (sc.pct === null ? "—" : sc.pct) + "/100";
 
-      $("stockRows").innerHTML = POPUP_METRICS.map(function (m) {
+      $("stockRows").innerHTML = (isEtf() ? ETF_POPUP_METRICS : POPUP_METRICS).map(function (m) {
         var pp = sc.parts[m.key];
         var color = colorScored(pp);
         var ptsTxt = (pp === undefined || pp === null)
@@ -594,17 +789,28 @@
           "</tr>";
       }).join("");
 
-      $("stockNote").innerHTML = "Each metric's points come from its percentile rank vs the " +
-        UNIVERSES[universeMode].label + " (green = top of the pack, red = bottom), weighted by pillar: " +
-        "Growth 60, Valuation 20, Balance sheet 20. A missing metric (—) scores zero. " +
-        "Open <b>Methodology</b> for the full method.";
+      $("stockNote").innerHTML = isEtf()
+        ? "Each metric's points come from its rank among the 10 funds (best = full points, worst = 0, " +
+          "evenly spaced, ties averaged), weighted by pillar: Technicals 50, Performance 30, " +
+          "Income &amp; cost 20. A missing metric (—) scores zero. Open <b>Methodology</b> for the full method."
+        : "Each metric's points come from its percentile rank vs the " +
+          UNIVERSES[universeMode].label + " (green = top of the pack, red = bottom), weighted by pillar: " +
+          "Growth 60, Valuation 20, Balance sheet 20. A missing metric (—) scores zero. " +
+          "Open <b>Methodology</b> for the full method.";
 
       $("stockModal").hidden = false;
     }
     function closeStock() { $("stockModal").hidden = true; }
 
     // ---- Modals ----
-    function openMethodology() { $("methodologyModal").hidden = false; }
+    // The methodology popup carries one section per model; show the one that
+    // matches the active universe kind.
+    function openMethodology() {
+      var etf = isEtf();
+      $("methodStock").hidden = etf;
+      $("methodEtf").hidden = !etf;
+      $("methodologyModal").hidden = false;
+    }
     function closeMethodology() { $("methodologyModal").hidden = true; }
 
     // ---- Events ----
@@ -619,15 +825,15 @@
         });
       });
 
-      // sort
-      document.querySelectorAll("tr.head-row th").forEach(function (th) {
-        th.addEventListener("click", function () {
-          var k = th.getAttribute("data-sort");
-          if (!k) return;
-          if (sortKey === k) { sortDir = -sortDir; }
-          else { sortKey = k; sortDir = (k === "ticker") ? 1 : -1; }
-          render();
-        });
+      // sort (delegated: the ETF universe re-renders the <thead>)
+      document.querySelector("#table thead").addEventListener("click", function (e) {
+        var th = e.target.closest("th");
+        if (!th) return;
+        var k = th.getAttribute("data-sort");
+        if (!k) return;
+        if (sortKey === k) { sortDir = -sortDir; }
+        else { sortKey = k; sortDir = (k === "ticker") ? 1 : -1; }
+        render();
       });
 
       // search
@@ -646,9 +852,8 @@
       });
       document.addEventListener("click", function () { $("colsMenu").hidden = true; });
       $("colsMenu").addEventListener("click", function (e) { e.stopPropagation(); });
-      document.querySelectorAll("#colsMenu input").forEach(function (cb) {
-        cb.addEventListener("change", applyColumnVisibility);
-      });
+      // delegated: the ETF universe re-renders the menu's checkboxes
+      $("colsMenu").addEventListener("change", applyColumnVisibility);
 
       // universe buttons (Nasdaq 100 / S&P 500 / Growth / Value / Dividend)
       document.querySelectorAll("#universeGroup .u-btn").forEach(function (b) {

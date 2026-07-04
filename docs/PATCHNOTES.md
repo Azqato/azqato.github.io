@@ -2,6 +2,25 @@
 
 ---
 
+## v3.33.0 — 2026-07-03 — Screener: ETFs universe
+
+**A sixth screener universe: a fixed, owner-curated list of 10 ETFs (QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO), scored on technicals, long-term performance, yield, and cost instead of fundamentals — the technical scoring the stock universes deliberately exclude, per the site's technicals-time-ETF-purchases doctrine. Owner-specced same day (v3.32.2-v3.32.4), decisions resolved via review (rank-linear points, rank-band tiers kept, yield scored as specced).**
+
+### Added
+
+- **ETFs universe button** with its own 20-column table: AUM, Price, Chg %, YTD, 1Y/5Y/10Y Total Return, Yield, Expense Ratio, Yield−ER, RSI, 52W Range, Price vs 20/100/200-Day MA, Updated. Scored 100 points: Technicals 50 (RSI 20 lowest-best, 52W range position 20 lowest-best, vs-200DMA 10 highest-best), Performance 30 (1/5/10y total returns, 10 each), Income & cost 20 (yield 10, expense ratio 10 lowest-best). YTD, Yield−ER, and the 20/100-day MAs are colored context columns with no points; AUM is display-only.
+- **Rank-linear points for this universe**: with 10 funds a percentile clamp is far too coarse, so the best fund on a metric earns full points, the worst 0, evenly spaced, ties averaged. Missing data stays a hard zero out of a fixed /100. Factors chip is /8. Cell colors: green at 15+ rank points (top ~3), red at 5 or less (bottom ~3).
+- **`data/etfs.json`** (fixed list, hand-edited only, never auto-synced), **`scripts/fetch_etf_data.py`** (one 11-year history call per fund: total returns on dividend-adjusted closes, RSI/52W/MAs on unadjusted closes; yield from `dividendYield`, expense ratio from `netExpenseRatio`, both verified live for all 10 funds), **`data/screener_etfs.json`** feed, and **`.github/workflows/screener-data-etfs.yml`** (Mon-Fri 23:15 UTC, between the Nasdaq 100 and S&P 500 jobs, same concurrency group).
+- **Methodology popup: dedicated ETF section** (pillar table, rank-points explanation, tiers-on-10-funds note including why an F here usually means "already ran up", fixed-list provenance) shown when the ETFs universe is active; the stock section shows otherwise. Per-fund popup breakdown with rank points per metric.
+
+### Changed
+
+- **screener.js: the table header and Columns menu are now config-driven** and re-render when the universe kind changes (stock vs ETF); sort clicks and Columns-menu changes moved to event delegation so they survive the re-render. This refactor pre-pays for future non-stock universes. **Stock universe logic and output are unchanged**: verified headless against the local feeds — Nasdaq 100 = 2 S+ / 10 S / 8 A / 32 B / 24 C / 24 F with MU and NVDA at 100, matching the v3.31.0 baseline exactly; ETF→stock switching restores the stock table byte-for-byte.
+- Tier rank bands on the 10-fund list land at 1 S / 1 A / 3 B / 3 C / 2 F (verified live; owner accepted that an F badge on a household index fund means "bottom of this list right now").
+- Screener meta description and disclaimer updated for the sixth universe (the ETFs list is fixed, not synced).
+
+---
+
 ## v3.32.4 — 2026-07-03 — Roadmap: v3.33.0 ETF spec review concerns logged
 
 **Docs only. Four pre-implementation review concerns are logged in the PRD's ETF Universe Scoring Model section, per owner request after a spec review. The spec itself is unchanged; the concerns are to be resolved during or before implementation: (1) yield is partially double-counted by total returns and tilts toward income-style funds; (2) RSI + 52W Range + Price vs 200DMA put 50 correlated dip-depth points in one factor, so scores will swing with selloffs; (3) S/A/B/C/F rank bands fit a 10-fund list badly (F badges on SPY/VTI, S+ nearly unreachable); (4) percentile scoring is coarse at N=10 and the 22% clamp was calibrated for 100+ stocks — absolute thresholds or rank-points recommended for this universe.**
