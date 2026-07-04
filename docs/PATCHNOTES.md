@@ -2,6 +2,18 @@
 
 ---
 
+## v3.34.13 — 2026-07-04 — Roadmap finalized: MAG 10 filter next, ETF review before v4.0.0, v3.35.0 retired
+
+**Docs only. Roadmap order finalized per owner instruction: v3.36.0 (renamed "FANG+" → "MAG 10" with the owner's actual ticker list) moves to the front as next up; v3.37.0 (ETFs rating methodology review) moves ahead of v4.0.0; v3.35.0 is retired and its scope merged into v4.0.0. No code changes in this entry.**
+
+### Changed
+
+- **v3.36.0 renamed "MAG 10"**: the owner supplied the real ticker list (AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA) and specified it should be sourced from S&P 500 data specifically, not whichever universe is active — updated design in ROADMAP.md accordingly.
+- **v3.35.0 retired, merged into v4.0.0**: both are screener table/CSS work (the methodology modal's `.table-wrap` bug fix and content audit, plus the responsive column-auto-hide redesign), so building them as one pass avoids reviewing the same table rendering twice.
+- **v3.37.0 moved ahead of v4.0.0** in the release order.
+
+---
+
 ## v3.34.12 — 2026-07-04 — Roadmap renumbered: v4.5.0 mobile pass becomes v4.0.0
 
 **Following v3.34.11's reprioritization (mobile pass moved to the front of the queue), the owner asked to renumber it to v4.0.0 to match its new position, rather than keep the v4.5.0 label from when it was the last item on the roadmap. All five other v4.x items shift by one to keep the sequence contiguous: v4.0.0 (sparklines) → v4.1.0, v4.1.0 (index coverage) → v4.2.0, v4.2.0 (historical examples) → v4.3.0, v4.3.0 (philosophy) → v4.4.0, v4.4.0 (conference call guide) → v4.5.0. No code changes; ROADMAP.md and PRD.md updated to the new numbers. Earlier PATCHNOTES entries are left as originally written and still use the numbering that was current when each was published (e.g. v3.33.1 and v3.34.1 still correctly say "v4.0.0 sparklines" and "v4.5.0 mobile pass" — patch notes are a dated historical record, not a living document, so they aren't retroactively renumbered).**

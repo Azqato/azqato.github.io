@@ -1,11 +1,11 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.12
+**Version:** 3.34.13
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): **v4.0.0 (reprioritized to the front)** → v3.35.0 → v3.36.0 → v3.37.0 (unscoped) → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
+Release order (updated 2026-07-04): **v3.36.0 (next up)** → v3.37.0 → v4.0.0 (absorbs the retired v3.35.0) → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
 
 ---
 
@@ -27,12 +27,6 @@ The v3.34.8 fix resolved the *sizing* bug (the table-wrap escaping its container
 4. The drafted (never-shipped) fix was: a persistently-visible non-overlay scrollbar via `::-webkit-scrollbar` styling, a wheel-to-horizontal-scroll redirect, and a right-edge fade affordance. **Superseded** — see v4.0.0.
 
 </details>
-
----
-
-## v3.37.0 — ETFs Universe: Rating Methodology Review — UNSCOPED, AWAITING OWNER INPUT
-
-Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needs a review. **No specifics given yet** — the owner will prompt with exactly what to address in a follow-up message. Placeholder only: do not start design or implementation work on this until scoped. Given as the immediate concern to the owner, this is a strong candidate to move to the front of the queue once scoped, ahead of v3.35.0/v3.36.0, but its actual position depends entirely on what the review turns up.
 
 ---
 
@@ -138,68 +132,48 @@ Owner-requested display change shipped the same day, following the plan below ex
 
 ---
 
-## v3.35.0 — Screener Methodology Audit & Table Display Fixes
+## v3.35.0 — RETIRED, MERGED INTO v4.0.0
 
-### Goal
-
-Two owner-flagged problems with the screener's Methodology popup: (1) the content needs a pass to confirm it's fully current against the shipped model (the popup has been edited five times in one day across v3.30.0-v3.34.0 — scoring model v2, S+ tier, margins removal, the ETF section, and the International row just added — so it needs a fresh read-through, not just trust that each edit was locally correct), and (2) real display problems: tables in the popup visually break with clipped content and text that doesn't wrap properly.
-
-### Root cause found (code inspection, 2026-07-04)
-
-`style.css`'s `.table-wrap` rule is self-contradictory:
-
-```css
-.table-wrap {
-  overflow-x: auto;   /* intended: horizontal scrollbar for wide tables */
-  margin-bottom: 6px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  overflow: hidden;    /* BUG: shorthand resets BOTH axes, silently cancels the line above */
-}
-```
-`overflow` is shorthand for `overflow-x` + `overflow-y`; the later `overflow: hidden` wins in the cascade and overrides the `overflow-x: auto` three lines above for both axes. The practical effect: a methodology table wider than the modal (the pillar tables have 4 columns including a long "Better means"/description column, and the International row added in v3.34.0 has a long single-paragraph cell) doesn't get a horizontal scrollbar — its overflow is just **clipped and invisible**, with no visual indication anything is cut off. Compounding it, `thead th { white-space: nowrap; }` (style.css) keeps header cells from wrapping at all, so a narrow modal width (or a narrow viewport under the 1023px breakpoint) can force the clipping even on shorter tables. This one CSS bug is likely the whole "display issues with the tables" report; the plan below still includes a review pass in case there's more (e.g. long `<td>` copy that should wrap rather than scroll, which is a design choice, not just a bug fix).
-
-### Plan
-
-1. **Fix the CSS bug**: remove the trailing `overflow: hidden` from `.table-wrap` (or reorder so `overflow-x: auto` is declared last and `overflow-y` is set explicitly if hiding vertical overflow was actually intended — check whether any table relies on vertical clipping before just deleting the line). This one change affects every `.table-wrap` site-wide (metrics.html, indices.html, guide pages, not just the screener), so verify none of those depended on the accidental `hidden` behavior.
-2. **Decide scroll vs. wrap per table**: the methodology's data tables (pillar weights, scoring curve, universe-source table) are naturally tabular and reasonable to let scroll horizontally on narrow viewports once the bug is fixed. But cells with long prose (the universe-source table's description column, e.g. the new International row) read better wrapping within a wider column than forcing the whole table into a horizontal scroll for one long sentence. Recommendation: keep scroll for the numeric/short-label tables, and either widen the description column or explicitly wrap long-text columns (`white-space: normal` already applies to plain `td`, so once the overflow bug is fixed this may resolve on its own — verify before adding overrides).
-3. **Audit methodology content for currency against the shipped model**: read `#methodStock` and `#methodEtf` end-to-end against the current `METRICS`/`ETF_METRICS` arrays and scoring code in `screener.js`, checking in particular: the pillar weight tables still say Growth 60/Valuation 20/Balance 20 and Technicals 50/Performance 30/Income&Cost 20 (correct as of v3.31.0/v3.33.0 — verify no later edit drifted); the "S+" and tier-band language matches `computeTierMap`; the International row reads correctly next to the other four universe-source rows without breaking the table's tone; the worked PEG example's numbers are still representative of live data, not stale from whenever it was written.
-4. **Visual polish pass beyond the bug fix**: with real content now spanning stock model + ETF model + six universe-source rows, re-check spacing, heading hierarchy, and mobile (under 1023px) rendering of the modal generally, since the modal's content volume has grown substantially since v3.29.0 without a matching visual review.
-
-### Verification
-
-- Headless Chrome screenshot or DOM check of the methodology modal in both stock and ETF mode, at a standard desktop width and at a narrow (~375px) mobile width, confirming no clipped table content and no unexpected horizontal scrollbars on tables that should wrap.
-- Spot-check `metrics.html`/`indices.html`/guide pages (which also use `.table-wrap`) after the CSS fix to confirm no regression from removing the `overflow: hidden` line.
+This item's number is retired. Its scope (the `.table-wrap` CSS display bug in the methodology modal, plus a content-currency audit of `#methodStock`/`#methodEtf`) is folded into v4.0.0 (Screener Responsive Redesign & Site-Wide Mobile-Friendliness Pass) — both are screener table/layout work, and splitting them across two releases would mean touching the same table rendering twice. See the v4.0.0 section below for the full combined plan.
 
 ---
 
-## v3.36.0 — "FANG+" Filter
+## v3.36.0 — "MAG 10" Filter
 
 ### Goal
 
-Owner-requested filter for the NYSE FANG+-style stock list. **Blocked on the owner supplying the actual ticker list** ("which i will provide to you later") — no composition should be guessed or hardcoded ahead of that, since FANG+-style lists vary in membership and the real NYSE FANG+ index itself changes constituents periodically.
+Owner-requested filter for a fixed 10-stock watchlist, the "Magnificent Ten" mega-cap names. Renamed from the original "FANG+" placeholder once the owner supplied the actual list (2026-07-04):
+
+**AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA**
 
 ### Design direction
 
-This was requested as **a filter**, not a new universe — the simplest reading is: within whichever stock universe is currently loaded (most FANG+-style names live in the Nasdaq 100, but the mechanism should work against any loaded universe), add a way to narrow the visible rows to just the names on the curated list. This is far lighter than building an eighth universe/feed:
+Requested as **a filter**, not a new universe — narrows the visible rows to just these 10 names within a loaded dataset, reusing 100% of existing scoring/rendering:
 
-1. **No new feed or scoring path needed.** The filter operates purely client-side against whichever universe's data is already loaded and already scored — a stock's score, tier, and every column stay exactly as computed for its actual universe; the filter only changes which rows are visible.
-2. **This is an orthogonal filter axis, not another tier chip.** The existing `.chip-group` (`data-filter="all"/"sp"/"s"/"a"/"b"/"c"/"f"`) is single-select and mutually exclusive by design (a stock has exactly one tier). A curated-list filter needs to **AND** with the tier filter and the search box, not replace them (a user should be able to see "FANG+ stocks that are also tier S", for example) — implement as a separate toggle button/chip near the tier group, not inserted into it.
-3. **Store the list in a small JSON file** (e.g. `data/fangplus.json`, a flat ticker array) once the owner provides it, structured to be reusable if other curated watchlists get requested later (a `{"name": "FANG+", "tickers": [...]}` shape rather than a single hardcoded array costs nothing extra and avoids a rewrite for the next one).
-4. **Membership check**: filter predicate becomes `tickers.includes(r.ticker)` alongside the existing tier/search predicates in `render()`'s `view = rs.filter(...)` step.
+1. **No new feed or scoring path.** The filter operates purely client-side; a stock's score, tier, and every column stay exactly as already computed — the filter only changes which rows are visible.
+2. **Sourced from the S&P 500 data specifically** (owner instruction: "use the S&P 500 data for reference of these stocks"), not whichever universe happens to be active. All 10 names are S&P 500 constituents, so this guarantees complete, consistent data and means each stock's score/tier reflects its percentile rank among the full 500-stock S&P universe — the most meaningful reference set for mega-caps, rather than a smaller or differently-composed universe. Toggling the filter on switches the active universe to S&P 500 (loading it if not already cached, same lazy-load path every other universe button uses) and applies the ticker-membership filter on top.
+3. **This is an orthogonal filter axis, not another tier chip.** ANDs with the existing tier-chip filter and the search box rather than replacing them (e.g. "MAG 10 stocks that are also tier S" should be a valid combination) — implemented as a separate toggle button near the tier group.
+4. **Store the list in a small `{"name","tickers"}` shape** (matching the pattern already used for `vxus_map.json`'s override blocks) rather than a bare array, so a future curated-watchlist request costs nothing extra.
 
 ### Plan
 
-1. **Wait for the owner's ticker list** — do not start implementation before it arrives, since the filter's only real content is that list.
-2. Add `data/fangplus.json` with the provided tickers (flat list, `{"name", "tickers"}` shape per above).
-3. Add a toggle control near the tier chip group (e.g. a single button/checkbox, "FANG+ only"), wired into `render()`'s filter predicate alongside `filter` (tier) and `query` (search).
-4. Decide behavior when the active universe contains none of the list's tickers (e.g. viewing Growth/Value/Dividend if FANG+ names aren't in that particular top-100 cut) — likely just show zero rows with the existing "no matches" empty state, no special-casing needed.
-5. Confirm interaction with universe switching: since this is a client-side filter over whatever's loaded, switching universes while the toggle is on should just re-filter the new universe's rows, no extra plumbing.
+1. Hardcode the 10-ticker list in `screener.js` (small and fixed; no separate JSON file needed for just 10 tickers, unlike the ~100-entry universe lists).
+2. Add a `mag10Active` toggle state and a "MAG 10" button near the tier chip group.
+3. Clicking the button: if S&P 500 isn't the active universe, switch to it (reusing `selectUniverse("sp500")`); then apply the ticker-membership filter in `render()`'s `view = rs.filter(...)` step, ANDed with the existing tier/search filters.
+4. Switching to a different universe via the normal universe buttons while the filter is active turns it off automatically (the filter is meaningfully tied to S&P 500 data specifically, not a general cross-universe toggle).
 
 ### Verification
 
-- With the real list in place: toggle on, confirm only list members show; toggle off, confirm the full universe returns; combine with a tier chip and the search box to confirm all three filters AND correctly.
-- Switch universes with the toggle active; confirm the filter re-applies to the newly loaded universe without a stale row set.
+- Confirm all 10 tickers exist in `data/sp500.json` before implementing (guards against a silent missing row).
+- Toggle on: confirm exactly these 10 rows show, scored/tiered relative to the full S&P 500 (not just the 10); toggle off: full S&P 500 list returns.
+- Combine with a tier chip and the search box to confirm all three filters AND correctly.
+- Switching to a different universe button while the toggle is active turns the filter off (doesn't leave a confusing stale state).
+
+---
+
+## v3.37.0 — ETFs Universe: Rating Methodology Review — UNSCOPED, AWAITING OWNER INPUT
+
+Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needs a review. **No specifics given yet.** Current methodology to be presented to the owner in full (a table of every scored metric, weight, and direction) so they can specify exactly what to change. No design or implementation work starts until scoped.
 
 ---
 
@@ -403,11 +377,34 @@ A new setup-guide page (peer to `finviz.html` and `seekingalpha.html`) teaching 
 
 ---
 
-## v4.0.0 — Screener Responsive Redesign & Site-Wide Mobile-Friendliness Pass — REPRIORITIZED TO THE FRONT (2026-07-04)
+## v4.0.0 — Screener Responsive Redesign, Methodology Table Fix & Site-Wide Mobile-Friendliness Pass
 
-### Why this moved to the front of the queue
+### Why this moved to the front of the queue, and why v3.35.0 merged in
 
 Originally the last item in the roadmap (a backlog hardening pass). Reprioritized the same day two real users hit the screener's horizontal-scroll problem (v3.34.8, v3.34.10): the owner clarified the actual requirement is **the screener should reflow so scrolling is never needed at all**, not just that the existing scroll mechanism become easier to find. That is fundamentally the same design question this pass was already scoped to answer ("should the table pin columns and reflow, or just scroll, at narrow widths?") — solving it once now, across the full width range (desktop-narrow through phone), avoids redoing the same design work twice and avoids shipping two different narrow-width behaviors a few weeks apart. v3.34.10's scrollbar-visibility fix is superseded and folded in here (see that entry for the diagnosis that led to this decision).
+
+v3.35.0 (the methodology modal's `.table-wrap` display bug and a content-currency audit) was then also merged in and its number retired: both items touch screener table CSS/rendering, so building them as one pass avoids reviewing the same table-rendering code twice in quick succession.
+
+### Merged scope from v3.35.0 (methodology modal table fix + content audit)
+
+**Root cause found (code inspection, 2026-07-04):** `style.css`'s `.table-wrap` rule is self-contradictory:
+
+```css
+.table-wrap {
+  overflow-x: auto;   /* intended: horizontal scrollbar for wide tables */
+  margin-bottom: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;    /* BUG: shorthand resets BOTH axes, silently cancels the line above */
+}
+```
+`overflow` is shorthand for `overflow-x` + `overflow-y`; the later `overflow: hidden` wins in the cascade and overrides the `overflow-x: auto` three lines above for both axes. The practical effect: a methodology table wider than the modal (the pillar tables have 4 columns including a long "Better means"/description column, and the International row added in v3.34.0 has a long single-paragraph cell) doesn't get a horizontal scrollbar — its overflow is just clipped and invisible. Compounding it, `thead th { white-space: nowrap; }` keeps header cells from wrapping at all.
+
+Merged plan items from v3.35.0, folded into the plan below:
+- Fix the CSS bug (remove or reorder the trailing `overflow: hidden`); this is a shared rule, so verify `metrics.html`/`indices.html`/guide pages don't regress.
+- Decide scroll-vs-wrap per methodology table (numeric/short-label tables can scroll; long-prose cells like the universe-source description column read better wrapping).
+- Audit `#methodStock`/`#methodEtf` content against the current `METRICS`/`ETF_METRICS` scoring code for drift (the popup's been edited five times in one day across v3.30.0-v3.34.0) — pillar weights, tier-band language, the International row's tone, and whether the worked PEG example is still representative.
+- General visual polish pass on the modal (spacing, heading hierarchy) now that its content volume has grown substantially since v3.29.0.
 
 ### Goal
 
@@ -424,20 +421,22 @@ Checked all 9 pages for fixed-width elements that could force horizontal overflo
 ### Known starting points (carried over from the original scope, still relevant)
 
 1. **The universe switcher has 7 buttons** (Nasdaq 100, S&P 500, Growth, Value, Dividend, ETFs, International) in a `flex-wrap` row — functional, but never checked for how many rows it wraps to on a 375px phone or whether it pushes other controls down awkwardly. May also need auto-collapse-to-dropdown treatment at some width, consistent with the column-hiding approach.
-2. **The methodology modal's tables** share the same `.table-wrap` component flagged in v3.35.0; sequence that fix in alongside this pass (or before it) since both touch table rendering.
-3. **Touch target sizing** has not been audited: chip filters, column-visibility checkboxes, and the sort-arrow click targets in table headers were sized for mouse pointers first.
+2. **Touch target sizing** has not been audited: chip filters, column-visibility checkboxes, and the sort-arrow click targets in table headers were sized for mouse pointers first.
 
 ### Plan
 
-1. **Define the column-group breakpoint tiers** for the stock table (Snapshot/Growth/Valuation/Balance Sheet groups) and the ETF table (Snapshot/Performance/Income/Technicals groups) separately, since they have different column counts and priorities. Ticker/Tier/Score/Factors always visible at every width (this is the information needed to answer "is this a good stock/fund," the core of the site's value).
-2. **Implement auto-hide via the existing Columns-menu infrastructure**: the checkboxes that already drive `applyColumnVisibility()` get their checked state driven by a width-based default in addition to manual user toggling, so a user's manual choice is still respected but the automatic default adapts to window width.
-3. **Universe-switcher and toolbar row**: decide whether the 7-button row needs its own narrow-width treatment (e.g. collapsing to a dropdown) or whether `flex-wrap` (already confirmed working) is sufficient — likely sufficient given confirmed correct wrapping behavior, revisit only if the width audit below finds it awkward.
-4. **Device/window-width audit**: headless Chrome sweep from ~375px (phone) up through ~1024-1280px (narrow desktop, matching both real reports) to ~1920px (full desktop) across the screener (both stock and ETF/International column sets) and spot-check the other 8 pages, cataloging concrete issues.
-5. **Fix and re-verify**: apply fixes, re-run the same width sweep to confirm no desktop regression (every page already works at full width; this must not be a rewrite of what's already correct).
+1. **Fix the methodology modal's `.table-wrap` overflow bug** (from merged v3.35.0): remove or reorder the trailing `overflow: hidden`; verify no regression on `metrics.html`/`indices.html`/guide pages, which share the rule.
+2. **Decide scroll-vs-wrap per methodology table** and audit `#methodStock`/`#methodEtf` content against the current scoring code for drift, per the merged scope above.
+3. **Define the column-group breakpoint tiers** for the stock table (Snapshot/Growth/Valuation/Balance Sheet groups) and the ETF table (Snapshot/Performance/Income/Technicals groups) separately, since they have different column counts and priorities. Ticker/Tier/Score/Factors always visible at every width (this is the information needed to answer "is this a good stock/fund," the core of the site's value).
+4. **Implement auto-hide via the existing Columns-menu infrastructure**: the checkboxes that already drive `applyColumnVisibility()` get their checked state driven by a width-based default in addition to manual user toggling, so a user's manual choice is still respected but the automatic default adapts to window width.
+5. **Universe-switcher and toolbar row**: decide whether the 7-button row needs its own narrow-width treatment (e.g. collapsing to a dropdown) or whether `flex-wrap` (already confirmed working) is sufficient — likely sufficient given confirmed correct wrapping behavior, revisit only if the width audit below finds it awkward.
+6. **Device/window-width audit**: headless Chrome sweep from ~375px (phone) up through ~1024-1280px (narrow desktop, matching both real reports) to ~1920px (full desktop) across the screener (both stock and ETF/International column sets), the methodology modal (both stock and ETF mode), and spot-check the other 8 pages, cataloging concrete issues.
+7. **Fix and re-verify**: apply fixes, re-run the same width sweep to confirm no desktop regression (every page already works at full width; this must not be a rewrite of what's already correct).
 
 ### Verification
 
 - Headless Chrome screenshots/DOM checks across the full width range (375px through ~1920px) for the screener in both stock-kind and ETF-kind modes, confirming Ticker/Tier/Score/Factors are always visible and no column group is ever clipped without also being hidden (i.e., never scroll-required, per the owner's requirement) — a real, provable check unlike the scrollbar-visibility dead end in v3.34.10.
+- Methodology modal (both stock and ETF mode) at a standard desktop width and ~375px, confirming no clipped table content and no unexpected horizontal scrollbars on tables that should wrap.
 - Spot-check the other 8 pages at 375px/414px/768px, before/after, kept as a record in the PATCHNOTES entry.
 - Full click-through of the screener (universe switch, sort, filter, popup, methodology modal, Columns-menu manual override) at several widths after the pass, confirming manual overrides still work on top of the automatic width-based defaults.
 
