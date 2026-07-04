@@ -165,6 +165,12 @@
       border-color: var(--color-accent);
       color: var(--color-accent);
     }
+    /* MAG 10 watchlist toggle (v3.36.0): same active styling as .u-btn.active */
+    #mag10Btn.active {
+      background: var(--color-accent-light);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
     .u-btn:disabled { opacity: 0.5; cursor: wait; }
 
     /* Columns dropdown */
@@ -528,6 +534,8 @@
         <button class="chip" data-filter="c">C <span class="count" id="cnt-c">0</span></button>
         <button class="chip" data-filter="f">F <span class="count" id="cnt-f">0</span></button>
       </div>
+
+      <button class="btn" id="mag10Btn" title="Filter to a fixed 10-stock watchlist (AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA), scored against the S&amp;P 500">MAG 10</button>
 
       <div class="menu-wrap">
         <button class="btn" id="colsBtn" aria-haspopup="true">Columns ▾</button>

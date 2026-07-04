@@ -1,11 +1,11 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.34.13
+**Version:** 3.36.0
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): **v3.36.0 (next up)** → v3.37.0 → v4.0.0 (absorbs the retired v3.35.0) → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, and v3.34.8 shipped 2026-07-04.)
+Release order (updated 2026-07-04): **v3.37.0 (next up)** → v4.0.0 (absorbs the retired v3.35.0) → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, and v3.36.0 shipped 2026-07-04.)
 
 ---
 
@@ -138,9 +138,13 @@ This item's number is retired. Its scope (the `.table-wrap` CSS display bug in t
 
 ---
 
-## v3.36.0 — "MAG 10" Filter
+## v3.36.0 — "MAG 10" Filter — DONE 2026-07-04
 
-### Goal
+Implemented exactly per plan, no deviations. Hardcoded `MAG10_TICKERS` array in `screener.js` (no separate JSON file, per the plan's judgment call — 10 fixed tickers didn't warrant one). New `mag10Active` state, `#mag10Btn` toggle button next to the tier-chip group, `toggleMag10()` switches the active universe to S&P 500 (via the existing `selectUniverse()` lazy-load path) if not already active, then the filter ANDs into `render()`'s existing `view = rs.filter(...)` step alongside the tier chip and search box. Manually switching to a different universe button while the toggle is active turns it off automatically.
+
+**Verified** (headless Chrome, script-injected click since no Selenium/chromedriver was available in this environment): confirmed all 10 tickers exist in `data/sp500.json` first. Toggling on switches the universe label to "S&P 500", scores against the full 500-stock set (summary line unchanged: "5 S+ · 49 S · 51 A · 147 B · 124 C · 124 F · 500/500 scored"), and shows exactly the 10 MAG 10 rows (META, NVDA, AMD, GOOGL, AVGO, MSFT, NFLX, AMZN, AAPL, TSLA). Combined with the tier-S chip: correctly ANDs down to the 5 MAG 10 names that are also tier S (AMD, GOOGL, AVGO, MSFT, NFLX). Nasdaq 100 default-load regression check: exact match to the v3.31.0 baseline, confirming zero impact on existing behavior.
+
+### Goal (original plan, retained below)
 
 Owner-requested filter for a fixed 10-stock watchlist, the "Magnificent Ten" mega-cap names. Renamed from the original "FANG+" placeholder once the owner supplied the actual list (2026-07-04):
 

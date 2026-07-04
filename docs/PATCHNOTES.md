@@ -2,6 +2,23 @@
 
 ---
 
+## v3.36.0 — 2026-07-04 — Screener: "MAG 10" filter
+
+**A fixed 10-stock watchlist toggle: AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA. Renamed from the original "FANG+" placeholder once the owner supplied the real list. Sourced specifically from S&P 500 data (owner instruction), so each stock's score and tier reflects its percentile rank among the full 500-stock universe, not a smaller or differently-composed one.**
+
+### Added
+
+- **`MAG10_TICKERS`** hardcoded in `screener.js` (10 fixed tickers didn't warrant a separate JSON file, unlike the ~100-entry universe lists).
+- **`#mag10Btn`** toggle button next to the tier-chip group. Clicking it switches the active universe to S&P 500 (reusing the existing lazy-load `selectUniverse()` path) if not already active, then filters the table to just these 10 rows via a new predicate in `render()`'s existing filter step — ANDs with the tier chip and search box rather than replacing them, so "MAG 10 stocks that are also tier S" is a valid combination.
+- Manually switching to a different universe button while the toggle is active turns it off automatically (the filter is tied to S&P 500 data specifically, not a general cross-universe toggle).
+
+### Verified
+
+- Headless Chrome (script-injected click, since no Selenium/chromedriver was available): toggling on switches the universe label to S&P 500, scores against the full 500-stock set, and shows exactly the 10 MAG 10 rows. Combined with the tier-S chip: correctly narrows to the 5 MAG 10 names that are also tier S.
+- Nasdaq 100 default-load regression: exact match to the v3.31.0 baseline, confirming zero impact on existing behavior.
+
+---
+
 ## v3.34.13 — 2026-07-04 — Roadmap finalized: MAG 10 filter next, ETF review before v4.0.0, v3.35.0 retired
 
 **Docs only. Roadmap order finalized per owner instruction: v3.36.0 (renamed "FANG+" → "MAG 10" with the owner's actual ticker list) moves to the front as next up; v3.37.0 (ETFs rating methodology review) moves ahead of v4.0.0; v3.35.0 is retired and its scope merged into v4.0.0. No code changes in this entry.**

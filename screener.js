@@ -79,6 +79,13 @@
     var query = "";
     var feedDone = false; // true once the active universe's fetch has finished
     var toggling = false; // guard against double-clicks while a feed loads
+    var mag10Active = false; // "MAG 10" watchlist toggle (v3.36.0), S&P 500 data only
+
+    // Fixed 10-ticker watchlist (owner-supplied, 2026-07-04). Sourced from the
+    // S&P 500 universe specifically -- toggling switches the active universe
+    // to S&P 500 if needed, so each stock's score/tier reflects its percentile
+    // among the full 500-stock set, not a smaller or differently-composed one.
+    var MAG10_TICKERS = ["AAPL", "AMD", "AMZN", "AVGO", "GOOGL", "META", "MSFT", "NFLX", "NVDA", "TSLA"];
 
     // ---- DOM ----
     var $ = function (id) { return document.getElementById(id); };
@@ -444,6 +451,7 @@
       // filter
       var view = rs.filter(function (r) {
         if (filter !== "all" && r.tier !== filter) return false;
+        if (mag10Active && MAG10_TICKERS.indexOf(r.ticker) === -1) return false;
         if (query) {
           var q = query.toLowerCase();
           if (r.ticker.toLowerCase().indexOf(q) === -1 && r.name.toLowerCase().indexOf(q) === -1) return false;
@@ -687,6 +695,21 @@
       }
     }
 
+    // ---- MAG 10 watchlist toggle (v3.36.0) ----
+    function updateMag10Button() {
+      $("mag10Btn").classList.toggle("active", mag10Active);
+    }
+    async function toggleMag10() {
+      if (!mag10Active) {
+        if (universeMode !== "sp500") await selectUniverse("sp500");
+        mag10Active = true;
+      } else {
+        mag10Active = false;
+      }
+      updateMag10Button();
+      render();
+    }
+
     var TIER_LABEL = { sp: "S+", s: "S", a: "A", b: "B", c: "C", f: "F", none: "NO DATA" };
 
     function isNameFirst() { return !!UNIVERSES[universeMode].nameFirst; }
@@ -911,8 +934,17 @@
 
       // universe buttons (Nasdaq 100 / S&P 500 / Growth / Value / Dividend)
       document.querySelectorAll("#universeGroup .u-btn").forEach(function (b) {
-        b.addEventListener("click", function () { selectUniverse(b.getAttribute("data-universe")); });
+        b.addEventListener("click", function () {
+          var target = b.getAttribute("data-universe");
+          // Manually switching to a different universe drops the MAG 10 filter --
+          // it's meaningfully tied to S&P 500 data specifically, not a general toggle.
+          if (mag10Active && target !== "sp500") { mag10Active = false; updateMag10Button(); }
+          selectUniverse(target);
+        });
       });
+
+      // MAG 10 watchlist toggle
+      $("mag10Btn").addEventListener("click", toggleMag10);
 
       // modals
       $("methodologyBtn").addEventListener("click", openMethodology);
