@@ -158,8 +158,12 @@
     .btn-primary:hover { background: var(--color-accent-hover); color: #06231c; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    /* Universe switcher: one button per universe, active one lit in the accent */
-    .universe-group { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+    /* Universe switcher: one button per universe, active one lit in the accent.
+       min-width: 0 overrides the flex-item default of "auto" (which computes
+       to the unwrapped max-content width here), letting the group actually
+       shrink and wrap its own buttons instead of pushing the page into
+       horizontal overflow at narrow widths. */
+    .universe-group { display: inline-flex; gap: 6px; flex-wrap: wrap; min-width: 0; max-width: 100%; }
     .u-btn.active {
       background: var(--color-accent-light);
       border-color: var(--color-accent);
@@ -466,6 +470,12 @@
     }
 
     @media (max-width: 720px) {
+      /* A shrink-to-fit inline-flex item won't reliably wrap its own children
+         from nested flex-wrap alone (its content-based width can exceed the
+         available space); giving it a concrete 100% width here lets the
+         browser actually wrap the universe buttons instead of overflowing
+         the page horizontally. */
+      .universe-group { width: 100%; }
       .app-search { width: 130px; }
       /* Hide whichever span is secondary at this width: the company name for
          ticker-first universes, or the ticker for name-first International. */

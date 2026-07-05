@@ -258,7 +258,11 @@ p { margin-bottom: 14px; }
   margin-bottom: 6px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow-y (not the "overflow" shorthand) so the table's square corners
+     still clip to the rounded border without cancelling overflow-x: auto --
+     the shorthand previously reset both axes to hidden, silently swallowing
+     the intended horizontal scrollbar on any table wider than its container. */
+  overflow-y: hidden;
 }
 
 table {
@@ -851,7 +855,11 @@ td.ticker-cell {
 /* === Responsive === */
 @media (max-width: 1023px) {
   .site-layout {
-    grid-template-columns: 1fr;
+    /* minmax(0, ...) preserved from the desktop rule (v3.34.8): a plain 1fr
+       here reintroduces the implicit min-width:auto grid-item bug at exactly
+       the narrow widths where overflowing content (e.g. the screener's
+       universe-button row) needs the track to clip/wrap instead of growing. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .sidebar {

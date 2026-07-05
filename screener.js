@@ -641,6 +641,7 @@
         // any sort keyed to a column that no longer exists.
         renderHead();
         renderColsMenu();
+        applyResponsiveColumns();
         sortKey = "score";
         sortDir = -1;
       }
@@ -817,6 +818,50 @@
       });
     }
 
+    // ---- Responsive auto-hide (v4.0.0) ----
+    // Least decision-relevant groups drop first so a narrow window never
+    // needs horizontal scroll: Ticker/Tier/Score/Factors (outside COL_GROUPS,
+    // always visible) plus as many groups as fit. Order is a judgment call --
+    // context-only columns before either scored pillar, and between the two
+    // scored pillars the heavier-weighted one (stock Growth: 60 of 100; ETF
+    // Technicals and Performance are tied at 50/50 so Technicals -- the
+    // entry-timing half -- stays a beat longer since it changes day to day).
+    var HIDE_ORDER = {
+      stock: ["snapshot", "balance", "valuation", "growth"],
+      etf: ["income", "snapshot", "performance", "technicals"]
+    };
+    var WIDTH_TIERS = [1440, 1150, 900, 700]; // px; below tier[i] hide HIDE_ORDER[0..i]
+
+    function autoHiddenCount(width) {
+      var n = 0;
+      for (var i = 0; i < WIDTH_TIERS.length; i++) {
+        if (width < WIDTH_TIERS[i]) n++;
+      }
+      return n;
+    }
+
+    // Live-responsive: recomputed on every resize, overriding any manual
+    // Columns-menu picks until the next breakpoint crossing (owner decision,
+    // 2026-07-04) -- the v4.0.0 goal is that scrolling is never required at
+    // any width, which a "sticky until universe change" default can't guarantee.
+    function applyResponsiveColumns() {
+      var kind = modeKind();
+      var order = HIDE_ORDER[kind];
+      var hideCount = Math.min(autoHiddenCount(window.innerWidth), order.length);
+      var hidden = order.slice(0, hideCount);
+      COL_GROUPS[kind].forEach(function (g) {
+        var cb = document.querySelector('#colsMenu input[data-group="' + g[0] + '"]');
+        if (cb) cb.checked = hidden.indexOf(g[0]) === -1;
+      });
+      applyColumnVisibility();
+    }
+
+    var responsiveResizeTimer = null;
+    function scheduleResponsiveColumns() {
+      clearTimeout(responsiveResizeTimer);
+      responsiveResizeTimer = setTimeout(applyResponsiveColumns, 120);
+    }
+
     // ---- Per-stock breakdown popup ----
     var POPUP_METRICS = [
       { key: "revTTM",      label: "Revenue Growth TTM", weight: 10, fmt: function (d) { return fmtPct(d.revTTM); } },
@@ -952,6 +997,10 @@
       // MAG 10 watchlist toggle
       $("mag10Btn").addEventListener("click", toggleMag10);
 
+      // Responsive column auto-hide (v4.0.0): re-evaluate on resize so no
+      // width ever needs a horizontal scrollbar to see Ticker/Tier/Score.
+      window.addEventListener("resize", scheduleResponsiveColumns);
+
       // modals
       $("methodologyBtn").addEventListener("click", openMethodology);
       $("methodologyClose").addEventListener("click", closeMethodology);
@@ -965,6 +1014,7 @@
     // ---- Init ----
     loadState();
     bind();
+    applyResponsiveColumns();
     render();
     loadInitial();
   })();

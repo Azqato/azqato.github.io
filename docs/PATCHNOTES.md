@@ -2,6 +2,28 @@
 
 ---
 
+## v4.0.0 — 2026-07-04 — Screener responsive redesign, methodology table fix & mobile-friendliness pass
+
+**A dedicated pass so the screener never requires horizontal scrolling, from full desktop down to phone width, plus a methodology-modal display bug fix, a content-drift audit, and the `indices.html` write-up for Price vs 200-Day Moving Average that v3.37.0's ETF rating review had left open. Absorbs the retired v3.35.0.**
+
+### Fixed
+
+- **Methodology modal table overflow**: `style.css`'s `.table-wrap` rule set `overflow-x: auto` and then, three lines later, the shorthand `overflow: hidden` — which resets both axes and silently cancelled the horizontal scrollbar on every wide methodology table sitewide. Changed the trailing declaration to the longhand `overflow-y: hidden`, preserving the rounded-corner clipping without cancelling `overflow-x`.
+- **Universe-button row overflowing the page at phone widths**: a second instance of the implicit-`min-width:auto` grid bug from v3.34.8, this time hitting the *mobile* breakpoint. `style.css`'s `max-width: 1023px` media query reset `.site-layout`'s grid track to a bare `1fr` (the single-column mobile layout), dropping the `minmax(0, 1fr)` fix that only covered the desktop two-column rule — so the overflowing 7-button-plus-MAG-10 row forced the whole page wider than the viewport instead of wrapping. Fixed by applying `minmax(0, 1fr)` to the mobile override too.
+
+### Added
+
+- **Live-responsive auto-hide columns**: the screener table now hides column groups automatically as the window narrows, recomputing on every resize (not just once on load), so Ticker/Tier/Score/Factors are always reachable without horizontal scroll at any width. Stock kind hides Snapshot → Balance → Valuation → Growth as it narrows; ETF kind hides Income & Cost → Snapshot → Performance → Technicals. Built on the existing Columns-menu checkboxes/`applyColumnVisibility()` rather than a new component; manual picks still work and are only overridden when a resize crosses a breakpoint.
+- **`indices.html`: Price vs 200-Day Moving Average** subsection added to the Timing Signals section, alongside RSI and 52-Week Range — the write-up v3.37.0's ETF methodology review had flagged as open. Framed as a trend-health confirmation signal (price above the 200-day MA confirms an intact uptrend; below it is the classic long-term downtrend warning), explicitly distinct from RSI/52-week range's contrarian dip-buying framing. The page's doctrine counts (metrics and timing-signal totals) were updated from nine/four to ten/five everywhere they're stated, including the quick-reference table.
+
+### Verified
+
+- Content audit: `#methodStock`/`#methodEtf` already correctly reflected the current scoring code (no drift found after five same-day scoring edits — the audit itself is the deliverable).
+- Headless Chrome sweep (375, 700, 900, 1023, 1150, 1440, 1920px): zero page-level horizontal overflow (`scrollWidth === clientWidth`) at every width, for the screener (both stock and ETF kind) and all 8 other content pages; column-hide order matches spec at every breakpoint crossing; universe-button row wraps cleanly at narrow widths.
+- Nasdaq 100 regression: exact match to the v3.31.0 baseline (2 S+ / 10 S / 8 A / 32 B / 24 C / 24 F, MU and NVDA at 100) at every width tested — this pass is render-only, no scoring code touched.
+
+---
+
 ## v3.37.2 — 2026-07-04 — Screener: stale-data banner threshold raised from 24 hours to a week
 
 **Owner feedback: the "this data is more than 24 hours old" banner fired too eagerly — a daily refresh slipping a day (a weekend, a rate-limited run) isn't worth alarming a user over. Raised the threshold to a week, which only surfaces the banner for a genuinely stuck pipeline.**

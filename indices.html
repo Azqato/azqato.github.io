@@ -202,7 +202,7 @@
               </ul>
             </div>
 
-            <p>The nine metrics on this page split into two groups. Four are timing signals (VIX, RSI, 52W Range, AAII Sentiment) that tell you when to increase exposure. Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio) that help you choose which ETF to hold. The timing signals do most of the work.</p>
+            <p>The ten metrics on this page split into two groups. Five are timing signals (VIX, RSI, 52W Range, Price vs 200-Day MA, AAII Sentiment) that tell you when to increase exposure. Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio) that help you choose which ETF to hold. The timing signals do most of the work.</p>
           </section>
 
           <!-- VIX Section -->
@@ -271,9 +271,9 @@
 
           <!-- Timing Signals -->
           <section id="section-timing" class="section">
-            <h2>Timing Signals: RSI and 52W Range</h2>
+            <h2>Timing Signals: RSI, 52W Range, and Price vs 200-Day MA</h2>
 
-            <p>RSI and 52-week range positioning are the two technical timing signals in this methodology, and this page is where they belong: they time index and ETF deployments, not individual stock purchases. Both confirm whether the current price represents a favorable or unfavorable entry point, independent of the underlying quality.</p>
+            <p>RSI, 52-week range positioning, and price vs the 200-day moving average are the three technical timing signals in this methodology, and this page is where they belong: they time index and ETF deployments, not individual stock purchases. RSI and 52-week range confirm whether the current price represents a favorable or unfavorable entry point; price vs the 200-day average confirms whether the longer-term trend still supports that entry.</p>
 
             <h3>RSI</h3>
             <p>The Relative Strength Index measures recent price momentum. For ETFs and indices, RSI below 40, and especially below 30, indicates the index has sold off sharply relative to its recent history. This typically coincides with elevated VIX readings and confirms that fear, not fundamentals, is driving the price lower.</p>
@@ -297,6 +297,18 @@
                 <li><span class="badge badge-good">Lower 25% of 52W range</span> Favorable entry. Price near a range low improves the risk/reward of new exposure.</li>
                 <li><span class="badge">25% to 75% of range</span> Neutral positioning. VIX and RSI should inform the decision more heavily than range alone.</li>
                 <li><span class="badge badge-caution">Upper 90% of 52W range</span> Price near annual high. Build cash, defer entries.</li>
+              </ul>
+            </div>
+
+            <h3>Price vs 200-Day Moving Average</h3>
+            <p>The 200-day moving average is the standard long-term trend line for an index or ETF: price above it signals an established uptrend, and price below it is the classic technical warning that a fund has moved into a longer-term downtrend. Unlike RSI and 52-week range, this signal does not reward buying deep pullbacks; it rewards confirmation that the long-term trend is still intact.</p>
+            <p>A fund trading comfortably above its 200-day average, even after a short-term dip that shows up as a low RSI, is telling a different story than a fund trading below it: the first is a pullback within a healthy trend, the second is a fund whose longer-term trend has broken down. Use this signal as a trend-health check alongside RSI and 52-week range, not as a replacement for them. RSI and 52-week range answer "is this a good moment to buy"; price vs the 200-day average answers "is the long-term trend still working in your favor."</p>
+
+            <div class="how-to-read">
+              <ul>
+                <li><span class="badge badge-good">Price above 200-day MA</span> Long-term uptrend intact. The standard bull-market condition; the most favorable entries in this methodology occur above this line, even during short-term pullbacks.</li>
+                <li><span class="badge">Price within a few % of the 200-day MA</span> Trend at an inflection point. Treat RSI and 52-week range as the deciding signals until the trend re-establishes itself clearly.</li>
+                <li><span class="badge badge-caution">Price below 200-day MA</span> Long-term downtrend. Historically associated with deeper, more prolonged drawdowns than a pullback within an uptrend. Warrants more caution even when RSI looks oversold.</li>
               </ul>
             </div>
           </section>
@@ -465,7 +477,7 @@
                 <li><strong>Pair it with the VIX:</strong> If you are already tracking the VIX weekly, add the Thursday AAII reading to the same check-in. The combined reading is substantially more informative than either alone. Two independent measures of fear pointing in the same direction carry far more weight than one.</li>
                 <li><strong>Read the GVD framework:</strong> The <a href="philosophy.html#section-gvd">Growth, Value, and Dividend section on the Philosophy page</a> explains how market environments determine which ETF categories lead recoveries. Understanding which fund types perform best in different phases of a market cycle helps you position across categories as a bottom forms, not just into the broad market.</li>
                 <li><strong>Look for persistence, not single-week spikes:</strong> A single week at 60% bearish is notable. Multiple consecutive weeks above 55% carries substantially more signal weight. The major bottoms documented in the historical table above were all preceded by sustained periods of elevated bearishness, not single-week spikes. Duration of the extreme reading is part of the signal.</li>
-                <li><strong>Confirm with RSI and 52W range:</strong> When AAII bearishness is extreme and the VIX is elevated, check whether the ETF you are considering is also in the lower 25% of its 52-week range with RSI below 40. When all four timing signals align, the entry setup is as high-conviction as this methodology produces.</li>
+                <li><strong>Confirm with RSI and 52W range:</strong> When AAII bearishness is extreme and the VIX is elevated, check whether the ETF you are considering is also in the lower 25% of its 52-week range with RSI below 40. When all five timing signals align, including price still holding above the 200-day moving average, the entry setup is as high-conviction as this methodology produces.</li>
               </ul>
             </div>
           </section>
@@ -517,7 +529,7 @@
           <!-- What Strong Signals Look Like -->
           <section id="section-signals" class="section">
             <h2>What Strong Signals Look Like</h2>
-            <p style="margin-bottom: 16px;">A quick-reference guide to all nine index and ETF metrics. Timing signals tell you when to buy; structural quality signals tell you what to hold.</p>
+            <p style="margin-bottom: 16px;">A quick-reference guide to all ten index and ETF metrics. Timing signals tell you when to buy; structural quality signals tell you what to hold.</p>
 
             <div class="table-wrap">
               <table>
@@ -552,6 +564,13 @@
                     <td><span class="badge badge-good">Lower 25%</span></td>
                     <td><span class="badge badge-caution">Upper 90%</span></td>
                     <td>Price near a range low improves risk/reward. Confirms the pullback is meaningful, not cosmetic.</td>
+                  </tr>
+                  <tr>
+                    <td class="ticker-cell">Price vs 200D MA</td>
+                    <td><span class="badge">Timing</span></td>
+                    <td><span class="badge badge-good">Above 200-day MA</span></td>
+                    <td><span class="badge badge-caution">Below 200-day MA</span></td>
+                    <td>Long-term trend health. Confirms whether a pullback is happening within an uptrend or during an established downtrend.</td>
                   </tr>
                   <tr>
                     <td class="ticker-cell">AAII Bear %</td>
@@ -598,7 +617,7 @@
                 </tbody>
               </table>
             </div>
-            <p class="table-note">The four timing signals (VIX, RSI, 52W Range, AAII Sentiment) carry the most decision weight for when to act. The five structural signals carry the most weight for which ETF to hold. Use both layers together; the best entry is one where the timing is right and the instrument is structurally sound.</p>
+            <p class="table-note">The five timing signals (VIX, RSI, 52W Range, Price vs 200-Day MA, AAII Sentiment) carry the most decision weight for when to act. The five structural signals carry the most weight for which ETF to hold. Use both layers together; the best entry is one where the timing is right and the instrument is structurally sound.</p>
           </section>
 
           <!-- Seeking Alpha Watchlist Setup -->

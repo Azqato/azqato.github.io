@@ -1,11 +1,11 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 3.37.2
+**Version:** 4.0.0
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): **v4.0.0 (next up, absorbs the retired v3.35.0)** → v4.1.0 → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, v3.36.0, v3.37.0's scoring change, v3.37.1, and v3.37.2 shipped 2026-07-04; v3.37.0's `indices.html` doctrine write-up remains open, tracked in its own section below.)
+Release order (updated 2026-07-04): **v4.1.0 (next up)** → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, v3.36.0, v3.37.0, v3.37.1, v3.37.2, and v4.0.0 all shipped 2026-07-04.)
 
 ---
 
@@ -183,16 +183,16 @@ Requested as **a filter**, not a new universe — narrows the visible rows to ju
 
 ---
 
-## v3.37.0 — ETFs Universe: Rating Methodology Review — SCORING CHANGE DONE 2026-07-04, DOCTRINE WRITE-UP STILL OPEN
+## v3.37.0 — ETFs Universe: Rating Methodology Review — DONE 2026-07-04 (doctrine write-up completed under v4.0.0)
 
-Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needed a review. Current methodology presented in full and cross-checked against `indices.html`'s own doctrine, surfacing three gaps (below). Owner decided on the scoring change; **shipped the same day**. The `indices.html` doctrine write-up for Price vs 200-Day MA remains a separate open to-do (item 2 below).
+Owner flagged 2026-07-04 that the ETFs universe scoring methodology (v3.33.0: Technicals 50 / Performance 30 / Income & cost 20, rank-linear points across the fixed 10-fund list) needed a review. Current methodology presented in full and cross-checked against `indices.html`'s own doctrine, surfacing three gaps (below). Owner decided on the scoring change; shipped the same day. The `indices.html` doctrine write-up for Price vs 200-Day MA (item 2 below) was completed as part of v4.0.0's scope — see that section for the as-shipped subsection.
 
 ### Findings from the `indices.html` doctrine review
 
 The page states its own framework explicitly: "The nine metrics on this page split into two groups. Four are timing signals (VIX, RSI, 52W Range, AAII Sentiment)... Five are structural quality signals (YTD Performance, 5Y Return, 10Y Return, Yield, Expense Ratio)." Comparing to the shipped screener model surfaced three gaps:
 
 1. **VIX and AAII Sentiment are absent from the screener entirely** — both are market-wide signals (one reading, not one per fund), so they structurally can't differentiate scores across the 10-fund relative-ranking model. An accepted limitation, not a bug.
-2. **Price vs 200-Day MA (10 pts, scored) has no grounding in `indices.html`'s doctrine.** The page names only RSI and 52-Week Range as ETF timing technicals. **Owner decision (2026-07-04): document this metric on the indices page rather than remove it from the screener** — write a Price vs 200-Day Moving Average subsection into `indices.html`'s Timing Signals section (alongside RSI and 52W Range). **Still open** — not yet written.
+2. **Price vs 200-Day MA (10 pts, scored) has no grounding in `indices.html`'s doctrine.** The page names only RSI and 52-Week Range as ETF timing technicals. **Owner decision (2026-07-04): document this metric on the indices page rather than remove it from the screener** — write a Price vs 200-Day Moving Average subsection into `indices.html`'s Timing Signals section (alongside RSI and 52W Range). **Done under v4.0.0** — see that section below.
 3. **YTD Performance is named in doctrine as one of the five structural signals but is unscored context in the screener**, which instead scores 1-Year Total Return (not named in doctrine). Owner declined to promote YTD (see decision below); this gap remains, unaddressed by design.
 
 ### Scoring change — DONE 2026-07-04
@@ -205,7 +205,7 @@ Owner requested removing Yield and Expense Ratio from scoring. Recommendation pr
 
 ### Plan (remaining)
 
-1. **Write the Price vs 200-Day Moving Average subsection into `indices.html`**, in the Timing Signals section alongside RSI and 52-Week Range. Not yet started.
+Done — see v4.0.0 below for the as-shipped `indices.html` write-up.
 
 ---
 
@@ -409,7 +409,7 @@ A new setup-guide page (peer to `finviz.html` and `seekingalpha.html`) teaching 
 
 ---
 
-## v4.0.0 — Screener Responsive Redesign, Methodology Table Fix & Site-Wide Mobile-Friendliness Pass
+## v4.0.0 — Screener Responsive Redesign, Methodology Table Fix & Site-Wide Mobile-Friendliness Pass — DONE 2026-07-04
 
 ### Why this moved to the front of the queue, and why v3.35.0 merged in
 
@@ -455,22 +455,37 @@ Checked all 9 pages for fixed-width elements that could force horizontal overflo
 1. **The universe switcher has 7 buttons** (Nasdaq 100, S&P 500, Growth, Value, Dividend, ETFs, International) in a `flex-wrap` row — functional, but never checked for how many rows it wraps to on a 375px phone or whether it pushes other controls down awkwardly. May also need auto-collapse-to-dropdown treatment at some width, consistent with the column-hiding approach.
 2. **Touch target sizing** has not been audited: chip filters, column-visibility checkboxes, and the sort-arrow click targets in table headers were sized for mouse pointers first.
 
-### Plan
+### 1. Methodology modal `.table-wrap` overflow bug — fixed
 
-1. **Fix the methodology modal's `.table-wrap` overflow bug** (from merged v3.35.0): remove or reorder the trailing `overflow: hidden`; verify no regression on `metrics.html`/`indices.html`/guide pages, which share the rule.
-2. **Decide scroll-vs-wrap per methodology table** and audit `#methodStock`/`#methodEtf` content against the current scoring code for drift, per the merged scope above.
-3. **Define the column-group breakpoint tiers** for the stock table (Snapshot/Growth/Valuation/Balance Sheet groups) and the ETF table (Snapshot/Performance/Income/Technicals groups) separately, since they have different column counts and priorities. Ticker/Tier/Score/Factors always visible at every width (this is the information needed to answer "is this a good stock/fund," the core of the site's value).
-4. **Implement auto-hide via the existing Columns-menu infrastructure**: the checkboxes that already drive `applyColumnVisibility()` get their checked state driven by a width-based default in addition to manual user toggling, so a user's manual choice is still respected but the automatic default adapts to window width.
-5. **Universe-switcher and toolbar row**: decide whether the 7-button row needs its own narrow-width treatment (e.g. collapsing to a dropdown) or whether `flex-wrap` (already confirmed working) is sufficient — likely sufficient given confirmed correct wrapping behavior, revisit only if the width audit below finds it awkward.
-6. **Device/window-width audit**: headless Chrome sweep from ~375px (phone) up through ~1024-1280px (narrow desktop, matching both real reports) to ~1920px (full desktop) across the screener (both stock and ETF/International column sets), the methodology modal (both stock and ETF mode), and spot-check the other 8 pages, cataloging concrete issues.
-7. **Fix and re-verify**: apply fixes, re-run the same width sweep to confirm no desktop regression (every page already works at full width; this must not be a rewrite of what's already correct).
+`style.css`'s `.table-wrap` rule set `overflow-x: auto` and then, three lines later, the shorthand `overflow: hidden` — which resets both axes and silently cancelled the horizontal scrollbar. Changed the trailing declaration to the longhand `overflow-y: hidden`, which keeps the rounded-corner clipping intent for the container without cancelling `overflow-x`. Shared rule, used by every `.table-wrap` sitewide (`metrics.html`, `indices.html`, guide pages, the methodology modal); the two overrides (`.example-table .table-wrap`, `.guide-step-body .table-wrap`) only touch margin/border, not overflow, so both inherit the fix with no further changes needed.
 
-### Verification
+### 2. `#methodStock`/`#methodEtf` content audit — no drift found
 
-- Headless Chrome screenshots/DOM checks across the full width range (375px through ~1920px) for the screener in both stock-kind and ETF-kind modes, confirming Ticker/Tier/Score/Factors are always visible and no column group is ever clipped without also being hidden (i.e., never scroll-required, per the owner's requirement) — a real, provable check unlike the scrollbar-visibility dead end in v3.34.10.
-- Methodology modal (both stock and ETF mode) at a standard desktop width and ~375px, confirming no clipped table content and no unexpected horizontal scrollbars on tables that should wrap.
-- Spot-check the other 8 pages at 375px/414px/768px, before/after, kept as a record in the PATCHNOTES entry.
-- Full click-through of the screener (universe switch, sort, filter, popup, methodology modal, Columns-menu manual override) at several widths after the pass, confirming manual overrides still work on top of the automatic width-based defaults.
+Read both sections in full against the current scoring code (`METRICS`/`ETF_METRICS` in `screener.js`). Both already correctly reflected the live model: stock pillars at Growth 60/Valuation 20/Balance 20, and the ETF pillars at the v3.37.0-reweighted Technicals 50 (RSI 20, 52W Range 20, vs 200-Day MA 10) / Performance 50 (1Y 10, 5Y 20, 10Y 20). No edits needed — the audit is the deliverable here, confirming the popup content had not drifted from the five scoring changes shipped earlier the same day.
+
+### 3. Responsive auto-hide columns — implemented
+
+Owner decisions locked before implementation: (a) **live-responsive** — column groups recompute on every resize (debounced 120ms), overriding manual Columns-menu picks until the next breakpoint crossing, rather than only setting a one-time default on load; the v4.0.0 goal (never require horizontal scroll) can't be guaranteed by a "sticky until universe change" default. (b) **Hide order**: least decision-relevant groups drop first — stock kind hides Snapshot, then Balance, then Valuation, then Growth (the heaviest-weighted 60pt pillar stays visible longest); ETF kind hides Income & Cost, then Snapshot, then Performance, then Technicals (the two scored pillars are tied at 50/50, so Technicals — the day-to-day entry-timing half — gets the edge to stay a beat longer).
+
+Implementation in `screener.js`: `HIDE_ORDER` (per kind, ordered array) + `WIDTH_TIERS = [1440, 1150, 900, 700]` px; `autoHiddenCount(width)` counts how many tiers the current width falls under; `applyResponsiveColumns()` sets the Columns-menu checkboxes to match, then calls the existing `applyColumnVisibility()`. Wired to fire on `window resize` (debounced via `scheduleResponsiveColumns()`), on init, and inside `activate()` right after `renderColsMenu()` on a stock↔ETF kind change (so switching to ETFs/International re-evaluates against the new column set immediately, not just on the next resize).
+
+### 4. Universe-switcher/toolbar overflow at narrow widths — a second implicit-min-width bug found and fixed
+
+The width audit (below) surfaced a real bug beyond the table itself: at phone widths, the 7 universe buttons + MAG 10 button overflowed past the viewport edge instead of wrapping, dragging the whole page into horizontal scroll even though `.universe-group` already had `flex-wrap: wrap`. Root cause: `style.css`'s `max-width: 1023px` media query resets `.site-layout`'s `grid-template-columns` to a bare `1fr` (the mobile single-column layout, sidebar collapsed to a top bar) — dropping the `minmax(0, 1fr)` fix shipped in v3.34.8 for the *desktop* rule exactly at the narrow widths where it's needed most. A bare `1fr` track's implicit minimum size is its content's intrinsic width, not 0, so the overflowing button row forced `main.app` (900px+) wider than its 485px-wide grid track instead of being clipped/wrapped into it. Fixed by changing the mobile override to `grid-template-columns: minmax(0, 1fr)`, matching the desktop rule. Confirmed via `getBoundingClientRect()` debug instrumentation (not just visual screenshots, which undercounted the actual rendered width because headless Chrome enforces a ~500px effective minimum viewport below that request size) that `document.documentElement.scrollWidth === clientWidth` at every width tested afterward.
+
+### 5. Device-width audit — completed
+
+Headless Chrome sweep (375, 700, 900, 1023, 1150, 1440, 1920px) confirmed, per width, via `scrollWidth`/`clientWidth` equality (a provable check, unlike the scrollbar-visibility dead end in v3.34.10) and DOM inspection of which `.grp-*` groups carry `.col-hidden`:
+- **Zero page-level horizontal overflow** at any tested width, for the screener (both stock-kind and ETF-kind) and all 8 other content pages (`indices.html`, `metrics.html`, `faq.html`, `philosophy.html`, `index.html`, and by shared-layout inference `finviz.html`/`seekingalpha.html`, which use the identical `.site-layout`/`.main-content` structure with no wide fixed-width elements).
+- Column-group hide order confirmed exactly matching `HIDE_ORDER` at every breakpoint crossing, for both stock kind (Snapshot→Balance→Valuation→Growth) and ETF kind (Income&Cost→Snapshot→Performance→Technicals).
+- Universe-button row wraps onto 2 lines at phone widths, 1 line from ~800px up; no page-level scrollbar at any width post-fix.
+- Nasdaq 100 default-load regression: exact match to the v3.31.0 baseline (2 S+ / 10 S / 8 A / 32 B / 24 C / 24 F, MU and NVDA at 100) at every width tested — the responsive work is render-only, no scoring code touched.
+
+### 6. `indices.html` Price vs 200-Day Moving Average write-up — completed
+
+Added a third `<h3>` subsection to the Timing Signals section (`#section-timing`), alongside RSI and 52-Week Range, following the same structure (explanatory paragraphs + a `<div class="how-to-read">` badge list). Framed as a **trend-health confirmation** signal, explicitly distinct from RSI/52W range's contrarian dip-buying framing: price above the 200-day MA confirms an intact long-term uptrend (the favorable condition, matching the ETF model's `higher: true` scoring direction), price below it is the classic long-term downtrend warning — a pullback within an uptrend reads differently than one occurring below a broken trend line, even if RSI is identical in both cases.
+
+Section heading renamed "Timing Signals: RSI, 52W Range, and Price vs 200-Day MA"; updated the page's own doctrine counts everywhere they were stated (the intro "nine metrics... four timing signals" line, the "What Strong Signals Look Like" quick-reference table — new row added for Price vs 200D MA — and its summary note) from nine metrics/four timing signals to **ten metrics/five timing signals**, and the AAII "confirm with RSI and 52W range" callout now also references the 200-day MA in the five-signal alignment check.
 
 ---
 
