@@ -2,6 +2,20 @@
 
 ---
 
+## v4.0.1 — 2026-07-04 — MAG 10 button spacing fix
+
+**Owner reported the MAG 10 button "appears different than the others" in the screener's app-bar. Diagnosed via `getBoundingClientRect()` comparison across all universe buttons.**
+
+### Fixed
+
+- **MAG 10 button gap doubled**: `#mag10Btn`'s `margin-left: 6px` (added in v3.37.1, when the button moved into the app-bar) stacked on top of `.universe-group`'s own `gap: 6px`, giving MAG 10 a 12px gap before it instead of the uniform 6px between every other button. Removed the redundant `margin-left`; the left-border divider and squared-off left corner (intentional, so it still reads as a filter rather than an eighth universe) are unaffected.
+
+### Verified
+
+- Headless Chrome: measured left/right edges of all 8 app-bar buttons before and after — gap between every consecutive pair (including International → MAG 10) is now a uniform 6.0px.
+
+---
+
 ## v4.0.0 — 2026-07-04 — Screener responsive redesign, methodology table fix & mobile-friendliness pass
 
 **A dedicated pass so the screener never requires horizontal scrolling, from full desktop down to phone width, plus a methodology-modal display bug fix, a content-drift audit, and the `indices.html` write-up for Price vs 200-Day Moving Average that v3.37.0's ETF rating review had left open. Absorbs the retired v3.35.0.**

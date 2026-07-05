@@ -1,11 +1,17 @@
 # ROADMAP.md — Implementation Plans for Planned Releases
 
-**Version:** 4.0.0
+**Version:** 4.0.1
 **Last Updated:** 2026-07-04
 
 This document holds the detailed implementation plan for every item still open on the [PRD roadmap](PRD.md#roadmap). The PRD's milestone table remains the source of truth for **what** is planned and in what order; this file is the reference for **how** each item will be built. When a release ships, its plan here is trimmed to a pointer at the PRD milestone row and the PATCHNOTES entry.
 
-Release order (updated 2026-07-04): **v4.1.0 (next up)** → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, v3.36.0, v3.37.0, v3.37.1, v3.37.2, and v4.0.0 all shipped 2026-07-04.)
+Release order (updated 2026-07-04): **v4.1.0 (next up)** → v4.2.0 → v4.3.0 → v4.4.0 → v4.5.0. (v3.34.0, v3.34.5, v3.34.6, v3.34.7, v3.34.8, v3.36.0, v3.37.0, v3.37.1, v3.37.2, v4.0.0, and v4.0.1 all shipped 2026-07-04.)
+
+---
+
+## v4.0.1 — MAG 10 Button Spacing Fix — DONE 2026-07-04
+
+Owner reported the MAG 10 button "appears different than the others" in the screener's app-bar. Diagnosed by injecting a debug script that measured `getBoundingClientRect()` for every app-bar button: the gap between International and MAG 10 was 12.0px, double the uniform 6.0px gap between every other consecutive pair. Root cause: `#mag10Btn`'s `margin-left: 6px` (added in v3.37.1, when the button moved from the tier-chip toolbar into the app-bar) stacked on top of `.universe-group`'s own flex `gap: 6px`. Fix: removed the redundant `margin-left` from `#mag10Btn` in `screener.html`, leaving the left-border divider and squared-off left corner (`border-radius: 0 7px 7px 0`) intact — those are the intentional visual cues that it's a filter, not an eighth universe. Re-verified with the same measurement script: all 8 gaps uniform at 6.0px. See PATCHNOTES.md for the shipped record.
 
 ---
 
