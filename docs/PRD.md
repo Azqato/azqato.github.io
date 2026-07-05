@@ -93,7 +93,7 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 
 - **F1: Project Cards.** Icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date. Defined in the `PROJECTS` array in `projects.html`.
 - **F2: Tag Filtering.** Auto-generated filter bar from `PROJECTS` array; real-time hide/show via `data-hidden` attribute; project count updates on filter change.
-- **F3: Navigation.** Sticky nav across all pages: Home, About, Discord, Invests, Links, Projects, Tools, YouTube, GitHub, Support. Active state via `class="active"` in HTML. Nav collapses on mobile. Discord links to `discord.html`; Tools links to `https://azqato.github.io/tools/`; GitHub links to `github.com/Azqato`; all open in the same tab.
+- **F3: Navigation.** Sticky nav across all pages: Home, About, Discord, Invests, Links, Projects, Tools, YouTube, GitHub, Support. Active state via `class="active"` in HTML. Below 860px, the link list collapses behind a hamburger toggle button (`.nav-toggle`) that opens a dropdown panel; inline JS per page handles open/close, closing on link click or outside click. Discord links to `discord.html`; Tools links to `https://azqato.github.io/tools/`; GitHub links to `github.com/Azqato`; all open in the same tab.
 - **F4: Hero Sections.** Headline and description on each page, styled consistently. Landing page hero includes profile photo, category pills, and CTA buttons.
 - **F5: Zero Dependencies.** Plain HTML/CSS/JS; works offline after first load; no external fonts, no CDN scripts.
 - **F6: About Page.** Bio with gaming origins, content creation, B5TA community, and web development. Pitch card with profile photo and signature.

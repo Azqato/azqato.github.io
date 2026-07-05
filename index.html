@@ -51,6 +51,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
 
     .nav-logo {
@@ -62,6 +63,17 @@
     }
 
     .nav-logo span { color: var(--accent); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+    }
 
     .nav-links {
       display: flex;
@@ -151,7 +163,6 @@
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
-      margin-top: 0.75rem;
     }
 
     .btn {
@@ -396,12 +407,32 @@
     footer a { color: var(--accent); text-decoration: none; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(13, 17, 23, 0.97);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 2rem 1rem;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 0.6rem 0; }
+    }
+
     @media (max-width: 600px) {
       .hero { padding: 3rem 1.25rem 2rem; }
       .intro-block { padding: 0.5rem 1.25rem 1.5rem; }
       .section { padding: 2rem 1.25rem; }
       .cta-section { padding: 1rem 1.25rem 3rem; }
-      .nav-links { display: none; }
       .cta-inner { padding: 2.25rem 1.25rem; }
     }
   </style>
@@ -412,6 +443,7 @@
   <nav>
     <div class="nav-inner">
       <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -529,5 +561,28 @@
     Built by <a href="https://github.com/Azqato">Azqato</a>.
   </footer>
 
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

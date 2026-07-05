@@ -55,6 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
 
     .nav-logo {
@@ -69,6 +70,16 @@
       color: var(--accent);
     }
 
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+    }
     .nav-links {
       display: flex;
       gap: 1.5rem;
@@ -233,7 +244,6 @@
     }
 
     .pitch-signature {
-      margin-top: 1.5rem;
       font-weight: 700;
       color: var(--accent);
       font-size: 1rem;
@@ -390,7 +400,6 @@
     }
 
     .affiliate-link-btn {
-      margin-top: 0.5rem;
       padding: 0.35rem 0.9rem;
       border-radius: 6px;
       border: 1px solid var(--border);
@@ -423,11 +432,31 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(13, 17, 23, 0.97);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 2rem 1rem;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 0.6rem 0; }
+    }
+
     @media (max-width: 600px) {
       .hero { padding: 3rem 1.25rem 2rem; }
       .section { padding: 2rem 1.25rem; }
       .cta-section { padding: 1rem 1.25rem 2rem; }
-      .nav-links { display: none; }
       .pitch-card { padding: 1.5rem; }
       .cta-inner { padding: 2rem 1.25rem; }
       .affiliate-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
@@ -440,6 +469,7 @@
   <nav>
     <div class="nav-inner">
       <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -539,5 +569,28 @@
     Built by <a href="https://github.com/Azqato">Azqato</a>.
   </footer>
 
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
