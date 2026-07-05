@@ -480,10 +480,6 @@
     "n": "Comfort Systems USA"
   },
   {
-    "t": "CAG",
-    "n": "Conagra Brands"
-  },
-  {
     "t": "COP",
     "n": "ConocoPhillips"
   },
@@ -934,6 +930,10 @@
   {
     "t": "HD",
     "n": "Home Depot (The)"
+  },
+  {
+    "t": "HONA",
+    "n": "Honeywell Aerospace"
   },
   {
     "t": "HON",
