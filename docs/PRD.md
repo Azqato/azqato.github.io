@@ -180,6 +180,8 @@ When publishing the new prompt to GitHub Pages, that push is the author's decisi
 
 | Version | Date | Summary |
 | --- | --- | --- |
+| 1.11.0 | 2026-07-05 | Fixed a mobile/tablet header bug found by running the Mobile Audit prompt against the live site: `.sidebar-sticky` kept its desktop `height: 100vh` below 1024px, making the collapsed header full-viewport-tall with its content vertically centered inside; `.sidebar-nav` also squeezed into a narrow column beside the logo instead of wrapping full-width. Fixed both in `css/style.css`. |
+| 1.10.0 | 2026-07-05 | Added the Mobile Audit prompt (`prompts/mobile-responsive-audit.md`), the seventh prompt. |
 | 1.9.0 | 2026-06-27 | Added an optional `hidden` frontmatter flag. Hidden prompts are dropped from the sidebar and home list but stay reachable by direct link. Retired Consolidate Documents, Docs Folder Audit, and Documentation Audit from navigation while preserving their pages. |
 | 1.8.0 | 2026-06-27 | Added the Documentation prompt (`prompts/documentation.md`), the most comprehensive of the documentation prompts: crawls the codebase, consolidates docs into four core files, and folds a full doc suite into a single deeply sectioned PRD. Expanded the Adding Prompts section into the canonical add-a-prompt workflow. |
 | 1.0 | June 2026 | Initial release. Markdown-driven structure: prompts authored as `.md` files in `prompts/`, rendered by a single `index.html` shell with hash routing. Runs with no server or dependencies (`file://` compatible) via `prompts-data.js`. Em dash audit prompt added as first example. Writing style rules documented. |

@@ -36,6 +36,7 @@ Browsers block `fetch()` of local files when a page is opened from disk (`file:/
 | `prompts/docs-folder-audit.md` | Docs Folder Audit prompt: crawl the entire codebase, then audit and rewrite every document in /docs to match the current state of the project. |
 | `prompts/documentation-audit.md` | Documentation audit prompt: create or update the full documentation suite for any project. |
 | `prompts/documentation.md` | Documentation prompt: crawl the codebase, then consolidate all docs into four core files with every supporting document folded into a deeply sectioned PRD. |
+| `prompts/mobile-responsive-audit.md` | Mobile Audit prompt: audit every page at multiple breakpoints for overflow and layout bugs, fix root causes, verify with real DOM measurements, then document the fixes. |
 
 `consolidate-documents`, `docs-folder-audit`, and `documentation-audit` are marked `hidden: true` in their frontmatter. They are kept on the backend and stay reachable by direct link (`index.html#/<slug>`) but no longer appear in the sidebar or home list, since the Documentation prompt supersedes them.
 
@@ -68,7 +69,8 @@ prompts/
 │   ├── consolidate-documents.md
 │   ├── docs-folder-audit.md
 │   ├── documentation-audit.md
-│   └── documentation.md
+│   ├── documentation.md
+│   └── mobile-responsive-audit.md
 └── docs/
     ├── PRD.md
     ├── DESIGN.md

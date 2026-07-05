@@ -416,6 +416,7 @@ code {
 
   .sidebar-sticky {
     position: static;
+    height: auto;
     max-height: none;
     overflow: visible;
     padding: 14px 0;
@@ -439,6 +440,7 @@ code {
   }
 
   .sidebar-nav {
+    flex-basis: 100%;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 4px 4px;
