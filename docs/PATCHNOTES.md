@@ -505,6 +505,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.7] - 2026-07-05
+
+### Added
+- ProteinPulse project card: browser-based calorie and protein tracker with daily logging, customizable goals, a carry-forward model, and weekly and monthly graphs. Fully client-side with Excel import and export. Tagged `Tools` and `Health`. Live at `https://azqato.github.io/protein/`.
+- `Health` added as a new filter tag category.
+
+---
+
 <!-- Template for future entries:
 
 ## [x.y.z] - YYYY-MM-DD
