@@ -5,6 +5,13 @@ Format: semantic versioning (`MAJOR.MINOR.PATCH`), date `YYYY-MM-DD`, sections: 
 
 ---
 
+## v0.1.7 — 2026-07-05
+
+### Added
+- Protein Tracker external tool card on the landing page — links to `https://azqato.github.io/protein/`
+
+---
+
 ## v0.1.6 — 2026-06-27
 
 ### Changed
