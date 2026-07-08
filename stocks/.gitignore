@@ -1,0 +1,15 @@
+# Orphaned files (replaced by renamed versions)
+guide.html
+indexes.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+
+# Python
+__pycache__/
+*.pyc
