@@ -32,9 +32,12 @@ No Node.js, no npm, no build tools required.
 ```bash
 git clone https://github.com/Azqato/Azqato.git
 cd Azqato
+git config core.hooksPath .githooks   # enable the writing-style pre-commit guard
 ```
 
 No `npm install`. No compilation step.
+
+The `core.hooksPath` step enables a `pre-commit` hook that blocks commits containing em dashes in HTML or docs, per the no-em-dash policy in [`docs/PRD.md`](docs/PRD.md). Bypass in an emergency with `git commit --no-verify`.
 
 ---
 
@@ -146,6 +149,7 @@ Edit `discord.html` directly. Each server is a static `.server-card` block. Copy
 ├── accounts.html        - gaming accounts (Steam, LoL, TFT, RuneScape)
 ├── privacy-policy.html  - full privacy policy
 ├── img/                 - image assets (profile photos, YT thumbnails, covers)
+├── .githooks/           - pre-commit writing-style guard (enable via core.hooksPath)
 ├── README.md            - this file
 └── docs/
     ├── PRD.md           - product requirements and all project documentation

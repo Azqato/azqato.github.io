@@ -123,6 +123,32 @@ Project and server card grids use `CSS Grid` with `auto-fill` and `minmax(280pxâ
 - Card padding: `1.25rem`; internal gap: `0.75rem`
 - Hidden cards use `data-hidden="true"` to toggle display: none via CSS attribute selector
 
+### Featured Project Card (`invests.html`)
+
+A larger, fully clickable variant of the project card used in the Invests page project showcase. The entire card is an `<a>`.
+
+- Background: `--surface`; border: `1px solid --border`; hover: `border-color: --accent`
+- Border radius: `12px`; padding: `1.5rem`; internal gap: `0.6rem`
+- Top-edge gradient on hover: `linear-gradient(90deg, --accent, --purple)`, `height: 3px`, `opacity: 0` default, `1` on hover
+- Hover transform: `translateY(-4px)` + `box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35)`
+- Icon: `1.6rem` emoji; each card's icon mirrors that project's own favicon emoji
+- Title (`1.05rem`, `700`) with a trailing `â†’` arrow that slides `translateX(4px)` and turns `--accent` on hover
+- Grid: `auto-fill`, `minmax(300px, 1fr)`, gap `1.25rem`
+
+### Section Heading (`.section-head`)
+
+Plain heading-plus-subtitle block introducing a page section (used above the Invests project showcase and resource grid). Distinct from Section Title: no left accent bar.
+
+- Heading: `1.6rem`, weight `800`, `letter-spacing: -0.3px`
+- Subtitle: `0.95rem`, `--text-muted`, `max-width: 620px`
+
+### Hero CTA Buttons (`invests.html`)
+
+- Container `.hero-cta`: flex row, wraps, gap `0.85rem`
+- `.btn`: `padding: 0.7rem 1.4rem`, `border-radius: 8px`, `font-size: 0.95rem`, `font-weight: 600`; hover: `translateY(-2px)`
+- `.btn-primary`: `--accent` background, `#04140f` text; hover: `--accent-hover`
+- `.btn-secondary`: `--surface` background, `--border` border, `--text`; hover: `--accent` border and text
+
 ### Discord Server Card (`discord.html`)
 
 - Same base as project cards but hover uses `--discord` border and shadow tint
@@ -240,6 +266,7 @@ All motion is functional: it confirms interactivity. No decorative animations.
 | Element            | Animation                                                   | Duration | Easing |
 |--------------------|-------------------------------------------------------------|----------|--------|
 | Project card       | `translateY(-2px)` + box-shadow + top gradient on hover     | `0.2s`   | default |
+| Featured project card (`invests.html`) | `translateY(-4px)` + box-shadow + top gradient + arrow slide on hover | `0.18s` | default |
 | Discord server card | `translateY(-2px)` + box-shadow + top gradient on hover   | `0.2s`   | default |
 | Affiliate card     | `translateY(-2px)` + box-shadow on hover                    | `0.2s`   | default |
 | Filter buttons     | Background and border color on hover and active             | `0.2s`   | default |

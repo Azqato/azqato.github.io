@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# Writing-style guard: blocks any commit that introduces an em dash into an
+# HTML or documentation file. Enforces the no-em-dash policy documented in the
+# Writing Style section of docs/PRD.md.
+#
+# Checks both forms: the literal Unicode character (U+2014) and the HTML
+# entity &mdash;. In Markdown, occurrences inside `backtick` code spans are
+# allowed, so the rule's own definition and historical references to the
+# character do not trip the guard.
+#
+# Enable once per clone:  git config core.hooksPath .githooks
+# Bypass in an emergency: git commit --no-verify
+#
+# Note: en dashes (U+2013) in numeric or version ranges are permitted by the
+# policy and are not checked. Double dashes are not auto-checked because CSS
+# custom properties (--var) would produce false positives; review those by eye.
+
+EMDASH=$(printf '\342\200\224')   # U+2014, avoids embedding the literal byte
+status=0
+
+# Staged, non-deleted .html and .md files.
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(html|md)$')
+
+for f in $files; do
+  content=$(git show ":$f")
+  case "$f" in
+    *.md)
+      # Strip inline code spans so backtick references are exempt.
+      scan=$(printf '%s\n' "$content" | sed 's/`[^`]*`//g')
+      ;;
+    *)
+      scan="$content"
+      ;;
+  esac
+
+  hits=$(printf '%s\n' "$scan" | grep -nE "$EMDASH|&mdash;")
+  if [ -n "$hits" ]; then
+    if [ "$status" -eq 0 ]; then
+      echo "commit blocked: em dash found (see Writing Style in docs/PRD.md)"
+      echo ""
+    fi
+    echo "  $f:"
+    printf '%s\n' "$hits" | sed 's/^/    /'
+    status=1
+  fi
+done
+
+if [ "$status" -ne 0 ]; then
+  echo ""
+  echo "Replace with a comma, colon, semicolon, parentheses, or period."
+  echo "To bypass (not recommended): git commit --no-verify"
+fi
+
+exit $status

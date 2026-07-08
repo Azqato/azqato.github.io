@@ -151,6 +151,8 @@ All copy across the site and documentation must be easy to read and free of em d
 
 Em dashes appear in two forms in HTML: as the literal Unicode character (`—`) and as the HTML entity (`&mdash;`). Both are prohibited. Audits must search for both forms independently.
 
+This policy is enforced automatically by a `pre-commit` hook in `.githooks/` that blocks any commit introducing either form into an HTML or documentation file. In Markdown, occurrences inside backtick code spans are exempt so the rule can document the character itself. Enable the hook once per clone with `git config core.hooksPath .githooks`; bypass in an emergency with `git commit --no-verify`.
+
 ---
 
 ## Success Criteria
@@ -864,3 +866,4 @@ No additional documentation files should be created inside `/docs`. All new refe
 5. When a roadmap milestone completes: move it from Planned to Completed in the Roadmap section of PRD.md and add a PATCHNOTES entry.
 6. When a third-party integration changes (affiliate link, Discord invite, Buy Me a Coffee URL): update the relevant data model table in PRD.md and the source HTML, then add a PATCHNOTES entry.
 7. Never create new `.md` files in `/docs`. All new documentation content goes into one of the three existing files.
+8. All site and documentation copy must follow the Writing Style section (no em dashes, no double dashes). The `.githooks/pre-commit` guard enforces the em-dash rule at commit time; keep it enabled with `git config core.hooksPath .githooks`.
