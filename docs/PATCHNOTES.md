@@ -2,6 +2,26 @@
 
 ---
 
+## v4.1.1 — 2026-07-08 — Investor-vs-trader discipline & IPO-timing content (video-sourced)
+
+**Owner asked for a video transcript to be reviewed for durable, non-dated concepts and folded into the site in the existing methodology's tone. Two new philosophy sections and two new FAQ items shipped; ticker-specific and time-bound commentary from the source video was left out by design.**
+
+### Added
+
+- **`philosophy.html#section-trader` — "Investor, Not Trader"**: generalizes the transcript's warning that unusually volatile stretches (a stock swinging hard on a single analyst note or sector-wide selling) pull investors into trading behavior — buying because a stock just ran, selling because it just dropped, or chasing a loss with a bigger, faster trade (the same mechanism behind compulsive gambling). The stated antidote: re-run your own revenue/EPS growth and valuation expectations and let that decide, not the last week's chart; a large unrealized gain does not change the test in either direction. Linked from `faq.html#answer-trader`.
+- **`philosophy.html#section-ipo` — "Why We Wait on IPOs"**: new ground for the site. Explains that IPO timing is chosen by the seller (the company and its lock-up-bound early shareholders) to maximize proceeds, not to offer a fair price to a new buyer, so offerings cluster in euphoric, richly-priced windows. Uses two closed historical illustrations rather than live data: the 2021 SPAC/IPO boom (most of that cohort fell sharply within about a year and never recovered) and Meta's own 2012 IPO ($38 to sub-$18 within the same calendar year, in a bull market, before going on to become one of the most valuable companies in the world) as proof that even excellent businesses aren't exempt from the pattern. Ties the "no-touch" rule to requirements this methodology already has — conference call history, multi-quarter financials — rather than inventing a new one. Linked from `faq.html#answer-ipo`.
+- **`faq.html`**: two new accordion items + matching FAQPage JSON-LD entries (`answer-trader`, `answer-ipo`); item count 34→36, corrected in the page's meta description, README.md, and PRD.md.
+
+### Not carried over (by design)
+
+- Single-stock price targets, capex commentary, and one creator's current portfolio positions from the source video — all dated, ticker-specific, and opinion-based, which conflicts with this site's non-goals ("not a buy/sell signal generator," "no financial advice," "no real-time data in editorial content") and the permanence-over-freshness tenet.
+
+### Verified
+
+- FAQ accordion item count and JSON-LD `Question` entry count both recount to 36 (`grep -c` on `faq.html`); philosophy section count recounts to 12. README.md and PRD.md counts corrected to match (PRD's stale "9 sections" / 10-actual label is also fixed as part of this pass).
+
+---
+
 ## v4.0.1 — 2026-07-04 — MAG 10 button spacing fix
 
 **Owner reported the MAG 10 button "appears different than the others" in the screener's app-bar. Diagnosed via `getBoundingClientRect()` comparison across all universe buttons.**

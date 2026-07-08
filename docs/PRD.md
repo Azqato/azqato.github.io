@@ -78,8 +78,8 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 
 - 8 educational pages with sidebar navigation (Home, Philosophy, Metrics, Screener, Finviz, Seeking Alpha, Indices, FAQ)
 - 12-metric evaluation framework documented with examples, how-to-read guides, and caveats
-- 9-section philosophy page (belief and long game, ownership model, research process, GVD framework, offense cadence, Wall Street critique, hype/weak-hands, leadership cycles, knowledge building)
-- 34-item FAQ accordion
+- 12-section philosophy page (belief and long game, ownership model, research process, GVD framework, offense cadence, protecting gains, investor-vs-trader discipline, Wall Street critique, hype/weak-hands, leadership cycles, knowledge building, why we wait on IPOs)
+- 36-item FAQ accordion
 - Step-by-step Finviz screener setup guide
 - Step-by-step Seeking Alpha watchlist setup guide (12-column layout)
 - Index/ETF methodology with VIX action levels, AAII sentiment, RSI, 52W range, structural quality metrics, DCA vs lump sum
@@ -131,7 +131,7 @@ Most investing resources either oversimplify (buy low, sell high) or overwhelm (
 
 - All 12 metrics explained clearly enough that a reader with no finance background can apply them
 - Philosophy content covers all major behavioral and conceptual foundations of the strategy
-- FAQ answers the most common investor questions (34 items) without requiring outside research
+- FAQ answers the most common investor questions (36 items) without requiring outside research
 - Screener shows all 100 Nasdaq 100 tickers with current scores, updated daily automatically
 - Site loads with no errors and no external requests in any modern browser
 - Mobile-readable at 375px minimum width
@@ -235,7 +235,8 @@ Detailed implementation plans for every Planned milestone below live in [docs/RO
 | v3.37.0 — ETFs universe rating methodology review, **fully shipped.** Current methodology presented and cross-checked against `indices.html`'s own doctrine, surfacing 3 gaps (VIX/AAII structurally can't be per-fund metrics; Price vs 200-Day MA was scored but undocumented on `indices.html`, owner decided to document it rather than remove it, written up under v4.0.0; YTD is doctrine-named but unscored while 1Y isn't doctrine-named but is scored — remains unaddressed, owner declined the recommendation to promote YTD). Owner removed Yield and Expense Ratio from scoring (demoted to weight-0 context, still displayed) and weighted up the two longest return horizons instead: 5-Year 10→20, 10-Year 10→20, keeping 1-Year at 10. Final model: Technicals 50 (unchanged) + Performance 50 (1Y 10, 5Y 20, 10Y 20) = 100. `ETF_METRICS`, `ETF_POPUP_METRICS`, column header titles, and the `#methodEtf` popup all updated. Verified via headless Chrome (ETFs universe: 10/10 scored, tiers 1S/1A/3B/3C/2F, Factors chip now `/6`) and a Nasdaq 100 regression check (exact match to the v3.31.0 baseline). See ROADMAP.md for the full record | 2026-07-04 | Complete |
 | v4.0.0 — **Screener responsive redesign, methodology table fix & site-wide mobile-friendliness pass, shipped** (absorbs the retired v3.35.0). Fixed the methodology modal's `.table-wrap` CSS bug (a trailing `overflow: hidden` shorthand was silently cancelling `overflow-x: auto`); audited `#methodStock`/`#methodEtf` content against the current scoring code (no drift found). Implemented live-responsive auto-hide column groups (owner decision: recompute on every resize, overriding manual Columns-menu picks, rather than a one-time load default) — Ticker/Tier/Score/Factors always visible; stock kind hides Snapshot→Balance→Valuation→Growth as the window narrows, ETF kind hides Income&Cost→Snapshot→Performance→Technicals. Width-audit also surfaced and fixed a second implicit-`min-width:auto` grid bug: the mobile media query reset `.site-layout`'s grid track to a bare `1fr`, dropping the v3.34.8 `minmax(0, 1fr)` fix exactly at phone widths, so the universe-button row overflowed the page instead of wrapping. Wrote the Price vs 200-Day Moving Average subsection into `indices.html`'s Timing Signals section (framed as a trend-health confirmation signal, distinct from RSI/52W range's contrarian dip-buying framing), updating the page's doctrine counts from nine metrics/four timing signals to ten metrics/five timing signals throughout. Verified via headless Chrome: zero page-level horizontal overflow from 375px to 1920px across the screener (both stock and ETF kind) and all 8 other content pages; Nasdaq 100 regression exactly matches the v3.31.0 baseline. See ROADMAP.md for the full as-built record | 2026-07-04 | Complete |
 | v4.0.1 — Screener UI bug fix. Owner reported the MAG 10 button "appears different than the others" in the app-bar; diagnosed via `getBoundingClientRect()` that its `margin-left: 6px` (added in v3.37.1) stacked on top of `.universe-group`'s own `gap: 6px`, doubling its lead-in gap to 12px versus every other button's 6px. Removed the redundant margin; the intentional left-border divider and squared-off corner are unaffected. Verified via headless Chrome edge measurements: uniform 6.0px gap between all 8 app-bar buttons | 2026-07-04 | Complete |
-| v4.1.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v4.0 | Planned |
+| v4.1.1 — Content: two new philosophy sections + two new FAQ items, sourced from a video transcript review (owner-requested, pulled ahead of v4.1.0 by direct instruction). "Investor, Not Trader" (`philosophy.html#section-trader`, `faq.html#answer-trader`) generalizes the transcript's warning about volatile stretches pulling investors into trading behavior (chasing price action, the gambler's-chase pattern) into durable doctrine: hold the fundamentals test constant regardless of a position's size or the last week's price swings. "Why We Wait on IPOs" (`philosophy.html#section-ipo`, `faq.html#answer-ipo`) is new ground for the site: IPO timing favors the seller, not the buyer, illustrated with the closed 2021 SPAC/IPO boom and Meta's own 2012 IPO ($38 to sub-$18 within the year) as historical (non-live-price) examples, and ties the "no-touch" rule to requirements the methodology already has (conference call history, multi-quarter financials) rather than inventing a new rule. Ticker-specific, dated commentary from the source video (single-stock price targets, capex debates, one creator's current portfolio positions) was deliberately excluded as out of scope per this doc's non-goals and permanence tenet. FAQ item count 34→36, philosophy section count 9(stale)/10(actual)→12; all three counts corrected across README/PRD | 2026-07-08 | Complete |
+| v4.1.0 — Screener score history sparklines (mine screener.json git history for per-stock score trends) | After v4.1.1 | Planned |
 | v4.2.0 — Deeper index fund coverage (sector ETFs, international allocation, bond tent strategy) | TBD | Planned |
 | v4.3.0 — Additional illustrative examples using historical market events | TBD | Planned |
 | v4.4.0 — Additional philosophy sections | TBD | Planned |
@@ -445,14 +446,14 @@ The site is a fully static architecture. No server processes any requests. No da
 stocks/
 ├── README.md                          ← Developer front door
 ├── index.html                         ← Home page
-├── philosophy.html                    ← Philosophy (9 sections)
+├── philosophy.html                    ← Philosophy (12 sections)
 ├── metrics.html                       ← 12-metric glossary
 ├── screener.html                      ← Interactive Nasdaq 100 screener (app: markup + CSS)
 ├── screener.js                        ← Screener logic (data load, scoring, render, popup)
 ├── finviz.html                        ← Finviz setup guide
 ├── seekingalpha.html                  ← Seeking Alpha setup guide
 ├── indices.html                       ← Index/ETF methodology
-├── faq.html                           ← FAQ accordion (34 items)
+├── faq.html                           ← FAQ accordion (36 items)
 ├── style.css                          ← Design system stylesheet
 ├── script.js                          ← Accordion + IntersectionObserver (content pages)
 ├── og-image.png                       ← Social card image (1200×630)
@@ -884,7 +885,7 @@ Home → Philosophy → Metrics → Screener → Finviz → SeekingAlpha → Ind
 | Page | Section IDs ("On This Page") |
 |------|------------------------------|
 | `index.html` | `#section-strategy`, `#section-metrics-grid`, `#section-reference`, `#section-portfolio` |
-| `philosophy.html` | `#section-possible`, `#section-ownership`, `#section-research`, `#section-gvd`, `#section-offense`, `#section-wall-street`, `#section-hype`, `#section-leadership`, `#section-knowledge` |
+| `philosophy.html` | `#section-possible`, `#section-ownership`, `#section-research`, `#section-gvd`, `#section-offense`, `#section-protect`, `#section-trader`, `#section-wall-street`, `#section-hype`, `#section-leadership`, `#section-knowledge`, `#section-ipo` |
 | `metrics.html` | `#metric-rev-ttm`, `#metric-rev-fwd`, `#metric-eps-ttm`, `#metric-eps-fwd`, `#metric-pe-fwd`, `#metric-peg-fwd`, `#metric-cash`, `#metric-debt`, `#metric-rsi`, `#metric-52w`, `#metric-gross-margin`, `#metric-net-margin` |
 | `finviz.html` | `#section-purpose`, `#section-step1`, `#section-step2`, `#section-step3`, `#section-coverage`, `#section-quickref` |
 | `seekingalpha.html` | `#section-account`, `#section-portfolio-create`, `#section-tickers`, `#section-columns`, `#section-sort`, `#section-done` |

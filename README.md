@@ -90,14 +90,14 @@ Output is written to `data/screener.json`.
 stocks/
 ├── README.md                         ← This file
 ├── index.html                        ← Home: strategy overview, metric grid, reference table
-├── philosophy.html                   ← Conceptual foundation (9 sections)
+├── philosophy.html                   ← Conceptual foundation (12 sections)
 ├── metrics.html                      ← 12-metric glossary with examples
 ├── screener.html                     ← Interactive Nasdaq 100 screener (markup + CSS)
 ├── screener.js                       ← Screener logic (data load, scoring, render, popup)
 ├── finviz.html                       ← Finviz screener setup guide
 ├── seekingalpha.html                 ← Seeking Alpha watchlist setup guide
 ├── indices.html                      ← Index/ETF methodology and timing signals
-├── faq.html                          ← Q&A accordion (34 items)
+├── faq.html                          ← Q&A accordion (36 items)
 ├── style.css                         ← Full design system stylesheet
 ├── script.js                         ← Accordion + IntersectionObserver sidebar
 ├── og-image.png                      ← Social card image (1200x630)
