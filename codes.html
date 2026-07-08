@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Azqato | About</title>
+  <title>Azqato | Codes</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
   <style>
     :root {
@@ -21,11 +21,10 @@
       --tag-bg: #21262d;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+    #projects { scroll-margin-top: 80px; }
 
     body {
       background: var(--bg);
@@ -64,9 +63,7 @@
       letter-spacing: 0.5px;
     }
 
-    .nav-logo span {
-      color: var(--accent);
-    }
+    .nav-logo span { color: var(--accent); }
 
     .nav-toggle {
       display: none;
@@ -91,14 +88,8 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-links a.active {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); font-weight: 600; }
 
     /* ── HERO ── */
     .hero {
@@ -119,7 +110,7 @@
       border-radius: 999px;
       padding: 0.25rem 0.75rem;
       font-size: 0.78rem;
-      color: var(--green);
+      color: var(--purple);
       width: fit-content;
     }
 
@@ -127,7 +118,7 @@
       content: '';
       width: 7px;
       height: 7px;
-      background: var(--green);
+      background: var(--purple);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -144,116 +135,141 @@
       letter-spacing: -0.5px;
     }
 
-    .hero h1 .highlight {
-      color: var(--accent);
-    }
+    .hero h1 .highlight { color: var(--accent); }
 
     .hero p {
       color: var(--text-muted);
       font-size: 1.1rem;
-      max-width: 560px;
+      max-width: 620px;
     }
 
-    /* ── SECTION ── */
-    .section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 700;
+    /* ── HERO CTAs ── */
+    .hero-cta {
       display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s, border-color 0.2s;
     }
 
-    .section-title::before {
-      content: '';
-      display: block;
-      width: 3px;
-      height: 1.2em;
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
       background: var(--accent);
-      border-radius: 2px;
+      color: #04140f;
     }
 
-    /* ── PITCH CARD ── */
-    .pitch-card {
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION HEADING ── */
+    .section-head {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+      max-width: 620px;
+    }
+
+    /* ── PROJECT GRID ── */
+    .projects {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 4rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .pitch-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--purple), var(--orange));
-    }
-
-    .pitch-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .pitch-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--purple));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      flex-shrink: 0;
-      overflow: hidden;
-      border: 2px solid var(--border);
-    }
-
-    .pitch-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .pitch-identity h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .pitch-identity p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .pitch-body {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.8;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.6rem;
+      overflow: hidden;
+      transition: transform 0.18s, border-color 0.2s, box-shadow 0.2s;
     }
 
-    .pitch-body p strong {
-      color: var(--text);
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple), var(--accent));
+      opacity: 0;
+      transition: opacity 0.2s;
     }
 
-    .pitch-signature {
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
       font-weight: 700;
-      color: var(--accent);
-      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-card h3 .arrow {
+      color: var(--text-muted);
+      transition: transform 0.18s, color 0.2s;
+    }
+
+    .project-card:hover h3 .arrow { transform: translateX(4px); color: var(--accent); }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
     }
 
     /* ── FOOTER ── */
@@ -265,10 +281,7 @@
       color: var(--text-muted);
     }
 
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    footer a { color: var(--accent); text-decoration: none; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
@@ -294,8 +307,7 @@
 
     @media (max-width: 600px) {
       .hero { padding: 3rem 1.25rem 2rem; }
-      .section { padding: 2rem 1.25rem; }
-      .pitch-card { padding: 1.5rem; }
+      .section { padding: 0 1.25rem 3rem; }
     }
   </style>
 </head>
@@ -308,12 +320,12 @@
       <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="discord.html">Discord</a></li>
         <li><a href="invests.html">Invests</a></li>
+        <li><a href="codes.html" class="active">Codes</a></li>
         <li><a href="links.html">Links</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="codes.html">Codes</a></li>
         <li><a href="youtube.html">YouTube</a></li>
         <li><a href="https://github.com/Azqato">GitHub</a></li>
         <li><a href="support.html">Support</a></li>
@@ -323,42 +335,36 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">Investor, Developer, Community Builder</div>
-    <h1>Hi, I'm <span class="highlight">Azqato.</span></h1>
-    <p>Also known as zoop. Here's a bit more about who I am and what I'm building.</p>
+    <div class="hero-badge">Developer tools &amp; AI prompts</div>
+    <h1>Azqato <span class="highlight">Codes</span></h1>
+    <p>Prompt libraries and coding tools built for working faster with AI. Explore what's available below, with more on the way.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">Explore the projects ↓</a>
+      <a class="btn btn-secondary" href="discord.html">💬 Join the Discord</a>
+    </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="section" style="padding-top: 0;">
-    <h2 class="section-title">About Me</h2>
-    <div class="pitch-card">
-      <div class="pitch-header">
-        <div class="pitch-avatar">
-          <img src="img/about-profile.jpg" alt="Azqato profile photo" />
-        </div>
-        <div class="pitch-identity">
-          <h3>Azqato (Azz-Kah-Toe)</h3>
-          <p>Content Creator &middot; Web Developer &middot; Community Leader &middot; also known as zoop</p>
-        </div>
-      </div>
-      <div class="pitch-body">
-        <p>
-          From a young age, Azqato, known to many as zoop, developed a love for gaming that has only grown over the years. What began as a passion for playing video games with friends evolved into a drive to build communities that bring people together. Today, he channels that passion into his role as a <strong>content creator, web developer, and community leader</strong>.
-        </p>
-        <p>
-          Azqato's journey in content creation spans multiple platforms, including <strong>Twitch and YouTube</strong>, where he shares his adventures in gaming, investing, and music production. His content reflects his belief in living life to the fullest, constantly trying new things, and encouraging others to do the same.
-        </p>
-        <p>
-          One of his most notable achievements is the creation of <strong>B5TA</strong>, a thriving community on RuneScape and Discord. Through B5TA, Azqato has cultivated a space where gamers of all skill levels can connect, share their experiences, and build lasting friendships. It's a place that embodies his vision of inclusivity and camaraderie in gaming.
-        </p>
-        <p>
-          As an aspiring web developer, Azqato is currently working on a project aimed at establishing a community that fosters the spread of knowledge, resources, and motivation. He is dedicated to empowering others through collaboration and support. For those who generously contribute to his vision, he extends his deepest gratitude.
-        </p>
-        <p>
-          Whether you join Azqato for his gaming streams, financial insights, or music production, his journey invites you to be a part of a larger adventure, one built on creativity, growth, and connection.
-        </p>
-        <div class="pitch-signature">Let's grow together. ⚡</div>
-      </div>
+  <!-- PROJECTS -->
+  <section class="section-head" id="projects">
+    <h2>Azqato's Projects</h2>
+    <p>Tools for coding with AI. Free to use, no signup required.</p>
+  </section>
+
+  <section class="projects">
+    <div class="project-grid">
+
+      <a class="project-card" href="https://azqato.github.io/prompts/" target="_blank" rel="noopener">
+        <span class="project-icon">💬</span>
+        <h3>Prompts <span class="arrow">→</span></h3>
+        <p>A personal library of reusable Claude Code prompts.</p>
+      </a>
+
+      <a class="project-card" href="https://azqato.github.io/tools/" target="_blank" rel="noopener">
+        <span class="project-icon">🛠️</span>
+        <h3>Tools <span class="arrow">→</span></h3>
+        <p>Free, browser-based utilities: favicon downloader, link cleaner, markdown preview, and more.</p>
+      </a>
+
     </div>
   </section>
 
