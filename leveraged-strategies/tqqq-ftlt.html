@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TQQQ FTLT — Leveraged Strategies</title>
+  <meta name="description" content="TQQQ For The Long Term — a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ, and TLT. Created by u/derecknielsen (2022).">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="top-bar" aria-label="Site navigation">
+    <div class="top-bar-inner">
+      <span class="logo-text">Azqato<span class="logo-dot">.</span></span>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
+        <svg width="20" height="15" viewBox="0 0 20 15" fill="none" aria-hidden="true">
+          <rect y="0" width="20" height="2" rx="1" fill="currentColor"/>
+          <rect y="6.5" width="20" height="2" rx="1" fill="currentColor"/>
+          <rect y="13" width="20" height="2" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <div class="top-bar-nav" id="mobile-nav" hidden>
+      <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="3sig.html" class="nav-link">3 Sig</a></li>
+        <li><a href="6sig.html" class="nav-link">6 Sig</a></li>
+        <li><a href="9sig.html" class="nav-link">9 Sig</a></li>
+        <li><a href="tqqq-ftlt.html" class="nav-link active" aria-current="page">TQQQ FTLT</a></li>
+        <li><a href="holy-grail.html" class="nav-link">Holy Grail</a></li>
+        <li><a href="hfea.html" class="nav-link">HFEA</a></li>
+        <li><a href="https://azqato.github.io/stocks/" class="nav-link">Individual Stocks</a></li>
+        <li><a href="https://azqato.github.io/composer/" class="nav-link">ComposerAtlas</a></li>
+        <li><a href="https://azqato.github.io/support.html" class="nav-link">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Site navigation">
+      <div class="sidebar-logo">
+        <span class="logo-text">Azqato<span class="logo-dot">.</span></span>
+        <span class="site-label">Leveraged Strategies</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Pages">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="3sig.html" class="nav-link">3 Sig</a></li>
+          <li><a href="6sig.html" class="nav-link">6 Sig</a></li>
+          <li><a href="9sig.html" class="nav-link">9 Sig</a></li>
+          <li><a href="tqqq-ftlt.html" class="nav-link active" aria-current="page">TQQQ FTLT</a></li>
+          <li><a href="holy-grail.html" class="nav-link">Holy Grail</a></li>
+          <li><a href="hfea.html" class="nav-link">HFEA</a></li>
+          <li><a href="https://azqato.github.io/stocks/" class="nav-link">Individual Stocks</a></li>
+        <li><a href="https://azqato.github.io/composer/" class="nav-link">ComposerAtlas</a></li>
+        <li><a href="https://azqato.github.io/support.html" class="nav-link">Support</a></li>
+        </ul>
+        <div class="on-this-page">
+          <span class="on-this-page-label">On This Page</span>
+          <ul>
+            <li><a href="#overview" class="anchor-link">Overview</a></li>
+            <li><a href="#rules" class="anchor-link">Rules and Logic</a></li>
+            <li><a href="#performance" class="anchor-link">Performance Notes</a></li>
+            <li><a href="#risks" class="anchor-link">Risks and Caveats</a></li>
+            <li><a href="#resources" class="anchor-link">Resources</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p class="sidebar-disclaimer">Educational use only. Not financial advice.</p>
+    </aside>
+
+    <div class="content-wrap">
+      <main id="main-content">
+
+        <div class="hero">
+          <div class="hero-badge">
+            <span class="hero-badge-dot" style="background: var(--color-strat-ftlt);"></span>
+            Daily Algorithm
+          </div>
+          <h1>TQQQ For The Long Term</h1>
+          <p class="lead">A daily rules-based algorithm using <span class="ticker">SPY</span>'s 200-day SMA as a macro regime detector and 10-day RSI for mean reversion signals. Rotates among <span class="ticker">TQQQ</span>, <span class="ticker">UVXY</span>, <span class="ticker">TECL</span>, <span class="ticker">UPRO</span>, <span class="ticker">SQQQ</span>, and <span class="ticker">TLT</span>. Created by u/derecknielsen and published October 2022.</p>
+        </div>
+
+        <section id="overview" aria-labelledby="overview-heading">
+          <h2 id="overview-heading">Overview</h2>
+
+          <p>TQQQ For The Long Term (TQQQ FTLT) is a rules-based algorithmic strategy created by Reddit user u/derecknielsen and published in October 2022. Despite its name suggesting a passive buy-and-hold approach, the strategy is an active, daily-rebalancing algorithm that uses a cascading set of conditions to rotate between leveraged long positions, a volatility ETF, leveraged short positions, and long-duration Treasuries depending on the prevailing market regime.</p>
+
+          <p>The strategy was designed to address a problem the author encountered firsthand: discovering <span class="ticker">TQQQ</span> in October 2021, just before a 70%+ drawdown over the following 12 months. The stated goal was to build something that could profit in both bull and bear markets, rather than accepting the full drawdown of simply holding TQQQ through a prolonged decline.</p>
+
+          <p>The strategy operates on two primary ideas. First, <strong>momentum switching via the 200-day SMA:</strong> the 200-day simple moving average of <span class="ticker">SPY</span> is used as a macro regime detector. When SPY is above its 200D SMA, the market is in a low-volatility trending environment and the strategy takes leveraged long positions. When SPY is below its 200D SMA, the strategy switches to bearish or defensive instruments. Second, <strong>mean reversion via 10-day RSI:</strong> within each regime, the 10-day RSI identifies when individual ETFs are overbought or oversold and takes the opposite-direction position, anticipating a reversion toward the mean.</p>
+
+          <p>This design is directly inspired by Michael Gayed's and Charles Bilello's 2015 academic paper, <em>Leverage for the Long Run</em> (SSRN #2741701), which demonstrated that applying leverage only when the S&amp;P 500 is above its 200-day moving average — and exiting to cash or Treasuries below it — produced a superior Sharpe ratio, reduced maximum drawdown, and higher terminal wealth than constant-leverage buy-and-hold over an 87-year backtest.</p>
+
+          <p>u/derecknielsen published the strategy on Composer.trade, a platform for building and running algorithmic trading symphonies. The post attracted extensive community engagement: at least 10 community variants were created and over 900 comments generated in the Composer Discord alone. By October 2022 — approximately four months after the author began running the strategy live — it was up approximately 150% cumulative from the June 2022 start date, a period during which <span class="ticker">TQQQ</span> itself was experiencing a major bear market bottom.</p>
+        </section>
+
+        <section id="rules" aria-labelledby="rules-heading">
+          <h2 id="rules-heading">Rules and Logic</h2>
+
+          <p>The strategy is a daily-rebalancing decision tree. All conditions are checked every trading day. The portfolio holds one instrument at a time (100% allocation, minus a 5% cash buffer maintained by the Composer symphony wrapper).</p>
+
+          <h3>Instruments</h3>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">TQQQ FTLT instruments</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Instrument</th>
+                  <th scope="col">Ticker</th>
+                  <th scope="col">Role in strategy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ProShares UltraPro QQQ</td>
+                  <td><span class="ticker">TQQQ</span></td>
+                  <td>Primary long position (3x Nasdaq-100)</td>
+                </tr>
+                <tr>
+                  <td>ProShares Ultra VIX Short-Term Futures</td>
+                  <td><span class="ticker">UVXY</span></td>
+                  <td>Overbought hedge (1.5x short VIX futures)</td>
+                </tr>
+                <tr>
+                  <td>Direxion Daily Technology Bull 3x</td>
+                  <td><span class="ticker">TECL</span></td>
+                  <td>Mean reversion long in bear regime (3x tech)</td>
+                </tr>
+                <tr>
+                  <td>ProShares UltraPro S&amp;P 500</td>
+                  <td><span class="ticker">UPRO</span></td>
+                  <td>Mean reversion long in bear regime (3x S&amp;P 500)</td>
+                </tr>
+                <tr>
+                  <td>ProShares UltraPro Short QQQ</td>
+                  <td><span class="ticker">SQQQ</span></td>
+                  <td>Bear regime short (&minus;3x Nasdaq-100)</td>
+                </tr>
+                <tr>
+                  <td>iShares 20+ Year Treasury Bond ETF</td>
+                  <td><span class="ticker">TLT</span></td>
+                  <td>Defensive alternative to SQQQ in bear regime</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Signal inputs</h3>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">TQQQ FTLT signal inputs</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Signal</th>
+                  <th scope="col">Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="ticker">SPY</span> vs. SPY 200D SMA</td>
+                  <td>Primary macro regime detector: bull or bear</td>
+                </tr>
+                <tr>
+                  <td><span class="ticker">TQQQ</span> vs. TQQQ 20D SMA</td>
+                  <td>Short-term bear trend detector within the bear regime</td>
+                </tr>
+                <tr>
+                  <td>TQQQ 10D RSI</td>
+                  <td>Overbought (&gt;79) and oversold (&lt;31) detection</td>
+                </tr>
+                <tr>
+                  <td>SPXL 10D RSI</td>
+                  <td>Secondary overbought detection (&gt;80)</td>
+                </tr>
+                <tr>
+                  <td>SPY 10D RSI</td>
+                  <td>S&amp;P 500 oversold detection (&lt;30)</td>
+                </tr>
+                <tr>
+                  <td>SQQQ 10D RSI</td>
+                  <td>Inverse ETF oversold detection (&lt;31)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Decision tree</h3>
+
+          <p><strong>Step 1 — Macro regime: SPY vs. its 200D SMA</strong></p>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">Macro regime determination</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Condition</th>
+                  <th scope="col">Regime</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="ticker">SPY</span> current price &gt; SPY 200D SMA</td>
+                  <td>BULL REGIME</td>
+                </tr>
+                <tr>
+                  <td><span class="ticker">SPY</span> current price &le; SPY 200D SMA</td>
+                  <td>BEAR REGIME</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p><strong>Bull Regime</strong></p>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">Bull regime decision tree</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Condition</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Rationale</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>TQQQ 10D RSI &gt; 79</td>
+                  <td>Buy <span class="ticker">UVXY</span></td>
+                  <td>TQQQ overbought; volatility spike expected</td>
+                </tr>
+                <tr>
+                  <td>SPXL 10D RSI &gt; 80</td>
+                  <td>Buy <span class="ticker">UVXY</span></td>
+                  <td>S&amp;P 500 3x also overbought; confirms overextension</td>
+                </tr>
+                <tr>
+                  <td>Neither condition met</td>
+                  <td>Buy <span class="ticker">TQQQ</span></td>
+                  <td>Default bull-market position</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p><strong>Bear Regime</strong></p>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">Bear regime decision tree</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Condition</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Rationale</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>TQQQ 10D RSI &lt; 31</td>
+                  <td>Buy <span class="ticker">TECL</span></td>
+                  <td>TQQQ oversold in bear; mean reversion long on leveraged tech</td>
+                </tr>
+                <tr>
+                  <td>SPY 10D RSI &lt; 30</td>
+                  <td>Buy <span class="ticker">UPRO</span></td>
+                  <td>S&amp;P oversold; mean reversion long on 3x S&amp;P 500</td>
+                </tr>
+                <tr>
+                  <td>TQQQ &lt; its 20D SMA</td>
+                  <td>Select top of [<span class="ticker">SQQQ</span>, <span class="ticker">TLT</span>] by 10D RSI</td>
+                  <td>Downtrend confirmed; hold best-performing defensive/short</td>
+                </tr>
+                <tr>
+                  <td>TQQQ &ge; 20D SMA AND SQQQ RSI &lt; 31</td>
+                  <td>Buy <span class="ticker">SQQQ</span></td>
+                  <td>Inverse ETF pulled back; re-enter short at better price</td>
+                </tr>
+                <tr>
+                  <td>None of the above</td>
+                  <td>Buy <span class="ticker">TQQQ</span></td>
+                  <td>Bear macro but TQQQ in short-term recovery</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p><strong>SQQQ vs. TLT selection:</strong> When <span class="ticker">TQQQ</span> is below its 20D SMA in a bear regime, the strategy selects whichever of <span class="ticker">SQQQ</span> or <span class="ticker">TLT</span> has the higher 10-day RSI. This prevents holding SQQQ after a prolonged short-side rally when TLT may offer a better risk-adjusted continuation position.</p>
+
+          <div class="callout callout-info">
+            <strong>Note on UVXY:</strong> The author flags <span class="ticker">UVXY</span> as extremely risky. It tracks 1.5x short-term VIX futures and can decline 20–30% in a single day when volatility drops. The overbought-into-UVXY trade is described as "a somewhat rare event but when it happens, the profits can be very generous."
+          </div>
+        </section>
+
+        <section id="performance" aria-labelledby="performance-heading">
+          <h2 id="performance-heading">Performance Notes</h2>
+
+          <h3>10-year backtest (October 2012 to October 2022)</h3>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">TQQQ FTLT 10-year backtest comparison</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Metric</th>
+                  <th scope="col">TQQQ FTLT</th>
+                  <th scope="col">TQQQ buy-and-hold</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cumulative return</td>
+                  <td class="num positive">+298%</td>
+                  <td class="num">+35%</td>
+                </tr>
+                <tr>
+                  <td>Relative performance</td>
+                  <td class="num">8.5&times; faster growth</td>
+                  <td class="num">baseline</td>
+                </tr>
+                <tr>
+                  <td>Approximate max drawdown</td>
+                  <td class="num">&asymp;half of TQQQ</td>
+                  <td class="num negative">&asymp;&minus;80%+ (2022)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The backtest window ended at October 2022, near the trough of the 2022 <span class="ticker">TQQQ</span> drawdown of approximately 77%. TQQQ's 10-year buy-and-hold result of +35% reflects ending at the 2022 bear market low — a period that would show a dramatically higher return at a different end date.</p>
+
+          <p><strong>Extended community backtest (1970s to present):</strong> A community member stripped the strategy to bare essentials to enable backtesting to the 1970s. Results showed the strategy can perform well in periods of stagflation, high inflation, and Federal Reserve quantitative tightening.</p>
+
+          <p><strong>Live tracking from June to October 2022:</strong> The author reports approximately +150% cumulative return over the four-month period following the strategy's June 2022 launch, during a time when <span class="ticker">TQQQ</span> was near its bear market bottom.</p>
+
+          <h3>Academic basis — Leverage for the Long Run (Gayed &amp; Bilello, 2015)</h3>
+
+          <p>The paper backtested the Leverage Rotation Strategy (LRS) from October 1928 to October 2015 (87 years):</p>
+
+          <div class="table-wrap">
+            <table>
+              <caption class="visually-hidden">LRS academic backtest summary</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Strategy</th>
+                  <th scope="col">Sharpe ratio</th>
+                  <th scope="col">Max drawdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Buy-and-hold S&amp;P 500</td>
+                  <td class="num">0.30</td>
+                  <td class="num negative">&minus;86%</td>
+                </tr>
+                <tr>
+                  <td>Unleveraged 200D SMA timing</td>
+                  <td class="num">0.60</td>
+                  <td class="num negative">&minus;50%</td>
+                </tr>
+                <tr>
+                  <td>LRS with 2x leverage</td>
+                  <td class="num">0.51</td>
+                  <td class="num negative">&minus;78%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Key findings: above the 200D SMA: +14.1% annualized return, 14.7% volatility. Below: &minus;2.3% annualized return, 26.5% volatility. The LRS outperformed buy-and-hold in 80% of rolling three-year periods. Approximately 5 regime switches per year on average.</p>
+        </section>
+
+        <section id="risks" aria-labelledby="risks-heading">
+          <h2 id="risks-heading">Risks and Caveats</h2>
+          <div class="callout callout-risk" role="note" aria-label="Risk notice">
+            <strong>Leveraged ETF Risk Notice</strong>
+            This strategy rotates among five leveraged instruments: <span class="ticker">TQQQ</span> (3x Nasdaq-100), <span class="ticker">UVXY</span> (1.5x VIX futures), <span class="ticker">TECL</span> (3x technology), <span class="ticker">UPRO</span> (3x S&amp;P 500), and <span class="ticker">SQQQ</span> (&minus;3x Nasdaq-100), plus <span class="ticker">TLT</span>. All leveraged instruments are subject to daily reset and volatility decay. This strategy is not a buy-and-hold position — it is a daily-rebalancing algorithm that may change holdings any trading day conditions change.
+          </div>
+
+          <p><strong>Daily rebalancing creates compounding transaction costs and tax events.</strong> Unlike the quarterly-rebalancing Kelly Signal plans, TQQQ FTLT checks conditions every trading day. In a volatile, choppy market near the 200D SMA, this can produce daily whipsaws with high transaction frequency. In a taxable account, each rotation generates a capital gains event.</p>
+
+          <p><strong>Choppy markets near the 200D SMA cause repeated false signals.</strong> When <span class="ticker">SPY</span> oscillates above and below its 200D SMA without establishing a clear trend, the strategy repeatedly switches between the bull regime (<span class="ticker">TQQQ</span>) and the bear regime (<span class="ticker">SQQQ</span>/<span class="ticker">TLT</span>). Each switch incurs costs, and the whipsaw between long and short positions can produce losses in both directions.</p>
+
+          <p><strong>UVXY is one of the most volatile instruments available.</strong> <span class="ticker">UVXY</span> tracks 1.5x short-term VIX futures, which have a persistent structural headwind due to futures roll cost. UVXY loses value in calm markets and during volatility mean reversion. The author explicitly warns it "can easily decline 20–30% in one day."</p>
+
+          <p><strong>All instruments carry leveraged ETF daily reset risk.</strong> <span class="ticker">TQQQ</span>, <span class="ticker">TECL</span>, <span class="ticker">UPRO</span>, and <span class="ticker">SQQQ</span> all use daily reset leverage. In volatile, sideways markets, each instrument individually decays through volatility drag.</p>
+
+          <p><strong>The 10-year backtest window was favorable.</strong> The October 2012 to October 2022 window captures a 10-year period of extraordinary Nasdaq-100 performance. A backtest that ends at any bear market low will show strong relative performance for a protection-oriented strategy.</p>
+
+          <p><strong>Bear regime instruments are not hedges.</strong> <span class="ticker">SQQQ</span> (&minus;3x Nasdaq-100) is a directional short-selling instrument. If the bear regime signal fires but the market immediately reverses upward, SQQQ produces large leveraged losses.</p>
+
+          <p><strong>Community evolutions vary significantly.</strong> At least 10 variations of the strategy were circulating in the Composer Discord within weeks of publication. Variations may differ in RSI thresholds, instrument substitutions, leverage levels, and regime definitions. Performance of any specific variant may differ materially from the original.</p>
+
+          <p><strong>Backtest survivorship and regime dependency.</strong> The academic foundation (Gayed &amp; Bilello) used October 1928 as its start date, beginning just before the Great Depression — a period where the 200D SMA's protective effect was extreme. CXO Advisory notes this start date biases the results toward the SMA's best historical performance.</p>
+        </section>
+
+        <section id="resources" aria-labelledby="resources-heading">
+          <h2 id="resources-heading">Resources</h2>
+
+          <p><strong>Original strategy post</strong> — u/derecknielsen (Reddit, October 2022): The complete explanation of the strategy design, decision tree, performance claims, and community evolution history.</p>
+
+          <p><strong>Composer.trade symphony</strong> — ID <code>ovM8FTJXYZX1uFmh0vRI</code>: The canonical published implementation. The symphony can be cloned and run on Composer.trade. The JSON contains the full decision tree.</p>
+
+          <p><strong>"Leverage for the Long Run"</strong> — Michael Gayed &amp; Charles Bilello (2015, SSRN #2741701): The academic paper providing the theoretical foundation for SMA-gated leverage. Documents the Leverage Rotation Strategy's 87-year backtest.</p>
+
+          <p><strong>CXO Advisory</strong> — Independent review of the Gayed/Bilello paper with corrected performance metrics and critical notes on backtest friction assumptions.</p>
+
+          <p><strong>The7Circles</strong> — Extended discussion of the LRS regime logic, drawdown profiles, and volatility regime theory.</p>
+        </section>
+
+      </main>
+
+      <footer>
+        <p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leveraged Strategies</title>
+  <meta name="description" content="A reference library for six leveraged ETF strategy frameworks built around TQQQ. Educational use only.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="top-bar" aria-label="Site navigation">
+    <div class="top-bar-inner">
+      <span class="logo-text">Azqato<span class="logo-dot">.</span></span>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
+        <svg width="20" height="15" viewBox="0 0 20 15" fill="none" aria-hidden="true">
+          <rect y="0" width="20" height="2" rx="1" fill="currentColor"/>
+          <rect y="6.5" width="20" height="2" rx="1" fill="currentColor"/>
+          <rect y="13" width="20" height="2" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <div class="top-bar-nav" id="mobile-nav" hidden>
+      <ul>
+        <li><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+        <li><a href="3sig.html" class="nav-link">3 Sig</a></li>
+        <li><a href="6sig.html" class="nav-link">6 Sig</a></li>
+        <li><a href="9sig.html" class="nav-link">9 Sig</a></li>
+        <li><a href="tqqq-ftlt.html" class="nav-link">TQQQ FTLT</a></li>
+        <li><a href="holy-grail.html" class="nav-link">Holy Grail</a></li>
+        <li><a href="hfea.html" class="nav-link">HFEA</a></li>
+        <li><a href="https://azqato.github.io/stocks/" class="nav-link">Individual Stocks</a></li>
+        <li><a href="https://azqato.github.io/composer/" class="nav-link">ComposerAtlas</a></li>
+        <li><a href="https://azqato.github.io/support.html" class="nav-link">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Site navigation">
+      <div class="sidebar-logo">
+        <span class="logo-text">Azqato<span class="logo-dot">.</span></span>
+        <span class="site-label">Leveraged Strategies</span>
+      </div>
+      <nav class="sidebar-nav" aria-label="Pages">
+        <ul>
+          <li><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+          <li><a href="3sig.html" class="nav-link">3 Sig</a></li>
+          <li><a href="6sig.html" class="nav-link">6 Sig</a></li>
+          <li><a href="9sig.html" class="nav-link">9 Sig</a></li>
+          <li><a href="tqqq-ftlt.html" class="nav-link">TQQQ FTLT</a></li>
+          <li><a href="holy-grail.html" class="nav-link">Holy Grail</a></li>
+          <li><a href="hfea.html" class="nav-link">HFEA</a></li>
+          <li><a href="https://azqato.github.io/stocks/" class="nav-link">Individual Stocks</a></li>
+        <li><a href="https://azqato.github.io/composer/" class="nav-link">ComposerAtlas</a></li>
+        <li><a href="https://azqato.github.io/support.html" class="nav-link">Support</a></li>
+        </ul>
+      </nav>
+      <p class="sidebar-disclaimer">Educational use only. Not financial advice.</p>
+    </aside>
+
+    <div class="content-wrap">
+      <main id="main-content">
+
+        <section class="site-intro">
+          <h1>Leveraged Strategies</h1>
+          <p class="lead">A reference library for six well-known strategy frameworks built around <span class="ticker">TQQQ</span> and related leveraged ETFs. Each strategy takes a distinct approach — from quarterly value-averaging signal plans to daily algorithmic regime switching to leveraged risk parity portfolios. These pages document the mechanics, not make recommendations.</p>
+
+          <div class="callout callout-risk" role="note" aria-label="Risk notice">
+            <strong>Leveraged ETF Risk Notice</strong>
+            <span class="ticker">TQQQ</span> uses daily rebalancing to deliver 3x the daily return of the Nasdaq-100. This daily reset means returns compound on a daily basis, not over longer periods. In volatile, sideways markets this creates volatility decay: the fund can lose value over time even when the index itself is flat or modestly positive. Drawdowns are amplified and recoveries take proportionally longer. These characteristics apply to every strategy documented here.
+          </div>
+
+          <p>The six strategies below represent distinct philosophies for working with leveraged ETFs: quarterly value-averaging signal plans across three leverage tiers, two daily algorithmic rotation systems using SMA and RSI signals, and a quarterly-rebalanced leveraged risk parity portfolio.</p>
+        </section>
+
+        <section aria-labelledby="strategies-heading">
+          <h2 id="strategies-heading">The Strategies</h2>
+          <div class="strategies-grid">
+
+            <article class="strategy-card strat-3sig">
+              <div class="card-body">
+                <h3 class="card-title">3 Sig</h3>
+                <p class="card-summary">A quarterly value-averaging strategy targeting 3% quarterly growth in a stock index fund (<span class="ticker">IJR</span> or <span class="ticker">SPY</span>) against a bond buffer. The conservative, unleveraged tier of Jason Kelly's Signal plan family.</p>
+              </div>
+              <div class="card-footer">
+                <a href="3sig.html" class="card-link">Read the strategy &rarr;</a>
+              </div>
+            </article>
+
+            <article class="strategy-card strat-6sig">
+              <div class="card-body">
+                <h3 class="card-title">6 Sig</h3>
+                <p class="card-summary">A quarterly value-averaging strategy targeting 6% quarterly growth in <span class="ticker">MVV</span> (2x leveraged midcap). The middle tier of Jason Kelly's Signal plan family between the unleveraged 3 Sig and the 3x-leveraged 9 Sig.</p>
+              </div>
+              <div class="card-footer">
+                <a href="6sig.html" class="card-link">Read the strategy &rarr;</a>
+              </div>
+            </article>
+
+            <article class="strategy-card strat-9sig">
+              <div class="card-body">
+                <h3 class="card-title">9 Sig</h3>
+                <p class="card-summary">A quarterly value-averaging strategy targeting 9% quarterly growth in <span class="ticker">TQQQ</span> against a bond buffer. The most aggressive tier of Jason Kelly's Signal plan family, with two additional safeguards for 3x leverage.</p>
+              </div>
+              <div class="card-footer">
+                <a href="9sig.html" class="card-link">Read the strategy &rarr;</a>
+              </div>
+            </article>
+
+            <article class="strategy-card strat-ftlt">
+              <div class="card-body">
+                <h3 class="card-title">TQQQ For The Long Term</h3>
+                <p class="card-summary">A daily rules-based algorithm using <span class="ticker">SPY</span>'s 200-day SMA as a macro regime detector and 10-day RSI for mean reversion. Rotates among <span class="ticker">TQQQ</span>, <span class="ticker">UVXY</span>, <span class="ticker">TECL</span>, <span class="ticker">UPRO</span>, <span class="ticker">SQQQ</span>, and <span class="ticker">TLT</span>. Created by u/derecknielsen (2022).</p>
+              </div>
+              <div class="card-footer">
+                <a href="tqqq-ftlt.html" class="card-link">Read the strategy &rarr;</a>
+              </div>
+            </article>
+
+            <article class="strategy-card strat-grail">
+              <div class="card-body">
+                <h3 class="card-title">Holy Grail</h3>
+                <p class="card-summary">A TQQQ FTLT variant using <span class="ticker">TQQQ</span>'s own 200-day SMA as the regime signal, adding <span class="ticker">SOXL</span> mean reversion in bear mode and <span class="ticker">BSV</span> as the defensive instrument. Event-driven rebalancing with a 5% corridor.</p>
+              </div>
+              <div class="card-footer">
+                <a href="holy-grail.html" class="card-link">Read the strategy &rarr;</a>
+              </div>
+            </article>
+
+            <article class="strategy-card strat-hfea">
+              <div class="card-body">
+                <h3 class="card-title">HFEA</h3>
+                <p class="card-summary">Hedgefundie's Excellent Adventure. A quarterly-rebalanced leveraged risk parity portfolio of <span class="ticker">UPRO</span> 55% and <span class="ticker">TMF</span> 45%, pairing 3x leveraged equities with 3x leveraged long-duration Treasuries.</p>
+              </div>
+              <div class="card-footer">
+                <a href="hfea.html" class="card-link">Read the strategy &rarr;</a>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
