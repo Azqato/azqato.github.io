@@ -505,6 +505,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.7.0] - 2026-07-08
+
+### Added
+- `invests.html` redesigned to lead with Azqato's own investing projects. New hero with a primary "Join the Discord" CTA and a secondary "Explore the projects" CTA that smooth-scrolls to the project showcase.
+- Featured project showcase: six large clickable cards (Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, Stock Screener, Leveraged Strategies), each with a description, hover lift, gradient top-bar, and sliding arrow. Card icons mirror each project's own favicon emoji.
+- Stock Screener link (`https://azqato.github.io/stocks/screener.html`) added to the projects list.
+
+### Changed
+- Curated resource grid moved below the project showcase under a new "Curated Resources" heading; the old text-only "Azqato's Projects" resource card was replaced by the featured cards.
+
+---
+
 ## [2.6.7] - 2026-07-05
 
 ### Added

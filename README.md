@@ -141,7 +141,7 @@ Edit `discord.html` directly. Each server is a static `.server-card` block. Copy
 ├── support.html         - Buy Me a Coffee CTA + affiliate partners grid
 ├── links.html           - all social/platform links by category
 ├── youtube.html         - four YouTube channels
-├── invests.html         - curated investing resource hub
+├── invests.html         - investing projects showcase + curated resource hub
 ├── music.html           - Spotify playlists + music platform links
 ├── accounts.html        - gaming accounts (Steam, LoL, TFT, RuneScape)
 ├── privacy-policy.html  - full privacy policy

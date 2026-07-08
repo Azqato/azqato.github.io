@@ -60,7 +60,7 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 | Discord        | `discord.html`        | Four Discord server cards with permanent invite links  |
 | Links          | `links.html`          | All platforms and channels in one place               |
 | YouTube        | `youtube.html`        | Four YouTube channels                                 |
-| Invests        | `invests.html`        | Curated investing resource hub                        |
+| Invests        | `invests.html`        | Investing projects showcase + curated resource hub    |
 | Music          | `music.html`          | Spotify playlists and mixes                           |
 | Accounts       | `accounts.html`       | Gaming profiles                                       |
 | Support        | `support.html`        | Buy Me a Coffee CTA + affiliate partners              |

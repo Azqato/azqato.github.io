@@ -23,6 +23,9 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+    #projects { scroll-margin-top: 80px; }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -138,6 +141,135 @@
       color: var(--text-muted);
       font-size: 1.1rem;
       max-width: 620px;
+    }
+
+    /* ── HERO CTAs ── */
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, background 0.2s, border-color 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #04140f;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION HEADING ── */
+    .section-head {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+      max-width: 620px;
+    }
+
+    /* ── PROJECT GRID ── */
+    .projects {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 4rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      overflow: hidden;
+      transition: transform 0.18s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-card h3 .arrow {
+      color: var(--text-muted);
+      transition: transform 0.18s, color 0.2s;
+    }
+
+    .project-card:hover h3 .arrow { transform: translateX(4px); color: var(--accent); }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
     }
 
     /* ── SECTION ── */
@@ -283,29 +415,74 @@
   <section class="hero">
     <div class="hero-badge">Community investing resources</div>
     <h1>Azqato <span class="highlight">Invests</span></h1>
-    <p>A curated resource hub for new and experienced traders. The mission is to equip new traders with knowledge while fostering networking opportunities. Join the <a href="discord.html" style="color:var(--accent);text-decoration:none;">Discord</a> to share your own recommendations.</p>
+    <p>Free tools and strategies built for new and experienced traders — plus a community to grow with. Start by joining the Discord, then explore the projects below.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="discord.html">💬 Join the Discord</a>
+      <a class="btn btn-secondary" href="#projects">Explore the projects ↓</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section-head" id="projects">
+    <h2>Azqato's Projects</h2>
+    <p>Investing tools and strategies I've built — free to use, no signup required.</p>
+  </section>
+
+  <section class="projects">
+    <div class="project-grid">
+
+      <a class="project-card" href="https://azqato.github.io/net-worth-tracker/" target="_blank" rel="noopener">
+        <span class="project-icon">💰</span>
+        <h3>Net Worth Tracker <span class="arrow">→</span></h3>
+        <p>Track your assets, liabilities, and net worth over time in one clean dashboard.</p>
+      </a>
+
+      <a class="project-card" href="https://azqato.github.io/VIX/" target="_blank" rel="noopener">
+        <span class="project-icon">📈</span>
+        <h3>VIX Strategy <span class="arrow">→</span></h3>
+        <p>A volatility-based approach to timing the market using the VIX fear index.</p>
+      </a>
+
+      <a class="project-card" href="https://azqato.github.io/composer" target="_blank" rel="noopener">
+        <span class="project-icon">🗺️</span>
+        <h3>ComposerAtlas <span class="arrow">→</span></h3>
+        <p>Explore and analyze automated trading strategies built on Composer.</p>
+      </a>
+
+      <a class="project-card" href="https://azqato.github.io/stocks/" target="_blank" rel="noopener">
+        <span class="project-icon">📈</span>
+        <h3>Stock Methodology <span class="arrow">→</span></h3>
+        <p>The framework I use to research, evaluate, and pick individual stocks.</p>
+      </a>
+
+      <a class="project-card" href="https://azqato.github.io/stocks/screener.html" target="_blank" rel="noopener">
+        <span class="project-icon">📈</span>
+        <h3>Stock Screener <span class="arrow">→</span></h3>
+        <p>Filter and surface stocks by custom criteria to find your next opportunity.</p>
+      </a>
+
+      <a class="project-card" href="https://azqato.github.io/leveraged-strategies/" target="_blank" rel="noopener">
+        <span class="project-icon">🚀</span>
+        <h3>Leveraged Strategies <span class="arrow">→</span></h3>
+        <p>Leveraged ETF strategies with a focus on decay risk and volatility management.</p>
+      </a>
+
+    </div>
   </section>
 
   <!-- RESOURCES -->
-  <section class="section">
+  <section class="section-head">
+    <h2>Curated Resources</h2>
+    <p>A hand-picked hub of platforms, screeners, education, and data for traders at any level.</p>
+  </section>
+
+  <section class="section" style="padding-top:1.5rem;">
     <div class="disclaimer">
       <span>&#9432;</span>
       <span>Azqato is not a licensed financial advisor. Nothing here is financial advice; all content is for informational and entertainment purposes only. Some links are affiliate/referral links.</span>
     </div>
 
     <div class="resource-grid">
-
-      <div class="resource-card">
-        <h3>Azqato's Projects</h3>
-        <ul>
-          <li><a href="https://azqato.github.io/net-worth-tracker/" target="_blank" rel="noopener">Net Worth Tracker</a></li>
-          <li><a href="https://azqato.github.io/VIX/" target="_blank" rel="noopener">VIX Strategy</a></li>
-          <li><a href="https://azqato.github.io/composer" target="_blank" rel="noopener">ComposerAtlas</a></li>
-          <li><a href="https://azqato.github.io/stocks/" target="_blank" rel="noopener">Stock Methodology</a></li>
-          <li><a href="https://azqato.github.io/stocks/screener.html" target="_blank" rel="noopener">Stock Screener</a></li>
-          <li><a href="https://azqato.github.io/leveraged-strategies/" target="_blank" rel="noopener">Leveraged Strategies</a></li>
-        </ul>
-      </div>
 
       <div class="resource-card">
         <h3>🏦 Platforms</h3>
