@@ -513,6 +513,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.10] - 2026-07-08
+
+### Fixed
+- Corrected the Azqato Mixes channel link on `youtube.html` to `https://www.youtube.com/@AzqatoMixes` (previously pointed to the wrong channel).
+
+---
+
 ## [2.6.9] - 2026-07-08
 
 ### Changed
