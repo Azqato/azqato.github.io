@@ -1,6 +1,6 @@
 # Azqato's Tools
 
-A collection of free, browser-based utilities. Every tool runs entirely client-side — no server, no build step, no dependencies.
+A collection of free, browser-based utilities. Every tool runs entirely client-side: no server, no build step, no dependencies.
 
 Live site: https://azqato.github.io/tools/
 
@@ -25,7 +25,7 @@ No Node, no npm, no bundler. There is nothing to install.
 ## Prerequisites
 
 - Any modern browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
-- A static file server for local development (optional — files open directly from disk)
+- A static file server for local development (optional, files open directly from disk)
 
 There is no Node version requirement because there is no Node dependency.
 
@@ -44,10 +44,10 @@ That is the entire installation. No `npm install`, no `.env`, no config files.
 
 ## Running locally
 
-**Option 1 — open directly (simplest):**
+**Option 1, open directly (simplest):**
 Double-click `index.html`. All pages work from the local filesystem.
 
-**Option 2 — local HTTP server (avoids any browser CORS restrictions):**
+**Option 2, local HTTP server (avoids any browser CORS restrictions):**
 
 Using Python (built into macOS/Linux):
 ```bash
@@ -117,6 +117,6 @@ Set publish directory to `/` (repo root). No build command required.
 
 See [/docs](./docs/) for:
 
-- [PRD.md](./docs/PRD.md) — product requirements, roadmap, runbook, technical spec, security, press release, FAQ
-- [DESIGN.md](./docs/DESIGN.md) — color tokens, typography, spacing, component patterns, accessibility
-- [PATCHNOTES.md](./docs/PATCHNOTES.md) — versioned changelog
+- [PRD.md](./docs/PRD.md): product requirements, roadmap, runbook, technical spec, security, press release, FAQ
+- [DESIGN.md](./docs/DESIGN.md): color tokens, typography, spacing, component patterns, accessibility
+- [PATCHNOTES.md](./docs/PATCHNOTES.md): versioned changelog

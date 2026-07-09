@@ -1,14 +1,14 @@
-# Design System — Azqato's Tools
+# Design System: Azqato's Tools
 
 ## Design philosophy
 
-The visual direction is minimal, functional, and typographically tight. Every UI decision defers to clarity: tools should feel invisible so users focus on their task, not the chrome around it. The aesthetic is modern but not trendy — no gradients on content, no decorative animations, no visual noise. Dark mode is a first-class feature, not an afterthought.
+The visual direction is minimal, functional, and typographically tight. Every UI decision defers to clarity: tools should feel invisible so users focus on their task, not the chrome around it. The aesthetic is modern but not trendy: no gradients on content, no decorative animations, no visual noise. Dark mode is a first-class feature, not an afterthought.
 
 ---
 
 ## Color palette
 
-All colors are declared as CSS custom properties on `:root` (light) and `[data-theme="dark"]`. Never use raw hex values in component CSS — always reference the token.
+All colors are declared as CSS custom properties on `:root` (light) and `[data-theme="dark"]`. Never use raw hex values in component CSS; always reference the token.
 
 ### Light theme (default)
 
@@ -71,7 +71,7 @@ All colors are declared as CSS custom properties on `:root` (light) and `[data-t
 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
 sans-serif, "Apple Color Emoji", "Segoe UI Emoji"
 ```
-System font stack — no web fonts loaded, no flash of unstyled text, no external requests.
+System font stack: no web fonts loaded, no flash of unstyled text, no external requests.
 
 **Monospace font (`--mono`):**
 ```
@@ -119,7 +119,7 @@ Inside `.md-body`, heading sizes are relative (`em`) to allow embedding at any s
 
 Base unit: **2px** (all values are multiples of 2 or common multiples of 4/8).
 
-No formal scale object exists in code — spacing is written inline as specific values. The practical scale in use:
+No formal scale object exists in code; spacing is written inline as specific values. The practical scale in use:
 
 | Value | Usage example |
 |-------|---------------|
@@ -145,12 +145,12 @@ No formal scale object exists in code — spacing is written inline as specific 
 **Max content width:** `--maxw: 1100px` (applied via `.wrap`).
 
 **Border radii:**
-- `--radius: 14px` — cards, tool cards, panes, fav-items, hero eyebrow
-- `--radius-sm: 9px` — buttons, inputs, code blocks
-- `8px` — logo mark
-- `10px` — icon-btn, md-toolbar groups, toast
-- `12px` — tool icon containers
-- `999px` — pills, chips, ext-tag (fully rounded)
+- `--radius: 14px`: cards, tool cards, panes, fav-items, hero eyebrow
+- `--radius-sm: 9px`: buttons, inputs, code blocks
+- `8px`: logo mark
+- `10px`: icon-btn, md-toolbar groups, toast
+- `12px`: tool icon containers
+- `999px`: pills, chips, ext-tag (fully rounded)
 
 ---
 
@@ -171,7 +171,7 @@ Changes:
 - `.md-preview` gains `min-height: 280px`
 - `.nav-link.hide-sm` is hidden (removes "All tools" / nav text links from topbar)
 
-The tool grid (`.tools-grid`) is always `repeat(auto-fill, minmax(290px, 1fr))` — it reflows naturally without a breakpoint.
+The tool grid (`.tools-grid`) is always `repeat(auto-fill, minmax(290px, 1fr))`; it reflows naturally without a breakpoint.
 
 ### ≤ 560px (small mobile)
 
@@ -194,7 +194,7 @@ Changes:
 - Contains: brand (logo + name), spacer, four nav links, theme toggle icon button
 - Nav links (in order): Azqato (`https://azqato.com/`), Projects (`https://azqato.com/projects`), Tools (`https://azqato.github.io/tools/`), Support (`https://azqato.github.io/support.html`)
 - All nav links carry `.hide-sm` to collapse on mobile (≤ 760px)
-- Theme toggle uses `data-theme-toggle` attribute (no class needed) — `common.js` handles the click event
+- Theme toggle uses `data-theme-toggle` attribute (no class needed); `common.js` handles the click event
 
 ### Brand / Logo
 
@@ -214,7 +214,7 @@ Three variants, all share `.btn` base:
 | `.btn.ghost` | `transparent` | `--border` | `--text` | Tertiary / subtle |
 | `.btn.sm` | (same) | (same) | (same) | Compact toolbar buttons |
 
-- Active state: `translateY(1px)` — subtle press feedback
+- Active state: `translateY(1px)`, subtle press feedback
 - Disabled: `opacity: 0.5`, `cursor: not-allowed`
 - Hover on default: border advances to `--border-strong`
 - Hover on primary: background advances to `--accent-hover`
@@ -282,14 +282,14 @@ Toolbar (`.md-toolbar`): flex row with a grouped button cluster (`.grp`) on left
 **Target:** WCAG 2.1 AA
 
 **Contrast:**
-- `--text` on `--bg`: `#161a20` on `#f6f7f9` — exceeds AA for normal text
-- `--accent` on `--bg-elev`: `#5b5bf0` on `#ffffff` — verify at each use; at small sizes may need reinforcement
+- `--text` on `--bg`: `#161a20` on `#f6f7f9`, exceeds AA for normal text
+- `--accent` on `--bg-elev`: `#5b5bf0` on `#ffffff`, verify at each use; at small sizes may need reinforcement
 - `--text-soft` on `--bg`: checked to meet AA for body text
 - Dark mode tokens are calibrated to maintain equivalent contrast ratios
 
 **Focus management:**
 - All interactive elements are keyboard-reachable in DOM order
-- Native `<button>`, `<a>`, `<input>`, `<textarea>` are used throughout — no div-based interactive elements
+- Native `<button>`, `<a>`, `<input>`, `<textarea>` are used throughout: no div-based interactive elements
 - Focus ring: `0 0 0 3px var(--accent-soft)` on inputs; browsers provide default focus rings on buttons and links (not suppressed globally)
 - Theme toggle has `aria-label="Toggle theme"`
 
@@ -303,7 +303,7 @@ Toolbar (`.md-toolbar`): flex row with a grouped button cluster (`.grp`) on left
 **Known gaps:**
 - No `<skip to main content>` link
 - No ARIA live region on the Markdown preview pane (screen readers won't announce live updates)
-- Favicon images loaded from an external service — alt text is generated but cannot reflect actual icon content
+- Favicon images loaded from an external service; alt text is generated but cannot reflect actual icon content
 
 ---
 
@@ -318,14 +318,14 @@ Toolbar (`.md-toolbar`): flex row with a grouped button cluster (`.grp`) on left
 | `.tool-card .go` | gap | 180ms (inherited) | ease | Arrow nudge on card hover |
 | `.tool-card .go svg` | (gap-driven) | 150ms | ease | |
 | `.icon-btn` | color, border-color | 150ms | ease | Hover feedback |
-| `.nav-link` | color | (none, instant) | — | Simple color change |
+| `.nav-link` | color | (none, instant) | n/a | Simple color change |
 | `.toast` | opacity, transform | 250ms | ease | Slide-up enter, fade-out exit |
 | `.field` | border-color, box-shadow | 150ms | ease | Focus ring appearance |
 
 **Rules:**
 - No animations trigger on page load or without user interaction
 - No looping or ambient animations
-- All durations are ≤ 250ms — nothing feels slow
+- All durations are ≤ 250ms; nothing feels slow
 - `prefers-reduced-motion` is not currently handled in CSS; this is a known gap to address in a future release
 
 ---
@@ -339,4 +339,4 @@ Toolbar (`.md-toolbar`): flex row with a grouped button cluster (`.grp`) on left
 - **Tool naming convention:** names must be generic and searchable (e.g. "Markdown Editor", "Favicon Downloader"). Never use another product's brand name as a tool name, even if it describes what the tool does. See `PRD.md` for the full tenet.
 - **External tools** (hosted on separate repos/domains) are linked from the landing page with `target="_blank" rel="noopener"`, a diagonal arrow icon, and an `.ext-tag` pill. They do not get their own page in this repo.
 - **Dark mode** is toggled via `data-theme="dark"` on `<html>`. `common.js` reads/writes `localStorage` key `azqato-theme` and respects `prefers-color-scheme` on first visit.
-- **Theme is set before first paint:** `common.js` reads `localStorage` synchronously at the top of the IIFE, so there is no flash of wrong theme as long as `common.js` is loaded in the `<body>` before visible content (or in `<head>` — current placement is end of `<body>`, acceptable given the `data-theme="light"` default on `<html>`).
+- **Theme is set before first paint:** `common.js` reads `localStorage` synchronously at the top of the IIFE, so there is no flash of wrong theme as long as `common.js` is loaded in the `<body>` before visible content (or in `<head>`, current placement is end of `<body>`, acceptable given the `data-theme="light"` default on `<html>`).

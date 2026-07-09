@@ -1,7 +1,7 @@
-# Product Requirements Document — Azqato's Tools
+# Product Requirements Document: Azqato's Tools
 
 **Last updated:** 2026-06-27
-**Status:** Active development — v0.1.x
+**Status:** Active development, v0.1.x
 
 ---
 
@@ -9,7 +9,7 @@
 
 Most freely available web utilities require the user to upload their data to a third-party server, create an account, accept cookies, or endure advertising. Even "simple" tools like Markdown editors and link cleaners transmit user content to a remote service the user cannot inspect or trust. Privacy-conscious users, developers, and people working with sensitive text or URLs have no reliable, branded home for fast, clean, no-compromise tooling.
 
-This product solves that by providing a curated set of utilities that run entirely in the browser — zero server contact for any user data, zero sign-up, zero cost.
+This product solves that by providing a curated set of utilities that run entirely in the browser: zero server contact for any user data, zero sign-up, zero cost.
 
 ---
 
@@ -19,7 +19,7 @@ This product solves that by providing a curated set of utilities that run entire
 A developer, writer, or researcher who uses the web constantly and is increasingly frustrated by tools that treat their data as the product. They want the tool to do one thing well and then get out of the way. They likely have an adblocker and are already familiar with Markdown, UTM parameters, and favicons.
 
 **Secondary: The casual content creator / marketer**
-Someone who shares links on social media, writes blog posts, or manages a newsletter. They paste URLs with tracking junk into the Link Cleaner and write posts in the Markdown Editor. They don't care about the tech — they care that it works instantly without asking them to log in.
+Someone who shares links on social media, writes blog posts, or manages a newsletter. They paste URLs with tracking junk into the Link Cleaner and write posts in the Markdown Editor. They don't care about the tech; they care that it works instantly without asking them to log in.
 
 **Tertiary: The Azqato audience / investor researcher**
 A user who follows Azqato's content on stocks and personal finance. They arrive via the landing page, use the external tools (Nasdaq 100 Screener, Net Worth Tracker, VIX Strategy) and discover the browser utilities as a bonus. Trust in the Azqato brand is already established.
@@ -61,28 +61,28 @@ A user who follows Azqato's content on stocks and personal finance. They arrive 
 
 ## Feature list
 
-### MVP (shipped — v0.1.0)
+### MVP (shipped: v0.1.0)
 
 - Landing page with tool grid, hero section, about section, sticky topbar, footer
 - Light/dark theme toggle with `localStorage` persistence and `prefers-color-scheme` detection
 - Shared design system (CSS custom properties, no framework)
-- **Markdown Editor** — split-pane live preview, formatting toolbar, localStorage draft autosave, copy-as-HTML, download as `.md`
-- **Favicon Downloader** — fetch favicons at 6 sizes (16, 32, 48, 64, 128, 256px) via Google's gstatic service, download PNG, copy direct link
-- **Link Cleaner** — strip ~40+ known tracking parameters by exact name and prefix pattern, show removed vs. kept params, copy clean URL, open clean URL, paste from clipboard
+- **Markdown Editor**: split-pane live preview, formatting toolbar, localStorage draft autosave, copy-as-HTML, download as `.md`
+- **Favicon Downloader**: fetch favicons at 6 sizes (16, 32, 48, 64, 128, 256px) via Google's gstatic service, download PNG, copy direct link
+- **Link Cleaner**: strip ~40+ known tracking parameters by exact name and prefix pattern, show removed vs. kept params, copy clean URL, open clean URL, paste from clipboard
 - External tool cards: Nasdaq 100 Screener, Net Worth Tracker, VIX Strategy (linked, not hosted)
 - Responsive layout (single-column on mobile)
 
 ### Future (post-launch, unordered)
 
-- **Color picker / converter** — pick a color, convert between hex/rgb/hsl/oklch
-- **Base64 encoder/decoder** — encode text or files, decode base64 strings
-- **JSON formatter** — paste minified JSON, get pretty-printed output with optional tree view
-- **Password generator** — configurable length, character sets, entropy display
-- **Image compressor** — client-side compression via Canvas API, no upload
-- **Word/character counter** — with reading time estimate
-- **Diff tool** — paste two text blocks, see a line-by-line diff
-- **QR code generator** — URL or text to QR, download as PNG/SVG
-- **Timestamp converter** — Unix epoch ↔ human-readable, any timezone
+- **Color picker / converter**: pick a color, convert between hex/rgb/hsl/oklch
+- **Base64 encoder/decoder**: encode text or files, decode base64 strings
+- **JSON formatter**: paste minified JSON, get pretty-printed output with optional tree view
+- **Password generator**: configurable length, character sets, entropy display
+- **Image compressor**: client-side compression via Canvas API, no upload
+- **Word/character counter**: with reading time estimate
+- **Diff tool**: paste two text blocks, see a line-by-line diff
+- **QR code generator**: URL or text to QR, download as PNG/SVG
+- **Timestamp converter**: Unix epoch ↔ human-readable, any timezone
 - `prefers-reduced-motion` support in CSS
 - Skip-to-main-content accessibility link
 - ARIA live region on Markdown preview pane
@@ -126,11 +126,11 @@ Ordered by priority. When two tenets conflict, the higher one wins.
 
 ### 1. Privacy is not a feature, it is the floor
 
-Every tool must work without transmitting user input to any server. This is not a selling point — it is a precondition. A tool that uploads data to process it, even temporarily, is not eligible for this site regardless of how useful it might be. When building a new tool, the first question is: can this run entirely in the browser? If the answer is no, the tool belongs on a different site.
+Every tool must work without transmitting user input to any server. This is not a selling point; it is a precondition. A tool that uploads data to process it, even temporarily, is not eligible for this site regardless of how useful it might be. When building a new tool, the first question is: can this run entirely in the browser? If the answer is no, the tool belongs on a different site.
 
 ### 2. Generic names over clever names
 
-Every tool is named using the simplest, most searchable descriptor of what it does. "Markdown Editor" not "Inkdown." "Link Cleaner" not "URLSanitizer Pro." The name should be what a user would type into a search engine to find exactly this kind of tool. Never reuse another product's brand name, even if it is also a generic term — verify before shipping.
+Every tool is named using the simplest, most searchable descriptor of what it does. "Markdown Editor" not "Inkdown." "Link Cleaner" not "URLSanitizer Pro." The name should be what a user would type into a search engine to find exactly this kind of tool. Never reuse another product's brand name, even if it is also a generic term; verify before shipping.
 
 ### 3. Zero dependencies, zero build step
 
@@ -142,7 +142,7 @@ Each tool lives in its own HTML file. Shared logic lives in `js/common.js` (them
 
 ### 5. Ship fast, document thoroughly
 
-Tools should be simple enough to ship in one session. Documentation should be thorough enough that any subsequent session — human or AI — can pick up where the last one left off without re-reading source code. When in doubt, add more to the docs, not more to the tool.
+Tools should be simple enough to ship in one session. Documentation should be thorough enough that any subsequent session (human or AI) can pick up where the last one left off without re-reading source code. When in doubt, add more to the docs, not more to the tool.
 
 ---
 
@@ -156,10 +156,10 @@ The site exists with three working in-browser tools and three external tool link
 
 | Milestone | Target | Status |
 |-----------|--------|--------|
-| v0.1.0 — Initial launch | 2026-06-27 | Complete |
-| v0.2.0 — Second tool batch | TBD | Planned |
-| v0.3.0 — Accessibility pass | TBD | Planned |
-| v1.0.0 — Public launch / deployment | 2026-06-27 | Complete |
+| v0.1.0: Initial launch | 2026-06-27 | Complete |
+| v0.2.0: Second tool batch | TBD | Planned |
+| v0.3.0: Accessibility pass | TBD | Planned |
+| v1.0.0: Public launch / deployment | 2026-06-27 | Complete |
 
 ### v0.1.0 feature breakdown (complete)
 
@@ -198,7 +198,7 @@ The site exists with three working in-browser tools and three external tool link
 
 ### North star
 
-**Weekly active sessions** — the number of unique browser sessions per week that interact with at least one tool. This measures whether the site is delivering practical value, not just being visited.
+**Weekly active sessions**: the number of unique browser sessions per week that interact with at least one tool. This measures whether the site is delivering practical value, not just being visited.
 
 ### Acquisition metrics
 
@@ -206,7 +206,7 @@ The site exists with three working in-browser tools and three external tool link
 |--------|--------|-----------|--------|
 | Organic search impressions | 500/month | 3 months post-launch | Google Search Console |
 | Click-through rate from search | ≥ 3% | 3 months post-launch | Google Search Console |
-| Referral traffic from Azqato's other properties | — | Ongoing | Privacy-respecting analytics |
+| Referral traffic from Azqato's other properties | n/a | Ongoing | Privacy-respecting analytics |
 
 ### Engagement metrics
 
@@ -214,14 +214,14 @@ The site exists with three working in-browser tools and three external tool link
 |--------|--------|-----------|--------|
 | Average tools used per session | ≥ 1.5 | 3 months post-launch | Analytics events |
 | Markdown Editor: drafts saved to localStorage | Proxy for repeat use | Ongoing | Cannot measure externally |
-| Link Cleaner: successful clean operations | — | Ongoing | Analytics event on successful clean |
+| Link Cleaner: successful clean operations | n/a | Ongoing | Analytics event on successful clean |
 
 ### Retention metrics
 
 | Metric | Target | Timeframe | Method |
 |--------|--------|-----------|--------|
 | Returning visitors (%) | ≥ 20% | 6 months post-launch | Privacy-respecting analytics |
-| Bookmark rate | Unmeasurable directly | — | Proxy: direct traffic |
+| Bookmark rate | Unmeasurable directly | n/a | Proxy: direct traffic |
 
 ### Performance metrics
 
@@ -302,7 +302,7 @@ No environment-specific config files exist. There are no environment variables.
 | Theme flashes to light on load | `common.js` loaded after content renders | Move `<script src="js/common.js">` earlier, or set `data-theme` in `<head>` via inline script |
 | Favicon images don't load | Ad blocker blocking gstatic.com | Inform user; no fix possible client-side |
 | Clipboard paste button fails | Page served over `file://` | Serve via HTTP server |
-| Favicon download opens new tab instead of downloading | CORS restriction on gstatic | Expected fallback — user must right-click to save |
+| Favicon download opens new tab instead of downloading | CORS restriction on gstatic | Expected fallback; user must right-click to save |
 | Markdown table not rendering | Missing leading/trailing `\|` on row | Known parser limitation; user must format table correctly |
 
 ### Monitoring
@@ -328,7 +328,7 @@ User browser
 
 Network requests made by the browser:
 - `GET` the HTML, CSS, and JS files from the host (standard page load)
-- `GET https://t3.gstatic.com/faviconV2?...` — Favicon Downloader only, one request per size per domain lookup
+- `GET https://t3.gstatic.com/faviconV2?...`: Favicon Downloader only, one request per size per domain lookup
 
 No user data is sent in any network request.
 
@@ -352,7 +352,7 @@ No user data is sent in any network request.
 ├── index.html                  ← Landing page
 ├── initialconcept.txt          ← Original project brief (reference only)
 ├── css/
-│   └── style.css               ← Full design system — all pages share this
+│   └── style.css               ← Full design system; all pages share this
 ├── js/
 │   ├── common.js               ← Theme toggle, toast, copyText helper
 │   ├── markdown.js             ← Self-contained Markdown → HTML parser
@@ -384,7 +384,7 @@ No cookies. No IndexedDB. No sessionStorage.
 | Tool | State variable | Type | Description |
 |------|---------------|------|-------------|
 | Link Cleaner | `current` | `string` | The most recently cleaned URL, used by Copy and Open buttons |
-| Favicon Downloader | `SIZES` | `number[]` | `[16, 32, 48, 64, 128, 256]` — the set of sizes to fetch |
+| Favicon Downloader | `SIZES` | `number[]` | `[16, 32, 48, 64, 128, 256]`: the set of sizes to fetch |
 | Markdown Editor | `SAMPLE` | `string` | Default content shown on first visit |
 
 ### API design (internal data flow)
@@ -453,7 +453,7 @@ This is the only third-party service. It receives: the domain the user typed. It
 | Total page weight (index + CSS + JS) | < 100KB uncompressed |
 | Lighthouse Performance | ≥ 90 |
 | First Contentful Paint | < 1.0s |
-| No render-blocking resources | Required — CSS in `<head>`, JS at end of `<body>` |
+| No render-blocking resources | Required: CSS in `<head>`, JS at end of `<body>` |
 | No external font requests | Required |
 | No third-party scripts | Required |
 
@@ -516,7 +516,7 @@ No other third party receives any user data. In particular:
 | Markdown preview (`innerHTML`) | Markdown input could contain XSS if rendered unsanitized | `markdown.js` HTML-escapes all input via `escapeHtml()` before parsing. Raw HTML passthrough is explicitly not supported. |
 | Link Cleaner URL parsing | Malformed URLs | Wrapped in `try/catch` around `new URL()`; invalid input returns `{ valid: false }` |
 | Favicon Downloader domain input | User types a malicious domain | `normalizeDomain()` validates against a regex before use. The constructed URL is passed to gstatic, not executed locally. |
-| Link protocol whitelisting | Markdown links with `javascript:` href | `escapeAttr()` is applied to all href values; additionally a whitelist check `^(https?:|mailto:|#|\/|\.)` is enforced — any other protocol falls back to `#`. |
+| Link protocol whitelisting | Markdown links with `javascript:` href | `escapeAttr()` is applied to all href values; additionally a whitelist check `^(https?:|mailto:|#|\/|\.)` is enforced; any other protocol falls back to `#`. |
 
 ### Dependency policy
 
@@ -528,28 +528,28 @@ There are no dependencies (no npm, no CDN libraries). There is nothing to monito
 
 **FOR IMMEDIATE RELEASE**
 
-**Azqato Launches Free Browser-Based Tool Suite — No Sign-Up, No Servers, No Compromise**
+**Azqato Launches Free Browser-Based Tool Suite: No Sign-Up, No Servers, No Compromise**
 
 *A growing collection of everyday utilities that run entirely on your device, protecting your privacy while doing the work you actually need done.*
 
-**London, 27 June 2026** — Azqato today launched Azqato's Tools, a free collection of browser-based utilities built to solve everyday tasks without asking users to hand over their data. The first release includes a Markdown Editor, a Favicon Downloader, and a Link Cleaner — three tools used daily by developers, writers, and content creators — alongside links to Azqato's existing financial tools including a Nasdaq 100 Screener, Net Worth Tracker, and VIX Strategy dashboard.
+**London, 27 June 2026**: Azqato today launched Azqato's Tools, a free collection of browser-based utilities built to solve everyday tasks without asking users to hand over their data. The first release includes a Markdown Editor, a Favicon Downloader, and a Link Cleaner (three tools used daily by developers, writers, and content creators), alongside links to Azqato's existing financial tools including a Nasdaq 100 Screener, Net Worth Tracker, and VIX Strategy dashboard.
 
 Unlike most web utilities, Azqato's Tools does not send user input to any server. All processing happens locally in the browser using native web technologies. The site requires no account, no email address, and installs nothing. It works offline after the first load.
 
-The tools were built using Claude Code and ship as plain HTML, CSS, and JavaScript — no frameworks, no build step, no dependencies. Azqato plans to add new tools regularly, with upcoming candidates including a JSON formatter, Base64 encoder, and color converter.
+The tools were built using Claude Code and ship as plain HTML, CSS, and JavaScript: no frameworks, no build step, no dependencies. Azqato plans to add new tools regularly, with upcoming candidates including a JSON formatter, Base64 encoder, and color converter.
 
 **The problem this solves:**
-Every time you paste text into a random "free" online tool, you're trusting a server you cannot see with data you may not want to share. Writers paste drafts into Markdown editors. Marketers paste customer URLs into link cleaners. These tools almost always send that data to a remote server, log it, and occasionally sell it. There was no single branded, trustworthy home for fast, private browser tools — until now.
+Every time you paste text into a random "free" online tool, you're trusting a server you cannot see with data you may not want to share. Writers paste drafts into Markdown editors. Marketers paste customer URLs into link cleaners. These tools almost always send that data to a remote server, log it, and occasionally sell it. There was no single branded, trustworthy home for fast, private browser tools, until now.
 
 **How it works:**
-Visit the site, open a tool, and use it. The Markdown Editor renders your document as you type, saves drafts to your own browser storage, and lets you export as HTML or `.md`. The Link Cleaner strips over 40 known tracking parameters from any URL using the browser's native URL API — no network request required. The Favicon Downloader fetches icons from Google's public favicon service and lets you download them at any size.
+Visit the site, open a tool, and use it. The Markdown Editor renders your document as you type, saves drafts to your own browser storage, and lets you export as HTML or `.md`. The Link Cleaner strips over 40 known tracking parameters from any URL using the browser's native URL API: no network request required. The Favicon Downloader fetches icons from Google's public favicon service and lets you download them at any size.
 
-*"I was sick of pasting my content into tools I didn't trust, just to preview some Markdown or strip a UTM tag. Azqato's Tools does exactly what I need and nothing else — I closed the tab and my draft was gone from their servers, because there are no servers."*
-— Jordan K., content strategist and early user
+*"I was sick of pasting my content into tools I didn't trust, just to preview some Markdown or strip a UTM tag. Azqato's Tools does exactly what I need and nothing else; I closed the tab and my draft was gone from their servers, because there are no servers."*
+- Jordan K., content strategist and early user
 
 **Try it now:** Visit [Azqato's Tools](https://azqato.github.io/tools/).
 
-Azqato is an independent publisher and tool builder focused on financial research and practical web utilities. Azqato's existing tools — including a Nasdaq 100 Screener that grades every index company on the Azqato methodology, a Google Sheets-powered Net Worth Tracker, and a VIX-based portfolio allocation strategy — have been used by individual investors and personal finance enthusiasts since 2024.
+Azqato is an independent publisher and tool builder focused on financial research and practical web utilities. Azqato's existing tools (including a Nasdaq 100 Screener that grades every index company on the Azqato methodology, a Google Sheets-powered Net Worth Tracker, and a VIX-based portfolio allocation strategy) have been used by individual investors and personal finance enthusiasts since 2024.
 
 ---
 
@@ -603,7 +603,7 @@ The primary difference is the privacy model. Most similar tools are hosted servi
 There is no set schedule. New tools are added when they are useful and can be built to the same privacy and quality standards.
 
 **Can I suggest a tool?**
-Yes — open a GitHub issue on the repo.
+Yes: open a GitHub issue on the repo.
 
 **What Markdown features are supported?**
 Headings (H1–H6), bold, italic, bold+italic, strikethrough, inline code, fenced code blocks, links, images, unordered lists, ordered lists, task lists (checkboxes), blockquotes, horizontal rules, and GFM tables. Nested lists and raw HTML are not supported.
@@ -654,7 +654,7 @@ This section defines how documentation should be maintained going forward.
 | File | Update when |
 |------|------------|
 | `README.md` | The project is deployed (add live URL), tech stack changes, or folder structure changes |
-| `PATCHNOTES.md` | Every time any file in the project changes — even small fixes get a patch entry |
+| `PATCHNOTES.md` | Every time any file in the project changes; even small fixes get a patch entry |
 | `DESIGN.md` | A new CSS token is added, a new component pattern is introduced, or a responsive breakpoint changes |
 | `PRD.md` | A new tool ships (feature list, technical requirements), a tenet is reconsidered, roadmap changes, or a new FAQ entry is warranted |
 
@@ -664,13 +664,13 @@ This section defines how documentation should be maintained going forward.
 2. Add any tool-specific JS to a new file in `/js/<tool-name>.js` if it's reusable; otherwise inline it.
 3. Add any tool-specific CSS to the appropriate section in `css/style.css` with a section comment.
 4. Add a `.tool-card` entry to `index.html`.
-5. Update `PRD.md` — move the tool from Future to MVP in the feature list; add it to the Technical Requirements section.
-6. Update `PATCHNOTES.md` — add a new version entry under Added.
+5. Update `PRD.md`: move the tool from Future to MVP in the feature list; add it to the Technical Requirements section.
+6. Update `PATCHNOTES.md`: add a new version entry under Added.
 7. If the tool introduces a new design pattern, update `DESIGN.md`.
 
 ### Naming convention
 
 Tool names must be generic and searchable. Before naming a tool:
-1. Search for the name — if the top result is a specific competing product and the name is that product's brand (not a generic term), choose a different name.
+1. Search for the name: if the top result is a specific competing product and the name is that product's brand (not a generic term), choose a different name.
 2. The name should be what someone would type into a search engine: "markdown editor", "favicon downloader", "link cleaner", "json formatter".
-3. Once a tool is named and shipped, do not rename it without a clear reason — URL stability matters for search.
+3. Once a tool is named and shipped, do not rename it without a clear reason; URL stability matters for search.
