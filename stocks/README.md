@@ -1,4 +1,4 @@
-# Azqato — Individual Stock Methodology
+# Azqato, Individual Stock Methodology
 
 A static educational website documenting Azqato's fundamentals-driven, long-term equity investing methodology. Covers stock evaluation, index/ETF timing signals, setup guides for Finviz and Seeking Alpha, and an interactive Nasdaq 100 screener.
 
@@ -56,7 +56,7 @@ No build step required. Open `index.html` directly in a browser, or serve with P
 python3 -m http.server 8080
 ```
 
-Then visit `http://localhost:8080`. The screener fetches its data feed directly from GitHub (`raw.githubusercontent.com`), so it also works when `screener.html` is opened straight from disk as a `file://` URL — no local server required.
+Then visit `http://localhost:8080`. The screener fetches its data feed directly from GitHub (`raw.githubusercontent.com`), so it also works when `screener.html` is opened straight from disk as a `file://` URL, no local server required.
 
 ---
 
@@ -72,7 +72,7 @@ This is a static site. There is no build step.
 
 **Deploy:** Push to `main`. GitHub Pages serves directly from the repository root.
 
-**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 21:30 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The schedule is deliberately anchored 30 minutes after the *latest* possible US market close in UTC terms (4:00pm US Eastern is 21:00 UTC in winter/EST, 20:00 UTC in summer/EDT — GitHub Actions cron doesn't observe DST, so this guarantees at least a 30-minute buffer after close year-round, growing to 90 minutes in summer). The ETFs feed (`scripts/fetch_etf_data.py`, a fixed 10-fund list) follows at 22:00 UTC, the S&P 500 feed at 22:30 UTC, the combined Growth/Value/Dividend feed at 23:00 UTC, and the International feed (top 100 VXUS holdings) at 23:30 UTC — each 30 minutes after the last, all same calendar day. The constituent sync (Wikipedia for the indices, Vanguard's holdings API for the VUG/VTV/VIG/VXUS lists — VXUS holdings are additionally resolved from ISIN to a Yahoo symbol via `data/vxus_map.json`; the ETFs list is hand-curated and never synced) runs Saturdays at 23:00 UTC.
+**Data pipeline (automated):** GitHub Actions runs `scripts/fetch_screener_data.py` on trading days (Mon-Fri) at 21:30 UTC, commits `data/screener.json` to the repo, and GitHub Pages serves the updated file immediately. The schedule is deliberately anchored 30 minutes after the *latest* possible US market close in UTC terms (4:00pm US Eastern is 21:00 UTC in winter/EST, 20:00 UTC in summer/EDT, GitHub Actions cron doesn't observe DST, so this guarantees at least a 30-minute buffer after close year-round, growing to 90 minutes in summer). The ETFs feed (`scripts/fetch_etf_data.py`, a fixed 10-fund list) follows at 22:00 UTC, the S&P 500 feed at 22:30 UTC, the combined Growth/Value/Dividend feed at 23:00 UTC, and the International feed (top 100 VXUS holdings) at 23:30 UTC, each 30 minutes after the last, all same calendar day. The constituent sync (Wikipedia for the indices, Vanguard's holdings API for the VUG/VTV/VIG/VXUS lists, VXUS holdings are additionally resolved from ISIN to a Yahoo symbol via `data/vxus_map.json`; the ETFs list is hand-curated and never synced) runs Saturdays at 23:00 UTC.
 
 **Data pipeline (manual):** Go to Actions → "Refresh Screener Data" → Run workflow. Or run locally:
 
@@ -139,7 +139,7 @@ stocks/
 
 ## Full Documentation
 
-- [docs/PRD.md](docs/PRD.md) — Product requirements, architecture, runbook, roadmap, FAQ
-- [docs/DESIGN.md](docs/DESIGN.md) — Design system, color tokens, typography, component patterns
-- [docs/PATCHNOTES.md](docs/PATCHNOTES.md) — Full changelog (v1.0.0 to present)
-- [docs/ROADMAP.md](docs/ROADMAP.md) — Detailed implementation plans for every planned roadmap item
+- [docs/PRD.md](docs/PRD.md), Product requirements, architecture, runbook, roadmap, FAQ
+- [docs/DESIGN.md](docs/DESIGN.md), Design system, color tokens, typography, component patterns
+- [docs/PATCHNOTES.md](docs/PATCHNOTES.md), Full changelog (v1.0.0 to present)
+- [docs/ROADMAP.md](docs/ROADMAP.md), Detailed implementation plans for every planned roadmap item

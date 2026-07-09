@@ -1,4 +1,4 @@
-# DESIGN.md — Azqato Stock Methodology Site
+# DESIGN.md: Azqato Stock Methodology Site
 
 **Version:** 2.0
 **Status:** Active
@@ -75,7 +75,7 @@ No external font loading. No Google Fonts. No web font requests.
 | Caption / note | 0.78rem | 400 | 1.5 | normal | `--color-text-secondary` | Table footnotes, small labels |
 | Metric value / data | 0.85rem | 400 | 1.6 | normal | Contextual | Monospace stack |
 | Ticker symbol | 0.875rem | 600 | 1.6 | normal | `--color-accent` | Monospace stack |
-| Table header label | 0.6875rem | varies | — | uppercase | `--color-text-secondary` | Screener column headers |
+| Table header label | 0.6875rem | varies |, | uppercase | `--color-text-secondary` | Screener column headers |
 
 **Mobile reduction:** H1 drops to 1.5rem below 768px. H2 drops to 1.2rem below 768px.
 
@@ -317,9 +317,9 @@ All pages use an emoji SVG data URI favicon. No external file required.
 
 Keep motion minimal and purposeful. Three allowed animations:
 
-1. **Card hover lift** (`translateY(-2px)`) — signals interactivity on metric cards
-2. **Accordion expand/collapse** (`max-height` transition, 200ms ease-in-out) — reveals content without layout jump
-3. **Sidebar link highlight** (IntersectionObserver, no transition) — "you are here" scroll tracking
+1. **Card hover lift** (`translateY(-2px)`), signals interactivity on metric cards
+2. **Accordion expand/collapse** (`max-height` transition, 200ms ease-in-out), reveals content without layout jump
+3. **Sidebar link highlight** (IntersectionObserver, no transition), "you are here" scroll tracking
 
 No other animations. No decorative motion. No loading spinners. No auto-playing anything.
 
@@ -408,7 +408,7 @@ This site documents a methodology, not a live portfolio. All content is written 
 - Moat-type examples use category descriptions, not named companies: "enterprise software platforms" not a specific ticker.
 - The Palantir story ($9 buy, $45 sell, $150 outcome) is the one named historical exception. It is a first-person account, not a live recommendation.
 - Historical references are acceptable when they clearly describe a past event.
-- No em dashes anywhere in copy. All three forms are prohibited: ` -- ` (double hyphen with spaces), `—` (raw Unicode U+2014), and `&mdash;` (HTML entity). Use commas, colons, semicolons, parentheses, or periods instead.
+- No em dashes anywhere in copy. All three forms are prohibited: the double hyphen with spaces, the raw Unicode em dash (U+2014), and its HTML entity. Use commas, colons, semicolons, parentheses, or periods instead.
 - No "- Azqato" brand suffix on `<title>` or `og:title`. Title = H1 only.
 
 ---
@@ -486,7 +486,7 @@ style.css (in order):
 | 3.13 | 2026-06 | Methodology popup added to screener toolbar. Reuses modal component. Settings section reduced to pointer. |
 | 3.15 | 2026-06-27 | Screener scoring switched to a relative percentile model (each stock ranked vs Nasdaq 100 peers, 0–20 per metric, bands Pass 65 / Watch 40 / Fail <40). Methodology popup rewritten to explain ranking. v3.15.1: negative forward P/E (unprofitable) now ranks worst on P/E vs Growth, not best. v3.15.2: same fix extended to PEG (ranks worst; column shows our own negative PEG instead of Yahoo's misleading positive). v3.15.3: shrinking forward earnings (EPS growth <=0) also rank worst on P/E vs Growth instead of being dropped. v3.15.4: negative forward P/E cell renders red. |
 | 3.16 | 2026-06-27 | Screener cell colors switched from absolute thresholds to the relative percentile ranking (top quartile green, bottom red, middle amber). New per-stock breakdown popup (click a row; reuses the modal component). Data now loads directly from GitHub raw (works as a local file) with a localStorage offline cache. Removed the FMP bring-your-own-key UI (Settings modal, API-key input, Load Data button, progress bar). Negative P/E / PEG sort as worst (expensive), not cheap. |
-| 3.17 | 2026-06-27 | Constituent list auto-syncs weekly from Wikipedia (`update_constituents.py` + `constituents.yml`). Screener derives its ticker universe from the feed (`universe()`), removing the embedded list — single source of truth. |
+| 3.17 | 2026-06-27 | Constituent list auto-syncs weekly from Wikipedia (`update_constituents.py` + `constituents.yml`). Screener derives its ticker universe from the feed (`universe()`), removing the embedded list, single source of truth. |
 | 3.18 | 2026-06-27 | Screener's inline JS extracted to `screener.js` (`screener.html` is now markup + CSS). No behavior change. |
 | 3.19 | 2026-06-28 | Mobile hamburger nav (CSS-only checkbox toggle; ☰/✕) replaces the cramped wrapping top bar on all pages under 1024px. Methodology/stock popups widened to 65% (max 1100px; full-width under 900px). |
 | 3.20 | 2026-06-28 | Verdict bands tightened to Pass ≥ 80, Watch 50–79, Fail < 50 (was 65 / 40), applied to both verdict labels and score cell colors. |
