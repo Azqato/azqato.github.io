@@ -167,6 +167,7 @@ Plain heading-plus-subtitle block introducing a page section (used above the Inv
 - Logo: `--text`, `1.15rem`, `700` weight; accent dot on trailing period
 - Nav links: `--text-muted`; hover: `--text`; active: `--accent`, `600` weight
 - Hidden on `< 600px` via `display: none` on `.nav-links`
+- **No external links in the top-level nav.** Every item in `.nav-links` must resolve to a page on azqato.github.io (or a relative link on the current page). Links to other properties (GitHub, sibling project sites not hosted in this repo, etc.) belong on the page itself (a card, a footer credit, a button) rather than in the persistent top-level nav. Current nav order: Home, About, Discord, Invests, Codes, Links, Projects, YouTube, Support.
 
 ### Hero Section
 
