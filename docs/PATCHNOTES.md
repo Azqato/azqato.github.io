@@ -505,6 +505,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.7.3] - 2026-07-08
+
+### Changed
+- Merged two adjacent `html { }` rules in `invests.html` into a single block (`overflow-y: scroll` + `scroll-behavior: smooth`). Cosmetic cleanup only; no behavior change.
+
+---
+
 ## [2.7.2] - 2026-07-08
 
 ### Changed
