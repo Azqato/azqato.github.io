@@ -505,6 +505,26 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.7.4] - 2026-07-09
+
+### Added
+- `--discord` and `--discord-hover` color tokens on `invests.html` to support a Discord-branded hero button.
+
+### Changed
+- `invests.html` restructured to the `discord.html` layout pattern: removed the "Community investing resources" hero badge, replaced the large `.section-head` blocks with discord-style `.section-header` sections (accent-bar `.section-title` + `.section-desc` + bottom-border separator), and retitled the two sections "Projects" and "Curated Resources".
+- `invests.html` hero "Join the Discord" button restyled to match the homepage `.btn-discord` (blue `--discord` background, white text, inline Discord SVG logo, lift-and-glow hover); the secondary "Explore the projects" button aligned to the homepage secondary style.
+- `index.html` both "Join the Discord" buttons repointed from the external `discord.gg/sKGKC3JFSE` invite to the internal `discord.html` page (removed `target="_blank"`/`rel`, now same-site navigation).
+- `codes.html` reformatted to the invests/discord layout: removed the "Developer tools & AI prompts" hero badge and both hero CTA buttons, replaced `.section-head` with the discord-style `.section-header` (Title/Description/separator), and merged its duplicate `html {}` rules.
+- `youtube.html` reformatted the same way: removed the "▶ Subscribe & watch" hero badge and added a "Channels" `.section-header` (Title/Description/separator) above the channel grid.
+- `discord.html` hero heading changed from "Join Azqato's Discord" to "Azqato's Discord".
+- `about.html` removed the "Investor, Developer, Community Builder" hero badge.
+- `links.html` removed the "Find me everywhere" hero badge and changed the hero description from "All my platforms, communities, and channels in one place." to "Find me everywhere."
+
+### Removed
+- Unused `.hero-badge` / `.hero-badge::before` / `@keyframes pulse` CSS from `invests.html`, `codes.html`, and `youtube.html` (badge markup removed on those pages). The same now-unused CSS remains in `about.html` and `links.html` and is flagged for later cleanup.
+
+---
+
 ## [2.7.3] - 2026-07-08
 
 ### Changed

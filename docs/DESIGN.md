@@ -31,7 +31,7 @@ All colors are defined as CSS custom properties in the `:root` block of each pag
 | `--discord`       | `#5865f2`   | Discord button background (`index.html` and `discord.html`)           |
 | `--discord-hover` | `#4752c4`   | Discord button hover background (`index.html` and `discord.html`)     |
 
-`--discord` and `--discord-hover` are defined on `index.html` (landing page Discord CTA) and `discord.html` (server card join buttons). They are not part of the global token set applied to all pages.
+`--discord` and `--discord-hover` are defined on `index.html` (landing page Discord CTA), `discord.html` (server card join buttons), and `invests.html` (hero Discord button). They are not part of the global token set applied to all pages. Note `--discord-hover` is `#6b76f5` on `index.html` and `invests.html` but `#4752c4` on `discord.html`.
 
 ### Language Tag Colors
 
@@ -123,9 +123,9 @@ Project and server card grids use `CSS Grid` with `auto-fill` and `minmax(280pxâ
 - Card padding: `1.25rem`; internal gap: `0.75rem`
 - Hidden cards use `data-hidden="true"` to toggle display: none via CSS attribute selector
 
-### Featured Project Card (`invests.html`)
+### Featured Project Card (`invests.html`, `codes.html`)
 
-A larger, fully clickable variant of the project card used in the Invests page project showcase. The entire card is an `<a>`.
+A larger, fully clickable variant of the project card used in the Invests and Codes project showcases. The entire card is an `<a>`.
 
 - Background: `--surface`; border: `1px solid --border`; hover: `border-color: --accent`
 - Border radius: `12px`; padding: `1.5rem`; internal gap: `0.6rem`
@@ -135,19 +135,22 @@ A larger, fully clickable variant of the project card used in the Invests page p
 - Title (`1.05rem`, `700`) with a trailing `â†’` arrow that slides `translateX(4px)` and turns `--accent` on hover
 - Grid: `auto-fill`, `minmax(300px, 1fr)`, gap `1.25rem`
 
-### Section Heading (`.section-head`)
+### Section Header (`.section-header`)
 
-Plain heading-plus-subtitle block introducing a page section (used above the Invests project showcase and resource grid). Distinct from Section Title: no left accent bar.
+The standard block introducing a page section, shared by `discord.html`, `invests.html`, `codes.html`, and `youtube.html`. Contains a `.section-title` and (except on `discord.html`) a `.section-desc`, with a bottom-border separator.
 
-- Heading: `1.6rem`, weight `800`, `letter-spacing: -0.3px`
-- Subtitle: `0.95rem`, `--text-muted`, `max-width: 620px`
+- `.section-header`: `margin-bottom: 1.5rem`; on `invests`/`codes`/`youtube` also `padding-bottom: 1rem` + `border-bottom: 1px solid --border` (the separator). `discord.html` uses the flex `space-between` variant without the border.
+- `.section-title`: `1.4rem`, weight `700`, with a left accent bar via `::before` (`3px` wide, `1.2em` tall, `--accent`, `2px` radius)
+- `.section-desc`: `0.95rem`, `--text-muted`, `margin-top: 0.5rem`, `max-width: 620px`
 
-### Hero CTA Buttons (`invests.html`)
+### Hero CTA Buttons (`invests.html`, `index.html`)
 
-- Container `.hero-cta`: flex row, wraps, gap `0.85rem`
-- `.btn`: `padding: 0.7rem 1.4rem`, `border-radius: 8px`, `font-size: 0.95rem`, `font-weight: 600`; hover: `translateY(-2px)`
-- `.btn-primary`: `--accent` background, `#04140f` text; hover: `--accent-hover`
-- `.btn-secondary`: `--surface` background, `--border` border, `--text`; hover: `--accent` border and text
+Present on the Invests hero (and the homepage). Pages formatted after `discord.html` (Codes, YouTube) have no hero buttons.
+
+- Container `.hero-cta`: flex row, wraps, gap `0.75rem`
+- `.btn`: `padding: 0.7rem 1.5rem`, `border-radius: 8px`, `font-size: 0.95rem`, `font-weight: 700`, `border: 1px solid transparent`; transitions `all 0.2s`
+- `.btn-discord`: `--discord` background, white text, inline Discord SVG logo (`20px`); hover: `--discord-hover` + `translateY(-2px)` + blue glow `box-shadow: 0 8px 24px rgba(88, 101, 242, 0.3)`. Matches the homepage Discord button.
+- `.btn-secondary`: transparent background, `--border` border, `--text`; hover: `--accent` border and text + `translateY(-2px)`
 
 ### Discord Server Card (`discord.html`)
 
