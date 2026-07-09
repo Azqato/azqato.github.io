@@ -25,9 +25,9 @@
 
     html {
       overflow-y: scroll;
+      scroll-behavior: smooth;
     }
 
-    html { scroll-behavior: smooth; }
     #projects { scroll-margin-top: 80px; }
 
     body {
@@ -99,37 +99,10 @@
     .hero {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 5rem 2rem 3rem;
+      padding: 5rem 2rem 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.78rem;
-      color: var(--purple);
-      width: fit-content;
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      background: var(--purple);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
     }
 
     .hero h1 {
@@ -147,70 +120,44 @@
       max-width: 620px;
     }
 
-    /* ── HERO CTAs ── */
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      margin-top: 0.75rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.7rem 1.4rem;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.15s, background 0.2s, border-color 0.2s;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #04140f;
-    }
-
-    .btn-primary:hover { background: var(--accent-hover); }
-
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* ── SECTION HEADING ── */
-    .section-head {
+    /* ── SECTION ── */
+    .section {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 1.5rem 2rem 3rem;
     }
 
-    .section-head h2 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: -0.3px;
+    .section-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .section-head p {
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section-desc {
       color: var(--text-muted);
       font-size: 0.95rem;
-      margin-top: 0.3rem;
+      margin-top: 0.5rem;
       max-width: 620px;
     }
 
     /* ── PROJECT GRID ── */
-    .projects {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.5rem 2rem 4rem;
-    }
-
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -310,8 +257,8 @@
     }
 
     @media (max-width: 600px) {
-      .hero { padding: 3rem 1.25rem 2rem; }
-      .section { padding: 0 1.25rem 3rem; }
+      .hero { padding: 3rem 1.25rem 1.5rem; }
+      .section { padding: 1.5rem 1.25rem 3rem; }
     }
   </style>
 </head>
@@ -338,22 +285,17 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">Developer tools &amp; AI prompts</div>
     <h1>Azqato <span class="highlight">Codes</span></h1>
     <p>Prompt libraries and coding tools built for working faster with AI. Explore what's available below, with more on the way.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#projects">Explore the projects ↓</a>
-      <a class="btn btn-secondary" href="discord.html">💬 Join the Discord</a>
-    </div>
   </section>
 
   <!-- PROJECTS -->
-  <section class="section-head" id="projects">
-    <h2>Azqato's Projects</h2>
-    <p>Tools for coding with AI. Free to use, no signup required.</p>
-  </section>
+  <section class="section" id="projects">
+    <div class="section-header">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-desc">Tools for coding with AI, free to use and open to everyone. Pick one below and start exploring.</p>
+    </div>
 
-  <section class="projects">
     <div class="project-grid">
 
       <a class="project-card" href="https://azqato.github.io/prompts/" target="_blank" rel="noopener">
