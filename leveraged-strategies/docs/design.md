@@ -1,6 +1,6 @@
 # DESIGN.md: Leveraged Strategies Site
 
-**Version:** 1.2
+**Version:** 1.3
 **Status:** Active
 **Author:** Azqato
 
@@ -24,33 +24,33 @@ All colors defined as CSS custom properties in `:root` in `css/style.css`.
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--color-bg` | `#0d1117` | Page background |
-| `--color-surface` | `#161b22` | Sidebar, cards, accordion triggers |
-| `--color-border` | `#30363d` | Borders, dividers |
-| `--color-accent` | `#00d4a0` | Links, active nav, h2 bar, hover borders, ticker text |
-| `--color-accent-hover` | `#00e6b0` | Accent hover state |
-| `--color-accent-light` | `rgba(0,212,160,0.08)` | Tinted backgrounds: callout boxes, row hover |
-| `--color-card-hover` | `#1c2128` | Card and table header hover background |
-| `--color-tag-bg` | `#21262d` | Pills, badges, ticker tags |
-| `--color-text-primary` | `#eef3f7` | Body copy, headings |
-| `--color-text-secondary` | `#cbdae6` | Captions, subtitles, supporting text |
-| `--color-positive` | `#3fb950` | Gains, favorable values |
-| `--color-negative` | `#f85149` | Losses, drawdowns, risk flags |
-| `--color-warning` | `#ffa657` | Caveats, caution callouts |
-| `--color-purple` | `#bc8cff` | Card hover gradient partner color |
+| `--bg` | `#0d1117` | Page background |
+| `--surface` | `#161b22` | Sidebar, cards, accordion triggers |
+| `--border` | `#30363d` | Borders, dividers |
+| `--accent` | `#00d4a0` | Links, active nav, h2 bar, hover borders, ticker text |
+| `--accent-hover` | `#00e6b0` | Accent hover state |
+| `--accent-light` | `rgba(0,212,160,0.08)` | Tinted backgrounds: callout boxes, row hover |
+| `--card-hover` | `#1c2128` | Card and table header hover background |
+| `--tag-bg` | `#21262d` | Pills, badges, ticker tags |
+| `--text` | `#eef3f7` | Body copy, headings |
+| `--text-muted` | `#cbdae6` | Captions, subtitles, supporting text |
+| `--green` | `#3fb950` | Gains, favorable values |
+| `--negative` | `#f85149` | Losses, drawdowns, risk flags |
+| `--orange` | `#ffa657` | Caveats, caution callouts |
+| `--purple` | `#bc8cff` | Card hover gradient partner color |
 
 **Strategy color coding (new for this site):** Each strategy gets a subtle identity tint used only in its index card top border and its page hero badge. All other UI stays on the shared teal.
 
 | Strategy | Tint token | Hex |
 |----------|-----------|-----|
-| 3 Sig | `--color-strat-3sig` | `#79c0ff` (light blue) |
-| 6 Sig | `--color-strat-6sig` | `#e3b341` (amber) |
-| 9 Sig | `--color-strat-9sig` | `#58a6ff` (blue) |
-| TQQQ FTLT | `--color-strat-ftlt` | `#3fb950` (green, reuses positive) |
-| Holy Grail | `--color-strat-grail` | `#bc8cff` (purple, reuses gradient partner) |
-| HFEA | `--color-strat-hfea` | `#f0883e` (orange) |
+| 3 Sig | `--strat-3sig` | `#79c0ff` (light blue) |
+| 6 Sig | `--strat-6sig` | `#e3b341` (amber) |
+| 9 Sig | `--strat-9sig` | `#58a6ff` (blue) |
+| TQQQ FTLT | `--strat-ftlt` | `#3fb950` (green, reuses positive) |
+| Holy Grail | `--strat-grail` | `#bc8cff` (purple, reuses gradient partner) |
+| HFEA | `--strat-hfea` | `#f0883e` (orange) |
 
-The tints are decorative wayfinding only. They never replace `--color-accent` for interactive elements.
+The tints are decorative wayfinding only. They never replace `--accent` for interactive elements.
 
 ---
 
@@ -103,7 +103,7 @@ Persistent on desktop. Contents, top to bottom:
 
 **Nav convention:** Every `.md` file added to `/strategies` implies a new page, a new nav entry in every page, and a new strategy card on the index. Support is always the last nav item and links externally.
 
-Specs: 220px wide, `--color-surface` background, 1px right border. Active page link gets accent text, weight 600, and a 3px left accent border.
+Specs: 220px wide, `--surface` background, 1px right border. Active page link gets accent text, weight 600, and a 3px left accent border.
 
 ### Content Area
 
@@ -115,22 +115,22 @@ Max width 820px. Padding 32px vertical, 28px horizontal on desktop; 20px on mobi
 
 ### Section Heading (h2)
 
-Every h2 carries a `::before` vertical bar: 3px wide, 1.1em tall, `--color-accent`, laid out with flex and 0.5rem gap. This is the cross-site Azqato signature and appears on all pages.
+Every h2 carries a `::before` vertical bar: 3px wide, 1.1em tall, `--accent`, laid out with flex and 0.5rem gap. This is the cross-site Azqato signature and appears on all pages.
 
 ### Strategy Cards (Index Page)
 
 Three cards in a 3-column grid on desktop (1-column below 768px).
 
 ```
-bg: --color-surface
-border: 1px solid --color-border
+bg: --surface
+border: 1px solid --border
 border-radius: 10px
 padding: 20px
 Top border on hover: 2px solid in the strategy's tint color via ::before
-Hover: bg --color-card-hover, translateY(-2px), subtle teal-tinted shadow
-Card title: 1.0625rem, weight 700, --color-accent
-Card summary: 0.9rem, --color-text-secondary
-Card footer: "Read the strategy" link arrow in --color-accent
+Hover: bg --card-hover, translateY(-2px), subtle teal-tinted shadow
+Card title: 1.0625rem, weight 700, --accent
+Card summary: 0.9rem, --text-muted
+Card footer: "Read the strategy" link arrow in --accent
 ```
 
 ### Placeholder Blocks (Initial Build)
@@ -138,10 +138,10 @@ Card footer: "Read the strategy" link arrow in --color-accent
 Until real content lands, each strategy section renders a placeholder block:
 
 ```
-border: 1px dashed --color-border
+border: 1px dashed --border
 border-radius: 8px
 padding: 24px
-text: --color-text-secondary, italic, centered
+text: --text-muted, italic, centered
 content: "Content coming soon. Source: /strategies/<name>.md"
 ```
 
@@ -152,13 +152,13 @@ Dashed border distinguishes placeholders from finished content at a glance.
 For rebalancing rules and allocation targets once content lands.
 
 ```
-Wrapper: 1px solid --color-border, radius 8px, overflow hidden
-Header row: bg --color-card-hover, uppercase 0.6875rem, secondary text
+Wrapper: 1px solid --border, radius 8px, overflow hidden
+Header row: bg --card-hover, uppercase 0.6875rem, secondary text
 Even rows: rgba(255,255,255,0.02)
 Cell padding: 10px 14px
 Numeric columns: right-aligned, monospace
 Percentages and dollar figures: monospace, contextual color
-Row hover: --color-accent-light
+Row hover: --accent-light
 ```
 
 ### Callout Boxes
@@ -166,8 +166,8 @@ Row hover: --color-accent-light
 Two variants, both left-bordered, radius 0 6px 6px 0, padding 14px 18px.
 
 ```
-Info box:   bg --color-accent-light,        border-left 3px --color-accent
-Risk box:   bg rgba(255,166,87,0.08),       border-left 3px --color-warning
+Info box:   bg --accent-light,        border-left 3px --accent
+Risk box:   bg rgba(255,166,87,0.08),       border-left 3px --orange
 ```
 
 Risk boxes are mandatory on every strategy page (leveraged ETF risk disclosure).
@@ -177,7 +177,7 @@ Risk boxes are mandatory on every strategy page (leveraged ETF risk disclosure).
 Pill badges, 999px radius, used for strategy metadata (rebalance cadence, risk level).
 
 ```
-Neutral:  bg --color-tag-bg, secondary text, --color-border border
+Neutral:  bg --tag-bg, secondary text, --border border
 Caution:  bg rgba(255,166,87,0.12), warning text and border tint
 Negative: bg rgba(248,81,73,0.12), negative text and border tint
 Positive: bg rgba(63,185,80,0.12), positive text and border tint
@@ -185,11 +185,11 @@ Positive: bg rgba(63,185,80,0.12), positive text and border tint
 
 ### Hero Badge (Strategy Pages)
 
-Small pill above the h1 showing the strategy tint color as a dot plus a label such as "Quarterly Rebalancing" or "Buy and Hold". `--color-tag-bg` background, 1px border, 0.75rem text.
+Small pill above the h1 showing the strategy tint color as a dot plus a label such as "Quarterly Rebalancing" or "Buy and Hold". `--tag-bg` background, 1px border, 0.75rem text.
 
 ### Ticker Tags
 
-Inline monospace pills for tickers (TQQQ, QQQ, AGG, etc.): `--color-tag-bg` background, 1px border, accent text weight 600, 6px radius. Hover tints border and background teal.
+Inline monospace pills for tickers (TQQQ, QQQ, AGG, etc.): `--tag-bg` background, 1px border, accent text weight 600, 6px radius. Hover tints border and background teal.
 
 ### Favicon
 
@@ -211,9 +211,9 @@ Emoji SVG data URI, consistent with the Azqato pattern:
 
 ## 7. Navigation
 
-- Inactive links: `--color-text-secondary`, weight 500
-- Hover: `--color-text-primary`
-- Active page: `--color-accent`, weight 600, 3px left border
+- Inactive links: `--text-muted`, weight 500
+- Hover: `--text`
+- Active page: `--accent`, weight 600, 3px left border
 - Anchor sub-links: smaller, indented, scroll-highlighted
 - Below 1024px: sticky top bar, `backdrop-filter: blur(12px)`, anchor sub-links hidden, active state moves to bottom border
 
@@ -221,7 +221,7 @@ Emoji SVG data URI, consistent with the Azqato pattern:
 
 ## 8. Footer
 
-1px top border, `--color-bg` background, centered `--color-text-secondary` text at 0.8rem, accent links, 28px 32px padding. Content: "Built by [Azqato](https://azqato.github.io)." Matches the footer pattern used across all Azqato properties.
+1px top border, `--bg` background, centered `--text-muted` text at 0.8rem, accent links, 28px 32px padding. Content: "Built by [Azqato](https://azqato.github.io)." Matches the footer pattern used across all Azqato properties.
 
 ---
 
@@ -236,9 +236,9 @@ Emoji SVG data URI, consistent with the Azqato pattern:
 
 ## 10. Accessibility
 
-- All text/background pairs meet WCAG AA (primary ~15:1, secondary ~4.8:1 on `--color-bg`)
+- All text/background pairs meet WCAG AA (primary ~15:1, secondary ~4.8:1 on `--bg`)
 - Strategy tints are never the only differentiator; cards and badges always carry text labels
-- `focus-visible` outline in `--color-accent` on all interactive elements
+- `focus-visible` outline in `--accent` on all interactive elements
 - Tables use `<th scope>` and visually hidden captions
 - `prefers-reduced-motion` disables card lifts and scroll-highlight transitions
 - Skip-to-content link as the first focusable element on every page
@@ -302,6 +302,7 @@ Carried over from the Azqato stock methodology site and applied here:
 
 | Version | Date | Summary |
 |---------|------|---------|
+| 1.3 | 2026-07-08 | Cross-project rebrand pass after this site was folded into the azqato.github.io monorepo. CSS custom property names renamed to match the shared root token names (e.g. `--color-bg` to `--bg`, `--color-text-primary` to `--text`, `--color-positive` to `--green`, `--color-strat-3sig` to `--strat-3sig`); all hex values unchanged, so this is a naming-only alignment, not a visual redesign. Pre-existing em dashes throughout the site's docs and copy also removed in a one-time cleanup. |
 | 1.2 | June 2026 | Added HFEA orange tint token (`#f0883e`). Design doc count aligned with six strategies and seven pages |
 | 1.1 | June 2026 | Added 3 Sig (light blue) and 6 Sig (amber) tint tokens. Documented /strategies nav convention. Footer updated to "Built by Azqato." pattern. Support link added as permanent last nav item |
 | 1.0 | June 2026 | Initial design. Azqato dark brand system applied to a wiki layout. Strategy tint coding, placeholder block component, and strategy page template defined |
