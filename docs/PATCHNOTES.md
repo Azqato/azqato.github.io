@@ -505,6 +505,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.7.0] - 2026-07-08
+
+### Changed
+- Site favicon changed from the ⚡ emoji to 🦁 across all 12 pages (inline SVG data-URI favicon, unchanged everywhere else).
+- The "About" card icon in the homepage explore grid (`index.html`) changed from 👋 to 🦁 to match the new favicon.
+
+---
+
 ## [2.6.9] - 2026-07-08
 
 ### Changed
