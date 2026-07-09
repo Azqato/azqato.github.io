@@ -505,6 +505,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.7.2] - 2026-07-08
+
+### Changed
+- Updated the Leveraged Strategies featured card link on `invests.html` from `https://azqato.github.io/leveraged-strategies/` to `https://azqato.github.io/leverage/`.
+
+---
+
 ## [2.7.1] - 2026-07-08
 
 ### Fixed
