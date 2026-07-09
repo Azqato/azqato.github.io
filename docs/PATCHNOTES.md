@@ -5,6 +5,19 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.7.0] - 2026-07-09
+
+### Changed
+- **Roadmap milestone: Code Extraction + Shared Assets (first half).** Extracted the CSS that was byte-identical across all 12 pages into a single external `styles.css`: the 12 shared design tokens (`:root`), the universal reset, the scrollbar-gutter fix, `body`, the entire nav component (`nav`, `.nav-inner`, `.nav-logo`, `.nav-toggle`, `.nav-links` and its states), the nav's 860px collapse breakpoint, and `footer`. Every page now links `<link rel="stylesheet" href="styles.css" />` instead of repeating roughly 100 lines of identical CSS in its own inline `<style>` block.
+- Page-specific `:root` overrides (`--discord`/`--discord-hover` on `discord.html`/`index.html`/`invests.html`, `--spotify` on `music.html`, `--coffee`/`--coffee-hover` on `support.html`) remain in each page's own inline `<style>` block, since CSS custom properties cascade additively across multiple `:root` rules; only the 12 common tokens moved to `styles.css`.
+- Renumbered six patch-note entries that had drifted into the `2.7.x` range (favicon change, nav logo scrollbar-gutter fix, Leveraged Strategies URL update, `invests.html` `html{}` rule merge, `invests.html`/`codes.html`/`youtube.html`/`discord.html`/`about.html`/`links.html` layout pass, VIX Strategy URL casing) down to `2.6.11`-`2.6.16`, since none of them were the actual "Code Extraction + Shared Assets" roadmap milestone and the true `v2.7.0` needed to be free for this entry.
+
+### Deferred
+- Extracting the shared `<nav>` markup and its toggle `<script>` out of the 12 HTML files themselves is intentionally not done here: it requires deciding between a JS-injected nav (no build step, but the nav is briefly absent until JS runs) and a minimal build step (nav stays in static HTML, but the project currently has none). The `styles.css` extraction above has no such trade-off and was safe to do immediately.
+- Auto-detecting the active nav link via `window.location.pathname` and adding `@media (prefers-reduced-motion: reduce)` remain outstanding from the same roadmap milestone.
+
+---
+
 ## [1.0.0] - 2026-06-06
 
 ### Added
@@ -505,14 +518,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
-## [2.7.5] - 2026-07-09
+## [2.6.16] - 2026-07-09
 
 ### Changed
 - Updated all VIX Strategy references to the renamed lowercase URLs: live site `https://azqato.github.io/vix` (`invests.html` card and `projects.html` `demo`) and repo `https://github.com/Azqato/vix` (`projects.html` `github`).
 
 ---
 
-## [2.7.4] - 2026-07-09
+## [2.6.15] - 2026-07-09
 
 ### Added
 - `--discord` and `--discord-hover` color tokens on `invests.html` to support a Discord-branded hero button.
@@ -532,28 +545,28 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
-## [2.7.3] - 2026-07-08
+## [2.6.14] - 2026-07-08
 
 ### Changed
 - Merged two adjacent `html { }` rules in `invests.html` into a single block (`overflow-y: scroll` + `scroll-behavior: smooth`). Cosmetic cleanup only; no behavior change.
 
 ---
 
-## [2.7.2] - 2026-07-08
+## [2.6.13] - 2026-07-08
 
 ### Changed
 - Updated the Leveraged Strategies featured card link on `invests.html` from `https://azqato.github.io/leveraged-strategies/` to `https://azqato.github.io/leverage/`.
 
 ---
 
-## [2.7.1] - 2026-07-08
+## [2.6.12] - 2026-07-08
 
 ### Fixed
 - **Nav logo position shifted slightly between pages.** `.nav-inner` centers itself with `margin: 0 auto` inside a `max-width: 1100px` wrapper, and Windows Chrome/Edge reserve real horizontal space for a vertical scrollbar only when a page's content is tall enough to scroll. Pages that fit within the viewport (`accounts.html`, `codes.html`, `youtube.html`) had no scrollbar and therefore a few pixels more usable width than longer pages, so the centered nav-inner (and the "Azqato" logo inside it) landed at a slightly different horizontal position depending on page length. Added `html { overflow-y: scroll; }` to every page so the scrollbar gutter is always reserved, whether or not the page actually needs to scroll; confirmed via headless Chrome measurement that `.nav-logo`'s `getBoundingClientRect().left` is now identical across all 12 pages at every tested width.
 
 ---
 
-## [2.7.0] - 2026-07-08
+## [2.6.11] - 2026-07-08
 
 ### Changed
 - Site favicon changed from the ⚡ emoji to 🦁 across all 12 pages (inline SVG data-URI favicon, unchanged everywhere else).

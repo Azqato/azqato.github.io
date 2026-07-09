@@ -148,6 +148,7 @@ Edit `discord.html` directly. Each server is a static `.server-card` block. Copy
 ├── music.html           - Spotify playlists + music platform links
 ├── accounts.html        - gaming accounts (Steam, LoL, TFT, RuneScape)
 ├── privacy-policy.html  - full privacy policy
+├── styles.css           - shared CSS: design tokens, reset, nav, footer (common to every page)
 ├── img/                 - image assets (profile photos, YT thumbnails, covers)
 ├── .githooks/           - pre-commit writing-style guard (enable via core.hooksPath)
 ├── README.md            - this file

@@ -10,7 +10,7 @@ The accent color is a teal-green (`#00d4a0`) that replaces the default GitHub bl
 
 ## Color Palette
 
-All colors are defined as CSS custom properties in the `:root` block of each page's `<style>` tag.
+The 12 tokens common to every page are defined once in the shared `:root` block of `styles.css`. A page that needs an extra token (e.g. `--discord`, `--spotify`, `--coffee`) declares its own small additional `:root` block in that page's inline `<style>` tag; CSS custom properties cascade additively across multiple `:root` rules, so this does not override the shared tokens.
 
 | Token             | Hex Value   | Intended Use                                                          |
 |-------------------|-------------|-----------------------------------------------------------------------|

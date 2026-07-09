@@ -404,7 +404,7 @@ Applies when: making visual design decisions. Loses to Tenet 1 and Tenet 2 if ac
 The goal is a developer-first aesthetic and zero maintenance overhead. Existing platforms do not allow precise visual control, and page builders add bloat. A hand-coded site is the fastest and most credible signal to other developers.
 
 **Q: Why inline CSS and JS instead of separate files?**
-With a small number of pages at launch, separate files added deployment complexity with no benefit, and each page being self-contained made it easier to read and modify. The site has since grown to eleven pages, so CSS repetition across pages is now the leading item of known technical debt; extracting a shared stylesheet and nav include is planned (see Roadmap).
+With a small number of pages at launch, separate files added deployment complexity with no benefit, and each page being self-contained made it easier to read and modify. The site has since grown to twelve pages, so as of `v2.7.0` the CSS that was identical across every page (design tokens, reset, nav, footer) lives in a shared `styles.css`; page-specific styles (hero, sections, grids, cards) remain inline per page. The nav markup and its toggle script are still duplicated in each page's HTML; extracting those is the remaining item on this roadmap milestone (see Roadmap).
 
 **Q: Why no analytics?**
 The PRD explicitly excludes analytics and tracking. The portfolio represents a developer who cares about privacy, and tracking visitors would contradict that. GitHub Pages provides basic traffic data (clones, referrers) in the repository Insights tab as a lightweight alternative.
@@ -776,17 +776,17 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 
 | Milestone  | Name                              | Status   |
 |------------|-----------------------------------|----------|
-| v2.7.0     | Code extraction + shared assets   | Planned  |
+| v2.7.0     | Code extraction + shared assets   | In Progress |
 | v2.8.0     | GitHub API integration            | Planned  |
 | v2.9.0     | Dark / light mode toggle          | Planned  |
 | v3.0.0     | Contact / hire-me section         | Planned  |
 
 ### v2.7.0: Code Extraction + Shared Assets
 
-- Extract shared CSS into a single `styles.css` to eliminate duplication across 11 pages.
-- Extract shared nav HTML using JS injection or a minimal build step.
-- Extract active-state detection into `nav.js` (using `window.location.pathname`).
-- Add `@media (prefers-reduced-motion: reduce)` rule to disable card hover transforms.
+- [x] Extract shared CSS into a single `styles.css` to eliminate duplication across all 12 pages. Done in patch `2.7.0`; page-specific `:root` overrides (Discord blue, Spotify green, coffee yellow) remain inline per page.
+- [ ] Extract shared nav HTML using JS injection or a minimal build step. Blocked on a decision between the two approaches (see `docs/PATCHNOTES.md` `2.7.0` Deferred section).
+- [ ] Extract active-state detection into `nav.js` (using `window.location.pathname`).
+- [ ] Add `@media (prefers-reduced-motion: reduce)` rule to disable card hover transforms.
 
 ### v2.8.0: GitHub API Integration
 
