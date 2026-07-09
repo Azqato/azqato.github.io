@@ -776,10 +776,27 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 
 | Milestone  | Name                              | Status   |
 |------------|-----------------------------------|----------|
+| Docs sync  | Document unpushed changes (see below) | TODO |
 | v2.7.0     | Code extraction + shared assets   | Planned  |
 | v2.8.0     | GitHub API integration            | Planned  |
 | v2.9.0     | Dark / light mode toggle          | Planned  |
 | v3.0.0     | Contact / hire-me section         | Planned  |
+
+### Docs Sync: Document Recently Pushed Changes (TODO)
+
+PATCHNOTES.md and DESIGN.md are behind the live site. The following shipped changes (commits up to `38007c1`) still need changelog entries and, where noted, DESIGN.md updates:
+
+- `invests.html` restructured to the discord.html layout pattern: hero badge removed, `.section-head` replaced by discord-style `.section-header` (accent-bar `.section-title` + `.section-desc` + bottom-border separator), sections retitled "Projects" and "Curated Resources". Update DESIGN.md (the "Featured Project Card", "Section Heading", and "Hero CTA Buttons" entries are now stale).
+- `invests.html` hero "Join the Discord" button restyled to match the homepage `.btn-discord` (blue `--discord`, Discord SVG logo); `--discord`/`--discord-hover` tokens added to the page.
+- `index.html` both "Join the Discord" buttons repointed from the external `discord.gg` invite to the internal `discord.html` (dropped `target="_blank"`).
+- `about.html` hero badge "Investor, Developer, Community Builder" removed.
+- `discord.html` hero heading changed from "Join Azqato's Discord" to "Azqato's Discord".
+- `codes.html` reformatted to the invests/discord layout (badge and hero CTA buttons removed, Title/Description/separator section header).
+- `youtube.html` reformatted the same way (badge removed, "Channels" Title/Description/separator header added).
+- `links.html` hero badge "Find me everywhere" removed; hero description changed to "Find me everywhere."
+- Merged duplicate `html {}` rules in `codes.html` while restructuring.
+
+Also apply the em-dash guard and pick the next version number(s) when writing these up. Note the stale `.hero-badge`/`@keyframes pulse` CSS left unused in `about.html` and `links.html` (candidate cleanup).
 
 ### v2.7.0: Code Extraction + Shared Assets
 
