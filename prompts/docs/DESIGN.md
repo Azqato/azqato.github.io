@@ -1,4 +1,4 @@
-# DESIGN.md — Prompts
+# DESIGN.md: Prompts
 
 **Version:** 1.0
 **Status:** Active

@@ -1,20 +1,20 @@
-# PATCHNOTES.md — Prompts
+# PATCHNOTES.md: Prompts
 
 All notable changes to this project are documented here. Entries are listed in reverse chronological order. Each version entry includes the version number, date, and a summary of what changed.
 
 ---
 
-## v1.11.0 — 2026-07-05
+## v1.11.0: 2026-07-05
 
 ### Fixed
 
-- `css/style.css`: Ran the Mobile Audit prompt against the live site (headless Chrome via CDP, `scrollWidth`/`clientWidth`/`getBoundingClientRect()` measurements at 375–1920px, not screenshots) and found the mobile/tablet header (< 1024px) was badly broken. Root cause: `.sidebar-sticky` sets `height: 100vh` for the desktop vertical sidebar, and the `@media (max-width: 1023px)` block that converts it into a horizontal header never reset that height, so the header stayed full-viewport-tall with its logo/nav/support button vertically centered inside — pushing all page content roughly 1200px below the fold on a typical mobile screen. Added `height: auto` to `.sidebar-sticky` in that media query.
+- `css/style.css`: Ran the Mobile Audit prompt against the live site (headless Chrome via CDP, `scrollWidth`/`clientWidth`/`getBoundingClientRect()` measurements at 375–1920px, not screenshots) and found the mobile/tablet header (< 1024px) was badly broken. Root cause: `.sidebar-sticky` sets `height: 100vh` for the desktop vertical sidebar, and the `@media (max-width: 1023px)` block that converts it into a horizontal header never reset that height, so the header stayed full-viewport-tall with its logo/nav/support button vertically centered inside, pushing all page content roughly 1200px below the fold on a typical mobile screen. Added `height: auto` to `.sidebar-sticky` in that media query.
 - `css/style.css`: Secondary bug in the same header: `.sidebar-nav` shared its row with `.sidebar-logo` instead of dropping to its own line, squeezing the 5 nav links into a ~150px-wide column that stacked one link per row instead of wrapping across the full width (the existing `margin-bottom` on `.sidebar-logo` already implied the intended layout was logo-then-nav-below). Added `flex-basis: 100%` to `.sidebar-nav` in the same media query so it wraps full-width beneath the logo.
 - No page-level horizontal overflow, `overflow` shorthand conflicts, bare `1fr` grid overflow, flex `min-width: auto` overflow, or margin/gap double-spacing were found anywhere else at any of the seven audited breakpoints across the home page and all seven prompt detail pages.
 
 ---
 
-## v1.10.0 — 2026-07-05
+## v1.10.0: 2026-07-05
 
 ### Added
 
@@ -28,7 +28,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.9.0 — 2026-06-27
+## v1.9.0: 2026-06-27
 
 ### Added
 
@@ -44,7 +44,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.8.0 — 2026-06-27
+## v1.8.0: 2026-06-27
 
 ### Added
 
@@ -58,7 +58,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.7.0 — 2026-06-14
+## v1.7.0: 2026-06-14
 
 ### Added
 
@@ -71,7 +71,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.6.0 — 2026-06-13
+## v1.6.0: 2026-06-13
 
 ### Changed
 
@@ -84,7 +84,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.5.0 — 2026-06-13
+## v1.5.0: 2026-06-13
 
 ### Added
 
@@ -97,7 +97,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.4.0 — 2026-06-13
+## v1.4.0: 2026-06-13
 
 ### Added
 
@@ -110,7 +110,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.3.0 — 2026-06-13
+## v1.3.0: 2026-06-13
 
 ### Changed
 
@@ -123,7 +123,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.2.0 — 2026-06-13
+## v1.2.0: 2026-06-13
 
 ### Changed
 
@@ -133,7 +133,7 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.1.0 — 2026-06-13
+## v1.1.0: 2026-06-13
 
 ### Added
 
@@ -151,14 +151,14 @@ All notable changes to this project are documented here. Entries are listed in r
 
 ---
 
-## v1.0.0 — 2026-06-13
+## v1.0.0: 2026-06-13
 
 **Initial release.**
 
 ### Added
 
 - `index.html`: Single-page shell (sidebar, content area, footer). Renders the home view and every prompt view via hash-based routing. No per-prompt HTML files.
-- `prompts/em-dash-audit.md`: First prompt, authored in markdown. Documents the full em dash audit workflow for Claude Code projects, covering both the literal Unicode character and the `&mdash;` HTML entity form, double dash punctuation handling, CSS custom property exceptions, and context-sensitive replacement rules (comma, colon, semicolon, parentheses, period). Includes instructions to update `docs/PRD.md` with a Writing Style section and push all changes to GitHub after the audit is complete.
+- `prompts/em-dash-audit.md`: First prompt, authored in markdown. Documents the full em dash audit workflow for Claude Code projects, covering both the literal Unicode character and the `mdash` HTML entity form, double dash punctuation handling, CSS custom property exceptions, and context-sensitive replacement rules (comma, colon, semicolon, parentheses, period). Includes instructions to update `docs/PRD.md` with a Writing Style section and push all changes to GitHub after the audit is complete.
 - `prompts-data.js`: Embedded copy of every prompt markdown file as `window.PROMPTS_DATA`, loaded via a `<script>` tag. This lets the site read prompt content with no server, so it runs by opening `index.html` directly (`file://`) while keeping the `.md` files as the readable source.
 - `style.css`: Full design system stylesheet. Implements the Azqato brand system: `#0d1117` background, `#161b22` surface, `#00d4a0` teal accent, system font stack, CSS Grid sidebar layout, code block component, copy button with state transitions, home page prompt list, hero section, responsive breakpoints at 1024px and 768px, reduced motion support.
 - `script.js`: Parses the embedded prompt markdown (frontmatter, description, fenced prompt block), builds the sidebar dynamically, handles hash routing, and provides copy-to-clipboard behavior using the native Clipboard API. On click, reads the rendered `<code>` element's text content, writes it to clipboard, updates the button label to "Copied!" for 2 seconds, then resets to "Copy".

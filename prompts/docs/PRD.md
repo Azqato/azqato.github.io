@@ -1,4 +1,4 @@
-# PRD.md — Prompts
+# PRD.md: Prompts
 
 **Version:** 1.0
 **Status:** Active
@@ -91,9 +91,9 @@ The source for each prompt. Frontmatter (`title`, `description`, `meta`, plus an
 
 Not rendered as navigable pages on the site. These are documentation files for contributors and for Claude Code context:
 
-- `docs/PRD.md` — product requirements (this file)
-- `docs/DESIGN.md` — full design specification
-- `docs/PATCHNOTES.md` — version history
+- `docs/PRD.md`: product requirements (this file)
+- `docs/DESIGN.md`: full design specification
+- `docs/PATCHNOTES.md`: version history
 
 ---
 
@@ -127,8 +127,8 @@ All copy on this site follows these rules. These rules apply to HTML pages, mark
 
 Em dashes are prohibited in all forms:
 
-- Literal Unicode character: `—`
-- HTML entity: `&mdash;`
+- Literal Unicode character: U+2014
+- HTML entity: the `mdash` named character reference
 - Double dash used as punctuation: `--` (note: this does NOT apply to CSS custom properties such as `--color-bg` or `--color-accent`, which are valid CSS variable syntax and must not be changed)
 
 Both the Unicode character and the HTML entity must be searched independently when auditing, because a search for one will not catch the other.

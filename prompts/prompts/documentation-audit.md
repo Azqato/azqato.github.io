@@ -17,7 +17,7 @@ configs, and any current documentation to understand what is being built. Then d
 the following:
 
 1. Update every existing documentation file to reflect the actual current state of
-   the project -- do not leave placeholder text if the real information is available
+   the project: do not leave placeholder text if the real information is available
    in the codebase.
 
 2. Create any missing documentation files from the list below.
