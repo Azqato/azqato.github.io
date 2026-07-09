@@ -101,6 +101,7 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 - **F8: Discord Page.** Four server cards (Azqato, Azqato Invests, B5TA, League of Azqato) with permanent invite links, server descriptions, emoji icons, and Discord-blue Join Server buttons.
 - **F9: `iconUrl` field.** Optional image or SVG URL per project card that overrides the emoji icon when set.
 - **F10: Introductory Landing Page.** `index.html` is the default entry point for first-time visitors. Introduces Azqato with an easygoing bio, routes visitors to the Discord and to every other page via a grid of destination cards.
+- **F11: Favicon.** Site-wide favicon is a 🦁 emoji, implemented as an inline SVG data-URI `<link rel="icon">` (no external image file) and repeated identically in the `<head>` of all 12 pages. The homepage's "About" explore-card icon (`index.html`) matches the favicon.
 
 ### Future (post-launch, not committed)
 
