@@ -505,6 +505,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.6.9] - 2026-07-08
+
+### Changed
+- Reordered the `invests.html` featured project cards so the strategy projects lead: Stocks, Leveraged Strategies, ComposerAtlas, Net Worth Tracker, VIX Strategy, Stock Screener.
+- Renamed the "Stock Methodology" featured card to "Stocks" on `invests.html` (link target unchanged: `https://azqato.github.io/stocks/`). The `projects.html` card retains its original name.
+
+---
+
 ## [2.6.8] - 2026-07-08
 
 ### Added
