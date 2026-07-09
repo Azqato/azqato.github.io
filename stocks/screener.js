@@ -374,9 +374,9 @@
     // The score bar takes its color from the stock's tier (tiers are ranks,
     // so the same score can be a different color in a different universe).
     var TIER_COLOR = {
-      sp: "var(--color-tier-splus)",
-      s: "var(--color-tier-s)", a: "var(--color-tier-a)", b: "var(--color-tier-b)",
-      c: "var(--color-tier-c)", f: "var(--color-negative)", none: "var(--color-border)"
+      sp: "var(--tier-splus)",
+      s: "var(--tier-s)", a: "var(--tier-a)", b: "var(--tier-b)",
+      c: "var(--tier-c)", f: "var(--negative)", none: "var(--border)"
     };
 
     // ---- Build a renderable row model ----

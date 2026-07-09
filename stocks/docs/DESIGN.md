@@ -1,8 +1,8 @@
 # DESIGN.md: Azqato Stock Methodology Site
 
-**Version:** 2.0
+**Version:** 2.1
 **Status:** Active
-**Last Updated:** 2026-06-27
+**Last Updated:** 2026-07-08
 
 ---
 
@@ -22,25 +22,25 @@ All colors are defined as CSS custom properties in `:root` in `style.css`. Never
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--color-bg` | `#0d1117` | Page background on all pages |
-| `--color-surface` | `#161b22` | Cards, sidebar background, modal backgrounds |
-| `--color-border` | `#30363d` | All borders and dividers |
-| `--color-accent` | `#00d4a0` | Primary interactive color: active nav links, hover borders, h2 accent bars, badge teal, range dot |
-| `--color-accent-hover` | `#00e6b0` | Hover state for any accent-colored element |
-| `--color-accent-light` | `rgba(0, 212, 160, 0.08)` | Tinted backgrounds: how-to-read boxes, accordion hover, FAQ teaser, card hover tint |
-| `--color-tag-bg` | `#21262d` | Tag pills, hero badges, ticker tag backgrounds |
-| `--color-card-hover` | `#1c2128` | Card hover background, table header background |
-| `--color-text-primary` | `#eef3f7` | Body copy, headings, all primary reading text |
-| `--color-text-secondary` | `#cbdae6` | Subtitles, captions, lead paragraphs, metric card definitions, sidebar inactive links |
-| `--color-positive` | `#3fb950` | Positive values in tables, good-signal badges, hero badge text |
-| `--color-negative` | `#f85149` | Negative values, red-flag badges, screener F tier (dark red) |
-| `--color-warning` | `#ffa657` | Caution values, amber badges, caveat box borders |
-| `--color-purple` | `#bc8cff` | Gradient endpoint on metric card hover top border only |
-| `--color-tier-splus` | `#bc8cff` | Screener S+ tier (purple, a perfect 100 score): badge, score bar |
-| `--color-tier-s` | `#2ea043` | Screener S tier (dark green): badge, score bar |
-| `--color-tier-a` | `#7ee787` | Screener A tier (light green): badge, score bar |
-| `--color-tier-b` | `#e3b341` | Screener B tier (yellow): badge, score bar |
-| `--color-tier-c` | `#ffa198` | Screener C tier (light red): badge, score bar |
+| `--bg` | `#0d1117` | Page background on all pages |
+| `--surface` | `#161b22` | Cards, sidebar background, modal backgrounds |
+| `--border` | `#30363d` | All borders and dividers |
+| `--accent` | `#00d4a0` | Primary interactive color: active nav links, hover borders, h2 accent bars, badge teal, range dot |
+| `--accent-hover` | `#00e6b0` | Hover state for any accent-colored element |
+| `--accent-light` | `rgba(0, 212, 160, 0.08)` | Tinted backgrounds: how-to-read boxes, accordion hover, FAQ teaser, card hover tint |
+| `--tag-bg` | `#21262d` | Tag pills, hero badges, ticker tag backgrounds |
+| `--card-hover` | `#1c2128` | Card hover background, table header background |
+| `--text` | `#eef3f7` | Body copy, headings, all primary reading text |
+| `--text-muted` | `#cbdae6` | Subtitles, captions, lead paragraphs, metric card definitions, sidebar inactive links |
+| `--green` | `#3fb950` | Positive values in tables, good-signal badges, hero badge text |
+| `--negative` | `#f85149` | Negative values, red-flag badges, screener F tier (dark red) |
+| `--orange` | `#ffa657` | Caution values, amber badges, caveat box borders |
+| `--purple` | `#bc8cff` | Gradient endpoint on metric card hover top border only |
+| `--tier-splus` | `#bc8cff` | Screener S+ tier (purple, a perfect 100 score): badge, score bar |
+| `--tier-s` | `#2ea043` | Screener S tier (dark green): badge, score bar |
+| `--tier-a` | `#7ee787` | Screener A tier (light green): badge, score bar |
+| `--tier-b` | `#e3b341` | Screener B tier (yellow): badge, score bar |
+| `--tier-c` | `#ffa198` | Screener C tier (light red): badge, score bar |
 
 **Contrast:** Primary text on background is approximately 15:1. Secondary text on background is approximately 4.8:1. Both meet WCAG AA. Do not introduce new text colors that fall below 4.5:1.
 
@@ -66,16 +66,16 @@ No external font loading. No Google Fonts. No web font requests.
 
 | Role | Size | Weight | Line Height | Letter Spacing | Color | Notes |
 |------|------|--------|-------------|----------------|-------|-------|
-| H1 (page title) | 1.875rem | 700 | 1.2 | -0.3px | `--color-text-primary` | One per page |
-| H2 (section) | 1.375rem | 700 | 1.3 | normal | `--color-text-primary` | Has `::before` teal accent bar |
-| H2 (metric block) | 1.5rem | 700 | 1.3 | normal | `--color-text-primary` | Larger variant for metrics.html full entries |
-| H3 (subsection) | 1.0625rem | 600 | 1.4 | normal | `--color-text-primary` | |
-| Body | 1rem | 400 | 1.6 | normal | `--color-text-primary` | Default for all paragraph text |
-| Lead / intro | 1rem | 400 | 1.65 | normal | `--color-text-secondary` | First paragraph of a page or section |
-| Caption / note | 0.78rem | 400 | 1.5 | normal | `--color-text-secondary` | Table footnotes, small labels |
+| H1 (page title) | 1.875rem | 700 | 1.2 | -0.3px | `--text` | One per page |
+| H2 (section) | 1.375rem | 700 | 1.3 | normal | `--text` | Has `::before` teal accent bar |
+| H2 (metric block) | 1.5rem | 700 | 1.3 | normal | `--text` | Larger variant for metrics.html full entries |
+| H3 (subsection) | 1.0625rem | 600 | 1.4 | normal | `--text` | |
+| Body | 1rem | 400 | 1.6 | normal | `--text` | Default for all paragraph text |
+| Lead / intro | 1rem | 400 | 1.65 | normal | `--text-muted` | First paragraph of a page or section |
+| Caption / note | 0.78rem | 400 | 1.5 | normal | `--text-muted` | Table footnotes, small labels |
 | Metric value / data | 0.85rem | 400 | 1.6 | normal | Contextual | Monospace stack |
-| Ticker symbol | 0.875rem | 600 | 1.6 | normal | `--color-accent` | Monospace stack |
-| Table header label | 0.6875rem | varies |, | uppercase | `--color-text-secondary` | Screener column headers |
+| Ticker symbol | 0.875rem | 600 | 1.6 | normal | `--accent` | Monospace stack |
+| Table header label | 0.6875rem | varies |, | uppercase | `--text-muted` | Screener column headers |
 
 **Mobile reduction:** H1 drops to 1.5rem below 768px. H2 drops to 1.2rem below 768px.
 
@@ -117,7 +117,7 @@ The design does not use a rigid 4px or 8px grid, but follows consistent spacing 
 
 ### Section Heading (h2)
 
-Every `h2` renders a 3px wide, 1.1em tall vertical bar in `--color-accent` via `::before` pseudo-element using `display: flex; align-items: center; gap: 0.5rem`. This is the signature visual element shared with azqato.github.io. Do not suppress it.
+Every `h2` renders a 3px wide, 1.1em tall vertical bar in `--accent` via `::before` pseudo-element using `display: flex; align-items: center; gap: 0.5rem`. This is the signature visual element shared with azqato.github.io. Do not suppress it.
 
 ---
 
@@ -126,17 +126,17 @@ Every `h2` renders a 3px wide, 1.1em tall vertical bar in `--color-accent` via `
 10 cards in a 2-column grid on desktop, 1-column on mobile.
 
 ```
-Background:       --color-surface
-Border:           1px solid --color-border
+Background:       --surface
+Border:           1px solid --border
 Border radius:    10px
 Padding:          18px
-Hover background: --color-card-hover
+Hover background: --card-hover
 Hover border:     rgba(0, 212, 160, 0.5)
 Hover transform:  translateY(-2px)
 Hover shadow:     0 4px 12px rgba(0, 212, 160, 0.08)
-Hover top border: 2px gradient (--color-accent → --color-purple) via ::before
-Card name:        0.9375rem, weight 700, --color-accent
-Card definition:  0.85rem, --color-text-secondary
+Hover top border: 2px gradient (--accent → --purple) via ::before
+Card name:        0.9375rem, weight 700, --accent
+Card definition:  0.85rem, --text-muted
 ```
 
 ---
@@ -146,16 +146,16 @@ Card definition:  0.85rem, --color-text-secondary
 Used for metric comparisons, reference data, illustrative examples.
 
 ```
-Wrapper:          border 1px solid --color-border, border-radius 8px, overflow hidden
-Header row:       background --color-card-hover, text 0.6875rem uppercase, --color-text-secondary
+Wrapper:          border 1px solid --border, border-radius 8px, overflow hidden
+Header row:       background --card-hover, text 0.6875rem uppercase, --text-muted
 Body rows:        alternating rgba(255, 255, 255, 0.02) on even rows
-Row hover:        background --color-accent-light (teal tint)
+Row hover:        background --accent-light (teal tint)
 Cell padding:     10px 14px
 Number columns:   right-aligned, monospace font
-Ticker column:    --color-accent, bold, monospace, nowrap
-Positive values:  --color-positive (#3fb950)
-Negative values:  --color-negative (#f85149)
-Caution values:   --color-warning (#ffa657)
+Ticker column:    --accent, bold, monospace, nowrap
+Positive values:  --green (#3fb950)
+Negative values:  --negative (#f85149)
+Caution values:   --orange (#ffa657)
 ```
 
 ---
@@ -165,8 +165,8 @@ Caution values:   --color-warning (#ffa657)
 Inline range visualization used in tables.
 
 ```
-Track:  4px height, background --color-border, border-radius 2px
-Dot:    8px × 8px circle, background --color-accent, border-radius 50%
+Track:  4px height, background --border, border-radius 2px
+Dot:    8px × 8px circle, background --accent, border-radius 50%
 Position: left: var(--pos) CSS custom property set inline per row
 Calculation: (price − low) / (high − low) as a percentage
 ```
@@ -176,14 +176,14 @@ Calculation: (price − low) / (high − low) as a percentage
 ### Accordion (faq.html)
 
 ```
-Container:        border 1px solid --color-border, border-radius 10px, overflow hidden
-Trigger:          background --color-surface, font 0.9375rem weight 500, no border
-Trigger hover:    background --color-accent-light
-Icon:             "+" / "−" in --color-accent, right-aligned
+Container:        border 1px solid --border, border-radius 10px, overflow hidden
+Trigger:          background --surface, font 0.9375rem weight 500, no border
+Trigger hover:    background --accent-light
+Icon:             "+" / "−" in --accent, right-aligned
 Transition:       max-height 0 → 6000px, 200ms ease-in-out
 Content bg:       rgba(0, 212, 160, 0.04)
-Content text:     --color-text-secondary
-Palantir story:   border-left 3px solid --color-accent, text --color-text-primary
+Content text:     --text-muted
+Palantir story:   border-left 3px solid --accent, text --text
 Behavior:         One item open at a time; opening one closes others
 ARIA:             aria-expanded toggled on trigger; aria-controls links to body id
 ```
@@ -195,10 +195,10 @@ ARIA:             aria-expanded toggled on trigger; aria-controls links to body 
 Pill-shaped. Used for verdict labels, signal ranges, and descriptive tags.
 
 ```
-Good:     background rgba(63, 185, 80, 0.12),  text --color-positive, border rgba(63, 185, 80, 0.3)
-Caution:  background rgba(255, 166, 87, 0.12), text --color-warning,  border rgba(255, 166, 87, 0.3)
-Negative: background rgba(248, 81, 73, 0.12),  text --color-negative, border rgba(248, 81, 73, 0.3)
-Neutral:  background --color-tag-bg,            text --color-text-secondary, border --color-border
+Good:     background rgba(63, 185, 80, 0.12),  text --green, border rgba(63, 185, 80, 0.3)
+Caution:  background rgba(255, 166, 87, 0.12), text --orange,  border rgba(255, 166, 87, 0.3)
+Negative: background rgba(248, 81, 73, 0.12),  text --negative, border rgba(248, 81, 73, 0.3)
+Neutral:  background --tag-bg,            text --text-muted, border --border
 Border radius: 999px
 Padding: 2px 10px (small) or 4px 12px (normal)
 ```
@@ -210,8 +210,8 @@ Padding: 2px 10px (small) or 4px 12px (normal)
 Used to explain how to interpret a metric or tool. Teal-tinted.
 
 ```
-Background:   --color-accent-light (rgba teal 8%)
-Border-left:  3px solid --color-accent
+Background:   --accent-light (rgba teal 8%)
+Border-left:  3px solid --accent
 Border-radius: 0 6px 6px 0
 Padding:      14px 18px
 ```
@@ -224,10 +224,10 @@ Used for warnings, edge cases, and limitations. Amber-tinted.
 
 ```
 Background:   rgba(255, 166, 87, 0.08)
-Border-left:  3px solid --color-warning
+Border-left:  3px solid --orange
 Border-radius: 0 6px 6px 0
-Text:         --color-text-secondary
-Strong labels: --color-warning
+Text:         --text-muted
+Strong labels: --orange
 ```
 
 ---
@@ -238,10 +238,10 @@ Pill badge appearing below the page description on every page.
 
 ```
 Position:     Below .hero-sub, margin-top: 16px
-Background:   --color-tag-bg
-Border:       1px solid --color-border
+Background:   --tag-bg
+Border:       1px solid --border
 Border-radius: 999px
-Text:         --color-positive, 0.75rem
+Text:         --green, 0.75rem
 ```
 
 ---
@@ -252,12 +252,12 @@ Used to display ticker symbols as interactive tags.
 
 ```
 Font:         monospace
-Background:   --color-tag-bg
-Border:       1px solid --color-border
+Background:   --tag-bg
+Border:       1px solid --border
 Border-radius: 6px
-Text:         --color-accent, weight 600
+Text:         --accent, weight 600
 Hover border: rgba(0, 212, 160, 0.5)
-Hover bg:     --color-accent-light
+Hover bg:     --accent-light
 ```
 
 ---
@@ -268,9 +268,9 @@ Used for the Settings and Methodology popups on `screener.html`.
 
 ```
 Backdrop:     fixed overlay, rgba(0,0,0,0.6)
-Modal:        --color-surface background, 1px border --color-border, border-radius 10px
+Modal:        --surface background, 1px border --border, border-radius 10px
 Width:        max 560px, 90vw
-Close button: top-right × button in --color-text-secondary
+Close button: top-right × button in --text-muted
 Behavior:     close on click outside, close on Escape key
 ```
 
@@ -279,12 +279,12 @@ Behavior:     close on click outside, close on Escape key
 ### Sidebar Navigation
 
 ```
-Inactive links:    --color-text-secondary, weight 500
-Hover:             --color-text-primary
-Active / current:  --color-accent, weight 600, 3px left border in --color-accent
+Inactive links:    --text-muted, weight 500
+Hover:             --text
+Active / current:  --accent, weight 600, 3px left border in --accent
 "On This Page":    Smaller, indented sub-links; highlighted via IntersectionObserver scroll
 Brand ("Azqato."): teal dot on period via <span>
-Footer:            "Educational use only. Not financial advice." in --color-text-secondary
+Footer:            "Educational use only. Not financial advice." in --text-muted
 ```
 
 ---
@@ -305,7 +305,7 @@ All pages use an emoji SVG data URI favicon. No external file required.
 
 - Primary text on background: approximately 15:1 contrast ratio
 - Secondary text on background: approximately 4.8:1 contrast ratio
-- All interactive elements have visible `:focus-visible` outline in `--color-accent`
+- All interactive elements have visible `:focus-visible` outline in `--accent`
 - Accordion items use `aria-expanded` and `aria-controls` attributes
 - Tables include `<caption class="visually-hidden">` and `<th scope>` attributes
 - Emoji favicon is presentational only; no alt text required
@@ -329,7 +329,7 @@ No other animations. No decorative motion. No loading spinners. No auto-playing 
 
 ## 9. Sidebar "On This Page" Navigation
 
-The "On This Page" anchor block is the signature interaction pattern of the site. As the user scrolls, the corresponding sidebar link highlights in `--color-accent` teal.
+The "On This Page" anchor block is the signature interaction pattern of the site. As the user scrolls, the corresponding sidebar link highlights in `--accent` teal.
 
 **Implementation:** `script.js` uses `IntersectionObserver` with a root margin of `-15% 0 -65% 0`. It derives which sections to observe from the `href` attributes of `.metric-links a` elements on the page. No per-page configuration is needed.
 
@@ -466,8 +466,8 @@ style.css (in order):
 | 1.1 | 2026-06 | Dark theme rebrand: Azqato brand system, teal `#00d4a0` accent, system fonts, GitHub Dark palette, h2 accent bars, card hover, emoji favicon |
 | 1.4 | 2026-06 | Content philosophy formalized: no real-time data in examples, hypothetical labels required, named company examples replaced with category descriptions |
 | 1.5 | 2026-06 | Two setup guide pages (watchlist, screener). Nav expanded. Text readability improved. Guide component CSS system added. |
-| 1.6 | 2026-06 | indices.html added. Nav restructured to 7 items. Sitewide readability: accordion/card/guide text to --color-text-primary. Capital gains content. |
-| 1.7 | 2026-06 | Text color differentiation: --color-text-primary → #eef3f7, --color-text-secondary → #cbdae6 |
+| 1.6 | 2026-06 | indices.html added. Nav restructured to 7 items. Sitewide readability: accordion/card/guide text to --text. Capital gains content. |
+| 1.7 | 2026-06 | Text color differentiation: --text → #eef3f7, --text-muted → #cbdae6 |
 | 1.8 | 2026-06 | "On This Page" sidebar nav extended sitewide. IntersectionObserver generalized. Block moved to below Support link. |
 | 1.9 | 2026-06 | Hero badge repositioned below .hero-sub. .hero padding-bottom reduced. |
 | 3.0 | 2026-06 | "Leveraged Strategies" external nav link added sitewide. Nav is now 9 items. |
@@ -494,3 +494,4 @@ style.css (in order):
 | 3.22 | 2026-06-29 | "Expand to S&P 500" toggle added to the screener app-bar (right of the Azqato pill). Lazy-loads a second daily feed (`data/screener_sp500.json`) and re-ranks against the full S&P 500; toggles back to the Nasdaq 100. On-screen labels swap via `.universe-name` spans. New `data/sp500.json` constituent list; staggered CI (Nasdaq 23:00, S&P 500 23:30). |
 | 3.23 | 2026-06-29 | CI schedule only: screener feeds run Mon-Fri (trading days); the weekly constituent sync moved to Saturday 23:00 UTC. No visual or UX change. |
 | 2.0 | 2026-06-27 | Full DESIGN.md rewrite consolidating all design decisions, adding missing sections (spacing, breakpoints, motion, social cards, content philosophy), and bringing documentation to v3.13.0 parity. |
+| 2.1 | 2026-07-08 | Cross-project rebrand pass after this site was folded into the azqato.github.io monorepo. CSS custom property names renamed to match the shared root token names (e.g. `--color-bg` to `--bg`, `--color-text-primary` to `--text`, `--color-positive` to `--green`); all hex values unchanged, so this is a naming-only alignment, not a visual redesign. Pre-existing em dashes throughout the site's docs and copy also removed in a one-time cleanup to bring the project into compliance with the writing style rule this file already stated. |
