@@ -86,6 +86,20 @@ a:hover {
   flex-direction: column;
 }
 
+.sidebar-back {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  padding: 0 24px;
+  margin-bottom: 12px;
+  transition: color 0.15s ease;
+}
+
+.sidebar-back:hover {
+  color: var(--color-accent);
+}
+
 .sidebar-logo {
   display: block;
   font-size: 1.25rem;
