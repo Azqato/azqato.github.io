@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HFEA — Leveraged Strategies</title>
+  <title>HFEA: Leveraged Strategies</title>
   <meta name="description" content="Hedgefundie's Excellent Adventure (HFEA). A quarterly-rebalanced leveraged risk parity portfolio of UPRO 55% and TMF 45%.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
   <link rel="stylesheet" href="css/style.css">
@@ -236,7 +236,7 @@
             </table>
           </div>
 
-          <h3>Regime-adaptive variant — "HFEA The Resurrection"</h3>
+          <h3>Regime-adaptive variant: "HFEA The Resurrection"</h3>
 
           <p>A Composer.trade implementation by u/derecknielsen that adds a two-factor regime-switching model on top of the static HFEA allocation. It rebalances quarterly and uses two moving average signals to detect the macro environment: <span class="ticker">SPY</span> vs. its 200-day SMA for the equity trend, and <span class="ticker">TLT</span> vs. its 400-day SMA for the interest rate environment.</p>
 
@@ -280,7 +280,7 @@
             </table>
           </div>
 
-          <p><span class="ticker">TMV</span> (Direxion Daily 20+ Year Treasury Bear 3x Shares) replaces <span class="ticker">TMF</span> when <span class="ticker">TLT</span> is below its 400-day SMA, converting the long-bond position to a short-bond position. The 400-day TLT lookback is intentionally longer than the standard 200-day to avoid false triggers from temporary bond dips within a sustained rising-rate trend. In the high-inflation bear scenario, <span class="ticker">UPRO</span> is reduced to 20% with 80% TMV — a defensive positioning that would have substantially reduced the 2022 drawdown.</p>
+          <p><span class="ticker">TMV</span> (Direxion Daily 20+ Year Treasury Bear 3x Shares) replaces <span class="ticker">TMF</span> when <span class="ticker">TLT</span> is below its 400-day SMA, converting the long-bond position to a short-bond position. The 400-day TLT lookback is intentionally longer than the standard 200-day to avoid false triggers from temporary bond dips within a sustained rising-rate trend. In the high-inflation bear scenario, <span class="ticker">UPRO</span> is reduced to 20% with 80% TMV, a defensive positioning that would have substantially reduced the 2022 drawdown.</p>
 
           <div class="callout callout-info">
             <strong>Composer symphony ID:</strong> <code>Cjb5ysKtJsPv6Tm3Fk0R</code>
@@ -379,7 +379,7 @@
 
           <p><strong>The pre-1982 data gap.</strong> Most backtests begin in 1987 or later, after the Volcker-era rate normalization had concluded. The 1970s stagflation period, during which both stocks and long bonds delivered poor real returns simultaneously for years at a time, is absent from the primary backtest window.</p>
 
-          <p><strong>Both instruments are 3x leveraged.</strong> Unlike a conventional 60/40 allocation where bonds are a lower-volatility stabilizer, here the bond position amplifies losses at 3x. A significant rise in long-term interest rates does not produce a modest bond decline — it produces a large <span class="ticker">TMF</span> loss, compounded by volatility decay from the daily reset.</p>
+          <p><strong>Both instruments are 3x leveraged.</strong> Unlike a conventional 60/40 allocation where bonds are a lower-volatility stabilizer, here the bond position amplifies losses at 3x. A significant rise in long-term interest rates does not produce a modest bond decline; it produces a large <span class="ticker">TMF</span> loss, compounded by volatility decay from the daily reset.</p>
 
           <p><strong>Long-duration Treasury sensitivity.</strong> <span class="ticker">TMF</span> tracks the ICE U.S. Treasury 20+ Year Bond Index. Long-duration bonds are among the most interest-rate-sensitive instruments available. A 1% sustained increase in long-term rates produces a proportionally large price decline in 20+ year bonds, then tripled.</p>
 

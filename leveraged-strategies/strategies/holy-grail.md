@@ -1,4 +1,4 @@
-# Holy Grail — Content Source
+# Holy Grail: Content Source
 
 **Strategy:** The Holy Grail
 **Rebalancing cadence:** Event-driven (rebalances when conditions change) with 5% drift corridor
@@ -8,14 +8,14 @@
 **Source file for:** holy-grail.html
 
 **⚠ Corrections for HTML port:**
-- The current hero badge says "Rules-Based Allocation" — acceptable but should clarify it's event-driven, not periodic
+- The current hero badge says "Rules-Based Allocation"; acceptable but should clarify it's event-driven, not periodic
 - The current lead paragraph mentions TMF as an inverse-correlated asset. **TMF is not used in this strategy.** The instruments are UVXY, TECL, SOXL, SQQQ, and BSV. Remove TMF from the lead.
 - The Composer JSON confirms this is a copy of the original ("The Holy Grail (Invest Copy)"). Attribution to the original creator is unknown from available sources.
 
-<!-- RESEARCH SOURCES — internal reference only, do not port to HTML -->
-- https://app.composer.trade/symphony/VPVpD1SoqR5ykVu4NdWS/factsheet?tab=backtest (Composer.trade factsheet for this symphony — requires authentication; factsheet performance data not retrieved; JSON pasted by user contains full decision tree)
-- https://www.reddit.com/user/derecknielsen/comments/yorwm0/educating_you_on_how_my_algo_tqqq_for_the_long/ (TQQQ FTLT original post — structural basis; Holy Grail is a close variant of derecknielsen's approach with key modifications)
-- https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2741701 (Michael Gayed & Charles Bilello, "Leverage for the Long Run" — academic basis for SMA-gated leverage used by both TQQQ FTLT and the Holy Grail)
+<!-- RESEARCH SOURCES: internal reference only, do not port to HTML -->
+- https://app.composer.trade/symphony/VPVpD1SoqR5ykVu4NdWS/factsheet?tab=backtest (Composer.trade factsheet for this symphony: requires authentication; factsheet performance data not retrieved; JSON pasted by user contains full decision tree)
+- https://www.reddit.com/user/derecknielsen/comments/yorwm0/educating_you_on_how_my_algo_tqqq_for_the_long/ (TQQQ FTLT original post: structural basis; Holy Grail is a close variant of derecknielsen's approach with key modifications)
+- https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2741701 (Michael Gayed & Charles Bilello, "Leverage for the Long Run": academic basis for SMA-gated leverage used by both TQQQ FTLT and the Holy Grail)
 - https://www.cxoadvisory.com/volatility-effects/leveraging-the-u-s-stock-market-based-on-sma-rules/ (CXO Advisory review of the Gayed/Bilello paper; SMA-based leverage performance data)
 - https://the7circles.uk/leverage-for-the-long-run/ (The7Circles analysis of Leverage for the Long Run; regime logic and drawdown comparison)
 <!-- END RESEARCH SOURCES -->
@@ -24,15 +24,15 @@
 
 ## Overview
 
-The Holy Grail is a rules-based algorithmic strategy that uses TQQQ's own 200-day simple moving average to detect bull and bear market regimes, then rotates among leveraged long ETFs, a volatility instrument, inverse ETFs, and short-term bonds depending on current conditions. The strategy rebalances event-driven — only when a condition changes — rather than on a fixed daily or weekly schedule.
+The Holy Grail is a rules-based algorithmic strategy that uses TQQQ's own 200-day simple moving average to detect bull and bear market regimes, then rotates among leveraged long ETFs, a volatility instrument, inverse ETFs, and short-term bonds depending on current conditions. The strategy rebalances event-driven (only when a condition changes) rather than on a fixed daily or weekly schedule.
 
-The strategy is closely related to TQQQ For The Long Term (TQQQ FTLT) and shares its conceptual foundation: using the 200-day SMA to gate leverage exposure and 10-day RSI to identify mean reversion opportunities within each regime. Both draw from Michael Gayed's and Charles Bilello's 2015 paper *Leverage for the Long Run* (SSRN #2741701), which showed that applying leverage only when the S&P 500 is above its 200-day moving average — and moving to safety below it — produced improved Sharpe ratios and lower maximum drawdowns versus constant-leverage buy-and-hold over an 87-year backtest.
+The strategy is closely related to TQQQ For The Long Term (TQQQ FTLT) and shares its conceptual foundation: using the 200-day SMA to gate leverage exposure and 10-day RSI to identify mean reversion opportunities within each regime. Both draw from Michael Gayed's and Charles Bilello's 2015 paper *Leverage for the Long Run* (SSRN #2741701), which showed that applying leverage only when the S&P 500 is above its 200-day moving average (and moving to safety below it) produced improved Sharpe ratios and lower maximum drawdowns versus constant-leverage buy-and-hold over an 87-year backtest.
 
 The Holy Grail's key differences from TQQQ FTLT:
 
-1. **Primary regime signal uses TQQQ's own 200D SMA** — not SPY's. Because TQQQ is a 3x leveraged instrument that amplifies every Nasdaq-100 move, TQQQ's 200D SMA is crossed more frequently than SPY's. This makes regime detection faster but also more prone to whipsawing near the boundary.
+1. **Primary regime signal uses TQQQ's own 200D SMA**, not SPY's. Because TQQQ is a 3x leveraged instrument that amplifies every Nasdaq-100 move, TQQQ's 200D SMA is crossed more frequently than SPY's. This makes regime detection faster but also more prone to whipsawing near the boundary.
 
-2. **Bull regime is 80% TQQQ + 20% implicit cash** — TQQQ FTLT is 100% in bull mode. The 20% cash buffer is a structural feature that reduces bull-market drawdown slightly at the cost of some upside.
+2. **Bull regime is 80% TQQQ + 20% implicit cash**. TQQQ FTLT is 100% in bull mode. The 20% cash buffer is a structural feature that reduces bull-market drawdown slightly at the cost of some upside.
 
 3. **Bear regime adds SOXL** (Direxion Daily Semiconductor Bull 3x) as a mean reversion signal. When the semiconductor sector is oversold on a 10-day RSI basis within a bear market, the strategy rotates into SOXL for the expected mean reversion bounce. This sector-specific layer is not present in TQQQ FTLT.
 
@@ -73,7 +73,7 @@ The Composer symphony is titled "The Holy Grail (Invest Copy)" indicating this i
 
 **Decision tree (evaluated on condition change + 5% drift):**
 
-**Step 1 — Primary regime: TQQQ vs. its 200D SMA**
+**Step 1, Primary regime: TQQQ vs. its 200D SMA**
 
 | Condition | Regime |
 |-----------|--------|
@@ -112,9 +112,9 @@ No public factsheet data was retrievable (Composer requires authentication). The
 
 **Structural performance properties:**
 
-The 20% cash buffer in the bull regime acts as a partial dampener on bull-market returns. In a strong TQQQ rally, the strategy captures only 80% of the gain (plus any UVXY trade when the overbought signal fires). In exchange, the cash buffer reduces the drawdown when the bull regime ends — at the point TQQQ crosses below its 200D SMA, 20% of the portfolio is already in cash and not exposed.
+The 20% cash buffer in the bull regime acts as a partial dampener on bull-market returns. In a strong TQQQ rally, the strategy captures only 80% of the gain (plus any UVXY trade when the overbought signal fires). In exchange, the cash buffer reduces the drawdown when the bull regime ends: at the point TQQQ crosses below its 200D SMA, 20% of the portfolio is already in cash and not exposed.
 
-The SOXL mean reversion layer adds a sector-specific entry point not present in TQQQ FTLT. Semiconductor stocks are among the most volatile major sector constituents of the Nasdaq-100. When SOXL's 10D RSI drops below 30 within a bear market, the strategy treats this as an extreme short-term oversold condition and takes a 3x leveraged position in semiconductors to capture the expected mean reversion. This is a high-variance bet — SOXL can recover 15-30% in days after an extreme selloff, but it can also continue declining.
+The SOXL mean reversion layer adds a sector-specific entry point not present in TQQQ FTLT. Semiconductor stocks are among the most volatile major sector constituents of the Nasdaq-100. When SOXL's 10D RSI drops below 30 within a bear market, the strategy treats this as an extreme short-term oversold condition and takes a 3x leveraged position in semiconductors to capture the expected mean reversion. This is a high-variance bet: SOXL can recover 15-30% in days after an extreme selloff, but it can also continue declining.
 
 **Comparison to the TQQQ FTLT structural properties:**
 
@@ -127,7 +127,7 @@ The SOXL mean reversion layer adds a sector-specific entry point not present in 
 | Rebalancing | Daily | Event-driven + 5% corridor |
 | Additional signals | SPXL RSI, SPY RSI | SOXL RSI |
 
-**Academic basis — Leverage for the Long Run (Gayed & Bilello, 2015):**
+**Academic basis: Leverage for the Long Run (Gayed & Bilello, 2015):**
 The underlying regime-switching framework was validated over 87 years (October 1928 to October 2015):
 - Above 200D SMA: +14.1% annualized return, 14.7% volatility
 - Below 200D SMA: −2.3% annualized return, 26.5% volatility
@@ -146,9 +146,9 @@ These figures are for the Gayed/Bilello LRS using S&P 500 + leverage/cash. The H
 
 **The 20% cash buffer in bull mode has a real cost.** Holding 20% cash while TQQQ is in a sustained bull phase means the strategy underperforms a fully-invested TQQQ position by approximately 20% of TQQQ's gain per period. In the 2020–2021 TQQQ run of several hundred percent, a 20% cash drag was a material cost. This is a deliberate design choice trading upside for downside protection; investors should understand it as a feature, not an accident.
 
-**UVXY is an extreme-risk instrument.** The overbought-into-UVXY rotation (TQQQ RSI > 79 → buy UVXY) is a high-variance short-duration trade. UVXY tracks 1.5x short-term VIX futures, which have a structural decay from futures roll costs in normal markets. A correct signal captures a large volatility spike within days. An incorrect signal — TQQQ's RSI cools without a volatility spike — results in a rapid UVXY loss. The strategy holds UVXY only for the duration of the overbought condition, not as a long-term position.
+**UVXY is an extreme-risk instrument.** The overbought-into-UVXY rotation (TQQQ RSI > 79 → buy UVXY) is a high-variance short-duration trade. UVXY tracks 1.5x short-term VIX futures, which have a structural decay from futures roll costs in normal markets. A correct signal captures a large volatility spike within days. An incorrect signal (TQQQ's RSI cools without a volatility spike) results in a rapid UVXY loss. The strategy holds UVXY only for the duration of the overbought condition, not as a long-term position.
 
-**SOXL mean reversion carries amplified risk within a bear market.** Buying SOXL (3x semiconductors) when its 10D RSI drops below 30 within a period when TQQQ is already below its 200D SMA is a counter-trend trade using 3x leverage. If the semiconductor downturn is fundamental rather than technical — as it was during parts of 2022 and 2023 — the mean reversion signal can generate large losses before any recovery materializes. SOXL has historically experienced drawdowns exceeding 90%.
+**SOXL mean reversion carries amplified risk within a bear market.** Buying SOXL (3x semiconductors) when its 10D RSI drops below 30 within a period when TQQQ is already below its 200D SMA is a counter-trend trade using 3x leverage. If the semiconductor downturn is fundamental rather than technical (as it was during parts of 2022 and 2023), the mean reversion signal can generate large losses before any recovery materializes. SOXL has historically experienced drawdowns exceeding 90%.
 
 **Event-driven rebalancing does not eliminate lag at regime changes.** Although the strategy rebalances whenever a condition changes, there is an inherent lag between the moment a regime change becomes meaningful and the moment the signal fires. TQQQ can fall significantly below its 200D SMA before the bull-to-bear transition is acted on. The 5% corridor threshold adds additional lag.
 
@@ -162,10 +162,10 @@ These figures are for the Gayed/Bilello LRS using S&P 500 + leverage/cash. The H
 
 ## Resources
 
-**Composer.trade symphony** — ID `VPVpD1SoqR5ykVu4NdWS`: The published implementation ("The Holy Grail (Invest Copy)"). Can be viewed and cloned on Composer.trade. The Composer platform handles daily condition evaluation and event-driven execution.
+**Composer.trade symphony**: ID `VPVpD1SoqR5ykVu4NdWS`: The published implementation ("The Holy Grail (Invest Copy)"). Can be viewed and cloned on Composer.trade. The Composer platform handles daily condition evaluation and event-driven execution.
 
-**TQQQ For The Long Term** — u/derecknielsen (Reddit, October 2022): The structural predecessor strategy that introduced the SPY 200D SMA + 10D RSI framework on which the Holy Grail is a variant. See `strategies/tqqq-ftlt.md` for the full TQQQ FTLT documentation.
+**TQQQ For The Long Term**: u/derecknielsen (Reddit, October 2022): The structural predecessor strategy that introduced the SPY 200D SMA + 10D RSI framework on which the Holy Grail is a variant. See `strategies/tqqq-ftlt.md` for the full TQQQ FTLT documentation.
 
-**"Leverage for the Long Run"** — Michael Gayed & Charles Bilello (2015, SSRN #2741701): The academic paper providing the theoretical basis for 200D SMA-gated leverage. Documents the Leverage Rotation Strategy's 87-year backtest and shows why above-SMA environments are systematically better for leveraged exposure than below-SMA environments.
+**"Leverage for the Long Run"**: Michael Gayed & Charles Bilello (2015, SSRN #2741701): The academic paper providing the theoretical basis for 200D SMA-gated leverage. Documents the Leverage Rotation Strategy's 87-year backtest and shows why above-SMA environments are systematically better for leveraged exposure than below-SMA environments.
 
 **CXO Advisory analysis** (cxoadvisory.com): Independent review of the Gayed/Bilello paper with performance metrics and critical notes on backtest friction assumptions.

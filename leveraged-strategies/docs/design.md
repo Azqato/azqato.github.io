@@ -1,4 +1,4 @@
-# DESIGN.md — Leveraged Strategies Site
+# DESIGN.md: Leveraged Strategies Site
 
 **Version:** 1.2
 **Status:** Active

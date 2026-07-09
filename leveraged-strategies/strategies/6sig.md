@@ -1,4 +1,4 @@
-# 6 Sig — Content Source
+# 6 Sig: Content Source
 
 **Strategy:** The 6% Signal (6 Sig)
 **Rebalancing cadence:** Quarterly
@@ -6,7 +6,7 @@
 **Allocation:** 60% stock / 40% bond (base, resets to this after 30 Down phase)
 **Source file for:** 6sig.html
 
-<!-- RESEARCH SOURCES — internal reference only, do not port to HTML -->
+<!-- RESEARCH SOURCES: internal reference only, do not port to HTML -->
 - https://jasonkelly.com/resources/strategies/ (comparison of 3 Sig, 6 Sig, and 9 Sig; fund selections and allocation details for 6 Sig)
 - https://jasonkelly.com/2017/01/how-my-signal-system-works/ (signal line calculation mechanics; applies equally to all three plans)
 - https://jasonkelly.com/2017/02/how-to-use-leveraged-etfs/ (Kelly's rationale for using 2x and 3x leverage in the signal system)
@@ -25,11 +25,11 @@
 
 The 6% Signal (6 Sig) is the middle tier of Jason Kelly's Signal plan family. It applies the same quarterly value-averaging mechanics as 3 Sig but uses a 2x leveraged midcap ETF as the stock position and targets 6% quarterly growth instead of 3%.
 
-The three Signal plans form a family based on leverage multiplier. The quarterly target is always 3% times the fund's leverage ratio: 3% × 1 = 3% for 3 Sig (unleveraged), 3% × 2 = 6% for 6 Sig (2x), and 3% × 3 = 9% for 9 Sig (3x). The mechanics — signal line calculation, quarterly buy/sell execution, cash contribution routing, and the 30 Down Rule structure — are identical across all three plans. Only the fund, the target percentage, and the specific 30 Down parameters differ.
+The three Signal plans form a family based on leverage multiplier. The quarterly target is always 3% times the fund's leverage ratio: 3% × 1 = 3% for 3 Sig (unleveraged), 3% × 2 = 6% for 6 Sig (2x), and 3% × 3 = 9% for 9 Sig (3x). The mechanics (signal line calculation, quarterly buy/sell execution, cash contribution routing, and the 30 Down Rule structure) are identical across all three plans. Only the fund, the target percentage, and the specific 30 Down parameters differ.
 
 6 Sig occupies the middle ground in the family: more return potential than 3 Sig's unleveraged SPY or IJR, but with lower maximum drawdown and less bond buffer depletion risk than 9 Sig's 3x TQQQ. In practice, 2x leverage still produces substantially amplified losses during bear markets compared to 3 Sig.
 
-**Stock fund:** MVV — the ProShares Ultra MidCap400 ETF, which delivers approximately 2x the daily return of the S&P MidCap 400 Index. The midcap index is used rather than large-cap because it exhibits higher volatility, creating larger buy-low and sell-high opportunities within the quarterly cycle. This follows the same logic as 3 Sig's selection of small-cap IJR: more price movement generates more useful signal events.
+**Stock fund:** MVV, the ProShares Ultra MidCap400 ETF, which delivers approximately 2x the daily return of the S&P MidCap 400 Index. The midcap index is used rather than large-cap because it exhibits higher volatility, creating larger buy-low and sell-high opportunities within the quarterly cycle. This follows the same logic as 3 Sig's selection of small-cap IJR: more price movement generates more useful signal events.
 
 The 6 Sig plan is available through The Kelly Letter subscription; there is no standalone book covering it specifically. The *3% Signal* book explains the system's core mechanics, which apply directly to 6 Sig with the fund and target percentage substituted.
 
@@ -113,7 +113,7 @@ Source: BestFolio corrected backtest, real data only (no synthetic pre-ETF data)
 
 **Volatility decay on the stock fund.** MVV resets its leverage ratio daily. In volatile, choppy markets where the midcap index moves up and down without a clear trend, the 2x reset produces a performance drag relative to the simple leveraged position the daily reset implies. Kelly's argument is that the quarterly buy-low/sell-high mechanics partially offset this decay by purchasing MVV after downward moves and selling after upward ones. Whether this offset is sufficient is not established with certainty.
 
-**Bond buffer depletion.** In a sustained bear market lasting multiple quarters, the bond fund is repeatedly drawn down to fund MVV purchases. If the fund runs dry, the plan holds 100% MVV with no buffer remaining. The 40% starting bond allocation gives more initial buffer than 3 Sig's 20% — but the larger quarterly funding requirement (6% target on 2x leverage) depletes it faster when markets are down.
+**Bond buffer depletion.** In a sustained bear market lasting multiple quarters, the bond fund is repeatedly drawn down to fund MVV purchases. If the fund runs dry, the plan holds 100% MVV with no buffer remaining. The 40% starting bond allocation gives more initial buffer than 3 Sig's 20%, but the larger quarterly funding requirement (6% target on 2x leverage) depletes it faster when markets are down.
 
 **Bond fund losses in rising rate environments.** AGG and similar bond ETFs lose value when interest rates rise. In 2022, this created simultaneous losses in both the stock fund and the bond fund, reducing the buffer at the same time equity purchases were being funded. This is the same structural vulnerability as 3 Sig and 9 Sig.
 
@@ -127,10 +127,10 @@ Source: BestFolio corrected backtest, real data only (no synthetic pre-ETF data)
 
 ## Resources
 
-*The 3% Signal* (Jason Kelly, 2015, Plume/Penguin) — the core book explaining the signal system mechanics. While written around 3 Sig, the mechanics apply directly to 6 Sig with MVV substituted as the stock fund and 6% as the quarterly target. ISBN: 978-0142180952.
+*The 3% Signal* (Jason Kelly, 2015, Plume/Penguin): the core book explaining the signal system mechanics. While written around 3 Sig, the mechanics apply directly to 6 Sig with MVV substituted as the stock fund and 6% as the quarterly target. ISBN: 978-0142180952.
 
-The Kelly Letter (jasonkelly.com) — Jason Kelly's subscriber newsletter. Contains official weekly plan status, signal line values, 30 Down Rule state, and all plan updates for 6 Sig.
+The Kelly Letter (jasonkelly.com): Jason Kelly's subscriber newsletter. Contains official weekly plan status, signal line values, 30 Down Rule state, and all plan updates for 6 Sig.
 
-Jason Kelly's strategy overview (jasonkelly.com/resources/strategies/) — free public summary with fund selections for all three Signal plans.
+Jason Kelly's strategy overview (jasonkelly.com/resources/strategies/): free public summary with fund selections for all three Signal plans.
 
-BestFolio corrected backtest (bestfolio.app/blog/kelly-signal-danger-v2) — independent analysis with corrected implementation for all three plans, including 6 Sig's drawdown profile and closed-system risk.
+BestFolio corrected backtest (bestfolio.app/blog/kelly-signal-danger-v2): independent analysis with corrected implementation for all three plans, including 6 Sig's drawdown profile and closed-system risk.

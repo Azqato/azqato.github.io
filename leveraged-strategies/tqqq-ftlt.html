@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TQQQ FTLT — Leveraged Strategies</title>
-  <meta name="description" content="TQQQ For The Long Term — a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ, and TLT. Created by u/derecknielsen (2022).">
+  <title>TQQQ FTLT: Leveraged Strategies</title>
+  <meta name="description" content="TQQQ For The Long Term, a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ, and TLT. Created by u/derecknielsen (2022).">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -94,9 +94,9 @@
 
           <p>The strategy operates on two primary ideas. First, <strong>momentum switching via the 200-day SMA:</strong> the 200-day simple moving average of <span class="ticker">SPY</span> is used as a macro regime detector. When SPY is above its 200D SMA, the market is in a low-volatility trending environment and the strategy takes leveraged long positions. When SPY is below its 200D SMA, the strategy switches to bearish or defensive instruments. Second, <strong>mean reversion via 10-day RSI:</strong> within each regime, the 10-day RSI identifies when individual ETFs are overbought or oversold and takes the opposite-direction position, anticipating a reversion toward the mean.</p>
 
-          <p>This design is directly inspired by Michael Gayed's and Charles Bilello's 2015 academic paper, <em>Leverage for the Long Run</em> (SSRN #2741701), which demonstrated that applying leverage only when the S&amp;P 500 is above its 200-day moving average — and exiting to cash or Treasuries below it — produced a superior Sharpe ratio, reduced maximum drawdown, and higher terminal wealth than constant-leverage buy-and-hold over an 87-year backtest.</p>
+          <p>This design is directly inspired by Michael Gayed's and Charles Bilello's 2015 academic paper, <em>Leverage for the Long Run</em> (SSRN #2741701), which demonstrated that applying leverage only when the S&amp;P 500 is above its 200-day moving average (and exiting to cash or Treasuries below it) produced a superior Sharpe ratio, reduced maximum drawdown, and higher terminal wealth than constant-leverage buy-and-hold over an 87-year backtest.</p>
 
-          <p>u/derecknielsen published the strategy on Composer.trade, a platform for building and running algorithmic trading symphonies. The post attracted extensive community engagement: at least 10 community variants were created and over 900 comments generated in the Composer Discord alone. By October 2022 — approximately four months after the author began running the strategy live — it was up approximately 150% cumulative from the June 2022 start date, a period during which <span class="ticker">TQQQ</span> itself was experiencing a major bear market bottom.</p>
+          <p>u/derecknielsen published the strategy on Composer.trade, a platform for building and running algorithmic trading symphonies. The post attracted extensive community engagement: at least 10 community variants were created and over 900 comments generated in the Composer Discord alone. By October 2022 (approximately four months after the author began running the strategy live), it was up approximately 150% cumulative from the June 2022 start date, a period during which <span class="ticker">TQQQ</span> itself was experiencing a major bear market bottom.</p>
         </section>
 
         <section id="rules" aria-labelledby="rules-heading">
@@ -193,7 +193,7 @@
 
           <h3>Decision tree</h3>
 
-          <p><strong>Step 1 — Macro regime: SPY vs. its 200D SMA</strong></p>
+          <p><strong>Step 1, Macro regime: SPY vs. its 200D SMA</strong></p>
 
           <div class="table-wrap">
             <table>
@@ -333,13 +333,13 @@
             </table>
           </div>
 
-          <p>The backtest window ended at October 2022, near the trough of the 2022 <span class="ticker">TQQQ</span> drawdown of approximately 77%. TQQQ's 10-year buy-and-hold result of +35% reflects ending at the 2022 bear market low — a period that would show a dramatically higher return at a different end date.</p>
+          <p>The backtest window ended at October 2022, near the trough of the 2022 <span class="ticker">TQQQ</span> drawdown of approximately 77%. TQQQ's 10-year buy-and-hold result of +35% reflects ending at the 2022 bear market low, a period that would show a dramatically higher return at a different end date.</p>
 
           <p><strong>Extended community backtest (1970s to present):</strong> A community member stripped the strategy to bare essentials to enable backtesting to the 1970s. Results showed the strategy can perform well in periods of stagflation, high inflation, and Federal Reserve quantitative tightening.</p>
 
           <p><strong>Live tracking from June to October 2022:</strong> The author reports approximately +150% cumulative return over the four-month period following the strategy's June 2022 launch, during a time when <span class="ticker">TQQQ</span> was near its bear market bottom.</p>
 
-          <h3>Academic basis — Leverage for the Long Run (Gayed &amp; Bilello, 2015)</h3>
+          <h3>Academic basis: Leverage for the Long Run (Gayed &amp; Bilello, 2015)</h3>
 
           <p>The paper backtested the Leverage Rotation Strategy (LRS) from October 1928 to October 2015 (87 years):</p>
 
@@ -380,7 +380,7 @@
           <h2 id="risks-heading">Risks and Caveats</h2>
           <div class="callout callout-risk" role="note" aria-label="Risk notice">
             <strong>Leveraged ETF Risk Notice</strong>
-            This strategy rotates among five leveraged instruments: <span class="ticker">TQQQ</span> (3x Nasdaq-100), <span class="ticker">UVXY</span> (1.5x VIX futures), <span class="ticker">TECL</span> (3x technology), <span class="ticker">UPRO</span> (3x S&amp;P 500), and <span class="ticker">SQQQ</span> (&minus;3x Nasdaq-100), plus <span class="ticker">TLT</span>. All leveraged instruments are subject to daily reset and volatility decay. This strategy is not a buy-and-hold position — it is a daily-rebalancing algorithm that may change holdings any trading day conditions change.
+            This strategy rotates among five leveraged instruments: <span class="ticker">TQQQ</span> (3x Nasdaq-100), <span class="ticker">UVXY</span> (1.5x VIX futures), <span class="ticker">TECL</span> (3x technology), <span class="ticker">UPRO</span> (3x S&amp;P 500), and <span class="ticker">SQQQ</span> (&minus;3x Nasdaq-100), plus <span class="ticker">TLT</span>. All leveraged instruments are subject to daily reset and volatility decay. This strategy is not a buy-and-hold position; it is a daily-rebalancing algorithm that may change holdings any trading day conditions change.
           </div>
 
           <p><strong>Daily rebalancing creates compounding transaction costs and tax events.</strong> Unlike the quarterly-rebalancing Kelly Signal plans, TQQQ FTLT checks conditions every trading day. In a volatile, choppy market near the 200D SMA, this can produce daily whipsaws with high transaction frequency. In a taxable account, each rotation generates a capital gains event.</p>
@@ -397,21 +397,21 @@
 
           <p><strong>Community evolutions vary significantly.</strong> At least 10 variations of the strategy were circulating in the Composer Discord within weeks of publication. Variations may differ in RSI thresholds, instrument substitutions, leverage levels, and regime definitions. Performance of any specific variant may differ materially from the original.</p>
 
-          <p><strong>Backtest survivorship and regime dependency.</strong> The academic foundation (Gayed &amp; Bilello) used October 1928 as its start date, beginning just before the Great Depression — a period where the 200D SMA's protective effect was extreme. CXO Advisory notes this start date biases the results toward the SMA's best historical performance.</p>
+          <p><strong>Backtest survivorship and regime dependency.</strong> The academic foundation (Gayed &amp; Bilello) used October 1928 as its start date, beginning just before the Great Depression, a period where the 200D SMA's protective effect was extreme. CXO Advisory notes this start date biases the results toward the SMA's best historical performance.</p>
         </section>
 
         <section id="resources" aria-labelledby="resources-heading">
           <h2 id="resources-heading">Resources</h2>
 
-          <p><strong>Original strategy post</strong> — u/derecknielsen (Reddit, October 2022): The complete explanation of the strategy design, decision tree, performance claims, and community evolution history.</p>
+          <p><strong>Original strategy post</strong>: u/derecknielsen (Reddit, October 2022): The complete explanation of the strategy design, decision tree, performance claims, and community evolution history.</p>
 
-          <p><strong>Composer.trade symphony</strong> — ID <code>ovM8FTJXYZX1uFmh0vRI</code>: The canonical published implementation. The symphony can be cloned and run on Composer.trade. The JSON contains the full decision tree.</p>
+          <p><strong>Composer.trade symphony</strong>: ID <code>ovM8FTJXYZX1uFmh0vRI</code>: The canonical published implementation. The symphony can be cloned and run on Composer.trade. The JSON contains the full decision tree.</p>
 
-          <p><strong>"Leverage for the Long Run"</strong> — Michael Gayed &amp; Charles Bilello (2015, SSRN #2741701): The academic paper providing the theoretical foundation for SMA-gated leverage. Documents the Leverage Rotation Strategy's 87-year backtest.</p>
+          <p><strong>"Leverage for the Long Run"</strong>: Michael Gayed &amp; Charles Bilello (2015, SSRN #2741701): The academic paper providing the theoretical foundation for SMA-gated leverage. Documents the Leverage Rotation Strategy's 87-year backtest.</p>
 
-          <p><strong>CXO Advisory</strong> — Independent review of the Gayed/Bilello paper with corrected performance metrics and critical notes on backtest friction assumptions.</p>
+          <p><strong>CXO Advisory</strong>: Independent review of the Gayed/Bilello paper with corrected performance metrics and critical notes on backtest friction assumptions.</p>
 
-          <p><strong>The7Circles</strong> — Extended discussion of the LRS regime logic, drawdown profiles, and volatility regime theory.</p>
+          <p><strong>The7Circles</strong>: Extended discussion of the LRS regime logic, drawdown profiles, and volatility regime theory.</p>
         </section>
 
       </main>

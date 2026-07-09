@@ -1,4 +1,4 @@
-# 9 Sig — Content Source
+# 9 Sig: Content Source
 
 **Strategy:** The 9% Signal (9 Sig)
 **Rebalancing cadence:** Quarterly
@@ -6,7 +6,7 @@
 **Allocation:** 60% TQQQ / 40% bonds (base, also reset target after 30 Down phase)
 **Source file for:** 9sig.html
 
-<!-- RESEARCH SOURCES — internal reference only, do not port to HTML -->
+<!-- RESEARCH SOURCES: internal reference only, do not port to HTML -->
 - https://jasonkelly.com/resources/strategies/ (official plan family overview; 9 Sig fund confirmed as TQQQ + AGG, 60/40 base)
 - https://jasonkelly.com/2017/01/how-my-signal-system-works/ (core signal mechanics; applies to all three plans)
 - https://jasonkelly.com/2017/02/how-to-use-leveraged-etfs/ (Kelly's rationale for using 3x leverage in 9 Sig)
@@ -23,11 +23,11 @@
 
 ## Overview
 
-The 9% Signal (9 Sig) is the most aggressive tier of Jason Kelly's Signal plan family. It pairs TQQQ — the ProShares UltraPro QQQ 3x leveraged Nasdaq-100 ETF — with a bond fund and rebalances quarterly to a 9% quarterly growth target.
+The 9% Signal (9 Sig) is the most aggressive tier of Jason Kelly's Signal plan family. It pairs TQQQ (the ProShares UltraPro QQQ 3x leveraged Nasdaq-100 ETF) with a bond fund and rebalances quarterly to a 9% quarterly growth target.
 
 The plan belongs to a three-tier family based on leverage multiplier. The quarterly target scales with the fund's leverage ratio: 3% × 1x (unleveraged, 3 Sig), 3% × 2x (6 Sig), 3% × 3x (9 Sig). The 9% target derives from the Nasdaq-100's historical annual return of approximately 12–14%, which corresponds to roughly 3% per quarter. Applied to a 3x leveraged fund, the equivalent quarterly target is 9%.
 
-The core mechanics — value averaging, signal line calculation, quarterly execution, and the 30 Down Rule — are the same across all three plans. The differences are the fund used, the quarterly target percentage, the 30 Down Rule's ignore count, and some additional safeguards unique to 9 Sig that manage the extreme volatility of 3x leverage.
+The core mechanics (value averaging, signal line calculation, quarterly execution, and the 30 Down Rule) are the same across all three plans. The differences are the fund used, the quarterly target percentage, the 30 Down Rule's ignore count, and some additional safeguards unique to 9 Sig that manage the extreme volatility of 3x leverage.
 
 The system is described as purely reactive: there are no forecasts, no market timing decisions, and no macroeconomic analysis. Each quarter, the investor compares the current TQQQ balance to a target balance that grows at 9% per quarter. If below target, buy. If above target, sell the excess. The bond fund serves as the reserve for purchases and the destination for profits.
 
@@ -44,7 +44,7 @@ Jason Kelly created 9 Sig as an extension of the 3 Sig system he introduced in h
 | Stock fund | TQQQ (ProShares UltraPro QQQ, 3x Nasdaq-100) | 60% |
 | Bond fund | AGG (or cash equivalents: SGOV, USFR, SPAXX, BOXX) | 40% |
 
-The 60/40 allocation is both the starting position and the allocation to which the plan resets after the 30 Down phase ends. During normal operation, the actual ratio drifts continuously — it has ranged historically as high as 99% TQQQ and as low as approximately 50% TQQQ depending on market conditions.
+The 60/40 allocation is both the starting position and the allocation to which the plan resets after the 30 Down phase ends. During normal operation, the actual ratio drifts continuously: it has ranged historically as high as 99% TQQQ and as low as approximately 50% TQQQ depending on market conditions.
 
 The official plan uses AGG (iShares Core U.S. Aggregate Bond ETF) as the bond fund. Community practitioners often substitute short-term Treasury ETFs (SGOV, TBLL), money market funds (SPAXX), or other stable instruments to avoid the interest rate sensitivity of intermediate-term bond funds.
 
@@ -80,7 +80,7 @@ This rule books profits during extreme bull-market spikes and rebuilds the bond 
 
 **30 Down Rule:**
 
-The 30 Down Rule activates when TQQQ's quarterly closing price falls at least 30% below its quarterly closing price high within the rolling past two years. Only quarterly closing prices are monitored — intra-quarter prices do not trigger the rule.
+The 30 Down Rule activates when TQQQ's quarterly closing price falls at least 30% below its quarterly closing price high within the rolling past two years. Only quarterly closing prices are monitored; intra-quarter prices do not trigger the rule.
 
 When active:
 - The next **2 sell signals are ignored**
@@ -130,7 +130,7 @@ This window (2010–2026) is almost entirely within an exceptionally favorable p
   - Median outcome: −98% maximum drawdown with 7.7x terminal multiple
   - Worst 5%: effectively total loss
   - Best 5%: −82% drawdown with 3,665x terminal multiple
-- The −99.73% closed-system drawdown in an extended synthetic dot-com scenario "is not a tail event — it is essentially the median" without ongoing contributions
+- The −99.73% closed-system drawdown in an extended synthetic dot-com scenario "is not a tail event; it is essentially the median" without ongoing contributions
 
 **Plan family comparison (BestFolio corrected backtest):**
 
@@ -148,7 +148,7 @@ This window (2010–2026) is almost entirely within an exceptionally favorable p
 
 **The plan is not viable as a closed system without ongoing contributions.** The most important structural risk of 9 Sig is that the strategy is designed for investors who continuously add new cash. Regular contributions refill the bond buffer after bear market draw-downs, raise the signal line, and sustain the buy-low mechanic. Without contributions, a severe and extended bear market exhausts the bond fund. At that point the plan holds 100% TQQQ at a depressed price with nothing left to buy further dips. The dot-com simulation shows this can result in 18–20 years to break even. Any investor with a fixed lump-sum and no future contributions should understand this risk clearly before starting 9 Sig.
 
-**3x leverage amplifies losses at a non-linear rate.** TQQQ resets its 3x leverage ratio daily. A 50% decline in the Nasdaq-100 does not produce a 150% loss in TQQQ — it produces a near-total wipeout due to daily compounding of amplified moves. In the 2022 bear market, TQQQ declined approximately 77% from its peak. Recovering a 77% loss requires a 335% gain in the fund.
+**3x leverage amplifies losses at a non-linear rate.** TQQQ resets its 3x leverage ratio daily. A 50% decline in the Nasdaq-100 does not produce a 150% loss in TQQQ; it produces a near-total wipeout due to daily compounding of amplified moves. In the 2022 bear market, TQQQ declined approximately 77% from its peak. Recovering a 77% loss requires a 335% gain in the fund.
 
 **Bond buffer depletion.** In 2022, the 9 Sig plan exhausted its bond buffer mid-year. With no bonds remaining, every subsequent buy signal went unfunded. The plan held 100% TQQQ through the rest of 2022 and into 2023, with no ability to buy at the lows and no buffer against continued decline. This is the plan's most dangerous state, and it occurred in a real live account within a few years of the plan's public documentation.
 
@@ -166,10 +166,10 @@ This window (2010–2026) is almost entirely within an exceptionally favorable p
 
 ## Resources
 
-*The 3% Signal* (Jason Kelly, 2015, Plume/Penguin) — covers the core signal mechanics in detail via the unleveraged 3 Sig plan; these apply directly to 9 Sig with TQQQ and the 9% target substituted. ISBN: 978-0142180952.
+*The 3% Signal* (Jason Kelly, 2015, Plume/Penguin): covers the core signal mechanics in detail via the unleveraged 3 Sig plan; these apply directly to 9 Sig with TQQQ and the 9% target substituted. ISBN: 978-0142180952.
 
-The Kelly Letter (jasonkelly.com) — Jason Kelly's subscriber newsletter. Contains the official weekly plan status, current TQQQ signal line value, 30 Down Rule state, and all plan rules including the Spike Reset and 90% throttle that are not publicly documented elsewhere.
+The Kelly Letter (jasonkelly.com): Jason Kelly's subscriber newsletter. Contains the official weekly plan status, current TQQQ signal line value, 30 Down Rule state, and all plan rules including the Spike Reset and 90% throttle that are not publicly documented elsewhere.
 
-Jason Kelly's strategy overview (jasonkelly.com/resources/strategies/) — free public summary of all three plans.
+Jason Kelly's strategy overview (jasonkelly.com/resources/strategies/): free public summary of all three plans.
 
-BestFolio corrected backtest (bestfolio.app/blog/kelly-signal-danger-v2) — independent analysis with corrected implementation across all three plans; includes 9 Sig's closed-system stress test and the five simulation errors present in prior community tools.
+BestFolio corrected backtest (bestfolio.app/blog/kelly-signal-danger-v2): independent analysis with corrected implementation across all three plans; includes 9 Sig's closed-system stress test and the five simulation errors present in prior community tools.

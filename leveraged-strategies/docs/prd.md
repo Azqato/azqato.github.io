@@ -1,4 +1,4 @@
-# PRD.md — Leveraged Strategies Site
+# PRD.md: Leveraged Strategies Site
 
 **Version:** 1.4
 **Status:** Active
@@ -91,7 +91,7 @@ When a strategy page requires external research, the URLs used must be stored in
 **Format:**
 
 ```markdown
-<!-- RESEARCH SOURCES — internal reference only, do not port to HTML -->
+<!-- RESEARCH SOURCES: internal reference only, do not port to HTML -->
 - https://example.com/article (description of what this source covers)
 <!-- END RESEARCH SOURCES -->
 ```
@@ -100,7 +100,7 @@ When a strategy page requires external research, the URLs used must be stored in
 
 1. The block is placed at the top of the file, immediately after the frontmatter metadata fields
 2. Each line inside the block is one URL with a parenthetical note on what that source contributed
-3. When porting content from `.md` to `.html`, the `<!-- RESEARCH SOURCES -->` block and everything inside it is omitted entirely — it never appears in any HTML file
+3. When porting content from `.md` to `.html`, the `<!-- RESEARCH SOURCES -->` block and everything inside it is omitted entirely; it never appears in any HTML file
 4. If additional sources are discovered later, they are added to the block in the `.md` file
 
 This convention ensures research sources are preserved with the content without being exposed in the public-facing website.

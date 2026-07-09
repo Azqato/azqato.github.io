@@ -1,5 +1,5 @@
 /* ============================================================
-   :root — Design tokens
+   :root: Design tokens
    ============================================================ */
 :root {
   --color-bg: #0d1117;
@@ -222,7 +222,7 @@ main {
   line-height: 1.5;
 }
 
-/* Top bar — mobile only, hidden on desktop */
+/* Top bar (mobile only, hidden on desktop) */
 .top-bar {
   display: none;
   position: sticky;

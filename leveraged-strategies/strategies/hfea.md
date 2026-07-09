@@ -1,4 +1,4 @@
-# HFEA — Content Source
+# HFEA: Content Source
 
 **Strategy:** Hedgefundie's Excellent Adventure (HFEA)
 **Rebalancing cadence:** Quarterly
@@ -6,13 +6,13 @@
 **Allocation:** 55% UPRO / 45% TMF (current); originally 40% UPRO / 60% TMF
 **Source file for:** hfea.html
 
-<!-- RESEARCH SOURCES — internal reference only, do not port to HTML -->
+<!-- RESEARCH SOURCES: internal reference only, do not port to HTML -->
 - https://hfea.neocities.org/ (community tracker and variant documentation)
-- https://www.bogleheads.org/forum/viewtopic.php?f=10&t=272007 (Thread 1, Feb 2019 — original proposal by Hedgefundie, 40/60 allocation, full theoretical basis, backtest data)
-- https://www.bogleheads.org/forum/viewtopic.php?f=10&t=288192 (Thread 2, Aug 2019 — revised to 55/45, continued live tracking)
+- https://www.bogleheads.org/forum/viewtopic.php?f=10&t=272007 (Thread 1, Feb 2019: original proposal by Hedgefundie, 40/60 allocation, full theoretical basis, backtest data)
+- https://www.bogleheads.org/forum/viewtopic.php?f=10&t=288192 (Thread 2, Aug 2019: revised to 55/45, continued live tracking)
 - https://www.optimizedportfolio.com/hedgefundie-adventure/ (performance tracking, variant analysis, 2022 drawdown documentation)
 - https://the7circles.uk/hedgefundies-excellent-adventure/ (independent analysis and UK-perspective writeup)
-- https://app.composer.trade/symphony/Cjb5ysKtJsPv6Tm3Fk0R/factsheet?tab=structure (Composer.trade symphony: "HFEA The Resurrection" by u/derecknielsen — regime-adaptive variant using SPY 200D SMA + TLT 400D SMA to switch between TMF and TMV; quarterly rebalancing)
+- https://app.composer.trade/symphony/Cjb5ysKtJsPv6Tm3Fk0R/factsheet?tab=structure (Composer.trade symphony: "HFEA The Resurrection" by u/derecknielsen: regime-adaptive variant using SPY 200D SMA + TLT 400D SMA to switch between TMF and TMV; quarterly rebalancing)
 <!-- END RESEARCH SOURCES -->
 
 ---
@@ -74,7 +74,7 @@ Borrowing costs are paid to swap counterparties (major investment banks) above t
 | Monthly rebalancing | 55% UPRO / 45% TMF | Same weights, higher frequency |
 | Threshold-based | 55% UPRO / 45% TMF | Rebalances only when either position drifts beyond a defined band |
 
-**Regime-adaptive variant — "HFEA The Resurrection" (Composer, u/derecknielsen):**
+**Regime-adaptive variant: "HFEA The Resurrection" (Composer, u/derecknielsen):**
 
 A Composer.trade implementation that adds a two-factor regime-switching model on top of the static HFEA allocation. It rebalances quarterly and uses two moving average signals to detect the macro environment: SPY vs. its 200-day SMA for the equity trend, and TLT vs. its 400-day SMA for the interest rate environment.
 
@@ -85,7 +85,7 @@ A Composer.trade implementation that adds a two-factor regime-switching model on
 | SPY < 200D SMA | TLT > 400D SMA | 55% UPRO / 45% TMF | Bear market, normal inflation |
 | SPY < 200D SMA | TLT < 400D SMA | 20% UPRO / 80% TMV | Bear market, high inflation |
 
-TMV (Direxion Daily 20+ Year Treasury Bear 3x Shares) replaces TMF when TLT is below its 400-day SMA, converting the long-bond position to a short-bond position. The 400-day TLT lookback is intentionally longer than the standard 200-day to avoid false triggers from temporary bond dips within a sustained rising-rate trend. In the high-inflation bear scenario, UPRO is reduced to 20% with 80% TMV — a defensive positioning that would have substantially reduced the 2022 drawdown.
+TMV (Direxion Daily 20+ Year Treasury Bear 3x Shares) replaces TMF when TLT is below its 400-day SMA, converting the long-bond position to a short-bond position. The 400-day TLT lookback is intentionally longer than the standard 200-day to avoid false triggers from temporary bond dips within a sustained rising-rate trend. In the high-inflation bear scenario, UPRO is reduced to 20% with 80% TMV, a defensive positioning that would have substantially reduced the 2022 drawdown.
 
 Composer symphony ID: `Cjb5ysKtJsPv6Tm3Fk0R`
 
@@ -140,7 +140,7 @@ The January to October 2022 drawdown was approximately 65% from peak. By April 2
 
 **The pre-1982 data gap.** Most backtests begin in 1987 or later, after the Volcker-era rate normalization had concluded. The 1970s stagflation period, during which both stocks and long bonds delivered poor real returns simultaneously for years at a time, is absent from the primary backtest window. The 1968-2018 simulation showed more modest but still positive outcomes; however, the quality of pre-1987 simulated data for a 3x leveraged instrument is lower.
 
-**Both instruments are 3x leveraged.** Unlike a conventional 60/40 allocation where bonds are a lower-volatility stabilizer, here the bond position amplifies losses at 3x. A significant rise in long-term interest rates does not produce a modest bond decline -- it produces a large TMF loss, compounded by volatility decay from the daily reset.
+**Both instruments are 3x leveraged.** Unlike a conventional 60/40 allocation where bonds are a lower-volatility stabilizer, here the bond position amplifies losses at 3x. A significant rise in long-term interest rates does not produce a modest bond decline; it produces a large TMF loss, compounded by volatility decay from the daily reset.
 
 **Long-duration Treasury sensitivity.** TMF tracks the ICE U.S. Treasury 20+ Year Bond Index. Long-duration bonds are among the most interest-rate-sensitive instruments available. A 1% sustained increase in long-term rates produces a proportionally large price decline in 20+ year bonds, then tripled.
 
