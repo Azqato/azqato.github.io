@@ -24,20 +24,20 @@ All colors are defined as CSS custom properties in `:root`.
 
 | Token | Hex | Usage |
 | --- | --- | --- |
-| `--color-bg` | `#0d1117` | Page background |
-| `--color-surface` | `#161b22` | Card and sidebar backgrounds |
-| `--color-border` | `#30363d` | All borders and dividers |
-| `--color-accent` | `#00d4a0` | Primary interactive color: links, active nav, hover borders, copy button |
-| `--color-accent-hover` | `#00e6b0` | Hover state for accent elements |
-| `--color-accent-light` | `rgba(0,212,160,0.08)` | Subtle tinted backgrounds (code block header, copy button hover) |
-| `--color-tag-bg` | `#21262d` | Code block background |
-| `--color-card-hover` | `#1c2128` | Card hover background |
-| `--color-text-primary` | `#eef3f7` | Body copy, headings |
-| `--color-text-secondary` | `#cbdae6` | Subtitles, captions, sidebar inactive links |
-| `--color-positive` | `#3fb950` | Success state (copy button "Copied!" feedback) |
-| `--color-negative` | `#f85149` | Error states (unused at v1.0) |
-| `--color-warning` | `#ffa657` | Caution callouts (unused at v1.0) |
-| `--color-purple` | `#bc8cff` | Gradient accent on card hover top border |
+| `--bg` | `#0d1117` | Page background |
+| `--surface` | `#161b22` | Card and sidebar backgrounds |
+| `--border` | `#30363d` | All borders and dividers |
+| `--accent` | `#00d4a0` | Primary interactive color: links, active nav, hover borders, copy button |
+| `--accent-hover` | `#00e6b0` | Hover state for accent elements |
+| `--accent-light` | `rgba(0,212,160,0.08)` | Subtle tinted backgrounds (code block header, copy button hover) |
+| `--tag-bg` | `#21262d` | Code block background |
+| `--card-hover` | `#1c2128` | Card hover background |
+| `--text` | `#eef3f7` | Body copy, headings |
+| `--text-muted` | `#cbdae6` | Subtitles, captions, sidebar inactive links |
+| `--green` | `#3fb950` | Success state (copy button "Copied!" feedback) |
+| `--negative` | `#f85149` | Error states (unused at v1.0) |
+| `--orange` | `#ffa657` | Caution callouts (unused at v1.0) |
+| `--purple` | `#bc8cff` | Gradient accent on card hover top border |
 
 **Rationale:** The `#00d4a0` teal is the Azqato brand signature across all projects. The dark background palette is drawn from the azqato.github.io design system. Primary text on background passes approximately 15:1 contrast; muted text on background is approximately 4.8:1, meeting WCAG AA.
 
@@ -59,13 +59,13 @@ font-family: 'SF Mono', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
 
 | Role | Size | Weight | Color | Notes |
 | --- | --- | --- | --- | --- |
-| H1 (page title) | 1.875rem | 700 | `--color-text-primary` | Letter-spacing -0.3px |
-| H2 (section title) | 1.375rem | 700 | `--color-text-primary` | Has `::before` vertical accent bar |
-| H3 (subsection) | 1.0625rem | 600 | `--color-text-primary` | |
-| Body | 1rem | 400 | `--color-text-primary` | Line height 1.6 |
-| Lead / description | 1rem | 400 | `--color-text-secondary` | Line height 1.65 |
-| Caption / meta | 0.78rem | 400 | `--color-text-secondary` | |
-| Code / prompt text | 0.875rem | 400 | `--color-text-primary` | Monospace stack, line height 1.6 |
+| H1 (page title) | 1.875rem | 700 | `--text` | Letter-spacing -0.3px |
+| H2 (section title) | 1.375rem | 700 | `--text` | Has `::before` vertical accent bar |
+| H3 (subsection) | 1.0625rem | 600 | `--text` | |
+| Body | 1rem | 400 | `--text` | Line height 1.6 |
+| Lead / description | 1rem | 400 | `--text-muted` | Line height 1.65 |
+| Caption / meta | 0.78rem | 400 | `--text-muted` | |
+| Code / prompt text | 0.875rem | 400 | `--text` | Monospace stack, line height 1.6 |
 
 ---
 
@@ -91,11 +91,11 @@ Persistent on desktop. Contains:
 - No in-page anchor links at v1.0
 
 **Sidebar width:** 220px
-**Sidebar background:** `--color-surface` (`#161b22`)
-**Sidebar border:** 1px solid `--color-border` on the right
-**Active nav link:** `--color-accent` text, 3px left border in accent, weight 600
-**Inactive link color:** `--color-text-secondary`
-**Hover link color:** `--color-text-primary`
+**Sidebar background:** `--surface` (`#161b22`)
+**Sidebar border:** 1px solid `--border` on the right
+**Active nav link:** `--accent` text, 3px left border in accent, weight 600
+**Inactive link color:** `--text-muted`
+**Hover link color:** `--text`
 
 ### Content Area
 
@@ -108,7 +108,7 @@ Persistent on desktop. Contains:
 
 ### Section Heading (h2)
 
-All `h2` elements include a `::before` pseudo-element: a 3px wide, 1.1em tall vertical bar in `--color-accent`, rendered inline via `display: flex; align-items: center; gap: 0.5rem`. This is the signature section delineation from the Azqato portfolio site.
+All `h2` elements include a `::before` pseudo-element: a 3px wide, 1.1em tall vertical bar in `--accent`, rendered inline via `display: flex; align-items: center; gap: 0.5rem`. This is the signature section delineation from the Azqato portfolio site.
 
 ---
 
@@ -116,8 +116,8 @@ All `h2` elements include a `::before` pseudo-element: a 3px wide, 1.1em tall ve
 
 Each prompt page renders three sections in a single-column flow within the content area:
 
-1. **Title block:** `h1` with the prompt name. Below the title, a small meta label (e.g. "Claude Code Prompt") in `--color-text-secondary`, 0.8rem.
-2. **Description block:** One or more paragraphs in body text. Color `--color-text-primary`. Separated from the title by 24px margin.
+1. **Title block:** `h1` with the prompt name. Below the title, a small meta label (e.g. "Claude Code Prompt") in `--text-muted`, 0.8rem.
+2. **Description block:** One or more paragraphs in body text. Color `--text`. Separated from the title by 24px margin.
 3. **Code block:** Full prompt text. See Code Block spec below.
 
 ---
@@ -128,28 +128,28 @@ The code block is the primary UI element on every prompt page.
 
 ```
 Outer wrapper:
-  bg: --color-surface
-  border: 1px solid --color-border
+  bg: --surface
+  border: 1px solid --border
   border-radius: 10px
   overflow: hidden
 
 Header bar (inside wrapper, above pre):
-  bg: --color-tag-bg
-  border-bottom: 1px solid --color-border
+  bg: --tag-bg
+  border-bottom: 1px solid --border
   padding: 10px 16px
   display: flex, justify-content: space-between, align-items: center
-  Left label: "Prompt" in --color-text-secondary, 0.8rem
+  Left label: "Prompt" in --text-muted, 0.8rem
   Right: Copy button (see below)
 
 pre element:
-  bg: --color-tag-bg
+  bg: --tag-bg
   padding: 20px
   overflow-x: auto
   margin: 0
   font-family: monospace stack
   font-size: 0.875rem
   line-height: 1.6
-  color: --color-text-primary
+  color: --text
   white-space: pre-wrap
   word-break: break-word
 ```
@@ -164,21 +164,21 @@ Positioned in the code block header bar, flush right.
 Default state:
   text: "Copy"
   bg: transparent
-  border: 1px solid --color-border
+  border: 1px solid --border
   border-radius: 6px
   padding: 4px 12px
   font-size: 0.78rem
-  color: --color-text-secondary
+  color: --text-muted
   cursor: pointer
 
 Hover state:
   border-color: rgba(0,212,160,0.5)
-  color: --color-accent
-  bg: --color-accent-light
+  color: --accent
+  bg: --accent-light
 
 Copied state (2 seconds):
   text: "Copied!"
-  color: --color-positive
+  color: --green
   border-color: rgba(63,185,80,0.4)
 
 Transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease
@@ -197,10 +197,10 @@ Layout: vertical list, one item per prompt
 Item:
   display: flex, align-items: flex-start
   padding: 16px 0
-  border-bottom: 1px solid --color-border
+  border-bottom: 1px solid --border
 
-  Left: prompt title as <a> link in --color-accent, weight 600, 1rem
-  Below title: one-line description in --color-text-secondary, 0.875rem
+  Left: prompt title as <a> link in --accent, weight 600, 1rem
+  Below title: one-line description in --text-muted, 0.875rem
 
   Hover: title underline, bg none
 ```
@@ -210,8 +210,8 @@ Item:
 ### Hero / Intro Section (index.html)
 
 ```
-h1: "Claude Code Prompts." (with teal dot in --color-accent)
-Lead paragraph: --color-text-secondary, 1rem, line height 1.65
+h1: "Claude Code Prompts." (with teal dot in --accent)
+Lead paragraph: --text-muted, 1rem, line height 1.65
 Max width: 640px
 Margin bottom: 40px before the prompt list
 ```
@@ -240,9 +240,9 @@ The `h2::before` vertical teal bar is the secondary signature element, consisten
 
 ### Sidebar Links
 
-- **Inactive:** `--color-text-secondary`, weight 500
-- **Hover:** `--color-text-primary`
-- **Active / current page:** `--color-accent`, weight 600, 3px left border in accent color
+- **Inactive:** `--text-muted`, weight 500
+- **Hover:** `--text`
+- **Active / current page:** `--accent`, weight 600, 3px left border in accent color
 
 ### Support Button
 
@@ -251,16 +251,16 @@ Sits at the bottom of the sidebar, pushed down by `margin-top: auto` on the `.si
 ```
 Default state:
   display: block, text-align: center
-  border: 1px solid --color-border
+  border: 1px solid --border
   border-radius: 6px
   padding: 8px 12px
   font-size: 0.8125rem, weight 500
-  color: --color-text-secondary
+  color: --text-muted
 
 Hover state:
-  color: --color-accent
+  color: --accent
   border-color: rgba(0,212,160,0.5)
-  background: --color-accent-light
+  background: --accent-light
 
 Opens: https://azqato.github.io/support.html in a new tab (target="_blank" rel="noopener noreferrer")
 ```
@@ -276,14 +276,14 @@ Sidebar collapses to a sticky top bar with light blur backdrop (`backdrop-filter
 ## 8. Footer
 
 ```
-border-top: 1px solid --color-border
-background: --color-bg (#0d1117)
-text: --color-text-secondary, 0.8rem, center-aligned
-links: --color-accent
+border-top: 1px solid --border
+background: --bg (#0d1117)
+text: --text-muted, 0.8rem, center-aligned
+links: --accent
 padding: 28px 32px
 content: "Built by Azqato." where "Azqato" is a link to azqato.github.io
-         in --color-accent. The trailing period sits outside the link and
-         inherits --color-text-secondary (same color as "Built by"), so it
+         in --accent. The trailing period sits outside the link and
+         inherits --text-muted (same color as "Built by"), so it
          is not colored and not clickable
 ```
 
@@ -302,7 +302,7 @@ content: "Built by Azqato." where "Azqato" is a link to azqato.github.io
 
 - All color combinations meet WCAG AA contrast minimums (primary text ~15:1, muted text ~4.8:1)
 - Copy button includes `aria-label="Copy prompt to clipboard"` and updates `aria-label` to "Copied!" on activation
-- Focus styles preserved on all interactive elements (`focus-visible` outline in `--color-accent`)
+- Focus styles preserved on all interactive elements (`focus-visible` outline in `--accent`)
 - `prefers-reduced-motion` disables transition animations
 - Code block uses `<pre><code>` semantics; screen readers treat it as preformatted content
 
@@ -432,6 +432,7 @@ Loading `prompts/*.md` with `fetch()` would require an HTTP server, because brow
 
 | Version | Date | Summary |
 | --- | --- | --- |
+| 1.6 | 2026-07-08 | Cross-project rebrand pass after this site was folded into the azqato.github.io monorepo. CSS custom property names renamed to match the shared root token names (e.g. `--color-bg` to `--bg`, `--color-text-primary` to `--text`, `--color-positive` to `--green`); all hex values unchanged, so this is a naming-only alignment, not a visual redesign. Pre-existing em dashes throughout the site's docs and copy also removed in a one-time cleanup, with one deliberate exception: `prompts/em-dash-audit.md` and its mirror in `prompts-data.js` keep their literal em dash example since that prompt's whole purpose is to demonstrate it. |
 | 1.5 | 2026-06-27 | Documented the optional `hidden: true` frontmatter key in the prompt markdown template. Hidden prompts are excluded from the sidebar and home list but remain reachable by direct link. |
 | 1.4 | 2026-06-13 | Static assets reorganized into subfolders: `css/style.css` and `js/script.js`, `js/prompts-data.js`. `index.html` references updated. Shell template and CSS file structure section updated. |
 | 1.3 | 2026-06-13 | Sidebar logo updated to "Azqato's Prompts.". Homepage h1 updated to "Claude Code Prompts.". Browser tab title updated to "Azqato's Prompts" on home; prompt pages show only the prompt name. Support button added to bottom of sidebar, pinned via flex column layout on `.sidebar-sticky`. |
