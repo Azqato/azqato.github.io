@@ -505,6 +505,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.7.5] - 2026-07-09
+
+### Changed
+- Updated all VIX Strategy references to the renamed lowercase URLs: live site `https://azqato.github.io/vix` (`invests.html` card and `projects.html` `demo`) and repo `https://github.com/Azqato/vix` (`projects.html` `github`).
+
+---
+
 ## [2.7.4] - 2026-07-09
 
 ### Added
