@@ -70,85 +70,34 @@
       padding: 0 2rem 4rem;
     }
 
-    /* ── PLAYLIST GRID ── */
+    /* ── EMBED GRID ── */
     .playlist-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.25rem;
       margin-bottom: 3rem;
     }
 
-    .playlist-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    .embed-card {
       border-radius: 12px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s;
-      position: relative;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      aspect-ratio: 16 / 9;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .playlist-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--spotify), #17a348);
-      opacity: 0;
-      transition: opacity 0.2s;
+    .embed-card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 8px 24px rgba(188, 140, 255, 0.12);
     }
 
-    .playlist-card:hover {
-      background: var(--card-hover);
-      border-color: var(--spotify);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(29, 185, 84, 0.12);
-    }
-
-    .playlist-card:hover::before { opacity: 1; }
-
-    .playlist-cover {
+    .embed-card iframe {
       width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
+      height: 100%;
+      border: none;
       display: block;
     }
-
-    .playlist-info {
-      padding: 1rem 1.25rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .playlist-name {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .playlist-sub {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .playlist-btn {
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      background: var(--spotify);
-      color: #000;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-align: center;
-      transition: background 0.2s;
-    }
-
-    .playlist-card:hover .playlist-btn { background: #1ed760; }
 
     /* ── MORE LINKS ── */
     .more-links {
@@ -275,23 +224,13 @@
   <section class="section">
     <div class="playlist-grid">
 
-      <a class="playlist-card" href="https://open.spotify.com/playlist/1G4IJbM8jnz23AngZKeiC0?si=64874833d97f42d6" target="_blank" rel="noopener">
-        <img class="playlist-cover" src="img/music-playlist-bangers.jpg" alt="BANGERS playlist cover" />
-        <div class="playlist-info">
-          <span class="playlist-name">BANGERS</span>
-          <span class="playlist-sub">Feat. Drops</span>
-          <span class="playlist-btn">Open on Spotify &#9654;</span>
-        </div>
-      </a>
+      <div class="embed-card">
+        <iframe src="https://www.youtube.com/embed/v_lFvMNAZGg" title="BANGERS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
 
-      <a class="playlist-card" href="https://open.spotify.com/playlist/7KePad2TWMrmXvEdZqmIPA?si=5ba79216d83f445d" target="_blank" rel="noopener">
-        <img class="playlist-cover" src="img/music-playlist-addictions.jpg" alt="ADDICTIONS playlist cover" />
-        <div class="playlist-info">
-          <span class="playlist-name">ADDICTIONS</span>
-          <span class="playlist-sub">Feat. Vocals</span>
-          <span class="playlist-btn">Open on Spotify &#9654;</span>
-        </div>
-      </a>
+      <div class="embed-card">
+        <iframe src="https://www.youtube.com/embed/mtfM7ttkSYU" title="ADDICTIONS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
 
     </div>
 
