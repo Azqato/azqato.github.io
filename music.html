@@ -122,8 +122,9 @@
     /* ── PLATFORM CARDS ── */
     .platform-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
       gap: 1rem;
+      justify-content: center;
     }
 
     .platform-card {
@@ -274,14 +275,10 @@
       </a>
       <a class="platform-card" href="https://youtube.com/@AzqatoMixes" target="_blank" rel="noopener">
         <span class="platform-icon">🎧</span>
-        <span class="platform-name">YouTube Mixes</span>
+        <span class="platform-name">YouTube</span>
       </a>
     </div>
   </section>
-
-  <footer style="background:transparent;">
-    <span style="display:inline-block;background:rgba(10,10,20,0.55);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,0.6);border-radius:6px;padding:0.2em 0.75em;">Built by <a href="https://azqato.com/">Azqato</a>.</span>
-  </footer>
 
   <!-- VISUALIZER MODE CONTROLS -->
   <div class="mode-controls">
@@ -295,6 +292,9 @@
     <button class="viz-btn mode-btn" data-mode="7">Ghost</button>
     <button class="viz-btn mode-btn" data-mode="8">Fence</button>
     <button class="viz-btn mode-btn" data-mode="9">Noise</button>
+    <footer style="background:transparent;width:100%;text-align:center;margin-top:0.25rem;padding:0;">
+      <span style="display:inline-block;background:rgba(10,10,20,0.55);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,0.6);border-radius:6px;padding:0.2em 0.75em;">Built by <a href="https://azqato.com/">Azqato</a>.</span>
+    </footer>
   </div>
 
   <script>
@@ -347,7 +347,7 @@
         // Center triangle
         lay.triCx  = cx;
         lay.triTop = H * 0.530;
-        lay.triBot = H * 0.635;
+        lay.triBot = H * 0.705; // bottom now sits at the booth
         lay.triHW  = W * 0.085;
 
         // Stage floor
@@ -356,12 +356,12 @@
         lay.floorTopW = W * 0.58;
         lay.floorBotW = W * 0.98;
 
-        // DJ booth
-        lay.boothX = cx - W * 0.095; lay.boothY = H * 0.780;
+        // DJ booth (moved higher)
+        lay.boothX = cx - W * 0.095; lay.boothY = H * 0.700;
         lay.boothW = W * 0.19;        lay.boothH = H * 0.048;
 
-        // Booth mini-screen
-        lay.bsX = cx - W * 0.065; lay.bsY = H * 0.710;
+        // Booth mini-screen (shifted up with booth)
+        lay.bsX = cx - W * 0.065; lay.bsY = H * 0.630;
         lay.bsW = W * 0.13;       lay.bsH = H * 0.068;
 
         // Fire columns
