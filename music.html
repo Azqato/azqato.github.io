@@ -114,7 +114,7 @@
 
     .mixcloud-embed iframe {
       width: 100%;
-      height: 400px;
+      height: 120px;
       border: none;
       display: block;
     }
@@ -178,20 +178,9 @@
       pointer-events: none;
     }
 
-    nav, .hero, .section, footer, .viz-controls {
+    nav, .hero, .section, footer {
       position: relative;
       z-index: 1;
-    }
-
-    /* ── AUDIO CONTROLS ── */
-    .viz-controls {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .viz-btn {
@@ -215,14 +204,17 @@
     .viz-btn:hover { border-color: var(--purple); color: var(--purple); }
     .viz-btn.active { border-color: var(--purple); color: var(--purple); background: rgba(188,140,255,0.1); }
 
-    #test-audio {
-      display: none;
-      height: 28px;
-      max-width: 180px;
-      accent-color: var(--purple);
+    .mode-controls {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-
-    #test-audio.visible { display: block; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
@@ -257,26 +249,18 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">🎵 Now playing</div>
-    <h1>Azqato's <span class="highlight">Music</span></h1>
+    <div class="hero-badge">🎵 Azqato's Music</div>
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Azqato's <span>Music</span></h1>
   </section>
 
   <!-- PLAYLISTS -->
   <section class="section">
-    <div class="playlist-grid">
-
-      <div class="embed-card">
-        <iframe src="https://www.youtube.com/embed/v_lFvMNAZGg?si=hwjYCQJe_uTrUx7d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-
-      <div class="embed-card">
-        <iframe src="https://www.youtube.com/embed/mtfM7ttkSYU?si=hwjYCQJe_uTrUx7d" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-
+    <div class="mixcloud-embed">
+      <iframe width="660px" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FAzqato%2Fedc-las-vegas-2026-2-hour-warm-up-festival-mix%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
     </div>
 
     <div class="mixcloud-embed">
-      <iframe src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FAzqato%2Fedc-las-vegas-2026-2-hour-warm-up-festival-mix%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share"></iframe>
+      <iframe width="660px" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FAzqato%2F2025-mix%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
     </div>
 
     <div class="platform-grid">
@@ -295,15 +279,22 @@
     </div>
   </section>
 
-  <footer>
-    Built by <a href="https://github.com/Azqato">Azqato</a>.
+  <footer style="background:transparent;">
+    <span style="display:inline-block;background:rgba(10,10,20,0.55);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,0.6);border-radius:6px;padding:0.2em 0.75em;">Built by <a href="https://azqato.com/">Azqato</a>.</span>
   </footer>
 
-  <!-- AUDIO SOURCE CONTROLS -->
-  <div class="viz-controls">
-    <audio id="test-audio"></audio>
-    <label class="viz-btn" for="audio-file-input">🎵 Load file<input id="audio-file-input" type="file" accept="audio/*" style="display:none"></label>
-    <button id="mic-btn" class="viz-btn">🎙 Use Mic</button>
+  <!-- VISUALIZER MODE CONTROLS -->
+  <div class="mode-controls">
+    <button class="viz-btn mode-btn" data-mode="0">Bars</button>
+    <button class="viz-btn mode-btn" data-mode="1">Volumetric</button>
+    <button class="viz-btn mode-btn" data-mode="2">Stars</button>
+    <button class="viz-btn mode-btn" data-mode="3">Vortex</button>
+    <button class="viz-btn mode-btn active" data-mode="4">Squares</button>
+    <button class="viz-btn mode-btn" data-mode="5">Origami</button>
+    <button class="viz-btn mode-btn" data-mode="6">Tunnel</button>
+    <button class="viz-btn mode-btn" data-mode="7">Ghost</button>
+    <button class="viz-btn mode-btn" data-mode="8">Fence</button>
+    <button class="viz-btn mode-btn" data-mode="9">Noise</button>
   </div>
 
   <script>
@@ -311,122 +302,1440 @@
     (function () {
       var canvas = document.getElementById('viz');
       var ctx    = canvas.getContext('2d');
-      var W, H, clusters;
+      var W, H;
+      var lay    = {};
 
-      // 8 clusters: 2 per side of a centered rectangle outline, tilted ~10°
       function build() {
         W = canvas.width  = window.innerWidth;
         H = canvas.height = window.innerHeight;
-        var s  = Math.min(W, H) * 0.40;
-        var cx = W * 0.5, cy = H * 0.5;
-        var rx = s * 0.60, ry = s * 0.44;
-        clusters = [
-          { x: cx - rx*0.42, y: cy - ry,       angle: -10, n: 3, gap: 26, fi: 0  },
-          { x: cx + rx*0.42, y: cy - ry,       angle: -10, n: 3, gap: 26, fi: 3  },
-          { x: cx + rx,      y: cy - ry*0.40,  angle: -80, n: 3, gap: 26, fi: 6  },
-          { x: cx + rx,      y: cy + ry*0.40,  angle: -80, n: 3, gap: 26, fi: 9  },
-          { x: cx + rx*0.42, y: cy + ry,       angle: -10, n: 3, gap: 26, fi: 12 },
-          { x: cx - rx*0.42, y: cy + ry,       angle: -10, n: 3, gap: 26, fi: 15 },
-          { x: cx - rx,      y: cy + ry*0.40,  angle: -80, n: 3, gap: 26, fi: 18 },
-          { x: cx - rx,      y: cy - ry*0.40,  angle: -80, n: 3, gap: 26, fi: 21 },
-        ];
+        var cx = W / 2;
+
+        lay.cx = cx;
+
+        // U logo
+        lay.logoY    = H * 0.055 + 32;
+        lay.logoSize = Math.min(W, H) * 0.068;
+
+        // Trusses
+        lay.truss1Y = H * 0.09;
+        lay.truss2Y = H * 0.14;
+        lay.truss3Y = H * 0.53;
+        lay.trussL  = W * 0.02;
+        lay.trussR  = W * 0.98;
+
+        // ── Brooklyn Mirage panoramic screen layout ──
+        // All 5 screens share the same Y and height for a seamless panoramic band
+
+        var sY = H * 0.10; // screen top
+        var sH = H * 0.42; // screen height (all same)
+
+        // Wide center screen (Brooklyn Mirage style)
+        lay.mainX    = cx - W * 0.21;
+        lay.mainY    = sY;
+        lay.mainW    = W * 0.42;
+        lay.mainH    = sH;
+        lay.mainCols = 24;
+        lay.mainRows = 8;
+
+        // Side panels: separate structures with gap from center screen, pivot at inner edge
+        lay.wingLX = W * 0.04; lay.wingLY = sY;
+        lay.wingLW = W * 0.22; lay.wingLH = sH;
+        lay.wingRX = W * 0.74; lay.wingRY = sY;
+        lay.wingRW = W * 0.22; lay.wingRH = sH;
+        lay.wingAngle = 0;
+
+        // Center triangle
+        lay.triCx  = cx;
+        lay.triTop = H * 0.530;
+        lay.triBot = H * 0.635;
+        lay.triHW  = W * 0.085;
+
+        // Stage floor
+        lay.floorY    = H * 0.645;
+        lay.floorBotY = H * 0.885;
+        lay.floorTopW = W * 0.58;
+        lay.floorBotW = W * 0.98;
+
+        // DJ booth
+        lay.boothX = cx - W * 0.095; lay.boothY = H * 0.780;
+        lay.boothW = W * 0.19;        lay.boothH = H * 0.048;
+
+        // Booth mini-screen
+        lay.bsX = cx - W * 0.065; lay.bsY = H * 0.710;
+        lay.bsW = W * 0.13;       lay.bsH = H * 0.068;
+
+        // Fire columns
+        lay.fireY = lay.floorBotY;
+        lay.fireXs = [-0.24, -0.12, 0.12, 0.24].map(function(o){ return cx + o * W; });
+
+        // Laser origin
+        lay.laserOX = cx;
+        lay.laserOY = lay.boothY + lay.boothH * 0.3;
       }
       build();
       window.addEventListener('resize', build);
 
-      // ── Web Audio ──
-      var audioCtx = null, analyser = null, freqData = null;
+      // ── Web Audio (analyser only, no UI controls) ──
+      var analyser = null, freqData = null;
 
-      function ensureCtx() {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          analyser = audioCtx.createAnalyser();
-          analyser.fftSize = 256;
-          freqData = new Uint8Array(analyser.frequencyBinCount);
-          analyser.connect(audioCtx.destination);
-        }
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        return audioCtx;
-      }
-
-      // File picker → audio element
-      var audioEl  = document.getElementById('test-audio');
-      var audioSrc = null;
-
-      document.getElementById('audio-file-input').addEventListener('change', function (e) {
-        var file = e.target.files[0];
-        if (!file) return;
-        audioEl.src = URL.createObjectURL(file);
-        audioEl.classList.add('visible');
-        audioEl.play();
-      });
-
-      audioEl.addEventListener('play', function () {
-        var ac = ensureCtx();
-        if (!audioSrc) {
-          audioSrc = ac.createMediaElementSource(audioEl);
-          audioSrc.connect(analyser);
-        }
-      });
-
-      // Mic toggle
-      var micBtn = document.getElementById('mic-btn');
-      micBtn.addEventListener('click', function () {
-        if (micBtn.classList.contains('active')) {
-          micBtn.classList.remove('active');
-          micBtn.textContent = '🎙 Use Mic';
-          if (window._micStream) { window._micStream.getTracks().forEach(function(t){t.stop();}); window._micStream = null; }
-          if (window._micSrc)    { window._micSrc.disconnect(); window._micSrc = null; }
-          return;
-        }
-        navigator.mediaDevices.getUserMedia({audio: true}).then(function (stream) {
-          window._micStream = stream;
-          var ac = ensureCtx();
-          window._micSrc = ac.createMediaStreamSource(stream);
-          window._micSrc.connect(analyser);
-          micBtn.classList.add('active');
-          micBtn.textContent = '🎙 Mic On';
-        }).catch(function () { alert('Microphone access denied.'); });
-      });
-
-      // ── Simulated fallback ──
-      var N = 24;
-      var phases = Array.from({length: N}, function(_, i){ return i * 0.67 + Math.random() * Math.PI; });
-      var t = 0;
+      // ── Frequency helpers ──
+      var N        = 64;
+      var phases   = Array.from({length: N}, function(_, i){ return i * 0.67 + Math.random() * Math.PI; });
+      var smoothed = new Float32Array(N);
+      var t        = 0;
 
       function freq(i) {
+        var idx = Math.max(0, Math.min(N - 1, i | 0));
         if (analyser && freqData) {
           analyser.getByteFrequencyData(freqData);
-          return freqData[Math.floor((i / N) * freqData.length * 0.65)] / 255;
+          var raw = freqData[Math.floor((idx / N) * freqData.length * 0.8)] / 255;
+          smoothed[idx] = smoothed[idx] * 0.72 + raw * 0.28;
+        } else {
+          var p = phases[idx];
+          smoothed[idx] = (Math.pow(Math.abs(Math.sin(t * 0.018 + p)), 1.8) * 0.6
+                        + Math.abs(Math.sin(t * 0.051 + p * 1.7)) * 0.25
+                        + Math.abs(Math.sin(t * 0.11  + p * 3.1)) * 0.15);
         }
-        var p = phases[i % N];
-        var a = Math.pow(Math.abs(Math.sin(t * 0.022 + p)), 1.5);
-        var b = Math.abs(Math.sin(t * 0.058 + p * 1.8));
-        var c = Math.abs(Math.sin(t * 0.13  + p * 3.2));
-        return a * 0.55 + b * 0.28 + c * 0.17;
+        return smoothed[idx];
       }
 
-      function drawBar(c2d, x, y, len, thick, deg, f) {
-        c2d.save();
-        c2d.translate(x, y);
-        c2d.rotate(deg * Math.PI / 180);
-        var hue = 280 + f * 38, color = 'hsl(' + hue + ',100%,65%)';
-        c2d.shadowColor = color;
-        c2d.shadowBlur  = 28 + f * 32;
-        c2d.globalAlpha = 0.45 + f * 0.35;
-        c2d.fillStyle   = color;
-        c2d.fillRect(-len/2, -(thick+5)/2, len, thick + 5);
-        c2d.shadowBlur  = 10;
-        c2d.globalAlpha = 0.70 + f * 0.30;
-        c2d.fillRect(-len/2, -(thick+2)/2, len, thick + 2);
-        c2d.shadowBlur  = 4;
-        c2d.globalAlpha = 0.85 + f * 0.15;
-        c2d.fillStyle   = 'hsl(' + hue + ',50%,92%)';
-        c2d.fillRect(-len/2, -thick/2, len, thick);
-        c2d.restore();
+      function favg(lo, hi) {
+        var s = 0;
+        for (var i = lo; i <= hi; i++) s += freq(i);
+        return s / (hi - lo + 1);
       }
 
-      // ── Favicon mini-visualizer ──
+      // ── Screen mode ──
+      var screenMode = 4; // 0=bars, 1=volumetric, 2=stars, 3=vortex, 4=squares, 5=origami, 6=tunnel, 7=ghost, 8=fence, 9=noise
+      var modeTimer  = 0;
+      var MODE_LEN   = 1800; // ~30 s at 60 fps
+      var fxSrc      = null; // WebGL canvas source for drawImagePanel
+
+      // ── WebGL shaders (modes 1–4) ──
+      var glCanvas = document.createElement('canvas');
+      glCanvas.width = 400; glCanvas.height = 250;
+      var gl = null;
+      try { gl = glCanvas.getContext('webgl2'); } catch(e) {}
+
+      var glVol     = {}; // mode 1: volumetric cone lights
+      var glStar    = {}; // mode 2: star nest
+      var glVortex  = {}; // mode 3: disco sun vortex
+      var glSquares  = {}; // mode 4: squares
+      var glOrigami  = {}; // mode 5: origami
+      var glTunnel   = {}; // mode 6: disco star tunnel
+      var glGhost    = {}; // mode 7: ghost silent disco
+      var glFence    = {}; // mode 8: electric fence
+      var glNoise    = {}; // mode 9: value noise (IQ)
+      var glAudioData = new Uint8Array(512 * 4);
+
+      (function() {
+        if (!gl) return;
+
+        var vsrc = '#version 300 es\nin vec2 pos;\nvoid main(){gl_Position=vec4(pos,0.,1.);}';
+
+        function mksh(type, src) {
+          var s = gl.createShader(type);
+          gl.shaderSource(s, src); gl.compileShader(s);
+          if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+            console.error('GL shader err:', gl.getShaderInfoLog(s)); return null;
+          }
+          return s;
+        }
+
+        var vs = mksh(gl.VERTEX_SHADER, vsrc);
+        if (!vs) { gl = null; return; }
+
+        // shared quad geometry
+        var vao = gl.createVertexArray(); gl.bindVertexArray(vao);
+        var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+
+        function mkProg(fssrc) {
+          var fs = mksh(gl.FRAGMENT_SHADER, fssrc);
+          if (!fs) return null;
+          var p = gl.createProgram();
+          gl.attachShader(p, vs); gl.attachShader(p, fs);
+          gl.linkProgram(p);
+          if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+            console.error('GL link:', gl.getProgramInfoLog(p)); return null;
+          }
+          gl.useProgram(p);
+          var posLoc = gl.getAttribLocation(p, 'pos');
+          gl.enableVertexAttribArray(posLoc);
+          gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+          return p;
+        }
+
+        // ── Mode 1: Volumetric cone lights (Shadertoy XstSRX) ──
+        var fs6 = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+out vec4 fragColor;
+
+const float EXPOSURE = 12.0;
+const float OMNI_LIGHT = 0.1;
+const float FLOOR_REFLECTION = 0.15;
+const int NUM_LIGHTS = 10;
+const float PI = 3.1415926535897932384626433832795;
+const float TAU = 2.0 * PI;
+const float BIG = 1e30;
+const float EPSILON = 1e-10;
+const float THETA = (1.0 + 2.2360679775) / 2.0;
+const float INV_THETA = 1.0 / THETA;
+
+struct Ray { vec3 o; vec3 d; };
+struct Intersection { float dist; vec3 normal; };
+struct Result { Intersection start; Intersection end; };
+struct Range { float start; float end; };
+struct Light { vec3 d; vec3 c; float a; };
+Light lights[NUM_LIGHTS];
+
+mat4 rotateX(float v){float c=cos(v),s=sin(v);return mat4(1,0,0,0,0,c,s,0,0,-s,c,0,0,0,0,1);}
+mat4 rotateY(float v){float c=cos(v),s=sin(v);return mat4(c,0,-s,0,0,1,0,0,s,0,c,0,0,0,0,1);}
+mat4 rotateZ(float v){float c=cos(v),s=sin(v);return mat4(c,s,0,0,-s,c,0,0,0,0,1,0,0,0,0,1);}
+
+float insideCone(vec3 dir,float angle,vec3 o){
+  float oz=dot(o,dir);vec3 oxy=o-dir*oz;
+  float c=dot(oxy,oxy)/(angle*angle)-(oz*oz);
+  return smoothstep(20.,-50.,c);
+}
+
+Range cone(vec3 dir,float angle,Ray ray){
+  float dz=dot(ray.d,dir),oz=dot(ray.o,dir);
+  vec3 dxy=ray.d-dir*dz,oxy=ray.o-dir*oz;
+  float a=dot(dxy,dxy)-(dz*dz*angle*angle);
+  float b=dot(dxy,oxy)-(dz*oz*angle*angle);
+  float c=dot(oxy,oxy)-(oz*oz*angle*angle);
+  float p=2.*b/a,q=c/a,r=p*p/4.-q;
+  Range res; res.start=BIG; res.end=-BIG;
+  if(r>=0.){float m=-p/2.,sr=sqrt(r);
+    if(c<0.){
+      if(m+sr<0.){res.start=0.;res.end=BIG;}
+      else if(m-sr<0.){res.start=0.;res.end=m+sr;}
+      else{res.start=0.;res.end=m-sr;}
+    }else{
+      if(m+sr<0.)return res;
+      else if(m-sr<0.){res.start=m+sr;res.end=BIG;}
+      else{res.start=m-sr;res.end=m+sr;}
+    }
+  }
+  return res;
+}
+
+Result plane(vec3 pos,vec3 normal,Ray ray){
+  ray.o-=pos;
+  float rdn=dot(ray.d,normal),ron=dot(ray.o,normal);
+  Result res; res.start.normal=normal; res.end.normal=normal;
+  if(ron>0.){
+    res.start.dist=BIG; res.end.dist=-BIG;
+    if(abs(rdn)>EPSILON){float d=-ron/rdn;
+      if(d>0.){res.start.dist=d;res.end.dist=BIG;}
+      else{res.start.dist=-BIG;res.end.dist=d;}
+    }
+  }else{
+    res.start.dist=-BIG; res.end.dist=BIG;
+    if(abs(rdn)>EPSILON){float d=-ron/rdn;
+      if(d>0.){res.start.dist=-BIG;res.end.dist=d;}
+      else{res.start.dist=d;res.end.dist=BIG;}
+    }
+  }
+  return res;
+}
+
+float inverseSquare(vec3 p){return 1./dot(p,p);}
+
+float isAD(Ray ray,float tt){
+  vec3 o=ray.o,d=ray.d;
+  float a=tt*dot(d,d)+dot(d,o);
+  float b1=d.x*d.x*dot(o.yz,o.yz);
+  float b2=2.*d.x*o.x*dot(o.yz,d.yz);
+  float b3=o.x*o.x*dot(d.yz,d.yz);
+  float b4=(o.y*d.z-d.y*o.z)*(o.y*d.z-d.y*o.z);
+  float b=sqrt(b1-b2+b3+b4);
+  return atan(a/b)/b;
+}
+
+float isIntegral(Ray ray,float s,float e){return isAD(ray,e)-isAD(ray,s);}
+
+vec3 getLight(vec3 pos){
+  vec3 col=vec3(inverseSquare(pos)*OMNI_LIGHT*2.);
+  for(int i=0;i<NUM_LIGHTS;i++)
+    col+=lights[i].c*inverseSquare(pos)*insideCone(lights[i].d,lights[i].a,pos);
+  return col;
+}
+
+vec3 renderVolumetric(Ray ray,float maxDist){
+  vec3 col=vec3(isIntegral(ray,0.,maxDist)*OMNI_LIGHT);
+  for(int i=0;i<NUM_LIGHTS;i++){
+    Range r=cone(lights[i].d,lights[i].a,ray);
+    r.end=min(r.end,maxDist);
+    if(r.end>r.start){
+      float boost=mix(1.,18.,insideCone(lights[i].d,lights[i].a,ray.o));
+      col+=isIntegral(ray,r.start,r.end)*lights[i].c*boost;
+    }
+  }
+  return col;
+}
+
+vec3 floorTexture(vec3 pos){
+  pos.z+=pos.x*0.25;
+  return fract(pos.x*.1)>fract(pos.z*.1)?vec3(1.):vec3(.7);
+}
+
+float floorGloss(vec3 pos){
+  pos.x+=pos.z*2.;
+  return texture(iChannel1,pos.xz*.2).x*.5+.75;
+}
+
+vec3 renderScene(Ray ray){
+  Result r=plane(vec3(0.,-18.,0.),vec3(0.,1.,0.),ray);
+  if(r.start.dist>0.&&r.start.dist<r.end.dist){
+    vec3 pos=ray.o+ray.d*r.start.dist;
+    Ray rr; rr.o=pos; rr.d=ray.d*vec3(1,-1,1);
+    vec3 vol=renderVolumetric(ray,r.start.dist);
+    vec3 rvol=renderVolumetric(rr,BIG);
+    vec3 col=-normalize(pos).y*getLight(pos)*30.*floorTexture(pos);
+    return vol+mix(col,rvol,FLOOR_REFLECTION*floorGloss(pos));
+  }
+  return renderVolumetric(ray,BIG);
+}
+
+vec3 toneMap(vec3 col){return 1.-exp(-col*EXPOSURE);}
+
+void setUpLights(){
+  mat4 m=rotateX(TAU*iTime*.05)*rotateY(TAU*iTime*.09);
+  lights[0].d=normalize(m*vec4(1,1,1,0)).xyz;
+  lights[1].d=normalize(m*m*vec4(1,1,-1,0)).xyz;
+  lights[2].d=normalize(m*vec4(1,-1,1,0)).xyz;
+  lights[3].d=normalize(m*m*vec4(1,-1,-1,0)).xyz;
+  lights[4].d=normalize(m*vec4(0,INV_THETA,THETA,0)).xyz;
+  lights[5].d=normalize(m*m*vec4(0,INV_THETA,-THETA,0)).xyz;
+  lights[6].d=normalize(m*vec4(INV_THETA,THETA,0,0)).xyz;
+  lights[7].d=normalize(m*m*vec4(INV_THETA,-THETA,0,0)).xyz;
+  lights[8].d=normalize(m*vec4(THETA,0,INV_THETA,0)).xyz;
+  lights[9].d=normalize(m*m*vec4(-THETA,0,INV_THETA,0)).xyz;
+  lights[0].c=normalize(vec3(1,1,1)*.5+.7);
+  lights[1].c=normalize(vec3(1,1,-1)*.5+.7);
+  lights[2].c=normalize(vec3(1,-1,1)*.5+.7);
+  lights[3].c=normalize(vec3(1,-1,-1)*.5+.7);
+  lights[4].c=normalize(vec3(0,INV_THETA,THETA)*.5+.7);
+  lights[5].c=normalize(vec3(0,INV_THETA,-THETA)*.5+.7);
+  lights[6].c=normalize(vec3(INV_THETA,THETA,0)*.5+.7);
+  lights[7].c=normalize(vec3(INV_THETA,-THETA,0)*.5+.7);
+  lights[8].c=normalize(vec3(THETA,0,INV_THETA)*.5+.7);
+  lights[9].c=normalize(vec3(-THETA,0,INV_THETA)*.5+.7);
+  for(int i=0;i<NUM_LIGHTS;i++)
+    lights[i].a=texture(iChannel0,vec2(float(i)*.18,0.)).x*.3+.05;
+}
+
+void mainImage(out vec4 fragColor,in vec2 fragCoord){
+  setUpLights();
+  Ray ray;
+  ray.o=vec3(sin(iTime*.5)*5.,-12.5+sin(iTime*.6)*2.5,-25.);
+  ray.d=normalize(rotateX(-sin(iTime*.23)*.1)*rotateZ(sin(iTime*.33)*.1)*
+        vec4((fragCoord.xy-iResolution.xy*.5)/iResolution.y,.7,0.)).xyz;
+  vec3 col=renderScene(ray);
+  col=toneMap(col);
+  fragColor=vec4(col,1.);
+}
+
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+
+        var p6 = mkProg(fs6);
+        if (p6) {
+          glVol.prog = p6;
+          gl.useProgram(p6);
+          glVol.timeLoc = gl.getUniformLocation(p6, 'iTime');
+          glVol.resLoc  = gl.getUniformLocation(p6, 'iResolution');
+          // iChannel0: audio (512x1, REPEAT)
+          glVol.tex0 = gl.createTexture();
+          gl.activeTexture(gl.TEXTURE0);
+          gl.bindTexture(gl.TEXTURE_2D, glVol.tex0);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 512, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+          gl.uniform1i(gl.getUniformLocation(p6, 'iChannel0'), 0);
+          // iChannel1: noise (256x256, REPEAT)
+          var nd = new Uint8Array(256 * 256 * 4);
+          for (var i = 0; i < nd.length; i += 4) {
+            var v = Math.random() * 255 | 0;
+            nd[i] = nd[i+1] = nd[i+2] = v; nd[i+3] = 255;
+          }
+          glVol.tex1 = gl.createTexture();
+          gl.activeTexture(gl.TEXTURE1);
+          gl.bindTexture(gl.TEXTURE_2D, glVol.tex1);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 256, 256, 0, gl.RGBA, gl.UNSIGNED_BYTE, nd);
+          gl.generateMipmap(gl.TEXTURE_2D);
+          gl.uniform1i(gl.getUniformLocation(p6, 'iChannel1'), 1);
+        }
+
+        // ── Mode 2: Star Nest (Pablo Roman Andrioli) ──
+        var fs7 = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+uniform vec4 iMouse;
+out vec4 fragColor;
+
+#define iterations 17
+#define formuparam 0.53
+#define volsteps 20
+#define stepsize 0.1
+#define zoom   0.800
+#define tile   0.850
+#define speed  0.010
+#define brightness 0.0015
+#define darkmatter 0.300
+#define distfading 0.730
+#define saturation 0.850
+
+void mainImage(out vec4 fragColor,in vec2 fragCoord){
+  vec2 uv=fragCoord.xy/iResolution.xy-.5;
+  uv.y*=iResolution.y/iResolution.x;
+  vec3 dir=vec3(uv*zoom,1.);
+  float time=iTime*speed+.25;
+  float a1=.5+iMouse.x/iResolution.x*2.;
+  float a2=.8+iMouse.y/iResolution.y*2.;
+  mat2 rot1=mat2(cos(a1),sin(a1),-sin(a1),cos(a1));
+  mat2 rot2=mat2(cos(a2),sin(a2),-sin(a2),cos(a2));
+  dir.xz*=rot1; dir.xy*=rot2;
+  vec3 from=vec3(1.,.5,.5);
+  from+=vec3(time*2.,time,-2.);
+  from.xz*=rot1; from.xy*=rot2;
+  float s=.1,fade=1.;
+  vec3 v=vec3(0.);
+  for(int r=0;r<volsteps;r++){
+    vec3 p=from+s*dir*.5;
+    p=abs(vec3(tile)-mod(p,vec3(tile*2.)));
+    float pa,a=pa=0.;
+    for(int i=0;i<iterations;i++){
+      p=abs(p)/dot(p,p)-formuparam;
+      a+=abs(length(p)-pa);
+      pa=length(p);
+    }
+    float dm=max(0.,darkmatter-a*a*.001);
+    a*=a*a;
+    if(r>6)fade*=1.-dm;
+    v+=fade;
+    v+=vec3(s,s*s,s*s*s*s)*a*brightness*fade;
+    fade*=distfading;
+    s+=stepsize;
+  }
+  v=mix(vec3(length(v)),v,saturation);
+  fragColor=vec4(v*.01,1.);
+}
+
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+
+        var p7 = mkProg(fs7);
+        if (p7) {
+          glStar.prog = p7;
+          gl.useProgram(p7);
+          glStar.timeLoc  = gl.getUniformLocation(p7, 'iTime');
+          glStar.resLoc   = gl.getUniformLocation(p7, 'iResolution');
+          glStar.mouseLoc = gl.getUniformLocation(p7, 'iMouse');
+        }
+
+        // ── Mode 3: Disco Sun Vortex (CC-BY-NC-SA-4.0, @WorkingClassHacker/@Frostbyte) ──
+        var fs3 = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+out vec4 fragColor;
+
+mat2 R(float a){return mat2(cos(a),sin(a),-sin(a),cos(a));}
+
+vec3 palette(float i){
+  const vec3 a=vec3(0.50,0.38,0.26),b=vec3(0.50,0.35,0.25);
+  const vec3 c=vec3(1.00),d=vec3(0.00,0.12,0.25);
+  return a+b*cos(6.2831853*(c*i+d));
+}
+vec3 palette2(float i){
+  const vec3 a=vec3(0.742702,0.908877,0.959831);
+  const vec3 b=vec3(-0.711,0.275,-0.052);
+  const vec3 c=vec3(1.0,1.855,1.0);
+  const vec3 d=vec3(0.18,0.091,0.38);
+  return a+b*cos(6.2831853*(c*i+d));
+}
+void mainImage(out vec4 fc,in vec2 fragCoord){
+  vec2 u=fragCoord.xy;
+  vec2 uv=(u-0.5*iResolution.xy+0.5)/iResolution.y;
+  float i=0.,s;
+  float tt=mod(iTime,6.283185);
+  vec3 p,d=normalize(vec3(2.0*u-iResolution.xy,iResolution.y));
+  p.z=tt;
+  fc*=0.;
+  for(;i<20.;i++){
+    p.xy=R(-p.z*0.01-tt*0.05)*p.xy;
+    s=0.6;
+    s=max(s,4.0*(-length(p.xy)+10.0));
+    s+=abs(p.y*0.004+sin(tt-p.x*0.5)*0.9+1.0);
+    p+=d*s;
+    fc+=1.0/(s*0.2);
+  }
+  fc*=vec4(palette(length(p)/(abs(sin(iTime*0.02)*50.)+6.0)),1.0);
+  fc-=20.0*smoothstep(.001,abs(sin(iTime*5.0)),.7-length(sin(uv*200.0)/1.5)-abs(uv.y)+.2);
+  fc/=0.5e2;
+  float l=length(uv);
+  fc*=1.2-l;
+  fc=mix(fc,palette(l-.23).rgbr,1.0-smoothstep(.01,.95,l));
+  fc=tanh(fc+fc);
+}
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+
+        var p3v = mkProg(fs3);
+        if (p3v) {
+          glVortex.prog = p3v;
+          gl.useProgram(p3v);
+          glVortex.timeLoc = gl.getUniformLocation(p3v, 'iTime');
+          glVortex.resLoc  = gl.getUniformLocation(p3v, 'iResolution');
+        }
+
+        // ── Mode 4: Squares (CC0, Shadertoy) ──
+        var fs4 = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+out vec4 fragColor;
+
+vec3 bgColor=vec3(0.01,0.16,0.42);
+vec3 rectColor=vec3(0.01,0.26,0.57);
+const float total=60.;
+const float minSize=0.03;
+const float maxSize=0.08-0.03;
+const float yDistribution=0.5;
+
+float random(vec2 co){return fract(sin(dot(co,vec2(12.9898,78.233)))*43758.5453);}
+float noise(in vec2 p){
+  p*=2.8;
+  vec2 i=floor(p),f=fract(p),u=f*f*(3.0-2.0*f);
+  return mix(mix(random(i),random(i+vec2(1,0)),u.x),mix(random(i+vec2(0,1)),random(i+vec2(1,1)),u.x),u.y);
+}
+float fbm(in vec2 uv){
+  uv*=5.0;
+  mat2 m=mat2(1.6,1.2,-1.2,1.6);
+  float f=0.5*noise(uv); uv=m*uv;
+  f+=0.25*noise(uv); uv=m*uv;
+  f+=0.125*noise(uv); uv=m*uv;
+  f+=0.0625*noise(uv);
+  return 0.5+0.5*f;
+}
+vec3 bg(vec2 uv){
+  float velocity=iTime/1.6;
+  float intensity=sin(uv.x*3.+velocity*2.)*1.1+1.5;
+  uv.y-=2.;
+  vec2 bp=uv+vec2(-2.,0.);
+  uv*=0.6;
+  float rb=fbm(vec2(uv.x*.5-velocity*.03,uv.y))*.1;
+  uv+=rb;
+  float rz=fbm(uv*.9+vec2(velocity*.35,0.));
+  rz*=dot(bp*intensity,bp)+1.2;
+  vec3 col=bgColor/(.1-rz);
+  return sqrt(abs(col));
+}
+float rectangle(vec2 uv,vec2 pos,float width,float height,float blur){
+  pos=(vec2(width,height)+.01)/2.-abs(uv-pos);
+  pos=smoothstep(0.,blur,pos);
+  return pos.x*pos.y;
+}
+mat2 rotate2d(float a){return mat2(cos(a),-sin(a),sin(a),cos(a));}
+
+void mainImage(out vec4 fc,in vec2 fragCoord){
+  vec2 uv=fragCoord.xy/iResolution.xy*2.-1.;
+  uv.x*=iResolution.x/iResolution.y;
+  vec3 color=bg(uv)*(2.-abs(uv.y*2.));
+  float velX=-iTime/8.,velY=iTime/10.;
+  for(float i=0.;i<total;i++){
+    float index=i/total,rnd=random(vec2(index));
+    vec3 pos=vec3(0,0,0);
+    pos.x=fract(velX*rnd+index)*4.-2.0;
+    pos.y=sin(index*rnd*1000.+velY)*yDistribution;
+    pos.z=maxSize*rnd+minSize;
+    vec2 uvRot=uv-pos.xy+pos.z/2.;
+    uvRot=rotate2d(i+iTime/2.)*uvRot;
+    uvRot+=pos.xy+pos.z/2.;
+    float rect=rectangle(uvRot,pos.xy,pos.z,pos.z,(maxSize+minSize-pos.z)/2.);
+    color+=rectColor*rect*pos.z/maxSize;
+  }
+  fc=vec4(color,1.0);
+}
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+
+        var p4s = mkProg(fs4);
+        if (p4s) {
+          glSquares.prog = p4s;
+          gl.useProgram(p4s);
+          glSquares.timeLoc = gl.getUniformLocation(p4s, 'iTime');
+          glSquares.resLoc  = gl.getUniformLocation(p4s, 'iResolution');
+        }
+
+        // ── Mode 5: Origami (@XorDev) ──
+        var fs5 = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+out vec4 fragColor;
+#define R mat2(cos(a/4.+vec4(0,11,33,0)))
+void mainImage(out vec4 O,vec2 I){
+  vec4 h;O=++h;
+  vec2 u,r=iResolution.xy;
+  for(float A,l,L,a,i=7.;--i>0.;
+    O=mix(h=sin(i+a/3.+vec4(1,3,5,0))*.2+.7,O,A=min(--l*r.y*.02,1.))*
+    (l+h+.5*A*u.y/L)/L)
+    a-=sin(a-=sin(a=iTime*4.+i*.4)),
+    u=(I+I-r)/r.y/.1,
+    L=l=max(length(u-=R*clamp(u*R,-i,i)),1.);
+}
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+        var p5 = mkProg(fs5);
+        if (p5) {
+          glOrigami.prog = p5; gl.useProgram(p5);
+          glOrigami.timeLoc = gl.getUniformLocation(p5, 'iTime');
+          glOrigami.resLoc  = gl.getUniformLocation(p5, 'iResolution');
+        }
+
+        // ── Mode 6: Disco Star Tunnel (CC0) ──
+        var fs6t = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+out vec4 fragColor;
+#define PI  3.141592654
+#define TAU (2.0*PI)
+#define TIME iTime
+float mod1(inout float p,float size){float h=size*.5,c=floor((p+h)/size);p=mod(p+h,size)-h;return c;}
+vec2 offset(float time,float z){z*=0.1*sqrt(0.5);vec2 o=vec2(0.0),r=vec2(2.0);o+=r*vec2(cos(z),sin(sqrt(0.5)*z+pow(0.5+0.5*sin(sqrt(0.25)*z),5.0)));return o;}
+void rot(inout vec2 p,float a){float c=cos(a),s=sin(a);p=vec2(c*p.x+s*p.y,-s*p.x+c*p.y);}
+vec2 toPolar(vec2 p){return vec2(length(p),atan(p.y,p.x));}
+vec2 toRect(vec2 p){return vec2(p.x*cos(p.y),p.x*sin(p.y));}
+const float smallRadii=pow(0.5,6.0);
+const float largeRadii=1.0+2.0*smallRadii;
+const float reps=float(int(largeRadii*TAU/(2.0*smallRadii)));
+const float degree=TAU/reps;
+float circle(vec2 p,float r){return length(p)-r;}
+float star5(vec2 p,float r,float rf){
+  const vec2 k1=vec2(0.809016994375,-0.587785252292);
+  const vec2 k2=vec2(-k1.x,k1.y);
+  p.x=abs(p.x);
+  p-=2.0*max(dot(k1,p),0.0)*k1;
+  p-=2.0*max(dot(k2,p),0.0)*k2;
+  p.x=abs(p.x);p.y-=r;
+  vec2 ba=rf*vec2(-k1.y,k1.x)-vec2(0,1);
+  float h=clamp(dot(p,ba)/dot(ba,ba),0.0,r);
+  return length(p-ba*h)*sign(p.y*ba.x-p.x*ba.y);
+}
+vec3 df(vec2 p,int gi){
+  float divend=2.0*smallRadii+0.5*pow(1.0-cos(0.0),2.0);
+  float dx=largeRadii-0.5*divend;
+  vec2 op=p,pp=toPolar(p);
+  float ny=pp.y;
+  pp.y+=-0.33*smallRadii*float(gi);
+  pp.x-=dx;float nx=pp.x/divend;
+  pp.x=mod(pp.x,divend);pp.x+=dx;
+  float nny=mod1(pp.y,degree);
+  pp.y+=PI/2.0;p=toRect(pp);
+  p-=vec2(0.0,largeRadii);
+  float ymul=mod(nny,2.0)>0.0?1.0:-1.0;
+  float xmul=mod(float(int(nx)),2.0)>0.0?1.0:-1.0;
+  rot(p,ymul*xmul*TIME*TAU/5.0);
+  float d=star5(p,smallRadii,0.25);
+  float id=circle(op,largeRadii-smallRadii);
+  d=max(d,-id);
+  return vec3(d,nx,ny);
+}
+vec3 tunnelEffect(vec2 p){
+  vec3 col=vec3(0.0);
+  float smoothPixel=5.0/iResolution.x;
+  const float zbase=10.0,zdtime=0.25,zspeed=10.0;
+  float gtime=TIME*0.5,gz=zspeed*gtime;
+  vec2 outerOff=offset(gtime,gz);
+  float fgtime=mod(gtime,zdtime);
+  for(int i=22;i>=-2;--i){
+    int gi=i+int(gtime/zdtime);
+    float lz=zspeed*(zdtime*float(i)-fgtime);
+    float zscale=zbase/(zbase+lz);
+    float iz=gz+lz;
+    vec2 innerOff=offset(gtime,iz);
+    vec2 ip=p+0.5*zscale*(-innerOff+outerOff);
+    float ld=length(ip)/zscale;
+    vec3 ddd=df(ip/zscale,gi)*zscale;
+    float d=ddd.x;
+    vec3 scol=vec3(0.6+0.4*sin(TAU*ddd.y*0.005-0.2*iz),pow(0.6+0.4*cos(-2.0*abs(ddd.z)-0.4*iz-0.5*gtime),1.0),0.8);
+    float diff=exp(-0.0125*lz)*(1.0-1.0*tanh(pow(0.4*max(ld-largeRadii,0.0),2.0)+3.0*smallRadii*max(ddd.y,0.0)));
+    vec4 icol=diff*vec4(scol,smoothstep(0.0,-smoothPixel,d));
+    icol.w+=diff*diff*diff*0.75*clamp(1.0-30.0*d,0.0,1.0);
+    icol.w+=tanh(0.125*0.125*lz)*0.5*ld*clamp(1.5-ld,0.0,1.0);
+    col=mix(col,icol.xyz,clamp(icol.w,0.0,1.0));
+  }
+  return col;
+}
+vec3 postProcess(vec3 col,vec2 q){
+  col=pow(clamp(col,0.0,1.0),vec3(0.75));
+  col=col*0.6+0.4*col*col*(3.0-2.0*col);
+  col=mix(col,vec3(dot(col,vec3(0.33))),-0.4);
+  col*=0.5+0.5*pow(19.0*q.x*q.y*(1.0-q.x)*(1.0-q.y),0.7);
+  return col;
+}
+void mainImage(out vec4 fc,in vec2 fragCoord){
+  vec2 q=fragCoord/iResolution.xy;
+  vec2 p=-1.+2.*q;p.x*=iResolution.x/iResolution.y;
+  fc=vec4(postProcess(tunnelEffect(p),q),1.0);
+}
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+        var p6t = mkProg(fs6t);
+        if (p6t) {
+          glTunnel.prog = p6t; gl.useProgram(p6t);
+          glTunnel.timeLoc = gl.getUniformLocation(p6t, 'iTime');
+          glTunnel.resLoc  = gl.getUniformLocation(p6t, 'iResolution');
+        }
+
+        // ── Mode 7: Ghost Silent Disco (seb chevrel, 2019) needs iChannel0 noise ──
+        var fs7g = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+uniform sampler2D iChannel0;
+out vec4 fragColor;
+const float PI=3.1415926535897,H_PI=PI*.5,Q_PI=PI*.25,TWO_PI=PI*2.0;
+mat3 rotate(vec3 axis,float angle){axis=normalize(axis);float s=sin(angle),c=cos(angle),oc=1.0-c;return mat3(oc*axis.x*axis.x+c,oc*axis.x*axis.y-axis.z*s,oc*axis.z*axis.x+axis.y*s,oc*axis.x*axis.y+axis.z*s,oc*axis.y*axis.y+c,oc*axis.y*axis.z-axis.x*s,oc*axis.z*axis.x-axis.y*s,oc*axis.y*axis.z+axis.x*s,oc*axis.z*axis.z+c);}
+vec3 rotateX(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(p.x,c*p.y-s*p.z,s*p.y+c*p.z);}
+vec3 rotateY(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(c*p.x+s*p.z,p.y,c*p.z-s*p.x);}
+vec3 rotateZ(vec3 p,float a){float c=cos(a),s=sin(a);return vec3(c*p.x-s*p.y,s*p.x+c*p.y,p.z);}
+float sdPlane(vec3 p,vec4 n){return dot(p,n.xyz)+n.w;}
+float sdSphere(vec3 p,float r){return length(p)-r;}
+float sdCapsule(vec3 p,vec3 a,vec3 b,float r){vec3 pa=p-a,ba=b-a;float h=clamp(dot(pa,ba)/dot(ba,ba),0.0,1.0);return length(pa-ba*h)-r;}
+float sdVerticalCapsule(vec3 p,float h,float r){p.y-=clamp(p.y,0.0,h);return length(p)-r;}
+float sdEllipsoid(in vec3 p,in vec3 r){float k0=length(p/r),k1=length(p/(r*r));return k0*(k0-1.0)/k1;}
+float opSmoothUnion(float d1,float d2,float k){float h=clamp(0.5+0.5*(d2-d1)/k,0.0,1.0);return mix(d2,d1,h)-k*h*(1.0-h);}
+float hash2(vec2 p){return fract(sin(1.0+dot(p,vec2(127.1,311.7)))*43758.545);}
+float noise(in vec3 x){
+  vec3 p=floor(x),f=fract(x);f=f*f*(3.0-2.0*f);
+  vec2 uv=(p.xy+vec2(37.0,17.0)*p.z)+f.xy;
+  vec2 rg=textureLod(iChannel0,(uv+0.5)/256.0,0.).yx;
+  return mix(rg.x,rg.y,f.z);
+}
+vec2 cossin(float a){return vec2(cos(a),sin(a));}
+vec3 palette(in float t,in vec3 a,in vec3 b,in vec3 c,in vec3 d){return a+b*cos(6.28318*(c*t+d));}
+float checkers(in vec3 p){vec2 s=sign(fract(p.xz*.5)-.5);return .5-.5*s.x*s.y;}
+vec2 map(in vec3 p){
+  float d2Plane=sdPlane(p,vec4(0,1,0,0));
+  vec2 grid_id=floor((p.xz+1.0)/2.0);
+  float fSeed=hash2(grid_id),fSeed2=hash2(grid_id+248.0);
+  p.xz=mod(p.xz+1.0,2.0)-1.0;
+  float a=fSeed*TWO_PI+iTime*(1.0+fSeed2*3.0)*sign(fSeed-0.5);
+  vec2 sc=cossin(a);
+  p.xz+=cossin(p.y*sign(fSeed)+iTime*(5.0+fSeed2)+fSeed*TWO_PI).yx*0.2;
+  p.y-=0.7+sin(iTime*(1.0+fSeed2*5.0)+fSeed)*0.5;
+  float h=1.0+fSeed2,r=sin(p.y*PI+fSeed*TWO_PI+iTime*10.0)*(0.05+fSeed2*0.05-0.025)+0.25;
+  float d2Body=sdVerticalCapsule(p,h,r);
+  float r2=r*2.5,armH=h*0.6+fSeed2*0.3;
+  float armL=h*0.4+fSeed*0.2+abs(sin(iTime*(1.0+fSeed*1.0)+fSeed2));
+  d2Body=opSmoothUnion(d2Body,sdCapsule(p,vec3(sc.x*r,armH,sc.y*r),vec3(sc.x*r2,armL,sc.y*r2),0.1),0.2);
+  d2Body=opSmoothUnion(d2Body,sdCapsule(p,vec3(-sc.x*r,armH,-sc.y*r),vec3(-sc.x*r2,armL,-sc.y*r2),0.1),0.2);
+  float mouthR=max(0.0,sin(iTime*(0.7+fSeed2)+fSeed)*sin(iTime*(2.0+fSeed)+fSeed2)*0.15+0.1);
+  float d2Mouth=sdSphere(p+vec3(-sc.y*r,-h*(0.7+fSeed2*0.2),sc.x*r),mouthR);
+  vec2 eye1=cossin(a+Q_PI),eye2=cossin(a+Q_PI+H_PI);
+  float eyeS=0.12;
+  float d2Eyeball=min(sdSphere(p+vec3(eye1.x*r,-h,eye1.y*r),eyeS),sdSphere(p+vec3(eye2.x*r,-h,eye2.y*r),eyeS));
+  float pupilS=0.07,r3=r+eyeS;
+  float d2Pupil=min(sdSphere(p+vec3(eye1.x*r3,-h,eye1.y*r3),pupilS),sdSphere(p+vec3(eye2.x*r3,-h,eye2.y*r3),pupilS));
+  float d2Eye=max(d2Eyeball,-d2Pupil);
+  if(d2Plane<d2Body)return vec2(-1.0,d2Plane);
+  else if(d2Eye<d2Body){if(d2Pupil<d2Eyeball)return vec2(-4.0,d2Pupil);else return vec2(-3.0,d2Eyeball);}
+  else{if(d2Body>-d2Mouth)return vec2(fSeed,d2Body);else return vec2(-2.0,-d2Mouth);}
+}
+vec3 nrm(in vec3 pos){vec3 eps=vec3(0.003,0.0,0.0);return normalize(vec3(map(pos+eps.xyy).y-map(pos-eps.xyy).y,map(pos+eps.yxy).y-map(pos-eps.yxy).y,map(pos+eps.yyx).y-map(pos-eps.yyx).y));}
+float AO(in vec3 pos,in vec3 nor){float occ=0.0,sca=1.0;for(int i=0;i<5;i++){float hr=0.01+0.10*float(i)/4.0;float dd=map(nor*hr+pos).y;occ+=-(dd-hr)*sca;sca*=0.95;}return clamp(1.0-3.0*occ,0.0,1.0);}
+float softShadows(in vec3 ro,in vec3 rd,in float mint,in float tmax){float res=1.0,t=mint;for(int i=0;i<16;i++){float h=map(ro+rd*t).y;res=min(res,7.0*h/t);t+=clamp(h,0.01,0.15);if(res<0.01||t>tmax)break;}return clamp(res,0.0,1.0);}
+vec3 intersect(in vec3 ro,in vec3 rd,in float px){vec3 res=vec3(-1.0);float t=0.0;for(int i=0;i<128;i++){vec2 IDd=map(ro+t*rd);res=vec3(t,IDd.x,float(i)/128.0);if(IDd.y<(px*t)||t>60.0)break;t+=min(IDd.y,0.4)*0.4;}return res;}
+vec3 render(in vec3 ro,in vec3 rd){
+  vec3 r=intersect(ro,rd,0.3/iResolution.y);
+  vec3 p=ro+rd*r.x,nor=nrm(p);
+  vec3 light=normalize(vec3(-0.5,2.0,-1.0));
+  float diffuse=dot(nor,light),occlusion=AO(p,nor);
+  vec3 ref=reflect(rd,nor);
+  float specular=(r.y>=0.0||r.y==-4.0)?pow(clamp(dot(ref,light),0.0,1.0),20.0):0.0;
+  float shadow=softShadows(p,light,0.01,10.0);
+  vec3 color=r.y<0.0?(r.y<-3.0?vec3(0.1):(r.y<-2.0?vec3(1.0):(r.y<-1.0?vec3(0.1):checkers(p)*vec3(0.2)+0.2))):palette(r.y*100.,vec3(0.5),vec3(0.5),vec3(0.5),vec3(0.0,0.33,0.67));
+  return vec3(1.0)*diffuse*specular+vec3(diffuse*0.5*shadow+0.5)*color;
+}
+void mainImage(out vec4 fc,in vec2 fragCoord){
+  vec2 uv=(fragCoord.xy/iResolution.xx)-vec2(0.5,0.5*iResolution.y/iResolution.x);
+  float time=iTime*0.3;
+  float cam_h=sin(time*0.5+1.0)*5.0+10.0;
+  float cam_r=sin(time*1.7+2.0)*sin(time)*5.0+cam_h;
+  vec3 ro=vec3(sin(time)*cam_r,cam_h,-cos(time)*cam_r);
+  vec3 rd=rotateX(normalize(vec3(uv,1.0)),PI/5.0);
+  fc=vec4(render(ro,rd),1.0);
+}
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+        var p7g = mkProg(fs7g);
+        if (p7g) {
+          glGhost.prog = p7g; gl.useProgram(p7g);
+          glGhost.timeLoc = gl.getUniformLocation(p7g, 'iTime');
+          glGhost.resLoc  = gl.getUniformLocation(p7g, 'iResolution');
+          gl.uniform1i(gl.getUniformLocation(p7g, 'iChannel0'), 0);
+        }
+
+        // ── Mode 8: Electric Fence (CC0) ──
+        var fs8 = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+out vec4 fragColor;
+float rand(float v){return fract(sin(v)*5364.54367);}
+float noise(float v){float i=floor(v),f=fract(v),a=rand(i),b=rand(i+1.0);return mix(a,b,smoothstep(0.0,1.0,f));}
+vec2 rotate2D(float angle,vec2 uv){return mat2(cos(angle),-sin(angle),sin(angle),cos(angle))*uv;}
+float hex(vec2 p,float thickness){
+  p.x*=0.57735*2.0;p.y+=mod(floor(p.x),2.0)*0.5;
+  p=abs(mod(p,1.0)-0.5);float sm=thickness*0.5;
+  return smoothstep(thickness+sm,thickness-sm,abs(max(p.x*1.5+p.y,p.y*2.0)-1.0));
+}
+vec3 pallete(){
+  vec3 ORANGE=vec3(0.7,0.3,0.1),BROWN=vec3(0.5,0.35,0.2),PURPLE=vec3(0.6,0.2,0.5),RED=vec3(0.7,0.1,0.2);
+  vec3 c1=mix(ORANGE,PURPLE,noise(iTime*0.55+185.43));
+  vec3 c2=mix(BROWN,RED,noise(iTime*0.45+1485.34));
+  return mix(c1,c2,noise(iTime*0.5+432.63));
+}
+void mainImage(out vec4 fc,in vec2 fragCoord){
+  vec2 uv=(fragCoord-iResolution.xy*0.5)/iResolution.y;
+  uv=rotate2D((noise(iTime*0.05+534.453)-0.5)*6.28318,uv);
+  float tiles=sin(iTime*0.5+12.5)*6.0+9.0;
+  vec3 pal=pallete();
+  vec3 col=pal*0.6;
+  float scaleAnim=0.15*sin(iTime*1.3+4324.0)+0.2;
+  vec2 cameraAnim=(vec2(noise(iTime*0.15+123.25),noise(iTime*0.2+1544.123))-0.5)*10.0;
+  float scale=1.0;
+  for(int i=1;i<=6;i++){
+    float thicknessAnim=0.08*sin(0.9*iTime+float(i)*0.6)+0.1;
+    float h=hex((scale*uv*tiles)+cameraAnim,thicknessAnim);
+    vec3 c=float(i)*pal*h;
+    c*=mix(0.9,-noise(iTime*0.5+1515.11)*0.6,step(0.5,float(i%2)));
+    c+=mix(0.2,-0.2,hex(5.0*uv,0.6))*h;
+    col+=(1.0-length(uv))*c;
+    scale-=scaleAnim/6.0;
+  }
+  fc=vec4(col,1.0);
+}
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+        var p8 = mkProg(fs8);
+        if (p8) {
+          glFence.prog = p8; gl.useProgram(p8);
+          glFence.timeLoc = gl.getUniformLocation(p8, 'iTime');
+          glFence.resLoc  = gl.getUniformLocation(p8, 'iResolution');
+        }
+
+        // ── Mode 9: Value Noise (Inigo Quilez, MIT License) ──
+        var fs9 = `#version 300 es
+precision highp float;
+uniform vec3 iResolution;
+uniform float iTime;
+out vec4 fragColor;
+float hash(in ivec2 q){int n=q.x*131+q.y*57;n=(n<<13)^n;n=n*(n*n*15731+789221)+1376312589;return float((n>>8)&0x007fffff)/float(0x007fffff);}
+float noise(in vec2 x,in int p){ivec2 i=ivec2(floor(x));vec2 f=fract(x);f=f*f*(3.0-2.0*f);return mix(mix(hash((i+ivec2(0,0))&(p-1)),hash((i+ivec2(1,0))&(p-1)),f.x),mix(hash((i+ivec2(0,1))&(p-1)),hash((i+ivec2(1,1))&(p-1)),f.x),f.y);}
+float fbm(in vec2 x,in int p){float f=0.0,s=0.5;for(int i=0;i<9;i++){f+=s*noise(x,p);s*=0.5;x*=2.0;p*=2;}return f;}
+void mainImage(out vec4 fc,in vec2 fragCoord){
+  vec2 p=(2.0*fragCoord-iResolution.xy)/iResolution.y;
+  bool polar=fract(iTime/6.0)>0.5;
+  vec2 q=polar?vec2(4.0+4.0*atan(p.y,p.x)/3.1415927,length(p)):p*8.0;
+  q+=0.5*iTime;
+  const int pe=8;
+  float f=fbm(q,pe);
+  vec3 col=vec3(f);
+  if(!polar){
+    vec2 w=smoothstep(0.0,0.01,abs(mod(8.0*p+float(pe/2),float(pe))/float(pe)-0.5));
+    col=mix(col,vec3(1.0,0.7,0.0),(1.0-w.x*w.y)*smoothstep(0.8,0.9,sin(iTime)));
+  }
+  fc=vec4(col,1.0);
+}
+void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
+        var p9 = mkProg(fs9);
+        if (p9) {
+          glNoise.prog = p9; gl.useProgram(p9);
+          glNoise.timeLoc = gl.getUniformLocation(p9, 'iTime');
+          glNoise.resLoc  = gl.getUniformLocation(p9, 'iResolution');
+        }
+      })();
+
+      function renderGL1() {
+        if (!gl || !glVol.prog) return;
+        gl.useProgram(glVol.prog);
+        for (var i = 0; i < 512; i++) {
+          var vi = (smoothed[Math.floor(i * N / 512)] || 0) * 220 | 0;
+          glAudioData[i*4] = glAudioData[i*4+1] = glAudioData[i*4+2] = vi;
+          glAudioData[i*4+3] = 255;
+        }
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, glVol.tex0);
+        gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, 512, 1, gl.RGBA, gl.UNSIGNED_BYTE, glAudioData);
+        gl.activeTexture(gl.TEXTURE1);
+        gl.bindTexture(gl.TEXTURE_2D, glVol.tex1);
+        gl.uniform1i(gl.getUniformLocation(glVol.prog, 'iChannel0'), 0);
+        gl.uniform1i(gl.getUniformLocation(glVol.prog, 'iChannel1'), 1);
+        gl.uniform1f(glVol.timeLoc, t / 60.0);
+        gl.uniform3f(glVol.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL2() {
+        if (!gl || !glStar.prog) return;
+        gl.useProgram(glStar.prog);
+        var mx = Math.sin(t * 0.007) * glCanvas.width  * 0.42 + glCanvas.width  * 0.5;
+        var my = Math.sin(t * 0.005) * glCanvas.height * 0.42 + glCanvas.height * 0.5;
+        gl.uniform1f(glStar.timeLoc, t / 60.0);
+        gl.uniform3f(glStar.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.uniform4f(glStar.mouseLoc, mx, my, 0.0, 0.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL3() {
+        if (!gl || !glVortex.prog) return;
+        gl.useProgram(glVortex.prog);
+        gl.uniform1f(glVortex.timeLoc, t / 60.0);
+        gl.uniform3f(glVortex.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL4() {
+        if (!gl || !glSquares.prog) return;
+        gl.useProgram(glSquares.prog);
+        gl.uniform1f(glSquares.timeLoc, t / 60.0);
+        gl.uniform3f(glSquares.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL5() {
+        if (!gl || !glOrigami.prog) return;
+        gl.useProgram(glOrigami.prog);
+        gl.uniform1f(glOrigami.timeLoc, t / 60.0);
+        gl.uniform3f(glOrigami.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL6() {
+        if (!gl || !glTunnel.prog) return;
+        gl.useProgram(glTunnel.prog);
+        gl.uniform1f(glTunnel.timeLoc, t / 60.0);
+        gl.uniform3f(glTunnel.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL7() {
+        if (!gl || !glGhost.prog || !glVol.tex1) return;
+        gl.useProgram(glGhost.prog);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, glVol.tex1);
+        gl.uniform1i(gl.getUniformLocation(glGhost.prog, 'iChannel0'), 0);
+        gl.uniform1f(glGhost.timeLoc, t / 60.0);
+        gl.uniform3f(glGhost.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL8() {
+        if (!gl || !glFence.prog) return;
+        gl.useProgram(glFence.prog);
+        gl.uniform1f(glFence.timeLoc, t / 60.0);
+        gl.uniform3f(glFence.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function renderGL9() {
+        if (!gl || !glNoise.prog) return;
+        gl.useProgram(glNoise.prog);
+        gl.uniform1f(glNoise.timeLoc, t / 60.0);
+        gl.uniform3f(glNoise.resLoc, glCanvas.width, glCanvas.height, 1.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      function drawImagePanel(px, py, pw, ph) {
+        ctx.fillStyle = '#080810'; ctx.fillRect(px-5, py-5, pw+10, ph+10);
+        ctx.fillStyle = '#0e0e1a'; ctx.fillRect(px-2, py-2, pw+4,  ph+4);
+        ctx.save();
+        ctx.imageSmoothingEnabled = (fxSrc === glCanvas);
+        ctx.drawImage(fxSrc, px, py, pw, ph);
+        // subtle audio brightness pulse on top
+        var energy = favg(0, 20);
+        ctx.globalAlpha = energy * 0.12;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(px, py, pw, ph);
+        ctx.restore();
+      }
+
+      // ── A: Background ──
+      function drawBg() {
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, W, H);
+        var b = favg(0, 3);
+        var g = ctx.createRadialGradient(lay.cx, H * 0.4, 0, lay.cx, H * 0.4, Math.max(W, H) * 0.72);
+        g.addColorStop(0,   'rgba(8,20,70,'  + (0.4  + b * 0.45) + ')');
+        g.addColorStop(0.5, 'rgba(3,8,30,'   + (0.15 + b * 0.2)  + ')');
+        g.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      }
+
+      function drawTruss(y, thick) {
+        ctx.save();
+        ctx.fillStyle = '#1e1e2e';
+        ctx.fillRect(lay.trussL, y - thick / 2, lay.trussR - lay.trussL, thick);
+        ctx.fillStyle = '#2a2a40';
+        ctx.fillRect(lay.trussL, y - thick / 2, lay.trussR - lay.trussL, thick * 0.28);
+        ctx.strokeStyle = '#141420'; ctx.lineWidth = 1;
+        var sp = 38;
+        for (var x = lay.trussL; x < lay.trussR; x += sp) {
+          ctx.beginPath(); ctx.moveTo(x, y - thick/2); ctx.lineTo(x + sp/2, y + thick/2); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(x + sp/2, y + thick/2); ctx.lineTo(x + sp, y - thick/2); ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function drawTrussLights(y, count) {
+        var sp = (lay.trussR - lay.trussL) / (count - 1);
+        for (var i = 0; i < count; i++) {
+          var lx  = lay.trussL + i * sp;
+          var f   = freq((i * 4) % N);
+          var tx  = lay.cx + Math.sin(t * 0.008 + i * 0.9) * W * 0.18;
+          var ty  = lay.floorY + H * 0.12;
+          var ang = Math.atan2(ty - y, tx - lx);
+          var sw  = 0.05 + f * 0.09;
+          var dst = Math.hypot(tx - lx, ty - y);
+          if (f > 0.1) {
+            ctx.save();
+            ctx.globalAlpha = 0.04 + f * 0.13;
+            var hue = 200 + i * 22;
+            var cg = ctx.createLinearGradient(lx, y, tx, ty);
+            cg.addColorStop(0, 'hsla(' + hue + ',100%,75%,0.9)');
+            cg.addColorStop(1, 'hsla(' + hue + ',100%,60%,0)');
+            ctx.fillStyle = cg;
+            ctx.beginPath();
+            ctx.moveTo(lx, y);
+            ctx.lineTo(lx + Math.cos(ang - sw) * dst * 1.3, y + Math.sin(ang - sw) * dst * 1.3);
+            ctx.lineTo(lx + Math.cos(ang + sw) * dst * 1.3, y + Math.sin(ang + sw) * dst * 1.3);
+            ctx.closePath(); ctx.fill(); ctx.restore();
+          }
+          ctx.save();
+          ctx.globalAlpha  = 0.45 + f * 0.55;
+          ctx.shadowColor  = 'hsl(' + (195 + i * 22) + ',100%,85%)';
+          ctx.shadowBlur   = 8 + f * 18;
+          ctx.fillStyle    = '#fff';
+          ctx.beginPath(); ctx.arc(lx, y, 2 + f * 3, 0, Math.PI * 2); ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      function drawULogo() {
+        var b   = favg(0, 2);
+        var s   = lay.logoSize;
+        var cx2 = lay.cx, cy2 = lay.logoY + s * 0.62;
+        var alpha = 0.65 + b * 0.35;
+        ctx.save();
+        ctx.textAlign    = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font         = 'bold ' + (s * 1.35) + 'px system-ui, sans-serif';
+        ctx.letterSpacing = (s * 0.08) + 'px';
+        // outer glow pass
+        ctx.shadowColor  = 'rgba(255,210,40,' + alpha + ')';
+        ctx.shadowBlur   = 22 + b * 40;
+        ctx.fillStyle    = 'rgba(255,210,40,' + alpha + ')';
+        ctx.fillText('AZQATO', cx2, cy2);
+        // bright core pass
+        ctx.shadowBlur   = 6 + b * 12;
+        ctx.fillStyle    = 'rgba(255,235,130,' + (0.85 + b * 0.15) + ')';
+        ctx.fillText('AZQATO', cx2, cy2);
+        ctx.restore();
+      }
+
+      // ── B: Screen grid helper + all screen zones ──
+      function drawGrid(px, py, pw, ph, cols, rows, cellFn) {
+        var gap   = Math.max(2, pw / (cols * 9));
+        var cellW = (pw - gap * (cols + 1)) / cols;
+        var cellH = (ph - gap * (rows + 1)) / rows;
+        ctx.fillStyle = '#080810'; ctx.fillRect(px - 5, py - 5, pw + 10, ph + 10);
+        ctx.fillStyle = '#0e0e1a'; ctx.fillRect(px - 2, py - 2, pw + 4,  ph + 4);
+        for (var r = 0; r < rows; r++) {
+          for (var c = 0; c < cols; c++) {
+            var res = cellFn(c, r, cols, rows);
+            var x   = px + gap + c * (cellW + gap);
+            var y   = py + gap + r * (cellH + gap);
+            ctx.save();
+            ctx.globalAlpha = res.a;
+            if (res.a > 0.18) { ctx.shadowColor = res.color; ctx.shadowBlur = res.a * 13; }
+            ctx.fillStyle = res.color;
+            ctx.fillRect(x, y, cellW, cellH);
+            ctx.restore();
+          }
+        }
+      }
+
+      function mainCell(c, r, cols, rows) {
+        var f  = freq(Math.floor((c / cols) * N * 0.78));
+        var th = 1 - (r + 1) / rows;
+        if (f < th) return { color: '#04040e', a: 1 };
+        var hue = 188 + (c / cols) * 75;
+        return { color: 'hsl(' + hue + ',100%,' + (42 + (f - th) * 120) + '%)', a: 0.82 + f * 0.18 };
+      }
+
+      function wingCell(c, r, cols, rows, fOff) {
+        var f  = freq(Math.floor(fOff + (c / cols) * N * 0.28) % N);
+        var th = 1 - (r + 1) / rows;
+        if (f < th) return { color: '#03030c', a: 1 };
+        var hue = 258 + (r / rows) * 65;
+        return { color: 'hsl(' + hue + ',100%,' + (38 + f * 38) + '%)', a: 0.78 + f * 0.22 };
+      }
+
+      function outerCell(c, r, cols, rows, side) {
+        var fi = side === 'L' ? r * 2 : (N - 1 - r * 2);
+        var f  = freq(Math.abs(fi) % N);
+        var mid = rows / 2, amp = f * rows * 0.44, dist = Math.abs(r - mid);
+        if (dist > amp) return { color: '#030308', a: 1 };
+        var hue = 168 + (1 - dist / (rows / 2)) * 45;
+        return { color: 'hsl(' + hue + ',100%,' + (28 + f * 48) + '%)', a: 0.72 + f * 0.28 };
+      }
+
+      function boothCell(c, r, cols, rows) {
+        var f  = freq(Math.floor((c / cols) * N * 0.38));
+        var th = 1 - (r + 1) / rows;
+        if (f < th) return { color: '#040410', a: 1 };
+        var hue = 198 + c * 14;
+        return { color: 'hsl(' + hue + ',100%,' + (40 + f * 42) + '%)', a: 0.88 };
+      }
+
+      function drawWingScreen(side) {
+        var x = side === 'L' ? lay.wingLX : lay.wingRX;
+        var y = side === 'L' ? lay.wingLY : lay.wingRY;
+        var w = side === 'L' ? lay.wingLW : lay.wingRW;
+        var h = side === 'L' ? lay.wingLH : lay.wingRH;
+        var pivot = side === 'L' ? x + w : x;
+        var angle = side === 'L' ? lay.wingAngle : -lay.wingAngle;
+        var fOff  = side === 'L' ? 4 : N * 0.5;
+        ctx.save();
+        ctx.translate(pivot, y + h * 0.5);
+        ctx.rotate(angle * Math.PI / 180);
+        ctx.translate(-pivot, -(y + h * 0.5));
+        if (screenMode === 0) {
+          drawGrid(x, y, w, h, 6, 9, function(c, r, cs, rs){ return wingCell(c, r, cs, rs, fOff); });
+        } else {
+          drawImagePanel(x, y, w, h);
+        }
+        ctx.restore();
+      }
+
+      function drawOuterScreen(side) {
+        var x = side === 'L' ? lay.outerLX : lay.outerRX;
+        var y = side === 'L' ? lay.outerLY : lay.outerRY;
+        var w = side === 'L' ? lay.outerLW : lay.outerRW;
+        var h = side === 'L' ? lay.outerLH : lay.outerRH;
+        var pivot = side === 'L' ? x + w : x;
+        var angle = side === 'L' ? lay.outerAngle : -lay.outerAngle;
+        var fOff  = side === 'L' ? 2 : N * 0.55;
+        ctx.save();
+        ctx.translate(pivot, y + h * 0.5);
+        ctx.rotate(angle * Math.PI / 180);
+        ctx.translate(-pivot, -(y + h * 0.5));
+        if (screenMode === 0) {
+          drawGrid(x, y, w, h, 4, 9, function(c, r, cs, rs){ return wingCell(c, r, cs, rs, fOff); });
+        } else {
+          drawImagePanel(x, y, w, h);
+        }
+        ctx.restore();
+      }
+
+      // ── C: Triangle, stage floor, booth, fire ──
+      function drawTriangle() {
+        var b   = favg(0, 3), m = favg(8, 20);
+        var cx2 = lay.triCx;
+        var hw  = lay.triHW + b * lay.triHW * 0.12;
+        var pts = [[cx2, lay.triTop], [cx2 - hw, lay.triBot], [cx2 + hw, lay.triBot]];
+        ctx.save();
+        ctx.shadowBlur = 18 + b * 38; ctx.shadowColor = 'rgba(0,210,255,' + (0.5 + b * 0.5) + ')';
+        ctx.strokeStyle = 'rgba(0,210,255,' + (0.55 + b * 0.45) + ')';
+        ctx.lineWidth = 2 + b * 3; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); ctx.lineTo(pts[1][0], pts[1][1]);
+        ctx.lineTo(pts[2][0], pts[2][1]); ctx.closePath(); ctx.stroke();
+        // inner inverted triangle
+        var sc = 0.48 + m * 0.14;
+        var my = (lay.triTop + lay.triBot) / 2;
+        ctx.lineWidth = 1.5 + m * 2; ctx.shadowBlur = 12 + m * 22;
+        ctx.strokeStyle = 'rgba(180,90,255,' + (0.48 + m * 0.52) + ')';
+        ctx.beginPath();
+        ctx.moveTo(cx2 + (pts[1][0] - cx2) * sc, my + (pts[1][1] - my) * sc);
+        ctx.lineTo(cx2 + (pts[0][0] - cx2) * sc, my + (pts[0][1] - my) * sc);
+        ctx.lineTo(cx2 + (pts[2][0] - cx2) * sc, my + (pts[2][1] - my) * sc);
+        ctx.closePath(); ctx.stroke();
+        // chasing dots along outer edge
+        var dp = (t * 0.006) % 1;
+        for (var di = 0; di < 10; di++) {
+          var p  = (dp + di / 10) % 1;
+          var si = Math.floor(p * 3), sf = (p * 3) % 1;
+          var p1 = pts[si], p2 = pts[(si + 1) % 3];
+          var df = freq((di * 4) % N);
+          ctx.globalAlpha = 0.38 + df * 0.62;
+          ctx.shadowBlur = 5 + df * 10; ctx.shadowColor = '#00eeff'; ctx.fillStyle = '#aaffff';
+          ctx.beginPath();
+          ctx.arc(p1[0] + (p2[0] - p1[0]) * sf, p1[1] + (p2[1] - p1[1]) * sf, 2 + df * 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function drawStageFloor() {
+        var cx2 = lay.cx, sy = lay.floorY, by = lay.floorBotY;
+        var tw  = lay.floorTopW, bw = lay.floorBotW;
+        var b   = favg(0, 3);
+        ctx.save();
+        var g = ctx.createLinearGradient(0, sy, 0, by);
+        g.addColorStop(0, '#090918'); g.addColorStop(1, '#040410');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.moveTo(cx2 - tw/2, sy); ctx.lineTo(cx2 + tw/2, sy);
+        ctx.lineTo(cx2 + bw/2, by); ctx.lineTo(cx2 - bw/2, by); ctx.closePath(); ctx.fill();
+        // grid
+        ctx.globalAlpha = 0.07 + b * 0.11; ctx.strokeStyle = '#0055bb'; ctx.lineWidth = 1;
+        for (var i = 1; i < 8; i++) {
+          var fr = i / 8, lw2 = tw + (bw - tw) * fr, ly2 = sy + (by - sy) * fr;
+          ctx.beginPath(); ctx.moveTo(cx2 - lw2/2, ly2); ctx.lineTo(cx2 + lw2/2, ly2); ctx.stroke();
+        }
+        for (var j = -5; j <= 5; j++) {
+          ctx.beginPath(); ctx.moveTo(cx2 + j * (tw/11), sy); ctx.lineTo(cx2 + j * (bw/9), by); ctx.stroke();
+        }
+        // front LED strip
+        ctx.globalAlpha = 1;
+        var sg = ctx.createLinearGradient(cx2 - bw/2, 0, cx2 + bw/2, 0);
+        sg.addColorStop(0,    'hsla(290,100%,55%,' + (0.12 + b * 0.88) + ')');
+        sg.addColorStop(0.25, 'hsla(200,100%,60%,' + (0.2  + b * 0.8)  + ')');
+        sg.addColorStop(0.5,  'hsla(50,100%,65%,'  + (0.25 + b * 0.75) + ')');
+        sg.addColorStop(0.75, 'hsla(200,100%,60%,' + (0.2  + b * 0.8)  + ')');
+        sg.addColorStop(1,    'hsla(290,100%,55%,' + (0.12 + b * 0.88) + ')');
+        ctx.strokeStyle = sg; ctx.lineWidth = 4 + b * 7;
+        ctx.shadowColor = '#4488ff'; ctx.shadowBlur = 10 + b * 22;
+        ctx.beginPath(); ctx.moveTo(cx2 - bw/2, by); ctx.lineTo(cx2 + bw/2, by); ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawBooth() {
+        var b = favg(0, 2), m = favg(8, 15);
+        var bx = lay.boothX, by2 = lay.boothY, bw = lay.boothW, bh = lay.boothH;
+        drawGrid(lay.bsX, lay.bsY, lay.bsW, lay.bsH, 5, 4, boothCell);
+        ctx.save();
+        var bg = ctx.createLinearGradient(0, by2, 0, by2 + bh);
+        bg.addColorStop(0, '#181828'); bg.addColorStop(1, '#0c0c1c');
+        ctx.fillStyle = bg; ctx.shadowColor = 'rgba(0,140,255,' + (0.18 + b * 0.52) + ')';
+        ctx.shadowBlur = 14 + b * 24; ctx.fillRect(bx, by2, bw, bh);
+        ctx.strokeStyle = 'hsl(210,100%,' + (38 + b * 32) + '%)';
+        ctx.lineWidth = 1.5; ctx.shadowBlur = 7 + b * 13; ctx.shadowColor = '#0088ff';
+        ctx.strokeRect(bx, by2, bw, bh);
+        ctx.shadowBlur = 0; ctx.fillStyle = '#131325';
+        ctx.fillRect(bx + bw*0.04, by2 + bh*0.12, bw*0.27, bh*0.72);
+        ctx.fillRect(bx + bw*0.69, by2 + bh*0.12, bw*0.27, bh*0.72);
+        ctx.fillRect(bx + bw*0.35, by2 + bh*0.16, bw*0.30, bh*0.76);
+        ctx.globalAlpha = 0.3 + m * 0.7;
+        ctx.fillStyle = 'hsl(200,100%,65%)'; ctx.shadowColor = 'hsl(200,100%,65%)'; ctx.shadowBlur = 4 + m * 8;
+        ctx.fillRect(bx + bw*0.07, by2 + bh*0.18, bw*0.09, bh*0.34);
+        ctx.fillRect(bx + bw*0.84, by2 + bh*0.18, bw*0.09, bh*0.34);
+        ctx.restore();
+      }
+
+      var fireH = [0,0,0,0];
+      function drawFire() {
+        var b = favg(0, 2);
+        for (var i = 0; i < lay.fireXs.length; i++) {
+          var tgt = b > 0.52 ? (b + freq((i*7+10)%N)*0.3) * H * 0.20 : 0;
+          fireH[i] += (tgt - fireH[i]) * 0.16;
+          if (fireH[i] < 3) continue;
+          var fx = lay.fireXs[i], fy = lay.fireY, fh = fireH[i];
+          var fw = W * 0.038 + Math.sin(t * 0.18 + i) * W * 0.005;
+          ctx.save();
+          var grd = ctx.createLinearGradient(fx, fy, fx, fy - fh);
+          grd.addColorStop(0,    'rgba(255,75,0,0.95)');
+          grd.addColorStop(0.3,  'rgba(255,135,0,0.7)');
+          grd.addColorStop(0.65, 'rgba(255,215,0,0.3)');
+          grd.addColorStop(1,    'rgba(255,255,200,0)');
+          ctx.shadowColor = 'rgba(255,90,0,0.8)'; ctx.shadowBlur = 18 + b * 28;
+          ctx.beginPath();
+          ctx.moveTo(fx - fw*0.5, fy);
+          ctx.quadraticCurveTo(fx - fw*0.55 + Math.sin(t*0.14+i)*fw*0.28, fy - fh*0.5,
+                               fx + Math.sin(t*0.1+i*2)*fw*0.18, fy - fh);
+          ctx.quadraticCurveTo(fx + fw*0.55 + Math.cos(t*0.14+i)*fw*0.28, fy - fh*0.5,
+                               fx + fw*0.5, fy);
+          ctx.closePath(); ctx.fillStyle = grd; ctx.fill();
+          var cg = ctx.createLinearGradient(fx, fy, fx, fy - fh*0.42);
+          cg.addColorStop(0, 'rgba(255,255,210,0.88)'); cg.addColorStop(1, 'rgba(255,175,0,0)');
+          ctx.beginPath();
+          ctx.moveTo(fx - fw*0.14, fy);
+          ctx.quadraticCurveTo(fx + Math.sin(t*0.11+i)*fw*0.09, fy - fh*0.28, fx, fy - fh*0.48);
+          ctx.quadraticCurveTo(fx + Math.cos(t*0.11+i)*fw*0.09, fy - fh*0.28, fx + fw*0.14, fy);
+          ctx.closePath(); ctx.fillStyle = cg; ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      // ── D: Lasers, beat flash, crowd ──
+      // Two laser fixture units, each has 4 possible beam angles, randomly shows 1-4 at a time.
+      var laserFixtures = [
+        { xOff: -0.43, beamAngs: [-68, -52, -38, -22], active: 2, timer: 0 },
+        { xOff:  0.43, beamAngs: [-158, -142, -128, -112], active: 2, timer: 0 },
+      ];
+
+      function drawLaserFixture(fx, fy, energy) {
+        var hr  = W * 0.032; // head radius
+        var hcy = fy - hr * 1.1; // head center Y (above base)
+
+        ctx.save();
+
+        // Yoke arms
+        ctx.strokeStyle = '#252535'; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(fx - hr * 0.7, fy); ctx.lineTo(fx - hr * 0.7, hcy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(fx + hr * 0.7, fy); ctx.lineTo(fx + hr * 0.7, hcy); ctx.stroke();
+
+        // Base plate
+        ctx.fillStyle = '#1c1c28';
+        ctx.fillRect(fx - hr * 1.0, fy, hr * 2, H * 0.016);
+        ctx.strokeStyle = '#2e2e42'; ctx.lineWidth = 1;
+        ctx.strokeRect(fx - hr * 1.0, fy, hr * 2, H * 0.016);
+
+        // Barrel outer ring
+        ctx.beginPath(); ctx.arc(fx, hcy, hr, 0, Math.PI * 2);
+        ctx.fillStyle = '#14141e'; ctx.fill();
+        ctx.strokeStyle = '#303045'; ctx.lineWidth = 2.5; ctx.stroke();
+
+        // Middle ring
+        ctx.beginPath(); ctx.arc(fx, hcy, hr * 0.76, 0, Math.PI * 2);
+        ctx.strokeStyle = '#1e1e2e'; ctx.lineWidth = 2; ctx.stroke();
+
+        // Lens gradient (face-on circular lens)
+        var lg = ctx.createRadialGradient(fx, hcy, 0, fx, hcy, hr * 0.55);
+        lg.addColorStop(0,   'rgba(210,255,255,' + (0.92 + energy * 0.08) + ')');
+        lg.addColorStop(0.25,'rgba(0,230,255,'   + (0.80 + energy * 0.20) + ')');
+        lg.addColorStop(0.65,'rgba(0,120,180,0.45)');
+        lg.addColorStop(1,   'rgba(0,40,80,0.0)');
+        ctx.beginPath(); ctx.arc(fx, hcy, hr * 0.55, 0, Math.PI * 2);
+        ctx.fillStyle = lg; ctx.fill();
+
+        // Hot-spot bloom
+        ctx.shadowColor = '#00eeff';
+        ctx.shadowBlur  = 18 + energy * 32;
+        ctx.globalAlpha = 0.55 + energy * 0.45;
+        ctx.fillStyle   = '#aaffff';
+        ctx.beginPath(); ctx.arc(fx, hcy, hr * 0.15, 0, Math.PI * 2); ctx.fill();
+
+        ctx.restore();
+        return hcy; // beam origin Y
+      }
+
+      function drawLasers() {
+        var pk  = favg(0, N - 1);
+        var m   = favg(8, 25);
+        var len = Math.max(W, H) * 1.4;
+
+        laserFixtures.forEach(function (fix, fi) {
+          // Step active count up or down by 1, clamped 1–4
+          fix.timer--;
+          if (fix.timer <= 0) {
+            var step = Math.random() < 0.5 ? -1 : 1;
+            fix.active = Math.min(4, Math.max(1, fix.active + step));
+            fix.timer  = 45 + Math.floor(Math.random() * 75);
+          }
+
+          var fx  = lay.cx + fix.xOff * W;
+          var fy  = lay.fireY;
+          var hcy = drawLaserFixture(fx, fy, m);
+
+          for (var i = 0; i < fix.active; i++) {
+            var angIdx = Math.floor(i * fix.beamAngs.length / fix.active);
+            var deg    = fix.beamAngs[angIdx];
+            var ang    = deg * Math.PI / 180 + Math.sin(t * 0.004 + fi * 2 + i * 0.55) * 0.05;
+            var hue    = (t * 1.4 + i * 60 + fi * 150) % 360;
+            var col    = 'hsl(' + hue + ',100%,65%)';
+            var f      = freq((fi * 16 + i * 6 + 8) % N);
+            ctx.save();
+            ctx.globalAlpha = 0.30 + f * 0.70;
+            ctx.strokeStyle = col;
+            ctx.lineWidth   = 1.5 + f * 2;
+            ctx.shadowColor = col;
+            ctx.shadowBlur  = 6 + f * 15;
+            ctx.lineCap     = 'round';
+            ctx.beginPath();
+            ctx.moveTo(fx, hcy);
+            ctx.lineTo(fx + Math.cos(ang) * len, hcy + Math.sin(ang) * len);
+            ctx.stroke();
+            ctx.restore();
+          }
+        });
+
+        // Hard peak: beams surge bright
+        if (pk > 0.80) {
+          var fl = (pk - 0.80) * 4;
+          laserFixtures.forEach(function (fix, fi) {
+            var fx  = lay.cx + fix.xOff * W;
+            var hcy = lay.fireY - W * 0.032 * 1.1;
+            for (var i = 0; i < fix.active; i++) {
+              var angIdx = Math.floor(i * fix.beamAngs.length / fix.active);
+              var ang    = fix.beamAngs[angIdx] * Math.PI / 180;
+              var hue    = (t * 1.4 + i * 60 + fi * 150) % 360;
+              ctx.save();
+              ctx.globalAlpha = fl * 0.55;
+              ctx.strokeStyle = 'hsl(' + hue + ',100%,75%)';
+              ctx.lineWidth   = 4 + fl * 5;
+              ctx.shadowColor = 'hsl(' + hue + ',100%,65%)';
+              ctx.shadowBlur  = 32;
+              ctx.lineCap     = 'round';
+              ctx.beginPath();
+              ctx.moveTo(fx, hcy);
+              ctx.lineTo(fx + Math.cos(ang) * len, hcy + Math.sin(ang) * len);
+              ctx.stroke();
+              ctx.restore();
+            }
+          });
+        }
+      }
+
+      function drawBeatFlash() {
+        var pk = favg(0, 5);
+        if (pk < 0.76) return;
+        ctx.save(); ctx.globalAlpha = (pk - 0.76) * 0.18;
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+        ctx.restore();
+      }
+
+      function drawCrowd() {
+        var b = favg(0, 2);
+        ctx.save(); ctx.fillStyle = '#000';
+        for (var i = 0; i < 65; i++) {
+          var px = (i / 65) * W + Math.sin(i * 4.6) * (W / 95);
+          var ph = H * 0.042 + Math.abs(Math.sin(i * 2.2)) * H * 0.028;
+          var pw2 = 6 + Math.sin(i * 3.1) * 2;
+          ctx.fillRect(px - pw2/2, H - ph, pw2, ph);
+          ctx.beginPath(); ctx.arc(px, H - ph, pw2 * 0.52, 0, Math.PI * 2); ctx.fill();
+          if (i % 5 === 0 || b > 0.62) {
+            ctx.fillRect(px + pw2 * 0.25, H - ph - ph * 0.35, 2.5, ph * 0.35);
+          }
+        }
+        ctx.restore();
+      }
+
+      // ── Mode button sync ──
+      var modeBtns = document.querySelectorAll('.mode-btn');
+      function syncModeBtns() {
+        modeBtns.forEach(function(b) {
+          b.classList.toggle('active', +b.getAttribute('data-mode') === screenMode);
+        });
+      }
+      modeBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          screenMode = +btn.getAttribute('data-mode');
+          modeTimer = 0;
+          syncModeBtns();
+        });
+      });
+
+      // ── Favicon ──
       var favCanvas = document.createElement('canvas');
       favCanvas.width = favCanvas.height = 32;
       var favCtx  = favCanvas.getContext('2d');
@@ -437,19 +1746,16 @@
 
       function updateFavicon() {
         favCtx.clearRect(0, 0, 32, 32);
-        var cx = 16, cy = 16, r = 9;
         for (var i = 0; i < 12; i++) {
-          var angle  = (i / 12) * Math.PI * 2 - Math.PI / 2;
-          var f      = freq(i % N);
-          var barLen = 2 + f * 8;
-          var hue    = 280 + f * 38;
+          var ang = (i / 12) * Math.PI * 2 - Math.PI / 2;
+          var f   = freq(i * 2);
+          var hue = 195 + f * 65;
           favCtx.strokeStyle = 'hsl(' + hue + ',100%,70%)';
           favCtx.shadowColor = 'hsl(' + hue + ',100%,65%)';
-          favCtx.shadowBlur  = 3;
-          favCtx.lineWidth   = 2.5;
+          favCtx.shadowBlur  = 3; favCtx.lineWidth = 2.5;
           favCtx.beginPath();
-          favCtx.moveTo(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r);
-          favCtx.lineTo(cx + Math.cos(angle) * (r + barLen), cy + Math.sin(angle) * (r + barLen));
+          favCtx.moveTo(16 + Math.cos(ang) * 8,          16 + Math.sin(ang) * 8);
+          favCtx.lineTo(16 + Math.cos(ang) * (8 + 2 + f*8), 16 + Math.sin(ang) * (8 + 2 + f*8));
           favCtx.stroke();
         }
         favLink.href = favCanvas.toDataURL();
@@ -458,19 +1764,38 @@
       // ── Main loop ──
       function draw() {
         t++;
-        ctx.clearRect(0, 0, W, H);
-        clusters.forEach(function (cl) {
-          var perpRad = (cl.angle + 90) * Math.PI / 180;
-          for (var i = 0; i < cl.n; i++) {
-            var f      = freq(cl.fi + i);
-            var offset = (i - (cl.n - 1) / 2) * cl.gap;
-            drawBar(ctx,
-              cl.x + Math.cos(perpRad) * offset,
-              cl.y + Math.sin(perpRad) * offset,
-              62 + f * 38, 8 + f * 6, cl.angle, f
-            );
-          }
-        });
+
+        // Cycle screen mode every ~30 s (10 modes: 0=bars, 1–9=WebGL)
+        if (++modeTimer >= MODE_LEN) { modeTimer = 0; var next; do { next = Math.floor(Math.random() * 10); } while (next === screenMode); screenMode = next; syncModeBtns(); }
+        if      (screenMode === 1) renderGL1();
+        else if (screenMode === 2) renderGL2();
+        else if (screenMode === 3) renderGL3();
+        else if (screenMode === 4) renderGL4();
+        else if (screenMode === 5) renderGL5();
+        else if (screenMode === 6) renderGL6();
+        else if (screenMode === 7) renderGL7();
+        else if (screenMode === 8) renderGL8();
+        else if (screenMode === 9) renderGL9();
+        fxSrc = (screenMode >= 1 && gl) ? glCanvas : null;
+
+        drawBg();
+        drawBeatFlash();
+        drawTruss(lay.truss1Y, 12); drawTruss(lay.truss2Y, 8); drawTruss(lay.truss3Y, 5);
+        drawTrussLights(lay.truss1Y, 11); drawTrussLights(lay.truss2Y, 7);
+
+        if (screenMode === 0) {
+          drawGrid(lay.mainX, lay.mainY, lay.mainW, lay.mainH, lay.mainCols, lay.mainRows, mainCell);
+        } else {
+          drawImagePanel(lay.mainX, lay.mainY, lay.mainW, lay.mainH);
+        }
+        drawWingScreen('L'); drawWingScreen('R');
+        drawULogo();
+        drawTriangle();
+        drawStageFloor();
+        drawBooth();
+        drawFire();
+        drawLasers();
+        drawCrowd();
         if (++favTick % 3 === 0) updateFavicon();
         requestAnimationFrame(draw);
       }

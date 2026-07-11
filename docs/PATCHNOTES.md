@@ -5,6 +5,37 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.0] - 2026-07-10
+
+### Changed: `music.html` visualizer overhaul
+
+**Screen layout**
+- Replaced the 5-screen Brooklyn Mirage layout (center + 2 wings + 2 outer panels) with a cleaner 3-screen layout: one wide center screen (42% canvas width) and two independent side panels (22% each) with a visible gap between center and sides. Side panels are flat (no rotation).
+- `drawOuterScreen` removed entirely; only `drawWingScreen` remains for the side panels.
+
+**WebGL shader modes** (added 7 new GPU visualizers, modes 5-9 plus two added mid-session):
+- **Origami** (mode 5, `@XorDev`): soft-shaded folded-paper layers with bounce lighting and palette color cycling.
+- **Tunnel** (mode 6, CC0): star-shaped SDF tunnel with per-layer rotation, postprocess vignette and contrast.
+- **Ghost** (mode 7, seb chevrel 2019): ray-marched ghost dancers scene with SDF bodies, AO, soft shadows, and palette coloring; reuses the volumetric noise texture as `iChannel0`.
+- **Fence** (mode 8, CC0): layered hexagonal grid animation with animated palette and camera drift.
+- **Noise** (mode 9, Inigo Quilez MIT): value noise with fractal octaves, alternates between Cartesian and polar projection every 3 seconds.
+- Previously added: **Vortex** (mode 3, CC-BY-NC-SA-4.0 @WorkingClassHacker) and **Squares** (mode 4, CC0).
+
+**Mode system**
+- Mode count increased from 5 to 10 (modes 0–9); `% 10` cycling.
+- Auto-advance now picks a **random** mode on each 30-second tick (no immediate repeat) instead of cycling sequentially.
+- Default mode on page load changed from Bars (0) to **Squares** (4).
+- Removed Julia, Plasma, Mandelbrot, Newton, and Burning Ship canvas fractal modes (and their dead `computeFractal_REMOVED` code block).
+
+**UI / text**
+- Hero badge changed from "🎵 Now playing" to "🎵 Azqato's Music".
+- H1 heading ("Azqato's Music") made visually hidden (1×1 px clip) while remaining in the DOM for SEO and screen readers.
+- Canvas logo text changed from "AZ" to "AZQATO"; vertical position tuned.
+- Footer "Built by Azqato." background/blur pill now wraps tightly around the text instead of spanning the full footer width.
+- Mode buttons updated to match new 10-mode list: Bars, Volumetric, Stars, Vortex, Squares, Origami, Tunnel, Ghost, Fence, Noise.
+
+---
+
 ## [2.7.0] - 2026-07-09
 
 ### Changed
