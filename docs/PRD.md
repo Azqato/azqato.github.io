@@ -106,7 +106,6 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 ### Future (post-launch, not committed)
 
 - Optional GitHub API integration to auto-populate star counts and update dates.
-- Dark / light mode toggle with `localStorage` persistence and `prefers-color-scheme` default.
 - Animated section transitions on scroll.
 - Contact or hire-me section with email link or GitHub Discussions CTA.
 - Project detail modal with extended README preview.
@@ -778,7 +777,6 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 |------------|-----------------------------------|----------|
 | v2.7.0     | Code extraction + shared assets   | In Progress |
 | v2.8.0     | GitHub API integration            | Planned  |
-| v2.9.0     | Dark / light mode toggle          | Planned  |
 | v3.0.0     | Contact / hire-me section         | Planned  |
 
 ### v2.7.0: Code Extraction + Shared Assets
@@ -795,13 +793,6 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 - Cache responses in `sessionStorage` to avoid repeated calls within one visit.
 - Silent fallback to hardcoded values if rate limit is hit.
 
-### v2.9.0: Dark / Light Mode Toggle
-
-- Toggle button in nav bar.
-- Persist preference in `localStorage`.
-- Respect `prefers-color-scheme` as initial default.
-- Define light-mode CSS custom property overrides.
-
 ### v3.0.0: Contact / Hire-Me Section
 
 - New page or section with a contact CTA.
@@ -817,6 +808,7 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 | Automated affiliate link management | Affiliate programs change rarely; manual edits sufficient at this scale |
 | Analytics / user tracking         | Explicitly excluded from PRD; conflicts with privacy-conscious aesthetic |
 | Multi-page routing / SPA          | Full page loads are simpler and more reliable for a static site        |
+| Dark / light mode toggle          | The site is intentionally dark-only by design; no theme toggle will be added |
 | Project detail modals             | Current descriptions are sufficient; revisit when a project needs extended docs |
 | RSS / changelog feed              | No audience yet; revisit when monthly visitors exceed 2,000            |
 | Automated testing (CI)            | Manual QA currently in use; threshold for smoke tests met at 11 pages, candidate for v2.7.0 |
