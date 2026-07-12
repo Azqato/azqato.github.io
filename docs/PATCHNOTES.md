@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.1] - 2026-07-11
+
+### Fixed: floor reflection ghosting near the DJ booth
+- The panoramic screens' bloom effect (an upscaled, offset redraw of already-rendered panel pixels) was being mirrored onto the glossy floor by `drawReflection()`, and that mirrored band overlapped the DJ booth's position, making the booth appear doubled and blurry. Clipped a hole in the reflection draw over the booth's footprint so the reflection no longer washes over it.
+
+### Changed: DJ booth redesign
+- Replaced the flat, single `fillRect` booth panel with an actual structure: a front fascia (angled toward the crowd), raked side cheeks, and a solid base, all merged into one continuous silhouette running from the top deck down to the floor. The old design ended in a thin, near-invisible riser that read as an abrupt cutoff; the new one is grounded.
+- Moved the "AZQATO" wordmark off a fixed spot at the top of the stage truss (the old `drawULogo`, now removed) and onto the booth's fascia, keeping the same gold gradient and glow treatment. Sizing now accounts for `letterSpacing` and fits both the width and height of the fascia's text box, fixing an overflow bug where the letters bled past the panel's edges.
+- Added a top deck with a back rail (visible thickness along the rear edge instead of a flat cutoff), two CDJ silhouettes with small static jog-wheel accents (previously oversized glowing circles), and a plain static mixer panel between them, replacing the animated audio-reactive LED grid that used to sit there.
+- Removed the center laser-triangle overlay (`drawTriangle`) that floated above the booth.
+- Enlarged the booth overall and added top margin above the wordmark so it isn't crowded by the deck.
+
+---
+
 ## [2.8.0] - 2026-07-10
 
 ### Changed: `music.html` visualizer overhaul

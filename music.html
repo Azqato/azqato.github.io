@@ -353,10 +353,6 @@
 
         lay.cx = cx;
 
-        // U logo
-        lay.logoY    = H * 0.055 + 32;
-        lay.logoSize = Math.min(W, H) * 0.068;
-
         // Trusses
         lay.truss1Y = H * 0.09;
         lay.truss2Y = H * 0.14;
@@ -385,25 +381,33 @@
         lay.wingRW = W * 0.22; lay.wingRH = sH;
         lay.wingAngle = 0;
 
-        // Center triangle
-        lay.triCx  = cx;
-        lay.triTop = H * 0.530;
-        lay.triBot = H * 0.705; // bottom now sits at the booth
-        lay.triHW  = W * 0.085;
-
         // Stage floor
         lay.floorY    = H * 0.645;
         lay.floorBotY = H * 0.885;
         lay.floorTopW = W * 0.58;
         lay.floorBotW = W * 0.98;
 
-        // DJ booth (moved higher)
-        lay.boothX = cx - W * 0.095; lay.boothY = H * 0.700;
-        lay.boothW = W * 0.19;        lay.boothH = H * 0.048;
+        // DJ booth: front fascia (branded face) + raked side cheeks + top deck (CDJs/mixer)
+        lay.boothW     = W * 0.25;  lay.boothH = H * 0.10;
+        lay.boothY     = H * 0.700;
+        lay.boothFlare = 1.3;  // bottom of the fascia is wider than the top (booth viewed from below)
+        lay.boothCheek   = lay.boothW * 0.10;
+        lay.boothGroundH = lay.boothH * 1.6; // solid base extends well past the branded panel, down to the floor
 
-        // Booth mini-screen (shifted up with booth)
-        lay.bsX = cx - W * 0.065; lay.bsY = H * 0.630;
-        lay.bsW = W * 0.13;       lay.bsH = H * 0.068;
+        lay.deckH      = lay.boothH * 0.42;
+        lay.deckY      = lay.boothY - lay.deckH;
+        lay.deckFrontW = lay.boothW * 1.05;
+        lay.deckBackW  = lay.boothW * 0.85;
+
+        lay.cdjW  = lay.deckFrontW * 0.22;
+        lay.cdjH  = lay.deckH * 0.68;
+        lay.cdjY  = lay.boothY - lay.cdjH * 0.9;
+        lay.cdjLX = cx - lay.deckFrontW * 0.42;
+        lay.cdjRX = cx + lay.deckFrontW * 0.20;
+
+        // Mixer LED grid, between the two CDJs
+        lay.bsW = lay.deckFrontW * 0.24; lay.bsH = lay.cdjH * 1.1;
+        lay.bsX = cx - lay.bsW / 2;      lay.bsY = lay.cdjY - lay.bsH * 0.06;
 
         // Fire columns
         lay.fireY = lay.floorBotY;
@@ -1443,15 +1447,20 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         }
       }
 
-      function drawULogo() {
-        var b   = favg(0, 2);
-        var s   = lay.logoSize;
-        var cx2 = lay.cx, cy2 = lay.logoY + s * 0.62;
-        var alpha = 0.65 + b * 0.35;
+      // AZQATO wordmark, branded onto the booth fascia (same treatment as the old top-of-rig logo,
+      // just fitted to the fascia's box via measureText instead of a fixed size)
+      function drawBoothWordmark(cx2, cy2, maxW, maxH, b) {
         ctx.save();
         ctx.textAlign    = 'center';
         ctx.textBaseline = 'middle';
-        ctx.font         = 'bold ' + (s * 1.35) + 'px system-ui, sans-serif';
+        ctx.font = 'bold 100px system-ui, sans-serif';
+        var baseW = ctx.measureText('AZQATO').width; // at 100px, before letterSpacing
+        var letterFrac = 0.08, gaps = 5; // matches ctx.letterSpacing below: 5 gaps across 6 letters
+        var sByWidth  = maxW / (baseW / 100 + gaps * letterFrac);
+        var sByHeight = maxH / 0.72; // approx cap-height fraction of font-size for bold sans
+        var s = Math.min(sByWidth, sByHeight);
+        var alpha = 0.65 + b * 0.35;
+        ctx.font         = 'bold ' + s + 'px system-ui, sans-serif';
         ctx.letterSpacing = (s * 0.08) + 'px';
         // outer glow pass
         ctx.shadowColor  = 'rgba(255,200,30,' + alpha + ')';
@@ -1519,14 +1528,6 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         return { color: 'hsl(' + hue + ',100%,' + (28 + f * 48) + '%)', a: 0.72 + f * 0.28 };
       }
 
-      function boothCell(c, r, cols, rows) {
-        var f  = freq(Math.floor((c / cols) * N * 0.38));
-        var th = 1 - (r + 1) / rows;
-        if (f < th) return { color: '#040410', a: 1 };
-        var hue = 198 + c * 14;
-        return { color: 'hsl(' + hue + ',100%,' + (40 + f * 42) + '%)', a: 0.88 };
-      }
-
       function drawWingScreen(side) {
         var x = side === 'L' ? lay.wingLX : lay.wingRX;
         var y = side === 'L' ? lay.wingLY : lay.wingRY;
@@ -1568,43 +1569,6 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       }
 
       // ── C: Triangle, stage floor, booth, fire ──
-      function drawTriangle() {
-        var b   = favg(0, 3), m = favg(8, 20);
-        var cx2 = lay.triCx;
-        var hw  = lay.triHW + b * lay.triHW * 0.12;
-        var pts = [[cx2, lay.triTop], [cx2 - hw, lay.triBot], [cx2 + hw, lay.triBot]];
-        ctx.save();
-        ctx.shadowBlur = 18 + b * 38; ctx.shadowColor = 'rgba(0,210,255,' + (0.5 + b * 0.5) + ')';
-        ctx.strokeStyle = 'rgba(0,210,255,' + (0.55 + b * 0.45) + ')';
-        ctx.lineWidth = 2 + b * 3; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-        ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); ctx.lineTo(pts[1][0], pts[1][1]);
-        ctx.lineTo(pts[2][0], pts[2][1]); ctx.closePath(); ctx.stroke();
-        // inner inverted triangle
-        var sc = 0.48 + m * 0.14;
-        var my = (lay.triTop + lay.triBot) / 2;
-        ctx.lineWidth = 1.5 + m * 2; ctx.shadowBlur = 12 + m * 22;
-        ctx.strokeStyle = 'rgba(180,90,255,' + (0.48 + m * 0.52) + ')';
-        ctx.beginPath();
-        ctx.moveTo(cx2 + (pts[1][0] - cx2) * sc, my + (pts[1][1] - my) * sc);
-        ctx.lineTo(cx2 + (pts[0][0] - cx2) * sc, my + (pts[0][1] - my) * sc);
-        ctx.lineTo(cx2 + (pts[2][0] - cx2) * sc, my + (pts[2][1] - my) * sc);
-        ctx.closePath(); ctx.stroke();
-        // chasing dots along outer edge
-        var dp = (t * 0.006) % 1;
-        for (var di = 0; di < 10; di++) {
-          var p  = (dp + di / 10) % 1;
-          var si = Math.floor(p * 3), sf = (p * 3) % 1;
-          var p1 = pts[si], p2 = pts[(si + 1) % 3];
-          var df = freq((di * 4) % N);
-          ctx.globalAlpha = 0.38 + df * 0.62;
-          ctx.shadowBlur = 5 + df * 10; ctx.shadowColor = '#00eeff'; ctx.fillStyle = '#aaffff';
-          ctx.beginPath();
-          ctx.arc(p1[0] + (p2[0] - p1[0]) * sf, p1[1] + (p2[1] - p1[1]) * sf, 2 + df * 3, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-
       function drawStageFloor() {
         var cx2 = lay.cx, sy = lay.floorY, by = lay.floorBotY;
         var tw  = lay.floorTopW, bw = lay.floorBotW;
@@ -1662,6 +1626,16 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         reflCtx.globalCompositeOperation = 'source-over';
         // composite additively: light on a dark glossy floor
         ctx.save();
+        // punch a hole over the DJ booth so its reflected ghosting doesn't wash over the booth itself
+        var bpad = lay.boothH * 0.5;
+        var boothGroundW  = lay.boothW + ((lay.boothW * lay.boothFlare) - lay.boothW) / lay.boothH * lay.boothGroundH;
+        var boothHoleHalfW = boothGroundW / 2 + lay.boothCheek + bpad;
+        var boothHoleTop = lay.deckY - bpad;
+        var boothHoleBot = lay.boothY + lay.boothGroundH + bpad;
+        ctx.beginPath();
+        ctx.rect(0, 0, W, H);
+        ctx.rect(lay.cx - boothHoleHalfW, boothHoleTop, boothHoleHalfW * 2, boothHoleBot - boothHoleTop);
+        ctx.clip('evenodd');
         ctx.globalAlpha = 0.5;
         ctx.globalCompositeOperation = 'lighter';
         ctx.imageSmoothingEnabled = true;
@@ -1671,24 +1645,89 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
 
       function drawBooth() {
         var b = favg(0, 2), m = favg(8, 15);
-        var bx = lay.boothX, by2 = lay.boothY, bw = lay.boothW, bh = lay.boothH;
-        drawGrid(lay.bsX, lay.bsY, lay.bsW, lay.bsH, 5, 4, boothCell);
+        var cx2   = lay.cx;
+        var topW  = lay.boothW, textBotW = topW * lay.boothFlare;
+        var y0    = lay.boothY, textY1 = y0 + lay.boothH;
+        var groundY = y0 + lay.boothGroundH;
+        var slope   = (textBotW - topW) / lay.boothH;
+        var groundW = topW + slope * (groundY - y0);
+        var topX0 = cx2 - topW / 2, topX1 = cx2 + topW / 2;
+        var groundX0 = cx2 - groundW / 2, groundX1 = cx2 + groundW / 2;
+        var cheek = lay.boothCheek;
+
         ctx.save();
-        var bg = ctx.createLinearGradient(0, by2, 0, by2 + bh);
-        bg.addColorStop(0, '#181828'); bg.addColorStop(1, '#0c0c1c');
-        ctx.fillStyle = bg; ctx.shadowColor = 'rgba(0,140,255,' + (0.18 + b * 0.52) + ')';
-        ctx.shadowBlur = 14 + b * 24; ctx.fillRect(bx, by2, bw, bh);
-        ctx.strokeStyle = 'hsl(210,100%,' + (38 + b * 32) + '%)';
-        ctx.lineWidth = 1.5; ctx.shadowBlur = 7 + b * 13; ctx.shadowColor = '#0088ff';
-        ctx.strokeRect(bx, by2, bw, bh);
-        ctx.shadowBlur = 0; ctx.fillStyle = '#131325';
-        ctx.fillRect(bx + bw*0.04, by2 + bh*0.12, bw*0.27, bh*0.72);
-        ctx.fillRect(bx + bw*0.69, by2 + bh*0.12, bw*0.27, bh*0.72);
-        ctx.fillRect(bx + bw*0.35, by2 + bh*0.16, bw*0.30, bh*0.76);
-        ctx.globalAlpha = 0.3 + m * 0.7;
-        ctx.fillStyle = 'hsl(200,100%,65%)'; ctx.shadowColor = 'hsl(200,100%,65%)'; ctx.shadowBlur = 4 + m * 8;
-        ctx.fillRect(bx + bw*0.07, by2 + bh*0.18, bw*0.09, bh*0.34);
-        ctx.fillRect(bx + bw*0.84, by2 + bh*0.18, bw*0.09, bh*0.34);
+
+        // raked side cheeks, running the full height down to the ground
+        var cheekGrad = ctx.createLinearGradient(0, y0, 0, groundY);
+        cheekGrad.addColorStop(0, '#20202f'); cheekGrad.addColorStop(1, '#0a0a12');
+        ctx.fillStyle = cheekGrad; ctx.strokeStyle = '#2a2a3e'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(topX0 - cheek, y0); ctx.lineTo(topX0, y0); ctx.lineTo(groundX0, groundY); ctx.lineTo(groundX0 - cheek, groundY);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(topX1, y0); ctx.lineTo(topX1 + cheek, y0); ctx.lineTo(groundX1 + cheek, groundY); ctx.lineTo(groundX1, groundY);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+
+        // front face: one continuous panel from the branded fascia down to the ground, no seam
+        var bg = ctx.createLinearGradient(0, y0, 0, groundY);
+        bg.addColorStop(0, '#181828'); bg.addColorStop(0.35, '#0c0c1c'); bg.addColorStop(1, '#050508');
+        ctx.fillStyle = bg;
+        ctx.shadowColor = 'rgba(0,140,255,' + (0.18 + b * 0.52) + ')'; ctx.shadowBlur = 14 + b * 24;
+        ctx.beginPath();
+        ctx.moveTo(topX0, y0); ctx.lineTo(topX1, y0); ctx.lineTo(groundX1, groundY); ctx.lineTo(groundX0, groundY);
+        ctx.closePath(); ctx.fill();
+        ctx.shadowColor = '#0088ff'; ctx.shadowBlur = 7 + b * 13;
+        ctx.strokeStyle = 'hsl(210,100%,' + (38 + b * 32) + '%)'; ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // LED strip accents: one along the top edge, one marking the base of the branded panel
+        var textBotX0 = cx2 - textBotW / 2, textBotX1 = cx2 + textBotW / 2;
+        ctx.globalAlpha = 0.3 + b * 0.4; ctx.fillStyle = '#3a8fff';
+        ctx.fillRect(topX0 + topW * 0.06, y0 + lay.boothH * 0.05, topW * 0.88, Math.max(1.5, lay.boothH * 0.035));
+        ctx.globalAlpha = 0.2 + b * 0.25;
+        ctx.fillRect(textBotX0 + textBotW * 0.1, textY1 - lay.boothH * 0.06, textBotW * 0.8, Math.max(1, lay.boothH * 0.025));
+        ctx.restore();
+
+        // AZQATO wordmark, branded onto the upper panel
+        var textTop = y0 + lay.boothH * 0.32, textBot = textY1 - lay.boothH * 0.14;
+        drawBoothWordmark(cx2, (textTop + textBot) / 2, topW * 0.84, textBot - textTop, b);
+
+        // top deck: the surface the CDJs and mixer sit on
+        var deckFrontW = lay.deckFrontW, deckBackW = lay.deckBackW, deckY1 = lay.deckY;
+        ctx.save();
+        var deckGrad = ctx.createLinearGradient(cx2 - deckFrontW / 2, 0, cx2 + deckFrontW / 2, 0);
+        deckGrad.addColorStop(0, '#26263a'); deckGrad.addColorStop(0.5, '#33334c'); deckGrad.addColorStop(1, '#26263a');
+        ctx.fillStyle = deckGrad; ctx.strokeStyle = '#3a3a52'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(cx2 - deckFrontW / 2, y0); ctx.lineTo(cx2 + deckFrontW / 2, y0);
+        ctx.lineTo(cx2 + deckBackW / 2, deckY1); ctx.lineTo(cx2 - deckBackW / 2, deckY1);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+
+        // back rail: gives the deck's rear edge visible thickness instead of stopping flat
+        var railH = lay.deckH * 0.22, railBackW = deckBackW * 0.94;
+        ctx.fillStyle = '#15151f'; ctx.strokeStyle = '#40405a'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(cx2 - deckBackW / 2, deckY1); ctx.lineTo(cx2 + deckBackW / 2, deckY1);
+        ctx.lineTo(cx2 + railBackW / 2, deckY1 - railH); ctx.lineTo(cx2 - railBackW / 2, deckY1 - railH);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.restore();
+
+        // CDJ bodies + jog wheels
+        ctx.save();
+        ctx.fillStyle = '#08080e';
+        ctx.fillRect(lay.cdjLX, lay.cdjY, lay.cdjW, lay.cdjH);
+        ctx.fillRect(lay.cdjRX, lay.cdjY, lay.cdjW, lay.cdjH);
+        ctx.globalAlpha = 0.55 + m * 0.35;
+        ctx.fillStyle = 'hsl(200,90%,' + (28 + m * 20) + '%)';
+        ctx.beginPath(); ctx.arc(lay.cdjLX + lay.cdjW / 2, lay.cdjY + lay.cdjH * 0.5, lay.cdjW * 0.12, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(lay.cdjRX + lay.cdjW / 2, lay.cdjY + lay.cdjH * 0.5, lay.cdjW * 0.12, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+
+        // mixer: static panel bridging the two CDJs
+        ctx.save();
+        ctx.fillStyle = '#08080e';
+        ctx.fillRect(lay.bsX, lay.bsY, lay.bsW, lay.bsH);
         ctx.restore();
       }
 
@@ -2116,8 +2155,6 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
           drawImagePanel(lay.mainX, lay.mainY, lay.mainW, lay.mainH);
         }
         drawWingScreen('L'); drawWingScreen('R');
-        drawULogo();
-        drawTriangle();
         drawStageFloor();
         drawReflection();
         drawBooth();
