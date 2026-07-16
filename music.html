@@ -746,6 +746,10 @@
       var flashCooldown = 0;
 
       function updateLoudFlash() {
+        // No real audio feeding the analyser (nothing ever played, or the current
+        // track is paused): never flash, even though freq()'s synthetic idle wave
+        // still varies enough to occasionally look like a statistical outlier.
+        if (!analyser || !trackAudio || trackAudio.paused) { flashPulse *= 0.85; return; }
         var energy = favg(0, 20);
         if (!loudWarmed) { loudMean = energy; loudVar = 0.0004; loudWarmed = true; }
         var alpha  = 0.0016; // ~10s adaptation time constant at 60fps
