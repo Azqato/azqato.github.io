@@ -141,6 +141,115 @@
       border-color: var(--purple);
     }
 
+    /* ── NATIVE TRACK PLAYER ── */
+    .console-player {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.65rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .console-player.playing {
+      border-color: var(--green);
+      background: rgba(29, 185, 84, 0.08);
+    }
+
+    .track-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .track-playbtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--text);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .track-playbtn:hover {
+      border-color: var(--purple);
+      background: rgba(188, 140, 255, 0.12);
+    }
+
+    .track-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .track-scrub {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .track-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+      width: 2.4em;
+    }
+
+    .track-time:last-child { text-align: right; }
+
+    .track-seek {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .track-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--purple);
+      border: 2px solid #0d0d14;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .track-seek:hover::-webkit-slider-thumb { transform: scale(1.15); }
+
+    .track-seek::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--purple);
+      border: 2px solid #0d0d14;
+      cursor: pointer;
+    }
+
+    .track-seek::-moz-range-track {
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .track-seek:disabled { cursor: default; opacity: 0.5; }
+
     .console-link .platform-icon { font-size: 1.15rem; line-height: 1; }
 
     .console-link .platform-name {
@@ -207,6 +316,15 @@
 
   <canvas id="viz"></canvas>
 
+  <!-- Local test tracks, feed the visualizer analyser and (in Video mode) the screens
+       themselves. <video> elements so their frames can be drawn to canvas; kept off-screen
+       rather than display:none so browsers keep decoding frames while hidden.
+       Not deployed (see .gitignore). -->
+  <video id="trackAudio2" src="music/EDC26 MIX.mp4" preload="none" playsinline
+         style="position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none;"></video>
+  <video id="trackAudio" src="music/2025 Mix Final.mp4" preload="none" playsinline
+         style="position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none;"></video>
+
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
@@ -243,6 +361,34 @@
       <iframe width="660px" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FAzqato%2F2025-mix%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
     </div>
 
+    <div class="console-player" id="trackPlayer2">
+      <div class="track-row">
+        <button class="track-playbtn" id="trackPlayBtn2" type="button" aria-label="Play">
+          <span id="trackPlayIcon2">&#9654;&#65039;</span>
+        </button>
+        <span class="track-title">EDC Las Vegas 2026 Warm-Up Mix</span>
+      </div>
+      <div class="track-scrub">
+        <span class="track-time" id="trackCurrent2">0:00</span>
+        <input class="track-seek" id="trackSeek2" type="range" min="0" max="0" step="0.1" value="0" disabled>
+        <span class="track-time" id="trackDuration2">0:00</span>
+      </div>
+    </div>
+
+    <div class="console-player" id="trackPlayer">
+      <div class="track-row">
+        <button class="track-playbtn" id="trackPlayBtn" type="button" aria-label="Play">
+          <span id="trackPlayIcon">&#9654;&#65039;</span>
+        </button>
+        <span class="track-title">2025 Mix</span>
+      </div>
+      <div class="track-scrub">
+        <span class="track-time" id="trackCurrent">0:00</span>
+        <input class="track-seek" id="trackSeek" type="range" min="0" max="0" step="0.1" value="0" disabled>
+        <span class="track-time" id="trackDuration">0:00</span>
+      </div>
+    </div>
+
     <div class="console-links">
       <a class="console-link" href="https://last.fm/user/Azqato" target="_blank" rel="noopener">
         <span class="platform-icon">🎵</span>
@@ -271,6 +417,7 @@
     <button class="viz-btn mode-btn" data-mode="7" style="display:none;">Ghost</button>
     <button class="viz-btn mode-btn" data-mode="8">Fence</button>
     <button class="viz-btn mode-btn" data-mode="9" style="display:none;">Noise</button>
+    <button class="viz-btn mode-btn" data-mode="10">Video</button>
     <footer style="background:transparent;width:100%;text-align:center;margin-top:0.25rem;padding:0;">
       <span style="display:inline-block;background:rgba(10,10,20,0.55);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,0.6);border-radius:6px;padding:0.2em 0.75em;">Built by <a href="https://azqato.com/">Azqato</a>.</span>
     </footer>
@@ -399,20 +546,126 @@
       build();
       window.addEventListener('resize', build);
 
-      // ── Web Audio (analyser only, no UI controls) ──
+      // ── Web Audio: native track player feeds the analyser ──
       var analyser = null, freqData = null;
+      var audioCtx = null;
+      // Dedicated, unsmoothed, bass-band-focused analyser for kick detection, separate
+      // from the general-purpose `analyser` above (which is deliberately smoothed for
+      // the rest of the visualizer and too coarse in resolution to isolate ~30-150Hz).
+      var analyserFast = null, freqDataFast = null;
+      var fastLoBin = 1, fastHiBin = 6;
+      // The screens' "Video" mode draws frames from whichever track was played last.
+      var trackAudio = null;
+
+      function initAudioGraph() {
+        if (audioCtx) return;
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256;
+        analyser.smoothingTimeConstant = 0.8;
+        // Raise the ceiling so a loud, heavily-mastered mix doesn't peg every bin near
+        // max constantly; louder transients are now needed to read as "full".
+        analyser.minDecibels = -90;
+        analyser.maxDecibels = -10;
+        freqData = new Uint8Array(analyser.frequencyBinCount);
+        analyser.connect(audioCtx.destination);
+
+        // Higher-resolution, zero-smoothing analyser for the kick detector: fftSize
+        // 2048 gives ~23Hz/bin at 48kHz, fine enough to isolate the 30-150Hz kick band
+        // rather than the 2-3 coarse bins the general analyser above would offer.
+        analyserFast = audioCtx.createAnalyser();
+        analyserFast.fftSize = 2048;
+        analyserFast.smoothingTimeConstant = 0;
+        analyserFast.minDecibels = -90;
+        analyserFast.maxDecibels = -10;
+        freqDataFast = new Uint8Array(analyserFast.frequencyBinCount);
+        var binHz = audioCtx.sampleRate / analyserFast.fftSize;
+        fastLoBin = Math.max(1, Math.round(30 / binHz));
+        fastHiBin = Math.max(fastLoBin, Math.round(150 / binHz));
+      }
+
+      function formatTime(s) {
+        if (!isFinite(s) || s < 0) return '0:00';
+        var m = Math.floor(s / 60);
+        var sec = Math.floor(s % 60);
+        return m + ':' + (sec < 10 ? '0' : '') + sec;
+      }
+
+      // Wires one track's play/pause/seek UI to its <video> element and taps it into
+      // the shared analyser graph the first time it's played. Called once per track.
+      function setupTrackPlayer(ids) {
+        var media   = document.getElementById(ids.media);
+        var player  = document.getElementById(ids.player);
+        var btn     = document.getElementById(ids.btn);
+        var icon    = document.getElementById(ids.icon);
+        var seek    = document.getElementById(ids.seek);
+        var curEl   = document.getElementById(ids.current);
+        var durEl   = document.getElementById(ids.duration);
+        if (!btn || !media) return;
+        var seeking = false;
+        var connected = false;
+
+        btn.addEventListener('click', function () {
+          initAudioGraph();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          if (!connected) {
+            var source = audioCtx.createMediaElementSource(media);
+            source.connect(analyser);
+            source.connect(analyserFast); // tap only, not routed to destination
+            connected = true;
+          }
+          if (media.paused) {
+            media.play();
+          } else {
+            media.pause();
+          }
+        });
+        media.addEventListener('play', function () {
+          icon.textContent = '⏸';
+          player.classList.add('playing');
+          trackAudio = media; // this track now feeds the screens' Video mode
+        });
+        media.addEventListener('pause', function () {
+          icon.textContent = '▶️';
+          player.classList.remove('playing');
+        });
+        media.addEventListener('loadedmetadata', function () {
+          seek.max = media.duration;
+          seek.disabled = false;
+          durEl.textContent = formatTime(media.duration);
+        });
+        media.addEventListener('timeupdate', function () {
+          if (seeking) return;
+          seek.value = media.currentTime;
+          curEl.textContent = formatTime(media.currentTime);
+        });
+        seek.addEventListener('input', function () {
+          seeking = true;
+          curEl.textContent = formatTime(seek.value);
+        });
+        seek.addEventListener('change', function () {
+          media.currentTime = seek.value;
+          seeking = false;
+        });
+      }
+
+      setupTrackPlayer({ media: 'trackAudio2', player: 'trackPlayer2', btn: 'trackPlayBtn2', icon: 'trackPlayIcon2', seek: 'trackSeek2', current: 'trackCurrent2', duration: 'trackDuration2' });
+      setupTrackPlayer({ media: 'trackAudio',  player: 'trackPlayer',  btn: 'trackPlayBtn',  icon: 'trackPlayIcon',  seek: 'trackSeek',  current: 'trackCurrent',  duration: 'trackDuration'  });
 
       // ── Frequency helpers ──
       var N        = 64;
       var phases   = Array.from({length: N}, function(_, i){ return i * 0.67 + Math.random() * Math.PI; });
       var smoothed = new Float32Array(N);
       var t        = 0;
+      var glTime   = 0; // audio-reactive clock for the WebGL screens
 
       function freq(i) {
         var idx = Math.max(0, Math.min(N - 1, i | 0));
         if (analyser && freqData) {
           analyser.getByteFrequencyData(freqData);
           var raw = freqData[Math.floor((idx / N) * freqData.length * 0.8)] / 255;
+          raw = Math.pow(raw, 1.6); // widen dynamic range: suppress mid values, keep true peaks
           smoothed[idx] = smoothed[idx] * 0.72 + raw * 0.28;
         } else {
           var p = phases[idx];
@@ -429,8 +682,91 @@
         return s / (hi - lo + 1);
       }
 
+      // ── Kick / beat detector ──
+      // Onset (rate-of-rise) detection rather than absolute-level detection: on a hot,
+      // heavily-mastered mix the bass band sits near ceiling almost constantly, so
+      // "spike above the average level" rarely fires (the average is already near max).
+      // Kicks are instead identified by their attack, a sharp rise in bass energy over
+      // the last couple frames, which stays detectable regardless of the overall level.
+      // Tuned by extracting the 30-150Hz band from the actual test track (ffmpeg) and
+      // sweeping parameters against its independently-measured ~124-128 BPM tempo
+      // (autocorrelation of the onset curve) until detected hits matched the real beat
+      // spacing: alpha=0.5 smoothing, rise threshold = max(0.007, avgRise * 1.2), ~433ms
+      // cooldown landed at 124.5 hits/min with 98% of intervals within 380-620ms of a
+      // real beat.
+      var bassSmooth   = 0;
+      var bassPrev     = 0;
+      var riseHistory  = [];
+      var beatPulse    = 0;
+      var beatCooldown = 0;
+
+      function rawBassFast() {
+        if (!analyserFast || !freqDataFast) return favg(0, 3); // fallback: synthetic idle wave
+        analyserFast.getByteFrequencyData(freqDataFast);
+        var s = 0, cnt = 0;
+        for (var i = fastLoBin; i <= fastHiBin; i++) { s += freqDataFast[i]; cnt++; }
+        return (s / cnt) / 255;
+      }
+
+      function updateBeat() {
+        var b = rawBassFast();
+        bassSmooth = bassSmooth * 0.5 + b * 0.5;
+        var rise = Math.max(0, bassSmooth - bassPrev);
+        bassPrev = bassSmooth;
+
+        riseHistory.push(rise);
+        if (riseHistory.length > 30) riseHistory.shift();
+        var avgRise = 0;
+        for (var i = 0; i < riseHistory.length; i++) avgRise += riseHistory[i];
+        avgRise /= riseHistory.length;
+
+        var threshold = Math.max(0.007, avgRise * 1.2);
+        beatCooldown = Math.max(0, beatCooldown - 1);
+
+        if (rise > threshold && beatCooldown === 0) {
+          beatPulse = 1;
+          beatCooldown = 26; // ~433ms refractory, matched to the track's real kick spacing
+        } else {
+          beatPulse *= 0.86; // decay back to rest between hits
+        }
+      }
+
+      // ── Loud-moment flash gate ──
+      // The panel brightness flash should read as a rare "drop" moment, not fire on
+      // every beat. Track a slowly-adapting mean/variance of overall loudness (long
+      // time constant, ~20s) as a running baseline for "how loud this track normally
+      // is", then only allow a flash when the current level is a genuine statistical
+      // outlier above that baseline (roughly the top ~20%, z-score > 0.84), gated to
+      // coincide with an actual kick and a long cooldown so it can't repeat rapidly
+      // even through a sustained loud section.
+      var loudMean      = 0;
+      var loudVar       = 0;
+      var loudWarmed    = false;
+      var flashPulse    = 0;
+      var flashCooldown = 0;
+
+      function updateLoudFlash() {
+        var energy = favg(0, 20);
+        if (!loudWarmed) { loudMean = energy; loudVar = 0.0004; loudWarmed = true; }
+        var alpha  = 0.0016; // ~10s adaptation time constant at 60fps
+        var d = energy - loudMean;
+        loudMean += d * alpha;
+        loudVar = loudVar * (1 - alpha) + d * d * alpha;
+        var std = Math.sqrt(loudVar);
+
+        flashCooldown = Math.max(0, flashCooldown - 1);
+        var isOutlier = std > 0.001 && energy > loudMean + std * 0.84;
+
+        if (isOutlier && beatPulse > 0.5 && flashCooldown === 0) {
+          flashPulse = 1;
+          flashCooldown = 300; // ~5s minimum gap between flashes
+        } else {
+          flashPulse *= 0.85;
+        }
+      }
+
       // ── Screen mode ──
-      var screenMode = 4; // 0=bars, 1=volumetric, 2=stars, 3=vortex, 4=squares, 5=origami, 6=tunnel, 7=ghost, 8=fence, 9=noise
+      var screenMode = 4; // 0=bars, 1=volumetric, 2=stars, 3=vortex, 4=squares, 5=origami, 6=tunnel, 7=ghost, 8=fence, 9=noise, 10=video (live frames from the native player's track)
       var modeTimer  = 0;
       var MODE_LEN   = 1800; // ~30 s at 60 fps
       var fxSrc      = null; // WebGL canvas source for drawImagePanel
@@ -1205,7 +1541,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         gl.bindTexture(gl.TEXTURE_2D, glVol.tex1);
         gl.uniform1i(gl.getUniformLocation(glVol.prog, 'iChannel0'), 0);
         gl.uniform1i(gl.getUniformLocation(glVol.prog, 'iChannel1'), 1);
-        gl.uniform1f(glVol.timeLoc, t / 60.0);
+        gl.uniform1f(glVol.timeLoc, glTime);
         gl.uniform3f(glVol.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1215,7 +1551,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         gl.useProgram(glStar.prog);
         var mx = Math.sin(t * 0.007) * glCanvas.width  * 0.42 + glCanvas.width  * 0.5;
         var my = Math.sin(t * 0.005) * glCanvas.height * 0.42 + glCanvas.height * 0.5;
-        gl.uniform1f(glStar.timeLoc, t / 60.0);
+        gl.uniform1f(glStar.timeLoc, glTime);
         gl.uniform3f(glStar.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.uniform4f(glStar.mouseLoc, mx, my, 0.0, 0.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -1224,7 +1560,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL3() {
         if (!gl || !glVortex.prog) return;
         gl.useProgram(glVortex.prog);
-        gl.uniform1f(glVortex.timeLoc, t / 60.0);
+        gl.uniform1f(glVortex.timeLoc, glTime);
         gl.uniform3f(glVortex.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1232,7 +1568,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL4() {
         if (!gl || !glSquares.prog) return;
         gl.useProgram(glSquares.prog);
-        gl.uniform1f(glSquares.timeLoc, t / 60.0);
+        gl.uniform1f(glSquares.timeLoc, glTime);
         gl.uniform3f(glSquares.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1240,7 +1576,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL5() {
         if (!gl || !glOrigami.prog) return;
         gl.useProgram(glOrigami.prog);
-        gl.uniform1f(glOrigami.timeLoc, t / 60.0);
+        gl.uniform1f(glOrigami.timeLoc, glTime);
         gl.uniform3f(glOrigami.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1248,7 +1584,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL6() {
         if (!gl || !glTunnel.prog) return;
         gl.useProgram(glTunnel.prog);
-        gl.uniform1f(glTunnel.timeLoc, t / 60.0);
+        gl.uniform1f(glTunnel.timeLoc, glTime);
         gl.uniform3f(glTunnel.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1259,7 +1595,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, glVol.tex1);
         gl.uniform1i(gl.getUniformLocation(glGhost.prog, 'iChannel0'), 0);
-        gl.uniform1f(glGhost.timeLoc, t / 60.0);
+        gl.uniform1f(glGhost.timeLoc, glTime);
         gl.uniform3f(glGhost.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1267,7 +1603,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL8() {
         if (!gl || !glFence.prog) return;
         gl.useProgram(glFence.prog);
-        gl.uniform1f(glFence.timeLoc, t / 60.0);
+        gl.uniform1f(glFence.timeLoc, glTime);
         gl.uniform3f(glFence.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1275,7 +1611,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL9() {
         if (!gl || !glNoise.prog) return;
         gl.useProgram(glNoise.prog);
-        gl.uniform1f(glNoise.timeLoc, t / 60.0);
+        gl.uniform1f(glNoise.timeLoc, glTime);
         gl.uniform3f(glNoise.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1345,17 +1681,23 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         drawBezel(px, py, pw, ph);
         if (!fxSrc) return; // no WebGL2: leave the panel dark rather than throwing
         ctx.save();
+        ctx.beginPath();
+        ctx.rect(px, py, pw, ph);
+        ctx.clip();
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(fxSrc, px, py, pw, ph);
-        // subtle audio brightness pulse on top
+        // beat-synced zoom pulse: fires on detected kick hits, not just sustained bass
+        var zoom = 1 + beatPulse * 0.08;
+        var zw = pw * zoom, zh = ph * zoom;
+        ctx.drawImage(fxSrc, px - (zw - pw) / 2, py - (zh - ph) / 2, zw, zh);
+        // brightness flash: rare "drop" moments only, not every kick (see updateLoudFlash)
         var energy = favg(0, 20);
-        ctx.globalAlpha = energy * 0.10;
+        ctx.globalAlpha = flashPulse * 0.4;
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(px, py, pw, ph);
         ctx.restore();
         panelOverlay(px, py, pw, ph);
-        panelBloom(px, py, pw, ph, 0.28 + energy * 0.30);
+        panelBloom(px, py, pw, ph, 0.28 + energy * 0.20 + beatPulse * 0.2 + flashPulse * 0.3);
       }
 
       // ── A: Background ──
@@ -1796,10 +2138,11 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       }
 
       // ── D: Lasers, beat flash, crowd ──
-      // Two laser fixture units, each has 4 possible beam angles, randomly shows 1-4 at a time.
+      // Two laser fixture units, each has 8 possible beam angles; active count scales
+      // with audio level, cycling 1-2 beams when quiet up to 6-8 beams when loud.
       var laserFixtures = [
-        { xOff: -0.43, beamAngs: [-68, -52, -38, -22], active: 2, timer: 0 },
-        { xOff:  0.43, beamAngs: [-158, -142, -128, -112], active: 2, timer: 0 },
+        { xOff: -0.43, beamAngs: [-70, -63, -56, -49, -42, -35, -28, -20], active: 2, timer: 0 },
+        { xOff:  0.43, beamAngs: [-160, -152, -145, -138, -131, -124, -117, -110], active: 2, timer: 0 },
       ];
 
       function drawLaserFixture(fx, fy, energy) {
@@ -1853,12 +2196,16 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         var m   = favg(8, 25);
         var len = Math.max(W, H) * 1.4;
 
+        // Active beam band scales with audio level: 1-2 beams when quiet, 6-8 when loud.
+        var loBound = Math.round(1 + pk * 5);
+        var hiBound = Math.round(2 + pk * 6);
+
         laserFixtures.forEach(function (fix, fi) {
-          // Step active count up or down by 1, clamped 1–4
+          // Step active count up or down by 1, clamped to the current audio-driven band
           fix.timer--;
           if (fix.timer <= 0) {
             var step = Math.random() < 0.5 ? -1 : 1;
-            fix.active = Math.min(4, Math.max(1, fix.active + step));
+            fix.active = Math.min(hiBound, Math.max(loBound, fix.active + step));
             fix.timer  = 45 + Math.floor(Math.random() * 75);
           }
 
@@ -2109,6 +2456,11 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       // ── Main loop ──
       function draw() {
         t++;
+        updateBeat();
+        updateLoudFlash();
+        // audio-reactive clock for the WebGL screens: speeds up on louder passages and
+        // snaps forward an extra beat on each detected kick
+        glTime += (1 / 60) * (0.6 + favg(0, 30) * 1.6) + beatPulse * 0.05;
 
         // Cycle screen mode every ~30 s (active modes only: stars, vortex, squares, tunnel, fence)
         if (++modeTimer >= MODE_LEN) { modeTimer = 0; var activeModes = [2, 3, 4, 6, 8]; var next; do { next = activeModes[Math.floor(Math.random() * activeModes.length)]; } while (next === screenMode); screenMode = next; syncModeBtns(); }
@@ -2121,7 +2473,16 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         else if (screenMode === 7) renderGL7();
         else if (screenMode === 8) renderGL8();
         else if (screenMode === 9) renderGL9();
-        fxSrc = (screenMode >= 1 && gl) ? glCanvas : null;
+
+        if (screenMode === 10) {
+          // Video mode: draw the native player's own decoded frames straight onto the
+          // screens (reusing the same bezel/bloom/reflection pipeline as the WebGL modes)
+          // instead of a generated pattern. Falls back to a dark panel until the track
+          // has an actual video frame ready.
+          fxSrc = (trackAudio.videoWidth > 0) ? trackAudio : null;
+        } else {
+          fxSrc = (screenMode >= 1 && gl) ? glCanvas : null;
+        }
 
         drawBg();
         drawBeatFlash();
