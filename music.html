@@ -70,103 +70,81 @@
       padding: 0 2rem 4rem;
     }
 
-    /* ── EMBED GRID ── */
-    .playlist-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 3rem;
-    }
-
-    .embed-card {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      aspect-ratio: 16 / 9;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .embed-card:hover {
-      border-color: var(--purple);
-      box-shadow: 0 8px 24px rgba(188, 140, 255, 0.12);
-    }
-
-    .embed-card iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    .mixcloud-embed {
-      max-width: calc(3 * 220px + 2 * 1rem); /* matches the 3-card platform-grid row below */
+    /* ── STAGE CONSOLE (embeds + links, docked on the center screen) ── */
+    .stage-console {
+      position: fixed;
+      top: 13vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(280px, 38vw, 560px);
+      height: clamp(220px, 36vh, 460px);
+      z-index: 1;
+      background: rgba(10, 12, 20, 0.62);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.5);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .stage-console::-webkit-scrollbar { width: 6px; }
+    .stage-console::-webkit-scrollbar-track { background: transparent; }
+    .stage-console::-webkit-scrollbar-thumb { background: rgba(188, 140, 255, 0.35); border-radius: 999px; }
+    .stage-console::-webkit-scrollbar-thumb:hover { background: rgba(188, 140, 255, 0.55); }
+    .stage-console { scrollbar-width: thin; scrollbar-color: rgba(188, 140, 255, 0.35) transparent; }
+
+    .console-embed {
+      border-radius: 8px;
       overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      margin: 0 auto 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
       transition: border-color 0.2s;
     }
 
-    .mixcloud-embed:hover {
-      border-color: var(--purple);
-    }
+    .console-embed:hover { border-color: var(--purple); }
 
-    .mixcloud-embed iframe {
+    .console-embed iframe {
       width: 100%;
       height: 120px;
       border: none;
       display: block;
     }
 
-    /* ── PLATFORM CARDS ── */
-    .platform-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .platform-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem 1.25rem;
+    .console-links {
       display: flex;
       flex-direction: column;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .console-link {
+      display: flex;
       align-items: center;
       gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.55rem 0.8rem;
       text-decoration: none;
       color: var(--text);
       transition: all 0.2s;
-      position: relative;
-      overflow: hidden;
     }
 
-    .platform-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--purple), var(--accent));
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .platform-card:hover {
-      background: var(--card-hover);
+    .console-link:hover {
+      background: rgba(188, 140, 255, 0.1);
       border-color: var(--purple);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(188, 140, 255, 0.1);
     }
 
-    .platform-card:hover::before { opacity: 1; }
+    .console-link .platform-icon { font-size: 1.15rem; line-height: 1; }
 
-    .platform-icon { font-size: 2rem; line-height: 1; }
-
-    .platform-name {
-      font-size: 0.9rem;
+    .console-link .platform-name {
+      font-size: 0.85rem;
       font-weight: 600;
       color: var(--text);
     }
@@ -255,44 +233,44 @@
     <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Azqato's <span>Music</span></h1>
   </section>
 
-  <!-- PLAYLISTS -->
-  <section class="section">
-    <div class="mixcloud-embed">
+  <!-- STAGE CONSOLE: embeds + links docked on the center screen, fixed and independently scrollable -->
+  <div class="stage-console">
+    <div class="console-embed">
       <iframe width="660px" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FAzqato%2Fedc-las-vegas-2026-2-hour-warm-up-festival-mix%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
     </div>
 
-    <div class="mixcloud-embed">
+    <div class="console-embed">
       <iframe width="660px" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FAzqato%2F2025-mix%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
     </div>
 
-    <div class="platform-grid">
-      <a class="platform-card" href="https://last.fm/user/Azqato" target="_blank" rel="noopener">
+    <div class="console-links">
+      <a class="console-link" href="https://last.fm/user/Azqato" target="_blank" rel="noopener">
         <span class="platform-icon">🎵</span>
         <span class="platform-name">Last.fm</span>
       </a>
-      <a class="platform-card" href="https://mixcloud.com/Azqato" target="_blank" rel="noopener">
+      <a class="console-link" href="https://mixcloud.com/Azqato" target="_blank" rel="noopener">
         <span class="platform-icon">🎛️</span>
         <span class="platform-name">Mixcloud</span>
       </a>
-      <a class="platform-card" href="https://youtube.com/@AzqatoMixes" target="_blank" rel="noopener">
+      <a class="console-link" href="https://youtube.com/@AzqatoMixes" target="_blank" rel="noopener">
         <span class="platform-icon">🎧</span>
         <span class="platform-name">YouTube</span>
       </a>
     </div>
-  </section>
+  </div>
 
   <!-- VISUALIZER MODE CONTROLS -->
   <div class="mode-controls">
-    <button class="viz-btn mode-btn" data-mode="0">Bars</button>
-    <button class="viz-btn mode-btn" data-mode="1">Volumetric</button>
+    <button class="viz-btn mode-btn" data-mode="0" style="display:none;">Bars</button>
+    <button class="viz-btn mode-btn" data-mode="1" style="display:none;">Volumetric</button>
     <button class="viz-btn mode-btn" data-mode="2">Stars</button>
     <button class="viz-btn mode-btn" data-mode="3">Vortex</button>
     <button class="viz-btn mode-btn active" data-mode="4">Squares</button>
-    <button class="viz-btn mode-btn" data-mode="5">Origami</button>
+    <button class="viz-btn mode-btn" data-mode="5" style="display:none;">Origami</button>
     <button class="viz-btn mode-btn" data-mode="6">Tunnel</button>
-    <button class="viz-btn mode-btn" data-mode="7">Ghost</button>
+    <button class="viz-btn mode-btn" data-mode="7" style="display:none;">Ghost</button>
     <button class="viz-btn mode-btn" data-mode="8">Fence</button>
-    <button class="viz-btn mode-btn" data-mode="9">Noise</button>
+    <button class="viz-btn mode-btn" data-mode="9" style="display:none;">Noise</button>
     <footer style="background:transparent;width:100%;text-align:center;margin-top:0.25rem;padding:0;">
       <span style="display:inline-block;background:rgba(10,10,20,0.55);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,0.6);border-radius:6px;padding:0.2em 0.75em;">Built by <a href="https://azqato.com/">Azqato</a>.</span>
     </footer>
@@ -2132,8 +2110,8 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function draw() {
         t++;
 
-        // Cycle screen mode every ~30 s (10 modes: 0=bars, 1–9=WebGL)
-        if (++modeTimer >= MODE_LEN) { modeTimer = 0; var next; do { next = Math.floor(Math.random() * 10); } while (next === screenMode); screenMode = next; syncModeBtns(); }
+        // Cycle screen mode every ~30 s (active modes only: stars, vortex, squares, tunnel, fence)
+        if (++modeTimer >= MODE_LEN) { modeTimer = 0; var activeModes = [2, 3, 4, 6, 8]; var next; do { next = activeModes[Math.floor(Math.random() * activeModes.length)]; } while (next === screenMode); screenMode = next; syncModeBtns(); }
         if      (screenMode === 1) renderGL1();
         else if (screenMode === 2) renderGL2();
         else if (screenMode === 3) renderGL3();

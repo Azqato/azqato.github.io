@@ -5,6 +5,21 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.3] - 2026-07-16
+
+### Added: stage console panel on `music.html`
+- Combined the two Mixcloud embeds and the three platform links (Last.fm, Mixcloud, YouTube) into a single `.stage-console` panel docked over the center visualizer screen. The panel is `position: fixed` and independently scrollable (`overflow-y: auto`), so it stays pinned in place and scrolls on its own without affecting the main page scroll. Styled with a dark glass background and a themed thin scrollbar to read as content displayed on the screen rather than a floating card.
+- Removed the old in-flow `.section` block, `.mixcloud-embed`, and `.platform-grid` markup and styles that this replaces.
+
+### Changed: visualizer mode buttons on `music.html`
+- Hidden the Bars, Volumetric, Origami, Ghost, and Noise mode buttons; only Stars, Vortex, Squares, Tunnel, and Fence remain visible. The modes themselves are unchanged in code.
+- The random mode auto-cycle now only picks from the five visible modes (Stars, Vortex, Squares, Tunnel, Fence), so the hidden modes no longer appear during automatic cycling either.
+
+### Documentation
+- Added a full mobile audit of `music.html` to `docs/PRD.md`'s Explicitly Deferred Items as a future action item, since the visualizer canvas and fixed stage console were tuned for desktop viewports first.
+
+---
+
 ## [2.8.2] - 2026-07-11
 
 ### Fixed: Mixcloud embed width on `music.html`

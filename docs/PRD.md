@@ -812,6 +812,7 @@ The portfolio has no analytics script. All acquisition data comes from GitHub Pa
 | Project detail modals             | Current descriptions are sufficient; revisit when a project needs extended docs |
 | RSS / changelog feed              | No audience yet; revisit when monthly visitors exceed 2,000            |
 | Automated testing (CI)            | Manual QA currently in use; threshold for smoke tests met at 11 pages, candidate for v2.7.0 |
+| Full mobile audit of `music.html` | The visualizer, fixed-position canvas, and fixed stage console were built and tuned for desktop viewports first; a dedicated pass across small screens (320 px to 480 px) is needed to verify layout, tap targets, and readability before this page is considered mobile-complete |
 
 ---
 
