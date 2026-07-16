@@ -5,6 +5,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.2] - 2026-07-11
+
+### Fixed: Mixcloud embed width on `music.html`
+- The two Mixcloud player iframes had a `width="660px"` HTML attribute that was silently overridden by `.mixcloud-embed iframe { width: 100% }`, so the embeds actually stretched to the full `.section` width (up to ~1036px) instead of the intended 660px.
+- Gave `.mixcloud-embed` a `max-width` of `calc(3 * 220px + 2 * 1rem)` (692px) and centered it, so the embeds now match the width of the three-card platform-grid row (Last.fm, Mixcloud, YouTube) directly below them.
+
+---
+
 ## [2.8.1] - 2026-07-11
 
 ### Fixed: floor reflection ghosting near the DJ booth
