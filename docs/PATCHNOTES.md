@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.0] - 2026-07-16 (branch only, not deployed)
+
+### Deferred: native track player, kick detection, and video screen mode
+- Built and validated a native in-page audio player for `music.html`: a Web Audio-routed `<video>` element (two test tracks), a scrub-bar player UI, an onset-based kick detector tuned against a real track with `ffmpeg`, a beat-synced screen pulse, a rarity-gated loud-moment flash, audio-scaled laser beam counts, and a "Video" screen mode that draws the playing track's own frames onto the stage screens.
+- Not merged to `main`: the player currently points at large local test files (multiple GB) that cannot be committed to this repo (GitHub rejects pushes over 100MB via normal git, and even Git LFS caps at 2GB/file on GitHub.com, well under these files' size). A live "Play" button pointing at nothing would be broken for real visitors.
+- Full implementation kept on branch `feature/native-audio-player` (pushed to GitHub) so the work isn't lost. To resume: host a real track externally (object storage plus CDN, or a video host that serves a direct file URL) and point the `<video src>` at it, then merge the branch. See Known Technical Debt below.
+
+---
+
 ## [2.8.3] - 2026-07-16
 
 ### Added: stage console panel on `music.html`

@@ -112,6 +112,7 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 - Search bar filtering by project name or description keyword.
 - Shared `styles.css` and `nav.js` to eliminate duplication across pages.
 - `@media (prefers-reduced-motion: reduce)` rule to disable card hover transforms.
+- **Native track player + kick-reactive visualizer on `music.html`** (built, not deployed). A Web Audio-routed in-page player, an onset-based kick detector tuned against a real track, a beat-synced screen pulse, a rarity-gated loud-moment flash, audio-scaled laser beams, and a "Video" screen mode that draws the playing track onto the stage screens. Fully implemented on branch `feature/native-audio-player`; not merged because the test tracks are large local files that cannot be committed to this repo. Needs a real, externally-hosted track (object storage plus CDN, or a direct-file video host) before it can ship. See Known Technical Debt.
 
 ---
 
@@ -338,6 +339,7 @@ All external interactions are outbound navigation. The portfolio does not call a
 | No `prefers-reduced-motion` query  | Hover transforms fire for all users                 | Add `@media (prefers-reduced-motion: reduce)` rule |
 | No CSP headers                     | GitHub Pages does not support custom response headers | Acceptable for static content-only; revisit if hosting changes |
 | No automated tests                 | Manual visual QA only                               | Playwright or Cypress smoke tests; threshold met at 11 pages |
+| Native player has no hostable audio | Test tracks are multi-GB local files; GitHub rejects normal pushes over 100MB and Git LFS caps at 2GB/file on GitHub.com, both well under these files' size | Host a real track externally (object storage plus CDN, or a direct-file video host), point the branch's `<video src>` at it, then merge `feature/native-audio-player` |
 
 ---
 
