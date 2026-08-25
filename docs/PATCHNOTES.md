@@ -5,6 +5,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.4] - 2026-08-24
+
+### Added: RouteNote affiliate card on `support.html`
+- Added a RouteNote referral card to the affiliate partners grid on `support.html`, placed after Twitch Prime. Links to `routenote.com/rn/referral/2fcd201c` (referral code `2fcd201c`) with a "Free Distribution" promo badge and an orange-tinted logo tile.
+- Updated the affiliate references in `docs/PRD.md`: feature F7, the assumptions list, the affiliate link accuracy criterion (now 7 links), the active affiliate cards line, and the third-party integrations table.
+
+---
+
 ## [2.9.0] - 2026-07-16 (branch only, not deployed)
 
 ### Deferred: native track player, kick detection, and video screen mode

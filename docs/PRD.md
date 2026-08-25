@@ -97,7 +97,7 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 - **F4: Hero Sections.** Headline and description on each page, styled consistently. Landing page hero includes profile photo, category pills, and CTA buttons.
 - **F5: Zero Dependencies.** Plain HTML/CSS/JS; works offline after first load; no external fonts, no CDN scripts.
 - **F6: About Page.** Bio with gaming origins, content creation, B5TA community, and web development. Pitch card with profile photo and signature.
-- **F7: Support Page.** Buy Me a Coffee CTA with FTC-compliant disclaimer. Affiliate partner grid with five live referral links (Tesla, Robinhood, M1 Finance, Public, Lyft).
+- **F7: Support Page.** Buy Me a Coffee CTA with FTC-compliant disclaimer. Affiliate partner grid with seven live referral links (Tesla, Twitch Prime, RouteNote, Robinhood, M1 Finance, Public, Lyft).
 - **F8: Discord Page.** Four server cards (Azqato, Azqato Invests, B5TA, League of Azqato) with permanent invite links, server descriptions, emoji icons, and Discord-blue Join Server buttons.
 - **F9: `iconUrl` field.** Optional image or SVG URL per project card that overrides the emoji icon when set.
 - **F10: Introductory Landing Page.** `index.html` is the default entry point for first-time visitors. Introduces Azqato with an easygoing bio, routes visitors to the Discord and to every other page via a grid of destination cards.
@@ -131,7 +131,7 @@ The site opens with an introductory landing page (`index.html`) that welcomes fi
 
 - GitHub Pages will remain free for public repositories.
 - Visitors have JavaScript enabled (filtering requires JS; static content degrades gracefully without it).
-- Affiliate programs (Tesla, Robinhood, M1 Finance, Public, Lyft) will honor the referral links for their stated promotional periods.
+- Affiliate programs (Tesla, Twitch Prime, RouteNote, Robinhood, M1 Finance, Public, Lyft) will honor the referral links for their stated promotional periods.
 - The owner will manually maintain the `PROJECTS` array and `discord.html` server cards; no automation is needed.
 - Buy Me a Coffee does not require integration code; a direct link is sufficient.
 - Discord invite links on `discord.html` are permanent and will not expire.
@@ -165,7 +165,7 @@ This policy is enforced automatically by a `pre-commit` hook in `.githooks/` tha
 | Cross-browser render            | No visual defects on Chrome, Firefox, Edge, Safari   |
 | Mobile usability                | Fully usable at 375 px (iPhone SE viewport)          |
 | Project addition time           | Under 2 minutes to add a new project card            |
-| Affiliate link accuracy         | All 5 affiliate links point to live, correct URLs    |
+| Affiliate link accuracy         | All 7 affiliate links point to live, correct URLs    |
 | FTC compliance                  | Affiliate disclosure visible on support page without scrolling |
 
 ---
@@ -262,7 +262,7 @@ Each affiliate card is static HTML. Structure:
   <a class="affiliate-btn">       <!-- CTA button linking to the referral URL -->
 ```
 
-Active affiliate cards: Tesla (`ts.la/robert459550`), Robinhood (`join.robinhood.com/robertg273/`), M1 Finance (`m1.finance/BVZBG3OqOfMj`), Public (`share.public.com/azqato`), Lyft (`lyft.com/invite/ROBGOLDY630855`), Twitch Prime (`twitch.tv/azqato`).
+Active affiliate cards: Tesla (`ts.la/robert459550`), Twitch Prime (`twitch.tv/azqato`), RouteNote (`routenote.com/rn/referral/2fcd201c`, code `2fcd201c`), Robinhood (`join.robinhood.com/robertg273/`), M1 Finance (`m1.finance/BVZBG3OqOfMj`), Public (`share.public.com/azqato`), Lyft (`lyft.com/invite/ROBGOLDY630855`).
 
 ---
 
@@ -306,6 +306,7 @@ No persistent state. No localStorage, sessionStorage, IndexedDB, or cookies anyw
 | GitHub Pages    | Static hosting, CDN delivery              | None                     |
 | Buy Me a Coffee | Donation link                             | User navigates externally |
 | Tesla           | Affiliate referral                        | User navigates externally |
+| RouteNote       | Affiliate referral                        | User navigates externally |
 | Robinhood       | Affiliate referral                        | User navigates externally |
 | M1 Finance      | Affiliate referral                        | User navigates externally |
 | Public          | Affiliate referral                        | User navigates externally |
