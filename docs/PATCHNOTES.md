@@ -5,6 +5,60 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.5] - 2026-08-24
+
+### Added
+- Added a full "Documentation Versus Reality" table to `docs/PRD.md` recording all 20 discrepancies found between the documentation and the source, with the source trusted and the reasoning for each.
+- Added a "Risks and Open Questions" section to `docs/PRD.md` covering what was not fully understood, fragile areas of the codebase, changes that are dangerous without more context, work in progress at audit time, and 8 numbered open questions for the author to resolve.
+- Added a "Working Practice" section to `docs/PRD.md`: pre-edit checks, a "which document to read first" table, a never-do list, an 8-step verification procedure, and post-change documentation sync steps.
+- Added a "Conventions" section to `docs/PRD.md` derived from the code itself, covering naming, formatting, organization, comments, error handling, and commit message and branching practice, naming the dominant form wherever the codebase is inconsistent.
+- Added a "Browser Testing" section to `docs/PRD.md` adopting Microsoft Edge as the browser for any automated or headless testing, with resolved binary paths, and recording `test-local-audio.bat` as a pre-existing Chrome-driving deviation.
+- Added a "Deprecation and Removal" section to `docs/PRD.md` defining the deploy boundary for this project, the HTML meta-refresh redirect mechanism, a full public surface table, and a retired items log.
+- Added a "Press Release" section to `docs/PRD.md`, which the previous "Press Release and FAQ" block referenced but never actually contained.
+- Added Retention metrics to `docs/PRD.md`, previously the one missing metrics category, together with an explicit statement that the site cannot measure retention and the three proxies available instead.
+- Added a "How an audit is run" procedure to the Documentation Process section of `docs/PRD.md`.
+- Added feature F13 (Codes page), F14 (music stage visualizer), F15 (stage console), F16 (shared stylesheet), and F17 (writing-style guard) to the `docs/PRD.md` feature list.
+- Added a sixth product tenet, "Say What Is Actually True", covering site copy, promo badges, and documentation equally.
+- Added a full `music.html` Visual System section to `docs/DESIGN.md`: scene structure, draw order, screen layout, DJ booth, reflection, bloom, scanlines, the 10-mode table with visible and hidden state, and the animated favicon.
+- Added an image asset table to `docs/DESIGN.md` listing all 15 files in `img/` with sizes and referencing pages.
+- Added six "Rules for Staying Consistent" to `docs/DESIGN.md`.
+- Expanded the external FAQ in `docs/PRD.md` from 8 to 20 questions.
+
+### Changed
+- Rewrote `README.md` for a general reader: name, description, live link, a 12-row table of what each page offers in plain language, who it is for, current status, and links to `/docs`. Removed the clone and serve commands, the file overview, the tech stack table, the version number, and the "Adding a Project" and "Adding a Discord Server" instructions. All of that content was preserved in the `docs/PRD.md` Operational Runbook and Data Models sections rather than deleted.
+- Rewrote `docs/DESIGN.md` around the two-layer CSS model (shared `styles.css` tokens versus page-scoped `:root` overrides), with separate token tables for each layer, the inline `rgba()` brand colors, and roughly 15 documented component patterns.
+- Rewrote `docs/PRD.md` in full, merging every existing section rather than replacing it. Original intent, rationale, and wording were kept wherever the code agreed with them; where the code disagreed, both readings are recorded.
+- Documented `wrangler.jsonc` as a configured but unused Cloudflare Workers deploy target in the tech stack and Environments sections, alongside the existing "only one environment" statement.
+- Restated the under-50 KB page weight constraint as met on 11 of 12 pages, naming `music.html` at 91 KB as a deliberate and explained exception rather than quietly restating the target.
+- Reprioritized the accessibility section of `docs/DESIGN.md`, promoting the absence of a reduced-motion path on `music.html` from a minor gap to a genuine problem.
+
+### Fixed
+- Corrected the navigation bar description in `README.md` and `docs/DESIGN.md` to the 10 current items (Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support). Both had described a nav with external Tools and GitHub links that was removed in v2.6.x, and both omitted Music, added in v2.8.0.
+- Added `codes.html`, which was live and in the nav of all 12 pages but appeared nowhere in `README.md` or `docs/PRD.md`, to the site structure table, folder tree, public surface list, and feature list.
+- Corrected the page count from 11 to 12 in every location, and dropped the "self-contained" description of the pages, which stopped being accurate when `styles.css` was extracted in v2.7.0.
+- Corrected the clone URL in the runbook from `github.com/Azqato/Azqato.git` to the actual remote, `github.com/Azqato/azqato.github.io.git`.
+- Narrowed the "zero external requests" claim, which was true of 11 pages but not of `music.html` (two Mixcloud iframes on every load) or `projects.html` (one cross-site favicon), everywhere it appeared in the performance, privacy, and security sections.
+- Corrected the affiliate card data model in `docs/PRD.md` and `docs/DESIGN.md` to the real class names (`.affiliate-logo`, `.affiliate-promo`, `.affiliate-link-btn`, on an anchor element). Three of the four previously documented class names did not exist in `support.html`.
+- Removed the `activeTag` state variable from the `docs/PRD.md` state management table. No such variable exists; filter state lives in the DOM as `.active` and `data-hidden`.
+- Corrected the mobile breakpoint in `docs/DESIGN.md` from "< 600px: nav links hidden" to the actual split: the nav collapses into a toggle at 860 px and content padding tightens at 600 px. The superseded claim is kept and marked rather than erased.
+- Corrected the image usage claims in `docs/DESIGN.md`: `index.html` contains no image element at all, `music.html` lists no playlists, and 10 of the 15 files in `img/` are referenced by nothing, including a 1.9 MB GIF that appeared in no documentation.
+- Corrected feature F4, which claimed the landing page hero includes a profile photo. It has interest pills and two CTA buttons.
+- Corrected feature F11, which claimed the lion favicon is identical across all 12 pages. `music.html` replaces it at runtime every third frame.
+- Documented that the `music.html` visualizer is not audio-reactive. `analyser` and `freqData` are declared and never assigned, so every visual is procedural. This was stated nowhere before and is now recorded in `docs/DESIGN.md`, the data flow section, F14, and Known Technical Debt.
+- Corrected the Known Technical Debt entry describing the nav as duplicated across "all 11 HTML files" to 12.
+
+### Removed
+- Removed nothing from the codebase. This audit was documentation only; no HTML, CSS, JavaScript, or image file was edited, renamed, or deleted.
+
+### Writing style sweep
+- Swept every text file in the repository for both prohibited em-dash forms independently (the literal character and the HTML entity), including files inside dot-directories that a plain recursive glob skips.
+- Found **zero violations** in any HTML file, in `styles.css`, and in all documentation prose.
+- Found 4 occurrences in `docs/PRD.md` and `docs/PATCHNOTES.md`, all inside backtick code spans where the rule names or quotes the character it prohibits. All are exempt under the existing policy and were left in place.
+- Found 2 occurrences in `.githooks/pre-commit`, where the guard defines the character it blocks. Exempt and left in place.
+- Found 13 lines with real violations in `.vscode/recentfedsummary.MD`, a personal note unrelated to the site that is tracked in git. Left untouched: it is outside this audit's write scope and outside the project's own documentation. Recorded as Open Question 1 in `docs/PRD.md`.
+
+---
+
 ## [2.8.4] - 2026-08-24
 
 ### Added: RouteNote affiliate card on `support.html`
