@@ -352,7 +352,7 @@ Active affiliate cards, in page order:
 |---------|-----|-------------|
 | Tesla | `ts.la/robert459550` | Free 3 Months FSD |
 | Twitch Prime | `twitch.tv/azqato` | Free Sub (No Cost) |
-| RouteNote | `routenote.com/rn/referral/2fcd201c` (code `2fcd201c`) | Free Distribution |
+| RouteNote | `routenote.com/rn/referral/2fcd201c` (code `2fcd201c`) | Referral Code: 2fcd201c |
 | Robinhood | `join.robinhood.com/robertg273/` | Free $5 to $200 Stock |
 | M1 Finance | `m1.finance/BVZBG3OqOfMj` | Free $75 Bonus |
 | Public | `share.public.com/azqato` | Free $20 |

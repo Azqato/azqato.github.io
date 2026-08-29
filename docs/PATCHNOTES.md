@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.6] - 2026-08-29
+
+### Changed: RouteNote referral code surfaced on the badge
+- Changed the RouteNote promo badge on `support.html` from "Free Distribution" to "Referral Code: 2fcd201c", so the code is visible at a glance and visitors remember to enter it at sign-up. Referral credit is only granted when the code is entered.
+- Moved the free-distribution message into the card description, which now reads "Free music distribution to Spotify, Apple Music, and every major platform. Enter referral code 2fcd201c when you sign up."
+- Updated the RouteNote row of the active affiliate cards table in `docs/PRD.md` to match the new badge text.
+
+---
+
 ## [2.8.5] - 2026-08-24
 
 ### Added
