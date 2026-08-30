@@ -124,7 +124,7 @@ There are **12** HTML pages.
 
 - **F1: Project Cards.** Icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date. Defined in the `PROJECTS` array in `projects.html`. Currently 14 entries.
 - **F2: Tag Filtering.** Auto-generated filter bar built from the union of all `tags` values; real-time hide and show via a `data-hidden` attribute; the project count updates on every filter change.
-- **F3: Navigation.** Sticky nav across all 12 pages: **Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support**. Active state via `class="active"` in the HTML. Below 860 px the link list collapses behind a hamburger toggle (`.nav-toggle`) that opens a dropdown panel; an inline script on each page handles open and close, closing on link click or on an outside click. Every nav item links to a page on this site with a relative path; no external links belong in the top-level nav (see the Navigation Bar section of DESIGN.md). External destinations such as the GitHub org are linked from within a page's own content instead.
+- **F3: Navigation.** Sticky nav across all 12 pages: **Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support**. Active state via `class="active"` in the HTML, written by `tools/build-nav.py` from each page's own filename rather than maintained by hand. Below 860 px the link list collapses behind a hamburger toggle (`.nav-toggle`) that opens a dropdown panel; an inline script on each page handles open and close, closing on link click or on an outside click. Every nav item links to a page on this site with a relative path; no external links belong in the top-level nav (see the Navigation Bar section of DESIGN.md). External destinations such as the GitHub org are linked from within a page's own content instead.
 - **F4: Hero Sections.** Headline and description on each page, styled consistently. The landing page hero adds a row of interest pills and two CTA buttons.
 - **F5: Near-Zero Dependencies.** Plain HTML, CSS, and JavaScript. No npm packages, no framework, no CDN scripts, no web fonts. Eleven of the twelve pages make zero outbound requests.
 - **F6: About Page.** Bio covering gaming origins, content creation, the B5TA community, and web development. Pitch card with profile photo and signature.
@@ -271,6 +271,8 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── .gitignore                - wrangler and env-file patterns only
 ├── .githooks/
 │   └── pre-commit            - em-dash writing-style guard
+├── tools/
+│   └── build-nav.py          - stamps the shared nav into every page; output is committed
 ├── .vscode/
 │   ├── settings.json         - editor chat settings
 │   └── recentfedsummary.MD   - unrelated personal note, tracked in git (see Risks)
@@ -495,8 +497,8 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 
 | Item | Current shortcut | Correct solution |
 |------|------------------|------------------|
-| Nav HTML repeated across pages | The nav block and its toggle script are duplicated verbatim in all 12 HTML files | Extract to a shared `nav.js` injection or a minimal build step. Blocked on choosing between them; see Roadmap v2.7.0. |
-| Active nav state in HTML | `class="active"` hardcoded per page | Detect via `window.location.pathname` in the shared nav script |
+| Nav toggle script repeated across pages | The roughly 20 line toggle IIFE is still duplicated verbatim in all 12 HTML files. The nav markup itself is no longer duplicated by hand: it is stamped by `tools/build-nav.py` as of v2.8.8. | Either extend the stamp script to cover the script block, or leave it. It has never changed since it was written, so the duplication costs nothing today. |
+| Nav drift is detectable but not enforced | `python tools/build-nav.py --check` reports any page whose nav is out of date, but nothing runs it automatically | Add it to the `pre-commit` hook alongside the em-dash guard, so a hand-edited nav cannot be committed |
 | `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 91 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
 | Tab-hidden render loop on `music.html` | The visualizer keeps drawing when the tab is in the background, beyond whatever the browser throttles on its own | Pause on `document.hidden` via a `visibilitychange` listener, reusing the `setPlaying()` function added in v2.8.7. Battery and heat, not accessibility. |
 | Dead `analyser` declaration in `music.html` | `analyser` and `freqData` are declared and never assigned; `freq()` always takes the synthetic branch | Either wire a real source (the paused branch does this) or delete the two variables and rename `freq()` so the next reader is not misled |
@@ -774,6 +776,7 @@ Specific enough to answer the question for any given file:
 | `/img/home-hero-profile.jpg`, `logo-cat-avatar.jpg`, `music-logo-small.jpg`, `music-playlist-bangers.jpg`, `music-playlist-addictions.jpg`, `yt-channel-azqato.jpg`, `yt-channel-streams.jpg`, `yt-channel-mixes.jpg`, `yt-channel-chills.jpg`, `20260711-0151-37.7601512.gif` | Asset | Deployed but referenced by nothing in this repository. Treat as public facing anyway if anything outside this repository might hotlink them; treat as internal if not. Unknown, and worth a moment's thought before deleting rather than an assumption. |
 | `/README.md`, `/docs/*.md` | Document | Served as raw files, not rendered. Not linked from any page. |
 | `/wrangler.jsonc`, `/.gitignore` | Config | Served if requested; harmless, contains no secrets |
+| `/tools/build-nav.py` | Tooling | Served as a plain text file if requested. Not linked from anywhere, contains no secrets, and is never executed by the host. |
 | `/.vscode/*`, `/.githooks/*` | Config | Probably not served: GitHub Pages runs Jekyll by default, which excludes dot-directories from its output, and there is no `.nojekyll` file in this repository. This has not been verified against the live site. If it matters, request `https://azqato.github.io/.vscode/recentfedsummary.MD` and see whether it returns 404. |
 
 **Not part of the public surface:** every CSS class, every JavaScript function and variable, every entry in `PROJECTS`, and every section of markup inside a page. These can be renamed or deleted freely.
@@ -826,7 +829,7 @@ Conflict note: this tenet will conflict with Tenet 3 (low maintenance). When a l
 
 Adding a project, updating an affiliate link, updating a Discord server card, or changing the theme should never require reading documentation. If the codebase reaches the point where the owner has to look something up to make a routine edit, it has grown too complex. Simplicity for the maintainer is a hard constraint, not a preference.
 
-This is why the nav is still duplicated across 12 files: every proposed fix (a build step, a JS-injected nav) makes a routine edit harder to reason about than copy and paste does. The duplication is ugly and it is winning on merit.
+The nav is the worked example. For months every proposed fix lost to copy and paste: a JS-injected nav makes a routine edit harder to reason about and breaks the page without JavaScript, and a real build step puts a toolchain between the source and the artifact. What finally won in v2.8.8 was a stamp script whose output is committed, because it adds a convenience without adding a dependency. The repository still holds complete readable HTML, and deleting the script costs nothing but the convenience.
 
 ## 4. Transparency Before Conversion
 
@@ -859,7 +862,8 @@ Everything a developer needs to run this project from a cold start. The README d
 | Git | Any modern version (2.x) | The only hard requirement |
 | A modern browser | Chrome, Firefox, Edge, or Safari, current | For viewing and for DevTools |
 | A text editor | Any. VS Code is what the repository is configured for (`.vscode/settings.json`) | No extensions required |
-| Python or Node | Optional | Only if you want a local server instead of `file://`. Any version that can run `python -m http.server` or `npx serve`. |
+| Python 3 | Needed only to change the nav | Runs `tools/build-nav.py`, and `python -m http.server` for a local server. Standard library only, no packages. Any Python 3 version works. |
+| Node | Optional | Only as an alternative local server via `npx serve`. Nothing in the project requires it. |
 
 There is no runtime to install. No Node version is required, no package manager is required, and there is no `package.json`.
 
@@ -892,7 +896,16 @@ One caveat for `music.html` on `file://`: the Mixcloud iframes still load (they 
 
 ## Build
 
-There is no build step. The source files are the deployed files. Nothing is compiled, bundled, minified, or transformed at any point between the editor and the browser.
+There is still no build step. The source files are the deployed files. Nothing is compiled, bundled, minified, or transformed at any point between the editor and the browser, and no command has to run before a deploy.
+
+One optional generator exists. `tools/build-nav.py` stamps the shared nav into every page, and its output is committed like any other edit. It is not a build step in the sense the project has avoided: the repository always contains complete deployable HTML, nothing sits between the source and the browser, and if the script were deleted the site would keep working and the nav would go back to being edited by hand. Run it only when the nav changes:
+
+```bash
+python tools/build-nav.py           # rewrite the nav in all 12 pages
+python tools/build-nav.py --check   # report drift, write nothing, exit 1 if any
+```
+
+Running it with no nav change prints `nav is up to date in every page` and writes nothing, which doubles as a check that all 12 navs still match.
 
 The closest thing to a build check is confirming page weight before pushing:
 
@@ -1017,7 +1030,7 @@ Nothing differs between environments: no feature flags, no environment variables
 | `music.html` shows a plain grid instead of shaders | WebGL2 unavailable, or a shader failed to compile | DevTools Console; look for `GL shader err:`. The fallback is intentional. |
 | `music.html` is sluggish | The unthrottled render loop on an underpowered GPU | No mitigation exists today. This is the reason a pause control is on the future list. |
 | Page weight over 50 KB | Too much inline content added | DevTools Network tab, or the PowerShell size command above |
-| A nav item is missing on one page | The nav was updated on 11 files instead of 12 | Grep the link across all pages; the nav is duplicated by hand |
+| A nav item is missing on one page | The nav was hand-edited instead of stamped | `python tools/build-nav.py --check` names the page, then `python tools/build-nav.py` repairs it |
 
 ## Monitoring
 
@@ -1124,9 +1137,11 @@ The site is feature-complete against its original goals: all 12 pages are live, 
 | Milestone | Name | Target | Status |
 |-----------|------|--------|--------|
 | v1.0.0 to v2.6.x | Launch through content build-out | 2026-06 | Complete |
-| v2.7.0 | Code extraction and shared assets | 2026-07 | In Progress (CSS done, nav not) |
+| v2.7.0 | Code extraction and shared assets | 2026-07 | Complete (CSS v2.7.0, nav v2.8.8) |
 | v2.8.x | Music page and visualizer | 2026-07 to 2026-08 | Complete |
 | v2.8.5 | Full documentation audit | 2026-08-24 | Complete |
+| v2.8.7 | Reduced motion support | 2026-08-29 | Complete |
+| v2.8.8 | Nav stamped from one source | 2026-08-29 | Complete |
 | v2.9.0 | Native track player and audio-reactive visualizer | No date | Blocked on audio hosting |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
 | Unnumbered | GitHub API integration | No date | Planned, low priority |
@@ -1154,11 +1169,11 @@ The site is feature-complete against its original goals: all 12 pages are live, 
 | v2.8.4 | RouteNote affiliate card | 2026-08-24 |
 | v2.8.5 | Full documentation audit | 2026-08-24 |
 
-### v2.7.0: Code extraction and shared assets (In Progress)
+### v2.7.0: Code extraction and shared assets (Complete)
 
 - [x] Extract shared CSS into a single `styles.css` across all 12 pages. Done. Page-specific `:root` overrides remain inline by design.
-- [ ] Extract the shared nav HTML using JS injection or a minimal build step. **Blocked on a decision between the two**, and that decision is genuinely hard: JS injection means the nav is briefly absent before scripts run and disappears entirely without JavaScript, while a build step means the project acquires a toolchain it has deliberately avoided. Tenet 3 currently favors leaving the duplication in place.
-- [ ] Extract active-state detection into the shared nav script using `window.location.pathname`.
+- [x] Extract the shared nav HTML. Done in v2.8.8, but not by either method this item originally proposed. Both were rejected: JS injection removes the nav entirely without JavaScript, which trades away the site's graceful degradation to fix a maintenance problem that had never produced a broken page, and a real build step puts a toolchain between the source and the deployed artifact. What shipped instead is `tools/build-nav.py`, a stamp script whose output is committed. The nav is defined once in `PAGES`; running the script rewrites the block between `<!-- NAV -->` and `</nav>` in every page. The deployed site is byte-for-byte unchanged, nothing runs at request time, and deleting the script would cost only the convenience.
+- [x] Extract active-state detection. Done in v2.8.8 by the same script, which writes `class="active"` onto the link matching each file's own name. The two pages not in the nav (`accounts.html`, `privacy-policy.html`) fall out correctly with no special case, because no entry matches their filename.
 - [x] Add `@media (prefers-reduced-motion: reduce)` to disable hover transforms. Done in v2.8.7, together with the `music.html` play/pause control that Open Question 8 resolved to.
 
 ### v2.9.0: Native track player (Blocked)
@@ -1237,7 +1252,7 @@ Every document was compared against the source at the v2.8.5 audit. Each row rec
 
 | Area | Why it is fragile | What breaks if you are careless |
 |------|-------------------|----------------------------------|
-| The nav block, duplicated in 12 files | Any change must be made 12 times by hand, and nothing checks it | One page silently missing a link, which is exactly how the README's nav description went stale |
+| The nav toggle script, duplicated in 12 files | The markup is stamped now, but the toggle IIFE is still copied by hand and nothing checks it | A page whose hamburger does nothing below 860 px, with no error to notice |
 | `music.html` `build()` and `lay` | Roughly 60 interdependent coordinates computed from viewport dimensions; the booth, floor, reflection, and screens are all positioned relative to each other | Changing one ratio detaches the booth from the floor or makes the reflection ghost, which is what v2.8.1 was spent fixing |
 | `drawReflection()` and the booth clip | The fix for reflection ghosting is a clipped hole over the booth footprint, tied to booth geometry | Moving the booth without moving the clip brings the ghosting back |
 | `projects.html` `PROJECTS` array | No validation, no error handling; a syntax error stops rendering entirely | An empty projects page with only a console error to explain it |
@@ -1307,7 +1322,7 @@ Concrete instructions for whoever works on this next, human or model.
 
 - **Never add a dependency, a CDN script, or a web font** without a decision recorded here first. Tenets 1 and 2 exist to make this a conversation rather than a habit.
 - **Never rename or delete a live `.html` file, `styles.css`, or a referenced image without a compatibility entry.** Inbound links live in Discord messages and video descriptions where they cannot be updated and their breakage cannot be observed.
-- **Never edit the nav on fewer than all 12 pages.** Grep the link text across `*.html` and count before committing.
+- **Never hand-edit the nav in a page.** It is generated. Edit `PAGES` in `tools/build-nav.py`, run the script, and commit the result. A hand edit survives until the next run and then vanishes without warning.
 - **Never bypass the pre-commit hook** with `--no-verify` except when the text genuinely requires the character it is blocking (a rule quoting itself). The hook exists because a previous audit found violations that a manual search had missed.
 - **Never claim in copy that the music visualizer reacts to the audio.** It does not, and Tenet 6 applies to marketing copy first.
 - **Never commit `test-local-audio.bat` or anything under `music/`.** The batch file launches a browser with web security disabled, and the audio files are multi-gigabyte.
@@ -1330,7 +1345,7 @@ Get-ChildItem *.html | Select-Object Name, Length | Sort-Object Length -Descendi
 
 3. **Open the changed page** and confirm the change renders. Open DevTools Console and confirm it is clean; zero console errors is the standard on every page.
 4. **Resize through both breakpoints.** Drag the window past 860 px to confirm the nav collapses and the hamburger opens, then past 600 px to confirm padding tightens. Use a 375 px device emulation for the mobile check.
-5. **If you touched the nav**, load all 12 pages and confirm the item list is identical and the correct link is `active` on each.
+5. **If you touched the nav**, run `python tools/build-nav.py --check` and confirm it prints `nav is up to date in every page`. Then load two or three pages, including one not in the nav (`accounts.html`), and confirm the item list and active state look right.
 6. **If you touched `projects.html`**, click every filter button and confirm the count in the section header matches the visible cards.
 7. **If you touched `music.html`**, watch it for a full 30-second cycle to confirm the mode auto-switch still works, click each visible mode button, and resize the window at least once to confirm `build()` re-lays the stage without artifacts.
 8. **If you added an external link**, click it.
@@ -1515,7 +1530,7 @@ Exactly four documents. No fifth file is created inside `/docs`. All new referen
 1. When adding a page: add a row to the Site Structure table, the folder tree, and the public surface list in PRD.md, plus a PATCHNOTES entry, plus a README row if it changes what a visitor gets.
 2. When adding a component: document its pattern in DESIGN.md under Component Patterns.
 3. When a CSS value changes: update DESIGN.md in the same commit.
-4. When changing the nav: update F3 in PRD.md, the Navigation Bar section in DESIGN.md, and all 12 HTML files.
+4. When changing the nav: edit `PAGES` in `tools/build-nav.py`, run `python tools/build-nav.py`, then update F3 in PRD.md and the Navigation Bar section in DESIGN.md. Never edit the nav inside a page.
 5. When a roadmap milestone completes: move it in the milestone table and add a PATCHNOTES entry.
 6. When a third-party link changes (affiliate, Discord invite, Buy Me a Coffee, embed): update the relevant data model table and the Third-Party Integrations table, then add a PATCHNOTES entry.
 7. Never create a new `.md` file in `/docs`. Add a section to one of the three instead.

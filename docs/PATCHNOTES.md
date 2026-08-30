@@ -5,6 +5,30 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.8] - 2026-08-29
+
+### Added: `tools/build-nav.py`, the nav now has one source
+- Added `tools/build-nav.py`, which holds the navigation bar once and stamps it into every page. Running it rewrites the block between the `<!-- NAV -->` marker and the closing `</nav>` tag in all 12 HTML files and sets `class="active"` from each file's own name.
+- Added a `--check` mode that reports any page whose nav has drifted, writes nothing, and exits non-zero. Running the script with no nav change prints "nav is up to date in every page", which doubles as a consistency check across all 12 pages.
+- No markers were added to any page. Both `<!-- NAV -->` and `</nav>` already appeared exactly once per file, which is what makes the range unambiguous without extra scaffolding.
+- The script preserves each file's own line endings. `music.html` is CRLF while every other page is LF, and rewriting that would have produced a whole-file diff instead of a nav diff.
+- The two pages that are not in the nav (`accounts.html`, `privacy-policy.html`) need no special case: no entry matches their filename, so they receive the nav with no active item, which is what they had before.
+
+### Changed
+- **The deployed site is byte-for-byte unchanged by this release.** The script was verified against the existing pages before anything was committed: it reproduces all 12 navs exactly, producing an empty `git diff`. It was then verified to repair drift, by deliberately removing the Music link from `accounts.html` and corrupting a link label in `music.html`, running the script, and confirming both files returned to their committed state with line endings intact.
+- Milestone v2.7.0 is complete. Both outstanding items (shared nav extraction and active-state detection) are closed by this change, roughly seven weeks after the CSS half shipped.
+
+### Documentation
+- Recorded in `docs/PRD.md` that the nav extraction shipped by a third method, not either of the two the milestone originally proposed. JS injection was rejected because it removes the nav entirely without JavaScript, trading away the site's graceful degradation to fix a maintenance problem that had never once produced a broken page. A real build step was rejected because it puts a toolchain between the source and the deployed artifact. A stamp script whose output is committed has neither property: the repository still contains complete deployable HTML, nothing runs at request time, and deleting the script would cost only the convenience.
+- Rewrote the Build section of the Runbook to state that there is still no build step, and to explain why the stamp script is not one.
+- Updated the Tenet 3 discussion, which previously used the nav duplication as its worked example of simplicity winning on merit. It now records what changed that verdict.
+- Updated Known Technical Debt: the nav markup row is closed. What remains is the roughly 20 line toggle script, still duplicated verbatim in all 12 pages, and the fact that nothing runs `--check` automatically. Wiring it into the `pre-commit` hook alongside the em-dash guard is the obvious next step and is recorded as such.
+- Updated the Working Practice never-do list, the common errors table, the fragile areas table, maintenance rule 4, the verification steps, the prerequisites table (Python 3 is now needed to change the nav, standard library only), the folder tree, the public surface table, and feature F3.
+- Added a note to the Navigation Bar section of `docs/DESIGN.md` that the markup is generated and must not be hand-edited.
+- Added v2.7.0, v2.8.7, and v2.8.8 rows to the milestone table.
+
+---
+
 ## [2.8.7] - 2026-08-29
 
 ### Added: reduced motion support sitewide and a pause control on `music.html`

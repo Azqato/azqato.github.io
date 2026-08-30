@@ -184,6 +184,7 @@ Grids are otherwise fluid rather than breakpoint-driven. They use `repeat(auto-f
 - **No external links in the top-level nav.** Every item in `.nav-links` must resolve to a page on azqato.github.io (or a relative link on the current page). Links to other properties (GitHub, sibling project sites not hosted in this repo) belong on the page itself (a card, a footer credit, a button) rather than in the persistent top-level nav.
 - Current nav order, identical in all 12 pages: **Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support** (10 items).
 - `accounts.html` and `privacy-policy.html` carry the same nav but are not themselves in it. They are reached from `index.html`'s explore grid and from `links.html`.
+- **The nav markup is generated. Do not hand-edit it.** As of v2.8.8 the block between `<!-- NAV -->` and `</nav>` in every page is stamped by `tools/build-nav.py`. To change the nav, edit the `PAGES` list in that script and run it, then update this section and F3 in PRD.md. A hand edit inside a page survives only until the next run. The active state is applied by the script from each file's own name, so `class="active"` is no longer maintained by hand either.
 
 ### Footer
 
