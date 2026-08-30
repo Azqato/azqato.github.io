@@ -135,10 +135,11 @@ There are **12** HTML pages.
 - **F11: Favicon.** The site-wide favicon is a lion emoji, implemented as an inline SVG data-URI `<link rel="icon">` with no external image file, repeated identically in the `<head>` of all 12 pages. The homepage's About explore-card icon matches it. **Exception:** `music.html` replaces this favicon at runtime with a live animated canvas favicon, redrawn every third frame (see F14).
 - **F12: Curated Investing Hub.** `invests.html` carries 16 categories of hand-picked external resources (Platforms, Careers, ETFs, Companies, Ratings, Screeners, Real Estate, Charts, Databases, Economic Indicators, Education, Guides, Indices, Information, News) above a visible "not a licensed financial advisor" disclaimer.
 - **F13: Codes Page.** `codes.html` presents the AI-tooling side of the work: the Prompts library, the browser Tools collection, and the GitHub org.
-- **F14: Music Stage Visualizer.** `music.html` renders a full-screen concert stage on a fixed canvas: panoramic LED screens, trusses, lasers, fire columns, haze, dust, a crowd, a floor reflection, and a branded DJ booth, with a cinematic vignette and letterbox grade. The center screen shows one of ten modes, nine of which are WebGL2 fragment shaders. Five modes are exposed as buttons and auto-cycle randomly every 30 seconds. The favicon animates in sync.
+- **F14: Music Stage Visualizer.** `music.html` renders a full-screen concert stage on a fixed canvas: panoramic LED screens, trusses, lasers, fire columns, haze, dust, a crowd, a floor reflection, and a branded DJ booth, with a cinematic vignette and letterbox grade. The center screen shows one of ten modes, nine of which are WebGL2 fragment shaders. Five modes are exposed as buttons and auto-cycle randomly every 30 seconds. The favicon animates in sync. A play/pause control sits at the left of the mode-button row; the page starts paused on one painted frame for visitors whose system requests reduced motion (F18).
 - **F15: Stage Console.** A fixed, independently scrollable glass panel docked over the center screen on `music.html`, holding two Mixcloud mix embeds and links to Last.fm, Mixcloud, and the Mixes YouTube channel.
 - **F16: Shared Stylesheet.** `styles.css` carries the design tokens, reset, nav, and footer for all 12 pages, replacing roughly 100 lines of duplicated CSS per page.
 - **F17: Writing-Style Guard.** A `.githooks/pre-commit` hook blocks any commit that introduces an em dash into an HTML or Markdown file, in either the literal or HTML-entity form.
+- **F18: Reduced Motion Support.** A sitewide `@media (prefers-reduced-motion: reduce)` block in `styles.css` suppresses every transition and hover transform, and the `music.html` visualizer reads the same preference in JavaScript to decide whether its render loop starts. A play/pause button gives every visitor a way to stop the animation, which WCAG 2.2.2 requires and which nothing on the page offered before v2.8.7.
 
 ### Future (post-launch, not committed)
 
@@ -148,7 +149,6 @@ There are **12** HTML pages.
 - Project detail modal with an extended README preview.
 - Search bar filtering by project name or description keyword.
 - Shared nav injection or a minimal build step to remove the duplicated nav markup.
-- A `@media (prefers-reduced-motion: reduce)` rule, and a way to stop the `music.html` animation.
 - **Native track player and kick-reactive visualizer on `music.html`** (built, not deployed). A Web Audio-routed in-page player, an onset-based kick detector tuned against a real track, a beat-synced screen pulse, a rarity-gated loud-moment flash, audio-scaled laser beams, and a Video screen mode that draws the playing track onto the stage screens. Fully implemented on branch `feature/native-audio-player`; not merged because the test tracks are large local files that cannot be committed. Needs a real, externally hosted track before it can ship. See Known Technical Debt.
 
 ---
@@ -483,7 +483,7 @@ No authentication is used with any of these. There are no API keys, tokens, or a
 | External requests on page load | 0 on all pages except `music.html` and `projects.html` | 2 iframes on `music.html`; 1 image on `projects.html` |
 | Image payload                  | No target set                  | `youtube.html` 2.3 MB, the worst page on the site |
 | Offline functionality          | Fully usable after first load  | True for 11 pages; the `music.html` embeds fail offline while the visualizer keeps running |
-| Sustained frame rate           | 60 fps on desktop              | Not measured; `music.html` runs an unthrottled `requestAnimationFrame` loop with WebGL and multiple canvas composites per frame, and never pauses when the tab is hidden beyond the browser's own throttling |
+| Sustained frame rate           | 60 fps on desktop              | Not measured; `music.html` runs an unthrottled `requestAnimationFrame` loop with WebGL and multiple canvas composites per frame. Since v2.8.7 a visitor can stop it with the pause button, and it never starts for anyone who requested reduced motion, but it still does not pause on its own when the tab is hidden |
 | Browser support                | Chrome, Firefox, Edge, Safari latest | Manual spot checks |
 | Viewport range                 | 320 px to 2560 px              | Met except `music.html` below 600 px |
 
@@ -498,7 +498,7 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 | Nav HTML repeated across pages | The nav block and its toggle script are duplicated verbatim in all 12 HTML files | Extract to a shared `nav.js` injection or a minimal build step. Blocked on choosing between them; see Roadmap v2.7.0. |
 | Active nav state in HTML | `class="active"` hardcoded per page | Detect via `window.location.pathname` in the shared nav script |
 | `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 91 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
-| No `prefers-reduced-motion` query | Hover transforms fire for everyone, and `music.html` animates continuously with no way to stop it | Add the media query sitewide, and gate the visualizer loop behind it with a visible play/pause control |
+| Tab-hidden render loop on `music.html` | The visualizer keeps drawing when the tab is in the background, beyond whatever the browser throttles on its own | Pause on `document.hidden` via a `visibilitychange` listener, reusing the `setPlaying()` function added in v2.8.7. Battery and heat, not accessibility. |
 | Dead `analyser` declaration in `music.html` | `analyser` and `freqData` are declared and never assigned; `freq()` always takes the synthetic branch | Either wire a real source (the paused branch does this) or delete the two variables and rename `freq()` so the next reader is not misled |
 | Ten unreferenced images in `img/` | Roughly 3.8 MB tracked and deployed but linked from nothing | Delete them, or use them. Either is fine; leaving them is the only bad option, because a future reader cannot tell which are staged and which are stale. |
 | Unoptimized thumbnails | Four `yt-thumb-*.jpg` totalling 2.3 MB on a 7.8 KB page, with no `loading="lazy"` | Resize to display dimensions, convert to WebP with a JPEG fallback, add `loading="lazy"` |
@@ -1159,7 +1159,7 @@ The site is feature-complete against its original goals: all 12 pages are live, 
 - [x] Extract shared CSS into a single `styles.css` across all 12 pages. Done. Page-specific `:root` overrides remain inline by design.
 - [ ] Extract the shared nav HTML using JS injection or a minimal build step. **Blocked on a decision between the two**, and that decision is genuinely hard: JS injection means the nav is briefly absent before scripts run and disappears entirely without JavaScript, while a build step means the project acquires a toolchain it has deliberately avoided. Tenet 3 currently favors leaving the duplication in place.
 - [ ] Extract active-state detection into the shared nav script using `window.location.pathname`.
-- [ ] Add `@media (prefers-reduced-motion: reduce)` to disable hover transforms.
+- [x] Add `@media (prefers-reduced-motion: reduce)` to disable hover transforms. Done in v2.8.7, together with the `music.html` play/pause control that Open Question 8 resolved to.
 
 ### v2.9.0: Native track player (Blocked)
 
@@ -1272,7 +1272,7 @@ Numbered so they can be answered by reference. When one is answered, fold the an
 5. **Leveraged Strategies has two URLs**: `/leveraged-strategies/` from `projects.html` and `/leverage/` from `invests.html`. Which is canonical? The other should be updated, and if the non-canonical one is a live GitHub Pages site it should carry a redirect page under the policy above.
 6. **The privacy policy** describes ad networks, DoubleClick cookies, account registration, and marketing emails, none of which exist here. It is dated "2024" while the rest of the site is dated 2026. Should it be rewritten to describe what the site actually does (which would be shorter, more honest, and more in keeping with Tenet 6), or is generic over-disclosure the deliberate safe choice?
 7. **Automated smoke tests** were deferred with an explicit threshold: "candidate at 11 pages". The site now has 12. Is that threshold still the plan, or has manual QA proven sufficient enough to drop the idea?
-8. **`music.html` accessibility.** The page animates continuously with strobes and flashes, has no pause control, and honors no reduced-motion preference. Is a play/pause control acceptable on a page whose whole point is the animation, or should the reduced-motion media query simply freeze the canvas on the first frame?
+8. **`music.html` accessibility.** ~~The page animates continuously with strobes and flashes, has no pause control, and honors no reduced-motion preference. Is a play/pause control acceptable on a page whose whole point is the animation, or should the reduced-motion media query simply freeze the canvas on the first frame?~~ **Answered 2026-08-29, shipped in v2.8.7.** The play/pause control won. Three candidates were built into a local harness and compared: freeze on first frame, start paused with a control, and a calm mode that kept slow motion but dropped strobes and lasers. The control was chosen because it is the only one of the three that also satisfies WCAG 2.2.2 (Pause Stop Hide, Level A) for the majority of visitors who never set a reduced-motion preference. Freezing would have satisfied the preference while leaving that criterion unmet for everyone else. See the Animation and Motion section of DESIGN.md for the shipped behavior. One follow-up remains open: the real beat flash rate in `music.html` has still not been measured against WCAG 2.3.1 (no more than three flashes per second).
 
 ---
 

@@ -184,6 +184,11 @@
     .viz-btn:hover { border-color: var(--purple); color: var(--purple); }
     .viz-btn.active { border-color: var(--purple); color: var(--purple); background: rgba(188,140,255,0.1); }
 
+    /* Play/pause for the stage animation. Separated from the mode pills so it
+       reads as a control over the whole scene rather than another mode. */
+    .motion-btn { border-color: rgba(0, 212, 160, 0.45); color: var(--accent); margin-right: 0.35rem; }
+    .motion-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 212, 160, 0.1); }
+
     .mode-controls {
       position: fixed;
       bottom: 1.5rem;
@@ -261,6 +266,7 @@
 
   <!-- VISUALIZER MODE CONTROLS -->
   <div class="mode-controls">
+    <button class="viz-btn motion-btn" id="motion-toggle" aria-pressed="false">Pause</button>
     <button class="viz-btn mode-btn" data-mode="0" style="display:none;">Bars</button>
     <button class="viz-btn mode-btn" data-mode="1" style="display:none;">Volumetric</button>
     <button class="viz-btn mode-btn" data-mode="2">Stars</button>
@@ -397,7 +403,10 @@
         lay.laserOY = lay.boothY + lay.boothH * 0.3;
       }
       build();
-      window.addEventListener('resize', build);
+      window.addEventListener('resize', function () {
+        build();
+        if (!rafId) draw();  // keep the still frame correct while paused
+      });
 
       // ── Web Audio (analyser only, no UI controls) ──
       var analyser = null, freqData = null;
@@ -2077,6 +2086,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
           screenMode = +btn.getAttribute('data-mode');
           modeTimer = 0;
           syncModeBtns();
+          if (!rafId) draw();  // show the picked mode even while paused
         });
       });
 
@@ -2145,9 +2155,38 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         // cinematic grade: vignette + letterbox
         ctx.drawImage(vigC, 0, 0, W, H);
         if (++favTick % 3 === 0) updateFavicon();
-        requestAnimationFrame(draw);
       }
+
+      // ── Motion control ──
+      // Visitors who asked their OS to reduce motion get the stage painted once
+      // and left still; everyone else gets a way to stop it (WCAG 2.2.2).
+      var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var motionBtn = document.getElementById('motion-toggle');
+      var rafId = null;
+
+      function loop() {
+        draw();
+        rafId = requestAnimationFrame(loop);
+      }
+
+      function setPlaying(on) {
+        if (on && !rafId) loop();
+        if (!on && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        if (motionBtn) {
+          motionBtn.textContent = on ? 'Pause' : 'Play';
+          motionBtn.setAttribute('aria-pressed', on ? 'false' : 'true');
+          motionBtn.setAttribute('aria-label', on ? 'Pause the stage animation' : 'Play the stage animation');
+        }
+      }
+
+      if (motionBtn) {
+        motionBtn.addEventListener('click', function () { setPlaying(!rafId); });
+      }
+
+      // Always paint one frame so the stage is never blank, then run it unless
+      // the visitor has asked us not to.
       draw();
+      setPlaying(!motionQuery.matches);
     })();
 
     /* ── NAV TOGGLE ── */

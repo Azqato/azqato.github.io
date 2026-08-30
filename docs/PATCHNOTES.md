@@ -5,6 +5,29 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.7] - 2026-08-29
+
+### Added: reduced motion support sitewide and a pause control on `music.html`
+- Added a `@media (prefers-reduced-motion: reduce)` block to `styles.css` that collapses every animation and transition to `0.01ms` and forces `transform: none` on hover. The card hover lift is suppressed; the border and background color changes that carry the same affordance are untouched, so no interactive element loses its cue.
+- Added a play/pause control to the mode-button row on `music.html` (`.motion-btn`, styled in `--accent` rather than the `--purple` used by the mode pills so it reads as a control over the whole scene). Every visitor can now stop the animation, which nothing on the page allowed before.
+- The `music.html` visualizer now reads `prefers-reduced-motion` in JavaScript and decides whether to start its render loop. A CSS media query cannot stop a `requestAnimationFrame` loop, so this had to be handled in the script rather than the stylesheet.
+- One frame is always painted before the loop is gated, so a paused stage shows the full scene rather than an empty canvas. Verified in Microsoft Edge with `--force-prefers-reduced-motion`: the button reads "Play" and the stage holds a complete still frame.
+
+### Changed
+- Refactored the `music.html` main loop: `draw()` no longer schedules itself. A new `loop()` drives the frames and a new `setPlaying()` starts and cancels it, updating the button label, `aria-pressed`, and `aria-label` together.
+- Clicking a mode button while paused now redraws a single frame, so the picked mode is visible without starting the animation.
+- The `resize` handler now redraws a single frame while paused, so the still frame stays correct after `build()` recomputes the stage layout.
+
+### Documentation
+- Resolved Open Question 8 in `docs/PRD.md`. Three candidates were built into a local harness and compared: freeze on first frame, start paused with a control, and a calm mode keeping slow motion without strobes or lasers. The control won because it is the only one of the three that also satisfies WCAG 2.2.2 (Pause Stop Hide, Level A) for the majority of visitors who never set a reduced-motion preference. The question is kept with its original text struck through rather than deleted, per the documentation process.
+- Added feature F18 to `docs/PRD.md` and updated F14 to mention the control.
+- Checked off the reduced-motion item in the v2.7.0 milestone in `docs/PRD.md`. That milestone now has only the nav extraction and its active-state detection outstanding.
+- Replaced the `prefers-reduced-motion` row in Known Technical Debt with the tab-hidden render loop, which is the part that remains unsolved and is a battery concern rather than an accessibility one.
+- Added a "Reduced motion" subsection to the Animation and Motion section of `docs/DESIGN.md` documenting both layers, the on-load behavior table, and the WCAG reasoning.
+- Rewrote the accessibility gaps list in `docs/DESIGN.md`: the two items this release closed were removed and marked as closed, and two gaps that had been ranked below them (unmeasured beat flash rate against WCAG 2.3.1, and browser-default focus styles) are now named explicitly.
+
+---
+
 ## [2.8.6] - 2026-08-29
 
 ### Changed: RouteNote referral code surfaced on the badge

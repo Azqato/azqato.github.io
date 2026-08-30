@@ -117,3 +117,23 @@ footer a { color: var(--accent); text-decoration: none; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 0.6rem 0; }
 }
+
+/* ── REDUCED MOTION ── */
+/* Honors the visitor's OS setting. Decoration only: hover lifts and transitions
+   are suppressed, while the color and border changes that carry the same
+   affordance are left alone. music.html gates its render loop separately. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  *:hover {
+    transform: none !important;
+  }
+}

@@ -436,10 +436,12 @@ No ARIA roles are used beyond what is implicit in semantic HTML.
 
 Known gaps, in the order they are worth fixing:
 
-1. **No `@media (prefers-reduced-motion: reduce)` anywhere.** The card hover transforms are subtle, but `music.html` runs a continuous full-screen animated scene with strobes, beat flashes, and laser sweeps at 60 fps, with no way to stop it and no reduced-motion escape hatch. This is a genuine accessibility problem on that page, not a cosmetic one, and it is more serious than the "subtle 2px translate" framing used in earlier versions of this document.
-2. **The mode buttons are the only interactive control on `music.html`** and there is no pause, no visibility toggle for the canvas, and no reduced-intensity option.
-3. **No skip-to-content link** on any page.
-4. **`music.html` has not had a mobile audit.** The fixed console and fixed mode-control row were tuned for desktop viewports; behavior between 320 px and 480 px is unverified. This is tracked in the PRD's deferred list.
+1. **No skip-to-content link** on any page.
+2. **The beat flash rate on `music.html` has never been measured** against WCAG 2.3.1, which allows no more than three flashes per second. The pause control added in v2.8.7 gives a visitor a way out, but it does not excuse the page from the criterion for anyone who has not pressed it.
+3. **`music.html` has not had a mobile audit.** The fixed console and fixed mode-control row were tuned for desktop viewports; behavior between 320 px and 480 px is unverified. This is tracked in the PRD's deferred list.
+4. **Focus styles are browser defaults everywhere.** No custom `:focus-visible` ring is defined, so the outline on the accent-colored buttons is whatever the browser draws over a dark surface.
+
+> **Closed in v2.8.7.** Earlier versions of this document listed the absence of any `@media (prefers-reduced-motion: reduce)` rule as the most serious accessibility gap on the site, and the absence of a pause control on `music.html` as the second. Both are fixed. See Animation and Motion below.
 
 ---
 
@@ -463,6 +465,38 @@ All motion outside `music.html` is functional: it confirms interactivity. No dec
 | `music.html` screen mode | Random switch among the five visible modes             | every 1,800 frames | n/a |
 
 Most transitions use the `transition: all 0.2s` shorthand. CSS `ease` is the browser default when no easing is named. Nothing on the site uses a custom cubic-bezier.
+
+### Reduced motion
+
+Added in v2.8.7. Two layers, because the two problems are different.
+
+**Sitewide, in `styles.css`.** A `@media (prefers-reduced-motion: reduce)` block collapses every animation and transition to `0.01ms` and forces `transform: none` on hover. The hover lift disappears; the border and background color changes that carry the same affordance stay. Nothing in the table above communicates anything through movement alone, so nothing is lost.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  *:hover { transform: none !important; }
+}
+```
+
+**`music.html`, in the visualizer script.** A CSS media query cannot stop a `requestAnimationFrame` loop, so the page reads the same preference in JavaScript and gates the loop on it. A `.motion-btn` play/pause control sits at the left of the mode-button row, styled in `--accent` rather than the `--purple` used by the mode pills so it reads as a control over the whole scene rather than another mode.
+
+The behavior:
+
+| Visitor's preference | On load | Button reads |
+|----------------------|---------|--------------|
+| No preference | One frame painted, then the loop runs | Pause |
+| `reduce` | One frame painted, then it holds still | Play |
+
+The single frame is drawn before the loop is gated, so a paused stage shows the full scene (screens, booth, lasers, crowd) rather than an empty canvas. Pressing a mode button while paused redraws one frame so the change is visible without starting the animation, and a resize does the same. The preference is read once on load; a visitor who presses Play is not overridden if the OS setting changes mid-session.
+
+Why a control rather than a hard freeze: WCAG 2.2.2 (Pause Stop Hide, Level A) requires a way to stop automatic motion that runs more than five seconds alongside other content, and the stage console sits directly over the visualizer. Freezing only for people who set the preference would have left that criterion unmet for everyone else. The control satisfies both at once.
 
 **Rule for new motion:** if a movement does not tell the user that something is interactive or that state changed, it does not ship. `music.html` is the single, deliberate exception, and no second exception should be granted without a decision recorded in the PRD.
 
