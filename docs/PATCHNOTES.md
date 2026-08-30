@@ -5,6 +5,31 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.9] - 2026-08-29
+
+### Fixed: dead demo link on the Leveraged Strategies card
+- Fixed the Leveraged Strategies card in `projects.html`, which pointed its demo link at `azqato.github.io/leveraged-strategies/`. That URL returns a hard 404 and has since the project was renamed. Both the `demo` and `github` fields now point at `leverage`.
+- Verified against the live web rather than assumed: `/leverage/` serves the page titled "Leveraged Strategies", `/leveraged-strategies/` returns 404, and the GitHub API resolves `Azqato/leveraged-strategies` to `Azqato/leverage`. GitHub redirects renamed repositories, which is why the `github` link still worked, but GitHub Pages does not redirect Pages URLs, which is why the demo link did not. Patch note 2.6.12 moved `invests.html` to the new URL and missed `projects.html`.
+- No compatibility entry was added at the old path, because no repository serves it and there is nowhere to put one.
+
+### Removed
+- Removed `wrangler.jsonc`. It described a complete Cloudflare Workers deploy target, arrived on 2026-07-09 via the only pull request in this repository's history (a Cloudflare autoconfiguration integration), and was never used for a real deploy. An untested deploy path implies a safety net nobody has checked. The site is plain files and moves to any static host with no configuration, so nothing was lost.
+- Removed the wrangler-specific patterns from `.gitignore` (`.wrangler`, `.dev.vars*`) along with the config they belonged to. The defensive `.env*` exclusion stays.
+- Removed `.vscode/recentfedsummary.MD`, a personal summary of a finance video that was tracked in git, unrelated to the site, and the only remaining source of em-dash violations in the repository. Setting aside the exempt lines where a rule names the character it prohibits, the project is now fully compliant with its own writing policy.
+
+### Changed
+- Milestone v2.9.0 is no longer blocked. It was waiting on somewhere to host audio; the owner is supplying standalone audio files to be played directly on the page. The milestone grew in scope as a result: it now replaces the two Mixcloud iframes rather than adding a player beside them, and it is the next substantial piece of work on the site.
+- Rewrote the Current Phase section of `docs/PRD.md`, which described the project as being in maintenance with a paused branch and a half-finished milestone. None of that is true any more. It now names v2.9.0 as next and lists the six remaining defect items with their sizes.
+
+### Documentation
+- Closed open questions 1 through 5 in `docs/PRD.md`. Each keeps its original text struck through with the answer beside it, per the documentation process, rather than being deleted. Questions 6, 7, and 8 remain, and question 8 is partly closed by v2.8.7.
+- Recorded a standing rule in `docs/PRD.md` (Never Do These) and `docs/DESIGN.md` (Image Assets): **nothing in `img/` is ever deleted unless the owner asks for that file by name.** Unreferenced is the normal state of that folder, which is a working asset library rather than build output. The removal policy's plain internal delete does not apply there, and future audits should stop raising it. The corresponding Known Technical Debt row and deferred item were reworded from open questions into settled decisions.
+- Updated the three Documentation Versus Reality rows that these answers resolve (15, 16, and 19) with what was decided and why.
+- Removed every reference to Cloudflare Workers and `wrangler.jsonc` from the tech stack, folder tree, environments table, alternative hosts table, public surface table, security section, and internal FAQ. The Environments discrepancy note is now marked resolved instead of open: there is again exactly one environment, without qualification.
+- Added v2.8.9 to the milestone table and updated the v2.9.0 row from blocked to ready.
+
+---
+
 ## [2.8.8] - 2026-08-29
 
 ### Added: `tools/build-nav.py`, the nav now has one source

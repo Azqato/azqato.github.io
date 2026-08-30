@@ -410,7 +410,9 @@ All images live in `img/` at the project root. Profile and thumbnail images rend
 | `yt-channel-chills.jpg` | 138 KB | Nothing |
 | `20260711-0151-37.7601512.gif` | 1.9 MB | Nothing |
 
-> **Discrepancy (open).** Earlier documentation described `home-hero-profile.jpg` as "Hero avatar on the landing page (`index.html`)" and the two `music-playlist-*.jpg` files as Spotify playlist covers on `music.html`. Neither is true in the current source: `index.html` contains no `<img>` at all, and `music.html` no longer lists Spotify playlists. The `yt-channel-*.jpg` set is likewise unreferenced. These ten files are still tracked in git and still deploy (about 3.8 MB of dead weight, of which the undocumented GIF is half). Whether they are stale leftovers or staged for planned use is the author's call, which is why they are listed rather than removed. Note that the GIF appears in no version of the documentation at all.
+> **Resolved 2026-08-29.** Earlier documentation described `home-hero-profile.jpg` as "Hero avatar on the landing page (`index.html`)" and the two `music-playlist-*.jpg` files as Spotify playlist covers on `music.html`. Neither was true: `index.html` contains no `<img>` at all, and `music.html` no longer lists Spotify playlists. The table above records actual usage instead.
+>
+> **The ten unreferenced files stay, and this is now a standing rule.** Nothing in `img/` is deleted unless the owner asks for that specific file by name. Unreferenced is the normal state of that folder: it is the owner's working library, not a set of build outputs, and a file being unlinked says nothing about whether it is wanted. Do not raise it as dead weight in a future audit, do not propose a cleanup, and do not delete one while doing unrelated work. The "Referenced by: Nothing" column above is a factual note about the current pages, not a to-do list.
 
 The four `yt-thumb-*.jpg` files are the site's real performance outlier: `youtube.html` is 7.8 KB of HTML that pulls 2.3 MB of images. No lazy-loading attribute is set on them.
 

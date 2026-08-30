@@ -242,7 +242,6 @@ No other page has any JavaScript beyond the nav toggle.
 | Graphics        | Canvas 2D       | The `music.html` stage, reflection, bloom, and favicon             |
 | Graphics        | WebGL2 / GLSL ES 3.00 | Nine fragment-shader screen modes in `music.html`, rendered offscreen at 640x400 |
 | Hosting         | GitHub Pages    | Free static hosting; deployed from the `main` branch root          |
-| Alt hosting     | Cloudflare Workers | `wrangler.jsonc` is present and configured; see Environments      |
 | Version Control | Git / GitHub    | Repository `Azqato/azqato.github.io`; `main` deploys on push        |
 
 No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fonts. The only third-party code in the repository is the shader source in `music.html`, which carries per-mode attribution in comments (CC0, MIT, CC-BY-NC-SA-4.0, and individually credited authors).
@@ -267,15 +266,13 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── accounts.html             - gaming profiles (not in nav)
 ├── privacy-policy.html       - policy and disclaimers (not in nav)
 ├── styles.css                - shared tokens, reset, nav, footer
-├── wrangler.jsonc            - Cloudflare Workers static-assets config
-├── .gitignore                - wrangler and env-file patterns only
+├── .gitignore                - env-file patterns only
 ├── .githooks/
 │   └── pre-commit            - em-dash writing-style guard
 ├── tools/
 │   └── build-nav.py          - stamps the shared nav into every page; output is committed
 ├── .vscode/
-│   ├── settings.json         - editor chat settings
-│   └── recentfedsummary.MD   - unrelated personal note, tracked in git (see Risks)
+│   └── settings.json         - editor chat settings
 ├── img/                      - 15 files, 5 referenced by pages, 10 unreferenced
 └── docs/
     ├── PRD.md                - this file
@@ -502,12 +499,11 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 | `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 91 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
 | Tab-hidden render loop on `music.html` | The visualizer keeps drawing when the tab is in the background, beyond whatever the browser throttles on its own | Pause on `document.hidden` via a `visibilitychange` listener, reusing the `setPlaying()` function added in v2.8.7. Battery and heat, not accessibility. |
 | Dead `analyser` declaration in `music.html` | `analyser` and `freqData` are declared and never assigned; `freq()` always takes the synthetic branch | Either wire a real source (the paused branch does this) or delete the two variables and rename `freq()` so the next reader is not misled |
-| Ten unreferenced images in `img/` | Roughly 3.8 MB tracked and deployed but linked from nothing | Delete them, or use them. Either is fine; leaving them is the only bad option, because a future reader cannot tell which are staged and which are stale. |
+| Ten unreferenced images in `img/` | Roughly 3.8 MB tracked and deployed but linked from nothing | **Not debt. Closed by decision on 2026-08-29:** the owner keeps everything in `img/`. See the standing rule under Never Do These. Audits should stop raising it. |
 | Unoptimized thumbnails | Four `yt-thumb-*.jpg` totalling 2.3 MB on a 7.8 KB page, with no `loading="lazy"` | Resize to display dimensions, convert to WebP with a JPEG fallback, add `loading="lazy"` |
-| No CSP headers | GitHub Pages does not support custom response headers | Acceptable for static content; the Cloudflare Workers config already in the repo could add them if that becomes the deploy target |
+| No CSP headers | GitHub Pages does not support custom response headers | Acceptable for static content. Any host that can send headers (Cloudflare, Vercel, Netlify) could add one if the site ever moves. |
 | No automated tests | Manual visual QA only | A Playwright smoke test per page (loads, nav renders, no console errors) would catch the majority of regressions. The threshold for this was set at 11 pages and has been passed. |
 | Native player has no hostable audio | The test tracks are multi-GB local files; GitHub rejects pushes over 100 MB and GitHub.com's Git LFS caps at 2 GB per file, both far under these files' size | Host a real track externally (object storage plus a CDN, or a video host that serves a direct file URL), point the branch's `<video src>` at it, then merge `feature/native-audio-player` |
-| Two different URLs for one project | `projects.html` links Leveraged Strategies at `azqato.github.io/leveraged-strategies/`; `invests.html` links the same project at `azqato.github.io/leverage/` | Decide which is canonical and make both pages agree. Patch note 2.6.12 moved `invests.html` to `/leverage/` and appears to have missed `projects.html`. |
 
 ---
 
@@ -674,7 +670,7 @@ Static content hardcoded into the HTML (project metadata, affiliate URLs, bio co
 
 There are none. No `.env` files, no API keys, no tokens, no credentials anywhere in the codebase, and no variables that a deploy needs to have set.
 
-Confirmed at audit: a full scan found no key-shaped strings, no `process.env` references, and no secret material. `.gitignore` pre-emptively excludes `.env*` and `.dev.vars*` (both patterns arrived with the Cloudflare Workers configuration) so that a future secret cannot be committed casually.
+Confirmed at audit: a full scan found no key-shaped strings, no `process.env` references, and no secret material. `.gitignore` pre-emptively excludes `.env*` so that a future secret cannot be committed casually. The wrangler-specific patterns that sat beside it were removed in v2.8.9 along with the config they belonged to.
 
 Affiliate URLs and referral codes are hardcoded as `href` attributes. They are public referral links, not secrets: they identify Azqato as the referrer and are meant to be shared.
 
@@ -704,7 +700,7 @@ The Mixcloud embeds are the only automatic third-party data flow on the site, an
 
 **Local test tooling.** `test-local-audio.bat` launches Chrome with `--disable-web-security`. That is a genuinely dangerous flag: a browser started that way ignores same-origin policy for every site it visits, not just `music.html`. It is mitigated by the throwaway `--user-data-dir` and by the comment in the file telling the user not to browse with that window. It is untracked and therefore never deployed. Do not remove those two mitigations, and do not commit the file.
 
-**Content Security Policy.** GitHub Pages cannot send custom response headers, so no CSP can be applied on the current host. This is acceptable for a static site with no user input, and the practical benefit would be limited to constraining the Mixcloud frame. The Cloudflare Workers config already in the repository could add headers if that ever becomes the live host.
+**Content Security Policy.** GitHub Pages cannot send custom response headers, so no CSP can be applied on the current host. This is acceptable for a static site with no user input, and the practical benefit would be limited to constraining the Mixcloud frame, which is itself scheduled for removal in v2.9.0.
 
 **Dependency vulnerabilities.** Zero. There are no packages, no lockfile, and no CDN scripts to compromise.
 
@@ -775,7 +771,7 @@ Specific enough to answer the question for any given file:
 | `/img/yt-thumb-azqato.jpg`, `-streams`, `-mixes`, `-chills` | Asset | Referenced by `youtube.html` |
 | `/img/home-hero-profile.jpg`, `logo-cat-avatar.jpg`, `music-logo-small.jpg`, `music-playlist-bangers.jpg`, `music-playlist-addictions.jpg`, `yt-channel-azqato.jpg`, `yt-channel-streams.jpg`, `yt-channel-mixes.jpg`, `yt-channel-chills.jpg`, `20260711-0151-37.7601512.gif` | Asset | Deployed but referenced by nothing in this repository. Treat as public facing anyway if anything outside this repository might hotlink them; treat as internal if not. Unknown, and worth a moment's thought before deleting rather than an assumption. |
 | `/README.md`, `/docs/*.md` | Document | Served as raw files, not rendered. Not linked from any page. |
-| `/wrangler.jsonc`, `/.gitignore` | Config | Served if requested; harmless, contains no secrets |
+| `/.gitignore` | Config | Served if requested; harmless, contains no secrets |
 | `/tools/build-nav.py` | Tooling | Served as a plain text file if requested. Not linked from anywhere, contains no secrets, and is never executed by the host. |
 | `/.vscode/*`, `/.githooks/*` | Config | Probably not served: GitHub Pages runs Jekyll by default, which excludes dot-directories from its output, and there is no `.nojekyll` file in this repository. This has not been verified against the live site. If it matters, request `https://azqato.github.io/.vscode/recentfedsummary.MD` and see whether it returns 404. |
 
@@ -950,7 +946,6 @@ The site can move to any static host in minutes, with no configuration changes, 
 
 | Host | Steps |
 |------|-------|
-| Cloudflare Workers | Already configured in `wrangler.jsonc`: name `azqato`, assets directory `.`, compatibility date 2026-07-09, `nodejs_compat` flag, observability enabled. Run `npx wrangler deploy`. Never used for a real deploy so far. |
 | Cloudflare Pages | Connect the repository; leave the build command blank; output directory `/` |
 | Vercel | Drag and drop the project folder at vercel.com/new; no build command |
 | Netlify | Drag and drop at app.netlify.com/drop |
@@ -999,11 +994,10 @@ There is no way to roll back faster than the GitHub Pages deploy cycle, so the r
 |-------------|-----|--------|----------------|-------------|
 | Production | `https://azqato.github.io/` | `main` | Push to `main` | The only real environment |
 | Local | `file://` or `localhost:3000` | Any | Open in a browser | Identical output. The only behavioral difference is browser handling of `file://` iframes on `music.html`. |
-| Cloudflare Workers | Not deployed | n/a | Manual `wrangler deploy` | Configured but unused; see below |
 
 Nothing differs between environments: no feature flags, no environment variables, no build modes, no conditional code paths anywhere in the source.
 
-> **Discrepancy (open).** This section previously stated "There is only one environment: production (GitHub Pages)." That is still true of what is actually serving traffic, but `wrangler.jsonc` has been committed since 2026-07-09 (via the one pull request in the repository's history, from a Cloudflare autoconfiguration integration) and describes a complete second deploy target. Whether it is an abandoned experiment or a deliberate escape hatch is unknown; the file is harmless either way. Recorded as Open Question 4.
+> **Resolved in v2.8.9.** This section previously stated "There is only one environment: production (GitHub Pages)", while `wrangler.jsonc` sat in the repository describing a complete Cloudflare Workers deploy target. It arrived 2026-07-09 via the only pull request in the repository's history, from a Cloudflare autoconfiguration integration, and was never used for a real deploy. It has been deleted. There is again exactly one environment, and the original statement is true without qualification. Moving hosts needs no configuration file, so nothing was lost.
 
 ## Environment variable reference
 
@@ -1128,9 +1122,24 @@ The proxies available, in descending order of usefulness:
 
 ## Current phase
 
-**Maintenance and content growth, with one paused feature branch.**
+**Native audio on `music.html`, then polish.**
 
-The site is feature-complete against its original goals: all 12 pages are live, the project grid is populated, the affiliate and support paths work, and the design system is stable. Work now falls into three buckets: adding projects and links as they exist, occasional visual passes on individual pages, and finishing the half-done shared-assets milestone. The one substantial unshipped feature (the native audio player) is blocked on hosting rather than on code.
+The site is feature-complete against its original goals: all 12 pages are live, the project grid is populated, the affiliate and support paths work, and the design system is stable. The shared-assets milestone closed in v2.8.8, and the audit's open questions closed in v2.8.9, so nothing is waiting on a decision any more.
+
+The next substantial piece of work is v2.9.0: replacing the Mixcloud embeds with audio served directly by the page, which merges the finished native player branch and makes the visualizer genuinely audio-reactive. It is waiting on the owner's audio files rather than on engineering.
+
+Everything else outstanding is defect work that needs no decisions and can happen in any order:
+
+| Item | Why it matters | Size |
+|------|----------------|------|
+| Optimize the four `youtube.html` thumbnails | 2.3 MB of images on a 7.8 KB page, with no `loading="lazy"`. The worst performance defect on the site, and a direct contradiction of Tenet 1. | Small |
+| Add `build-nav.py --check` to the pre-commit hook | Makes nav drift uncommittable, finishing what v2.8.8 started | Small |
+| Measure the `music.html` beat flash against WCAG 2.3.1 | The one accessibility item v2.8.7 left open. A pause button does not exempt the page from the three-flashes-per-second limit. | Small |
+| Pause the render loop on `document.hidden` | Battery and heat. Reuses the `setPlaying()` function that already exists. | Small |
+| Playwright smoke tests | The threshold set for adding these was 11 pages; the site has 12. Overdue rather than deferred. | Medium |
+| Mobile audit of `music.html`, 320 px to 480 px | Never done. The fixed canvas and console were tuned for desktop. | Medium |
+
+Beyond that: adding projects and links as they exist, and occasional visual passes on individual pages.
 
 ## Milestone table
 
@@ -1142,7 +1151,8 @@ The site is feature-complete against its original goals: all 12 pages are live, 
 | v2.8.5 | Full documentation audit | 2026-08-24 | Complete |
 | v2.8.7 | Reduced motion support | 2026-08-29 | Complete |
 | v2.8.8 | Nav stamped from one source | 2026-08-29 | Complete |
-| v2.9.0 | Native track player and audio-reactive visualizer | No date | Blocked on audio hosting |
+| v2.8.9 | Open questions cleared, dead link fixed | 2026-08-29 | Complete |
+| v2.9.0 | Native track player and audio-reactive visualizer | Next | Ready, waiting on the owner's audio files |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
 | Unnumbered | GitHub API integration | No date | Planned, low priority |
 
@@ -1176,13 +1186,27 @@ The site is feature-complete against its original goals: all 12 pages are live, 
 - [x] Extract active-state detection. Done in v2.8.8 by the same script, which writes `class="active"` onto the link matching each file's own name. The two pages not in the nav (`accounts.html`, `privacy-policy.html`) fall out correctly with no special case, because no entry matches their filename.
 - [x] Add `@media (prefers-reduced-motion: reduce)` to disable hover transforms. Done in v2.8.7, together with the `music.html` play/pause control that Open Question 8 resolved to.
 
-### v2.9.0: Native track player (Blocked)
+### v2.9.0: Native track player (Ready, waiting on files)
 
 Fully built on `feature/native-audio-player` and pushed to GitHub. Contains a Web Audio-routed `<video>` player with a scrub bar, an onset-based kick detector tuned against a real track using `ffmpeg`, a beat-synced screen pulse, a rarity-gated loud-moment flash, audio-scaled laser beam counts, and a Video screen mode that draws the playing track's own frames onto the stage screens.
 
-Blocked on one thing: somewhere to host the audio. The test tracks are multi-GB local files. GitHub rejects pushes over 100 MB, and GitHub.com's Git LFS caps at 2 GB per file. Shipping a Play button that points at nothing would be worse than not shipping.
+**Unblocked on 2026-08-29.** The owner is supplying standalone audio files to be played directly on the page, replacing the two Mixcloud iframes. That resolves the only thing this milestone was ever waiting on, and it makes the milestone larger than originally scoped: it is now a replacement of the stage console's playback rather than an addition to it.
 
-To unblock: host one real track on object storage with a CDN, or on a video host that serves a direct file URL, point the branch's `<video src>` at it, verify, then merge.
+What this milestone now covers, in the order it should be done:
+
+1. Take delivery of the audio files and decide where they live. Anything under roughly 50 MB can sit in the repository and be served by GitHub Pages like any other asset, which keeps the site self-contained. Larger files need object storage with a CDN, or a host that serves a direct file URL. Confirm the actual sizes before choosing, because this decision is hard to reverse once links exist.
+2. Replace the two Mixcloud iframes in `.stage-console` with the native player from the branch.
+3. Merge `feature/native-audio-player` and wire the real analyser into `freq()`, replacing the synthetic three-sine signal. The visualizer becomes genuinely audio-reactive for the first time.
+4. Delete the now-dead `analyser` and `freqData` declarations if the merge does not already consume them.
+5. Reconcile the new player with the v2.8.7 motion control. The play/pause button currently governs the stage animation only. Once audio drives the visuals, decide whether one control governs both or whether they stay separate, and make sure a reduced-motion visitor still gets a still stage rather than a silent one.
+
+What it unlocks beyond the feature itself:
+
+- **The zero-external-request claim becomes true again for all 12 pages**, since the Mixcloud iframes are the only automatic third-party load on the site. Every performance, privacy, and security section that currently carries a "except `music.html`" caveat can drop it, including the README's privacy sentence.
+- The iframe attack surface described under Known Attack Surface disappears entirely, so the open note about its overly broad `allow` list and missing `sandbox` becomes moot.
+- Page weight on `music.html` goes up by whatever the audio costs if the files are committed to the repository. Note that against the 50 KB budget, which the page already exceeds at 93 KB.
+
+Caveat worth stating before the files arrive: hosting audio in the repository is the simplest option and the one most in keeping with the project's tenets, but git stores every version of a binary forever. Replacing a 40 MB track five times leaves 200 MB in history that cannot be reclaimed without rewriting it. Prefer getting the file right once, or host it outside the repository.
 
 ### v3.0.0: Contact / hire-me section (Planned)
 
@@ -1206,7 +1230,7 @@ Auto-fetch star counts and last-pushed dates per repository, cache them in `sess
 | Automated testing (CI) | Manual QA is in use. The threshold that was set for adding smoke tests (11 pages) has now been passed at 12 pages, so this is overdue rather than deferred. |
 | Full mobile audit of `music.html` | The visualizer, fixed canvas, and fixed stage console were built and tuned for desktop first. A dedicated pass from 320 px to 480 px is needed to verify layout, tap targets, and readability before the page is mobile-complete. |
 | External audio capture for the visualizer | Making the visualizer react to audio from another tab or from system output was researched and declined. It requires either a browser extension or a screen-capture permission prompt, both of which are hostile to a visitor who just wants to look at a page. The native player branch is the accepted path to real reactivity instead. Do not relitigate this. |
-| Deleting the ten unreferenced images | Blocked on knowing whether they are staged for use or stale. See Open Question 2. |
+| Deleting anything from `img/` | Not deferred, declined. The owner keeps every file in that folder whether or not a page references it. See the standing rule under Never Do These. |
 
 ---
 
@@ -1230,11 +1254,11 @@ Every document was compared against the source at the v2.8.5 audit. Each row rec
 | 12 | PRD F4 said the landing page hero includes a profile photo. It has pills and buttons, no photo. | Code. | Fixed. |
 | 13 | F11 said the lion favicon is identical across all 12 pages. `music.html` overwrites it at runtime every third frame. | Code. Both statements are half true, which is worse than either. | Fixed. F11 now names the exception and F14 documents the animated favicon. |
 | 14 | No document anywhere mentioned that the `music.html` visualizer is not audio-reactive. `analyser` and `freqData` are declared and never assigned, so every visual is procedural. | Code. This is the kind of thing a reader assumes the opposite of by default. | Fixed. Stated in DESIGN.md, in the data flow section, in F14, and in Known Technical Debt. |
-| 15 | The PRD said "There is only one environment: production (GitHub Pages)". `wrangler.jsonc` describes a complete Cloudflare Workers deploy target and has been committed since 2026-07-09. | Both. The statement is true of what serves traffic; the file is real and undocumented. | Documented in Environments and in the tech stack. Intent recorded as Open Question 4. |
-| 16 | `projects.html` links Leveraged Strategies at `/leveraged-strategies/`; `invests.html` links the same project at `/leverage/`. Patch note 2.6.12 records the move to `/leverage/`. | Neither, safely. Both URLs may resolve; only the author knows which is canonical. | Recorded in Known Technical Debt and as Open Question 5. Not changed, because guessing here breaks a live link. |
+| 15 | The PRD said "There is only one environment: production (GitHub Pages)". `wrangler.jsonc` describes a complete Cloudflare Workers deploy target and has been committed since 2026-07-09. | Both. The statement was true of what served traffic; the file was real and undocumented. | Resolved in v2.8.9 by deleting the file. The document was right and the file was residue. |
+| 16 | `projects.html` links Leveraged Strategies at `/leveraged-strategies/`; `invests.html` links the same project at `/leverage/`. Patch note 2.6.12 records the move to `/leverage/`. | Resolved in v2.8.9 by checking the live web instead of guessing. `/leverage/` serves the page; `/leveraged-strategies/` is a hard 404. | Fixed. Both fields on the `projects.html` card now point at `leverage`. The audit was right to leave it alone at the time: it was a live broken link, and guessing the other way would have broken the working one too. |
 | 17 | The privacy policy describes Google DoubleClick DART cookies, third-party ad servers, ad networks, account registration, and marketing emails. The site has no ads, no accounts, and no email capture. | Code. The policy is a generic template with real disclosures (affiliate, financial) appended. | Not changed. It is legal copy, over-disclosure is not a defect, and rewriting a privacy policy is the author's decision, not an audit's. Recorded as Open Question 6. |
 | 18 | PRD Known Technical Debt said the nav is duplicated across "all 11 HTML files". It is 12. | Code. | Fixed. |
-| 19 | `.vscode/recentfedsummary.MD` is tracked in git, is unrelated to the project, and contains 13 em-dash violations of the project's own writing policy. | Code. The policy is unambiguous; the file predates the hook, which only checks staged changes. | Not changed; outside this audit's write scope. Recorded as Open Question 1. |
+| 19 | `.vscode/recentfedsummary.MD` is tracked in git, is unrelated to the project, and contains 13 em-dash violations of the project's own writing policy. | Code. The policy is unambiguous; the file predates the hook, which only checks staged changes. | Resolved in v2.8.9: deleted at the owner's direction. Setting aside the exempt lines where a rule names the character it prohibits, the repository now has zero violations. |
 | 20 | PATCHNOTES.md entries are not in a consistent order: the file runs newest-first at the top, then ascending from 1.0.0, then jumps between 2.6.6, 2.5.1, 2.6.16, and back down. | Neither is wrong; the file is a historical record. | Not reordered. Historical records are not rewritten. The convention for new entries is stated in the Documentation Process below. |
 
 ---
@@ -1280,11 +1304,11 @@ No file in the repository contains a `TODO`, `FIXME`, `HACK`, or `XXX` marker. T
 
 Numbered so they can be answered by reference. When one is answered, fold the answer into the relevant section and mark it answered here rather than deleting it.
 
-1. **`.vscode/recentfedsummary.MD`** is a personal summary of a finance video, tracked in git, unrelated to the site, and carrying 13 em-dash violations of the project's own writing policy. Should it be deleted from the repository, moved out of version control, or brought into compliance and kept? It was left untouched because this audit's write scope was the four documentation files.
-2. **Ten unreferenced images**, roughly 3.8 MB including a 1.9 MB GIF that appears in no documentation. Are these staged for planned use or are they leftovers? If leftovers, they are a plain internal delete under the removal policy.
-3. **The Mixcloud embeds** are the only thing preventing the site from making a true zero-external-request claim, and they load before any visitor interaction. Should they become click-to-load (a poster image that swaps in the iframe on click), restoring the privacy promise at the cost of one click? Or is playback-on-arrival the point of the page?
-4. **`wrangler.jsonc`.** Is Cloudflare Workers an intended alternative or future host, or the residue of an autoconfiguration pull request that was merged and forgotten? If the latter, it can be deleted; if the former, it deserves a real deploy test before it is needed in an emergency.
-5. **Leveraged Strategies has two URLs**: `/leveraged-strategies/` from `projects.html` and `/leverage/` from `invests.html`. Which is canonical? The other should be updated, and if the non-canonical one is a live GitHub Pages site it should carry a redirect page under the policy above.
+1. ~~**`.vscode/recentfedsummary.MD`** is a personal summary of a finance video, tracked in git, unrelated to the site, and carrying 13 em-dash violations of the project's own writing policy.~~ **Answered 2026-08-29, done in v2.8.9.** Deleted from the repository. It remains recoverable from git history.
+2. ~~**Ten unreferenced images**, roughly 3.8 MB including a 1.9 MB GIF that appears in no documentation. Are these staged for planned use or are they leftovers?~~ **Answered 2026-08-29.** They stay, and so does anything else added to `img/` later. This is a standing rule rather than a per-file answer: nothing in `img/` is deleted unless the owner explicitly asks for it. Unreferenced files there are the owner's working library, not stale assets, and an audit finding one unused is not evidence of anything. The removal policy's plain internal delete does not apply to that folder.
+3. ~~**The Mixcloud embeds** are the only thing preventing the site from making a true zero-external-request claim, and they load before any visitor interaction. Should they become click-to-load?~~ **Answered 2026-08-29.** Neither option. The embeds are going away: the owner is supplying standalone audio files to be played directly on the page, which removes the third party rather than gating it. Tracked as milestone v2.9.0, which this also unblocks. Do not spend effort on click-to-load or on tightening the iframe `allow` list in the meantime, because both would be work on code scheduled for deletion.
+4. ~~**`wrangler.jsonc`.** Is Cloudflare Workers an intended alternative or future host, or the residue of an autoconfiguration pull request that was merged and forgotten?~~ **Answered 2026-08-29, done in v2.8.9.** Residue. Deleted, along with the wrangler-specific `.gitignore` patterns that arrived with it. An untested deploy path implies a safety net nobody has checked, and the site needs no configuration file to move hosts.
+5. ~~**Leveraged Strategies has two URLs**: `/leveraged-strategies/` from `projects.html` and `/leverage/` from `invests.html`. Which is canonical?~~ **Answered 2026-08-29, fixed in v2.8.9.** `/leverage/` is canonical. Both were checked against the live web rather than assumed: `/leverage/` returns the page titled Leveraged Strategies, and `/leveraged-strategies/` returns a hard 404, so `projects.html` had been shipping a dead demo link since the v2.6.12 rename. The GitHub repository was renamed too. `github.com/Azqato/leveraged-strategies` still resolves because GitHub redirects renamed repositories, but GitHub Pages does not do the same for Pages URLs, which is exactly why one link broke and the other did not. Both fields on the card now point at `leverage`. No compatibility entry was added at the old path because no repository serves it, so there is nowhere to put one.
 6. **The privacy policy** describes ad networks, DoubleClick cookies, account registration, and marketing emails, none of which exist here. It is dated "2024" while the rest of the site is dated 2026. Should it be rewritten to describe what the site actually does (which would be shorter, more honest, and more in keeping with Tenet 6), or is generic over-disclosure the deliberate safe choice?
 7. **Automated smoke tests** were deferred with an explicit threshold: "candidate at 11 pages". The site now has 12. Is that threshold still the plan, or has manual QA proven sufficient enough to drop the idea?
 8. **`music.html` accessibility.** ~~The page animates continuously with strobes and flashes, has no pause control, and honors no reduced-motion preference. Is a play/pause control acceptable on a page whose whole point is the animation, or should the reduced-motion media query simply freeze the canvas on the first frame?~~ **Answered 2026-08-29, shipped in v2.8.7.** The play/pause control won. Three candidates were built into a local harness and compared: freeze on first frame, start paused with a control, and a calm mode that kept slow motion but dropped strobes and lasers. The control was chosen because it is the only one of the three that also satisfies WCAG 2.2.2 (Pause Stop Hide, Level A) for the majority of visitors who never set a reduced-motion preference. Freezing would have satisfied the preference while leaving that criterion unmet for everyone else. See the Animation and Motion section of DESIGN.md for the shipped behavior. One follow-up remains open: the real beat flash rate in `music.html` has still not been measured against WCAG 2.3.1 (no more than three flashes per second).
@@ -1320,6 +1344,7 @@ Concrete instructions for whoever works on this next, human or model.
 
 ## Never do these
 
+- **Never delete anything from `img/`.** Not an unreferenced file, not an apparent duplicate, not an obvious leftover, no matter how confident an audit is that nothing links it. That folder is the owner's working library and unused is its normal state. Remove a file from it only when the owner asks for that file by name.
 - **Never add a dependency, a CDN script, or a web font** without a decision recorded here first. Tenets 1 and 2 exist to make this a conversation rather than a habit.
 - **Never rename or delete a live `.html` file, `styles.css`, or a referenced image without a compatibility entry.** Inbound links live in Discord messages and video descriptions where they cannot be updated and their breakage cannot be observed.
 - **Never hand-edit the nav in a page.** It is generated. Edit `PAGES` in `tools/build-nav.py`, run the script, and commit the result. A hand edit survives until the next run and then vanishes without warning.
@@ -1471,7 +1496,7 @@ That community traffic converts and cold developer traffic does not. Visitors fr
 The link is hardcoded in `support.html`, so it needs a manual edit and a commit. That is the correct trade for a project with no backend, and it is why link validity is on a monthly manual check in the Monitoring table.
 
 **What is the plan if GitHub Pages goes away or starts charging?**
-The entire site is plain files. It moves to Cloudflare Pages, Vercel, or Netlify in under five minutes with no configuration changes. A Cloudflare Workers config already sits in the repository. There is no lock-in of any kind.
+The entire site is plain files. It moves to Cloudflare Pages, Vercel, or Netlify in under five minutes with no configuration changes and nothing to port. There is no lock-in of any kind.
 
 **How are new projects added?**
 Add one object to the `PROJECTS` array in `projects.html`, commit, push. Two to five minutes, and the field documentation sits in a comment directly above the array so it never requires opening these docs.
