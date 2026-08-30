@@ -5,6 +5,38 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.8.10] - 2026-08-29
+
+### Added: the visualizer now reacts to real audio
+- Added a native track player to the top of the `music.html` stage console: one same-origin file (`audio/womanchild-azqato-remix.mp3`, 6.1 MB, 4:46), with a play/pause button, title, elapsed and total time, and a draggable scrub bar. The two Mixcloud embeds and all three platform links are untouched and sit below it.
+- Wired the track through a Web Audio `AnalyserNode` (fftSize 256, smoothing 0.8). While it plays, `freq()` reads real frequency data and the lasers, fire columns, screen pulses, crowd, and animated favicon follow the music. This is the first time anything on the site has responded to audio.
+- Kept the synthetic three-sine signal as the fallback, and it is a fallback rather than a failure state. It runs when the track is paused, when it has never been started, and when a Mixcloud embed is playing. A paused element reads as silence, so falling through to the analyser would flatten the stage rather than idle it. Both branches share the same `0.72 / 0.28` smoothing, so the handover at play and pause is continuous rather than a jump.
+
+### Technical notes
+- Band `i` reads analyser bin `floor((i / 64) * bins * 0.8)`. The top fifth of the spectrum is skipped because it is nearly always empty and would otherwise waste a fifth of the bands on silence.
+- Raw amplitudes are raised to the power 1.6 before smoothing. Without that curve most tracks sit inside a narrow loudness band and the stage reads as uniformly bright rather than dynamic. The exponent is ported from `feature/native-audio-player`, where it was tuned against a real track.
+- The `AudioContext` is created lazily inside the play button's click handler, not at load. Browsers refuse to start one outside a user gesture, and creating it up front would leave a suspended context that never resumes.
+- `createMediaElementSource` is called exactly once and guarded by an `audioWired` flag, because a second call on the same element throws. If it does throw, the error is logged and `analyser` is reset to null, which degrades the page to the synthetic signal instead of breaking playback.
+- `preload="metadata"` rather than `none`. With `none` the duration stayed at `0:00` until first play, so the scrub bar had no range to show.
+- Removed the `analyser` and `freqData` dead declarations, which had been declared and never assigned since the visualizer was written. They are now real. The Known Technical Debt row and the deferred cleanup item that tracked them are both gone.
+
+### Known limitation
+- **The stage is driven by the audio but does not yet read as reacting to it.** Confirmed on the first real listen: the kick does not land, and you cannot tell a drum hit from a pad by watching. Scoped as milestone v2.9.1 with six hypotheses to measure before changing anything, chief among them that the analyser's 0.8 smoothing and `freq()`'s own `0.72 / 0.28` are two low-pass filters in series and a kick is a transient. The onset-based kick detector already sitting on `feature/native-audio-player` exists because a raw analyser level does not give you a kick, and is pulled forward into that milestone.
+
+### Fixed
+- Skip Web Audio entirely when the page is opened over `file://`. The browser treats a same-folder mp3 as cross-origin there, so `createMediaElementSource` succeeds, reroutes the element, and outputs silence with no error thrown. The track appeared to play with the timer running and no sound. The page now checks `location.protocol` and leaves the element unrouted on a local file, so playback is audible and the stage runs synthetic. Serve over http to get the real path.
+
+### Documentation
+- Rewrote the "The visualizer is not audio-reactive" section of `docs/DESIGN.md` and the "signal driving the visualizer" section of `docs/PRD.md`. Both were correct when written and are now false. The replacement text is explicit about which of the three playback situations gets which signal, because the interesting case is the one that has not changed: a visitor playing a Mixcloud mix still sees choreography, not reaction, and no browser will ever let that page read cross-origin iframe audio.
+- Added F19 (Native Track Player) to the feature list, updated F14 and F15, and added `audio/` to the folder tree and the public surface table.
+- Marked steps 2 through 4 of milestone v2.9.0 as done and restated what the milestone is now: replacing the Mixcloud embeds, which is gated on the remaining audio files rather than on code. Five features are still unmerged on `feature/native-audio-player`: the `<video>` element, the onset-based kick detector, the beat-synced screen pulse, the loud-moment flash, and the Video screen mode. The beat flash needs measuring against WCAG 2.3.1 before it can ship.
+- Recorded the sizing answer the milestone was waiting on: 6.1 MB for a 4:46 track at 192 kbps, so a handful of tracks fits in the repository and GitHub Pages serves them like any other asset. No object storage needed.
+- Updated the `music.html` page weight from 91 KB to 99 KB everywhere it appears in the constraints, success criteria, technical debt, tenets, and working-practice sections. It remains the one acknowledged exception to the 50 KB budget.
+- Noted that the zero-external-request caveat did **not** move. The player was added beside the embeds, not in place of them, so every "except `music.html`" qualifier still stands.
+
+---
+
+
 ## [2.8.9] - 2026-08-29
 
 ### Fixed: dead demo link on the Leveraged Strategies card

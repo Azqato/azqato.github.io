@@ -338,13 +338,16 @@ Most buttons use `border-radius: 6px`, `font-size: 0.9rem`, `font-weight: 600`, 
 
 ## `music.html` Visual System
 
-`music.html` is the only page with a non-trivial rendering layer, and it is large enough (91 KB, roughly 2,175 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
+`music.html` is the only page with a non-trivial rendering layer, and it is large enough (99 KB, roughly 2,450 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
 
 ### Structure
 
 - A single full-viewport `<canvas id="viz">` is `position: fixed`, `z-index: 0`, `pointer-events: none`, and painted every frame via `requestAnimationFrame`.
 - `nav`, `.hero`, `.section`, and `footer` are lifted to `z-index: 1` so page chrome sits above the canvas.
-- `.stage-console` is a `position: fixed` glass panel centered at `top: 13vh`, sized `clamp(280px, 38vw, 560px)` by `clamp(220px, 36vh, 460px)`, holding the two Mixcloud iframes and three platform links. It scrolls independently (`overflow-y: auto`) with a purple-tinted thin scrollbar. It is designed to read as content displayed on the stage's center screen.
+- `.stage-console` is a `position: fixed` glass panel centered at `top: 13vh`, sized `clamp(280px, 38vw, 560px)` by `clamp(220px, 36vh, 460px)`, holding, in order, the native track player, the two Mixcloud iframes, and three platform links. It scrolls independently (`overflow-y: auto`) with a purple-tinted thin scrollbar. It is designed to read as content displayed on the stage's center screen.
+- `.console-player` sits at the top of that panel: a two-row block on the same glass, separated from the embeds below by a hairline border. The top row is a 34px circular `.track-playbtn` in accent purple beside a `.track-meta` column holding the `.track-title` and a small uppercase `.track-tag` reading "Drives the visualizer". The bottom row is the scrub: elapsed time, a full-width `.track-seek` range input, total time, with `.track-time` in a tabular-figure monospace so the digits do not jitter as they count.
+- `.track-seek` is a styled `input[type=range]`. Both `::-webkit-slider-thumb` and `::-moz-range-thumb` are set, because the two engines share nothing here; omitting either gives one browser the platform default thumb against a custom track. The input carries `disabled` in the markup and is enabled by JavaScript on `loadedmetadata`, so it can never be dragged before a duration exists.
+- The player is placed above the embeds rather than below because it is the only thing on the panel that drives the stage. Its position is the page's way of saying which control does something the others do not.
 - `.mode-controls` is a fixed centered row at `bottom: 1.5rem` holding the visible mode buttons and the page's footer pill.
 
 ### The rendered scene
@@ -376,9 +379,23 @@ Ten modes exist in code (0-9). Modes 1 through 9 are WebGL2 fragment shaders ren
 
 Hidden modes keep their buttons in the DOM with `style="display:none;"` and are excluded from the auto-cycle. Every 1,800 frames (roughly 30 seconds at 60 fps) the page picks a random mode from the visible five, never repeating the current one.
 
-### The visualizer is not audio-reactive
+### The visualizer reacts to the native track only
 
-This is the single most important thing to know about the page, and it was previously documented nowhere. `music.html` declares `var analyser = null, freqData = null;` and never assigns either. The `freq(i)` helper therefore always takes its synthetic branch, generating a per-band value from three summed sine waves with per-band random phases, smoothed over time. Every "beat", laser burst, fire column, and screen pulse is procedural animation on a frame counter, not a response to the Mixcloud audio.
+`music.html` carries one same-origin track (`audio/womanchild-azqato-remix.mp3`) alongside the two Mixcloud embeds. When that track is playing, its audio is routed through a Web Audio `AnalyserNode` and `freq(i)` reads real frequency data, so the lasers, fire, screen pulses, and crowd genuinely follow the music.
+
+At every other moment the page falls back to a synthetic signal: three summed sine waves per band with fixed random phases, smoothed over time. That covers three cases, and they are all normal rather than error states:
+
+| Situation | Signal |
+|-----------|--------|
+| Native track playing | Real analyser data, dynamic range widened by `Math.pow(raw, 1.6)` |
+| Native track paused or never started | Synthetic. A paused track reads as silence, which would flatten the stage rather than idle it. |
+| A Mixcloud embed playing | Synthetic. The iframes are cross-origin and their audio is unreadable by this page under any browser's security model, so the stage cannot follow them. |
+
+That last row is the one to keep in mind when writing copy about the page. A visitor playing a Mixcloud mix sees choreography, not reaction. Only the native track drives the visuals.
+
+> **Known gap, as of v2.8.10.** Driven by the audio is not the same as reading as a reaction, and right now the page only manages the first. The kick does not land and a drum hit is not visually distinguishable from a pad. The likely cause is that the signal is smoothed twice before it reaches the screen, once by the analyser at 0.8 and again by `freq()` at `0.72 / 0.28`, which is fatal to transients; a linear 64-band mapping that gives the kick roughly one band of the display is the next suspect. Tracked as milestone v2.9.1. Do not tune any of the visual mappings below against the current signal, because the signal is what is wrong.
+
+One consequence for local work: opening the page over `file://` makes the browser treat the same-folder mp3 as cross-origin, so the page deliberately skips Web Audio and runs synthetic. The audio is audible but the reaction is not real. Never judge the visualizer's reactivity from a local file load.
 
 This is by design and should not be treated as a bug to fix. A browser cannot read audio out of a third-party iframe, and capturing system or other-tab audio was considered and declined. The paused `feature/native-audio-player` branch is the only path to genuine reactivity, because it plays the audio from the page itself.
 

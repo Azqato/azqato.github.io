@@ -116,6 +116,115 @@
       display: block;
     }
 
+    /* ── NATIVE TRACK PLAYER ── */
+    /* Unlike the Mixcloud embeds beside it, this player is same-origin, so the
+       page can route it through Web Audio and drive the visualizer from the
+       real signal. See the analyser wiring in the script below. */
+    .console-player {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.75rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid rgba(188, 140, 255, 0.25);
+      background: rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+
+    .console-player:hover { border-color: var(--purple); }
+
+    .track-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .track-playbtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--text);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .track-playbtn:hover {
+      border-color: var(--purple);
+      background: rgba(188, 140, 255, 0.12);
+    }
+
+    .track-meta { display: flex; flex-direction: column; min-width: 0; }
+    .track-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .track-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+
+    .track-scrub {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .track-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+      width: 2.6em;
+    }
+
+    .track-time:last-child { text-align: right; }
+
+    .track-seek {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+    }
+
+    .track-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--purple);
+      border: none;
+      cursor: pointer;
+    }
+
+    .track-seek::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--purple);
+      border: none;
+      cursor: pointer;
+    }
+
+    .track-seek:disabled { cursor: default; opacity: 0.5; }
+
     .console-links {
       display: flex;
       flex-direction: column;
@@ -240,6 +349,29 @@
 
   <!-- STAGE CONSOLE: embeds + links docked on the center screen, fixed and independently scrollable -->
   <div class="stage-console">
+
+    <!-- Native track, served from this origin. The only player on the page the
+         visualizer can actually hear; the Mixcloud frames below are cross-origin
+         and their audio is unreadable by this page under any browser. -->
+    <audio id="trackAudio" src="audio/womanchild-azqato-remix.mp3" preload="metadata"></audio>
+
+    <div class="console-player">
+      <div class="track-row">
+        <button class="track-playbtn" id="trackPlayBtn" type="button" aria-label="Play track">
+          <span id="trackPlayIcon">&#9654;</span>
+        </button>
+        <span class="track-meta">
+          <span class="track-title">Womanchild (Azqato Remix)</span>
+          <span class="track-tag">Drives the visualizer</span>
+        </span>
+      </div>
+      <div class="track-scrub">
+        <span class="track-time" id="trackCurrent">0:00</span>
+        <input class="track-seek" id="trackSeek" type="range" min="0" max="0" step="0.1" value="0" disabled aria-label="Seek">
+        <span class="track-time" id="trackDuration">0:00</span>
+      </div>
+    </div>
+
     <div class="console-embed">
       <iframe width="660px" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FAzqato%2Fedc-las-vegas-2026-2-hour-warm-up-festival-mix%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
     </div>
@@ -408,8 +540,49 @@
         if (!rafId) draw();  // keep the still frame correct while paused
       });
 
-      // ── Web Audio (analyser only, no UI controls) ──
-      var analyser = null, freqData = null;
+      // ── Web Audio: the native track feeds the analyser ──
+      // Until a track plays these stay null and freq() falls back to a synthetic
+      // wave, so the stage still animates for a visitor who never presses play.
+      var analyser = null, freqData = null, audioCtx = null, audioWired = false;
+      var trackAudio = document.getElementById('trackAudio');
+
+      // Opened as a local file, the browser treats the mp3 as cross-origin even
+      // though it sits next to this page. createMediaElementSource then succeeds
+      // but routes silence, so the track plays with no sound at all. Skip the
+      // graph entirely in that case: the element plays normally and the stage
+      // runs synthetic. Serve over http (python -m http.server) to test for real.
+      var canRouteAudio = location.protocol !== 'file:';
+
+      function initAudio() {
+        if (audioCtx || !canRouteAudio) return;
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return;  // no Web Audio: the player still works, the stage stays synthetic
+        audioCtx = new Ctx();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256;
+        analyser.smoothingTimeConstant = 0.8;
+        analyser.minDecibels = -90;
+        analyser.maxDecibels = -10;
+        freqData = new Uint8Array(analyser.frequencyBinCount);
+        analyser.connect(audioCtx.destination);
+      }
+
+      // createMediaElementSource can only be called once per element, and once
+      // called it reroutes the audio through the graph, so this must run before
+      // the first play and never again.
+      function wireAudio(media) {
+        if (audioWired || !canRouteAudio || !audioCtx || !analyser) return;
+        try {
+          audioCtx.createMediaElementSource(media).connect(analyser);
+          audioWired = true;
+        } catch (e) {
+          // Already routed, or blocked. Leave the element playing on its own and
+          // fall back to the synthetic signal rather than killing playback.
+          console.error('Web Audio wiring failed:', e);
+          analyser = null;
+          freqData = null;
+        }
+      }
 
       // ── Frequency helpers ──
       var N        = 64;
@@ -419,9 +592,13 @@
 
       function freq(i) {
         var idx = Math.max(0, Math.min(N - 1, i | 0));
-        if (analyser && freqData) {
+        // Only trust the analyser while audio is actually playing. A paused track
+        // reads as silence, which would flatten the whole stage instead of
+        // returning it to the idle animation.
+        if (analyser && freqData && trackAudio && !trackAudio.paused) {
           analyser.getByteFrequencyData(freqData);
           var raw = freqData[Math.floor((idx / N) * freqData.length * 0.8)] / 255;
+          raw = Math.pow(raw, 1.6);  // widen dynamic range: suppress mids, keep true peaks
           smoothed[idx] = smoothed[idx] * 0.72 + raw * 0.28;
         } else {
           var p = phases[idx];
@@ -2181,6 +2358,73 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
 
       if (motionBtn) {
         motionBtn.addEventListener('click', function () { setPlaying(!rafId); });
+      }
+
+      // ── Native track player ──
+      var playBtn  = document.getElementById('trackPlayBtn');
+      var playIcon = document.getElementById('trackPlayIcon');
+      var seek     = document.getElementById('trackSeek');
+      var curEl    = document.getElementById('trackCurrent');
+      var durEl    = document.getElementById('trackDuration');
+      var seeking  = false;
+
+      function fmtTime(s) {
+        if (!isFinite(s) || s < 0) s = 0;
+        var m = Math.floor(s / 60);
+        var r = Math.floor(s % 60);
+        return m + ':' + (r < 10 ? '0' : '') + r;
+      }
+
+      if (trackAudio && playBtn) {
+        playBtn.addEventListener('click', function () {
+          if (trackAudio.paused) {
+            // Must happen inside the click: browsers only allow an AudioContext
+            // to start from a user gesture.
+            initAudio();
+            wireAudio(trackAudio);
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+            trackAudio.play();
+          } else {
+            trackAudio.pause();
+          }
+        });
+
+        trackAudio.addEventListener('play', function () {
+          playIcon.innerHTML = '&#10073;&#10073;';
+          playBtn.setAttribute('aria-label', 'Pause track');
+        });
+
+        trackAudio.addEventListener('pause', function () {
+          playIcon.innerHTML = '&#9654;';
+          playBtn.setAttribute('aria-label', 'Play track');
+        });
+
+        trackAudio.addEventListener('loadedmetadata', function () {
+          seek.max = trackAudio.duration || 0;
+          seek.disabled = false;
+          durEl.textContent = fmtTime(trackAudio.duration);
+        });
+
+        trackAudio.addEventListener('timeupdate', function () {
+          if (seeking) return;
+          seek.value = trackAudio.currentTime;
+          curEl.textContent = fmtTime(trackAudio.currentTime);
+        });
+
+        trackAudio.addEventListener('ended', function () {
+          seek.value = 0;
+          curEl.textContent = '0:00';
+        });
+
+        seek.addEventListener('input', function () {
+          seeking = true;
+          curEl.textContent = fmtTime(+seek.value);
+        });
+
+        seek.addEventListener('change', function () {
+          trackAudio.currentTime = +seek.value;
+          seeking = false;
+        });
       }
 
       // Always paint one frame so the stage is never blank, then run it unless

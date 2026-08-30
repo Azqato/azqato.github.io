@@ -135,10 +135,11 @@ There are **12** HTML pages.
 - **F11: Favicon.** The site-wide favicon is a lion emoji, implemented as an inline SVG data-URI `<link rel="icon">` with no external image file, repeated identically in the `<head>` of all 12 pages. The homepage's About explore-card icon matches it. **Exception:** `music.html` replaces this favicon at runtime with a live animated canvas favicon, redrawn every third frame (see F14).
 - **F12: Curated Investing Hub.** `invests.html` carries 16 categories of hand-picked external resources (Platforms, Careers, ETFs, Companies, Ratings, Screeners, Real Estate, Charts, Databases, Economic Indicators, Education, Guides, Indices, Information, News) above a visible "not a licensed financial advisor" disclaimer.
 - **F13: Codes Page.** `codes.html` presents the AI-tooling side of the work: the Prompts library, the browser Tools collection, and the GitHub org.
-- **F14: Music Stage Visualizer.** `music.html` renders a full-screen concert stage on a fixed canvas: panoramic LED screens, trusses, lasers, fire columns, haze, dust, a crowd, a floor reflection, and a branded DJ booth, with a cinematic vignette and letterbox grade. The center screen shows one of ten modes, nine of which are WebGL2 fragment shaders. Five modes are exposed as buttons and auto-cycle randomly every 30 seconds. The favicon animates in sync. A play/pause control sits at the left of the mode-button row; the page starts paused on one painted frame for visitors whose system requests reduced motion (F18).
-- **F15: Stage Console.** A fixed, independently scrollable glass panel docked over the center screen on `music.html`, holding two Mixcloud mix embeds and links to Last.fm, Mixcloud, and the Mixes YouTube channel.
+- **F14: Music Stage Visualizer.** `music.html` renders a full-screen concert stage on a fixed canvas: panoramic LED screens, trusses, lasers, fire columns, haze, dust, a crowd, a floor reflection, and a branded DJ booth, with a cinematic vignette and letterbox grade. The center screen shows one of ten modes, nine of which are WebGL2 fragment shaders. Five modes are exposed as buttons and auto-cycle randomly every 30 seconds. While the native track (F19) is playing, every one of those elements is driven by its real frequency data; at all other times the same elements run on a synthetic signal. The favicon animates in sync. A play/pause control sits at the left of the mode-button row; the page starts paused on one painted frame for visitors whose system requests reduced motion (F18).
+- **F15: Stage Console.** A fixed, independently scrollable glass panel docked over the center screen on `music.html`, holding the native track player (F19), two Mixcloud mix embeds, and links to Last.fm, Mixcloud, and the Mixes YouTube channel.
 - **F16: Shared Stylesheet.** `styles.css` carries the design tokens, reset, nav, and footer for all 12 pages, replacing roughly 100 lines of duplicated CSS per page.
 - **F17: Writing-Style Guard.** A `.githooks/pre-commit` hook blocks any commit that introduces an em dash into an HTML or Markdown file, in either the literal or HTML-entity form.
+- **F19: Native Track Player.** One track (`audio/womanchild-azqato-remix.mp3`) is served from the site itself and sits at the top of the stage console, above the Mixcloud embeds. It has a play/pause button, title, elapsed and total time, and a draggable scrub bar. Because the file is same-origin, its audio can be routed through a Web Audio `AnalyserNode`, which makes the visualizer react to it for real (F14). Playing it is what turns the stage from choreography into reaction.
 - **F18: Reduced Motion Support.** A sitewide `@media (prefers-reduced-motion: reduce)` block in `styles.css` suppresses every transition and hover transform, and the `music.html` visualizer reads the same preference in JavaScript to decide whether its render loop starts. A play/pause button gives every visitor a way to stop the animation, which WCAG 2.2.2 requires and which nothing on the page offered before v2.8.7.
 
 ### Future (post-launch, not committed)
@@ -157,7 +158,7 @@ There are **12** HTML pages.
 
 - Must render correctly in the latest versions of Chrome, Firefox, Edge, and Safari.
 - Must be usable at viewport widths from 320 px to 2560 px. (`music.html` is unverified below 600 px; see the deferred list.)
-- Page weight (HTML plus inline CSS plus inline JS) should stay under 50 KB per page, uncompressed. **`music.html` is 91 KB and knowingly breaks this.** See Success Criteria.
+- Page weight (HTML plus inline CSS plus inline JS) should stay under 50 KB per page, uncompressed. **`music.html` is 99 KB and knowingly breaks this.** See Success Criteria.
 - No cookies, localStorage, sessionStorage, or first-party tracking of any kind.
 - No user data collected or transmitted by the site itself.
 - All affiliate disclosures must comply with FTC guidelines.
@@ -184,7 +185,7 @@ There are **12** HTML pages.
 | Criterion                       | Target                                               | Status at audit |
 |---------------------------------|------------------------------------------------------|-----------------|
 | Page load time                  | Under 1 second on a 4G connection                    | Unverified, no measurement recorded |
-| Page weight per page            | Under 50 KB uncompressed HTML                        | Met on 11 of 12 pages; `music.html` is 91 KB |
+| Page weight per page            | Under 50 KB uncompressed HTML                        | Met on 11 of 12 pages; `music.html` is 99 KB |
 | Image payload per page          | No stated target                                     | `youtube.html` pulls 2.3 MB of thumbnails; worth a target |
 | Cross-browser render            | No visual defects on Chrome, Firefox, Edge, Safari   | Manual spot checks only |
 | Mobile usability                | Fully usable at 375 px (iPhone SE viewport)          | Met except `music.html`, unverified |
@@ -258,7 +259,7 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── discord.html              - four community server cards
 ├── invests.html              - investing projects plus 16-category resource hub
 ├── codes.html                - AI tooling: Prompts, Tools, GitHub
-├── music.html                - stage visualizer, Mixcloud embeds, platform links
+├── music.html                - stage visualizer, native track player, Mixcloud embeds, platform links
 ├── links.html                - every platform, grouped
 ├── projects.html             - filterable project grid, driven by the PROJECTS array
 ├── youtube.html              - four channel cards
@@ -266,6 +267,8 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── accounts.html             - gaming profiles (not in nav)
 ├── privacy-policy.html       - policy and disclaimers (not in nav)
 ├── styles.css                - shared tokens, reset, nav, footer
+├── audio/
+│   └── womanchild-azqato-remix.mp3  - the one same-origin track; drives the visualizer (6.1 MB)
 ├── .gitignore                - env-file patterns only
 ├── .githooks/
 │   └── pre-commit            - em-dash writing-style guard
@@ -371,7 +374,9 @@ Not a persisted model, but the closest thing the site has to application state:
 | `smoothed` | Float32Array(64) | Per-band amplitude, exponentially smoothed. |
 | `phases` | number[64] | Fixed random phase offsets, generated once per page load. |
 | `lay` | object | All stage geometry, recomputed on every resize. |
-| `analyser`, `freqData` | null | Declared for a real audio source; never assigned. See below. |
+| `analyser`, `freqData` | AnalyserNode / Uint8Array, or null | Created on the visitor's first press of the track play button. Null until then, and null forever if the browser has no `AudioContext` or the source could not be wired. |
+| `audioCtx`, `audioWired` | AudioContext / boolean | The context is created once, lazily, inside the click handler so browsers accept it as a user gesture. `audioWired` guards `createMediaElementSource`, which throws if called twice on the same element. |
+| `seeking` | boolean | True while the visitor drags the scrub bar, so `timeupdate` does not fight the drag. |
 
 ---
 
@@ -431,11 +436,15 @@ draw()                        every animation frame
 
 Error states: shader compilation failures are logged to the console via `console.error` and set `gl = null`, which silently falls the page back to mode 0's canvas LED grid. This is the only error handling on the site.
 
-### The signal driving the visualizer is synthetic
+### What drives the visualizer
 
-`freq(i)` checks for a live analyser and, finding none, returns a value built from three summed sine waves at different rates with a fixed random phase per band, smoothed at `0.72 / 0.28`. Nothing on the page listens to audio. The Mixcloud iframes are a separate origin and their audio is not readable by the page under any browser's security model.
+`freq(i)` has two branches.
 
-This means the stage does not react to the mix that is playing. It is animation that looks like a reaction. Anyone reading the code should know this before spending time debugging "why the bass does not hit", and anyone writing copy about the page should not claim it responds to the music.
+**Real.** If the native track is playing, `analyser.getByteFrequencyData()` fills `freqData` and band `i` reads bin `floor((i / 64) * bins * 0.8)`. The top 20 percent of the spectrum is skipped because it is nearly always empty and would waste a fifth of the bands on silence. The raw 0-1 value is then raised to the power 1.6, which pushes mid-level noise down while leaving true peaks near 1. Without that curve most tracks sit in a narrow band and the stage reads as uniformly bright. The result is smoothed at `0.72 / 0.28` into `smoothed[i]`, the same smoothing the synthetic branch uses, so the two look continuous when playback starts or stops.
+
+**Synthetic.** Otherwise, band `i` is three summed sine waves at different rates with a fixed random phase, smoothed identically. This is the branch that runs when the track is paused, when it has never been started, and when a Mixcloud embed is playing. A paused element reads as silence, so falling through to the analyser would flatten the stage instead of idling it.
+
+Two consequences worth carrying into any copy about the page. The stage genuinely reacts to the native track, and only to it. It does not and cannot react to the Mixcloud embeds, which are a separate origin whose audio no browser will expose to this page.
 
 ---
 
@@ -476,7 +485,7 @@ No authentication is used with any of these. There are no API keys, tokens, or a
 
 | Metric                         | Target                         | Actual at audit |
 |--------------------------------|--------------------------------|-----------------|
-| Page weight (uncompressed HTML)| Under 50 KB per page           | 6.7 KB to 23.8 KB on 11 pages; `music.html` 91 KB |
+| Page weight (uncompressed HTML)| Under 50 KB per page           | 6.7 KB to 23.8 KB on 11 pages; `music.html` 99 KB |
 | Shared CSS                     | No target                      | 2.3 KB, cached across pages |
 | Time to first meaningful paint | Under 1 second on 4G           | Not measured |
 | External requests on page load | 0 on all pages except `music.html` and `projects.html` | 2 iframes on `music.html`; 1 image on `projects.html` |
@@ -496,9 +505,10 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 |------|------------------|------------------|
 | Nav toggle script repeated across pages | The roughly 20 line toggle IIFE is still duplicated verbatim in all 12 HTML files. The nav markup itself is no longer duplicated by hand: it is stamped by `tools/build-nav.py` as of v2.8.8. | Either extend the stamp script to cover the script block, or leave it. It has never changed since it was written, so the duplication costs nothing today. |
 | Nav drift is detectable but not enforced | `python tools/build-nav.py --check` reports any page whose nav is out of date, but nothing runs it automatically | Add it to the `pre-commit` hook alongside the em-dash guard, so a hand-edited nav cannot be committed |
-| `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 91 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
+| `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 99 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
 | Tab-hidden render loop on `music.html` | The visualizer keeps drawing when the tab is in the background, beyond whatever the browser throttles on its own | Pause on `document.hidden` via a `visibilitychange` listener, reusing the `setPlaying()` function added in v2.8.7. Battery and heat, not accessibility. |
-| Dead `analyser` declaration in `music.html` | `analyser` and `freqData` are declared and never assigned; `freq()` always takes the synthetic branch | Either wire a real source (the paused branch does this) or delete the two variables and rename `freq()` so the next reader is not misled |
+| The visualizer is driven by audio but does not read as reacting to it | Analyser smoothing 0.8 stacked on top of `freq()`'s own `0.72 / 0.28`, a linear 64-band mapping over 128 bins at about 172 Hz each, and no onset detection. A kick occupies one or two bands and is smoothed twice before it reaches the screen. | Scoped as milestone v2.9.1. Measure before changing anything, and read the branch's onset detector first |
+| Only one native track, hardcoded | `audio/womanchild-azqato-remix.mp3` is a single `<audio>` element with its title written into the markup. Adding a second means copying the block. | If more tracks arrive, move to a `TRACKS` array rendered the way `projects.html` renders `PROJECTS`, rather than copying markup a third time |
 | Ten unreferenced images in `img/` | Roughly 3.8 MB tracked and deployed but linked from nothing | **Not debt. Closed by decision on 2026-08-29:** the owner keeps everything in `img/`. See the standing rule under Never Do These. Audits should stop raising it. |
 | Unoptimized thumbnails | Four `yt-thumb-*.jpg` totalling 2.3 MB on a 7.8 KB page, with no `loading="lazy"` | Resize to display dimensions, convert to WebP with a JPEG fallback, add `loading="lazy"` |
 | No CSP headers | GitHub Pages does not support custom response headers | Acceptable for static content. Any host that can send headers (Cloudflare, Vercel, Netlify) could add one if the site ever moves. |
@@ -542,7 +552,7 @@ One deviation worth knowing: the image file `20260711-0151-37.7601512.gif` follo
 ## Organization
 
 - **One page, one file.** Each page carries its own `<style>` and `<script>`. Only genuinely universal CSS lives in `styles.css`.
-- **File size norms:** 6 KB to 24 KB per page is the working range. `music.html` at 91 KB is the acknowledged outlier and is the trigger point for extracting to an external file.
+- **File size norms:** 6 KB to 24 KB per page is the working range. `music.html` at 99 KB is the acknowledged outlier and is the trigger point for extracting to an external file.
 - **Script placement:** always at the end of `<body>`, never in `<head>`, never with `defer` or `async` (unnecessary at that position).
 - **Module pattern:** every script is a bare IIFE, `(function () { ... })();`. There are no ES modules, no exports, and no globals beyond what the IIFEs close over.
 - **Data before behavior:** in `projects.html` the `PROJECTS` array sits at the top of the script under a comment block that documents every field, followed by render functions, followed by the call to `render()`. New data-driven pages should copy that shape.
@@ -767,6 +777,7 @@ Specific enough to answer the question for any given file:
 | `/support.html` | Page | |
 | `/youtube.html` | Page | |
 | `/styles.css` | Asset | Linked by all 12 pages; renaming it breaks every page at once |
+| `/audio/womanchild-azqato-remix.mp3` | Asset | Referenced by `music.html`. Directly linkable and hotlinkable, so treat the path as public. |
 | `/img/about-profile.jpg` | Asset | Referenced by `about.html` |
 | `/img/yt-thumb-azqato.jpg`, `-streams`, `-mixes`, `-chills` | Asset | Referenced by `youtube.html` |
 | `/img/home-hero-profile.jpg`, `logo-cat-avatar.jpg`, `music-logo-small.jpg`, `music-playlist-bangers.jpg`, `music-playlist-addictions.jpg`, `yt-channel-azqato.jpg`, `yt-channel-streams.jpg`, `yt-channel-mixes.jpg`, `yt-channel-chills.jpg`, `20260711-0151-37.7601512.gif` | Asset | Deployed but referenced by nothing in this repository. Treat as public facing anyway if anything outside this repository might hotlink them; treat as internal if not. Unknown, and worth a moment's thought before deleting rather than an assumption. |
@@ -813,7 +824,7 @@ These are the guiding principles for every decision made on this project. When t
 
 A page that loads in under a second with five project cards is more valuable than a page that loads in three seconds with ten. Every addition (a library, a font, a third-party widget) must pay for itself in load time. If it cannot, it does not ship.
 
-Applies when: debating whether to add a dependency, a new CDN resource, or a feature that requires external data. Note the one place this tenet has already lost: `music.html` is 91 KB and loads two third-party iframes, because the music page's whole job is to be an experience rather than a document. That was a deliberate trade, and it is the only one.
+Applies when: debating whether to add a dependency, a new CDN resource, or a feature that requires external data. Note the one place this tenet has already lost: `music.html` is 99 KB and loads two third-party iframes, because the music page's whole job is to be an experience rather than a document. That was a deliberate trade, and it is the only one.
 
 ## 2. No Dependencies by Default
 
@@ -886,7 +897,7 @@ python -m http.server  # http://localhost:8000
 
 No required port. No configuration file to copy. No environment variables to set.
 
-One caveat for `music.html` on `file://`: the Mixcloud iframes still load (they are absolute HTTPS URLs) but some browsers restrict iframe behavior on local files. Use Option B when working on that page.
+Two caveats for `music.html` on `file://`. The Mixcloud iframes still load (they are absolute HTTPS URLs) but some browsers restrict iframe behavior on local files. More importantly, the native track cannot drive the visualizer from a local file: the browser treats the same-folder mp3 as cross-origin, so the page deliberately skips Web Audio and falls back to the synthetic signal. The audio is audible, but the reaction is not real. **Use Option B for any work on the audio path**, and never judge the visualizer's reactivity from a `file://` load.
 
 > **Discrepancy (resolved in favor of the code).** Before this audit both the README and this runbook gave the clone command as `git clone https://github.com/Azqato/Azqato.git` followed by `cd Azqato`. That is not the repository. The actual remote, read from `git remote -v`, is `https://github.com/Azqato/azqato.github.io.git`, which is the GitHub user-site repository that serves `azqato.github.io`. The old command would fail or clone the wrong thing.
 
@@ -1126,6 +1137,8 @@ The proxies available, in descending order of usefulness:
 
 The site is feature-complete against its original goals: all 12 pages are live, the project grid is populated, the affiliate and support paths work, and the design system is stable. The shared-assets milestone closed in v2.8.8, and the audit's open questions closed in v2.8.9, so nothing is waiting on a decision any more.
 
+v2.8.10 delivered the half of v2.9.0 that matters most: one same-origin track now plays on `music.html` and drives the visualizer through a real analyser. It is driven by the audio but does not yet read as reacting to it, which is v2.9.1 and is the next thing to do. What remains of v2.9.0 is the replacement half. The Mixcloud embeds are still there, deliberately, because the owner has supplied one track and the embeds carry the rest of the catalog. They come out when enough standalone files exist to cover it.
+
 The next substantial piece of work is v2.9.0: replacing the Mixcloud embeds with audio served directly by the page, which merges the finished native player branch and makes the visualizer genuinely audio-reactive. It is waiting on the owner's audio files rather than on engineering.
 
 Everything else outstanding is defect work that needs no decisions and can happen in any order:
@@ -1152,7 +1165,9 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 | v2.8.7 | Reduced motion support | 2026-08-29 | Complete |
 | v2.8.8 | Nav stamped from one source | 2026-08-29 | Complete |
 | v2.8.9 | Open questions cleared, dead link fixed | 2026-08-29 | Complete |
-| v2.9.0 | Native track player and audio-reactive visualizer | Next | Ready, waiting on the owner's audio files |
+| v2.8.10 | One native track, real audio-reactive visualizer | 2026-08-29 | Complete |
+| v2.9.1 | Reaction tuning: make the kick actually land | Next | Open. Scoped 2026-08-29 after the first real listen |
+| v2.9.0 | Full catalog native, Mixcloud embeds removed | After v2.9.1 | In progress, waiting on the remaining audio files |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
 | Unnumbered | GitHub API integration | No date | Planned, low priority |
 
@@ -1186,27 +1201,52 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 - [x] Extract active-state detection. Done in v2.8.8 by the same script, which writes `class="active"` onto the link matching each file's own name. The two pages not in the nav (`accounts.html`, `privacy-policy.html`) fall out correctly with no special case, because no entry matches their filename.
 - [x] Add `@media (prefers-reduced-motion: reduce)` to disable hover transforms. Done in v2.8.7, together with the `music.html` play/pause control that Open Question 8 resolved to.
 
-### v2.9.0: Native track player (Ready, waiting on files)
+### v2.9.0: Full native catalog (In progress)
 
 Fully built on `feature/native-audio-player` and pushed to GitHub. Contains a Web Audio-routed `<video>` player with a scrub bar, an onset-based kick detector tuned against a real track using `ffmpeg`, a beat-synced screen pulse, a rarity-gated loud-moment flash, audio-scaled laser beam counts, and a Video screen mode that draws the playing track's own frames onto the stage screens.
 
 **Unblocked on 2026-08-29.** The owner is supplying standalone audio files to be played directly on the page, replacing the two Mixcloud iframes. That resolves the only thing this milestone was ever waiting on, and it makes the milestone larger than originally scoped: it is now a replacement of the stage console's playback rather than an addition to it.
 
-What this milestone now covers, in the order it should be done:
+**Steps 1 through 4 shipped in v2.8.10** with the first track. Sizing is settled: a 4:46 track at 192 kbps is 6.1 MB, so a handful of tracks sits comfortably inside the repository and GitHub Pages serves them like any other asset. The analyser is wired and the dead declarations are gone. What is left is the replacement itself, and it is gated on files rather than on code.
+
+What this milestone covers, in the order it should be done:
 
 1. Take delivery of the audio files and decide where they live. Anything under roughly 50 MB can sit in the repository and be served by GitHub Pages like any other asset, which keeps the site self-contained. Larger files need object storage with a CDN, or a host that serves a direct file URL. Confirm the actual sizes before choosing, because this decision is hard to reverse once links exist.
-2. Replace the two Mixcloud iframes in `.stage-console` with the native player from the branch.
-3. Merge `feature/native-audio-player` and wire the real analyser into `freq()`, replacing the synthetic three-sine signal. The visualizer becomes genuinely audio-reactive for the first time.
-4. Delete the now-dead `analyser` and `freqData` declarations if the merge does not already consume them.
-5. Reconcile the new player with the v2.8.7 motion control. The play/pause button currently governs the stage animation only. Once audio drives the visuals, decide whether one control governs both or whether they stay separate, and make sure a reduced-motion visitor still gets a still stage rather than a silent one.
+2. ~~Replace the two Mixcloud iframes in `.stage-console` with the native player from the branch.~~ Partly done in v2.8.10. The player is in, above the embeds; the embeds stay until the catalog is covered by files.
+3. ~~Merge `feature/native-audio-player` and wire the real analyser into `freq()`, replacing the synthetic three-sine signal.~~ Done in v2.8.10, though by porting rather than merging. The branch's CSS, player shape, and `Math.pow(raw, 1.6)` dynamic-range curve were taken; its `<video>` element, kick detector, beat-synced pulse, loud-moment flash, audio-scaled lasers, and Video screen mode were not. Those five remain unmerged and are the interesting part of what the branch still holds.
+4. ~~Delete the now-dead `analyser` and `freqData` declarations.~~ Done in v2.8.10; the wiring consumed them.
+5. Take the remaining five features off `feature/native-audio-player`. The kick detector and beat pulse are pulled forward into v2.9.1, since they are the fix for the reaction problem rather than an enhancement on top of it. What stays here is the `<video>` element, the loud-moment flash, the audio-scaled lasers, and the Video screen mode.
+6. Move the single hardcoded `<audio>` element to a `TRACKS` array once there is a second track, rather than copying the markup block.
+7. Reconcile the new player with the v2.8.7 motion control. The play/pause button currently governs the stage animation only. Once audio drives the visuals, decide whether one control governs both or whether they stay separate, and make sure a reduced-motion visitor still gets a still stage rather than a silent one.
 
 What it unlocks beyond the feature itself:
 
-- **The zero-external-request claim becomes true again for all 12 pages**, since the Mixcloud iframes are the only automatic third-party load on the site. Every performance, privacy, and security section that currently carries a "except `music.html`" caveat can drop it, including the README's privacy sentence.
+- **The zero-external-request claim becomes true again for all 12 pages** once the embeds go, since the Mixcloud iframes are the only automatic third-party load on the site. v2.8.10 did not move this: it added a native player beside the embeds rather than in place of them, so the caveat still stands everywhere it is written. Every performance, privacy, and security section that currently carries a "except `music.html`" caveat can drop it, including the README's privacy sentence.
 - The iframe attack surface described under Known Attack Surface disappears entirely, so the open note about its overly broad `allow` list and missing `sandbox` becomes moot.
-- Page weight on `music.html` goes up by whatever the audio costs if the files are committed to the repository. Note that against the 50 KB budget, which the page already exceeds at 93 KB.
+- Page weight on `music.html` goes up by whatever the audio costs if the files are committed to the repository. Note that against the 50 KB budget, which the page already exceeds at 99 KB. The audio itself is 6.1 MB, served separately and not counted in the HTML figure, but a visitor on metered data pays for it the moment they press play.
 
 Caveat worth stating before the files arrive: hosting audio in the repository is the simplest option and the one most in keeping with the project's tenets, but git stores every version of a binary forever. Replacing a 40 MB track five times leaves 200 MB in history that cannot be reclaimed without rewriting it. Prefer getting the file right once, or host it outside the repository.
+
+### v2.9.1: Make the reaction actually read as a reaction (Next, and ahead of the rest of v2.9.0)
+
+**Observed 2026-08-29, on the first real listen.** The analyser is genuinely wired and the stage genuinely moves with the audio, but it does not read as reacting to the music. The kick does not land. Watching it, you cannot tell that a drum hit and a synth pad are different events. This is the difference between a display that is driven by audio and one that looks like it is listening, and only the second is worth having.
+
+It is a tuning and signal-design problem rather than a wiring problem, so it is scoped separately and should be done before the rest of v2.9.0. There is no point moving the whole catalog onto a player whose reaction does not convince.
+
+**Do not assume the cause. Measure first.** Standing hypotheses, most likely first, all of them unverified:
+
+1. **Two low-pass filters stacked.** `analyser.smoothingTimeConstant` is 0.8 and `freq()` then smooths again at `0.72 / 0.28`. Each one alone rounds off transients; together they remove them almost entirely. A kick is a transient by definition, so this alone could explain the whole symptom. Cheapest thing to test: drop the analyser smoothing toward 0.2 and see whether hits appear.
+2. **Band mapping is linear, hearing is not.** `fftSize` 256 gives 128 bins across the full spectrum, so at 44.1 kHz each bin is about 172 Hz. Kick fundamentals live around 50 to 100 Hz, which is bin 0 and part of bin 1. Spread linearly across 64 bands, the entire kick moves one or two bands out of 64 and everything else is midrange and air. A logarithmic or mel-spaced mapping would give the low end the share of the display it has in the listening.
+3. **Resolution too coarse to see a kick at all.** At 172 Hz per bin there is no way to separate a kick from a bass note. `fftSize` 1024 or 2048 costs almost nothing on a page already running shaders.
+4. **`Math.pow(raw, 1.6)` may be pulling the wrong direction.** It was tuned on the branch against a different track and a different pipeline. It could be flattening the peaks it was meant to preserve.
+5. **The visuals may not be mapped to anything a listener notices.** Even a perfect signal reads as nothing if it drives a slow-moving element. The lasers, fire, and screen pulse each need checking against what the signal is doing at that moment.
+6. **The file itself.** Check `audio/womanchild-azqato-remix.mp3` before blaming the code: confirm its actual loudness, dynamic range, and whether it is heavily limited. A brickwalled master has little transient left to detect, and if that is the case the fix is a different render of the track, not different JavaScript. `ffmpeg -af astats` and `ffmpeg -af ebur128` will answer this in one command each.
+
+**The branch already contains the answer to part of this.** `feature/native-audio-player` has an onset-based kick detector that was tuned against a real track using `ffmpeg`, plus a beat-synced screen pulse. It exists because a raw analyser reading does not give you a kick, which is the same wall this has now hit independently. Read that code before writing anything new. Detecting an onset (a sudden rise in low-band energy relative to its own recent average) is a different technique from reading a level, and it is the technique that makes a hit land.
+
+Acceptance is subjective and should stay that way: play the track, and a person who cannot see the code should be able to tell you where the kick is by watching the screen with the sound off.
+
+Before merging any of it, measure the result against WCAG 2.3.1: nothing may flash more than three times per second. A convincing kick response on a fast track is exactly the thing that violates this.
 
 ### v3.0.0: Contact / hire-me section (Planned)
 
@@ -1245,7 +1285,7 @@ Every document was compared against the source at the v2.8.5 audit. Each row rec
 | 3 | README said "Eleven self-contained HTML pages"; the PRD architecture section said "eleven plain HTML pages"; other PRD sections said 12. The filesystem has 12. | Code, and the PRD contradicted itself. | Fixed. 12 everywhere. Also dropped "self-contained", which stopped being true when `styles.css` was extracted in v2.7.0. |
 | 4 | The clone command in both the README and the runbook was `git clone https://github.com/Azqato/Azqato.git`. The actual remote is `Azqato/azqato.github.io`. | Code (`git remote -v`). The documented command would fail. | Fixed in the runbook. The README no longer carries commands at all. |
 | 5 | Docs claimed "zero external requests on page load" and "no external requests of any kind on the main site pages". `music.html` loads two Mixcloud iframes on every visit and `projects.html` fetches one cross-site favicon. | Code. The claim was written before the Mixcloud embeds existed and was never revisited. | Fixed. Every performance, privacy, and security claim now states the exception. Whether to make the embeds click-to-load is Open Question 3. |
-| 6 | Success criteria and constraints stated "under 50 KB per page" as met. `music.html` is 91 KB. | Code. The file size is not a matter of opinion. | Fixed. The target is kept as the standard for the other 11 pages, with the exception named and explained. |
+| 6 | Success criteria and constraints stated "under 50 KB per page" as met. `music.html` is 99 KB. | Code. The file size is not a matter of opinion. | Fixed. The target is kept as the standard for the other 11 pages, with the exception named and explained. |
 | 7 | DESIGN.md documented the affiliate card as `.logo-area`, `.promo-badge`, `.affiliate-btn` inside a `<div>`. The PRD data model repeated the same names. `support.html` uses `.affiliate-logo`, `.affiliate-promo`, `.affiliate-link-btn` inside an `<a>`. | Code. Three of four documented class names do not exist. | Fixed in both documents. |
 | 8 | The PRD State Management table listed an `activeTag` string variable in `projects.html`. No such variable exists; filter state lives in the DOM. | Code. | Fixed. |
 | 9 | DESIGN.md gave the mobile breakpoint as "< 600px: nav links hidden (logo only visible)". `styles.css` collapses the nav at 860 px into a hamburger dropdown, and PRD F3 already said 860 px. | Code, corroborated by the PRD. DESIGN.md described a nav that no longer exists. | Fixed, with the superseded claim recorded rather than erased. |
@@ -1253,7 +1293,7 @@ Every document was compared against the source at the v2.8.5 audit. Each row rec
 | 11 | `img/20260711-0151-37.7601512.gif` (1.9 MB, tracked, unreferenced) appeared in no documentation of any kind. | Code. | Fixed. Documented as unreferenced in DESIGN.md and in the public surface list. |
 | 12 | PRD F4 said the landing page hero includes a profile photo. It has pills and buttons, no photo. | Code. | Fixed. |
 | 13 | F11 said the lion favicon is identical across all 12 pages. `music.html` overwrites it at runtime every third frame. | Code. Both statements are half true, which is worse than either. | Fixed. F11 now names the exception and F14 documents the animated favicon. |
-| 14 | No document anywhere mentioned that the `music.html` visualizer is not audio-reactive. `analyser` and `freqData` are declared and never assigned, so every visual is procedural. | Code. This is the kind of thing a reader assumes the opposite of by default. | Fixed. Stated in DESIGN.md, in the data flow section, in F14, and in Known Technical Debt. |
+| 14 | No document anywhere mentioned that the `music.html` visualizer is not audio-reactive. `analyser` and `freqData` are declared and never assigned, so every visual is procedural. | Code. This is the kind of thing a reader assumes the opposite of by default. | Fixed in v2.8.5 by documenting it, then made obsolete in v2.8.10 by wiring a real analyser to the native track. The page is now reactive while that track plays and synthetic otherwise, and every document says so. |
 | 15 | The PRD said "There is only one environment: production (GitHub Pages)". `wrangler.jsonc` describes a complete Cloudflare Workers deploy target and has been committed since 2026-07-09. | Both. The statement was true of what served traffic; the file was real and undocumented. | Resolved in v2.8.9 by deleting the file. The document was right and the file was residue. |
 | 16 | `projects.html` links Leveraged Strategies at `/leveraged-strategies/`; `invests.html` links the same project at `/leverage/`. Patch note 2.6.12 records the move to `/leverage/`. | Resolved in v2.8.9 by checking the live web instead of guessing. `/leverage/` serves the page; `/leveraged-strategies/` is a hard 404. | Fixed. Both fields on the `projects.html` card now point at `leverage`. The audit was right to leave it alone at the time: it was a live broken link, and guessing the other way would have broken the working one too. |
 | 17 | The privacy policy describes Google DoubleClick DART cookies, third-party ad servers, ad networks, account registration, and marketing emails. The site has no ads, no accounts, and no email capture. | Code. The policy is a generic template with real disclosures (affiliate, financial) appended. | Not changed. It is legal copy, over-disclosure is not a defect, and rewriting a privacy policy is the author's decision, not an audit's. Recorded as Open Question 6. |
@@ -1295,10 +1335,10 @@ No file in the repository contains a `TODO`, `FIXME`, `HACK`, or `XXX` marker. T
 
 ## Work in progress at audit time
 
-- **Untracked in the working tree:** `music/` (a folder holding a `desktop.ini` that names a local `EDC26 MIX.mp4`, the test track for the paused player) and `test-local-audio.bat`. Neither is committed. Both belong to the paused branch's workflow.
+- **Untracked in the working tree:** `music/` (the owner's local source audio, including the file that became `audio/womanchild-azqato-remix.mp3`) and `test-local-audio.bat` (launches Chrome with web security disabled so a `file://` load can route local audio). Neither is committed and neither should be. The batch file is a workaround for a problem now handled in the page itself, and serving over http is the supported route; see the Build section.
 - **Unmerged branch:** `feature/native-audio-player`, pushed to GitHub, complete but unshippable. Documented above.
 - **Half-finished milestone:** v2.7.0, CSS extracted, nav not.
-- **Dead code in the tree:** the `analyser` and `freqData` declarations in `music.html`, and five hidden visualizer modes (Bars, Volumetric, Origami, Ghost, Noise) whose buttons are `display:none` and which the auto-cycle skips. The modes are complete and working, just not exposed; they are hidden by choice, not broken.
+- **Dead code in the tree:** five hidden visualizer modes (Bars, Volumetric, Origami, Ghost, Noise) whose buttons are `display:none` and which the auto-cycle skips. The modes are complete and working, just not exposed; they are hidden by choice, not broken.
 
 ## Open questions
 
@@ -1321,7 +1361,7 @@ Concrete instructions for whoever works on this next, human or model.
 
 ## Before editing anything
 
-1. **Read the page you are about to change, in full.** They are 6 KB to 24 KB; there is no excuse for skimming. `music.html` is the exception at 91 KB: read the section you are touching plus `build()`, because almost everything depends on `lay`.
+1. **Read the page you are about to change, in full.** They are 6 KB to 24 KB; there is no excuse for skimming. `music.html` is the exception at 99 KB: read the section you are touching plus `build()`, because almost everything depends on `lay`.
 2. **Check whether the change touches the nav.** If it does, it touches 12 files, and missing one is the single most common defect in this repository's history.
 3. **Confirm the pre-commit hook is live:** `git config core.hooksPath` should print `.githooks`. If it prints nothing, the writing policy is not being enforced in your clone.
 4. **Check `git status`.** `music/` and `test-local-audio.bat` are expected to be untracked. Anything else unexpected deserves a look before you add files.
@@ -1443,7 +1483,7 @@ The two mixes on that page are embedded Mixcloud players, so playing them works 
 Any modern browser: Chrome, Firefox, Edge, or Safari. It works on phones, tablets, and desktops. The Music page's visualizer needs WebGL2 for its best modes and falls back to a simpler view without it. Nothing needs to be installed.
 
 **Does the Music page visualizer react to the music?**
-No, and it is worth being clear about it. The stage animates continuously on its own timing. A web page cannot read the audio out of an embedded player from another company, so the lasers and lights are choreography rather than reaction. A version that genuinely reacts to the audio has been built and is waiting on somewhere to host the audio files.
+It depends on which thing is playing, and it is worth being clear about it. The remix served by the site itself is read by the page, so the lights genuinely move with it. The two embedded Mixcloud mixes are not and cannot be: a web page cannot read the audio out of another company's player, so while one of those is playing the stage is choreography rather than reaction. Honest caveat on the part that does work: as of v2.8.10 the lights are driven by the audio but do not yet convincingly read as responding to it, which is being worked on as milestone v2.9.1.
 
 **What are the affiliate links on the Support page?**
 Referral links for services Azqato personally uses or recommends. If you sign up through one, you typically get the same sign-up bonus you would get anyway, and Azqato earns a referral commission. There is no extra cost to you, and the disclosure sits at the top of the page rather than in the footer.
