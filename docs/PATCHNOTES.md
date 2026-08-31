@@ -5,6 +5,23 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.2] - 2026-08-30
+
+### Fixed: the logarithmic band mapping collapsed at the low end
+v2.9.1 claimed to give the bass its fair share of the display. It did not, and the claim was wrong rather than merely optimistic.
+
+- Each band is about 10 percent wider than the one below it, but 10 percent of 30 Hz is 3 Hz and one bin at `fftSize` 1024 spans about 47 Hz. The first fourteen bands therefore all rounded to the same bin and moved as a single value. Instrumenting the running page showed it directly: `bandBins` read `1,1,1,1,1,1,1` and bands 0 through 5 all held an identical `0.28`.
+- Each band is now forced to advance at least one bin. That makes the low end linear and the top end logarithmic, which is what a mel or bark scale does and what the v2.9.1 change was supposed to deliver. After the fix `bandBins` reads `1,2,3,4,5,6,7,8,9` and the bands hold distinct values.
+
+### Fixed: the page failed invisibly on a local file
+- Opened over `file://`, the browser treats the same-folder mp3 as cross-origin, so the page skips Web Audio and runs the synthetic idle animation. That is the correct behaviour and it has been in place since v2.8.10, but nothing on screen said so: the tag under the track still read "Drives the visualizer", and a stage running its idle loop looks exactly like a stage that is ignoring the music. The tag now reads "Serve over http to make the visualizer react" whenever the audio path is unavailable.
+- This is the difference between a feature that is broken and a feature that is not connected, and the page was giving no way to tell them apart. On the deployed site, which is HTTPS, the condition never arises.
+
+### Verification note
+Instrumenting the live page found both of the above; the v2.9.1 measurement did not, because it tested the detector algorithm against decoded audio rather than the running page. Both are worth doing and neither substitutes for the other: the offline harness proves the maths, the live probe proves the wiring. The kick detector's behaviour in a real browser, with a real audio device, is still unconfirmed. Headless Edge has no audio device and its analyser returns a frozen snapshot, so it cannot answer that question, and the deployed site is now the place to check it.
+
+---
+
 ## [2.9.1] - 2026-08-30
 
 ### Fixed: the visualizer now reads as reacting to the music
@@ -45,7 +62,7 @@ Measured offline rather than judged by eye. The mp3 was decoded in the browser a
 ### Documentation
 - Closed milestone v2.9.1 in `docs/PRD.md` and recorded the measured figures, so the next person tuning this has a baseline to compare against rather than an opinion.
 - Updated the signal sections of `docs/PRD.md` and `docs/DESIGN.md`, and removed the DESIGN.md warning against tuning visuals to the old signal, which no longer applies.
-- `music.html` is now 109 KB, still the one acknowledged exception to the 50 KB page budget.
+- `music.html` is now 110 KB, still the one acknowledged exception to the 50 KB page budget.
 
 ---
 

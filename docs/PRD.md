@@ -158,7 +158,7 @@ There are **12** HTML pages.
 
 - Must render correctly in the latest versions of Chrome, Firefox, Edge, and Safari.
 - Must be usable at viewport widths from 320 px to 2560 px. (`music.html` is unverified below 600 px; see the deferred list.)
-- Page weight (HTML plus inline CSS plus inline JS) should stay under 50 KB per page, uncompressed. **`music.html` is 109 KB and knowingly breaks this.** See Success Criteria.
+- Page weight (HTML plus inline CSS plus inline JS) should stay under 50 KB per page, uncompressed. **`music.html` is 110 KB and knowingly breaks this.** See Success Criteria.
 - No cookies, localStorage, sessionStorage, or first-party tracking of any kind.
 - No user data collected or transmitted by the site itself.
 - All affiliate disclosures must comply with FTC guidelines.
@@ -185,7 +185,7 @@ There are **12** HTML pages.
 | Criterion                       | Target                                               | Status at audit |
 |---------------------------------|------------------------------------------------------|-----------------|
 | Page load time                  | Under 1 second on a 4G connection                    | Unverified, no measurement recorded |
-| Page weight per page            | Under 50 KB uncompressed HTML                        | Met on 11 of 12 pages; `music.html` is 109 KB |
+| Page weight per page            | Under 50 KB uncompressed HTML                        | Met on 11 of 12 pages; `music.html` is 110 KB |
 | Image payload per page          | No stated target                                     | `youtube.html` pulls 2.3 MB of thumbnails; worth a target |
 | Cross-browser render            | No visual defects on Chrome, Firefox, Edge, Safari   | Manual spot checks only |
 | Mobile usability                | Fully usable at 375 px (iPhone SE viewport)          | Met except `music.html`, unverified |
@@ -446,7 +446,7 @@ Four things about that sampling matter, and each was a defect fixed in v2.9.1:
 
 | Property | Value | Why |
 |----------|-------|-----|
-| Band spacing | Logarithmic, 30 Hz to 16 kHz | Hearing divides pitch logarithmically. Spread linearly, the entire kick region fell inside band 0 while sixty-odd bands showed hiss. |
+| Band spacing | Logarithmic, 30 Hz to 16 kHz, with every band forced to advance at least one bin | Hearing divides pitch logarithmically. Spread linearly, the entire kick region fell inside band 0 while sixty-odd bands showed hiss. The minimum-one-bin rule was added in v2.9.2: without it the first fourteen bands rounded to the same bin and moved as one value, so the log mapping delivered nothing where it mattered most. Linear at the bottom, logarithmic at the top, which is what a mel scale does. |
 | `fftSize` | 1024, about 43 Hz per bin | 256 gave 190 Hz per bin, wider than the whole kick band. Not 2048: that window spans 46 ms, longer than a frame, and smears transients. |
 | Within-band reduction | Peak, not mean | A mean lets one loud bin be averaged away by quiet neighbours. |
 | Smoothing | Analyser 0.35, then asymmetric `0.25 / 0.75` rising and `0.82 / 0.18` falling | The old pair, 0.8 and a symmetric `0.72 / 0.28`, were two low-pass filters in series. A kick is a transient; they removed it. |
@@ -502,7 +502,7 @@ No authentication is used with any of these. There are no API keys, tokens, or a
 
 | Metric                         | Target                         | Actual at audit |
 |--------------------------------|--------------------------------|-----------------|
-| Page weight (uncompressed HTML)| Under 50 KB per page           | 6.7 KB to 23.8 KB on 11 pages; `music.html` 109 KB |
+| Page weight (uncompressed HTML)| Under 50 KB per page           | 6.7 KB to 23.8 KB on 11 pages; `music.html` 110 KB |
 | Shared CSS                     | No target                      | 2.3 KB, cached across pages |
 | Time to first meaningful paint | Under 1 second on 4G           | Not measured |
 | External requests on page load | 0 on all pages except `music.html` and `projects.html` | 2 iframes on `music.html`; 1 image on `projects.html` |
@@ -522,7 +522,7 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 |------|------------------|------------------|
 | Nav toggle script repeated across pages | The roughly 20 line toggle IIFE is still duplicated verbatim in all 12 HTML files. The nav markup itself is no longer duplicated by hand: it is stamped by `tools/build-nav.py` as of v2.8.8. | Either extend the stamp script to cover the script block, or leave it. It has never changed since it was written, so the duplication costs nothing today. |
 | Nav drift is detectable but not enforced | `python tools/build-nav.py --check` reports any page whose nav is out of date, but nothing runs it automatically | Add it to the `pre-commit` hook alongside the em-dash guard, so a hand-edited nav cannot be committed |
-| `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 109 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
+| `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 110 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
 | Tab-hidden render loop on `music.html` | The visualizer keeps drawing when the tab is in the background, beyond whatever the browser throttles on its own | Pause on `document.hidden` via a `visibilitychange` listener, reusing the `setPlaying()` function added in v2.8.7. Battery and heat, not accessibility. |
 | Only one native track, hardcoded | `audio/womanchild-azqato-remix.mp3` is a single `<audio>` element with its title written into the markup. Adding a second means copying the block. | If more tracks arrive, move to a `TRACKS` array rendered the way `projects.html` renders `PROJECTS`, rather than copying markup a third time |
 | Ten unreferenced images in `img/` | Roughly 3.8 MB tracked and deployed but linked from nothing | **Not debt. Closed by decision on 2026-08-29:** the owner keeps everything in `img/`. See the standing rule under Never Do These. Audits should stop raising it. |
@@ -568,7 +568,7 @@ One deviation worth knowing: the image file `20260711-0151-37.7601512.gif` follo
 ## Organization
 
 - **One page, one file.** Each page carries its own `<style>` and `<script>`. Only genuinely universal CSS lives in `styles.css`.
-- **File size norms:** 6 KB to 24 KB per page is the working range. `music.html` at 109 KB is the acknowledged outlier and is the trigger point for extracting to an external file.
+- **File size norms:** 6 KB to 24 KB per page is the working range. `music.html` at 110 KB is the acknowledged outlier and is the trigger point for extracting to an external file.
 - **Script placement:** always at the end of `<body>`, never in `<head>`, never with `defer` or `async` (unnecessary at that position).
 - **Module pattern:** every script is a bare IIFE, `(function () { ... })();`. There are no ES modules, no exports, and no globals beyond what the IIFEs close over.
 - **Data before behavior:** in `projects.html` the `PROJECTS` array sits at the top of the script under a comment block that documents every field, followed by render functions, followed by the call to `render()`. New data-driven pages should copy that shape.
@@ -840,7 +840,7 @@ These are the guiding principles for every decision made on this project. When t
 
 A page that loads in under a second with five project cards is more valuable than a page that loads in three seconds with ten. Every addition (a library, a font, a third-party widget) must pay for itself in load time. If it cannot, it does not ship.
 
-Applies when: debating whether to add a dependency, a new CDN resource, or a feature that requires external data. Note the one place this tenet has already lost: `music.html` is 109 KB and loads two third-party iframes, because the music page's whole job is to be an experience rather than a document. That was a deliberate trade, and it is the only one.
+Applies when: debating whether to add a dependency, a new CDN resource, or a feature that requires external data. Note the one place this tenet has already lost: `music.html` is 110 KB and loads two third-party iframes, because the music page's whole job is to be an experience rather than a document. That was a deliberate trade, and it is the only one.
 
 ## 2. No Dependencies by Default
 
@@ -1183,6 +1183,7 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 | v2.8.9 | Open questions cleared, dead link fixed | 2026-08-29 | Complete |
 | v2.8.10 | One native track, real audio-reactive visualizer | 2026-08-29 | Complete |
 | v2.9.1 | Reaction tuning: make the kick actually land | 2026-08-30 | Complete. Measured at 124 BPM against the track |
+| v2.9.2 | Band mapping fix, visible degraded state | 2026-08-30 | Complete |
 | v2.9.0 | Full catalog native, Mixcloud embeds removed | Next | In progress, waiting on the remaining audio files |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
 | Unnumbered | GitHub API integration | No date | Planned, low priority |
@@ -1239,7 +1240,7 @@ What it unlocks beyond the feature itself:
 
 - **The zero-external-request claim becomes true again for all 12 pages** once the embeds go, since the Mixcloud iframes are the only automatic third-party load on the site. v2.8.10 did not move this: it added a native player beside the embeds rather than in place of them, so the caveat still stands everywhere it is written. Every performance, privacy, and security section that currently carries a "except `music.html`" caveat can drop it, including the README's privacy sentence.
 - The iframe attack surface described under Known Attack Surface disappears entirely, so the open note about its overly broad `allow` list and missing `sandbox` becomes moot.
-- Page weight on `music.html` goes up by whatever the audio costs if the files are committed to the repository. Note that against the 50 KB budget, which the page already exceeds at 109 KB. The audio itself is 6.1 MB, served separately and not counted in the HTML figure, but a visitor on metered data pays for it the moment they press play.
+- Page weight on `music.html` goes up by whatever the audio costs if the files are committed to the repository. Note that against the 50 KB budget, which the page already exceeds at 110 KB. The audio itself is 6.1 MB, served separately and not counted in the HTML figure, but a visitor on metered data pays for it the moment they press play.
 
 Caveat worth stating before the files arrive: hosting audio in the repository is the simplest option and the one most in keeping with the project's tenets, but git stores every version of a binary forever. Replacing a 40 MB track five times leaves 200 MB in history that cannot be reclaimed without rewriting it. Prefer getting the file right once, or host it outside the repository.
 
@@ -1317,7 +1318,7 @@ Every document was compared against the source at the v2.8.5 audit. Each row rec
 | 3 | README said "Eleven self-contained HTML pages"; the PRD architecture section said "eleven plain HTML pages"; other PRD sections said 12. The filesystem has 12. | Code, and the PRD contradicted itself. | Fixed. 12 everywhere. Also dropped "self-contained", which stopped being true when `styles.css` was extracted in v2.7.0. |
 | 4 | The clone command in both the README and the runbook was `git clone https://github.com/Azqato/Azqato.git`. The actual remote is `Azqato/azqato.github.io`. | Code (`git remote -v`). The documented command would fail. | Fixed in the runbook. The README no longer carries commands at all. |
 | 5 | Docs claimed "zero external requests on page load" and "no external requests of any kind on the main site pages". `music.html` loads two Mixcloud iframes on every visit and `projects.html` fetches one cross-site favicon. | Code. The claim was written before the Mixcloud embeds existed and was never revisited. | Fixed. Every performance, privacy, and security claim now states the exception. Whether to make the embeds click-to-load is Open Question 3. |
-| 6 | Success criteria and constraints stated "under 50 KB per page" as met. `music.html` is 109 KB. | Code. The file size is not a matter of opinion. | Fixed. The target is kept as the standard for the other 11 pages, with the exception named and explained. |
+| 6 | Success criteria and constraints stated "under 50 KB per page" as met. `music.html` is 110 KB. | Code. The file size is not a matter of opinion. | Fixed. The target is kept as the standard for the other 11 pages, with the exception named and explained. |
 | 7 | DESIGN.md documented the affiliate card as `.logo-area`, `.promo-badge`, `.affiliate-btn` inside a `<div>`. The PRD data model repeated the same names. `support.html` uses `.affiliate-logo`, `.affiliate-promo`, `.affiliate-link-btn` inside an `<a>`. | Code. Three of four documented class names do not exist. | Fixed in both documents. |
 | 8 | The PRD State Management table listed an `activeTag` string variable in `projects.html`. No such variable exists; filter state lives in the DOM. | Code. | Fixed. |
 | 9 | DESIGN.md gave the mobile breakpoint as "< 600px: nav links hidden (logo only visible)". `styles.css` collapses the nav at 860 px into a hamburger dropdown, and PRD F3 already said 860 px. | Code, corroborated by the PRD. DESIGN.md described a nav that no longer exists. | Fixed, with the superseded claim recorded rather than erased. |
@@ -1393,7 +1394,7 @@ Concrete instructions for whoever works on this next, human or model.
 
 ## Before editing anything
 
-1. **Read the page you are about to change, in full.** They are 6 KB to 24 KB; there is no excuse for skimming. `music.html` is the exception at 109 KB: read the section you are touching plus `build()`, because almost everything depends on `lay`.
+1. **Read the page you are about to change, in full.** They are 6 KB to 24 KB; there is no excuse for skimming. `music.html` is the exception at 110 KB: read the section you are touching plus `build()`, because almost everything depends on `lay`.
 2. **Check whether the change touches the nav.** If it does, it touches 12 files, and missing one is the single most common defect in this repository's history.
 3. **Confirm the pre-commit hook is live:** `git config core.hooksPath` should print `.githooks`. If it prints nothing, the writing policy is not being enforced in your clone.
 4. **Check `git status`.** `music/` and `test-local-audio.bat` are expected to be untracked. Anything else unexpected deserves a look before you add files.

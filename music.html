@@ -644,6 +644,15 @@
           var hz = loHz * Math.pow(hiHz / loHz, i / N);
           bandBins[i] = Math.min(bins - 1, Math.max(0, Math.round(hz / nyquist * bins)));
         }
+        // Log spacing alone collapses at the bottom. Each band is about 10 percent
+        // wider than the last, but 10 percent of 30 Hz is 3 Hz and a bin is 47 Hz,
+        // so the first fourteen bands all rounded to the same bin and moved as one.
+        // Forcing each band to advance at least one bin makes the low end linear
+        // and the top end logarithmic, which is what a mel or bark scale does and
+        // what the fix was supposed to deliver in the first place.
+        for (var i = 1; i <= N; i++) {
+          if (bandBins[i] <= bandBins[i - 1]) bandBins[i] = Math.min(bins - 1, bandBins[i - 1] + 1);
+        }
       }
 
       // Filled once per frame by sampleAudio(), not once per band. freq() used to
@@ -2556,6 +2565,16 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         var m = Math.floor(s / 60);
         var r = Math.floor(s % 60);
         return m + ':' + (r < 10 ? '0' : '') + r;
+      }
+
+      // The tag under the title claims the track drives the visualizer. On a
+      // local file that is a lie, because the browser treats the same-folder mp3
+      // as cross-origin and the page skips Web Audio entirely. Say so rather than
+      // letting the stage run its idle animation and look like a broken feature.
+      var trackTag = document.querySelector('.track-tag');
+      if (trackTag && !canRouteAudio) {
+        trackTag.textContent = 'Serve over http to make the visualizer react';
+        trackTag.style.color = 'var(--muted)';
       }
 
       if (trackAudio && playBtn) {

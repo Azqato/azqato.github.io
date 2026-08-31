@@ -338,7 +338,7 @@ Most buttons use `border-radius: 6px`, `font-size: 0.9rem`, `font-weight: 600`, 
 
 ## `music.html` Visual System
 
-`music.html` is the only page with a non-trivial rendering layer, and it is large enough (109 KB, roughly 2,560 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
+`music.html` is the only page with a non-trivial rendering layer, and it is large enough (110 KB, roughly 2,580 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
 
 ### Structure
 
