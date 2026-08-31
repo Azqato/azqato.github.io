@@ -399,11 +399,25 @@ That last row is the one to keep in mind when writing copy about the page. A vis
 |---------|------------------------|
 | Center screen | Zoom to 1.08, clipped to the bezel |
 | Crowd | Front row bounce plus 5, back row plus 2.5 |
-| Lasers | Mid-band intensity plus 0.35, clamped |
+| Lasers | Mid-band intensity plus 0.22, clamped |
 | WebGL clock | Jumps forward 0.05 s |
-| Full-width light pump | Scaled to 0.55, and capped there on purpose |
+| Full-width light pump | Scaled to 0.26, capped on purpose, and only while the pyro is firing |
 
-That last row is an accessibility constraint, not a taste decision. Measured against the track, the detector fires up to three times in a one-second window, which is exactly WCAG 2.3.1's limit rather than under it. Impact is therefore carried by motion (zoom, bounce, beam count) rather than by luminance. Do not raise the light pump.
+That last row is an accessibility constraint, not a taste decision, and in v2.9.3 it stopped being a theoretical one.
+
+**Everything on this page used to be timed in frames, and `requestAnimationFrame` runs at the display's refresh rate.** The refractory was written as 26 frames, described everywhere as 433 ms, and that description was only ever true on a 60 Hz panel. Measured with a worst-case synthetic signal that clears the detector's threshold on every frame:
+
+| Display | Before v2.9.3 | After | WCAG 2.3.1 limit |
+|---|---|---|---|
+| 60 Hz | 2.40 /s | **1.70 /s** | 3 /s |
+| 120 Hz | **4.70 /s** | **1.70 /s** | 3 /s |
+| 144 Hz | **5.60 /s** | **1.70 /s** | 3 /s |
+
+On any high-refresh display the page was running at nearly twice the limit. Every rate is now wall-clock milliseconds, so the rig behaves identically on a phone, a TV and a 144 Hz gaming monitor, and the refractory is 600 ms rather than 433, which sits under the limit instead of on it.
+
+**Rate is only half of photosensitivity.** The size of the luminance step matters as much as its frequency, so the light pump is halved to 0.26, the white wash over the main panel is roughly a third of what it was, and the laser response is softened. Impact is carried by motion (zoom, bounce, beam count) rather than by luminance. Do not raise the light pump.
+
+**Nothing flashes without a visible cause.** Both the light pump and the white wash over the main panel are gated on `fireActive`, true while any of the four pyro jets is burning. This is a legibility rule before it is an accessibility one: a flash with nothing making it reads as a glitch, while the same flash with fire behind it reads as the blast throwing light across the room. It narrows the photosensitivity exposure as a side effect, since the flash cannot fire during quiet passages when the jets are down. The flag is set in `drawFire()`, which runs after the flashes in the frame order, so the gate reads the previous frame. 16 ms at 60 fps, not perceivable.
 
 One consequence for local work: opening the page over `file://` makes the browser treat the same-folder mp3 as cross-origin, so the page deliberately skips Web Audio and runs synthetic. The audio is audible but the reaction is not real. Never judge the visualizer's reactivity from a local file load.
 
@@ -467,7 +481,7 @@ No ARIA roles are used beyond what is implicit in semantic HTML.
 Known gaps, in the order they are worth fixing:
 
 1. **No skip-to-content link** on any page.
-2. **The beat flash rate on `music.html` has never been measured** against WCAG 2.3.1, which allows no more than three flashes per second. The pause control added in v2.8.7 gives a visitor a way out, but it does not excuse the page from the criterion for anyone who has not pressed it.
+2. ~~**The beat flash rate on `music.html` has never been measured** against WCAG 2.3.1.~~ **Measured in v2.9.3, and it failed.** The rate was frame-counted, so it scaled with refresh rate: 2.40 events per second at 60 Hz but **4.70 at 120 Hz and 5.60 at 144 Hz**, against a limit of three. Now 1.70 at every refresh rate. See Animation and Motion.
 3. **`music.html` has not had a mobile audit.** The fixed console and fixed mode-control row were tuned for desktop viewports; behavior between 320 px and 480 px is unverified. This is tracked in the PRD's deferred list.
 4. **Focus styles are browser defaults everywhere.** No custom `:focus-visible` ring is defined, so the outline on the accent-colored buttons is whatever the browser draws over a dark surface.
 

@@ -176,6 +176,11 @@
       text-transform: uppercase;
       color: var(--purple);
     }
+    .track-note {
+      font-size: 0.6rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+    }
 
     .track-scrub {
       display: flex;
@@ -362,7 +367,8 @@
         </button>
         <span class="track-meta">
           <span class="track-title">Womanchild (Azqato Remix)</span>
-          <span class="track-tag">Drives the visualizer</span>
+          <span class="track-tag">EOB, Azqato</span>
+          <span class="track-note" id="trackNote">Drives the visualizer</span>
         </span>
       </div>
       <div class="track-scrub">
@@ -707,7 +713,30 @@
       var bassPrev     = 0;
       var riseHistory  = [];
       var beatPulse    = 0;
-      var beatCooldown = 0;
+      var beatReadyAt  = 0;
+
+      // ── Wall-clock frame delta ──
+      // requestAnimationFrame runs at the display refresh rate, so anything
+      // counted in frames runs twice as fast on a 120 Hz panel as on a 60 Hz one.
+      // Every light-rig rate below is therefore in milliseconds. `decay` converts
+      // the old per-frame-at-60 factors into the same wall-clock falloff at any
+      // refresh rate, so a pulse lasts as long on a gaming monitor as on a TV.
+      var lastFrameT = 0;
+      var frameMs    = 1000 / 60;
+      var nowMs      = 0;
+
+      function tickClock(now) {
+        nowMs = now;
+        if (!lastFrameT) lastFrameT = now;
+        // Clamped so a backgrounded tab returning after seconds away does not
+        // resolve into one enormous step.
+        frameMs = Math.min(50, Math.max(1, now - lastFrameT));
+        lastFrameT = now;
+      }
+
+      function decay(v, per60) {
+        return v * Math.pow(per60, frameMs / (1000 / 60));
+      }
 
       function rawBassFast() {
         if (!analyserFast || !freqDataFast) return 0;
@@ -718,7 +747,7 @@
       }
 
       function updateBeat() {
-        if (!audioLive) { beatPulse *= 0.86; return; }
+        if (!audioLive) { beatPulse = decay(beatPulse, 0.86); return; }
         var b = rawBassFast();
         bassSmooth = bassSmooth * 0.5 + b * 0.5;
         var rise = Math.max(0, bassSmooth - bassPrev);
@@ -733,17 +762,18 @@
         avgRise /= riseHistory.length;
 
         var threshold = Math.max(0.007, avgRise * 1.2);
-        beatCooldown = Math.max(0, beatCooldown - 1);
 
-        if (rise > threshold && beatCooldown === 0) {
+        if (rise > threshold && nowMs >= beatReadyAt) {
           beatPulse = 1;
-          // ~433 ms refractory. This also happens to be the page's WCAG 2.3.1
-          // guarantee: it caps every beat-driven visual at 2.3 events per second,
-          // below the three-per-second flash threshold, structurally rather than
-          // by hoping no track is fast enough to breach it.
-          beatCooldown = 26;
+          // 600 ms refractory, in wall-clock time rather than frames. This is the
+          // page's WCAG 2.3.1 guarantee: it caps every beat-driven visual at 1.67
+          // events per second, comfortably under the three-per-second threshold
+          // instead of sitting on it, and it holds at any refresh rate. A track
+          // faster than 100 BPM simply gets a light on every other beat, which
+          // reads as a half-time rig rather than as a strobe.
+          beatReadyAt = nowMs + 600;
         } else {
-          beatPulse *= 0.86;  // decay back to rest between hits
+          beatPulse = decay(beatPulse, 0.86);  // decay back to rest between hits
         }
       }
 
@@ -755,11 +785,11 @@
       var loudMean      = 0;
       var loudVar       = 0;
       var loudWarmed    = false;
-      var flashPulse    = 0;
-      var flashCooldown = 0;
+      var flashPulse   = 0;
+      var flashReadyAt = 0;
 
       function updateLoudFlash() {
-        if (!audioLive) { flashPulse *= 0.85; return; }
+        if (!audioLive) { flashPulse = decay(flashPulse, 0.85); return; }
         var energy = favg(0, 20);
         if (!loudWarmed) { loudMean = energy; loudVar = 0.0004; loudWarmed = true; }
         var alpha = 0.0016;  // ~10 s adaptation at 60 fps
@@ -768,14 +798,13 @@
         loudVar = loudVar * (1 - alpha) + d * d * alpha;
         var std = Math.sqrt(loudVar);
 
-        flashCooldown = Math.max(0, flashCooldown - 1);
         var isOutlier = std > 0.001 && energy > loudMean + std * 0.84;
 
-        if (isOutlier && beatPulse > 0.5 && flashCooldown === 0) {
+        if (isOutlier && beatPulse > 0.5 && nowMs >= flashReadyAt) {
           flashPulse = 1;
-          flashCooldown = 300;  // ~5 s minimum gap
+          flashReadyAt = nowMs + 8000;  // 8 s minimum gap, wall clock
         } else {
-          flashPulse *= 0.85;
+          flashPulse = decay(flashPulse, 0.85);
         }
       }
 
@@ -788,7 +817,7 @@
       // ── Screen mode ──
       var screenMode = 4; // 0=bars, 1=volumetric, 2=stars, 3=vortex, 4=squares, 5=origami, 6=tunnel, 7=ghost, 8=fence, 9=noise
       var modeTimer  = 0;
-      var MODE_LEN   = 1800; // ~30 s at 60 fps
+      var MODE_LEN   = 30000; // 30 s, wall clock (was 1800 frames)
       var fxSrc      = null; // WebGL canvas source for drawImagePanel
 
       // ── WebGL shaders (modes 1–4) ──
@@ -1711,14 +1740,16 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         var zoom = 1 + beatPulse * 0.08;
         var zw = pw * zoom, zh = ph * zoom;
         ctx.drawImage(fxSrc, px - (zw - pw) / 2, py - (zh - ph) / 2, zw, zh);
-        // Brightness flash: rare drop moments only, gated by updateLoudFlash.
+        // Brightness flash: rare drop moments only, gated by updateLoudFlash, and
+        // kept shallow. A white wash over the main panel is the largest bright
+        // area on the stage, so it is the one most worth keeping small.
         var energy = favg(0, 20);
-        ctx.globalAlpha = energy * 0.10 + flashPulse * 0.30;
+        ctx.globalAlpha = energy * 0.05 + (fireActive ? flashPulse * 0.12 : 0);
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(px, py, pw, ph);
         ctx.restore();
         panelOverlay(px, py, pw, ph);
-        panelBloom(px, py, pw, ph, 0.28 + energy * 0.30 + beatPulse * 0.20 + flashPulse * 0.30);
+        panelBloom(px, py, pw, ph, 0.28 + energy * 0.30 + beatPulse * 0.10 + (fireActive ? flashPulse * 0.12 : 0));
       }
 
       // ── A: Background ──
@@ -2074,9 +2105,16 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       }
 
       var fireH  = [0,0,0,0];
+      // True while any pyro jet is actually burning. The screen flashes are gated
+      // on this so a flash never fires on its own: the flash reads as part of the
+      // pyro hit rather than as an unexplained blink. Updated in drawFire(), which
+      // runs after the flashes in the frame, so this is last frame's state. One
+      // frame at 60 fps is 16 ms and is not perceivable.
+      var fireActive = false;
       var embers = [];
       function drawFire() {
         var b = favg(0, 2);
+        var anyFire = false;
         // rising embers spawned while pyro is active
         for (var e = embers.length - 1; e >= 0; e--) {
           var em = embers[e];
@@ -2097,6 +2135,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         for (var i = 0; i < lay.fireXs.length; i++) {
           var tgt = b > 0.52 ? (b + freq((i*7+10)%N)*0.3) * H * 0.20 : 0;
           fireH[i] += (tgt - fireH[i]) * 0.16;
+          if (fireH[i] >= 3) anyFire = true;
           if (fireH[i] < 3) continue;
           var fx = lay.fireXs[i], fy = lay.fireY, fh = fireH[i];
           if (embers.length < 90 && Math.random() < 0.5) {
@@ -2156,6 +2195,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
           }
           ctx.restore();
         }
+        fireActive = anyFire;
       }
 
       // ── D: Lasers, beat flash, crowd ──
@@ -2213,7 +2253,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
 
       function drawLasers() {
         var pk  = favg(0, N - 1);
-        var m   = Math.min(1, favg(8, 25) + beatPulse * 0.35);
+        var m   = Math.min(1, favg(8, 25) + beatPulse * 0.22);
         var len = Math.max(W, H) * 1.4;
 
         laserFixtures.forEach(function (fix, fi) {
@@ -2331,19 +2371,24 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         // Driven by the kick detector, not by a level threshold. The old test was
         // `favg(0, 5) >= 0.76`, which on a loud master is either true continuously
         // or never, and in both cases reads as no reaction at all.
-        // Scaled to 0.55 on the audio path. Measured against the track, the
-        // detector fires up to 3 times in a one-second window, which is exactly
-        // WCAG 2.3.1's limit rather than under it. The impact is therefore carried
-        // by the screen zoom, the crowd, and the lasers, all of which are motion
-        // rather than luminance, while this full-width light pump stays small
-        // enough not to count as a flash. Do not raise it.
-        var a = audioLive ? beatPulse * 0.55 : Math.max(0, favg(0, 5) - 0.76) * 4;
+        // Scaled to 0.26 on the audio path, halved from the original 0.55. The
+        // refractory in updateBeat now caps this at 1.67 events per second at any
+        // refresh rate, but rate is only half of photosensitivity: the size of the
+        // luminance step matters as much as its frequency. Impact is carried by
+        // the screen zoom, the crowd and the lasers, all of which are motion
+        // rather than luminance, while this full-width light pump stays a gentle
+        // swell. Do not raise it.
+        // Gated on the pyro: no fire, no flash. A light pump with nothing visibly
+        // making it reads as a glitch; with the jets firing behind it, it reads as
+        // the blast throwing light across the room, which is what it is meant to be.
+        if (!fireActive) return;
+        var a = audioLive ? beatPulse * 0.26 : Math.max(0, favg(0, 5) - 0.76) * 2;
         if (a <= 0.01) return;
         // radial light pump from the stage instead of a flat full-screen flash
         var fy = lay.mainY + lay.mainH * 0.7;
         var g = ctx.createRadialGradient(lay.cx, fy, 0, lay.cx, fy, Math.max(W, H) * 0.85);
-        g.addColorStop(0,   'rgba(205,225,255,' + (a * 0.16) + ')');
-        g.addColorStop(0.35,'rgba(130,160,255,' + (a * 0.06) + ')');
+        g.addColorStop(0,   'rgba(205,225,255,' + (a * 0.10) + ')');
+        g.addColorStop(0.35,'rgba(130,160,255,' + (a * 0.035) + ')');
         g.addColorStop(1,   'rgba(0,0,0,0)');
         ctx.save();
         ctx.globalCompositeOperation = 'lighter';
@@ -2489,8 +2534,11 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         // with the track instead of on their own fixed timebase.
         glTime += (1 / 60) * (0.6 + favg(0, 30) * 1.6) + beatPulse * 0.05;
 
-        // Cycle screen mode every ~30 s (active modes only: stars, vortex, squares, tunnel, fence)
-        if (++modeTimer >= MODE_LEN) { modeTimer = 0; var activeModes = [2, 3, 4, 6, 8]; var next; do { next = activeModes[Math.floor(Math.random() * activeModes.length)]; } while (next === screenMode); screenMode = next; syncModeBtns(); }
+        // Cycle screen mode on a wall clock (active modes: stars, vortex, squares,
+        // tunnel, fence). This was a frame count, so the panel swapped twice as
+        // often on a 120 Hz display as the 30 s in the comment claimed.
+        modeTimer += frameMs;
+        if (modeTimer >= MODE_LEN) { modeTimer = 0; var activeModes = [2, 3, 4, 6, 8]; var next; do { next = activeModes[Math.floor(Math.random() * activeModes.length)]; } while (next === screenMode); screenMode = next; syncModeBtns(); }
         if      (screenMode === 1) renderGL1();
         else if (screenMode === 2) renderGL2();
         else if (screenMode === 3) renderGL3();
@@ -2533,13 +2581,14 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       var motionBtn = document.getElementById('motion-toggle');
       var rafId = null;
 
-      function loop() {
+      function loop(now) {
+        tickClock(typeof now === 'number' ? now : performance.now());
         draw();
         rafId = requestAnimationFrame(loop);
       }
 
       function setPlaying(on) {
-        if (on && !rafId) loop();
+        if (on && !rafId) { lastFrameT = 0; loop(); }
         if (!on && rafId) { cancelAnimationFrame(rafId); rafId = null; }
         if (motionBtn) {
           motionBtn.textContent = on ? 'Pause' : 'Play';
@@ -2571,10 +2620,11 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       // local file that is a lie, because the browser treats the same-folder mp3
       // as cross-origin and the page skips Web Audio entirely. Say so rather than
       // letting the stage run its idle animation and look like a broken feature.
-      var trackTag = document.querySelector('.track-tag');
-      if (trackTag && !canRouteAudio) {
-        trackTag.textContent = 'Serve over http to make the visualizer react';
-        trackTag.style.color = 'var(--muted)';
+      // The credit line above stays put. Only the note under it changes, so the
+      // artists are named whether or not the visualizer can hear anything.
+      var trackNote = document.getElementById('trackNote');
+      if (trackNote && !canRouteAudio) {
+        trackNote.textContent = 'Serve over http to make the visualizer react';
       }
 
       if (trackAudio && playBtn) {

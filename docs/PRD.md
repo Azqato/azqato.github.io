@@ -1163,7 +1163,6 @@ Everything else outstanding is defect work that needs no decisions and can happe
 |------|----------------|------|
 | Optimize the four `youtube.html` thumbnails | 2.3 MB of images on a 7.8 KB page, with no `loading="lazy"`. The worst performance defect on the site, and a direct contradiction of Tenet 1. | Small |
 | Add `build-nav.py --check` to the pre-commit hook | Makes nav drift uncommittable, finishing what v2.8.8 started | Small |
-| Measure the `music.html` beat flash against WCAG 2.3.1 | The one accessibility item v2.8.7 left open. A pause button does not exempt the page from the three-flashes-per-second limit. | Small |
 | Pause the render loop on `document.hidden` | Battery and heat. Reuses the `setPlaying()` function that already exists. | Small |
 | Playwright smoke tests | The threshold set for adding these was 11 pages; the site has 12. Overdue rather than deferred. | Medium |
 | Mobile audit of `music.html`, 320 px to 480 px | Never done. The fixed canvas and console were tuned for desktop. | Medium |
@@ -1184,6 +1183,7 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 | v2.8.10 | One native track, real audio-reactive visualizer | 2026-08-29 | Complete |
 | v2.9.1 | Reaction tuning: make the kick actually land | 2026-08-30 | Complete. Measured at 124 BPM against the track |
 | v2.9.2 | Band mapping fix, visible degraded state | 2026-08-30 | Complete |
+| v2.9.3 | WCAG 2.3.1 flash rate fixed, artist credit | 2026-08-30 | Complete |
 | v2.9.0 | Full catalog native, Mixcloud embeds removed | Next | In progress, waiting on the remaining audio files |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
 | Unnumbered | GitHub API integration | No date | Planned, low priority |
@@ -1277,7 +1277,21 @@ Acceptance is subjective and should stay that way: play the track, and a person 
 
 124 BPM, against the 124-128 BPM the branch had measured independently for its own track. The detector is locking to the beat rather than firing on noise. Keep these numbers: they are the baseline for anyone who retunes this, and an opinion about whether it "feels right" is not a substitute for them.
 
-**WCAG 2.3.1, measured rather than assumed.** The 26-frame refractory caps beat events at 2.3 per second in principle, but the measurement found a maximum of 3 in a one-second window, which is at the limit rather than under it. So the full-width light pump is scaled to 0.55 and impact is carried by motion instead: zoom, crowd bounce, beam count. The one true full-screen brightness flash stays gated to at most one per 5 seconds. The source carries a comment saying not to raise the pump, and it is load-bearing.
+**WCAG 2.3.1. Measured properly in v2.9.3, and the earlier measurement was wrong.**
+
+The refractory was written as 26 frames and described throughout this document as 433 ms and 2.3 events per second. **That was only ever true at 60 Hz.** `requestAnimationFrame` runs at the display refresh rate, so on a 120 Hz panel the same 26 frames is 217 ms, and every per-frame decay ran twice as fast, which also made each pulse shorter and harder rather than merely more frequent. Driving the real detector with a worst-case signal that clears its threshold on every frame:
+
+| Display | Before v2.9.3 | After | Limit |
+|---|---|---|---|
+| 60 Hz | 2.40 /s | **1.70 /s** | 3 /s |
+| 120 Hz | **4.70 /s** | **1.70 /s** | 3 /s |
+| 144 Hz | **5.60 /s** | **1.70 /s** | 3 /s |
+
+The earlier note in this section said the rate was "at the limit rather than under it" and treated that as the safe case. It was over the limit, by a wide margin, on hardware a large share of visitors own.
+
+Fixed by moving every rate to wall-clock milliseconds and raising the refractory to 600 ms. The light pump is halved to 0.26, the panel white wash cut to roughly a third, the laser response softened to 0.22, and the one true full-screen brightness flash gated to at most one per 8 seconds. Impact is carried by motion instead: zoom, crowd bounce, beam count. The source comment saying not to raise the pump is still load-bearing.
+
+**The general lesson, which applies past this page:** a rate expressed in frames is not a rate. Anything that must respect a per-second limit has to be measured against a clock, and the number has to be taken on more than one refresh rate or the measurement only describes the machine it was taken on.
 
 **Still unmerged from `feature/native-audio-player`:** the `<video>` element and the Video screen mode. The kick detector, beat pulse, loud-moment gate, and audio-scaled lasers all landed here.
 
@@ -1384,7 +1398,7 @@ Numbered so they can be answered by reference. When one is answered, fold the an
 5. ~~**Leveraged Strategies has two URLs**: `/leveraged-strategies/` from `projects.html` and `/leverage/` from `invests.html`. Which is canonical?~~ **Answered 2026-08-29, fixed in v2.8.9.** `/leverage/` is canonical. Both were checked against the live web rather than assumed: `/leverage/` returns the page titled Leveraged Strategies, and `/leveraged-strategies/` returns a hard 404, so `projects.html` had been shipping a dead demo link since the v2.6.12 rename. The GitHub repository was renamed too. `github.com/Azqato/leveraged-strategies` still resolves because GitHub redirects renamed repositories, but GitHub Pages does not do the same for Pages URLs, which is exactly why one link broke and the other did not. Both fields on the card now point at `leverage`. No compatibility entry was added at the old path because no repository serves it, so there is nowhere to put one.
 6. **The privacy policy** describes ad networks, DoubleClick cookies, account registration, and marketing emails, none of which exist here. It is dated "2024" while the rest of the site is dated 2026. Should it be rewritten to describe what the site actually does (which would be shorter, more honest, and more in keeping with Tenet 6), or is generic over-disclosure the deliberate safe choice?
 7. **Automated smoke tests** were deferred with an explicit threshold: "candidate at 11 pages". The site now has 12. Is that threshold still the plan, or has manual QA proven sufficient enough to drop the idea?
-8. **`music.html` accessibility.** ~~The page animates continuously with strobes and flashes, has no pause control, and honors no reduced-motion preference. Is a play/pause control acceptable on a page whose whole point is the animation, or should the reduced-motion media query simply freeze the canvas on the first frame?~~ **Answered 2026-08-29, shipped in v2.8.7.** The play/pause control won. Three candidates were built into a local harness and compared: freeze on first frame, start paused with a control, and a calm mode that kept slow motion but dropped strobes and lasers. The control was chosen because it is the only one of the three that also satisfies WCAG 2.2.2 (Pause Stop Hide, Level A) for the majority of visitors who never set a reduced-motion preference. Freezing would have satisfied the preference while leaving that criterion unmet for everyone else. See the Animation and Motion section of DESIGN.md for the shipped behavior. One follow-up remains open: the real beat flash rate in `music.html` has still not been measured against WCAG 2.3.1 (no more than three flashes per second).
+8. **`music.html` accessibility.** ~~The page animates continuously with strobes and flashes, has no pause control, and honors no reduced-motion preference. Is a play/pause control acceptable on a page whose whole point is the animation, or should the reduced-motion media query simply freeze the canvas on the first frame?~~ **Answered 2026-08-29, shipped in v2.8.7.** The play/pause control won. Three candidates were built into a local harness and compared: freeze on first frame, start paused with a control, and a calm mode that kept slow motion but dropped strobes and lasers. The control was chosen because it is the only one of the three that also satisfies WCAG 2.2.2 (Pause Stop Hide, Level A) for the majority of visitors who never set a reduced-motion preference. Freezing would have satisfied the preference while leaving that criterion unmet for everyone else. See the Animation and Motion section of DESIGN.md for the shipped behavior. The one follow-up that remained open, measuring the real beat flash rate against WCAG 2.3.1, **was closed in v2.9.3 and the page was found to be in breach**: 4.70 flashes per second on a 120 Hz display against a limit of three, because the refractory was counted in frames rather than milliseconds. Now 1.70 at any refresh rate.
 
 ---
 

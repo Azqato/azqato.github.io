@@ -5,6 +5,66 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.3] - 2026-08-30
+
+### Fixed
+- **The stage was flashing above the WCAG 2.3.1 limit on any high-refresh display, and the page's
+  own documentation said otherwise.** Every rate in the light rig was a frame count, and
+  `requestAnimationFrame` runs at the display's refresh rate, so the 26-frame beat refractory was
+  the documented 433 ms only on a 60 Hz panel. Driving the real detector with a worst-case signal
+  that clears its threshold on every frame:
+
+  | Display | Before | After | Limit |
+  |---|---|---|---|
+  | 60 Hz | 2.40 /s | **1.70 /s** | 3 /s |
+  | 120 Hz | **4.70 /s** | **1.70 /s** | 3 /s |
+  | 144 Hz | **5.60 /s** | **1.70 /s** | 3 /s |
+
+  Every rate is now wall-clock milliseconds, so the rig behaves identically on a phone, a TV and a
+  144 Hz monitor, and the refractory is 600 ms rather than 433, which sits under the limit instead
+  of on it. The per-frame decays are refresh-rate independent too, so a pulse now lasts as long on a
+  gaming monitor as on a TV instead of being half as long and twice as sharp.
+- **Screen-mode cycling had the same defect.** `MODE_LEN` was 1800 frames, commented as "~30 s at 60
+  fps", which meant the whole centre panel swapped every 15 seconds on a 120 Hz display. Now 30
+  seconds on a clock.
+
+### Changed
+- **Luminance amplitude cut across the rig, because rate is only half of photosensitivity.** The
+  full-width light pump is halved (0.55 to 0.26) with its gradient stops reduced, the white wash
+  over the main panel cut to roughly a third (0.30 to 0.12 on the flash term, 0.10 to 0.05 on the
+  ambient term), panel bloom's beat and flash contributions roughly halved, and the laser response
+  softened (0.35 to 0.22). The rare full-screen drop flash is gated to one per 8 seconds rather than
+  one per 5.
+- **Impact is carried by motion, not brightness.** The beat-synced panel zoom, the crowd bounce and
+  the laser beam count are untouched. They read as impact and cannot flicker.
+- **The screen only flashes when the pyro is firing.** Both the full-width light pump and the white
+  wash over the main panel are now gated on `fireActive`, which is true while any of the four jets
+  is actually burning. A flash with nothing visibly causing it reads as a glitch; the same flash
+  with fire behind it reads as the blast throwing light across the room, which is what it was always
+  meant to be. The flag is set in `drawFire()`, which runs after the flashes in the frame, so the
+  gate uses the previous frame's state. That is 16 ms at 60 fps and is not perceivable. It also
+  narrows the photosensitivity exposure further, since the flash can no longer fire during quiet
+  passages when the jets are down.
+- **The track credit now names the artists.** The tag under the title reads "EOB, Azqato" at all
+  times. It previously read "Drives the visualizer", and was overwritten with a serve-over-http
+  warning on local file loads, so the artists were never credited on the page at all. The warning
+  moved to its own muted line underneath rather than being dropped.
+
+### Notes
+- **This closes an accessibility item that had been open since v2.8.7** and was listed in both
+  DESIGN.md and the PRD as "the beat flash rate has never been measured". It has now been measured,
+  and it failed. The pause control from v2.8.7 was the mitigation; it was never the fix.
+- **The earlier documentation was confidently wrong.** DESIGN.md and the PRD both described the rate
+  as "at the limit rather than under it" and treated that as the safe case. It was over the limit by
+  a wide margin on hardware a large share of visitors own. Both documents are corrected rather than
+  quietly updated.
+- **The general lesson, which is not specific to this page: a rate expressed in frames is not a
+  rate.** Anything that has to respect a per-second limit must be measured against a clock, and on
+  more than one refresh rate, or the measurement only describes the machine it was taken on.
+- **Verified in headless Edge** (never Chrome), before and after, by driving the page's real
+  `updateBeat` at simulated 60, 120 and 144 Hz rather than by reading the constants. The credit line
+  and the http note were checked in the rendered DOM in the same pass.
+
 ## [2.9.2] - 2026-08-30
 
 ### Fixed: the logarithmic band mapping collapsed at the low end
