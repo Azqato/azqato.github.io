@@ -338,7 +338,7 @@ Most buttons use `border-radius: 6px`, `font-size: 0.9rem`, `font-weight: 600`, 
 
 ## `music.html` Visual System
 
-`music.html` is the only page with a non-trivial rendering layer, and it is large enough (99 KB, roughly 2,450 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
+`music.html` is the only page with a non-trivial rendering layer, and it is large enough (109 KB, roughly 2,560 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
 
 ### Structure
 
@@ -393,7 +393,17 @@ At every other moment the page falls back to a synthetic signal: three summed si
 
 That last row is the one to keep in mind when writing copy about the page. A visitor playing a Mixcloud mix sees choreography, not reaction. Only the native track drives the visuals.
 
-> **Known gap, as of v2.8.10.** Driven by the audio is not the same as reading as a reaction, and right now the page only manages the first. The kick does not land and a drum hit is not visually distinguishable from a pad. The likely cause is that the signal is smoothed twice before it reaches the screen, once by the analyser at 0.8 and again by `freq()` at `0.72 / 0.28`, which is fatal to transients; a linear 64-band mapping that gives the kick roughly one band of the display is the next suspect. Tracked as milestone v2.9.1. Do not tune any of the visual mappings below against the current signal, because the signal is what is wrong.
+**How a hit is made visible.** A detected kick raises `beatPulse` to 1, which decays at 0.86 per frame. It drives four things at once, and the multiplicity is the point: one element changing reads as an effect, four changing together reads as a response.
+
+| Element | Response to `beatPulse` |
+|---------|------------------------|
+| Center screen | Zoom to 1.08, clipped to the bezel |
+| Crowd | Front row bounce plus 5, back row plus 2.5 |
+| Lasers | Mid-band intensity plus 0.35, clamped |
+| WebGL clock | Jumps forward 0.05 s |
+| Full-width light pump | Scaled to 0.55, and capped there on purpose |
+
+That last row is an accessibility constraint, not a taste decision. Measured against the track, the detector fires up to three times in a one-second window, which is exactly WCAG 2.3.1's limit rather than under it. Impact is therefore carried by motion (zoom, bounce, beam count) rather than by luminance. Do not raise the light pump.
 
 One consequence for local work: opening the page over `file://` makes the browser treat the same-folder mp3 as cross-origin, so the page deliberately skips Web Audio and runs synthetic. The audio is audible but the reaction is not real. Never judge the visualizer's reactivity from a local file load.
 

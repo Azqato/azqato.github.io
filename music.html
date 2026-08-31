@@ -546,6 +546,14 @@
       var analyser = null, freqData = null, audioCtx = null, audioWired = false;
       var trackAudio = document.getElementById('trackAudio');
 
+      // A second analyser, high resolution and completely unsmoothed, used only to
+      // find kicks. The general analyser above is deliberately smoothed for the
+      // ambient visuals and far too coarse to isolate a kick: at fftSize 256 each
+      // bin spans about 190 Hz, so the entire 30-150 Hz kick band is part of one
+      // bin. At 2048 a bin is about 23 Hz, which resolves it properly.
+      var analyserFast = null, freqDataFast = null;
+      var fastLoBin = 1, fastHiBin = 6;
+
       // Opened as a local file, the browser treats the mp3 as cross-origin even
       // though it sits next to this page. createMediaElementSource then succeeds
       // but routes silence, so the track plays with no sound at all. Skip the
@@ -559,12 +567,35 @@
         if (!Ctx) return;  // no Web Audio: the player still works, the stage stays synthetic
         audioCtx = new Ctx();
         analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 256;
-        analyser.smoothingTimeConstant = 0.8;
+        // 1024 rather than 256: at 256 a bin spans about 190 Hz, which is wider
+        // than the entire kick band, so the low end could not be resolved at all.
+        // Not 2048 either. Frequency resolution and time resolution trade against
+        // each other, and 2048 spans 46 ms of audio, longer than a frame at 60 fps,
+        // which smears the transients this whole change exists to preserve. The
+        // kick detector below uses 2048 because it needs the opposite trade.
+        analyser.fftSize = 1024;
+        // 0.35 rather than 0.8. The old value was a second low-pass filter stacked
+        // on top of freq()'s own smoothing, and between them every attack was
+        // rounded off before it reached the screen. freq() now does the smoothing,
+        // asymmetrically, so this stage only needs to take the jitter off.
+        analyser.smoothingTimeConstant = 0.35;
         analyser.minDecibels = -90;
         analyser.maxDecibels = -10;
         freqData = new Uint8Array(analyser.frequencyBinCount);
         analyser.connect(audioCtx.destination);
+
+        analyserFast = audioCtx.createAnalyser();
+        analyserFast.fftSize = 2048;
+        analyserFast.smoothingTimeConstant = 0;  // smoothing destroys the attack we are looking for
+        analyserFast.minDecibels = -90;
+        analyserFast.maxDecibels = -10;
+        freqDataFast = new Uint8Array(analyserFast.frequencyBinCount);
+        // Sample rate varies by device, so derive the bin range rather than hardcoding it.
+        var binHz = audioCtx.sampleRate / analyserFast.fftSize;
+        fastLoBin = Math.max(1, Math.round(30 / binHz));
+        fastHiBin = Math.max(fastLoBin, Math.round(150 / binHz));
+        // Not connected to the destination: it is a tap, and connecting it would
+        // add a second copy of the signal to the output.
       }
 
       // createMediaElementSource can only be called once per element, and once
@@ -573,7 +604,9 @@
       function wireAudio(media) {
         if (audioWired || !canRouteAudio || !audioCtx || !analyser) return;
         try {
-          audioCtx.createMediaElementSource(media).connect(analyser);
+          var src = audioCtx.createMediaElementSource(media);
+          src.connect(analyser);
+          src.connect(analyserFast);
           audioWired = true;
         } catch (e) {
           // Already routed, or blocked. Leave the element playing on its own and
@@ -581,6 +614,8 @@
           console.error('Web Audio wiring failed:', e);
           analyser = null;
           freqData = null;
+          analyserFast = null;
+          freqDataFast = null;
         }
       }
 
@@ -589,24 +624,150 @@
       var phases   = Array.from({length: N}, function(_, i){ return i * 0.67 + Math.random() * Math.PI; });
       var smoothed = new Float32Array(N);
       var t        = 0;
+      var glTime   = 0;  // audio-reactive clock for the WebGL screens
+
+      // Band i covers a frequency range, and the ranges are spaced logarithmically
+      // rather than linearly. Linear spacing was the original approach and it is
+      // why the stage never looked like it was listening: a kick lives near 60 Hz,
+      // and with 64 bands spread evenly to 22 kHz the entire low end fell inside
+      // band 0 while sixty-odd bands showed hiss. Ears hear pitch logarithmically,
+      // so the display has to divide the spectrum the same way. Built once, since
+      // it only depends on the sample rate.
+      var bandBins = null;
+      function buildBandBins() {
+        if (!analyser || !audioCtx) return;
+        bandBins = new Int32Array(N + 1);
+        var nyquist = audioCtx.sampleRate / 2;
+        var bins = analyser.frequencyBinCount;
+        var loHz = 30, hiHz = 16000;
+        for (var i = 0; i <= N; i++) {
+          var hz = loHz * Math.pow(hiHz / loHz, i / N);
+          bandBins[i] = Math.min(bins - 1, Math.max(0, Math.round(hz / nyquist * bins)));
+        }
+      }
+
+      // Filled once per frame by sampleAudio(), not once per band. freq() used to
+      // call getByteFrequencyData itself, which meant refetching the whole spectrum
+      // 64 times a frame and more once favg() was counted.
+      var audioLive = false;
+
+      function sampleAudio() {
+        audioLive = !!(analyser && freqData && trackAudio && !trackAudio.paused);
+        if (!audioLive) return;
+        analyser.getByteFrequencyData(freqData);
+        if (!bandBins) { buildBandBins(); if (!bandBins) { audioLive = false; return; } }
+        for (var i = 0; i < N; i++) {
+          // Peak rather than mean across the band. A mean lets one loud bin get
+          // averaged away by its quiet neighbours, which is again fatal to a kick.
+          var lo = bandBins[i], hi = Math.max(lo, bandBins[i + 1] - 1), peak = 0;
+          for (var b = lo; b <= hi; b++) if (freqData[b] > peak) peak = freqData[b];
+          var raw = Math.pow(peak / 255, 1.6);  // widen dynamic range: suppress mids, keep true peaks
+          // Asymmetric smoothing: jump almost straight to a new peak, fall back
+          // slowly. Symmetric smoothing rounds the leading edge off every hit,
+          // which is exactly the part of a drum the eye reads as impact.
+          smoothed[i] = raw > smoothed[i] ? smoothed[i] * 0.25 + raw * 0.75
+                                          : smoothed[i] * 0.82 + raw * 0.18;
+        }
+      }
 
       function freq(i) {
         var idx = Math.max(0, Math.min(N - 1, i | 0));
         // Only trust the analyser while audio is actually playing. A paused track
         // reads as silence, which would flatten the whole stage instead of
         // returning it to the idle animation.
-        if (analyser && freqData && trackAudio && !trackAudio.paused) {
-          analyser.getByteFrequencyData(freqData);
-          var raw = freqData[Math.floor((idx / N) * freqData.length * 0.8)] / 255;
-          raw = Math.pow(raw, 1.6);  // widen dynamic range: suppress mids, keep true peaks
-          smoothed[idx] = smoothed[idx] * 0.72 + raw * 0.28;
-        } else {
-          var p = phases[idx];
-          smoothed[idx] = (Math.pow(Math.abs(Math.sin(t * 0.018 + p)), 1.8) * 0.6
-                        + Math.abs(Math.sin(t * 0.051 + p * 1.7)) * 0.25
-                        + Math.abs(Math.sin(t * 0.11  + p * 3.1)) * 0.15);
-        }
+        if (audioLive) return smoothed[idx];
+        var p = phases[idx];
+        smoothed[idx] = (Math.pow(Math.abs(Math.sin(t * 0.018 + p)), 1.8) * 0.6
+                      + Math.abs(Math.sin(t * 0.051 + p * 1.7)) * 0.25
+                      + Math.abs(Math.sin(t * 0.11  + p * 3.1)) * 0.15);
         return smoothed[idx];
+      }
+
+      // ── Kick detector ──
+      // Onset detection, not level detection. On a modern mastered mix the bass band
+      // sits near the ceiling almost continuously, so "is the bass loud right now"
+      // is true nearly all the time and fires on nothing. What makes a kick a kick is
+      // its attack: a sharp rise in low-band energy over two or three frames. That
+      // stays detectable no matter how compressed the master is, which is the whole
+      // reason this exists instead of a threshold.
+      // Constants come from `feature/native-audio-player`, where they were tuned by
+      // extracting the 30-150 Hz band with ffmpeg and sweeping against the track's
+      // independently measured 124-128 BPM until detected hits matched real beat
+      // spacing: 124.5 hits/min with 98 percent of intervals inside 380-620 ms.
+      var bassSmooth   = 0;
+      var bassPrev     = 0;
+      var riseHistory  = [];
+      var beatPulse    = 0;
+      var beatCooldown = 0;
+
+      function rawBassFast() {
+        if (!analyserFast || !freqDataFast) return 0;
+        analyserFast.getByteFrequencyData(freqDataFast);
+        var s = 0, cnt = 0;
+        for (var i = fastLoBin; i <= fastHiBin; i++) { s += freqDataFast[i]; cnt++; }
+        return (s / cnt) / 255;
+      }
+
+      function updateBeat() {
+        if (!audioLive) { beatPulse *= 0.86; return; }
+        var b = rawBassFast();
+        bassSmooth = bassSmooth * 0.5 + b * 0.5;
+        var rise = Math.max(0, bassSmooth - bassPrev);
+        bassPrev = bassSmooth;
+
+        // Threshold adapts to the track's own recent behaviour, so a quiet passage
+        // still registers its hits and a loud one does not fire continuously.
+        riseHistory.push(rise);
+        if (riseHistory.length > 30) riseHistory.shift();
+        var avgRise = 0;
+        for (var i = 0; i < riseHistory.length; i++) avgRise += riseHistory[i];
+        avgRise /= riseHistory.length;
+
+        var threshold = Math.max(0.007, avgRise * 1.2);
+        beatCooldown = Math.max(0, beatCooldown - 1);
+
+        if (rise > threshold && beatCooldown === 0) {
+          beatPulse = 1;
+          // ~433 ms refractory. This also happens to be the page's WCAG 2.3.1
+          // guarantee: it caps every beat-driven visual at 2.3 events per second,
+          // below the three-per-second flash threshold, structurally rather than
+          // by hoping no track is fast enough to breach it.
+          beatCooldown = 26;
+        } else {
+          beatPulse *= 0.86;  // decay back to rest between hits
+        }
+      }
+
+      // ── Loud-moment gate ──
+      // The full brightness flash should read as a drop, not as every kick. Keep a
+      // slowly adapting mean and variance of overall loudness as a baseline for how
+      // loud this track normally is, then flash only on a genuine statistical
+      // outlier above it, gated to land on an actual kick and with a long cooldown.
+      var loudMean      = 0;
+      var loudVar       = 0;
+      var loudWarmed    = false;
+      var flashPulse    = 0;
+      var flashCooldown = 0;
+
+      function updateLoudFlash() {
+        if (!audioLive) { flashPulse *= 0.85; return; }
+        var energy = favg(0, 20);
+        if (!loudWarmed) { loudMean = energy; loudVar = 0.0004; loudWarmed = true; }
+        var alpha = 0.0016;  // ~10 s adaptation at 60 fps
+        var d = energy - loudMean;
+        loudMean += d * alpha;
+        loudVar = loudVar * (1 - alpha) + d * d * alpha;
+        var std = Math.sqrt(loudVar);
+
+        flashCooldown = Math.max(0, flashCooldown - 1);
+        var isOutlier = std > 0.001 && energy > loudMean + std * 0.84;
+
+        if (isOutlier && beatPulse > 0.5 && flashCooldown === 0) {
+          flashPulse = 1;
+          flashCooldown = 300;  // ~5 s minimum gap
+        } else {
+          flashPulse *= 0.85;
+        }
       }
 
       function favg(lo, hi) {
@@ -1391,7 +1552,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         gl.bindTexture(gl.TEXTURE_2D, glVol.tex1);
         gl.uniform1i(gl.getUniformLocation(glVol.prog, 'iChannel0'), 0);
         gl.uniform1i(gl.getUniformLocation(glVol.prog, 'iChannel1'), 1);
-        gl.uniform1f(glVol.timeLoc, t / 60.0);
+        gl.uniform1f(glVol.timeLoc, glTime);
         gl.uniform3f(glVol.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1401,7 +1562,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         gl.useProgram(glStar.prog);
         var mx = Math.sin(t * 0.007) * glCanvas.width  * 0.42 + glCanvas.width  * 0.5;
         var my = Math.sin(t * 0.005) * glCanvas.height * 0.42 + glCanvas.height * 0.5;
-        gl.uniform1f(glStar.timeLoc, t / 60.0);
+        gl.uniform1f(glStar.timeLoc, glTime);
         gl.uniform3f(glStar.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.uniform4f(glStar.mouseLoc, mx, my, 0.0, 0.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -1410,7 +1571,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL3() {
         if (!gl || !glVortex.prog) return;
         gl.useProgram(glVortex.prog);
-        gl.uniform1f(glVortex.timeLoc, t / 60.0);
+        gl.uniform1f(glVortex.timeLoc, glTime);
         gl.uniform3f(glVortex.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1418,7 +1579,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL4() {
         if (!gl || !glSquares.prog) return;
         gl.useProgram(glSquares.prog);
-        gl.uniform1f(glSquares.timeLoc, t / 60.0);
+        gl.uniform1f(glSquares.timeLoc, glTime);
         gl.uniform3f(glSquares.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1426,7 +1587,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL5() {
         if (!gl || !glOrigami.prog) return;
         gl.useProgram(glOrigami.prog);
-        gl.uniform1f(glOrigami.timeLoc, t / 60.0);
+        gl.uniform1f(glOrigami.timeLoc, glTime);
         gl.uniform3f(glOrigami.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1434,7 +1595,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL6() {
         if (!gl || !glTunnel.prog) return;
         gl.useProgram(glTunnel.prog);
-        gl.uniform1f(glTunnel.timeLoc, t / 60.0);
+        gl.uniform1f(glTunnel.timeLoc, glTime);
         gl.uniform3f(glTunnel.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1445,7 +1606,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, glVol.tex1);
         gl.uniform1i(gl.getUniformLocation(glGhost.prog, 'iChannel0'), 0);
-        gl.uniform1f(glGhost.timeLoc, t / 60.0);
+        gl.uniform1f(glGhost.timeLoc, glTime);
         gl.uniform3f(glGhost.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1453,7 +1614,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL8() {
         if (!gl || !glFence.prog) return;
         gl.useProgram(glFence.prog);
-        gl.uniform1f(glFence.timeLoc, t / 60.0);
+        gl.uniform1f(glFence.timeLoc, glTime);
         gl.uniform3f(glFence.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1461,7 +1622,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       function renderGL9() {
         if (!gl || !glNoise.prog) return;
         gl.useProgram(glNoise.prog);
-        gl.uniform1f(glNoise.timeLoc, t / 60.0);
+        gl.uniform1f(glNoise.timeLoc, glTime);
         gl.uniform3f(glNoise.resLoc, glCanvas.width, glCanvas.height, 1.0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
@@ -1533,15 +1694,22 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         ctx.save();
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(fxSrc, px, py, pw, ph);
-        // subtle audio brightness pulse on top
+        // Beat-synced zoom. A push on the image itself reads as impact far more
+        // strongly than a brightness change does, and it cannot flicker.
+        ctx.beginPath();
+        ctx.rect(px, py, pw, ph);
+        ctx.clip();
+        var zoom = 1 + beatPulse * 0.08;
+        var zw = pw * zoom, zh = ph * zoom;
+        ctx.drawImage(fxSrc, px - (zw - pw) / 2, py - (zh - ph) / 2, zw, zh);
+        // Brightness flash: rare drop moments only, gated by updateLoudFlash.
         var energy = favg(0, 20);
-        ctx.globalAlpha = energy * 0.10;
+        ctx.globalAlpha = energy * 0.10 + flashPulse * 0.30;
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(px, py, pw, ph);
         ctx.restore();
         panelOverlay(px, py, pw, ph);
-        panelBloom(px, py, pw, ph, 0.28 + energy * 0.30);
+        panelBloom(px, py, pw, ph, 0.28 + energy * 0.30 + beatPulse * 0.20 + flashPulse * 0.30);
       }
 
       // ── A: Background ──
@@ -2036,7 +2204,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
 
       function drawLasers() {
         var pk  = favg(0, N - 1);
-        var m   = favg(8, 25);
+        var m   = Math.min(1, favg(8, 25) + beatPulse * 0.35);
         var len = Math.max(W, H) * 1.4;
 
         laserFixtures.forEach(function (fix, fi) {
@@ -2151,10 +2319,18 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       }
 
       function drawBeatFlash() {
-        var pk = favg(0, 5);
-        if (pk < 0.76) return;
+        // Driven by the kick detector, not by a level threshold. The old test was
+        // `favg(0, 5) >= 0.76`, which on a loud master is either true continuously
+        // or never, and in both cases reads as no reaction at all.
+        // Scaled to 0.55 on the audio path. Measured against the track, the
+        // detector fires up to 3 times in a one-second window, which is exactly
+        // WCAG 2.3.1's limit rather than under it. The impact is therefore carried
+        // by the screen zoom, the crowd, and the lasers, all of which are motion
+        // rather than luminance, while this full-width light pump stays small
+        // enough not to count as a flash. Do not raise it.
+        var a = audioLive ? beatPulse * 0.55 : Math.max(0, favg(0, 5) - 0.76) * 4;
+        if (a <= 0.01) return;
         // radial light pump from the stage instead of a flat full-screen flash
-        var a = (pk - 0.76) * 4;
         var fy = lay.mainY + lay.mainH * 0.7;
         var g = ctx.createRadialGradient(lay.cx, fy, 0, lay.cx, fy, Math.max(W, H) * 0.85);
         g.addColorStop(0,   'rgba(205,225,255,' + (a * 0.16) + ')');
@@ -2219,7 +2395,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
           var bx2 = (j / 85) * W + Math.sin(j * 7.3) * (W / 110);
           var bh2 = H * 0.026 + Math.abs(Math.sin(j * 2.9)) * H * 0.016;
           var bw2 = 4 + Math.sin(j * 5.2) * 1.5;
-          var bob2 = Math.abs(Math.sin(t * 0.05 + j * 1.31)) * (1 + b * 5);
+          var bob2 = Math.abs(Math.sin(t * 0.05 + j * 1.31)) * (1 + b * 5 + beatPulse * 2.5);
           var byT = H - H * 0.012 - bh2 - bob2;
           ctx.fillRect(bx2 - bw2 / 2, byT, bw2, bh2 + bob2 + H * 0.02);
           ctx.beginPath(); ctx.arc(bx2, byT, bw2 * 0.55, 0, Math.PI * 2); ctx.fill();
@@ -2230,7 +2406,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
           var px = (i / 65) * W + Math.sin(i * 4.6) * (W / 95);
           var ph = H * 0.042 + Math.abs(Math.sin(i * 2.2)) * H * 0.028;
           var pw2 = 6 + Math.sin(i * 3.1) * 2;
-          var bob = Math.abs(Math.sin(t * 0.055 + i * 0.83)) * (1.5 + b * 9);
+          var bob = Math.abs(Math.sin(t * 0.055 + i * 0.83)) * (1.5 + b * 9 + beatPulse * 5);
           var hy = H - ph - bob;
           ctx.fillRect(px - pw2 / 2, hy, pw2, ph + bob);
           ctx.beginPath(); ctx.arc(px, hy, pw2 * 0.52, 0, Math.PI * 2); ctx.fill();
@@ -2296,6 +2472,13 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       // ── Main loop ──
       function draw() {
         t++;
+        sampleAudio();
+        updateBeat();
+        updateLoudFlash();
+        // Audio-reactive clock for the WebGL screens: runs faster through louder
+        // passages and jumps forward on each detected kick, so the shaders drift
+        // with the track instead of on their own fixed timebase.
+        glTime += (1 / 60) * (0.6 + favg(0, 30) * 1.6) + beatPulse * 0.05;
 
         // Cycle screen mode every ~30 s (active modes only: stars, vortex, squares, tunnel, fence)
         if (++modeTimer >= MODE_LEN) { modeTimer = 0; var activeModes = [2, 3, 4, 6, 8]; var next; do { next = activeModes[Math.floor(Math.random() * activeModes.length)]; } while (next === screenMode); screenMode = next; syncModeBtns(); }

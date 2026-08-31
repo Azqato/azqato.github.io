@@ -5,6 +5,50 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.1] - 2026-08-30
+
+### Fixed: the visualizer now reads as reacting to the music
+v2.8.10 wired a real analyser and the stage moved with the audio, but it did not look like it was listening: the kick did not land and a drum hit was not distinguishable from a pad. Four causes, all real, all now fixed.
+
+- **Two low-pass filters in series.** `analyser.smoothingTimeConstant` was 0.8 and `freq()` smoothed again at `0.72 / 0.28`. A kick is a transient, and each filter rounded off its leading edge; together they removed it. The analyser now smooths at 0.35 and `freq()` smooths asymmetrically instead: it jumps to a new peak at `0.25 / 0.75` and falls back at `0.82 / 0.18`. Attack survives, decay stays smooth, and the leading edge of a hit is the part the eye reads as impact.
+- **Linear band mapping.** 64 bands spread evenly across the spectrum put the entire kick region inside band 0 while sixty-odd bands displayed hiss. Bands are now spaced logarithmically from 30 Hz to 16 kHz, built once from the actual sample rate, which is how hearing divides pitch and therefore how the display has to divide it.
+- **Resolution too coarse to see a kick.** `fftSize` was 256, about 190 Hz per bin, wider than the whole kick band. Now 1024. Deliberately not 2048: frequency resolution trades against time resolution, and a 2048 window spans 46 ms, longer than a frame at 60 fps, which smears the transients this change exists to preserve.
+- **Averaging within a band.** Band level is now the peak of its bins rather than the mean, so one loud bin is not averaged away by quiet neighbours.
+
+### Added: kick detection
+- Added a second analyser dedicated to finding kicks: `fftSize` 2048 for about 23 Hz per bin, `smoothingTimeConstant` 0, tapping the same source but not connected to the output. It takes the opposite resolution trade from the general analyser because it needs frequency precision rather than time precision.
+- Detection is by onset, not by level. On a modern master the bass sits near the ceiling almost continuously, so "is the bass loud" is true nearly always and fires on nothing. A kick is instead identified by its attack: a sharp rise in 30-150 Hz energy over the last few frames, with a threshold that adapts to the track's own recent behaviour so quiet passages still register and loud ones do not fire continuously. Ported from `feature/native-audio-player`, where the constants were tuned with `ffmpeg` against a known tempo.
+- `beatPulse` now drives the screen zoom, the crowd bounce, the laser intensity, and the WebGL clock, so a hit moves several independent things at once. That is what reads as reaction; a single brightness change does not.
+- Added the loud-moment gate from the same branch: a full brightness flash fires only when loudness is a genuine statistical outlier against a slowly adapting baseline, coincides with an actual kick, and has not fired in the last 5 seconds. It reads as a drop rather than as every beat.
+- Replaced the old `drawBeatFlash` trigger, which was `favg(0, 5) >= 0.76`. On a loud master that test is either true continuously or never true, and both look identical to no reaction at all.
+
+### Verified
+Measured offline rather than judged by eye. The mp3 was decoded in the browser and the detector run over a 2048-point FFT at a 60 Hz hop, reproducing exactly what the page sees per frame:
+
+| Measure | Result |
+|---------|--------|
+| Hits detected | 92 over 44.5 s |
+| Rate | 124.0 per minute |
+| Median interval | 0.480 s, implying 125.0 BPM |
+| Intervals in 380-620 ms | 94 percent |
+| Interval p10 / p90 | 0.430 s / 0.560 s |
+
+124 BPM against the 124-128 BPM the branch measured independently for its own test track. The detector is locking to the real beat, not firing on noise.
+
+### Accessibility
+- **WCAG 2.3.1 measured, not assumed.** The 26-frame refractory caps beat-driven events at 2.3 per second in principle, and the measurement found a maximum of 3 in any one-second window, which is at the limit rather than under it. So the full-width light pump is scaled to 0.55 on the audio path and the impact is carried by the screen zoom, the crowd, and the lasers, which are motion rather than luminance. The one true full-screen brightness flash remains gated to at most one per 5 seconds. There is a comment in the source saying not to raise the pump; it is load-bearing.
+- The reduced-motion behaviour from v2.8.7 is unchanged: the loop still starts paused when the system asks for reduced motion, and the pause control still stops everything.
+
+### Performance
+- `freq()` called `getByteFrequencyData` on every band, so the full spectrum was refetched 64 times per frame and more once `favg()` was counted. Sampling now happens once per frame in `sampleAudio()` and `freq()` only reads the result.
+
+### Documentation
+- Closed milestone v2.9.1 in `docs/PRD.md` and recorded the measured figures, so the next person tuning this has a baseline to compare against rather than an opinion.
+- Updated the signal sections of `docs/PRD.md` and `docs/DESIGN.md`, and removed the DESIGN.md warning against tuning visuals to the old signal, which no longer applies.
+- `music.html` is now 109 KB, still the one acknowledged exception to the 50 KB page budget.
+
+---
+
 ## [2.8.10] - 2026-08-29
 
 ### Added: the visualizer now reacts to real audio

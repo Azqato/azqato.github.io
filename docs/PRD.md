@@ -135,7 +135,7 @@ There are **12** HTML pages.
 - **F11: Favicon.** The site-wide favicon is a lion emoji, implemented as an inline SVG data-URI `<link rel="icon">` with no external image file, repeated identically in the `<head>` of all 12 pages. The homepage's About explore-card icon matches it. **Exception:** `music.html` replaces this favicon at runtime with a live animated canvas favicon, redrawn every third frame (see F14).
 - **F12: Curated Investing Hub.** `invests.html` carries 16 categories of hand-picked external resources (Platforms, Careers, ETFs, Companies, Ratings, Screeners, Real Estate, Charts, Databases, Economic Indicators, Education, Guides, Indices, Information, News) above a visible "not a licensed financial advisor" disclaimer.
 - **F13: Codes Page.** `codes.html` presents the AI-tooling side of the work: the Prompts library, the browser Tools collection, and the GitHub org.
-- **F14: Music Stage Visualizer.** `music.html` renders a full-screen concert stage on a fixed canvas: panoramic LED screens, trusses, lasers, fire columns, haze, dust, a crowd, a floor reflection, and a branded DJ booth, with a cinematic vignette and letterbox grade. The center screen shows one of ten modes, nine of which are WebGL2 fragment shaders. Five modes are exposed as buttons and auto-cycle randomly every 30 seconds. While the native track (F19) is playing, every one of those elements is driven by its real frequency data; at all other times the same elements run on a synthetic signal. The favicon animates in sync. A play/pause control sits at the left of the mode-button row; the page starts paused on one painted frame for visitors whose system requests reduced motion (F18).
+- **F14: Music Stage Visualizer.** `music.html` renders a full-screen concert stage on a fixed canvas: panoramic LED screens, trusses, lasers, fire columns, haze, dust, a crowd, a floor reflection, and a branded DJ booth, with a cinematic vignette and letterbox grade. The center screen shows one of ten modes, nine of which are WebGL2 fragment shaders. Five modes are exposed as buttons and auto-cycle randomly every 30 seconds. While the native track (F19) is playing, every one of those elements is driven by its real frequency data, and detected kicks drive the screen zoom, crowd, lasers, and shader clock together so a hit lands as one event; at all other times the same elements run on a synthetic signal. The favicon animates in sync. A play/pause control sits at the left of the mode-button row; the page starts paused on one painted frame for visitors whose system requests reduced motion (F18).
 - **F15: Stage Console.** A fixed, independently scrollable glass panel docked over the center screen on `music.html`, holding the native track player (F19), two Mixcloud mix embeds, and links to Last.fm, Mixcloud, and the Mixes YouTube channel.
 - **F16: Shared Stylesheet.** `styles.css` carries the design tokens, reset, nav, and footer for all 12 pages, replacing roughly 100 lines of duplicated CSS per page.
 - **F17: Writing-Style Guard.** A `.githooks/pre-commit` hook blocks any commit that introduces an em dash into an HTML or Markdown file, in either the literal or HTML-entity form.
@@ -158,7 +158,7 @@ There are **12** HTML pages.
 
 - Must render correctly in the latest versions of Chrome, Firefox, Edge, and Safari.
 - Must be usable at viewport widths from 320 px to 2560 px. (`music.html` is unverified below 600 px; see the deferred list.)
-- Page weight (HTML plus inline CSS plus inline JS) should stay under 50 KB per page, uncompressed. **`music.html` is 99 KB and knowingly breaks this.** See Success Criteria.
+- Page weight (HTML plus inline CSS plus inline JS) should stay under 50 KB per page, uncompressed. **`music.html` is 109 KB and knowingly breaks this.** See Success Criteria.
 - No cookies, localStorage, sessionStorage, or first-party tracking of any kind.
 - No user data collected or transmitted by the site itself.
 - All affiliate disclosures must comply with FTC guidelines.
@@ -185,7 +185,7 @@ There are **12** HTML pages.
 | Criterion                       | Target                                               | Status at audit |
 |---------------------------------|------------------------------------------------------|-----------------|
 | Page load time                  | Under 1 second on a 4G connection                    | Unverified, no measurement recorded |
-| Page weight per page            | Under 50 KB uncompressed HTML                        | Met on 11 of 12 pages; `music.html` is 99 KB |
+| Page weight per page            | Under 50 KB uncompressed HTML                        | Met on 11 of 12 pages; `music.html` is 109 KB |
 | Image payload per page          | No stated target                                     | `youtube.html` pulls 2.3 MB of thumbnails; worth a target |
 | Cross-browser render            | No visual defects on Chrome, Firefox, Edge, Safari   | Manual spot checks only |
 | Mobile usability                | Fully usable at 375 px (iPhone SE viewport)          | Met except `music.html`, unverified |
@@ -440,7 +440,24 @@ Error states: shader compilation failures are logged to the console via `console
 
 `freq(i)` has two branches.
 
-**Real.** If the native track is playing, `analyser.getByteFrequencyData()` fills `freqData` and band `i` reads bin `floor((i / 64) * bins * 0.8)`. The top 20 percent of the spectrum is skipped because it is nearly always empty and would waste a fifth of the bands on silence. The raw 0-1 value is then raised to the power 1.6, which pushes mid-level noise down while leaving true peaks near 1. Without that curve most tracks sit in a narrow band and the stage reads as uniformly bright. The result is smoothed at `0.72 / 0.28` into `smoothed[i]`, the same smoothing the synthetic branch uses, so the two look continuous when playback starts or stops.
+**Real.** While the native track plays, `sampleAudio()` runs once per frame and fills all 64 bands; `freq(i)` only reads the result. It used to call `getByteFrequencyData` itself, which refetched the whole spectrum 64 times a frame.
+
+Four things about that sampling matter, and each was a defect fixed in v2.9.1:
+
+| Property | Value | Why |
+|----------|-------|-----|
+| Band spacing | Logarithmic, 30 Hz to 16 kHz | Hearing divides pitch logarithmically. Spread linearly, the entire kick region fell inside band 0 while sixty-odd bands showed hiss. |
+| `fftSize` | 1024, about 43 Hz per bin | 256 gave 190 Hz per bin, wider than the whole kick band. Not 2048: that window spans 46 ms, longer than a frame, and smears transients. |
+| Within-band reduction | Peak, not mean | A mean lets one loud bin be averaged away by quiet neighbours. |
+| Smoothing | Analyser 0.35, then asymmetric `0.25 / 0.75` rising and `0.82 / 0.18` falling | The old pair, 0.8 and a symmetric `0.72 / 0.28`, were two low-pass filters in series. A kick is a transient; they removed it. |
+
+The raw 0-1 value is still raised to the power 1.6, which pushes mid-level noise down while leaving true peaks near 1.
+
+**Kick detection.** A second analyser exists for one job: finding hits. `fftSize` 2048 for about 23 Hz per bin, `smoothingTimeConstant` 0, tapping the same source but never connected to the output. It takes the opposite resolution trade from the general analyser deliberately.
+
+Detection is by onset, not by level. On a modern master the bass sits near the ceiling almost continuously, so "is the bass loud right now" is true nearly always and discriminates nothing. A kick is instead its attack: a sharp rise in 30-150 Hz energy over the last few frames, against a threshold that adapts to the track's own recent behaviour. A 26-frame refractory follows each hit. `beatPulse` then drives the screen zoom, the crowd bounce, the laser intensity, and the WebGL clock at once, which is what reads as reaction; one brightness change does not.
+
+Measured against the track rather than judged by eye: 92 hits in 44.5 s, 124.0 per minute, median interval 0.480 s implying 125.0 BPM, and 94 percent of intervals inside 380-620 ms.
 
 **Synthetic.** Otherwise, band `i` is three summed sine waves at different rates with a fixed random phase, smoothed identically. This is the branch that runs when the track is paused, when it has never been started, and when a Mixcloud embed is playing. A paused element reads as silence, so falling through to the analyser would flatten the stage instead of idling it.
 
@@ -485,7 +502,7 @@ No authentication is used with any of these. There are no API keys, tokens, or a
 
 | Metric                         | Target                         | Actual at audit |
 |--------------------------------|--------------------------------|-----------------|
-| Page weight (uncompressed HTML)| Under 50 KB per page           | 6.7 KB to 23.8 KB on 11 pages; `music.html` 99 KB |
+| Page weight (uncompressed HTML)| Under 50 KB per page           | 6.7 KB to 23.8 KB on 11 pages; `music.html` 109 KB |
 | Shared CSS                     | No target                      | 2.3 KB, cached across pages |
 | Time to first meaningful paint | Under 1 second on 4G           | Not measured |
 | External requests on page load | 0 on all pages except `music.html` and `projects.html` | 2 iframes on `music.html`; 1 image on `projects.html` |
@@ -505,9 +522,8 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 |------|------------------|------------------|
 | Nav toggle script repeated across pages | The roughly 20 line toggle IIFE is still duplicated verbatim in all 12 HTML files. The nav markup itself is no longer duplicated by hand: it is stamped by `tools/build-nav.py` as of v2.8.8. | Either extend the stamp script to cover the script block, or leave it. It has never changed since it was written, so the duplication costs nothing today. |
 | Nav drift is detectable but not enforced | `python tools/build-nav.py --check` reports any page whose nav is out of date, but nothing runs it automatically | Add it to the `pre-commit` hook alongside the em-dash guard, so a hand-edited nav cannot be committed |
-| `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 99 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
+| `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 109 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
 | Tab-hidden render loop on `music.html` | The visualizer keeps drawing when the tab is in the background, beyond whatever the browser throttles on its own | Pause on `document.hidden` via a `visibilitychange` listener, reusing the `setPlaying()` function added in v2.8.7. Battery and heat, not accessibility. |
-| The visualizer is driven by audio but does not read as reacting to it | Analyser smoothing 0.8 stacked on top of `freq()`'s own `0.72 / 0.28`, a linear 64-band mapping over 128 bins at about 172 Hz each, and no onset detection. A kick occupies one or two bands and is smoothed twice before it reaches the screen. | Scoped as milestone v2.9.1. Measure before changing anything, and read the branch's onset detector first |
 | Only one native track, hardcoded | `audio/womanchild-azqato-remix.mp3` is a single `<audio>` element with its title written into the markup. Adding a second means copying the block. | If more tracks arrive, move to a `TRACKS` array rendered the way `projects.html` renders `PROJECTS`, rather than copying markup a third time |
 | Ten unreferenced images in `img/` | Roughly 3.8 MB tracked and deployed but linked from nothing | **Not debt. Closed by decision on 2026-08-29:** the owner keeps everything in `img/`. See the standing rule under Never Do These. Audits should stop raising it. |
 | Unoptimized thumbnails | Four `yt-thumb-*.jpg` totalling 2.3 MB on a 7.8 KB page, with no `loading="lazy"` | Resize to display dimensions, convert to WebP with a JPEG fallback, add `loading="lazy"` |
@@ -552,7 +568,7 @@ One deviation worth knowing: the image file `20260711-0151-37.7601512.gif` follo
 ## Organization
 
 - **One page, one file.** Each page carries its own `<style>` and `<script>`. Only genuinely universal CSS lives in `styles.css`.
-- **File size norms:** 6 KB to 24 KB per page is the working range. `music.html` at 99 KB is the acknowledged outlier and is the trigger point for extracting to an external file.
+- **File size norms:** 6 KB to 24 KB per page is the working range. `music.html` at 109 KB is the acknowledged outlier and is the trigger point for extracting to an external file.
 - **Script placement:** always at the end of `<body>`, never in `<head>`, never with `defer` or `async` (unnecessary at that position).
 - **Module pattern:** every script is a bare IIFE, `(function () { ... })();`. There are no ES modules, no exports, and no globals beyond what the IIFEs close over.
 - **Data before behavior:** in `projects.html` the `PROJECTS` array sits at the top of the script under a comment block that documents every field, followed by render functions, followed by the call to `render()`. New data-driven pages should copy that shape.
@@ -824,7 +840,7 @@ These are the guiding principles for every decision made on this project. When t
 
 A page that loads in under a second with five project cards is more valuable than a page that loads in three seconds with ten. Every addition (a library, a font, a third-party widget) must pay for itself in load time. If it cannot, it does not ship.
 
-Applies when: debating whether to add a dependency, a new CDN resource, or a feature that requires external data. Note the one place this tenet has already lost: `music.html` is 99 KB and loads two third-party iframes, because the music page's whole job is to be an experience rather than a document. That was a deliberate trade, and it is the only one.
+Applies when: debating whether to add a dependency, a new CDN resource, or a feature that requires external data. Note the one place this tenet has already lost: `music.html` is 109 KB and loads two third-party iframes, because the music page's whole job is to be an experience rather than a document. That was a deliberate trade, and it is the only one.
 
 ## 2. No Dependencies by Default
 
@@ -1137,7 +1153,7 @@ The proxies available, in descending order of usefulness:
 
 The site is feature-complete against its original goals: all 12 pages are live, the project grid is populated, the affiliate and support paths work, and the design system is stable. The shared-assets milestone closed in v2.8.8, and the audit's open questions closed in v2.8.9, so nothing is waiting on a decision any more.
 
-v2.8.10 delivered the half of v2.9.0 that matters most: one same-origin track now plays on `music.html` and drives the visualizer through a real analyser. It is driven by the audio but does not yet read as reacting to it, which is v2.9.1 and is the next thing to do. What remains of v2.9.0 is the replacement half. The Mixcloud embeds are still there, deliberately, because the owner has supplied one track and the embeds carry the rest of the catalog. They come out when enough standalone files exist to cover it.
+v2.8.10 delivered the half of v2.9.0 that matters most: one same-origin track now plays on `music.html` and drives the visualizer through a real analyser. v2.9.1 then made that reaction convincing, verified by measurement rather than by eye. What remains of v2.9.0 is the replacement half, and it is gated on audio files rather than on code. The Mixcloud embeds are still there, deliberately, because the owner has supplied one track and the embeds carry the rest of the catalog. They come out when enough standalone files exist to cover it.
 
 The next substantial piece of work is v2.9.0: replacing the Mixcloud embeds with audio served directly by the page, which merges the finished native player branch and makes the visualizer genuinely audio-reactive. It is waiting on the owner's audio files rather than on engineering.
 
@@ -1166,8 +1182,8 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 | v2.8.8 | Nav stamped from one source | 2026-08-29 | Complete |
 | v2.8.9 | Open questions cleared, dead link fixed | 2026-08-29 | Complete |
 | v2.8.10 | One native track, real audio-reactive visualizer | 2026-08-29 | Complete |
-| v2.9.1 | Reaction tuning: make the kick actually land | Next | Open. Scoped 2026-08-29 after the first real listen |
-| v2.9.0 | Full catalog native, Mixcloud embeds removed | After v2.9.1 | In progress, waiting on the remaining audio files |
+| v2.9.1 | Reaction tuning: make the kick actually land | 2026-08-30 | Complete. Measured at 124 BPM against the track |
+| v2.9.0 | Full catalog native, Mixcloud embeds removed | Next | In progress, waiting on the remaining audio files |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
 | Unnumbered | GitHub API integration | No date | Planned, low priority |
 
@@ -1223,30 +1239,46 @@ What it unlocks beyond the feature itself:
 
 - **The zero-external-request claim becomes true again for all 12 pages** once the embeds go, since the Mixcloud iframes are the only automatic third-party load on the site. v2.8.10 did not move this: it added a native player beside the embeds rather than in place of them, so the caveat still stands everywhere it is written. Every performance, privacy, and security section that currently carries a "except `music.html`" caveat can drop it, including the README's privacy sentence.
 - The iframe attack surface described under Known Attack Surface disappears entirely, so the open note about its overly broad `allow` list and missing `sandbox` becomes moot.
-- Page weight on `music.html` goes up by whatever the audio costs if the files are committed to the repository. Note that against the 50 KB budget, which the page already exceeds at 99 KB. The audio itself is 6.1 MB, served separately and not counted in the HTML figure, but a visitor on metered data pays for it the moment they press play.
+- Page weight on `music.html` goes up by whatever the audio costs if the files are committed to the repository. Note that against the 50 KB budget, which the page already exceeds at 109 KB. The audio itself is 6.1 MB, served separately and not counted in the HTML figure, but a visitor on metered data pays for it the moment they press play.
 
 Caveat worth stating before the files arrive: hosting audio in the repository is the simplest option and the one most in keeping with the project's tenets, but git stores every version of a binary forever. Replacing a 40 MB track five times leaves 200 MB in history that cannot be reclaimed without rewriting it. Prefer getting the file right once, or host it outside the repository.
 
-### v2.9.1: Make the reaction actually read as a reaction (Next, and ahead of the rest of v2.9.0)
+### v2.9.1: Make the reaction actually read as a reaction (Complete, 2026-08-30)
 
 **Observed 2026-08-29, on the first real listen.** The analyser is genuinely wired and the stage genuinely moves with the audio, but it does not read as reacting to the music. The kick does not land. Watching it, you cannot tell that a drum hit and a synth pad are different events. This is the difference between a display that is driven by audio and one that looks like it is listening, and only the second is worth having.
 
 It is a tuning and signal-design problem rather than a wiring problem, so it is scoped separately and should be done before the rest of v2.9.0. There is no point moving the whole catalog onto a player whose reaction does not convince.
 
-**Do not assume the cause. Measure first.** Standing hypotheses, most likely first, all of them unverified:
+**Closed 2026-08-30.** Four of the six hypotheses below were correct and are fixed; two were wrong. The original list is kept with each verdict attached, because the two that were wrong are as useful to the next person as the four that were right.
 
-1. **Two low-pass filters stacked.** `analyser.smoothingTimeConstant` is 0.8 and `freq()` then smooths again at `0.72 / 0.28`. Each one alone rounds off transients; together they remove them almost entirely. A kick is a transient by definition, so this alone could explain the whole symptom. Cheapest thing to test: drop the analyser smoothing toward 0.2 and see whether hits appear.
-2. **Band mapping is linear, hearing is not.** `fftSize` 256 gives 128 bins across the full spectrum, so at 44.1 kHz each bin is about 172 Hz. Kick fundamentals live around 50 to 100 Hz, which is bin 0 and part of bin 1. Spread linearly across 64 bands, the entire kick moves one or two bands out of 64 and everything else is midrange and air. A logarithmic or mel-spaced mapping would give the low end the share of the display it has in the listening.
-3. **Resolution too coarse to see a kick at all.** At 172 Hz per bin there is no way to separate a kick from a bass note. `fftSize` 1024 or 2048 costs almost nothing on a page already running shaders.
-4. **`Math.pow(raw, 1.6)` may be pulling the wrong direction.** It was tuned on the branch against a different track and a different pipeline. It could be flattening the peaks it was meant to preserve.
-5. **The visuals may not be mapped to anything a listener notices.** Even a perfect signal reads as nothing if it drives a slow-moving element. The lasers, fire, and screen pulse each need checking against what the signal is doing at that moment.
-6. **The file itself.** Check `audio/womanchild-azqato-remix.mp3` before blaming the code: confirm its actual loudness, dynamic range, and whether it is heavily limited. A brickwalled master has little transient left to detect, and if that is the case the fix is a different render of the track, not different JavaScript. `ffmpeg -af astats` and `ffmpeg -af ebur128` will answer this in one command each.
+**Do not assume the cause. Measure first.** Standing hypotheses, most likely first, all of them unverified at the time of writing:
+
+1. **Two low-pass filters stacked.** `analyser.smoothingTimeConstant` is 0.8 and `freq()` then smooths again at `0.72 / 0.28`. Each one alone rounds off transients; together they remove them almost entirely. A kick is a transient by definition, so this alone could explain the whole symptom. Cheapest thing to test: drop the analyser smoothing toward 0.2 and see whether hits appear. **Confirmed, and it was the largest single cause.** Fixed by dropping the analyser to 0.35 and making `freq()`'s own smoothing asymmetric: `0.25 / 0.75` rising, `0.82 / 0.18` falling. Symmetric smoothing rounds the leading edge off every hit, and the leading edge is the part the eye reads as impact.
+2. **Band mapping is linear, hearing is not.** `fftSize` 256 gives 128 bins across the full spectrum, so at 44.1 kHz each bin is about 172 Hz. Kick fundamentals live around 50 to 100 Hz, which is bin 0 and part of bin 1. Spread linearly across 64 bands, the entire kick moves one or two bands out of 64 and everything else is midrange and air. A logarithmic or mel-spaced mapping would give the low end the share of the display it has in the listening. **Confirmed.** Bands are now spaced logarithmically from 30 Hz to 16 kHz, built once from the actual sample rate rather than assuming 44.1 kHz.
+3. **Resolution too coarse to see a kick at all.** At 172 Hz per bin there is no way to separate a kick from a bass note. `fftSize` 1024 or 2048 costs almost nothing on a page already running shaders. **Confirmed, with a correction to the reasoning.** The general analyser went to 1024, not 2048: frequency resolution trades against time resolution, and a 2048 window spans 46 ms, longer than a frame at 60 fps, which smears the very transients this was meant to recover. The kick detector uses 2048 precisely because it wants the opposite trade. A fifth cause turned up here that was not on this list at all: band level was the mean of its bins, so one loud bin was averaged away by quiet neighbours. It is now the peak.
+4. **`Math.pow(raw, 1.6)` may be pulling the wrong direction.** It was tuned on the branch against a different track and a different pipeline. It could be flattening the peaks it was meant to preserve. **Wrong.** The curve is doing what it was meant to. Left at 1.6.
+5. **The visuals may not be mapped to anything a listener notices.** Even a perfect signal reads as nothing if it drives a slow-moving element. The lasers, fire, and screen pulse each need checking against what the signal is doing at that moment. **Confirmed, and it turned out to be half the answer.** A hit now drives the screen zoom, the crowd bounce, the laser intensity, and the WebGL clock simultaneously. One element changing reads as an effect; several changing together read as a response. The old `drawBeatFlash` trigger was also replaced: it tested `favg(0, 5) >= 0.76`, which on a loud master is either true continuously or never, and both look identical to no reaction.
+6. **The file itself.** Check `audio/womanchild-azqato-remix.mp3` before blaming the code: confirm its actual loudness, dynamic range, and whether it is heavily limited. A brickwalled master has little transient left to detect, and if that is the case the fix is a different render of the track, not different JavaScript. `ffmpeg -af astats` and `ffmpeg -af ebur128` will answer this in one command each. **Wrong, and worth recording as wrong.** The file is fine. There was no `ffmpeg` on this machine anyway, so the measurement was done in the browser instead: decode the mp3, run a 2048-point FFT at a 60 Hz hop, and drive the real detector over the result. The track's transients were there the whole time; the page was destroying them.
 
 **The branch already contains the answer to part of this.** `feature/native-audio-player` has an onset-based kick detector that was tuned against a real track using `ffmpeg`, plus a beat-synced screen pulse. It exists because a raw analyser reading does not give you a kick, which is the same wall this has now hit independently. Read that code before writing anything new. Detecting an onset (a sudden rise in low-band energy relative to its own recent average) is a different technique from reading a level, and it is the technique that makes a hit land.
 
 Acceptance is subjective and should stay that way: play the track, and a person who cannot see the code should be able to tell you where the kick is by watching the screen with the sound off.
 
-Before merging any of it, measure the result against WCAG 2.3.1: nothing may flash more than three times per second. A convincing kick response on a fast track is exactly the thing that violates this.
+**Measured result**, from the offline harness described above:
+
+| Measure | Result |
+|---------|--------|
+| Hits detected | 92 over 44.5 s |
+| Rate | 124.0 per minute |
+| Median interval | 0.480 s, implying 125.0 BPM |
+| Intervals in 380-620 ms | 94 percent |
+| Interval p10 / p90 | 0.430 s / 0.560 s |
+
+124 BPM, against the 124-128 BPM the branch had measured independently for its own track. The detector is locking to the beat rather than firing on noise. Keep these numbers: they are the baseline for anyone who retunes this, and an opinion about whether it "feels right" is not a substitute for them.
+
+**WCAG 2.3.1, measured rather than assumed.** The 26-frame refractory caps beat events at 2.3 per second in principle, but the measurement found a maximum of 3 in a one-second window, which is at the limit rather than under it. So the full-width light pump is scaled to 0.55 and impact is carried by motion instead: zoom, crowd bounce, beam count. The one true full-screen brightness flash stays gated to at most one per 5 seconds. The source carries a comment saying not to raise the pump, and it is load-bearing.
+
+**Still unmerged from `feature/native-audio-player`:** the `<video>` element and the Video screen mode. The kick detector, beat pulse, loud-moment gate, and audio-scaled lasers all landed here.
 
 ### v3.0.0: Contact / hire-me section (Planned)
 
@@ -1285,7 +1317,7 @@ Every document was compared against the source at the v2.8.5 audit. Each row rec
 | 3 | README said "Eleven self-contained HTML pages"; the PRD architecture section said "eleven plain HTML pages"; other PRD sections said 12. The filesystem has 12. | Code, and the PRD contradicted itself. | Fixed. 12 everywhere. Also dropped "self-contained", which stopped being true when `styles.css` was extracted in v2.7.0. |
 | 4 | The clone command in both the README and the runbook was `git clone https://github.com/Azqato/Azqato.git`. The actual remote is `Azqato/azqato.github.io`. | Code (`git remote -v`). The documented command would fail. | Fixed in the runbook. The README no longer carries commands at all. |
 | 5 | Docs claimed "zero external requests on page load" and "no external requests of any kind on the main site pages". `music.html` loads two Mixcloud iframes on every visit and `projects.html` fetches one cross-site favicon. | Code. The claim was written before the Mixcloud embeds existed and was never revisited. | Fixed. Every performance, privacy, and security claim now states the exception. Whether to make the embeds click-to-load is Open Question 3. |
-| 6 | Success criteria and constraints stated "under 50 KB per page" as met. `music.html` is 99 KB. | Code. The file size is not a matter of opinion. | Fixed. The target is kept as the standard for the other 11 pages, with the exception named and explained. |
+| 6 | Success criteria and constraints stated "under 50 KB per page" as met. `music.html` is 109 KB. | Code. The file size is not a matter of opinion. | Fixed. The target is kept as the standard for the other 11 pages, with the exception named and explained. |
 | 7 | DESIGN.md documented the affiliate card as `.logo-area`, `.promo-badge`, `.affiliate-btn` inside a `<div>`. The PRD data model repeated the same names. `support.html` uses `.affiliate-logo`, `.affiliate-promo`, `.affiliate-link-btn` inside an `<a>`. | Code. Three of four documented class names do not exist. | Fixed in both documents. |
 | 8 | The PRD State Management table listed an `activeTag` string variable in `projects.html`. No such variable exists; filter state lives in the DOM. | Code. | Fixed. |
 | 9 | DESIGN.md gave the mobile breakpoint as "< 600px: nav links hidden (logo only visible)". `styles.css` collapses the nav at 860 px into a hamburger dropdown, and PRD F3 already said 860 px. | Code, corroborated by the PRD. DESIGN.md described a nav that no longer exists. | Fixed, with the superseded claim recorded rather than erased. |
@@ -1361,7 +1393,7 @@ Concrete instructions for whoever works on this next, human or model.
 
 ## Before editing anything
 
-1. **Read the page you are about to change, in full.** They are 6 KB to 24 KB; there is no excuse for skimming. `music.html` is the exception at 99 KB: read the section you are touching plus `build()`, because almost everything depends on `lay`.
+1. **Read the page you are about to change, in full.** They are 6 KB to 24 KB; there is no excuse for skimming. `music.html` is the exception at 109 KB: read the section you are touching plus `build()`, because almost everything depends on `lay`.
 2. **Check whether the change touches the nav.** If it does, it touches 12 files, and missing one is the single most common defect in this repository's history.
 3. **Confirm the pre-commit hook is live:** `git config core.hooksPath` should print `.githooks`. If it prints nothing, the writing policy is not being enforced in your clone.
 4. **Check `git status`.** `music/` and `test-local-audio.bat` are expected to be untracked. Anything else unexpected deserves a look before you add files.
@@ -1483,7 +1515,7 @@ The two mixes on that page are embedded Mixcloud players, so playing them works 
 Any modern browser: Chrome, Firefox, Edge, or Safari. It works on phones, tablets, and desktops. The Music page's visualizer needs WebGL2 for its best modes and falls back to a simpler view without it. Nothing needs to be installed.
 
 **Does the Music page visualizer react to the music?**
-It depends on which thing is playing, and it is worth being clear about it. The remix served by the site itself is read by the page, so the lights genuinely move with it. The two embedded Mixcloud mixes are not and cannot be: a web page cannot read the audio out of another company's player, so while one of those is playing the stage is choreography rather than reaction. Honest caveat on the part that does work: as of v2.8.10 the lights are driven by the audio but do not yet convincingly read as responding to it, which is being worked on as milestone v2.9.1.
+It depends on which thing is playing, and it is worth being clear about it. The remix served by the site itself is read by the page, so the lights genuinely move with it. The two embedded Mixcloud mixes are not and cannot be: a web page cannot read the audio out of another company's player, so while one of those is playing the stage is choreography rather than reaction. The kick, in particular, is detected rather than guessed at, so the stage hits when the drum does.
 
 **What are the affiliate links on the Support page?**
 Referral links for services Azqato personally uses or recommends. If you sign up through one, you typically get the same sign-up bonus you would get anyway, and Azqato earns a referral commission. There is no extra cost to you, and the disclosure sits at the top of the page rather than in the footer.

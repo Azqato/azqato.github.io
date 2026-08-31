@@ -17,7 +17,7 @@ The site is twelve pages, each doing one job.
 | **Discord** | Four community servers with permanent invite links: the main Azqato server, an investing server, the B5TA RuneScape clan, and a League of Legends server. Pick the one that matches your interests and join. |
 | **Invests** | Free investing tools Azqato built, alongside a large hand-picked hub of brokers, screeners, ETF lists, charts, economic data, and learning resources. Nothing here is financial advice. |
 | **Codes** | Prompt libraries and browser-based coding tools for working faster with AI. |
-| **Music** | An animated concert-stage visualizer, a remix you can play in the page that the stage lights move with, two more DJ mixes, and links to Last.fm, Mixcloud, and the mixes channel on YouTube. |
+| **Music** | An animated concert-stage visualizer, a remix you can play in the page that the stage lights genuinely react to, down to the kick, two more DJ mixes, and links to Last.fm, Mixcloud, and the mixes channel on YouTube. |
 | **Links** | Every platform and channel Azqato is on, grouped by category, in one tidy list. |
 | **Projects** | A filterable grid of everything he has built: finance dashboards, browser tools, educational sites, and a few jokes. Every card links to a live version and to the source code. |
 | **YouTube** | Four channels: the main channel, stream highlights, DJ mixes, and chill content. |
@@ -39,7 +39,7 @@ Everything is free to read and free to use. The site collects nothing about you:
 
 ## Status
 
-Live and actively maintained. New projects, links, and pages are added regularly. The Music page now plays one track directly from the site and the visualizer follows it, though making that reaction convincing is still in progress. The remaining mixes are still embedded players and will move over as their files arrive.
+Live and actively maintained. New projects, links, and pages are added regularly. The Music page now plays one track directly from the site, and the visualizer reacts to it: the lights, lasers, and crowd hit when the drum does. The remaining mixes are still embedded players and will move over as their files arrive.
 
 ---
 
