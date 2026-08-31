@@ -368,7 +368,7 @@
         <span class="track-meta">
           <span class="track-title">Womanchild (Azqato Remix)</span>
           <span class="track-tag">EOB, Azqato</span>
-          <span class="track-note" id="trackNote">Drives the visualizer</span>
+          <span class="track-note" id="trackNote"></span>
         </span>
       </div>
       <div class="track-scrub">
@@ -1743,30 +1743,28 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         // Brightness flash: rare drop moments only, gated by updateLoudFlash, and
         // kept shallow. A white wash over the main panel is the largest bright
         // area on the stage, so it is the one most worth keeping small.
-        var energy = favg(0, 20);
-        ctx.globalAlpha = energy * 0.05 + (fireActive ? flashPulse * 0.12 : 0);
+        ctx.globalAlpha = envBroad * 0.05 + (fireActive ? flashPulse * 0.12 : 0);
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(px, py, pw, ph);
         ctx.restore();
         panelOverlay(px, py, pw, ph);
-        panelBloom(px, py, pw, ph, 0.28 + energy * 0.30 + beatPulse * 0.10 + (fireActive ? flashPulse * 0.12 : 0));
+        panelBloom(px, py, pw, ph, 0.28 + envBroad * 0.30 + beatPulse * 0.10 + (fireActive ? flashPulse * 0.12 : 0));
       }
 
       // ── A: Background ──
       function drawBg() {
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, W, H);
-        var b = favg(0, 3);
         var g = ctx.createRadialGradient(lay.cx, H * 0.4, 0, lay.cx, H * 0.4, Math.max(W, H) * 0.72);
-        g.addColorStop(0,   'rgba(8,20,70,'  + (0.4  + b * 0.45) + ')');
-        g.addColorStop(0.5, 'rgba(3,8,30,'   + (0.15 + b * 0.2)  + ')');
+        g.addColorStop(0,   'rgba(8,20,70,'  + (0.4  + envLow * 0.30) + ')');
+        g.addColorStop(0.5, 'rgba(3,8,30,'   + (0.15 + envLow * 0.14) + ')');
         g.addColorStop(1,   'rgba(0,0,0,0)');
         ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
         // warm horizon glow rising from behind the stage
         var hzTop = lay.floorY - H * 0.20;
         var hz = ctx.createLinearGradient(0, hzTop, 0, lay.floorY);
         hz.addColorStop(0, 'rgba(0,0,0,0)');
-        hz.addColorStop(1, 'rgba(70,25,130,' + (0.10 + b * 0.16) + ')');
+        hz.addColorStop(1, 'rgba(70,25,130,' + (0.10 + envLow * 0.16) + ')');
         ctx.fillStyle = hz;
         ctx.fillRect(0, hzTop, W, lay.floorY - hzTop);
       }
@@ -1953,7 +1951,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         ctx.beginPath(); ctx.moveTo(cx2 - tw/2, sy); ctx.lineTo(cx2 + tw/2, sy);
         ctx.lineTo(cx2 + bw/2, by); ctx.lineTo(cx2 - bw/2, by); ctx.closePath(); ctx.fill();
         // grid
-        ctx.globalAlpha = 0.07 + b * 0.11; ctx.strokeStyle = '#0055bb'; ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.07 + envLow * 0.11; ctx.strokeStyle = '#0055bb'; ctx.lineWidth = 1;
         for (var i = 1; i < 8; i++) {
           var fr = i / 8, lw2 = tw + (bw - tw) * fr, ly2 = sy + (by - sy) * fr;
           ctx.beginPath(); ctx.moveTo(cx2 - lw2/2, ly2); ctx.lineTo(cx2 + lw2/2, ly2); ctx.stroke();
@@ -2523,16 +2521,43 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         favLink.href = favCanvas.toDataURL();
       }
 
+      // ── Luminance envelopes ──
+      // sampleAudio() smooths asymmetrically on purpose: it jumps 75 percent of the
+      // way to a new peak in a single frame so a kick reads as impact in the bars
+      // and in the beat detector. That is right for anything that moves and wrong
+      // for anything that glows, because the same step applied to a large area of
+      // the screen is seen as the whole picture pulsing rather than as a hit.
+      //
+      // So brightness reads from its own envelope: same signal, heavily and
+      // symmetrically smoothed, with roughly a 300 ms time constant. Fast things
+      // stay fast, lit things swell. Use favg() for motion and these for light.
+      var envBroad = 0, envLow = 0;
+      function updateEnvelopes() {
+        // Frame-rate corrected, so the swell takes the same wall-clock time on a
+        // 144 Hz panel as on a 60 Hz one. Same defect class as the beat refractory.
+        var a = 1 - Math.pow(1 - 0.045, frameMs / (1000 / 60));
+        envBroad += (favg(0, 20) - envBroad) * a;
+        envLow   += (favg(0, 3)  - envLow)   * a;
+      }
+
       // ── Main loop ──
       function draw() {
-        t++;
+        // t counts 60 fps-equivalent frames rather than raw frames. Fourteen call
+        // sites multiply it by a hand-tuned coefficient (t * 0.018, t * 0.05, and
+        // so on) and every one of them was tuned on a 60 Hz panel, so a plain t++
+        // ran the whole idle animation about 2.4 times too fast on a 144 Hz
+        // display. Scaling the increment keeps every one of those coefficients
+        // correct without touching them. Same defect as the beat refractory,
+        // second instance.
+        t += frameMs / (1000 / 60);
         sampleAudio();
+        updateEnvelopes();
         updateBeat();
         updateLoudFlash();
         // Audio-reactive clock for the WebGL screens: runs faster through louder
         // passages and jumps forward on each detected kick, so the shaders drift
         // with the track instead of on their own fixed timebase.
-        glTime += (1 / 60) * (0.6 + favg(0, 30) * 1.6) + beatPulse * 0.05;
+        glTime += (frameMs / 1000) * (0.6 + favg(0, 30) * 1.6) + beatPulse * 0.05;
 
         // Cycle screen mode on a wall clock (active modes: stars, vortex, squares,
         // tunnel, fence). This was a frame count, so the panel swapped twice as

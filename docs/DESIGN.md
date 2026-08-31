@@ -338,7 +338,7 @@ Most buttons use `border-radius: 6px`, `font-size: 0.9rem`, `font-weight: 600`, 
 
 ## `music.html` Visual System
 
-`music.html` is the only page with a non-trivial rendering layer, and it is large enough (110 KB, roughly 2,580 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
+`music.html` is the only page with a non-trivial rendering layer, and it is large enough (114 KB, roughly 2,660 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
 
 ### Structure
 
@@ -416,6 +416,10 @@ That last row is an accessibility constraint, not a taste decision, and in v2.9.
 On any high-refresh display the page was running at nearly twice the limit. Every rate is now wall-clock milliseconds, so the rig behaves identically on a phone, a TV and a 144 Hz gaming monitor, and the refractory is 600 ms rather than 433, which sits under the limit instead of on it.
 
 **Rate is only half of photosensitivity.** The size of the luminance step matters as much as its frequency, so the light pump is halved to 0.26, the white wash over the main panel is roughly a third of what it was, and the laser response is softened. Impact is carried by motion (zoom, bounce, beam count) rather than by luminance. Do not raise the light pump.
+
+**Motion reads from the fast signal, light reads from a slow one.** `sampleAudio()` smooths asymmetrically so a kick jumps 75 percent of the way to its peak in one frame. That is what makes a hit land in the bars and the beat detector, and it is exactly wrong for brightness: the same step across a large area is seen as the whole picture pulsing rather than as a hit. Panel bloom, the white panel wash, the background gradient and the floor grid therefore read from `envBroad` and `envLow`, the same signal symmetrically smoothed at roughly a 300 ms time constant. When adding anything new, ask whether it moves or whether it glows, and pick the signal accordingly.
+
+**Nothing counted in frames.** `requestAnimationFrame` runs at the viewer's refresh rate, so a frame count is a rate that changes with their monitor. Both bugs of this class found so far (the beat refractory in v2.9.3, the `t` counter in v2.9.4) shipped looking correct because they were tuned on a 60 Hz panel. `t` now advances in 60 fps-equivalent units so its fourteen hand-tuned coefficients stay valid, and every other rate is wall-clock milliseconds.
 
 **Nothing flashes without a visible cause.** Both the light pump and the white wash over the main panel are gated on `fireActive`, true while any of the four pyro jets is burning. This is a legibility rule before it is an accessibility one: a flash with nothing making it reads as a glitch, while the same flash with fire behind it reads as the blast throwing light across the room. It narrows the photosensitivity exposure as a side effect, since the flash cannot fire during quiet passages when the jets are down. The flag is set in `drawFire()`, which runs after the flashes in the frame order, so the gate reads the previous frame. 16 ms at 60 fps, not perceivable.
 

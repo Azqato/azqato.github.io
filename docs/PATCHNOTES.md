@@ -5,6 +5,37 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.4] - 2026-08-30
+
+### Fixed: the screens pulsed with the music
+The v2.9.3 work capped the rate of discrete flashes. It did nothing for this, because this was continuous modulation rather than flashing and no rate limit touches it.
+
+The cause was one deliberate decision applied in the wrong place. `sampleAudio()` smooths asymmetrically on purpose: it jumps 75 percent of the way to a new peak in a single frame so that a kick reads as impact. That is right for anything that moves and wrong for anything that glows, because the same step spread across a large area of the screen is seen as the whole picture pulsing rather than as a hit landing.
+
+- Added two slow luminance envelopes, `envBroad` and `envLow`: the same signal, symmetrically smoothed with roughly a 300 ms time constant and frame-rate corrected. Brightness now reads from these; motion still reads from `favg()`. Fast things stay fast, lit things swell.
+- Repointed the four brightness terms at them: panel bloom, the white wash over the main panel, the background radial gradient with its horizon glow, and the stage floor grid.
+- Reduced the background's swing (0.45 to 0.30 on the inner stop, 0.20 to 0.14 on the mid stop). It is the largest lit area on the page, so it contributes most to the sensation of the room breathing.
+
+Measured by driving the real `updateEnvelopes()` at simulated refresh rates, worst single-frame change in the panel bloom term:
+
+| Display | Largest one-frame luminance step | `t` advance over 4 s |
+|---|---|---|
+| 60 Hz | 0.0073 | 239.1 |
+| 120 Hz | 0.0037 | 239.6 |
+| 144 Hz | 0.0031 | 239.6 |
+
+Before the change a single attack could move that term by roughly 0.22 in one frame, so the worst case is about thirty times smaller. The envelope still reaches the same range (0.001 to 0.601 at every refresh rate), so nothing is flattened; it only gets there smoothly.
+
+### Fixed: second instance of the frame-count defect
+`t` was a plain frame counter incremented once per `requestAnimationFrame`, and fourteen call sites multiply it by a coefficient tuned on a 60 Hz panel (`t * 0.018`, `t * 0.05`, and so on). The whole idle animation therefore ran about 2.4 times too fast on a 144 Hz display. `t` now advances in 60 fps-equivalent frames, which keeps every one of those coefficients correct without touching them; the table above shows it advancing identically at all three rates. `glTime` had the same defect via a hardcoded `1 / 60` per frame and is now on the wall clock too.
+
+This is the same class of bug as the beat refractory fixed in v2.9.3. Anything counted in frames is a rate that changes with the viewer's monitor.
+
+### Changed
+- Removed the "Drives the visualizer" text under the track. The span is now empty by default and populates only with the serve-over-http warning when the audio path is unavailable. The credit line above it is unchanged.
+
+---
+
 ## [2.9.3] - 2026-08-30
 
 ### Fixed
