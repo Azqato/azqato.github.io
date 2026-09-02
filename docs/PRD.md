@@ -1184,6 +1184,8 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 | v2.9.1 | Reaction tuning: make the kick actually land | 2026-08-30 | Complete. Measured at 124 BPM against the track |
 | v2.9.2 | Band mapping fix, visible degraded state | 2026-08-30 | Complete |
 | v2.9.3 | WCAG 2.3.1 flash rate fixed, artist credit | 2026-08-30 | Complete |
+| v2.9.4 | Screens stop pulsing, second frame-count bug fixed | 2026-08-31 | Complete |
+| v2.9.5 | Gate the remaining pulsing on the fire | Next | Open. Requested 2026-09-01 |
 | v2.9.0 | Full catalog native, Mixcloud embeds removed | Next | In progress, waiting on the remaining audio files |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
 | Unnumbered | GitHub API integration | No date | Planned, low priority |
@@ -1294,6 +1296,25 @@ Fixed by moving every rate to wall-clock milliseconds and raising the refractory
 **The general lesson, which applies past this page:** a rate expressed in frames is not a rate. Anything that must respect a per-second limit has to be measured against a clock, and the number has to be taken on more than one refresh rate or the measurement only describes the machine it was taken on.
 
 **Still unmerged from `feature/native-audio-player`:** the `<video>` element and the Video screen mode. The kick detector, beat pulse, loud-moment gate, and audio-scaled lasers all landed here.
+
+### v2.9.5: No pulsing unless the fire is firing (Next, scoped 2026-09-01)
+
+**Requested by the owner, verbatim:** "can you make it so that the pulsing isn't happening unless the fire from the kick is also firing?"
+
+This extends the rule v2.9.3 established for the flash to the continuous brightness terms. v2.9.3 gated the discrete events on `fireActive`, so a white wash only happens when something visible on stage caused it. The slow luminance envelopes added in v2.9.4 are still ungated: they breathe with the music whether or not a kick has fired, and that residual breathing is what is left to remove.
+
+**Sites to change**, all in `music.html`:
+
+| Site | Term |
+|------|------|
+| `drawBg` background gradient | `envLow * 0.30` and `envLow * 0.14` |
+| `drawBg` horizon wash | `envLow * 0.16` |
+| Floor grid alpha | `envLow * 0.11` |
+| `drawImagePanel` panel alpha and bloom | the `envBroad` terms, whose `flashPulse` half is already gated |
+
+**The one design question to settle before writing any of it.** `fireActive` is a boolean that goes true and false abruptly. Multiplying a slow envelope by it replaces a gentle pulse with a hard step, which is a worse artifact than the one being removed, and on a large area of screen it is exactly the kind of luminance step v2.9.3 spent its whole budget eliminating. The gate almost certainly needs its own ramp: a `fireGate` value that rises quickly when fire starts and falls over a few hundred milliseconds when it stops, with the envelope terms multiplied by that rather than by the boolean. Measure the worst one-frame luminance step afterwards the same way v2.9.4 did, on more than one refresh rate.
+
+**Acceptance:** with the track paused or silent, the stage holds a steady brightness and nothing breathes. With the track playing, brightness moves only while jets are visibly lit. The worst single-frame luminance step stays at or below the v2.9.4 figure of 0.0073 at 60 Hz.
 
 ### v3.0.0: Contact / hire-me section (Planned)
 
