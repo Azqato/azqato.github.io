@@ -1,3 +1,12 @@
 # environment files
 .env*
 !.env.example
+
+# Local-only brand and merchandise working folder.
+# 100 concept files, three planning docs and a generated reading page. Kept out
+# of git deliberately: this repo is served publicly by GitHub Pages from the
+# root, so anything committed here would be readable at azqato.com/brand/.
+# The generator is ignored alongside it because it only builds that folder and
+# would be a dangling reference in a fresh clone.
+brand/
+tools/build-brand-page.py

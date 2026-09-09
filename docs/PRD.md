@@ -269,7 +269,7 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── styles.css                - shared tokens, reset, nav, footer
 ├── audio/
 │   └── womanchild-azqato-remix.mp3  - the one same-origin track; drives the visualizer (6.1 MB)
-├── .gitignore                - env-file patterns only
+├── .gitignore                - env-file patterns, plus the local-only brand folder
 ├── .githooks/
 │   └── pre-commit            - em-dash writing-style guard
 ├── tools/
@@ -285,8 +285,24 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 Untracked and local only (present in the working tree, not in git):
 ├── music/                    - local test-track folder for the paused player branch
 ├── test-local-audio.bat      - launches Chrome with file-access restrictions relaxed
+├── brand/                    - brand and merchandise concept folder, see below
+│   ├── 00-brand-foundation.md      - mascot traits, palette, lanes, voice
+│   ├── 01-prior-art-and-prompt-rules.md - findings from the music project
+│   ├── 02-final-review.md          - assessment of the 100 concepts
+│   ├── README.md                   - ranked index
+│   ├── assets/                     - 100 concept files, one image asset each
+│   └── index.html                  - generated reading page (279 KB)
+├── tools/build-brand-page.py - generates brand/index.html from brand/assets/*.md
 └── .claude/settings.local.json - ignored via the user's global gitignore
 ```
+
+**Why `brand/` is ignored rather than committed.** GitHub Pages serves this repository
+publicly from the root, so a committed `brand/` would be readable at `azqato.com/brand/`,
+including supplier notes, priority scores and an open question about the mascot's licensing
+provenance. It is excluded in `.gitignore` rather than merely left unstaged, because a
+`git add .` would otherwise publish it in one keystroke. `tools/build-brand-page.py` is
+ignored alongside it: it only builds that folder and would be a dangling reference in a
+fresh clone. Reversing the decision is a two-line edit to `.gitignore`.
 
 ---
 

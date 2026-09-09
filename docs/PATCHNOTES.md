@@ -5,6 +5,35 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.6] - 2026-09-08
+
+### Added: `.gitignore` now excludes the local brand folder
+A brand and merchandise concept folder was built in the working tree: three planning
+documents, 100 concept files under `brand/assets/`, and a generated reading page. It is
+deliberately not part of this repository.
+
+- Added `brand/` and `tools/build-brand-page.py` to `.gitignore`. GitHub Pages serves this
+  repository publicly from the root, so a committed `brand/` would be readable at
+  `azqato.com/brand/`, including supplier notes, priority scores, and an unresolved question
+  about the mascot artwork's licensing provenance.
+- Ignoring it is the point rather than a side effect. Leaving the folder merely unstaged
+  means a single `git add .` publishes it, and this folder will sit in the working tree for
+  months. The generator is ignored alongside it because it only builds that folder and would
+  be a dangling reference in a fresh clone.
+- The trade is that none of it is backed up by git. That is recorded in the folder's own
+  review document so it is not discovered the hard way.
+
+### Documentation
+- `docs/PRD.md`: the folder tree now lists `brand/` and its contents under the existing
+  untracked-and-local-only block, with the reasoning for the exclusion and a note that
+  reversing it is a two-line edit.
+- `docs/PRD.md`: the `.gitignore` line in the tree said "env-file patterns only", which
+  stopped being true with this change.
+- No page changed and nothing on the deployed site is affected. Version 2.9.5 stays reserved
+  for the roadmap item that gates the visualizer's brightness modulation on the fire.
+
+---
+
 ## [2.9.4] - 2026-08-30
 
 ### Fixed: the screens pulsed with the music
