@@ -82,7 +82,7 @@ There are **12** HTML pages.
 | Codes          | `codes.html`          | Yes        | Three cards: Prompts, Tools, and the GitHub org                 |
 | Music          | `music.html`          | Yes        | Full-screen stage visualizer, two Mixcloud embeds, three platform links |
 | Links          | `links.html`          | Yes        | All platforms and channels grouped into six categories          |
-| Projects       | `projects.html`       | Yes        | Filterable grid of 14 projects, generated from a JS array       |
+| Projects       | `projects.html`       | Yes        | Filterable grid of 15 projects, generated from a JS array       |
 | YouTube        | `youtube.html`        | Yes        | Four YouTube channel cards with thumbnails                      |
 | Support        | `support.html`        | Yes        | Buy Me a Coffee CTA plus seven affiliate partner cards          |
 | Gaming Accounts| `accounts.html`       | No         | Steam, League of Legends, Teamfight Tactics, RuneScape profiles |
@@ -122,7 +122,7 @@ There are **12** HTML pages.
 
 ### MVP (shipped and live)
 
-- **F1: Project Cards.** Icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date. Defined in the `PROJECTS` array in `projects.html`. Currently 14 entries.
+- **F1: Project Cards.** Icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date. Defined in the `PROJECTS` array in `projects.html`. Currently 15 entries.
 - **F2: Tag Filtering.** Auto-generated filter bar built from the union of all `tags` values; real-time hide and show via a `data-hidden` attribute; the project count updates on every filter change.
 - **F3: Navigation.** Sticky nav across all 12 pages: **Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support**. Active state via `class="active"` in the HTML, written by `tools/build-nav.py` from each page's own filename rather than maintained by hand. Below 860 px the link list collapses behind a hamburger toggle (`.nav-toggle`) that opens a dropdown panel; an inline script on each page handles open and close, closing on link click or on an outside click. Every nav item links to a page on this site with a relative path; no external links belong in the top-level nav (see the Navigation Bar section of DESIGN.md). External destinations such as the GitHub org are linked from within a page's own content instead.
 - **F4: Hero Sections.** Headline and description on each page, styled consistently. The landing page hero adds a row of interest pills and two CTA buttons.
@@ -314,7 +314,7 @@ fresh clone. Reversing the decision is a two-line edit to `.gitignore`.
 {
   name: string,       // required, display name on the card
   desc: string,       // required, short description, 1 to 3 sentences
-  github: string,     // required, full GitHub repo URL, or a live site URL for non-GitHub projects
+  github: string,     // required, full GitHub repo URL, or the project site URL when there is no public repo
   demo: string,       // optional, live site URL; the card title links here when set
   tags: string[],     // required, category labels; the first tag takes the langClass color
   langClass: string,  // optional, CSS class for the language tag color (for example "lang-js")
@@ -325,11 +325,15 @@ fresh clone. Reversing the decision is a two-line edit to `.gitignore`.
 }
 ```
 
-The 14 current projects, in array order: Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, Leveraged Strategies, Lantern, Cat Food Center, Clan B5TA, Boaty McBoatface Ventures, No Fee Apartments, LV Guest List, Prompts, ProteinPulse, Azqato's Tools.
+The 15 current projects, in array order: Automate Fundamentals, Net Worth Tracker, VIX Strategy, ComposerAtlas, Stock Methodology, Leveraged Strategies, Lantern, Cat Food Center, Clan B5TA, Boaty McBoatface Ventures, No Fee Apartments, LV Guest List, Prompts, ProteinPulse, Azqato's Tools.
 
 Active filter tags, derived automatically from the array: Education, Finance, Health, Meme, Real Estate, Social, Tools. The filter bar sorts them alphabetically and prepends "All".
 
-Two entries (No Fee Apartments, LV Guest List) point `github` at an external commercial site rather than a repository, so their GitHub icon button opens that site. Two entries (No Fee Apartments, LV Guest List) omit `updated` and therefore render no card footer.
+**The `github` fallback rule (adopted 2026-09-28).** `github` is a required field, but not every project has a public repository: some are private, and some are not ours to host. Those entries point `github` at the project's own site instead, and set `demo` to the same URL. Three entries do this: Automate Fundamentals (private repository), No Fee Apartments and LV Guest List (external commercial sites).
+
+The card reads this off the URL rather than off a separate flag. `buildCard` tests `github` against `^https://github\.com/`; when it does not match, the icon's `title` and `aria-label` become "No public repository, opens the project site" instead of "View on GitHub". Deriving it from the host means the label cannot drift from the link, which a hand-set boolean would eventually do. The GitHub octocat mark still renders, because the icon marks the repository slot rather than the destination, and relabeling it is what keeps that honest for a screen reader.
+
+Two entries (No Fee Apartments, LV Guest List) omit `updated` and therefore render no card footer. One entry (Automate Fundamentals) omits `langClass`, so its first tag renders without a language color; the stack is not known yet and guessing one would put a false claim on the card.
 
 ### Discord Server Entry (defined in `discord.html` static HTML)
 

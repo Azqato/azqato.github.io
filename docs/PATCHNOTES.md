@@ -5,6 +5,48 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.8] - 2026-09-28
+
+### Added: Automate Fundamentals on the Projects grid
+The v2.9.7 note said this project was left off `projects.html` because that page's card
+array requires a `github` field and there is no public repository. The rule below settles
+that, so the card is now on both pages.
+
+- Added a fifteenth entry to the `PROJECTS` array, placed first to match its position in
+  the Invests grid.
+
+### Changed: the `github` field falls back to the project's own site
+**Adopted as a standing rule.** When a project has no public repository, its `github` field
+points at the project's own site and `demo` is set to the same URL.
+
+- This is not a new pattern so much as a named one. Two entries already did it, No Fee
+  Apartments and LV Guest List, both external commercial sites. Automate Fundamentals is
+  the third and the first that is private rather than external.
+- The GitHub icon button was hardcoded to `title="View on GitHub"`, which became false the
+  moment the link went anywhere else, and had been false on those two cards for as long as
+  they have existed. `buildCard` now tests the `github` value against
+  `^https://github.com/` and labels the button "No public repository, opens the project
+  site" when it does not match.
+- The label is derived from the URL rather than from a flag on the entry, because a flag is
+  a second thing to remember and would eventually disagree with the link it describes.
+- The button also gained an `aria-label`. A `title` alone is not reliably announced, and an
+  unlabelled link containing only an SVG reads as nothing useful.
+- The octocat mark itself still renders on all three. It marks the repository slot rather
+  than the destination, and relabeling it is what keeps that honest.
+
+### Documentation
+- `docs/PRD.md`: the project count moved from 14 to 15 in the page inventory, in F1, and in
+  the array-order list.
+- `docs/PRD.md`: the sentence describing the two external-site entries is replaced by a
+  full statement of the fallback rule, how the card detects it, and why it is read off the
+  host instead of a flag.
+- `docs/PRD.md`: the `PROJECTS` schema comment for `github` now describes the fallback.
+- The new entry omits `langClass`, so its first tag renders without a language color. The
+  stack is not known and guessing would put a false claim on the card. Recorded in the PRD
+  rather than left as a puzzle for the next reader.
+
+---
+
 ## [2.9.7] - 2026-09-28
 
 ### Added: Automate Fundamentals on the Invests page

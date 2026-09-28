@@ -430,7 +430,11 @@
     //  Required fields:
     //    name        - display name
     //    desc        - short description (1-2 sentences)
-    //    github      - full GitHub URL
+    //    github      - full GitHub URL. No public repository, because the repo is
+    //                  private or the project is not ours to host? Point this at
+    //                  the project's own site instead, and set demo to the same
+    //                  URL. The card reads the host and relabels the icon, so no
+    //                  extra flag is needed and the label cannot drift.
     //    tags        - array of strings; first tag drives the filter color
     //
     //  Optional fields:
@@ -444,6 +448,15 @@
     //                           lang-html, lang-css, lang-go, lang-rust, lang-java
     // ─────────────────────────────────────────────
     const PROJECTS = [
+      {
+        name: "Automate Fundamentals",
+        desc: "Strategy builder for investors who work from earnings reports rather than price charts. Score companies on fundamentals, build rule-based strategies without writing code, then backtest and paper trade them. Currently in free beta.",
+        github: "https://automatefundamentals.com/",
+        demo: "https://automatefundamentals.com/",
+        tags: ["Finance", "Tools"],
+        icon: "🤖",
+        updated: "2026",
+      },
       {
         name: "Net Worth Tracker",
         desc: "Browser-based personal finance tool for tracking monthly net worth across four asset categories. Fully client-side; all data stays in your browser's localStorage with no accounts or servers required.",
@@ -597,6 +610,13 @@
         ? `<a class="card-link" href="${p.demo}" target="_blank" rel="noopener" title="Live demo">&#8599;</a>`
         : '';
 
+      // A private repo has no public GitHub page, so its `github` field points at
+      // the project's own site instead. Read that off the host rather than a
+      // separate flag: one source of truth, and the tooltip cannot claim GitHub
+      // while the link goes somewhere else.
+      const isRepo    = /^https:\/\/github\.com\//i.test(p.github || '');
+      const repoTitle = isRepo ? 'View on GitHub' : 'No public repository, opens the project site';
+
       const stars     = p.stars
         ? `<span class="card-stat">&#9733; ${p.stars}</span>`
         : '';
@@ -611,7 +631,7 @@
             <span class="card-icon">${icon}</span>
             <div class="card-links">
               ${demoLink}
-              <a class="card-link" href="${p.github}" target="_blank" rel="noopener" title="View on GitHub">
+              <a class="card-link" href="${p.github}" target="_blank" rel="noopener" title="${repoTitle}" aria-label="${repoTitle}">
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
                   0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
