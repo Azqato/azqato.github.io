@@ -41,9 +41,9 @@ points at the project's own site and `demo` is set to the same URL.
   full statement of the fallback rule, how the card detects it, and why it is read off the
   host instead of a flag.
 - `docs/PRD.md`: the `PROJECTS` schema comment for `github` now describes the fallback.
-- The new entry omits `langClass`, so its first tag renders without a language color. The
-  stack is not known and guessing would put a false claim on the card. Recorded in the PRD
-  rather than left as a puzzle for the next reader.
+- The new entry is tagged `lang-cs`, for .NET. That class has been defined in the page's
+  stylesheet since it was written but no project had used it, so this is the first card to
+  render the C# green.
 
 ---
 

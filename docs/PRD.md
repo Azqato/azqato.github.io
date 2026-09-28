@@ -333,7 +333,7 @@ Active filter tags, derived automatically from the array: Education, Finance, He
 
 The card reads this off the URL rather than off a separate flag. `buildCard` tests `github` against `^https://github\.com/`; when it does not match, the icon's `title` and `aria-label` become "No public repository, opens the project site" instead of "View on GitHub". Deriving it from the host means the label cannot drift from the link, which a hand-set boolean would eventually do. The GitHub octocat mark still renders, because the icon marks the repository slot rather than the destination, and relabeling it is what keeps that honest for a screen reader.
 
-Two entries (No Fee Apartments, LV Guest List) omit `updated` and therefore render no card footer. One entry (Automate Fundamentals) omits `langClass`, so its first tag renders without a language color; the stack is not known yet and guessing one would put a false claim on the card.
+Two entries (No Fee Apartments, LV Guest List) omit `updated` and therefore render no card footer. Every entry sets `langClass`. Automate Fundamentals is the only one on `lang-cs`, for .NET; the class had been defined in the stylesheet since the page was written but no project had used it until now.
 
 ### Discord Server Entry (defined in `discord.html` static HTML)
 
