@@ -78,7 +78,7 @@ There are **12** HTML pages.
 | Landing        | `index.html`          | Yes (Home) | Introductory front door: Discord CTA plus explore grid          |
 | About          | `about.html`          | Yes        | Bio and personal pitch card                                     |
 | Discord        | `discord.html`        | Yes        | Four Discord server cards with permanent invite links           |
-| Invests        | `invests.html`        | Yes        | Six investing project cards plus a 16-category curated resource hub |
+| Invests        | `invests.html`        | Yes        | Seven investing project cards plus a 16-category curated resource hub |
 | Codes          | `codes.html`          | Yes        | Three cards: Prompts, Tools, and the GitHub org                 |
 | Music          | `music.html`          | Yes        | Full-screen stage visualizer, two Mixcloud embeds, three platform links |
 | Links          | `links.html`          | Yes        | All platforms and channels grouped into six categories          |

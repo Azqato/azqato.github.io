@@ -5,6 +5,30 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.9.7] - 2026-09-28
+
+### Added: Automate Fundamentals on the Invests page
+A new site is in progress at `automatefundamentals.com`, and the Invests project grid is
+where it belongs.
+
+- Added a seventh card to the `invests.html` project grid, placed first because it is the
+  newest work and the rest of the grid has no meaningful order. Icon, title, arrow and
+  description follow the existing `project-card` pattern exactly, so no CSS changed.
+- The description says what the site says about itself, a strategy builder for investors
+  who work from earnings reports rather than charts, and states plainly that it is in free
+  beta. The site is a beta with its trading and backtesting features still hypothetical,
+  and a card that implied a finished product would be wrong within a week.
+- This is the first project card on the site that points at a domain other than
+  `azqato.github.io`. It keeps `target="_blank" rel="noopener"` like every other outbound
+  link on the page, so nothing about the link handling is special.
+- Not added to `projects.html`. That page's card array carries a `github` field alongside
+  `demo`, and there is no public repository to put in it yet.
+
+### Documentation
+- `docs/PRD.md`: the page inventory said the Invests page carries six project cards.
+
+---
+
 ## [2.9.6] - 2026-09-08
 
 ### Added: `.gitignore` now excludes the local brand folder
