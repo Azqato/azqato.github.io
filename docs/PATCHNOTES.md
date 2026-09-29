@@ -5,6 +5,80 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.10.7] - 2026-09-29
+
+The canonical domain is a **Cloudflare Pages** deployment, not GitHub Pages behind a proxy. Every
+document in this project had the hosting wrong, and the v2.9.9 audit had confidently refined it to a
+different wrong answer. The owner corrected it in one sentence: "I use Cloudflare Pages instead of
+GitHub."
+
+### What is actually true
+`azqato.com` and `azqato.github.io` are **two independent deployments of the same commit**, not a
+proxy and an origin. Each builds from a push to `main`. Neither knows about the other. That explains
+several things this project had recorded as unexplained or had explained wrongly:
+
+- The `.html` to extensionless 307 found during the v2.10.6 deploy check is Cloudflare Pages' default
+  URL handling, not a mystery rule somebody added.
+- `cfOrigin;dur=0` on every request was not aggressive caching in front of an origin. There is no
+  other origin to contact.
+- The empty 404 on `azqato.com` against GitHub's styled 404 on `azqato.github.io` is two different
+  products, not one product behaving inconsistently.
+
+Corroborated before changing anything: Cloudflare nameservers, Cloudflare IPs on both apex and `www`,
+no GitHub headers anywhere in the `azqato.com` response.
+
+### Fixed, and one of these was a real problem
+- **`privacy-policy.html` named the wrong data controller.** It said "The site is hosted on GitHub
+  Pages" and told readers their server-log data sits with GitHub. For the canonical domain, where
+  essentially all traffic goes, it sits with **Cloudflare**. The page now describes both hosts, says
+  which serves which address, and says plainly that in practice it means Cloudflare. This shipped
+  yesterday in v2.10.5, so it was wrong for one day. It is the one item here with consequences beyond
+  tidiness, which is why it was fixed first.
+- **The deploy-verification step was checking the wrong host, for a reason that no longer exists.**
+  v2.10.3 had deliberately kept the check on `azqato.github.io`, reasoning it was "the origin" and that
+  `azqato.com` was a cache that might lie. With two independent deployments, **a green GitHub Pages
+  build is not evidence that Cloudflare Pages built anything at all**. The check could have passed
+  while the canonical domain sat on a failed build. It now checks `azqato.com` with a cache-buster, and
+  says explicitly that each host reports only on itself.
+- Architecture diagram, hosting table, third-party data tables, Security Model, and the environments
+  note all corrected.
+
+### The CNAME milestone is closed as moot, not deferred
+A `CNAME` file is a **GitHub Pages** mechanism. `azqato.com` does not run on GitHub Pages, so the file
+would have done nothing for it. Everything the milestone worried about dissolves with the premise: the
+DNS never needed confirming for this purpose, the Pages custom-domain field was never going to be
+involved, and the redirect-loop risk that justified holding it back could not occur, because there is
+no proxy relationship to loop through. The milestone's real goal, making `azqato.com` canonical, was
+already met by what shipped on 2026-09-28.
+
+The caution cost nothing and was reasonable given what was believed. But the entire analysis, several
+hundred words across three documents, rested on an assumption about infrastructure that is described
+nowhere in this repository and was never flagged as an assumption. **When a plan depends on how
+something outside the repository is wired, ask before writing the plan.**
+
+### A constraint that turned out to be false
+Both the Security Model and the constraints table said no CSP was possible because GitHub Pages cannot
+send custom response headers. True of `azqato.github.io`. **False of `azqato.com`**, which runs on
+Cloudflare Pages and supports a `_headers` file. Nothing was added, and going without a CSP is still
+defensible on a static site with no user input. The change is that it is now a decision rather than a
+limitation, and the documents say so.
+
+### Changed
+- **Music page sharing copy**, at the owner's request, reframed around why the page exists rather than
+  what it does. `og:title` is now "A Concert Stage Built to Showcase the Music"; the description leads
+  with Azqato building the page to showcase his music. Re-ran the v2.10.4 compliance gate: 43 and 172
+  characters, no site name in `og:title`.
+
+### Decided
+- **Internal links keep their `.html`.** Each internal click on `azqato.com` therefore takes a 307 to
+  the extensionless form. It costs a few milliseconds. Dropping the extensions would mean changing the
+  nav generator and every page body, and would stop the site working when a page is opened straight
+  from disk, which is how it has always been developed. Canonical and `og:url` already point at the
+  extensionless destination, so shared links and crawlers are unaffected. Not revisited unless the
+  development workflow changes.
+
+---
+
 ## [2.10.6] - 2026-09-28
 
 Canonical and `og:url` repointed at the URLs `azqato.com` actually serves. A same-day fix to a defect

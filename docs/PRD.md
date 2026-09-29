@@ -206,7 +206,8 @@ The portfolio is a fully static site with no server, no build step, and no runti
 
 ```
 Browser
-  → GitHub Pages (CDN)
+  → Cloudflare Pages (azqato.com, canonical)
+  → GitHub Pages   (azqato.github.io, same files, separate deployment)
       → index.html (default entry)
         about.html      discord.html    invests.html
         codes.html      music.html      links.html
@@ -242,7 +243,7 @@ No other page has any JavaScript beyond the nav toggle.
 | Scripting       | JavaScript      | ES6+ in `projects.html` (arrow functions, template literals, `Set`, spread). ES5-style `var` and `function` in the nav toggles and the `music.html` visualizer. Both styles are current; see Conventions. |
 | Graphics        | Canvas 2D       | The `music.html` stage, reflection, bloom, and favicon             |
 | Graphics        | WebGL2 / GLSL ES 3.00 | Nine fragment-shader screen modes in `music.html`, rendered offscreen at 640x400 |
-| Hosting         | GitHub Pages    | Free static hosting; deployed from the `main` branch root          |
+| Hosting         | Cloudflare Pages and GitHub Pages | Two independent deployments of the same `main` branch root. Cloudflare Pages serves `azqato.com` and is canonical; GitHub Pages serves `azqato.github.io`. See Hosting |
 | Version Control | Git / GitHub    | Repository `Azqato/azqato.github.io`; `main` deploys on push        |
 
 No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fonts. The only third-party code in the repository is the shader source in `music.html`, which carries per-mode attribution in comments (CC0, MIT, CC-BY-NC-SA-4.0, and individually credited authors).
@@ -509,7 +510,8 @@ State is minimal, lives entirely in memory, and does not survive a page load. No
 
 | Service | Purpose | What it receives | When |
 |---------|---------|------------------|------|
-| GitHub Pages | Static hosting and CDN delivery | Standard web server access data (IP, user agent, referrer) for every request | Every page load |
+| **Cloudflare Pages** | Static hosting and CDN delivery for `azqato.com`, the canonical domain, which is where essentially all traffic goes | Standard web server access data (IP, user agent, referrer) for every request | Every page load |
+| GitHub Pages | Static hosting for `azqato.github.io`, a separate deployment of the same files | Standard web server access data (IP, user agent, referrer) for every request | Every page load on that address |
 | Mixcloud (`player-widget.mixcloud.com`) | Two embedded mix players on `music.html` | The visitor's IP, user agent, and referring page, plus whatever Mixcloud's widget sets in its own frame | On every `music.html` load, before any interaction |
 | Buy Me a Coffee | Donation link | Nothing until the visitor clicks | On click |
 | Tesla, Twitch Prime, RouteNote, Robinhood, M1 Finance, Public, Lyft | Affiliate referrals | Nothing until the visitor clicks; then the referral code identifies Azqato as the referrer | On click |
@@ -552,7 +554,7 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 | Only one native track, hardcoded | `audio/womanchild-azqato-remix.mp3` is a single `<audio>` element with its title written into the markup. Adding a second means copying the block. | If more tracks arrive, move to a `TRACKS` array rendered the way `projects.html` renders `PROJECTS`, rather than copying markup a third time |
 | Ten unreferenced images in `img/` | Roughly 3.8 MB tracked and deployed but linked from nothing | **Not debt. Closed by decision on 2026-08-29:** the owner keeps everything in `img/`. See the standing rule under Never Do These. Audits should stop raising it. |
 | Unoptimized thumbnails | Four `yt-thumb-*.jpg` totalling 2.3 MB on a 7.8 KB page, with no `loading="lazy"` | Resize to display dimensions, convert to WebP with a JPEG fallback, add `loading="lazy"` |
-| No CSP headers | GitHub Pages does not support custom response headers | Acceptable for static content. Any host that can send headers (Cloudflare, Vercel, Netlify) could add one if the site ever moves. |
+| No CSP headers | **No longer a host limitation.** True of GitHub Pages, which cannot send custom response headers. False of Cloudflare Pages, which serves the canonical domain and supports a `_headers` file. | Acceptable for static content with no user input. Since 2026-09-29 this is a decision not to add one rather than an inability to, and a CSP on `azqato.com` is available whenever it is wanted. |
 | No automated tests | Manual visual QA only | A Playwright smoke test per page (loads, nav renders, no console errors) would catch the majority of regressions. The threshold for this was set at 11 pages and has been passed. |
 | Native player has no hostable audio | The test tracks are multi-GB local files; GitHub rejects pushes over 100 MB and GitHub.com's Git LFS caps at 2 GB per file, both far under these files' size | Host a real track externally (object storage plus a CDN, or a video host that serves a direct file URL), point the branch's `<video src>` at it, then merge `feature/native-audio-player` |
 
@@ -700,7 +702,7 @@ The project stated no rule of its own on this, so the default is adopted and rec
 
 **Local means a server, not `file://`.** Run `python -m http.server` and open `http://localhost:8000`. This matters more here than in most projects: `music.html` sets `canRouteAudio` to false on the `file://` protocol, so the visualizer cannot read the audio and the page shows a note saying so. A `file://` check of that page verifies a degraded mode that no visitor uses.
 
-**Confirming a deploy landed is not an exception to this rule.** After a push, opening `https://azqato.github.io/` with a hard refresh to confirm the change arrived (the origin, not `azqato.com`, because Cloudflare caches the canonical domain) is a post-push comparison against what was already verified locally. It answers "did GitHub Pages publish what I pushed", which is a question about the host. It is not a test of the change, it does not substitute for the local check, and finding the change present there proves nothing about whether the change is correct.
+**Confirming a deploy landed is not an exception to this rule.** After a push, opening `https://azqato.com/` with a cache-busting query string to confirm the change arrived is a post-push comparison against what was already verified locally. It answers "did the host publish what I pushed", which is a question about the host, and it has to be asked of each host separately because there are two. It is not a test of the change, it does not substitute for the local check, and finding the change present there proves nothing about whether the change is correct.
 
 ---
 
@@ -888,7 +890,7 @@ There is no admin interface, no moderation surface, and no content that differs 
 
 The portfolio stores no user data. No database, no server-side storage, no cookies, no localStorage, no sessionStorage, no IndexedDB. There is nothing to breach and nothing to export.
 
-Static content hardcoded into the HTML (project metadata, affiliate URLs, bio copy) is public by design and contains no information about visitors. GitHub Pages logs standard web server access data as part of its infrastructure; that is outside the site's control and is governed by GitHub's privacy policy.
+Static content hardcoded into the HTML (project metadata, affiliate URLs, bio copy) is public by design and contains no information about visitors. Both hosts log standard web server access data as part of their infrastructure; that is outside the site's control and is governed by Cloudflare's and GitHub's own privacy policies. `azqato.com` runs on Cloudflare Pages, so in practice almost all of it sits with Cloudflare.
 
 ## Environment variables
 
@@ -908,7 +910,8 @@ Every third party that receives visitor data, and what it receives:
 
 | Service | Data it receives | Trigger |
 |---------|------------------|---------|
-| GitHub Pages | IP address, user agent, referrer, requested path, for every request | Automatic, every page |
+| Cloudflare Pages | IP address, user agent, referrer, requested path, for every request to `azqato.com` | Automatic, every page |
+| GitHub Pages | The same, for every request to `azqato.github.io` | Automatic, every page on that address |
 | Mixcloud | IP address, user agent, and the referring page URL, plus any cookies or storage its own widget sets inside its frame | Automatic, on every `music.html` load |
 | Every linked destination | Whatever a normal outbound click sends, plus the referral code where one is embedded | Only on click |
 
@@ -924,7 +927,7 @@ The Mixcloud embeds are the only automatic third-party data flow on the site, an
 
 **Local test tooling.** `test-local-audio.bat` launches Chrome with `--disable-web-security`. That is a genuinely dangerous flag: a browser started that way ignores same-origin policy for every site it visits, not just `music.html`. It is mitigated by the throwaway `--user-data-dir` and by the comment in the file telling the user not to browse with that window. It is untracked and therefore never deployed. Do not remove those two mitigations, and do not commit the file.
 
-**Content Security Policy.** GitHub Pages cannot send custom response headers, so no CSP can be applied on the current host. This is acceptable for a static site with no user input, and the practical benefit would be limited to constraining the Mixcloud frame, which is itself scheduled for removal in v2.9.0.
+**Content Security Policy.** None is set. **The reason changed on 2026-09-29 and the old one no longer holds.** This used to say a CSP was impossible because GitHub Pages cannot send custom response headers. That is still true of `azqato.github.io`, but the canonical domain runs on Cloudflare Pages, which supports a `_headers` file, so a CSP on `azqato.com` is perfectly possible and simply has not been written. It remains acceptable to go without on a static site with no user input, and the practical benefit would still be limited to constraining the Mixcloud frame, which is itself scheduled for removal in v2.9.0. The difference is that this is now a choice.
 
 **Dependency vulnerabilities.** Zero. There are no packages, no lockfile, and no CDN scripts to compromise.
 
@@ -1138,13 +1141,30 @@ Target: under 50,000 bytes per page. `music.html` is knowingly over at 114,680 b
 
 ## Deploy
 
-### Production: GitHub Pages
+### Production: two deployments, not one
 
-One-time setup, already done and recorded only in case it is ever lost:
+**Corrected 2026-09-29, and this had been wrong in every version of this document.** This project is served by **two independent static hosts**, both building from the root of `main`:
 
-1. The repository is named `azqato.github.io`, which makes it a GitHub user site.
-2. Settings, then Pages, then Source: Deploy from a branch, `main`, `/root`.
-3. Live at `https://azqato.github.io/` within roughly 60 seconds of a push, and at `https://azqato.com/` once Cloudflare's cache expires or is purged.
+| | `azqato.com` (canonical) | `azqato.github.io` |
+|---|---|---|
+| Host | **Cloudflare Pages** | GitHub Pages |
+| Triggered by | a push to `main` | a push to `main` |
+| URL shape | extensionless; `/page.html` 307s to `/page` | both `/page` and `/page.html` return 200 |
+| Analytics beacon | yes, injected at the edge | no |
+| 404 | empty body | GitHub's standard 404 page |
+| Custom response headers | **supported**, via a `_headers` file | not supported |
+
+**The two are siblings, not a proxy and an origin.** Every earlier version of this document, and the whole `CNAME` milestone, assumed Cloudflare sat *in front of* GitHub Pages as a caching proxy. It does not. They are separate builds of the same commit, and neither knows about the other. Everything that followed from the proxy assumption was wrong, including the deploy-verification rationale and the entire risk analysis for the `CNAME` file. See the note under Deploy verification, and Roadmap v2.10.3.
+
+**How this was established**, since none of it is visible in the repository: `azqato.com` resolves to Cloudflare IPs (`104.21.8.156`, `172.67.188.142`) on Cloudflare nameservers, returns `cfOrigin;dur=0` on every request (it never contacts another origin), and serves an empty 404, while `azqato.github.io` returns `Server: GitHub.com` with GitHub's own 404 page. The owner confirmed it directly on 2026-09-29: "I use Cloudflare Pages instead of GitHub."
+
+**A capability this unlocks.** Cloudflare Pages supports a `_headers` file, so the long-standing "no CSP is possible on this host" constraint is **false for the canonical domain**. It was true when the only host was GitHub Pages. Nothing has been added; the constraint is simply no longer a hard one, and it is now a decision rather than a limitation. See the Security Model.
+
+One-time setup, recorded only in case it is ever lost:
+
+1. The repository is named `azqato.github.io`, which makes it a GitHub user site, serving `https://azqato.github.io/` from `main` at `/root`.
+2. A Cloudflare Pages project builds the same repository and serves `https://azqato.com/` and `https://www.azqato.com/`. Its configuration lives in the Cloudflare dashboard, not in this repository, which is why nothing here describes it.
+3. Both are live within roughly 60 seconds of a push, independently of each other.
 
 Routine deploy, which is the entire process:
 
@@ -1156,7 +1176,13 @@ git push origin main
 
 There is no staging environment, no approval gate, and no CI. A push to `main` is a production release. Treat it that way: read the diff before pushing.
 
-Verify after every deploy: open `https://azqato.github.io/`, hard-refresh with Ctrl+Shift+R, and confirm the change is visible. **Check the `github.io` origin rather than `azqato.com` for this one thing**, even though `azqato.com` is canonical: Cloudflare sits in front of the custom domain and caches, so a stale page there tells you nothing about whether GitHub Pages published, and a fresh one might be a cache hit from before the push. The origin answers the question the check is actually asking. If nothing has changed after two minutes, check the repository's Actions tab and the Pages section of Settings for a failed build.
+**Deploy verification. Check `azqato.com`, and know that it does not vouch for the other host.**
+
+> **Corrected 2026-09-29.** This step used to say to check `https://azqato.github.io/` *instead of* `azqato.com`, reasoning that the `github.io` address was "the origin" and that Cloudflare merely cached in front of it. That reasoning was built on a false model of the hosting. The two are independent deployments, so **a successful GitHub Pages build is not evidence that Cloudflare Pages built anything at all.** The old check could have passed while the canonical domain, where the visitors are, sat on a failed build.
+
+Verify after every deploy by opening `https://azqato.com/` with a cache-busting query string, or hard-refreshing with Ctrl+Shift+R, and confirming the change is visible. That is the domain that matters. If the change is missing after two minutes, check the Cloudflare Pages dashboard for a failed build.
+
+Check `https://azqato.github.io/` as well when the change has to be right on both, and check the repository's Actions tab and the Pages section of Settings if that one is stale. Each host reports only on itself.
 
 If the push is rejected because the remote has moved ahead (this happens occasionally, for example when an automated integration opens a pull request):
 
@@ -1222,7 +1248,7 @@ There is no way to roll back faster than the GitHub Pages deploy cycle, so the r
 
 Nothing differs between environments: no feature flags, no environment variables, no build modes, no conditional code paths anywhere in the source.
 
-> **Resolved in v2.8.9.** This section previously stated "There is only one environment: production (GitHub Pages)", while `wrangler.jsonc` sat in the repository describing a complete Cloudflare Workers deploy target. It arrived 2026-07-09 via the only pull request in the repository's history, from a Cloudflare autoconfiguration integration, and was never used for a real deploy. It has been deleted. There is again exactly one environment, and the original statement is true without qualification. Moving hosts needs no configuration file, so nothing was lost.
+> **Resolved in v2.8.9.** This section previously stated "There is only one environment: production (GitHub Pages)", while `wrangler.jsonc` sat in the repository describing a complete Cloudflare Workers deploy target. It arrived 2026-07-09 via the only pull request in the repository's history, from a Cloudflare autoconfiguration integration, and was never used for a real deploy. It has been deleted. There is again exactly one *environment*, in the sense of one branch and no staging. **Corrected 2026-09-29:** that one environment is served by **two hosts**, Cloudflare Pages and GitHub Pages, so "production (GitHub Pages)" was still not the whole truth. Moving hosts needs no configuration file in this repository, so nothing was lost by deleting `wrangler.jsonc`. Note the irony worth recording: the deleted file was a Cloudflare deploy target, dismissed as residue from an autoconfiguration integration, at a time when Cloudflare was already serving the canonical domain and nobody had noticed. It was still the right file to delete, because Workers is not what serves the site, but the reasoning that it was unrelated to anything real was luck rather than judgement.
 
 ## Environment variable reference
 
@@ -1593,9 +1619,37 @@ Two further points settled themselves once the full specification was read rathe
 
 **Open questions, now closed.** Whether the media types needed explicit `binary` lines. They were added rather than relying on `text=auto` detection: `*.mp3`, `*.jpg`, `*.jpeg`, `*.png`, `*.gif`, `*.ico`. An explicit line costs nothing and removes the doubt permanently, which matters more here than brevity because the `music/` directory holds audio that is deliberately never committed and a future decision to commit it should not also be a decision about encoding. `git diff --stat` confirmed no binary file was touched.
 
-### v2.10.3 - Restore the canonical domain (S) - PARTIAL 2026-09-28, CNAME held back
+### v2.10.3 - Restore the canonical domain (S) - COMPLETE 2026-09-28, CNAME closed as moot 2026-09-29
 
-**Status.** Steps 2, 3, and 4 shipped. `sitemap.xml` names `https://azqato.com/` in all 12 `<loc>` values, `robots.txt` points at `https://azqato.com/sitemap.xml`, the README live link is `azqato.com`, and the Runbook, Deploy, Rollback, Monitoring, north-star, External FAQ and press-release references in this document were repointed. Step 1, the `CNAME` file, was **not** created.
+> **The `CNAME` is not happening, and it was never the right task.** Closed 2026-09-29, not because
+> the risk was accepted or avoided, but because the premise was wrong. A `CNAME` file is a **GitHub
+> Pages** mechanism: it tells GitHub Pages which custom domain it is authoritative for. `azqato.com`
+> is not served by GitHub Pages. It is served by **Cloudflare Pages**, a separate product with its
+> own custom-domain configuration that lives in the Cloudflare dashboard and takes no file in this
+> repository. Adding a `CNAME` would not have made Cloudflare Pages authoritative for anything; at
+> best it would have done nothing to the canonical domain, and at worst it would have started GitHub
+> Pages redirecting `azqato.github.io` to a domain it does not serve.
+>
+> **Everything this milestone worried about dissolves with the premise.** The DNS records did not
+> need confirming for this purpose, the Pages custom-domain field was never going to be involved, and
+> the redirect-loop risk that justified holding it back could not have occurred, because there is no
+> proxy relationship between the two hosts to loop through. The caution was reasonable given what was
+> believed and it cost nothing, but it was caution about an imaginary mechanism.
+>
+> **The milestone's actual goal was already met** by the work that did ship. `azqato.com` is
+> canonical in all 12 page heads, in `sitemap.xml`, in `robots.txt`, in the README, and in this
+> document. Nothing further is required, and nothing is outstanding. See Production: two deployments,
+> not one.
+>
+> **The lesson, which is the same one this batch keeps teaching.** The entire `CNAME` analysis, across
+> three documents and several hundred words of risk assessment, rested on an unchecked assumption
+> about infrastructure that is not described anywhere in this repository. It was never verified
+> because it was never noticed as an assumption. One question to the owner settled it in a sentence.
+> **When a plan depends on how something outside the repository is wired, ask, before writing the
+> plan.**
+
+
+**Status.** Steps 2, 3, and 4 shipped. `sitemap.xml` names `https://azqato.com/` in all 12 `<loc>` values, `robots.txt` points at `https://azqato.com/sitemap.xml`, the README live link is `azqato.com`, and the Runbook, Deploy, Rollback, Monitoring, north-star, External FAQ and press-release references in this document were repointed. Step 1, the `CNAME` file, was **not** created, and on 2026-09-29 was closed as moot rather than deferred. The original reasoning for holding it back follows, and is kept because it is a clean example of a careful argument resting on an unchecked premise.
 
 **Why the `CNAME` is still outstanding, and why that is not a loose end.** It is the single change on the whole roadmap that can take the site down, and it depends on two things outside this repository: the DNS records for `azqato.com` and the GitHub Pages custom-domain setting. Neither could be read at the audit and neither can be read from here. Everything else in this milestone is a text edit that one revert undoes. Holding the `CNAME` back is safe in a way worth restating, because it is not obvious: `azqato.com` already serves this site today through Cloudflare, so every `og:url` and `rel="canonical"` shipped in v2.10.4 is correct right now. The `CNAME` decides which host is formally authoritative; it does not decide whether the address works. Tracked in `docs/TODO.md`.
 
@@ -1891,6 +1945,7 @@ Every document was compared against the source at the v2.8.5 audit, and again at
 | 30 | No `.gitattributes`, in a repository where `music.html` is CRLF, everything else is LF, and the nav generator preserves per-file endings on purpose. | Code and configuration. | Not created at the audit, because Repository Hygiene is a policy record rather than an action and the fix is a deliberately noisy 12-file commit. **Decided 2026-09-28: add it and normalize everything.** Scheduled as Roadmap v2.10.2 and recommended to run first, so the whitespace-only diff lands in its own commit instead of contaminating the head edits. Open Question 13 closed. **Shipped 2026-09-28 as `5070b3b`, and the finding itself was wrong.** `git ls-files --eol` shows every committed blob was already LF, `music.html` included; the CRLF was confined to the working tree and `core.autocrlf=true` was doing the normalizing. `git add --renormalize .` produced zero changes. The file is still correct to have, for the better reason that it moves the guarantee out of one machine's local config. See Repository Hygiene. |
 | 31 | The PRD stated that `azqato.com` was probably unrelated to this repository, reasoning that the absence of a `CNAME` file meant this repository does not serve that domain. | The live web. `azqato.com` returns this exact site. Git history shows a `CNAME` was created and then deleted, and all 12 page footers link `azqato.com`. | Answered, and it turned into a bigger question than it was. The domain does serve this site, through Cloudflare. Which of the two hosts is canonical is now Open Question 10, and it blocks the sharing tags. |
 | 32 | `tools/build-nav.py` has a `SKIP` set naming `nav-extraction-test.html` and `reduced-motion-test.html`. Neither file exists. | Code and the filesystem. | Not changed; it is harmless dead configuration in a script, not a documentation defect, and editing a working script was outside this audit's write scope. Logged in `docs/TODO.md`. |
+| 36 | Every document stated the site is hosted on GitHub Pages, and the v2.9.9 audit refined that to "Cloudflare proxying in front of GitHub Pages". Both are wrong. | The owner, asked directly on 2026-09-29, plus DNS and response evidence that corroborates it: Cloudflare nameservers, Cloudflare IPs, `cfOrigin;dur=0` on every request, and a 404 that is not GitHub's. | `azqato.com` is a **Cloudflare Pages** deployment, independent of the GitHub Pages one. Corrected as v2.10.7 across the architecture diagram, hosting table, deploy verification, third-party data tables, Security Model, and `privacy-policy.html`, which had been naming the wrong data controller. Three consequences: the deploy-verification step was checking a host that cannot vouch for the canonical domain; the `CNAME` milestone was moot, not blocked; and the "no CSP possible" constraint is false for `azqato.com`, which supports a `_headers` file. |
 | 35 | The 11 non-index canonical and `og:url` tags shipped in v2.10.4 pointed at `https://azqato.com/page.html`, which the canonical domain 307-redirects to `https://azqato.com/page`. The 11 matching `sitemap.xml` entries had the same problem. | The live site, which is the only source that could have answered this. A Cloudflare rule strips the extension; it is not in this repository and is not documented anywhere. | **Fixed the same day as v2.10.6**, before anyone could have shared a link. Both hosts return 200 on the extensionless form, so the repointed URLs are correct on the origin too. Found by checking the deployed site rather than by checking that the deploy landed, which is the distinction now written into the Verification checklist. Internal links still use `.html` and still redirect; that is deliberate and tracked in `docs/TODO.md`. |
 | 34 | All 12 page titles are brand-first with a pipe separator (`Azqato \| Projects`), so every tab truncates to the same visible string and the pixel budget is spent on the one word that is identical everywhere and already shown by the favicon. Two page names, "Welcome" and "Codes", identify nothing to a stranger. | The specification's Page Titles rule, read in full after the owner supplied it. This section had never been recorded in this project, so there was no existing project rule to defer to. | Policy written into the new Page Titles section with the current state of all 12 titles tabulated. **Decided 2026-09-28: fix the titles**, in the same pass as the sharing tags, since both edit the same heads. Replacement titles are specified in Roadmap v2.10.4. Not applied at the audit: changing a title is a page edit, which the specification puts outside an audit. **Applied 2026-09-28** in that milestone. Every title is page-first with a ` - Azqato` suffix; the longest is 38 characters against a 60 character budget; no two share their first 30 characters. "Welcome" and "Codes" became "Azqato - Communities, Projects, Music" and "AI Prompts and Coding Tools - Azqato". Resolved. |
 | 33 | No `CLAUDE.md` and no `/dashboard`. | Filesystem. | Neither was created. A `CLAUDE.md` is not created by an audit for a project that has none. Because no progress dashboard convention exists, the standing rule was not added either; instead a Future Updates roadmap entry proposes one, built from the linked prompt. |
@@ -1904,7 +1959,7 @@ Every document was compared against the source at the v2.8.5 audit, and again at
 
 - **The GLSL shader source in `music.html`.** Roughly 700 lines of fragment shader code across nine modes, much of it adapted from public sources under CC0, MIT, and CC-BY-NC-SA licenses. The audit verified what each mode is called, where its output goes, how modes are selected, and what license each carries. It did not verify what any individual shader computes mathematically. Treat these as opaque assets: they can be swapped or removed wholesale, but editing their internals is a specialist job.
 - **Whether GitHub Pages actually serves the dot-directories.** Default Jekyll processing excludes them and there is no `.nojekyll` file, so `.vscode/` and `.githooks/` are probably not reachable. This was reasoned from how GitHub Pages works, not tested against the live site. It matters only for Open Question 1.
-- ~~**Whether `azqato.com` is related to this repository.**~~ **Resolved at the v2.9.9 audit.** It is this repository, served through Cloudflare: `https://azqato.com/` returns these exact files. The absence of a `CNAME` was read as evidence the domain was unrelated, which was wrong; it means only that GitHub Pages is not formally configured for the custom domain. `azqato.com` is now the canonical domain. The original note follows. Every page's footer links to `https://azqato.com/`, but there is no `CNAME` file, so this repository does not serve that domain. Whether it is a separate site, a redirect to `azqato.github.io`, or a dead link is unknown and was not tested.
+- ~~**Whether `azqato.com` is related to this repository.**~~ **Resolved at the v2.9.9 audit, and the mechanism corrected 2026-09-29.** It is this repository: `https://azqato.com/` returns these exact files. The absence of a `CNAME` was read as evidence the domain was unrelated, which was wrong. The audit then guessed the mechanism was Cloudflare proxying in front of GitHub Pages, which was also wrong. It is a **separate Cloudflare Pages deployment** of the same repository. The `CNAME` file is irrelevant to it either way, since that is a GitHub Pages mechanism. `azqato.com` is now the canonical domain. The original note follows. Every page's footer links to `https://azqato.com/`, but there is no `CNAME` file, so this repository does not serve that domain. Whether it is a separate site, a redirect to `azqato.github.io`, or a dead link is unknown and was not tested.
 - **Live link validity.** No external link was clicked. Affiliate URLs, Discord invites, and the roughly 90 resource links on `invests.html` were verified to be well-formed and to match what the documentation claims, not to resolve.
 
 ## Fragile areas
@@ -1951,7 +2006,7 @@ Numbered so they can be answered by reference. When one is answered, fold the an
 9. ~~**The licence posture contradicts the site's own copy.**~~ **Answered 2026-09-28: keep all rights reserved.** `LICENSE.md` stands as written, and the copy was reworded to match it rather than the reverse. The README now points at `LICENSE.md` instead of inviting reuse, the External FAQ separates this site (source-available) from the individual projects (mostly public repositories with their own licences), and the press release boilerplate no longer says everything he builds is open source. Applied at the audit as v2.10.0. The original question follows.
     `LICENSE.md` was created at the v2.9.9 audit with the all rights reserved, source-available default, because the project had no licence text of any kind. But the README ends with "The source is open. Read it, copy it, or use it as a starting point for your own site," and the External FAQ says "The site and nearly every project on it are open source at github.com/Azqato." Which is it? If reuse is genuinely intended, `LICENSE.md` should be replaced with a real permissive licence, most likely MIT, and the invitation becomes true instead of merely stated. If the reservation is right, those two sentences need rewording. This is the question to answer first, because every other licensing sentence in the project depends on it. See the Licensing section.
 
-10. ~~**Which domain is canonical?**~~ **Answered 2026-09-28: `azqato.com`.** The branded domain wins, which is also what all 12 page footers already assumed. This unblocked the sharing tags. Implementation is Roadmap v2.10.3, and it is the one item on the list that can take the site down, because the DNS records and the GitHub Pages custom-domain setting both live outside this repository and the audit could not read either. `sitemap.xml` and `robots.txt` still say `azqato.github.io` and are repointed as part of that milestone. The original question follows.
+10. ~~**Which domain is canonical?**~~ **Answered 2026-09-28: `azqato.com`.** The branded domain wins, which is also what all 12 page footers already assumed. This unblocked the sharing tags. Shipped as Roadmap v2.10.3. **The "it can take the site down" warning below was wrong**, and was withdrawn on 2026-09-29: it assumed a `CNAME` file was involved, and a `CNAME` is a GitHub Pages mechanism that has no bearing on `azqato.com`, which runs on Cloudflare Pages. Nothing about this milestone was ever capable of taking the site down. The original text follows. `sitemap.xml` and `robots.txt` still say `azqato.github.io` and are repointed as part of that milestone. The original question follows.
      Both serve this site and both return 200. All 12 page footers link `azqato.com`. The README's live link, the Runbook, the Deploy section, the Rollback section, and every row of the Monitoring table name `azqato.github.io`. There is no `CNAME` file in the repository, though git history shows one was created and later deleted, and `azqato.com` resolves through Cloudflare while `azqato.github.io` is served directly by GitHub. The audit used `azqato.github.io` in `sitemap.xml` and `robots.txt` because that is what this repository's own documents name and what the repository name implies, but that is a defensible default, not an answer. Answering it settles Open Question 11 and unblocks the sharing tags. It probably also means restoring a `CNAME`, adding `rel="canonical"` to all 12 pages, and deciding whether the other host should redirect.
 
 11. ~~**Social sharing tags: all 12 pages have none.**~~ **Answered 2026-09-28: add the full set to all 12 pages.** Scheduled as Roadmap v2.10.4, together with the title rewrite, since both edit the same 12 heads. Reading the full specification also settled the image question that had been left open: images are off by default, so there is no `og:image` and `twitter:card` is `summary`. The original question follows.
