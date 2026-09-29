@@ -23,7 +23,7 @@ Since `v2.7.0` the site has two layers of styling:
 | Shared | `styles.css` (linked by all 12 pages) | The 12 common design tokens on `:root`, the universal reset, the `html { overflow-y: scroll }` scrollbar-gutter fix, `body` typography, the entire nav component, the nav's 860 px collapse breakpoint, and `footer` |
 | Page-specific | inline `<style>` in each `.html` file | Extra `:root` tokens for that page, hero, sections, grids, cards, and that page's own responsive rules |
 
-There is no CSS build step, no preprocessor, and no minification. `styles.css` is 2,282 bytes and is the only external stylesheet on any page.
+There is no CSS build step, no preprocessor, and no minification. `styles.css` is 2,887 bytes and is the only external stylesheet on any page.
 
 A page that needs an extra token (for example `--discord`, `--spotify`, `--coffee`) declares its own small additional `:root` block in that page's inline `<style>` tag. CSS custom properties cascade additively across multiple `:root` rules, so this adds tokens without overriding the shared ones.
 
@@ -83,7 +83,7 @@ Language tags use inline color values rather than CSS custom properties:
 | `lang-rust`  | Rust       | `#dea584` |
 | `lang-java`  | Java       | `#b07219` |
 
-Only `lang-js` and `lang-html` are currently in use by the `PROJECTS` array. The rest are defined ahead of need.
+In use by the `PROJECTS` array: `lang-js` on eight entries, `lang-html` on six, and `lang-cs` on one (Automate Fundamentals, added in v2.9.8). The rest are defined ahead of need.
 
 ---
 
@@ -338,14 +338,14 @@ Most buttons use `border-radius: 6px`, `font-size: 0.9rem`, `font-weight: 600`, 
 
 ## `music.html` Visual System
 
-`music.html` is the only page with a non-trivial rendering layer, and it is large enough (114 KB, roughly 2,660 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
+`music.html` is the only page with a non-trivial rendering layer, and it is large enough (112 KB, roughly 2,660 lines) that its visual rules belong here rather than being reverse-engineered from the source each time.
 
 ### Structure
 
 - A single full-viewport `<canvas id="viz">` is `position: fixed`, `z-index: 0`, `pointer-events: none`, and painted every frame via `requestAnimationFrame`.
 - `nav`, `.hero`, `.section`, and `footer` are lifted to `z-index: 1` so page chrome sits above the canvas.
 - `.stage-console` is a `position: fixed` glass panel centered at `top: 13vh`, sized `clamp(280px, 38vw, 560px)` by `clamp(220px, 36vh, 460px)`, holding, in order, the native track player, the two Mixcloud iframes, and three platform links. It scrolls independently (`overflow-y: auto`) with a purple-tinted thin scrollbar. It is designed to read as content displayed on the stage's center screen.
-- `.console-player` sits at the top of that panel: a two-row block on the same glass, separated from the embeds below by a hairline border. The top row is a 34px circular `.track-playbtn` in accent purple beside a `.track-meta` column holding the `.track-title` and a small uppercase `.track-tag` reading "Drives the visualizer". The bottom row is the scrub: elapsed time, a full-width `.track-seek` range input, total time, with `.track-time` in a tabular-figure monospace so the digits do not jitter as they count.
+- `.console-player` sits at the top of that panel: a two-row block on the same glass, separated from the embeds below by a hairline border. The top row is a 34px circular `.track-playbtn` in accent purple beside a `.track-meta` column holding the `.track-title` and a small uppercase `.track-tag` carrying the track credit, currently "EOB, Azqato". The bottom row is the scrub: elapsed time, a full-width `.track-seek` range input, total time, with `.track-time` in a tabular-figure monospace so the digits do not jitter as they count.
 - `.track-seek` is a styled `input[type=range]`. Both `::-webkit-slider-thumb` and `::-moz-range-thumb` are set, because the two engines share nothing here; omitting either gives one browser the platform default thumb against a custom track. The input carries `disabled` in the markup and is enabled by JavaScript on `loadedmetadata`, so it can never be dragged before a duration exists.
 - The player is placed above the embeds rather than below because it is the only thing on the panel that drives the stage. Its position is the page's way of saying which control does something the others do not.
 - `.mode-controls` is a fixed centered row at `bottom: 1.5rem` holding the visible mode buttons and the page's footer pill.
@@ -555,6 +555,6 @@ Why a control rather than a hard freeze: WCAG 2.2.2 (Pause Stop Hide, Level A) r
 1. Reuse an existing component pattern before inventing a new one. Most new sections are a grid of one of the six card types already documented above.
 2. New shared colors go in `styles.css` as a token. A color used by exactly one page goes in that page's inline `:root`. A one-off brand tint may stay an inline `rgba()`.
 3. Keep the `1100px` max width and the `2rem` / `1.25rem` horizontal padding pair. A section that sets its own width will visibly fail to line up with the nav.
-4. Any new page copies the nav block verbatim from an existing page and moves the `class="active"` to its own link. There is no shared nav include yet.
+4. Never hand-edit the nav in a page. Since v2.8.8 it is generated: add the page to `PAGES` in `tools/build-nav.py`, run the script, and commit the result. The script stamps the block between the `<!-- NAV -->` marker and `</nav>` in every root-level page and sets `class="active"` itself. A hand edit survives until the next run and then vanishes without warning. Verify with `python tools/build-nav.py --check`.
 5. When a CSS value changes in the source, update the matching row in this document in the same commit. That rule predates this audit and is the reason the design system is still legible.
 6. Match the existing dark palette. There is no light theme and none is planned; do not add `prefers-color-scheme` handling.

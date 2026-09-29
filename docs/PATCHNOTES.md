@@ -5,6 +5,387 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.10.5] - 2026-09-28
+
+`privacy-policy.html` rewritten to describe this site rather than a generic one. The page was the last
+piece of the analytics decision: v2.10.0 fixed the copy that claimed the site had no analytics, but the
+privacy policy is the page a reader actually goes to when they want to know, and it was still generated
+boilerplate from 2024 describing a site with ads, accounts and cookies. 14,212 bytes down to 13,381,
+which is the right direction, because the old page was longer for being generic rather than for saying
+more.
+
+### Removed
+- **Consent**, which described a log-in flow that does not exist.
+- **Google DoubleClick DART Cookie**, **Advertising Partners** and **Third Party Privacy Policies**,
+  all of which described ad networks this site has never carried.
+- **Cookies and Web Beacons**, which explained cookie handling for a site that sets none.
+- **How We Use Your Information**, a list of uses for information that is never collected.
+
+A policy that describes the wrong site is worse than a short one. It is confidently wrong about exactly
+the thing the reader came to check, and every false protection in it makes the true statements next to
+it harder to believe.
+
+### Added
+- **The short version**, at the top, stating plainly that there are no accounts, forms, comments,
+  newsletters or ads, no cookies set by the site, and no marketing trackers, then naming the three
+  things that do see a visitor: the host, the analytics on the main domain, and the embedded players.
+- **Web server logs.** GitHub Pages records requests as any web server does, including IP address,
+  user agent, page and referrer. That is hosting infrastructure rather than a choice made here, and
+  GitHub controls that data under its own policy.
+- **Analytics on azqato.com.** The real disclosure, and the reason this milestone existed. It names
+  Cloudflare, says the script is injected at the edge before the page reaches the visitor, and is
+  specific about what kind of analytics it is, because "analytics" covers very different things: it is
+  cookieless, does not fingerprint, does not build a profile, does not follow anyone between sites and
+  is not shared with advertisers. It then says any blocker stops it and nothing on the site breaks,
+  which is true and is the part most policies leave out.
+- **Embedded players on the Music page.** Mixcloud and YouTube are loaded directly by the browser, so
+  they see the visitor's IP and may set their own cookies, and this happens on page load rather than on
+  play. No other page loads anything third party, and the one locally served track involves nobody.
+- **Your rights over your data.** States the GDPR and CCPA rights, then refuses the usual dodge: this
+  site holds no personal data to hand over or delete because it collects none, and the data that does
+  exist sits with GitHub, Cloudflare, Mixcloud and YouTube as separate controllers, so a request is
+  best made to them directly.
+- **Copyright**, pointing at `LICENSE.md`, closing the last place the site implied its source was free
+  to reuse.
+- **Changes and contact**, noting that the revision history is public so any change to this page can be
+  read in the repository, and ending by saying the page has not been reviewed by a lawyer and is not
+  legal advice.
+
+### Kept
+- Children's Information, Affiliate Links, Financial Disclaimer and Entertainment Purposes, which were
+  the four sections that were already accurate. The affiliate section gained a sentence naming where
+  the links actually appear, which is the Support page and parts of Invests.
+
+### Changed
+- Hero: "Last updated: 2024. Accessible from azqato.github.io" became "Last updated: 28 September 2026.
+  Applies to azqato.com and azqato.github.io, which serve the same site."
+
+---
+
+## [2.10.4] - 2026-09-28
+
+Page heads: titles, social sharing tags, meta descriptions and canonical URLs, on all 12 pages. The
+item with the actual payoff in this batch. Before this, every link shared to Discord rendered as a bare
+URL with no title card, on a site whose primary call to action is its Discord page, and all 12 browser
+tabs truncated to the same word.
+
+### Added
+Nine tags in every head, verified by count on each page rather than by spot-check: `<title>`,
+`<meta name="description">`, `<link rel="canonical">`, `og:title`, `og:description`, `og:url`,
+`og:type`, `og:site_name`, `twitter:card`.
+
+- All `og:url` and `canonical` values are absolute on `https://azqato.com/`, the canonical domain
+  decided at the audit. They are correct today: that domain already serves this site through
+  Cloudflare, and the `CNAME` decision that is still outstanding changes which host is formally
+  authoritative, not whether the address works.
+- **No `og:image`, which is the specification rather than an omission.** The documentation spec puts
+  images off by default, so `twitter:card` is `summary` rather than `summary_large_image`. Cards render
+  as text. Adding an image later changes both settings together and needs a real per-page image or one
+  credible default, not a logo stretched to fit.
+
+### Changed
+All 12 titles, from brand-first with a pipe (`Azqato | Projects`) to page-first with a suffix:
+
+| Page | Was | Now |
+|------|-----|-----|
+| `index.html` | Azqato \| Welcome | Azqato - Communities, Projects, Music |
+| `about.html` | Azqato \| About | About - Azqato |
+| `discord.html` | Azqato \| Discord | Discord Communities - Azqato |
+| `invests.html` | Azqato \| Invests | Investing Tools and Resources - Azqato |
+| `codes.html` | Azqato \| Codes | AI Prompts and Coding Tools - Azqato |
+| `music.html` | Azqato \| Music | Music and DJ Mixes - Azqato |
+| `links.html` | Azqato \| Links | All Links - Azqato |
+| `projects.html` | Azqato \| Projects | Projects - Azqato |
+| `youtube.html` | Azqato \| YouTube | YouTube Channels - Azqato |
+| `support.html` | Azqato \| Support | Support the Work - Azqato |
+| `accounts.html` | Azqato \| Accounts | Gaming Accounts - Azqato |
+| `privacy-policy.html` | Azqato \| Privacy Policy | Privacy Policy - Azqato |
+
+The two that identified nothing to a stranger, "Welcome" and "Codes", now say what the page is. The
+longest title is 38 characters against a 60 character budget, and no two pages share their first 30
+characters, which is roughly what a tab shows.
+
+### How it was applied
+By script, with a compliance gate that ran to completion before a single file was written. The gate
+failed the entire run on any title over 60 characters, any `og:title` over 70, any description over
+200, an `og:title` containing the site name, a non-index title missing the suffix, two pages sharing
+their first 30 characters, or a placeholder title. It passed on the first complete run. The ordering is
+the part worth repeating: a script that validates all of its input before touching any of 12 files
+cannot leave the repository half-edited.
+
+### Verified
+- `python tools/build-nav.py --check` clean, which matters because the nav block sits in all 12 heads.
+- Browser test in headless Edge against a local server on `index`, `projects`, `music` and
+  `privacy-policy`. All render correctly, with the music page's stage, lasers, local track, both
+  Mixcloud embeds and the visualizer mode buttons intact.
+- Still outstanding, because it cannot be done before deploying: paste two or three live URLs into
+  Discord and look at the cards. That is the only check that tests what this milestone is for.
+
+---
+
+## [2.10.3] - 2026-09-28
+
+Canonical domain, repository side. **Partial by design: the `CNAME` file was deliberately not created.**
+
+### Changed
+- `sitemap.xml`: all 12 `<loc>` values repointed from `azqato.github.io` to `azqato.com`, with a
+  comment recording that the canonical domain was decided on 2026-09-28.
+- `robots.txt`: the `Sitemap:` line and the header comment repointed.
+- `README.md`: the live link is now `https://azqato.com/`.
+- `docs/PRD.md`: the public-surface definition, the compatibility-entry example, the deploy step, the
+  Environments table, Monitoring, the north-star metric, the press release dateline and its call to
+  action. The unresolved note asking whether `azqato.com` was related to this repository was marked
+  resolved: it is this repository, served through Cloudflare. The absence of a `CNAME` had been read as
+  evidence the domain was unrelated, which was wrong.
+
+### Not changed, on purpose
+The `CNAME` file. It is the one change on the roadmap that can take the site down, and it depends on
+the DNS records and the GitHub Pages custom-domain setting, both of which live outside this repository
+and neither of which could be confirmed. Everything above is a text edit one revert undoes.
+
+This split is why the batch is coherent rather than contradictory. The owner had excluded v2.10.3 from
+the batch to avoid exactly this risk, which was sound, but v2.10.4 writes `azqato.com` into 12 page
+heads, and shipping that while the sitemap still said `azqato.github.io` would have left the site
+declaring one canonical address in its heads and another in its sitemap. That is worse than the
+ambiguity it started with: two hosts merely competing is something a crawler resolves conservatively,
+whereas an active contradiction invites it to pick, and it may not pick the intended one. Splitting on
+the line of what needs DNS, rather than on the milestone boundary, let the risky part wait while the
+rest shipped consistently.
+
+### Deploy verification stays on the origin
+The runbook still says to confirm a deploy by opening `azqato.github.io` rather than `azqato.com`, and
+that is now a documented decision rather than a leftover. Cloudflare sits in front of the canonical
+domain and caches, so a stale page there says nothing about whether GitHub Pages published, and a fresh
+one might be a cache hit from before the push. The origin answers the question the check is asking.
+
+---
+
+## [2.10.2] - 2026-09-28
+
+`.gitattributes` added at root, pinning `* text=auto eol=lf` with explicit `binary` lines for `*.mp3`,
+`*.jpg`, `*.jpeg`, `*.png`, `*.gif` and `*.ico`.
+
+### The finding that prompted this was wrong, and the correction is the useful part
+The v2.9.9 audit recorded that `music.html` was committed with CRLF while every other text file was LF,
+and scheduled a "deliberately noisy" commit that would rewrite all 12 pages. That was checked properly
+before running, with `git ls-files --eol`, which is the authoritative test. **Every committed blob in
+this repository was already LF, `music.html` included.** The CRLF existed only in the working tree, on
+`music.html` and `.vscode/settings.json`.
+
+What had been keeping the repository clean was `core.autocrlf=true` in the local git config, which
+converted silently on the way in. That is not part of the repository. A second machine, a CI runner or
+a fresh clone with a different setting would have committed CRLF, and nobody would have noticed until
+the diff arrived.
+
+So this file does not repair a broken repository. It moves a guarantee that was an accident of one
+machine's configuration into the repository, where every clone gets it. That is a better reason than
+the one the audit gave.
+
+`git add --renormalize .` produced **zero changes**. The predicted 12-file diff never existed. The
+sequencing advice that put this milestone first cost nothing and was sound reasoning, but it was
+reasoning built on a premise that was cheap to check and had not been.
+
+The lesson worth keeping: `git status` and editor line-ending indicators describe the working tree, not
+the repository. Only `git ls-files --eol` answers what is actually committed.
+
+### Note
+`tools/build-nav.py` still contains its deliberate code to preserve whatever line ending each file
+already uses. That note in the audit was accurate. It is belt-and-braces now rather than a workaround,
+and it was left alone.
+
+---
+
+## [2.10.1] - 2026-09-28
+
+`tools/build-nav.py`: the `SKIP` set listed `nav-extraction-test.html` and `reduced-motion-test.html`,
+neither of which has existed for some time. Leaving them there implied a rule the project no longer
+has, and the next reader would have had to check whether those files mattered.
+
+`SKIP` is now an empty set with a comment naming what used to be in it and why it is gone. Emptying it
+rather than deleting the mechanism costs one line and is the better shape: the loop that reads it is
+untouched, so the next person who genuinely needs to exclude a page adds a filename instead of
+rebuilding the feature. No behavioral change, since the script only ever iterated files that exist.
+`python tools/build-nav.py --check` reports the nav is up to date in every page, which is the same
+answer it gave before, and that is the point.
+
+Offered at the v2.9.9 audit and deferred with "revisit this later", then pulled back into scope the
+same day when the owner scheduled the batch.
+
+---
+
+## [2.10.0] - 2026-09-28
+
+Copy alignment, applied immediately after the v2.9.9 audit closed. The audit put six questions to the
+owner and all six were answered the same day. Five of the six became scheduled Roadmap milestones
+(v2.10.2 through v2.10.5). This entry covers the one part that was pure documentation and so was
+applied rather than scheduled: the sentences that had become false the moment a licence existed and
+the moment the Cloudflare beacon was found.
+
+### Changed
+- **External FAQ, the open-source answer.** It read "Yes. The site and nearly every project on it are
+  open source at github.com/Azqato." Now separates the two things it had run together: the individual
+  projects are mostly public repositories carrying their own licences, while this site is
+  source-available rather than open source, readable on purpose but reserved, with `LICENSE.md` setting
+  out what is granted and an invitation to ask for anything else.
+- **Press release boilerplate.** "Everything he builds is open source, runs entirely in the browser,
+  and is free to use" became "Everything he builds runs entirely in the browser and is free to use, and
+  most of the projects are public on GitHub."
+- **Security Model, what the site collects.** It read "None. No analytics, no cookies set by the site,
+  no tracking pixels, no forms, and no accounts." That was true of the source and false of what a
+  visitor to the canonical domain receives. It now states both: nothing from the site's own code, plus
+  GitHub's server-level request logging and the Cloudflare Web Analytics beacon injected into every
+  page served from `azqato.com`.
+- **External FAQ, "Why no analytics?" became "What analytics does the site use?"** The old answer
+  defended a position the site no longer holds. The honest description is now "no tracking of its own,
+  plus cookieless aggregate counts from the CDN", and the entry says so rather than defending the
+  earlier absolute claim, because Tenet 6 does not leave room for a claim that is technically about the
+  source while being false about what a visitor gets.
+- **North star metric.** The paragraph explaining the metric's weakness assumed no analytics existed at
+  all. Annotated: Cloudflare Web Analytics does hold real page-level visit counts that were never taken
+  into account when the metric was designed. Whether to start reading them, and whether the metric
+  should be redefined around them, is left unresolved rather than answered in passing.
+- `docs/TODO.md`: the six decided items moved out of Decisions Waiting On The Owner and into a Decided
+  section pointing at the Roadmap milestones, leaving three genuinely open items.
+
+### Decisions recorded
+All six are written up in full, with effort estimates, sequencing and open risks, under Decided At The
+v2.9.9 Audit in the PRD Roadmap. In brief: keep all rights reserved; `azqato.com` is canonical; keep
+the Cloudflare beacon and fix the copy; add the full sharing-tag set to all 12 pages; fix all 12 page
+titles in the same pass; add `.gitattributes` and normalize everything. The smaller cleanups in
+`docs/TODO.md` were offered and deferred.
+
+### Not changed
+- Nothing outside `/docs` and `README.md` was touched **in this version**. No page head, no title,
+  no `CNAME`, no `.gitattributes`, and no `privacy-policy.html`. All of those except the `CNAME`
+  shipped later the same day as v2.10.1 through v2.10.5. Those are the four scheduled milestones, and the
+  recommended order puts the renormalization first so its whitespace-only diff across all 12 pages
+  does not contaminate the head edits.
+- No version control command that changes state was run.
+
+---
+
+## [2.9.9] - 2026-09-28
+
+Full documentation audit, the first since v2.8.5 on 2026-08-24, covering the 17 commits since.
+Read every document in `/docs` in full plus the README, then checked them against the code in
+three passes. Four files created, 13 new discrepancies recorded, six questions left open for the
+owner. No page was browser-tested, because a documentation-only change is a minor update under
+the cadence policy this entry adopts.
+
+### Added
+- `LICENSE.md` at the repository root. The project had no licence text anywhere, while the README
+  invited people to copy the source. Adopted the all rights reserved, source-available default,
+  with sections covering no licence granted, AI search and automated access, no waiver, permission,
+  platform terms, third-party content, no warranty, and the not-financial-advice disclaimer. AI
+  referencing and quoting are granted; substitution is not; training data is routed to a request
+  on the public issue tracker.
+- `robots.txt` at the root. Confirmed missing by a live 404 on both hosts, not just absent from the
+  repository. Fully open to every crawler with no exclusions, carrying a comment that says the
+  openness is deliberate and that `LICENSE.md` wins if the two ever look like they disagree.
+- `sitemap.xml` at the root, listing all 12 pages, which is every page: none sits behind a sign-in.
+  Each `lastmod` is that page's last commit date read from git, not today's date. `robots.txt`
+  names it on a `Sitemap:` line.
+- `docs/TODO.md`. Seeded from open items already scattered through the other documents plus what
+  this audit turned up. It is a holding place, explicitly not an instruction list, and it is never
+  consolidated, merged, moved, or deleted.
+- PRD: six new sections. **Verification Environment** (verify locally, never against production;
+  `file://` does not count for `music.html` because it disables audio routing). **Testing Cadence**
+  (see Changed). **Repository Hygiene** (a policy record, reported as a table of 10 rules against
+  their actual state). **Licensing**. **Social Sharing Tags**. **Page Titles**, which this project had never recorded and   fails on all 12 pages, every one of them brand-first with a pipe separator so that every tab
+  truncates to the same string.
+- PRD Roadmap: a **Future updates** section, opening with a proposal for a progress dashboard built
+  from the prompt at `https://azqato.github.io/prompts/p/progress-dashboard.html`. Added rather than
+  adopted as a rule because this project has no `CLAUDE.md` and so no existing dashboard convention.
+- PRD Roadmap: a **Verification checklist** naming the seven areas whose claims were not read in code
+  at this audit and are carried forward on an earlier audit's authority.
+- PRD: Open Questions 9 through 14, and Documentation Versus Reality rows 21 through 33.
+
+### Changed
+- **Testing Cadence replaced the project's rule of that kind.** The old rule required a browser check
+  after every edit with no project-specific reason recorded for the frequency. The replaced wording
+  was, in How to Verify a Change: "There is no test suite, so verification is manual and specific. Do
+  all of these:", together with the Monitoring table row "Console errors | DevTools Console on the
+  changed page | After each change". The default now applies: browser tests use headless Edge with a
+  unique `--user-data-dir`; an assumption check and one browser test run immediately before a major
+  update ships; minor updates (wording, docs, comments, patch notes) ship without either; batched
+  edits are tested once; and confirming a deploy arrived is not a test. The verification steps
+  themselves are unchanged, and the section now says the cadence governs when they run, not what
+  they contain.
+- **Never Do These: the visualizer rule had inverted and was rewritten.** It read "Never claim in copy
+  that the music visualizer reacts to the audio. It does not." It does. `music.html` builds a real
+  `AnalyserNode`, calls `createMediaElementSource` on the native player, and drives the lights from
+  `getByteFrequencyData` every frame. The rule now draws the real line: true for the one same-origin
+  track, false for the cross-origin Mixcloud and YouTube embeds, and false on `file://` where
+  `canRouteAudio` is false and the page says so. The old wording is quoted in place. Following the old
+  rule would have required deleting true sentences from the README and the FAQ.
+- **README** made precise about analytics instead of left inaccurate. It claimed "no analytics, and no
+  tracking" without qualification. `azqato.com` and `www.azqato.com` both serve a Cloudflare Web
+  Analytics beacon, injected at the edge and not present in this repository's source;
+  `azqato.github.io` is clean. The README now distinguishes what the site's own code does from what
+  the `azqato.com` edge adds. Whether to keep the beacon is Open Question 12.
+- **README**: "The source is open. Read it, copy it, or use it as a starting point for your own site"
+  became a neutral pointer to `LICENSE.md`. A bare grant with no licence text behind it is an
+  ambiguity, and leaving it beside a reserved-rights licence would mislead a reader in one direction
+  or the other. The new wording asserts neither posture, pending Open Question 9.
+- **Documentation Process: the document set is five, not four.** The old text read "Exactly four
+  documents. No fifth file is created inside `/docs`", and maintenance rule 7 read "Never create a new
+  `.md` file in `/docs`. Add a section to one of the three instead." Both contradicted the newly
+  required `docs/TODO.md` and were updated to name it as the last addition.
+- DESIGN.md: four stale claims corrected. `styles.css` given as 2,282 bytes, actually 2,887 since the
+  v2.8.7 reduced-motion block. Only `lang-js` and `lang-html` described as in use; `lang-cs` joined
+  them in v2.9.8. `.track-tag` described as reading "Drives the visualizer", text removed in v2.9.4;
+  it carries the track credit now. Build rule 4 said "Any new page copies the nav block verbatim from
+  an existing page... There is no shared nav include yet", false since v2.8.8 and contradicting
+  DESIGN.md's own navigation section; replaced with the generator workflow, because as written it
+  instructed the reader to do the one thing Never Do These forbids.
+- PRD: `music.html` given as "roughly 91,000 bytes" in the Build section against 114 KB in nine other
+  places. It is 117,417 bytes. Shared CSS given as 2.3 KB, now 2.8 KB.
+- PRD: the Current Phase claim that "nothing is waiting on a decision any more" was true after v2.8.9
+  and is not now.
+- PRD: `2.9.5` added to the reserved version numbers, held for the visualizer brightness gate.
+- PRD: the em-dash compliance paragraph still named `.vscode/recentfedsummary.MD` as out of
+  compliance; that file was deleted in v2.8.9. Replaced with this audit's sweep result, which is zero
+  violations across every tracked file and the four new ones, with six exempt occurrences inside
+  backtick code spans where the rule names the character it prohibits.
+- PRD: the Browser Testing section said the Edge binary path "has not been verified on this machine".
+  It was verified at this audit.
+- PRD: the press release said fourteen tools; it is fifteen as of v2.9.7.
+- PRD: Working Practice gained a step to check `docs/TODO.md` before pushing, an explicit "ask before
+  pushing" step, and a note that confirming the deploy afterwards is a comparison rather than a test.
+- PRD: How An Audit Is Run gained five steps covering reading TODO.md, checking that required files
+  are actually served rather than merely mentioned, keeping a policy record separate from an action,
+  and naming what was not verified.
+
+### Fixed
+- The PRD's open question about whether `azqato.com` is related to this repository, which reasoned
+  from the absence of a `CNAME` file that it was not. It is: the domain serves this exact site through
+  Cloudflare, all 12 page footers link it, and git history shows a `CNAME` created and then deleted.
+  Answering it opened a larger one, because the repository now demonstrably has two live hosts and no
+  recorded canonical. See Open Question 10.
+
+### Not changed, on purpose
+- **No `CLAUDE.md` and no `/dashboard` were created.** An audit does not create a `CLAUDE.md` for a
+  project that has none, and with no existing progress-dashboard convention the standing rule was not
+  added either; a Future Updates roadmap entry proposes one instead.
+- **No `.gitattributes` was created**, though its absence is a real gap: `music.html` is committed CRLF
+  while everything else is LF, and `tools/build-nav.py` deliberately preserves per-file endings. A
+  blanket `eol=lf` would rewrite all 12 pages in one diff. Repository Hygiene is a policy record, not
+  an action, so this is recorded as a discrepancy and as Open Question 13.
+- **No page head was edited**, although all 12 pages carry zero `og:` tags, zero `twitter:` tags, no
+  meta description, and no canonical tag, and all 12 titles are brand-first. Social Sharing Tags and
+  Page Titles are both policy records, and the specification puts a page edit outside an audit. The
+  work was decided on the same day and is scheduled as Roadmap v2.10.4.
+- **`privacy-policy.html` was left as it is** at the audit. Boilerplate describing Google DART cookies
+  and ad networks this site does not have, recorded as row 17 and Open Question 6 since the v2.8.5
+  audit. The owner decided on 2026-09-28 to rewrite it, scheduled as Roadmap v2.10.5, and it is now
+  the page that has to carry the real Cloudflare disclosure.
+- **`tools/build-nav.py`'s `SKIP` set** still names two files that no longer exist. Harmless dead
+  configuration in a working script, outside this audit's write scope, logged in `docs/TODO.md`.
+- **No version control command that changes state was run.** Nothing was staged, committed, pushed, or
+  untracked by the audit.
+
+---
+
 ## [2.9.8] - 2026-09-28
 
 ### Added: Automate Fundamentals on the Projects grid

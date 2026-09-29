@@ -2,7 +2,7 @@
 
 Azqato's personal website: one place that introduces who he is and connects you to his communities, projects, videos, music, and investing resources.
 
-**Live site:** https://azqato.github.io/
+**Live site:** https://azqato.com/
 
 ---
 
@@ -25,7 +25,7 @@ The site is twelve pages, each doing one job.
 | **Gaming Accounts** | Where to find him in Steam, League of Legends, Teamfight Tactics, and RuneScape. |
 | **Privacy Policy** | What the site does and does not collect, plus the affiliate and financial disclaimers. |
 
-Everything is free to read and free to use. The site collects nothing about you: no accounts, no sign-ups, no analytics, and no tracking. The only parts that reach outside the page are the two embedded music players on the Music page.
+Everything on the site is free. The site's own code collects nothing about you: no accounts, no sign-ups, no analytics, no tracking. One caveat, stated plainly because the alternative is a claim that is not true: `azqato.com` is served through Cloudflare, which injects its own Web Analytics beacon into every page. The `azqato.github.io` address does not. Apart from that, the only parts that reach outside the page are the two embedded music players on the Music page.
 
 ---
 
@@ -50,5 +50,6 @@ Everything technical lives in [/docs](docs/):
 - [docs/PRD.md](docs/PRD.md) - what the site is, who it serves, how it is built, how to run and deploy it, and every convention it follows
 - [docs/DESIGN.md](docs/DESIGN.md) - colors, type, spacing, and the rules for building new UI
 - [docs/PATCHNOTES.md](docs/PATCHNOTES.md) - every change, dated
+- [docs/TODO.md](docs/TODO.md) - open work and decisions not yet made
 
-The source is open. Read it, copy it, or use it as a starting point for your own site.
+All of the source is public and free to read. [LICENSE.md](LICENSE.md) states what you may do with it.
