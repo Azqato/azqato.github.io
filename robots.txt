@@ -1,0 +1,18 @@
+# robots.txt for azqato.com
+#
+# Everything is allowed, for every crawler, with no exclusions and no crawl
+# delay. This is a deliberate choice, not an oversight and not a default that
+# nobody reviewed. The whole site is public, there is nothing behind a login,
+# there is no admin path, and the point of the site is to be found, including
+# by AI search and by the assistants people now ask instead of a search box.
+#
+# Being open to crawling is not a grant of copyright. LICENSE.md in the root
+# of this repository sets out what you may and may not do with what you find,
+# and if this file and LICENSE.md ever appear to disagree, LICENSE.md is
+# authoritative. In short: index it, quote it, link to it. Do not republish it
+# as your own, and ask first about training data.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://azqato.com/sitemap.xml

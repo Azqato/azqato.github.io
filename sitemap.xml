@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Every page on the site. All twelve are public: there is no login, no gated
+  content, and no page that renders differently for a signed-in visitor.
+  lastmod is the date of the last commit that changed that page.
+  The canonical domain is azqato.com, decided 2026-09-28. See the PRD, Open Question 10.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://azqato.com/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/about.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/projects.html</loc>
+    <lastmod>2026-09-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/invests.html</loc>
+    <lastmod>2026-09-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/music.html</loc>
+    <lastmod>2026-08-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/discord.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/youtube.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/links.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/support.html</loc>
+    <lastmod>2026-08-29</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/accounts.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/privacy-policy.html</loc>
+    <lastmod>2026-07-10</lastmod>
+    <priority>0.3</priority>
+  </url>
+</urlset>
