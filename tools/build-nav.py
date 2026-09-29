@@ -56,7 +56,10 @@ TEMPLATE = """<!-- NAV -->
   </nav>"""
 
 # Files that are in the project root but are not site pages.
-SKIP = {'nav-extraction-test.html', 'reduced-motion-test.html'}
+# Pages in the root that the nav is deliberately not stamped into. Empty today:
+# the two test harnesses that used to be listed here were deleted long ago, and
+# leaving their names in place implied a rule the project no longer has.
+SKIP = set()
 
 
 def nav_for(filename):
