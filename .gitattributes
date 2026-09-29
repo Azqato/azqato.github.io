@@ -1,0 +1,20 @@
+# Line endings are normalized to LF in the repository.
+#
+# Before this file existed, music.html was committed with CRLF while every other
+# text file was LF, git printed "LF will be replaced by CRLF" on most edits, and
+# tools/build-nav.py carried explicit code to preserve whatever ending each file
+# already had rather than normalizing it. That workaround exists because of the
+# inconsistency this file removes.
+#
+# Adopted in v2.10.2. The commit that added it renormalized all 12 pages, which
+# is why that commit touches every file and changes nothing you can see.
+
+* text=auto eol=lf
+
+# Binaries: never touched, never normalized, never diffed as text.
+*.mp3 binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
