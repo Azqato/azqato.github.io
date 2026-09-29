@@ -39,6 +39,19 @@ Internal nav and body links still use `.html`. On `azqato.com` every internal cl
 batch introduced, and changing it means touching the nav generator and every page body, which is a
 separate decision. Recorded in `docs/TODO.md`.
 
+### Also verified, and one trap recorded
+Every declared canonical URL and every `sitemap.xml` entry was resolved against both hosts after the
+deploy: 12 of 12 return 200 directly, with no redirect, on `azqato.com` and on `azqato.github.io`.
+
+The Cloudflare analytics beacon was re-checked at the same time and **nearly produced a false
+correction.** A plain `curl https://azqato.com/` returns a page with no beacon in it, which looks like
+proof the analytics had been switched off and the privacy policy shipped hours earlier was wrong. It
+is not. Cloudflare injects the beacon only when the request carries an `Accept: text/html` header,
+which every real browser sends and `curl` does not. With the header it appears deterministically, on
+`azqato.com` and never on `azqato.github.io`. The privacy policy is accurate as written. The check is
+recorded in the PRD Security Model so the next person does not "fix" a correct page on the strength of
+a bare `curl`.
+
 ### Worth keeping
 The deploy check is what caught this. Confirming that a page went live is a weaker check than asking
 whether the thing shipped is actually correct against the live site, and the second one is what found
