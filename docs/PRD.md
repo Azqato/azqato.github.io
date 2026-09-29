@@ -1391,6 +1391,7 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 | v2.10.3 | Restore `azqato.com` as the canonical domain | 2026-09-28 | **Partial.** Everything in the repository is done. The `CNAME` is deliberately held back pending DNS confirmation |
 | v2.10.4 | Page heads: titles, sharing tags, canonical | 2026-09-28 | Complete. All 12 pages |
 | v2.10.5 | Rewrite `privacy-policy.html` | 2026-09-28 | Complete |
+| v2.10.6 | Canonical URLs repointed to the extensionless form | 2026-09-28 | Complete. Same-day fix to a v2.10.4 defect found by verifying the deploy |
 | v2.9.5 | Gate the remaining pulsing on the fire | Next | Open. Requested 2026-09-01 |
 | v2.9.0 | Full catalog native, Mixcloud embeds removed | Next | In progress, waiting on the remaining audio files |
 | v3.0.0 | Contact / hire-me section | No date | Planned |
@@ -1713,6 +1714,32 @@ And the `og:title` values, which carry no brand because the card prints `og:site
 | v2.9.0 full catalog native | Blocked on the remaining audio files arriving. |
 | The brand and mascot decisions | Owner decisions, not work. In `docs/TODO.md`. |
 
+### v2.10.6 - Canonical URLs repointed to the extensionless form (XS) - COMPLETE 2026-09-28
+
+**What.** `rel="canonical"` and `og:url` on the 11 non-index pages, and the matching 11 `<loc>` values
+in `sitemap.xml`, changed from `https://azqato.com/page.html` to `https://azqato.com/page`.
+
+**Why.** v2.10.4 shipped `https://azqato.com/projects.html` in every head. Verifying the deploy showed
+`azqato.com` returns **307 to `/projects`**: there is a Cloudflare rule stripping the extension, which
+was not recorded in any document and which the audit could not have seen, because it was reading the
+repository rather than the live responses. Every canonical tag was therefore pointing at a URL that
+immediately redirects, which undercuts the only thing a canonical exists to assert.
+
+**Checked before changing anything.** The extensionless form returns 200 on both hosts. GitHub Pages
+serves `/projects` for `projects.html` natively, so the declared URLs are correct on the origin too,
+which matters while the `CNAME` is outstanding and the origin is still what the runbook checks.
+
+**Not in scope.** Internal links still carry `.html`, so on `azqato.com` every internal click takes a
+307 first. That predates this batch and fixing it means changing the nav generator and every page
+body. Tracked in `docs/TODO.md`.
+
+**The general point, which is the reason this is written up rather than quietly patched.** The head
+tags were generated from the repository's filenames. Nobody asked what the canonical host does with
+those filenames, and the canonical host does something. **A URL is a claim about a live system, and
+it can only be verified against that system.** Confirming a deploy landed is not the same check as
+confirming that what landed is correct, and this project's runbook had the first and not the second.
+See the addition to the Verification checklist.
+
 ### The planned batch, scheduled 2026-09-28
 
 The owner scheduled **v2.10.1, v2.10.2, v2.10.4, and v2.10.5 as a single pass**, deliberately leaving
@@ -1810,9 +1837,13 @@ Proposals that are not yet milestones. Each one states what it is, why it might 
 
 Claims in this document and in DESIGN.md that were **not** read in the code at the v2.9.9 audit, and are therefore carried forward on the authority of an earlier audit rather than on a fresh reading. They are not known to be wrong; they are unverified, which is a different thing, and the next audit should start here.
 
+**A category this checklist did not have, added 2026-09-28 after it cost something.** Some claims cannot be verified by reading the repository at all, because they are claims about what a live host does. Reading every file in this project will never tell you that `azqato.com` 307-redirects `/projects.html` to `/projects`, because that rule lives in a Cloudflare configuration that is not in the repository and is not documented anywhere else either. v2.10.4 shipped 11 canonical tags pointing at redirecting URLs for exactly this reason, and only a request to the live site found it. **Anything the site asserts about a URL, a header, or a response belongs in this category**: canonical tags, `og:url`, sitemap entries, the analytics beacon, redirect behaviour between the two hosts, and anything involving Cloudflare. The check is a request, not a read.
+
 | Section | What is unverified | Why it was not checked |
 |---------|--------------------|------------------------|
 | Data Models, for `about.html`, `index.html`, `discord.html`, `youtube.html`, `codes.html`, `links.html`, `accounts.html` | The per-page card and section tables. | The v2.9.9 audit read `projects.html` and `invests.html` closely, because that is where the change since the last audit landed, and read `music.html` only in the regions bearing on the visualizer claim. The other seven pages were read only in their `<head>`, for the sharing-tag check. |
+| **Live-host behaviour on `azqato.com`** | What Cloudflare does to requests beyond injecting the analytics beacon. One redirect rule was found on 2026-09-28; whether there are others, and what the cache, header, and `www` behaviour are, is unknown. | Nothing about the Cloudflare configuration is in this repository or recorded in any document. It can only be established by making requests, and it was never checked until a shipped defect forced it. |
+| **Internal link shape** | Whether every internal `href` resolves without a redirect on the canonical domain. It does not: they all carry `.html` and all take a 307. | Known and deliberate as of v2.10.6. Recorded in `docs/TODO.md` as a decision for the owner, not a defect. |
 | Third-Party Integrations | That every Discord invite, affiliate URL, and embed still resolves. | Requires clicking each one. The Monitoring table already schedules this monthly; an audit is not the place for it. |
 | Performance metrics and Targets | Load time, Lighthouse scores, and the sub-second claim. | Nothing was measured this audit. The figures date from the v2.8.5 audit. Page weights were re-measured and are current. |
 | DESIGN.md, spacing scale, breakpoint values, and the six component patterns | That each documented value matches the CSS. | Only `styles.css`'s size and the four specific stale claims were checked. The token tables were not re-read against the inline `<style>` blocks. |
@@ -1860,6 +1891,7 @@ Every document was compared against the source at the v2.8.5 audit, and again at
 | 30 | No `.gitattributes`, in a repository where `music.html` is CRLF, everything else is LF, and the nav generator preserves per-file endings on purpose. | Code and configuration. | Not created at the audit, because Repository Hygiene is a policy record rather than an action and the fix is a deliberately noisy 12-file commit. **Decided 2026-09-28: add it and normalize everything.** Scheduled as Roadmap v2.10.2 and recommended to run first, so the whitespace-only diff lands in its own commit instead of contaminating the head edits. Open Question 13 closed. **Shipped 2026-09-28 as `5070b3b`, and the finding itself was wrong.** `git ls-files --eol` shows every committed blob was already LF, `music.html` included; the CRLF was confined to the working tree and `core.autocrlf=true` was doing the normalizing. `git add --renormalize .` produced zero changes. The file is still correct to have, for the better reason that it moves the guarantee out of one machine's local config. See Repository Hygiene. |
 | 31 | The PRD stated that `azqato.com` was probably unrelated to this repository, reasoning that the absence of a `CNAME` file meant this repository does not serve that domain. | The live web. `azqato.com` returns this exact site. Git history shows a `CNAME` was created and then deleted, and all 12 page footers link `azqato.com`. | Answered, and it turned into a bigger question than it was. The domain does serve this site, through Cloudflare. Which of the two hosts is canonical is now Open Question 10, and it blocks the sharing tags. |
 | 32 | `tools/build-nav.py` has a `SKIP` set naming `nav-extraction-test.html` and `reduced-motion-test.html`. Neither file exists. | Code and the filesystem. | Not changed; it is harmless dead configuration in a script, not a documentation defect, and editing a working script was outside this audit's write scope. Logged in `docs/TODO.md`. |
+| 35 | The 11 non-index canonical and `og:url` tags shipped in v2.10.4 pointed at `https://azqato.com/page.html`, which the canonical domain 307-redirects to `https://azqato.com/page`. The 11 matching `sitemap.xml` entries had the same problem. | The live site, which is the only source that could have answered this. A Cloudflare rule strips the extension; it is not in this repository and is not documented anywhere. | **Fixed the same day as v2.10.6**, before anyone could have shared a link. Both hosts return 200 on the extensionless form, so the repointed URLs are correct on the origin too. Found by checking the deployed site rather than by checking that the deploy landed, which is the distinction now written into the Verification checklist. Internal links still use `.html` and still redirect; that is deliberate and tracked in `docs/TODO.md`. |
 | 34 | All 12 page titles are brand-first with a pipe separator (`Azqato \| Projects`), so every tab truncates to the same visible string and the pixel budget is spent on the one word that is identical everywhere and already shown by the favicon. Two page names, "Welcome" and "Codes", identify nothing to a stranger. | The specification's Page Titles rule, read in full after the owner supplied it. This section had never been recorded in this project, so there was no existing project rule to defer to. | Policy written into the new Page Titles section with the current state of all 12 titles tabulated. **Decided 2026-09-28: fix the titles**, in the same pass as the sharing tags, since both edit the same heads. Replacement titles are specified in Roadmap v2.10.4. Not applied at the audit: changing a title is a page edit, which the specification puts outside an audit. **Applied 2026-09-28** in that milestone. Every title is page-first with a ` - Azqato` suffix; the longest is 38 characters against a 60 character budget; no two share their first 30 characters. "Welcome" and "Codes" became "Azqato - Communities, Projects, Music" and "AI Prompts and Coding Tools - Azqato". Resolved. |
 | 33 | No `CLAUDE.md` and no `/dashboard`. | Filesystem. | Neither was created. A `CLAUDE.md` is not created by an audit for a project that has none. Because no progress dashboard convention exists, the standing rule was not added either; instead a Future Updates roadmap entry proposes one, built from the linked prompt. |
 

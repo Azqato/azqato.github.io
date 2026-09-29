@@ -5,6 +5,49 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.10.6] - 2026-09-28
+
+Canonical and `og:url` repointed at the URLs `azqato.com` actually serves. A same-day fix to a defect
+introduced by v2.10.4, found by verifying the deploy rather than assuming it.
+
+### The defect
+v2.10.4 wrote `https://azqato.com/projects.html` into every canonical and `og:url` tag. Checking the
+live site afterwards showed that `azqato.com` **307-redirects `/projects.html` to `/projects`**. There
+is a Cloudflare rule stripping the extension, which nobody had recorded anywhere, and the audit never
+saw it because it was reading the repository rather than the responses.
+
+So all 11 non-index pages were declaring a canonical URL that immediately redirects. That is a
+self-defeating signal: the tag says "the authoritative address is X", and X replies "no, it is Y". A
+crawler will usually follow it and land in the right place, but a canonical is a statement about the
+preferred address, and pointing it at a redirect weakens the one thing it exists to assert. The
+sitemap had the same 11 URLs and the same problem.
+
+### Changed
+- All 11 non-index pages: `rel="canonical"` and `og:url` drop the `.html`.
+- `sitemap.xml`: the same 11 `<loc>` values, with a comment recording why the URLs are extensionless
+  so the next person does not "fix" them back.
+- `index.html` was already correct. It declared `https://azqato.com/`, which returns 200 directly.
+
+Verified on both hosts before changing anything: the extensionless form returns 200 on `azqato.com`
+and on `azqato.github.io`, because GitHub Pages serves `/projects` for `projects.html` natively. The
+declared URLs are therefore correct on the origin as well, which matters while the `CNAME` is still
+outstanding.
+
+### Not changed
+Internal nav and body links still use `.html`. On `azqato.com` every internal click therefore takes a
+307 before landing. That is a pre-existing condition of the Cloudflare rule rather than anything this
+batch introduced, and changing it means touching the nav generator and every page body, which is a
+separate decision. Recorded in `docs/TODO.md`.
+
+### Worth keeping
+The deploy check is what caught this. Confirming that a page went live is a weaker check than asking
+whether the thing shipped is actually correct against the live site, and the second one is what found
+a redirect rule that exists in nobody's documentation. The gap was not in the code; it was that the
+head tags were written from the repository's filenames without ever asking what the canonical host
+does with them.
+
+---
+
 ## [2.10.5] - 2026-09-28
 
 `privacy-policy.html` rewritten to describe this site rather than a generic one. The page was the last
