@@ -795,3 +795,48 @@
 .pp-page .src-stocks .app-table-wrap {
   min-height: 70vh;
 }
+
+/* Pager: each button fits its text; Next sits at the right edge even when it's
+   alone (Home), Previous at the left (FAQ), so no half-width empty column. */
+.pp-pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.pp-pager-link {
+  min-width: 200px;
+  max-width: 100%;
+}
+
+.pp-pager-link--next {
+  margin-left: auto;
+}
+
+/* invests.html's last section ends with 48px of padding; above the pager that
+   doubled the gap on Home and Resources. The pager's 32px margin is enough. */
+.src-invests .section:last-child {
+  padding-bottom: 0;
+}
+
+/* Sidebar note sits at the bottom of the sidebar, under the groups: the
+   sidebar is a full-height column and the note's wrapper takes the leftover
+   space above it. When open groups fill the column, it follows them, 32px below. */
+.pp-sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-sidebar > * {
+  flex-shrink: 0;
+}
+
+.site-sidebar-foot {
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.site-sidebar-foot .pp-sidebar-card {
+  margin-top: 0;
+}

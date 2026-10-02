@@ -2,7 +2,7 @@
 
 This is the product requirements document for Azqato Invests: one site, in its own repo, that merges the stocks, vix and leverage sites with the current invests.html page, built on the documentation-site template. It's the main reference for anyone working on the project, person or AI model. It holds the whole plan, the technical setup, the standing rules and how work is done here, so the project can be understood without reading any code.
 
-- **Stage:** planning is done apart from a few open points (see Risks and Open Questions). No site files exist yet. Where this document describes the site, it describes the plan, not code; the verification checklist in the Roadmap shows which sections have been checked, and against what.
+- **Stage:** live since 2026-10-02 at https://azqato.com/invests/, as the `invests/` folder of the azqato.github.io repository, which is this project's single source of truth (Repository Hygiene). See Roadmap, Current phase, for what's next. Earlier text: planning is done apart from a few open points (see Risks and Open Questions). No site files exist yet. Where this document describes the site, it describes the plan, not code; the verification checklist in the Roadmap shows which sections have been checked, and against what.
 - **Last documentation audit:** 2026-10-01 (see Documentation audits). The next audit starts from this date.
 - **Other documents:** [README.md](../README.md) is the short public front door. [DESIGN.md](DESIGN.md) covers how the site looks. [PATCHNOTES.md](PATCHNOTES.md) logs every change. [TODO.md](TODO.md) is the author's ideas list. [LICENSE.md](../LICENSE.md) sets the terms of use.
 - **Where the plan came from:** until 2026-10-01 the whole plan lived in README.md. The documentation audit on that date moved it here and into DESIGN.md word for word. Text marked "Added by the 2026-10-01 audit" is new.
@@ -275,6 +275,10 @@ Added by the 2026-10-01 audit:
 ## Roadmap
 
 ### Current phase
+
+**Update 2026-10-02, live (azqato.github.io v2.11.0 to v2.11.1):** the author gave the go-ahead (D20) and the azqato.github.io repository was pushed. The site is live at https://azqato.com/invests/ and (GitHub Pages) azqato.github.io/invests/. What the merge added outside `invests/`: `invests.html` became a one-file redirect page to `invests/index.html`; a new `_redirects` sends `/invests` and `/invests.html` to `/invests/` with 301 on Cloudflare Pages (GitHub Pages ignores it); the nav (tools/build-nav.py), the Home explore card and the Links page button point at `invests/index.html`; sitemap.xml lists https://azqato.com/invests/ and robots.txt gained `Sitemap: https://azqato.com/invests/sitemap.xml`; the pre-commit hook skips `invests/inventory/`. Links use `index.html` explicitly so they also work from file://, where a folder link shows a directory listing. Post-deploy check (a comparison): the served page and asset files match the local copies byte for byte; /invests and /invests.html answer 301 to /invests/ in one hop; azqato.github.io/invests.html redirects; Home, the Screener and the VIX Dashboard load live data in both themes with no script errors. The separate local repository (`../invests`, last commit `9120a25`) is retired and will be deleted (Repository Hygiene). The working notes from the session that did this (an uncommitted HANDOVER.md) were moved into this document and deleted.
+
+Next, in order: P7.9 (the author reviews the live site); then the post-launch list under Future updates (P13); later P11, P12 and P14.
 
 **Update 2026-10-02, hosting decided (v0.18.0):** Question 18 answered with option D: the site merges into the azqato.github.io repository as an `invests/` folder, at https://azqato.com/invests/ (D21). Canonical links, og:url and sitemap.xml now use azqato.com's clean addresses (no .html). This repository's history was rewritten to remove the private project's name (Question 16). The files are committed to the main repository locally; nothing is pushed.
 
@@ -707,6 +711,8 @@ Needs: P8 and an answer to Question 1 (the address). Prepares; publishes nothing
 
 Only on the author's explicit go-ahead (D20).
 
+**Done 2026-10-02 (steps 1 to 3):** pushed, deploy confirmed against the local copy, and data feeds and both themes checked live (Current phase). Steps 4 and 5 moved to P13 at the author's request. Step 6 is done in practice (azqato.com's nav, Home card and Links page link the site); step 7 is open.
+
 1. Push and deploy.
 2. Confirm the deploy: fetch every deployed file and compare it with the local copy.
 3. Check the live site's data feeds and both themes.
@@ -1037,6 +1043,17 @@ No rule existed, so the default was adopted on 2026-10-01. It covers the docs, t
 - Leave any instance the text needs in order to mean anything, such as a rule naming the character it prohibits.
 - Tone: direct and functional, plain declarative sentences, no marketing language, no filler openings.
 - Text moved from the sources comes over as it is (core rule), with one exception the author approved on 2026-10-01 (Question 14): em dashes in moved text are replaced under this rule, the wording otherwise unchanged, and every replacement is listed in PATCHNOTES.md. scripts/check.py fails on any em dash in page text.
+#### P13. Post-launch list (added 2026-10-02, at the author's request)
+
+1. **D7 redirects for the 19 old addresses (on the roadmap; ask before starting, it changes the stocks, vix and leverage repos).** Each old page becomes a redirect page to its new address, keeping every data file serving (stocks `data/`, vix `data/vix.js`). Per page: the old title, `<link rel="canonical" href="NEW">`, `<meta http-equiv="refresh" content="0; url=NEW">`, `<script>location.replace("NEW" + location.hash)</script>` and a plain link. Check each lands in one hop. The list is under Deprecation and Removal. The old sites are served under azqato.github.io (and under azqato.com only if those repos have their own Cloudflare setup; check before writing the redirects).
+2. **The author's review of the live site (P7.9)**, then P7.10 (the drafted PRD sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ).
+3. **Two dead outside links on Resources (on the roadmap),** from the old invests.html: dividendstocksonline.com (expired certificate) and www.denvercondomania.com (times out). Source content, so fixed or removed only with the author's approval (P11).
+4. **Delete the empty github.com/Azqato/invests repository** once testing of the live site is finished (author's decision, 2026-10-02). It was never pushed to and isn't needed for hosting.
+
+#### P14. Fold invests into azqato.com's structure (later; design needed; ask first)
+
+The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
+
 - Record each sweep in PATCHNOTES.md: how many instances were found, and where. The 2026-10-01 sweep found none.
 
 ## Browser Testing
@@ -1341,11 +1358,14 @@ How anyone, person or AI model, works on this project. These are instructions, n
 - Never cut, trim or summarize source content without the author's sign-off. The author called the core rule very important, and lost content is the failure this project exists to avoid.
 - Never push, publish or deploy without the author's say-so (D20). A publish can't be taken back from caches, search engines or the people who saw it.
 - Never take rules, docs or design from azqato.github.io (D5). It's a separate project with different decisions, and copying its rules would silently override this repo's.
-- Never change the stocks, vix, leverage or azqato.github.io repos as part of work here unless the author asks. They keep the data and the live sites running (D6, D7).
+- Never change the stocks, vix or leverage repos, or azqato.github.io outside `invests/`, as part of work here unless the author asks. Where the two meet (nav, sitemap, robots, redirects), update both sets of docs; the main repository's own docs (docs/PRD.md, DESIGN.md, PATCHNOTES.md) govern everything outside `invests/`. They keep the data and the live sites running (D6, D7).
 - Never correct out-of-date content while moving it (D19). The move is checked against unchanged text, and corrections come later in one pass.
 - Never add tracking, accounts, or anything that needs a server. The site has none by design (Assumptions, Non-goals).
 - Never redefine a theme.css token; give this site its own tokens instead (DESIGN.md). The templates depend on the shared tokens meaning the same thing everywhere.
 - Never put passwords, keys or other secrets anywhere in the repo, TODO.md included.
+- Never name the author's private project anywhere in the repository (docs, code, commits); the repository is public. The backup bundle of the old invests history (C:/Users/nine5/invests-history-backup-2026-10-02.bundle, made before `git filter-repo` removed the name) still contains it and must never be pushed anywhere.
+- Never stage with `git add -A` or `git add .` in the azqato.github.io repository; stage files by name. The author keeps unrelated uncommitted work there (for example `.vscode/settings.json`, `music/`, `test-local-audio.bat`). Never use `--no-verify`.
+- Never stop a server you didn't start; stop test servers by their own PID. A broad kill once stopped the author's other servers.
 - Never create a CLAUDE.md during an audit. The project has none; if the author adds one, its rules are recorded in this section, with a line saying CLAUDE.md is the copy Claude reads and that the two change together.
 
 **How to verify a change**, following Testing Cadence:

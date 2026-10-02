@@ -2,6 +2,25 @@
 
 Every change to this project, newest first. Versions follow semantic versioning and stay below 1.0.0 until the site launches (see Conventions in PRD.md). Dates come from the system clock.
 
+## v1.0.1 - 2026-10-02 - Pager and sidebar note
+
+### Changed
+
+- Pager: each button fits its text instead of taking half the page. Next sits at the right edge even when it's alone (Home), Previous at the left (FAQ), so there's no empty half-width column (assets/css/site.css).
+- Home and Resources: the gap above the pager is 32px like every other page; invests.html's last section no longer adds its 48px bottom padding there.
+- Sidebar: the "Educational use only. Not financial advice." note sits at the bottom of the sidebar, on two lines (scripts/site.py wraps it in `.site-sidebar-foot`; site.css pins it). When open groups fill the sidebar it follows them, 32px below.
+- Docs: the session handover (HANDOVER.md, never committed) moved into PRD.md: the live state under Current phase, P10 marked done for steps 1 to 3, P13 (post-launch list: D7 redirects, the author's review, the two dead Resources links, deleting the empty Azqato/invests repository after testing) and P14 (folding into azqato.com's structure), and four Never rules (the private project and the backup bundle, staging by name, stopping only your own servers). Repository Hygiene and the Runbook describe `invests/` as the single source of truth.
+
+### Tested
+
+- `python scripts/check.py`: 21 pages, 0 failures. `python scripts/browser.py`: 0 failures, the usual 9 notes. Pager measured in headless Edge at 1550px and 390px on Home, Learn/Metrics and FAQ; sidebar note measured at the bottom of the sidebar at 2100x1250.
+
+## v1.0.0 - 2026-10-02 - Live
+
+### Changed
+
+- Published at https://azqato.com/invests/ as part of azqato.github.io v2.11.0 (D20 go-ahead). Post-deploy check passed (PRD, Current phase). The separate repository is retired; `invests/` in azqato.github.io is the single source of truth.
+
 ## v0.18.0 - 2026-10-02 - Merging into the main site
 
 ### Changed

@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.11.2] - 2026-10-02
+
+### Changed
+- Azqato Invests v1.0.1: the pager buttons fit their text, with Next at the right edge; the gap above
+the pager on Home and Resources matches the other pages; the sidebar's "Educational use only. / Not
+financial advice." note sits at the bottom of the sidebar on two lines.
+- The working notes from the merge (HANDOVER.md, never committed) moved into invests/docs/PRD.md
+and were deleted. The post-launch list (old-site redirects, the two dead Resources links, deleting
+the empty Azqato/invests repository after testing) is on the invests roadmap (P13).
+
+---
+
 ## [2.11.1] - 2026-10-02
 
 ### Changed

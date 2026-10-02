@@ -498,7 +498,7 @@ def sidebar(page):
     </button>
   </div>
   {"".join(groups)}
-  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+  <div class="site-sidebar-foot"><div class="pp-sidebar-card"><p><strong>Educational use only.</strong><br>Not financial advice.</p></div></div>
 </nav>
 <div class="pp-scrim" id="pp-scrim" hidden></div>
 """
