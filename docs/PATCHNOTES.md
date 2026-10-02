@@ -5,6 +5,16 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.11.1] - 2026-10-02
+
+### Changed
+- `invests/` in this repository is now the single source of truth for Azqato Invests. The separate
+local repository it was built in is retired and will be deleted; nothing is edited there.
+- invests/docs/PRD.md: Repository Hygiene, the Runbook's Local setup, Build and Deploy, and Rollback
+describe working in `invests/` here instead of copying from the separate repository.
+
+---
+
 ## [2.11.0] - 2026-10-02
 
 Azqato Invests moves in. The investing site built in its own repository (stocks, vix and leverage

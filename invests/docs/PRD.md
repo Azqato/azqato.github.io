@@ -753,7 +753,7 @@ Each PRD and DESIGN.md section that describes the code, and when it was last che
 | Section | Status |
 |---|---|
 | PRD: Folder structure (current tree) | Verified 2026-10-02 against the folder listing (P8) |
-| PRD: Repository Hygiene (current state) | Verified 2026-10-02: local git repository on `main`, no remote; `.gitattributes` and `.gitignore` present; github.com/Azqato/invests exists but isn't connected |
+| PRD: Repository Hygiene (current state) | Updated 2026-10-02: lives in the azqato.github.io repository as `invests/` (single source of truth); `.gitattributes` and `.gitignore` present; the separate repository is retired |
 | PRD: What's being merged (source page lists) | Verified 2026-10-02 against fresh snapshots of stocks, vix, leverage and azqato.github.io (P7.1) |
 | PRD: System architecture | Verified 2026-10-02 against scripts/site.py and the built pages |
 | PRD: Tech stack | Verified 2026-10-02: no manifests; Python 3.14.3, bs4, Playwright; Lighthouse through npx for P7 only |
@@ -806,20 +806,20 @@ Rewritten 2026-10-02 (P8.3) from what was actually run. Deploy and Rollback are 
 - Python 3, for the scripts and the local web server. The maintenance machine has Python 3.14.3; any Python 3 with the standard `http.server` module serves the site.
 - For the scripts: BeautifulSoup 4 (`pip install beautifulsoup4`) for scripts/site.py, scripts/inventory.py and scripts/check.py, and Playwright (`pip install playwright`) for scripts/browser.py. Playwright drives the installed Edge, so no browser download is needed.
 - Read access to the private `Azqato/templateinterface` repo, to copy the template files: for example the GitHub CLI (`gh`) logged in as Azqato. Version 2.101.0 was used on 2026-10-01.
-- Git. The folder has been a repository since 2026-10-01 (Repository Hygiene).
+- Git. The folder lives in the azqato.github.io repository since 2026-10-02 (Repository Hygiene).
 - No package manager or runtime for the site itself. Node.js is optional and only used to run Lighthouse from the command line (`npx lighthouse`; Node 24.19.0 on the maintenance machine).
 
 ### Local setup
 
-1. Get the folder. It's a local git repository with no remote; the only copy is the working folder on the maintenance machine, inside OneDrive. github.com/Azqato/invests exists but isn't connected (D20).
-2. From the repository root, run `python -m http.server 8000`.
-3. Open http://localhost:8000/ in Edge. Port 8000 is `http.server`'s default. Stop the server with Ctrl+C in its window.
+1. Get the folder: clone github.com/Azqato/azqato.github.io; the site is its `invests/` folder.
+2. From `invests/`, run `python -m http.server 8000` (the browser test serves it this way), or from the repository root to test under the real base path.
+3. Open http://localhost:8000/ (or http://localhost:8000/invests/) in Edge. Port 8000 is `http.server`'s default. Stop the server with Ctrl+C in its window.
 
 Opening a page straight from disk (file://) may work for static pages, but expect the data tools to fail there, since browsers restrict fetch() on file:// pages (not tested in this project).
 
 ### Build
 
-The served site has no build step: the committed files are the site. The pages are generated, though, and committed (Repository Hygiene). After changing scripts/site.py, assets/css/site.css or the sources, from the repository root:
+The served site has no build step: the committed files are the site. The pages are generated, though, and committed (Repository Hygiene). After changing scripts/site.py, assets/css/site.css or the sources, from `invests/`:
 
 1. `python scripts/snapshot.py`: fresh read-only copies of the source pages and Template Interface's files in `_sources/` (needs `gh` logged in as Azqato for the private template repo).
 2. `python scripts/inventory.py`: the core rule's inventories, from the snapshots.
@@ -831,17 +831,17 @@ Steps 1 and 2 are only needed when a source changed. On Windows, set `PYTHONIOEN
 
 ### Deploy
 
-Rewritten 2026-10-02 for D21's latest form (Question 18); not run. Only on the author's go-ahead (D20).
+Rewritten 2026-10-02 after the merge into the azqato.github.io repository (D21). Only on the author's go-ahead (D20).
 
-1. Build and test here (Build, steps 1 to 5) and commit in this repository.
-2. Copy the tracked files into the azqato.github.io repository's `invests/` folder (`git ls-files` here, copied with the same paths); `_sources/` stays out (ignored there as `invests/_sources/`).
-3. In that repository: check the em-dash hook passes, run `python invests/scripts/check.py`, commit, and push `main`. Cloudflare Pages rebuilds azqato.com and GitHub Pages rebuilds azqato.github.io.
+1. Build and test in `invests/` (Build, steps 1 to 5).
+2. From the repository root: commit, staging files by name; the pre-commit hook checks for em dashes (it skips `invests/inventory/`).
+3. Push `main`. Cloudflare Pages rebuilds azqato.com and GitHub Pages rebuilds azqato.github.io.
 4. Post-deploy check (a comparison, not a test): fetch each file under https://azqato.com/invests/ and compare it with the local copy; check /invests and /invests.html land on /invests/ in one hop; open Home, the Screener and the VIX Dashboard live in both themes.
 5. Then the D7 redirects in the old repos (Deprecation and Removal).
 
 ### Rollback
 
-Locally: `git revert <commit>`. Once pushed: revert the invests commit in the azqato.github.io repository and push; both hosts republish the previous state within minutes. A bad redirect: revert that commit in the repo that holds it. Caches may serve the old file for a few minutes.
+Locally: `git revert <commit>`. Once pushed: revert the commit in the azqato.github.io repository and push; both hosts republish the previous state within minutes. A bad redirect: revert that commit in the repo that holds it. Caches may serve the old file for a few minutes.
 
 ### Environment configs
 
@@ -1103,7 +1103,7 @@ No earlier testing rule existed, so nothing was replaced. The default was adopte
 
 No rule existed, so the default below was adopted on 2026-10-01. This is a policy record: the audit created no ignore or attributes file and ran no version control command.
 
-**Current state (2026-10-01, P0):** a local git repository with default branch `main` and no remote (D20). `.gitattributes` pins LF (`* text=auto eol=lf`, with images marked binary); `.gitignore` excludes `_sources/`, the read-only source snapshots that scripts/snapshot.py regenerates. Before P0 the folder wasn't a repository. The only copy is the working folder on the maintenance machine, inside OneDrive. The repository's name, where it lives on GitHub and whether it's public are open (Question 5). **Update 2026-10-02:** github.com/Azqato/invests exists (private, to be public later); the local repository isn't connected to it. `.gitignore` gained `__pycache__/`, which Python writes when one script imports another (scripts/browser.py loads scripts/site.py).
+**Current state (2026-10-01, P0):** a local git repository with default branch `main` and no remote (D20). `.gitattributes` pins LF (`* text=auto eol=lf`, with images marked binary); `.gitignore` excludes `_sources/`, the read-only source snapshots that scripts/snapshot.py regenerates. Before P0 the folder wasn't a repository. The only copy is the working folder on the maintenance machine, inside OneDrive. The repository's name, where it lives on GitHub and whether it's public are open (Question 5). **Update 2026-10-02:** github.com/Azqato/invests exists (private, to be public later); the local repository isn't connected to it. `.gitignore` gained `__pycache__/`, which Python writes when one script imports another (scripts/browser.py loads scripts/site.py). **Update 2026-10-02 (after the merge, D21):** the `invests/` folder in the azqato.github.io repository is the single source of truth for everything here, decided by the author. The separate local repository (`../invests`) is retired and will be deleted; nothing is edited there, and its history isn't carried over. `invests/.gitignore` and `invests/.gitattributes` came with the files and still apply inside the folder.
 
 **Default:**
 
