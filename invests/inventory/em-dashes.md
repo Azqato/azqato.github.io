@@ -41,41 +41,41 @@ with its place, the text around it and what replaced it. Lone dashes that stand 
 | assets/js/vix/vix.js | { value, timestamp, fromCache, stale }   (em dash) on success (live or cached) //   { value | `-` |
 | assets/js/vix/vix.js | lue: null, timestamp: null, error: true } (em dash) total failure, no cache async function f | `-` |
 | assets/js/vix/vix.js | le: false };   }    // All fetches failed (em dash) return stale cache rather than showing a | `-` |
-| tools/screener.html | A missing value ((em dash)) scores zero for that metric and render | `– (placeholder)` |
-| tools/screener.html | erformance is structural rather than luck (em dash) see the | `-` |
-| tools/screener.html | es share the average). A missing value ((em dash)) scores zero and renders dark red; the | `– (placeholder)` |
-| tools/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         return p.toLocaleString(undef | `– (placeholder)` |
-| tools/market.html (inline script) | (c === null // c === undefined) return "(em dash)";         var sign = c > 0 ? "+" : ""; | `– (placeholder)` |
-| tools/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         var sign = p > 0 ? "+" : ""; | `– (placeholder)` |
-| tools/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         return p.toFixed(3) + "%"; | `– (placeholder)` |
-| tools/market.html (inline script) | (c === null // c === undefined) return "(em dash)";         var sign = c > 0 ? "+" : ""; | `– (placeholder)` |
-| tools/vix-dashboard.html | (em dash) SPDR Bloomberg 1–3 Month T-Bill ETF. Nea | `-` |
-| tools/vix-dashboard.html | (em dash) SPDR S&P 500 ETF. Broad market exposure. | `-` |
-| tools/vix-dashboard.html | (em dash) Invesco Nasdaq-100 ETF. Growth and tech | `-` |
-| tools/vix-dashboard.html | (em dash) ProShares UltraPro QQQ 3× Leveraged ETF. | `-` |
-| tools/vix-dashboard.html | crosses             into a different tier (em dash) either up or down. | `-` |
-| tools/vix-dashboard.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
-| tools/vix-dashboard.html (inline script) | allocation, cached.value);   }    // Boot (em dash) this script tag sits at the end of the b | `-` |
-| tools/vix-dashboard.html (inline script) | {     paintCached();          // instant (em dash) zero network wait     await refresh(); | `-` |
-| tools/vix-custom.html | Free-text entry (em dash) tickers are not yet verified against a l | `-` |
-| tools/vix-custom.html | d percentage weights as the core strategy (em dash)         only the ticker per category changes. Re | `-` |
-| tools/vix-custom.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
-| strategies/vix.html | ure to growth ETFs when market fear peaks (em dash)           and pulls back when complacency sets in. | `-` |
-| strategies/vix.html | uring the market's most important moments (em dash) the crashes that         precede the fas | `-` |
-| strategies/vix.html | espond to opportunity. It rides fear down (em dash) but doesn't             press its advant | `-` |
-| strategies/vix.html | ded.             The opportunity is there (em dash) if you are positioned for it. | `-` |
-| strategies/vix.html | prices. It is not a directional predictor (em dash)         it is a precise, real-time measure of co | `-` |
-| strategies/vix.html | the market recovers (em dash) it is whether you are         positioned | `-` |
-| strategies/vix.html | "Be greedy when others are fearful." (em dash) Warren Buffett | `-` |
-| strategies/vix.html | T-Bills and toward leveraged growth ETFs (em dash) maximizing recovery         capture prec | `-` |
-| strategies/vix.html | semiconductor, and cloud computing (em dash) sectors at the center of a         multi | `-` |
-| strategies/vix.html | s             dominate QQQ's top holdings (em dash) and the capital expenditure is | `-` |
-| strategies/vix.html | nding can overcome             that decay (em dash) provided the underlying index continues | `-` |
-| strategies/vix.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
-| strategies/vix.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |
-| strategies/vix.html (inline script) | const SHORT_LABELS = {     tier1: 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate | `-` |
-| strategies/vix.html (inline script) | : 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Ele | `-` |
-| strategies/vix.html (inline script) | er 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) Hig | `-` |
-| strategies/vix.html (inline script) | er 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme | `-` |
-| strategies/vix.html (inline script) | 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme Fear',   };   const TIER_CLASSES | `-` |
-| strategies/vix.html (inline script) | t-known value from localStorage instantly (em dash) no network wait     const cached = getCa | `-` |
+| stocks/screener.html | A missing value ((em dash)) scores zero for that metric and render | `– (placeholder)` |
+| stocks/screener.html | erformance is structural rather than luck (em dash) see the | `-` |
+| stocks/screener.html | es share the average). A missing value ((em dash)) scores zero and renders dark red; the | `– (placeholder)` |
+| indices/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         return p.toLocaleString(undef | `– (placeholder)` |
+| indices/market.html (inline script) | (c === null // c === undefined) return "(em dash)";         var sign = c > 0 ? "+" : ""; | `– (placeholder)` |
+| indices/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         var sign = p > 0 ? "+" : ""; | `– (placeholder)` |
+| indices/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         return p.toFixed(3) + "%"; | `– (placeholder)` |
+| indices/market.html (inline script) | (c === null // c === undefined) return "(em dash)";         var sign = c > 0 ? "+" : ""; | `– (placeholder)` |
+| vix/index.html | ure to growth ETFs when market fear peaks (em dash)           and pulls back when complacency sets in. | `-` |
+| vix/index.html | uring the market's most important moments (em dash) the crashes that         precede the fas | `-` |
+| vix/index.html | espond to opportunity. It rides fear down (em dash) but doesn't             press its advant | `-` |
+| vix/index.html | ded.             The opportunity is there (em dash) if you are positioned for it. | `-` |
+| vix/index.html | prices. It is not a directional predictor (em dash)         it is a precise, real-time measure of co | `-` |
+| vix/index.html | the market recovers (em dash) it is whether you are         positioned | `-` |
+| vix/index.html | "Be greedy when others are fearful." (em dash) Warren Buffett | `-` |
+| vix/index.html | T-Bills and toward leveraged growth ETFs (em dash) maximizing recovery         capture prec | `-` |
+| vix/index.html | semiconductor, and cloud computing (em dash) sectors at the center of a         multi | `-` |
+| vix/index.html | s             dominate QQQ's top holdings (em dash) and the capital expenditure is | `-` |
+| vix/index.html | nding can overcome             that decay (em dash) provided the underlying index continues | `-` |
+| vix/index.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
+| vix/index.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |
+| vix/index.html (inline script) | const SHORT_LABELS = {     tier1: 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate | `-` |
+| vix/index.html (inline script) | : 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Ele | `-` |
+| vix/index.html (inline script) | er 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) Hig | `-` |
+| vix/index.html (inline script) | er 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme | `-` |
+| vix/index.html (inline script) | 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme Fear',   };   const TIER_CLASSES | `-` |
+| vix/index.html (inline script) | t-known value from localStorage instantly (em dash) no network wait     const cached = getCa | `-` |
+| vix/dashboard.html | (em dash) SPDR Bloomberg 1–3 Month T-Bill ETF. Nea | `-` |
+| vix/dashboard.html | (em dash) SPDR S&P 500 ETF. Broad market exposure. | `-` |
+| vix/dashboard.html | (em dash) Invesco Nasdaq-100 ETF. Growth and tech | `-` |
+| vix/dashboard.html | (em dash) ProShares UltraPro QQQ 3× Leveraged ETF. | `-` |
+| vix/dashboard.html | crosses             into a different tier (em dash) either up or down. | `-` |
+| vix/dashboard.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
+| vix/dashboard.html (inline script) | allocation, cached.value);   }    // Boot (em dash) this script tag sits at the end of the b | `-` |
+| vix/dashboard.html (inline script) | {     paintCached();          // instant (em dash) zero network wait     await refresh(); | `-` |
+| vix/custom.html | Free-text entry (em dash) tickers are not yet verified against a l | `-` |
+| vix/custom.html | d percentage weights as the core strategy (em dash)         only the ticker per category changes. Re | `-` |
+| vix/custom.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |

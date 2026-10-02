@@ -139,7 +139,7 @@ def shell_tests(ctx, base):
     page.set_viewport_size(PHONE)
     errors = []
     watch(page, base, errors)
-    page.goto(base + "learn/philosophy.html")
+    page.goto(base + "stocks/philosophy.html")
     page.keyboard.press("Tab")
     if page.evaluate("document.activeElement.className") != "site-skip":
         fail("skip link: not the first thing Tab reaches")
@@ -191,13 +191,13 @@ def shell_tests(ctx, base):
     kept = page.evaluate("document.documentElement.getAttribute('data-theme')")
     if before == after or kept != after or ("light" if after == "dark" else "dark") not in label:
         fail(f"theme button: {before} -> {after}, after reload {kept}, label {label!r}")
-    page.goto(base + "faq.html")
+    page.goto(base + "resources/faq.html")
     page.fill("#faq-filter", "palantir")
     page.wait_for_timeout(500)
     shown = page.locator(".accordion-item:not([hidden])").count()
     if not 0 < shown < 37:
         fail(f"FAQ filter: {shown} questions shown for 'palantir'")
-    page.goto(base + "faq.html#answer-nosell")
+    page.goto(base + "resources/faq.html#answer-nosell")
     page.wait_for_timeout(800)
     if page.get_attribute("[aria-controls='answer-nosell']", "aria-expanded") != "true":
         fail("FAQ: a link to an answer didn't open it")
@@ -207,7 +207,7 @@ def shell_tests(ctx, base):
 
 
 def tool_tests(ctx, base):
-    p = load(ctx, base, "tools/screener.html", "dark", DESKTOP, wait=6000)
+    p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, wait=6000)
     rows = p.locator("table tbody tr").count()
     as_of = p.inner_text("#asOf")
     print(f"screener: {rows} table rows; {as_of}", flush=True)
@@ -215,12 +215,12 @@ def tool_tests(ctx, base):
         fail(f"screener: data didn't load ({rows} rows, {as_of!r})")
     notes.append(f"screener shows: {as_of}")
     p.close()
-    p = load(ctx, base, "tools/market.html", "dark", DESKTOP, wait=6000)
+    p = load(ctx, base, "indices/market.html", "dark", DESKTOP, wait=6000)
     txt = p.inner_text("#pp-article")
     print("market:", txt[:200].replace("\n", " "), flush=True)
     notes.append("market overview: " + " ".join(txt.split())[:160])
     p.close()
-    for path in ("tools/vix-dashboard.html", "tools/vix-custom.html", "strategies/vix.html"):
+    for path in ("vix/dashboard.html", "vix/custom.html", "vix/index.html"):
         p = load(ctx, base, path, "dark", DESKTOP, wait=5000)
         data = p.evaluate("JSON.stringify(window.__VIX_DATA__ || null)")
         cached = p.evaluate("localStorage.getItem('vix_last_known')")
@@ -235,7 +235,7 @@ def fallback_tests(browser, base):
     # Screener: block raw GitHub; the fallback at azqato.github.io/stocks/data/ should serve.
     ctx = browser.new_context()
     ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
-    p = load(ctx, base, "tools/screener.html", "dark", DESKTOP, blocked=True, wait=8000)
+    p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, blocked=True, wait=8000)
     rows = p.locator("table tbody tr").count()
     as_of = p.inner_text("#asOf")
     print(f"screener with raw GitHub blocked: {rows} rows; {as_of}", flush=True)
@@ -243,14 +243,14 @@ def fallback_tests(browser, base):
         fail(f"screener fallback: no data with raw GitHub blocked ({as_of!r})")
     p.close()
     # Market Overview with raw GitHub blocked.
-    p = load(ctx, base, "tools/market.html", "dark", DESKTOP, blocked=True, wait=8000)
+    p = load(ctx, base, "indices/market.html", "dark", DESKTOP, blocked=True, wait=8000)
     notes.append("market overview, raw GitHub blocked: " + " ".join(p.inner_text("#pp-article").split())[:160])
     p.close()
     ctx.close()
     # VIX: block the vix.js feed; vix.js falls back to allorigins, then the cache.
     ctx = browser.new_context()
     ctx.route("https://azqato.github.io/vix/data/vix.js*", lambda r: r.abort())
-    p = load(ctx, base, "tools/vix-dashboard.html", "dark", DESKTOP, blocked=True, wait=12000)
+    p = load(ctx, base, "vix/dashboard.html", "dark", DESKTOP, blocked=True, wait=12000)
     notes.append("VIX dashboard, feed blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
     p.close()
     ctx.close()
@@ -259,10 +259,10 @@ def fallback_tests(browser, base):
     ctx.route("https://azqato.github.io/**", lambda r: r.abort())
     ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
     ctx.route("https://api.allorigins.win/**", lambda r: r.abort())
-    p = load(ctx, base, "tools/vix-dashboard.html", "dark", DESKTOP, blocked=True, wait=12000)
+    p = load(ctx, base, "vix/dashboard.html", "dark", DESKTOP, blocked=True, wait=12000)
     notes.append("VIX dashboard, all feeds blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
     p.close()
-    p = load(ctx, base, "tools/screener.html", "dark", DESKTOP, blocked=True, wait=8000)
+    p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, blocked=True, wait=8000)
     notes.append("screener, all feeds blocked: " + p.inner_text("#asOf"))
     p.close()
     ctx.close()
@@ -282,7 +282,7 @@ def main():
             for path, *_ in PAGES:
                 for theme in ("light", "dark"):
                     for size in (DESKTOP, PHONE):
-                        p = load(ctx, base, path, theme, size, shots if size is DESKTOP or path in ("index.html", "tools/screener.html", "learn/metrics.html") else None)
+                        p = load(ctx, base, path, theme, size, shots if size is DESKTOP or path in ("index.html", "stocks/screener.html", "stocks/metrics.html") else None)
                         if size is DESKTOP:
                             contrast(p, f"{path} [{theme}]")
                         p.close()

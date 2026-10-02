@@ -10,7 +10,7 @@
   var body = document.body;
   var ROOT = body.getAttribute("data-root") || "";
   var article = document.getElementById("pp-article");
-  var POPULAR = ["tools/screener.html", "strategies/vix.html", "learn/metrics.html", "faq.html"];
+  var POPULAR = ["stocks/screener.html", "vix/index.html", "stocks/metrics.html", "resources/faq.html"];
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -330,7 +330,7 @@
 
   /* ---------- FAQ filter (help-center's search-as-you-type, D8) ---------- */
 
-  // A link to one answer (faq.html#answer-...) opens that answer.
+  // A link to one answer (resources/faq.html#answer-...) opens that answer.
   function openLinked() {
     var id = decodeURIComponent(location.hash.slice(1));
     var target = id && document.getElementById(id);

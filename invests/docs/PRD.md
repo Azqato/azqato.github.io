@@ -190,31 +190,31 @@ Drafted by the 2026-10-01 audit from the core rule and the decisions, in priorit
 
 ## Site map
 
-21 pages from the 20 source pages (invests.html splits into Home and Resources).
+21 pages from the 20 source pages (invests.html splits into Home and Resources). **Restructured 2026-10-02 (author's request, v1.1.0):** grouped by what the visitor invests in, not by page type; each topic group's first page is its landing page, listed as "Overview" in the sidebar. The pages had been live about an hour, so the old addresses were dropped without redirects (author's decision). The earlier map (Learn, Tools, Strategies, Resources, FAQ) is in PATCHNOTES.md, v1.0.1 and before.
 
 ```
-Home                                from invests.html, address not decided (D4)
+Home                                index.html, from invests.html
 │
-├── Learn                           landing, from stocks/index.html
+├── Individual Stocks               stocks/index.html, landing, from stocks/index.html
 │   ├── Philosophy                  stocks/philosophy.html
 │   ├── Stock metrics               stocks/metrics.html
-│   ├── Index & ETF methodology     stocks/indices.html
-│   ├── Finviz setup guide          stocks/finviz.html
-│   └── Seeking Alpha setup guide   stocks/seekingalpha.html
+│   └── Screener                    stocks/screener.html
 │
-├── Tools
-│   ├── Screener                    stocks/screener.html
-│   ├── Market Overview             stocks/market.html
-│   ├── VIX Dashboard               vix/strategy.html
+├── Indices & ETFs                  indices/index.html, landing, from stocks/indices.html
+│   └── Market Overview             indices/market.html, from stocks/market.html
+│
+├── VIX Strategy                    vix/index.html, landing, from vix/index.html
+│   ├── VIX Dashboard               vix/dashboard.html, from vix/strategy.html
 │   └── VIX Custom builder          vix/custom.html
 │
-├── Strategies
-│   ├── VIX Strategy                vix/index.html
-│   └── Leveraged strategies        landing, from leverage/index.html
-│       └── 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail, HFEA
+├── Leveraged Strategies            leveraged/index.html, landing, from leverage/index.html
+│   └── 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail, HFEA (leveraged/<name>.html)
 │
-├── Resources                       curated links, from invests.html
-└── FAQ                             stocks/faq.html
+└── Resources
+    ├── Curated resources           resources/index.html, from invests.html
+    ├── Finviz setup guide          resources/finviz.html, from stocks/finviz.html
+    ├── Seeking Alpha setup guide   resources/seekingalpha.html, from stocks/seekingalpha.html
+    └── FAQ                         resources/faq.html, from stocks/faq.html
 ```
 
 **On every page:** the site's top bar with 💰 Azqato Invests, search across every page and the ☀️/🌙 button, under azqato.com's top nav if D9 stays.
@@ -277,6 +277,8 @@ Added by the 2026-10-01 audit:
 ### Current phase
 
 **Update 2026-10-02, live (azqato.github.io v2.11.0 to v2.11.1):** the author gave the go-ahead (D20) and the azqato.github.io repository was pushed. The site is live at https://azqato.com/invests/ and (GitHub Pages) azqato.github.io/invests/. What the merge added outside `invests/`: `invests.html` became a one-file redirect page to `invests/index.html`; a new `_redirects` sends `/invests` and `/invests.html` to `/invests/` with 301 on Cloudflare Pages (GitHub Pages ignores it); the nav (tools/build-nav.py), the Home explore card and the Links page button point at `invests/index.html`; sitemap.xml lists https://azqato.com/invests/ and robots.txt gained `Sitemap: https://azqato.com/invests/sitemap.xml`; the pre-commit hook skips `invests/inventory/`. Links use `index.html` explicitly so they also work from file://, where a folder link shows a directory listing. Post-deploy check (a comparison): the served page and asset files match the local copies byte for byte; /invests and /invests.html answer 301 to /invests/ in one hop; azqato.github.io/invests.html redirects; Home, the Screener and the VIX Dashboard load live data in both themes with no script errors. The separate local repository (`../invests`, last commit `9120a25`) is retired and will be deleted (Repository Hygiene). The working notes from the session that did this (an uncommitted HANDOVER.md) were moved into this document and deleted.
+
+**Update 2026-10-02, restructured (v1.1.0):** the sidebar groups are now Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources (Site map), at new addresses, without redirects (author's decision: live about an hour). The D7 redirect list under Deprecation and Removal points at the new addresses.
 
 Next, in order: P7.9 (the author reviews the live site); then the post-launch list under Future updates (P13); later P11, P12 and P14.
 
@@ -918,16 +920,16 @@ There's no package manager, so there's no manifest or lockfile.
 
 ### Folder structure
 
-Current, checked 2026-10-02 after P9 (the scripts moved from `tools/` to `scripts/` on 2026-10-02, because the Tools section's pages live in `tools/`):
+Current, updated 2026-10-02 for the restructure (v1.1.0); earlier, checked after P9 (the scripts moved from `tools/` to `scripts/` on 2026-10-02, because the Tools section's pages live in `tools/`):
 
 ```
 invests/
 ├── index.html                     Home
-├── faq.html                       FAQ
-├── learn/                         index.html (Learn), philosophy, metrics, indices, finviz, seekingalpha
-├── tools/                         screener, market, vix-dashboard, vix-custom
-├── strategies/                    vix.html, and leveraged/: index.html, 3sig, 6sig, 9sig, tqqq-ftlt, holy-grail, hfea
-├── resources/index.html           Resources
+├── stocks/                        index.html (Individual Stocks), philosophy, metrics, screener
+├── indices/                       index.html (Indices & ETFs), market
+├── vix/                           index.html (VIX Strategy), dashboard, custom
+├── leveraged/                     index.html (Leveraged Strategies), 3sig, 6sig, 9sig, tqqq-ftlt, holy-grail, hfea
+├── resources/                     index.html (Curated resources), finviz, seekingalpha, faq
 ├── assets/
 │   ├── css/                       theme, base, components (Template Interface), docs (documentation-site),
 │   │                              site (this site's own), src-stocks, src-vix, src-leverage (scoped source CSS)
@@ -1053,6 +1055,10 @@ No rule existed, so the default was adopted on 2026-10-01. It covers the docs, t
 #### P14. Fold invests into azqato.com's structure (later; design needed; ask first)
 
 The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
+
+#### P17. SEO and landing-page review of every page (added 2026-10-02, owner's request; ask first)
+
+Review the content of all 21 pages against SEO best practice: one clear topic and search intent per page, a descriptive title and meta description, one h1 and a sensible heading order, internal links between related pages, and a reasonable length. In particular, consider turning each group's landing page (Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies) into a short landing page with clear calls to action into its pages, instead of carrying the whole method at once; the long text would move to its own page in the group. That changes source content, so it needs the author's approval page by page (core rule, D19), and it fits with P11's corrections pass and P16 (one VIX page).
 
 #### P15. Adopt azqato.com's colors (added 2026-10-02, owner's request; ask first)
 
@@ -1229,25 +1235,25 @@ The deploy boundary is the published site: a page is public facing once its addr
 
 | Old address (azqato.github.io/...) | New address (azqato.github.io/invests/...) |
 |---|---|
-| stocks/ (index.html) | learn/ |
-| stocks/philosophy.html | learn/philosophy.html |
-| stocks/metrics.html | learn/metrics.html |
-| stocks/indices.html | learn/indices.html |
-| stocks/finviz.html | learn/finviz.html |
-| stocks/seekingalpha.html | learn/seekingalpha.html |
-| stocks/screener.html | tools/screener.html |
-| stocks/market.html | tools/market.html |
-| stocks/faq.html | faq.html |
-| vix/ (index.html) | strategies/vix.html |
-| vix/strategy.html | tools/vix-dashboard.html |
-| vix/custom.html | tools/vix-custom.html |
-| leverage/ (index.html) | strategies/leveraged/ |
-| leverage/3sig.html | strategies/leveraged/3sig.html |
-| leverage/6sig.html | strategies/leveraged/6sig.html |
-| leverage/9sig.html | strategies/leveraged/9sig.html |
-| leverage/tqqq-ftlt.html | strategies/leveraged/tqqq-ftlt.html |
-| leverage/holy-grail.html | strategies/leveraged/holy-grail.html |
-| leverage/hfea.html | strategies/leveraged/hfea.html |
+| stocks/ (index.html) | stocks/ |
+| stocks/philosophy.html | stocks/philosophy.html |
+| stocks/metrics.html | stocks/metrics.html |
+| stocks/indices.html | indices/ |
+| stocks/finviz.html | resources/finviz.html |
+| stocks/seekingalpha.html | resources/seekingalpha.html |
+| stocks/screener.html | stocks/screener.html |
+| stocks/market.html | indices/market.html |
+| stocks/faq.html | resources/faq.html |
+| vix/ (index.html) | vix/ |
+| vix/strategy.html | vix/dashboard.html |
+| vix/custom.html | vix/custom.html |
+| leverage/ (index.html) | leveraged/ |
+| leverage/3sig.html | leveraged/3sig.html |
+| leverage/6sig.html | leveraged/6sig.html |
+| leverage/9sig.html | leveraged/9sig.html |
+| leverage/tqqq-ftlt.html | leveraged/tqqq-ftlt.html |
+| leverage/holy-grail.html | leveraged/holy-grail.html |
+| leverage/hfea.html | leveraged/hfea.html |
 
 A 20th, outside D7 and waiting on Question 17: azqato.github.io/invests.html (azqato.com/invests), whose content became Home and Resources.
 

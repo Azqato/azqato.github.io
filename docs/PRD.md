@@ -1894,6 +1894,34 @@ Proposals that are not yet milestones. Each one states what it is, why it might 
 
 **Recommendation.** Do it; it's mostly CSS and one template. Settle the phone layout with the owner first.
 
+### Clean addresses for every page (added 2026-10-02, owner's request)
+
+**What.** Give the main site the same address style as Invests: `/discord`, `/invests`, `/links` instead of `discord.html`, `invests.html`, `links.html`. The `.html` files become redirect pages to their clean addresses, and every internal link, the nav, sitemap.xml, canonical links and og:url use the clean form.
+
+**Why.** Shorter, tidier addresses that match /invests/, and one address per page.
+
+**How.** Cloudflare Pages already serves `discord.html` at `/discord` (that's how canonical links work today), so most of the change is links and tags: build-nav.py's list, the Home and Links pages, sitemap.xml and every page head. A file can't be both the page and a redirect, so the content moves to `discord/index.html` (or the equivalent) and `discord.html` becomes the redirect page, under the removal policy (Compatibility entries). Check what GitHub Pages serves at azqato.github.io for the same addresses, and how links behave when a page is opened from disk (file://), which today works for every page.
+
+**Size.** Medium: 12 pages, each with a redirect page and updated links, then a one-hop check of every old address after deploy.
+
+**Open questions.** Folders (`discord/index.html`) or Cloudflare `_redirects` rules alone. Whether file:// support still matters (Local setup, Option A).
+
+**Recommendation.** Do it, before or together with the shared top bar, since both touch every page's nav links.
+
+### The Invests footer across the whole site (added 2026-10-02, owner's request)
+
+**What.** Restyle the main site's footer to match the Invests footer: the slim bar with the brand, a short line of text and a row of links (invests/scripts/site.py, `footer()`, styled in invests/assets/css/site.css).
+
+**Why.** The owner prefers how it looks on /invests, and it makes the two halves of the site read as one.
+
+**How.** Port the footer styles into styles.css and change the footer markup on the 12 pages (ideally stamped by build-nav.py like the nav, so it can't drift). Decide which text and links the main footer carries; the Invests line about financial advice and referral links belongs to Invests only.
+
+**Size.** Small.
+
+**Open questions.** The footer's text and links for the main site.
+
+**Recommendation.** Do it alongside the top bar and theme button entry, which already touches every page.
+
 ### A progress dashboard
 
 **What.** A single page that shows the state of the project at a glance: which roadmap milestones are done, which are in flight, what is deferred, how many open questions are outstanding, and when the last audit ran. It would live at `/dashboard` in the repository root.

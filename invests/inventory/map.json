@@ -4,60 +4,60 @@
   "resources/index.html"
  ],
  "stocks-index.json": [
-  "learn/index.html"
+  "stocks/index.html"
  ],
  "stocks-philosophy.json": [
-  "learn/philosophy.html"
+  "stocks/philosophy.html"
  ],
  "stocks-metrics.json": [
-  "learn/metrics.html"
- ],
- "stocks-indices.json": [
-  "learn/indices.html"
- ],
- "stocks-finviz.json": [
-  "learn/finviz.html"
- ],
- "stocks-seekingalpha.json": [
-  "learn/seekingalpha.html"
+  "stocks/metrics.html"
  ],
  "stocks-screener.json": [
-  "tools/screener.html"
+  "stocks/screener.html"
+ ],
+ "stocks-indices.json": [
+  "indices/index.html"
  ],
  "stocks-market.json": [
-  "tools/market.html"
- ],
- "vix-strategy.json": [
-  "tools/vix-dashboard.html"
- ],
- "vix-custom.json": [
-  "tools/vix-custom.html"
+  "indices/market.html"
  ],
  "vix-index.json": [
-  "strategies/vix.html"
+  "vix/index.html"
+ ],
+ "vix-strategy.json": [
+  "vix/dashboard.html"
+ ],
+ "vix-custom.json": [
+  "vix/custom.html"
  ],
  "leverage-index.json": [
-  "strategies/leveraged/index.html"
+  "leveraged/index.html"
  ],
  "leverage-3sig.json": [
-  "strategies/leveraged/3sig.html"
+  "leveraged/3sig.html"
  ],
  "leverage-6sig.json": [
-  "strategies/leveraged/6sig.html"
+  "leveraged/6sig.html"
  ],
  "leverage-9sig.json": [
-  "strategies/leveraged/9sig.html"
+  "leveraged/9sig.html"
  ],
  "leverage-tqqq-ftlt.json": [
-  "strategies/leveraged/tqqq-ftlt.html"
+  "leveraged/tqqq-ftlt.html"
  ],
  "leverage-holy-grail.json": [
-  "strategies/leveraged/holy-grail.html"
+  "leveraged/holy-grail.html"
  ],
  "leverage-hfea.json": [
-  "strategies/leveraged/hfea.html"
+  "leveraged/hfea.html"
+ ],
+ "stocks-finviz.json": [
+  "resources/finviz.html"
+ ],
+ "stocks-seekingalpha.json": [
+  "resources/seekingalpha.html"
  ],
  "stocks-faq.json": [
-  "faq.html"
+  "resources/faq.html"
  ]
 }

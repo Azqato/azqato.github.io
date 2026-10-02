@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.11.3] - 2026-10-02
+
+### Changed
+- Azqato Invests v1.1.0: its sections are grouped by topic (Individual Stocks, Indices & ETFs, VIX
+Strategy, Leveraged Strategies, Resources) at new addresses; the old ones were live about an hour
+and get no redirects (owner's decision). See invests/docs/PATCHNOTES.md.
+- Roadmap (Future updates): the Invests top bar and theme button across the whole site, clean
+addresses for every page (`/discord` instead of `discord.html`), and the Invests footer across the
+whole site.
+
+---
+
 ## [2.11.2] - 2026-10-02
 
 ### Changed

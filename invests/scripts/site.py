@@ -29,29 +29,32 @@ SITE_URL = "https://azqato.com/invests/"
 # path, source page, sidebar label, group, kind, parent path (for breadcrumbs)
 PAGES = [
     ("index.html", "azqato.github.io/invests.html", "Home", None, "home", None),
-    ("learn/index.html", "stocks/index.html", "Overview", "Learn", "doc", None),
-    ("learn/philosophy.html", "stocks/philosophy.html", "Philosophy", "Learn", "doc", "learn/index.html"),
-    ("learn/metrics.html", "stocks/metrics.html", "Stock metrics", "Learn", "doc", "learn/index.html"),
-    ("learn/indices.html", "stocks/indices.html", "Index & ETF methodology", "Learn", "doc", "learn/index.html"),
-    ("learn/finviz.html", "stocks/finviz.html", "Finviz setup guide", "Learn", "doc", "learn/index.html"),
-    ("learn/seekingalpha.html", "stocks/seekingalpha.html", "Seeking Alpha setup guide", "Learn", "doc", "learn/index.html"),
-    ("tools/screener.html", "stocks/screener.html", "Screener", "Tools", "tool", None),
-    ("tools/market.html", "stocks/market.html", "Market Overview", "Tools", "tool", None),
-    ("tools/vix-dashboard.html", "vix/strategy.html", "VIX Dashboard", "Tools", "tool", None),
-    ("tools/vix-custom.html", "vix/custom.html", "VIX Custom builder", "Tools", "tool", None),
-    ("strategies/vix.html", "vix/index.html", "VIX Strategy", "Strategies", "doc", None),
-    ("strategies/leveraged/index.html", "leverage/index.html", "Leveraged strategies", "Strategies", "doc", None),
-    ("strategies/leveraged/3sig.html", "leverage/3sig.html", "3 Sig", "Strategies", "doc", "strategies/leveraged/index.html"),
-    ("strategies/leveraged/6sig.html", "leverage/6sig.html", "6 Sig", "Strategies", "doc", "strategies/leveraged/index.html"),
-    ("strategies/leveraged/9sig.html", "leverage/9sig.html", "9 Sig", "Strategies", "doc", "strategies/leveraged/index.html"),
-    ("strategies/leveraged/tqqq-ftlt.html", "leverage/tqqq-ftlt.html", "TQQQ FTLT", "Strategies", "doc", "strategies/leveraged/index.html"),
-    ("strategies/leveraged/holy-grail.html", "leverage/holy-grail.html", "Holy Grail", "Strategies", "doc", "strategies/leveraged/index.html"),
-    ("strategies/leveraged/hfea.html", "leverage/hfea.html", "HFEA", "Strategies", "doc", "strategies/leveraged/index.html"),
+    ("stocks/index.html", "stocks/index.html", "Individual Stocks", "Individual Stocks", "doc", None),
+    ("stocks/philosophy.html", "stocks/philosophy.html", "Philosophy", "Individual Stocks", "doc", "stocks/index.html"),
+    ("stocks/metrics.html", "stocks/metrics.html", "Stock metrics", "Individual Stocks", "doc", "stocks/index.html"),
+    ("stocks/screener.html", "stocks/screener.html", "Screener", "Individual Stocks", "tool", "stocks/index.html"),
+    ("indices/index.html", "stocks/indices.html", "Indices & ETFs", "Indices & ETFs", "doc", None),
+    ("indices/market.html", "stocks/market.html", "Market Overview", "Indices & ETFs", "tool", "indices/index.html"),
+    ("vix/index.html", "vix/index.html", "VIX Strategy", "VIX Strategy", "doc", None),
+    ("vix/dashboard.html", "vix/strategy.html", "VIX Dashboard", "VIX Strategy", "tool", "vix/index.html"),
+    ("vix/custom.html", "vix/custom.html", "VIX Custom builder", "VIX Strategy", "tool", "vix/index.html"),
+    ("leveraged/index.html", "leverage/index.html", "Leveraged Strategies", "Leveraged Strategies", "doc", None),
+    ("leveraged/3sig.html", "leverage/3sig.html", "3 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
+    ("leveraged/6sig.html", "leverage/6sig.html", "6 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
+    ("leveraged/9sig.html", "leverage/9sig.html", "9 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
+    ("leveraged/tqqq-ftlt.html", "leverage/tqqq-ftlt.html", "TQQQ FTLT", "Leveraged Strategies", "doc", "leveraged/index.html"),
+    ("leveraged/holy-grail.html", "leverage/holy-grail.html", "Holy Grail", "Leveraged Strategies", "doc", "leveraged/index.html"),
+    ("leveraged/hfea.html", "leverage/hfea.html", "HFEA", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("resources/index.html", "azqato.github.io/invests.html", "Curated resources", "Resources", "doc", None),
-    ("faq.html", "stocks/faq.html", "FAQ", "FAQ", "doc", None),
+    ("resources/finviz.html", "stocks/finviz.html", "Finviz setup guide", "Resources", "doc", "resources/index.html"),
+    ("resources/seekingalpha.html", "stocks/seekingalpha.html", "Seeking Alpha setup guide", "Resources", "doc", "resources/index.html"),
+    ("resources/faq.html", "stocks/faq.html", "FAQ", "Resources", "doc", "resources/index.html"),
 ]
-GROUPS = ["Learn", "Tools", "Strategies", "Resources", "FAQ"]
-TITLES = {"index.html": f"{BRAND} - Investing Tools and Resources", "learn/index.html": "Learn - Azqato Invests"}
+# Grouped by what the visitor invests in (restructure, 2026-10-02): each group's
+# first page is its landing page; the sidebar lists it as "Overview" in the
+# topic groups.
+GROUPS = ["Individual Stocks", "Indices & ETFs", "VIX Strategy", "Leveraged Strategies", "Resources"]
+TITLES = {"index.html": f"{BRAND} - Investing Tools and Resources"}
 
 # azqato.com's top nav (D9), copied from azqato.github.io/invests.html at the
 # snapshot commit; Invests points to this site.
@@ -326,8 +329,8 @@ def split_invests(body, part, soup, page):
     for a in hero.select("a.btn-discord"):
         a["href"] = "https://azqato.com/discord"
     if part == "home":
-        cards = {"Stocks": "learn/index.html", "Leveraged Strategies": "strategies/leveraged/index.html",
-                 "VIX Strategy": "strategies/vix.html", "Stock Screener": "tools/screener.html"}
+        cards = {"Stocks": "stocks/index.html", "Leveraged Strategies": "leveraged/index.html",
+                 "VIX Strategy": "vix/index.html", "Stock Screener": "stocks/screener.html"}
         for a in projects.select("a.project-card"):
             name = a.h3.get_text(" ", strip=True).replace("→", "").strip()
             if name in cards:
@@ -359,9 +362,9 @@ def home_cards(page):
     """Cards for the sections the source's project cards don't cover, in the
     source's own card markup."""
     cards = [
-        ("\U0001F9F0", "Market Overview & VIX tools", "tools/market.html", "A same-day market snapshot, the live VIX Dashboard and the VIX Custom builder."),
+        ("\U0001F9F0", "Market Overview & VIX tools", "indices/market.html", "A same-day market snapshot, the live VIX Dashboard and the VIX Custom builder."),
         ("\U0001F4DA", "Curated Resources", "resources/index.html", "A hand-picked hub of platforms, screeners, education and data, in 15 categories."),
-        ("\u2753", "FAQ", "faq.html", "Answers to common questions about the methodology, the tools and the strategies."),
+        ("\u2753", "FAQ", "resources/faq.html", "Answers to common questions about the methodology, the tools and the strategies."),
     ]
     used = set()
     return "".join(f'<a class="project-card" href="{rel(page, href)}"><span class="project-icon">{icon}</span>'
@@ -370,16 +373,16 @@ def home_cards(page):
 
 
 ATLAS = {
-    "strategies/leveraged/tqqq-ftlt.html": [
+    "leveraged/tqqq-ftlt.html": [
         ("TQQQ For The Long Term (original)", "https://composeratlas.com/strategies?slug=tqqq-long-term"),
         ("TQQQ For The Long Term, 2026 version", "https://composeratlas.com/strategies?slug=zoops-tqqq-long-term-2026"),
         ("UPRO FTLT, the S&P 500 counterpart", "https://composeratlas.com/strategies?slug=zoops-upro-ftlt-2026"),
     ],
-    "strategies/leveraged/holy-grail.html": [
+    "leveraged/holy-grail.html": [
         ("Holy Grail (original)", "https://composeratlas.com/strategies?slug=holy-grail"),
         ("Holy Grail, 2026 version", "https://composeratlas.com/strategies?slug=zoops-holy-grail-2026"),
     ],
-    "strategies/leveraged/hfea.html": [
+    "leveraged/hfea.html": [
         ("Composer Atlas database (search for symphony Cjb5ysKtJsPv6Tm3Fk0R)", "https://composeratlas.com/database.html"),
     ],
 }
@@ -478,9 +481,9 @@ def sidebar(page):
         return f'<li{cls}><a href="{r}{path}"{cur}>{esc(label)}</a></li>'
     groups = [f'<div class="pp-group"><ul>{item("index.html", "Home")}</ul></div>']
     for g in GROUPS:
-        gid = "pp-g-" + g.lower()
+        gid = "pp-g-" + slug(g, set())
         members = [(p, label, parent) for p, _, label, grp, _, parent in PAGES if grp == g]
-        lis = "".join(item(p, label, sub=bool(parent and parent.startswith("strategies/leveraged"))) for p, label, parent in members)
+        lis = "".join(item(p, "Overview" if label == g else label) for p, label, parent in members)
         # Groups that don't hold this page start closed (UI review, Sidebar).
         opened = " open" if any(p == page for p, _, _ in members) else ""
         groups.append(f'<details class="pp-group site-group"{opened}><summary class="pp-group-label" id="{gid}">{g}</summary>'
@@ -509,18 +512,15 @@ def crumbs(page, label, group, parent):
         return ""
     r = rel(page, "")
     parts = [f'<li><a href="{r}index.html">Home</a></li>']
-    if group and group not in ("Resources", "FAQ"):
-        first = next(p for p, _, _, g, _, _ in PAGES if g == group)
-        parts.append(f'<li><a href="{r}{first}">{group}</a></li>' if group == "Learn" and page != first else f"<li>{group}</li>")
-    if parent and parent != "learn/index.html":
-        plabel = next(l for p, _, l, *_ in PAGES if p == parent)
-        parts.append(f'<li><a href="{r}{parent}">{esc(plabel)}</a></li>')
+    if group and label != group:
+        landing = next(p for p, _, _, g, _, _ in PAGES if g == group)
+        parts.append(f'<li><a href="{r}{landing}">{esc(group)}</a></li>')
     parts.append(f'<li><span aria-current="page">{esc(label)}</span></li>')
     return f'<nav class="pp-crumbs" aria-label="Breadcrumb"><ol>{"".join(parts)}</ol></nav>\n'
 
 
 def pager(page):
-    order = [p for p, *_ in PAGES if p != "resources/index.html" and p != "faq.html"] + ["resources/index.html", "faq.html"]
+    order = [p for p, *_ in PAGES]
     labels = {p: l for p, _, l, *_ in PAGES}
     i = order.index(page)
     r = rel(page, "")
@@ -540,7 +540,7 @@ def footer(page, notes=""):
   <div class="pp-footer-in">
     <p class="pp-footer-brand">\U0001F4B0 {BRAND}</p>
     <p>Educational use only. Not financial advice. Some links are referral links.</p>{notes}
-    <p><a href="{r}resources/index.html">Curated resources</a> · <a href="{r}faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+    <p><a href="{r}resources/index.html">Curated resources</a> · <a href="{r}resources/faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
   </div>
 </footer>
 
@@ -720,12 +720,12 @@ def build_page(entry, search):
     if page in ATLAS:
         first = wrap.find("section")
         first.insert_before(BeautifulSoup(atlas_box(page), "html.parser"))
-    if page == "faq.html":
+    if page == "resources/faq.html":
         h1 = wrap.find("h1")
         anchor = h1.find_parent("section") or h1
         anchor.insert_after(BeautifulSoup(FAQ_FILTER, "html.parser"))
     notes = merge_footers(wrap, repo)
-    if page == "tools/vix-custom.html":
+    if page == "vix/custom.html":
         # The reading and tier first (UI review), then the ticker inputs, then the
         # chart and table they drive (author's request, 2026-10-02).
         wrap.find(id="chart-section").insert_before(wrap.find(id="customize").extract())

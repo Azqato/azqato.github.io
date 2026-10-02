@@ -2,6 +2,19 @@
 
 Every change to this project, newest first. Versions follow semantic versioning and stay below 1.0.0 until the site launches (see Conventions in PRD.md). Dates come from the system clock.
 
+## v1.1.0 - 2026-10-02 - Sections by topic
+
+### Changed
+
+- Navigation restructured at the author's request: the sidebar groups are Individual Stocks (Overview, Philosophy, Stock metrics, Screener), Indices & ETFs (Overview, Market Overview), VIX Strategy (Overview, VIX Dashboard, VIX Custom builder), Leveraged Strategies (Overview and the six strategies) and Resources (Curated resources, Finviz and Seeking Alpha setup guides, FAQ). Before: Learn, Tools, Strategies, Resources, FAQ. Each topic group's first page is its landing page: the old Learn Overview became Individual Stocks, and Index & ETF methodology became Indices & ETFs. No page content changed.
+- Addresses moved with the groups: learn/, tools/, strategies/ and faq.html are gone; pages live in stocks/, indices/, vix/, leveraged/ and resources/ (PRD, Site map). No redirects, by the author's decision: the old addresses had been live about an hour.
+- Breadcrumbs read Home > group > page; the pager follows the sidebar order; the Home cards, the footer's FAQ link, search's popular pages and the browser tests use the new addresses.
+- PRD: Site map, Folder structure and the D7 redirect list updated; roadmap items P15 (azqato.com's colors), P16 (one VIX page) and P17 (SEO and landing-page review) added.
+
+### Tested
+
+- `python scripts/check.py`: 21 pages, 0 failures (0 broken internal links). `python scripts/browser.py`: 0 failures, the usual 9 notes.
+
 ## v1.0.1 - 2026-10-02 - Pager and sidebar note
 
 ### Changed

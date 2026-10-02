@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://azqato.com/invests/</loc></url>
-  <url><loc>https://azqato.com/invests/learn/</loc></url>
-  <url><loc>https://azqato.com/invests/learn/philosophy</loc></url>
-  <url><loc>https://azqato.com/invests/learn/metrics</loc></url>
-  <url><loc>https://azqato.com/invests/learn/indices</loc></url>
-  <url><loc>https://azqato.com/invests/learn/finviz</loc></url>
-  <url><loc>https://azqato.com/invests/learn/seekingalpha</loc></url>
-  <url><loc>https://azqato.com/invests/tools/screener</loc></url>
-  <url><loc>https://azqato.com/invests/tools/market</loc></url>
-  <url><loc>https://azqato.com/invests/tools/vix-dashboard</loc></url>
-  <url><loc>https://azqato.com/invests/tools/vix-custom</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/vix</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/leveraged/</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/leveraged/3sig</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/leveraged/6sig</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/leveraged/9sig</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/leveraged/tqqq-ftlt</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/leveraged/holy-grail</loc></url>
-  <url><loc>https://azqato.com/invests/strategies/leveraged/hfea</loc></url>
+  <url><loc>https://azqato.com/invests/stocks/</loc></url>
+  <url><loc>https://azqato.com/invests/stocks/philosophy</loc></url>
+  <url><loc>https://azqato.com/invests/stocks/metrics</loc></url>
+  <url><loc>https://azqato.com/invests/stocks/screener</loc></url>
+  <url><loc>https://azqato.com/invests/indices/</loc></url>
+  <url><loc>https://azqato.com/invests/indices/market</loc></url>
+  <url><loc>https://azqato.com/invests/vix/</loc></url>
+  <url><loc>https://azqato.com/invests/vix/dashboard</loc></url>
+  <url><loc>https://azqato.com/invests/vix/custom</loc></url>
+  <url><loc>https://azqato.com/invests/leveraged/</loc></url>
+  <url><loc>https://azqato.com/invests/leveraged/3sig</loc></url>
+  <url><loc>https://azqato.com/invests/leveraged/6sig</loc></url>
+  <url><loc>https://azqato.com/invests/leveraged/9sig</loc></url>
+  <url><loc>https://azqato.com/invests/leveraged/tqqq-ftlt</loc></url>
+  <url><loc>https://azqato.com/invests/leveraged/holy-grail</loc></url>
+  <url><loc>https://azqato.com/invests/leveraged/hfea</loc></url>
   <url><loc>https://azqato.com/invests/resources/</loc></url>
-  <url><loc>https://azqato.com/invests/faq</loc></url>
+  <url><loc>https://azqato.com/invests/resources/finviz</loc></url>
+  <url><loc>https://azqato.com/invests/resources/seekingalpha</loc></url>
+  <url><loc>https://azqato.com/invests/resources/faq</loc></url>
 </urlset>
