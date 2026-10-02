@@ -1,0 +1,351 @@
+{
+ "source": "vix/custom.html",
+ "head": [
+  "title: Custom Strategy — VIX Strategy",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: Build your own VIX-driven allocation strategy. Pick your own ticker for each risk category, keeping the same VIX-tier weighting as the core strategy.",
+  "og:title: VIX Strategy — Custom Strategy Builder",
+  "og:description: Substitute your own ETFs into the VIX-tier allocation model.",
+  "og:type: website",
+  "link icon: assets/img/favicon.svg",
+  "link stylesheet: assets/css/styles.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "image",
+   "region": "nav",
+   "text": "VIX Strategy",
+   "src": "assets/img/logo.svg"
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "VIX Strategy",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "link",
+   "region": "nav",
+   "text": "About",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Dashboard",
+   "href": "strategy.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "link",
+   "region": "nav",
+   "text": "Custom",
+   "href": "custom.html",
+   "flags": []
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 7,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 8,
+   "kind": "h2",
+   "region": "main",
+   "text": "Build Your Own VIX Strategy"
+  },
+  {
+   "n": 9,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Keep the same five VIX-tier weightings as the core strategy, but substitute your own ticker into each risk category. Your choices are saved in this browser only.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 10,
+   "kind": "h2",
+   "region": "main",
+   "text": "Your Categories"
+  },
+  {
+   "n": 11,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Free-text entry — tickers are not yet verified against a live quote. Double-check your symbol before saving."
+  },
+  {
+   "n": 12,
+   "kind": "form",
+   "region": "main",
+   "text": "",
+   "id": "customize-form"
+  },
+  {
+   "n": 13,
+   "kind": "button",
+   "region": "main",
+   "text": "Save Strategy"
+  },
+  {
+   "n": 14,
+   "kind": "button",
+   "region": "main",
+   "text": "Reset to Defaults"
+  },
+  {
+   "n": 15,
+   "kind": "text",
+   "region": "main",
+   "text": "--"
+  },
+  {
+   "n": 16,
+   "kind": "text",
+   "region": "main",
+   "text": "CBOE VIX"
+  },
+  {
+   "n": 17,
+   "kind": "text",
+   "region": "main",
+   "text": "LOADING"
+  },
+  {
+   "n": 18,
+   "kind": "text",
+   "region": "main",
+   "text": "Fetching data…"
+  },
+  {
+   "n": 19,
+   "kind": "button",
+   "region": "main",
+   "text": "↻ Refresh"
+  },
+  {
+   "n": 20,
+   "kind": "text",
+   "region": "main",
+   "text": "Waiting for VIX data…"
+  },
+  {
+   "n": 21,
+   "kind": "h2",
+   "region": "main",
+   "text": "Your Custom Allocation"
+  },
+  {
+   "n": 22,
+   "kind": "chart canvas",
+   "region": "main",
+   "text": "Donut chart showing current custom allocation percentages",
+   "id": "allocationChart"
+  },
+  {
+   "n": 23,
+   "kind": "h2",
+   "region": "main",
+   "text": "Allocation Breakdown"
+  },
+  {
+   "n": 24,
+   "kind": "table row",
+   "region": "main",
+   "text": "Category | Ticker | Allocation | Description"
+  },
+  {
+   "n": 25,
+   "kind": "table row",
+   "region": "main",
+   "text": "Loading allocation data…"
+  },
+  {
+   "n": 26,
+   "kind": "table",
+   "region": "main",
+   "text": "2 rows; first row: Category | Ticker | Allocation | Description"
+  },
+  {
+   "n": 27,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Same VIX-tier boundaries and percentage weights as the core strategy — only the ticker per category changes. Rebalance monthly, or whenever the VIX crosses into a new tier."
+  },
+  {
+   "n": 28,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Prefer the original allocation?"
+  },
+  {
+   "n": 29,
+   "kind": "link",
+   "region": "footer",
+   "text": "View Core Strategy →",
+   "href": "strategy.html",
+   "flags": []
+  },
+  {
+   "n": 30,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "This is not financial advice. For educational and informational purposes only. Past performance is not indicative of future results. Tickers you enter here are not verified against a live quote.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 31,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "© 2026 VIX Strategy. Built with no backend. Powered by VIX."
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 33,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato"
+  },
+  {
+   "n": 34,
+   "kind": "script",
+   "region": "body",
+   "text": "https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+  },
+  {
+   "n": 35,
+   "kind": "script",
+   "region": "body",
+   "text": "data/vix.js"
+  },
+  {
+   "n": 36,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/vix.js"
+  },
+  {
+   "n": 37,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/strategy.js"
+  },
+  {
+   "n": 38,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/chart.js"
+  },
+  {
+   "n": 39,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/custom.js"
+  },
+  {
+   "n": 40,
+   "kind": "script",
+   "region": "body",
+   "text": "inline, 8568 characters",
+   "storage keys": [
+    "vix_last_known"
+   ],
+   "functions": [
+    "currentLabels",
+    "buildFormFields",
+    "updateLegend",
+    "updateAllocationTable",
+    "startLoadingCounter",
+    "stopLoadingCounter",
+    "formatTimestamp",
+    "setStatus",
+    "updateVIXDisplay",
+    "updateTierBanner",
+    "renderAll",
+    "refresh",
+    "paintCached",
+    "showStatus"
+   ],
+   "sets innerHTML": true
+  }
+ ],
+ "linked scripts": {
+  "assets/js/vix.js": {
+   "urls": [
+    "https://api.allorigins.win/raw?url=https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX",
+    "https://api.allorigins.win/raw?url=https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX"
+   ],
+   "storage keys": [
+    "CACHE_KEY"
+   ],
+   "functions": [
+    "parseResponse",
+    "fetchFromURL",
+    "getDataFileVIX",
+    "getCachedVIX",
+    "saveToCache",
+    "fetchVIX"
+   ]
+  },
+  "assets/js/strategy.js": {
+   "functions": [
+    "normalize",
+    "getTier",
+    "getAllocation",
+    "getTierLabel"
+   ]
+  },
+  "assets/js/chart.js": {
+   "functions": [
+    "initChart",
+    "updateChart"
+   ]
+  },
+  "assets/js/custom.js": {
+   "storage keys": [
+    "CONFIG_KEY"
+   ],
+   "functions": [
+    "defaultConfig",
+    "sanitizeTicker",
+    "getCustomConfig",
+    "saveCustomConfig",
+    "resetCustomConfig"
+   ]
+  }
+ }
+}

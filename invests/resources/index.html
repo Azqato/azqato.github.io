@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curated resources - Azqato Invests</title>
+<meta name="description" content="Curated investing resources from Azqato Invests: platforms, careers, screeners, education, data and news, in 15 categories. Some links are referral links.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="Curated resources - Azqato Invests">
+<meta property="og:description" content="Curated investing resources from Azqato Invests: platforms, careers, screeners, education, data and news, in 15 categories. Some links are referral links.">
+<meta property="og:url" content="https://azqato.com/invests/resources/">
+<link rel="canonical" href="https://azqato.com/invests/resources/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
+<script src="../assets/js/theme.js"></script>
+<link rel="stylesheet" href="../assets/css/theme.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/docs.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+<style>
+.src-invests {
+      --discord: #5865f2;
+      --discord-hover: #6b76f5;
+}
+.src-invests #projects { scroll-margin-top: 80px;
+}
+.src-invests .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+}
+.src-invests .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+}
+.src-invests .hero h1 .highlight { color: var(--accent);
+}
+.src-invests .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 620px;
+}
+.src-invests .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+}
+.src-invests .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+}
+.src-invests .btn-discord {
+      background: var(--discord);
+      color: #fff;
+      border-color: var(--discord);
+}
+.src-invests .btn-discord:hover {
+      background: var(--discord-hover);
+      border-color: var(--discord-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(88, 101, 242, 0.3);
+}
+.src-invests .btn-discord svg { width: 20px; height: 20px; fill: currentColor;
+}
+.src-invests .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+}
+.src-invests .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+}
+.src-invests .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+}
+.src-invests .section-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+}
+.src-invests .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+}
+.src-invests .section-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+}
+.src-invests .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      max-width: 620px;
+}
+.src-invests .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+}
+.src-invests .project-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      overflow: hidden;
+      transition: transform 0.18s, border-color 0.2s, box-shadow 0.2s;
+}
+.src-invests .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      opacity: 0;
+      transition: opacity 0.2s;
+}
+.src-invests .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+.src-invests .project-card:hover::before { opacity: 1;
+}
+.src-invests .project-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+}
+.src-invests .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+}
+.src-invests .project-card h3 .arrow {
+      color: var(--text-muted);
+      transition: transform 0.18s, color 0.2s;
+}
+.src-invests .project-card:hover h3 .arrow { transform: translateX(4px); color: var(--accent);
+}
+.src-invests .project-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+}
+.src-invests .disclaimer {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+}
+.src-invests .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+}
+.src-invests .resource-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+}
+.src-invests .resource-card h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+}
+.src-invests .resource-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+}
+.src-invests .resource-card li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+}
+.src-invests .resource-card li a::before {
+      content: '›';
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+}
+.src-invests .resource-card li a:hover { color: var(--accent);
+}
+@media (max-width: 600px) {
+.src-invests .hero { padding: 3rem 1.25rem 1.5rem;
+}
+.src-invests .section { padding: 1.5rem 1.25rem 3rem;
+}
+.src-invests .resource-grid { grid-template-columns: minmax(0, 1fr);
+}
+}
+</style>
+</head>
+<body class="pp-page site-page is-doc" data-root="../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="https://azqato.com/">Azqato<span>.</span></a>
+  <ul><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="../index.html" aria-current="true">Invests</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-learn">Learn</summary><ul aria-labelledby="pp-g-learn"><li><a href="../learn/index.html">Overview</a></li><li><a href="../learn/philosophy.html">Philosophy</a></li><li><a href="../learn/metrics.html">Stock metrics</a></li><li><a href="../learn/indices.html">Index &amp; ETF methodology</a></li><li><a href="../learn/finviz.html">Finviz setup guide</a></li><li><a href="../learn/seekingalpha.html">Seeking Alpha setup guide</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-tools">Tools</summary><ul aria-labelledby="pp-g-tools"><li><a href="../tools/screener.html">Screener</a></li><li><a href="../tools/market.html">Market Overview</a></li><li><a href="../tools/vix-dashboard.html">VIX Dashboard</a></li><li><a href="../tools/vix-custom.html">VIX Custom builder</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-strategies">Strategies</summary><ul aria-labelledby="pp-g-strategies"><li><a href="../strategies/vix.html">VIX Strategy</a></li><li><a href="../strategies/leveraged/index.html">Leveraged strategies</a></li><li class="site-sub"><a href="../strategies/leveraged/3sig.html">3 Sig</a></li><li class="site-sub"><a href="../strategies/leveraged/6sig.html">6 Sig</a></li><li class="site-sub"><a href="../strategies/leveraged/9sig.html">9 Sig</a></li><li class="site-sub"><a href="../strategies/leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li class="site-sub"><a href="../strategies/leveraged/holy-grail.html">Holy Grail</a></li><li class="site-sub"><a href="../strategies/leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../resources/index.html" aria-current="page">Curated resources</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-faq">FAQ</summary><ul aria-labelledby="pp-g-faq"><li><a href="../faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul></details>
+  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><span aria-current="page">Curated resources</span></li></ol></nav>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-invests"><section class="section">
+<div class="section-header">
+<h1 class="section-title">Curated Resources</h1>
+<p class="section-desc">A hand-picked hub of platforms, screeners, education, and data for traders at any level.</p>
+</div>
+<div class="disclaimer">
+<span>ⓘ</span>
+<span>Azqato is not a licensed financial advisor. Nothing here is financial advice; all content is for informational and entertainment purposes only. Some links are affiliate/referral links.</span>
+</div>
+<div class="resource-grid">
+<div class="resource-card">
+<h3 id="platforms">🏦 Platforms</h3>
+<ul>
+<li><a href="http://join.robinhood.com/robertg273" rel="noopener" target="_blank">Robinhood</a></li>
+<li><a href="https://m1.finance/BVZBG3OqOfMj" rel="noopener" target="_blank">M1 Finance</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="careers">💼 Careers</h3>
+<ul>
+<li><a href="https://www.roberthalf.com/jobs/remote" rel="noopener" target="_blank">Remote Jobs</a></li>
+<li><a href="https://remotive.com/" rel="noopener" target="_blank">Remotive</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="etfs">📊 ETFs</h3>
+<ul>
+<li><a href="https://m1.finance/lg6DhArFe7mR" rel="noopener" target="_blank">US Economy</a></li>
+<li><a href="https://m1.finance/aYecv1jT7ATx" rel="noopener" target="_blank">Dividends</a></li>
+<li><a href="https://m1.finance/AODxtLWiUWzS" rel="noopener" target="_blank">Growth</a></li>
+<li><a href="https://m1.finance/wXPV0G6wQG9s" rel="noopener" target="_blank">Market Sentiment</a></li>
+<li><a href="https://m1.finance/ZONqRA-E4jfh" rel="noopener" target="_blank">Vanguard</a></li>
+<li><a href="https://m1.finance/Bded182o2HL5" rel="noopener" target="_blank">High Dividend &amp; Low Volatility</a></li>
+<li><a href="https://m1.finance/qsKTrzlzfl6d" rel="noopener" target="_blank">US Government Bonds</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="companies">🏢 Companies</h3>
+<ul>
+<li><a href="https://m1.finance/Ql1-1ZBHVG6T" rel="noopener" target="_blank">Software</a></li>
+<li><a href="https://m1.finance/InXZI6AHxrEt" rel="noopener" target="_blank">Telecom</a></li>
+<li><a href="https://m1.finance/GMRwAaWa07j_" rel="noopener" target="_blank">Networking</a></li>
+<li><a href="https://m1.finance/Do0WxUtoL6A7" rel="noopener" target="_blank">Banks</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="ratings">⭐ Ratings</h3>
+<ul>
+<li><a href="https://www.thestreet.com/stock-market-news/10579592/top-rated-stocks/top-rated-stocks.html" rel="noopener" target="_blank">Top Rated Stocks</a></li>
+<li><a href="https://www.thestreet.com/stock-market-news/10575864/top-rated-etfs/top-rated-etfs.html" rel="noopener" target="_blank">Top Rated ETFs</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="screeners">🔍 Screeners</h3>
+<ul>
+<li><a href="https://www.tradingview.com/screener/" rel="noopener" target="_blank">TradingView Stock Screener</a></li>
+<li><a href="https://www.reddit.com/r/FluentInFinance/comments/mf7nk0/collection_of_finviz_screeners/" rel="noopener" target="_blank">Collection of Finviz Screeners</a></li>
+<li><a href="https://finviz.com/screener.ashx" rel="noopener" target="_blank">Finviz Screener</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="real-estate">🏠 Real Estate</h3>
+<ul>
+<li><a href="https://www.redfin.com/" rel="noopener" target="_blank">Redfin</a></li>
+<li><a href="https://www.areavibes.com/" rel="noopener" target="_blank">Areavibes</a></li>
+<li><a href="https://www.sacramentocondomania.com" rel="noopener" target="_blank">Sacramento</a></li>
+<li><a href="https://www.denvercondomania.com" rel="noopener" target="_blank">Denver</a></li>
+<li><a href="https://www.tempecondomania.com/" rel="noopener" target="_blank">Tempe</a></li>
+<li><a href="https://www.lasvegascondomania.com/" rel="noopener" target="_blank">Las Vegas</a></li>
+<li><a href="https://www.sandiegocondomania.com/" rel="noopener" target="_blank">San Diego</a></li>
+<li><a href="https://www.orangecountycondomania.com/" rel="noopener" target="_blank">Orange County</a></li>
+<li><a href="https://www.sanjosecondomania.com/" rel="noopener" target="_blank">San Jose</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="charts">📈 Charts</h3>
+<ul>
+<li><a href="https://stockcharts.com/freecharts/" rel="noopener" target="_blank">Stock Charts: Free Charts</a></li>
+<li><a href="https://robintrack.net/" rel="noopener" target="_blank">RobinTrack</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="databases">🗄️ Databases</h3>
+<ul>
+<li><a href="https://etfdb.com/etfs/" rel="noopener" target="_blank">ETFDB.com</a></li>
+<li><a href="https://www.dividend.com/" rel="noopener" target="_blank">Dividend.com</a></li>
+<li><a href="https://dividendstocksonline.com/" rel="noopener" target="_blank">Dividend Stocks Online</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="economic-indicators">📉 Economic Indicators</h3>
+<ul>
+<li><a href="https://truflation.com/" rel="noopener" target="_blank">Truflation</a></li>
+<li><a href="https://www.investopedia.com/terms/e/economic_indicator.asp" rel="noopener" target="_blank">Investopedia Economic Indicator</a></li>
+<li><a href="https://ycharts.com/indicators/us_investor_sentiment_bull_bear_spread" rel="noopener" target="_blank">YCharts Sentiment</a></li>
+<li><a href="https://www.census.gov/economic-indicators/" rel="noopener" target="_blank">Census Economic Indicators</a></li>
+<li><a href="https://tradingeconomics.com/indicators" rel="noopener" target="_blank">Trading Economics</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="education">🎓 Education</h3>
+<ul>
+<li><a href="https://www.investopedia.com/" rel="noopener" target="_blank">Investopedia</a></li>
+<li><a href="https://www.coursera.org/specializations/investment-strategy" rel="noopener" target="_blank">Coursera Investment Strategy</a></li>
+<li><a href="https://www.investopedia.com/terms/e/etf.asp" rel="noopener" target="_blank">Investopedia ETF Guide</a></li>
+<li><a href="https://www.investopedia.com/terms/a/averagedown.asp" rel="noopener" target="_blank">Averaging Down</a></li>
+<li><a href="https://www.investopedia.com/terms/e/eps.asp" rel="noopener" target="_blank">EPS Guide</a></li>
+<li><a href="https://finance.zacks.com/make-money-trading-earnings-calendar-11148.html" rel="noopener" target="_blank">Zacks Earnings Calendar</a></li>
+<li><a href="https://study.com/academy/lesson/what-is-a-leveraged-etf-decay-risk-volatility.html" rel="noopener" target="_blank">Leveraged ETF Decay</a></li>
+<li><a href="https://www.investopedia.com/terms/i/inverse-etf.asp" rel="noopener" target="_blank">Inverse ETF</a></li>
+<li><a href="https://www.investopedia.com/ask/answers/06/stoplossorderdetails.asp" rel="noopener" target="_blank">Stop Loss Orders</a></li>
+<li><a href="https://www.investopedia.com/trading/support-and-resistance-basics/" rel="noopener" target="_blank">Support and Resistance</a></li>
+<li><a href="https://www.investopedia.com/terms/m/movingaverage.asp" rel="noopener" target="_blank">Moving Average</a></li>
+<li><a href="https://www.investopedia.com/terms/m/macd.asp" rel="noopener" target="_blank">MACD</a></li>
+<li><a href="https://www.investopedia.com/terms/b/beta.asp" rel="noopener" target="_blank">Beta</a></li>
+<li><a href="https://www.investopedia.com/terms/v/volatility.asp" rel="noopener" target="_blank">Volatility</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="guides">📖 Guides</h3>
+<ul>
+<li><a href="https://docs.google.com/document/d/1pjHqe-QKjiutLtAnELCEonIEIJ4IrcVSE_ZJKbuBcMY/edit?usp=sharing" rel="noopener" target="_blank">Stock Ratios Guide</a></li>
+<li><a href="https://www.investopedia.com/options-basics-tutorial-4583012" rel="noopener" target="_blank">Options Basics Tutorial</a></li>
+<li><a href="https://www.lynalden.com/asset-allocation/" rel="noopener" target="_blank">Asset Allocation Guide</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="indices">📋 Indices</h3>
+<ul>
+<li><a href="https://www.tradingview.com/markets/indices/quotes-major/" rel="noopener" target="_blank">TradingView Major Indices</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="information">ℹ️ Information</h3>
+<ul>
+<li><a href="https://google.com/finance" rel="noopener" target="_blank">Google Finance</a></li>
+<li><a href="https://finance.yahoo.com/" rel="noopener" target="_blank">Yahoo Finance</a></li>
+<li><a href="https://wolframalpha.com/" rel="noopener" target="_blank">WolframAlpha</a></li>
+<li><a href="https://www.investopedia.com/" rel="noopener" target="_blank">Investopedia</a></li>
+<li><a href="https://www.tradingview.com/" rel="noopener" target="_blank">TradingView</a></li>
+<li><a href="https://finviz.com/" rel="noopener" target="_blank">Finviz</a></li>
+<li><a href="https://seekingalpha.com/" rel="noopener" target="_blank">Seeking Alpha</a></li>
+</ul>
+</div>
+<div class="resource-card">
+<h3 id="news">📰 News</h3>
+<ul>
+<li><a href="https://renaissancecapital.com/IPO-Center/Calendar" rel="noopener" target="_blank">Renaissance Capital IPO Calendar</a></li>
+<li><a href="https://www.newsnow.co.uk/h/Business+&amp;+Finance/Oil+Prices" rel="noopener" target="_blank">NewsNow Oil Prices</a></li>
+<li><a href="https://seekingalpha.com/market-news/top-news" rel="noopener" target="_blank">Seeking Alpha Market News</a></li>
+<li><a href="https://www.youtube.com/channel/UCIALMKvObZNtJ6AmdCLP7Lg" rel="noopener" target="_blank">YouTube Finance Channel</a></li>
+<li><a href="https://www.youtube.com/channel/UCrp_UI8XtuYfpiqluWLD7Lw" rel="noopener" target="_blank">YouTube Finance Channel 2</a></li>
+<li><a href="https://www.youtube.com/user/DailyFXNews" rel="noopener" target="_blank">Daily FX News</a></li>
+</ul>
+</div>
+</div>
+</section><div class="src-footer site-dup">
+    Built by <a href="https://azqato.com/">Azqato</a>.
+  </div></div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../strategies/leveraged/hfea.html"><small>Previous</small><span>HFEA</span></a><a class="pp-pager-link pp-pager-link--next" href="../faq.html"><small>Next</small><span>FAQ</span></a></nav>
+</main>
+<aside class="pp-toc" aria-labelledby="pp-toc-title">
+  <p class="pp-toc-title" id="pp-toc-title">On this page</p>
+  <ul class="pp-toc-list" id="pp-toc-list"></ul>
+</aside>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../resources/index.html">Curated resources</a> · <a href="../faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../assets/js/site.js"></script>
+
+</body>
+</html>

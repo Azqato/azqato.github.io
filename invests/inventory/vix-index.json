@@ -1,0 +1,536 @@
+{
+ "source": "vix/index.html",
+ "head": [
+  "title: VIX Strategy — Fear Is a Signal. Use It.",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: A rules-based, VIX-driven portfolio strategy. Real-time ETF allocations that increase growth exposure when market fear peaks.",
+  "og:title: VIX Strategy — Fear Is a Signal. Use It.",
+  "og:description: Dynamic ETF allocations driven by the CBOE VIX. More aggressive exposure when fear is highest.",
+  "og:type: website",
+  "og:image: assets/img/logo.svg",
+  "link icon: assets/img/favicon.svg",
+  "link stylesheet: assets/css/styles.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "image",
+   "region": "nav",
+   "text": "VIX Strategy",
+   "src": "assets/img/logo.svg"
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "VIX Strategy",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "link",
+   "region": "nav",
+   "text": "About",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Dashboard",
+   "href": "strategy.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "link",
+   "region": "nav",
+   "text": "Custom",
+   "href": "custom.html",
+   "flags": []
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 7,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 8,
+   "kind": "text",
+   "region": "main",
+   "text": "LIVE MARKET DATA"
+  },
+  {
+   "n": 9,
+   "kind": "h1",
+   "region": "main",
+   "text": "Fear Is a Signal.Use It."
+  },
+  {
+   "n": 10,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A rules-based, contrarian portfolio strategy that mechanically increases exposure to growth ETFs when market fear peaks — and pulls back when complacency sets in."
+  },
+  {
+   "n": 11,
+   "kind": "text",
+   "region": "main",
+   "text": "CBOE VIX"
+  },
+  {
+   "n": 12,
+   "kind": "text",
+   "region": "main",
+   "text": "--"
+  },
+  {
+   "n": 13,
+   "kind": "text",
+   "region": "main",
+   "text": "Volatility Index"
+  },
+  {
+   "n": 14,
+   "kind": "text",
+   "region": "main",
+   "text": "Loading…"
+  },
+  {
+   "n": 15,
+   "kind": "text",
+   "region": "main",
+   "text": "QQQ & TQQQ increase"
+  },
+  {
+   "n": 16,
+   "kind": "text",
+   "region": "main",
+   "text": "as this number rises"
+  },
+  {
+   "n": 17,
+   "kind": "link",
+   "region": "main",
+   "text": "See the Live Strategy →",
+   "href": "strategy.html",
+   "flags": []
+  },
+  {
+   "n": 18,
+   "kind": "h2",
+   "region": "main",
+   "text": "The Problem With Buy and Hold"
+  },
+  {
+   "n": 19,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Static allocation strategies leave performance on the table during the market's most important moments — the crashes that precede the fastest recoveries."
+  },
+  {
+   "n": 20,
+   "kind": "text",
+   "region": "main",
+   "text": "⚡"
+  },
+  {
+   "n": 21,
+   "kind": "h3",
+   "region": "main",
+   "text": "Volatility Spikes Are Inevitable"
+  },
+  {
+   "n": 22,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The S&P 500 experiences VIX spikes above 30 roughly every 2–3 years. Most investors panic-sell at exactly the wrong moment, locking in losses at the bottom.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 23,
+   "kind": "text",
+   "region": "main",
+   "text": "📉"
+  },
+  {
+   "n": 24,
+   "kind": "h3",
+   "region": "main",
+   "text": "Static Portfolios Don't Adapt"
+  },
+  {
+   "n": 25,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A fixed 60/40 or 100% equity allocation has no mechanism to respond to opportunity. It rides fear down — but doesn't press its advantage when the signal is clearest."
+  },
+  {
+   "n": 26,
+   "kind": "text",
+   "region": "main",
+   "text": "📈"
+  },
+  {
+   "n": 27,
+   "kind": "h3",
+   "region": "main",
+   "text": "Recoveries Are Fastest After Peak Fear"
+  },
+  {
+   "n": 28,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Historically, the 12 months following a VIX spike above 35 contain some of the strongest equity returns ever recorded. The opportunity is there — if you are positioned for it."
+  },
+  {
+   "n": 29,
+   "kind": "h2",
+   "region": "main",
+   "text": "The Insight: VIX Is Mean-Reverting"
+  },
+  {
+   "n": 30,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The CBOE VIX measures 30-day implied volatility derived from S&P 500 options prices. It is not a directional predictor — it is a precise, real-time measure of collective market fear."
+  },
+  {
+   "n": 31,
+   "kind": "text",
+   "region": "main",
+   "text": "~80"
+  },
+  {
+   "n": 32,
+   "kind": "text",
+   "region": "main",
+   "text": "VIX peak during 2008–2009 Financial Crisis"
+  },
+  {
+   "n": 33,
+   "kind": "text",
+   "region": "main",
+   "text": "~85"
+  },
+  {
+   "n": 34,
+   "kind": "text",
+   "region": "main",
+   "text": "VIX peak during 2020 COVID-19 crash"
+  },
+  {
+   "n": 35,
+   "kind": "text",
+   "region": "main",
+   "text": "12–15"
+  },
+  {
+   "n": 36,
+   "kind": "text",
+   "region": "main",
+   "text": "Typical \"complacency\" range in bull markets"
+  },
+  {
+   "n": 37,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Every time the VIX has spiked above 40, it has reverted to its long-term mean of roughly 20 within 12–18 months. The question is not if the market recovers — it is whether you are positioned to capture it."
+  },
+  {
+   "n": 38,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "\"Be greedy when others are fearful.\" — Warren Buffett"
+  },
+  {
+   "n": 39,
+   "kind": "h2",
+   "region": "main",
+   "text": "The Strategy: 5 VIX Tiers, 4 ETFs"
+  },
+  {
+   "n": 40,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "As the VIX rises, allocations mechanically shift away from T-Bills and toward leveraged growth ETFs — maximizing recovery capture precisely when fear is highest."
+  },
+  {
+   "n": 41,
+   "kind": "table row",
+   "region": "main",
+   "text": "VIX Range | BIL (T-Bill) | SPY (S&P 500) | QQQ (Nasdaq-100) | TQQQ (3× Nasdaq)"
+  },
+  {
+   "n": 42,
+   "kind": "table row",
+   "region": "main",
+   "text": "VIX < 15Low Fear | 25.00% | 50.00% | 20.00% | 5.00%"
+  },
+  {
+   "n": 43,
+   "kind": "table row",
+   "region": "main",
+   "text": "VIX 15–25Moderate Fear | 20.00% | 40.00% | 30.00% | 10.00%"
+  },
+  {
+   "n": 44,
+   "kind": "table row",
+   "region": "main",
+   "text": "VIX 25–35Elevated Fear | 15.00% | 35.00% | 35.00% | 15.00%"
+  },
+  {
+   "n": 45,
+   "kind": "table row",
+   "region": "main",
+   "text": "VIX 35–45High Fear | 10.00% | 30.00% | 40.00% | 20.00%"
+  },
+  {
+   "n": 46,
+   "kind": "table row",
+   "region": "main",
+   "text": "VIX > 45Extreme Fear | 5.00% | 20.00% | 50.00% | 25.00%"
+  },
+  {
+   "n": 47,
+   "kind": "table",
+   "region": "main",
+   "text": "6 rows; first row: VIX Range | BIL (T-Bill) | SPY (S&P 500) | QQQ (Nasdaq-100) | TQQQ (3× Nasdaq)"
+  },
+  {
+   "n": 48,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "All allocations normalized to 100%. Rebalance monthly on the first trading day, or whenever the VIX crosses into a new tier."
+  },
+  {
+   "n": 49,
+   "kind": "h2",
+   "region": "main",
+   "text": "Why Now: The AI & Semiconductor Supercycle"
+  },
+  {
+   "n": 50,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "QQQ and TQQQ carry heavy weighting in AI infrastructure, semiconductor, and cloud computing — sectors at the center of a multi-decade secular growth cycle."
+  },
+  {
+   "n": 51,
+   "kind": "h3",
+   "region": "main",
+   "text": "AI Infrastructure Buildout"
+  },
+  {
+   "n": 52,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "NVIDIA, Microsoft, Alphabet, Amazon, and Meta are each spending hundreds of billions annually on AI compute. These companies dominate QQQ's top holdings — and the capital expenditure is just beginning."
+  },
+  {
+   "n": 53,
+   "kind": "h3",
+   "region": "main",
+   "text": "Structural Semiconductor Demand"
+  },
+  {
+   "n": 54,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "AI training, inference, EVs, IoT, and data center expansion are creating demand for semiconductors that will persist for decades. Every major technology trend requires more silicon."
+  },
+  {
+   "n": 55,
+   "kind": "h3",
+   "region": "main",
+   "text": "Leverage + Time + Discipline"
+  },
+  {
+   "n": 56,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "TQQQ introduces volatility decay. Over a 10+ year horizon with systematic rebalancing at fear peaks, compounding can overcome that decay — provided the underlying index continues its long-term growth trend."
+  },
+  {
+   "n": 57,
+   "kind": "h2",
+   "region": "main",
+   "text": "⚠ Risk Disclosure",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 58,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This strategy carries significant risk. Read this before proceeding.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 59,
+   "kind": "list item",
+   "region": "main",
+   "text": "Leveraged ETF Decay: TQQQ uses daily rebalanced 3× leverage. In choppy or sideways markets it loses value even when the underlying index is flat. This volatility decay is permanent and structural.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 60,
+   "kind": "list item",
+   "region": "main",
+   "text": "Severe Drawdowns: TQQQ lost approximately 80% during the 2022 bear market and over 90% during COVID-19. You must be prepared to hold — or add — through drawdowns of this magnitude without panic-selling."
+  },
+  {
+   "n": 61,
+   "kind": "list item",
+   "region": "main",
+   "text": "10+ Year Horizon Required: This strategy is not suitable for capital you may need within five years. Leveraged ETFs require time and compounding to recover from major drawdowns."
+  },
+  {
+   "n": 62,
+   "kind": "list item",
+   "region": "main",
+   "text": "Rebalancing Discipline: The strategy only works if you execute rebalances mechanically. Emotional deviation during drawdowns permanently impairs the compounding advantage."
+  },
+  {
+   "n": 63,
+   "kind": "list item",
+   "region": "main",
+   "text": "Concentration Risk: Heavy exposure to tech and Nasdaq. A prolonged tech bear market or regulatory crackdown on large-cap tech would severely impact strategy returns.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This is not financial advice. For educational and informational purposes only. Past performance is not indicative of future results.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 65,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Ready to see what the current VIX says about your allocation?"
+  },
+  {
+   "n": 66,
+   "kind": "link",
+   "region": "footer",
+   "text": "View Live Strategy →",
+   "href": "strategy.html",
+   "flags": []
+  },
+  {
+   "n": 67,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "This is not financial advice. For educational and informational purposes only. Past performance is not indicative of future results.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 68,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "© 2026 VIX Strategy. Built with no backend. Powered by VIX."
+  },
+  {
+   "n": 69,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 70,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato"
+  },
+  {
+   "n": 71,
+   "kind": "script",
+   "region": "body",
+   "text": "data/vix.js"
+  },
+  {
+   "n": 72,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/vix.js"
+  },
+  {
+   "n": 73,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/strategy.js"
+  },
+  {
+   "n": 74,
+   "kind": "script",
+   "region": "body",
+   "text": "inline, 2827 characters",
+   "functions": [
+    "updateGauge"
+   ]
+  }
+ ],
+ "linked scripts": {
+  "assets/js/vix.js": {
+   "urls": [
+    "https://api.allorigins.win/raw?url=https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX",
+    "https://api.allorigins.win/raw?url=https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX"
+   ],
+   "storage keys": [
+    "CACHE_KEY"
+   ],
+   "functions": [
+    "parseResponse",
+    "fetchFromURL",
+    "getDataFileVIX",
+    "getCachedVIX",
+    "saveToCache",
+    "fetchVIX"
+   ]
+  },
+  "assets/js/strategy.js": {
+   "functions": [
+    "normalize",
+    "getTier",
+    "getAllocation",
+    "getTierLabel"
+   ]
+  }
+ }
+}

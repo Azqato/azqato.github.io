@@ -20,7 +20,10 @@ EMDASH=$(printf '\342\200\224')   # U+2014, avoids embedding the literal byte
 status=0
 
 # Staged, non-deleted .html and .md files.
-files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(html|md)$')
+# invests/inventory/ is exempt: Azqato Invests' word-for-word records of its
+# source pages, which its preserve-everything rule checks the moved pages
+# against. They are records, not pages; the pages themselves are checked.
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(html|md)$' | grep -v '^invests/inventory/')
 
 for f in $files; do
   content=$(git show ":$f")

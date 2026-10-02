@@ -1,0 +1,1640 @@
+{
+ "source": "azqato.github.io/invests.html",
+ "head": [
+  "title: Investing Tools and Resources - Azqato",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: Free investing tools built by Azqato, plus a hand-picked hub of brokers, screeners, ETF lists, charts and economic data. Nothing here is financial advice.",
+  "link canonical: https://azqato.com/invests",
+  "og:title: Free Investing Tools and a Curated Resource Hub",
+  "og:description: Free investing tools built by Azqato, plus a hand-picked hub of brokers, screeners, ETF lists, charts and economic data. Nothing here is financial advice.",
+  "og:url: https://azqato.com/invests",
+  "og:type: website",
+  "og:site_name: Azqato",
+  "twitter:card: summary",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>",
+  "link stylesheet: styles.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato.",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "button",
+   "region": "nav",
+   "text": "☰"
+  },
+  {
+   "n": 3,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 4,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 5,
+   "kind": "link",
+   "region": "nav",
+   "text": "About",
+   "href": "about.html",
+   "flags": []
+  },
+  {
+   "n": 6,
+   "kind": "list item",
+   "region": "nav",
+   "text": "About"
+  },
+  {
+   "n": 7,
+   "kind": "link",
+   "region": "nav",
+   "text": "Discord",
+   "href": "discord.html",
+   "flags": []
+  },
+  {
+   "n": 8,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Discord"
+  },
+  {
+   "n": 9,
+   "kind": "link",
+   "region": "nav",
+   "text": "Invests",
+   "href": "invests.html",
+   "flags": []
+  },
+  {
+   "n": 10,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Invests"
+  },
+  {
+   "n": 11,
+   "kind": "link",
+   "region": "nav",
+   "text": "Codes",
+   "href": "codes.html",
+   "flags": []
+  },
+  {
+   "n": 12,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Codes"
+  },
+  {
+   "n": 13,
+   "kind": "link",
+   "region": "nav",
+   "text": "Music",
+   "href": "music.html",
+   "flags": []
+  },
+  {
+   "n": 14,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Music"
+  },
+  {
+   "n": 15,
+   "kind": "link",
+   "region": "nav",
+   "text": "Links",
+   "href": "links.html",
+   "flags": []
+  },
+  {
+   "n": 16,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Links"
+  },
+  {
+   "n": 17,
+   "kind": "link",
+   "region": "nav",
+   "text": "Projects",
+   "href": "projects.html",
+   "flags": []
+  },
+  {
+   "n": 18,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Projects"
+  },
+  {
+   "n": 19,
+   "kind": "link",
+   "region": "nav",
+   "text": "YouTube",
+   "href": "youtube.html",
+   "flags": []
+  },
+  {
+   "n": 20,
+   "kind": "list item",
+   "region": "nav",
+   "text": "YouTube"
+  },
+  {
+   "n": 21,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "support.html",
+   "flags": []
+  },
+  {
+   "n": 22,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 23,
+   "kind": "h1",
+   "region": "body",
+   "text": "Azqato Invests"
+  },
+  {
+   "n": 24,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Free investing tools and strategies I've built for traders at any level. No signup, no paywall. Join the community on Discord, then dig into the projects below."
+  },
+  {
+   "n": 25,
+   "kind": "svg icon",
+   "region": "body",
+   "text": ""
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "body",
+   "text": "Join the Discord",
+   "href": "discord.html",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "link",
+   "region": "body",
+   "text": "Explore the projects ↓",
+   "href": "#projects",
+   "flags": []
+  },
+  {
+   "n": 28,
+   "kind": "h2",
+   "region": "body",
+   "text": "Projects"
+  },
+  {
+   "n": 29,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Investing tools and strategies I've built, free to use and open to everyone. Pick one below and start exploring."
+  },
+  {
+   "n": 30,
+   "kind": "h3",
+   "region": "body",
+   "text": "Automate Fundamentals →"
+  },
+  {
+   "n": 31,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "The strategy builder for investors who read earnings reports. Turn your own rules into backtestable strategies, no coding. In free beta."
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "body",
+   "text": "🤖",
+   "href": "https://automatefundamentals.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 33,
+   "kind": "h3",
+   "region": "body",
+   "text": "Stocks →"
+  },
+  {
+   "n": 34,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "The framework I use to research, evaluate, and pick individual stocks."
+  },
+  {
+   "n": 35,
+   "kind": "link",
+   "region": "body",
+   "text": "📈",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 36,
+   "kind": "h3",
+   "region": "body",
+   "text": "Leveraged Strategies →"
+  },
+  {
+   "n": 37,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Leveraged ETF strategies with a focus on decay risk and volatility management.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 38,
+   "kind": "link",
+   "region": "body",
+   "text": "🚀",
+   "href": "https://azqato.github.io/leverage/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 39,
+   "kind": "h3",
+   "region": "body",
+   "text": "ComposerAtlas →"
+  },
+  {
+   "n": 40,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Explore and analyze automated trading strategies built on Composer."
+  },
+  {
+   "n": 41,
+   "kind": "link",
+   "region": "body",
+   "text": "🗺️",
+   "href": "https://azqato.github.io/composer",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 42,
+   "kind": "h3",
+   "region": "body",
+   "text": "Net Worth Tracker →"
+  },
+  {
+   "n": 43,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Track your assets, liabilities, and net worth over time in one clean dashboard."
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "body",
+   "text": "💰",
+   "href": "https://azqato.github.io/net-worth-tracker/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 45,
+   "kind": "h3",
+   "region": "body",
+   "text": "VIX Strategy →"
+  },
+  {
+   "n": 46,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "A volatility-based approach to timing the market using the VIX fear index."
+  },
+  {
+   "n": 47,
+   "kind": "link",
+   "region": "body",
+   "text": "📈",
+   "href": "https://azqato.github.io/vix",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 48,
+   "kind": "h3",
+   "region": "body",
+   "text": "Stock Screener →"
+  },
+  {
+   "n": 49,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Filter and surface stocks by custom criteria to find your next opportunity."
+  },
+  {
+   "n": 50,
+   "kind": "link",
+   "region": "body",
+   "text": "📈",
+   "href": "https://azqato.github.io/stocks/screener.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 51,
+   "kind": "h2",
+   "region": "body",
+   "text": "Curated Resources"
+  },
+  {
+   "n": 52,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "A hand-picked hub of platforms, screeners, education, and data for traders at any level."
+  },
+  {
+   "n": 53,
+   "kind": "text",
+   "region": "body",
+   "text": "ⓘ"
+  },
+  {
+   "n": 54,
+   "kind": "text",
+   "region": "body",
+   "text": "Azqato is not a licensed financial advisor. Nothing here is financial advice; all content is for informational and entertainment purposes only. Some links are affiliate/referral links."
+  },
+  {
+   "n": 55,
+   "kind": "h3",
+   "region": "body",
+   "text": "🏦 Platforms"
+  },
+  {
+   "n": 56,
+   "kind": "link",
+   "region": "body",
+   "text": "Robinhood",
+   "href": "http://join.robinhood.com/robertg273",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 57,
+   "kind": "list item",
+   "region": "body",
+   "text": "Robinhood"
+  },
+  {
+   "n": 58,
+   "kind": "link",
+   "region": "body",
+   "text": "M1 Finance",
+   "href": "https://m1.finance/BVZBG3OqOfMj",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 59,
+   "kind": "list item",
+   "region": "body",
+   "text": "M1 Finance"
+  },
+  {
+   "n": 60,
+   "kind": "h3",
+   "region": "body",
+   "text": "💼 Careers"
+  },
+  {
+   "n": 61,
+   "kind": "link",
+   "region": "body",
+   "text": "Remote Jobs",
+   "href": "https://www.roberthalf.com/jobs/remote",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 62,
+   "kind": "list item",
+   "region": "body",
+   "text": "Remote Jobs"
+  },
+  {
+   "n": 63,
+   "kind": "link",
+   "region": "body",
+   "text": "Remotive",
+   "href": "https://remotive.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 64,
+   "kind": "list item",
+   "region": "body",
+   "text": "Remotive"
+  },
+  {
+   "n": 65,
+   "kind": "h3",
+   "region": "body",
+   "text": "📊 ETFs"
+  },
+  {
+   "n": 66,
+   "kind": "link",
+   "region": "body",
+   "text": "US Economy",
+   "href": "https://m1.finance/lg6DhArFe7mR",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 67,
+   "kind": "list item",
+   "region": "body",
+   "text": "US Economy"
+  },
+  {
+   "n": 68,
+   "kind": "link",
+   "region": "body",
+   "text": "Dividends",
+   "href": "https://m1.finance/aYecv1jT7ATx",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 69,
+   "kind": "list item",
+   "region": "body",
+   "text": "Dividends"
+  },
+  {
+   "n": 70,
+   "kind": "link",
+   "region": "body",
+   "text": "Growth",
+   "href": "https://m1.finance/AODxtLWiUWzS",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 71,
+   "kind": "list item",
+   "region": "body",
+   "text": "Growth"
+  },
+  {
+   "n": 72,
+   "kind": "link",
+   "region": "body",
+   "text": "Market Sentiment",
+   "href": "https://m1.finance/wXPV0G6wQG9s",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 73,
+   "kind": "list item",
+   "region": "body",
+   "text": "Market Sentiment"
+  },
+  {
+   "n": 74,
+   "kind": "link",
+   "region": "body",
+   "text": "Vanguard",
+   "href": "https://m1.finance/ZONqRA-E4jfh",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 75,
+   "kind": "list item",
+   "region": "body",
+   "text": "Vanguard"
+  },
+  {
+   "n": 76,
+   "kind": "link",
+   "region": "body",
+   "text": "High Dividend & Low Volatility",
+   "href": "https://m1.finance/Bded182o2HL5",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 77,
+   "kind": "list item",
+   "region": "body",
+   "text": "High Dividend & Low Volatility"
+  },
+  {
+   "n": 78,
+   "kind": "link",
+   "region": "body",
+   "text": "US Government Bonds",
+   "href": "https://m1.finance/qsKTrzlzfl6d",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 79,
+   "kind": "list item",
+   "region": "body",
+   "text": "US Government Bonds"
+  },
+  {
+   "n": 80,
+   "kind": "h3",
+   "region": "body",
+   "text": "🏢 Companies"
+  },
+  {
+   "n": 81,
+   "kind": "link",
+   "region": "body",
+   "text": "Software",
+   "href": "https://m1.finance/Ql1-1ZBHVG6T",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 82,
+   "kind": "list item",
+   "region": "body",
+   "text": "Software"
+  },
+  {
+   "n": 83,
+   "kind": "link",
+   "region": "body",
+   "text": "Telecom",
+   "href": "https://m1.finance/InXZI6AHxrEt",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 84,
+   "kind": "list item",
+   "region": "body",
+   "text": "Telecom"
+  },
+  {
+   "n": 85,
+   "kind": "link",
+   "region": "body",
+   "text": "Networking",
+   "href": "https://m1.finance/GMRwAaWa07j_",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 86,
+   "kind": "list item",
+   "region": "body",
+   "text": "Networking"
+  },
+  {
+   "n": 87,
+   "kind": "link",
+   "region": "body",
+   "text": "Banks",
+   "href": "https://m1.finance/Do0WxUtoL6A7",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 88,
+   "kind": "list item",
+   "region": "body",
+   "text": "Banks"
+  },
+  {
+   "n": 89,
+   "kind": "h3",
+   "region": "body",
+   "text": "⭐ Ratings"
+  },
+  {
+   "n": 90,
+   "kind": "link",
+   "region": "body",
+   "text": "Top Rated Stocks",
+   "href": "https://www.thestreet.com/stock-market-news/10579592/top-rated-stocks/top-rated-stocks.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 91,
+   "kind": "list item",
+   "region": "body",
+   "text": "Top Rated Stocks"
+  },
+  {
+   "n": 92,
+   "kind": "link",
+   "region": "body",
+   "text": "Top Rated ETFs",
+   "href": "https://www.thestreet.com/stock-market-news/10575864/top-rated-etfs/top-rated-etfs.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 93,
+   "kind": "list item",
+   "region": "body",
+   "text": "Top Rated ETFs"
+  },
+  {
+   "n": 94,
+   "kind": "h3",
+   "region": "body",
+   "text": "🔍 Screeners"
+  },
+  {
+   "n": 95,
+   "kind": "link",
+   "region": "body",
+   "text": "TradingView Stock Screener",
+   "href": "https://www.tradingview.com/screener/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 96,
+   "kind": "list item",
+   "region": "body",
+   "text": "TradingView Stock Screener"
+  },
+  {
+   "n": 97,
+   "kind": "link",
+   "region": "body",
+   "text": "Collection of Finviz Screeners",
+   "href": "https://www.reddit.com/r/FluentInFinance/comments/mf7nk0/collection_of_finviz_screeners/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 98,
+   "kind": "list item",
+   "region": "body",
+   "text": "Collection of Finviz Screeners"
+  },
+  {
+   "n": 99,
+   "kind": "link",
+   "region": "body",
+   "text": "Finviz Screener",
+   "href": "https://finviz.com/screener.ashx",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 100,
+   "kind": "list item",
+   "region": "body",
+   "text": "Finviz Screener"
+  },
+  {
+   "n": 101,
+   "kind": "h3",
+   "region": "body",
+   "text": "🏠 Real Estate"
+  },
+  {
+   "n": 102,
+   "kind": "link",
+   "region": "body",
+   "text": "Redfin",
+   "href": "https://www.redfin.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 103,
+   "kind": "list item",
+   "region": "body",
+   "text": "Redfin"
+  },
+  {
+   "n": 104,
+   "kind": "link",
+   "region": "body",
+   "text": "Areavibes",
+   "href": "https://www.areavibes.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 105,
+   "kind": "list item",
+   "region": "body",
+   "text": "Areavibes"
+  },
+  {
+   "n": 106,
+   "kind": "link",
+   "region": "body",
+   "text": "Sacramento",
+   "href": "https://www.sacramentocondomania.com",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 107,
+   "kind": "list item",
+   "region": "body",
+   "text": "Sacramento"
+  },
+  {
+   "n": 108,
+   "kind": "link",
+   "region": "body",
+   "text": "Denver",
+   "href": "https://www.denvercondomania.com",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 109,
+   "kind": "list item",
+   "region": "body",
+   "text": "Denver"
+  },
+  {
+   "n": 110,
+   "kind": "link",
+   "region": "body",
+   "text": "Tempe",
+   "href": "https://www.tempecondomania.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 111,
+   "kind": "list item",
+   "region": "body",
+   "text": "Tempe"
+  },
+  {
+   "n": 112,
+   "kind": "link",
+   "region": "body",
+   "text": "Las Vegas",
+   "href": "https://www.lasvegascondomania.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 113,
+   "kind": "list item",
+   "region": "body",
+   "text": "Las Vegas"
+  },
+  {
+   "n": 114,
+   "kind": "link",
+   "region": "body",
+   "text": "San Diego",
+   "href": "https://www.sandiegocondomania.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 115,
+   "kind": "list item",
+   "region": "body",
+   "text": "San Diego"
+  },
+  {
+   "n": 116,
+   "kind": "link",
+   "region": "body",
+   "text": "Orange County",
+   "href": "https://www.orangecountycondomania.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 117,
+   "kind": "list item",
+   "region": "body",
+   "text": "Orange County"
+  },
+  {
+   "n": 118,
+   "kind": "link",
+   "region": "body",
+   "text": "San Jose",
+   "href": "https://www.sanjosecondomania.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 119,
+   "kind": "list item",
+   "region": "body",
+   "text": "San Jose"
+  },
+  {
+   "n": 120,
+   "kind": "h3",
+   "region": "body",
+   "text": "📈 Charts"
+  },
+  {
+   "n": 121,
+   "kind": "link",
+   "region": "body",
+   "text": "Stock Charts: Free Charts",
+   "href": "https://stockcharts.com/freecharts/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 122,
+   "kind": "list item",
+   "region": "body",
+   "text": "Stock Charts: Free Charts"
+  },
+  {
+   "n": 123,
+   "kind": "link",
+   "region": "body",
+   "text": "RobinTrack",
+   "href": "https://robintrack.net/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 124,
+   "kind": "list item",
+   "region": "body",
+   "text": "RobinTrack"
+  },
+  {
+   "n": 125,
+   "kind": "h3",
+   "region": "body",
+   "text": "🗄️ Databases"
+  },
+  {
+   "n": 126,
+   "kind": "link",
+   "region": "body",
+   "text": "ETFDB.com",
+   "href": "https://etfdb.com/etfs/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 127,
+   "kind": "list item",
+   "region": "body",
+   "text": "ETFDB.com"
+  },
+  {
+   "n": 128,
+   "kind": "link",
+   "region": "body",
+   "text": "Dividend.com",
+   "href": "https://www.dividend.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 129,
+   "kind": "list item",
+   "region": "body",
+   "text": "Dividend.com"
+  },
+  {
+   "n": 130,
+   "kind": "link",
+   "region": "body",
+   "text": "Dividend Stocks Online",
+   "href": "https://dividendstocksonline.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 131,
+   "kind": "list item",
+   "region": "body",
+   "text": "Dividend Stocks Online"
+  },
+  {
+   "n": 132,
+   "kind": "h3",
+   "region": "body",
+   "text": "📉 Economic Indicators"
+  },
+  {
+   "n": 133,
+   "kind": "link",
+   "region": "body",
+   "text": "Truflation",
+   "href": "https://truflation.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 134,
+   "kind": "list item",
+   "region": "body",
+   "text": "Truflation"
+  },
+  {
+   "n": 135,
+   "kind": "link",
+   "region": "body",
+   "text": "Investopedia Economic Indicator",
+   "href": "https://www.investopedia.com/terms/e/economic_indicator.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 136,
+   "kind": "list item",
+   "region": "body",
+   "text": "Investopedia Economic Indicator"
+  },
+  {
+   "n": 137,
+   "kind": "link",
+   "region": "body",
+   "text": "YCharts Sentiment",
+   "href": "https://ycharts.com/indicators/us_investor_sentiment_bull_bear_spread",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 138,
+   "kind": "list item",
+   "region": "body",
+   "text": "YCharts Sentiment"
+  },
+  {
+   "n": 139,
+   "kind": "link",
+   "region": "body",
+   "text": "Census Economic Indicators",
+   "href": "https://www.census.gov/economic-indicators/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 140,
+   "kind": "list item",
+   "region": "body",
+   "text": "Census Economic Indicators"
+  },
+  {
+   "n": 141,
+   "kind": "link",
+   "region": "body",
+   "text": "Trading Economics",
+   "href": "https://tradingeconomics.com/indicators",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 142,
+   "kind": "list item",
+   "region": "body",
+   "text": "Trading Economics"
+  },
+  {
+   "n": 143,
+   "kind": "h3",
+   "region": "body",
+   "text": "🎓 Education"
+  },
+  {
+   "n": 144,
+   "kind": "link",
+   "region": "body",
+   "text": "Investopedia",
+   "href": "https://www.investopedia.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 145,
+   "kind": "list item",
+   "region": "body",
+   "text": "Investopedia"
+  },
+  {
+   "n": 146,
+   "kind": "link",
+   "region": "body",
+   "text": "Coursera Investment Strategy",
+   "href": "https://www.coursera.org/specializations/investment-strategy",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 147,
+   "kind": "list item",
+   "region": "body",
+   "text": "Coursera Investment Strategy"
+  },
+  {
+   "n": 148,
+   "kind": "link",
+   "region": "body",
+   "text": "Investopedia ETF Guide",
+   "href": "https://www.investopedia.com/terms/e/etf.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 149,
+   "kind": "list item",
+   "region": "body",
+   "text": "Investopedia ETF Guide"
+  },
+  {
+   "n": 150,
+   "kind": "link",
+   "region": "body",
+   "text": "Averaging Down",
+   "href": "https://www.investopedia.com/terms/a/averagedown.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 151,
+   "kind": "list item",
+   "region": "body",
+   "text": "Averaging Down"
+  },
+  {
+   "n": 152,
+   "kind": "link",
+   "region": "body",
+   "text": "EPS Guide",
+   "href": "https://www.investopedia.com/terms/e/eps.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 153,
+   "kind": "list item",
+   "region": "body",
+   "text": "EPS Guide"
+  },
+  {
+   "n": 154,
+   "kind": "link",
+   "region": "body",
+   "text": "Zacks Earnings Calendar",
+   "href": "https://finance.zacks.com/make-money-trading-earnings-calendar-11148.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 155,
+   "kind": "list item",
+   "region": "body",
+   "text": "Zacks Earnings Calendar"
+  },
+  {
+   "n": 156,
+   "kind": "link",
+   "region": "body",
+   "text": "Leveraged ETF Decay",
+   "href": "https://study.com/academy/lesson/what-is-a-leveraged-etf-decay-risk-volatility.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 157,
+   "kind": "list item",
+   "region": "body",
+   "text": "Leveraged ETF Decay"
+  },
+  {
+   "n": 158,
+   "kind": "link",
+   "region": "body",
+   "text": "Inverse ETF",
+   "href": "https://www.investopedia.com/terms/i/inverse-etf.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 159,
+   "kind": "list item",
+   "region": "body",
+   "text": "Inverse ETF"
+  },
+  {
+   "n": 160,
+   "kind": "link",
+   "region": "body",
+   "text": "Stop Loss Orders",
+   "href": "https://www.investopedia.com/ask/answers/06/stoplossorderdetails.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 161,
+   "kind": "list item",
+   "region": "body",
+   "text": "Stop Loss Orders",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 162,
+   "kind": "link",
+   "region": "body",
+   "text": "Support and Resistance",
+   "href": "https://www.investopedia.com/trading/support-and-resistance-basics/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 163,
+   "kind": "list item",
+   "region": "body",
+   "text": "Support and Resistance"
+  },
+  {
+   "n": 164,
+   "kind": "link",
+   "region": "body",
+   "text": "Moving Average",
+   "href": "https://www.investopedia.com/terms/m/movingaverage.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 165,
+   "kind": "list item",
+   "region": "body",
+   "text": "Moving Average"
+  },
+  {
+   "n": 166,
+   "kind": "link",
+   "region": "body",
+   "text": "MACD",
+   "href": "https://www.investopedia.com/terms/m/macd.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 167,
+   "kind": "list item",
+   "region": "body",
+   "text": "MACD"
+  },
+  {
+   "n": 168,
+   "kind": "link",
+   "region": "body",
+   "text": "Beta",
+   "href": "https://www.investopedia.com/terms/b/beta.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 169,
+   "kind": "list item",
+   "region": "body",
+   "text": "Beta"
+  },
+  {
+   "n": 170,
+   "kind": "link",
+   "region": "body",
+   "text": "Volatility",
+   "href": "https://www.investopedia.com/terms/v/volatility.asp",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 171,
+   "kind": "list item",
+   "region": "body",
+   "text": "Volatility"
+  },
+  {
+   "n": 172,
+   "kind": "h3",
+   "region": "body",
+   "text": "📖 Guides"
+  },
+  {
+   "n": 173,
+   "kind": "link",
+   "region": "body",
+   "text": "Stock Ratios Guide",
+   "href": "https://docs.google.com/document/d/1pjHqe-QKjiutLtAnELCEonIEIJ4IrcVSE_ZJKbuBcMY/edit?usp=sharing",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 174,
+   "kind": "list item",
+   "region": "body",
+   "text": "Stock Ratios Guide"
+  },
+  {
+   "n": 175,
+   "kind": "link",
+   "region": "body",
+   "text": "Options Basics Tutorial",
+   "href": "https://www.investopedia.com/options-basics-tutorial-4583012",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 176,
+   "kind": "list item",
+   "region": "body",
+   "text": "Options Basics Tutorial"
+  },
+  {
+   "n": 177,
+   "kind": "link",
+   "region": "body",
+   "text": "Asset Allocation Guide",
+   "href": "https://www.lynalden.com/asset-allocation/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 178,
+   "kind": "list item",
+   "region": "body",
+   "text": "Asset Allocation Guide"
+  },
+  {
+   "n": 179,
+   "kind": "h3",
+   "region": "body",
+   "text": "📋 Indices"
+  },
+  {
+   "n": 180,
+   "kind": "link",
+   "region": "body",
+   "text": "TradingView Major Indices",
+   "href": "https://www.tradingview.com/markets/indices/quotes-major/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 181,
+   "kind": "list item",
+   "region": "body",
+   "text": "TradingView Major Indices"
+  },
+  {
+   "n": 182,
+   "kind": "h3",
+   "region": "body",
+   "text": "ℹ️ Information"
+  },
+  {
+   "n": 183,
+   "kind": "link",
+   "region": "body",
+   "text": "Google Finance",
+   "href": "https://google.com/finance",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 184,
+   "kind": "list item",
+   "region": "body",
+   "text": "Google Finance"
+  },
+  {
+   "n": 185,
+   "kind": "link",
+   "region": "body",
+   "text": "Yahoo Finance",
+   "href": "https://finance.yahoo.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 186,
+   "kind": "list item",
+   "region": "body",
+   "text": "Yahoo Finance"
+  },
+  {
+   "n": 187,
+   "kind": "link",
+   "region": "body",
+   "text": "WolframAlpha",
+   "href": "https://wolframalpha.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 188,
+   "kind": "list item",
+   "region": "body",
+   "text": "WolframAlpha"
+  },
+  {
+   "n": 189,
+   "kind": "link",
+   "region": "body",
+   "text": "Investopedia",
+   "href": "https://www.investopedia.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 190,
+   "kind": "list item",
+   "region": "body",
+   "text": "Investopedia"
+  },
+  {
+   "n": 191,
+   "kind": "link",
+   "region": "body",
+   "text": "TradingView",
+   "href": "https://www.tradingview.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 192,
+   "kind": "list item",
+   "region": "body",
+   "text": "TradingView"
+  },
+  {
+   "n": 193,
+   "kind": "link",
+   "region": "body",
+   "text": "Finviz",
+   "href": "https://finviz.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 194,
+   "kind": "list item",
+   "region": "body",
+   "text": "Finviz"
+  },
+  {
+   "n": 195,
+   "kind": "link",
+   "region": "body",
+   "text": "Seeking Alpha",
+   "href": "https://seekingalpha.com/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 196,
+   "kind": "list item",
+   "region": "body",
+   "text": "Seeking Alpha"
+  },
+  {
+   "n": 197,
+   "kind": "h3",
+   "region": "body",
+   "text": "📰 News"
+  },
+  {
+   "n": 198,
+   "kind": "link",
+   "region": "body",
+   "text": "Renaissance Capital IPO Calendar",
+   "href": "https://renaissancecapital.com/IPO-Center/Calendar",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 199,
+   "kind": "list item",
+   "region": "body",
+   "text": "Renaissance Capital IPO Calendar"
+  },
+  {
+   "n": 200,
+   "kind": "link",
+   "region": "body",
+   "text": "NewsNow Oil Prices",
+   "href": "https://www.newsnow.co.uk/h/Business+&+Finance/Oil+Prices",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 201,
+   "kind": "list item",
+   "region": "body",
+   "text": "NewsNow Oil Prices"
+  },
+  {
+   "n": 202,
+   "kind": "link",
+   "region": "body",
+   "text": "Seeking Alpha Market News",
+   "href": "https://seekingalpha.com/market-news/top-news",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 203,
+   "kind": "list item",
+   "region": "body",
+   "text": "Seeking Alpha Market News"
+  },
+  {
+   "n": 204,
+   "kind": "link",
+   "region": "body",
+   "text": "YouTube Finance Channel",
+   "href": "https://www.youtube.com/channel/UCIALMKvObZNtJ6AmdCLP7Lg",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 205,
+   "kind": "list item",
+   "region": "body",
+   "text": "YouTube Finance Channel"
+  },
+  {
+   "n": 206,
+   "kind": "link",
+   "region": "body",
+   "text": "YouTube Finance Channel 2",
+   "href": "https://www.youtube.com/channel/UCrp_UI8XtuYfpiqluWLD7Lw",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 207,
+   "kind": "list item",
+   "region": "body",
+   "text": "YouTube Finance Channel 2"
+  },
+  {
+   "n": 208,
+   "kind": "link",
+   "region": "body",
+   "text": "Daily FX News",
+   "href": "https://www.youtube.com/user/DailyFXNews",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 209,
+   "kind": "list item",
+   "region": "body",
+   "text": "Daily FX News"
+  },
+  {
+   "n": 210,
+   "kind": "text",
+   "region": "footer",
+   "text": "Built by"
+  },
+  {
+   "n": 211,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.com/",
+   "flags": []
+  },
+  {
+   "n": 212,
+   "kind": "text",
+   "region": "footer",
+   "text": "."
+  },
+  {
+   "n": 213,
+   "kind": "script",
+   "region": "body",
+   "text": "inline, 826 characters"
+  }
+ ],
+ "linked scripts": {}
+}

@@ -1,0 +1,898 @@
+{
+ "source": "leverage/6sig.html",
+ "head": [
+  "title: 6 Sig: Leveraged Strategies",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: The 6 Sig quarterly value-averaging strategy by Jason Kelly. A signal-based system using a 6% quarterly target with MVV, the 2x leveraged midcap ETF.",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>",
+  "link stylesheet: css/style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "body",
+   "text": "Skip to content",
+   "href": "#main-content",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "svg icon",
+   "region": "nav",
+   "text": "decorative"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 25,
+   "kind": "text",
+   "region": "aside",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 38,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 39,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 40,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 41,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 42,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 43,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 45,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 46,
+   "kind": "text",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 47,
+   "kind": "link",
+   "region": "nav",
+   "text": "Overview",
+   "href": "#overview",
+   "flags": []
+  },
+  {
+   "n": 48,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Overview"
+  },
+  {
+   "n": 49,
+   "kind": "link",
+   "region": "nav",
+   "text": "Rules and Logic",
+   "href": "#rules",
+   "flags": []
+  },
+  {
+   "n": 50,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 51,
+   "kind": "link",
+   "region": "nav",
+   "text": "Performance Notes",
+   "href": "#performance",
+   "flags": []
+  },
+  {
+   "n": 52,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 53,
+   "kind": "link",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "href": "#risks",
+   "flags": []
+  },
+  {
+   "n": 54,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 55,
+   "kind": "link",
+   "region": "nav",
+   "text": "Resources",
+   "href": "#resources",
+   "flags": []
+  },
+  {
+   "n": 56,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Resources"
+  },
+  {
+   "n": 57,
+   "kind": "paragraph",
+   "region": "aside",
+   "text": "Educational use only. Not financial advice.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 58,
+   "kind": "text",
+   "region": "main",
+   "text": "Quarterly Rebalancing"
+  },
+  {
+   "n": 59,
+   "kind": "h1",
+   "region": "main",
+   "text": "6 Sig"
+  },
+  {
+   "n": 60,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A quarterly value-averaging strategy targeting 6% quarterly growth in MVV (ProShares Ultra MidCap400, 2x leveraged) against a bond buffer. The middle tier of Jason Kelly's Signal plan family between the unleveraged 3 Sig and the 3x-leveraged 9 Sig."
+  },
+  {
+   "n": 61,
+   "kind": "h2",
+   "region": "main",
+   "text": "Overview"
+  },
+  {
+   "n": 62,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 6% Signal (6 Sig) is the middle tier of Jason Kelly's Signal plan family. It applies the same quarterly value-averaging mechanics as 3 Sig but uses a 2x leveraged midcap ETF as the stock position and targets 6% quarterly growth instead of 3%."
+  },
+  {
+   "n": 63,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The three Signal plans form a family based on leverage multiplier. The quarterly target is always 3% times the fund's leverage ratio: 3% × 1 = 3% for 3 Sig (unleveraged), 3% × 2 = 6% for 6 Sig (2x), and 3% × 3 = 9% for 9 Sig (3x). The mechanics (signal line calculation, quarterly buy/sell execution, cash contribution routing, and the 30 Down Rule structure) are identical across all three plans. Only the fund, the target percentage, and the specific 30 Down parameters differ."
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "6 Sig occupies the middle ground in the family: more return potential than 3 Sig's unleveraged SPY or IJR, but with lower maximum drawdown and less bond buffer depletion risk than 9 Sig's 3x TQQQ. In practice, 2x leverage still produces substantially amplified losses during bear markets compared to 3 Sig.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 65,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Stock fund: MVV, the ProShares Ultra MidCap400 ETF, which delivers approximately 2x the daily return of the S&P MidCap 400 Index. The midcap index is used rather than large-cap because it exhibits higher volatility, creating larger buy-low and sell-high opportunities within the quarterly cycle. This follows the same logic as 3 Sig's selection of small-cap IJR: more price movement generates more useful signal events."
+  },
+  {
+   "n": 66,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 6 Sig plan is available through The Kelly Letter subscription; there is no standalone book covering it specifically. The 3% Signal book explains the system's core mechanics, which apply directly to 6 Sig with the fund and target percentage substituted."
+  },
+  {
+   "n": 67,
+   "kind": "h2",
+   "region": "main",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 68,
+   "kind": "h3",
+   "region": "main",
+   "text": "Starting allocation"
+  },
+  {
+   "n": 69,
+   "kind": "caption",
+   "region": "main",
+   "text": "6 Sig starting allocation"
+  },
+  {
+   "n": 70,
+   "kind": "table row",
+   "region": "main",
+   "text": "Asset | Fund | Weight"
+  },
+  {
+   "n": 71,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund | MVV (ProShares Ultra MidCap400, 2x) | 60%"
+  },
+  {
+   "n": 72,
+   "kind": "table row",
+   "region": "main",
+   "text": "Bond fund | BND, AGG, or similar | 40%"
+  },
+  {
+   "n": 73,
+   "kind": "table",
+   "region": "main",
+   "text": "3 rows; first row: Asset | Fund | Weight"
+  },
+  {
+   "n": 74,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 60/40 base is the allocation to which the plan resets after the 30 Down phase ends. During normal operation, the actual ratio drifts continuously as the market moves; the plan targets a signal line dollar amount, not a fixed percentage."
+  },
+  {
+   "n": 75,
+   "kind": "h3",
+   "region": "main",
+   "text": "Signal line calculation"
+  },
+  {
+   "n": 76,
+   "kind": "text",
+   "region": "main",
+   "text": "Base formula:"
+  },
+  {
+   "n": 77,
+   "kind": "text",
+   "region": "main",
+   "text": "Signal line = (Previous quarter-end stock fund balance) × 1.06"
+  },
+  {
+   "n": 78,
+   "kind": "text",
+   "region": "main",
+   "text": "With new cash contributions:"
+  },
+  {
+   "n": 79,
+   "kind": "text",
+   "region": "main",
+   "text": "Signal line = (Previous quarter-end stock fund balance) × 1.06 + (Half of new quarterly contributions)"
+  },
+  {
+   "n": 80,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "All new cash goes to the bond fund during the quarter. At rebalancing time, half of the new contributions is added to the signal line, deploying the new money partially into equities."
+  },
+  {
+   "n": 81,
+   "kind": "h3",
+   "region": "main",
+   "text": "Quarterly rebalancing"
+  },
+  {
+   "n": 82,
+   "kind": "caption",
+   "region": "main",
+   "text": "6 Sig quarterly rebalancing actions"
+  },
+  {
+   "n": 83,
+   "kind": "table row",
+   "region": "main",
+   "text": "Outcome | Action"
+  },
+  {
+   "n": 84,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund balance > signal line | Sell the surplus; proceeds go to bond fund"
+  },
+  {
+   "n": 85,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund balance < signal line | Buy the shortfall; funded from bond fund"
+  },
+  {
+   "n": 86,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund balance = signal line | No trade"
+  },
+  {
+   "n": 87,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Outcome | Action"
+  },
+  {
+   "n": 88,
+   "kind": "h3",
+   "region": "main",
+   "text": "30 Down Rule"
+  },
+  {
+   "n": 89,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 30 Down Rule activates when MVV's quarterly closing price falls at least 30% below its quarterly closing price high within the rolling past two years. Only quarterly closing prices are monitored."
+  },
+  {
+   "n": 90,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "When active: the next 2 sell signals are ignored. Buy signals during the locked phase are followed as normal. After 2 sell signals have been ignored, the plan resets to the 60/40 base allocation and resumes normal operations. This differs from 3 Sig, which resumes without resetting. The reset prepares the plan for the next cycle with a fresh bond buffer."
+  },
+  {
+   "n": 91,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Because MVV uses 2x leverage, it amplifies both the drawdown trigger and the recovery movement. The 30 Down Rule is more likely to activate for MVV than for SPY (3 Sig) due to this amplification."
+  },
+  {
+   "n": 92,
+   "kind": "h2",
+   "region": "main",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 93,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 6% quarterly signal projects to approximately 26.2% annually (1.064 − 1 ≈ 26.25%). This is the target rate of growth for the MVV position each quarter, funded from bonds when the market falls short. It is a performance target that must be met or made up, not a return delivered passively."
+  },
+  {
+   "n": 94,
+   "kind": "h3",
+   "region": "main",
+   "text": "Independent corrected backtest: BestFolio (2024)"
+  },
+  {
+   "n": 95,
+   "kind": "caption",
+   "region": "main",
+   "text": "6 Sig corrected backtest results"
+  },
+  {
+   "n": 96,
+   "kind": "table row",
+   "region": "main",
+   "text": "Metric | 6 Sig (MVV + AGG, real data)"
+  },
+  {
+   "n": 97,
+   "kind": "table row",
+   "region": "main",
+   "text": "CAGR | 11.7%"
+  },
+  {
+   "n": 98,
+   "kind": "table row",
+   "region": "main",
+   "text": "Max drawdown | −78.3%"
+  },
+  {
+   "n": 99,
+   "kind": "table row",
+   "region": "main",
+   "text": "Sharpe ratio | 0.23"
+  },
+  {
+   "n": 100,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Metric | 6 Sig (MVV + AGG, real data)"
+  },
+  {
+   "n": 101,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The BestFolio analysis used corrected implementation matching the actual plan rules. The −78.3% maximum drawdown is notable given that 6 Sig is sometimes positioned as a \"moderate\" option relative to 9 Sig. A drawdown of this depth requires roughly a 360% gain to recover to the prior peak."
+  },
+  {
+   "n": 102,
+   "kind": "h3",
+   "region": "main",
+   "text": "Plan family comparison"
+  },
+  {
+   "n": 103,
+   "kind": "caption",
+   "region": "main",
+   "text": "Signal plan family comparison"
+  },
+  {
+   "n": 104,
+   "kind": "table row",
+   "region": "main",
+   "text": "Plan | Stock fund | CAGR | Max DD | Sharpe"
+  },
+  {
+   "n": 105,
+   "kind": "table row",
+   "region": "main",
+   "text": "3 Sig | IJR + BND | 9.0% | −52.3% | 0.31"
+  },
+  {
+   "n": 106,
+   "kind": "table row",
+   "region": "main",
+   "text": "6 Sig | MVV + AGG | 11.7% | −78.3% | 0.23"
+  },
+  {
+   "n": 107,
+   "kind": "table row",
+   "region": "main",
+   "text": "9 Sig | TQQQ + AGG | 39.4% | −72.1% | 0.82"
+  },
+  {
+   "n": 108,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Plan | Stock fund | CAGR | Max DD | Sharpe"
+  },
+  {
+   "n": 109,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Source: BestFolio corrected backtest, real data only. Note that 9 Sig's CAGR reflects the 2010–2026 window, which included an exceptionally favorable Nasdaq run."
+  },
+  {
+   "n": 110,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Closed-system risk: Community simulators that show strong 6 Sig performance almost universally include regular monthly cash contributions. Without contributions, a multi-year bear market will exhaust the bond buffer. The BestFolio analysis found a maximum drawdown of −78.3% in real data. In a hypothetical extended scenario without new cash, the drawdown would be deeper.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 111,
+   "kind": "h2",
+   "region": "main",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 112,
+   "kind": "text",
+   "region": "main",
+   "text": "Leveraged ETF Risk Notice"
+  },
+  {
+   "n": 113,
+   "kind": "text",
+   "region": "main",
+   "text": "MVV"
+  },
+  {
+   "n": 114,
+   "kind": "text",
+   "region": "main",
+   "text": "is a 2x leveraged ETF subject to daily reset and volatility decay. The 2x leverage roughly doubles the drawdown of the S&P MidCap 400 index. The corrected maximum backtest drawdown for 6 Sig is −78.3%, requiring a gain of over 350% to recover. The 40% bond buffer faces the same depletion risk as 3 Sig but with larger quarterly funding requirements from the 6% target on a leveraged position."
+  },
+  {
+   "n": 115,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "2x leverage amplifies all risks. MVV delivers approximately twice the daily return of the MidCap 400. Drawdowns are roughly doubled relative to the unleveraged index. Recovering from a 78% loss requires a 355% gain.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 116,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Volatility decay on the stock fund. MVV resets its leverage ratio daily. In volatile, choppy markets where the midcap index moves up and down without a clear trend, the 2x reset produces a performance drag relative to the simple leveraged position the daily reset implies. Whether the quarterly buy-low/sell-high mechanics sufficiently offset this decay is not established with certainty."
+  },
+  {
+   "n": 117,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Bond buffer depletion. In a sustained bear market, the bond fund is repeatedly drawn down to fund MVV purchases. If the fund runs dry, the plan holds 100% MVV with no buffer remaining. The 40% starting bond allocation gives more initial buffer than 3 Sig's 20%, but the larger quarterly funding requirement (6% target on 2x leverage) depletes it faster when markets are down."
+  },
+  {
+   "n": 118,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Bond fund losses in rising rate environments. AGG and similar bond ETFs lose value when interest rates rise. In 2022, this created simultaneous losses in both the stock fund and the bond fund, reducing the buffer at the same time equity purchases were being funded.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 119,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 30 Down reset creates a fresh exposure. When the 30 Down phase ends and the plan resets to 60/40, the investor re-enters a 60% MVV position at whatever price MVV is at after the recovery. If a second decline follows shortly after the reset, the plan re-enters a 30 Down phase with a freshly rebuilt but not fully grown bond buffer."
+  },
+  {
+   "n": 120,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The \"moderate\" label is misleading. 6 Sig is presented as a middle option between 3 Sig and 9 Sig, which is accurate in terms of leverage multiplier. But a maximum drawdown of −78.3% is not moderate in absolute terms. Investors who choose 6 Sig as a \"safer\" leveraged alternative should understand they are still accepting a risk of near-total portfolio loss in extreme conditions.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 121,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Tax drag in taxable accounts. Quarterly sell signals in a taxable account generate capital gains. Tax-advantaged accounts are strongly preferred."
+  },
+  {
+   "n": 122,
+   "kind": "h2",
+   "region": "main",
+   "text": "Resources"
+  },
+  {
+   "n": 123,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 3% Signal (Jason Kelly, 2015, Plume/Penguin): the core book explaining the signal system mechanics. While written around 3 Sig, the mechanics apply directly to 6 Sig with MVV substituted as the stock fund and 6% as the quarterly target. ISBN 978-0142180952."
+  },
+  {
+   "n": 124,
+   "kind": "link",
+   "region": "main",
+   "text": "jasonkelly.com",
+   "href": "https://jasonkelly.com",
+   "flags": []
+  },
+  {
+   "n": 125,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The Kelly Letter (jasonkelly.com): Jason Kelly's subscriber newsletter. Contains official weekly plan status, signal line values, 30 Down Rule state, and all plan updates for 6 Sig."
+  },
+  {
+   "n": 126,
+   "kind": "link",
+   "region": "main",
+   "text": "jasonkelly.com/resources/strategies/",
+   "href": "https://jasonkelly.com/resources/strategies/",
+   "flags": []
+  },
+  {
+   "n": 127,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "jasonkelly.com/resources/strategies/: free public summary with fund selections for all three Signal plans."
+  },
+  {
+   "n": 128,
+   "kind": "link",
+   "region": "main",
+   "text": "BestFolio corrected backtest",
+   "href": "https://bestfolio.app/blog/kelly-signal-danger-v2",
+   "flags": []
+  },
+  {
+   "n": 129,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "BestFolio corrected backtest: independent analysis with corrected implementation for all three plans, including 6 Sig's drawdown profile and closed-system risk.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 130,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io",
+   "flags": []
+  },
+  {
+   "n": 131,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato."
+  },
+  {
+   "n": 132,
+   "kind": "script",
+   "region": "body",
+   "text": "js/main.js"
+  }
+ ],
+ "linked scripts": {
+  "js/main.js": {}
+ }
+}

@@ -1,0 +1,810 @@
+{
+ "source": "stocks/index.html",
+ "head": [
+  "title: Stock Picking Methodology",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: A free, complete stock picking methodology for long-term investors: 12 plain-English metrics, portfolio construction rules, and a daily-updated Nasdaq 100 screener.",
+  "link canonical: https://azqato.github.io/stocks/",
+  "google-site-verification: p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4",
+  "og:type: website",
+  "og:url: https://azqato.github.io/stocks/",
+  "og:title: Stock Picking Methodology",
+  "og:description: A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise.",
+  "og:image: https://azqato.github.io/stocks/og-image.png",
+  "twitter:card: summary_large_image",
+  "twitter:title: Stock Picking Methodology",
+  "twitter:description: A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise.",
+  "twitter:image: https://azqato.github.io/stocks/og-image.png",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>",
+  "link stylesheet: style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "script",
+   "region": "body",
+   "text": "inline, 416 characters",
+   "urls": [
+    "https://azqato.github.io/",
+    "https://azqato.github.io/stocks/",
+    "https://schema.org"
+   ]
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "text",
+   "region": "aside",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 4,
+   "kind": "control",
+   "region": "aside",
+   "text": "type=checkbox id=nav-toggle",
+   "tag": "input"
+  },
+  {
+   "n": 5,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 6,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 7,
+   "kind": "link",
+   "region": "nav",
+   "text": "Philosophy",
+   "href": "philosophy.html",
+   "flags": []
+  },
+  {
+   "n": 8,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Philosophy"
+  },
+  {
+   "n": 9,
+   "kind": "link",
+   "region": "nav",
+   "text": "Metrics",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 10,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Metrics"
+  },
+  {
+   "n": 11,
+   "kind": "link",
+   "region": "nav",
+   "text": "Screener",
+   "href": "screener.html",
+   "flags": []
+  },
+  {
+   "n": 12,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Screener"
+  },
+  {
+   "n": 13,
+   "kind": "link",
+   "region": "nav",
+   "text": "Market Overview",
+   "href": "market.html",
+   "flags": []
+  },
+  {
+   "n": 14,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Market Overview"
+  },
+  {
+   "n": 15,
+   "kind": "link",
+   "region": "nav",
+   "text": "Finviz",
+   "href": "finviz.html",
+   "flags": []
+  },
+  {
+   "n": 16,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Finviz"
+  },
+  {
+   "n": 17,
+   "kind": "link",
+   "region": "nav",
+   "text": "SeekingAlpha",
+   "href": "seekingalpha.html",
+   "flags": []
+  },
+  {
+   "n": 18,
+   "kind": "list item",
+   "region": "nav",
+   "text": "SeekingAlpha"
+  },
+  {
+   "n": 19,
+   "kind": "link",
+   "region": "nav",
+   "text": "Indices",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 20,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Indices"
+  },
+  {
+   "n": 21,
+   "kind": "link",
+   "region": "nav",
+   "text": "FAQ",
+   "href": "faq.html",
+   "flags": []
+  },
+  {
+   "n": 22,
+   "kind": "list item",
+   "region": "nav",
+   "text": "FAQ"
+  },
+  {
+   "n": 23,
+   "kind": "link",
+   "region": "nav",
+   "text": "Leveraged Strategies",
+   "href": "https://azqato.github.io/leverage/",
+   "flags": []
+  },
+  {
+   "n": 24,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 25,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 26,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 27,
+   "kind": "link",
+   "region": "nav",
+   "text": "The Strategy",
+   "href": "#section-strategy",
+   "flags": []
+  },
+  {
+   "n": 28,
+   "kind": "list item",
+   "region": "nav",
+   "text": "The Strategy"
+  },
+  {
+   "n": 29,
+   "kind": "link",
+   "region": "nav",
+   "text": "The 10 Metrics",
+   "href": "#section-metrics-grid",
+   "flags": []
+  },
+  {
+   "n": 30,
+   "kind": "list item",
+   "region": "nav",
+   "text": "The 10 Metrics"
+  },
+  {
+   "n": 31,
+   "kind": "link",
+   "region": "nav",
+   "text": "What Strong Metrics Look Like",
+   "href": "#section-reference",
+   "flags": [
+    "possible referral link"
+   ]
+  },
+  {
+   "n": 32,
+   "kind": "list item",
+   "region": "nav",
+   "text": "What Strong Metrics Look Like"
+  },
+  {
+   "n": 33,
+   "kind": "link",
+   "region": "nav",
+   "text": "Portfolio vs. Watchlist",
+   "href": "#section-portfolio",
+   "flags": []
+  },
+  {
+   "n": 34,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Portfolio vs. Watchlist"
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 36,
+   "kind": "text",
+   "region": "aside",
+   "text": "Educational use only."
+  },
+  {
+   "n": 37,
+   "kind": "text",
+   "region": "aside",
+   "text": "Not financial advice."
+  },
+  {
+   "n": 38,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Buy companies with strong growth fundamentals. Hold them. Do not sell."
+  },
+  {
+   "n": 39,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A disciplined, metrics-driven approach to long-term equity investing. No day trading. No panic selling. No noise."
+  },
+  {
+   "n": 40,
+   "kind": "text",
+   "region": "main",
+   "text": "📈 Methodology Documentation"
+  },
+  {
+   "n": 41,
+   "kind": "h2",
+   "region": "main",
+   "text": "The Strategy"
+  },
+  {
+   "n": 42,
+   "kind": "link",
+   "region": "main",
+   "text": "Indices page",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 43,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The core idea is simple: find companies with durable revenue growth, expanding earnings, and healthy balance sheets (more cash than debt), buy them at a price justified by their growth, and hold them long enough for compounding to work. Individual stocks are bought on fundamentals, never on chart signals. Technical timing tools like RSI and the 52-week range do have a role in this methodology, but only for index and ETF purchases, covered on the Indices page. Exit timing for stocks is, by design, almost never."
+  },
+  {
+   "n": 44,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Stocks enter the portfolio only after passing the full metric evaluation. Stocks enter the watchlist when fundamentals are strong but the price is not yet at an attractive valuation. The portfolio is intentionally concentrated in high-conviction names where the underlying thesis is fully understood."
+  },
+  {
+   "n": 45,
+   "kind": "link",
+   "region": "main",
+   "text": "FAQ",
+   "href": "faq.html#palantir",
+   "flags": []
+  },
+  {
+   "n": 46,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The biggest risk in long-term investing is not volatility. It is selling a great company too early because the price scared you. The Palantir story in the FAQ explains exactly how costly that mistake can be.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 47,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Holding positions for more than twelve months also unlocks a significant tax advantage. In most jurisdictions, assets held longer than one year qualify for long-term capital gains treatment, a substantially lower rate than the ordinary income tax applied to short-term gains. For most investors, the difference is 10 to 20 percentage points. Selling a winning position too early does not just interrupt compounding; it also accelerates the tax bill on every dollar of gain. A strategy built around holding is not just a better investment philosophy; it is a more tax-efficient one."
+  },
+  {
+   "n": 48,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Portfolio construction follows a simple rule: hold between 10 and 20 individual stocks. Fewer than 10 concentrates risk too heavily in a small number of outcomes. A single company failing, being disrupted, or undergoing a prolonged correction can significantly damage the portfolio. More than 20 dilutes conviction to the point where it becomes difficult to stay genuinely informed on each holding. The 10-to-20 range balances meaningful exposure to winners with protection against any one company underperforming.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 49,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "When evaluating a new candidate, compare the current market cap (the total price tag the market puts on the whole company: share price times share count) to the company's realistic long-term potential. A company with a $25B market cap operating in a market where established competitors have already reached $200-500B suggests meaningful precedent for the path ahead. The size of the addressable opportunity relative to the company's current size is one of the most important inputs into how much appreciation is plausible over a long holding period."
+  },
+  {
+   "n": 50,
+   "kind": "link",
+   "region": "main",
+   "text": "FAQ",
+   "href": "faq.html#answer-blowup",
+   "flags": []
+  },
+  {
+   "n": 51,
+   "kind": "link",
+   "region": "main",
+   "text": "Philosophy",
+   "href": "philosophy.html#section-protect",
+   "flags": []
+  },
+  {
+   "n": 52,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Volatility is not the only risk worth guarding against. The second, and more common, is self-inflicted. After a strong run, when the portfolio is at a high, the temptation is to escalate: reaching for margin, chasing options, or forcing trades to keep the momentum going. That is how investors give back the gains the process earned. The discipline that builds a portfolio is the same discipline that protects it: hold quality, keep position sizing measured, spread capital across growth, value, and dividend names, and let new money wait for a favorable entry rather than forcing it. The FAQ covers how to avoid blowing up a portfolio after a big run, and the Philosophy page explains the mindset behind it.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 53,
+   "kind": "h2",
+   "region": "main",
+   "text": "The 10 Metrics"
+  },
+  {
+   "n": 54,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the full glossary.",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 55,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The first eight signals evaluate the company itself and drive every stock decision. The last two, RSI and the 52-Week Range, are technical signals used to time index and ETF purchases, not to judge individual stocks. Read the full glossary.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 56,
+   "kind": "text",
+   "region": "main",
+   "text": "Revenue Growth TTM"
+  },
+  {
+   "n": 57,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Actual top-line growth over the trailing twelve months. Confirms the business is growing in reality, not just in projections."
+  },
+  {
+   "n": 58,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-rev-ttm",
+   "flags": []
+  },
+  {
+   "n": 59,
+   "kind": "text",
+   "region": "main",
+   "text": "Revenue Growth FWD"
+  },
+  {
+   "n": 60,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Analyst consensus estimate for next-year revenue growth. Shows the trajectory the market is currently pricing in."
+  },
+  {
+   "n": 61,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-rev-fwd",
+   "flags": []
+  },
+  {
+   "n": 62,
+   "kind": "text",
+   "region": "main",
+   "text": "EPS Growth TTM"
+  },
+  {
+   "n": 63,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Earnings per share growth over the past twelve months. Confirms revenue growth is translating into actual profit growth."
+  },
+  {
+   "n": 64,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-eps-ttm",
+   "flags": []
+  },
+  {
+   "n": 65,
+   "kind": "text",
+   "region": "main",
+   "text": "EPS Growth FWD"
+  },
+  {
+   "n": 66,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Consensus forward EPS growth estimate. The primary input into the PEG calculation and a key signal for future valuation."
+  },
+  {
+   "n": 67,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-eps-fwd",
+   "flags": []
+  },
+  {
+   "n": 68,
+   "kind": "text",
+   "region": "main",
+   "text": "P/E FWD"
+  },
+  {
+   "n": 69,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What you are paying today for the next twelve months of estimated earnings. The primary valuation anchor, but requires growth context."
+  },
+  {
+   "n": 70,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-pe-fwd",
+   "flags": []
+  },
+  {
+   "n": 71,
+   "kind": "text",
+   "region": "main",
+   "text": "PEG FWD"
+  },
+  {
+   "n": 72,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The single most important number in this methodology. Normalizes valuation by growth rate. Below 1.0 often signals an undervalued compounder."
+  },
+  {
+   "n": 73,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-peg-fwd",
+   "flags": []
+  },
+  {
+   "n": 74,
+   "kind": "text",
+   "region": "main",
+   "text": "Total Cash"
+  },
+  {
+   "n": 75,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Cash, equivalents, and short-term investments. A strong cash position provides optionality: acquisitions, buybacks, R&D, or surviving a downturn."
+  },
+  {
+   "n": 76,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-cash",
+   "flags": []
+  },
+  {
+   "n": 77,
+   "kind": "text",
+   "region": "main",
+   "text": "Total Debt"
+  },
+  {
+   "n": 78,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "All short and long-term debt obligations. High debt amplifies downside risk and eats into earnings through interest expense.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 79,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-debt",
+   "flags": []
+  },
+  {
+   "n": 80,
+   "kind": "text",
+   "region": "main",
+   "text": "RSI"
+  },
+  {
+   "n": 81,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Relative Strength Index. A momentum signal used to time index and ETF purchases, not to judge stocks. Low readings mark broad-market fear windows."
+  },
+  {
+   "n": 82,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-rsi",
+   "flags": []
+  },
+  {
+   "n": 83,
+   "kind": "text",
+   "region": "main",
+   "text": "52-Week Range"
+  },
+  {
+   "n": 84,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Where the current price sits within its annual high and low. Paired with RSI to time index and ETF deployments; context only for individual stocks."
+  },
+  {
+   "n": 85,
+   "kind": "link",
+   "region": "main",
+   "text": "Learn more →",
+   "href": "metrics.html#metric-52w",
+   "flags": []
+  },
+  {
+   "n": 86,
+   "kind": "link",
+   "region": "main",
+   "text": "Metrics glossary",
+   "href": "metrics.html#metric-gross-margin",
+   "flags": []
+  },
+  {
+   "n": 87,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Gross Margin and Net Margin are two additional business quality signals evaluated during company research. They are not available as direct screener filters but are reviewed when analyzing any candidate in depth. See the Metrics glossary for thresholds and interpretation.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 88,
+   "kind": "h2",
+   "region": "main",
+   "text": "What Strong Metrics Look Like"
+  },
+  {
+   "n": 89,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A quick-reference guide to reading each metric. These are the target ranges and warning zones used when evaluating any position."
+  },
+  {
+   "n": 90,
+   "kind": "caption",
+   "region": "main",
+   "text": "Target metric ranges and signals"
+  },
+  {
+   "n": 91,
+   "kind": "table row",
+   "region": "main",
+   "text": "Metric | Strong Signal | Caution Zone | What It Confirms"
+  },
+  {
+   "n": 92,
+   "kind": "table row",
+   "region": "main",
+   "text": "Rev Growth FWD | > 15% | < 8% | Top-line momentum is real and expanding"
+  },
+  {
+   "n": 93,
+   "kind": "table row",
+   "region": "main",
+   "text": "EPS Growth FWD | > 15% | Flat or declining | Revenue growth is converting into profit growth"
+  },
+  {
+   "n": 94,
+   "kind": "table row",
+   "region": "main",
+   "text": "PEG FWD | < 1.0 | > 2.0 | Growth is underpriced relative to the multiple paid"
+  },
+  {
+   "n": 95,
+   "kind": "table row",
+   "region": "main",
+   "text": "P/E FWD | P/E < EPS Growth % | P/E > EPS Growth % | Growth rate outpaces the multiple paid; the stock is underpriced relative to its earnings trajectory. Also compare to 5Y avg and sector."
+  },
+  {
+   "n": 96,
+   "kind": "table row",
+   "region": "main",
+   "text": "Cash / Debt | Cash > Debt | Debt > 3x Cash | Balance sheet can survive a downturn without dilution"
+  },
+  {
+   "n": 97,
+   "kind": "table row",
+   "region": "main",
+   "text": "RSI (index timing) | 30 to 45 | > 70 | The broad market has pulled back to a favorable deployment window"
+  },
+  {
+   "n": 98,
+   "kind": "table row",
+   "region": "main",
+   "text": "52W Range (index timing) | Lower 25% | Upper 90% | The index is near a range low, improving deployment risk/reward"
+  },
+  {
+   "n": 99,
+   "kind": "table row",
+   "region": "main",
+   "text": "Gross Margin | > 50% | < 30% | Business retains substantial revenue before operating expenses"
+  },
+  {
+   "n": 100,
+   "kind": "table row",
+   "region": "main",
+   "text": "Net Margin | > 25% | < 10% | Profit efficiency: revenue converting into earnings at scale"
+  },
+  {
+   "n": 101,
+   "kind": "table",
+   "region": "main",
+   "text": "10 rows; first row: Metric | Strong Signal | Caution Zone | What It Confirms"
+  },
+  {
+   "n": 102,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "These are directional guidelines, not hard rules. Each metric must be read in context of the others. A company can have a P/E above its 5-year average and still be a strong buy if the PEG is below 1.0 and growth is accelerating. The full picture matters more than any single number."
+  },
+  {
+   "n": 103,
+   "kind": "h2",
+   "region": "main",
+   "text": "Portfolio vs. Watchlist"
+  },
+  {
+   "n": 104,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Not every company that passes the metric evaluation belongs in the portfolio immediately. The distinction between a portfolio holding and a watchlist name comes down to valuation: the same great business can be a buy at one price and a wait at another."
+  },
+  {
+   "n": 105,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A company earns a portfolio position when: the fundamentals pass the full evaluation, the business model is understood well enough to hold through a 50% drawdown without flinching, and the valuation is reasonable, meaning the PEG is at or below target and the P/E is not demanding more than the earnings growth can deliver."
+  },
+  {
+   "n": 106,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A company earns a watchlist position when: the fundamentals are strong but the price is extended. The PEG has moved above target because the stock ran ahead of its earnings growth, or the P/E now exceeds the growth rate. The watchlist is a patience queue. It prevents buying quality companies at the wrong price."
+  },
+  {
+   "n": 107,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The transition from watchlist to portfolio happens when the price and the earnings come back into line: either the stock pulls back, or the earnings keep growing until the valuation catches up to target. Patience here is a strategy, not a passive state."
+  },
+  {
+   "n": 108,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the Palantir story.",
+   "href": "faq.html#palantir",
+   "flags": []
+  },
+  {
+   "n": 109,
+   "kind": "link",
+   "region": "main",
+   "text": "the methodology philosophy.",
+   "href": "philosophy.html",
+   "flags": []
+  },
+  {
+   "n": 110,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why do I never sell? Read the Palantir story. The thinking behind every rule: the methodology philosophy."
+  },
+  {
+   "n": 111,
+   "kind": "text",
+   "region": "footer",
+   "text": "Built by"
+  },
+  {
+   "n": 112,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 113,
+   "kind": "text",
+   "region": "footer",
+   "text": "."
+  },
+  {
+   "n": 114,
+   "kind": "script",
+   "region": "body",
+   "text": "script.js"
+  }
+ ],
+ "linked scripts": {
+  "script.js": {}
+ }
+}

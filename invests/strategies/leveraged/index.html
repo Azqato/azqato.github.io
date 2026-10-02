@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leveraged strategies - Azqato Invests</title>
+<meta name="description" content="A reference library for six leveraged ETF strategy frameworks built around TQQQ. Educational use only.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="Leveraged strategies - Azqato Invests">
+<meta property="og:description" content="A reference library for six leveraged ETF strategy frameworks built around TQQQ. Educational use only.">
+<meta property="og:url" content="https://azqato.com/invests/strategies/leveraged/">
+<link rel="canonical" href="https://azqato.com/invests/strategies/leveraged/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
+<script src="../../assets/js/theme.js"></script>
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/src-leverage.css">
+</head>
+<body class="pp-page site-page is-doc" data-root="../../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="https://azqato.com/">Azqato<span>.</span></a>
+  <ul><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="../../index.html" aria-current="true">Invests</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-learn">Learn</summary><ul aria-labelledby="pp-g-learn"><li><a href="../../learn/index.html">Overview</a></li><li><a href="../../learn/philosophy.html">Philosophy</a></li><li><a href="../../learn/metrics.html">Stock metrics</a></li><li><a href="../../learn/indices.html">Index &amp; ETF methodology</a></li><li><a href="../../learn/finviz.html">Finviz setup guide</a></li><li><a href="../../learn/seekingalpha.html">Seeking Alpha setup guide</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-tools">Tools</summary><ul aria-labelledby="pp-g-tools"><li><a href="../../tools/screener.html">Screener</a></li><li><a href="../../tools/market.html">Market Overview</a></li><li><a href="../../tools/vix-dashboard.html">VIX Dashboard</a></li><li><a href="../../tools/vix-custom.html">VIX Custom builder</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-strategies">Strategies</summary><ul aria-labelledby="pp-g-strategies"><li><a href="../../strategies/vix.html">VIX Strategy</a></li><li><a href="../../strategies/leveraged/index.html" aria-current="page">Leveraged strategies</a></li><li class="site-sub"><a href="../../strategies/leveraged/3sig.html">3 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/6sig.html">6 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/9sig.html">9 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li class="site-sub"><a href="../../strategies/leveraged/holy-grail.html">Holy Grail</a></li><li class="site-sub"><a href="../../strategies/leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../../resources/index.html">Curated resources</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-faq">FAQ</summary><ul aria-labelledby="pp-g-faq"><li><a href="../../faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul></details>
+  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li>Strategies</li><li><span aria-current="page">Leveraged strategies</span></li></ol></nav>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-leverage">
+
+
+
+
+
+<div class="src-main">
+<section class="site-intro">
+<h1>Leveraged Strategies</h1>
+<p class="lead">A reference library for six well-known strategy frameworks built around <span class="ticker">TQQQ</span> and related leveraged ETFs. Each strategy takes a distinct approach, from quarterly value-averaging signal plans to daily algorithmic regime switching to leveraged risk parity portfolios. These pages document the mechanics, not make recommendations.</p>
+<div aria-label="Risk notice" class="callout callout-risk" role="note">
+<strong>Leveraged ETF Risk Notice</strong>
+<span class="ticker">TQQQ</span> uses daily rebalancing to deliver 3x the daily return of the Nasdaq-100. This daily reset means returns compound on a daily basis, not over longer periods. In volatile, sideways markets this creates volatility decay: the fund can lose value over time even when the index itself is flat or modestly positive. Drawdowns are amplified and recoveries take proportionally longer. These characteristics apply to every strategy documented here.
+          </div>
+<p>The six strategies below represent distinct philosophies for working with leveraged ETFs: quarterly value-averaging signal plans across three leverage tiers, two daily algorithmic rotation systems using SMA and RSI signals, and a quarterly-rebalanced leveraged risk parity portfolio.</p>
+</section>
+<section aria-labelledby="strategies-heading">
+<h2 id="strategies-heading">The Strategies</h2>
+<div class="strategies-grid">
+<article class="strategy-card strat-3sig">
+<div class="card-body">
+<h3 class="card-title" id="3-sig">3 Sig</h3>
+<p class="card-summary">A quarterly value-averaging strategy targeting 3% quarterly growth in a stock index fund (<span class="ticker">IJR</span> or <span class="ticker">SPY</span>) against a bond buffer. The conservative, unleveraged tier of Jason Kelly's Signal plan family.</p>
+</div>
+<div class="card-footer">
+<a class="card-link" href="3sig.html">Read the strategy →</a>
+</div>
+</article>
+<article class="strategy-card strat-6sig">
+<div class="card-body">
+<h3 class="card-title" id="6-sig">6 Sig</h3>
+<p class="card-summary">A quarterly value-averaging strategy targeting 6% quarterly growth in <span class="ticker">MVV</span> (2x leveraged midcap). The middle tier of Jason Kelly's Signal plan family between the unleveraged 3 Sig and the 3x-leveraged 9 Sig.</p>
+</div>
+<div class="card-footer">
+<a class="card-link" href="6sig.html">Read the strategy →</a>
+</div>
+</article>
+<article class="strategy-card strat-9sig">
+<div class="card-body">
+<h3 class="card-title" id="9-sig">9 Sig</h3>
+<p class="card-summary">A quarterly value-averaging strategy targeting 9% quarterly growth in <span class="ticker">TQQQ</span> against a bond buffer. The most aggressive tier of Jason Kelly's Signal plan family, with two additional safeguards for 3x leverage.</p>
+</div>
+<div class="card-footer">
+<a class="card-link" href="9sig.html">Read the strategy →</a>
+</div>
+</article>
+<article class="strategy-card strat-ftlt">
+<div class="card-body">
+<h3 class="card-title" id="tqqq-for-the-long-term">TQQQ For The Long Term</h3>
+<p class="card-summary">A daily rules-based algorithm using <span class="ticker">SPY</span>'s 200-day SMA as a macro regime detector and 10-day RSI for mean reversion. Rotates among <span class="ticker">TQQQ</span>, <span class="ticker">UVXY</span>, <span class="ticker">TECL</span>, <span class="ticker">UPRO</span>, <span class="ticker">SQQQ</span>, and <span class="ticker">TLT</span>. Created by u/derecknielsen (2022).</p>
+</div>
+<div class="card-footer">
+<a class="card-link" href="tqqq-ftlt.html">Read the strategy →</a>
+</div>
+</article>
+<article class="strategy-card strat-grail">
+<div class="card-body">
+<h3 class="card-title" id="holy-grail">Holy Grail</h3>
+<p class="card-summary">A TQQQ FTLT variant using <span class="ticker">TQQQ</span>'s own 200-day SMA as the regime signal, adding <span class="ticker">SOXL</span> mean reversion in bear mode and <span class="ticker">BSV</span> as the defensive instrument. Event-driven rebalancing with a 5% corridor.</p>
+</div>
+<div class="card-footer">
+<a class="card-link" href="holy-grail.html">Read the strategy →</a>
+</div>
+</article>
+<article class="strategy-card strat-hfea">
+<div class="card-body">
+<h3 class="card-title" id="hfea">HFEA</h3>
+<p class="card-summary">Hedgefundie's Excellent Adventure. A quarterly-rebalanced leveraged risk parity portfolio of <span class="ticker">UPRO</span> 55% and <span class="ticker">TMF</span> 45%, pairing 3x leveraged equities with 3x leveraged long-duration Treasuries.</p>
+</div>
+<div class="card-footer">
+<a class="card-link" href="hfea.html">Read the strategy →</a>
+</div>
+</article>
+</div>
+</section>
+</div>
+<div class="src-footer site-dup">
+<p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
+</div>
+
+
+
+<div class="src-footer src-footer--notes site-dup"><p class="sidebar-disclaimer">Educational use only. Not financial advice.</p></div></div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../../strategies/vix.html"><small>Previous</small><span>VIX Strategy</span></a><a class="pp-pager-link pp-pager-link--next" href="../../strategies/leveraged/3sig.html"><small>Next</small><span>3 Sig</span></a></nav>
+</main>
+<aside class="pp-toc" aria-labelledby="pp-toc-title">
+  <p class="pp-toc-title" id="pp-toc-title">On this page</p>
+  <ul class="pp-toc-list" id="pp-toc-list"></ul>
+</aside>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../../resources/index.html">Curated resources</a> · <a href="../../faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../../assets/js/site.js"></script>
+
+</body>
+</html>

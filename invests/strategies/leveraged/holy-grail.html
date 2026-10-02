@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holy Grail - Azqato Invests</title>
+<meta name="description" content="The Holy Grail, a TQQQ FTLT variant using TQQQ&#x27;s own 200-day SMA as the regime signal, adding SOXL mean reversion and BSV as the defensive instrument.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="Holy Grail - Azqato Invests">
+<meta property="og:description" content="The Holy Grail, a TQQQ FTLT variant using TQQQ&#x27;s own 200-day SMA as the regime signal, adding SOXL mean reversion and BSV as the defensive instrument.">
+<meta property="og:url" content="https://azqato.com/invests/strategies/leveraged/holy-grail">
+<link rel="canonical" href="https://azqato.com/invests/strategies/leveraged/holy-grail">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
+<script src="../../assets/js/theme.js"></script>
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/src-leverage.css">
+</head>
+<body class="pp-page site-page is-doc" data-root="../../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="https://azqato.com/">Azqato<span>.</span></a>
+  <ul><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="../../index.html" aria-current="true">Invests</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-learn">Learn</summary><ul aria-labelledby="pp-g-learn"><li><a href="../../learn/index.html">Overview</a></li><li><a href="../../learn/philosophy.html">Philosophy</a></li><li><a href="../../learn/metrics.html">Stock metrics</a></li><li><a href="../../learn/indices.html">Index &amp; ETF methodology</a></li><li><a href="../../learn/finviz.html">Finviz setup guide</a></li><li><a href="../../learn/seekingalpha.html">Seeking Alpha setup guide</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-tools">Tools</summary><ul aria-labelledby="pp-g-tools"><li><a href="../../tools/screener.html">Screener</a></li><li><a href="../../tools/market.html">Market Overview</a></li><li><a href="../../tools/vix-dashboard.html">VIX Dashboard</a></li><li><a href="../../tools/vix-custom.html">VIX Custom builder</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-strategies">Strategies</summary><ul aria-labelledby="pp-g-strategies"><li><a href="../../strategies/vix.html">VIX Strategy</a></li><li><a href="../../strategies/leveraged/index.html">Leveraged strategies</a></li><li class="site-sub"><a href="../../strategies/leveraged/3sig.html">3 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/6sig.html">6 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/9sig.html">9 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li class="site-sub"><a href="../../strategies/leveraged/holy-grail.html" aria-current="page">Holy Grail</a></li><li class="site-sub"><a href="../../strategies/leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../../resources/index.html">Curated resources</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-faq">FAQ</summary><ul aria-labelledby="pp-g-faq"><li><a href="../../faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul></details>
+  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li>Strategies</li><li><a href="../../strategies/leveraged/index.html">Leveraged strategies</a></li><li><span aria-current="page">Holy Grail</span></li></ol></nav>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-leverage">
+
+
+
+
+
+<div class="src-main">
+<div class="hero">
+<div class="hero-badge">
+<span class="hero-badge-dot" style="background: var(--color-strat-grail);"></span>
+            Event-Driven Algorithm
+          </div>
+<h1>Holy Grail</h1>
+<p class="lead">A <a href="tqqq-ftlt.html">TQQQ FTLT</a> variant using <span class="ticker">TQQQ</span>'s own 200-day SMA as the regime signal, rotating among <span class="ticker">TQQQ</span>, <span class="ticker">UVXY</span>, <span class="ticker">TECL</span>, <span class="ticker">SOXL</span>, <span class="ticker">SQQQ</span>, and <span class="ticker">BSV</span>. Event-driven rebalancing with a 5% corridor. Holds 80% in bull mode with 20% implicit cash buffer.</p>
+</div>
+<aside aria-labelledby="atlas-h" class="pp-callout pp-callout--note site-atlas"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg><div><p id="atlas-h"><strong>On Composer Atlas</strong></p><ul><li><a href="https://composeratlas.com/strategies?slug=holy-grail" rel="noopener" target="_blank">Holy Grail (original)</a></li><li><a href="https://composeratlas.com/strategies?slug=zoops-holy-grail-2026" rel="noopener" target="_blank">Holy Grail, 2026 version</a></li></ul></div></aside><section aria-labelledby="overview-heading" id="overview">
+<h2 id="overview-heading">Overview</h2>
+<p>The Holy Grail is a rules-based algorithmic strategy that uses <span class="ticker">TQQQ</span>'s own 200-day simple moving average to detect bull and bear market regimes, then rotates among leveraged long ETFs, a volatility instrument, inverse ETFs, and short-term bonds depending on current conditions. The strategy rebalances event-driven: only when a condition changes, rather than on a fixed daily or weekly schedule.</p>
+<p>The strategy is closely related to TQQQ For The Long Term (TQQQ FTLT) and shares its conceptual foundation: using the 200-day SMA to gate leverage exposure and 10-day RSI to identify mean reversion opportunities within each regime. Both draw from Michael Gayed's and Charles Bilello's 2015 paper <em>Leverage for the Long Run</em> (SSRN #2741701), which showed that applying leverage only when the S&amp;P 500 is above its 200-day moving average produced improved Sharpe ratios and lower maximum drawdowns versus constant-leverage buy-and-hold over an 87-year backtest.</p>
+<p><strong>Key differences from TQQQ FTLT:</strong></p>
+<ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+<li><strong>Primary regime signal uses TQQQ's own 200D SMA</strong>, not SPY's. Because TQQQ is 3x leveraged, TQQQ's 200D SMA is crossed more frequently than SPY's. This makes regime detection faster but also more prone to whipsawing near the boundary.</li>
+<li><strong>Bull regime is 80% TQQQ + 20% implicit cash</strong>; TQQQ FTLT is 100% in bull mode. The 20% cash buffer reduces bull-market drawdown at the cost of some upside.</li>
+<li><strong>Bear regime adds SOXL</strong> (Direxion Daily Semiconductor Bull 3x) as a mean reversion signal. When semiconductors are oversold on 10-day RSI within a bear market, the strategy rotates into SOXL for the expected mean reversion bounce. This sector-specific layer is not present in TQQQ FTLT.</li>
+<li><strong>Bear regime uses BSV</strong> (Vanguard Short-Term Bond ETF) instead of TLT as the defensive alternative to SQQQ. BSV has significantly less interest rate sensitivity than TLT and did not suffer the 2022 concurrent decline that made TLT an unreliable safe haven.</li>
+<li><strong>Rebalancing is event-driven</strong> with a 5% corridor threshold. The portfolio only rebalances when a condition flips or the portfolio drifts more than 5% from target. This produces fewer transactions than a daily-rebalancing approach.</li>
+</ul>
+<p>The Composer symphony is titled "The Holy Grail (Invest Copy)" indicating this is a saved copy of a publicly shared original strategy. The original creator is unknown from the sources available; it appears to be a community evolution of the TQQQ FTLT framework.</p>
+</section>
+<section aria-labelledby="rules-heading" id="rules">
+<h2 id="rules-heading">Rules and Logic</h2>
+<h3 id="instruments">Instruments</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">Holy Grail instruments</caption>
+<thead>
+<tr>
+<th scope="col">Instrument</th>
+<th scope="col">Ticker</th>
+<th scope="col">Role in strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ProShares UltraPro QQQ</td>
+<td><span class="ticker">TQQQ</span></td>
+<td>Primary long position (3x Nasdaq-100)</td>
+</tr>
+<tr>
+<td>ProShares Ultra VIX Short-Term Futures</td>
+<td><span class="ticker">UVXY</span></td>
+<td>Overbought hedge (1.5x short VIX futures)</td>
+</tr>
+<tr>
+<td>Direxion Daily Technology Bull 3x</td>
+<td><span class="ticker">TECL</span></td>
+<td>Mean reversion long in bear regime (3x tech)</td>
+</tr>
+<tr>
+<td>Direxion Daily Semiconductor Bull 3x</td>
+<td><span class="ticker">SOXL</span></td>
+<td>Semiconductor oversold mean reversion (3x semis)</td>
+</tr>
+<tr>
+<td>ProShares UltraPro Short QQQ</td>
+<td><span class="ticker">SQQQ</span></td>
+<td>Bear regime short (−3x Nasdaq-100)</td>
+</tr>
+<tr>
+<td>Vanguard Short-Term Bond ETF</td>
+<td><span class="ticker">BSV</span></td>
+<td>Defensive alternative to SQQQ in bear regime</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="signal-inputs">Signal inputs</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">Holy Grail signal inputs</caption>
+<thead>
+<tr>
+<th scope="col">Signal</th>
+<th scope="col">Condition tested</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="ticker">TQQQ</span> vs. TQQQ 200D SMA</td>
+<td>Primary macro regime detector: bull or bear</td>
+</tr>
+<tr>
+<td><span class="ticker">TQQQ</span> vs. TQQQ 20D SMA</td>
+<td>Short-term downtrend detector within bear regime</td>
+</tr>
+<tr>
+<td>TQQQ 10D RSI</td>
+<td>Overbought (&gt;79) and oversold (&lt;31)</td>
+</tr>
+<tr>
+<td>SOXL 10D RSI</td>
+<td>Semiconductor oversold (&lt;30)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="allocation">Allocation</h3>
+<ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+<li>Bull regime: 80% <span class="ticker">TQQQ</span> or <span class="ticker">UVXY</span> / 20% cash</li>
+<li>Bear regime: 100% in one instrument at a time</li>
+</ul>
+<h3 id="decision-tree-evaluated-on-condition-change-5-dr">Decision tree (evaluated on condition change + 5% drift)</h3>
+<p><strong>Step 1. Primary regime: TQQQ vs. its 200D SMA</strong></p>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">Primary regime determination</caption>
+<thead>
+<tr>
+<th scope="col">Condition</th>
+<th scope="col">Regime</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="ticker">TQQQ</span> current price &gt; TQQQ 200D SMA</td>
+<td>BULL</td>
+</tr>
+<tr>
+<td><span class="ticker">TQQQ</span> current price ≤ TQQQ 200D SMA</td>
+<td>BEAR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Bull Regime (80% allocation)</strong></p>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">Bull regime decision tree</caption>
+<thead>
+<tr>
+<th scope="col">Condition</th>
+<th scope="col">Action</th>
+<th scope="col">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TQQQ 10D RSI &gt; 79</td>
+<td>80% <span class="ticker">UVXY</span></td>
+<td>TQQQ overbought; volatility spike likely</td>
+</tr>
+<tr>
+<td>Neither condition met</td>
+<td>80% <span class="ticker">TQQQ</span></td>
+<td>Default bull position; 20% cash held at all times</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Bear Regime (100% allocation)</strong></p>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">Bear regime decision tree</caption>
+<thead>
+<tr>
+<th scope="col">Condition</th>
+<th scope="col">Action</th>
+<th scope="col">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TQQQ 10D RSI &lt; 31</td>
+<td>100% <span class="ticker">TECL</span></td>
+<td>TQQQ oversold in bear; leveraged tech mean reversion</td>
+</tr>
+<tr>
+<td>SOXL 10D RSI &lt; 30</td>
+<td>100% <span class="ticker">SOXL</span></td>
+<td>Semiconductors oversold; sector mean reversion</td>
+</tr>
+<tr>
+<td>TQQQ &lt; TQQQ 20D SMA</td>
+<td>Top of [<span class="ticker">SQQQ</span>, <span class="ticker">BSV</span>] by 10D RSI</td>
+<td>Downtrend confirmed; hold best-momentum short/defensive</td>
+</tr>
+<tr>
+<td>None of the above</td>
+<td>100% <span class="ticker">TQQQ</span></td>
+<td>Transitional: TQQQ above 20D SMA within bear but no signal</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>SQQQ vs. BSV selection:</strong> When <span class="ticker">TQQQ</span> is below its 20D SMA in the bear regime, the strategy selects whichever of <span class="ticker">SQQQ</span> or <span class="ticker">BSV</span> has the higher 10-day RSI. BSV replaces the TLT used in TQQQ FTLT; its short-duration profile avoids the interest rate sensitivity that made TLT unreliable in 2022.</p>
+<p><strong>Rebalancing mechanics:</strong> The symphony's rebalance setting is "none," meaning no calendar-based rebalancing is scheduled. Rebalancing occurs only when a condition in the decision tree changes state, or the portfolio drifts more than 5% from its target allocation. This contrasts with TQQQ FTLT's daily evaluation and results in fewer transactions in stable trending markets.</p>
+</section>
+<section aria-labelledby="performance-heading" id="performance">
+<h2 id="performance-heading">Performance Notes</h2>
+<p>No public factsheet data was retrievable (Composer requires authentication). The following observations are drawn from the strategy's structural properties and the academic basis.</p>
+<h3 id="structural-performance-properties">Structural performance properties</h3>
+<p>The 20% cash buffer in the bull regime acts as a partial dampener on bull-market returns. In a strong <span class="ticker">TQQQ</span> rally, the strategy captures only 80% of the gain (plus any <span class="ticker">UVXY</span> trade when the overbought signal fires). In exchange, the cash buffer reduces the drawdown when the bull regime ends.</p>
+<p>The <span class="ticker">SOXL</span> mean reversion layer adds a sector-specific entry point not present in TQQQ FTLT. Semiconductor stocks are among the most volatile major sector constituents of the Nasdaq-100. When SOXL's 10D RSI drops below 30 within a bear market, the strategy takes a 3x leveraged position to capture the expected mean reversion. This is a high-variance bet: SOXL can recover 15–30% in days after an extreme selloff, but it can also continue declining.</p>
+<h3 id="comparison-to-tqqq-ftlt-structural-properties">Comparison to TQQQ FTLT structural properties</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">Holy Grail vs TQQQ FTLT comparison</caption>
+<thead>
+<tr>
+<th scope="col">Feature</th>
+<th scope="col">TQQQ FTLT</th>
+<th scope="col">Holy Grail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary regime signal</td>
+<td>SPY 200D SMA</td>
+<td>TQQQ 200D SMA</td>
+</tr>
+<tr>
+<td>Bull allocation</td>
+<td>100% <span class="ticker">TQQQ</span> or <span class="ticker">UVXY</span></td>
+<td>80% <span class="ticker">TQQQ</span> or <span class="ticker">UVXY</span> + 20% cash</td>
+</tr>
+<tr>
+<td>Bear mean reversion instruments</td>
+<td><span class="ticker">TECL</span>, <span class="ticker">UPRO</span></td>
+<td><span class="ticker">TECL</span>, <span class="ticker">SOXL</span></td>
+</tr>
+<tr>
+<td>Bear defensive/short selection</td>
+<td><span class="ticker">SQQQ</span> vs. <span class="ticker">TLT</span></td>
+<td><span class="ticker">SQQQ</span> vs. <span class="ticker">BSV</span></td>
+</tr>
+<tr>
+<td>Rebalancing</td>
+<td>Daily</td>
+<td>Event-driven + 5% corridor</td>
+</tr>
+<tr>
+<td>Additional signals</td>
+<td>SPXL RSI, SPY RSI</td>
+<td>SOXL RSI</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="academic-basis-leverage-for-the-long-run-gayed-b">Academic basis: Leverage for the Long Run (Gayed &amp; Bilello, 2015)</h3>
+<p>The underlying regime-switching framework was validated over 87 years (October 1928 to October 2015):</p>
+<ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+<li>Above 200D SMA: +14.1% annualized return, 14.7% volatility</li>
+<li>Below 200D SMA: −2.3% annualized return, 26.5% volatility</li>
+<li>2x leveraged LRS: Sharpe 0.51, max drawdown −78%</li>
+<li>Unleveraged SMA200 timing: Sharpe 0.60, max drawdown −50%</li>
+<li>Buy-and-hold S&amp;P 500: Sharpe 0.30, max drawdown −86%</li>
+<li>The strategy outperformed buy-and-hold in 80% of rolling three-year periods</li>
+</ul>
+<p>These figures are for the Gayed/Bilello LRS using S&amp;P 500 + leverage/cash. The Holy Grail applies this regime logic to <span class="ticker">TQQQ</span> (3x Nasdaq-100) with a significantly different instruments set, so direct performance comparison is not possible from the published paper.</p>
+</section>
+<section aria-labelledby="risks-heading" id="risks">
+<h2 id="risks-heading">Risks and Caveats</h2>
+<div aria-label="Risk notice" class="callout callout-risk" role="note">
+<strong>Leveraged ETF Risk Notice</strong>
+            This strategy rotates among six instruments: <span class="ticker">TQQQ</span> (3x Nasdaq-100), <span class="ticker">UVXY</span> (1.5x VIX futures), <span class="ticker">TECL</span> (3x technology), <span class="ticker">SOXL</span> (3x semiconductors), <span class="ticker">SQQQ</span> (−3x Nasdaq-100), and <span class="ticker">BSV</span> (short-term bonds). TMF is not used in this strategy. All leveraged instruments are subject to daily reset and volatility decay. SOXL has historically experienced drawdowns exceeding 90%.
+          </div>
+<p><strong>Using TQQQ's own 200D SMA creates faster but noisier switching.</strong> Because <span class="ticker">TQQQ</span> is 3x leveraged, it oscillates much more than the underlying Nasdaq-100 or SPY. TQQQ can cross its own 200D SMA multiple times during a period where SPY remains clearly above or below its 200D SMA. Each crossing triggers a full regime flip, generating a rotation and its associated transaction costs.</p>
+<p><strong>The 20% cash buffer in bull mode has a real cost.</strong> Holding 20% cash while <span class="ticker">TQQQ</span> is in a sustained bull phase means the strategy underperforms a fully-invested TQQQ position by approximately 20% of TQQQ's gain per period. In the 2020–2021 TQQQ run of several hundred percent, a 20% cash drag was a material cost.</p>
+<p><strong>UVXY is an extreme-risk instrument.</strong> The overbought-into-<span class="ticker">UVXY</span> rotation (TQQQ RSI &gt; 79 → buy UVXY) is a high-variance short-duration trade. UVXY tracks 1.5x short-term VIX futures, which have a structural decay from futures roll costs. An incorrect signal results in a rapid UVXY loss.</p>
+<p><strong>SOXL mean reversion carries amplified risk within a bear market.</strong> Buying <span class="ticker">SOXL</span> (3x semiconductors) when its 10D RSI drops below 30 within a bear market is a counter-trend trade using 3x leverage. If the semiconductor downturn is fundamental rather than technical, the mean reversion signal can generate large losses before any recovery. SOXL has historically experienced drawdowns exceeding 90%.</p>
+<p><strong>Event-driven rebalancing does not eliminate lag at regime changes.</strong> There is an inherent lag between the moment a regime change becomes meaningful and the moment the signal fires. TQQQ can fall significantly below its 200D SMA before the bull-to-bear transition is acted on. The 5% corridor threshold adds additional lag.</p>
+<p><strong>SQQQ vs. BSV selection is momentum-based.</strong> In the bear regime's downtrend condition (TQQQ &lt; 20D SMA), the strategy picks whichever of <span class="ticker">SQQQ</span> or <span class="ticker">BSV</span> has higher 10-day RSI. The higher-RSI instrument may be rallying for idiosyncratic reasons unrelated to future performance. In some periods, both instruments lose value simultaneously.</p>
+<p><strong>All leveraged instruments carry daily reset decay.</strong> <span class="ticker">TQQQ</span>, <span class="ticker">TECL</span>, <span class="ticker">SOXL</span>, and <span class="ticker">SQQQ</span> all use daily leverage reset. In volatile, mean-reverting markets, each of these instruments decays even when the underlying index is roughly flat.</p>
+<p><strong>No public performance record is available.</strong> Unlike the Kelly Letter 9 Sig plan or HFEA, this strategy has no publicly verified live performance record in the sources reviewed. The backtest data on the Composer factsheet was not accessible without authentication.</p>
+</section>
+<section aria-labelledby="resources-heading" id="resources">
+<h2 id="resources-heading">Resources</h2>
+<p><strong>Composer.trade symphony</strong>: ID <code>VPVpD1SoqR5ykVu4NdWS</code>: The published implementation ("The Holy Grail (Invest Copy)"). Can be viewed and cloned on Composer.trade. The Composer platform handles condition evaluation and event-driven execution.</p>
+<p><strong>TQQQ For The Long Term</strong>: u/derecknielsen (Reddit, October 2022): The structural predecessor strategy that introduced the SPY 200D SMA + 10D RSI framework on which the Holy Grail is a variant. See the <a href="tqqq-ftlt.html">TQQQ FTLT page</a> for full documentation.</p>
+<p><strong>"Leverage for the Long Run"</strong>: Michael Gayed &amp; Charles Bilello (2015, SSRN #2741701): The academic paper providing the theoretical basis for 200D SMA-gated leverage. Documents the Leverage Rotation Strategy's 87-year backtest.</p>
+<p><strong>CXO Advisory</strong>: independent review of the Gayed/Bilello paper with performance metrics and critical notes on backtest friction assumptions.</p>
+</section>
+</div>
+<div class="src-footer site-dup">
+<p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
+</div>
+
+
+
+<div class="src-footer src-footer--notes site-dup"><p class="sidebar-disclaimer">Educational use only. Not financial advice.</p></div></div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../../strategies/leveraged/tqqq-ftlt.html"><small>Previous</small><span>TQQQ FTLT</span></a><a class="pp-pager-link pp-pager-link--next" href="../../strategies/leveraged/hfea.html"><small>Next</small><span>HFEA</span></a></nav>
+</main>
+<aside class="pp-toc" aria-labelledby="pp-toc-title">
+  <p class="pp-toc-title" id="pp-toc-title">On this page</p>
+  <ul class="pp-toc-list" id="pp-toc-list"></ul>
+</aside>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../../resources/index.html">Curated resources</a> · <a href="../../faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../../assets/js/site.js"></script>
+
+</body>
+</html>

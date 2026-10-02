@@ -1,0 +1,887 @@
+{
+ "source": "stocks/finviz.html",
+ "head": [
+  "title: How to Set Up a Finviz Stock Screener For Free",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha.",
+  "link canonical: https://azqato.github.io/stocks/finviz.html",
+  "google-site-verification: p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4",
+  "og:type: website",
+  "og:url: https://azqato.github.io/stocks/finviz.html",
+  "og:title: How to Set Up a Finviz Stock Screener For Free",
+  "og:description: How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha.",
+  "og:image: https://azqato.github.io/stocks/og-image.png",
+  "twitter:card: summary_large_image",
+  "twitter:title: How to Set Up a Finviz Stock Screener For Free",
+  "twitter:description: How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha.",
+  "twitter:image: https://azqato.github.io/stocks/og-image.png",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>",
+  "link stylesheet: style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "text",
+   "region": "aside",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 3,
+   "kind": "control",
+   "region": "aside",
+   "text": "type=checkbox id=nav-toggle",
+   "tag": "input"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Philosophy",
+   "href": "philosophy.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Philosophy"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "Metrics",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Metrics"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "Screener",
+   "href": "screener.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Screener"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "Market Overview",
+   "href": "market.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Market Overview"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Finviz",
+   "href": "finviz.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Finviz"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "SeekingAlpha",
+   "href": "seekingalpha.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "SeekingAlpha"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Indices",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Indices"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "FAQ",
+   "href": "faq.html",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "FAQ"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Leveraged Strategies",
+   "href": "https://azqato.github.io/leverage/",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 25,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "What Finviz Is For",
+   "href": "#section-purpose",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "What Finviz Is For"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 1: Open the Screener",
+   "href": "#section-step1",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 1: Open the Screener"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 2: Set the Filters",
+   "href": "#section-step2",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 2: Set the Filters"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 3: Read the Results",
+   "href": "#section-step3",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 3: Read the Results"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "Finviz Free Tier Coverage",
+   "href": "#section-coverage",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Finviz Free Tier Coverage"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "Quick-Reference Summary",
+   "href": "#section-quickref",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Quick-Reference Summary"
+  },
+  {
+   "n": 38,
+   "kind": "list item",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 39,
+   "kind": "text",
+   "region": "aside",
+   "text": "Educational use only."
+  },
+  {
+   "n": 40,
+   "kind": "text",
+   "region": "aside",
+   "text": "Not financial advice."
+  },
+  {
+   "n": 41,
+   "kind": "h1",
+   "region": "main",
+   "text": "How to Set Up a Finviz Stock Screener For Free"
+  },
+  {
+   "n": 42,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to configure Finviz's free stock screener to surface candidates that align with the methodology. Use this as a discovery tool to find stocks worth evaluating further in Seeking Alpha."
+  },
+  {
+   "n": 43,
+   "kind": "text",
+   "region": "main",
+   "text": "🔍 Candidate Discovery"
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "main",
+   "text": "finviz.com/screener",
+   "href": "https://finviz.com/screener",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 45,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Free screener, no account required. The Finviz screener at finviz.com/screener is fully usable without creating an account. No sign-up, no credit card, no trial. The filters covered in this guide are all available on the free tier."
+  },
+  {
+   "n": 46,
+   "kind": "h2",
+   "region": "main",
+   "text": "What Finviz Is For"
+  },
+  {
+   "n": 47,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Finviz is a stock screener, not a portfolio tracker. Its purpose in this methodology is different from Seeking Alpha's. Finviz answers the question: \"Which companies across the entire market currently look like candidates worth evaluating?\" Seeking Alpha then answers: \"Do the full 12 metrics on this specific company confirm that it is worth holding?\""
+  },
+  {
+   "n": 48,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Finviz does not perfectly replicate every column from the Seeking Alpha watchlist. It does not have a direct Revenue Growth FWD filter, does not show Total Cash and Total Debt as standalone dollar amounts, and uses a slightly different PEG calculation. These limitations are why Finviz is a starting point, not a final answer. Every company the Finviz screener surfaces should be verified against all 10 metrics in Seeking Alpha before adding it to the watchlist."
+  },
+  {
+   "n": 49,
+   "kind": "list item",
+   "region": "main",
+   "text": "Finviz role: cast a wide net across all stocks, filter down to candidates with strong growth and valuation metrics (technical columns provide context only)"
+  },
+  {
+   "n": 50,
+   "kind": "list item",
+   "region": "main",
+   "text": "Seeking Alpha role: verify the full 12-metric picture on each specific candidate before adding to the watchlist"
+  },
+  {
+   "n": 51,
+   "kind": "list item",
+   "region": "main",
+   "text": "Portfolio role: companies that pass the full 12-metric evaluation at a valuation the growth actually supports"
+  },
+  {
+   "n": 52,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 1: Open the Screener"
+  },
+  {
+   "n": 53,
+   "kind": "text",
+   "region": "main",
+   "text": "1"
+  },
+  {
+   "n": 54,
+   "kind": "h3",
+   "region": "main",
+   "text": "Go to the Finviz screener"
+  },
+  {
+   "n": 55,
+   "kind": "link",
+   "region": "main",
+   "text": "finviz.com/screener",
+   "href": "https://finviz.com/screener",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 56,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Navigate to finviz.com/screener. No account or login is required."
+  },
+  {
+   "n": 57,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The screener page has two main areas: a filter panel at the top (rows of dropdown menus organized by category) and a results table at the bottom showing stocks that match the active filters."
+  },
+  {
+   "n": 58,
+   "kind": "text",
+   "region": "main",
+   "text": "2"
+  },
+  {
+   "n": 59,
+   "kind": "h3",
+   "region": "main",
+   "text": "Understand the filter layout"
+  },
+  {
+   "n": 60,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The filter dropdowns are organized into rows. Key rows for this methodology:"
+  },
+  {
+   "n": 61,
+   "kind": "list item",
+   "region": "main",
+   "text": "Descriptors row: Exchange, Market Cap, Price, Volume"
+  },
+  {
+   "n": 62,
+   "kind": "list item",
+   "region": "main",
+   "text": "Fundamental row: Forward P/E, PEG, EPS Growth Next Year, EPS Growth Next 5Y, Sales Growth, Debt/Equity"
+  },
+  {
+   "n": 63,
+   "kind": "list item",
+   "region": "main",
+   "text": "Technical row: RSI (14), 52-Week High/Low"
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Each filter is a dropdown. Click any dropdown to see the available options. By default all filters are set to Any, meaning no filter is applied."
+  },
+  {
+   "n": 65,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 2: Set the Filters"
+  },
+  {
+   "n": 66,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The table below shows the recommended filter settings for surfacing candidates that align with this methodology. Set each filter using the dropdown menus in the screener. You do not need to set all of them at once. Start with the most important filters (PEG, EPS Growth) and add more to narrow results if needed. The two technical filters at the end are optional context filters: they surface beaten-down candidates worth a fundamental look, but they are never buy criteria in this methodology."
+  },
+  {
+   "n": 67,
+   "kind": "caption",
+   "region": "main",
+   "text": "Recommended Finviz screener filter settings"
+  },
+  {
+   "n": 68,
+   "kind": "table row",
+   "region": "main",
+   "text": "Filter | Row | Recommended Setting | Methodology Rationale"
+  },
+  {
+   "n": 69,
+   "kind": "table row",
+   "region": "main",
+   "text": "Market Cap | Descriptors | Mid or Large | Filters out micro/nano caps that lack analyst coverage and liquidity"
+  },
+  {
+   "n": 70,
+   "kind": "table row",
+   "region": "main",
+   "text": "Forward P/E | Fundamental | Under 50 | Broad filter; removes extremely overpriced stocks. PEG refines this further"
+  },
+  {
+   "n": 71,
+   "kind": "table row",
+   "region": "main",
+   "text": "PEG | Fundamental | Under 1 | Growth-adjusted valuation. PEG below 1.0 is the primary signal in this methodology"
+  },
+  {
+   "n": 72,
+   "kind": "table row",
+   "region": "main",
+   "text": "EPS Growth Next Year | Fundamental | Over 15% | Maps directly to the EPS Growth FWD target. Screens for earnings momentum"
+  },
+  {
+   "n": 73,
+   "kind": "table row",
+   "region": "main",
+   "text": "EPS Growth Next 5 Years | Fundamental | Over 10% | Confirms sustained earnings trajectory, not just a single-year spike"
+  },
+  {
+   "n": 74,
+   "kind": "table row",
+   "region": "main",
+   "text": "Sales Growth Qtr/Qtr | Fundamental | Over 10% | Revenue momentum proxy. Finviz does not have a direct Revenue FWD filter; QoQ growth confirms current top-line expansion"
+  },
+  {
+   "n": 75,
+   "kind": "table row",
+   "region": "main",
+   "text": "Total Debt/Equity | Fundamental | Under 1 | Balance sheet proxy. Total Debt/Equity under 1.0 means debt does not exceed equity. Verify exact cash and debt amounts in Seeking Alpha"
+  },
+  {
+   "n": 76,
+   "kind": "table row",
+   "region": "main",
+   "text": "RSI (14) | Technical | Near Oversold (30–40) | Context filter, not a buy signal. A low RSI surfaces quality names the market has recently sold off, which makes them worth a fundamental review; the buy decision itself rests entirely on the fundamentals"
+  },
+  {
+   "n": 77,
+   "kind": "table row",
+   "region": "main",
+   "text": "52-Week Low | Technical | 0–30% above Low | Approximates the lower 25–30% of the 52W range. Context only: it surfaces beaten-down candidates for fundamental review; range position never decides a stock purchase"
+  },
+  {
+   "n": 78,
+   "kind": "table",
+   "region": "main",
+   "text": "10 rows; first row: Filter | Row | Recommended Setting | Methodology Rationale"
+  },
+  {
+   "n": 79,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "These are starting point filter settings, not hard rules. If results are too few, loosen the RSI or 52W Low filter first. If results are too many, tighten PEG to \"Low (<1)\" and raise EPS Growth Next Year to \"Over 20%\"."
+  },
+  {
+   "n": 80,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Finviz PEG vs. Seeking Alpha PEG: Finviz calculates PEG using trailing earnings growth estimates, which may differ slightly from the forward-based PEG used in Seeking Alpha. Treat the Finviz PEG as a directional filter. Always verify the PEG Non-GAAP (FWD) value in Seeking Alpha before making a final evaluation."
+  },
+  {
+   "n": 81,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 3: Read the Results Table"
+  },
+  {
+   "n": 82,
+   "kind": "text",
+   "region": "main",
+   "text": "1"
+  },
+  {
+   "n": 83,
+   "kind": "h3",
+   "region": "main",
+   "text": "Switch the results view to Valuation"
+  },
+  {
+   "n": 84,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Below the filter panel, the results table has view tabs: Overview, Valuation, Financial, Ownership, Technical, Performance, Custom."
+  },
+  {
+   "n": 85,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Click Valuation to see Forward P/E, PEG, EPS growth estimates, and sales growth alongside each ticker. This is the most useful view for this methodology."
+  },
+  {
+   "n": 86,
+   "kind": "text",
+   "region": "main",
+   "text": "2"
+  },
+  {
+   "n": 87,
+   "kind": "h3",
+   "region": "main",
+   "text": "Sort results by PEG"
+  },
+  {
+   "n": 88,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Click the PEG column header to sort results by PEG ascending. This puts the most growth-efficient valuations at the top. Scan down the list and note any tickers with PEG values below 1.0 that also have strong EPS growth figures."
+  },
+  {
+   "n": 89,
+   "kind": "text",
+   "region": "main",
+   "text": "3"
+  },
+  {
+   "n": 90,
+   "kind": "h3",
+   "region": "main",
+   "text": "Check the Technical view for RSI and range"
+  },
+  {
+   "n": 91,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Switch to the Technical view to see RSI and 52-week range positioning. Read these as context, not entry criteria: a beaten-down reading tells you the market has been selling the name, which is often when a quality business deserves a closer fundamental look. A candidate is never bought or rejected because of where these numbers sit; the fundamentals decide.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 92,
+   "kind": "text",
+   "region": "main",
+   "text": "4"
+  },
+  {
+   "n": 93,
+   "kind": "h3",
+   "region": "main",
+   "text": "Move promising candidates to Seeking Alpha"
+  },
+  {
+   "n": 94,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Any ticker that looks compelling from the Finviz screen should be evaluated against the full 10-metric scorecard in Seeking Alpha before being added to the watchlist. Finviz surfaces the candidates; Seeking Alpha closes the evaluation.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 95,
+   "kind": "list item",
+   "region": "main",
+   "text": "Click any ticker in the Finviz results to open its Finviz summary page for a quick overview"
+  },
+  {
+   "n": 96,
+   "kind": "list item",
+   "region": "main",
+   "text": "For full evaluation, search the ticker on Seeking Alpha and check Revenue Growth FWD, Total Cash, Total Debt, and the full RSI + 52W Range data"
+  },
+  {
+   "n": 97,
+   "kind": "list item",
+   "region": "main",
+   "text": "Only add to your Seeking Alpha watchlist after confirming all 12 columns"
+  },
+  {
+   "n": 98,
+   "kind": "h2",
+   "region": "main",
+   "text": "Finviz Free Tier Coverage"
+  },
+  {
+   "n": 99,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The free Finviz screener covers every filter needed for this methodology. The limitations worth knowing:"
+  },
+  {
+   "n": 100,
+   "kind": "caption",
+   "region": "main",
+   "text": "Finviz free tier coverage for methodology metrics"
+  },
+  {
+   "n": 101,
+   "kind": "table row",
+   "region": "main",
+   "text": "Methodology Metric | Finviz Coverage | Notes"
+  },
+  {
+   "n": 102,
+   "kind": "table row",
+   "region": "main",
+   "text": "Revenue Growth FWD | Proxy only | Use Sales Growth QoQ as a substitute. Verify FWD figure in Seeking Alpha"
+  },
+  {
+   "n": 103,
+   "kind": "table row",
+   "region": "main",
+   "text": "EPS Growth FWD | Available | \"EPS Growth Next Year\" in the Fundamental row"
+  },
+  {
+   "n": 104,
+   "kind": "table row",
+   "region": "main",
+   "text": "P/E FWD | Available | \"Forward P/E\" in the Fundamental row"
+  },
+  {
+   "n": 105,
+   "kind": "table row",
+   "region": "main",
+   "text": "PEG FWD | Close match | Finviz PEG uses different growth inputs than Seeking Alpha Non-GAAP FWD. Use directionally; verify in SA"
+  },
+  {
+   "n": 106,
+   "kind": "table row",
+   "region": "main",
+   "text": "Total Cash | Proxy only | No standalone filter. Use Current Ratio or Debt/Equity as a balance sheet proxy"
+  },
+  {
+   "n": 107,
+   "kind": "table row",
+   "region": "main",
+   "text": "Total Debt | Proxy only | Use Total Debt/Equity ratio. Absolute dollar amounts must be verified in Seeking Alpha"
+  },
+  {
+   "n": 108,
+   "kind": "table row",
+   "region": "main",
+   "text": "RSI (14) | Available | \"RSI (14)\" in the Technical row. Dropdown options include Near Oversold (30–40)"
+  },
+  {
+   "n": 109,
+   "kind": "table row",
+   "region": "main",
+   "text": "52W Range | Available | \"52-Week Low\" filter in the Technical row gives range positioning"
+  },
+  {
+   "n": 110,
+   "kind": "table row",
+   "region": "main",
+   "text": "Market Cap | Available | \"Market Cap\" in the Descriptors row"
+  },
+  {
+   "n": 111,
+   "kind": "table",
+   "region": "main",
+   "text": "10 rows; first row: Methodology Metric | Finviz Coverage | Notes"
+  },
+  {
+   "n": 112,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Finviz Elite adds more columns and real-time data. For the purposes of this methodology, the free screener is sufficient for candidate discovery. All final evaluations happen in Seeking Alpha."
+  },
+  {
+   "n": 113,
+   "kind": "h2",
+   "region": "main",
+   "text": "Quick-Reference Filter Summary"
+  },
+  {
+   "n": 114,
+   "kind": "link",
+   "region": "main",
+   "text": "finviz.com/screener",
+   "href": "https://finviz.com/screener",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 115,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The complete filter configuration for a first-pass screen. Apply these settings at finviz.com/screener to surface initial candidates."
+  },
+  {
+   "n": 116,
+   "kind": "caption",
+   "region": "main",
+   "text": "Quick reference filter values"
+  },
+  {
+   "n": 117,
+   "kind": "table row",
+   "region": "main",
+   "text": "Filter | Set To | Where to Find It"
+  },
+  {
+   "n": 118,
+   "kind": "table row",
+   "region": "main",
+   "text": "Market Cap | Mid ($2B–$10B) or Large ($10B+) | Descriptors row"
+  },
+  {
+   "n": 119,
+   "kind": "table row",
+   "region": "main",
+   "text": "Forward P/E | Under 50 | Fundamental row"
+  },
+  {
+   "n": 120,
+   "kind": "table row",
+   "region": "main",
+   "text": "PEG | Under 1 | Fundamental row"
+  },
+  {
+   "n": 121,
+   "kind": "table row",
+   "region": "main",
+   "text": "EPS Growth Next Year | Over 15% | Fundamental row"
+  },
+  {
+   "n": 122,
+   "kind": "table row",
+   "region": "main",
+   "text": "EPS Growth Next 5 Years | Over 10% | Fundamental row"
+  },
+  {
+   "n": 123,
+   "kind": "table row",
+   "region": "main",
+   "text": "Sales Growth Qtr/Qtr | Over 10% | Fundamental row"
+  },
+  {
+   "n": 124,
+   "kind": "table row",
+   "region": "main",
+   "text": "Total Debt/Equity | Under 1 | Fundamental row"
+  },
+  {
+   "n": 125,
+   "kind": "table row",
+   "region": "main",
+   "text": "RSI (14) | Near Oversold (30–40) | Technical row"
+  },
+  {
+   "n": 126,
+   "kind": "table row",
+   "region": "main",
+   "text": "52-Week Low | 0–30% above Low | Technical row"
+  },
+  {
+   "n": 127,
+   "kind": "table",
+   "region": "main",
+   "text": "10 rows; first row: Filter | Set To | Where to Find It"
+  },
+  {
+   "n": 128,
+   "kind": "link",
+   "region": "main",
+   "text": "Set up your Seeking Alpha watchlist",
+   "href": "seekingalpha.html",
+   "flags": []
+  },
+  {
+   "n": 129,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Found a candidate? Set up your Seeking Alpha watchlist to track it against all 12 methodology metrics."
+  },
+  {
+   "n": 130,
+   "kind": "text",
+   "region": "footer",
+   "text": "Built by"
+  },
+  {
+   "n": 131,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 132,
+   "kind": "text",
+   "region": "footer",
+   "text": "."
+  },
+  {
+   "n": 133,
+   "kind": "script",
+   "region": "body",
+   "text": "script.js"
+  }
+ ],
+ "linked scripts": {
+  "script.js": {}
+ }
+}

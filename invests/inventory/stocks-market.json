@@ -1,0 +1,298 @@
+{
+ "source": "stocks/market.html",
+ "head": [
+  "title: Market Overview",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: A same-day market snapshot: major indices, factor and style funds, sector ETFs, commodities, Treasury yields, leveraged ETFs, and crypto, refreshed three times per trading day.",
+  "link canonical: https://azqato.github.io/stocks/market.html",
+  "google-site-verification: p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4",
+  "og:type: website",
+  "og:url: https://azqato.github.io/stocks/market.html",
+  "og:title: Market Overview",
+  "og:description: A same-day market snapshot across indices, factors, sectors, commodities, yields, leveraged ETFs, and crypto, refreshed three times per trading day.",
+  "og:image: https://azqato.github.io/stocks/og-image.png",
+  "twitter:card: summary_large_image",
+  "twitter:title: Market Overview",
+  "twitter:description: A same-day market snapshot across indices, factors, sectors, commodities, yields, leveraged ETFs, and crypto, refreshed three times per trading day.",
+  "twitter:image: https://azqato.github.io/stocks/og-image.png",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>",
+  "link stylesheet: style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "text",
+   "region": "aside",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 3,
+   "kind": "control",
+   "region": "aside",
+   "text": "type=checkbox id=nav-toggle",
+   "tag": "input"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Philosophy",
+   "href": "philosophy.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Philosophy"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "Metrics",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Metrics"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "Screener",
+   "href": "screener.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Screener"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "Market Overview",
+   "href": "market.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Market Overview"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Finviz",
+   "href": "finviz.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Finviz"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "SeekingAlpha",
+   "href": "seekingalpha.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "SeekingAlpha"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Indices",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Indices"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "FAQ",
+   "href": "faq.html",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "FAQ"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Leveraged Strategies",
+   "href": "https://azqato.github.io/leverage/",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 25,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 26,
+   "kind": "text",
+   "region": "aside",
+   "text": "Educational use only."
+  },
+  {
+   "n": 27,
+   "kind": "text",
+   "region": "aside",
+   "text": "Not financial advice."
+  },
+  {
+   "n": 28,
+   "kind": "h1",
+   "region": "main",
+   "text": "Market Overview"
+  },
+  {
+   "n": 29,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A same-day snapshot across Indices, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Refreshed three times per trading day (shortly after the open, midday, and shortly after the close) so it reads as a live check-in, not a stale close-of-business number.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 30,
+   "kind": "text",
+   "region": "main",
+   "text": "🕒"
+  },
+  {
+   "n": 31,
+   "kind": "text",
+   "region": "main",
+   "text": "Loading market data…"
+  },
+  {
+   "n": 32,
+   "kind": "text",
+   "region": "footer",
+   "text": "Built by"
+  },
+  {
+   "n": 33,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 34,
+   "kind": "text",
+   "region": "footer",
+   "text": "."
+  },
+  {
+   "n": 35,
+   "kind": "script",
+   "region": "body",
+   "text": "script.js"
+  },
+  {
+   "n": 36,
+   "kind": "script",
+   "region": "body",
+   "text": "inline, 7936 characters",
+   "urls": [
+    "https://raw.githubusercontent.com/Azqato/stocks/main/data/"
+   ],
+   "storage keys": [
+    "CACHE_KEY"
+   ],
+   "functions": [
+    "readCache",
+    "writeCache",
+    "fmtPrice",
+    "fmtChange",
+    "fmtPct",
+    "fmtYield",
+    "fmtYieldChange",
+    "dirClass",
+    "arrow",
+    "cardHtml",
+    "timeEmoji",
+    "render",
+    "load"
+   ],
+   "sets innerHTML": true
+  }
+ ],
+ "linked scripts": {
+  "script.js": {}
+ }
+}

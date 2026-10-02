@@ -31,7 +31,7 @@ PAGES = [
     ('index.html', 'Home'),
     ('about.html', 'About'),
     ('discord.html', 'Discord'),
-    ('invests.html', 'Invests'),
+    ('invests/index.html', 'Invests'),
     ('codes.html', 'Codes'),
     ('music.html', 'Music'),
     ('links.html', 'Links'),

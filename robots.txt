@@ -16,3 +16,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://azqato.com/sitemap.xml
+Sitemap: https://azqato.com/invests/sitemap.xml

@@ -1,0 +1,797 @@
+/* Azqato Invests: this site's own styles, on top of Template Interface's
+   documentation-site (docs.css). No theme.css token is redefined, per the
+   template contract. Sections: skip link, azqato.com's nav, shell changes,
+   page variants, moved source content and its theme mapping, home page. */
+
+/* ---------- Skip link (Question 8) ---------- */
+
+.site-skip {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: var(--pp-radius);
+  background: var(--pp-emerald-fill);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-skip:focus {
+  top: 8px;
+}
+
+/* ---------- azqato.com's nav (D9) ----------
+   azqato.com is dark-only; its colors are the shared theme tokens. The light
+   version uses the site's light palette. */
+
+.site-azqato {
+  --az-bg: #ffffff;
+  --az-text: #55625c;
+  --az-hover: #13201b;
+  --az-accent: #0b7a52;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 44px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--pp-line);
+  background: var(--az-bg);
+  font-size: 0.875rem;
+  overflow-x: auto;
+}
+
+:root[data-theme="dark"] .site-azqato {
+  --az-bg: var(--color-canvas);
+  --az-text: var(--color-text-secondary);
+  --az-hover: var(--color-text-primary);
+  --az-accent: var(--color-accent);
+}
+
+.site-azqato-logo {
+  flex: none;
+  color: var(--az-hover);
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.site-azqato-logo span {
+  color: var(--az-accent);
+}
+
+.site-azqato ul {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-azqato a:not(.site-azqato-logo) {
+  display: block;
+  padding: 6px 10px;
+  border-radius: var(--pp-radius);
+  color: var(--az-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pp-page .site-azqato a:hover {
+  color: var(--az-hover);
+}
+
+.pp-page .site-azqato a[aria-current] {
+  color: var(--az-accent);
+  font-weight: 600;
+}
+
+/* ---------- Shell ---------- */
+
+.site-logo-mark {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.pp-group li.site-sub a {
+  padding-left: 24px;
+  font-size: 0.9rem;
+}
+
+.pp-main:focus {
+  outline: none;
+}
+
+/* ---------- Page variants ---------- */
+
+/* Tool pages and Home: no "On this page", content cap lifted (Design details). */
+.is-tool .pp-shell,
+.is-home .pp-shell {
+  grid-template-columns: var(--pp-rail-w) minmax(0, 1fr);
+}
+
+.is-tool .pp-main > *,
+.is-home .pp-main > * {
+  max-width: none;
+}
+
+.is-home .pp-main > * {
+  max-width: 1120px;
+}
+
+@media (max-width: 900px) {
+  .is-tool .pp-shell,
+  .is-home .pp-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Moved source content ----------
+   Each page's content keeps its source's own classes, styled by the scoped
+   source stylesheets (src-*.css). Plain text, headings, lists and tables take
+   the template's styles. */
+
+.site-src img,
+.site-src svg {
+  max-width: 100%;
+}
+
+.pp-article .site-src table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.pp-article .site-src th,
+.pp-article .site-src td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pp-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.pp-article .site-src thead th {
+  background: var(--pp-rail);
+  color: var(--pp-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pp-article .site-src .table-wrap {
+  margin-bottom: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--pp-line);
+  border-radius: var(--pp-radius);
+}
+
+.pp-article .site-src .table-wrap table {
+  margin: 0;
+}
+
+.site-src .src-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--pp-line);
+  color: var(--pp-muted);
+  font-size: 0.875rem;
+}
+
+.site-src .src-footer--notes {
+  margin-top: 16px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.site-atlas ul {
+  margin: 4px 0 0;
+}
+
+.site-faq-filter {
+  margin: 24px 0 32px;
+}
+
+.site-faq-filter .pp-input {
+  width: 100%;
+}
+
+/* The screener and the VIX tools were full-window apps; here they sit in the
+   page and scroll with it. */
+.pp-page .src-stocks .app {
+  height: auto;
+  min-height: 0;
+}
+
+/* ---------- Theme mapping for moved content ----------
+   The sources were dark-only. Their surface and text tokens follow the site's
+   themes; their data colors keep the source values in dark and get darker
+   counterparts in light, so text in those colors stays readable on white. */
+
+.pp-page .src-stocks,
+.pp-page .src-leverage {
+  --color-bg: var(--pp-bg);
+  --color-surface: var(--pp-rail);
+  --color-border: var(--pp-line);
+  --color-accent: var(--pp-emerald);
+  --color-accent-hover: var(--pp-emerald-deep);
+  --color-accent-light: var(--pp-emerald-pale);
+  --color-tag-bg: var(--pp-hover);
+  --color-card-hover: var(--pp-hover);
+  --color-text-primary: var(--pp-ink);
+  --color-text-secondary: var(--pp-text);
+  color: var(--pp-text);
+}
+
+:root[data-theme="light"] .pp-page .src-stocks,
+:root[data-theme="light"] .pp-page .src-leverage {
+  --color-positive: #116329;
+  --color-negative: #a40e26;
+  --color-warning: #7d4e00;
+  --color-purple: #8250df;
+  --color-strat-3sig: #0969da;
+  --color-strat-6sig: #9a6700;
+  --color-strat-9sig: #0550ae;
+  --color-strat-hfea: #bc4c00;
+  --color-strat-ftlt: #1a7f37;
+  --color-strat-grail: #8250df;
+  --color-tier-splus: #6639ba;
+  --color-tier-s: #116329;
+  --color-tier-a: #1a7f37;
+  --color-tier-b: #7d4e00;
+  --color-tier-c: #a40e26;
+}
+
+/* Contrast fixes found by scripts/browser.py (2026-10-02). */
+:root[data-theme="light"] .pp-page .src-stocks .chip.active .count {
+  color: var(--pp-emerald-deep);
+}
+
+/* The source's red badge text was 4.1:1 on its tint in dark; GitHub's lighter red passes. */
+:root[data-theme="dark"] .pp-page .src-stocks .badge-negative {
+  color: #ff7b72;
+}
+
+/* The template's .callout is a flex row; the leverage sources' callouts are blocks. */
+.pp-page .src-leverage .callout {
+  display: block;
+}
+
+.pp-page .src-vix {
+  --bg-primary: var(--pp-bg);
+  --bg-secondary: var(--pp-rail);
+  --bg-card: var(--pp-rail);
+  --bg-card-hover: var(--pp-hover);
+  --text-primary: var(--pp-ink);
+  --text-secondary: var(--pp-text);
+  --text-muted: var(--pp-muted);
+  --border: var(--pp-line);
+  --border-accent: var(--pp-emerald-line);
+  --accent-glow: rgba(0, 255, 136, 0.5);
+  color: var(--pp-text);
+}
+
+:root[data-theme="light"] .pp-page .src-vix {
+  --accent-green: #047857;
+  --accent-amber: #92400e;
+  --accent-blue: #1d4ed8;
+  --accent-red: #b91c1c;
+  --accent-orange: #c2410c;
+  --accent-glow: transparent;
+  --tier1-color: #1d4ed8;
+  --tier2-color: #047857;
+  --tier3-color: #b45309;
+  --tier4-color: #c2410c;
+  --tier5-color: #b91c1c;
+  --color-bil: #1d4ed8;
+  --color-spy: #047857;
+  --color-qqq: #92400e;
+  --color-tqqq: #b91c1c;
+}
+
+/* Black on the light theme's darker green fails contrast; white passes. */
+:root[data-theme="light"] .pp-page .src-vix .btn-primary {
+  color: #fff;
+}
+
+.pp-page .src-invests {
+  --bg: var(--pp-bg);
+  --surface: var(--pp-rail);
+  --card-hover: var(--pp-hover);
+  --border: var(--pp-line);
+  --text: var(--pp-ink);
+  --text-muted: var(--pp-muted);
+  --accent: var(--pp-emerald);
+  --accent-hover: var(--pp-emerald-deep);
+  --tag-bg: var(--pp-hover);
+}
+
+@media (max-width: 640px) {
+  .site-azqato {
+    padding: 0 16px;
+  }
+}
+
+/* ---------- Wide, left-aligned content (author's request, 2026-10-02) ----------
+   The template centers a 760px column, which left empty space between the
+   sidebar and the text on wide screens. Content now starts at the sidebar and
+   uses up to 1400px. */
+
+.pp-main > *,
+.is-home .pp-main > * {
+  max-width: 1400px;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.pp-page .src-invests .hero,
+.pp-page .src-invests .section {
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ---------- Legibility in light (author's request, 2026-10-02) ----------
+   Darker body and muted text, stronger lines, and larger small text. */
+
+:root:not([data-theme="dark"]) .pp-page {
+  --pp-text: #16201c;
+  --pp-muted: #3a4641;
+  --pp-line: #d2d9dc;
+}
+
+.pp-group a {
+  font-size: 0.95rem;
+}
+
+.pp-card span:last-child {
+  font-size: 0.95rem;
+}
+
+:root:not([data-theme="dark"]) .pp-group a,
+:root:not([data-theme="dark"]) .pp-card span:last-child {
+  color: var(--pp-text);
+}
+
+/* VIX in light: the source hard-codes a dark hero, a white-to-grey headline
+   and scanlines meant for its dark page. Dark mode is unchanged. */
+:root:not([data-theme="dark"]) .pp-page .src-vix .hero-section {
+  background: linear-gradient(135deg, var(--pp-bg) 0%, var(--pp-rail) 100%);
+}
+
+:root:not([data-theme="dark"]) .pp-page .src-vix .hero-headline {
+  background: linear-gradient(140deg, var(--pp-ink) 0%, #2f3d37 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+:root:not([data-theme="dark"]) .pp-page .src-vix::before {
+  display: none;
+}
+
+/* The vix pages center their own container; align it left like the rest. */
+.pp-page .src-vix .container {
+  margin-left: 0;
+}
+
+/* VIX hero: the source fills 90% of the window, built as a full-page landing
+   section. Here it sits in a page, so it fits its content (author's request). */
+.pp-page .src-vix .hero-section {
+  min-height: 0;
+  width: fit-content;
+  max-width: 100%;
+  padding: 40px 40px 40px 0;
+  border-radius: 8px;
+}
+
+.pp-page .src-vix .hero-section .container {
+  padding-left: 40px;
+}
+
+/* VIX sections: the source's 3xl padding suits a landing page; inside a page
+   it leaves large gaps (author's request). */
+.pp-page .src-vix .section {
+  padding: 40px 0;
+}
+
+.pp-page .src-vix .section-alt {
+  border-radius: 8px;
+}
+
+/* The template's article h2 adds a 48px top margin; a section's first heading
+   sits on the section's own padding instead. */
+.pp-page .src-vix .section .container > h2:first-child,
+.pp-page .src-vix .section-header > h2:first-child {
+  margin-top: 0;
+}
+
+/* ---------- Full-width content (author's choice, option C, 2026-10-02) ----------
+   The stocks pages cap their content at 820px and the VIX pages at 1100px
+   (720px for section intros); here it runs the full width,
+   and the card grids add columns as the space allows. Pages whose
+   "On this page" list is empty (Resources, FAQ) give its column back. */
+
+.pp-page .src-stocks .content-inner,
+.pp-page .src-vix .container,
+.pp-page .src-vix .section-lead {
+  max-width: none;
+}
+
+.pp-page .src-stocks .market-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+@media (min-width: 901px) {
+  .pp-shell:has(.pp-toc[hidden]) {
+    grid-template-columns: var(--pp-rail-w) minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   UI review fixes (docs/UI-REVIEW.md, author's decisions 2026-10-02)
+   ========================================================================== */
+
+/* ---------- One footer per page ----------
+   Source footers that only repeat the site footer stay in the page, hidden.
+   The VIX pages' disclaimer lines sit in the site footer (site-footer-note). */
+
+.pp-page .site-dup {
+  display: none;
+}
+
+.pp-footer .site-footer-note {
+  color: var(--pp-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- Sidebar: groups collapse ----------
+   A group opens when it holds the current page; the rest open on click. */
+
+.site-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  margin-bottom: 0;
+  border-radius: var(--pp-radius);
+  cursor: pointer;
+  list-style: none;
+}
+
+.site-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-group > summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.15s;
+}
+
+.site-group[open] > summary::after {
+  transform: rotate(45deg);
+}
+
+.pp-page .site-group > summary:hover {
+  background: var(--pp-hover);
+  color: var(--pp-ink);
+}
+
+.site-group[open] > summary {
+  margin-bottom: 6px;
+}
+
+.pp-group + .pp-group {
+  margin-top: 12px;
+}
+
+/* azqato.com's links live in the sidebar on phones only. */
+.site-azqato-group {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .site-azqato {
+    display: none;
+  }
+
+  .site-azqato-group {
+    display: block;
+  }
+}
+
+/* ---------- Text size floor: 12px ----------
+   Source stylesheets are raised in scripts/site.py (min_font); these are the
+   template's and this site's own small text. */
+
+.pp-sidebar-card {
+  font-size: 0.875rem;
+}
+
+.pp-page .src-stocks tr.group-row th,
+.pp-page .src-stocks tr.head-row th,
+.pp-page .src-stocks .metric-label,
+.pp-page .src-stocks .example-label,
+.pp-page .src-stocks .badge,
+.pp-page .src-stocks .chip .count {
+  font-size: 0.75rem;
+}
+
+.pp-page .src-leverage .callout {
+  font-size: 0.95rem;
+}
+
+/* ---------- Tables: figures in the site font, digits aligned ---------- */
+
+.pp-page .src-stocks table td,
+.pp-page .src-stocks table th,
+.pp-page .src-stocks td.num,
+.pp-page .src-stocks td.ticker-cell,
+.pp-page .src-stocks .val-positive,
+.pp-page .src-stocks .val-negative,
+.pp-page .src-stocks .val-caution,
+.pp-page .src-stocks .ticker-tag {
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Stock metrics: the subtitle lines up with its heading ---------- */
+
+.pp-page .src-stocks .metric-subtitle {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+/* ---------- Learn pages and FAQ: the page tag is a label, not a button ---------- */
+
+.pp-page .src-stocks .hero-badge {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pp-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+/* ---------- Home: one grid ---------- */
+
+.pp-page .src-invests .project-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* Emoji icons share one size and a matching tile. */
+.pp-page .src-invests .project-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--pp-hover);
+  font-size: 1.4rem;
+}
+
+@media (max-width: 640px) {
+  .pp-page .src-invests .project-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  /* On phones the icon sits beside the title, so cards aren't mostly empty. */
+  .pp-page .src-invests .project-card {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 14px;
+    row-gap: 4px;
+    padding: 16px;
+  }
+
+  .pp-page .src-invests .project-card > .project-icon {
+    grid-row: span 2;
+  }
+}
+
+/* ---------- Resources: masonry columns ---------- */
+
+.pp-page .src-invests .resource-grid {
+  display: block;
+  columns: 260px;
+  column-gap: 1.25rem;
+}
+
+.pp-page .src-invests .resource-card {
+  display: block;
+  margin-bottom: 1.25rem;
+  break-inside: avoid;
+}
+
+/* ---------- Screener ---------- */
+
+.pp-page .src-stocks .disclaimer-bar {
+  padding: 12px 0;
+  background: none;
+  border-top: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* The pinned ticker column casts a shadow so the sideways scroll reads. */
+.pp-page .src-stocks td.col-ticker,
+.pp-page .src-stocks th.col-ticker {
+  box-shadow: 6px 0 8px -6px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 640px) {
+  .pp-page .src-stocks .chip-group {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .pp-page .src-stocks .app-search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .pp-page .src-stocks td.col-ticker,
+  .pp-page .src-stocks th.col-ticker {
+    max-width: 120px;
+  }
+
+  .pp-page .src-stocks .app-table-wrap::before {
+    content: "Swipe sideways for more columns \2192";
+    position: sticky;
+    left: 0;
+    display: block;
+    padding: 6px 12px;
+    color: var(--pp-muted);
+    font-size: 0.8rem;
+  }
+}
+
+/* ---------- Market Overview: names wrap instead of being cut off ---------- */
+
+.pp-page .src-stocks .market-card-name {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* ---------- VIX pages ---------- */
+
+/* Courier New's Q has a tail that reads as an underline (QQQ, TQQQ). */
+.pp-page .src-vix {
+  --font-mono: "SF Mono", "Consolas", "Liberation Mono", "Courier New", monospace;
+}
+
+/* Less space around the single Strategy Summary item. */
+.pp-page .src-vix .dashboard-section {
+  padding: 32px 0;
+}
+
+/* Tables become stacked cards on phones; site.js labels each cell from its
+   column heading (data-label). */
+@media (max-width: 640px) {
+  .pp-page .src-vix .table-wrapper {
+    overflow: visible;
+    border: 0;
+    background: none;
+  }
+
+  .pp-page .src-vix .table-styled,
+  .pp-page .src-vix .table-styled tbody,
+  .pp-page .src-vix .table-styled tr,
+  .pp-page .src-vix .table-styled td {
+    display: block;
+    width: 100%;
+  }
+
+  .pp-page .src-vix .table-styled thead {
+    display: none;
+  }
+
+  .pp-page .src-vix .table-styled tr {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border: 1px solid var(--pp-line);
+    border-radius: 8px;
+    background: var(--bg-card);
+  }
+
+  .pp-page .src-vix .table-styled td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 6px 0;
+    border: 0;
+    text-align: right;
+  }
+
+  .pp-page .src-vix .table-styled td + td {
+    border-top: 1px solid var(--pp-line);
+  }
+
+  .pp-page .src-vix .table-styled td[data-label]::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    color: var(--pp-muted);
+    font-weight: 600;
+    text-align: left;
+  }
+}
+
+/* VIX Strategy uses the site's headings and boxes. */
+.pp-page.is-doc .src-vix .section-title {
+  color: var(--pp-ink);
+  font-family: var(--pp-sans);
+  font-size: 1.5rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.pp-page.is-doc .src-vix .section-title::after {
+  display: none;
+}
+
+.pp-page.is-doc .src-vix .section-alt {
+  background: none;
+}
+
+.pp-page.is-doc .src-vix .section + .section {
+  border-top: 1px solid var(--pp-line);
+}
+
+.pp-page.is-doc .src-vix .card,
+.pp-page.is-doc .src-vix .insight-stat,
+.pp-page.is-doc .src-vix .table-wrapper {
+  border: 1px solid var(--pp-line);
+  border-radius: var(--pp-radius);
+  background: var(--pp-bg);
+  box-shadow: none;
+}
+
+/* ---------- Tap targets on phones: at least 24px ---------- */
+
+@media (max-width: 900px) {
+  .pp-crumbs a,
+  .pp-toc-inline a,
+  .pp-footer a {
+    display: inline-block;
+    min-height: 24px;
+    padding: 2px 0;
+  }
+
+  .pp-group a {
+    min-height: 32px;
+  }
+
+  .pp-page .src-stocks .accordion-trigger {
+    min-height: 48px;
+  }
+
+  .pp-page .src-stocks .accordion-icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* Card headings on Home and Resources: the article's heading margins left a
+   gap under the icons. */
+.pp-article .src-invests .project-card h3,
+.pp-article .src-invests .resource-card h3 {
+  margin-top: 0;
+}
+
+/* Screener: hold room for the table while its data loads, so the note
+   below it doesn't jump down (Lighthouse layout shift, P7). */
+.pp-page .src-stocks .app-table-wrap {
+  min-height: 70vh;
+}

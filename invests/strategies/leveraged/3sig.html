@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3 Sig - Azqato Invests</title>
+<meta name="description" content="The 3 Sig quarterly value-averaging strategy by Jason Kelly. A signal-based system using a 3% quarterly target to manage a stock index fund against a bond buffer.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="3 Sig - Azqato Invests">
+<meta property="og:description" content="The 3 Sig quarterly value-averaging strategy by Jason Kelly. A signal-based system using a 3% quarterly target to manage a stock index fund against a bond buffer.">
+<meta property="og:url" content="https://azqato.com/invests/strategies/leveraged/3sig">
+<link rel="canonical" href="https://azqato.com/invests/strategies/leveraged/3sig">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
+<script src="../../assets/js/theme.js"></script>
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/src-leverage.css">
+</head>
+<body class="pp-page site-page is-doc" data-root="../../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="https://azqato.com/">Azqato<span>.</span></a>
+  <ul><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="../../index.html" aria-current="true">Invests</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-learn">Learn</summary><ul aria-labelledby="pp-g-learn"><li><a href="../../learn/index.html">Overview</a></li><li><a href="../../learn/philosophy.html">Philosophy</a></li><li><a href="../../learn/metrics.html">Stock metrics</a></li><li><a href="../../learn/indices.html">Index &amp; ETF methodology</a></li><li><a href="../../learn/finviz.html">Finviz setup guide</a></li><li><a href="../../learn/seekingalpha.html">Seeking Alpha setup guide</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-tools">Tools</summary><ul aria-labelledby="pp-g-tools"><li><a href="../../tools/screener.html">Screener</a></li><li><a href="../../tools/market.html">Market Overview</a></li><li><a href="../../tools/vix-dashboard.html">VIX Dashboard</a></li><li><a href="../../tools/vix-custom.html">VIX Custom builder</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-strategies">Strategies</summary><ul aria-labelledby="pp-g-strategies"><li><a href="../../strategies/vix.html">VIX Strategy</a></li><li><a href="../../strategies/leveraged/index.html">Leveraged strategies</a></li><li class="site-sub"><a href="../../strategies/leveraged/3sig.html" aria-current="page">3 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/6sig.html">6 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/9sig.html">9 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li class="site-sub"><a href="../../strategies/leveraged/holy-grail.html">Holy Grail</a></li><li class="site-sub"><a href="../../strategies/leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../../resources/index.html">Curated resources</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-faq">FAQ</summary><ul aria-labelledby="pp-g-faq"><li><a href="../../faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul></details>
+  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li>Strategies</li><li><a href="../../strategies/leveraged/index.html">Leveraged strategies</a></li><li><span aria-current="page">3 Sig</span></li></ol></nav>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-leverage">
+
+
+
+
+
+<div class="src-main">
+<div class="hero">
+<div class="hero-badge">
+<span class="hero-badge-dot" style="background: var(--color-strat-3sig);"></span>
+            Quarterly Rebalancing
+          </div>
+<h1>3 Sig</h1>
+<p class="lead">A quarterly value-averaging strategy that targets 3% quarterly growth in a stock index fund (<span class="ticker">IJR</span> or <span class="ticker">SPY</span>) against a bond buffer, buying from bonds when the fund underperforms and selling into bonds when it overperforms. Created by Jason Kelly, <em>The 3% Signal</em> (2015).</p>
+</div>
+<section aria-labelledby="overview-heading" id="overview">
+<h2 id="overview-heading">Overview</h2>
+<p>The 3% Signal (3 Sig) is the conservative, unleveraged tier of Jason Kelly's Signal plan family, introduced in his 2015 book <em>The 3% Signal: The Investment Technique That Will Change Your Life</em>. It pairs a single stock index fund with a bond fund and rebalances quarterly to a 3% quarterly growth target.</p>
+<p>The core principle is value averaging: the investor targets a specific dollar balance in the stock fund that grows at exactly 3% per quarter (approximately 12.6% annualized) regardless of what the market actually did. Each quarter, the portfolio is adjusted to hit that target. If the stock fund underperformed the target, bonds are sold to buy more shares. If the stock fund overperformed, the surplus is sold into bonds. The bond fund serves as the reserve from which purchases are funded and into which profits are deposited.</p>
+<p>This structure mechanically compels buying when prices are low and selling when prices are high, relative to the signal line, inverting the emotional pattern that causes most retail investors to buy into rallies and sell into declines.</p>
+<p>The three Signal plans form a family based on leverage multiplier. The quarterly target scales directly with the fund's leverage ratio: 3% for a 1x unleveraged fund (3 Sig), 6% for a 2x leveraged fund (6 Sig), and 9% for a 3x leveraged fund (9 Sig). 3 Sig is the entry point for the system and the subject of Kelly's book.</p>
+<h3 id="stock-fund-selection">Stock fund selection</h3>
+<p><strong>Original (book):</strong> <span class="ticker">IJR</span> (iShares Core S&amp;P Small-Cap ETF). Kelly selected small-cap because its higher historical volatility creates larger buy-low and sell-high opportunities within each quarterly cycle. Small-cap index funds have historically returned approximately 11–12% annually, which supports a 3% quarterly target.</p>
+<p><strong>Current Kelly Letter version:</strong> <span class="ticker">SPY</span> (SPDR S&amp;P 500 ETF Trust). The Kelly Letter's published 30 Down Rule documentation (October 2024) identifies SPY as the 3 Sig fund. The book's IJR-based implementation remains valid for readers following the original text.</p>
+<p>Jason Kelly explicitly positions 3 Sig as an easy system: one stock index fund and one bond index fund, quarterly rebalancing that takes approximately 15 minutes, no market timing, no news monitoring, and no predictions required. The system requires only reaction to what prices already did, not forecasts of what they will do.</p>
+</section>
+<section aria-labelledby="rules-heading" id="rules">
+<h2 id="rules-heading">Rules and Logic</h2>
+<h3 id="starting-allocation">Starting allocation</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">3 Sig starting allocation</caption>
+<thead>
+<tr>
+<th scope="col">Asset</th>
+<th scope="col">Fund</th>
+<th scope="col">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stock fund</td>
+<td><span class="ticker">IJR</span> (book) or <span class="ticker">SPY</span> (Kelly Letter)</td>
+<td class="num">80%</td>
+</tr>
+<tr>
+<td>Bond fund</td>
+<td><span class="ticker">BND</span>, <span class="ticker">AGG</span>, VFIIX, or SCHZ</td>
+<td class="num">20%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The 80/20 allocation is the starting base only. The actual ratio drifts continuously between quarterly rebalances as markets move; the plan targets a signal line dollar amount, not a fixed percentage.</p>
+<h3 id="signal-line-calculation">Signal line calculation</h3>
+<div class="callout callout-info">
+<strong>Base formula:</strong>
+            Signal line = (Previous quarter-end stock fund balance) × 1.03<br/><br/>
+<strong>With new cash contributions:</strong>
+            Signal line = (Previous quarter-end stock fund balance) × 1.03 + (Half of new quarterly contributions)
+          </div>
+<p>All new cash contributed during a quarter goes entirely to the bond fund. At rebalancing time, half of those new contributions is added to the signal line target, which effectively deploys the new money partially into equities. Dividends from both funds are reinvested into the bond fund.</p>
+<h3 id="quarterly-rebalancing">Quarterly rebalancing</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">3 Sig quarterly rebalancing actions</caption>
+<thead>
+<tr>
+<th scope="col">Outcome</th>
+<th scope="col">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stock fund balance &gt; signal line</td>
+<td>Sell the surplus; proceeds go to bond fund</td>
+</tr>
+<tr>
+<td>Stock fund balance &lt; signal line</td>
+<td>Buy the shortfall; funded from bond fund</td>
+</tr>
+<tr>
+<td>Stock fund balance = signal line</td>
+<td>No trade</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="30-down-rule">30 Down Rule</h3>
+<p>The 30 Down Rule activates when the stock fund's quarterly closing price falls at least 30% below its quarterly closing price high within the rolling past two years. Only quarterly closing prices count; intra-quarter prices are ignored.</p>
+<p>When active: the next <strong>4 consecutive sell signals are ignored</strong>. Buy signals during the locked phase are followed as normal. After 4 sell signals have been ignored, the plan <strong>resumes normal operations without resetting</strong> the allocation. This is unique to 3 Sig; the 6 Sig and 9 Sig variants reset to a base allocation after their locked phases end.</p>
+<p>The rule's purpose is psychological: after a 30%+ quarterly decline, media coverage will uniformly project further losses. Locking in place preserves full equity exposure during the recovery, preventing the plan from selling into the rebound.</p>
+<p><strong>Historical activations:</strong> Spring 2020 (COVID crash, plans locked through the 2020–2021 recovery). The rule did not activate for 3 Sig in 2022 because <span class="ticker">SPY</span> did not close a quarter 30% below its 2-year high during that bear market.</p>
+</section>
+<section aria-labelledby="performance-heading" id="performance">
+<h2 id="performance-heading">Performance Notes</h2>
+<p>The 3% quarterly signal projects to approximately 12.6% annually (1.03<sup>4</sup> − 1 ≈ 12.55%). This target was calibrated to small-cap index historical averages of roughly 11–12% annually. It is a target that must be funded from bonds when not met by market performance, not a return that is delivered passively.</p>
+<h3 id="independent-corrected-backtest-bestfolio-2024">Independent corrected backtest: BestFolio (2024)</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">3 Sig corrected backtest results</caption>
+<thead>
+<tr>
+<th scope="col">Metric</th>
+<th scope="col">3 Sig (<span class="ticker">IJR</span> + <span class="ticker">BND</span>, real data)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAGR</td>
+<td class="num positive">9.0%</td>
+</tr>
+<tr>
+<td>Max drawdown</td>
+<td class="num negative">−52.3%</td>
+</tr>
+<tr>
+<td>Sharpe ratio</td>
+<td class="num">0.31</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The BestFolio analysis corrected five implementation errors present in prior community simulators: wrong starting allocation (80/20 vs. 60/40 in older tools), incorrect 30 Down trigger lookback (all-time high vs. rolling 8-quarter high), wrong trigger response (dumping all bonds vs. skipping the specified number of sells), missing buy throttle, and absent reset logic. The corrected figures represent a more realistic live implementation.</p>
+<p><strong>Community backtest (Bogleheads forum, 2016):</strong> An independent investor ran 3 Sig against a buy-and-hold position in the same underlying fund from 2000 and from 1993. In both test windows, simple buy-and-hold outperformed 3 Sig in total return by the end of the period.</p>
+<h3 id="open-vs-closed-system">Open vs. closed system</h3>
+<p>Published community simulations of the Signal plans almost universally assume regular monthly contributions of several hundred dollars. These ongoing deposits continuously replenish the bond buffer. In a closed system (starting capital only, no new money) the bond buffer eventually depletes after a severe multi-quarter decline. For 3 Sig (unleveraged), the exposure to this failure mode is lower than for 6 Sig and 9 Sig, but extreme bear markets lasting several years can still exhaust the buffer and leave the plan at 100% equities with no dry powder.</p>
+<p>In a sustained, strong bull market, the quarterly sell signal fires consistently, moving profit from the stock fund into bonds. This reduces equity exposure over time and caps upside capture relative to a full buy-and-hold position in the same fund. The plan's advantage is better performance in choppy and bear markets; its disadvantage is underperformance in extended bull runs.</p>
+</section>
+<section aria-labelledby="risks-heading" id="risks">
+<h2 id="risks-heading">Risks and Caveats</h2>
+<div aria-label="Risk notice" class="callout callout-risk" role="note">
+<strong>Risk Notice</strong>
+            3 Sig uses an unleveraged stock index fund (<span class="ticker">IJR</span> or <span class="ticker">SPY</span>) paired with a bond fund. The bond fund is not a riskless reserve; it loses value when interest rates rise, reducing buying power precisely when draw-down purchases are needed. Quarterly rebalancing means there is no mechanism to respond to intra-quarter moves. In a sustained bear market, continuous buy signals will exhaust the bond buffer, leaving the portfolio at 100% equities with nothing left to buy further dips.
+          </div>
+<p><strong>Bond buffer depletion.</strong> In a severe or extended bear market, the plan repeatedly signals to buy from the bond fund. If this continues for many quarters, the bond fund depletes. At that point the plan holds 100% equities with no dry powder and no buffer against continued losses. Recovery from this state depends entirely on the market reversing.</p>
+<p><strong>Bond fund losses in rising rate environments.</strong> The bond fund loses value when interest rates rise. The Federal Reserve's 2022–2023 rate hiking cycle produced simultaneous losses in both the equity fund and the bond fund, reducing the buffer just as it was being drawn down for equity purchases. The plan assumes the bond fund is a stable reserve; this assumption fails in inflationary rate-hiking cycles.</p>
+<p><strong>The 3% target is fixed regardless of market conditions.</strong> The signal line grows at 3% per quarter whether the underlying index is returning 2% or 20% over that period. In a prolonged bear market, the plan keeps buying, drawing the buffer down toward zero. The target does not adapt to valuations, interest rates, or market regimes. There is no built-in recognition that recovery may be delayed.</p>
+<p><strong>Performance vs. buy-and-hold is not reliably superior.</strong> Community backtesting has not consistently demonstrated that 3 Sig outperforms simple buy-and-hold in the same fund. The value-averaging mechanics force buying lower and selling higher relative to the signal line, but in a strong bull market, constant profit-taking reduces equity exposure and captures a smaller share of the rally.</p>
+<p><strong>Data snooping risk.</strong> Selecting small-cap equity and 3% as the signal threshold both involve parameters that were likely chosen partly because they fit the historical period examined. Out-of-sample performance may differ from backtest results.</p>
+<p><strong>Tax drag in taxable accounts.</strong> Each sell signal generates capital gains. With up to four potential sell events per year, the tax drag on after-tax compounding is significant over many years. Tax-advantaged accounts (Roth IRA, traditional IRA, 401k) are strongly preferred.</p>
+</section>
+<section aria-labelledby="resources-heading" id="resources">
+<h2 id="resources-heading">Resources</h2>
+<p><em>The 3% Signal</em> (Jason Kelly, 2015, Plume/Penguin): the original book. Covers the 3 Sig mechanics, historical backtest, the 30 Down Rule, and implementation guidance for tax-advantaged accounts. ISBN 978-0142180952.</p>
+<p>The Kelly Letter (<a href="https://jasonkelly.com">jasonkelly.com</a>): Jason Kelly's subscriber newsletter. Contains the official weekly plan status, current signal line values, 30 Down Rule state for all three plans, and all plan updates.</p>
+<p><a href="https://jasonkelly.com/resources/strategies/">jasonkelly.com/resources/strategies/</a>: free public summary of the 3 Sig, 6 Sig, and 9 Sig plans with fund selections and current parameters.</p>
+<p><a href="https://bestfolio.app/blog/kelly-signal-danger-v2">BestFolio corrected backtest</a>: independent backtesting with corrected implementation and critical drawdown analysis across all three plan variants. Documents the five most common simulation errors in prior community tools.</p>
+</section>
+</div>
+<div class="src-footer site-dup">
+<p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
+</div>
+
+
+
+<div class="src-footer src-footer--notes site-dup"><p class="sidebar-disclaimer">Educational use only. Not financial advice.</p></div></div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../../strategies/leveraged/index.html"><small>Previous</small><span>Leveraged strategies</span></a><a class="pp-pager-link pp-pager-link--next" href="../../strategies/leveraged/6sig.html"><small>Next</small><span>6 Sig</span></a></nav>
+</main>
+<aside class="pp-toc" aria-labelledby="pp-toc-title">
+  <p class="pp-toc-title" id="pp-toc-title">On this page</p>
+  <ul class="pp-toc-list" id="pp-toc-list"></ul>
+</aside>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../../resources/index.html">Curated resources</a> · <a href="../../faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../../assets/js/site.js"></script>
+
+</body>
+</html>

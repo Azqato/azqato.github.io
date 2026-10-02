@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HFEA - Azqato Invests</title>
+<meta name="description" content="Hedgefundie&#x27;s Excellent Adventure (HFEA). A quarterly-rebalanced leveraged risk parity portfolio of UPRO 55% and TMF 45%.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="HFEA - Azqato Invests">
+<meta property="og:description" content="Hedgefundie&#x27;s Excellent Adventure (HFEA). A quarterly-rebalanced leveraged risk parity portfolio of UPRO 55% and TMF 45%.">
+<meta property="og:url" content="https://azqato.com/invests/strategies/leveraged/hfea">
+<link rel="canonical" href="https://azqato.com/invests/strategies/leveraged/hfea">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
+<script src="../../assets/js/theme.js"></script>
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/src-leverage.css">
+</head>
+<body class="pp-page site-page is-doc" data-root="../../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="https://azqato.com/">Azqato<span>.</span></a>
+  <ul><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="../../index.html" aria-current="true">Invests</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-learn">Learn</summary><ul aria-labelledby="pp-g-learn"><li><a href="../../learn/index.html">Overview</a></li><li><a href="../../learn/philosophy.html">Philosophy</a></li><li><a href="../../learn/metrics.html">Stock metrics</a></li><li><a href="../../learn/indices.html">Index &amp; ETF methodology</a></li><li><a href="../../learn/finviz.html">Finviz setup guide</a></li><li><a href="../../learn/seekingalpha.html">Seeking Alpha setup guide</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-tools">Tools</summary><ul aria-labelledby="pp-g-tools"><li><a href="../../tools/screener.html">Screener</a></li><li><a href="../../tools/market.html">Market Overview</a></li><li><a href="../../tools/vix-dashboard.html">VIX Dashboard</a></li><li><a href="../../tools/vix-custom.html">VIX Custom builder</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-strategies">Strategies</summary><ul aria-labelledby="pp-g-strategies"><li><a href="../../strategies/vix.html">VIX Strategy</a></li><li><a href="../../strategies/leveraged/index.html">Leveraged strategies</a></li><li class="site-sub"><a href="../../strategies/leveraged/3sig.html">3 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/6sig.html">6 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/9sig.html">9 Sig</a></li><li class="site-sub"><a href="../../strategies/leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li class="site-sub"><a href="../../strategies/leveraged/holy-grail.html">Holy Grail</a></li><li class="site-sub"><a href="../../strategies/leveraged/hfea.html" aria-current="page">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../../resources/index.html">Curated resources</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-faq">FAQ</summary><ul aria-labelledby="pp-g-faq"><li><a href="../../faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul></details>
+  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li>Strategies</li><li><a href="../../strategies/leveraged/index.html">Leveraged strategies</a></li><li><span aria-current="page">HFEA</span></li></ol></nav>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-leverage">
+
+
+
+
+
+<div class="src-main">
+<div class="hero">
+<div class="hero-badge">
+<span class="hero-badge-dot" style="background: var(--color-strat-hfea);"></span>
+            Quarterly Rebalancing
+          </div>
+<h1>Hedgefundie's Excellent Adventure</h1>
+<p class="lead">A quarterly-rebalanced two-fund leveraged portfolio holding <span class="ticker">UPRO</span> at 55% and <span class="ticker">TMF</span> at 45%, designed to capture amplified equity returns while using negatively-correlated long-duration Treasuries to structurally moderate drawdowns. Proposed on Bogleheads in February 2019.</p>
+</div>
+<aside aria-labelledby="atlas-h" class="pp-callout pp-callout--note site-atlas"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg><div><p id="atlas-h"><strong>On Composer Atlas</strong></p><ul><li><a href="https://composeratlas.com/database.html" rel="noopener" target="_blank">Composer Atlas database (search for symphony Cjb5ysKtJsPv6Tm3Fk0R)</a></li></ul></div></aside><section aria-labelledby="overview-heading" id="overview">
+<h2 id="overview-heading">Overview</h2>
+<p>Hedgefundie's Excellent Adventure is a leveraged risk parity portfolio proposed by a Bogleheads forum user known as "Hedgefundie" in February 2019. The strategy pairs a 3x leveraged S&amp;P 500 ETF (<span class="ticker">UPRO</span>) with a 3x leveraged long-duration Treasury ETF (<span class="ticker">TMF</span>), rebalanced quarterly to a fixed target allocation.</p>
+<p>The theoretical foundation is risk parity. Rather than allocating dollars equally, risk parity allocates risk equally by balancing each position's contribution to total portfolio volatility. Hedgefundie calculated that the long-run annual volatility of the S&amp;P 500 is approximately 15% and of long-term Treasuries approximately 10%. Simple arithmetic gives risk parity at 40% stocks and 60% bonds. A 40/60 unleveraged portfolio delivers conservative returns, so leverage is added to bring the risk back up to S&amp;P 500 levels while preserving the diversification benefit. The result, historically, is a higher Sharpe ratio than the S&amp;P 500 alone.</p>
+<p>Stocks and long-duration Treasuries have maintained a correlation of approximately zero over the long run, with a meaningfully negative correlation during large single-day equity declines. Hedgefundie's data showed that when the S&amp;P drops 2% or more in a day, there is a 75% chance long-term Treasuries will rise. When the S&amp;P drops 4% or more, the median long-term Treasury return for that day is positive 1 to 3%.</p>
+<p><strong>Thread 1 (February 2019):</strong> Original allocation of 40% <span class="ticker">UPRO</span> / 60% <span class="ticker">TMF</span>, based on the risk parity volatility calculation. Starting position: $100,000, representing 15% of Hedgefundie's investable assets.</p>
+<p><strong>Thread 2 (August 2019):</strong> Allocation revised to 55% <span class="ticker">UPRO</span> / 45% <span class="ticker">TMF</span>. The shift reflected the view that stocks are the primary return driver and bonds serve as crash insurance, and that the original 60% TMF position was larger than necessary. The revision was made mid-strategy as the position had grown to approximately $143,000.</p>
+<p>A precedent for this type of portfolio existed before the Bogleheads thread: PIMCO's StocksPLUS Long Duration Fund (<span class="ticker">PSLDX</span>), launched September 2007, holds effectively 100% S&amp;P 500 futures plus 100% long bonds, achieving a similar leveraged risk parity exposure without daily resetting ETFs. PSLDX has a 5-star Morningstar rating and is available in some 401k plans.</p>
+<p>Hedgefundie explicitly framed this as a high-risk satellite position for young investors, to be used with only a small portion of total net worth. His goal was to grow $100,000 to $10,000,000 over 20 to 25 years, at which point he planned to exit into unleveraged Treasuries.</p>
+</section>
+<section aria-labelledby="rules-heading" id="rules">
+<h2 id="rules-heading">Rules and Logic</h2>
+<h3 id="allocation-current-standard">Allocation (current standard)</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">HFEA current standard allocation</caption>
+<thead>
+<tr>
+<th scope="col">Asset</th>
+<th scope="col">Ticker</th>
+<th scope="col">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ProShares UltraPro S&amp;P 500 (3x S&amp;P 500)</td>
+<td><span class="ticker">UPRO</span></td>
+<td class="num">55%</td>
+</tr>
+<tr>
+<td>Direxion Daily 20+ Year Treasury Bull 3X</td>
+<td><span class="ticker">TMF</span></td>
+<td class="num">45%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="allocation-original-thread-1">Allocation (original Thread 1)</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">HFEA original allocation</caption>
+<thead>
+<tr>
+<th scope="col">Ticker</th>
+<th scope="col">Weight</th>
+<th scope="col">Basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="ticker">UPRO</span></td>
+<td class="num">40%</td>
+<td>Risk parity: S&amp;P 500 vol ≈15%</td>
+</tr>
+<tr>
+<td><span class="ticker">TMF</span></td>
+<td class="num">60%</td>
+<td>Risk parity: LTT vol ≈10%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="cost-of-leverage-as-of-2018">Cost of leverage (as of 2018)</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">HFEA cost of leverage</caption>
+<thead>
+<tr>
+<th scope="col">ETF</th>
+<th scope="col">Expense Ratio</th>
+<th scope="col">Borrow Rate (swap cost)</th>
+<th scope="col">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="ticker">UPRO</span></td>
+<td class="num">0.92%</td>
+<td class="num">2.87%</td>
+<td class="num">≈3.79%</td>
+</tr>
+<tr>
+<td><span class="ticker">TMF</span></td>
+<td class="num">1.09%</td>
+<td class="num">1.83%</td>
+<td class="num">≈2.92%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Borrowing costs are paid to swap counterparties above the short-term treasury rate. These costs reduce the effective leverage return and are embedded in the fund's daily performance; they are not charged separately.</p>
+<p><strong>Rebalancing:</strong> Quarterly, calendar-based. No signal, no threshold. At the end of each quarter the portfolio is reset to the target weights. Hedgefundie chose quarterly rebalancing because it produced the best results in the backtest. Account type: strongly preferred in a tax-advantaged account (Roth IRA, Traditional IRA, 401k). M1 Finance was commonly used for automatic rebalancing via new deposit allocation without triggering sales.</p>
+<h3 id="community-variants">Community variants</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">HFEA community variants</caption>
+<thead>
+<tr>
+<th scope="col">Variant</th>
+<th scope="col">Allocation</th>
+<th scope="col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Original (Thread 1)</td>
+<td>40% <span class="ticker">UPRO</span> / 60% <span class="ticker">TMF</span></td>
+<td>Risk parity volatility calculation</td>
+</tr>
+<tr>
+<td>Standard (Thread 2)</td>
+<td>55% <span class="ticker">UPRO</span> / 45% <span class="ticker">TMF</span></td>
+<td>Most referenced version</td>
+</tr>
+<tr>
+<td>Tax-efficient</td>
+<td>43% <span class="ticker">UPRO</span> / 57% <span class="ticker">EDV</span></td>
+<td>Replaces 3x TMF with unleveraged long-duration bond ETF</td>
+</tr>
+<tr>
+<td>Monthly rebalancing</td>
+<td>55% <span class="ticker">UPRO</span> / 45% <span class="ticker">TMF</span></td>
+<td>Same weights, higher frequency</td>
+</tr>
+<tr>
+<td>Threshold-based</td>
+<td>55% <span class="ticker">UPRO</span> / 45% <span class="ticker">TMF</span></td>
+<td>Rebalances only when either position drifts beyond a defined band</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="regime-adaptive-variant-hfea-the-resurrection">Regime-adaptive variant: "HFEA The Resurrection"</h3>
+<p>A Composer.trade implementation by u/derecknielsen that adds a two-factor regime-switching model on top of the static HFEA allocation. It rebalances quarterly and uses two moving average signals to detect the macro environment: <span class="ticker">SPY</span> vs. its 200-day SMA for the equity trend, and <span class="ticker">TLT</span> vs. its 400-day SMA for the interest rate environment.</p>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">HFEA The Resurrection four-regime allocation</caption>
+<thead>
+<tr>
+<th scope="col">Equity trend</th>
+<th scope="col">Bond trend</th>
+<th scope="col">Allocation</th>
+<th scope="col">Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPY &gt; 200D SMA</td>
+<td>TLT &gt; 400D SMA</td>
+<td>55% <span class="ticker">UPRO</span> / 45% <span class="ticker">TMF</span></td>
+<td>Bull market, normal inflation</td>
+</tr>
+<tr>
+<td>SPY &gt; 200D SMA</td>
+<td>TLT &lt; 400D SMA</td>
+<td>55% <span class="ticker">UPRO</span> / 45% <span class="ticker">TMV</span></td>
+<td>Bull market, high inflation</td>
+</tr>
+<tr>
+<td>SPY &lt; 200D SMA</td>
+<td>TLT &gt; 400D SMA</td>
+<td>55% <span class="ticker">UPRO</span> / 45% <span class="ticker">TMF</span></td>
+<td>Bear market, normal inflation</td>
+</tr>
+<tr>
+<td>SPY &lt; 200D SMA</td>
+<td>TLT &lt; 400D SMA</td>
+<td>20% <span class="ticker">UPRO</span> / 80% <span class="ticker">TMV</span></td>
+<td>Bear market, high inflation</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="ticker">TMV</span> (Direxion Daily 20+ Year Treasury Bear 3x Shares) replaces <span class="ticker">TMF</span> when <span class="ticker">TLT</span> is below its 400-day SMA, converting the long-bond position to a short-bond position. The 400-day TLT lookback is intentionally longer than the standard 200-day to avoid false triggers from temporary bond dips within a sustained rising-rate trend. In the high-inflation bear scenario, <span class="ticker">UPRO</span> is reduced to 20% with 80% TMV, a defensive positioning that would have substantially reduced the 2022 drawdown.</p>
+<div class="callout callout-info">
+<strong>Composer symphony ID:</strong> <code>Cjb5ysKtJsPv6Tm3Fk0R</code>
+</div>
+</section>
+<section aria-labelledby="performance-heading" id="performance">
+<h2 id="performance-heading">Performance Notes</h2>
+<p><span class="ticker">UPRO</span> launched June 2009; <span class="ticker">TMF</span> launched April 2009. All backtests before those dates use a simulation formula applied to S&amp;P 500 and long Treasury daily returns, accounting for daily leverage reset, borrowing costs (1-month LIBOR), and expense ratios. The formula, contributed by forum member EfficientInvestor, is:</p>
+<div class="callout callout-info">
+            (Daily % of underlying total return index) × X − ER/250 − (X − 1) × (1-month LIBOR) × (days elapsed / 360)<br/><br/>
+            Where X is the leverage multiplier.
+          </div>
+<h3 id="backtest-1987-to-2018-40-60-quarterly-rebalancin">Backtest 1987 to 2018 (40/60, quarterly rebalancing)</h3>
+<ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+<li>CAGR: approximately 23.75% (Hedgefundie's model) to approximately 19% (more conservative estimate from forum member vineviz accounting for additional volatility drag)</li>
+<li>The wide range reflects methodological differences in modeling swap costs and daily volatility decay</li>
+<li>Significantly outperformed the S&amp;P 500 in total return over this period</li>
+</ul>
+<h3 id="the-lost-decade-validation-january-2000-to-septe">The "lost decade" validation (January 2000 to September 2011)</h3>
+<ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+<li>S&amp;P 500 total return: approximately 0% over the period</li>
+<li>HFEA (simulated): approximately 11% CAGR over the same period</li>
+<li>The risk parity structure preserved and grew capital during a period when a pure equity position went nowhere for over a decade</li>
+</ul>
+<h3 id="live-tracking-may-2019-to-april-2025">Live tracking (May 2019 to April 2025)</h3>
+<div class="table-wrap">
+<table>
+<caption class="visually-hidden">HFEA live tracking</caption>
+<thead>
+<tr>
+<th scope="col">Date</th>
+<th scope="col">Approximate total return from inception</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>May 2019</td>
+<td class="num positive">+15%</td>
+</tr>
+<tr>
+<td>August 2019</td>
+<td class="num positive">+33%</td>
+</tr>
+<tr>
+<td>Mid-August 2019 (allocation change to 55/45)</td>
+<td class="num positive">+43%</td>
+</tr>
+<tr>
+<td>July 2021</td>
+<td class="num positive">+105%</td>
+</tr>
+<tr>
+<td>January 2022</td>
+<td class="num positive">+150% (peak)</td>
+</tr>
+<tr>
+<td>July 2022</td>
+<td class="num positive">+14%</td>
+</tr>
+<tr>
+<td>October 2022</td>
+<td class="num negative">−14%</td>
+</tr>
+<tr>
+<td>January 2023</td>
+<td class="num negative">−10%</td>
+</tr>
+<tr>
+<td>April 2025</td>
+<td class="num positive">+37%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The January to October 2022 drawdown was approximately 65% from peak. By April 2025, the strategy had not recovered to its January 2022 high after more than three years.</p>
+</section>
+<section aria-labelledby="risks-heading" id="risks">
+<h2 id="risks-heading">Risks and Caveats</h2>
+<div aria-label="Risk notice" class="callout callout-risk" role="note">
+<strong>Leveraged ETF Risk Notice</strong>
+<span class="ticker">UPRO</span> and <span class="ticker">TMF</span> are both 3x leveraged ETFs subject to daily reset and volatility decay. HFEA relies on a historically negative correlation between equities and long-duration Treasuries to moderate drawdowns. This correlation can and does break down, most notably in rising-rate environments where both positions decline simultaneously. The 2022 period demonstrated this directly. No rebalancing schedule eliminates the underlying leverage risk in either instrument.
+          </div>
+<p><strong>Correlation breakdown is the primary risk, and it materialized in 2022.</strong> Hedgefundie stated in the original February 2019 post: "The main risk is that the S&amp;P 500 and long Treasuries crash together in the same short period of time. In the past 30 years this has not happened, and I can't think of a real-world scenario in which this would happen." The Federal Reserve's 2022 rate hiking cycle proved this scenario does occur. Both <span class="ticker">UPRO</span> and <span class="ticker">TMF</span> fell together for an extended period with no offsetting hedge.</p>
+<p><strong>The pre-1982 data gap.</strong> Most backtests begin in 1987 or later, after the Volcker-era rate normalization had concluded. The 1970s stagflation period, during which both stocks and long bonds delivered poor real returns simultaneously for years at a time, is absent from the primary backtest window.</p>
+<p><strong>Both instruments are 3x leveraged.</strong> Unlike a conventional 60/40 allocation where bonds are a lower-volatility stabilizer, here the bond position amplifies losses at 3x. A significant rise in long-term interest rates does not produce a modest bond decline; it produces a large <span class="ticker">TMF</span> loss, compounded by volatility decay from the daily reset.</p>
+<p><strong>Long-duration Treasury sensitivity.</strong> <span class="ticker">TMF</span> tracks the ICE U.S. Treasury 20+ Year Bond Index. Long-duration bonds are among the most interest-rate-sensitive instruments available. A 1% sustained increase in long-term rates produces a proportionally large price decline in 20+ year bonds, then tripled.</p>
+<p><strong>Volatility decay on both sides.</strong> Each fund independently undergoes daily compounding. In volatile sideways markets, both positions decay without the correlation benefit that manifests in trending markets.</p>
+<p><strong>Backtest optimism.</strong> The 23.75% CAGR figure from Hedgefundie's original model has been independently estimated as closer to 19% when swap costs and daily drag are more conservatively modeled. Live results since 2019 have substantially underperformed the backtest range.</p>
+<p><strong>Tax drag in taxable accounts.</strong> Quarterly rebalancing in a taxable account generates short-term capital gains every time a winning position is trimmed. Over a decade of quarterly rebalancing, this meaningfully erodes after-tax compounding.</p>
+<p><strong>Not for large portfolio allocations.</strong> Hedgefundie invested $100,000, representing 15% of his investable assets at the time, and stated explicitly that losing this amount would not materially change the course of his retirement savings. The strategy is not suited to a majority or core portfolio position.</p>
+</section>
+<section aria-labelledby="resources-heading" id="resources">
+<h2 id="resources-heading">Resources</h2>
+<p>Hedgefundie's Excellent Adventure originated in two Bogleheads forum threads in 2019, both authored by the user "Hedgefundie":</p>
+<ul style="list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem;">
+<li><strong>Thread 1 (February 2019):</strong> Introduced the 40/60 <span class="ticker">UPRO</span>/<span class="ticker">TMF</span> strategy, the risk parity theoretical basis, and the 1987–2018 backtest</li>
+<li><strong>Thread 2 (August 2019):</strong> Revised the allocation to 55/45, continued the live tracking</li>
+</ul>
+<p>Backtesting was conducted using Portfolio Visualizer (portfoliovisualizer.com) with the simulated pre-2009 dataset contributed by forum member EfficientInvestor.</p>
+<p>PIMCO StocksPLUS Long Duration (<span class="ticker">PSLDX</span>) is a related analogue that has operated since September 2007 with a similar risk parity structure using futures and active bond management.</p>
+<p>The hfea.neocities.org community site documents live performance tracking, variants, and community discussion beyond the original threads.</p>
+</section>
+</div>
+<div class="src-footer site-dup">
+<p>Built by <a href="https://azqato.github.io">Azqato</a>.</p>
+</div>
+
+
+
+<div class="src-footer src-footer--notes site-dup"><p class="sidebar-disclaimer">Educational use only. Not financial advice.</p></div></div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../../strategies/leveraged/holy-grail.html"><small>Previous</small><span>Holy Grail</span></a><a class="pp-pager-link pp-pager-link--next" href="../../resources/index.html"><small>Next</small><span>Curated resources</span></a></nav>
+</main>
+<aside class="pp-toc" aria-labelledby="pp-toc-title">
+  <p class="pp-toc-title" id="pp-toc-title">On this page</p>
+  <ul class="pp-toc-list" id="pp-toc-list"></ul>
+</aside>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../../resources/index.html">Curated resources</a> · <a href="../../faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../../assets/js/site.js"></script>
+
+</body>
+</html>

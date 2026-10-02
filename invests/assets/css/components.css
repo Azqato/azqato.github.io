@@ -1,0 +1,416 @@
+/* Motion (DESIGN.md section 11): purposeful entrance transitions, driven
+   by assets/js/motion-utils.js. Reduced motion is handled entirely by
+   theme.css zeroing --transition-slow, not by a separate media query
+   here, so this stays correct automatically. */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.fade-in-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sidebar (DESIGN.md section 4.1) */
+
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border-default);
+  height: 100vh;
+  overflow-y: auto;
+  min-height: 0;
+  padding: var(--space-6) var(--space-4);
+}
+
+.sidebar-title {
+  display: block;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.sidebar-title:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.sidebar-group {
+  margin-bottom: var(--space-2);
+}
+
+.sidebar-group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-2) var(--space-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.sidebar-group-toggle:hover {
+  background: var(--color-surface-inset);
+  color: var(--color-text-primary);
+}
+
+.sidebar-group-toggle svg {
+  transition: transform var(--transition-base);
+  flex-shrink: 0;
+}
+
+.sidebar-group.is-expanded .sidebar-group-toggle svg {
+  transform: rotate(90deg);
+}
+
+.sidebar-group-list {
+  list-style: none;
+  margin: var(--space-1) 0 var(--space-3) 0;
+  padding: 0;
+  display: none;
+}
+
+.sidebar-group.is-expanded .sidebar-group-list {
+  display: block;
+}
+
+.sidebar-link {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  margin: 0 0 var(--space-1) 0;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.sidebar-link:hover {
+  background: var(--color-surface-inset);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.sidebar-link.is-active {
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Sidebar toggle button, mobile and tablet only (DESIGN.md section 6.1) */
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-primary);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 50;
+}
+
+/* Content area (DESIGN.md section 4.2) */
+
+/* min-width: 0 because .content is a flex item in the wiki layout, and a flex
+   item's automatic minimum size is its content-based minimum, not zero. Without
+   this it refuses to shrink below the widest thing inside it: a demo stage or a
+   table then pushes the whole column past the viewport instead of scrolling
+   inside its own box, which is what .demo-stage and .table-wrap already ask for.
+   See DESIGN.md section 8 and the lesson in 02-layout-and-structure. */
+.content {
+  min-width: 0;
+  max-width: var(--content-max-width);
+  padding: var(--space-10) var(--space-6);
+}
+
+.content > *:last-child {
+  margin-bottom: 0;
+}
+
+.eyebrow {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+/* Code block (DESIGN.md section 4.3) */
+
+pre {
+  background: var(--color-surface-inset);
+  border: 1px solid var(--color-border-muted);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  overflow-x: auto;
+  margin: 0 0 var(--space-6) 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+p code,
+li code {
+  background: var(--color-surface-inset);
+  border: 1px solid var(--color-border-muted);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.4em;
+}
+
+/* Callout (DESIGN.md section 4.4) */
+
+.callout {
+  display: flex;
+  gap: var(--space-2);
+  background: var(--color-surface);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: var(--space-4);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.callout svg {
+  flex-shrink: 0;
+  margin-top: 0.15em;
+}
+
+.callout--warning {
+  border-left-color: var(--color-warning);
+}
+
+.callout--caution {
+  border-left-color: var(--color-danger);
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+/* Button (DESIGN.md section 4.8) */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 40px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.button--primary {
+  background: var(--color-accent);
+  color: #0d1117;
+}
+
+.button--primary:hover {
+  background: var(--color-accent-emphasis);
+  text-decoration: none;
+}
+
+.button--secondary {
+  background: transparent;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.button--secondary:hover {
+  background: var(--color-accent-muted);
+  text-decoration: none;
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.button--ghost:hover {
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+/* Demo container (DESIGN.md section 4.5) */
+
+.demo-container {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.demo-label {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-4);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.demo-stage {
+  background: var(--color-surface-inset);
+  border: 1px solid var(--color-border-muted);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  overflow-x: auto;
+}
+
+.demo-readout {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.demo-readout strong {
+  color: var(--color-text-primary);
+}
+
+/* Interactive control (DESIGN.md section 4.6) */
+
+.control-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+input[type="range"] {
+  accent-color: var(--color-accent);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="color"] {
+  background: var(--color-surface-inset);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+}
+
+input[type="color"] {
+  padding: var(--space-1);
+  width: 48px;
+  height: 36px;
+}
+
+.tab-row {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  background: var(--color-surface-inset);
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tab-button.is-active {
+  background: var(--color-accent-muted);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Card (DESIGN.md section 4.7) */
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Table (DESIGN.md section 4.9) */
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 0 0 var(--space-6) 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+th,
+td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+th {
+  background: var(--color-surface);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+td {
+  color: var(--color-text-secondary);
+}
+
+.difficulty {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+}

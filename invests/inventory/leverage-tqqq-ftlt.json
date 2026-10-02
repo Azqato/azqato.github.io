@@ -1,0 +1,1121 @@
+{
+ "source": "leverage/tqqq-ftlt.html",
+ "head": [
+  "title: TQQQ FTLT: Leveraged Strategies",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: TQQQ For The Long Term, a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ, and TLT. Created by u/derecknielsen (2022).",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>",
+  "link stylesheet: css/style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "body",
+   "text": "Skip to content",
+   "href": "#main-content",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "svg icon",
+   "region": "nav",
+   "text": "decorative"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 25,
+   "kind": "text",
+   "region": "aside",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 38,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 39,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 40,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 41,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 42,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 43,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 45,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 46,
+   "kind": "text",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 47,
+   "kind": "link",
+   "region": "nav",
+   "text": "Overview",
+   "href": "#overview",
+   "flags": []
+  },
+  {
+   "n": 48,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Overview"
+  },
+  {
+   "n": 49,
+   "kind": "link",
+   "region": "nav",
+   "text": "Rules and Logic",
+   "href": "#rules",
+   "flags": []
+  },
+  {
+   "n": 50,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 51,
+   "kind": "link",
+   "region": "nav",
+   "text": "Performance Notes",
+   "href": "#performance",
+   "flags": []
+  },
+  {
+   "n": 52,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 53,
+   "kind": "link",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "href": "#risks",
+   "flags": []
+  },
+  {
+   "n": 54,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 55,
+   "kind": "link",
+   "region": "nav",
+   "text": "Resources",
+   "href": "#resources",
+   "flags": []
+  },
+  {
+   "n": 56,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Resources"
+  },
+  {
+   "n": 57,
+   "kind": "paragraph",
+   "region": "aside",
+   "text": "Educational use only. Not financial advice.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 58,
+   "kind": "text",
+   "region": "main",
+   "text": "Daily Algorithm"
+  },
+  {
+   "n": 59,
+   "kind": "h1",
+   "region": "main",
+   "text": "TQQQ For The Long Term"
+  },
+  {
+   "n": 60,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A daily rules-based algorithm using SPY's 200-day SMA as a macro regime detector and 10-day RSI for mean reversion signals. Rotates among TQQQ, UVXY, TECL, UPRO, SQQQ, and TLT. Created by u/derecknielsen and published October 2022."
+  },
+  {
+   "n": 61,
+   "kind": "text",
+   "region": "main",
+   "text": "Original strategy on Composer:"
+  },
+  {
+   "n": 62,
+   "kind": "link",
+   "region": "main",
+   "text": "composeratlas.com/strategies?slug=tqqq-long-term",
+   "href": "https://composeratlas.com/strategies?slug=tqqq-long-term",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 63,
+   "kind": "h2",
+   "region": "main",
+   "text": "Overview"
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "TQQQ For The Long Term (TQQQ FTLT) is a rules-based algorithmic strategy created by Reddit user u/derecknielsen and published in October 2022. Despite its name suggesting a passive buy-and-hold approach, the strategy is an active, daily-rebalancing algorithm that uses a cascading set of conditions to rotate between leveraged long positions, a volatility ETF, leveraged short positions, and long-duration Treasuries depending on the prevailing market regime."
+  },
+  {
+   "n": 65,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The strategy was designed to address a problem the author encountered firsthand: discovering TQQQ in October 2021, just before a 70%+ drawdown over the following 12 months. The stated goal was to build something that could profit in both bull and bear markets, rather than accepting the full drawdown of simply holding TQQQ through a prolonged decline."
+  },
+  {
+   "n": 66,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The strategy operates on two primary ideas. First, momentum switching via the 200-day SMA: the 200-day simple moving average of SPY is used as a macro regime detector. When SPY is above its 200D SMA, the market is in a low-volatility trending environment and the strategy takes leveraged long positions. When SPY is below its 200D SMA, the strategy switches to bearish or defensive instruments. Second, mean reversion via 10-day RSI: within each regime, the 10-day RSI identifies when individual ETFs are overbought or oversold and takes the opposite-direction position, anticipating a reversion toward the mean."
+  },
+  {
+   "n": 67,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This design is directly inspired by Michael Gayed's and Charles Bilello's 2015 academic paper, Leverage for the Long Run (SSRN #2741701), which demonstrated that applying leverage only when the S&P 500 is above its 200-day moving average (and exiting to cash or Treasuries below it) produced a superior Sharpe ratio, reduced maximum drawdown, and higher terminal wealth than constant-leverage buy-and-hold over an 87-year backtest."
+  },
+  {
+   "n": 68,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "u/derecknielsen published the strategy on Composer.trade, a platform for building and running algorithmic trading symphonies. The post attracted extensive community engagement: at least 10 community variants were created and over 900 comments generated in the Composer Discord alone. By October 2022, approximately four months after the author began running the strategy live, it was up approximately 150% cumulative from the June 2022 start date, a period during which TQQQ itself was experiencing a major bear market bottom."
+  },
+  {
+   "n": 69,
+   "kind": "h2",
+   "region": "main",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 70,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The strategy is a daily-rebalancing decision tree. All conditions are checked every trading day. The portfolio holds one instrument at a time (100% allocation, minus a 5% cash buffer maintained by the Composer symphony wrapper)."
+  },
+  {
+   "n": 71,
+   "kind": "h3",
+   "region": "main",
+   "text": "Instruments"
+  },
+  {
+   "n": 72,
+   "kind": "caption",
+   "region": "main",
+   "text": "TQQQ FTLT instruments"
+  },
+  {
+   "n": 73,
+   "kind": "table row",
+   "region": "main",
+   "text": "Instrument | Ticker | Role in strategy"
+  },
+  {
+   "n": 74,
+   "kind": "table row",
+   "region": "main",
+   "text": "ProShares UltraPro QQQ | TQQQ | Primary long position (3x Nasdaq-100)"
+  },
+  {
+   "n": 75,
+   "kind": "table row",
+   "region": "main",
+   "text": "ProShares Ultra VIX Short-Term Futures | UVXY | Overbought hedge (1.5x short VIX futures)"
+  },
+  {
+   "n": 76,
+   "kind": "table row",
+   "region": "main",
+   "text": "Direxion Daily Technology Bull 3x | TECL | Mean reversion long in bear regime (3x tech)"
+  },
+  {
+   "n": 77,
+   "kind": "table row",
+   "region": "main",
+   "text": "ProShares UltraPro S&P 500 | UPRO | Mean reversion long in bear regime (3x S&P 500)"
+  },
+  {
+   "n": 78,
+   "kind": "table row",
+   "region": "main",
+   "text": "ProShares UltraPro Short QQQ | SQQQ | Bear regime short (−3x Nasdaq-100)"
+  },
+  {
+   "n": 79,
+   "kind": "table row",
+   "region": "main",
+   "text": "iShares 20+ Year Treasury Bond ETF | TLT | Defensive alternative to SQQQ in bear regime"
+  },
+  {
+   "n": 80,
+   "kind": "table",
+   "region": "main",
+   "text": "7 rows; first row: Instrument | Ticker | Role in strategy"
+  },
+  {
+   "n": 81,
+   "kind": "h3",
+   "region": "main",
+   "text": "Signal inputs"
+  },
+  {
+   "n": 82,
+   "kind": "caption",
+   "region": "main",
+   "text": "TQQQ FTLT signal inputs"
+  },
+  {
+   "n": 83,
+   "kind": "table row",
+   "region": "main",
+   "text": "Signal | Purpose"
+  },
+  {
+   "n": 84,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY vs. SPY 200D SMA | Primary macro regime detector: bull or bear"
+  },
+  {
+   "n": 85,
+   "kind": "table row",
+   "region": "main",
+   "text": "TQQQ vs. TQQQ 20D SMA | Short-term bear trend detector within the bear regime"
+  },
+  {
+   "n": 86,
+   "kind": "table row",
+   "region": "main",
+   "text": "TQQQ 10D RSI | Overbought (>79) and oversold (<31) detection"
+  },
+  {
+   "n": 87,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPXL 10D RSI | Secondary overbought detection (>80)"
+  },
+  {
+   "n": 88,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY 10D RSI | S&P 500 oversold detection (<30)"
+  },
+  {
+   "n": 89,
+   "kind": "table row",
+   "region": "main",
+   "text": "SQQQ 10D RSI | Inverse ETF oversold detection (<31)"
+  },
+  {
+   "n": 90,
+   "kind": "table",
+   "region": "main",
+   "text": "7 rows; first row: Signal | Purpose"
+  },
+  {
+   "n": 91,
+   "kind": "h3",
+   "region": "main",
+   "text": "Decision tree"
+  },
+  {
+   "n": 92,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Step 1. Macro regime: SPY vs. its 200D SMA"
+  },
+  {
+   "n": 93,
+   "kind": "caption",
+   "region": "main",
+   "text": "Macro regime determination"
+  },
+  {
+   "n": 94,
+   "kind": "table row",
+   "region": "main",
+   "text": "Condition | Regime"
+  },
+  {
+   "n": 95,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY current price > SPY 200D SMA | BULL REGIME"
+  },
+  {
+   "n": 96,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY current price ≤ SPY 200D SMA | BEAR REGIME"
+  },
+  {
+   "n": 97,
+   "kind": "table",
+   "region": "main",
+   "text": "3 rows; first row: Condition | Regime"
+  },
+  {
+   "n": 98,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Bull Regime"
+  },
+  {
+   "n": 99,
+   "kind": "caption",
+   "region": "main",
+   "text": "Bull regime decision tree"
+  },
+  {
+   "n": 100,
+   "kind": "table row",
+   "region": "main",
+   "text": "Condition | Action | Rationale"
+  },
+  {
+   "n": 101,
+   "kind": "table row",
+   "region": "main",
+   "text": "TQQQ 10D RSI > 79 | Buy UVXY | TQQQ overbought; volatility spike expected"
+  },
+  {
+   "n": 102,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPXL 10D RSI > 80 | Buy UVXY | S&P 500 3x also overbought; confirms overextension"
+  },
+  {
+   "n": 103,
+   "kind": "table row",
+   "region": "main",
+   "text": "Neither condition met | Buy TQQQ | Default bull-market position"
+  },
+  {
+   "n": 104,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Condition | Action | Rationale"
+  },
+  {
+   "n": 105,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Bear Regime"
+  },
+  {
+   "n": 106,
+   "kind": "caption",
+   "region": "main",
+   "text": "Bear regime decision tree"
+  },
+  {
+   "n": 107,
+   "kind": "table row",
+   "region": "main",
+   "text": "Condition | Action | Rationale"
+  },
+  {
+   "n": 108,
+   "kind": "table row",
+   "region": "main",
+   "text": "TQQQ 10D RSI < 31 | Buy TECL | TQQQ oversold in bear; mean reversion long on leveraged tech"
+  },
+  {
+   "n": 109,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY 10D RSI < 30 | Buy UPRO | S&P oversold; mean reversion long on 3x S&P 500"
+  },
+  {
+   "n": 110,
+   "kind": "table row",
+   "region": "main",
+   "text": "TQQQ < its 20D SMA | Select top of [SQQQ, TLT] by 10D RSI | Downtrend confirmed; hold best-performing defensive/short"
+  },
+  {
+   "n": 111,
+   "kind": "table row",
+   "region": "main",
+   "text": "TQQQ ≥ 20D SMA AND SQQQ RSI < 31 | Buy SQQQ | Inverse ETF pulled back; re-enter short at better price"
+  },
+  {
+   "n": 112,
+   "kind": "table row",
+   "region": "main",
+   "text": "None of the above | Buy TQQQ | Bear macro but TQQQ in short-term recovery"
+  },
+  {
+   "n": 113,
+   "kind": "table",
+   "region": "main",
+   "text": "6 rows; first row: Condition | Action | Rationale"
+  },
+  {
+   "n": 114,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "SQQQ vs. TLT selection: When TQQQ is below its 20D SMA in a bear regime, the strategy selects whichever of SQQQ or TLT has the higher 10-day RSI. This prevents holding SQQQ after a prolonged short-side rally when TLT may offer a better risk-adjusted continuation position.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 115,
+   "kind": "text",
+   "region": "main",
+   "text": "Note on UVXY:"
+  },
+  {
+   "n": 116,
+   "kind": "text",
+   "region": "main",
+   "text": "The author flags"
+  },
+  {
+   "n": 117,
+   "kind": "text",
+   "region": "main",
+   "text": "UVXY"
+  },
+  {
+   "n": 118,
+   "kind": "text",
+   "region": "main",
+   "text": "as extremely risky. It tracks 1.5x short-term VIX futures and can decline 20–30% in a single day when volatility drops. The overbought-into-UVXY trade is described as \"a somewhat rare event but when it happens, the profits can be very generous.\""
+  },
+  {
+   "n": 119,
+   "kind": "h2",
+   "region": "main",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 120,
+   "kind": "h3",
+   "region": "main",
+   "text": "10-year backtest (October 2012 to October 2022)"
+  },
+  {
+   "n": 121,
+   "kind": "caption",
+   "region": "main",
+   "text": "TQQQ FTLT 10-year backtest comparison"
+  },
+  {
+   "n": 122,
+   "kind": "table row",
+   "region": "main",
+   "text": "Metric | TQQQ FTLT | TQQQ buy-and-hold"
+  },
+  {
+   "n": 123,
+   "kind": "table row",
+   "region": "main",
+   "text": "Cumulative return | +298% | +35%"
+  },
+  {
+   "n": 124,
+   "kind": "table row",
+   "region": "main",
+   "text": "Relative performance | 8.5× faster growth | baseline"
+  },
+  {
+   "n": 125,
+   "kind": "table row",
+   "region": "main",
+   "text": "Approximate max drawdown | ≈half of TQQQ | ≈−80%+ (2022)"
+  },
+  {
+   "n": 126,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Metric | TQQQ FTLT | TQQQ buy-and-hold"
+  },
+  {
+   "n": 127,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The backtest window ended at October 2022, near the trough of the 2022 TQQQ drawdown of approximately 77%. TQQQ's 10-year buy-and-hold result of +35% reflects ending at the 2022 bear market low, a period that would show a dramatically higher return at a different end date."
+  },
+  {
+   "n": 128,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Extended community backtest (1970s to present): A community member stripped the strategy to bare essentials to enable backtesting to the 1970s. Results showed the strategy can perform well in periods of stagflation, high inflation, and Federal Reserve quantitative tightening."
+  },
+  {
+   "n": 129,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Live tracking from June to October 2022: The author reports approximately +150% cumulative return over the four-month period following the strategy's June 2022 launch, during a time when TQQQ was near its bear market bottom."
+  },
+  {
+   "n": 130,
+   "kind": "h3",
+   "region": "main",
+   "text": "Academic basis: Leverage for the Long Run (Gayed & Bilello, 2015)"
+  },
+  {
+   "n": 131,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The paper backtested the Leverage Rotation Strategy (LRS) from October 1928 to October 2015 (87 years):"
+  },
+  {
+   "n": 132,
+   "kind": "caption",
+   "region": "main",
+   "text": "LRS academic backtest summary"
+  },
+  {
+   "n": 133,
+   "kind": "table row",
+   "region": "main",
+   "text": "Strategy | Sharpe ratio | Max drawdown"
+  },
+  {
+   "n": 134,
+   "kind": "table row",
+   "region": "main",
+   "text": "Buy-and-hold S&P 500 | 0.30 | −86%"
+  },
+  {
+   "n": 135,
+   "kind": "table row",
+   "region": "main",
+   "text": "Unleveraged 200D SMA timing | 0.60 | −50%"
+  },
+  {
+   "n": 136,
+   "kind": "table row",
+   "region": "main",
+   "text": "LRS with 2x leverage | 0.51 | −78%"
+  },
+  {
+   "n": 137,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Strategy | Sharpe ratio | Max drawdown"
+  },
+  {
+   "n": 138,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Key findings: above the 200D SMA: +14.1% annualized return, 14.7% volatility. Below: −2.3% annualized return, 26.5% volatility. The LRS outperformed buy-and-hold in 80% of rolling three-year periods. Approximately 5 regime switches per year on average."
+  },
+  {
+   "n": 139,
+   "kind": "h2",
+   "region": "main",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 140,
+   "kind": "text",
+   "region": "main",
+   "text": "Leveraged ETF Risk Notice"
+  },
+  {
+   "n": 141,
+   "kind": "text",
+   "region": "main",
+   "text": "This strategy rotates among five leveraged instruments:"
+  },
+  {
+   "n": 142,
+   "kind": "text",
+   "region": "main",
+   "text": "TQQQ"
+  },
+  {
+   "n": 143,
+   "kind": "text",
+   "region": "main",
+   "text": "(3x Nasdaq-100),"
+  },
+  {
+   "n": 144,
+   "kind": "text",
+   "region": "main",
+   "text": "UVXY"
+  },
+  {
+   "n": 145,
+   "kind": "text",
+   "region": "main",
+   "text": "(1.5x VIX futures),"
+  },
+  {
+   "n": 146,
+   "kind": "text",
+   "region": "main",
+   "text": "TECL"
+  },
+  {
+   "n": 147,
+   "kind": "text",
+   "region": "main",
+   "text": "(3x technology),"
+  },
+  {
+   "n": 148,
+   "kind": "text",
+   "region": "main",
+   "text": "UPRO"
+  },
+  {
+   "n": 149,
+   "kind": "text",
+   "region": "main",
+   "text": "(3x S&P 500), and"
+  },
+  {
+   "n": 150,
+   "kind": "text",
+   "region": "main",
+   "text": "SQQQ"
+  },
+  {
+   "n": 151,
+   "kind": "text",
+   "region": "main",
+   "text": "(−3x Nasdaq-100), plus"
+  },
+  {
+   "n": 152,
+   "kind": "text",
+   "region": "main",
+   "text": "TLT"
+  },
+  {
+   "n": 153,
+   "kind": "text",
+   "region": "main",
+   "text": ". All leveraged instruments are subject to daily reset and volatility decay. This strategy is not a buy-and-hold position; it is a daily-rebalancing algorithm that may change holdings any trading day conditions change."
+  },
+  {
+   "n": 154,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Daily rebalancing creates compounding transaction costs and tax events. Unlike the quarterly-rebalancing Kelly Signal plans, TQQQ FTLT checks conditions every trading day. In a volatile, choppy market near the 200D SMA, this can produce daily whipsaws with high transaction frequency. In a taxable account, each rotation generates a capital gains event."
+  },
+  {
+   "n": 155,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Choppy markets near the 200D SMA cause repeated false signals. When SPY oscillates above and below its 200D SMA without establishing a clear trend, the strategy repeatedly switches between the bull regime (TQQQ) and the bear regime (SQQQ/TLT). Each switch incurs costs, and the whipsaw between long and short positions can produce losses in both directions.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 156,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "UVXY is one of the most volatile instruments available. UVXY tracks 1.5x short-term VIX futures, which have a persistent structural headwind due to futures roll cost. UVXY loses value in calm markets and during volatility mean reversion. The author explicitly warns it \"can easily decline 20–30% in one day.\"",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 157,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "All instruments carry leveraged ETF daily reset risk. TQQQ, TECL, UPRO, and SQQQ all use daily reset leverage. In volatile, sideways markets, each instrument individually decays through volatility drag.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 158,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 10-year backtest window was favorable. The October 2012 to October 2022 window captures a 10-year period of extraordinary Nasdaq-100 performance. A backtest that ends at any bear market low will show strong relative performance for a protection-oriented strategy."
+  },
+  {
+   "n": 159,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Bear regime instruments are not hedges. SQQQ (−3x Nasdaq-100) is a directional short-selling instrument. If the bear regime signal fires but the market immediately reverses upward, SQQQ produces large leveraged losses.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 160,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Community evolutions vary significantly. At least 10 variations of the strategy were circulating in the Composer Discord within weeks of publication. Variations may differ in RSI thresholds, instrument substitutions, leverage levels, and regime definitions. Performance of any specific variant may differ materially from the original."
+  },
+  {
+   "n": 161,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Backtest survivorship and regime dependency. The academic foundation (Gayed & Bilello) used October 1928 as its start date, beginning just before the Great Depression, a period where the 200D SMA's protective effect was extreme. CXO Advisory notes this start date biases the results toward the SMA's best historical performance."
+  },
+  {
+   "n": 162,
+   "kind": "h2",
+   "region": "main",
+   "text": "Resources"
+  },
+  {
+   "n": 163,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Original strategy post: u/derecknielsen (Reddit, October 2022): The complete explanation of the strategy design, decision tree, performance claims, and community evolution history."
+  },
+  {
+   "n": 164,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Composer.trade symphony: ID ovM8FTJXYZX1uFmh0vRI: The canonical published implementation. The symphony can be cloned and run on Composer.trade. The JSON contains the full decision tree."
+  },
+  {
+   "n": 165,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "\"Leverage for the Long Run\": Michael Gayed & Charles Bilello (2015, SSRN #2741701): The academic paper providing the theoretical foundation for SMA-gated leverage. Documents the Leverage Rotation Strategy's 87-year backtest."
+  },
+  {
+   "n": 166,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "CXO Advisory: independent review of the Gayed/Bilello paper with corrected performance metrics and critical notes on backtest friction assumptions."
+  },
+  {
+   "n": 167,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The7Circles: extended discussion of the LRS regime logic, drawdown profiles, and volatility regime theory."
+  },
+  {
+   "n": 168,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io",
+   "flags": []
+  },
+  {
+   "n": 169,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato."
+  },
+  {
+   "n": 170,
+   "kind": "script",
+   "region": "body",
+   "text": "js/main.js"
+  }
+ ],
+ "linked scripts": {
+  "js/main.js": {}
+ }
+}

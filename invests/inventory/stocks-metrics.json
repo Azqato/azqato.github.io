@@ -1,0 +1,1990 @@
+{
+ "source": "stocks/metrics.html",
+ "head": [
+  "title: Stock Evaluation Metrics Explained",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: Plain-English guide to 12 stock evaluation metrics: revenue growth, EPS growth, P/E, PEG, cash vs debt, RSI, and margins, with how to read each one before you buy.",
+  "link canonical: https://azqato.github.io/stocks/metrics.html",
+  "google-site-verification: p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4",
+  "og:type: website",
+  "og:url: https://azqato.github.io/stocks/metrics.html",
+  "og:title: Stock Evaluation Metrics Explained",
+  "og:description: Twelve metrics. Each one earns its place. If you have ever opened a stock's summary page and wondered what all those numbers actually mean, and which ones deserve your attention, this page is the reference. Each entry explains in plain English what the number measures, why it matters for a long-term decision, and how to read it before you buy. All examples are illustrative and use hypothetical figures to demonstrate how each metric works in practice.",
+  "og:image: https://azqato.github.io/stocks/og-image.png",
+  "twitter:card: summary_large_image",
+  "twitter:title: Stock Evaluation Metrics Explained",
+  "twitter:description: Twelve metrics. Each one earns its place. If you have ever opened a stock's summary page and wondered what all those numbers actually mean, and which ones deserve your attention, this page is the reference. Each entry explains in plain English what the number measures, why it matters for a long-term decision, and how to read it before you buy. All examples are illustrative and use hypothetical figures to demonstrate how each metric works in practice.",
+  "twitter:image: https://azqato.github.io/stocks/og-image.png",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>",
+  "link stylesheet: style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "text",
+   "region": "aside",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 3,
+   "kind": "control",
+   "region": "aside",
+   "text": "type=checkbox id=nav-toggle",
+   "tag": "input"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Philosophy",
+   "href": "philosophy.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Philosophy"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "Metrics",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Metrics"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "Screener",
+   "href": "screener.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Screener"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "Market Overview",
+   "href": "market.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Market Overview"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Finviz",
+   "href": "finviz.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Finviz"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "SeekingAlpha",
+   "href": "seekingalpha.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "SeekingAlpha"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Indices",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Indices"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "FAQ",
+   "href": "faq.html",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "FAQ"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Leveraged Strategies",
+   "href": "https://azqato.github.io/leverage/",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 25,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "Revenue Growth TTM",
+   "href": "#metric-rev-ttm",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Revenue Growth TTM"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "Revenue Growth FWD",
+   "href": "#metric-rev-fwd",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Revenue Growth FWD"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "EPS Growth TTM",
+   "href": "#metric-eps-ttm",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "EPS Growth TTM"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "EPS Growth FWD",
+   "href": "#metric-eps-fwd",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "EPS Growth FWD"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "P/E FWD",
+   "href": "#metric-pe-fwd",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "P/E FWD"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "PEG FWD",
+   "href": "#metric-peg-fwd",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "PEG FWD"
+  },
+  {
+   "n": 38,
+   "kind": "link",
+   "region": "nav",
+   "text": "Total Cash",
+   "href": "#metric-cash",
+   "flags": []
+  },
+  {
+   "n": 39,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Total Cash"
+  },
+  {
+   "n": 40,
+   "kind": "link",
+   "region": "nav",
+   "text": "Total Debt",
+   "href": "#metric-debt",
+   "flags": []
+  },
+  {
+   "n": 41,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Total Debt"
+  },
+  {
+   "n": 42,
+   "kind": "link",
+   "region": "nav",
+   "text": "RSI",
+   "href": "#metric-rsi",
+   "flags": []
+  },
+  {
+   "n": 43,
+   "kind": "list item",
+   "region": "nav",
+   "text": "RSI"
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "nav",
+   "text": "52-Week Range",
+   "href": "#metric-52w",
+   "flags": []
+  },
+  {
+   "n": 45,
+   "kind": "list item",
+   "region": "nav",
+   "text": "52-Week Range"
+  },
+  {
+   "n": 46,
+   "kind": "link",
+   "region": "nav",
+   "text": "Gross Margin",
+   "href": "#metric-gross-margin",
+   "flags": []
+  },
+  {
+   "n": 47,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Gross Margin"
+  },
+  {
+   "n": 48,
+   "kind": "link",
+   "region": "nav",
+   "text": "Net Margin",
+   "href": "#metric-net-margin",
+   "flags": []
+  },
+  {
+   "n": 49,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Net Margin"
+  },
+  {
+   "n": 50,
+   "kind": "list item",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 51,
+   "kind": "text",
+   "region": "aside",
+   "text": "Educational use only."
+  },
+  {
+   "n": 52,
+   "kind": "text",
+   "region": "aside",
+   "text": "Not financial advice."
+  },
+  {
+   "n": 53,
+   "kind": "h1",
+   "region": "main",
+   "text": "Stock Evaluation Metrics Explained"
+  },
+  {
+   "n": 54,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Twelve metrics. Each one earns its place. If you have ever opened a stock's summary page and wondered what all those numbers actually mean, and which ones deserve your attention, this page is the reference. Each entry explains in plain English what the number measures, why it matters for a long-term decision, and how to read it before you buy. All examples are illustrative and use hypothetical figures to demonstrate how each metric works in practice."
+  },
+  {
+   "n": 55,
+   "kind": "text",
+   "region": "main",
+   "text": "📊 The 12 Signals"
+  },
+  {
+   "n": 56,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How the twelve fit together. These metrics work as five small teams, not twelve separate tests. Revenue and EPS growth (TTM and FWD) tell you whether the business is actually growing and whether that growth is speeding up or slowing down. P/E FWD and PEG FWD tell you whether the price you would pay is justified by that growth. Total Cash and Total Debt tell you whether the company can survive trouble and even go on offense during it. RSI and the 52-Week Range are technical timing signals, and in this methodology technicals are for timing index and ETF purchases, not for judging individual companies; a stock is bought on its fundamentals. Gross and Net Margin reveal whether the business operates from a position of power. No single metric decides anything; the picture they form together does."
+  },
+  {
+   "n": 57,
+   "kind": "h2",
+   "region": "main",
+   "text": "Revenue Growth TTM"
+  },
+  {
+   "n": 58,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Trailing Twelve Months Revenue Growth"
+  },
+  {
+   "n": 59,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 60,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Revenue is all the money a company brings in from selling its products or services, before any costs are subtracted. It is often called the top line because it sits on the first line of the income statement. TTM stands for trailing twelve months: the most recently completed twelve-month period. Revenue Growth TTM compares that period's revenue to the same period one year earlier. It is backward-looking, reported data, not an estimate, and it answers one question: how fast did this company actually grow?"
+  },
+  {
+   "n": 61,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 62,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "TTM revenue growth is ground truth. Forecasts are opinions about the future; TTM is what already happened, taken from the company's own reported results. When TTM growth is strong and speeding up versus the prior year, real customers are spending real money at an increasing rate, which is one of the clearest signals that a business has momentum. When TTM is weak but forward estimates are high, be careful: you are being asked to pay today for execution the company has not yet demonstrated. The gap between what happened and what is promised is a risk you take on as the buyer.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 63,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The most powerful setup is when TTM growth is both high in absolute terms and increasing versus prior periods. That acceleration pattern signals that demand is expanding faster than expected and the business is building rather than plateauing."
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The opposite pattern is just as important to recognize: growth that slows quarter after quarter. A business reporting quarterly revenue growth of +20%, +15%, +10%, +5% is still growing, but each step down says demand is cooling and the business is approaching a plateau. This matters to you as a holder because the market pays a premium price for confident, durable growth. When that confidence weakens, the price investors are willing to pay for each dollar of the company's earnings shrinks, and the stock can fall even while revenue is still rising. Consistent deceleration across four or more quarters is one of the clearest warning signals available."
+  },
+  {
+   "n": 65,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 66,
+   "kind": "list item",
+   "region": "main",
+   "text": "Strong TTM above 15% for a growth company, especially if the growth rate is increasing year-over-year"
+  },
+  {
+   "n": 67,
+   "kind": "list item",
+   "region": "main",
+   "text": "Watch TTM below 10% for a company with high forward expectations (the gap between reality and estimate is a risk)",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 68,
+   "kind": "list item",
+   "region": "main",
+   "text": "Red flag Declining TTM revenue growth across consecutive quarters signals momentum loss",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 69,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Revenue Growth Trajectories"
+  },
+  {
+   "n": 70,
+   "kind": "table row",
+   "region": "main",
+   "text": "Scenario | TTM Growth | FWD Estimate | Signal"
+  },
+  {
+   "n": 71,
+   "kind": "table row",
+   "region": "main",
+   "text": "Accelerating | 18% | 25% | Growth is expanding"
+  },
+  {
+   "n": 72,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stable | 20% | 20% | Consistent, not accelerating"
+  },
+  {
+   "n": 73,
+   "kind": "table row",
+   "region": "main",
+   "text": "Decelerating | 22% | 11% | Growth may be peaking"
+  },
+  {
+   "n": 74,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Scenario | TTM Growth | FWD Estimate | Signal"
+  },
+  {
+   "n": 75,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: TTM is backward-looking by definition. A company can have a slow TTM figure but an accelerating forward trajectory, perhaps due to a product launch, market expansion, or easy year-over-year comparisons ahead. Always read TTM alongside the FWD estimate to understand whether growth is speeding up or slowing down."
+  },
+  {
+   "n": 76,
+   "kind": "h2",
+   "region": "main",
+   "text": "Revenue Growth FWD"
+  },
+  {
+   "n": 77,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Forward Revenue Growth Estimate"
+  },
+  {
+   "n": 78,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 79,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The consensus estimate for revenue growth in the company's next fiscal year. Professional analysts who cover a stock each publish their own forecast; the consensus is the average of all of them. FWD (forward) means this is a projection about the future, not reported data. It moves continuously as analysts revise their models, and it tells you what the market currently expects the company to deliver."
+  },
+  {
+   "n": 80,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 81,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Forward estimates are the market's collective bet on the future. The relationship between FWD and TTM tells an important story about the direction of growth. A company where FWD exceeds TTM is in an acceleration phase; growth is expected to speed up. A company where FWD is below TTM is decelerating; the business is maturing or facing headwinds."
+  },
+  {
+   "n": 82,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The ideal setup for a high-conviction buy is strong FWD combined with accelerating TTM: both real and expected growth are moving in the right direction. When the PEG also remains below 1.0 in that context (PEG is covered in full further down this page; in short, it checks whether the price you pay is justified by the growth you get), the position becomes a core holding candidate."
+  },
+  {
+   "n": 83,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 84,
+   "kind": "list item",
+   "region": "main",
+   "text": "FWD > TTM Growth is accelerating. The market expects continued expansion above the recent pace."
+  },
+  {
+   "n": 85,
+   "kind": "list item",
+   "region": "main",
+   "text": "Strong FWD + Strong TTM Both real and expected growth are solid. This is the high-conviction setup."
+  },
+  {
+   "n": 86,
+   "kind": "list item",
+   "region": "main",
+   "text": "Strong FWD + Weak TTM Execution risk. Estimates may be optimistic. Verify against management guidance.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 87,
+   "kind": "list item",
+   "region": "main",
+   "text": "FWD < TTM Deceleration. Business is likely maturing or facing market saturation."
+  },
+  {
+   "n": 88,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: FWD vs TTM Relationship"
+  },
+  {
+   "n": 89,
+   "kind": "table row",
+   "region": "main",
+   "text": "Profile | TTM | FWD | Interpretation"
+  },
+  {
+   "n": 90,
+   "kind": "table row",
+   "region": "main",
+   "text": "High conviction | 19% | 26% | Real growth meeting expectations and accelerating"
+  },
+  {
+   "n": 91,
+   "kind": "table row",
+   "region": "main",
+   "text": "Execution risk | 8% | 22% | Large gap between reality and estimate. Monitor closely."
+  },
+  {
+   "n": 92,
+   "kind": "table row",
+   "region": "main",
+   "text": "Maturing business | 24% | 14% | Decelerating; still growing but trajectory is weakening"
+  },
+  {
+   "n": 93,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Profile | TTM | FWD | Interpretation"
+  },
+  {
+   "n": 94,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: Analyst estimates miss. Always cross-check with management's own guidance. On high-quality compounders, the street is often too conservative; management frequently guides conservatively and beats estimates quarter after quarter. Treat consensus as a floor, not a ceiling, for companies with a track record of beating."
+  },
+  {
+   "n": 95,
+   "kind": "h2",
+   "region": "main",
+   "text": "EPS Growth TTM"
+  },
+  {
+   "n": 96,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Trailing Twelve Months Earnings Per Share Growth"
+  },
+  {
+   "n": 97,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 98,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "EPS stands for earnings per share: the company's total profit divided by the number of shares that exist. If a company earns $2B in a year and has 1 billion shares, its EPS is $2. (Diluted EPS, the standard version used here, also counts shares that could be created by stock options and similar instruments, making it the more honest denominator.) EPS Growth TTM is the percentage change in that per-share profit over the past twelve months versus the prior-year period. It measures profit growth, not revenue growth, and the two can tell different stories: a company growing revenue at 30% while its costs grow even faster will show strong TTM revenue but weak or negative EPS TTM. That divergence matters."
+  },
+  {
+   "n": 99,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 100,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Revenue tells you the business is growing. EPS tells you the business is compounding. The goal is not just a company that sells more; it is a company that earns more per share over time. When EPS TTM is strong and growing alongside revenue, the company is becoming more efficient as it scales, not just bigger. That efficiency has a name, operating leverage: costs grow slower than sales, so each new dollar of revenue produces more profit than the last."
+  },
+  {
+   "n": 101,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Comparing EPS TTM to P/E FWD (the price you pay for each dollar of next year's expected earnings, explained in its own section below) is also a useful check. If per-share earnings keep growing but the P/E stays low, the market has not yet given the company credit for the quality of those earnings. That is the kind of gap this methodology targets."
+  },
+  {
+   "n": 102,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 103,
+   "kind": "list item",
+   "region": "main",
+   "text": "Strong EPS TTM growing above 15%, especially alongside healthy revenue growth"
+  },
+  {
+   "n": 104,
+   "kind": "list item",
+   "region": "main",
+   "text": "Watch Revenue growing fast but EPS flat or declining (margin compression, heavy reinvestment, or cost growth outpacing revenue)"
+  },
+  {
+   "n": 105,
+   "kind": "list item",
+   "region": "main",
+   "text": "Red flag Negative EPS TTM growth despite positive revenue growth; profitability is moving in the wrong direction"
+  },
+  {
+   "n": 106,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Revenue vs. EPS Growth Divergence"
+  },
+  {
+   "n": 107,
+   "kind": "table row",
+   "region": "main",
+   "text": "Company Profile | Revenue TTM | EPS TTM | What It Signals"
+  },
+  {
+   "n": 108,
+   "kind": "table row",
+   "region": "main",
+   "text": "Compounding business | 22% | 28% | Margins expanding; earnings growing faster than revenue"
+  },
+  {
+   "n": 109,
+   "kind": "table row",
+   "region": "main",
+   "text": "Growing but investing | 18% | 4% | Heavy reinvestment phase. Monitor if this normalizes."
+  },
+  {
+   "n": 110,
+   "kind": "table row",
+   "region": "main",
+   "text": "Margin compression | 15% | -8% | Costs growing faster than revenue; scrutinize the cost structure"
+  },
+  {
+   "n": 111,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Company Profile | Revenue TTM | EPS TTM | What It Signals"
+  },
+  {
+   "n": 112,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: EPS can be inflated by share buybacks even without real earnings growth. A buyback is when a company purchases and retires its own shares, shrinking the total share count; the same earnings divided across fewer shares produce a higher EPS even if profit never grew. Always check the diluted share count trend alongside EPS."
+  },
+  {
+   "n": 113,
+   "kind": "h2",
+   "region": "main",
+   "text": "EPS Growth FWD"
+  },
+  {
+   "n": 114,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Forward Earnings Per Share Growth Estimate"
+  },
+  {
+   "n": 115,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 116,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The analyst consensus estimate for EPS growth in the next twelve months. This is the primary input into the PEG ratio. When you divide a company's forward P/E by this number, you get the PEG FWD, the most important single metric in this methodology."
+  },
+  {
+   "n": 117,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 118,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "EPS Growth FWD is the bridge between valuation and growth. It determines whether a given P/E is cheap or expensive. A company with a P/E of 25 and EPS growth of 30% is cheaper, relative to the growth you are getting, than a company with a P/E of 12 and EPS growth of 4%. The P/E number alone means nothing without the growth rate sitting next to it."
+  },
+  {
+   "n": 119,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "An accelerating EPS growth trajectory is particularly compelling. When the consensus estimate shows growth increasing each year (12%, 16%, 20%, 25%), it suggests the business has operational leverage that will compound returns over time even if the stock does nothing in the near term."
+  },
+  {
+   "n": 120,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 121,
+   "kind": "list item",
+   "region": "main",
+   "text": "Strong Forward EPS growth of 20%+ with a P/E under 25; typically an attractive entry"
+  },
+  {
+   "n": 122,
+   "kind": "list item",
+   "region": "main",
+   "text": "Accelerating FWD growth rate higher than TTM signals an expanding earnings trajectory ahead"
+  },
+  {
+   "n": 123,
+   "kind": "list item",
+   "region": "main",
+   "text": "Watch High FWD estimates that look inconsistent with the company's recent margin trend"
+  },
+  {
+   "n": 124,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Accelerating EPS Trajectory"
+  },
+  {
+   "n": 125,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year | EPS Growth Estimate | Implication"
+  },
+  {
+   "n": 126,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year 1 | 11% | Base growth, earnings expanding"
+  },
+  {
+   "n": 127,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year 2 | 16% | Acceleration beginning"
+  },
+  {
+   "n": 128,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year 3 | 21% | Operational leverage kicking in"
+  },
+  {
+   "n": 129,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year 4 | 27% | Compounding effect: EPS outpacing revenue growth"
+  },
+  {
+   "n": 130,
+   "kind": "table",
+   "region": "main",
+   "text": "5 rows; first row: Year | EPS Growth Estimate | Implication"
+  },
+  {
+   "n": 131,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "An accelerating trajectory like this shrinks the P/E on its own. P/E is price divided by earnings, so if the price sits still while earnings per share keep climbing, the ratio falls. A company at a P/E of 22 today, growing EPS at an accelerating rate, trades at a P/E of 11 to 13 four years later without the stock moving at all. The seemingly expensive price you paid becomes cheap in hindsight, purely because the earnings grew into it."
+  },
+  {
+   "n": 132,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: On high-quality compounders, street estimates are frequently too conservative. Management typically guides conservatively and beats estimates. Treat the consensus as a floor, not a ceiling, for companies with a consistent beat history. The actual EPS growth often exceeds what the forward estimate implies."
+  },
+  {
+   "n": 133,
+   "kind": "h2",
+   "region": "main",
+   "text": "P/E FWD"
+  },
+  {
+   "n": 134,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Forward Price-to-Earnings Ratio"
+  },
+  {
+   "n": 135,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 136,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The current stock price divided by the estimated earnings per share for the next twelve months. A worked example: a stock trading at $110, with expected earnings of $5 per share next year, has a forward P/E of 110 ÷ 5 = 22. You are paying 22 dollars today for each dollar of next year's expected profit. Investors call this number the multiple, as in \"the stock trades at 22 times earnings.\" P/E FWD answers the question every investor eventually asks in front of the buy button: what am I actually paying for this?"
+  },
+  {
+   "n": 137,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 138,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "P/E FWD is the primary valuation anchor in this methodology. It sets the baseline for how expensive or cheap a stock is relative to its near-term earnings power. But raw P/E numbers are almost meaningless without context. A P/E of 30 on a company growing earnings at 40% per year is not expensive. A P/E of 10 on a company with flat earnings and a deteriorating competitive position is not cheap."
+  },
+  {
+   "n": 139,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The most important way to use P/E FWD is to set it next to the forward EPS growth rate and compare the two numbers directly. Suppose a company's P/E FWD is 22 and its forward EPS growth is 30%. The multiple (22) is lower than the growth rate (30). That is a strong signal: you are paying 22 times earnings for a business growing its earnings at 30% per year, which means the price has not caught up to the growth that is coming. Now flip it. The same company at a P/E of 35 with only 10% EPS growth has a multiple that demands far more than the earnings can deliver; the price is counting on a future the estimates do not support. This one comparison is the engine of the whole valuation approach, and it is exactly what the PEG ratio in the next section formalizes: a PEG below 1.0 is the mathematical way of saying the P/E is lower than the EPS growth rate."
+  },
+  {
+   "n": 140,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Beyond the growth rate comparison, P/E should also be evaluated against the sector median (is this company pricing in a premium its peers are not?) and against the company's own 5-year average (is the market applying a historically unusual multiple?). When a stock trades below its own historical P/E average while still growing at the same or faster rate, that discount is often an opportunity."
+  },
+  {
+   "n": 141,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 142,
+   "kind": "list item",
+   "region": "main",
+   "text": "Primary signal P/E FWD below the forward EPS growth rate; growth outpaces the multiple paid. This is the most direct confirmation that a stock is not overpriced for its trajectory."
+  },
+  {
+   "n": 143,
+   "kind": "list item",
+   "region": "main",
+   "text": "Secondary signal P/E below the sector median and the company's own 5-year average, trading at a relative and historical discount"
+  },
+  {
+   "n": 144,
+   "kind": "list item",
+   "region": "main",
+   "text": "Watch P/E above the EPS growth rate; the multiple now exceeds the growth, meaning the market is pricing in more earnings acceleration than estimates currently show"
+  },
+  {
+   "n": 145,
+   "kind": "list item",
+   "region": "main",
+   "text": "Expensive P/E significantly above the EPS growth rate, sector median, and 5Y average with no growth acceleration to justify it"
+  },
+  {
+   "n": 146,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: P/E Compression Over Time"
+  },
+  {
+   "n": 147,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year | P/E at Current Price | What This Shows"
+  },
+  {
+   "n": 148,
+   "kind": "table row",
+   "region": "main",
+   "text": "Today (actual) | 22 | Starting multiple (may look elevated)"
+  },
+  {
+   "n": 149,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year +1 (estimated) | 19 | EPS growth beginning to compress the multiple"
+  },
+  {
+   "n": 150,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year +2 (estimated) | 16 | Compounding earnings making the stock cheaper"
+  },
+  {
+   "n": 151,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year +3 (estimated) | 13 | At this P/E the entry price looks very reasonable in hindsight"
+  },
+  {
+   "n": 152,
+   "kind": "table row",
+   "region": "main",
+   "text": "Year +4 (estimated) | 11 | If held from today, the effective P/E paid was 22 for 11 earnings"
+  },
+  {
+   "n": 153,
+   "kind": "table",
+   "region": "main",
+   "text": "6 rows; first row: Year | P/E at Current Price | What This Shows"
+  },
+  {
+   "n": 154,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This is why holding matters. A company that appears to have a \"high\" P/E today often looks cheap in retrospect if earnings growth continues. The market is slow to fully price in multi-year compounding, which creates the entry windows this methodology targets."
+  },
+  {
+   "n": 155,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: P/E vs. Sector Context"
+  },
+  {
+   "n": 156,
+   "kind": "table row",
+   "region": "main",
+   "text": "Comparison | Company P/E | Benchmark | % Difference"
+  },
+  {
+   "n": 157,
+   "kind": "table row",
+   "region": "main",
+   "text": "vs. Sector Median | 21 | 14 | +50%"
+  },
+  {
+   "n": 158,
+   "kind": "table row",
+   "region": "main",
+   "text": "vs. Own 5Y Average | 21 | 27 | -22%"
+  },
+  {
+   "n": 159,
+   "kind": "table",
+   "region": "main",
+   "text": "3 rows; first row: Comparison | Company P/E | Benchmark | % Difference"
+  },
+  {
+   "n": 160,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The same company can look \"expensive\" versus peers but \"cheap\" versus its own history. When a stock trades at a discount to its own 5-year average P/E while still growing at the same or faster rate, that is a historically unusual opportunity; the market is applying less credit to the same quality business."
+  },
+  {
+   "n": 161,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: P/E alone misleads. A P/E of 50 on a 60% grower can be cheap. A P/E of 12 on a 2% grower can be expensive. The number that matters is whether the P/E is above or below the EPS growth rate. When P/E is lower than the growth rate, the stock is paying you to hold it in the form of compressed valuation relative to compounding earnings. When P/E is higher, you are paying a premium that earnings have to grow into. Always compare P/E FWD directly to EPS Growth FWD before drawing any conclusion about whether the stock is expensive or cheap."
+  },
+  {
+   "n": 162,
+   "kind": "h2",
+   "region": "main",
+   "text": "PEG FWD"
+  },
+  {
+   "n": 163,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Forward Price/Earnings-to-Growth Ratio"
+  },
+  {
+   "n": 164,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 165,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Forward P/E divided by the forward EPS growth rate. Using the first row of the table below as a worked example: a P/E of 26 divided by an EPS growth rate of 32 gives a PEG of 0.81. PEG adjusts the valuation for growth, answering the question that P/E alone cannot: is the price you are paying reasonable given how fast this company is actually growing?"
+  },
+  {
+   "n": 166,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 167,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "PEG FWD is the single most important number in this methodology. It is the reason a company with a P/E of 25 can be a significantly better investment than a company with a P/E of 10. Growth rate context transforms the meaning of any multiple. Two companies trading at different P/E ratios can be equally valued on a growth-adjusted basis, or dramatically different."
+  },
+  {
+   "n": 168,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The benchmark is 1.0. A PEG below 1.0 means you are paying less than one dollar of P/E for each percentage point of growth. That is where the best long-term opportunities tend to concentrate: quality businesses whose earnings growth has not yet been fully recognized by the market. A PEG above 2.0 means you are paying a significant premium for growth that is already priced in."
+  },
+  {
+   "n": 169,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 170,
+   "kind": "list item",
+   "region": "main",
+   "text": "PEG below 1.0 Potentially undervalued relative to growth. The highest-conviction entry zone in this methodology."
+  },
+  {
+   "n": 171,
+   "kind": "list item",
+   "region": "main",
+   "text": "PEG 1.0 to 2.0 Fairly valued to slightly premium. Acceptable for companies with durable competitive moats."
+  },
+  {
+   "n": 172,
+   "kind": "list item",
+   "region": "main",
+   "text": "PEG above 2.0 Growth already priced in. Requires strong conviction that estimates will be significantly exceeded."
+  },
+  {
+   "n": 173,
+   "kind": "list item",
+   "region": "main",
+   "text": "PEG above 3.0 The market is pricing in very aggressive future growth. High downside risk if estimates disappoint.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 174,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Why P/E Alone Is Misleading"
+  },
+  {
+   "n": 175,
+   "kind": "table row",
+   "region": "main",
+   "text": "Company | P/E FWD | EPS Growth | PEG FWD | Verdict"
+  },
+  {
+   "n": 176,
+   "kind": "table row",
+   "region": "main",
+   "text": "High-growth tech co. | 26 | 32% | 0.81 | Undervalued on growth"
+  },
+  {
+   "n": 177,
+   "kind": "table row",
+   "region": "main",
+   "text": "Slow-growth value co. | 11 | 4% | 2.75 | Expensive on growth"
+  },
+  {
+   "n": 178,
+   "kind": "table row",
+   "region": "main",
+   "text": "Quality compounder | 20 | 24% | 0.83 | Undervalued on growth"
+  },
+  {
+   "n": 179,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Company | P/E FWD | EPS Growth | PEG FWD | Verdict"
+  },
+  {
+   "n": 180,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The high-growth tech company appears expensive at a P/E of 26. The slow-growth value company appears cheap at 11. But on a growth-adjusted basis, the high-growth company is far cheaper. PEG cuts through the surface-level multiple and reveals the actual value you are receiving per dollar paid."
+  },
+  {
+   "n": 181,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: PEG is only as good as the growth estimate underneath it. If the forward EPS estimate is too aggressive, a PEG under 1.0 can be misleading. A company with a PEG of 0.70 based on an estimate that gets cut in half now has a PEG of 1.40. Always use PEG alongside balance sheet health and an honest assessment of whether the growth estimate is achievable."
+  },
+  {
+   "n": 182,
+   "kind": "h2",
+   "region": "main",
+   "text": "Total Cash"
+  },
+  {
+   "n": 183,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Cash, Equivalents, and Short-Term Investments"
+  },
+  {
+   "n": 184,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 185,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The total of cash, cash equivalents, and short-term liquid investments the company holds as of its most recent report. You find it on the balance sheet: the financial statement that lists everything a company owns and owes at a single point in time. Total cash is the portion of what it owns that is immediately spendable, without selling assets or borrowing money."
+  },
+  {
+   "n": 186,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 187,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Judge a company's cash the way you would judge a person's savings: it is the cushion that turns a bad year into an inconvenience instead of a crisis, and the fuel for opportunities that appear when others are struggling. Cash is optionality. A company with a strong cash position can fund its own growth without issuing new shares (which would dilute your ownership), make acquisitions on favorable terms, buy back stock, invest aggressively in R&D while competitors are cutting costs, and survive unexpected disruptions without borrowing expensive money at the worst possible time."
+  },
+  {
+   "n": 188,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The power of a strong cash position is most visible during downturns. When markets contract and credit tightens, cash-rich companies can act aggressively: hiring top talent at below-peak salaries, buying competitors at distressed valuations, or simply staying the course while leveraged competitors are forced into survival mode. Cash gives a business the ability to play offense when everyone else is playing defense."
+  },
+  {
+   "n": 189,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A cash-heavy balance sheet also becomes an active financial advantage during Federal Reserve rate hiking cycles. When rates are elevated, a company with substantial cash holdings earns meaningful interest income. At 4-5% rates, $10B in cash generates $400-500M per year in interest income flowing directly to the income statement. Simultaneously, a company with little or no debt pays zero interest expense. Companies carrying heavy debt face the exact opposite: rising interest payments compressing earnings precisely when markets are already repricing risk. In a rate-hiking environment, balance sheet quality stops being only a risk metric and becomes an earnings-level competitive advantage.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 190,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The most useful way to read total cash is not in absolute terms but relative to total debt. A company with more cash than debt has a net-cash-positive balance sheet; it could theoretically pay off all obligations today. That is the strongest signal of balance sheet health."
+  },
+  {
+   "n": 191,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 192,
+   "kind": "list item",
+   "region": "main",
+   "text": "Net cash positive Total cash exceeds total debt. Maximum balance sheet optionality."
+  },
+  {
+   "n": 193,
+   "kind": "list item",
+   "region": "main",
+   "text": "Cash-neutral Cash and debt roughly equivalent. Manageable if free cash flow is consistently strong."
+  },
+  {
+   "n": 194,
+   "kind": "list item",
+   "region": "main",
+   "text": "Debt-heavy Debt significantly exceeds cash. Scrutinize debt terms, maturity schedule, and ability to service obligations."
+  },
+  {
+   "n": 195,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Balance Sheet Profiles"
+  },
+  {
+   "n": 196,
+   "kind": "table row",
+   "region": "main",
+   "text": "Profile | Cash | Debt | Cash/Debt | Signal"
+  },
+  {
+   "n": 197,
+   "kind": "table row",
+   "region": "main",
+   "text": "Strong | $4.2B | $380M | 11x | Excellent financial position"
+  },
+  {
+   "n": 198,
+   "kind": "table row",
+   "region": "main",
+   "text": "Neutral | $3.1B | $3.0B | 1.0x | Manageable with strong FCF"
+  },
+  {
+   "n": 199,
+   "kind": "table row",
+   "region": "main",
+   "text": "Leveraged | $600M | $4.8B | 0.13x | High scrutiny required"
+  },
+  {
+   "n": 200,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Profile | Cash | Debt | Cash/Debt | Signal"
+  },
+  {
+   "n": 201,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: Absolute cash figures must be read relative to company size, operational burn rate, and free cash flow generation. Large absolute cash numbers can be misleading. A trillion-dollar company with $5B in cash may be cash-poor relative to its needs, while a $3B company with $500M in cash may be extraordinarily well-capitalized. Always compare cash to the scale of the business."
+  },
+  {
+   "n": 202,
+   "kind": "h2",
+   "region": "main",
+   "text": "Total Debt"
+  },
+  {
+   "n": 203,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Total Short and Long-Term Debt Obligations"
+  },
+  {
+   "n": 204,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 205,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The combined total of all short-term and long-term debt obligations on the company's balance sheet, including bonds, term loans, revolving credit facilities, and other interest-bearing liabilities."
+  },
+  {
+   "n": 206,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 207,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Debt amplifies everything: both upside and downside. In growth phases, leverage can accelerate returns on equity. In downturns, debt creates mandatory interest expense that eats directly into earnings, constrains strategic flexibility, and in severe cases can threaten solvency. For long-term investors, the downside asymmetry of high debt is the primary concern: a leveraged company that runs into trouble has far fewer options than a cash-rich one."
+  },
+  {
+   "n": 208,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The key question is not whether a company carries debt (almost all large companies do), but whether the debt is manageable relative to earnings power and cash position. The yardstick is free cash flow: the cash left over each year after paying operating costs and funding investment in the business, in other words the money actually available to service debt. A company generating $10B in annual free cash flow with $20B in long-term debt at a fixed low rate has no meaningful debt risk. A company generating $200M in free cash flow with $5B in short-term obligations at floating rates has a serious problem.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 209,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 210,
+   "kind": "list item",
+   "region": "main",
+   "text": "Debt/Cash below 1.0 Cash exceeds debt. The company could retire all debt today with cash on hand."
+  },
+  {
+   "n": 211,
+   "kind": "list item",
+   "region": "main",
+   "text": "Debt/Cash 1x to 3x Requires deeper review. Evaluate interest rate, maturity schedule, and free cash flow coverage ratio."
+  },
+  {
+   "n": 212,
+   "kind": "list item",
+   "region": "main",
+   "text": "Debt/Cash above 3x High scrutiny required. Is the free cash flow sufficient to service obligations comfortably through a downturn?"
+  },
+  {
+   "n": 213,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Debt Risk Profiles",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 214,
+   "kind": "table row",
+   "region": "main",
+   "text": "Profile | Annual FCF | Total Debt | Debt/FCF | Assessment"
+  },
+  {
+   "n": 215,
+   "kind": "table row",
+   "region": "main",
+   "text": "Low risk | $8B | $5B | 0.6x | Could pay off all debt in under a year from FCF"
+  },
+  {
+   "n": 216,
+   "kind": "table row",
+   "region": "main",
+   "text": "Moderate risk | $2B | $9B | 4.5x | Manageable if FCF holds; vulnerable if revenue contracts"
+  },
+  {
+   "n": 217,
+   "kind": "table row",
+   "region": "main",
+   "text": "High risk | $300M | $6B | 20x | Any disruption to FCF creates a liquidity crisis"
+  },
+  {
+   "n": 218,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Profile | Annual FCF | Total Debt | Debt/FCF | Assessment"
+  },
+  {
+   "n": 219,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: Not all debt is equal. Low-interest long-term bonds issued during a low-rate environment carry very different risk than high-interest short-term revolving credit. A company with $20B in 30-year fixed bonds at 2% has minimal near-term risk regardless of the absolute size. Always check the interest rate, maturity schedule, and whether the debt is fixed or floating before drawing conclusions from the total debt figure alone.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 220,
+   "kind": "h2",
+   "region": "main",
+   "text": "RSI"
+  },
+  {
+   "n": 221,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Relative Strength Index"
+  },
+  {
+   "n": 222,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 223,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "RSI is a number from 0 to 100, calculated from the last 14 trading days, that compares the average size of an asset's recent up days to the average size of its recent down days. After a stretch of heavy buying, RSI runs high; after a stretch of heavy selling, it runs low. Technical traders call this a momentum oscillator, but the plain-English version is simple: RSI measures how hard and how fast a price has recently been pushed in one direction, and whether that push looks stretched (overbought) or overdone (oversold) relative to its normal behavior."
+  },
+  {
+   "n": 224,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 225,
+   "kind": "link",
+   "region": "main",
+   "text": "Indices page",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 226,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "In this methodology, RSI is an index and ETF timing tool, not a stock-picking tool. Individual companies are valued on fundamentals: the growth, valuation, balance sheet, and margin metrics covered on this page. A broad index is a different kind of purchase. You are not evaluating one business; you are buying a basket of hundreds, and the basket's short-term price is driven mostly by market-wide fear and greed. Technical signals like RSI measure exactly that, which is why the timing framework on the Indices page leans on them. If you have ever hesitated to buy an index fund during a scary market dip, or piled in right after a euphoric run, RSI is the guardrail for exactly those moments."
+  },
+  {
+   "n": 227,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The core insight is that the broad market regularly sells off for reasons that have nothing to do with the long-term earnings power of the companies inside it: macro fear, interest rate scares, geopolitical shocks, or simple herd de-risking. When that happens, the index's RSI drops below 40 or 30, creating a window to deploy capital into the same basket of businesses at a better price than it offered two or three months earlier. Those are the moments the timing framework is built for.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 228,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Think of RSI as a discount detector for the broad market, not a predictor. It does not predict where prices will go next. It measures how much the price has already fallen relative to its recent behavior, a proxy for how much fear is already reflected in the level. For an individual stock, treat a low RSI as context at most: it never substitutes for the fundamental case, and it never turns a weak business into a buy."
+  },
+  {
+   "n": 229,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 230,
+   "kind": "list item",
+   "region": "main",
+   "text": "RSI above 70 Overbought. The index has moved sharply upward in a short time. Not the moment to deploy extra capital. Wait for a pullback."
+  },
+  {
+   "n": 231,
+   "kind": "list item",
+   "region": "main",
+   "text": "RSI 45 to 70 Neutral to mild momentum. Neither extended nor oversold. Monitor but do not chase."
+  },
+  {
+   "n": 232,
+   "kind": "list item",
+   "region": "main",
+   "text": "RSI 30 to 45 Approaching oversold. An interesting window for adding to index and ETF positions."
+  },
+  {
+   "n": 233,
+   "kind": "list item",
+   "region": "main",
+   "text": "RSI below 30 Significantly oversold. Broad fear is elevated and the market has sold aggressively. The highest-value deployment window for index purchases."
+  },
+  {
+   "n": 234,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: RSI as an Index Entry Signal"
+  },
+  {
+   "n": 235,
+   "kind": "table row",
+   "region": "main",
+   "text": "RSI Level | Market Condition | Action"
+  },
+  {
+   "n": 236,
+   "kind": "table row",
+   "region": "main",
+   "text": "28 | Deeply oversold; market has sold aggressively | High priority deployment window"
+  },
+  {
+   "n": 237,
+   "kind": "table row",
+   "region": "main",
+   "text": "37 | Oversold; price has pulled back meaningfully | Favorable window for index buys"
+  },
+  {
+   "n": 238,
+   "kind": "table row",
+   "region": "main",
+   "text": "52 | Neutral; no strong timing signal either way | Monitor. Await better conditions."
+  },
+  {
+   "n": 239,
+   "kind": "table row",
+   "region": "main",
+   "text": "68 | Approaching overbought; stock has run hard | Wait. Better entry likely ahead."
+  },
+  {
+   "n": 240,
+   "kind": "table row",
+   "region": "main",
+   "text": "79 | Overbought; significant short-term momentum | Do not chase; let it cool"
+  },
+  {
+   "n": 241,
+   "kind": "table",
+   "region": "main",
+   "text": "6 rows; first row: RSI Level | Market Condition | Action"
+  },
+  {
+   "n": 242,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: RSI is a timing signal only, and even for indices it is not a bottom-caller. An oversold index can keep falling for months in a genuine bear market, which is why the Indices page pairs RSI with the VIX bands and sentiment signals, and why capital is deployed in steady installments rather than all at once. For individual stocks, do not invert the rule: a low RSI on a deteriorating business is not an opportunity, it is confirmation that something is wrong. Stocks are bought on fundamentals. RSI tells you the price has fallen; fundamentals tell you whether that matters."
+  },
+  {
+   "n": 243,
+   "kind": "h2",
+   "region": "main",
+   "text": "52-Week Range"
+  },
+  {
+   "n": 244,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Annual High-Low Price Range"
+  },
+  {
+   "n": 245,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 246,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The lowest and highest price at which a stock or index has traded over the trailing 52 weeks. It provides context for where the current price sits within the annual trading range, effectively answering: is the price near its recent peak, near its recent low, or somewhere in between?"
+  },
+  {
+   "n": 247,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 248,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Like RSI, the 52-week range is used here as an index and ETF timing tool rather than a stock-picking tool. It is a practical way to check whether you are deploying capital at a historically unfavorable price relative to recent levels. When a broad index sits near its 52-week low, the market has already priced in a significant amount of pessimism. For a single company that pessimism may be fully deserved, but a broad index is a basket of hundreds of businesses, continually refreshed with its market's strongest companies, so an index near its annual low usually reflects market-wide fear rather than something simultaneously broken inside every company in the basket. Deploying near the low typically offers better risk/reward than deploying near the high.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 249,
+   "kind": "link",
+   "region": "main",
+   "text": "Indices page",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 250,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This metric pairs directly with RSI. When an index is in the lower 25% of its annual range and its RSI is below 40, both signals are aligned: prices have already fallen substantially and the selling pressure is real. That combination marks the highest-value deployment windows the timing framework identifies, and it is exactly the moment to check the VIX and sentiment signals on the Indices page next."
+  },
+  {
+   "n": 251,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "For individual stocks, treat the range as context rather than a signal. A great business near its 52-week high can still be the right buy if the fundamentals and valuation support it, and a stock at its 52-week low can fully deserve to be there. What the range does prevent is a common mistake: assuming a price \"feels cheap\" without any frame of reference for where it sits historically. Anchoring to the range forces a relative comparison; it just never replaces the fundamental case."
+  },
+  {
+   "n": 252,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 253,
+   "kind": "list item",
+   "region": "main",
+   "text": "Lower 25% of range High priority deployment window. The market may be pricing in excessive broad pessimism."
+  },
+  {
+   "n": 254,
+   "kind": "list item",
+   "region": "main",
+   "text": "25% to 50% of range Reasonable deployment zone. Not at a deep discount but not chasing the high either."
+  },
+  {
+   "n": 255,
+   "kind": "list item",
+   "region": "main",
+   "text": "50% to 85% of range Caution on extra deployments. The market has recovered; a better price may come."
+  },
+  {
+   "n": 256,
+   "kind": "list item",
+   "region": "main",
+   "text": "Near 52W high (85%+) Not the time to deploy extra capital in size. Regular scheduled contributions continue regardless of level."
+  },
+  {
+   "n": 257,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Range Position and Risk/Reward",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 258,
+   "kind": "table row",
+   "region": "main",
+   "text": "Range Position | % of 52W Range | RSI (paired) | Entry Signal"
+  },
+  {
+   "n": 259,
+   "kind": "table row",
+   "region": "main",
+   "text": "Near annual low | 8% | 32 | Both signals aligned; strongest entry"
+  },
+  {
+   "n": 260,
+   "kind": "table row",
+   "region": "main",
+   "text": "Lower third | 22% | 41 | Favorable entry zone"
+  },
+  {
+   "n": 261,
+   "kind": "table row",
+   "region": "main",
+   "text": "Mid-range | 49% | 55 | Neutral; no strong timing advantage"
+  },
+  {
+   "n": 262,
+   "kind": "table row",
+   "region": "main",
+   "text": "Upper third | 78% | 66 | Caution. Wait for a pullback."
+  },
+  {
+   "n": 263,
+   "kind": "table row",
+   "region": "main",
+   "text": "Near annual high | 94% | 74 | Do not deploy extra capital; let it cool"
+  },
+  {
+   "n": 264,
+   "kind": "table",
+   "region": "main",
+   "text": "6 rows; first row: Range Position | % of 52W Range | RSI (paired) | Entry Signal"
+  },
+  {
+   "n": 265,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: A 52-week low is not a floor. In a genuine bear market an index can keep making new lows well below the current one, which is why the timing framework deploys capital in steady installments and cross-checks the VIX and sentiment signals rather than treating any single level as the bottom. For an individual stock, a 52-week low can simply be cheap for a reason: if the business is genuinely deteriorating, the low gets lower. That asymmetry is precisely why this methodology times indices with technicals but judges individual companies on fundamentals."
+  },
+  {
+   "n": 266,
+   "kind": "h2",
+   "region": "main",
+   "text": "Gross Margin"
+  },
+  {
+   "n": 267,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Revenue Minus Cost of Goods Sold, as a Percentage of Revenue"
+  },
+  {
+   "n": 268,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 269,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Gross margin starts with the cost of goods sold: the direct costs of producing whatever the company sells (materials, manufacturing, hosting costs for software, and so on). Subtract that from revenue, divide by revenue, and you have gross margin: the share of each sales dollar left over after making the product. A worked example: a company sells $100M of software that costs $20M to deliver. Gross profit is $80M, so gross margin is 80%. That 80 cents of every revenue dollar is what remains to pay for everything else (sales, marketing, R&D, administration) before any profit exists."
+  },
+  {
+   "n": 270,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 271,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Gross margin is one of the clearest signals of business model quality. High gross margins mean the company retains a large portion of each dollar of revenue to cover operating costs and generate profit. Low gross margins mean most revenue is consumed by the cost of delivering the product or service, leaving very little room for profitability even at large scale."
+  },
+  {
+   "n": 272,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The direction of gross margin over time matters as much as the current level. Rising gross margins signal that the company is in a position of strength: it can charge higher prices, manage input costs effectively, and improve profitability as it scales. Falling gross margins signal competitive pressure, pricing deterioration, or cost growth outpacing revenue. When professional investors see gross margins declining, they often read it as a systemic threat to the business and sell accordingly. Expanding gross margins do the opposite: they attract premium valuations because they signal a widening competitive moat (the durable advantages that protect a business from competitors)."
+  },
+  {
+   "n": 273,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 274,
+   "kind": "list item",
+   "region": "main",
+   "text": "50%+ gross margin Strong. Typical of software, high-value consumer brands, and platform businesses. Substantial revenue is retained before any operating expense."
+  },
+  {
+   "n": 275,
+   "kind": "list item",
+   "region": "main",
+   "text": "30% to 50% gross margin Moderate. Depends on operating leverage and scale. Acceptable for high-volume businesses with disciplined cost structures."
+  },
+  {
+   "n": 276,
+   "kind": "list item",
+   "region": "main",
+   "text": "Under 30% gross margin Elevated risk. Low-margin businesses are highly sensitive to cost increases, competitive price pressure, and economic slowdowns. Little cushion for unexpected headwinds.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 277,
+   "kind": "list item",
+   "region": "main",
+   "text": "Declining trend Regardless of absolute level, a consistent multi-quarter downtrend in gross margin is a red flag that warrants investigation before any conclusion is drawn."
+  },
+  {
+   "n": 278,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Gross Margin by Business Type"
+  },
+  {
+   "n": 279,
+   "kind": "table row",
+   "region": "main",
+   "text": "Business Type | Typical Gross Margin | Characteristic"
+  },
+  {
+   "n": 280,
+   "kind": "table row",
+   "region": "main",
+   "text": "SaaS / Cloud software | 65% - 80% | High-margin recurring revenue with minimal per-unit delivery cost"
+  },
+  {
+   "n": 281,
+   "kind": "table row",
+   "region": "main",
+   "text": "Consumer brand / Premium goods | 55% - 70% | Brand premium enables pricing above input costs"
+  },
+  {
+   "n": 282,
+   "kind": "table row",
+   "region": "main",
+   "text": "Hardware / Electronics | 35% - 50% | Component costs constrain margin, but scale and mix help"
+  },
+  {
+   "n": 283,
+   "kind": "table row",
+   "region": "main",
+   "text": "Retail / Distribution | 20% - 35% | Thin margins, high volume dependency, limited pricing power"
+  },
+  {
+   "n": 284,
+   "kind": "table row",
+   "region": "main",
+   "text": "Commodity / Manufacturing | 10% - 25% | Low pricing power, high input cost sensitivity"
+  },
+  {
+   "n": 285,
+   "kind": "table",
+   "region": "main",
+   "text": "6 rows; first row: Business Type | Typical Gross Margin | Characteristic"
+  },
+  {
+   "n": 286,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: Gross margins are not comparable across industries. A software company at 45% gross margin is underperforming its category. A manufacturing company at 45% is exceptional. Always compare a company's gross margin against its direct industry peers and against its own historical trend, not against a universal benchmark. A company improving from 32% to 42% gross margin over three years is showing meaningful evidence of improving competitive positioning, even if 42% looks modest in absolute terms."
+  },
+  {
+   "n": 287,
+   "kind": "h2",
+   "region": "main",
+   "text": "Net Margin"
+  },
+  {
+   "n": 288,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Net Income as a Percentage of Revenue"
+  },
+  {
+   "n": 289,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "What it measures"
+  },
+  {
+   "n": 290,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The percentage of revenue that becomes profit after every cost is subtracted: cost of goods sold, operating expenses, sales and marketing, R&D, interest expense, and taxes. If a company brings in $100M of revenue and, after all of that, keeps $22M as profit, its net margin is 22%. Where gross margin measures the product's economics, net margin is the bottom line: how efficiently the whole company converts revenue into earnings."
+  },
+  {
+   "n": 291,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Why it matters"
+  },
+  {
+   "n": 292,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Net margin is the final test of whether a business is building wealth at scale. A company can have strong gross margins and still post thin or negative net margins if operating expenses are out of control. The path from gross margin to net margin tells the story of cost management: each layer of expense between gross profit and net income should be declining as a percentage of revenue as the business scales."
+  },
+  {
+   "n": 293,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Like gross margin, the direction of net margin over time matters as much as the current level. A rising net margin trajectory means the company is building operating leverage: each additional dollar of revenue produces more profit than the last. This is the engine of long-term earnings compounding. A declining net margin trajectory, even alongside strong revenue growth, signals that costs are growing faster than the business, a structural problem that limits how much of the revenue growth translates into shareholder value over time."
+  },
+  {
+   "n": 294,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "How to read it"
+  },
+  {
+   "n": 295,
+   "kind": "list item",
+   "region": "main",
+   "text": "30%+ net margin Elite. Very few businesses sustain this level. Indicates exceptional competitive positioning and disciplined cost management."
+  },
+  {
+   "n": 296,
+   "kind": "list item",
+   "region": "main",
+   "text": "25% to 30% net margin Excellent. Strong pricing power and well-managed operating expenses. A business with real moat characteristics."
+  },
+  {
+   "n": 297,
+   "kind": "list item",
+   "region": "main",
+   "text": "10% to 25% net margin Good. The business is profitably scaling. Quality within this range depends heavily on sector and trajectory."
+  },
+  {
+   "n": 298,
+   "kind": "list item",
+   "region": "main",
+   "text": "Under 10% net margin Requires context. Not inherently bad; some high-volume businesses operate efficiently at thin margins. But low net margins mean little room for error during downturns."
+  },
+  {
+   "n": 299,
+   "kind": "list item",
+   "region": "main",
+   "text": "Negative net margin The company is spending more than it earns. Acceptable in an early-growth phase if revenue growth is strong and the path to profitability is credible. Not acceptable at maturity."
+  },
+  {
+   "n": 300,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Illustrative Example: Net Margin Trajectories"
+  },
+  {
+   "n": 301,
+   "kind": "table row",
+   "region": "main",
+   "text": "Scenario | Net Margin (Current) | Net Margin (Prior Year) | What It Signals"
+  },
+  {
+   "n": 302,
+   "kind": "table row",
+   "region": "main",
+   "text": "Operating leverage | 22% | 16% | Expanding; costs scaling slower than revenue"
+  },
+  {
+   "n": 303,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stable compounder | 28% | 27% | Consistent elite margins; business in a position of strength"
+  },
+  {
+   "n": 304,
+   "kind": "table row",
+   "region": "main",
+   "text": "Margin compression | 12% | 18% | Declining. Investigate the cause immediately."
+  },
+  {
+   "n": 305,
+   "kind": "table row",
+   "region": "main",
+   "text": "Revenue growth, shrinking profit | 3% | 9% | Costs growing faster than revenue; structural risk"
+  },
+  {
+   "n": 306,
+   "kind": "table",
+   "region": "main",
+   "text": "5 rows; first row: Scenario | Net Margin (Current) | Net Margin (Prior Year) | What It Signals"
+  },
+  {
+   "n": 307,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Caveat: Always research why margins move. If net margin drops from 18% to 12% in a quarter, that is a significant event that demands explanation. The conference call and quarterly report are where the cause is explained. Is it a one-time investment cycle? Deliberate customer acquisition spending that will normalize? The beginning of structural competitive pressure? The answer completely changes the investment read. Similarly, an unexpected margin jump should be understood before extrapolating it forward; not all margin improvements are durable. Find the cause before drawing any conclusion."
+  },
+  {
+   "n": 308,
+   "kind": "text",
+   "region": "footer",
+   "text": "Built by"
+  },
+  {
+   "n": 309,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 310,
+   "kind": "text",
+   "region": "footer",
+   "text": "."
+  },
+  {
+   "n": 311,
+   "kind": "script",
+   "region": "body",
+   "text": "script.js"
+  }
+ ],
+ "linked scripts": {
+  "script.js": {}
+ }
+}

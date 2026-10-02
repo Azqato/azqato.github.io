@@ -1,0 +1,1075 @@
+{
+ "source": "leverage/hfea.html",
+ "head": [
+  "title: HFEA: Leveraged Strategies",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: Hedgefundie's Excellent Adventure (HFEA). A quarterly-rebalanced leveraged risk parity portfolio of UPRO 55% and TMF 45%.",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>",
+  "link stylesheet: css/style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "body",
+   "text": "Skip to content",
+   "href": "#main-content",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "svg icon",
+   "region": "nav",
+   "text": "decorative"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 25,
+   "kind": "text",
+   "region": "aside",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 38,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 39,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 40,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 41,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 42,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 43,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 45,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 46,
+   "kind": "text",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 47,
+   "kind": "link",
+   "region": "nav",
+   "text": "Overview",
+   "href": "#overview",
+   "flags": []
+  },
+  {
+   "n": 48,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Overview"
+  },
+  {
+   "n": 49,
+   "kind": "link",
+   "region": "nav",
+   "text": "Rules and Logic",
+   "href": "#rules",
+   "flags": []
+  },
+  {
+   "n": 50,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 51,
+   "kind": "link",
+   "region": "nav",
+   "text": "Performance Notes",
+   "href": "#performance",
+   "flags": []
+  },
+  {
+   "n": 52,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 53,
+   "kind": "link",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "href": "#risks",
+   "flags": []
+  },
+  {
+   "n": 54,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 55,
+   "kind": "link",
+   "region": "nav",
+   "text": "Resources",
+   "href": "#resources",
+   "flags": []
+  },
+  {
+   "n": 56,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Resources"
+  },
+  {
+   "n": 57,
+   "kind": "paragraph",
+   "region": "aside",
+   "text": "Educational use only. Not financial advice.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 58,
+   "kind": "text",
+   "region": "main",
+   "text": "Quarterly Rebalancing"
+  },
+  {
+   "n": 59,
+   "kind": "h1",
+   "region": "main",
+   "text": "Hedgefundie's Excellent Adventure"
+  },
+  {
+   "n": 60,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A quarterly-rebalanced two-fund leveraged portfolio holding UPRO at 55% and TMF at 45%, designed to capture amplified equity returns while using negatively-correlated long-duration Treasuries to structurally moderate drawdowns. Proposed on Bogleheads in February 2019."
+  },
+  {
+   "n": 61,
+   "kind": "h2",
+   "region": "main",
+   "text": "Overview"
+  },
+  {
+   "n": 62,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Hedgefundie's Excellent Adventure is a leveraged risk parity portfolio proposed by a Bogleheads forum user known as \"Hedgefundie\" in February 2019. The strategy pairs a 3x leveraged S&P 500 ETF (UPRO) with a 3x leveraged long-duration Treasury ETF (TMF), rebalanced quarterly to a fixed target allocation.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 63,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The theoretical foundation is risk parity. Rather than allocating dollars equally, risk parity allocates risk equally by balancing each position's contribution to total portfolio volatility. Hedgefundie calculated that the long-run annual volatility of the S&P 500 is approximately 15% and of long-term Treasuries approximately 10%. Simple arithmetic gives risk parity at 40% stocks and 60% bonds. A 40/60 unleveraged portfolio delivers conservative returns, so leverage is added to bring the risk back up to S&P 500 levels while preserving the diversification benefit. The result, historically, is a higher Sharpe ratio than the S&P 500 alone.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Stocks and long-duration Treasuries have maintained a correlation of approximately zero over the long run, with a meaningfully negative correlation during large single-day equity declines. Hedgefundie's data showed that when the S&P drops 2% or more in a day, there is a 75% chance long-term Treasuries will rise. When the S&P drops 4% or more, the median long-term Treasury return for that day is positive 1 to 3%."
+  },
+  {
+   "n": 65,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Thread 1 (February 2019): Original allocation of 40% UPRO / 60% TMF, based on the risk parity volatility calculation. Starting position: $100,000, representing 15% of Hedgefundie's investable assets.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 66,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Thread 2 (August 2019): Allocation revised to 55% UPRO / 45% TMF. The shift reflected the view that stocks are the primary return driver and bonds serve as crash insurance, and that the original 60% TMF position was larger than necessary. The revision was made mid-strategy as the position had grown to approximately $143,000."
+  },
+  {
+   "n": 67,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A precedent for this type of portfolio existed before the Bogleheads thread: PIMCO's StocksPLUS Long Duration Fund (PSLDX), launched September 2007, holds effectively 100% S&P 500 futures plus 100% long bonds, achieving a similar leveraged risk parity exposure without daily resetting ETFs. PSLDX has a 5-star Morningstar rating and is available in some 401k plans.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 68,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Hedgefundie explicitly framed this as a high-risk satellite position for young investors, to be used with only a small portion of total net worth. His goal was to grow $100,000 to $10,000,000 over 20 to 25 years, at which point he planned to exit into unleveraged Treasuries.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 69,
+   "kind": "h2",
+   "region": "main",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 70,
+   "kind": "h3",
+   "region": "main",
+   "text": "Allocation (current standard)"
+  },
+  {
+   "n": 71,
+   "kind": "caption",
+   "region": "main",
+   "text": "HFEA current standard allocation"
+  },
+  {
+   "n": 72,
+   "kind": "table row",
+   "region": "main",
+   "text": "Asset | Ticker | Weight"
+  },
+  {
+   "n": 73,
+   "kind": "table row",
+   "region": "main",
+   "text": "ProShares UltraPro S&P 500 (3x S&P 500) | UPRO | 55%"
+  },
+  {
+   "n": 74,
+   "kind": "table row",
+   "region": "main",
+   "text": "Direxion Daily 20+ Year Treasury Bull 3X | TMF | 45%"
+  },
+  {
+   "n": 75,
+   "kind": "table",
+   "region": "main",
+   "text": "3 rows; first row: Asset | Ticker | Weight"
+  },
+  {
+   "n": 76,
+   "kind": "h3",
+   "region": "main",
+   "text": "Allocation (original Thread 1)"
+  },
+  {
+   "n": 77,
+   "kind": "caption",
+   "region": "main",
+   "text": "HFEA original allocation"
+  },
+  {
+   "n": 78,
+   "kind": "table row",
+   "region": "main",
+   "text": "Ticker | Weight | Basis"
+  },
+  {
+   "n": 79,
+   "kind": "table row",
+   "region": "main",
+   "text": "UPRO | 40% | Risk parity: S&P 500 vol ≈15%"
+  },
+  {
+   "n": 80,
+   "kind": "table row",
+   "region": "main",
+   "text": "TMF | 60% | Risk parity: LTT vol ≈10%"
+  },
+  {
+   "n": 81,
+   "kind": "table",
+   "region": "main",
+   "text": "3 rows; first row: Ticker | Weight | Basis"
+  },
+  {
+   "n": 82,
+   "kind": "h3",
+   "region": "main",
+   "text": "Cost of leverage (as of 2018)"
+  },
+  {
+   "n": 83,
+   "kind": "caption",
+   "region": "main",
+   "text": "HFEA cost of leverage"
+  },
+  {
+   "n": 84,
+   "kind": "table row",
+   "region": "main",
+   "text": "ETF | Expense Ratio | Borrow Rate (swap cost) | Total"
+  },
+  {
+   "n": 85,
+   "kind": "table row",
+   "region": "main",
+   "text": "UPRO | 0.92% | 2.87% | ≈3.79%"
+  },
+  {
+   "n": 86,
+   "kind": "table row",
+   "region": "main",
+   "text": "TMF | 1.09% | 1.83% | ≈2.92%"
+  },
+  {
+   "n": 87,
+   "kind": "table",
+   "region": "main",
+   "text": "3 rows; first row: ETF | Expense Ratio | Borrow Rate (swap cost) | Total"
+  },
+  {
+   "n": 88,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Borrowing costs are paid to swap counterparties above the short-term treasury rate. These costs reduce the effective leverage return and are embedded in the fund's daily performance; they are not charged separately."
+  },
+  {
+   "n": 89,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Rebalancing: Quarterly, calendar-based. No signal, no threshold. At the end of each quarter the portfolio is reset to the target weights. Hedgefundie chose quarterly rebalancing because it produced the best results in the backtest. Account type: strongly preferred in a tax-advantaged account (Roth IRA, Traditional IRA, 401k). M1 Finance was commonly used for automatic rebalancing via new deposit allocation without triggering sales."
+  },
+  {
+   "n": 90,
+   "kind": "h3",
+   "region": "main",
+   "text": "Community variants"
+  },
+  {
+   "n": 91,
+   "kind": "caption",
+   "region": "main",
+   "text": "HFEA community variants"
+  },
+  {
+   "n": 92,
+   "kind": "table row",
+   "region": "main",
+   "text": "Variant | Allocation | Notes"
+  },
+  {
+   "n": 93,
+   "kind": "table row",
+   "region": "main",
+   "text": "Original (Thread 1) | 40% UPRO / 60% TMF | Risk parity volatility calculation"
+  },
+  {
+   "n": 94,
+   "kind": "table row",
+   "region": "main",
+   "text": "Standard (Thread 2) | 55% UPRO / 45% TMF | Most referenced version"
+  },
+  {
+   "n": 95,
+   "kind": "table row",
+   "region": "main",
+   "text": "Tax-efficient | 43% UPRO / 57% EDV | Replaces 3x TMF with unleveraged long-duration bond ETF"
+  },
+  {
+   "n": 96,
+   "kind": "table row",
+   "region": "main",
+   "text": "Monthly rebalancing | 55% UPRO / 45% TMF | Same weights, higher frequency"
+  },
+  {
+   "n": 97,
+   "kind": "table row",
+   "region": "main",
+   "text": "Threshold-based | 55% UPRO / 45% TMF | Rebalances only when either position drifts beyond a defined band"
+  },
+  {
+   "n": 98,
+   "kind": "table",
+   "region": "main",
+   "text": "6 rows; first row: Variant | Allocation | Notes"
+  },
+  {
+   "n": 99,
+   "kind": "h3",
+   "region": "main",
+   "text": "Regime-adaptive variant: \"HFEA The Resurrection\""
+  },
+  {
+   "n": 100,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A Composer.trade implementation by u/derecknielsen that adds a two-factor regime-switching model on top of the static HFEA allocation. It rebalances quarterly and uses two moving average signals to detect the macro environment: SPY vs. its 200-day SMA for the equity trend, and TLT vs. its 400-day SMA for the interest rate environment."
+  },
+  {
+   "n": 101,
+   "kind": "caption",
+   "region": "main",
+   "text": "HFEA The Resurrection four-regime allocation"
+  },
+  {
+   "n": 102,
+   "kind": "table row",
+   "region": "main",
+   "text": "Equity trend | Bond trend | Allocation | Scenario"
+  },
+  {
+   "n": 103,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY > 200D SMA | TLT > 400D SMA | 55% UPRO / 45% TMF | Bull market, normal inflation"
+  },
+  {
+   "n": 104,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY > 200D SMA | TLT < 400D SMA | 55% UPRO / 45% TMV | Bull market, high inflation"
+  },
+  {
+   "n": 105,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY < 200D SMA | TLT > 400D SMA | 55% UPRO / 45% TMF | Bear market, normal inflation"
+  },
+  {
+   "n": 106,
+   "kind": "table row",
+   "region": "main",
+   "text": "SPY < 200D SMA | TLT < 400D SMA | 20% UPRO / 80% TMV | Bear market, high inflation"
+  },
+  {
+   "n": 107,
+   "kind": "table",
+   "region": "main",
+   "text": "5 rows; first row: Equity trend | Bond trend | Allocation | Scenario"
+  },
+  {
+   "n": 108,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "TMV (Direxion Daily 20+ Year Treasury Bear 3x Shares) replaces TMF when TLT is below its 400-day SMA, converting the long-bond position to a short-bond position. The 400-day TLT lookback is intentionally longer than the standard 200-day to avoid false triggers from temporary bond dips within a sustained rising-rate trend. In the high-inflation bear scenario, UPRO is reduced to 20% with 80% TMV, a defensive positioning that would have substantially reduced the 2022 drawdown."
+  },
+  {
+   "n": 109,
+   "kind": "text",
+   "region": "main",
+   "text": "Composer symphony ID:"
+  },
+  {
+   "n": 110,
+   "kind": "text",
+   "region": "main",
+   "text": "Cjb5ysKtJsPv6Tm3Fk0R"
+  },
+  {
+   "n": 111,
+   "kind": "h2",
+   "region": "main",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 112,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "UPRO launched June 2009; TMF launched April 2009. All backtests before those dates use a simulation formula applied to S&P 500 and long Treasury daily returns, accounting for daily leverage reset, borrowing costs (1-month LIBOR), and expense ratios. The formula, contributed by forum member EfficientInvestor, is:"
+  },
+  {
+   "n": 113,
+   "kind": "text",
+   "region": "main",
+   "text": "(Daily % of underlying total return index) × X − ER/250 − (X − 1) × (1-month LIBOR) × (days elapsed / 360)"
+  },
+  {
+   "n": 114,
+   "kind": "text",
+   "region": "main",
+   "text": "Where X is the leverage multiplier."
+  },
+  {
+   "n": 115,
+   "kind": "h3",
+   "region": "main",
+   "text": "Backtest 1987 to 2018 (40/60, quarterly rebalancing)"
+  },
+  {
+   "n": 116,
+   "kind": "list item",
+   "region": "main",
+   "text": "CAGR: approximately 23.75% (Hedgefundie's model) to approximately 19% (more conservative estimate from forum member vineviz accounting for additional volatility drag)"
+  },
+  {
+   "n": 117,
+   "kind": "list item",
+   "region": "main",
+   "text": "The wide range reflects methodological differences in modeling swap costs and daily volatility decay"
+  },
+  {
+   "n": 118,
+   "kind": "list item",
+   "region": "main",
+   "text": "Significantly outperformed the S&P 500 in total return over this period"
+  },
+  {
+   "n": 119,
+   "kind": "h3",
+   "region": "main",
+   "text": "The \"lost decade\" validation (January 2000 to September 2011)"
+  },
+  {
+   "n": 120,
+   "kind": "list item",
+   "region": "main",
+   "text": "S&P 500 total return: approximately 0% over the period"
+  },
+  {
+   "n": 121,
+   "kind": "list item",
+   "region": "main",
+   "text": "HFEA (simulated): approximately 11% CAGR over the same period"
+  },
+  {
+   "n": 122,
+   "kind": "list item",
+   "region": "main",
+   "text": "The risk parity structure preserved and grew capital during a period when a pure equity position went nowhere for over a decade",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 123,
+   "kind": "h3",
+   "region": "main",
+   "text": "Live tracking (May 2019 to April 2025)"
+  },
+  {
+   "n": 124,
+   "kind": "caption",
+   "region": "main",
+   "text": "HFEA live tracking"
+  },
+  {
+   "n": 125,
+   "kind": "table row",
+   "region": "main",
+   "text": "Date | Approximate total return from inception"
+  },
+  {
+   "n": 126,
+   "kind": "table row",
+   "region": "main",
+   "text": "May 2019 | +15%"
+  },
+  {
+   "n": 127,
+   "kind": "table row",
+   "region": "main",
+   "text": "August 2019 | +33%"
+  },
+  {
+   "n": 128,
+   "kind": "table row",
+   "region": "main",
+   "text": "Mid-August 2019 (allocation change to 55/45) | +43%"
+  },
+  {
+   "n": 129,
+   "kind": "table row",
+   "region": "main",
+   "text": "July 2021 | +105%"
+  },
+  {
+   "n": 130,
+   "kind": "table row",
+   "region": "main",
+   "text": "January 2022 | +150% (peak)"
+  },
+  {
+   "n": 131,
+   "kind": "table row",
+   "region": "main",
+   "text": "July 2022 | +14%"
+  },
+  {
+   "n": 132,
+   "kind": "table row",
+   "region": "main",
+   "text": "October 2022 | −14%"
+  },
+  {
+   "n": 133,
+   "kind": "table row",
+   "region": "main",
+   "text": "January 2023 | −10%"
+  },
+  {
+   "n": 134,
+   "kind": "table row",
+   "region": "main",
+   "text": "April 2025 | +37%"
+  },
+  {
+   "n": 135,
+   "kind": "table",
+   "region": "main",
+   "text": "10 rows; first row: Date | Approximate total return from inception"
+  },
+  {
+   "n": 136,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The January to October 2022 drawdown was approximately 65% from peak. By April 2025, the strategy had not recovered to its January 2022 high after more than three years."
+  },
+  {
+   "n": 137,
+   "kind": "h2",
+   "region": "main",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 138,
+   "kind": "text",
+   "region": "main",
+   "text": "Leveraged ETF Risk Notice"
+  },
+  {
+   "n": 139,
+   "kind": "text",
+   "region": "main",
+   "text": "UPRO"
+  },
+  {
+   "n": 140,
+   "kind": "text",
+   "region": "main",
+   "text": "and"
+  },
+  {
+   "n": 141,
+   "kind": "text",
+   "region": "main",
+   "text": "TMF"
+  },
+  {
+   "n": 142,
+   "kind": "text",
+   "region": "main",
+   "text": "are both 3x leveraged ETFs subject to daily reset and volatility decay. HFEA relies on a historically negative correlation between equities and long-duration Treasuries to moderate drawdowns. This correlation can and does break down, most notably in rising-rate environments where both positions decline simultaneously. The 2022 period demonstrated this directly. No rebalancing schedule eliminates the underlying leverage risk in either instrument."
+  },
+  {
+   "n": 143,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Correlation breakdown is the primary risk, and it materialized in 2022. Hedgefundie stated in the original February 2019 post: \"The main risk is that the S&P 500 and long Treasuries crash together in the same short period of time. In the past 30 years this has not happened, and I can't think of a real-world scenario in which this would happen.\" The Federal Reserve's 2022 rate hiking cycle proved this scenario does occur. Both UPRO and TMF fell together for an extended period with no offsetting hedge.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 144,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The pre-1982 data gap. Most backtests begin in 1987 or later, after the Volcker-era rate normalization had concluded. The 1970s stagflation period, during which both stocks and long bonds delivered poor real returns simultaneously for years at a time, is absent from the primary backtest window."
+  },
+  {
+   "n": 145,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Both instruments are 3x leveraged. Unlike a conventional 60/40 allocation where bonds are a lower-volatility stabilizer, here the bond position amplifies losses at 3x. A significant rise in long-term interest rates does not produce a modest bond decline; it produces a large TMF loss, compounded by volatility decay from the daily reset.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 146,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Long-duration Treasury sensitivity. TMF tracks the ICE U.S. Treasury 20+ Year Bond Index. Long-duration bonds are among the most interest-rate-sensitive instruments available. A 1% sustained increase in long-term rates produces a proportionally large price decline in 20+ year bonds, then tripled."
+  },
+  {
+   "n": 147,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Volatility decay on both sides. Each fund independently undergoes daily compounding. In volatile sideways markets, both positions decay without the correlation benefit that manifests in trending markets."
+  },
+  {
+   "n": 148,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Backtest optimism. The 23.75% CAGR figure from Hedgefundie's original model has been independently estimated as closer to 19% when swap costs and daily drag are more conservatively modeled. Live results since 2019 have substantially underperformed the backtest range.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 149,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Tax drag in taxable accounts. Quarterly rebalancing in a taxable account generates short-term capital gains every time a winning position is trimmed. Over a decade of quarterly rebalancing, this meaningfully erodes after-tax compounding."
+  },
+  {
+   "n": 150,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Not for large portfolio allocations. Hedgefundie invested $100,000, representing 15% of his investable assets at the time, and stated explicitly that losing this amount would not materially change the course of his retirement savings. The strategy is not suited to a majority or core portfolio position."
+  },
+  {
+   "n": 151,
+   "kind": "h2",
+   "region": "main",
+   "text": "Resources"
+  },
+  {
+   "n": 152,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Hedgefundie's Excellent Adventure originated in two Bogleheads forum threads in 2019, both authored by the user \"Hedgefundie\":"
+  },
+  {
+   "n": 153,
+   "kind": "list item",
+   "region": "main",
+   "text": "Thread 1 (February 2019): Introduced the 40/60 UPRO/TMF strategy, the risk parity theoretical basis, and the 1987–2018 backtest",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 154,
+   "kind": "list item",
+   "region": "main",
+   "text": "Thread 2 (August 2019): Revised the allocation to 55/45, continued the live tracking"
+  },
+  {
+   "n": 155,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Backtesting was conducted using Portfolio Visualizer (portfoliovisualizer.com) with the simulated pre-2009 dataset contributed by forum member EfficientInvestor."
+  },
+  {
+   "n": 156,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "PIMCO StocksPLUS Long Duration (PSLDX) is a related analogue that has operated since September 2007 with a similar risk parity structure using futures and active bond management.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 157,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The hfea.neocities.org community site documents live performance tracking, variants, and community discussion beyond the original threads."
+  },
+  {
+   "n": 158,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io",
+   "flags": []
+  },
+  {
+   "n": 159,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato."
+  },
+  {
+   "n": 160,
+   "kind": "script",
+   "region": "body",
+   "text": "js/main.js"
+  }
+ ],
+ "linked scripts": {
+  "js/main.js": {}
+ }
+}

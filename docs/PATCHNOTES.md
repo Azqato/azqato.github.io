@@ -5,6 +5,40 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.11.0] - 2026-10-02
+
+Azqato Invests moves in. The investing site built in its own repository (stocks, vix and leverage
+merged with this site's invests.html, 21 pages) now lives in `invests/`, served at
+https://azqato.com/invests/. It is self-contained for now: its pages, assets, generator, checks and
+docs are all inside the folder, and its own docs (invests/docs/PRD.md) govern it. Folding it into
+this site's structure is planned for later. Its history stays in its own repository.
+
+### Added
+- `invests/`: the 21 pages, assets, sitemap.xml, scripts and docs of Azqato Invests.
+- `_redirects`: Cloudflare Pages rules sending `/invests` and `/invests.html` to `/invests/` in one hop,
+so the old page and the new folder never compete for the address.
+- robots.txt: a second Sitemap line for https://azqato.com/invests/sitemap.xml.
+
+### Changed
+- `invests.html` is now a one-file redirect page to `invests/` (the first compatibility entry under the
+removal policy). Its content lives on in the new Home and Resources pages, word for word.
+- The nav's Invests item, the Home explore card and the Links page button point at `invests/`
+(tools/build-nav.py updated and rerun).
+- sitemap.xml: the Invests entry is https://azqato.com/invests/.
+- Links to the new site use `invests/index.html`, so they also work when a page is opened from disk
+(a folder link there shows a file listing); Cloudflare Pages serves it as /invests/.
+- .githooks/pre-commit skips `invests/inventory/`: word-for-word records of the source pages, not pages.
+Azqato Invests' pages are checked as usual (their missing-value mark is now an en dash).
+- docs/PRD.md: site structure, folder structure, public surface and compatibility entries.
+
+### Verified
+- Served from this repository's root in headless Edge: all 21 pages under /invests/ in light and dark,
+no script errors, no failed requests, no links leaving the folder; the screener loads its data and the
+VIX tools read LIVE; invests.html lands on /invests/. `python invests/scripts/check.py`: 0 failures.
+- Not verified: the `_redirects` rules (Cloudflare only) and the live deploy; nothing is pushed.
+
+---
+
 ## [2.10.7] - 2026-09-29
 
 The canonical domain is a **Cloudflare Pages** deployment, not GitHub Pages behind a proxy. Every

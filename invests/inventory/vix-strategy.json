@@ -1,0 +1,449 @@
+{
+ "source": "vix/strategy.html",
+ "head": [
+  "title: Live Strategy Dashboard — VIX Strategy",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: Real-time VIX-driven ETF allocation dashboard. See the current portfolio tier and allocation breakdown.",
+  "og:title: VIX Strategy — Live Dashboard",
+  "og:description: Real-time VIX-driven ETF allocation. Updated every 60 seconds.",
+  "og:type: website",
+  "link icon: assets/img/favicon.svg",
+  "link stylesheet: assets/css/styles.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "image",
+   "region": "nav",
+   "text": "VIX Strategy",
+   "src": "assets/img/logo.svg"
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "VIX Strategy",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "link",
+   "region": "nav",
+   "text": "About",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Dashboard",
+   "href": "strategy.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "link",
+   "region": "nav",
+   "text": "Custom",
+   "href": "custom.html",
+   "flags": []
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 7,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 8,
+   "kind": "text",
+   "region": "main",
+   "text": "--"
+  },
+  {
+   "n": 9,
+   "kind": "text",
+   "region": "main",
+   "text": "CBOE VIX"
+  },
+  {
+   "n": 10,
+   "kind": "text",
+   "region": "main",
+   "text": "LOADING"
+  },
+  {
+   "n": 11,
+   "kind": "text",
+   "region": "main",
+   "text": "Fetching data…"
+  },
+  {
+   "n": 12,
+   "kind": "button",
+   "region": "main",
+   "text": "↻ Refresh"
+  },
+  {
+   "n": 13,
+   "kind": "text",
+   "region": "main",
+   "text": "Waiting for VIX data…"
+  },
+  {
+   "n": 14,
+   "kind": "h2",
+   "region": "main",
+   "text": "Current Allocation"
+  },
+  {
+   "n": 15,
+   "kind": "chart canvas",
+   "region": "main",
+   "text": "Donut chart showing current ETF allocation percentages",
+   "id": "allocationChart"
+  },
+  {
+   "n": 16,
+   "kind": "text",
+   "region": "main",
+   "text": "BIL"
+  },
+  {
+   "n": 17,
+   "kind": "text",
+   "region": "main",
+   "text": "--"
+  },
+  {
+   "n": 18,
+   "kind": "text",
+   "region": "main",
+   "text": "SPY"
+  },
+  {
+   "n": 19,
+   "kind": "text",
+   "region": "main",
+   "text": "--"
+  },
+  {
+   "n": 20,
+   "kind": "text",
+   "region": "main",
+   "text": "QQQ"
+  },
+  {
+   "n": 21,
+   "kind": "text",
+   "region": "main",
+   "text": "--"
+  },
+  {
+   "n": 22,
+   "kind": "text",
+   "region": "main",
+   "text": "TQQQ"
+  },
+  {
+   "n": 23,
+   "kind": "text",
+   "region": "main",
+   "text": "--"
+  },
+  {
+   "n": 24,
+   "kind": "h2",
+   "region": "main",
+   "text": "Allocation Breakdown"
+  },
+  {
+   "n": 25,
+   "kind": "table row",
+   "region": "main",
+   "text": "Ticker | Allocation | ETF Name | Description"
+  },
+  {
+   "n": 26,
+   "kind": "table row",
+   "region": "main",
+   "text": "Loading allocation data…"
+  },
+  {
+   "n": 27,
+   "kind": "table",
+   "region": "main",
+   "text": "2 rows; first row: Ticker | Allocation | ETF Name | Description"
+  },
+  {
+   "n": 28,
+   "kind": "h2",
+   "region": "main",
+   "text": "VIX Tier Reference"
+  },
+  {
+   "n": 29,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "All five tiers and their normalized allocations. The active tier is highlighted based on the current live VIX reading."
+  },
+  {
+   "n": 30,
+   "kind": "table row",
+   "region": "main",
+   "text": "VIX Range / Fear Level | BIL | SPY | QQQ | TQQQ"
+  },
+  {
+   "n": 31,
+   "kind": "table",
+   "region": "main",
+   "text": "1 rows; first row: VIX Range / Fear Level | BIL | SPY | QQQ | TQQQ"
+  },
+  {
+   "n": 32,
+   "kind": "h2",
+   "region": "main",
+   "text": "Strategy Summary"
+  },
+  {
+   "n": 33,
+   "kind": "summary",
+   "region": "main",
+   "text": "Core Philosophy & Mechanics"
+  },
+  {
+   "n": 34,
+   "kind": "h4",
+   "region": "main",
+   "text": "Core Thesis"
+  },
+  {
+   "n": 35,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The VIX is a mean-reverting fear gauge. When markets price in maximum fear, they historically precede the strongest recoveries. This strategy mechanically increases leverage exposure when fear is highest and reduces it during complacency."
+  },
+  {
+   "n": 36,
+   "kind": "h4",
+   "region": "main",
+   "text": "The Four ETFs"
+  },
+  {
+   "n": 37,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "BIL — SPDR Bloomberg 1–3 Month T-Bill ETF. Near-cash stability. Preserves capital in calm markets; reduced as crisis opportunity grows."
+  },
+  {
+   "n": 38,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "SPY — SPDR S&P 500 ETF. Broad market exposure. The steady core position across all tiers."
+  },
+  {
+   "n": 39,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "QQQ — Invesco Nasdaq-100 ETF. Growth and tech concentration. Increases meaningfully as VIX rises."
+  },
+  {
+   "n": 40,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "TQQQ — ProShares UltraPro QQQ 3× Leveraged ETF. Maximum recovery capture at peak fear. Highest risk, highest reward potential. Never exceeds 25% of the portfolio.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 41,
+   "kind": "h4",
+   "region": "main",
+   "text": "Rebalancing Rules"
+  },
+  {
+   "n": 42,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Rebalance monthly on the first trading day of each month. Additionally, rebalance immediately when the VIX crosses into a different tier — either up or down."
+  },
+  {
+   "n": 43,
+   "kind": "h4",
+   "region": "main",
+   "text": "Time Horizon"
+  },
+  {
+   "n": 44,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Minimum 10 years. TQQQ's volatility decay requires extended compounding to overcome. This strategy is inappropriate for any capital needed within 5 years."
+  },
+  {
+   "n": 45,
+   "kind": "h4",
+   "region": "main",
+   "text": "Risk Acknowledgment",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 46,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This is not financial advice. For educational and informational purposes only. Past performance is not indicative of future results. TQQQ can lose 70–95% of its value in severe bear markets. Never invest more than you can afford to lose completely.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 47,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Learn why this strategy is built the way it is."
+  },
+  {
+   "n": 48,
+   "kind": "link",
+   "region": "footer",
+   "text": "← Read the Full Pitch",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 49,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "This is not financial advice. For educational and informational purposes only. Past performance is not indicative of future results.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 50,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "© 2026 VIX Strategy. Built with no backend. Powered by VIX."
+  },
+  {
+   "n": 51,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 52,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato"
+  },
+  {
+   "n": 53,
+   "kind": "script",
+   "region": "body",
+   "text": "https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+  },
+  {
+   "n": 54,
+   "kind": "script",
+   "region": "body",
+   "text": "data/vix.js"
+  },
+  {
+   "n": 55,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/vix.js"
+  },
+  {
+   "n": 56,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/strategy.js"
+  },
+  {
+   "n": 57,
+   "kind": "script",
+   "region": "body",
+   "text": "assets/js/chart.js"
+  },
+  {
+   "n": 58,
+   "kind": "script",
+   "region": "body",
+   "text": "inline, 7094 characters",
+   "storage keys": [
+    "vix_last_known"
+   ],
+   "functions": [
+    "startLoadingCounter",
+    "stopLoadingCounter",
+    "formatTimestamp",
+    "setStatus",
+    "updateVIXDisplay",
+    "updateTierBanner",
+    "updateLegend",
+    "updateAllocationTable",
+    "renderTierReference",
+    "refresh",
+    "paintCached"
+   ],
+   "sets innerHTML": true
+  }
+ ],
+ "linked scripts": {
+  "assets/js/vix.js": {
+   "urls": [
+    "https://api.allorigins.win/raw?url=https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX",
+    "https://api.allorigins.win/raw?url=https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX"
+   ],
+   "storage keys": [
+    "CACHE_KEY"
+   ],
+   "functions": [
+    "parseResponse",
+    "fetchFromURL",
+    "getDataFileVIX",
+    "getCachedVIX",
+    "saveToCache",
+    "fetchVIX"
+   ]
+  },
+  "assets/js/strategy.js": {
+   "functions": [
+    "normalize",
+    "getTier",
+    "getAllocation",
+    "getTierLabel"
+   ]
+  },
+  "assets/js/chart.js": {
+   "functions": [
+    "initChart",
+    "updateChart"
+   ]
+  }
+ }
+}

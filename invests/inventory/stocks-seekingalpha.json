@@ -1,0 +1,856 @@
+{
+ "source": "stocks/seekingalpha.html",
+ "head": [
+  "title: How to Build a Stock Watchlist in Seeking Alpha For Free",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology.",
+  "link canonical: https://azqato.github.io/stocks/seekingalpha.html",
+  "google-site-verification: p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4",
+  "og:type: website",
+  "og:url: https://azqato.github.io/stocks/seekingalpha.html",
+  "og:title: How to Build a Stock Watchlist in Seeking Alpha For Free",
+  "og:description: Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology.",
+  "og:image: https://azqato.github.io/stocks/og-image.png",
+  "twitter:card: summary_large_image",
+  "twitter:title: How to Build a Stock Watchlist in Seeking Alpha For Free",
+  "twitter:description: Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology.",
+  "twitter:image: https://azqato.github.io/stocks/og-image.png",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>",
+  "link stylesheet: style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "text",
+   "region": "aside",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 3,
+   "kind": "control",
+   "region": "aside",
+   "text": "type=checkbox id=nav-toggle",
+   "tag": "input"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Philosophy",
+   "href": "philosophy.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Philosophy"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "Metrics",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Metrics"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "Screener",
+   "href": "screener.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Screener"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "Market Overview",
+   "href": "market.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Market Overview"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Finviz",
+   "href": "finviz.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Finviz"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "SeekingAlpha",
+   "href": "seekingalpha.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "SeekingAlpha"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Indices",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Indices"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "FAQ",
+   "href": "faq.html",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "FAQ"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Leveraged Strategies",
+   "href": "https://azqato.github.io/leverage/",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 25,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 1: Create Account",
+   "href": "#section-account",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 1: Create Account"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 2: Create Portfolio",
+   "href": "#section-portfolio-create",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 2: Create Portfolio"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 3: Add Tickers",
+   "href": "#section-tickers",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 3: Add Tickers"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 4: Configure Columns",
+   "href": "#section-columns",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 4: Configure Columns"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "Step 5: Set Sort Order",
+   "href": "#section-sort",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Step 5: Set Sort Order"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "Your Watchlist Is Ready",
+   "href": "#section-done",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Your Watchlist Is Ready"
+  },
+  {
+   "n": 38,
+   "kind": "list item",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 39,
+   "kind": "text",
+   "region": "aside",
+   "text": "Educational use only."
+  },
+  {
+   "n": 40,
+   "kind": "text",
+   "region": "aside",
+   "text": "Not financial advice."
+  },
+  {
+   "n": 41,
+   "kind": "h1",
+   "region": "main",
+   "text": "How to Build a Stock Watchlist in Seeking Alpha For Free"
+  },
+  {
+   "n": 42,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Step-by-step guide to creating a free Seeking Alpha account and configuring a portfolio to track individual stocks with the exact 12-column layout used in this methodology."
+  },
+  {
+   "n": 43,
+   "kind": "text",
+   "region": "main",
+   "text": "📋 12-Column Tracking Setup"
+  },
+  {
+   "n": 44,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Free account required. Seeking Alpha offers a free tier that includes portfolio creation and all 12 columns covered in this guide. No paid subscription is needed to follow these steps. The free account requires an email address and takes about two minutes to set up."
+  },
+  {
+   "n": 45,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 1: Create a Free Account"
+  },
+  {
+   "n": 46,
+   "kind": "text",
+   "region": "main",
+   "text": "1"
+  },
+  {
+   "n": 47,
+   "kind": "h3",
+   "region": "main",
+   "text": "Go to Seeking Alpha and sign up"
+  },
+  {
+   "n": 48,
+   "kind": "link",
+   "region": "main",
+   "text": "seekingalpha.com",
+   "href": "https://seekingalpha.com",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 49,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Navigate to seekingalpha.com and click the Sign Up button in the top right corner of the page."
+  },
+  {
+   "n": 50,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "You can register with an email address or sign in through a Google account. Either works. Seeking Alpha does not require a credit card for the free tier."
+  },
+  {
+   "n": 51,
+   "kind": "text",
+   "region": "main",
+   "text": "2"
+  },
+  {
+   "n": 52,
+   "kind": "h3",
+   "region": "main",
+   "text": "Complete registration"
+  },
+  {
+   "n": 53,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Enter your email address, create a password, and confirm your account through the verification email Seeking Alpha sends. The process takes under two minutes."
+  },
+  {
+   "n": 54,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "When asked about investment interests or experience level, you can answer or skip; these do not affect access to the portfolio feature used in this guide."
+  },
+  {
+   "n": 55,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Note: Seeking Alpha will prompt you to start a paid trial at various points. You do not need to accept. The free account gives full access to the portfolio columns needed for this methodology."
+  },
+  {
+   "n": 56,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 2: Create a Portfolio"
+  },
+  {
+   "n": 57,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Seeking Alpha uses \"Portfolios\" as the container for watchlists. A portfolio can hold any list of tickers and displays live metric data for each one. You will create one portfolio and configure it as your primary watchlist."
+  },
+  {
+   "n": 58,
+   "kind": "text",
+   "region": "main",
+   "text": "1"
+  },
+  {
+   "n": 59,
+   "kind": "h3",
+   "region": "main",
+   "text": "Navigate to the portfolio page"
+  },
+  {
+   "n": 60,
+   "kind": "link",
+   "region": "main",
+   "text": "seekingalpha.com/account/portfolio",
+   "href": "https://seekingalpha.com/account/portfolio",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 61,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Go directly to: seekingalpha.com/account/portfolio"
+  },
+  {
+   "n": 62,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "You can also reach it by clicking Portfolio in the top navigation bar after signing in."
+  },
+  {
+   "n": 63,
+   "kind": "text",
+   "region": "main",
+   "text": "2"
+  },
+  {
+   "n": 64,
+   "kind": "h3",
+   "region": "main",
+   "text": "Create a new portfolio"
+  },
+  {
+   "n": 65,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "On the portfolio page, look for a + New Portfolio or Create Portfolio button. It is typically in the left sidebar or the top right area of the page."
+  },
+  {
+   "n": 66,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Give the portfolio a name. Something like Individual Stocks or Watchlist works well. Click Create or Save."
+  },
+  {
+   "n": 67,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 3: Add Tickers"
+  },
+  {
+   "n": 68,
+   "kind": "text",
+   "region": "main",
+   "text": "1"
+  },
+  {
+   "n": 69,
+   "kind": "h3",
+   "region": "main",
+   "text": "Open your new portfolio"
+  },
+  {
+   "n": 70,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Click the portfolio you just created. You will see an empty table with some default columns. The columns will be configured in the next section."
+  },
+  {
+   "n": 71,
+   "kind": "text",
+   "region": "main",
+   "text": "2"
+  },
+  {
+   "n": 72,
+   "kind": "h3",
+   "region": "main",
+   "text": "Add stock symbols"
+  },
+  {
+   "n": 73,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Look for an Add Symbol button or a search field at the top of the portfolio table. Click it and type a ticker symbol (e.g., NVDA). Select the correct result from the dropdown."
+  },
+  {
+   "n": 74,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Repeat for each stock you want to track. You can add any number of tickers at this stage; they can also be added or removed later."
+  },
+  {
+   "n": 75,
+   "kind": "list item",
+   "region": "main",
+   "text": "Type the exact ticker symbol for the fastest match (e.g., AAPL, MSFT, PLTR)"
+  },
+  {
+   "n": 76,
+   "kind": "list item",
+   "region": "main",
+   "text": "If a company has both common stock and preferred shares, select the common stock (no letter suffix)"
+  },
+  {
+   "n": 77,
+   "kind": "list item",
+   "region": "main",
+   "text": "Seeking Alpha covers US equities, ETFs, and many international ADRs"
+  },
+  {
+   "n": 78,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 4: Configure the 12 Columns"
+  },
+  {
+   "n": 79,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This is the core of the setup. Seeking Alpha's portfolio table supports fully custom columns. You will remove the default columns you do not need and add the 12 specific columns used in this methodology."
+  },
+  {
+   "n": 80,
+   "kind": "text",
+   "region": "main",
+   "text": "1"
+  },
+  {
+   "n": 81,
+   "kind": "h3",
+   "region": "main",
+   "text": "Open the column customizer"
+  },
+  {
+   "n": 82,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "In your portfolio table, look for a Customize button or a gear / column settings icon near the top right of the table. Click it to open the column configuration panel."
+  },
+  {
+   "n": 83,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The panel shows available metric categories on one side and your currently active columns on the other. You can search for a metric by name using the search field at the top of the panel."
+  },
+  {
+   "n": 84,
+   "kind": "text",
+   "region": "main",
+   "text": "2"
+  },
+  {
+   "n": 85,
+   "kind": "h3",
+   "region": "main",
+   "text": "Remove default columns you do not need"
+  },
+  {
+   "n": 86,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Seeking Alpha adds several columns by default (Dividend Yield, P/E GAAP, etc.). Uncheck or remove any column not in the list below to keep the table focused on the 12 signals used in this methodology."
+  },
+  {
+   "n": 87,
+   "kind": "text",
+   "region": "main",
+   "text": "3"
+  },
+  {
+   "n": 88,
+   "kind": "h3",
+   "region": "main",
+   "text": "Add each of the 12 columns"
+  },
+  {
+   "n": 89,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Search for and enable each column in the table below. The \"Search For\" column shows the exact term to type in Seeking Alpha's column search field."
+  },
+  {
+   "n": 90,
+   "kind": "table row",
+   "region": "main",
+   "text": "# | Column | Search For in Seeking Alpha | Category"
+  },
+  {
+   "n": 91,
+   "kind": "table row",
+   "region": "main",
+   "text": "1 | Symbol | Default (always present) | N/A"
+  },
+  {
+   "n": 92,
+   "kind": "table row",
+   "region": "main",
+   "text": "2 | Market Cap | Market Cap | Overview"
+  },
+  {
+   "n": 93,
+   "kind": "table row",
+   "region": "main",
+   "text": "3 | Price | Price | Overview"
+  },
+  {
+   "n": 94,
+   "kind": "table row",
+   "region": "main",
+   "text": "4 | Change % | % Change | Overview"
+  },
+  {
+   "n": 95,
+   "kind": "table row",
+   "region": "main",
+   "text": "5 | Revenue Growth FWD | Revenue Growth (FWD) | Growth"
+  },
+  {
+   "n": 96,
+   "kind": "table row",
+   "region": "main",
+   "text": "6 | EPS Growth FWD | EPS Growth (FWD) | Growth"
+  },
+  {
+   "n": 97,
+   "kind": "table row",
+   "region": "main",
+   "text": "7 | P/E FWD | P/E Non-GAAP (FWD) | Valuation"
+  },
+  {
+   "n": 98,
+   "kind": "table row",
+   "region": "main",
+   "text": "8 | PEG FWD | PEG Non-GAAP (FWD) | Valuation"
+  },
+  {
+   "n": 99,
+   "kind": "table row",
+   "region": "main",
+   "text": "9 | Total Cash | Total Cash | Financials"
+  },
+  {
+   "n": 100,
+   "kind": "table row",
+   "region": "main",
+   "text": "10 | Total Debt | Total Debt | Financials"
+  },
+  {
+   "n": 101,
+   "kind": "table row",
+   "region": "main",
+   "text": "11 | RSI | RSI (14) | Technical"
+  },
+  {
+   "n": 102,
+   "kind": "table row",
+   "region": "main",
+   "text": "12 | 52W Range | 52 Week Range | Technical"
+  },
+  {
+   "n": 103,
+   "kind": "table",
+   "region": "main",
+   "text": "13 rows; first row: # | Column | Search For in Seeking Alpha | Category"
+  },
+  {
+   "n": 104,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Non-GAAP vs. GAAP: For P/E and PEG, Seeking Alpha offers both GAAP and Non-GAAP versions. Select Non-GAAP. Non-GAAP excludes stock-based compensation and one-time items, giving a cleaner picture of operating earnings. This is the variant used throughout this methodology."
+  },
+  {
+   "n": 105,
+   "kind": "link",
+   "region": "main",
+   "text": "Indices page",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 106,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "About the two Technical columns: RSI and 52W Range are tracked for context, not for stock decisions. In this methodology, technical signals time index and ETF purchases (see the Indices page); for the individual stocks on this watchlist, the buy decision rests on the growth, valuation, and balance sheet columns."
+  },
+  {
+   "n": 107,
+   "kind": "text",
+   "region": "main",
+   "text": "4"
+  },
+  {
+   "n": 108,
+   "kind": "h3",
+   "region": "main",
+   "text": "Apply and save the column layout"
+  },
+  {
+   "n": 109,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Click Apply or Save in the column customizer. Some Seeking Alpha views save automatically when you make changes; others require an explicit save. If you see a save button, click it before navigating away."
+  },
+  {
+   "n": 110,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 12 columns should now appear in your portfolio table with live data for each ticker."
+  },
+  {
+   "n": 111,
+   "kind": "h2",
+   "region": "main",
+   "text": "Step 5: Set the Sort Order"
+  },
+  {
+   "n": 112,
+   "kind": "text",
+   "region": "main",
+   "text": "1"
+  },
+  {
+   "n": 113,
+   "kind": "h3",
+   "region": "main",
+   "text": "Sort by Symbol, ascending (A to Z)"
+  },
+  {
+   "n": 114,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Click the Symbol column header in the portfolio table. If the sort arrow points down (Z to A), click the header again to reverse it to ascending (A to Z)."
+  },
+  {
+   "n": 115,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A small arrow indicator on the column header shows the current sort direction. An upward arrow means ascending (A-Z). This is the default sort order for the watchlist."
+  },
+  {
+   "n": 116,
+   "kind": "list item",
+   "region": "main",
+   "text": "Ascending A-Z makes it easy to scan for a specific ticker quickly"
+  },
+  {
+   "n": 117,
+   "kind": "list item",
+   "region": "main",
+   "text": "You can temporarily re-sort by any other column (e.g., click PEG FWD to see the lowest-PEG names first) and then reset to Symbol A-Z when done"
+  },
+  {
+   "n": 118,
+   "kind": "h2",
+   "region": "main",
+   "text": "Your Watchlist Is Ready"
+  },
+  {
+   "n": 119,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Once the 12 columns are configured and tickers are added, the portfolio table updates automatically as company data changes. After earnings reports, analyst estimate revisions, or significant price moves, the values in your watchlist will reflect the latest available data without any manual input."
+  },
+  {
+   "n": 120,
+   "kind": "link",
+   "region": "main",
+   "text": "Metrics glossary",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 121,
+   "kind": "link",
+   "region": "main",
+   "text": "home page",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 122,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Use the Metrics glossary to understand what each column is measuring and the target ranges to look for. The table on the home page gives a quick-reference guide to strong signal values and caution zones for each metric.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 123,
+   "kind": "link",
+   "region": "main",
+   "text": "Use the Finviz screener guide",
+   "href": "finviz.html",
+   "flags": []
+  },
+  {
+   "n": 124,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Not sure how to find new stocks to add? Use the Finviz screener guide to surface candidates that match the methodology before adding them here."
+  },
+  {
+   "n": 125,
+   "kind": "text",
+   "region": "footer",
+   "text": "Built by"
+  },
+  {
+   "n": 126,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io/",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 127,
+   "kind": "text",
+   "region": "footer",
+   "text": "."
+  },
+  {
+   "n": 128,
+   "kind": "script",
+   "region": "body",
+   "text": "script.js"
+  }
+ ],
+ "linked scripts": {
+  "script.js": {}
+ }
+}

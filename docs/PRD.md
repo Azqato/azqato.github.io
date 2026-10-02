@@ -78,7 +78,7 @@ There are **12** HTML pages.
 | Landing        | `index.html`          | Yes (Home) | Introductory front door: Discord CTA plus explore grid          |
 | About          | `about.html`          | Yes        | Bio and personal pitch card                                     |
 | Discord        | `discord.html`        | Yes        | Four Discord server cards with permanent invite links           |
-| Invests        | `invests.html`        | Yes        | Seven investing project cards plus a 16-category curated resource hub |
+| Invests        | `invests/` (Azqato Invests) | Yes   | Since v2.11.0 a 21-page site in its own folder; `invests.html` is a redirect page to it |
 | Codes          | `codes.html`          | Yes        | Three cards: Prompts, Tools, and the GitHub org                 |
 | Music          | `music.html`          | Yes        | Full-screen stage visualizer, two Mixcloud embeds, three platform links |
 | Links          | `links.html`          | Yes        | All platforms and channels grouped into six categories          |
@@ -261,7 +261,11 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── index.html                - landing page: intro, Discord CTA, explore grid
 ├── about.html                - bio and pitch card
 ├── discord.html              - four community server cards
-├── invests.html              - investing projects plus 16-category resource hub
+├── invests.html              - redirect page to invests/ (since v2.11.0)
+├── _redirects                - Cloudflare Pages rules: /invests and /invests.html to /invests/
+├── invests/                  - Azqato Invests, a self-contained 21-page site with its own
+│                               generator, checks and docs (invests/README.md, invests/docs/);
+│                               its rules apply inside the folder; built by invests/scripts/site.py
 ├── codes.html                - AI tooling: Prompts, Tools, GitHub
 ├── music.html                - stage visualizer, native track player, Mixcloud embeds, platform links
 ├── links.html                - every platform, grouped
@@ -973,7 +977,7 @@ The project had no stated removal rule before this audit. The default is adopted
 
 The old filename stays in place carrying that content. It costs one small file and it keeps every existing inbound link working, including links posted in Discord years ago, which is the actual failure mode this guards against for a site whose traffic arrives through chat messages and video descriptions.
 
-To date this has never been needed: no page has ever been removed or renamed. The first time it is, follow the rule above rather than deciding fresh.
+First used in v2.11.0 for invests.html. The first time it is, follow the rule above rather than deciding fresh.
 
 ## Public surface
 
@@ -986,7 +990,8 @@ Specific enough to answer the question for any given file:
 | `/accounts.html` | Page | Not in nav; linked from `index.html` and `links.html` |
 | `/codes.html` | Page | |
 | `/discord.html` | Page | |
-| `/invests.html` | Page | |
+| `/invests.html` | Redirect page | To `/invests/` since v2.11.0 (compatibility entry) |
+| `/invests/` and its 21 pages | Pages | Azqato Invests; listed in invests/sitemap.xml |
 | `/links.html` | Page | |
 | `/music.html` | Page | |
 | `/privacy-policy.html` | Page | Not in nav; linked from `links.html` |
@@ -1007,7 +1012,9 @@ Specific enough to answer the question for any given file:
 
 ## Compatibility entries
 
-There are currently none. When one is created, it is:
+- `/invests.html` (v2.11.0): a one-file redirect page to `/invests/`, plus `_redirects` rules on Cloudflare Pages so `/invests` and `/invests.html` reach `/invests/` in one hop.
+
+When one is created, it is:
 
 - **Permanent.** A compatibility entry is never removed on the grounds that "nobody uses it any more", because the traffic it serves is invisible from here.
 - **Never chained.** A redirect resolves to a real page in one hop. If the target later moves, the original redirect is repointed at the new final destination rather than at the second redirect.

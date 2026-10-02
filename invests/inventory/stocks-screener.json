@@ -1,0 +1,980 @@
+{
+ "source": "stocks/screener.html",
+ "head": [
+  "title: Nasdaq 100 Screener",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: An interactive screener that ranks the Nasdaq 100, S&P 500, Vanguard Growth, Value, Dividend, and International (VXUS) top-100 lists, the whole US market (about 3,500 stocks), and a curated ETF list against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.",
+  "link canonical: https://azqato.github.io/stocks/screener.html",
+  "google-site-verification: p91IiuxXa8OCaa0C8U8XFgr7yP2QNWDE1fCN8PcZOp4",
+  "og:type: website",
+  "og:url: https://azqato.github.io/stocks/screener.html",
+  "og:title: Nasdaq 100 Screener",
+  "og:description: An interactive Nasdaq 100 screener that rates each stock against the Azqato methodology factors. Runs entirely in your browser.",
+  "og:image: https://azqato.github.io/stocks/og-image.png",
+  "twitter:card: summary_large_image",
+  "twitter:title: Nasdaq 100 Screener",
+  "twitter:description: An interactive Nasdaq 100 screener that rates each stock against the Azqato methodology factors. Runs entirely in your browser.",
+  "twitter:image: https://azqato.github.io/stocks/og-image.png",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>",
+  "link stylesheet: style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "text",
+   "region": "aside",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 3,
+   "kind": "control",
+   "region": "aside",
+   "text": "type=checkbox id=nav-toggle",
+   "tag": "input"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "Philosophy",
+   "href": "philosophy.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Philosophy"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "Metrics",
+   "href": "metrics.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Metrics"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "Screener",
+   "href": "screener.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Screener"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "Market Overview",
+   "href": "market.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Market Overview"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Finviz",
+   "href": "finviz.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Finviz"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "SeekingAlpha",
+   "href": "seekingalpha.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "SeekingAlpha"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Indices",
+   "href": "indices.html",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Indices"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "FAQ",
+   "href": "faq.html",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "FAQ"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Leveraged Strategies",
+   "href": "https://azqato.github.io/leverage/",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 25,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 26,
+   "kind": "text",
+   "region": "aside",
+   "text": "Educational use only."
+  },
+  {
+   "n": 27,
+   "kind": "text",
+   "region": "aside",
+   "text": "Not financial advice."
+  },
+  {
+   "n": 28,
+   "kind": "text",
+   "region": "header",
+   "text": "📈"
+  },
+  {
+   "n": 29,
+   "kind": "text",
+   "region": "header",
+   "text": "Nasdaq 100"
+  },
+  {
+   "n": 30,
+   "kind": "text",
+   "region": "header",
+   "text": "Screener"
+  },
+  {
+   "n": 31,
+   "kind": "text",
+   "region": "header",
+   "text": "Azqato"
+  },
+  {
+   "n": 32,
+   "kind": "button",
+   "region": "header",
+   "text": "Nasdaq 100"
+  },
+  {
+   "n": 33,
+   "kind": "button",
+   "region": "header",
+   "text": "S&P 500"
+  },
+  {
+   "n": 34,
+   "kind": "button",
+   "region": "header",
+   "text": "MAG 10"
+  },
+  {
+   "n": 35,
+   "kind": "button",
+   "region": "header",
+   "text": "Growth"
+  },
+  {
+   "n": 36,
+   "kind": "button",
+   "region": "header",
+   "text": "Value"
+  },
+  {
+   "n": 37,
+   "kind": "button",
+   "region": "header",
+   "text": "Dividend"
+  },
+  {
+   "n": 38,
+   "kind": "button",
+   "region": "header",
+   "text": "Domestic"
+  },
+  {
+   "n": 39,
+   "kind": "button",
+   "region": "header",
+   "text": "International"
+  },
+  {
+   "n": 40,
+   "kind": "button",
+   "region": "header",
+   "text": "ETFs"
+  },
+  {
+   "n": 41,
+   "kind": "text",
+   "region": "header",
+   "text": "no data loaded"
+  },
+  {
+   "n": 42,
+   "kind": "control",
+   "region": "header",
+   "text": "type=text id=search placeholder=Filter by symbol or name… aria-label=Filter stocks",
+   "tag": "input"
+  },
+  {
+   "n": 43,
+   "kind": "text",
+   "region": "main",
+   "text": "Loading the"
+  },
+  {
+   "n": 44,
+   "kind": "text",
+   "region": "main",
+   "text": "Nasdaq 100"
+  },
+  {
+   "n": 45,
+   "kind": "text",
+   "region": "main",
+   "text": "…"
+  },
+  {
+   "n": 46,
+   "kind": "button",
+   "region": "main",
+   "text": "All 0"
+  },
+  {
+   "n": 47,
+   "kind": "button",
+   "region": "main",
+   "text": "S+ 0"
+  },
+  {
+   "n": 48,
+   "kind": "button",
+   "region": "main",
+   "text": "S 0"
+  },
+  {
+   "n": 49,
+   "kind": "button",
+   "region": "main",
+   "text": "A 0"
+  },
+  {
+   "n": 50,
+   "kind": "button",
+   "region": "main",
+   "text": "B 0"
+  },
+  {
+   "n": 51,
+   "kind": "button",
+   "region": "main",
+   "text": "C 0"
+  },
+  {
+   "n": 52,
+   "kind": "button",
+   "region": "main",
+   "text": "F 0"
+  },
+  {
+   "n": 53,
+   "kind": "button",
+   "region": "main",
+   "text": "Columns ▾"
+  },
+  {
+   "n": 54,
+   "kind": "control",
+   "region": "main",
+   "text": "type=checkbox checked=None",
+   "tag": "input"
+  },
+  {
+   "n": 55,
+   "kind": "label",
+   "region": "main",
+   "text": "Snapshot"
+  },
+  {
+   "n": 56,
+   "kind": "control",
+   "region": "main",
+   "text": "type=checkbox checked=None",
+   "tag": "input"
+  },
+  {
+   "n": 57,
+   "kind": "label",
+   "region": "main",
+   "text": "Growth"
+  },
+  {
+   "n": 58,
+   "kind": "control",
+   "region": "main",
+   "text": "type=checkbox checked=None",
+   "tag": "input"
+  },
+  {
+   "n": 59,
+   "kind": "label",
+   "region": "main",
+   "text": "Valuation"
+  },
+  {
+   "n": 60,
+   "kind": "control",
+   "region": "main",
+   "text": "type=checkbox checked=None",
+   "tag": "input"
+  },
+  {
+   "n": 61,
+   "kind": "label",
+   "region": "main",
+   "text": "Balance Sheet"
+  },
+  {
+   "n": 62,
+   "kind": "button",
+   "region": "main",
+   "text": "📊 Methodology"
+  },
+  {
+   "n": 63,
+   "kind": "text",
+   "region": "main",
+   "text": "Data is more than a week old."
+  },
+  {
+   "n": 64,
+   "kind": "table row",
+   "region": "main",
+   "text": " | Azqato Screen | Snapshot | Growth | Valuation | Balance Sheet | "
+  },
+  {
+   "n": 65,
+   "kind": "table row",
+   "region": "main",
+   "text": "Ticker | Tier | Score | Factors | Mkt Cap | Price | Chg % | Rev TTM | Rev FWD | EPS TTM | EPS FWD* | P/E FWD | PEG FWD | Total Cash | Total Debt | Cash/Debt | Net Cash/Mkt Cap | Updated"
+  },
+  {
+   "n": 66,
+   "kind": "table",
+   "region": "main",
+   "text": "2 rows; first row:  | Azqato Screen | Snapshot | Growth | Valuation | Balance Sheet | "
+  },
+  {
+   "n": 67,
+   "kind": "h2",
+   "region": "main",
+   "text": "Couldn't load the data"
+  },
+  {
+   "n": 68,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The screener pulls its daily data from GitHub. This usually means you're offline or GitHub is unreachable. Check your connection and refresh the page."
+  },
+  {
+   "n": 69,
+   "kind": "button",
+   "region": "main",
+   "text": "Refresh"
+  },
+  {
+   "n": 70,
+   "kind": "text",
+   "region": "main",
+   "text": "Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. In the stock universes, forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but"
+  },
+  {
+   "n": 71,
+   "kind": "text",
+   "region": "main",
+   "text": "*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure"
+  },
+  {
+   "n": 72,
+   "kind": "text",
+   "region": "main",
+   "text": ". Stock constituent lists are synced weekly and may differ from the current index or fund holdings; the ETFs list is a fixed set of 10 funds. The International universe shows each stock's price and balance-sheet figures in its own local currency, not U.S. dollars."
+  },
+  {
+   "n": 73,
+   "kind": "button",
+   "region": "body",
+   "text": "×"
+  },
+  {
+   "n": 74,
+   "kind": "h2",
+   "region": "body",
+   "text": "Ticker"
+  },
+  {
+   "n": 75,
+   "kind": "table row",
+   "region": "body",
+   "text": "Metric | Value | Percentile | Points"
+  },
+  {
+   "n": 76,
+   "kind": "table",
+   "region": "body",
+   "text": "1 rows; first row: Metric | Value | Percentile | Points"
+  },
+  {
+   "n": 77,
+   "kind": "button",
+   "region": "body",
+   "text": "×"
+  },
+  {
+   "n": 78,
+   "kind": "h2",
+   "region": "body",
+   "text": "Scoring Methodology"
+  },
+  {
+   "n": 79,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Each stock is graded relative to the rest of the Nasdaq 100 on six metrics in four evenly weighted pillars: TTM 25 · FWD 25 · Valuation 25 · Balance sheet 25, adding up to a Score out of 100. For each metric a stock earns points based on where it ranks against its peers. The score's rank within the list then maps to a Tier, exactly like a tier list: S is the top tenth of this list right now, F is its bottom quarter. This is a ranking, not a fixed-threshold test and not a buy or sell rating: a high tier means a stock looks better than most of the list right now, not that it cleared a specific target."
+  },
+  {
+   "n": 80,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "S+ perfect 100 S top 10% A next 10% B 20–50% C 50–75% F bottom 25%"
+  },
+  {
+   "n": 81,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Tier sizes are fixed by rank, so a 100-stock list always has about 10 S, 10 A, 30 B, 25 C, and 25 F stocks, and the S&P 500 scales the same percentages to 500. The only exception is a tie: when stocks at a boundary share the same rounded score, they all round up into the higher tier. S+ sits above the bands: any stock that scores a perfect 100 of 100 earns it, and the scoring curve is calibrated so that is roughly one stock in the Nasdaq 100 and five in the S&P 500 at a time."
+  },
+  {
+   "n": 82,
+   "kind": "h3",
+   "region": "body",
+   "text": "The four pillars"
+  },
+  {
+   "n": 83,
+   "kind": "table row",
+   "region": "body",
+   "text": "Pillar | Metrics | Weight | Better means"
+  },
+  {
+   "n": 84,
+   "kind": "table row",
+   "region": "body",
+   "text": "TTM | Revenue Growth TTM (10) · EPS Growth TTM (15) | 25 total | higher (faster proven, trailing sales and profit growth)"
+  },
+  {
+   "n": 85,
+   "kind": "table row",
+   "region": "body",
+   "text": "FWD | Revenue Growth FWD (10) · EPS Growth FWD (15) | 25 total | higher (faster expected sales and profit growth)"
+  },
+  {
+   "n": 86,
+   "kind": "table row",
+   "region": "body",
+   "text": "Valuation | PEG FWD | 25 | lower (a cheaper price for the growth you get)"
+  },
+  {
+   "n": 87,
+   "kind": "table row",
+   "region": "body",
+   "text": "Balance sheet | Cash vs Debt | 25 | higher (more cash than debt)"
+  },
+  {
+   "n": 88,
+   "kind": "table",
+   "region": "body",
+   "text": "5 rows; first row: Pillar | Metrics | Weight | Better means"
+  },
+  {
+   "n": 89,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Trailing (TTM) and expected (FWD) growth are weighted equally: proven results count the same as analyst forecasts, rather than forecasts counting double. Within each pillar EPS growth outweighs revenue growth (15 vs 10), since profit growth flows more directly to shareholders. A company with negative forward earnings (a negative P/E) ranks worst on PEG, not best, since \"cheap relative to earnings\" has no meaning when there are no earnings. For those names the PEG column shows a negative value (computed from forward P/E and growth) rather than the data provider's misleading positive figure. The P/E FWD column is shown for context (colored by its own P/E-vs-growth ranking) but its points come through PEG, so valuation is not counted twice. The Net Cash/Mkt Cap column (net cash, meaning total cash minus total debt, as a percentage of market cap) is likewise shown for context and colored by its rank against peers, but it is not scored: the balance-sheet points come from Cash vs Debt."
+  },
+  {
+   "n": 90,
+   "kind": "h3",
+   "region": "body",
+   "text": "How a rank becomes points"
+  },
+  {
+   "n": 91,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "For each metric, every stock is ranked against the others and given a percentile: the share of peers it beats (for \"lower is better\" metrics, being cheaper counts as beating). The percentile maps to points on this curve."
+  },
+  {
+   "n": 92,
+   "kind": "table row",
+   "region": "body",
+   "text": "Where it ranks | Points (of 20)"
+  },
+  {
+   "n": 93,
+   "kind": "table row",
+   "region": "body",
+   "text": "Bottom 22% (0 to 22nd percentile) | 0"
+  },
+  {
+   "n": 94,
+   "kind": "table row",
+   "region": "body",
+   "text": "36th percentile | 5"
+  },
+  {
+   "n": 95,
+   "kind": "table row",
+   "region": "body",
+   "text": "Median (50th percentile) | 10"
+  },
+  {
+   "n": 96,
+   "kind": "table row",
+   "region": "body",
+   "text": "64th percentile | 15"
+  },
+  {
+   "n": 97,
+   "kind": "table row",
+   "region": "body",
+   "text": "Top 22% (78th percentile and up) | 20"
+  },
+  {
+   "n": 98,
+   "kind": "table",
+   "region": "body",
+   "text": "6 rows; first row: Where it ranks | Points (of 20)"
+  },
+  {
+   "n": 99,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Formula: points = 20 × (percentile - 0.22) ÷ 0.56, capped between 0 and 20, then scaled by the metric's weight. Only the top 22% of a metric earns full marks, so a perfect 100 (the S+ tier) still requires ranking near the top of the list on everything; the clamp is calibrated against the live data so roughly one Nasdaq 100 stock and five S&P 500 stocks manage it, with more only when rounded scores tie. The table's cell colors follow the same ranking: a green cell is top-of-the-pack on that metric, red is bottom, and amber is in between. A missing value (—) scores zero for that metric and renders dark red: the score is always out of the full 100, so incomplete data can never help a stock."
+  },
+  {
+   "n": 100,
+   "kind": "h3",
+   "region": "body",
+   "text": "Worked example: Apple's PEG"
+  },
+  {
+   "n": 101,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Apple's PEG of about 2.3 is cheaper than roughly 35% of the index. On the curve, the 35th percentile earns 20 × (0.35 - 0.22) ÷ 0.56 = about 5 of 20, and since PEG carries the full 25-point valuation pillar, that scales to about 6 of its 25 score points. Not because 2.3 fails a fixed bar, but because most other Nasdaq 100 names are cheaper. A stock with a PEG in the cheapest 22% of the group would earn the full 25."
+  },
+  {
+   "n": 102,
+   "kind": "h3",
+   "region": "body",
+   "text": "Adding up and the Factors chip"
+  },
+  {
+   "n": 103,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "A stock that is exactly average on every metric scores 50. The Factors column (for example 4/6) counts how many of the six scored metrics land in the upper part of the pack (15 of 20 percentile points or better). A metric with missing data counts as a miss, never a pass."
+  },
+  {
+   "n": 104,
+   "kind": "h3",
+   "region": "body",
+   "text": "Where each list comes from"
+  },
+  {
+   "n": 105,
+   "kind": "table row",
+   "region": "body",
+   "text": "Universe | Source"
+  },
+  {
+   "n": 106,
+   "kind": "table row",
+   "region": "body",
+   "text": "Nasdaq 100 | The current Nasdaq-100 index constituents (synced weekly from the published index list)"
+  },
+  {
+   "n": 107,
+   "kind": "table row",
+   "region": "body",
+   "text": "S&P 500 | The current S&P 500 index constituents (synced weekly from the published index list)"
+  },
+  {
+   "n": 108,
+   "kind": "table row",
+   "region": "body",
+   "text": "Growth 100 | Top 100 holdings of VUG (Vanguard Growth ETF), by portfolio weight, from Vanguard's published holdings"
+  },
+  {
+   "n": 109,
+   "kind": "table row",
+   "region": "body",
+   "text": "Value 100 | Top 100 holdings of VTV (Vanguard Value ETF), by portfolio weight, from Vanguard's published holdings"
+  },
+  {
+   "n": 110,
+   "kind": "table row",
+   "region": "body",
+   "text": "Dividend 100 | Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF), by portfolio weight, from Vanguard's published holdings"
+  },
+  {
+   "n": 111,
+   "kind": "table row",
+   "region": "body",
+   "text": "International | Top 100 holdings of VXUS (Vanguard Total International Stock ETF), by portfolio weight, from Vanguard's published holdings. Each holding trades on its own local exchange (e.g. Taiwan, Japan, the UK); Price, Mkt Cap, Total Cash, and Total Debt are shown in that listing's native currency, labeled with its symbol (€, ¥, £, etc.), not converted to U.S. dollars. Scoring is unaffected by currency: all six scored metrics are growth rates and ratios."
+  },
+  {
+   "n": 112,
+   "kind": "table",
+   "region": "body",
+   "text": "7 rows; first row: Universe | Source"
+  },
+  {
+   "n": 113,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Index lists update within days of membership changes. Vanguard publishes fund holdings monthly, so the ETF-based lists can lag the funds' live portfolios by a few weeks; dual share classes are collapsed to one listing per company. Foreign analyst coverage is occasionally thinner than U.S. coverage, so a small number of International names may show a lower Factors count; a missing metric still scores a hard zero, same as any other stock universe. Scores are always relative to the active universe only."
+  },
+  {
+   "n": 114,
+   "kind": "h3",
+   "region": "body",
+   "text": "Good to know"
+  },
+  {
+   "n": 115,
+   "kind": "link",
+   "region": "body",
+   "text": "Metrics glossary",
+   "href": "metrics.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 116,
+   "kind": "link",
+   "region": "body",
+   "text": "Indices methodology",
+   "href": "indices.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 117,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Because grades are relative, a stock's score can shift when other companies' numbers change, even if its own do not, and by design some of every list always lands in the bottom tiers: an F here means the bottom of this particular list, not a broken company. Scores are computed across whichever stocks are currently loaded (normally the full Nasdaq 100 from the daily feed). Because the universes overlap, the same stock can earn a different score in different universes: a dividend payer that looks slow next to the Nasdaq 100 can rank near the top of the Dividend 100, because its peers changed, not its numbers. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the * note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the Metrics glossary and the Indices methodology.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 118,
+   "kind": "link",
+   "region": "body",
+   "text": "Indices methodology",
+   "href": "indices.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 119,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "The ETFs list is scored on an entirely different basis than the stock universes, and on purpose. This methodology's own rule is that individual stocks are judged on fundamentals while index and ETF purchases are timed with technical signals, so this universe grades exactly what the stock lists leave out: Technicals 50 · Performance 50, adding up to a Score out of 100. A high score means a fund with a strong long-term record that is currently sitting low relative to its own recent prices: the setup this methodology treats as the better moment to add to an index position. Yield and Expense Ratio are shown for context but no longer scored (changed 2026-07-04): the freed weight went to the 5-year and 10-year return horizons, since a longer track record is stronger evidence that a fund's outperformance is structural rather than luck — see the Indices methodology's Structural Quality Metrics section."
+  },
+  {
+   "n": 120,
+   "kind": "h3",
+   "region": "body",
+   "text": "The six scored metrics"
+  },
+  {
+   "n": 121,
+   "kind": "table row",
+   "region": "body",
+   "text": "Pillar | Metric | Weight | Better means"
+  },
+  {
+   "n": 122,
+   "kind": "table row",
+   "region": "body",
+   "text": "Technicals | RSI (14-day) | 20 | lower (an oversold fund is the better entry)"
+  },
+  {
+   "n": 123,
+   "kind": "table row",
+   "region": "body",
+   "text": "Technicals | 52-Week Range position | 20 | lower (near the 52-week low beats near the high)"
+  },
+  {
+   "n": 124,
+   "kind": "table row",
+   "region": "body",
+   "text": "Technicals | Price vs 200-Day Moving Average | 10 | higher (holding above its long-term trend)"
+  },
+  {
+   "n": 125,
+   "kind": "table row",
+   "region": "body",
+   "text": "Performance | 1 Year Total Return | 10 | higher"
+  },
+  {
+   "n": 126,
+   "kind": "table row",
+   "region": "body",
+   "text": "Performance | 5 Year Total Return | 20 | higher"
+  },
+  {
+   "n": 127,
+   "kind": "table row",
+   "region": "body",
+   "text": "Performance | 10 Year Total Return | 20 | higher"
+  },
+  {
+   "n": 128,
+   "kind": "table",
+   "region": "body",
+   "text": "7 rows; first row: Pillar | Metric | Weight | Better means"
+  },
+  {
+   "n": 129,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "Total returns include reinvested distributions. RSI, the range position, and the moving averages are computed from daily price history. YTD Performance, Yield, Expense Ratio, Yield−ER, and price vs the 20-day and 100-day moving averages are shown and colored for context but carry no points, like the P/E FWD column in the stock universes; AUM is display-only."
+  },
+  {
+   "n": 130,
+   "kind": "h3",
+   "region": "body",
+   "text": "How a rank becomes points"
+  },
+  {
+   "n": 131,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "With only 10 funds, the stock universes' percentile curve would be far too coarse, so this list uses straight rank points: on each metric the best fund earns the full weight, the worst earns 0, and the funds between are spaced evenly (ties share the average). A missing value (—) scores zero and renders dark red; the score is always out of the full 100. Cell colors follow the same ranks: green is the top of the pack on that metric (15 of 20 rank points or better), red is the bottom (5 or less), amber is in between."
+  },
+  {
+   "n": 132,
+   "kind": "h3",
+   "region": "body",
+   "text": "Tiers on a 10-fund list"
+  },
+  {
+   "n": 133,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "The same rank bands as the stock lists apply: S top 10% · A next 10% · B 20–50% · C 50–75% · F bottom 25%, ties round up, and a perfect 100 earns S+. On 10 funds that is roughly 1 S, 1 A, 3 B, 3 C, and 2 F at any moment. An F here means the bottom of this list right now: usually a strong fund that has already run up (a high RSI, near the top of its range), not a broken product. Because half the score is timing, tiers in this universe move with the market: a broad selloff can lift a fund up the list without anything changing inside it. That is by design; the score doubles as a deployment-timing dial."
+  },
+  {
+   "n": 134,
+   "kind": "h3",
+   "region": "body",
+   "text": "Where the list comes from"
+  },
+  {
+   "n": 135,
+   "kind": "link",
+   "region": "body",
+   "text": "Indices methodology",
+   "href": "indices.html",
+   "flags": [
+    "new tab"
+   ]
+  },
+  {
+   "n": 136,
+   "kind": "paragraph",
+   "region": "body",
+   "text": "A fixed, owner-curated list of 10 funds: QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, and SPMO. It is not synced to any index; changes to it are deliberate edits. The data refreshes each trading day from Yahoo Finance. See the Indices methodology for the doctrine behind the technical signals, including the RSI and 52-week-range frameworks these scores apply."
+  },
+  {
+   "n": 137,
+   "kind": "script",
+   "region": "body",
+   "text": "screener.js"
+  }
+ ],
+ "linked scripts": {
+  "screener.js": {
+   "urls": [
+    "https://raw.githubusercontent.com/Azqato/stocks/main/data/"
+   ],
+   "storage keys": [
+    "key"
+   ],
+   "functions": [
+    "universe",
+    "partPaths",
+    "readCache",
+    "writeCache",
+    "loadState",
+    "isNum",
+    "fmtPct",
+    "fmtNum",
+    "currencyPrefix",
+    "fmtMoney",
+    "fmtPrice",
+    "fmtChange",
+    "fmtRet",
+    "fmtPct2",
+    "fmtRsi",
+    "fmtRangePos",
+    "clsChange",
+    "freshestMs",
+    "fmtAge",
+    "clsAge",
+    "ageTitle",
+    "clamp",
+    "pointsFromPct",
+    "wk52Pos",
+    "netYield",
+    "modeKind",
+    "isEtf",
+    "activeMetrics",
+    "computeScoreMap",
+    "colorFromPts",
+    "colorScored",
+    "computeTierMap",
+    "pegDisplay",
+    "cashDebtRatio",
+    "netCashToMktCap",
+    "fmtRatio",
+    "rows",
+    "sortRows",
+    "render",
+    "isStale",
+    "checkStale",
+    "fetchFirst",
+    "fetchFromParts",
+    "fetchUniverse",
+    "renderHead",
+    "renderColsMenu",
+    "updateTickerColumnLabel",
+    "activate",
+    "setUniverseLabel",
+    "updateUniverseButtons",
+    "setUniverseButtonsDisabled",
+    "loadInitial",
+    "selectUniverse",
+    "updateMag10Button",
+    "toggleMag10",
+    "isNameFirst",
+    "screenCells",
+    "rowHtml",
+    "rowHtmlEtf",
+    "rowHtmlStock",
+    "updateSortIndicators",
+    "applyColumnVisibility",
+    "autoHiddenCount",
+    "applyResponsiveColumns",
+    "scheduleResponsiveColumns",
+    "ordinal",
+    "openStock",
+    "closeStock",
+    "openMethodology",
+    "closeMethodology",
+    "bind"
+   ],
+   "sets innerHTML": true
+  }
+ }
+}

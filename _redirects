@@ -1,0 +1,6 @@
+# Cloudflare Pages redirects (azqato.com). GitHub Pages ignores this file.
+# invests.html is a redirect page for GitHub Pages; on Cloudflare these rules
+# send the old address straight to the Azqato Invests folder in one hop, so
+# /invests (invests.html) and /invests/ (invests/index.html) never compete.
+/invests       /invests/  301
+/invests.html  /invests/  301

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azqato Invests - Investing Tools and Resources</title>
+<meta name="description" content="Free investing tools built by Azqato, plus a hand-picked hub of brokers, screeners, ETF lists, charts and economic data. Nothing here is financial advice.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="Azqato Invests - Investing Tools and Resources">
+<meta property="og:description" content="Free investing tools built by Azqato, plus a hand-picked hub of brokers, screeners, ETF lists, charts and economic data. Nothing here is financial advice.">
+<meta property="og:url" content="https://azqato.com/invests/">
+<link rel="canonical" href="https://azqato.com/invests/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
+<script src="assets/js/theme.js"></script>
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/docs.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.src-invests {
+      --discord: #5865f2;
+      --discord-hover: #6b76f5;
+}
+.src-invests #projects { scroll-margin-top: 80px;
+}
+.src-invests .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+}
+.src-invests .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+}
+.src-invests .hero h1 .highlight { color: var(--accent);
+}
+.src-invests .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 620px;
+}
+.src-invests .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+}
+.src-invests .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+}
+.src-invests .btn-discord {
+      background: var(--discord);
+      color: #fff;
+      border-color: var(--discord);
+}
+.src-invests .btn-discord:hover {
+      background: var(--discord-hover);
+      border-color: var(--discord-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(88, 101, 242, 0.3);
+}
+.src-invests .btn-discord svg { width: 20px; height: 20px; fill: currentColor;
+}
+.src-invests .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+}
+.src-invests .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+}
+.src-invests .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+}
+.src-invests .section-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+}
+.src-invests .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+}
+.src-invests .section-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+}
+.src-invests .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      max-width: 620px;
+}
+.src-invests .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+}
+.src-invests .project-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      overflow: hidden;
+      transition: transform 0.18s, border-color 0.2s, box-shadow 0.2s;
+}
+.src-invests .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      opacity: 0;
+      transition: opacity 0.2s;
+}
+.src-invests .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+.src-invests .project-card:hover::before { opacity: 1;
+}
+.src-invests .project-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+}
+.src-invests .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+}
+.src-invests .project-card h3 .arrow {
+      color: var(--text-muted);
+      transition: transform 0.18s, color 0.2s;
+}
+.src-invests .project-card:hover h3 .arrow { transform: translateX(4px); color: var(--accent);
+}
+.src-invests .project-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+}
+.src-invests .disclaimer {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+}
+.src-invests .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+}
+.src-invests .resource-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+}
+.src-invests .resource-card h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+}
+.src-invests .resource-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+}
+.src-invests .resource-card li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+}
+.src-invests .resource-card li a::before {
+      content: '›';
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+}
+.src-invests .resource-card li a:hover { color: var(--accent);
+}
+@media (max-width: 600px) {
+.src-invests .hero { padding: 3rem 1.25rem 1.5rem;
+}
+.src-invests .section { padding: 1.5rem 1.25rem 3rem;
+}
+.src-invests .resource-grid { grid-template-columns: minmax(0, 1fr);
+}
+}
+</style>
+</head>
+<body class="pp-page site-page is-home" data-root="">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="https://azqato.com/">Azqato<span>.</span></a>
+  <ul><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="index.html" aria-current="true">Invests</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="index.html" aria-current="page">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-learn">Learn</summary><ul aria-labelledby="pp-g-learn"><li><a href="learn/index.html">Overview</a></li><li><a href="learn/philosophy.html">Philosophy</a></li><li><a href="learn/metrics.html">Stock metrics</a></li><li><a href="learn/indices.html">Index &amp; ETF methodology</a></li><li><a href="learn/finviz.html">Finviz setup guide</a></li><li><a href="learn/seekingalpha.html">Seeking Alpha setup guide</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-tools">Tools</summary><ul aria-labelledby="pp-g-tools"><li><a href="tools/screener.html">Screener</a></li><li><a href="tools/market.html">Market Overview</a></li><li><a href="tools/vix-dashboard.html">VIX Dashboard</a></li><li><a href="tools/vix-custom.html">VIX Custom builder</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-strategies">Strategies</summary><ul aria-labelledby="pp-g-strategies"><li><a href="strategies/vix.html">VIX Strategy</a></li><li><a href="strategies/leveraged/index.html">Leveraged strategies</a></li><li class="site-sub"><a href="strategies/leveraged/3sig.html">3 Sig</a></li><li class="site-sub"><a href="strategies/leveraged/6sig.html">6 Sig</a></li><li class="site-sub"><a href="strategies/leveraged/9sig.html">9 Sig</a></li><li class="site-sub"><a href="strategies/leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li class="site-sub"><a href="strategies/leveraged/holy-grail.html">Holy Grail</a></li><li class="site-sub"><a href="strategies/leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="resources/index.html">Curated resources</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-faq">FAQ</summary><ul aria-labelledby="pp-g-faq"><li><a href="faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul></details>
+  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<article class="pp-article" id="pp-article">
+<div class="site-src src-invests"><section class="hero">
+<h1>Azqato <span class="highlight">Invests</span></h1>
+<p>Free investing tools and strategies I've built for traders at any level. No signup, no paywall. Join the community on Discord, then dig into the projects below.</p>
+<div class="hero-cta">
+<a class="btn btn-discord" href="https://azqato.com/discord">
+<svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"></path></svg>
+        Join the Discord
+      </a>
+<a class="btn btn-secondary" href="#projects">Explore the projects ↓</a>
+</div>
+</section><section class="section" id="projects">
+<div class="section-header">
+<h2 class="section-title" id="projects-2">Projects</h2>
+<p class="section-desc">Investing tools and strategies I've built, free to use and open to everyone. Pick one below and start exploring.</p>
+</div>
+<div class="project-grid">
+
+
+
+
+
+
+
+<a class="project-card" href="learn/index.html">
+<span class="project-icon">📈</span>
+<h3 id="stocks">Stocks <span class="arrow">→</span></h3>
+<p>The framework I use to research, evaluate, and pick individual stocks.</p>
+</a><a class="project-card" href="tools/screener.html">
+<span class="project-icon">📈</span>
+<h3 id="stock-screener">Stock Screener <span class="arrow">→</span></h3>
+<p>Filter and surface stocks by custom criteria to find your next opportunity.</p>
+</a><a class="project-card" href="tools/market.html"><span class="project-icon">🧰</span><h3 id="market-overview-vix-tools">Market Overview &amp; VIX tools <span class="arrow">→</span></h3><p>A same-day market snapshot, the live VIX Dashboard and the VIX Custom builder.</p></a><a class="project-card" href="strategies/vix.html">
+<span class="project-icon">📈</span>
+<h3 id="vix-strategy">VIX Strategy <span class="arrow">→</span></h3>
+<p>A volatility-based approach to timing the market using the VIX fear index.</p>
+</a><a class="project-card" href="strategies/leveraged/index.html">
+<span class="project-icon">🚀</span>
+<h3 id="leveraged-strategies">Leveraged Strategies <span class="arrow">→</span></h3>
+<p>Leveraged ETF strategies with a focus on decay risk and volatility management.</p>
+</a><a class="project-card" href="resources/index.html"><span class="project-icon">📚</span><h3 id="curated-resources">Curated Resources <span class="arrow">→</span></h3><p>A hand-picked hub of platforms, screeners, education and data, in 15 categories.</p></a><a class="project-card" href="faq.html"><span class="project-icon">❓</span><h3 id="faq">FAQ <span class="arrow">→</span></h3><p>Answers to common questions about the methodology, the tools and the strategies.</p></a><a class="project-card" href="https://automatefundamentals.com/" rel="noopener" target="_blank">
+<span class="project-icon">🤖</span>
+<h3 id="automate-fundamentals">Automate Fundamentals <span class="arrow">→</span></h3>
+<p>The strategy builder for investors who read earnings reports. Turn your own rules into backtestable strategies, no coding. In free beta.</p>
+</a><a class="project-card" href="https://composeratlas.com/" rel="noopener" target="_blank">
+<span class="project-icon">🗺️</span>
+<h3 id="composeratlas">ComposerAtlas <span class="arrow">→</span></h3>
+<p>Explore and analyze automated trading strategies built on Composer.</p>
+</a><a class="project-card" href="https://azqato.github.io/net-worth-tracker/" rel="noopener" target="_blank">
+<span class="project-icon">💰</span>
+<h3 id="net-worth-tracker">Net Worth Tracker <span class="arrow">→</span></h3>
+<p>Track your assets, liabilities, and net worth over time in one clean dashboard.</p>
+</a></div>
+</section><div class="src-footer site-dup">
+    Built by <a href="https://azqato.com/">Azqato</a>.
+  </div></div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--next" href="learn/index.html"><small>Next</small><span>Overview</span></a></nav>
+</main>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="resources/index.html">Curated resources</a> · <a href="faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="assets/js/site.js"></script>
+
+</body>
+</html>

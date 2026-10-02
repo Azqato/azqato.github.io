@@ -1,0 +1,907 @@
+{
+ "source": "leverage/3sig.html",
+ "head": [
+  "title: 3 Sig: Leveraged Strategies",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: The 3 Sig quarterly value-averaging strategy by Jason Kelly. A signal-based system using a 3% quarterly target to manage a stock index fund against a bond buffer.",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>",
+  "link stylesheet: css/style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "body",
+   "text": "Skip to content",
+   "href": "#main-content",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "svg icon",
+   "region": "nav",
+   "text": "decorative"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 25,
+   "kind": "text",
+   "region": "aside",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 38,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 39,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 40,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 41,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 42,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 43,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 45,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 46,
+   "kind": "text",
+   "region": "nav",
+   "text": "On This Page"
+  },
+  {
+   "n": 47,
+   "kind": "link",
+   "region": "nav",
+   "text": "Overview",
+   "href": "#overview",
+   "flags": []
+  },
+  {
+   "n": 48,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Overview"
+  },
+  {
+   "n": 49,
+   "kind": "link",
+   "region": "nav",
+   "text": "Rules and Logic",
+   "href": "#rules",
+   "flags": []
+  },
+  {
+   "n": 50,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 51,
+   "kind": "link",
+   "region": "nav",
+   "text": "Performance Notes",
+   "href": "#performance",
+   "flags": []
+  },
+  {
+   "n": 52,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 53,
+   "kind": "link",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "href": "#risks",
+   "flags": []
+  },
+  {
+   "n": 54,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 55,
+   "kind": "link",
+   "region": "nav",
+   "text": "Resources",
+   "href": "#resources",
+   "flags": []
+  },
+  {
+   "n": 56,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Resources"
+  },
+  {
+   "n": 57,
+   "kind": "paragraph",
+   "region": "aside",
+   "text": "Educational use only. Not financial advice.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 58,
+   "kind": "text",
+   "region": "main",
+   "text": "Quarterly Rebalancing"
+  },
+  {
+   "n": 59,
+   "kind": "h1",
+   "region": "main",
+   "text": "3 Sig"
+  },
+  {
+   "n": 60,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A quarterly value-averaging strategy that targets 3% quarterly growth in a stock index fund (IJR or SPY) against a bond buffer, buying from bonds when the fund underperforms and selling into bonds when it overperforms. Created by Jason Kelly, The 3% Signal (2015)."
+  },
+  {
+   "n": 61,
+   "kind": "h2",
+   "region": "main",
+   "text": "Overview"
+  },
+  {
+   "n": 62,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 3% Signal (3 Sig) is the conservative, unleveraged tier of Jason Kelly's Signal plan family, introduced in his 2015 book The 3% Signal: The Investment Technique That Will Change Your Life. It pairs a single stock index fund with a bond fund and rebalances quarterly to a 3% quarterly growth target."
+  },
+  {
+   "n": 63,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The core principle is value averaging: the investor targets a specific dollar balance in the stock fund that grows at exactly 3% per quarter (approximately 12.6% annualized) regardless of what the market actually did. Each quarter, the portfolio is adjusted to hit that target. If the stock fund underperformed the target, bonds are sold to buy more shares. If the stock fund overperformed, the surplus is sold into bonds. The bond fund serves as the reserve from which purchases are funded and into which profits are deposited."
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "This structure mechanically compels buying when prices are low and selling when prices are high, relative to the signal line, inverting the emotional pattern that causes most retail investors to buy into rallies and sell into declines."
+  },
+  {
+   "n": 65,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The three Signal plans form a family based on leverage multiplier. The quarterly target scales directly with the fund's leverage ratio: 3% for a 1x unleveraged fund (3 Sig), 6% for a 2x leveraged fund (6 Sig), and 9% for a 3x leveraged fund (9 Sig). 3 Sig is the entry point for the system and the subject of Kelly's book."
+  },
+  {
+   "n": 66,
+   "kind": "h3",
+   "region": "main",
+   "text": "Stock fund selection"
+  },
+  {
+   "n": 67,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Original (book): IJR (iShares Core S&P Small-Cap ETF). Kelly selected small-cap because its higher historical volatility creates larger buy-low and sell-high opportunities within each quarterly cycle. Small-cap index funds have historically returned approximately 11–12% annually, which supports a 3% quarterly target."
+  },
+  {
+   "n": 68,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Current Kelly Letter version: SPY (SPDR S&P 500 ETF Trust). The Kelly Letter's published 30 Down Rule documentation (October 2024) identifies SPY as the 3 Sig fund. The book's IJR-based implementation remains valid for readers following the original text."
+  },
+  {
+   "n": 69,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Jason Kelly explicitly positions 3 Sig as an easy system: one stock index fund and one bond index fund, quarterly rebalancing that takes approximately 15 minutes, no market timing, no news monitoring, and no predictions required. The system requires only reaction to what prices already did, not forecasts of what they will do."
+  },
+  {
+   "n": 70,
+   "kind": "h2",
+   "region": "main",
+   "text": "Rules and Logic"
+  },
+  {
+   "n": 71,
+   "kind": "h3",
+   "region": "main",
+   "text": "Starting allocation"
+  },
+  {
+   "n": 72,
+   "kind": "caption",
+   "region": "main",
+   "text": "3 Sig starting allocation"
+  },
+  {
+   "n": 73,
+   "kind": "table row",
+   "region": "main",
+   "text": "Asset | Fund | Weight"
+  },
+  {
+   "n": 74,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund | IJR (book) or SPY (Kelly Letter) | 80%"
+  },
+  {
+   "n": 75,
+   "kind": "table row",
+   "region": "main",
+   "text": "Bond fund | BND, AGG, VFIIX, or SCHZ | 20%"
+  },
+  {
+   "n": 76,
+   "kind": "table",
+   "region": "main",
+   "text": "3 rows; first row: Asset | Fund | Weight"
+  },
+  {
+   "n": 77,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 80/20 allocation is the starting base only. The actual ratio drifts continuously between quarterly rebalances as markets move; the plan targets a signal line dollar amount, not a fixed percentage."
+  },
+  {
+   "n": 78,
+   "kind": "h3",
+   "region": "main",
+   "text": "Signal line calculation"
+  },
+  {
+   "n": 79,
+   "kind": "text",
+   "region": "main",
+   "text": "Base formula:"
+  },
+  {
+   "n": 80,
+   "kind": "text",
+   "region": "main",
+   "text": "Signal line = (Previous quarter-end stock fund balance) × 1.03"
+  },
+  {
+   "n": 81,
+   "kind": "text",
+   "region": "main",
+   "text": "With new cash contributions:"
+  },
+  {
+   "n": 82,
+   "kind": "text",
+   "region": "main",
+   "text": "Signal line = (Previous quarter-end stock fund balance) × 1.03 + (Half of new quarterly contributions)"
+  },
+  {
+   "n": 83,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "All new cash contributed during a quarter goes entirely to the bond fund. At rebalancing time, half of those new contributions is added to the signal line target, which effectively deploys the new money partially into equities. Dividends from both funds are reinvested into the bond fund."
+  },
+  {
+   "n": 84,
+   "kind": "h3",
+   "region": "main",
+   "text": "Quarterly rebalancing"
+  },
+  {
+   "n": 85,
+   "kind": "caption",
+   "region": "main",
+   "text": "3 Sig quarterly rebalancing actions"
+  },
+  {
+   "n": 86,
+   "kind": "table row",
+   "region": "main",
+   "text": "Outcome | Action"
+  },
+  {
+   "n": 87,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund balance > signal line | Sell the surplus; proceeds go to bond fund"
+  },
+  {
+   "n": 88,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund balance < signal line | Buy the shortfall; funded from bond fund"
+  },
+  {
+   "n": 89,
+   "kind": "table row",
+   "region": "main",
+   "text": "Stock fund balance = signal line | No trade"
+  },
+  {
+   "n": 90,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Outcome | Action"
+  },
+  {
+   "n": 91,
+   "kind": "h3",
+   "region": "main",
+   "text": "30 Down Rule"
+  },
+  {
+   "n": 92,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 30 Down Rule activates when the stock fund's quarterly closing price falls at least 30% below its quarterly closing price high within the rolling past two years. Only quarterly closing prices count; intra-quarter prices are ignored."
+  },
+  {
+   "n": 93,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "When active: the next 4 consecutive sell signals are ignored. Buy signals during the locked phase are followed as normal. After 4 sell signals have been ignored, the plan resumes normal operations without resetting the allocation. This is unique to 3 Sig; the 6 Sig and 9 Sig variants reset to a base allocation after their locked phases end."
+  },
+  {
+   "n": 94,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The rule's purpose is psychological: after a 30%+ quarterly decline, media coverage will uniformly project further losses. Locking in place preserves full equity exposure during the recovery, preventing the plan from selling into the rebound.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 95,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Historical activations: Spring 2020 (COVID crash, plans locked through the 2020–2021 recovery). The rule did not activate for 3 Sig in 2022 because SPY did not close a quarter 30% below its 2-year high during that bear market.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 96,
+   "kind": "h2",
+   "region": "main",
+   "text": "Performance Notes"
+  },
+  {
+   "n": 97,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 3% quarterly signal projects to approximately 12.6% annually (1.034 − 1 ≈ 12.55%). This target was calibrated to small-cap index historical averages of roughly 11–12% annually. It is a target that must be funded from bonds when not met by market performance, not a return that is delivered passively."
+  },
+  {
+   "n": 98,
+   "kind": "h3",
+   "region": "main",
+   "text": "Independent corrected backtest: BestFolio (2024)"
+  },
+  {
+   "n": 99,
+   "kind": "caption",
+   "region": "main",
+   "text": "3 Sig corrected backtest results"
+  },
+  {
+   "n": 100,
+   "kind": "table row",
+   "region": "main",
+   "text": "Metric | 3 Sig (IJR + BND, real data)"
+  },
+  {
+   "n": 101,
+   "kind": "table row",
+   "region": "main",
+   "text": "CAGR | 9.0%"
+  },
+  {
+   "n": 102,
+   "kind": "table row",
+   "region": "main",
+   "text": "Max drawdown | −52.3%"
+  },
+  {
+   "n": 103,
+   "kind": "table row",
+   "region": "main",
+   "text": "Sharpe ratio | 0.31"
+  },
+  {
+   "n": 104,
+   "kind": "table",
+   "region": "main",
+   "text": "4 rows; first row: Metric | 3 Sig (IJR + BND, real data)"
+  },
+  {
+   "n": 105,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The BestFolio analysis corrected five implementation errors present in prior community simulators: wrong starting allocation (80/20 vs. 60/40 in older tools), incorrect 30 Down trigger lookback (all-time high vs. rolling 8-quarter high), wrong trigger response (dumping all bonds vs. skipping the specified number of sells), missing buy throttle, and absent reset logic. The corrected figures represent a more realistic live implementation."
+  },
+  {
+   "n": 106,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Community backtest (Bogleheads forum, 2016): An independent investor ran 3 Sig against a buy-and-hold position in the same underlying fund from 2000 and from 1993. In both test windows, simple buy-and-hold outperformed 3 Sig in total return by the end of the period."
+  },
+  {
+   "n": 107,
+   "kind": "h3",
+   "region": "main",
+   "text": "Open vs. closed system",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 108,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Published community simulations of the Signal plans almost universally assume regular monthly contributions of several hundred dollars. These ongoing deposits continuously replenish the bond buffer. In a closed system (starting capital only, no new money) the bond buffer eventually depletes after a severe multi-quarter decline. For 3 Sig (unleveraged), the exposure to this failure mode is lower than for 6 Sig and 9 Sig, but extreme bear markets lasting several years can still exhaust the buffer and leave the plan at 100% equities with no dry powder.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 109,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "In a sustained, strong bull market, the quarterly sell signal fires consistently, moving profit from the stock fund into bonds. This reduces equity exposure over time and caps upside capture relative to a full buy-and-hold position in the same fund. The plan's advantage is better performance in choppy and bear markets; its disadvantage is underperformance in extended bull runs."
+  },
+  {
+   "n": 110,
+   "kind": "h2",
+   "region": "main",
+   "text": "Risks and Caveats",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 111,
+   "kind": "text",
+   "region": "main",
+   "text": "Risk Notice"
+  },
+  {
+   "n": 112,
+   "kind": "text",
+   "region": "main",
+   "text": "3 Sig uses an unleveraged stock index fund ("
+  },
+  {
+   "n": 113,
+   "kind": "text",
+   "region": "main",
+   "text": "IJR"
+  },
+  {
+   "n": 114,
+   "kind": "text",
+   "region": "main",
+   "text": "or"
+  },
+  {
+   "n": 115,
+   "kind": "text",
+   "region": "main",
+   "text": "SPY"
+  },
+  {
+   "n": 116,
+   "kind": "text",
+   "region": "main",
+   "text": ") paired with a bond fund. The bond fund is not a riskless reserve; it loses value when interest rates rise, reducing buying power precisely when draw-down purchases are needed. Quarterly rebalancing means there is no mechanism to respond to intra-quarter moves. In a sustained bear market, continuous buy signals will exhaust the bond buffer, leaving the portfolio at 100% equities with nothing left to buy further dips."
+  },
+  {
+   "n": 117,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Bond buffer depletion. In a severe or extended bear market, the plan repeatedly signals to buy from the bond fund. If this continues for many quarters, the bond fund depletes. At that point the plan holds 100% equities with no dry powder and no buffer against continued losses. Recovery from this state depends entirely on the market reversing.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 118,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Bond fund losses in rising rate environments. The bond fund loses value when interest rates rise. The Federal Reserve's 2022–2023 rate hiking cycle produced simultaneous losses in both the equity fund and the bond fund, reducing the buffer just as it was being drawn down for equity purchases. The plan assumes the bond fund is a stable reserve; this assumption fails in inflationary rate-hiking cycles.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 119,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 3% target is fixed regardless of market conditions. The signal line grows at 3% per quarter whether the underlying index is returning 2% or 20% over that period. In a prolonged bear market, the plan keeps buying, drawing the buffer down toward zero. The target does not adapt to valuations, interest rates, or market regimes. There is no built-in recognition that recovery may be delayed."
+  },
+  {
+   "n": 120,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Performance vs. buy-and-hold is not reliably superior. Community backtesting has not consistently demonstrated that 3 Sig outperforms simple buy-and-hold in the same fund. The value-averaging mechanics force buying lower and selling higher relative to the signal line, but in a strong bull market, constant profit-taking reduces equity exposure and captures a smaller share of the rally."
+  },
+  {
+   "n": 121,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Data snooping risk. Selecting small-cap equity and 3% as the signal threshold both involve parameters that were likely chosen partly because they fit the historical period examined. Out-of-sample performance may differ from backtest results.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 122,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Tax drag in taxable accounts. Each sell signal generates capital gains. With up to four potential sell events per year, the tax drag on after-tax compounding is significant over many years. Tax-advantaged accounts (Roth IRA, traditional IRA, 401k) are strongly preferred."
+  },
+  {
+   "n": 123,
+   "kind": "h2",
+   "region": "main",
+   "text": "Resources"
+  },
+  {
+   "n": 124,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The 3% Signal (Jason Kelly, 2015, Plume/Penguin): the original book. Covers the 3 Sig mechanics, historical backtest, the 30 Down Rule, and implementation guidance for tax-advantaged accounts. ISBN 978-0142180952."
+  },
+  {
+   "n": 125,
+   "kind": "link",
+   "region": "main",
+   "text": "jasonkelly.com",
+   "href": "https://jasonkelly.com",
+   "flags": []
+  },
+  {
+   "n": 126,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The Kelly Letter (jasonkelly.com): Jason Kelly's subscriber newsletter. Contains the official weekly plan status, current signal line values, 30 Down Rule state for all three plans, and all plan updates."
+  },
+  {
+   "n": 127,
+   "kind": "link",
+   "region": "main",
+   "text": "jasonkelly.com/resources/strategies/",
+   "href": "https://jasonkelly.com/resources/strategies/",
+   "flags": []
+  },
+  {
+   "n": 128,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "jasonkelly.com/resources/strategies/: free public summary of the 3 Sig, 6 Sig, and 9 Sig plans with fund selections and current parameters."
+  },
+  {
+   "n": 129,
+   "kind": "link",
+   "region": "main",
+   "text": "BestFolio corrected backtest",
+   "href": "https://bestfolio.app/blog/kelly-signal-danger-v2",
+   "flags": []
+  },
+  {
+   "n": 130,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "BestFolio corrected backtest: independent backtesting with corrected implementation and critical drawdown analysis across all three plan variants. Documents the five most common simulation errors in prior community tools."
+  },
+  {
+   "n": 131,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io",
+   "flags": []
+  },
+  {
+   "n": 132,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato."
+  },
+  {
+   "n": 133,
+   "kind": "script",
+   "region": "body",
+   "text": "js/main.js"
+  }
+ ],
+ "linked scripts": {
+  "js/main.js": {}
+ }
+}

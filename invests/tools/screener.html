@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Screener - Azqato Invests</title>
+<meta name="description" content="An interactive screener that ranks the Nasdaq 100, S&amp;P 500, Vanguard Growth, Value, Dividend, and International (VXUS) top-100 lists, the whole US market (about 3,500 stocks), and a curated ETF list against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="Screener - Azqato Invests">
+<meta property="og:description" content="An interactive screener that ranks the Nasdaq 100, S&amp;P 500, Vanguard Growth, Value, Dividend, and International (VXUS) top-100 lists, the whole US market (about 3,500 stocks), and a curated ETF list against the Azqato methodology factors. Updated daily from Yahoo Finance, runs entirely in your browser.">
+<meta property="og:url" content="https://azqato.com/invests/tools/screener">
+<link rel="canonical" href="https://azqato.com/invests/tools/screener">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💰%3C/text%3E%3C/svg%3E">
+<script src="../assets/js/theme.js"></script>
+<link rel="stylesheet" href="../assets/css/theme.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/docs.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/src-stocks.css">
+<style>
+.src-stocks {
+      font-size: 0.875rem;
+}
+.src-stocks .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+}
+.src-stocks .app-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 18px;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      flex-shrink: 0;
+      flex-wrap: wrap;
+}
+.src-stocks .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+}
+.src-stocks .app-brand .logo { color: var(--color-accent);
+}
+.src-stocks .app-brand a { color: var(--color-text-primary);
+}
+.src-stocks .app-brand a:hover { text-decoration: none; color: var(--color-accent);
+}
+.src-stocks .app-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.8rem;
+}
+.src-stocks .app-links a { color: var(--color-text-secondary);
+}
+.src-stocks .app-links a:hover { color: var(--color-accent); text-decoration: none;
+}
+.src-stocks .screen-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      background: var(--color-accent-light);
+      border: 1px solid rgba(0, 212, 160, 0.25);
+      border-radius: 999px;
+      padding: 3px 10px;
+}
+.src-stocks .screen-pill::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--color-accent);
+}
+.src-stocks .as-of { font-size: 0.75rem; color: var(--color-text-secondary); white-space: nowrap;
+}
+.src-stocks .app-bar .spacer { flex: 1;
+}
+.src-stocks .app-search {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 0.8rem;
+      width: 200px;
+}
+.src-stocks .app-search:focus { outline: none; border-color: var(--color-accent);
+}
+.src-stocks .app-search::placeholder { color: var(--color-text-secondary);
+}
+.src-stocks .app-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 18px;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      flex-shrink: 0;
+      flex-wrap: wrap;
+}
+.src-stocks .summary-text { font-size: 0.8rem; color: var(--color-text-secondary);
+}
+.src-stocks .summary-text b { color: var(--color-text-primary);
+}
+.src-stocks .app-toolbar .spacer { flex: 1;
+}
+.src-stocks .chip-group { display: inline-flex; border: 1px solid var(--color-border); border-radius: 7px; overflow: hidden;
+}
+.src-stocks .chip {
+      background: var(--color-surface);
+      border: none;
+      border-right: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, color 0.15s;
+}
+.src-stocks .chip:last-child { border-right: none;
+}
+.src-stocks .chip:hover { background: var(--color-card-hover); color: var(--color-text-primary);
+}
+.src-stocks .chip.active { background: var(--color-accent-light); color: var(--color-accent);
+}
+.src-stocks .chip .count {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      background: var(--color-tag-bg);
+      border-radius: 999px;
+      padding: 0 6px;
+      font-weight: 600;
+}
+.src-stocks .chip.active .count { color: var(--color-accent); background: rgba(0,212,160,0.12);
+}
+.src-stocks .btn {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+}
+.src-stocks .btn:hover { border-color: var(--color-accent); color: var(--color-accent);
+}
+.src-stocks .btn-primary { background: var(--color-accent); color: #06231c; border-color: var(--color-accent);
+}
+.src-stocks .btn-primary:hover { background: var(--color-accent-hover); color: #06231c;
+}
+.src-stocks .btn-primary:disabled { opacity: 0.5; cursor: not-allowed;
+}
+.src-stocks .universe-group { display: inline-flex; gap: 6px; flex-wrap: wrap; min-width: 0; max-width: 100%;
+}
+.src-stocks .u-btn.active {
+      background: var(--color-accent-light);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+}
+.src-stocks #mag10Btn.active {
+      background: var(--color-accent-light);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+}
+.src-stocks .u-btn:disabled { opacity: 0.5; cursor: wait;
+}
+.src-stocks .menu-wrap { position: relative;
+}
+.src-stocks .menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 6px);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 8px;
+      min-width: 190px;
+      z-index: 30;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+.src-stocks .menu[hidden] { display: none;
+}
+.src-stocks .menu label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--color-text-primary);
+}
+.src-stocks .menu label:hover { background: var(--color-accent-light);
+}
+.src-stocks .menu input { accent-color: var(--color-accent);
+}
+.src-stocks .app-table-wrap {
+      flex: 1;
+      min-height: 0;   
+      overflow: auto;
+      position: relative;
+}
+.src-stocks table.screener {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--color-bg);
+      min-width: 900px;
+}
+.src-stocks table.screener thead th {
+      position: sticky;
+      background: var(--color-card-hover);
+      z-index: 5;
+}
+.src-stocks tr.group-row th {
+      top: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      font-weight: 700;
+      padding: 7px 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+      border-left: 1px solid var(--color-border);
+}
+.src-stocks tr.group-row th.g-screen { color: var(--color-accent);
+}
+.src-stocks tr.head-row th {
+      top: 30px;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      font-weight: 600;
+      padding: 8px 14px;
+      text-align: right;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+}
+.src-stocks tr.head-row th.left { text-align: left;
+}
+.src-stocks tr.head-row th:hover { color: var(--color-text-primary);
+}
+.src-stocks tr.head-row th .arrow { color: var(--color-accent); font-size: 0.75rem; margin-left: 3px;
+}
+.src-stocks .group-start { border-left: 1px solid var(--color-border);
+}
+.src-stocks th.col-ticker,
+.src-stocks td.col-ticker {
+      position: sticky;
+      left: 0;
+      z-index: 6;
+      background: var(--color-bg);
+      border-right: 1px solid var(--color-border);
+}
+.src-stocks tr.group-row th.col-ticker,
+.src-stocks tr.head-row th.col-ticker { z-index: 8; background: var(--color-card-hover);
+}
+.src-stocks tbody tr:hover td.col-ticker { background: #11201b;
+}
+.src-stocks td.col-ticker { text-align: left;
+}
+.src-stocks .tkr { font-weight: 700; color: var(--color-accent); font-size: 0.85rem;
+}
+.src-stocks .tkr-name {
+      display: block;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+}
+.src-stocks .col-ticker.name-first .tkr-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      max-width: 220px;
+}
+.src-stocks .col-ticker.name-first .tkr {
+      display: block;
+      font-weight: 400;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+}
+.src-stocks .verdict {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 3px 10px;
+      border-radius: 999px;
+}
+.src-stocks .v-sp { background: rgba(188,140,255,0.12); color: var(--color-tier-splus); border: 1px solid rgba(188,140,255,0.45);
+}
+.src-stocks .v-s { background: rgba(46,160,67,0.15);   color: var(--color-tier-s);  border: 1px solid rgba(46,160,67,0.45);
+}
+.src-stocks .v-a { background: rgba(126,231,135,0.10); color: var(--color-tier-a);  border: 1px solid rgba(126,231,135,0.3);
+}
+.src-stocks .v-b { background: rgba(227,179,65,0.10);  color: var(--color-tier-b);  border: 1px solid rgba(227,179,65,0.3);
+}
+.src-stocks .v-c { background: rgba(255,161,152,0.10); color: var(--color-tier-c);  border: 1px solid rgba(255,161,152,0.3);
+}
+.src-stocks .v-f { background: rgba(248,81,73,0.12);   color: var(--color-negative); border: 1px solid rgba(248,81,73,0.35);
+}
+.src-stocks .v-none { background: var(--color-tag-bg);    color: var(--color-text-secondary); border: 1px solid var(--color-border);
+}
+.src-stocks .factors {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--color-tag-bg);
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border);
+}
+.src-stocks .score-bar-wrap { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end;
+}
+.src-stocks .score-val { font-weight: 700; min-width: 34px; text-align: right;
+}
+.src-stocks .score-track { width: 46px; height: 5px; background: var(--color-border); border-radius: 3px; overflow: hidden;
+}
+.src-stocks .score-fill { height: 100%; border-radius: 3px;
+}
+.src-stocks .pos { color: var(--color-positive);
+}
+.src-stocks .cau { color: var(--color-warning);
+}
+.src-stocks .neg { color: var(--color-negative);
+}
+.src-stocks .muted { color: var(--color-text-secondary);
+}
+.src-stocks .col-hidden { display: none;
+}
+.src-stocks .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      pointer-events: none;
+}
+.src-stocks .placeholder-card {
+      max-width: 460px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 28px 30px;
+      pointer-events: auto;
+}
+.src-stocks .placeholder-card h2 { margin: 0 0 8px; font-size: 1.1rem;
+}
+.src-stocks .placeholder-card h2::before { display: none;
+}
+.src-stocks .placeholder-card p { color: var(--color-text-secondary); font-size: 0.85rem; margin-bottom: 14px;
+}
+.src-stocks .progress-wrap { display: none; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--color-text-secondary);
+}
+.src-stocks .progress-wrap.on { display: inline-flex;
+}
+.src-stocks .progress-track { width: 120px; height: 5px; background: var(--color-border); border-radius: 3px; overflow: hidden;
+}
+.src-stocks .progress-fill { height: 100%; width: 0%; background: var(--color-accent); transition: width 0.2s;
+}
+.src-stocks .stale-banner {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 18px;
+      background: rgba(255, 166, 87, 0.10);
+      border-bottom: 1px solid rgba(255, 166, 87, 0.3);
+      color: var(--color-warning);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+}
+.src-stocks .stale-banner.on { display: flex;
+}
+.src-stocks .stale-banner .spacer { flex: 1;
+}
+.src-stocks .stale-banner b { color: var(--color-warning);
+}
+.src-stocks .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; padding: 20px;
+}
+.src-stocks .modal-backdrop[hidden] { display: none;
+}
+.src-stocks .modal {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      width: 65%; max-width: 1100px;
+      max-height: 90vh; overflow-y: auto;
+      padding: 28px 34px;
+}
+.src-stocks .modal h2 { margin-top: 0; font-size: 1.15rem;
+}
+.src-stocks .modal h2::before { display: none;
+}
+.src-stocks .modal h3 { margin-top: 22px; font-size: 0.95rem;
+}
+.src-stocks .modal label.field { display: block; font-size: 0.8rem; font-weight: 600; margin: 14px 0 6px; color: var(--color-text-primary);
+}
+.src-stocks .modal input[type=text],
+.src-stocks .modal input[type=password],
+.src-stocks .modal input[type=number] {
+      width: 100%;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 7px;
+      padding: 9px 11px;
+      color: var(--color-text-primary);
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 0.82rem;
+}
+.src-stocks .modal input:focus { outline: none; border-color: var(--color-accent);
+}
+.src-stocks .modal .hint { font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 6px; line-height: 1.5;
+}
+.src-stocks .modal-actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap;
+}
+.src-stocks .modal-close { position: relative; float: right; background: none; border: none; color: var(--color-text-secondary); font-size: 1.4rem; cursor: pointer; line-height: 1;
+}
+.src-stocks .modal-close:hover { color: var(--color-text-primary);
+}
+.src-stocks .status-msg { font-size: 0.78rem; margin-top: 14px; padding: 10px 12px; border-radius: 7px; display: none;
+}
+.src-stocks .status-msg.on { display: block;
+}
+.src-stocks .status-msg.err { background: rgba(248,81,73,0.1); color: var(--color-negative); border: 1px solid rgba(248,81,73,0.3);
+}
+.src-stocks .status-msg.ok { background: rgba(63,185,80,0.1); color: var(--color-positive); border: 1px solid rgba(63,185,80,0.3);
+}
+.src-stocks .modal ul { padding-left: 18px;
+}
+.src-stocks .modal li { font-size: 0.82rem; color: var(--color-text-secondary); margin-bottom: 6px; line-height: 1.5;
+}
+.src-stocks .disclaimer-bar {
+      flex-shrink: 0;
+      padding: 6px 18px;
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      text-align: center;
+}
+@media (max-width: 1023px) {
+.src-stocks .app { height: auto;
+}
+.src-stocks .app-table-wrap { max-height: 80vh;
+}
+}
+@media (max-width: 900px) {
+.src-stocks .modal { width: 100%; max-width: none; padding: 24px 20px;
+}
+}
+@media (max-width: 720px) {
+.src-stocks .universe-group { width: 100%;
+}
+.src-stocks .app-search { width: 130px;
+}
+.src-stocks .col-ticker:not(.name-first) .tkr-name { display: none;
+}
+.src-stocks .col-ticker.name-first .tkr { display: none;
+}
+}
+</style>
+</head>
+<body class="pp-page site-page is-tool" data-root="../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="https://azqato.com/">Azqato<span>.</span></a>
+  <ul><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="../index.html" aria-current="true">Invests</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-learn">Learn</summary><ul aria-labelledby="pp-g-learn"><li><a href="../learn/index.html">Overview</a></li><li><a href="../learn/philosophy.html">Philosophy</a></li><li><a href="../learn/metrics.html">Stock metrics</a></li><li><a href="../learn/indices.html">Index &amp; ETF methodology</a></li><li><a href="../learn/finviz.html">Finviz setup guide</a></li><li><a href="../learn/seekingalpha.html">Seeking Alpha setup guide</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-tools">Tools</summary><ul aria-labelledby="pp-g-tools"><li><a href="../tools/screener.html" aria-current="page">Screener</a></li><li><a href="../tools/market.html">Market Overview</a></li><li><a href="../tools/vix-dashboard.html">VIX Dashboard</a></li><li><a href="../tools/vix-custom.html">VIX Custom builder</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-strategies">Strategies</summary><ul aria-labelledby="pp-g-strategies"><li><a href="../strategies/vix.html">VIX Strategy</a></li><li><a href="../strategies/leveraged/index.html">Leveraged strategies</a></li><li class="site-sub"><a href="../strategies/leveraged/3sig.html">3 Sig</a></li><li class="site-sub"><a href="../strategies/leveraged/6sig.html">6 Sig</a></li><li class="site-sub"><a href="../strategies/leveraged/9sig.html">9 Sig</a></li><li class="site-sub"><a href="../strategies/leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li class="site-sub"><a href="../strategies/leveraged/holy-grail.html">Holy Grail</a></li><li class="site-sub"><a href="../strategies/leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../resources/index.html">Curated resources</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-faq">FAQ</summary><ul aria-labelledby="pp-g-faq"><li><a href="../faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="https://azqato.com/">Home</a></li><li><a href="https://azqato.com/about">About</a></li><li><a href="https://azqato.com/discord">Discord</a></li><li><a href="https://azqato.com/codes">Codes</a></li><li><a href="https://azqato.com/music">Music</a></li><li><a href="https://azqato.com/links">Links</a></li><li><a href="https://azqato.com/projects">Projects</a></li><li><a href="https://azqato.com/youtube">YouTube</a></li><li><a href="https://azqato.com/support">Support</a></li></ul></details>
+  <div class="pp-sidebar-card"><p><strong>Educational use only.</strong> Not financial advice.</p></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li>Tools</li><li><span aria-current="page">Screener</span></li></ol></nav>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-stocks">
+
+
+
+
+
+<div class="src-main app">
+
+<header class="app-bar">
+<div class="app-brand">
+<span class="logo">📈</span>
+<span class="universe-name">Nasdaq 100</span> Screener
+      </div>
+<span class="screen-pill">Azqato</span>
+<div aria-label="Choose a universe" class="universe-group" id="universeGroup" role="group">
+<button class="btn u-btn active" data-universe="nasdaq100">Nasdaq 100</button>
+<button class="btn u-btn" data-universe="sp500">S&amp;P 500</button>
+<button class="btn" id="mag10Btn" title="Filter to a fixed 10-stock watchlist (AAPL, AMD, AMZN, AVGO, GOOGL, META, MSFT, NFLX, NVDA, TSLA), scored against the S&amp;P 500">MAG 10</button>
+<button class="btn u-btn" data-universe="growth" title="Top 100 holdings of VUG (Vanguard Growth ETF)">Growth</button>
+<button class="btn u-btn" data-universe="value" title="Top 100 holdings of VTV (Vanguard Value ETF)">Value</button>
+<button class="btn u-btn" data-universe="dividend" title="Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF)">Dividend</button>
+<button class="btn u-btn" data-universe="vti" title="Every US holding of VTI (Vanguard Total Stock Market ETF), about 3,500 stocks, scored on the same fundamentals model. Larger download than the other universes; loads on first use">Domestic</button>
+<button class="btn u-btn" data-universe="intl" title="Top 100 holdings of VXUS (Vanguard Total International Stock ETF), scored on the same fundamentals model as the other stock universes">International</button>
+<button class="btn u-btn" data-universe="etfs" title="A fixed list of 10 broad-market and factor ETFs, scored on technicals, long-term performance, and cost instead of fundamentals">ETFs</button>
+</div>
+<span class="spacer"></span>
+<span class="as-of" id="asOf">no data loaded</span>
+<input aria-label="Filter stocks" class="app-search" id="search" placeholder="Filter by symbol or name…" type="text"/>
+</header>
+
+<div class="app-toolbar">
+<span class="summary-text" id="summary">Loading the <span class="universe-name">Nasdaq 100</span>…</span>
+<span class="spacer"></span>
+<div aria-label="Filter by tier" class="chip-group" role="group">
+<button class="chip active" data-filter="all">All <span class="count" id="cnt-all">0</span></button>
+<button class="chip" data-filter="sp">S+ <span class="count" id="cnt-sp">0</span></button>
+<button class="chip" data-filter="s">S <span class="count" id="cnt-s">0</span></button>
+<button class="chip" data-filter="a">A <span class="count" id="cnt-a">0</span></button>
+<button class="chip" data-filter="b">B <span class="count" id="cnt-b">0</span></button>
+<button class="chip" data-filter="c">C <span class="count" id="cnt-c">0</span></button>
+<button class="chip" data-filter="f">F <span class="count" id="cnt-f">0</span></button>
+</div>
+<div class="menu-wrap">
+<button aria-haspopup="true" class="btn" id="colsBtn">Columns ▾</button>
+<div class="menu" hidden="" id="colsMenu">
+<label><input checked="" data-group="snapshot" type="checkbox"/> Snapshot</label>
+<label><input checked="" data-group="growth" type="checkbox"/> Growth</label>
+<label><input checked="" data-group="valuation" type="checkbox"/> Valuation</label>
+<label><input checked="" data-group="balance" type="checkbox"/> Balance Sheet</label>
+</div>
+</div>
+<button class="btn" id="methodologyBtn">📊 Methodology</button>
+</div>
+
+<div class="stale-banner" id="staleBanner">
+<span id="staleText">Data is more than a week old.</span>
+</div>
+
+<div class="app-table-wrap">
+<table class="screener" id="table">
+<thead>
+<tr class="group-row">
+<th class="col-ticker"></th>
+<th class="g-screen group-start" colspan="3">Azqato Screen</th>
+<th class="grp-snapshot group-start" colspan="3">Snapshot</th>
+<th class="grp-growth group-start" colspan="4">Growth</th>
+<th class="grp-valuation group-start" colspan="2">Valuation</th>
+<th class="grp-balance group-start" colspan="4">Balance Sheet</th>
+<th class="grp-snapshot group-start" colspan="1"></th>
+</tr>
+<tr class="head-row">
+<th class="left col-ticker" data-sort="ticker">Ticker</th>
+<th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>
+<th data-sort="score">Score</th>
+<th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 percentile points)">Factors</th>
+<th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>
+<th class="grp-snapshot" data-sort="price">Price</th>
+<th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session's close, as of the last daily data refresh">Chg %</th>
+<th class="grp-growth group-start" data-sort="revTTM">Rev TTM</th>
+<th class="grp-growth" data-sort="revFwd">Rev FWD</th>
+<th class="grp-growth" data-sort="epsTTM">EPS TTM</th>
+<th class="grp-growth" data-sort="epsFwd" title="GAAP-basis forward EPS growth (current fiscal year). May differ from Seeking Alpha, which uses Non-GAAP consensus.">EPS FWD*</th>
+<th class="grp-valuation group-start" data-sort="peFwd" title="Shown for context and colored by the P/E-vs-growth ranking; the score's valuation points come from PEG FWD">P/E FWD</th>
+<th class="grp-valuation" data-sort="pegFwd">PEG FWD</th>
+<th class="grp-balance group-start" data-sort="cash">Total Cash</th>
+<th class="grp-balance" data-sort="debt">Total Debt</th>
+<th class="grp-balance" data-sort="cashDebt">Cash/Debt</th>
+<th class="grp-balance" data-sort="netCashMc" title="Net cash (Total Cash minus Total Debt) as a percentage of market cap. Positive = net cash, negative = net debt. Colored by rank vs peers; context only, not scored.">Net Cash/Mkt Cap</th>
+<th class="grp-snapshot group-start" data-sort="updated">Updated</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+<div class="placeholder" id="placeholder">
+<div class="placeholder-card">
+<h2 id="couldn-t-load-the-data">Couldn't load the data</h2>
+<p>The screener pulls its daily data from GitHub. This usually means you're offline or GitHub is unreachable. Check your connection and refresh the page.</p>
+<button class="btn btn-primary" onclick="location.reload()">Refresh</button>
+</div>
+</div>
+</div>
+<div class="disclaimer-bar">
+      Educational use only. Not financial advice. Data is from Yahoo Finance via a daily feed and may be delayed or incomplete. In the stock universes, forward figures use current fiscal-year consensus estimates; P/E FWD and PEG FWD track Seeking Alpha, but <strong>*EPS Growth FWD is GAAP-basis and may differ from Seeking Alpha's Non-GAAP figure</strong>. Stock constituent lists are synced weekly and may differ from the current index or fund holdings; the ETFs list is a fixed set of 10 funds. The International universe shows each stock's price and balance-sheet figures in its own local currency, not U.S. dollars.
+    </div>
+</div>
+
+
+
+<div class="modal-backdrop" hidden="" id="stockModal">
+<div class="modal">
+<button aria-label="Close" class="modal-close" id="stockClose">×</button>
+<h2 id="stockTitle">Ticker</h2>
+<p class="hint" id="stockSub"></p>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Metric</th><th class="num" scope="col">Value</th><th class="num" scope="col">Percentile</th><th class="num" scope="col">Points</th></tr></thead>
+<tbody id="stockRows"></tbody>
+</table>
+</div>
+<p class="hint" id="stockNote"></p>
+</div>
+</div>
+
+<div class="modal-backdrop" hidden="" id="methodologyModal">
+<div class="modal">
+<button aria-label="Close" class="modal-close" id="methodologyClose">×</button>
+<h2 id="scoring-methodology">Scoring Methodology</h2>
+<div id="methodStock">
+<p class="hint">Each stock is graded <b>relative to the rest of the <span class="universe-name">Nasdaq 100</span></b> on six metrics in four evenly weighted pillars: <b>TTM 25 · FWD 25 · Valuation 25 · Balance sheet 25</b>, adding up to a <b>Score out of 100</b>. For each metric a stock earns points based on where it ranks against its peers. The score's rank within the list then maps to a <b>Tier</b>, exactly like a tier list: S is the top tenth of this list right now, F is its bottom quarter. This is a ranking, not a fixed-threshold test and not a buy or sell rating: a high tier means a stock looks better than most of the list right now, not that it cleared a specific target.</p>
+<p class="hint" style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+<span><span class="verdict v-sp">S+</span> perfect 100</span>
+<span><span class="verdict v-s">S</span> top 10%</span>
+<span><span class="verdict v-a">A</span> next 10%</span>
+<span><span class="verdict v-b">B</span> 20–50%</span>
+<span><span class="verdict v-c">C</span> 50–75%</span>
+<span><span class="verdict v-f">F</span> bottom 25%</span>
+</p>
+<p class="hint">Tier sizes are fixed by rank, so a 100-stock list always has about 10 S, 10 A, 30 B, 25 C, and 25 F stocks, and the S&amp;P 500 scales the same percentages to 500. The only exception is a tie: when stocks at a boundary share the same rounded score, they all round up into the higher tier. <b>S+</b> sits above the bands: any stock that scores a perfect <b>100 of 100</b> earns it, and the scoring curve is calibrated so that is roughly one stock in the Nasdaq 100 and five in the S&amp;P 500 at a time.</p>
+<h3 id="the-four-pillars">The four pillars</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Pillar</th><th scope="col">Metrics</th><th class="num" scope="col">Weight</th><th scope="col">Better means</th></tr></thead>
+<tbody>
+<tr><td>TTM</td><td>Revenue Growth TTM (10) · EPS Growth TTM (15)</td><td class="num">25 total</td><td>higher (faster proven, trailing sales and profit growth)</td></tr>
+<tr><td>FWD</td><td>Revenue Growth FWD (10) · EPS Growth FWD (15)</td><td class="num">25 total</td><td>higher (faster expected sales and profit growth)</td></tr>
+<tr><td>Valuation</td><td>PEG FWD</td><td class="num">25</td><td>lower (a cheaper price for the growth you get)</td></tr>
+<tr><td>Balance sheet</td><td>Cash vs Debt</td><td class="num">25</td><td>higher (more cash than debt)</td></tr>
+</tbody>
+</table>
+</div>
+<p class="table-note">Trailing (TTM) and expected (FWD) growth are weighted equally: proven results count the same as analyst forecasts, rather than forecasts counting double. Within each pillar EPS growth outweighs revenue growth (15 vs 10), since profit growth flows more directly to shareholders. A company with negative forward earnings (a negative P/E) ranks worst on PEG, not best, since "cheap relative to earnings" has no meaning when there are no earnings. For those names the PEG column shows a negative value (computed from forward P/E and growth) rather than the data provider's misleading positive figure. The P/E FWD column is shown for context (colored by its own P/E-vs-growth ranking) but its points come through PEG, so valuation is not counted twice. The <b>Net Cash/Mkt Cap</b> column (net cash, meaning total cash minus total debt, as a percentage of market cap) is likewise shown for context and colored by its rank against peers, but it is not scored: the balance-sheet points come from Cash vs Debt.</p>
+<h3 id="how-a-rank-becomes-points">How a rank becomes points</h3>
+<p class="hint">For each metric, every stock is ranked against the others and given a <b>percentile</b>: the share of peers it beats (for "lower is better" metrics, being cheaper counts as beating). The percentile maps to points on this curve.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Where it ranks</th><th class="num" scope="col">Points (of 20)</th></tr></thead>
+<tbody>
+<tr><td>Bottom 22% (0 to 22nd percentile)</td><td class="num">0</td></tr>
+<tr><td>36th percentile</td><td class="num">5</td></tr>
+<tr><td>Median (50th percentile)</td><td class="num">10</td></tr>
+<tr><td>64th percentile</td><td class="num">15</td></tr>
+<tr><td>Top 22% (78th percentile and up)</td><td class="num">20</td></tr>
+</tbody>
+</table>
+</div>
+<p class="table-note">Formula: points = 20 × (percentile - 0.22) ÷ 0.56, capped between 0 and 20, then scaled by the metric's weight. Only the top 22% of a metric earns full marks, so a perfect 100 (the S+ tier) still requires ranking near the top of the list on <i>everything</i>; the clamp is calibrated against the live data so roughly one Nasdaq 100 stock and five S&amp;P 500 stocks manage it, with more only when rounded scores tie. The table's <b>cell colors follow the same ranking</b>: a green cell is top-of-the-pack on that metric, red is bottom, and amber is in between. <b>A missing value (–) scores zero for that metric and renders dark red</b>: the score is always out of the full 100, so incomplete data can never help a stock.</p>
+<h3 id="worked-example-apple-s-peg">Worked example: Apple's PEG</h3>
+<p class="hint">Apple's PEG of about 2.3 is cheaper than roughly 35% of the index. On the curve, the 35th percentile earns 20 × (0.35 - 0.22) ÷ 0.56 = about <b>5 of 20</b>, and since PEG carries the full 25-point valuation pillar, that scales to about <b>6 of its 25 score points</b>. Not because 2.3 fails a fixed bar, but because most other <span class="universe-name">Nasdaq 100</span> names are cheaper. A stock with a PEG in the cheapest 22% of the group would earn the full 25.</p>
+<h3 id="adding-up-and-the-factors-chip">Adding up and the Factors chip</h3>
+<p class="hint">A stock that is exactly average on every metric scores <b>50</b>. The <b>Factors</b> column (for example <span class="factors">4/6</span>) counts how many of the six scored metrics land in the upper part of the pack (15 of 20 percentile points or better). A metric with missing data counts as a miss, never a pass.</p>
+<h3 id="where-each-list-comes-from">Where each list comes from</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Universe</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>Nasdaq 100</td><td>The current Nasdaq-100 index constituents (synced weekly from the published index list)</td></tr>
+<tr><td>S&amp;P 500</td><td>The current S&amp;P 500 index constituents (synced weekly from the published index list)</td></tr>
+<tr><td>Growth 100</td><td>Top 100 holdings of VUG (Vanguard Growth ETF), by portfolio weight, from Vanguard's published holdings</td></tr>
+<tr><td>Value 100</td><td>Top 100 holdings of VTV (Vanguard Value ETF), by portfolio weight, from Vanguard's published holdings</td></tr>
+<tr><td>Dividend 100</td><td>Top 100 holdings of VIG (Vanguard Dividend Appreciation ETF), by portfolio weight, from Vanguard's published holdings</td></tr>
+<tr><td>International</td><td>Top 100 holdings of VXUS (Vanguard Total International Stock ETF), by portfolio weight, from Vanguard's published holdings. Each holding trades on its own local exchange (e.g. Taiwan, Japan, the UK); Price, Mkt Cap, Total Cash, and Total Debt are shown in that listing's native currency, labeled with its symbol (€, ¥, £, etc.), not converted to U.S. dollars. Scoring is unaffected by currency: all six scored metrics are growth rates and ratios.</td></tr>
+</tbody>
+</table>
+</div>
+<p class="table-note">Index lists update within days of membership changes. Vanguard publishes fund holdings monthly, so the ETF-based lists can lag the funds' live portfolios by a few weeks; dual share classes are collapsed to one listing per company. Foreign analyst coverage is occasionally thinner than U.S. coverage, so a small number of International names may show a lower Factors count; a missing metric still scores a hard zero, same as any other stock universe. Scores are always relative to the active universe only.</p>
+<h3 id="good-to-know">Good to know</h3>
+<p class="hint">Because grades are relative, a stock's score can shift when <i>other</i> companies' numbers change, even if its own do not, and by design some of every list always lands in the bottom tiers: an F here means the bottom of this particular list, not a broken company. Scores are computed across whichever stocks are currently loaded (normally the full <span class="universe-name">Nasdaq 100</span> from the daily feed). Because the universes overlap, the same stock can earn a different score in different universes: a dividend payer that looks slow next to the Nasdaq 100 can rank near the top of the Dividend 100, because its peers changed, not its numbers. Forward figures track Seeking Alpha; EPS Growth FWD is GAAP-basis (the <span class="ui-text">*</span> note). The screener grades fundamentals only: technical signals like RSI and the 52-week range are not part of any stock's score, because in this methodology they are used to time index and ETF purchases, not to judge individual companies. See the <a href="../learn/metrics.html" rel="noopener" target="_blank">Metrics glossary</a> and the <a href="../learn/indices.html" rel="noopener" target="_blank">Indices methodology</a>.</p>
+</div>
+<div hidden="" id="methodEtf">
+<p class="hint">The ETFs list is scored on an entirely different basis than the stock universes, and on purpose. This methodology's own rule is that individual stocks are judged on fundamentals while index and ETF purchases are timed with technical signals, so this universe grades exactly what the stock lists leave out: <b>Technicals 50 · Performance 50</b>, adding up to a <b>Score out of 100</b>. A high score means a fund with a strong long-term record that is currently sitting low relative to its own recent prices: the setup this methodology treats as the better moment to add to an index position. Yield and Expense Ratio are shown for context but no longer scored (changed 2026-07-04): the freed weight went to the 5-year and 10-year return horizons, since a longer track record is stronger evidence that a fund's outperformance is structural rather than luck - see the <a href="../learn/indices.html" rel="noopener" target="_blank">Indices methodology</a>'s Structural Quality Metrics section.</p>
+<h3 id="the-six-scored-metrics">The six scored metrics</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Pillar</th><th scope="col">Metric</th><th class="num" scope="col">Weight</th><th scope="col">Better means</th></tr></thead>
+<tbody>
+<tr><td>Technicals</td><td>RSI (14-day)</td><td class="num">20</td><td>lower (an oversold fund is the better entry)</td></tr>
+<tr><td>Technicals</td><td>52-Week Range position</td><td class="num">20</td><td>lower (near the 52-week low beats near the high)</td></tr>
+<tr><td>Technicals</td><td>Price vs 200-Day Moving Average</td><td class="num">10</td><td>higher (holding above its long-term trend)</td></tr>
+<tr><td>Performance</td><td>1 Year Total Return</td><td class="num">10</td><td>higher</td></tr>
+<tr><td>Performance</td><td>5 Year Total Return</td><td class="num">20</td><td>higher</td></tr>
+<tr><td>Performance</td><td>10 Year Total Return</td><td class="num">20</td><td>higher</td></tr>
+</tbody>
+</table>
+</div>
+<p class="table-note">Total returns include reinvested distributions. RSI, the range position, and the moving averages are computed from daily price history. YTD Performance, Yield, Expense Ratio, Yield−ER, and price vs the 20-day and 100-day moving averages are shown and colored for context but carry no points, like the P/E FWD column in the stock universes; AUM is display-only.</p>
+<h3 id="how-a-rank-becomes-points-2">How a rank becomes points</h3>
+<p class="hint">With only 10 funds, the stock universes' percentile curve would be far too coarse, so this list uses straight rank points: on each metric the <b>best fund earns the full weight, the worst earns 0</b>, and the funds between are spaced evenly (ties share the average). A missing value (–) scores zero and renders dark red; the score is always out of the full 100. Cell colors follow the same ranks: green is the top of the pack on that metric (15 of 20 rank points or better), red is the bottom (5 or less), amber is in between.</p>
+<h3 id="tiers-on-a-10-fund-list">Tiers on a 10-fund list</h3>
+<p class="hint">The same rank bands as the stock lists apply: <span class="verdict v-s">S</span> top 10% · <span class="verdict v-a">A</span> next 10% · <span class="verdict v-b">B</span> 20–50% · <span class="verdict v-c">C</span> 50–75% · <span class="verdict v-f">F</span> bottom 25%, ties round up, and a perfect 100 earns <span class="verdict v-sp">S+</span>. On 10 funds that is roughly 1 S, 1 A, 3 B, 3 C, and 2 F at any moment. An F here means the bottom of this list <i>right now</i>: usually a strong fund that has already run up (a high RSI, near the top of its range), not a broken product. Because half the score is timing, tiers in this universe move with the market: a broad selloff can lift a fund up the list without anything changing inside it. That is by design; the score doubles as a deployment-timing dial.</p>
+<h3 id="where-the-list-comes-from">Where the list comes from</h3>
+<p class="hint">A fixed, owner-curated list of 10 funds: QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, and SPMO. It is not synced to any index; changes to it are deliberate edits. The data refreshes each trading day from Yahoo Finance. See the <a href="../learn/indices.html" rel="noopener" target="_blank">Indices methodology</a> for the doctrine behind the technical signals, including the RSI and 52-week-range frameworks these scores apply.</p>
+</div>
+</div>
+</div>
+
+<div class="src-footer src-footer--notes site-dup"><p class="sidebar-footer">
+          Educational use only.<br/>Not financial advice.
+        </p></div></div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../learn/seekingalpha.html"><small>Previous</small><span>Seeking Alpha setup guide</span></a><a class="pp-pager-link pp-pager-link--next" href="../tools/market.html"><small>Next</small><span>Market Overview</span></a></nav>
+</main>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../resources/index.html">Curated resources</a> · <a href="../faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/stocks/screener.js"></script>
+</body>
+</html>

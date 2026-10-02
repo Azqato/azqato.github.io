@@ -1,0 +1,531 @@
+{
+ "source": "leverage/index.html",
+ "head": [
+  "title: Leveraged Strategies",
+  "viewport: width=device-width, initial-scale=1.0",
+  "description: A reference library for six leveraged ETF strategy frameworks built around TQQQ. Educational use only.",
+  "link icon: data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>",
+  "link stylesheet: css/style.css"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "kind": "link",
+   "region": "body",
+   "text": "Skip to content",
+   "href": "#main-content",
+   "flags": []
+  },
+  {
+   "n": 2,
+   "kind": "link",
+   "region": "nav",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 3,
+   "kind": "svg icon",
+   "region": "nav",
+   "text": "decorative"
+  },
+  {
+   "n": 4,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 5,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 6,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 7,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 8,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 9,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 10,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 11,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 12,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 13,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 14,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 15,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 16,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 17,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 18,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 19,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 20,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 21,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 22,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 23,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 24,
+   "kind": "link",
+   "region": "aside",
+   "text": "Azqato Invests",
+   "href": "https://azqato.com/invests",
+   "flags": []
+  },
+  {
+   "n": 25,
+   "kind": "text",
+   "region": "aside",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 26,
+   "kind": "link",
+   "region": "nav",
+   "text": "Home",
+   "href": "index.html",
+   "flags": []
+  },
+  {
+   "n": 27,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Home"
+  },
+  {
+   "n": 28,
+   "kind": "link",
+   "region": "nav",
+   "text": "3 Sig",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 29,
+   "kind": "list item",
+   "region": "nav",
+   "text": "3 Sig"
+  },
+  {
+   "n": 30,
+   "kind": "link",
+   "region": "nav",
+   "text": "6 Sig",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 31,
+   "kind": "list item",
+   "region": "nav",
+   "text": "6 Sig"
+  },
+  {
+   "n": 32,
+   "kind": "link",
+   "region": "nav",
+   "text": "9 Sig",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 33,
+   "kind": "list item",
+   "region": "nav",
+   "text": "9 Sig"
+  },
+  {
+   "n": 34,
+   "kind": "link",
+   "region": "nav",
+   "text": "TQQQ FTLT",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 35,
+   "kind": "list item",
+   "region": "nav",
+   "text": "TQQQ FTLT"
+  },
+  {
+   "n": 36,
+   "kind": "link",
+   "region": "nav",
+   "text": "Holy Grail",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 37,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 38,
+   "kind": "link",
+   "region": "nav",
+   "text": "HFEA",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 39,
+   "kind": "list item",
+   "region": "nav",
+   "text": "HFEA"
+  },
+  {
+   "n": 40,
+   "kind": "link",
+   "region": "nav",
+   "text": "Individual Stocks",
+   "href": "https://azqato.github.io/stocks/",
+   "flags": []
+  },
+  {
+   "n": 41,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Individual Stocks"
+  },
+  {
+   "n": 42,
+   "kind": "link",
+   "region": "nav",
+   "text": "ComposerAtlas",
+   "href": "https://azqato.github.io/composer/",
+   "flags": []
+  },
+  {
+   "n": 43,
+   "kind": "list item",
+   "region": "nav",
+   "text": "ComposerAtlas"
+  },
+  {
+   "n": 44,
+   "kind": "link",
+   "region": "nav",
+   "text": "Support",
+   "href": "https://azqato.github.io/support.html",
+   "flags": []
+  },
+  {
+   "n": 45,
+   "kind": "list item",
+   "region": "nav",
+   "text": "Support"
+  },
+  {
+   "n": 46,
+   "kind": "paragraph",
+   "region": "aside",
+   "text": "Educational use only. Not financial advice.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 47,
+   "kind": "h1",
+   "region": "main",
+   "text": "Leveraged Strategies"
+  },
+  {
+   "n": 48,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A reference library for six well-known strategy frameworks built around TQQQ and related leveraged ETFs. Each strategy takes a distinct approach, from quarterly value-averaging signal plans to daily algorithmic regime switching to leveraged risk parity portfolios. These pages document the mechanics, not make recommendations.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 49,
+   "kind": "text",
+   "region": "main",
+   "text": "Leveraged ETF Risk Notice"
+  },
+  {
+   "n": 50,
+   "kind": "text",
+   "region": "main",
+   "text": "TQQQ"
+  },
+  {
+   "n": 51,
+   "kind": "text",
+   "region": "main",
+   "text": "uses daily rebalancing to deliver 3x the daily return of the Nasdaq-100. This daily reset means returns compound on a daily basis, not over longer periods. In volatile, sideways markets this creates volatility decay: the fund can lose value over time even when the index itself is flat or modestly positive. Drawdowns are amplified and recoveries take proportionally longer. These characteristics apply to every strategy documented here."
+  },
+  {
+   "n": 52,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "The six strategies below represent distinct philosophies for working with leveraged ETFs: quarterly value-averaging signal plans across three leverage tiers, two daily algorithmic rotation systems using SMA and RSI signals, and a quarterly-rebalanced leveraged risk parity portfolio.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 53,
+   "kind": "h2",
+   "region": "main",
+   "text": "The Strategies"
+  },
+  {
+   "n": 54,
+   "kind": "h3",
+   "region": "main",
+   "text": "3 Sig"
+  },
+  {
+   "n": 55,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A quarterly value-averaging strategy targeting 3% quarterly growth in a stock index fund (IJR or SPY) against a bond buffer. The conservative, unleveraged tier of Jason Kelly's Signal plan family."
+  },
+  {
+   "n": 56,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the strategy →",
+   "href": "3sig.html",
+   "flags": []
+  },
+  {
+   "n": 57,
+   "kind": "h3",
+   "region": "main",
+   "text": "6 Sig"
+  },
+  {
+   "n": 58,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A quarterly value-averaging strategy targeting 6% quarterly growth in MVV (2x leveraged midcap). The middle tier of Jason Kelly's Signal plan family between the unleveraged 3 Sig and the 3x-leveraged 9 Sig."
+  },
+  {
+   "n": 59,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the strategy →",
+   "href": "6sig.html",
+   "flags": []
+  },
+  {
+   "n": 60,
+   "kind": "h3",
+   "region": "main",
+   "text": "9 Sig"
+  },
+  {
+   "n": 61,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A quarterly value-averaging strategy targeting 9% quarterly growth in TQQQ against a bond buffer. The most aggressive tier of Jason Kelly's Signal plan family, with two additional safeguards for 3x leverage."
+  },
+  {
+   "n": 62,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the strategy →",
+   "href": "9sig.html",
+   "flags": []
+  },
+  {
+   "n": 63,
+   "kind": "h3",
+   "region": "main",
+   "text": "TQQQ For The Long Term"
+  },
+  {
+   "n": 64,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A daily rules-based algorithm using SPY's 200-day SMA as a macro regime detector and 10-day RSI for mean reversion. Rotates among TQQQ, UVXY, TECL, UPRO, SQQQ, and TLT. Created by u/derecknielsen (2022)."
+  },
+  {
+   "n": 65,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the strategy →",
+   "href": "tqqq-ftlt.html",
+   "flags": []
+  },
+  {
+   "n": 66,
+   "kind": "h3",
+   "region": "main",
+   "text": "Holy Grail"
+  },
+  {
+   "n": 67,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "A TQQQ FTLT variant using TQQQ's own 200-day SMA as the regime signal, adding SOXL mean reversion in bear mode and BSV as the defensive instrument. Event-driven rebalancing with a 5% corridor."
+  },
+  {
+   "n": 68,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the strategy →",
+   "href": "holy-grail.html",
+   "flags": []
+  },
+  {
+   "n": 69,
+   "kind": "h3",
+   "region": "main",
+   "text": "HFEA"
+  },
+  {
+   "n": 70,
+   "kind": "paragraph",
+   "region": "main",
+   "text": "Hedgefundie's Excellent Adventure. A quarterly-rebalanced leveraged risk parity portfolio of UPRO 55% and TMF 45%, pairing 3x leveraged equities with 3x leveraged long-duration Treasuries.",
+   "flags": [
+    "disclaimer or risk wording"
+   ]
+  },
+  {
+   "n": 71,
+   "kind": "link",
+   "region": "main",
+   "text": "Read the strategy →",
+   "href": "hfea.html",
+   "flags": []
+  },
+  {
+   "n": 72,
+   "kind": "link",
+   "region": "footer",
+   "text": "Azqato",
+   "href": "https://azqato.github.io",
+   "flags": []
+  },
+  {
+   "n": 73,
+   "kind": "paragraph",
+   "region": "footer",
+   "text": "Built by Azqato."
+  },
+  {
+   "n": 74,
+   "kind": "script",
+   "region": "body",
+   "text": "js/main.js"
+  }
+ ],
+ "linked scripts": {
+  "js/main.js": {}
+ }
+}
