@@ -13,6 +13,13 @@ local repository it was built in is retired and will be deleted; nothing is edit
 - invests/docs/PRD.md: Repository Hygiene, the Runbook's Local setup, Build and Deploy, and Rollback
 describe working in `invests/` here instead of copying from the separate repository.
 
+### Deployed
+- Pushed 2026-10-02 (v2.11.0 and v2.11.1); Azqato Invests is live at https://azqato.com/invests/.
+Post-deploy check: all 43 served files under invests/ match the local copies byte for byte;
+https://azqato.com/invests and /invests.html answer 301 to /invests/ in one hop (`_redirects` works);
+https://azqato.github.io/invests.html redirects to invests/index.html. In headless Edge, light and
+dark: Home, the Screener (data loaded) and the VIX Dashboard (LIVE) show no script errors.
+
 ---
 
 ## [2.11.0] - 2026-10-02
