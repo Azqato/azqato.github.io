@@ -1054,6 +1054,14 @@ No rule existed, so the default was adopted on 2026-10-01. It covers the docs, t
 
 The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
 
+#### P15. Adopt azqato.com's colors (added 2026-10-02, owner's request; ask first)
+
+Move the site's colors to azqato.com's palette (the tokens in the main repository's styles.css), so Invests and the main site look like one site. Before changing anything, ask the author which current colors to keep for things that carry meaning: for example the emerald accent and links, the VIX tier colors (calm to panic), gains and losses (green and red) in the Screener and Market Overview, the leverage risk notices, and the Discord button. Keep WCAG AA contrast in both themes (DESIGN.md, Data colors). Pairs with the main PRD's Future update for the shared top bar and theme button, which needs a light palette for the main site.
+
+#### P16. Combine the three VIX pages (added 2026-10-02, owner's request; ask first)
+
+The VIX Strategy, VIX Dashboard and VIX Custom builder explain and run one strategy across three pages. Combine them into one VIX page (or one page with sections or tabs), keeping every item from all three (core rule). Settle first: one page or a landing page with two tools; which address survives; redirects for the others (Deprecation and Removal). Related: the navigation restructure (2026-10-02 proposal), which first groups the three together.
+
 - Record each sweep in PATCHNOTES.md: how many instances were found, and where. The 2026-10-01 sweep found none.
 
 ## Browser Testing

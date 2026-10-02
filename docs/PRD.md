@@ -1880,17 +1880,17 @@ The whole batch shipped the same day the path was written, so this section is a 
 
 Proposals that are not yet milestones. Each one states what it is, why it might be worth doing, how it would be built, how big it is, what is unresolved, and a recommendation.
 
-### The Invests top bar across the whole site (added 2026-10-02, owner's request)
+### The Invests top bar and theme button across the whole site (added 2026-10-02, owner's request)
 
-**What.** Give every azqato.com page the top navigation bar the Invests pages use: the slim full-width strip with the `Azqato.` logo and the same ten links, sitting at the very top above the page's own content. Today the main pages have their own sticky nav (F3); Invests draws a copy of it in its own style (invests/scripts/site.py `AZQATO_NAV`, styled by `.site-azqato` in invests/assets/css/site.css).
+**What.** Two changes, done together. (1) Give every azqato.com page the top navigation bar the Invests pages use: the slim full-width strip with the `Azqato.` logo and the same ten links, sitting at the very top above the page's own content. (2) Give the whole site the light and dark theme button Invests has (invests/assets/js/theme.js: follows the system setting until the visitor picks, remembers the choice in localStorage, sets `data-theme` on `<html>` before first paint), placed in that new top bar. The main site is dark-only today, so this also needs a light palette for styles.css; Invests' button then moves from its own top bar into the shared one. Today the main pages have their own sticky nav (F3); Invests draws a copy of it in its own style (invests/scripts/site.py `AZQATO_NAV`, styled by `.site-azqato` in invests/assets/css/site.css).
 
 **Why.** The owner prefers how it sits above the main content. One look for the nav on both halves of the site also removes the visible jump between azqato.com and /invests/.
 
 **How.** Port the `.site-azqato` styles (both themes) into styles.css and change the markup tools/build-nav.py stamps into the 12 pages, so the nav stays generated from one list. Keep the mobile dropdown working (the nav toggle script on every page); on phones Invests hides the strip and moves its links into its sidebar, which the main pages don't have, so the phone layout needs its own decision. Ideally the Invests copy then reads the same page list (build-nav.py or a shared file) so the two can't drift (invests PRD, Known technical debt).
 
-**Size.** Small to medium: one stylesheet section, the build-nav.py template, a rerun, and a browser check of all 12 pages in both themes at desktop and phone widths.
+**Size.** Medium: the nav is one stylesheet section, the build-nav.py template and a rerun; the theme button is a small script on every page (or one shared file) plus a full light palette for styles.css, which is the bulk of the work. Then a browser check of all 12 pages in both themes at desktop and phone widths.
 
-**Open questions.** The phone layout (keep the current dropdown, or something else). Whether `Support` and the active-page highlight look the same as on Invests. Whether this lands before or as part of folding Invests into the site's structure (invests PRD, P14).
+**Open questions.** The light palette (pairs with the invests colors item, invests PRD P15, which asks the owner which colors to keep). The phone layout (keep the current dropdown, or something else; where the theme button sits on phones). Whether `Support` and the active-page highlight look the same as on Invests. Whether this lands before or as part of folding Invests into the site's structure (invests PRD, P14).
 
 **Recommendation.** Do it; it's mostly CSS and one template. Settle the phone layout with the owner first.
 
