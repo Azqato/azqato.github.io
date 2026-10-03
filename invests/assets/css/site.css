@@ -361,6 +361,12 @@
   padding-right: 0;
 }
 
+/* The home hero's 80px top padding left dead space under the bar (owner's
+   request, 2026-10-03); the main column's own padding is enough. */
+.pp-page .src-invests .hero {
+  padding-top: 0;
+}
+
 /* ---------- Legibility in light (author's request, 2026-10-02) ----------
    Darker body and muted text, stronger lines, and larger small text. */
 

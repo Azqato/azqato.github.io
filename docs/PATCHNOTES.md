@@ -5,6 +5,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.15.2] - 2026-10-03
+
+### Changed
+- Invests home: the dead space above "Azqato Invests" is gone (the hero's 80px top padding; owner's request).
+
+---
+
 ## [2.15.1] - 2026-10-03
 
 ### Changed
