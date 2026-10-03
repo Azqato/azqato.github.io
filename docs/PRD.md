@@ -1378,6 +1378,61 @@ The proxies available, in descending order of usefulness:
 
 # Roadmap
 
+## Roadmap at a glance
+
+Organized 2026-10-02 at the owner's request: every open item from both halves of the site in one place, in a suggested order. Each item's detail stays where it was written: Part 1 below, or Part 2, Invests: Roadmap (P numbers). Nothing here is scheduled until the owner says so.
+
+**Now (waiting on the owner)**
+
+| # | Item | Where it's detailed | Status |
+|---|---|---|---|
+| 1 | Review the live Azqato Invests site and list changes | Part 2, P7.9 (in P13.2) | Waiting on the owner |
+| 2 | Review Invests' drafted sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ | Part 2, P7.10 (in P13.2) | Waiting on the owner; D22 already settles Tenet 3 |
+| 3 | Paste two or three live URLs into Discord and check the cards | docs/TODO.md | Waiting on the owner |
+
+**Next: one site, one look (owner's requests, 2026-10-02).** These touch every page, so they're best done together, in this order.
+
+| # | Item | Where it's detailed | Size |
+|---|---|---|---|
+| 4 | Pick the colors to keep for both halves (asks the owner first) | Part 2, P15 | Small (a decision) |
+| 5 | The Invests top bar and theme button across the whole site, with a light palette for the 12 root pages | Future updates, below | Medium |
+| 6 | The Invests footer across the whole site | Future updates, below | Small |
+| 7 | Clean addresses for every page (`/discord`, not `discord.html`) | Future updates, below | Medium |
+| 8 | Fold the Invests pages, generator and inventories into the main structure (docs part done in 2.12.0) | Part 2, P14 | Large; design needed |
+
+**Next: Azqato Invests content and the old sites**
+
+| # | Item | Where it's detailed | Size |
+|---|---|---|---|
+| 9 | Redirect the 19 old stocks, vix and leverage pages to their new addresses (changes those repos; ask first) | Part 2, P13.1 and Deprecation and Removal (D7) | Medium |
+| 10 | The old repos become data feeds only; a second VIX data source | Part 2, P12 | Medium |
+| 11 | Correct out-of-date content, including the two dead Resources links and the Holy Grail metrics | Part 2, P11 and P13.3 | Medium; each change needs the owner's approval |
+| 12 | Combine the three VIX pages into one | Part 2, P16 | Medium |
+| 13 | SEO and landing-page review of all 21 pages | Part 2, P17 | Large |
+
+**Next: the main site**
+
+| # | Item | Where it's detailed | Size |
+|---|---|---|---|
+| 14 | v2.9.5: no pulsing unless the fire is firing | v2.9.5, below | Small |
+| 15 | Defect list: optimize the four `youtube.html` thumbnails; `build-nav.py --check` in the pre-commit hook; pause the render loop on `document.hidden`; Playwright smoke tests; mobile audit of `music.html` | Current phase, below | Small to medium each |
+| 16 | v2.9.0: full native catalog | v2.9.0, below | Waiting on the owner's audio files |
+
+**Later**
+
+| # | Item | Where it's detailed |
+|---|---|---|
+| 17 | v3.0.0: contact / hire-me section | Below |
+| 18 | GitHub API integration (low priority) | Below |
+| 19 | A progress dashboard | Future updates, below |
+| 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below |
+
+**Owner decisions that aren't work:** one brand or two; where the mascot came from; whether to start reading the Cloudflare analytics (docs/TODO.md).
+
+**Declined or deferred:** Part 1's Explicitly deferred items and Part 2's Invests: Explicitly deferred.
+
+**Recently done:** Azqato Invests launched (2.11.0, 2026-10-02), regrouped by topic (2.11.3) and its docs merged into these (2.12.0). The empty github.com/Azqato/invests repository is gone (P13.4).
+
 ## Current phase
 
 **Azqato Invests (2026-10-02):** live at azqato.com/invests/; its docs merged into these (2.12.0). Its next steps are in Part 2, Invests: Roadmap, Current phase.
@@ -1575,7 +1630,7 @@ Auto-fetch star counts and last-pushed dates per repository, cache them in `sess
 | Automated affiliate link management | Affiliate programs change rarely; manual edits are sufficient at this scale |
 | Analytics or user tracking | Explicitly excluded by the PRD; conflicts with the privacy-conscious positioning. **Note added v2.9.9:** this remains true of the site's own code, and is no longer true of what a visitor to `azqato.com` receives, because Cloudflare injects a Web Analytics beacon at the edge. See Open Question 12. |
 | Multi-page routing or an SPA | Full page loads are simpler and more reliable for a static site |
-| Dark / light mode toggle | The site is intentionally dark-only; no toggle will be added |
+| Dark / light mode toggle | The site is intentionally dark-only; no toggle will be added. **Reversed 2026-10-02 by the owner:** the Invests theme button comes to the whole site (Future updates) |
 | Project detail modals | Current descriptions are sufficient; revisit when a project needs extended docs |
 | RSS or changelog feed | No audience for it yet; revisit above 2,000 monthly visitors |
 | Automated testing (CI) | Manual QA is in use. The threshold that was set for adding smoke tests (11 pages) has now been passed at 12 pages, so this is overdue rather than deferred. |
@@ -1769,7 +1824,7 @@ And the `og:title` values, which carry no brand because the card prints `og:site
 
 | Item | Why not |
 |------|---------|
-| `tools/build-nav.py` SKIP cleanup | Offered, deferred with "revisit this later". In `docs/TODO.md`. |
+| `tools/build-nav.py` SKIP cleanup | Offered, deferred with "revisit this later". In `docs/TODO.md`. **Done as v2.10.1.** |
 | Extract `music.html` JS to `viz.js` | Offered, deferred. Large refactor of the visualizer, roughly 1,900 lines, needing a full browser test. Known technical debt, not urgent. |
 | Compress the four oversized thumbnails in `img/` | In `docs/TODO.md`. Compression, never deletion: nothing in `img/` is deleted. |
 | A progress dashboard | See Future Updates below. Deliberately after these items, because it reports on facts that are about to change. |
@@ -2574,15 +2629,17 @@ Added by the 2026-10-01 audit:
 
 ### Current phase
 
-**Update 2026-10-02, live (azqato.github.io v2.11.0 to v2.11.1):** the author gave the go-ahead (D20) and the azqato.github.io repository was pushed. The site is live at https://azqato.com/invests/ and (GitHub Pages) azqato.github.io/invests/. What the merge added outside `invests/`: `invests.html` became a one-file redirect page to `invests/index.html`; a new `_redirects` sends `/invests` and `/invests.html` to `/invests/` with 301 on Cloudflare Pages (GitHub Pages ignores it); the nav (tools/build-nav.py), the Home explore card and the Links page button point at `invests/index.html`; sitemap.xml lists https://azqato.com/invests/ and robots.txt gained `Sitemap: https://azqato.com/invests/sitemap.xml`; the pre-commit hook skips `invests/inventory/`. Links use `index.html` explicitly so they also work from file://, where a folder link shows a directory listing. Post-deploy check (a comparison): the served page and asset files match the local copies byte for byte; /invests and /invests.html answer 301 to /invests/ in one hop; azqato.github.io/invests.html redirects; Home, the Screener and the VIX Dashboard load live data in both themes with no script errors. The separate local repository (`../invests`, last commit `9120a25`) is retired and will be deleted (Repository Hygiene). The working notes from the session that did this (an uncommitted HANDOVER.md) were moved into this document and deleted.
+**Next, in order** (the whole site's list is Roadmap at a glance, in Part 1): P7.9 (the author reviews the live site); then the post-launch list under Future updates (P13); later P11, P12 and P14 to P17.
 
-**Update 2026-10-02, restructured (v1.1.0):** the sidebar groups are now Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources (Site map), at new addresses, without redirects (author's decision: live about an hour). The D7 redirect list under Deprecation and Removal points at the new addresses.
+Updates, newest first:
 
-**Update 2026-10-02, docs merged (main 2.12.0):** README.md, LICENSE.md and every file in docs/ merged into the main repository's README, LICENSE and docs, word for word; this PRD is Part 2 of docs/PRD.md. The author decided the main site's rules win (D22) and that the site's version numbers combine: from now on Invests changes are main 2.x entries in docs/PATCHNOTES.md. Next, in order, unchanged below.
+**Update 2026-10-02, docs merged (main 2.12.0):** README.md, LICENSE.md and every file in docs/ merged into the main repository's README, LICENSE and docs, word for word; this PRD is Part 2 of docs/PRD.md. The author decided the main site's rules win (D22) and that the site's version numbers combine: from now on Invests changes are main 2.x entries in docs/PATCHNOTES.md. Next, in order, unchanged above.
 
 **Update 2026-10-02, documentation audit (v1.1.1):** README.md, LICENSE.md and every file in docs/ checked against the live site and brought up to date; the findings are under Documentation Versus Reality (entries 13 to 17). The empty github.com/Azqato/invests repository is gone (P13.4). Next, at the author's request: merge these docs into the main repository's docs ("full re-read of everything and ingestion planning" first).
 
-Next, in order: P7.9 (the author reviews the live site); then the post-launch list under Future updates (P13); later P11, P12 and P14 to P17.
+**Update 2026-10-02, restructured (v1.1.0):** the sidebar groups are now Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources (Site map), at new addresses, without redirects (author's decision: live about an hour). The D7 redirect list under Deprecation and Removal points at the new addresses.
+
+**Update 2026-10-02, live (azqato.github.io v2.11.0 to v2.11.1):** the author gave the go-ahead (D20) and the azqato.github.io repository was pushed. The site is live at https://azqato.com/invests/ and (GitHub Pages) azqato.github.io/invests/. What the merge added outside `invests/`: `invests.html` became a one-file redirect page to `invests/index.html`; a new `_redirects` sends `/invests` and `/invests.html` to `/invests/` with 301 on Cloudflare Pages (GitHub Pages ignores it); the nav (tools/build-nav.py), the Home explore card and the Links page button point at `invests/index.html`; sitemap.xml lists https://azqato.com/invests/ and robots.txt gained `Sitemap: https://azqato.com/invests/sitemap.xml`; the pre-commit hook skips `invests/inventory/`. Links use `index.html` explicitly so they also work from file://, where a folder link shows a directory listing. Post-deploy check (a comparison): the served page and asset files match the local copies byte for byte; /invests and /invests.html answer 301 to /invests/ in one hop; azqato.github.io/invests.html redirects; Home, the Screener and the VIX Dashboard load live data in both themes with no script errors. The separate local repository (`../invests`, last commit `9120a25`) is retired and will be deleted (Repository Hygiene). The working notes from the session that did this (an uncommitted HANDOVER.md) were moved into this document and deleted.
 
 **Update 2026-10-02, hosting decided (v0.18.0):** Question 18 answered with option D: the site merges into the azqato.github.io repository as an `invests/` folder, at https://azqato.com/invests/ (D21). Canonical links, og:url and sitemap.xml now use azqato.com's clean addresses (no .html). This repository's history was rewritten to remove the private project's name (Question 16). The files are committed to the main repository locally; nothing is pushed.
 
@@ -3067,10 +3124,6 @@ Runs after P10, whenever the author decides to clean out the old repos. Each rep
 
 **Docs part done 2026-10-02:** these docs merged into the main repository's docs (this PRD is Part 2 of docs/PRD.md; D22). The pages, generator and inventories haven't moved. The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
 
-#### P17. SEO and landing-page review of every page (added 2026-10-02, owner's request; ask first)
-
-Review the content of all 21 pages against SEO best practice: one clear topic and search intent per page, a descriptive title and meta description, one h1 and a sensible heading order, internal links between related pages, and a reasonable length. In particular, consider turning each group's landing page (Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies) into a short landing page with clear calls to action into its pages, instead of carrying the whole method at once; the long text would move to its own page in the group. That changes source content, so it needs the author's approval page by page (core rule, D19), and it fits with P11's corrections pass and P16 (one VIX page).
-
 #### P15. Adopt azqato.com's colors (added 2026-10-02, owner's request; ask first)
 
 Move the site's colors to azqato.com's palette (the tokens in the main repository's styles.css), so Invests and the main site look like one site. Before changing anything, ask the author which current colors to keep for things that carry meaning: for example the emerald accent and links, the VIX tier colors (calm to panic), gains and losses (green and red) in the Screener and Market Overview, the leverage risk notices, and the Discord button. Keep WCAG AA contrast in both themes (DESIGN.md, Data colors). Pairs with the main PRD's Future update for the shared top bar and theme button, which needs a light palette for the main site.
@@ -3078,6 +3131,10 @@ Move the site's colors to azqato.com's palette (the tokens in the main repositor
 #### P16. Combine the three VIX pages (added 2026-10-02, owner's request; ask first)
 
 The VIX Strategy, VIX Dashboard and VIX Custom builder explain and run one strategy across three pages. Combine them into one VIX page (or one page with sections or tabs), keeping every item from all three (core rule). Settle first: one page or a landing page with two tools; which address survives; redirects for the others (Deprecation and Removal). Related: the navigation restructure (2026-10-02 proposal), which first groups the three together.
+
+#### P17. SEO and landing-page review of every page (added 2026-10-02, owner's request; ask first)
+
+Review the content of all 21 pages against SEO best practice: one clear topic and search intent per page, a descriptive title and meta description, one h1 and a sensible heading order, internal links between related pages, and a reasonable length. In particular, consider turning each group's landing page (Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies) into a short landing page with clear calls to action into its pages, instead of carrying the whole method at once; the long text would move to its own page in the group. That changes source content, so it needs the author's approval page by page (core rule, D19), and it fits with P11's corrections pass and P16 (one VIX page).
 
 ### Verification checklist
 

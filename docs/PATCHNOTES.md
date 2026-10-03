@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.12.1] - 2026-10-02
+
+### Changed
+- `docs/PRD.md`: new Roadmap at a glance at the top of the Roadmap, listing every open item from both
+halves of the site in one suggested order (now, one site and one look, Invests content, the main
+site, later), each pointing at its detail. Part 2's Current phase now leads with what's next and
+lists its updates newest first; its Future updates run P12 to P17 in order. The deferred "no
+light/dark toggle" row and the "SKIP cleanup" row are marked as reversed and done. No item was
+removed.
+
+---
+
 ## [2.12.0] - 2026-10-02
 
 ### Changed
