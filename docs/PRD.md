@@ -1461,7 +1461,7 @@ Every item from Roadmap at a glance except Later, smallest first, each broken in
 | 21 | Emoji and section brands | An emoji favicon and title icon for each of the 12 pages and the Invests sections (list above); "Azqato Invests / Music / Codes" in the top bar on those pages; update the sharing tags if titles change | **Done 2026-10-02:** 2.13.1. Emoji favicons on every page and Invests section; Music and Codes brands in the top bar; titles unchanged (S) |
 | 15d | Smoke-test script | `tools/smoke.py` (local, no GitHub Action): all 12 pages in Edge, both themes, desktop and phone widths; fails on console errors, broken links or sideways scroll; documented in the Runbook | **Moved to Later by the owner, 2026-10-02** (S to M) |
 | 15e | Music page on phones | Test `music.html` from 320 to 480 px; fix layout, tap targets and the stage console; record the results | **Done 2026-10-02:** 2.13.2. Tested 320 to 480 px; console spans the screen, badge hidden, footer three lines, 24 px seek bar on touch (DESIGN, Music page on phones) |
-| 11 | Content corrections | Remove the two dead Resources links; load the Holy Grail figures live from Composer Atlas on every page load with a cached default (first check that Atlas offers the figures in a form the page can fetch; if it doesn't, ask the owner); gather every other correction into one list for the owner | M |
+| 11 | Content corrections | Remove the two dead Resources links; load the Holy Grail figures live from Composer Atlas on every page load with a cached default (first check that Atlas offers the figures in a form the page can fetch; if it doesn't, ask the owner); gather every other correction into one list for the owner | **Done 2026-10-02:** 2.13.3. Dead links removed; Holy Grail figures live from Composer Atlas with a cached default; corrections list C1 to C8 in Part 2, P11, for the owner (M) |
 | 10 | Old repos become data feeds | The vix job also writes `vix.json`; the VIX pages read it as the second source; drop the blocked allorigins fallback; a clear "unavailable" state; confirm the stocks and vix jobs still run | M |
 | 9 | Redirect the old sites | 19 redirect pages across the stocks, vix and leverage repos (old title, canonical, instant redirect, a fallback link); `/leveraged-strategies/` too; every data file keeps serving; after the push, check each old address reaches its page in one hop | M |
 | 12 | One VIX page | Merge the three pages into `/invests/vix/` (strategy, then dashboard, then builder, with jump links), keeping everything (core rule); the old addresses become redirects; update the sidebar, search, sitemap and inventories; run `check.py` and `browser.py` | M |
@@ -3140,6 +3140,27 @@ Only on the author's explicit go-ahead (D20).
 1. Gather every out-of-date item noted during P4 to P6.
 2. Correct each with the author's approval, for example the Holy Grail metrics from Composer Atlas (D19).
 3. Record each correction in PATCHNOTES.md.
+
+**Done 2026-10-02 (main 2.13.3, build pass item 11), the owner-approved part:**
+
+- The two dead Resources links (P13.3) are removed: Denver (www.denvercondomania.com, timed out) from Real Estate and Dividend Stocks Online (dividendstocksonline.com, expired certificate) from Databases. `scripts/site.py` drops them through `REMOVE_LINKS`; the inventories keep them as the record of the source, and `scripts/check.py`'s `REMOVED` stops expecting items 108, 109, 130 and 131.
+- The Holy Grail page has a "Backtest on Composer Atlas" box after its Performance Notes' first paragraph, filled live from Composer Atlas on every page load (`ATLAS_FIGURES` in `scripts/site.py`). Atlas's `data/strategies.json` sends no CORS header, so the page loads `https://composeratlas.com/data/strategies.js` (about 490 KB, loaded async after the page) and reads `window.STRATEGIES_DATA`, slug `holy-grail`. Order: the figures built into the page (Atlas's 2026-10-01 reading), then the last live reading saved in localStorage, then the live reading. If Atlas can't be reached, the page says so and keeps the last figures it has. Tested in Edge live, with Atlas blocked after a visit, and with Atlas blocked on a first visit.
+- The original text is unchanged; the sentences it makes out of date are on the list below.
+
+**Corrections list for the owner (2026-10-02).** Nothing here is changed until the owner approves it, item by item (D19, core rule 1).
+
+| # | Page | Now | Proposed |
+|---|---|---|---|
+| C1 | Leveraged Strategies, Holy Grail, Performance Notes | "No public factsheet data was retrievable (Composer requires authentication). The following observations are drawn from the strategy's structural properties and the academic basis." | "Composer Atlas publishes this strategy's backtest; the figures above load from it. The following observations are drawn from the strategy's structural properties and the academic basis." |
+| C2 | Holy Grail, risks | "No public performance record is available. ... The backtest data on the Composer factsheet was not accessible without authentication." | Keep the first sentence (a backtest is not a live record); replace the last with "Its backtest is on Composer Atlas (above); a backtest is not a live record." |
+| C3 | Resources, a "Top-rated stocks" link to thestreet.com/.../top-rated-stocks.html | Answers 404 (2026-10-02) | Remove, or replace with a current TheStreet ratings page if the owner has one |
+| C4 | Resources, a "Top-rated ETFs" link to thestreet.com/.../top-rated-etfs.html | Answers 404 (2026-10-02) | Remove, or replace |
+| C5 | Resources, Charts: RobinTrack (robintrack.net) | The site is up, but its data stopped in 2020, when Robinhood stopped publishing holder counts | Remove, or keep with "(historical, to 2020)" |
+| C6 | Leveraged Strategies, HFEA: "Cost of leverage (as of 2018)" | An eight-year-old figure | Keep with its date as is, or the owner supplies a current figure |
+| C7 | The "On Composer Atlas" boxes on TQQQ FTLT and Holy Grail | Three of the five links (the 2026 versions of TQQQ FTLT, UPRO FTLT and Holy Grail) are marked hidden in Atlas's data | Check those three open on Atlas; if not, drop them from the boxes |
+| C8 | Leveraged Strategies, HFEA's Atlas link | Points at Atlas's database page with a symphony ID to search for; Atlas still has no HFEA entry (checked 2026-10-02) | No change until Atlas has one |
+
+Checked and fine: Zacks (503) and Investopedia, study.com, Reddit, dividend.com and YCharts (403/405) refuse automated requests but open in a browser; every other outside link on Resources answered 200.
 
 ### Explicitly deferred
 

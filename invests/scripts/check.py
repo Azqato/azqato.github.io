@@ -22,6 +22,10 @@ DEMO = ["Parcelpoint", "API v3.4", "Get API keys", "Back to Template Interface"]
 # No em dash anywhere in a page file, in either form (Question 19: the missing-
 # value placeholder is an en dash, and the main repository's hook agrees).
 PUNCT_DASH = re.compile(r"\u2014|&mdash;")
+# Inventory items removed on purpose, with the owner's approval. The inventories
+# stay a record of the sources; these numbers are simply not expected on the
+# pages any more. P11, 2026-10-02: two dead links on Resources.
+REMOVED = {"azqato.github.io-invests.json": {108, 109, 130, 131}}
 PLACEHOLDERS = {"untitled", "document", "home", "index", "introduction - parcelpoint docs"}
 
 
@@ -138,7 +142,7 @@ def main():
             inv = json.loads((ROOT / "inventory" / src).read_text(encoding="utf-8"))
             have = squash(" ".join(" ".join(parsed[t].text) for t in targets if t in parsed))
             ids = set().union(*(parsed[t].ids for t in targets if t in parsed))
-            missing = [i for i in inv["items"] if not found(i, have, ids)]
+            missing = [i for i in inv["items"] if i["n"] not in REMOVED.get(src, set()) and not found(i, have, ids)]
             if missing:
                 fails.append(f"{src}: {len(missing)} inventory items not found on {', '.join(targets)} (first: #{missing[0]['n']} {missing[0]['text'][:60]!r})")
 

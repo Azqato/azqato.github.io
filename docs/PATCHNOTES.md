@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.3] - 2026-10-02
+
+### Changed
+- Azqato Invests corrections (build pass, item 11). Resources: the two dead links are removed (Denver
+condo listings and Dividend Stocks Online). Holy Grail: a "Backtest on Composer Atlas" box, filled live
+from Composer Atlas on every page load, with the figures built in and the last reading saved for when
+Atlas can't be reached.
+- `invests/scripts/site.py`: `REMOVE_LINKS` and `ATLAS_FIGURES`; `check.py`: `REMOVED`; `browser.py`
+prints UTF-8, so its notes no longer crash Windows' console.
+- `docs/PRD.md` Part 2, P11: what was done, and the corrections list for the owner (C1 to C8).
+`docs/DESIGN.md`: Composer Atlas figures.
+
+---
+
 ## [2.13.2] - 2026-10-02
 
 ### Fixed

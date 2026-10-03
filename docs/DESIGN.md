@@ -473,6 +473,10 @@ Tested 2026-10-02 (2.13.2, build pass item 15e) in Edge at 320, 375, 414 and 480
 
 Tap targets: the mode buttons and the console links are at least 32px tall; footer links are 24px, the WCAG 2.2 AA minimum. Desktop is unchanged (footer 87px, badge shown).
 
+### Composer Atlas figures (Invests)
+
+Added 2026-10-02 (2.13.3). A note-style callout (`pp-callout--note site-atlas site-atlas-figures`) holding a two-column table (`.site-atlas-table` in `invests/assets/css/site.css`): label left, figure right in tabular numerals, a 1px border between rows. Below it a `role="status"` line says where the figures came from (built in, saved from the last visit, or live, with Atlas's update date), then "A backtest, not a live record, and not financial advice" and a link to the strategy on Atlas. Percentages to one decimal place, ratios to two. Used on the Holy Grail page; `ATLAS_FIGURES` in `invests/scripts/site.py` can add it to other strategies.
+
 ### Page emoji and section brands
 
 Added 2026-10-02 (2.13.1, build pass item 21), from the owner's answers. Each page has its own emoji favicon; the home page and any page without one use 🦁.

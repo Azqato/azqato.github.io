@@ -260,7 +260,41 @@
 </section>
 <section aria-labelledby="performance-heading" id="performance">
 <h2 id="performance-heading">Performance Notes</h2>
-<p>No public factsheet data was retrievable (Composer requires authentication). The following observations are drawn from the strategy's structural properties and the academic basis.</p>
+<p>No public factsheet data was retrievable (Composer requires authentication). The following observations are drawn from the strategy's structural properties and the academic basis.</p><aside aria-labelledby="atlas-figures-h" class="pp-callout pp-callout--note site-atlas site-atlas-figures" data-slug="holy-grail" id="atlas-figures"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg><div><p id="atlas-figures-h"><strong>Backtest on Composer Atlas: The Holy Grail (Original)</strong></p><table class="site-atlas-table"><tbody><tr><th scope="row">Annualized return</th><td data-atlas="annualized_rate_of_return" data-kind="pct">150.3%</td></tr><tr><th scope="row">Maximum drawdown</th><td data-atlas="max_drawdown" data-kind="pct">-47.4%</td></tr><tr><th scope="row">Sharpe ratio</th><td data-atlas="sharpe_ratio" data-kind="num">1.77</td></tr><tr><th scope="row">Calmar ratio</th><td data-atlas="calmar_ratio" data-kind="num">3.17</td></tr><tr><th scope="row">Annualized volatility</th><td data-atlas="standard_deviation" data-kind="pct">62.5%</td></tr><tr><th scope="row">Trailing one-year return</th><td data-atlas="trailing_one_year_return" data-kind="pct">35.1%</td></tr><tr><th scope="row">Backtest length (days)</th><td data-atlas="backtest_days" data-kind="int">3,768</td></tr></tbody></table><p class="pp-help" id="atlas-figures-status" role="status">Built into this page; Composer Atlas updated these figures on 2026-10-01.</p><p class="pp-help">A backtest, not a live record, and not financial advice. <a href="https://composeratlas.com/strategies?slug=holy-grail" rel="noopener" target="_blank">See the strategy on Composer Atlas</a>.</p></div></aside><script>(function () {
+  var box = document.getElementById('atlas-figures'), slug = box.getAttribute('data-slug'), KEY = 'azq-atlas-' + slug;
+  var status = document.getElementById('atlas-figures-status');
+  function fmt(v, kind) {
+    if (typeof v !== 'number' || !isFinite(v)) return null;
+    if (kind === 'pct') return (v * 100).toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + '%';
+    if (kind === 'num') return v.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    return Math.round(v).toLocaleString('en-US');
+  }
+  function show(s, how) {
+    var cells = box.querySelectorAll('[data-atlas]'), ok = 0;
+    for (var i = 0; i < cells.length; i++) {
+      var t = fmt(s[cells[i].getAttribute('data-atlas')], cells[i].getAttribute('data-kind'));
+      if (t !== null) { cells[i].textContent = t; ok++; }
+    }
+    if (ok && s.last_updated) status.textContent = how + ' Composer Atlas updated these figures on ' + String(s.last_updated).replace(/[<>]/g, '') + '.';
+    return ok;
+  }
+  try { var c = JSON.parse(window.localStorage.getItem(KEY) || 'null'); if (c) show(c, 'Saved from your last visit; checking for newer figures.'); } catch (e) { /* storage blocked: the built-in figures stay */ }
+  var s = document.createElement('script');
+  s.src = 'https://composeratlas.com/data/strategies.js';
+  s.async = true;
+  s.onload = function () {
+    var all = window.STRATEGIES_DATA || [], hit = null;
+    for (var i = 0; i < all.length; i++) if (all[i] && all[i].slug === slug) hit = all[i];
+    if (hit && show(hit, 'Live.')) {
+      var keep = {};
+      box.querySelectorAll('[data-atlas]').forEach(function (td) { var k = td.getAttribute('data-atlas'); keep[k] = hit[k]; });
+      keep.last_updated = hit.last_updated;
+      try { window.localStorage.setItem(KEY, JSON.stringify(keep)); } catch (e) { /* storage blocked: nothing to keep */ }
+    } else status.textContent = 'Composer Atlas did not list this strategy just now; showing the last figures this page has.';
+  };
+  s.onerror = function () { status.textContent = 'Composer Atlas could not be reached; showing the last figures this page has.'; };
+  document.body.appendChild(s);
+})();</script>
 <h3 id="structural-performance-properties">Structural performance properties</h3>
 <p>The 20% cash buffer in the bull regime acts as a partial dampener on bull-market returns. In a strong <span class="ticker">TQQQ</span> rally, the strategy captures only 80% of the gain (plus any <span class="ticker">UVXY</span> trade when the overbought signal fires). In exchange, the cash buffer reduces the drawdown when the bull regime ends.</p>
 <p>The <span class="ticker">SOXL</span> mean reversion layer adds a sector-specific entry point not present in TQQQ FTLT. Semiconductor stocks are among the most volatile major sector constituents of the Nasdaq-100. When SOXL's 10D RSI drops below 30 within a bear market, the strategy takes a 3x leveraged position to capture the expected mean reversion. This is a high-variance bet: SOXL can recover 15–30% in days after an extreme selloff, but it can also continue declining.</p>

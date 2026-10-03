@@ -395,6 +395,88 @@ def atlas_box(page):
             f'<div><p id="atlas-h"><strong>On Composer Atlas</strong></p><ul>{items}</ul></div></aside>')
 
 
+# Corrections (P11, build pass item 11, 2026-10-02). Outside links the owner
+# approved removing because they're dead: the <li> holding each is dropped.
+REMOVE_LINKS = {
+    "resources/index.html": ["https://www.denvercondomania.com", "https://dividendstocksonline.com/"],
+}
+
+# The Holy Grail's backtest figures, read live from Composer Atlas on every page
+# load (owner's answer, 2026-10-02). Atlas's strategies.json sends no CORS
+# header, so the page loads strategies.js, which sets window.STRATEGIES_DATA.
+# ATLAS_FIGURES_DEFAULT is the reading baked in at build time (Atlas updated it
+# 2026-10-01); the last live reading is kept in localStorage and shown first
+# on the next visit until the new one arrives.
+ATLAS_FIGURES_SRC = "https://composeratlas.com/data/strategies.js"
+ATLAS_FIGURES = {
+    "leveraged/holy-grail.html": {
+        "slug": "holy-grail", "name": "The Holy Grail (Original)", "after": "No public factsheet data was retrievable",
+        "default": {"annualized_rate_of_return": 1.5027786149311226, "max_drawdown": -0.47420086711158205,
+                    "sharpe_ratio": 1.7745710748773533, "calmar_ratio": 3.1690760586009445,
+                    "standard_deviation": 0.6245033857070518, "trailing_one_year_return": 0.3507868342435174,
+                    "backtest_days": 3768, "last_updated": "2026-10-01"},
+    },
+}
+ATLAS_FIGURE_ROWS = [("annualized_rate_of_return", "Annualized return", "pct"), ("max_drawdown", "Maximum drawdown", "pct"),
+                     ("sharpe_ratio", "Sharpe ratio", "num"), ("calmar_ratio", "Calmar ratio", "num"),
+                     ("standard_deviation", "Annualized volatility", "pct"), ("trailing_one_year_return", "Trailing one-year return", "pct"),
+                     ("backtest_days", "Backtest length (days)", "int")]
+
+
+def atlas_figures(page):
+    cfg = ATLAS_FIGURES[page]
+    d = cfg["default"]
+
+    def fmt(v, kind):
+        return f"{v * 100:,.1f}%" if kind == "pct" else f"{v:,.2f}" if kind == "num" else f"{v:,}"
+    rows = "".join(f'<tr><th scope="row">{esc(label)}</th><td data-atlas="{k}" data-kind="{kind}">{fmt(d[k], kind)}</td></tr>'
+                   for k, label, kind in ATLAS_FIGURE_ROWS)
+    url = next(u for t, u in ATLAS[page] if u.endswith("slug=" + cfg["slug"]))
+    js = """(function () {
+  var box = document.getElementById('atlas-figures'), slug = box.getAttribute('data-slug'), KEY = 'azq-atlas-' + slug;
+  var status = document.getElementById('atlas-figures-status');
+  function fmt(v, kind) {
+    if (typeof v !== 'number' || !isFinite(v)) return null;
+    if (kind === 'pct') return (v * 100).toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + '%';
+    if (kind === 'num') return v.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    return Math.round(v).toLocaleString('en-US');
+  }
+  function show(s, how) {
+    var cells = box.querySelectorAll('[data-atlas]'), ok = 0;
+    for (var i = 0; i < cells.length; i++) {
+      var t = fmt(s[cells[i].getAttribute('data-atlas')], cells[i].getAttribute('data-kind'));
+      if (t !== null) { cells[i].textContent = t; ok++; }
+    }
+    if (ok && s.last_updated) status.textContent = how + ' Composer Atlas updated these figures on ' + String(s.last_updated).replace(/[<>]/g, '') + '.';
+    return ok;
+  }
+  try { var c = JSON.parse(window.localStorage.getItem(KEY) || 'null'); if (c) show(c, 'Saved from your last visit; checking for newer figures.'); } catch (e) { /* storage blocked: the built-in figures stay */ }
+  var s = document.createElement('script');
+  s.src = '""" + ATLAS_FIGURES_SRC + """';
+  s.async = true;
+  s.onload = function () {
+    var all = window.STRATEGIES_DATA || [], hit = null;
+    for (var i = 0; i < all.length; i++) if (all[i] && all[i].slug === slug) hit = all[i];
+    if (hit && show(hit, 'Live.')) {
+      var keep = {};
+      box.querySelectorAll('[data-atlas]').forEach(function (td) { var k = td.getAttribute('data-atlas'); keep[k] = hit[k]; });
+      keep.last_updated = hit.last_updated;
+      try { window.localStorage.setItem(KEY, JSON.stringify(keep)); } catch (e) { /* storage blocked: nothing to keep */ }
+    } else status.textContent = 'Composer Atlas did not list this strategy just now; showing the last figures this page has.';
+  };
+  s.onerror = function () { status.textContent = 'Composer Atlas could not be reached; showing the last figures this page has.'; };
+  document.body.appendChild(s);
+})();"""
+    return (f'<aside class="pp-callout pp-callout--note site-atlas site-atlas-figures" id="atlas-figures" data-slug="{cfg["slug"]}" aria-labelledby="atlas-figures-h">'
+            f'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>'
+            f'<div><p id="atlas-figures-h"><strong>Backtest on Composer Atlas: {esc(cfg["name"])}</strong></p>'
+            f'<table class="site-atlas-table"><tbody>{rows}</tbody></table>'
+            f'<p class="pp-help" id="atlas-figures-status" role="status">Built into this page; Composer Atlas updated these figures on {d["last_updated"]}.</p>'
+            f'<p class="pp-help">A backtest, not a live record, and not financial advice. '
+            f'<a href="{esc(url)}" target="_blank" rel="noopener">See the strategy on Composer Atlas</a>.</p></div></aside>'
+            f'<script>{js}</script>')
+
+
 FAQ_FILTER = ('<div class="site-faq-filter"><label class="pp-label" for="faq-filter">Filter the questions</label>'
               '<input class="pp-input" id="faq-filter" type="search" autocomplete="off" placeholder="Type a word, like PEG or Palantir">'
               '<p class="pp-help" id="faq-filter-count" role="status"></p></div>')
@@ -727,6 +809,14 @@ def build_page(entry, search):
     if page in ATLAS:
         first = wrap.find("section")
         first.insert_before(BeautifulSoup(atlas_box(page), "html.parser"))
+    for url in REMOVE_LINKS.get(page, []):
+        hits = wrap.find_all("a", href=url)
+        assert len(hits) == 1, (page, url, len(hits))
+        hits[0].find_parent("li").decompose()
+    if page in ATLAS_FIGURES:
+        hits = [p for p in wrap.find_all("p") if p.get_text().startswith(ATLAS_FIGURES[page]["after"])]
+        assert len(hits) == 1, (page, "atlas figures anchor")
+        hits[0].insert_after(BeautifulSoup(atlas_figures(page), "html.parser"))
     if page == "resources/faq.html":
         h1 = wrap.find("h1")
         anchor = h1.find_parent("section") or h1

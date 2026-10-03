@@ -13,6 +13,8 @@ links; the tools load live data; and each data feed's fallback works when the
 feed is blocked. Exits 1 if any check fails.
 """
 import functools, http.server, importlib.util, pathlib, socketserver, sys, threading
+import sys
+sys.stdout.reconfigure(encoding="utf-8")  # notes quote page text (for example ↻); Windows' console encoding can't print it
 sys.dont_write_bytecode = True
 from playwright.sync_api import sync_playwright
 

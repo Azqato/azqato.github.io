@@ -189,6 +189,23 @@
   margin: 4px 0 0;
 }
 
+/* Holy Grail backtest figures from Composer Atlas (P11, 2026-10-02) */
+.site-atlas-table {
+  margin: 8px 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.site-atlas-table th,
+.site-atlas-table td {
+  padding: 4px 16px 4px 0;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.site-atlas-table th { font-weight: 500; }
+.site-atlas-table td { text-align: right; font-weight: 600; }
+
 .site-faq-filter {
   margin: 24px 0 32px;
 }
