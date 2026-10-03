@@ -74,6 +74,13 @@ SECTION_NAMES = {
     'youtube/index.html': 'YouTube', 'support/index.html': 'Support',
     'accounts/index.html': 'Gaming Accounts', 'privacy-policy/index.html': 'Privacy Policy',
 }
+# The second bar's wording, where the owner chose it (2026-10-03); any other
+# page reads "Azqato <name>".
+BAR_TITLES = {
+    'about/index.html': 'About Azqato', 'discord/index.html': "Azqato's Discord",
+    'music/index.html': "Azqato's Music", 'links/index.html': "Azqato's Links",
+    'projects/index.html': "Azqato's Projects", 'support/index.html': 'Support Azqato',
+}
 
 
 def icon_for(filename):
@@ -116,7 +123,7 @@ TEMPLATE = """<!-- NAV -->
 
 SUB_TEMPLATE = """
   <div class="site-sub">
-    <a class="site-sub-brand" href="{self}"><span class="site-sub-mark" aria-hidden="true">{icon}</span> Azqato {name}</a>
+    <a class="site-sub-brand" href="{self}"><span class="site-sub-mark" aria-hidden="true">{icon}</span> {name}</a>
     <button class="site-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
       <span class="site-search-text">Search the site</span>
@@ -198,7 +205,7 @@ def nav_for(filename):
         # The home page: one bar, with the theme button at its end.
         return TEMPLATE.format(items=items, home='index.html', brand=BRAND_DEFAULT, theme=theme, sub='')
     sub = SUB_TEMPLATE.format(self='index.html', icon=ICONS.get(filename, ICON_DEFAULT),
-                              name=SECTION_NAMES[filename], up=up(filename),
+                              name=BAR_TITLES.get(filename, 'Azqato ' + SECTION_NAMES[filename]), up=up(filename),
                               theme=theme.replace('\n        ', '\n      '))
     return TEMPLATE.format(items=items, home=href(filename, 'index.html'), brand=BRAND_DEFAULT, theme='', sub=sub)
 

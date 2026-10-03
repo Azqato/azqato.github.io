@@ -5,6 +5,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.14.3] - 2026-10-02
+
+### Changed
+- Second-bar names, as the owner chose: "About Azqato", "Azqato's Discord", "Azqato's Music",
+"Azqato's Links", "Azqato's Projects" and "Support Azqato" (`BAR_TITLES` in `tools/build-nav.py`).
+
+---
+
 ## [2.14.2] - 2026-10-02
 
 ### Changed
