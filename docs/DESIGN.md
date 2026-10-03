@@ -52,6 +52,8 @@ A page that needs an extra token (for example `--discord`, `--spotify`, `--coffe
 
 The owner picked these on 2026-10-02 (PRD Part 2, P15; Roadmap at a glance, item 4), one color per role, from a side-by-side comparison of azqato.com's and Invests' colors. They become the tokens for both halves of the site when items 5 to 8 are built; until then the tables above and Azqato Invests Visual System describe what is live. Contrast is measured against the page background with the WCAG formula.
 
+**Live 2026-10-02 (2.13.7, build pass item 5).** styles.css carries these as tokens: dark on `:root`, light on `:root[data-theme="light"]` and, for visitors without scripts, under `prefers-color-scheme: light`. New tokens: `--on-accent` (text on an accent fill), `--amber`, `--red`, `--blue`, `--nav-bg`, `--nav-menu-bg`. Changes from the table, made after the contrast audit: light `--green` `#116329` (`#1a7f37` was 4.36:1); dark `--border` `#3a4a43` and `--text-muted` `#9fb1a8`. Invests maps documentation-site's `--pp-*` tokens to these in invests/assets/css/site.css. One shared script, `/theme.js`, sets the theme before the first paint for every page (Theme button). music.html stays dark and has no button (`data-theme-lock="dark"`): the owner's "the visualizer stays dark". Known before this pass and unchanged: the Projects page's dark C# and HTML tags measure 3.42 and 4.09:1 (owner review).
+
 | Role | Dark | Source | Light | Source |
 |---|---|---|---|---|
 | Page background | `#0d1117` | azqato.com | `#f6f8fa` | New (GitHub-style) |
@@ -766,6 +768,8 @@ D8 borrows help-center's searchable FAQ and step-by-step guides, admin-dashboard
 
 #### Theme button
 
+**Moved 2026-10-02 (2.13.7):** the script is now `/theme.js`, shared by every page on azqato.com and Invests. The saved choice is under `azqato-theme` (Invests' old `azqato-invests-theme` still counts). On the root pages the button sits at the end of the slim top bar, beside ☰ on phones.
+
 **Built 2026-10-02 (P2):** assets/js/theme.js. It starts in the visitor's system theme, saves the choice in the visitor's browser, sets the theme in the head before the page draws, and shows the theme it switches to: ☀️ while dark, 🌙 while light, which is Template Interface's convention. Its accessible name says the action ("Switch to light theme").
 
 - ☀️/🌙 in the top bar (D10).
@@ -1250,4 +1254,4 @@ Why a control rather than a hard freeze: WCAG 2.2.2 (Pause Stop Hide, Level A) r
 3. Keep the `1100px` max width and the `2rem` / `1.25rem` horizontal padding pair. A section that sets its own width will visibly fail to line up with the nav.
 4. Never hand-edit the nav in a page. Since v2.8.8 it is generated: add the page to `PAGES` in `tools/build-nav.py`, run the script, and commit the result. The script stamps the block between the `<!-- NAV -->` marker and `</nav>` in every root-level page and sets `class="active"` itself. A hand edit survives until the next run and then vanishes without warning. Verify with `python tools/build-nav.py --check`.
 5. When a CSS value changes in the source, update the matching row in this document in the same commit. That rule predates this audit and is the reason the design system is still legible.
-6. Match the existing dark palette. There is no light theme and none is planned; do not add `prefers-color-scheme` handling. (**2026-10-02:** true for the 12 root pages. Azqato Invests has both themes, and the PRD's Future updates bring its theme button to the whole site; PRD Documentation Versus Reality 39.)
+6. Match the existing dark palette. ~~There is no light theme and none is planned.~~ **Replaced 2026-10-02 (2.13.7):** every page has a light and a dark theme from one palette (One palette for the whole site); build new parts in both and check their contrast in both. (**2026-10-02:** true for the 12 root pages. Azqato Invests has both themes, and the PRD's Future updates bring its theme button to the whole site; PRD Documentation Versus Reality 39.)

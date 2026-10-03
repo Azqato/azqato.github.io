@@ -270,6 +270,17 @@
   color: #ff7b72;
 }
 
+/* On the shared palette's darker background (build pass item 5) the badge
+   tints read darker too: the red above fell to 4.47:1 and the source's green
+   to 3.92:1. GitHub's lighter red and green pass. */
+:root[data-theme="dark"] .pp-page .src-stocks .badge-negative {
+  color: #ffa198;
+}
+
+:root[data-theme="dark"] .pp-page .src-stocks .badge-good {
+  color: #56d364;
+}
+
 /* The template's .callout is a flex row; the leverage sources' callouts are blocks. */
 .pp-page .src-leverage .callout {
   display: block;
@@ -856,4 +867,57 @@
 
 .site-sidebar-foot .pp-sidebar-card {
   margin-top: 0;
+}
+
+/* ---------- One palette for the whole site (build pass item 5, 2026-10-02) ----------
+   The owner's palette (docs/DESIGN.md, One palette for the whole site) mapped
+   onto the template's tokens, so Invests and azqato.com share their colors.
+   Declared last, so it supersedes the template's values above and the "Legibility
+   in light" values, which are kept as the record. The source sections follow
+   through their mappings; their data colors (tiers, gains and losses, strategy
+   colors) keep their meanings. */
+
+.pp-page {
+  --pp-bg: #f6f8fa;
+  --pp-rail: #f6f8fa;
+  --pp-hover: #eaeef2;
+  --pp-line: #d0d7de;
+  --pp-line-strong: #d0d7de;
+  --pp-ink: #1f2328;
+  --pp-text: #1f2328;
+  --pp-muted: #59636e;
+  --pp-emerald: #007a5e;
+  --pp-emerald-deep: #00664e;
+  --pp-emerald-fill: #007a5e;
+  --pp-emerald-fill-deep: #00664e;
+  --pp-emerald-pale: #ddf1ea;
+  --pp-emerald-line: #9fd5c3;
+  --pp-code-inline-bg: #eaeef2;
+  --pp-code-inline-line: #d0d7de;
+  --pp-amber: #9a6700;
+  --pp-red: #cf222e;
+  --pp-blue: #0969da;
+  --pp-blue-fill: #0969da;
+}
+
+@media screen {
+  :root[data-theme="dark"] .pp-page {
+    --pp-bg: #0d1117;
+    --pp-rail: #161b22;
+    --pp-hover: #1c2128;
+    --pp-line: #3a4a43;
+    --pp-line-strong: #3a4a43;
+    --pp-ink: #e6edf3;
+    --pp-text: #e6edf3;
+    --pp-muted: #9fb1a8;
+    --pp-emerald: #00d4a0;
+    --pp-emerald-deep: #00e6b0;
+    --pp-emerald-pale: #0d3d31;
+    --pp-emerald-line: #1f4a37;
+    --pp-code-inline-bg: #161b22;
+    --pp-code-inline-line: #3a4a43;
+    --pp-amber: #f0b45a;
+    --pp-red: #f85149;
+    --pp-blue: #58a6ff;
+  }
 }

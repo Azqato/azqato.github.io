@@ -5,6 +5,22 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.7] - 2026-10-02
+
+### Added
+- Light and dark themes on every page (build pass, item 5). The site follows the visitor's system theme
+until they press the ☀️/🌙 button; the choice is remembered in their browser. music.html stays dark.
+- `theme.js` at the root, shared by azqato.com and Azqato Invests (replaces `invests/assets/js/theme.js`).
+
+### Changed
+- One palette for the whole site (DESIGN.md): new tokens in `styles.css`; Invests' `--pp-*` colors mapped
+to it in `invests/assets/css/site.css`.
+- The top bar is the slim full-width strip Invests uses, with the theme button at its end.
+- `tools/build-nav.py` stamps the theme button and script; Projects, YouTube and Home colors moved to tokens.
+- `docs/DESIGN.md` and `docs/PRD.md` updated (rule 6 replaced; Future update marked done).
+
+---
+
 ## [2.13.6] - 2026-10-02
 
 ### Changed

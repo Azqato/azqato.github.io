@@ -84,10 +84,12 @@ class Quiet(http.server.SimpleHTTPRequestHandler):
 
 
 def serve():
-    handler = functools.partial(Quiet, directory=str(ROOT))
+    # The whole main site, with Invests at /invests/ as on azqato.com: the pages
+    # load the site's shared theme.js from one level up (build pass item 5).
+    handler = functools.partial(Quiet, directory=str(ROOT.parent))
     httpd = socketserver.ThreadingTCPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
-    return httpd, f"http://127.0.0.1:{httpd.server_address[1]}/"
+    return httpd, f"http://127.0.0.1:{httpd.server_address[1]}/invests/"
 
 
 def watch(page, base, errors):
@@ -108,7 +110,7 @@ def load(ctx, base, path, theme, size, shots=None, wait=2500, blocked=False):
     page.set_viewport_size(size)
     errors = []
     watch(page, base, errors)
-    page.add_init_script(f"try {{ localStorage.setItem('azqato-invests-theme', '{theme}'); }} catch (e) {{}}")
+    page.add_init_script(f"try {{ localStorage.setItem('azqato-theme', '{theme}'); }} catch (e) {{}}")
     page.goto(base + path, wait_until="load")
     page.wait_for_timeout(wait)
     if page.evaluate("document.documentElement.getAttribute('data-theme')") != theme:

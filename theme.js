@@ -1,10 +1,16 @@
 /*
- * Light and dark themes (D10). Adapted from Template Interface's
- * assets/js/theme-toggle.js (commit ed840da): loaded in the head, without
- * defer, so the theme is set on <html data-theme> before the first paint.
- * Changed for this site: a visitor with no saved choice gets their system
- * theme (the template defaults to dark), and the choice is saved under this
- * site's own key, in the visitor's browser only.
+ * Light and dark themes for the whole site (build pass item 5, 2026-10-02).
+ * One script for azqato.com's pages and Azqato Invests, moved here from
+ * invests/assets/js/theme.js (itself adapted from Template Interface's
+ * theme-toggle.js, commit ed840da). Loaded in the head, without defer, so the
+ * theme is set on <html data-theme> before the first paint.
+ *
+ * A visitor with no saved choice gets their system theme. The choice is saved
+ * under one key for the whole site, in the visitor's browser only; a choice
+ * saved under Invests' old key still counts.
+ *
+ * A page whose <html> carries data-theme-lock="dark" (music.html: the
+ * visualizer is drawn for a dark room) stays dark and has no button.
  *
  * Any <button class="theme-toggle"> becomes the toggle. It shows the theme it
  * switches to (a sun while dark, a moon while light) and its accessible name
@@ -13,12 +19,14 @@
 (function () {
   "use strict";
 
-  var KEY = "azqato-invests-theme";
+  var KEY = "azqato-theme";
+  var OLD_KEY = "azqato-invests-theme";
   var root = document.documentElement;
+  var lock = root.getAttribute("data-theme-lock");
 
-  function stored() {
+  function read(key) {
     try {
-      var v = window.localStorage.getItem(KEY);
+      var v = window.localStorage.getItem(key);
       return v === "light" || v === "dark" ? v : null;
     } catch (e) {
       return null;
@@ -33,7 +41,7 @@
     try { window.localStorage.setItem(KEY, mode); } catch (e) { /* storage blocked: the choice lasts this page only */ }
   }
 
-  root.setAttribute("data-theme", stored() || system());
+  root.setAttribute("data-theme", lock || read(KEY) || read(OLD_KEY) || system());
 
   function sync(button) {
     var dark = root.getAttribute("data-theme") === "dark";
@@ -45,6 +53,7 @@
   function bind() {
     var buttons = document.querySelectorAll(".theme-toggle");
     buttons.forEach(function (button) {
+      if (lock) { button.hidden = true; return; }
       sync(button);
       button.addEventListener("click", function () {
         var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";

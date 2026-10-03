@@ -547,7 +547,7 @@ def head(page, title, desc, kind, scope, extra_css, inline_css):
 <link rel="canonical" href="{page_url(page)}">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="{favicon(page)}">
-<script src="{r}assets/js/theme.js"></script>
+<script src="{r}../theme.js"></script>
 {links}
 {style}</head>
 """

@@ -49,7 +49,17 @@ ICONS = {
     'accounts.html': '🎮', 'privacy-policy.html': '🔒',
 }
 ICON_DEFAULT = '🦁'
-ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />')
+# The icon link, then the theme script (unless the page is locked dark), are
+# stamped together, so a rerun replaces both instead of adding a script.
+ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="theme.js"></script>)?')
+
+# Light and dark themes (build pass item 5): theme.js sets the theme before the
+# first paint; the button sits in the bar. music.html stays dark (owner's
+# answer: the visualizer stays dark) and gets neither; its <html> carries
+# data-theme="dark" data-theme-lock="dark".
+THEME_LOCKED = {'music.html'}
+THEME_BUTTON = ('\n        <button class="theme-toggle" type="button" aria-label="Switch theme">'
+                '<span class="theme-toggle-icon" aria-hidden="true"></span></button>')
 
 # Section brands in the top bar. Every other page shows "Azqato."
 BRANDS = {
@@ -62,7 +72,8 @@ BRAND_DEFAULT = 'Azqato<span>.</span>'
 def icon_for(filename):
     return ("<link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' "
             "viewBox='0 0 100 100'><text y='.9em' font-size='90'>%s</text></svg>\" />"
-            % ICONS.get(filename, ICON_DEFAULT))
+            % ICONS.get(filename, ICON_DEFAULT)
+            + ('' if filename in THEME_LOCKED else '\n  <script src="theme.js"></script>'))
 
 
 # Everything from the marker through the closing tag is regenerated. Both appear
@@ -73,10 +84,12 @@ TEMPLATE = """<!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a class="nav-logo" href="index.html">{brand}</a>
-      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
 {items}
       </ul>
+      <div class="nav-tools">{theme}
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
     </div>
   </nav>"""
 
@@ -146,7 +159,8 @@ def nav_for(filename):
         % (href, ' class="active"' if href == filename else '', label)
         for href, label in PAGES
     )
-    return TEMPLATE.format(items=items, brand=BRANDS.get(filename, BRAND_DEFAULT))
+    theme = '' if filename in THEME_LOCKED else THEME_BUTTON
+    return TEMPLATE.format(items=items, brand=BRANDS.get(filename, BRAND_DEFAULT), theme=theme)
 
 
 def main():

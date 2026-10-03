@@ -1,16 +1,75 @@
+/* ── THEME ── */
+/* One palette for the whole site, dark and light (docs/DESIGN.md, One palette
+   for the whole site; build pass item 5). theme.js sets data-theme on <html>
+   before the first paint: the visitor's saved choice, else their system
+   theme. Without scripts, the system theme still applies through the media
+   query. Dark is the base. */
 :root {
   --bg: #0d1117;
   --surface: #161b22;
-  --border: #30363d;
+  --border: #3a4a43;
   --accent: #00d4a0;
   --accent-hover: #00e6b0;
+  --on-accent: #0d1117;
   --green: #3fb950;
   --purple: #bc8cff;
   --orange: #ffa657;
+  --amber: #f0b45a;
+  --red: #f85149;
+  --blue: #58a6ff;
   --text: #e6edf3;
-  --text-muted: #8b949e;
+  --text-muted: #9fb1a8;
   --card-hover: #1c2128;
   --tag-bg: #21262d;
+  --nav-bg: rgba(13, 17, 23, 0.85);
+  --nav-menu-bg: rgba(13, 17, 23, 0.97);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f8fa;
+  --surface: #f6f8fa;
+  --border: #d0d7de;
+  --accent: #007a5e;
+  --accent-hover: #00664e;
+  --on-accent: #ffffff;
+  --green: #116329;
+  --purple: #8250df;
+  --orange: #bc4c00;
+  --amber: #9a6700;
+  --red: #cf222e;
+  --blue: #0969da;
+  --text: #1f2328;
+  --text-muted: #59636e;
+  --card-hover: #eaeef2;
+  --tag-bg: #eaeef2;
+  --nav-bg: rgba(246, 248, 250, 0.88);
+  --nav-menu-bg: rgba(246, 248, 250, 0.98);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: #f6f8fa;
+    --surface: #f6f8fa;
+    --border: #d0d7de;
+    --accent: #007a5e;
+    --accent-hover: #00664e;
+    --on-accent: #ffffff;
+    --green: #116329;
+    --purple: #8250df;
+    --orange: #bc4c00;
+    --amber: #9a6700;
+    --red: #cf222e;
+    --blue: #0969da;
+    --text: #1f2328;
+    --text-muted: #59636e;
+    --card-hover: #eaeef2;
+    --tag-bg: #eaeef2;
+    --nav-bg: rgba(246, 248, 250, 0.88);
+    --nav-menu-bg: rgba(246, 248, 250, 0.98);
+    color-scheme: light;
+  }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,19 +91,19 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13, 17, 23, 0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  padding: 0 2rem;
+  padding: 0 24px;
 }
 
+/* The slim full-width strip Azqato Invests uses (owner's request, build pass
+   item 5): logo, then the links, then the theme button at the far end. */
 .nav-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  height: 60px;
+  height: 52px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
   position: relative;
 }
 
@@ -71,19 +130,50 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 4px;
   list-style: none;
 }
 
 .nav-links a {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 6px;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 
 .nav-links a:hover { color: var(--text); }
 .nav-links a.active { color: var(--accent); font-weight: 600; }
+
+/* The theme button and, on phones, the menu button, at the bar's far end. */
+.nav-tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.theme-toggle:hover { background: var(--card-hover); }
+.theme-toggle[hidden] { display: none; }
 
 /* ── FOOTER ── */
 /* Stamped by tools/build-nav.py. Styled after Azqato Invests' footer: a slim
@@ -179,14 +269,14 @@ nav {
     right: 0;
     flex-direction: column;
     gap: 0;
-    background: rgba(13, 17, 23, 0.97);
+    background: var(--nav-menu-bg);
     border-bottom: 1px solid var(--border);
-    padding: 0.5rem 2rem 1rem;
+    padding: 0.5rem 24px 1rem;
   }
 
   .nav-links.open { display: flex; }
   .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 0.6rem 0; }
+  .nav-links a { display: block; padding: 0.6rem 0; border-radius: 0; }
 }
 
 /* ── REDUCED MOTION ── */
