@@ -637,6 +637,36 @@ def atlas_figures(page):
             f'<script>{js}</script>')
 
 
+# Topic groups on the FAQ (SEO review S7, owner's approval 2026-10-03). Each
+# group starts at the question named and runs to the next; the questions keep
+# their source order and text, so only the headings are new.
+FAQ_GROUPS = [
+    ("faq-mindset", "The long-term mindset", "Why do you never sell your stocks?"),
+    ("faq-markets", "How markets move", "What is market leadership cycle and why does it matter?"),
+    ("faq-research", "Researching a company", "How do you research a company before looking at any numbers?"),
+    ("faq-quality", "What makes a company worth owning", "What makes a company worth holding long-term?"),
+    ("faq-timing", "Timing and signals", "Do you use technical analysis?"),
+    ("faq-funds", "ETFs, leverage and how to invest", "How is investing in ETFs different from picking individual stocks?"),
+    ("faq-portfolio", "Managing your portfolio", "Why does holding for over 12 months matter beyond investment returns?"),
+]
+
+
+def faq_groups(wrap):
+    items = wrap.select(".accordion-item")
+    assert len(items) == 37, len(items)
+    starts = {}
+    for i, item in enumerate(items):
+        q = item.find(class_="accordion-trigger").get_text(" ", strip=True).rstrip("+").strip()
+        starts[q] = i
+    bounds = [starts[q] for _, _, q in FAQ_GROUPS] + [len(items)]
+    assert bounds[0] == 0 and bounds == sorted(bounds), bounds
+    for (gid, title, _), lo, hi in zip(FAQ_GROUPS, bounds, bounds[1:]):
+        sec = BeautifulSoup(f'<section class="site-faq-group" id="{gid}"><h2>{esc(title)}</h2></section>', "html.parser").section
+        items[lo].insert_before(sec)
+        for item in items[lo:hi]:
+            sec.append(item.extract())
+
+
 FAQ_FILTER = ('<div class="site-faq-filter"><label class="pp-label" for="faq-filter">Filter the questions</label>'
               '<input class="pp-input" id="faq-filter" type="search" autocomplete="off" placeholder="Type a word, like PEG or Palantir">'
               '<p class="pp-help" id="faq-filter-count" role="status"></p></div>')
@@ -1050,6 +1080,7 @@ def build_page(entry, search):
         links = ", ".join(f'<a href="{r}{u}">{esc(t)}</a>' for u, t in RELATED[page])
         wrap.append(BeautifulSoup(f'<p class="site-related"><strong>Related:</strong> {links}</p>', "html.parser"))
     if page == "resources/faq.html":
+        faq_groups(wrap)
         h1 = wrap.find("h1")
         anchor = h1.find_parent("section") or h1
         anchor.insert_after(BeautifulSoup(FAQ_FILTER, "html.parser"))

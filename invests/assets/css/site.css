@@ -927,3 +927,18 @@
     --pp-blue: #58a6ff;
   }
 }
+
+/* ---------- FAQ topic groups (SEO review S7, 2026-10-03) ----------
+   The groups sit inside the source's accordion box; each heading lines up
+   with the questions under it. */
+
+.pp-page .site-faq-group > h2 {
+  margin: 0;
+  padding: 1.5rem 20px 0.5rem;
+  font-size: 1.15rem;
+  border-bottom: 1px solid var(--pp-line);
+}
+
+.pp-page .site-faq-group:first-child > h2 {
+  padding-top: 1rem;
+}

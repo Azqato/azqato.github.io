@@ -5,6 +5,21 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.15.3] - 2026-10-03
+
+### Added
+- FAQ: seven topic groups, from the questions as they already run; no question moved or reworded
+(SEO review S7). Each is a section with an h2, so "On this page" lists them, and the filter hides a group
+with no matching questions.
+
+### Changed
+- Roadmap items 1 and 2: the live Invests site checked (21 pages, two widths, two themes: no errors;
+one outside link down, Zacks, for the owner), and PRD Part 2's drafted sections brought up to date:
+goals, stories and success criteria marked met, FAQ answers 3, 6, 10 and 12 corrected, D23 records
+the 2026-10-03 decisions. New owner questions Q11 to Q13 in docs/OWNER-QUESTIONS.md.
+
+---
+
 ## [2.15.2] - 2026-10-03
 
 ### Changed
