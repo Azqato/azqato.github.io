@@ -5,6 +5,16 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.14.1] - 2026-10-02
+
+### Added
+- `docs/SEO-REVIEW.md` (build pass, item 13; drafts only, nothing live): an audit of all 30 pages
+(titles, descriptions, headings, links in the text, length), seven small fixes, and drafts of the
+landing and Method pages for Individual Stocks, Indices & ETFs and VIX, for the owner's review.
+- `.gitignore`: Python's `__pycache__/`.
+
+---
+
 ## [2.14.0] - 2026-10-02
 
 ### Changed
