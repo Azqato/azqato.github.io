@@ -5,6 +5,16 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.2] - 2026-10-02
+
+### Fixed
+- `music.html` on phones (build pass, item 15e), tested at 320 to 480 px: the stage console spans the
+screen, the duplicate badge is hidden, the footer drops from about seven lines to three, and the seek
+bar is a 24 px tap target on touch screens. Desktop unchanged.
+- `docs/DESIGN.md`: new section, Music page on phones.
+
+---
+
 ## [2.13.1] - 2026-10-02
 
 ### Changed

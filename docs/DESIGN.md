@@ -462,6 +462,17 @@ This is by design and should not be treated as a bug to fix. A browser cannot re
 
 Every third frame, `music.html` redraws a 32x32 canvas of twelve radial spokes colored `hsl(195 + f*65, 100%, 70%)` and assigns it to the page's `<link rel="icon">` as a data URL. The shared lion favicon is therefore only visible on this page for the first few frames. Every other page keeps the lion. **Updated 2026-10-02 (2.13.1):** the static icon on this page is now 🎧, not the lion; the spokes still replace it after the first few frames.
 
+### Music page on phones
+
+Tested 2026-10-02 (2.13.2, build pass item 15e) in Edge at 320, 375, 414 and 480 px wide, with touch on. No sideways scroll and no script errors at any width. Fixed at 600 px and below:
+
+- The stage console now spans the screen less a 1rem gutter (up to 560px). Its old 280px floor left it narrower than the screen at 414 to 480px, half covering the badge.
+- The "🎵 Azqato's Music" badge is hidden, since the top bar already reads "🎧 Azqato Music".
+- The footer is one flowing block of 0.7rem links with the brand and copyright inline, and the mode row it sits in spans the screen. It went from about seven lines at 320px to three.
+- On touch screens (`pointer: coarse`, any width) the seek bar is a 24px tall input with the 4px track drawn through its middle, and an 18px thumb.
+
+Tap targets: the mode buttons and the console links are at least 32px tall; footer links are 24px, the WCAG 2.2 AA minimum. Desktop is unchanged (footer 87px, badge shown).
+
 ### Page emoji and section brands
 
 Added 2026-10-02 (2.13.1, build pass item 21), from the owner's answers. Each page has its own emoji favicon; the home page and any page without one use 🦁.
