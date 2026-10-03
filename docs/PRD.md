@@ -1427,6 +1427,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | 18 | ~~GitHub API integration (low priority)~~ Dropped for now (owner, 2026-10-02) | Below |
 | 19 | ~~A progress dashboard~~ Dropped for now (owner, 2026-10-02) | Future updates, below |
 | 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below |
+| 15d | Smoke-test script, `tools/smoke.py`, run locally (moved from the build pass by the owner, 2026-10-02) | The next build pass, below |
 | 21 | A brand per section and an emoji per page (favicon and title icon), the lion for the home page and any page without its own (owner's decision, 2026-10-02) | This list; to be written up as a Future update |
 
 **Owner's answers for the next build pass (2026-10-02).** Recorded before building so the pass needs no further questions:
@@ -1458,7 +1459,7 @@ Every item from Roadmap at a glance except Later, smallest first, each broken in
 | 15a | Compressed YouTube thumbnails | Make compressed copies of the four images, keeping the originals in `img/`; point `youtube.html` at the copies with `loading="lazy"`; record the bytes saved | **Done 2026-10-02:** four 160 px WebP copies, 2.37 MB to 30 KB, lazy-loaded; originals kept (S) |
 | 6 | New footer on every page | "© 2026 Azqato" plus plain links to every main section (SEO practice: crawlable links, descriptive text; no sitemap link, since robots.txt lists sitemap.xml); stamp it from `tools/build-nav.py` into all 12 pages; match the Invests footer's style; update DESIGN.md | S |
 | 21 | Emoji and section brands | An emoji favicon and title icon for each of the 12 pages and the Invests sections (list above); "Azqato Invests / Music / Codes" in the top bar on those pages; update the sharing tags if titles change | **Done 2026-10-02:** 2.13.1. Emoji favicons on every page and Invests section; Music and Codes brands in the top bar; titles unchanged (S) |
-| 15d | Smoke-test script | `tools/smoke.py` (local, no GitHub Action): all 12 pages in Edge, both themes, desktop and phone widths; fails on console errors, broken links or sideways scroll; documented in the Runbook | S to M |
+| 15d | Smoke-test script | `tools/smoke.py` (local, no GitHub Action): all 12 pages in Edge, both themes, desktop and phone widths; fails on console errors, broken links or sideways scroll; documented in the Runbook | **Moved to Later by the owner, 2026-10-02** (S to M) |
 | 15e | Music page on phones | Test `music.html` from 320 to 480 px; fix layout, tap targets and the stage console; record the results | M |
 | 11 | Content corrections | Remove the two dead Resources links; load the Holy Grail figures live from Composer Atlas on every page load with a cached default (first check that Atlas offers the figures in a form the page can fetch; if it doesn't, ask the owner); gather every other correction into one list for the owner | M |
 | 10 | Old repos become data feeds | The vix job also writes `vix.json`; the VIX pages read it as the second source; drop the blocked allorigins fallback; a clear "unavailable" state; confirm the stocks and vix jobs still run | M |
