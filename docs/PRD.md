@@ -1416,12 +1416,12 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 |---|---|---|---|
 | 14 | v2.9.5: no pulsing unless the fire is firing | v2.9.5, below | Small |
 | 15 | Defect list: optimize the four `youtube.html` thumbnails; `build-nav.py --check` in the pre-commit hook; pause the render loop on `document.hidden`; Playwright smoke tests; mobile audit of `music.html` | Current phase, below | Small to medium each |
-| 16 | v2.9.0: full native catalog | v2.9.0, below | Waiting on the owner's audio files |
 
 **Later**
 
 | # | Item | Where it's detailed |
 |---|---|---|
+| 16 | v2.9.0: full native catalog (moved to Later by the owner, 2026-10-02; waiting on the owner's audio files) | v2.9.0, below |
 | 17 | v3.0.0: contact / hire-me section | Below |
 | 18 | GitHub API integration (low priority) | Below |
 | 19 | A progress dashboard | Future updates, below |
