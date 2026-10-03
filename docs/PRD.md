@@ -1443,6 +1443,33 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 - **Later or dropped:** the full music catalog is Later (item 16). The contact section (item 17) points to https://github.com/Azqato/azqato.github.io/issues. GitHub stats (18) and the progress dashboard (19) are dropped for now.
 - **Pushing:** after each item is done and checked.
 
+### The next build pass, sorted by effort (planned 2026-10-02)
+
+Every item from Roadmap at a glance except Later, smallest first, each broken into its subtasks. Written before building, at the owner's request. The owner's answers it relies on are listed above.
+
+**Status:** waiting on the owner's answer to one question: what this pass covers. Recommended: every row below in this order, with item 13 stopping at drafts for the owner's review, and item 7 moved up to run straight after item 5, because both rewrite every page's links. Each item is pushed when it's done and checked.
+
+| # | Item | Subtasks | Effort |
+|---|---|---|---|
+| 15b | Block commits with an out-of-date nav | Add `python tools/build-nav.py --check` to `.githooks/pre-commit`; test it with a deliberately stale page | XS |
+| 15c | Pause the visualizer in hidden tabs | Pause and resume the render loop on `visibilitychange`, reusing `setPlaying()`; check it in Edge | XS |
+| 14 | No pulsing unless the fire is firing (v2.9.5) | Gate the four `envLow` and `envBroad` brightness terms on the fire through a 150 to 250 ms eased gate, not a hard switch; confirm a paused or silent track holds steady brightness; re-measure the worst single-frame brightness step (limit 0.0073 at 60 Hz) | S |
+| 15a | Compressed YouTube thumbnails | Make compressed copies of the four images, keeping the originals in `img/`; point `youtube.html` at the copies with `loading="lazy"`; record the bytes saved | S |
+| 6 | New footer on every page | "© 2026 Azqato" plus plain links to every main section (SEO practice: crawlable links, descriptive text; no sitemap link, since robots.txt lists sitemap.xml); stamp it from `tools/build-nav.py` into all 12 pages; match the Invests footer's style; update DESIGN.md | S |
+| 21 | Emoji and section brands | An emoji favicon and title icon for each of the 12 pages and the Invests sections (list above); "Azqato Invests / Music / Codes" in the top bar on those pages; update the sharing tags if titles change | S |
+| 15d | Smoke-test script | `tools/smoke.py` (local, no GitHub Action): all 12 pages in Edge, both themes, desktop and phone widths; fails on console errors, broken links or sideways scroll; documented in the Runbook | S to M |
+| 15e | Music page on phones | Test `music.html` from 320 to 480 px; fix layout, tap targets and the stage console; record the results | M |
+| 11 | Content corrections | Remove the two dead Resources links; load the Holy Grail figures live from Composer Atlas on every page load with a cached default (first check that Atlas offers the figures in a form the page can fetch; if it doesn't, ask the owner); gather every other correction into one list for the owner | M |
+| 10 | Old repos become data feeds | The vix job also writes `vix.json`; the VIX pages read it as the second source; drop the blocked allorigins fallback; a clear "unavailable" state; confirm the stocks and vix jobs still run | M |
+| 9 | Redirect the old sites | 19 redirect pages across the stocks, vix and leverage repos (old title, canonical, instant redirect, a fallback link); `/leveraged-strategies/` too; every data file keeps serving; after the push, check each old address reaches its page in one hop | M |
+| 12 | One VIX page | Merge the three pages into `/invests/vix/` (strategy, then dashboard, then builder, with jump links), keeping everything (core rule); the old addresses become redirects; update the sidebar, search, sitemap and inventories; run `check.py` and `browser.py` | M |
+| 5 | Top bar and theme button on every page | The light palette and new tokens in `styles.css`; swap literal colors for tokens on the pages that have them (`music.html` 137, `projects.html` 34, `support.html` 23, a few elsewhere); the nav template in `tools/build-nav.py` becomes the slim bar with ☀️/🌙 beside ☰ on phones; one shared theme script (system theme first, choice remembered); the visualizer stays dark; check all 12 pages in both themes | M to L |
+| 7 | Clean addresses | Move 11 pages into folders, each `.html` left as a redirect page; fix relative paths one level deeper; nav links point at `folder/index.html` so opening from disk works (on azqato.com each click then takes one redirect to the clean address, as `.html` links do today; on azqato.github.io the address bar shows `/folder/index.html`, and canonical tags keep search engines on the clean form); update canonicals, sitemap.xml and og:url; check every old address and opening from disk | M to L |
+| 20 | `music.html`'s script to `viz.js` | Move about 1,900 lines unchanged; test the visualizer, the audio reaction and every mode in Edge; confirm the page weight drops | L |
+| 8 | Fold Invests in | Move its scripts and inventories to `tools/invests/` and fix their paths; Invests takes the shared palette and top bar; rerun `site.py`, `check.py` and `browser.py`; the pages and addresses stay | L |
+| 13 | Landing pages and SEO (drafts only) | Audit all 21 pages (titles, descriptions, headings, internal links); draft four landing pages and four "Method" pages; the owner reviews them together | L |
+| Review | Full review | The owner reviews the live site and Invests' drafted sections, after item 15 | Owner |
+
 **Owner decisions that aren't work:** one brand or two; where the mascot came from; whether to start reading the Cloudflare analytics (docs/TODO.md). **Answered 2026-10-02 by the owner:** (1) brand: several brands, one per section, with a different emoji for each page; the home page and any page without its own use the lion. (2) The mascot is a lion because the owner likes cats. (3) Cloudflare analytics: much later.
 
 **Declined or deferred:** Part 1's Explicitly deferred items and Part 2's Invests: Explicitly deferred.
