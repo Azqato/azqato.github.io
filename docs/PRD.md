@@ -1426,8 +1426,9 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | 18 | GitHub API integration (low priority) | Below |
 | 19 | A progress dashboard | Future updates, below |
 | 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below |
+| 21 | A brand per section and an emoji per page (favicon and title icon), the lion for the home page and any page without its own (owner's decision, 2026-10-02) | This list; to be written up as a Future update |
 
-**Owner decisions that aren't work:** one brand or two; where the mascot came from; whether to start reading the Cloudflare analytics (docs/TODO.md).
+**Owner decisions that aren't work:** one brand or two; where the mascot came from; whether to start reading the Cloudflare analytics (docs/TODO.md). **Answered 2026-10-02 by the owner:** (1) brand: several brands, one per section, with a different emoji for each page; the home page and any page without its own use the lion. (2) The mascot is a lion because the owner likes cats. (3) Cloudflare analytics: much later.
 
 **Declined or deferred:** Part 1's Explicitly deferred items and Part 2's Invests: Explicitly deferred.
 
