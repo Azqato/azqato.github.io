@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.8] - 2026-10-02
+
+### Changed
+- Clean addresses (build pass, item 7): the ten root pages moved into folders, so azqato.com/discord/
+replaces discord.html. Each old `.html` address is a redirect page, and `_redirects` sends it to the new
+address in one hop on azqato.com. Links still work when a page is opened from disk.
+- `tools/build-nav.py` writes the nav and footer links relative to each page and stamps the pages in
+their folders. Canonicals, og:url, sitemap.xml and Invests' top bar use the new addresses.
+- `docs/PRD.md`: the Future update is marked done, with ten new compatibility entries.
+
+---
+
 ## [2.13.7] - 2026-10-02
 
 ### Added

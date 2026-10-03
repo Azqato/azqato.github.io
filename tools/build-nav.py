@@ -30,41 +30,41 @@ import sys
 # receive the nav, they simply have no active item.
 PAGES = [
     ('index.html', 'Home'),
-    ('about.html', 'About'),
-    ('discord.html', 'Discord'),
+    ('about/index.html', 'About'),
+    ('discord/index.html', 'Discord'),
     ('invests/index.html', 'Invests'),
-    ('codes.html', 'Codes'),
-    ('music.html', 'Music'),
-    ('links.html', 'Links'),
-    ('projects.html', 'Projects'),
-    ('youtube.html', 'YouTube'),
-    ('support.html', 'Support'),
+    ('codes/index.html', 'Codes'),
+    ('music/index.html', 'Music'),
+    ('links/index.html', 'Links'),
+    ('projects/index.html', 'Projects'),
+    ('youtube/index.html', 'YouTube'),
+    ('support/index.html', 'Support'),
 ]
 
 # Each page's emoji favicon (owner's answers, 2026-10-02). A page not listed
 # here, and the home page, use the lion.
 ICONS = {
-    'about.html': '🙋', 'discord.html': '💬', 'codes.html': '💻', 'music.html': '🎧',
-    'links.html': '🔗', 'projects.html': '🛠️', 'youtube.html': '📺', 'support.html': '☕',
-    'accounts.html': '🎮', 'privacy-policy.html': '🔒',
+    'about/index.html': '🙋', 'discord/index.html': '💬', 'codes/index.html': '💻', 'music/index.html': '🎧',
+    'links/index.html': '🔗', 'projects/index.html': '🛠️', 'youtube/index.html': '📺', 'support/index.html': '☕',
+    'accounts/index.html': '🎮', 'privacy-policy/index.html': '🔒',
 }
 ICON_DEFAULT = '🦁'
 # The icon link, then the theme script (unless the page is locked dark), are
 # stamped together, so a rerun replaces both instead of adding a script.
-ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="theme.js"></script>)?')
+ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="(?:\.\./)?theme.js"></script>)?')
 
 # Light and dark themes (build pass item 5): theme.js sets the theme before the
 # first paint; the button sits in the bar. music.html stays dark (owner's
 # answer: the visualizer stays dark) and gets neither; its <html> carries
 # data-theme="dark" data-theme-lock="dark".
-THEME_LOCKED = {'music.html'}
+THEME_LOCKED = {'music/index.html'}
 THEME_BUTTON = ('\n        <button class="theme-toggle" type="button" aria-label="Switch theme">'
                 '<span class="theme-toggle-icon" aria-hidden="true"></span></button>')
 
 # Section brands in the top bar. Every other page shows "Azqato."
 BRANDS = {
-    'music.html': '🎧 Azqato <span>Music</span>',
-    'codes.html': '💻 Azqato <span>Codes</span>',
+    'music/index.html': '🎧 Azqato <span>Music</span>',
+    'codes/index.html': '💻 Azqato <span>Codes</span>',
 }
 BRAND_DEFAULT = 'Azqato<span>.</span>'
 
@@ -73,7 +73,18 @@ def icon_for(filename):
     return ("<link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' "
             "viewBox='0 0 100 100'><text y='.9em' font-size='90'>%s</text></svg>\" />"
             % ICONS.get(filename, ICON_DEFAULT)
-            + ('' if filename in THEME_LOCKED else '\n  <script src="theme.js"></script>'))
+            + ('' if filename in THEME_LOCKED else '\n  <script src="%stheme.js"></script>' % up(filename)))
+
+
+def up(filename):
+    """The way back to the site root from a page: '' for index.html, '../' for
+    a page in its own folder (clean addresses, build pass item 7)."""
+    return '../' * filename.count('/')
+
+
+def href(page, target):
+    """A link from one page to another, relative, so pages open from disk."""
+    return up(page) + target
 
 
 # Everything from the marker through the closing tag is regenerated. Both appear
@@ -83,7 +94,7 @@ BLOCK = re.compile(r'<!-- NAV -->.*?</nav>', re.DOTALL)
 TEMPLATE = """<!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html">{brand}</a>
+      <a class="nav-logo" href="{home}">{brand}</a>
       <ul class="nav-links">
 {items}
       </ul>
@@ -98,8 +109,8 @@ TEMPLATE = """<!-- NAV -->
 # "all the major categories, for SEO"). Two groups: the site, and Azqato
 # Invests' sections. No sitemap link: robots.txt points crawlers at sitemap.xml.
 FOOTER_SITE = PAGES + [
-    ('accounts.html', 'Gaming Accounts'),
-    ('privacy-policy.html', 'Privacy Policy'),
+    ('accounts/index.html', 'Gaming Accounts'),
+    ('privacy-policy/index.html', 'Privacy Policy'),
 ]
 FOOTER_INVESTS = [
     ('invests/index.html', 'Azqato Invests'),
@@ -130,7 +141,7 @@ FOOTER_TEMPLATE = """<!-- FOOTER -->
 
 # music.html's footer sits inside the fixed stage console, so it gets a compact,
 # translucent variant of the same block.
-FOOTER_VARIANT = {'music.html': ' site-footer--stage'}
+FOOTER_VARIANT = {'music/index.html': ' site-footer--stage'}
 
 
 def footer_for(filename):
@@ -138,8 +149,8 @@ def footer_for(filename):
     def items(pairs):
         return '\n'.join(
             '          <li><a href="%s"%s>%s</a></li>'
-            % (href, ' aria-current="page"' if href == filename else '', label.replace('&', '&amp;'))
-            for href, label in pairs
+            % (href(filename, target), ' aria-current="page"' if target == filename else '', label.replace('&', '&amp;'))
+            for target, label in pairs
         )
     return FOOTER_TEMPLATE.format(variant=FOOTER_VARIANT.get(filename, ''),
                                   site=items(FOOTER_SITE), invests=items(FOOTER_INVESTS))
@@ -156,11 +167,11 @@ def nav_for(filename):
     """Return the nav block for one page, with its own link marked active."""
     items = '\n'.join(
         '        <li><a href="%s"%s>%s</a></li>'
-        % (href, ' class="active"' if href == filename else '', label)
-        for href, label in PAGES
+        % (href(filename, target), ' class="active"' if target == filename else '', label)
+        for target, label in PAGES
     )
     theme = '' if filename in THEME_LOCKED else THEME_BUTTON
-    return TEMPLATE.format(items=items, brand=BRANDS.get(filename, BRAND_DEFAULT), theme=theme)
+    return TEMPLATE.format(items=items, home=href(filename, 'index.html'), brand=BRANDS.get(filename, BRAND_DEFAULT), theme=theme)
 
 
 def main():
@@ -173,8 +184,12 @@ def main():
     changed = []
     skipped = []
 
-    for path in sorted(root.glob('*.html')):
-        if path.name in SKIP:
+    # The home page, then each page in its own folder (clean addresses, build
+    # pass item 7). The old root .html files are redirect pages and get nothing.
+    names = ['index.html'] + [t for t, _ in FOOTER_SITE if t != 'index.html' and not t.startswith('invests/')]
+    for name in names:
+        path = root / name
+        if name in SKIP:
             continue
 
         # newline='' keeps each file's own line endings intact. music.html is
@@ -182,21 +197,21 @@ def main():
         # diff of the whole file instead of the nav.
         src = path.read_text(encoding='utf-8', newline='')
         if '<!-- NAV -->' not in src:
-            skipped.append(path.name)
+            skipped.append(name)
             continue
 
         newline = '\r\n' if '\r\n' in src else '\n'
-        block = nav_for(path.name).replace('\n', newline)
+        block = nav_for(name).replace('\n', newline)
         out = BLOCK.sub(lambda _: block, src, count=1)
-        out = ICON_LINK.sub(lambda _: icon_for(path.name), out, count=1)
+        out = ICON_LINK.sub(lambda _: icon_for(name), out, count=1)
         if '<!-- FOOTER -->' in out:
-            fblock = footer_for(path.name).replace('\n', newline)
+            fblock = footer_for(name).replace('\n', newline)
             out = FOOTER_BLOCK.sub(lambda _: fblock, out, count=1)
 
         if out == src:
             continue
 
-        changed.append(path.name)
+        changed.append(name)
         if not args.check:
             path.write_text(out, encoding='utf-8', newline='')
 

@@ -56,10 +56,10 @@ TITLES = {"index.html": f"{BRAND} - Investing Tools and Resources"}
 
 # azqato.com's top nav (D9), copied from azqato.github.io/invests.html at the
 # snapshot commit; Invests points to this site.
-AZQATO_NAV = [("Home", "https://azqato.com/"), ("About", "https://azqato.com/about"), ("Discord", "https://azqato.com/discord"),
-              ("Invests", None), ("Codes", "https://azqato.com/codes"), ("Music", "https://azqato.com/music"),
-              ("Links", "https://azqato.com/links"), ("Projects", "https://azqato.com/projects"),
-              ("YouTube", "https://azqato.com/youtube"), ("Support", "https://azqato.com/support")]
+AZQATO_NAV = [("Home", "https://azqato.com/"), ("About", "https://azqato.com/about/"), ("Discord", "https://azqato.com/discord/"),
+              ("Invests", None), ("Codes", "https://azqato.com/codes/"), ("Music", "https://azqato.com/music/"),
+              ("Links", "https://azqato.com/links/"), ("Projects", "https://azqato.com/projects/"),
+              ("YouTube", "https://azqato.com/youtube/"), ("Support", "https://azqato.com/support/")]
 
 # Old addresses (relative to each source, or absolute) to new pages.
 LINKS = {}
@@ -350,7 +350,7 @@ def split_invests(body, part, soup, page):
     hero, projects, resources = sections[0], sections[1], sections[2]
     footer = body.select_one(".src-footer")
     for a in hero.select("a.btn-discord"):
-        a["href"] = "https://azqato.com/discord"
+        a["href"] = "https://azqato.com/discord/"
     if part == "home":
         cards = {"Stocks": "stocks/index.html", "Leveraged Strategies": "leveraged/index.html",
                  "VIX Strategy": "vix/index.html", "Stock Screener": "stocks/screener.html"}

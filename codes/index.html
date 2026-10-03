@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Prompts and Coding Tools - Azqato</title>
+  <meta name="description" content="Prompt libraries and browser-based tools for working faster with AI. Free to use, nothing to install, with more being added." />
+  <link rel="canonical" href="https://azqato.com/codes/" />
+  <meta property="og:title" content="Prompt Libraries and Browser-Based AI Tools" />
+  <meta property="og:description" content="Prompt libraries and browser-based tools for working faster with AI. Free to use, nothing to install, with more being added." />
+  <meta property="og:url" content="https://azqato.com/codes/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Azqato" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>" />
+  <script src="../theme.js"></script>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    html { scroll-behavior: smooth; }
+
+    #projects { scroll-margin-top: 80px; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 .highlight { color: var(--accent); }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 620px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      max-width: 620px;
+    }
+
+    /* ── PROJECT GRID ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      overflow: hidden;
+      transition: transform 0.18s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple), var(--accent));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-card h3 .arrow {
+      color: var(--text-muted);
+      transition: transform 0.18s, color 0.2s;
+    }
+
+    .project-card:hover h3 .arrow { transform: translateX(4px); color: var(--accent); }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 1.25rem 1.5rem; }
+      .section { padding: 1.5rem 1.25rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="../index.html">💻 Azqato <span>Codes</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../discord/index.html">Discord</a></li>
+        <li><a href="../invests/index.html">Invests</a></li>
+        <li><a href="../codes/index.html" class="active">Codes</a></li>
+        <li><a href="../music/index.html">Music</a></li>
+        <li><a href="../links/index.html">Links</a></li>
+        <li><a href="../projects/index.html">Projects</a></li>
+        <li><a href="../youtube/index.html">YouTube</a></li>
+        <li><a href="../support/index.html">Support</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button class="theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Azqato <span class="highlight">Codes</span></h1>
+    <p>Prompt libraries and coding tools built for working faster with AI. Explore what's available below, with more on the way.</p>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-desc">Tools for coding with AI, free to use and open to everyone. Pick one below and start exploring.</p>
+    </div>
+
+    <div class="project-grid">
+
+      <a class="project-card" href="https://azqato.github.io/prompts/" target="_blank" rel="noopener">
+        <span class="project-icon">💬</span>
+        <h3>Prompts <span class="arrow">→</span></h3>
+        <p>A personal library of reusable Claude Code prompts.</p>
+      </a>
+
+      <a class="project-card" href="https://azqato.github.io/tools/" target="_blank" rel="noopener">
+        <span class="project-icon">🛠️</span>
+        <h3>Tools <span class="arrow">→</span></h3>
+        <p>Free, browser-based utilities: favicon downloader, link cleaner, markdown preview, and more.</p>
+      </a>
+
+      <a class="project-card" href="https://github.com/Azqato" target="_blank" rel="noopener">
+        <span class="project-icon">🐙</span>
+        <h3>GitHub <span class="arrow">→</span></h3>
+        <p>Everything Azqato builds, open source and free to browse.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-in">
+      <p class="site-footer-brand">Azqato<span>.</span></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul aria-label="Site">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../about/index.html">About</a></li>
+          <li><a href="../discord/index.html">Discord</a></li>
+          <li><a href="../invests/index.html">Invests</a></li>
+          <li><a href="../codes/index.html" aria-current="page">Codes</a></li>
+          <li><a href="../music/index.html">Music</a></li>
+          <li><a href="../links/index.html">Links</a></li>
+          <li><a href="../projects/index.html">Projects</a></li>
+          <li><a href="../youtube/index.html">YouTube</a></li>
+          <li><a href="../support/index.html">Support</a></li>
+          <li><a href="../accounts/index.html">Gaming Accounts</a></li>
+          <li><a href="../privacy-policy/index.html">Privacy Policy</a></li>
+        </ul>
+        <ul aria-label="Azqato Invests">
+          <li><a href="../invests/index.html">Azqato Invests</a></li>
+          <li><a href="../invests/stocks/index.html">Individual Stocks</a></li>
+          <li><a href="../invests/indices/index.html">Indices &amp; ETFs</a></li>
+          <li><a href="../invests/vix/index.html">VIX Strategy</a></li>
+          <li><a href="../invests/leveraged/index.html">Leveraged Strategies</a></li>
+          <li><a href="../invests/resources/index.html">Investing Resources</a></li>
+        </ul>
+      </nav>
+      <p class="site-footer-legal">&copy; 2026 Azqato</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -4,3 +4,16 @@
 # /invests (invests.html) and /invests/ (invests/index.html) never compete.
 /invests       /invests/  301
 /invests.html  /invests/  301
+
+# Clean addresses (build pass item 7, 2.13.8): each root page moved to its own
+# folder; the old .html address goes straight to the clean one in one hop.
+/about.html  /about/  301
+/accounts.html  /accounts/  301
+/codes.html  /codes/  301
+/discord.html  /discord/  301
+/links.html  /links/  301
+/music.html  /music/  301
+/privacy-policy.html  /privacy-policy/  301
+/projects.html  /projects/  301
+/support.html  /support/  301
+/youtube.html  /youtube/  301

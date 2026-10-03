@@ -4,22 +4,23 @@
   content, and no page that renders differently for a signed-in visitor.
   lastmod is the date of the last commit that changed that page.
   The canonical domain is azqato.com, decided 2026-09-28. See the PRD, Open Question 10.
-  URLs are extensionless because that is what azqato.com serves: the .html form
-  307-redirects to it. Both hosts return 200 on the form listed here.
+  Each page lives in its own folder (name/index.html), so its address ends in a
+  slash (2.13.8, clean addresses). The old name.html form redirects there;
+  both hosts return 200 on the form listed here.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://azqato.com/</loc>
-    <lastmod>2026-07-10</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://azqato.com/about</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://azqato.com/about/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://azqato.com/projects</loc>
+    <loc>https://azqato.com/projects/</loc>
     <lastmod>2026-09-28</lastmod>
     <priority>0.9</priority>
   </url>
@@ -29,43 +30,43 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://azqato.com/music</loc>
-    <lastmod>2026-08-30</lastmod>
+    <loc>https://azqato.com/music/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://azqato.com/discord</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://azqato.com/discord/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://azqato.com/codes/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://azqato.com/youtube</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://azqato.com/youtube/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://azqato.com/links</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://azqato.com/links/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://azqato.com/support</loc>
-    <lastmod>2026-08-29</lastmod>
+    <loc>https://azqato.com/support/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/accounts</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://azqato.com/accounts/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/privacy-policy</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://azqato.com/privacy-policy/</loc>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.3</priority>
   </url>
 </urlset>
