@@ -1447,7 +1447,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 
 Every item from Roadmap at a glance except Later, smallest first, each broken into its subtasks. Written before building, at the owner's request. The owner's answers it relies on are listed above.
 
-**Status:** waiting on the owner's answer to one question: what this pass covers. Recommended: every row below in this order, with item 13 stopping at drafts for the owner's review, and item 7 moved up to run straight after item 5, because both rewrite every page's links. Each item is pushed when it's done and checked.
+**Status:** approved by the owner 2026-10-02 as recommended; in progress. Earlier: waiting on the owner's answer to one question: what this pass covers. Recommended: every row below in this order, with item 13 stopping at drafts for the owner's review, and item 7 moved up to run straight after item 5, because both rewrite every page's links. Each item is pushed when it's done and checked.
 
 | # | Item | Subtasks | Effort |
 |---|---|---|---|
