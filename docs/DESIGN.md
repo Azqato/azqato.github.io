@@ -460,7 +460,24 @@ This is by design and should not be treated as a bug to fix. A browser cannot re
 
 ### Dynamic favicon
 
-Every third frame, `music.html` redraws a 32x32 canvas of twelve radial spokes colored `hsl(195 + f*65, 100%, 70%)` and assigns it to the page's `<link rel="icon">` as a data URL. The shared lion favicon is therefore only visible on this page for the first few frames. Every other page keeps the lion.
+Every third frame, `music.html` redraws a 32x32 canvas of twelve radial spokes colored `hsl(195 + f*65, 100%, 70%)` and assigns it to the page's `<link rel="icon">` as a data URL. The shared lion favicon is therefore only visible on this page for the first few frames. Every other page keeps the lion. **Updated 2026-10-02 (2.13.1):** the static icon on this page is now 🎧, not the lion; the spokes still replace it after the first few frames.
+
+### Page emoji and section brands
+
+Added 2026-10-02 (2.13.1, build pass item 21), from the owner's answers. Each page has its own emoji favicon; the home page and any page without one use 🦁.
+
+| Page | Emoji | Page | Emoji |
+|---|---|---|---|
+| Home | 🦁 | Links | 🔗 |
+| About | 🙋 | Projects | 🛠️ |
+| Discord | 💬 | YouTube | 📺 |
+| Invests (Home) | 💰 | Support | ☕ |
+| Codes | 💻 | Gaming Accounts | 🎮 |
+| Music | 🎧 | Privacy | 🔒 |
+
+The Invests sections take their section's emoji: Individual Stocks 📈, Indices & ETFs 📊, VIX Strategy ⚡, Leveraged Strategies 🚀, Resources 📚.
+
+The top bar shows a section brand on that section's pages: "🎧 Azqato Music" on `music.html`, "💻 Azqato Codes" on `codes.html` and "💰 Azqato Invests" on the Invests pages. Every other page shows "Azqato.". Page titles are unchanged. The root pages' icons and brands are stamped by `tools/build-nav.py` (`ICONS`, `BRANDS`); the Invests icons come from `invests/scripts/site.py` (`GROUP_ICONS`). Never edit either by hand.
 
 ---
 

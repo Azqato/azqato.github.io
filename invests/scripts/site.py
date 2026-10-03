@@ -402,8 +402,15 @@ FAQ_FILTER = ('<div class="site-faq-filter"><label class="pp-label" for="faq-fil
 
 # ---------- Shell ----------
 
-def favicon():
-    svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\U0001F4B0</text></svg>"
+# Each section's emoji favicon (owner's answers, 2026-10-02); Invests Home keeps 💰.
+GROUP_ICONS = {"Individual Stocks": "📈", "Indices & ETFs": "📊", "VIX Strategy": "⚡",
+               "Leveraged Strategies": "🚀", "Resources": "📚"}
+
+
+def favicon(page):
+    group = next((p[3] for p in PAGES if p[0] == page), None)
+    icon = GROUP_ICONS.get(group, "\U0001F4B0")
+    svg = f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>{icon}</text></svg>"
     return "data:image/svg+xml," + svg.replace("<", "%3C").replace(">", "%3E").replace("#", "%23")
 
 
@@ -434,7 +441,7 @@ def head(page, title, desc, kind, scope, extra_css, inline_css):
 <meta property="og:url" content="{page_url(page)}">
 <link rel="canonical" href="{page_url(page)}">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="{favicon()}">
+<link rel="icon" href="{favicon(page)}">
 <script src="{r}assets/js/theme.js"></script>
 {links}
 {style}</head>

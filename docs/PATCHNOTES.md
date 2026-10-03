@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.1] - 2026-10-02
+
+### Changed
+- An emoji favicon for each page (build pass, item 21): 🙋 About, 💬 Discord, 💻 Codes, 🎧 Music,
+🔗 Links, 🛠️ Projects, 📺 YouTube, ☕ Support, 🎮 Gaming Accounts, 🔒 Privacy; Home stays 🦁. The
+Invests pages take their section's emoji (📈 📊 ⚡ 🚀 📚; 💰 for Invests Home).
+- Section brands in the top bar: "🎧 Azqato Music" on the music page, "💻 Azqato Codes" on the codes page.
+- `tools/build-nav.py` stamps the icons and brands (`ICONS`, `BRANDS`); `invests/scripts/site.py` has `GROUP_ICONS`.
+- `docs/DESIGN.md`: new section, Page emoji and section brands.
+
+---
+
 ## [2.13.0] - 2026-10-02
 
 ### Changed

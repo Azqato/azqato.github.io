@@ -41,6 +41,30 @@ PAGES = [
     ('support.html', 'Support'),
 ]
 
+# Each page's emoji favicon (owner's answers, 2026-10-02). A page not listed
+# here, and the home page, use the lion.
+ICONS = {
+    'about.html': '🙋', 'discord.html': '💬', 'codes.html': '💻', 'music.html': '🎧',
+    'links.html': '🔗', 'projects.html': '🛠️', 'youtube.html': '📺', 'support.html': '☕',
+    'accounts.html': '🎮', 'privacy-policy.html': '🔒',
+}
+ICON_DEFAULT = '🦁'
+ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />')
+
+# Section brands in the top bar. Every other page shows "Azqato."
+BRANDS = {
+    'music.html': '🎧 Azqato <span>Music</span>',
+    'codes.html': '💻 Azqato <span>Codes</span>',
+}
+BRAND_DEFAULT = 'Azqato<span>.</span>'
+
+
+def icon_for(filename):
+    return ("<link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' "
+            "viewBox='0 0 100 100'><text y='.9em' font-size='90'>%s</text></svg>\" />"
+            % ICONS.get(filename, ICON_DEFAULT))
+
+
 # Everything from the marker through the closing tag is regenerated. Both appear
 # exactly once per page, which is what makes this safe without extra markers.
 BLOCK = re.compile(r'<!-- NAV -->.*?</nav>', re.DOTALL)
@@ -48,7 +72,7 @@ BLOCK = re.compile(r'<!-- NAV -->.*?</nav>', re.DOTALL)
 TEMPLATE = """<!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html">Azqato<span>.</span></a>
+      <a class="nav-logo" href="index.html">{brand}</a>
       <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
 {items}
@@ -122,7 +146,7 @@ def nav_for(filename):
         % (href, ' class="active"' if href == filename else '', label)
         for href, label in PAGES
     )
-    return TEMPLATE.format(items=items)
+    return TEMPLATE.format(items=items, brand=BRANDS.get(filename, BRAND_DEFAULT))
 
 
 def main():
@@ -150,6 +174,7 @@ def main():
         newline = '\r\n' if '\r\n' in src else '\n'
         block = nav_for(path.name).replace('\n', newline)
         out = BLOCK.sub(lambda _: block, src, count=1)
+        out = ICON_LINK.sub(lambda _: icon_for(path.name), out, count=1)
         if '<!-- FOOTER -->' in out:
             fblock = footer_for(path.name).replace('\n', newline)
             out = FOOTER_BLOCK.sub(lambda _: fblock, out, count=1)
