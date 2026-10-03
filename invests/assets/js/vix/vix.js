@@ -5,11 +5,11 @@
 // or GitHub Pages, since it doesn't touch the network or CORS at all.
 
 // Fallback only, used if window.__VIX_DATA__ is unavailable.
-// corsproxy.io is blocked by Yahoo Finance (returns 403).
-// allorigins.win relays the request from their server and includes CORS headers.
+// Azqato Invests: the same reading as plain JSON, written by the vix job beside
+// data/vix.js and read from raw GitHub, which sends CORS headers. Replaces the
+// allorigins relay to Yahoo Finance, which browsers refuse (CORS).
 const URLS = [
-  'https://api.allorigins.win/raw?url=https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX',
-  'https://api.allorigins.win/raw?url=https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX',
+  'https://raw.githubusercontent.com/Azqato/vix/main/data/vix.json',
 ];
 
 // localStorage key - persists across tabs, pages, and browser sessions.
@@ -19,18 +19,20 @@ const CACHE_KEY = 'vix_last_known';
 const REFRESH_TTL = 30 * 60 * 1000; // re-fetch after 30 minutes
 
 function parseResponse(data) {
-  const meta = data?.chart?.result?.[0]?.meta;
-  if (!meta || meta.regularMarketPrice == null) {
+  // Azqato Invests: data/vix.json is { value, timestamp, fetchedAt }.
+  if (!data || typeof data.value !== 'number' || !data.timestamp) {
     throw new Error('Unexpected VIX response shape');
   }
-  return {
-    value: meta.regularMarketPrice,
-    timestamp: new Date(meta.regularMarketTime * 1000),
-  };
+  return { value: data.value, timestamp: new Date(data.timestamp) };
 }
 
 async function fetchFromURL(url) {
-  const res = await fetch(url);
+  // Azqato Invests: give up after 8 seconds, so a dead source shows the
+  // cached reading or the error state instead of "Fetching data…".
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 8000);
+  let res;
+  try { res = await fetch(url, { cache: 'no-store', signal: ctl.signal }); } finally { clearTimeout(timer); }
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return parseResponse(await res.json());
 }

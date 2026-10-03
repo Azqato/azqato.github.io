@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.4] - 2026-10-02
+
+### Fixed
+- Azqato Invests VIX pages (build pass, item 10): when the main VIX feed fails and nothing is cached,
+the pages now read the second source, `data/vix.json` from the vix repo via raw GitHub, instead of
+waiting on the allorigins relay that browsers refuse. Sources time out after 8 seconds.
+- The vix repo's job writes `data/vix.json` too (vix v1.3.0).
+- `docs/PRD.md` Part 2, P12: step 2 recorded as done.
+
+---
+
 ## [2.13.3] - 2026-10-02
 
 ### Changed

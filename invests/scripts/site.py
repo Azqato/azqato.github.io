@@ -683,6 +683,47 @@ def page_scripts(page, repo, scripts):
     return "\n".join(out)
 
 
+VIX_JSON = "https://raw.githubusercontent.com/Azqato/vix/main/data/vix.json"
+
+
+def vix_sources(js):
+    """P12 step 2 (build pass item 10, 2026-10-02). The allorigins relay is
+    refused by browsers (CORS), so a visitor whose data/vix.js failed and who
+    had nothing cached waited on "Fetching data…" until it timed out. The
+    second source is now data/vix.json, which the vix job writes beside
+    vix.js, read from raw GitHub (CORS headers, independent of GitHub Pages),
+    with an 8 second timeout so a dead source fails quickly."""
+    old_urls = js[js.index("// Fallback only"):js.index("];", js.index("const URLS")) + 2]
+    js = js.replace(old_urls, f"""// Fallback only, used if window.__VIX_DATA__ is unavailable.
+// Azqato Invests: the same reading as plain JSON, written by the vix job beside
+// data/vix.js and read from raw GitHub, which sends CORS headers. Replaces the
+// allorigins relay to Yahoo Finance, which browsers refuse (CORS).
+const URLS = [
+  '{VIX_JSON}',
+];""")
+    old_parse = js[js.index("function parseResponse(data) {"):js.index("async function fetchFromURL")]
+    js = js.replace(old_parse, """function parseResponse(data) {
+  // Azqato Invests: data/vix.json is { value, timestamp, fetchedAt }.
+  if (!data || typeof data.value !== 'number' || !data.timestamp) {
+    throw new Error('Unexpected VIX response shape');
+  }
+  return { value: data.value, timestamp: new Date(data.timestamp) };
+}
+
+""")
+    old_fetch = "  const res = await fetch(url);\n"
+    assert js.count(old_fetch) == 1
+    js = js.replace(old_fetch, """  // Azqato Invests: give up after 8 seconds, so a dead source shows the
+  // cached reading or the error state instead of "Fetching data…".
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 8000);
+  let res;
+  try { res = await fetch(url, { cache: 'no-store', signal: ctl.signal }); } finally { clearTimeout(timer); }
+""")
+    assert "api.allorigins" not in js
+    return js
+
+
 def vix_inline(js):
     """UI review, VIX pages. A reading saved by another VIX page less than 30
     minutes ago (vix.js's REFRESH_TTL) is the same live reading, so it shows
@@ -741,6 +782,8 @@ def copy_scripts():
                   "  const el = document.querySelector('.src-vix') || document.documentElement;\n"
                   "  const v = getComputedStyle(el).getPropertyValue(name).trim();\n"
                   "  return v || fallback;\n}\n\n") + js
+        if p.name == "vix.js":
+            js = vix_sources(js)
         js = fix_dashes(js, f"assets/js/{repo}/{p.name}")
         out = ROOT / "assets/js" / repo / p.name
         out.parent.mkdir(parents=True, exist_ok=True)

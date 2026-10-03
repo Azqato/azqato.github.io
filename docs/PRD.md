@@ -1462,7 +1462,7 @@ Every item from Roadmap at a glance except Later, smallest first, each broken in
 | 15d | Smoke-test script | `tools/smoke.py` (local, no GitHub Action): all 12 pages in Edge, both themes, desktop and phone widths; fails on console errors, broken links or sideways scroll; documented in the Runbook | **Moved to Later by the owner, 2026-10-02** (S to M) |
 | 15e | Music page on phones | Test `music.html` from 320 to 480 px; fix layout, tap targets and the stage console; record the results | **Done 2026-10-02:** 2.13.2. Tested 320 to 480 px; console spans the screen, badge hidden, footer three lines, 24 px seek bar on touch (DESIGN, Music page on phones) |
 | 11 | Content corrections | Remove the two dead Resources links; load the Holy Grail figures live from Composer Atlas on every page load with a cached default (first check that Atlas offers the figures in a form the page can fetch; if it doesn't, ask the owner); gather every other correction into one list for the owner | **Done 2026-10-02:** 2.13.3. Dead links removed; Holy Grail figures live from Composer Atlas with a cached default; corrections list C1 to C8 in Part 2, P11, for the owner (M) |
-| 10 | Old repos become data feeds | The vix job also writes `vix.json`; the VIX pages read it as the second source; drop the blocked allorigins fallback; a clear "unavailable" state; confirm the stocks and vix jobs still run | M |
+| 10 | Old repos become data feeds | The vix job also writes `vix.json`; the VIX pages read it as the second source; drop the blocked allorigins fallback; a clear "unavailable" state; confirm the stocks and vix jobs still run | **Done 2026-10-02:** 2.13.4 (vix v1.3.0). vix.json written by the job, read from raw GitHub as the second source; allorigins dropped; 8 s timeout; error state when all fail (Part 2, P12) (M) |
 | 9 | Redirect the old sites | 19 redirect pages across the stocks, vix and leverage repos (old title, canonical, instant redirect, a fallback link); `/leveraged-strategies/` too; every data file keeps serving; after the push, check each old address reaches its page in one hop | M |
 | 12 | One VIX page | Merge the three pages into `/invests/vix/` (strategy, then dashboard, then builder, with jump links), keeping everything (core rule); the old addresses become redirects; update the sidebar, search, sitemap and inventories; run `check.py` and `browser.py` | M |
 | 5 | Top bar and theme button on every page | The light palette and new tokens in `styles.css`; swap literal colors for tokens on the pages that have them (`music.html` 137, `projects.html` 34, `support.html` 23, a few elsewhere); the nav template in `tools/build-nav.py` becomes the slim bar with ☀️/🌙 beside ☰ on phones; one shared theme script (system theme first, choice remembered); the visualizer stays dark; check all 12 pages in both themes | M to L |
@@ -3186,6 +3186,14 @@ Runs after P10, whenever the author decides to clean out the old repos. Each rep
    3. With every source down, show the cached reading if there is one, otherwise a clear "unavailable" state.
 3. Remove the leverage sites' pages the same way, as redirects (D7).
 4. Record each change in PATCHNOTES.md and in the old repos' own notes.
+
+**Step 2 done 2026-10-02 (main 2.13.4, build pass item 10):**
+
+- The vix repo (its v1.3.0) writes `data/vix.json` beside `data/vix.js` on every run of `update-vix.yml`; a manual run on 2026-10-02 succeeded and wrote it. raw.githubusercontent.com serves it with `Access-Control-Allow-Origin: *`.
+- The Invests copy of `vix.js` is rewritten at build time by `vix_sources()` in `scripts/site.py` (the snapshot in `_sources/` is unchanged): the allorigins URLs are gone; the second source is `https://raw.githubusercontent.com/Azqato/vix/main/data/vix.json`, independent of GitHub Pages, with an 8 second timeout.
+- With every source down: the saved reading if there is one, marked STALE; otherwise the existing error state ("ERROR, Unable to fetch - check connection"), which `browser.py` confirms appears instead of a page stuck on "Fetching data…".
+- Tested with `browser.py`: with azqato.github.io/vix/data/vix.js blocked and nothing cached, the Dashboard shows the live reading from vix.json (it used to stay on "Fetching data…"). 0 failures.
+- The stocks job is unchanged and still runs on its schedule (its data serves the Screener and Market Overview; `browser.py` read 121 rows).
 
 #### P13. Post-launch list (added 2026-10-02, at the author's request)
 
