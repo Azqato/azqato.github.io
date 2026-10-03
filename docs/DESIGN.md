@@ -212,6 +212,13 @@ Grids are otherwise fluid rather than breakpoint-driven. They use `repeat(auto-f
 - Content is one line on every page: `Built by <a href="https://azqato.com/">Azqato</a>.`
 - `music.html` is the exception: its footer is nested inside `.mode-controls`, has a transparent background, and wraps its text in a blurred dark pill so it stays readable over the visualizer.
 
+**Replaced in 2.13.0 (build pass, item 6).** The footer is now `.site-footer`, stamped into all 12 pages by `tools/build-nav.py` between `<!-- FOOTER -->` and `</footer>`, styled after the Azqato Invests footer:
+- A `--surface` panel with a `--border` top line, `0.875rem`, `--text-muted`; inner width `1100px` like the nav.
+- The `Azqato.` brand, then a `<nav aria-label="Footer">` with two rows of plain links: every site page (the ten nav pages plus Gaming Accounts and Privacy Policy) and Azqato Invests' five sections. The current page's link is marked `aria-current="page"` and shown in `--accent`.
+- `© 2026 Azqato` on its own line. The financial-advice line stays on Invests' own footer.
+- Links are at least 24px tall for tapping. `.site-footer-nav` resets the top bar's `nav` rule, which matches every `<nav>`.
+- `music.html` uses `.site-footer--stage`: the same block, compact and translucent inside the stage console, without the Invests row so the console stays short.
+
 ### Hero Section
 
 - Max width: `1100px`, centered; flex column with `1rem` gap

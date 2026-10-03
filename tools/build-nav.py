@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Stamp the shared navigation bar into every page.
+"""Stamp the shared navigation bar and footer into every page.
 
-The nav lives here once. Running this script rewrites the block between the
-`<!-- NAV -->` marker and the closing `</nav>` tag in every HTML file in the
-project root, setting the active link from the file's own name.
+The nav and footer live here once. Running this script rewrites the block
+between the `<!-- NAV -->` marker and the closing `</nav>` tag, and the block
+between the `<!-- FOOTER -->` marker and the closing `</footer>` tag, in every
+HTML file in the project root, setting the active link from the file's own name.
 
 The output is committed and deployed exactly as it is now. Nothing runs at
 request time, nothing is compiled, and the repository still contains complete,
@@ -55,6 +56,58 @@ TEMPLATE = """<!-- NAV -->
     </div>
   </nav>"""
 
+# ── The footer ────────────────────────────────────────────
+# Plain crawlable links to every major section (owner's request, 2026-10-02:
+# "all the major categories, for SEO"). Two groups: the site, and Azqato
+# Invests' sections. No sitemap link: robots.txt points crawlers at sitemap.xml.
+FOOTER_SITE = PAGES + [
+    ('accounts.html', 'Gaming Accounts'),
+    ('privacy-policy.html', 'Privacy Policy'),
+]
+FOOTER_INVESTS = [
+    ('invests/index.html', 'Azqato Invests'),
+    ('invests/stocks/index.html', 'Individual Stocks'),
+    ('invests/indices/index.html', 'Indices & ETFs'),
+    ('invests/vix/index.html', 'VIX Strategy'),
+    ('invests/leveraged/index.html', 'Leveraged Strategies'),
+    ('invests/resources/index.html', 'Investing Resources'),
+]
+
+FOOTER_BLOCK = re.compile(r'<!-- FOOTER -->.*?</footer>', re.DOTALL)
+
+FOOTER_TEMPLATE = """<!-- FOOTER -->
+  <footer class="site-footer{variant}">
+    <div class="site-footer-in">
+      <p class="site-footer-brand">Azqato<span>.</span></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul aria-label="Site">
+{site}
+        </ul>
+        <ul aria-label="Azqato Invests">
+{invests}
+        </ul>
+      </nav>
+      <p class="site-footer-legal">&copy; 2026 Azqato</p>
+    </div>
+  </footer>"""
+
+# music.html's footer sits inside the fixed stage console, so it gets a compact,
+# translucent variant of the same block.
+FOOTER_VARIANT = {'music.html': ' site-footer--stage'}
+
+
+def footer_for(filename):
+    """Return the footer block for one page."""
+    def items(pairs):
+        return '\n'.join(
+            '          <li><a href="%s"%s>%s</a></li>'
+            % (href, ' aria-current="page"' if href == filename else '', label.replace('&', '&amp;'))
+            for href, label in pairs
+        )
+    return FOOTER_TEMPLATE.format(variant=FOOTER_VARIANT.get(filename, ''),
+                                  site=items(FOOTER_SITE), invests=items(FOOTER_INVESTS))
+
+
 # Files that are in the project root but are not site pages.
 # Pages in the root that the nav is deliberately not stamped into. Empty today:
 # the two test harnesses that used to be listed here were deleted long ago, and
@@ -97,6 +150,9 @@ def main():
         newline = '\r\n' if '\r\n' in src else '\n'
         block = nav_for(path.name).replace('\n', newline)
         out = BLOCK.sub(lambda _: block, src, count=1)
+        if '<!-- FOOTER -->' in out:
+            fblock = footer_for(path.name).replace('\n', newline)
+            out = FOOTER_BLOCK.sub(lambda _: fblock, out, count=1)
 
         if out == src:
             continue
@@ -109,7 +165,7 @@ def main():
         print('skipped (no NAV marker): %s' % name)
 
     if not changed:
-        print('nav is up to date in every page')
+        print('nav and footer are up to date in every page')
         return 0
 
     verb = 'out of date' if args.check else 'updated'

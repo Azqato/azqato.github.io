@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.0] - 2026-10-02
+
+### Changed
+- Footer on all 12 pages (build pass, item 6): replaced the one-line "Built by Azqato" with a panel
+styled after the Azqato Invests footer: the brand, plain links to every site page and every Invests
+section, and "© 2026 Azqato". `tools/build-nav.py` now stamps it from one list, like the nav;
+`styles.css` holds `.site-footer`; `music.html` uses a compact variant over the stage.
+- `docs/DESIGN.md` Footer, `docs/PRD.md` Never do these and Maintenance rules: the footer is generated.
+
+---
+
 ## [2.12.6] - 2026-10-02
 
 ### Added
