@@ -1394,7 +1394,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
-| 4 | Pick the colors to keep for both halves (asks the owner first) | Part 2, P15 | Small (a decision) |
+| 4 | Pick the colors to keep for both halves (asks the owner first) | Part 2, P15; DESIGN.md, One palette for the whole site | **Done 2026-10-02** |
 | 5 | The Invests top bar and theme button across the whole site, with a light palette for the 12 root pages | Future updates, below | Medium |
 | 6 | The Invests footer across the whole site | Future updates, below | Small |
 | 7 | Clean addresses for every page (`/discord`, not `discord.html`) | Future updates, below | Medium |
@@ -3131,6 +3131,8 @@ Runs after P10, whenever the author decides to clean out the old repos. Each rep
 **Docs part done 2026-10-02:** these docs merged into the main repository's docs (this PRD is Part 2 of docs/PRD.md; D22). The pages, generator and inventories haven't moved. The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
 
 #### P15. Adopt azqato.com's colors (added 2026-10-02, owner's request; ask first)
+
+**Decided 2026-10-02:** the owner picked one palette for both halves of the site, dark and light; it's in DESIGN.md, One palette for the whole site. It's built with Roadmap at a glance items 5 to 8.
 
 Move the site's colors to azqato.com's palette (the tokens in the main repository's styles.css), so Invests and the main site look like one site. Before changing anything, ask the author which current colors to keep for things that carry meaning: for example the emerald accent and links, the VIX tier colors (calm to panic), gains and losses (green and red) in the Screener and Market Overview, the leverage risk notices, and the Discord button. Keep WCAG AA contrast in both themes (DESIGN.md, Data colors). Pairs with the main PRD's Future update for the shared top bar and theme button, which needs a light palette for the main site.
 

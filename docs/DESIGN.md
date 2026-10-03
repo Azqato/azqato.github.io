@@ -48,6 +48,26 @@ A page that needs an extra token (for example `--discord`, `--spotify`, `--coffe
 | `--card-hover`    | `#1c2128`   | Card background on hover                                              |
 | `--tag-bg`        | `#21262d`   | Tag pill background                                                   |
 
+### One palette for the whole site (decided 2026-10-02)
+
+The owner picked these on 2026-10-02 (PRD Part 2, P15; Roadmap at a glance, item 4), one color per role, from a side-by-side comparison of azqato.com's and Invests' colors. They become the tokens for both halves of the site when items 5 to 8 are built; until then the tables above and Azqato Invests Visual System describe what is live. Contrast is measured against the page background with the WCAG formula.
+
+| Role | Dark | Source | Light | Source |
+|---|---|---|---|---|
+| Page background | `#0d1117` | azqato.com | `#f6f8fa` | New (GitHub-style) |
+| Cards, top bar, sidebar | `#161b22` | azqato.com | `#f6f8fa` | New (GitHub-style); same as the background, so panels are set off by their borders |
+| Hover on cards and rows | `#1c2128` | azqato.com | `#eaeef2` | New (GitHub-style) |
+| Borders and dividers | `#3a4a43` | Invests | `#d0d7de` | New (GitHub-style) |
+| Main text and headings | `#e6edf3` | azqato.com | `#1f2328` (14.8:1) | New |
+| Secondary text | `#9fb1a8` | Invests | `#59636e` (5.7:1) | New |
+| Accent: links, active page, buttons | `#00d4a0` | azqato.com | `#007a5e` (5.0:1) | New, a deeper azqato.com mint |
+| Warnings and risk notices | `#f0b45a` | Invests | `#9a6700` (4.6:1) | New (GitHub-style) |
+| Losses and errors | `#f85149` | New (GitHub-style) | `#cf222e` (5.0:1) | New (GitHub-style) |
+| Information notes | `#58a6ff` | New (GitHub-style) | `#0969da` (4.9:1) | New (GitHub-style) |
+| Second accent | `#bc8cff` | azqato.com | `#8250df` (4.7:1) | New (GitHub-style) |
+
+Every text color passes AA (4.5:1) on its background in both themes. On the light hover color, warning, info and second-accent text fall to 4.2 to 4.45:1, so colored text inside a hovered row needs a check when it's built.
+
 ### Page-scoped tokens (declared inline on the pages that need them)
 
 | Token             | Hex Value   | Declared on                                          | Use                                        |

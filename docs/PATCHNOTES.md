@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.12.3] - 2026-10-02
+
+### Added
+- `docs/DESIGN.md`: One palette for the whole site, the owner's picks for every color role in dark
+and light (Roadmap at a glance, item 4; Invests P15), with contrast figures.
+
+### Changed
+- `docs/PRD.md`: P15 and Roadmap at a glance item 4 marked decided.
+
+---
+
 ## [2.12.2] - 2026-10-02
 
 ### Changed
