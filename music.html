@@ -1751,12 +1751,12 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         // Brightness flash: rare drop moments only, gated by updateLoudFlash, and
         // kept shallow. A white wash over the main panel is the largest bright
         // area on the stage, so it is the one most worth keeping small.
-        ctx.globalAlpha = envBroad * 0.05 + (fireActive ? flashPulse * 0.12 : 0);
+        ctx.globalAlpha = envBroad * fireGate * 0.05 + (fireActive ? flashPulse * 0.12 : 0);
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(px, py, pw, ph);
         ctx.restore();
         panelOverlay(px, py, pw, ph);
-        panelBloom(px, py, pw, ph, 0.28 + envBroad * 0.30 + beatPulse * 0.10 + (fireActive ? flashPulse * 0.12 : 0));
+        panelBloom(px, py, pw, ph, 0.28 + envBroad * fireGate * 0.30 + beatPulse * 0.10 + (fireActive ? flashPulse * 0.12 : 0));
       }
 
       // ── A: Background ──
@@ -1764,15 +1764,15 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, W, H);
         var g = ctx.createRadialGradient(lay.cx, H * 0.4, 0, lay.cx, H * 0.4, Math.max(W, H) * 0.72);
-        g.addColorStop(0,   'rgba(8,20,70,'  + (0.4  + envLow * 0.30) + ')');
-        g.addColorStop(0.5, 'rgba(3,8,30,'   + (0.15 + envLow * 0.14) + ')');
+        g.addColorStop(0,   'rgba(8,20,70,'  + (0.4  + envLow * fireGate * 0.30) + ')');
+        g.addColorStop(0.5, 'rgba(3,8,30,'   + (0.15 + envLow * fireGate * 0.14) + ')');
         g.addColorStop(1,   'rgba(0,0,0,0)');
         ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
         // warm horizon glow rising from behind the stage
         var hzTop = lay.floorY - H * 0.20;
         var hz = ctx.createLinearGradient(0, hzTop, 0, lay.floorY);
         hz.addColorStop(0, 'rgba(0,0,0,0)');
-        hz.addColorStop(1, 'rgba(70,25,130,' + (0.10 + envLow * 0.16) + ')');
+        hz.addColorStop(1, 'rgba(70,25,130,' + (0.10 + envLow * fireGate * 0.16) + ')');
         ctx.fillStyle = hz;
         ctx.fillRect(0, hzTop, W, lay.floorY - hzTop);
       }
@@ -1959,7 +1959,7 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
         ctx.beginPath(); ctx.moveTo(cx2 - tw/2, sy); ctx.lineTo(cx2 + tw/2, sy);
         ctx.lineTo(cx2 + bw/2, by); ctx.lineTo(cx2 - bw/2, by); ctx.closePath(); ctx.fill();
         // grid
-        ctx.globalAlpha = 0.07 + envLow * 0.11; ctx.strokeStyle = '#0055bb'; ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.07 + envLow * fireGate * 0.11; ctx.strokeStyle = '#0055bb'; ctx.lineWidth = 1;
         for (var i = 1; i < 8; i++) {
           var fr = i / 8, lw2 = tw + (bw - tw) * fr, ly2 = sy + (by - sy) * fr;
           ctx.beginPath(); ctx.moveTo(cx2 - lw2/2, ly2); ctx.lineTo(cx2 + lw2/2, ly2); ctx.stroke();
@@ -2540,12 +2540,17 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       // symmetrically smoothed, with roughly a 300 ms time constant. Fast things
       // stay fast, lit things swell. Use favg() for motion and these for light.
       var envBroad = 0, envLow = 0;
+      // v2.9.5: the brightness envelopes only show while the kick's fire is lit.
+      // fireGate eases toward 1 while fire is active and back to 0 after, with a
+      // 250 ms time constant, so the gate itself never makes a hard luminance step.
+      var fireGate = 0;
       function updateEnvelopes() {
         // Frame-rate corrected, so the swell takes the same wall-clock time on a
         // 144 Hz panel as on a 60 Hz one. Same defect class as the beat refractory.
         var a = 1 - Math.pow(1 - 0.045, frameMs / (1000 / 60));
         envBroad += (favg(0, 20) - envBroad) * a;
         envLow   += (favg(0, 3)  - envLow)   * a;
+        fireGate += ((fireActive ? 1 : 0) - fireGate) * (1 - Math.exp(-frameMs / 250));
       }
 
       // ── Main loop ──
@@ -2633,6 +2638,15 @@ void main(){mainImage(fragColor,gl_FragCoord.xy);}`;
       if (motionBtn) {
         motionBtn.addEventListener('click', function () { setPlaying(!rafId); });
       }
+
+      // Stop drawing while the tab is hidden (battery and heat), and pick up
+      // where it was when the tab comes back. Only resumes what visibility paused,
+      // so a visitor who pressed Pause stays paused.
+      var pausedByHidden = false;
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden && rafId) { pausedByHidden = true; setPlaying(false); }
+        else if (!document.hidden && pausedByHidden) { pausedByHidden = false; setPlaying(true); }
+      });
 
       // ── Native track player ──
       var playBtn  = document.getElementById('trackPlayBtn');

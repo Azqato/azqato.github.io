@@ -1451,8 +1451,8 @@ Every item from Roadmap at a glance except Later, smallest first, each broken in
 
 | # | Item | Subtasks | Effort |
 |---|---|---|---|
-| 15b | Block commits with an out-of-date nav | Add `python tools/build-nav.py --check` to `.githooks/pre-commit`; test it with a deliberately stale page | XS |
-| 15c | Pause the visualizer in hidden tabs | Pause and resume the render loop on `visibilitychange`, reusing `setPlaying()`; check it in Edge | XS |
+| 15b | Block commits with an out-of-date nav | Add `python tools/build-nav.py --check` to `.githooks/pre-commit`; test it with a deliberately stale page | **Done 2026-10-02:** tested with a deliberately stale page (XS) |
+| 15c | Pause the visualizer in hidden tabs | Pause and resume the render loop on `visibilitychange`, reusing `setPlaying()`; check it in Edge | **Done 2026-10-02:** visibilitychange pauses and resumes; a Pause stays paused (XS) |
 | 14 | No pulsing unless the fire is firing (v2.9.5) | Gate the four `envLow` and `envBroad` brightness terms on the fire through a 150 to 250 ms eased gate, not a hard switch; confirm a paused or silent track holds steady brightness; re-measure the worst single-frame brightness step (limit 0.0073 at 60 Hz) | S |
 | 15a | Compressed YouTube thumbnails | Make compressed copies of the four images, keeping the originals in `img/`; point `youtube.html` at the copies with `loading="lazy"`; record the bytes saved | S |
 | 6 | New footer on every page | "© 2026 Azqato" plus plain links to every main section (SEO practice: crawlable links, descriptive text; no sitemap link, since robots.txt lists sitemap.xml); stamp it from `tools/build-nav.py` into all 12 pages; match the Invests footer's style; update DESIGN.md | S |
@@ -1639,6 +1639,8 @@ Fixed by moving every rate to wall-clock milliseconds and raising the refractory
 **Still unmerged from `feature/native-audio-player`:** the `<video>` element and the Video screen mode. The kick detector, beat pulse, loud-moment gate, and audio-scaled lasers all landed here.
 
 ### v2.9.5: No pulsing unless the fire is firing (Next, scoped 2026-09-01)
+
+**Complete 2026-10-02.** `fireGate` eases toward 1 while the fire is lit and back to 0 after (250 ms time constant) and multiplies every term in the table below. Measured in headless Edge at about 78 fps as the mean luminance of the canvas: idle spread 0.0086 before, 0.0038 after; worst frame-to-frame step while playing 0.0042, under the 0.0073 recorded in v2.9.4 (a different method, so compare loosely).
 
 **Requested by the owner, verbatim:** "can you make it so that the pulsing isn't happening unless the fire from the kick is also firing?"
 
@@ -3695,7 +3697,7 @@ The code is the truth about what is; the docs are the truth about what was inten
 | 11 | 2026-10-02 | DESIGN.md: Home has content up to 1120px, section tiles then project cards, and wiki-portal's breakpoints; inner pages cap content at 760px; the footer's content "isn't decided" | Since v0.16.0 every page runs to 1400px, Home is one grid of 10 cards on the inner pages' breakpoints, and the footer holds the brand, notice, links and the VIX disclaimer lines | The code | Resolved 2026-10-02: DESIGN.md marks each as superseded, with the old text kept |
 | 12 | 2026-10-02 | `.gitignore`'s comment names tools/snapshot.py | The script is scripts/snapshot.py | The folder | Resolved 2026-10-02: comment corrected |
 | 13 | 2026-10-02 (audit) | README.md, the PRD's Constraints, Runbook, Monitoring, Security, Deprecation and Removal, and DESIGN.md's intro describe the site as not published | Live at https://azqato.com/invests/ since 2026-10-02 | The live site | Resolved by the audit: each marked with the current state, original text kept |
-| 14 | 2026-10-02 (audit) | P13 to P17 belong under Future updates | They had been inserted inside Writing Style, splitting its last bullet off | The file | Resolved by the audit: moved under Future updates after P12 |
+| 14 | 2026-10-02 (audit) | P13 to P17 belong under Future updates | They had been inserted inside Writing Style, splitting its last bullet off | The file | **Done 2026-10-02:** 250 ms eased gate; measured in headless Edge, idle luminance spread 0.0086 to 0.0038, worst playing step 0.0042 (limit 0.0073) (S) |
 | 15 | 2026-10-02 (audit) | LICENSE.md: permission requests go to github.com/Azqato/invests/issues | That repository returns 404 (deleted) | GitHub | Resolved by the audit: LICENSE.md points at the azqato.github.io issue tracker |
 | 16 | 2026-10-02 (audit) | D5, Tenet 3, Non-goals and Working Practice: this site takes no rules, docs or design from azqato.github.io | D21 put the site in that repository, and the author has asked for its colors (P15) and for the docs to merge | The author's decisions | Open: marked in each place; for the author's review (P7.10) and the docs merge |
 | 17 | 2026-10-02 (audit) | DESIGN.md: sidebar groups, breadcrumbs, pager and a 640px pager stack; D12 and the Site map's old groups | v1.0.1 and v1.1.0 changed all of them | The code | Resolved by the audit: updated, with the earlier text kept |

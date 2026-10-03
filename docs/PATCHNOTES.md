@@ -5,6 +5,33 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.12.5] - 2026-10-02
+
+### Changed
+- `music.html`: the render loop pauses while the tab is hidden and resumes when it comes back; a
+visitor who pressed Pause stays paused (build pass, item 15c).
+
+---
+
+## [2.9.5] - 2026-10-02
+
+### Changed
+- `music.html`: no pulsing unless the fire is firing. The background, horizon, floor grid and panel
+brightness envelopes are multiplied by `fireGate`, which eases in and out over 250 ms so the gate
+itself makes no hard step. Measured in headless Edge: idle luminance spread 0.0086 to 0.0038; worst
+playing step 0.0042 (reserved version, Roadmap v2.9.5).
+
+---
+
+## [2.12.4] - 2026-10-02
+
+### Changed
+- `.githooks/pre-commit`: a commit that stages a root page is blocked when `tools/build-nav.py
+--check` finds any page's nav out of date (build pass, item 15b).
+- `docs/PRD.md`: the build pass approved; the owner's answers recorded; the build pass table.
+
+---
+
 ## [2.12.3] - 2026-10-02
 
 ### Added
