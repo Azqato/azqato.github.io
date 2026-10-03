@@ -50,16 +50,6 @@ with its place, the text around it and what replaced it. Lone dashes that stand 
 | indices/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         return p.toFixed(3) + "%"; | `– (placeholder)` |
 | indices/market.html (inline script) | (c === null // c === undefined) return "(em dash)";         var sign = c > 0 ? "+" : ""; | `– (placeholder)` |
 | vix/index.html | ure to growth ETFs when market fear peaks (em dash)           and pulls back when complacency sets in. | `-` |
-| vix/index.html | uring the market's most important moments (em dash) the crashes that         precede the fas | `-` |
-| vix/index.html | espond to opportunity. It rides fear down (em dash) but doesn't             press its advant | `-` |
-| vix/index.html | ded.             The opportunity is there (em dash) if you are positioned for it. | `-` |
-| vix/index.html | prices. It is not a directional predictor (em dash)         it is a precise, real-time measure of co | `-` |
-| vix/index.html | the market recovers (em dash) it is whether you are         positioned | `-` |
-| vix/index.html | "Be greedy when others are fearful." (em dash) Warren Buffett | `-` |
-| vix/index.html | T-Bills and toward leveraged growth ETFs (em dash) maximizing recovery         capture prec | `-` |
-| vix/index.html | semiconductor, and cloud computing (em dash) sectors at the center of a         multi | `-` |
-| vix/index.html | s             dominate QQQ's top holdings (em dash) and the capital expenditure is | `-` |
-| vix/index.html | nding can overcome             that decay (em dash) provided the underlying index continues | `-` |
 | vix/index.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
 | vix/index.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |
 | vix/index.html | (em dash) SPDR Bloomberg 1–3 Month T-Bill ETF. Nea | `-` |
@@ -79,3 +69,15 @@ with its place, the text around it and what replaced it. Lone dashes that stand 
 | vix/index.html (inline script) | allocation, cached.value);   }    // Boot (em dash) this script tag sits at the end of the b | `-` |
 | vix/index.html (inline script) | {     paintCached();          // instant (em dash) zero network wait     await refresh(); | `-` |
 | vix/index.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
+| vix/method.html | uring the market's most important moments (em dash) the crashes that         precede the fas | `-` |
+| vix/method.html | espond to opportunity. It rides fear down (em dash) but doesn't             press its advant | `-` |
+| vix/method.html | ded.             The opportunity is there (em dash) if you are positioned for it. | `-` |
+| vix/method.html | prices. It is not a directional predictor (em dash)         it is a precise, real-time measure of co | `-` |
+| vix/method.html | the market recovers (em dash) it is whether you are         positioned | `-` |
+| vix/method.html | "Be greedy when others are fearful." (em dash) Warren Buffett | `-` |
+| vix/method.html | T-Bills and toward leveraged growth ETFs (em dash) maximizing recovery         capture prec | `-` |
+| vix/method.html | semiconductor, and cloud computing (em dash) sectors at the center of a         multi | `-` |
+| vix/method.html | s             dominate QQQ's top holdings (em dash) and the capital expenditure is | `-` |
+| vix/method.html | nding can overcome             that decay (em dash) provided the underlying index continues | `-` |
+| vix/method.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
+| vix/method.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |

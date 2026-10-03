@@ -4,7 +4,8 @@
   "resources/index.html"
  ],
  "stocks-index.json": [
-  "stocks/index.html"
+  "stocks/index.html",
+  "stocks/method.html"
  ],
  "stocks-philosophy.json": [
   "stocks/philosophy.html"
@@ -16,13 +17,15 @@
   "stocks/screener.html"
  ],
  "stocks-indices.json": [
-  "indices/index.html"
+  "indices/index.html",
+  "indices/method.html"
  ],
  "stocks-market.json": [
   "indices/market.html"
  ],
  "vix-index.json": [
-  "vix/index.html"
+  "vix/index.html",
+  "vix/method.html"
  ],
  "vix-strategy.json": [
   "vix/index.html"

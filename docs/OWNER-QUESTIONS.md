@@ -7,7 +7,28 @@ Written 2026-10-03, at the end of the 2026-10-02 build pass (main 2.13.1 to 2.14
 **Contents**
 
 | # | Topic | Urgency |
+|## Answers (2026-10-03), built in 2.15.0
+
+| # | Answer | Done |
 |---|---|---|
+| Q1 | Ignore for now: Cloudflare takes 6 to 12 hours after the earlier limits fix | Waiting |
+| C1, C2 | Recommended wording | Built |
+| C3, C4 | Remove | Built |
+| C5 | Keep, with "(historical, to 2020)" | Built |
+| C6, C8 | Recommended: no change | Nothing to build |
+| C7 | Keep the boxes | Nothing to build |
+| Q3 | Yes to all | S1 to S6 built. **S7 held:** the FAQ has no topic groups to label (37 numbered items plus two sections), so a grouping is proposed below for your approval |
+| Q4 | Yes to all | Built: Stock, Index and VIX Method pages, cards on the three landing pages, old links to moved sections forward to the Method page |
+| Q5 | Brighten the dark C#/HTML tags | Built |
+| Q6 | Keep music dark, no button | Nothing to build |
+| Q7 | Find the correct number and keep it | **12** (the Metrics page, the reference table and the description all say 12; the grid lacked Gross and Net Margin). Grid and text fixed; `check.py` now fails any page saying another number |
+| Q8 | Update the .bat | Done (local file) |
+| Q9 | Keep the trailing slash | Nothing to build |
+| New | VIX Strategy into Indices & ETFs | Built; its address is unchanged |
+
+**S7, proposed FAQ groups (needs your OK):** Selling and holding (when to sell, trims, losers); Building a portfolio (how many stocks, sizing, ETFs vs stocks); Reading the metrics (PEG vs P/E, margins, RSI); Timing (VIX, DCA vs lump sum, IPOs); The long game. Labels only; no question text changes.
+
+---|---|---|
 | Q1 | azqato.com isn't deploying | **Urgent:** the canonical site is six versions behind |
 | Q2 | Content corrections C1 to C8 (Invests) | Normal |
 | Q3 | SEO small fixes S1 to S7 | Normal |

@@ -5,6 +5,26 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.15.0] - 2026-10-03
+
+The owner's answers to docs/OWNER-QUESTIONS.md.
+
+### Changed
+- VIX Strategy moves into Indices & ETFs (owner's request); its address is unchanged.
+- Individual Stocks, Indices & ETFs and VIX Strategy are landing pages with cards; their long sections
+moved word for word to new Method pages (`stocks/method.html`, `indices/method.html`, `vix/method.html`).
+Old links to a moved section forward to the Method page.
+- Stocks: 12 metrics everywhere (Q7). The grid gains Gross Margin and Net Margin; `check.py` enforces 12.
+- Holy Grail: the two "not accessible" sentences now point at the Composer Atlas figures (C1, C2).
+- Resources: two dead thestreet.com links removed (C3, C4); RobinTrack marked "(historical, to 2020)" (C5).
+- SEO: an h1 on every page, longer titles, descriptions within 160 characters, no skipped heading
+levels, "Related" links on the leveraged, metrics and philosophy pages (S1 to S5).
+- Root pages: longer titles; music description rewritten (S2, S3).
+- Projects: cards written into the HTML by `tools/prerender-projects.py` (S6); dark C#/HTML tags
+brightened to pass contrast (Q5).
+
+---
+
 ## [2.14.3] - 2026-10-02
 
 ### Changed

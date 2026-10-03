@@ -34,12 +34,17 @@ SITE_URL = "https://azqato.com/invests/"
 PAGES = [
     ("index.html", "azqato.github.io/invests.html", "Home", None, "home", None),
     ("stocks/index.html", "stocks/index.html", "Individual Stocks", "Individual Stocks", "doc", None),
+    ("stocks/method.html", "stocks/index.html", "Stock method", "Individual Stocks", "doc", "stocks/index.html"),
     ("stocks/philosophy.html", "stocks/philosophy.html", "Philosophy", "Individual Stocks", "doc", "stocks/index.html"),
     ("stocks/metrics.html", "stocks/metrics.html", "Stock metrics", "Individual Stocks", "doc", "stocks/index.html"),
     ("stocks/screener.html", "stocks/screener.html", "Screener", "Individual Stocks", "tool", "stocks/index.html"),
     ("indices/index.html", "stocks/indices.html", "Indices & ETFs", "Indices & ETFs", "doc", None),
+    ("indices/method.html", "stocks/indices.html", "Index method", "Indices & ETFs", "doc", "indices/index.html"),
     ("indices/market.html", "stocks/market.html", "Market Overview", "Indices & ETFs", "tool", "indices/index.html"),
-    ("vix/index.html", "vix/index.html", "VIX Strategy", "VIX Strategy", "doc", None),
+    # VIX Strategy is one page since P16, so it sits in Indices & ETFs (owner's
+    # request, 2026-10-03). Its address is unchanged.
+    ("vix/index.html", "vix/index.html", "VIX Strategy", "Indices & ETFs", "doc", "indices/index.html"),
+    ("vix/method.html", "vix/index.html", "VIX method", "Indices & ETFs", "doc", "vix/index.html"),
     ("leveraged/index.html", "leverage/index.html", "Leveraged Strategies", "Leveraged Strategies", "doc", None),
     ("leveraged/3sig.html", "leverage/3sig.html", "3 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("leveraged/6sig.html", "leverage/6sig.html", "6 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
@@ -55,8 +60,41 @@ PAGES = [
 # Grouped by what the visitor invests in (restructure, 2026-10-02): each group's
 # first page is its landing page; the sidebar lists it as "Overview" in the
 # topic groups.
-GROUPS = ["Individual Stocks", "Indices & ETFs", "VIX Strategy", "Leveraged Strategies", "Resources"]
+GROUPS = ["Individual Stocks", "Indices & ETFs", "Leveraged Strategies", "Resources"]
 TITLES = {"index.html": f"{BRAND} - Investing Tools and Resources"}
+# Longer titles, topic first (SEO review S2, owner's approval 2026-10-03).
+TITLES.update({
+    "stocks/method.html": f"Stock Method: 12 Metrics, Buy and Hold - {BRAND}",
+    "stocks/philosophy.html": f"Stock Investing Philosophy - {BRAND}",
+    "stocks/screener.html": f"Stock Screener: Nasdaq 100, S&P 500 - {BRAND}",
+    "indices/method.html": f"Index & ETF Method: When to Buy - {BRAND}",
+    "vix/index.html": f"VIX Strategy: Fear Is a Signal - {BRAND}",
+    "vix/method.html": f"VIX Strategy Method: 5 Tiers - {BRAND}",
+    "leveraged/3sig.html": f"3 Sig Leveraged ETF Strategy - {BRAND}",
+    "leveraged/6sig.html": f"6 Sig Leveraged ETF Strategy - {BRAND}",
+    "leveraged/9sig.html": f"9 Sig Leveraged ETF Strategy - {BRAND}",
+    "leveraged/tqqq-ftlt.html": f"TQQQ For The Long Term (FTLT) - {BRAND}",
+    "leveraged/holy-grail.html": f"Holy Grail Leveraged ETF Strategy - {BRAND}",
+    "leveraged/hfea.html": f"HFEA: Hedgefundie's Excellent Adventure - {BRAND}",
+    "resources/faq.html": f"Investing FAQ - {BRAND}",
+})
+# Descriptions trimmed to 160 characters or less, from the source's own
+# sentence (SEO review S3, owner's approval 2026-10-03).
+DESCS = {
+    "stocks/index.html": "A free, complete stock picking methodology for long-term investors: 12 plain-English metrics, portfolio rules, and a daily-updated Nasdaq 100 screener.",
+    "stocks/method.html": "The Azqato stock method in full: the strategy, the 12 metrics, what strong metrics look like, and portfolio vs. watchlist.",
+    "stocks/metrics.html": "Plain-English guide to 12 stock metrics: revenue and EPS growth, P/E, PEG, cash vs debt, RSI and margins, and how to read each before you buy.",
+    "stocks/screener.html": "An interactive screener that ranks the Nasdaq 100, S&P 500, the whole US market and more against the Azqato methodology. Updated daily; runs in your browser.",
+    "indices/index.html": "When to buy index funds and ETFs: VIX action levels, AAII sentiment, RSI timing, DCA vs lump-sum math, and quality metrics like expense ratio.",
+    "indices/method.html": "The index and ETF method in full: fund types, DCA vs lump sum, the VIX, RSI and 52-week timing, AAII sentiment, and fund quality.",
+    "indices/market.html": "A same-day market snapshot: major indices, factor and sector ETFs, commodities, Treasury yields, leveraged ETFs and crypto, refreshed three times a trading day.",
+    "vix/method.html": "Why buy-and-hold struggles, why the VIX is mean-reverting, and the 5 VIX tiers that set the 4-ETF allocation.",
+    "leveraged/3sig.html": "The 3 Sig quarterly value-averaging strategy by Jason Kelly: a 3% quarterly target manages a stock index fund against a bond buffer.",
+    "leveraged/tqqq-ftlt.html": "TQQQ For The Long Term: a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ and TLT.",
+    "resources/faq.html": "37 practical answers on long-term stock investing: when to sell, how many stocks to hold, PEG vs P/E, VIX timing, DCA vs lump sum and IPO timing.",
+    "resources/finviz.html": "How to configure Finviz's free stock screener to find candidates that fit the methodology, then evaluate them further in Seeking Alpha.",
+    "resources/seekingalpha.html": "Set up a free Seeking Alpha account and a portfolio that tracks individual stocks with the exact 12-column layout this methodology uses.",
+}
 
 # azqato.com's top nav (D9), copied from azqato.github.io/invests.html at the
 # snapshot commit; Invests points to this site.
@@ -339,6 +377,19 @@ def dash_tree(node, where):
                 tag[k] = fix_dashes(v, where + f" ({k})")
 
 
+def level_headings(wrap):
+    """No skipped heading levels (SEO review S4): a heading more than one level
+    below the one before it moves up. Its look is kept with a class."""
+    prev = 1
+    for h in wrap.find_all(re.compile("^h[1-6]$")):
+        lvl = int(h.name[1])
+        if lvl > prev + 1:
+            h["class"] = h.get("class", []) + [f"site-h{lvl}"]
+            h.name = f"h{prev + 1}"
+            lvl = prev + 1
+        prev = lvl
+
+
 def ensure_ids(article):
     used = {el["id"] for el in article.find_all(id=True)}
     for h in article.find_all(["h2", "h3"]):
@@ -428,8 +479,100 @@ def atlas_box(page):
 # Corrections (P11, build pass item 11, 2026-10-02). Outside links the owner
 # approved removing because they're dead: the <li> holding each is dropped.
 REMOVE_LINKS = {
-    "resources/index.html": ["https://www.denvercondomania.com", "https://dividendstocksonline.com/"],
+    "resources/index.html": ["https://www.denvercondomania.com", "https://dividendstocksonline.com/",
+                             # C3, C4 (owner's answers, 2026-10-03): both answer 404
+                             "https://www.thestreet.com/stock-market-news/10579592/top-rated-stocks/top-rated-stocks.html",
+                             "https://www.thestreet.com/stock-market-news/10575864/top-rated-etfs/top-rated-etfs.html"],
 }
+# Text the owner approved changing (P11 corrections, 2026-10-03), keyed by the
+# source page, so a landing page and its Method page both get it. Each old
+# text must be inside one text node, exactly once.
+TEXT_FIXES = {
+    "leverage/holy-grail.html": [
+        # C1: the figures load from Composer Atlas (2.13.3), just below this paragraph
+        ("No public factsheet data was retrievable (Composer requires authentication).",
+         "Composer Atlas publishes this strategy's backtest; the figures below load from it."),
+        # C2
+        ("The backtest data on the Composer factsheet was not accessible without authentication.",
+         "Its backtest is on Composer Atlas (above); a backtest is not a live record."),
+    ],
+    "stocks/index.html": [
+        # Q7: the method has 12 metrics (the Metrics page, the reference table and
+        # the description agree); the grid had 10 and gains the two margins.
+        ("The 10 Metrics", "The 12 Metrics"),
+        ("The first eight signals evaluate", "The first ten signals evaluate"),
+    ],
+}
+# C5: a link kept with a note after it.
+LINK_NOTES = {"resources/index.html": [("https://robintrack.net/", " (historical, to 2020)")]}
+# Q7: the two metric cards the grid lacked, in its own markup, after Total Debt.
+MARGIN_CARDS = """<div class="metric-card">
+<div class="metric-card-name">Gross Margin</div>
+<p class="metric-card-def">Revenue minus cost of goods sold, as a percentage of revenue. Shows how much of each sale the business keeps before overhead.</p>
+<a class="metric-card-link" href="metrics.html#metric-gross-margin">Learn more →</a>
+</div>
+<div class="metric-card">
+<div class="metric-card-name">Net Margin</div>
+<p class="metric-card-def">Net income as a percentage of revenue. The share of every sale left as profit after all costs.</p>
+<a class="metric-card-link" href="metrics.html#metric-net-margin">Learn more →</a>
+</div>"""
+# One h1 per page (SEO review S1): pages whose source has none.
+ADD_H1 = {"stocks/index.html": "Individual Stocks", "stocks/screener.html": "Screener",
+          "stocks/method.html": "The Stock Method", "indices/method.html": "The Index & ETF Method",
+          "vix/method.html": "The VIX Strategy Method"}
+# "Related" links at the end of a page (SEO review S5).
+_LEV = [("leveraged/3sig.html", "3 Sig"), ("leveraged/6sig.html", "6 Sig"), ("leveraged/9sig.html", "9 Sig"),
+        ("leveraged/tqqq-ftlt.html", "TQQQ FTLT"), ("leveraged/holy-grail.html", "Holy Grail"), ("leveraged/hfea.html", "HFEA")]
+RELATED = {p: [x for x in _LEV if x[0] != p] for p, _ in _LEV}
+RELATED.update({
+    "stocks/metrics.html": [("stocks/philosophy.html", "Philosophy"), ("stocks/screener.html", "Screener"), ("stocks/method.html", "Stock method")],
+    "stocks/philosophy.html": [("stocks/metrics.html", "Stock metrics"), ("stocks/screener.html", "Screener"), ("stocks/method.html", "Stock method")],
+})
+
+# Landing pages and Method pages (SEO review L1 to L3, M1 to M3; owner's
+# approval 2026-10-03). The landing page keeps the source's opening and gets
+# cards; the listed sections move, word for word, to the Method page, which
+# keeps only them (and the source's closing notes). A link to a moved
+# section's #id on the landing page is forwarded to the Method page.
+SPLIT = {
+    "stocks/index.html": {
+        "method": "stocks/method.html",
+        "move": ["section-strategy", "section-metrics-grid", "section-reference", "section-portfolio"],
+        "drop": ["hero", "faq-teaser"],
+        "after": ("section", "hero"),
+        "button": ("Read the method", "stocks/method.html"),
+        "cards": [("stocks/method.html", "The Method", "The strategy, the 12 metrics, and portfolio vs. watchlist."),
+                  ("stocks/metrics.html", "Stock metrics", "Every metric explained in plain English."),
+                  ("stocks/philosophy.html", "Philosophy", "Why buy-and-hold on fundamentals."),
+                  ("stocks/screener.html", "Screener", "The Nasdaq 100 and more, ranked daily by these metrics.")],
+    },
+    "indices/index.html": {
+        "method": "indices/method.html",
+        "move": ["section-types", "section-dca", "section-lumpsum", "section-framework", "section-vix", "section-timing",
+                 "section-aaii", "section-quality", "section-signals", "section-sa-setup"],
+        "drop": ["guide-intro"],
+        "after": ("div", "guide-intro"),
+        "button": ("Read the method", "indices/method.html"),
+        "cards": [("indices/method.html#section-dca", "When to buy", "DCA, lump sum and the hybrid approach."),
+                  ("indices/method.html#section-timing", "Timing signals", "The VIX, RSI, the 52-week range and the 200-day average."),
+                  ("indices/method.html#section-aaii", "Sentiment", "The AAII survey as a contrarian signal."),
+                  ("indices/method.html#section-quality", "Fund quality", "Returns, yield and expense ratio."),
+                  ("indices/market.html", "Market Overview", "The live market table."),
+                  ("vix/index.html", "VIX Strategy", "The live VIX reading and a 5-tier ETF strategy.")],
+    },
+    "vix/index.html": {
+        "method": "vix/method.html",
+        "move": ["problem", "insight", "strategy", "why-now"],
+        "drop": ["hero"],
+        "after": ("section", "hero"),
+        "button": None,
+        "cards": [("vix/method.html", "The Method", "Why buy-and-hold struggles, and the 5 tiers."),
+                  ("vix/index.html#dashboard", "VIX Dashboard", "Today's tier and allocation."),
+                  ("vix/index.html#custom", "Custom builder", "Your own tiers and tickers."),
+                  ("vix/index.html#risk", "Risk Disclosure", "Read this before acting on any tier.")],
+    },
+}
+METHOD_OF = {v["method"]: k for k, v in SPLIT.items()}
 
 # The Holy Grail's backtest figures, read live from Composer Atlas on every page
 # load (owner's answer, 2026-10-02). Atlas's strategies.json sends no CORS
@@ -521,7 +664,7 @@ GROUP_ICONS = {"Individual Stocks": "📈", "Indices & ETFs": "📊", "VIX Strat
 
 def favicon(page):
     group = next((p[3] for p in PAGES if p[0] == page), None)
-    icon = GROUP_ICONS.get(group, "\U0001F4B0")
+    icon = "\u26A1" if page.startswith("vix/") else GROUP_ICONS.get(group, "\U0001F4B0")
     svg = f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>{icon}</text></svg>"
     return "data:image/svg+xml," + svg.replace("<", "%3C").replace(">", "%3E").replace("#", "%23")
 
@@ -892,10 +1035,33 @@ def build_page(entry, search):
         hits = wrap.find_all("a", href=url)
         assert len(hits) == 1, (page, url, len(hits))
         hits[0].find_parent("li").decompose()
+    for url, note in LINK_NOTES.get(page, []):
+        hits = wrap.find_all("a", href=url)
+        assert len(hits) == 1, (page, url, len(hits))
+        hits[0].insert_after(note)
     if page in ATLAS_FIGURES:
         hits = [p for p in wrap.find_all("p") if p.get_text().startswith(ATLAS_FIGURES[page]["after"])]
         assert len(hits) == 1, (page, "atlas figures anchor")
         hits[0].insert_after(BeautifulSoup(atlas_figures(page), "html.parser"))
+    for old, new in TEXT_FIXES.get(src, []):
+        hits = [t for t in wrap.find_all(string=True) if old in t]
+        assert len(hits) == 1, (page, old, len(hits))
+        hits[0].replace_with(hits[0].replace(old, new))
+    if src == "stocks/index.html":
+        debt = [c for c in wrap.select(".metric-card") if c.find(class_="metric-card-name").get_text(strip=True) == "Total Debt"]
+        assert len(debt) == 1
+        debt[0].insert_after(BeautifulSoup(MARGIN_CARDS, "html.parser"))
+    if page in SPLIT or page in METHOD_OF:
+        split_page(page, wrap)
+    if page in ADD_H1:
+        assert not wrap.find("h1"), (page, "already has an h1")
+        h1 = article.new_tag("h1")
+        h1.string = ADD_H1[page]
+        (wrap.select_one(".content-inner") or wrap.select_one(".src-main") or wrap).insert(0, h1)
+    if page in RELATED:
+        r = rel(page, "")
+        links = ", ".join(f'<a href="{r}{u}">{esc(t)}</a>' for u, t in RELATED[page])
+        wrap.append(BeautifulSoup(f'<p class="site-related"><strong>Related:</strong> {links}</p>', "html.parser"))
     if page == "resources/faq.html":
         h1 = wrap.find("h1")
         anchor = h1.find_parent("section") or h1
@@ -904,7 +1070,9 @@ def build_page(entry, search):
         scripts, styles = combine_part(page, wrap, src2, sid, heading, scripts, styles)
     notes = merge_footers(wrap, repo)
     dash_tree(wrap, page)
+    level_headings(wrap)
     ensure_ids(wrap)
+    desc = DESCS.get(page, desc)
     title = TITLES.get(page, f"{label} - {BRAND}")
     title = fix_dashes(title, page + " (title)")
     desc = fix_dashes(desc, page + " (description)")
@@ -927,7 +1095,7 @@ def build_page(entry, search):
            + pager(page) + "</main>\n" + toc + "</div>\n"
            + footer(page, fix_dashes(notes, page + " (footer)"))
            + f'<script src="{r}assets/js/site.js"></script>\n'
-           + page_scripts(page, repo, scripts) + "\n</body>\n</html>\n")
+           + page_scripts(page, repo, [] if page in METHOD_OF else scripts) + "\n</body>\n</html>\n")
     out = ROOT / page
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(doc, encoding="utf-8", newline="\n")
@@ -983,6 +1151,37 @@ def combine_part(page, wrap, src, sid, heading, scripts, styles):
             x = dict(x, body=js)
         scripts.append(x)
     return scripts, styles + [x for x in styles2 if x not in styles]
+
+
+def split_page(page, wrap):
+    """A landing page or its Method page (SPLIT)."""
+    landing = page in SPLIT
+    cfg = SPLIT[page] if landing else SPLIT[METHOD_OF[page]]
+
+    def find(key):
+        hit = wrap.find(id=key) or wrap.find(class_=key)
+        assert hit, (page, key)
+        return hit
+    moved = [find(k) for k in cfg["move"]]
+    if landing:
+        ids = sorted({el["id"] for m in moved for el in [m] + m.find_all(id=True)})
+        for m in moved:
+            m.decompose()
+        r = rel(page, "")
+        cards = "".join(f'<a class="pp-card" href="{r}{u}"><span class="pp-card-kicker">{i}</span>'
+                        f'<strong>{esc(t)}</strong><span>{esc(d)}</span></a>'
+                        for i, (u, t, d) in enumerate(cfg["cards"], 1))
+        button = (f'<p class="site-landing-start"><a class="pp-btn pp-btn--solid" href="{r}{cfg["button"][1]}">{esc(cfg["button"][0])}</a></p>'
+                  if cfg["button"] else "")
+        method = rel(page, cfg["method"])
+        forward = ("<script>(function () { var ids = " + json.dumps(ids) + "; var h = decodeURIComponent(location.hash.slice(1));"
+                   f' if (h && ids.indexOf(h) > -1 && !document.getElementById(h)) location.replace("{method}#" + h); }})();</script>')
+        tag, key = cfg["after"]
+        anchor = wrap.find(tag, id=key) or wrap.find(tag, class_=key)
+        anchor.insert_after(BeautifulSoup(f'<div class="site-landing">{button}<div class="pp-cards">{cards}</div></div>{forward}', "html.parser"))
+    else:
+        for key in cfg["drop"]:
+            find(key).decompose()
 
 
 def merge_footers(wrap, repo):

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects - Azqato</title>
+  <title>Azqato's Projects: Web Tools and Investing Sites</title>
   <meta name="description" content="A filterable grid of everything Azqato has built: finance dashboards, browser tools, educational sites and a few jokes. Every card links to a live version." />
   <link rel="canonical" href="https://azqato.com/projects/" />
   <meta property="og:title" content="Fifteen Browser Tools, Dashboards and Sites" />
@@ -314,8 +314,8 @@
     .tag.lang-js    { color: #e8c840; border-color: rgba(232,200,64,0.3); background: rgba(232,200,64,0.08); }
     .tag.lang-ts    { color: #3178c6; border-color: rgba(49,120,198,0.3); background: rgba(49,120,198,0.08); }
     .tag.lang-py    { color: #3572a5; border-color: rgba(53,114,165,0.3); background: rgba(53,114,165,0.08); }
-    .tag.lang-cs    { color: #178600; border-color: rgba(23,134,0,0.3);   background: rgba(23,134,0,0.08);   }
-    .tag.lang-html  { color: #e34c26; border-color: rgba(227,76,38,0.3);  background: rgba(227,76,38,0.08);  }
+    .tag.lang-cs    { color: #2fb31a; border-color: rgba(23,134,0,0.3);   background: rgba(23,134,0,0.08);   }
+    .tag.lang-html  { color: #f26b47; border-color: rgba(227,76,38,0.3);  background: rgba(227,76,38,0.08);  }
     .tag.lang-css   { color: #563d7c; border-color: rgba(86,61,124,0.3);  background: rgba(86,61,124,0.08);  }
     .tag.lang-go    { color: #00add8; border-color: rgba(0,173,216,0.3);  background: rgba(0,173,216,0.08);  }
     .tag.lang-rust  { color: #dea584; border-color: rgba(222,165,132,0.3);background: rgba(222,165,132,0.08);}
@@ -433,7 +433,7 @@
   <section class="section" id="projects">
     <div class="section-header">
       <h2 class="section-title">Projects</h2>
-      <span class="section-meta" id="project-count"></span>
+      <span class="section-meta" id="project-count">15 projects</span>
     </div>
 
     <div class="filter-bar" id="filter-bar">
@@ -442,7 +442,368 @@
     </div>
 
     <div class="project-grid" id="project-grid">
-      <!-- Cards injected by JS -->
+      <!-- PROJECTS: written by tools/prerender-projects.py from the PROJECTS array; the script redraws it on load. -->
+      <div class="project-card" data-tags="finance,tools">
+          <div class="card-top">
+            <span class="card-icon">🤖</span>
+            <div class="card-links">
+              <a class="card-link" href="https://automatefundamentals.com/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://automatefundamentals.com/" target="_blank" rel="noopener" title="No public repository, opens the project site" aria-label="No public repository, opens the project site">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://automatefundamentals.com/" target="_blank" rel="noopener">Automate Fundamentals</a>
+          <p class="card-desc">Strategy builder for investors who work from earnings reports rather than price charts. Score companies on fundamentals, build rule-based strategies without writing code, then backtest and paper trade them. Currently in free beta.</p>
+          <div class="card-tags"><span class="tag lang-cs">Finance</span><span class="tag ">Tools</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+        <div class="project-card" data-tags="finance,tools">
+          <div class="card-top">
+            <span class="card-icon">💰</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/net-worth-tracker/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/net-worth-tracker" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/net-worth-tracker/" target="_blank" rel="noopener">Net Worth Tracker</a>
+          <p class="card-desc">Browser-based personal finance tool for tracking monthly net worth across four asset categories. Fully client-side; all data stays in your browser's localStorage with no accounts or servers required.</p>
+          <div class="card-tags"><span class="tag lang-js">Finance</span><span class="tag ">Tools</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2025</span></div>
+        </div>
+        <div class="project-card" data-tags="finance">
+          <div class="card-top">
+            <span class="card-icon">📈</span>
+            <div class="card-links">
+              <a class="card-link" href="../invests/vix/index.html" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/vix" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="../invests/vix/index.html" target="_blank" rel="noopener">VIX Strategy</a>
+          <p class="card-desc">Rules-based contrarian investment dashboard that dynamically rebalances a portfolio across ETFs (BIL, SPY, QQQ, TQQQ) based on live CBOE VIX volatility tiers. Increases growth exposure at peak market fear.</p>
+          <div class="card-tags"><span class="tag lang-js">Finance</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2025</span></div>
+        </div>
+        <div class="project-card" data-tags="finance,tools,education">
+          <div class="card-top">
+            <span class="card-icon">🗺️</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/composer" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/ComposerAtlas" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/composer" target="_blank" rel="noopener">ComposerAtlas</a>
+          <p class="card-desc">Curated strategy library and education hub for Composer.trade investing. Browse strategy pages with plain-English logic breakdowns, risk profiles, and metrics tables, plus a glossary of systematic investing concepts including RSI, VIX tiers, and leveraged ETFs.</p>
+          <div class="card-tags"><span class="tag lang-js">Finance</span><span class="tag ">Tools</span><span class="tag ">Education</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+        <div class="project-card" data-tags="finance,education">
+          <div class="card-top">
+            <span class="card-icon">📊</span>
+            <div class="card-links">
+              <a class="card-link" href="../invests/stocks/index.html" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/stocks" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="../invests/stocks/index.html" target="_blank" rel="noopener">Stock Methodology</a>
+          <p class="card-desc">Educational site documenting a fundamentals-driven individual stock and ETF investing methodology. Covers 10 core evaluation metrics (PEG, P/E FWD, RSI, and more), a Finviz screener guide, Seeking Alpha watchlist setup, and VIX-based index investing strategies.</p>
+          <div class="card-tags"><span class="tag lang-html">Finance</span><span class="tag ">Education</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+        <div class="project-card" data-tags="finance,education">
+          <div class="card-top">
+            <span class="card-icon">🚀</span>
+            <div class="card-links">
+              <a class="card-link" href="../invests/leveraged/index.html" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/leverage" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="../invests/leveraged/index.html" target="_blank" rel="noopener">Leveraged Strategies</a>
+          <p class="card-desc">Educational reference site documenting six leveraged ETF strategies side by side: 3 Sig, 6 Sig, 9 Sig, TQQQ For The Long Term, Holy Grail, and HFEA. Each strategy gets a dedicated wiki-style page covering rules and logic, performance notes, risks, and sources.</p>
+          <div class="card-tags"><span class="tag lang-html">Finance</span><span class="tag ">Education</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+        <div class="project-card" data-tags="social">
+          <div class="card-top">
+            <span class="card-icon">🏮</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/Lantern/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/Lantern" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/Lantern/" target="_blank" rel="noopener">Lantern</a>
+          <p class="card-desc">Culture-based social platform for discovering your taste profile across books, film, music, games, and podcasts. Generates Cultural Archetypes, Taste Dimensions, and surfaces users with overlapping interests via AI-powered Smart Cohorts.</p>
+          <div class="card-tags"><span class="tag lang-js">Social</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2025</span></div>
+        </div>
+        <div class="project-card" data-tags="tools,education">
+          <div class="card-top">
+            <span class="card-icon"><img src="https://azqato.github.io/Cat-Food-Center/favicon.svg" width="22" height="22" alt="" style="display:block;"></span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/Cat-Food-Center/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/Cat-Food-Center" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/Cat-Food-Center/" target="_blank" rel="noopener">Cat Food Center</a>
+          <p class="card-desc">Mobile-first web app that evaluates cat food products via barcode scan or catalog search. Provides ingredient breakdowns, additive safety flags, and a 0–100 CFC health score grounded in feline veterinary nutritional standards.</p>
+          <div class="card-tags"><span class="tag lang-js">Tools</span><span class="tag ">Education</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2025</span></div>
+        </div>
+        <div class="project-card" data-tags="social">
+          <div class="card-top">
+            <span class="card-icon">⚔️</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/B5TA/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/B5TA" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/B5TA/" target="_blank" rel="noopener">Clan B5TA</a>
+          <p class="card-desc">Community website for Clan B5TA, a RuneScape clan founded in 2014. Covers clan rules, membership requirements, and Discord join links for a drama-free skilling, flipping, and bossing community.</p>
+          <div class="card-tags"><span class="tag lang-html">Social</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2014</span></div>
+        </div>
+        <div class="project-card" data-tags="meme">
+          <div class="card-top">
+            <span class="card-icon">🛥️</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/mcboat/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/mcboat" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/mcboat/" target="_blank" rel="noopener">Boaty McBoatface Ventures</a>
+          <p class="card-desc">Humorous marketing website for New England's premier canvas exo-skeleton water displacement experience company. Features an interactive eject demo with animations and sound effects, animated CSS boat, parody investor pitch deck, SVG service area map with shark risk levels, and an absurdist FAQ.</p>
+          <div class="card-tags"><span class="tag lang-html">Meme</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+        <div class="project-card" data-tags="tools,real estate">
+          <div class="card-top">
+            <span class="card-icon">🏠</span>
+            <div class="card-links">
+              <a class="card-link" href="https://www.nofeeapartments.net/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://www.nofeeapartments.net/" target="_blank" rel="noopener" title="No public repository, opens the project site" aria-label="No public repository, opens the project site">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://www.nofeeapartments.net/" target="_blank" rel="noopener">No Fee Apartments</a>
+          <p class="card-desc">Curated directory of no-broker-fee apartment buildings across New York City, Boston, and San Francisco. Find no-fee rentals directly, without paying agent commissions.</p>
+          <div class="card-tags"><span class="tag lang-html">Tools</span><span class="tag ">Real Estate</span></div>
+          
+        </div>
+        <div class="project-card" data-tags="social">
+          <div class="card-top">
+            <span class="card-icon">🎉</span>
+            <div class="card-links">
+              <a class="card-link" href="https://www.lvguestlist.com/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://www.lvguestlist.com/" target="_blank" rel="noopener" title="No public repository, opens the project site" aria-label="No public repository, opens the project site">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://www.lvguestlist.com/" target="_blank" rel="noopener">LV Guest List</a>
+          <p class="card-desc">Free guest list access for Las Vegas's top nightclubs and dayclubs, including Omnia, LIV, XS, Marquee, Zouk, Hakkasan, Jewel, and Tao. Sign up for free entry and no cover most nights.</p>
+          <div class="card-tags"><span class="tag lang-html">Social</span></div>
+          
+        </div>
+        <div class="project-card" data-tags="tools,education">
+          <div class="card-top">
+            <span class="card-icon">💬</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/prompts/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/prompts" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/prompts/" target="_blank" rel="noopener">Prompts</a>
+          <p class="card-desc">Personal reference library of reusable Claude Code prompts for recurring development, documentation, and maintenance tasks. One-click copy, hash-based routing, and zero dependencies; works offline from any browser with no setup required.</p>
+          <div class="card-tags"><span class="tag lang-js">Tools</span><span class="tag ">Education</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+        <div class="project-card" data-tags="tools,health">
+          <div class="card-top">
+            <span class="card-icon">💪</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/protein/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/protein" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/protein/" target="_blank" rel="noopener">ProteinPulse</a>
+          <p class="card-desc">Browser-based calorie and protein tracker with daily logging, customizable goals, a carry-forward model, and weekly and monthly graphs. Fully client-side with Excel import and export; no accounts, no servers, and no setup required.</p>
+          <div class="card-tags"><span class="tag lang-js">Tools</span><span class="tag ">Health</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+        <div class="project-card" data-tags="tools">
+          <div class="card-top">
+            <span class="card-icon">🔧</span>
+            <div class="card-links">
+              <a class="card-link" href="https://azqato.github.io/tools/" target="_blank" rel="noopener" title="Live demo">↗</a>
+              <a class="card-link" href="https://github.com/Azqato/tools" target="_blank" rel="noopener" title="View on GitHub" aria-label="View on GitHub">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                  -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+                  .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+                  -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+                  1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                  1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <a class="card-name" href="https://azqato.github.io/tools/" target="_blank" rel="noopener">Azqato's Tools</a>
+          <p class="card-desc">Collection of free, browser-based utilities: a Markdown editor with live preview and HTML export, a Favicon Downloader, a Link Cleaner that strips tracking parameters, and a Nasdaq 100 Screener. Every tool runs entirely on your device with no accounts, no uploads, and no server involvement.</p>
+          <div class="card-tags"><span class="tag lang-js">Tools</span></div>
+          <div class="card-footer"><span class="card-stat">🕑 2026</span></div>
+        </div>
+      <!-- /PROJECTS -->
     </div>
   </section>
 

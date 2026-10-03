@@ -29,7 +29,12 @@ PUNCT_DASH = re.compile(r"\u2014|&mdash;")
 # Inventory items removed on purpose, with the owner's approval. The inventories
 # stay a record of the sources; these numbers are simply not expected on the
 # pages any more. P11, 2026-10-02: two dead links on Resources.
-REMOVED = {"azqato.github.io-invests.json": {108, 109, 130, 131}}
+# Items the owner approved removing or rewording (P11; C1 to C4 and Q7 on 2026-10-03).
+REMOVED = {"azqato.github.io-invests.json": {108, 109, 130, 131, 90, 91, 92, 93},
+           "stocks-index.json": {53, 55},
+           "leverage-holy-grail.json": {118, 163}}
+# The method has 12 metrics (owner, Q7, 2026-10-03): keep every page saying so.
+METRIC_COUNT = 12
 PLACEHOLDERS = {"untitled", "document", "home", "index", "introduction - parcelpoint docs"}
 
 
@@ -173,8 +178,21 @@ def main():
             have = squash(" ".join(" ".join(parsed[t].text) for t in targets if t in parsed))
             ids = set().union(*(parsed[t].ids for t in targets if t in parsed))
             missing = [i for i in inv["items"] if i["n"] not in REMOVED.get(src, set()) and not found(i, have, ids)]
+            if missing and "--list" in sys.argv:
+                print(src, [i["n"] for i in missing])
             if missing:
                 fails.append(f"{src}: {len(missing)} inventory items not found on {', '.join(targets)} (first: #{missing[0]['n']} {missing[0]['text'][:60]!r})")
+
+    for rel, r in parsed.items():
+        body = " ".join(r.text)
+        for n in re.findall(r"(\d+) (?:[Mm]etrics|plain-English metrics|stock metrics)", body):
+            if int(n) != METRIC_COUNT:
+                fails.append(f"{rel}: says {n} metrics; the method has {METRIC_COUNT}")
+    grid = (ROOT / "stocks" / "method.html")
+    if grid.exists():
+        cards = grid.read_text(encoding="utf-8").count('class="metric-card"')
+        if cards != METRIC_COUNT:
+            fails.append(f"stocks/method.html: {cards} metric cards; the method has {METRIC_COUNT}")
 
     fails += redirects()
     n = len(parsed)
