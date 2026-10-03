@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.12.2] - 2026-10-02
+
+### Changed
+- `docs/PRD.md` Part 2, the owner's review of Invests' drafted sections, all suggestions accepted:
+Tenet 3 and the "nothing from azqato.com" and "nothing pushed" non-goals removed (D22); Tenet 2 is
+now "push only on the owner's word"; Tenet 5 softened for the shared look; a seventh goal (one look
+with azqato.com); goals, user stories and success criteria marked met or open; analytics-based
+metrics postponed; the press release dated; FAQ 7 mentions Cloudflare's beacon. Earlier text kept.
+- `docs/PRD.md` Roadmap at a glance: the full review moves after item 15; the Discord card check is
+done; new item 21 (a brand per section, an emoji per page). `docs/TODO.md`: the brand, mascot and
+analytics questions answered.
+
+---
+
 ## [2.12.1] - 2026-10-02
 
 ### Changed

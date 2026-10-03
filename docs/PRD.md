@@ -2387,7 +2387,7 @@ Azqato's investing material is split across four places, each a separate site wi
 - the leverage site: 7 pages, a landing page and six leveraged strategies;
 - invests.html on azqato.com: one page of project cards and 15 categories of curated links.
 
-A visitor has to know which site holds what, and the sites link to one another rather than sharing one menu or one search. Some links point to an old GitHub Pages copy of Composer Atlas instead of the live site (see Composer Atlas).
+**Changed 2026-10-02 (owner's review):** solved at launch; this records why the site exists. A visitor has to know which site holds what, and the sites link to one another rather than sharing one menu or one search. Some links point to an old GitHub Pages copy of Composer Atlas instead of the live site (see Composer Atlas).
 
 Azqato Invests merges all four into one site with one navigation, one search and one design, while keeping every page, tool, link, disclaimer and risk warning (core rule). It's for people learning about investing or managing their own investments, for Azqato's Discord community, and for Azqato as the site's one maintainer.
 
@@ -2395,7 +2395,7 @@ Azqato Invests merges all four into one site with one navigation, one search and
 
 Personas drafted by the 2026-10-01 audit from the plan; the descriptions are illustrative.
 
-1. **The learner.** New to investing, or to picking individual stocks. Reads the Learn pages (philosophy, stock metrics, index and ETF methodology), the setup guides and the FAQ. Needs plain explanations, numbered steps and risk warnings that are hard to miss. The template ratings describe the reading pages as being for "beginner-to-intermediate investors".
+1. **The learner.** New to investing, or to picking individual stocks. Reads the Learn pages (philosophy, stock metrics, index and ETF methodology; since v1.1.0 the Individual Stocks and Indices & ETFs sections), the setup guides and the FAQ. Needs plain explanations, numbered steps and risk warnings that are hard to miss. The template ratings describe the reading pages as being for "beginner-to-intermediate investors".
 2. **The stock picker.** Manages their own portfolio and screens for ideas. Uses the Screener, Market Overview and the Metrics page. Needs a full-width, dense table, quick filters and current data.
 3. **The strategy follower.** Runs, or is weighing, a rules-based strategy: the VIX strategy or one of the leveraged ones (3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail, HFEA). Checks the VIX Dashboard, reads the rules and risks, and compares with Composer Atlas. Needs today's reading, the exact rules and a direct link to the Atlas page.
 4. **The Discord member.** Arrives from a link shared in Azqato's Discord. Needs to land on the right page and find related pages through the sidebar and search. Visitors arriving from elsewhere use the "Join the Discord" button to join.
@@ -2409,11 +2409,14 @@ Personas drafted by the 2026-10-01 audit from the plan; the descriptions are ill
 4. Light and dark themes, switched with one button (D10).
 5. Composer strategies link to their Composer Atlas pages (D15, D16, D17).
 6. Every old stocks, vix and leverage address keeps working by redirecting to its new page, once publishing is approved (D7, D20).
+7. One look with azqato.com: shared colors, top bar, theme button and footer (added 2026-10-02 by the owner; Roadmap at a glance, items 4 to 8).
+
+**Changed 2026-10-02 (owner's review):** goals 1 to 5 were met at launch (2026-10-02); goal 6 is open (Roadmap at a glance, item 9); goal 7 is new.
 
 ## Invests: Non-goals
 
 - No accounts, sign-in or saved user data (Assumptions).
-- No tracking or analytics scripts (Assumptions).
+- No tracking or analytics scripts (Assumptions). (The site's own code adds none. azqato.com is served through Cloudflare, which injects its Web Analytics beacon, as the main site discloses; reading it is for much later, by the owner's decision.)
 - No financial advice or personal recommendations. The site explains and shows data; invests.html already says "Nothing here is financial advice."
 - No moving, copying or rebuilding the data pipelines; they stay in the stocks and vix repos (D6).
 - No Net Worth Tracker pages, and none from the author's private project. Net Worth Tracker keeps only its home page card (D2).
@@ -2423,8 +2426,8 @@ Personas drafted by the 2026-10-01 audit from the plan; the descriptions are ill
 - No cutting, trimming or summarizing content without the author's sign-off (core rule).
 - No build step and no Node.js (Assumptions).
 - No features that need a server, such as the template's page-feedback form, comments or a mailing list (Design details in DESIGN.md; template ratings).
-- No rules, docs or design taken from azqato.github.io (D5). **Audit 2026-10-02:** D5 was superseded by D21, and the author has since asked for azqato.com's colors (P15) and for the two sites' docs to merge; this stands only until those changes are made.
-- Nothing pushed, published or deployed until the author says so (D20). (Launch go-ahead given 2026-10-02; each push still waits for the author's word.)
+- ~~No rules, docs or design taken from azqato.github.io (D5).~~ **Changed 2026-10-02 (owner's review):** removed; the main site's rules win (D22). **Audit 2026-10-02:** D5 was superseded by D21, and the author has since asked for azqato.com's colors (P15) and for the two sites' docs to merge; this stands only until those changes are made.
+- ~~Nothing pushed, published or deployed until the author says so (D20).~~ **Changed 2026-10-02 (owner's review):** removed; the site is live and each push waits for the owner's word. (Launch go-ahead given 2026-10-02; each push still waits for the author's word.)
 
 ## Invests: User stories
 
@@ -2436,7 +2439,7 @@ Personas drafted by the 2026-10-01 audit from the plan; the descriptions are ill
 - As a strategy follower, I want each Composer strategy write-up to link to its Composer Atlas page so that I can check its backtested numbers.
 - As any visitor, I want to search every page from the top bar so that I can find a topic without knowing which section holds it.
 - As any visitor, I want a button that switches between light and dark and remembers my choice so that the site is comfortable to read.
-- As a visitor with an old bookmark, I want old stocks, vix and leverage addresses to land on the matching new page so that my links still work.
+- As a visitor with an old bookmark, I want old stocks, vix and leverage addresses to land on the matching new page so that my links still work. (Open: Roadmap at a glance, item 9; every other story was met at launch.)
 - As a visitor, I want referral links disclosed so that I know when a link can earn Azqato a reward.
 - As a Discord member, I want the home page's "Join the Discord" button so that I can join the community.
 - As the maintainer, I want every source page checked against an inventory after it moves so that I know nothing was lost.
@@ -2502,6 +2505,8 @@ Added by the 2026-10-01 audit:
 4. **No errors:** every page loads in headless Edge with 0 console errors and 0 broken internal links, in both themes.
 5. **Readable:** every text and UI color pairing in both themes meets WCAG AA contrast: 4.5:1 for body text, 3:1 for large text.
 6. **Fast:** in a mobile Lighthouse run, Home, the Screener and one strategy page reach an LCP of 2.5 s or less, a CLS of 0.1 or less and a TBT of 200 ms or less (targets set by the 2026-10-01 audit; see Metrics).
+**Changed 2026-10-02 (owner's review):** criteria 1 to 6 were met at launch (scripts/check.py, scripts/browser.py and the P7 Lighthouse run, 2026-10-02); 7 is open until the redirects (Roadmap at a glance, item 9).
+
 7. **Old links work:** once publishing is approved, each of the 19 old stocks, vix and leverage page addresses reaches its new page in one hop (D7).
 
 ## Invests: Tenets
@@ -2509,10 +2514,10 @@ Added by the 2026-10-01 audit:
 Drafted by the 2026-10-01 audit from the core rule and the decisions, in priority order: when two conflict, the higher one wins. The author may reorder or reword them (Question 15).
 
 1. **Preserve before polish.** Nothing from the four sources is cut, trimmed or summarized without the author's sign-off, even when it's repetitive, out of date (D19) or awkward to fit the template. When content and layout disagree, the layout changes. A cleaner page that lost a paragraph is a failed move.
-2. **Local until told otherwise.** Nothing is pushed, published or deployed until the author says so (D20), not even a fix for something broken on a live site. Work is finished and verified locally, then waits. A ready change that sits unpublished costs nothing that can't be recovered; a publish can't be taken back.
-3. **This repo sets its own rules.** (**Audit 2026-10-02:** D5 was superseded by D21, so this tenet no longer matches the decisions; it waits for the author's review, P7.10. **Superseded 2026-10-02 by D22:** the main site's rules win.) Azqato Invests is independent (D5). Where azqato.github.io's docs, rules or design say something different, this repo's docs win. azqato.github.io is a source of facts, such as where a feed lives, never of rules.
+2. **Push only on the owner's word.** **Changed 2026-10-02 (owner's review):** the site is live; work is finished and verified locally and pushed only when the owner says so. Earlier title and text: **Local until told otherwise.** Nothing is pushed, published or deployed until the author says so (D20), not even a fix for something broken on a live site. Work is finished and verified locally, then waits. A ready change that sits unpublished costs nothing that can't be recovered; a publish can't be taken back.
+3. ~~**This repo sets its own rules.**~~ **Changed 2026-10-02 (owner's review):** removed; D22. (**Audit 2026-10-02:** D5 was superseded by D21, so this tenet no longer matches the decisions; it waits for the author's review, P7.10. **Superseded 2026-10-02 by D22:** the main site's rules win.) Azqato Invests is independent (D5). Where azqato.github.io's docs, rules or design say something different, this repo's docs win. azqato.github.io is a source of facts, such as where a feed lives, never of rules.
 4. **Reuse the feeds, don't move the pipelines.** Pages read the data the stocks and vix repos already publish, even when that's awkward, like loading the VIX reading from another site (D6). A second copy of a pipeline is a second thing to keep running.
-5. **Template structure, source content.** Layout, navigation and styling come from the chosen Template Interface templates (D8); words, numbers, links and warnings come from the sources. Template demo content always comes out, and source content never does.
+5. **Template structure, source content.** (**Changed 2026-10-02 (owner's review):** softened: the look moves toward azqato.com's colors, top bar and footer, P15 and Roadmap at a glance items 4 to 8; the content rule is unchanged.) Layout, navigation and styling come from the chosen Template Interface templates (D8); words, numbers, links and warnings come from the sources. Template demo content always comes out, and source content never does.
 6. **No accounts, no tracking.** If a feature needs sign-in, a server or a way to follow visitors, it's out, even when it would make success easier to measure. Anything the site keeps stays in the visitor's own browser.
 
 ## Invests: Decisions
@@ -3169,7 +3174,7 @@ Each PRD and DESIGN.md section that describes the code, and when it was last che
 
 ## Invests: Metrics
 
-Every metric has to work without tracking (Assumptions). The targets were set by the 2026-10-01 audit as defaults for the author to confirm (Question 11).
+Every metric has to work without tracking (Assumptions). **Changed 2026-10-02 (owner's review):** the north star, acquisition and engagement metrics are postponed: they rely on host or analytics counts, and the owner has put Cloudflare analytics off until much later. The performance table stands; uptime has no target and isn't monitored for now. The targets were set by the 2026-10-01 audit as defaults for the author to confirm (Question 11).
 
 - **North star: weekly page views across the site.** One number for whether people use the site. Target: record a baseline over the first 4 weeks after launch, then set a growth target from it. Measured with the host's own aggregate request counts, if the host chosen under D4 provides them without cookies or scripts; GitHub Pages provides no visitor statistics. Reviewed monthly after launch.
 - **Acquisition:**
@@ -3781,13 +3786,13 @@ How anyone, person or AI model, works on this project. These are instructions, n
 
 ## Invests: Press Release
 
-A mock announcement, written as if the site had just launched, to test that the plan adds up to something worth announcing. The launch date and place aren't decided (Question 15).
+A mock announcement, written as if the site had just launched, to test that the plan adds up to something worth announcing. The launch date and place aren't decided (Question 15). **Changed 2026-10-02 (owner's review):** launched 2026-10-02 at azqato.com/invests/; the quote stays, labeled fictional.
 
 ### Azqato Invests puts free stock tools, VIX and leveraged strategy guides, and a curated investing link hub on one site
 
 **Twenty pages from four separate Azqato sites now share one menu, one search and a light or dark look, and nothing from the originals was left out.**
 
-ONLINE, launch date to be set. Azqato today launched Azqato Invests, a free website for people who manage their own investments or are learning how. It brings together a stock screener and market overview, a VIX dashboard and strategy, write-ups of six leveraged strategies, guides to stock metrics and screening tools, and fifteen categories of hand-picked investing links. Until now these lived on four separate sites, each with its own design and menu. The new site keeps every page, tool, link and risk warning from those sites, needs no account, and states plainly that nothing on it is financial advice.
+ONLINE, 2 October 2026. Azqato today launched Azqato Invests, a free website for people who manage their own investments or are learning how. It brings together a stock screener and market overview, a VIX dashboard and strategy, write-ups of six leveraged strategies, guides to stock metrics and screening tools, and fifteen categories of hand-picked investing links. Until now these lived on four separate sites, each with its own design and menu. The new site keeps every page, tool, link and risk warning from those sites, needs no account, and states plainly that nothing on it is financial advice.
 
 **The problem.** Following an investing strategy means keeping track of a lot: one site for the screener, another for today's VIX reading, a third for the strategy's rules, and a pile of bookmarks for everything else. Azqato's own material had the same problem. The screener, the VIX strategy and the leveraged strategy guides each lived on a separate site, and a separate page on azqato.com linked them all.
 
@@ -3795,7 +3800,7 @@ ONLINE, launch date to be set. Azqato today launched Azqato Invests, a free webs
 
 **What a user says.** "I used to keep four tabs open just to check the VIX and look up the rules," said Sam Rivera, a part-time investor who follows the VIX strategy (a fictional user, for illustration). "Now it's one site, and when I search for something, it's there."
 
-**Get started.** Visit Azqato Invests (address to be announced; now https://azqato.com/invests/), start with Learn if you're new, and join the Discord from the home page.
+**Get started.** Visit Azqato Invests at https://azqato.com/invests/ (earlier: address to be announced), start with Individual Stocks if you're new (earlier: Learn), and join the Discord from the home page.
 
 **About Azqato.** Azqato builds free websites and investing tools, and runs a Discord community. Azqato's projects are linked from azqato.com.
 
@@ -3809,7 +3814,7 @@ ONLINE, launch date to be set. Azqato today launched Azqato Invests, a free webs
 4. **What does it cost?** Nothing. There's no account, sign-up or paid tier.
 5. **When and where is it available?** At https://azqato.com/invests/, live since 2026-10-02. Anyone with a browser can use it, with no sign-up.
 6. **Where does the data come from, and how fresh is it?** From automated jobs in Azqato's stocks and vix repositories. Stock and ETF data updates daily, the Market Overview three times a weekday, statements and index constituents weekly, and the VIX reading eight times a weekday. If the VIX feed can't be reached, the VIX pages fall back to Yahoo Finance's data.
-7. **Does it track me or store my data?** No tracking and no accounts. Your browser keeps three things locally: your theme choice, and cached copies of the latest market overview and VIX reading so pages load quickly. None of it is sent anywhere.
+7. **Does it track me or store my data?** No tracking and no accounts. Your browser keeps three things locally: your theme choice, and cached copies of the latest market overview and VIX reading so pages load quickly. None of it is sent anywhere. azqato.com is served through Cloudflare, which adds its own visit statistics (Web Analytics) to every page; see the privacy policy.
 8. **Is this financial advice?** No. The site explains strategies and shows data; it doesn't tell you what to buy or sell. Leveraged strategies in particular can lose money quickly, and past or backtested results don't predict future returns.
 9. **Are any links sponsored?** Some links in Resources are referral links, which can earn Azqato a reward if you sign up. The page says so.
 10. **What happens to the old stocks, vix and leverage sites?** They stay up for now; later their pages will redirect to the matching new pages, so old links keep working. The repositories behind them stay, because they produce the data.
@@ -3825,7 +3830,7 @@ ONLINE, launch date to be set. Azqato today launched Azqato Invests, a free webs
 
 1. **Why merge the sites instead of improving each one?** One site means one design, one navigation and one search to maintain instead of four, and visitors find everything without knowing which site holds it. The data pipelines don't move (D6), so the cost is the move itself, which the core rule's inventory check keeps safe.
 2. **How will we know it worked?** Every inventory item present on every moved page, all 21 pages reachable and searchable, current data in the tools, zero console errors, and the old addresses redirecting once published (Success criteria). After launch, traffic baselines, where the host can provide them without tracking (Metrics).
-3. **What comes after launch?** The correction pass for out-of-date content (D19), HFEA's Composer Atlas link, and whatever the author adds to TODO.md and approves into the Roadmap.
+3. **What comes after launch?** The correction pass for out-of-date content (D19), HFEA's Composer Atlas link, and whatever the author adds to TODO.md and approves into the Roadmap. (Changed 2026-10-02: the current list is Roadmap at a glance, at the top of the Roadmap in Part 1.)
 4. **What does it cost to run?** No servers and no paid services are planned. The data pipelines already run in the stocks and vix repos. Hosting is the main site's existing Cloudflare Pages and GitHub Pages builds, at no extra cost.
 
 ## Invests: Hosting options (record, 2026-10-02)
