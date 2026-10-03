@@ -1382,13 +1382,13 @@ The proxies available, in descending order of usefulness:
 
 Organized 2026-10-02 at the owner's request: every open item from both halves of the site in one place, in a suggested order. Each item's detail stays where it was written: Part 1 below, or Part 2, Invests: Roadmap (P numbers). Nothing here is scheduled until the owner says so.
 
-**Now (waiting on the owner)**
+**Now (waiting on the owner).** Changed 2026-10-02 by the owner: items 1 and 2 happen as one full review after item 15, and item 3 is done.
 
 | # | Item | Where it's detailed | Status |
 |---|---|---|---|
-| 1 | Review the live Azqato Invests site and list changes | Part 2, P7.9 (in P13.2) | Waiting on the owner |
-| 2 | Review Invests' drafted sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ | Part 2, P7.10 (in P13.2) | Waiting on the owner; D22 already settles Tenet 3 |
-| 3 | Paste two or three live URLs into Discord and check the cards | docs/TODO.md | Waiting on the owner |
+| 1 | Review the live Azqato Invests site and list changes | Part 2, P7.9 (in P13.2) | Moved: full review after item 15 |
+| 2 | Review Invests' drafted sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ | Part 2, P7.10 (in P13.2) | Moved: full review after item 15 (a summary was shown to the owner 2026-10-02); D22 already settles Tenet 3 |
+| 3 | Paste two or three live URLs into Discord and check the cards | docs/TODO.md | **Done 2026-10-02:** the owner checked them; the cards look right |
 
 **Next: one site, one look (owner's requests, 2026-10-02).** These touch every page, so they're best done together, in this order.
 
