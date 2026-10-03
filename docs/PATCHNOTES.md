@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.12.6] - 2026-10-02
+
+### Added
+- `img/yt-thumb-*-160.webp`: 160 px WebP copies of the four YouTube channel thumbnails, 30 KB in
+all against 2.37 MB (build pass, item 15a). The originals stay in `img/`.
+
+### Changed
+- `youtube.html`: the thumbnails load the copies, lazily, with width and height set.
+
+---
+
 ## [2.12.5] - 2026-10-02
 
 ### Changed

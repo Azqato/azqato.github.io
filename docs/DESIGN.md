@@ -1090,10 +1090,14 @@ All images live in `img/` at the project root. Profile and thumbnail images rend
 | File | Size | Referenced by |
 |------|------|---------------|
 | `about-profile.jpg` | 198 KB | `about.html` pitch card avatar |
-| `yt-thumb-azqato.jpg` | 333 KB | `youtube.html` |
-| `yt-thumb-streams.jpg` | 469 KB | `youtube.html` |
-| `yt-thumb-mixes.jpg` | 854 KB | `youtube.html` |
-| `yt-thumb-chills.jpg` | 659 KB | `youtube.html` |
+| `yt-thumb-azqato.jpg` | 333 KB | Kept, no longer referenced (since 2.12.6) |
+| `yt-thumb-azqato-160.webp` | 7.1 KB | `youtube.html` (since 2.12.6) |
+| `yt-thumb-streams.jpg` | 469 KB | Kept, no longer referenced (since 2.12.6) |
+| `yt-thumb-streams-160.webp` | 6.1 KB | `youtube.html` (since 2.12.6) |
+| `yt-thumb-mixes.jpg` | 854 KB | Kept, no longer referenced (since 2.12.6) |
+| `yt-thumb-mixes-160.webp` | 8.9 KB | `youtube.html` (since 2.12.6) |
+| `yt-thumb-chills.jpg` | 659 KB | Kept, no longer referenced (since 2.12.6) |
+| `yt-thumb-chills-160.webp` | 7.3 KB | `youtube.html` (since 2.12.6) |
 | `home-hero-profile.jpg` | 445 KB | Nothing |
 | `logo-cat-avatar.jpg` | 335 KB | Nothing |
 | `music-logo-small.jpg` | 45 KB | Nothing |
@@ -1109,7 +1113,7 @@ All images live in `img/` at the project root. Profile and thumbnail images rend
 >
 > **The ten unreferenced files stay, and this is now a standing rule.** Nothing in `img/` is deleted unless the owner asks for that specific file by name. Unreferenced is the normal state of that folder: it is the owner's working library, not a set of build outputs, and a file being unlinked says nothing about whether it is wanted. Do not raise it as dead weight in a future audit, do not propose a cleanup, and do not delete one while doing unrelated work. The "Referenced by: Nothing" column above is a factual note about the current pages, not a to-do list.
 
-The four `yt-thumb-*.jpg` files are the site's real performance outlier: `youtube.html` is 7.8 KB of HTML that pulls 2.3 MB of images. No lazy-loading attribute is set on them.
+The four `yt-thumb-*.jpg` files are the site's real performance outlier: `youtube.html` is 7.8 KB of HTML that pulls 2.3 MB of images. No lazy-loading attribute is set on them. **Fixed in 2.12.6:** the page now loads 160 px WebP copies (30 KB for all four, from 2.37 MB) with `loading="lazy"`, width and height; the originals stay in `img/`.
 
 ---
 
