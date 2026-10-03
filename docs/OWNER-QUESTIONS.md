@@ -17,7 +17,7 @@ Written 2026-10-03, at the end of the 2026-10-02 build pass (main 2.13.1 to 2.14
 | Q7 | Individual Stocks: "12 metrics" or "10 metrics" | Low |
 | Q8 | `test-local-audio.bat` points at the old music address | Low (local file only) |
 | Q9 | Trailing slash in the new addresses | Low (confirm what's built) |
-| Q10 | The Invests theme button stays in Invests' own bar | Low (confirm what's built) |
+| Q10 | The theme button's place | Resolved 2026-10-03 |
 | Later | 15d, smoke-test script | Saved for later at your request; listed so it isn't lost |
 
 ---
@@ -149,6 +149,8 @@ After you approve, I build it all in one pass, and the inventory check confirms 
 
 ## Q6. Music page: dark only, no theme button (confirm)
 
+- **Update 2026-10-03:** the music page now has the second bar (🎧 Azqato Music and the search), still without a theme button. If you choose B, the button goes into that bar.
+
 - Your answer for item 5 was "the visualizer stays dark". I built that as: **the whole music page stays dark, and it has no theme button** (`data-theme-lock="dark"`). Every other page has the button.
 - The alternative reading: the page follows the theme (light top bar, light footer), and only the visualizer stage stays dark.
 - **Options:** A, keep it as built (recommended; the page is almost entirely the stage, and a light bar over a dark stage looks broken). B, the page follows the theme, and only the stage stays dark.
@@ -178,11 +180,9 @@ After you approve, I build it all in one pass, and the inventory check confirms 
 
 ---
 
-## Q10. The Invests theme button stays in Invests' own bar (confirm)
+## Q10. The theme button's place (resolved 2026-10-03)
 
-- Item 8 said "Invests takes the shared top bar". Invests already had the same slim azqato.com strip at the top, and since 2.14.0 its links come from the same list as the root pages' bar. The ☀️/🌙 button and search stay in Invests' second bar, as before.
-- **Why:** on phones the azqato.com strip is hidden on Invests pages, to save space. A button inside it would vanish on phones.
-- **Options:** A, keep it as built (recommended). B, move the button into the strip on desktop, and keep a second copy in the Invests bar on phones.
+Settled by your 2026-10-03 request: every page except the home page now has the Invests-style second bar, with the page's emoji and name, "Search the site" and the theme button. The top bar shows only "Azqato." and the links. The home page keeps its single bar, with the theme button at its end. Nothing to answer.
 
 ---
 

@@ -20,6 +20,7 @@ To change the nav: edit PAGES below, run the script, review `git diff`, commit.
 """
 
 import argparse
+import json
 import pathlib
 import re
 import sys
@@ -61,12 +62,18 @@ THEME_LOCKED = {'music/index.html'}
 THEME_BUTTON = ('\n        <button class="theme-toggle" type="button" aria-label="Switch theme">'
                 '<span class="theme-toggle-icon" aria-hidden="true"></span></button>')
 
-# Section brands in the top bar. Every other page shows "Azqato."
-BRANDS = {
-    'music/index.html': '🎧 Azqato <span>Music</span>',
-    'codes/index.html': '💻 Azqato <span>Codes</span>',
-}
+# The top bar shows "Azqato." on every page (owner's request, 2026-10-03).
 BRAND_DEFAULT = 'Azqato<span>.</span>'
+
+# The second bar, under the top bar on every page but the home page (owner's
+# request, 2026-10-03: "match the Invests one"): the page's emoji and name,
+# "Search the site", and the theme button. The home page keeps one bar.
+SECTION_NAMES = {
+    'about/index.html': 'About', 'discord/index.html': 'Discord', 'codes/index.html': 'Codes',
+    'music/index.html': 'Music', 'links/index.html': 'Links', 'projects/index.html': 'Projects',
+    'youtube/index.html': 'YouTube', 'support/index.html': 'Support',
+    'accounts/index.html': 'Gaming Accounts', 'privacy-policy/index.html': 'Privacy Policy',
+}
 
 
 def icon_for(filename):
@@ -89,7 +96,9 @@ def href(page, target):
 
 # Everything from the marker through the closing tag is regenerated. Both appear
 # exactly once per page, which is what makes this safe without extra markers.
-BLOCK = re.compile(r'<!-- NAV -->.*?</nav>', re.DOTALL)
+# Since the second bar (2026-10-03) the block ends at <!-- /NAV -->; the second
+# alternative reads a page stamped before then.
+BLOCK = re.compile(r'<!-- NAV -->.*?<!-- /NAV -->|<!-- NAV -->.*?</nav>', re.DOTALL)
 
 TEMPLATE = """<!-- NAV -->
   <nav>
@@ -102,7 +111,21 @@ TEMPLATE = """<!-- NAV -->
         <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
       </div>
     </div>
-  </nav>"""
+  </nav>{sub}
+  <!-- /NAV -->"""
+
+SUB_TEMPLATE = """
+  <div class="site-sub">
+    <a class="site-sub-brand" href="{self}"><span class="site-sub-mark" aria-hidden="true">{icon}</span> Azqato {name}</a>
+    <button class="site-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <span class="site-search-text">Search the site</span>
+      <kbd aria-hidden="true">/</kbd>
+    </button>
+    <div class="site-sub-end">{theme}
+    </div>
+  </div>
+  <script src="{up}search.js" defer></script>"""
 
 # ── The footer ────────────────────────────────────────────
 # Plain crawlable links to every major section (owner's request, 2026-10-02:
@@ -171,7 +194,54 @@ def nav_for(filename):
         for target, label in PAGES
     )
     theme = '' if filename in THEME_LOCKED else THEME_BUTTON
-    return TEMPLATE.format(items=items, home=href(filename, 'index.html'), brand=BRANDS.get(filename, BRAND_DEFAULT), theme=theme)
+    if filename == 'index.html':
+        # The home page: one bar, with the theme button at its end.
+        return TEMPLATE.format(items=items, home='index.html', brand=BRAND_DEFAULT, theme=theme, sub='')
+    sub = SUB_TEMPLATE.format(self='index.html', icon=ICONS.get(filename, ICON_DEFAULT),
+                              name=SECTION_NAMES[filename], up=up(filename),
+                              theme=theme.replace('\n        ', '\n      '))
+    return TEMPLATE.format(items=items, home=href(filename, 'index.html'), brand=BRAND_DEFAULT, theme='', sub=sub)
+
+
+# ── Search ────────────────────────────────────────────────
+# search-index.js, for the second bar's search (search.js): every root page's
+# sections, then Azqato Invests' own index (invests/assets/js/search-index.js,
+# written by tools/invests/site.py) with its addresses moved under invests/.
+# Same format as Invests' index: pages [{u, t, g}], entries [{p, h, a, x}].
+def search_index(root):
+    from bs4 import BeautifulSoup
+    pages, entries = [], []
+    for name in ['index.html'] + list(SECTION_NAMES):
+        soup = BeautifulSoup((root / name).read_text(encoding='utf-8'), 'html.parser')
+        body = soup.body
+        for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas'):
+            x.decompose()
+        label = 'Home' if name == 'index.html' else SECTION_NAMES[name]
+        pi = len(pages)
+        pages.append({'u': name, 't': label, 'g': 'Azqato.com'})
+        h1 = body.find('h1')
+        head, text = (h1.get_text(' ', strip=True) if h1 else label), []
+        anchor = ''
+        for el in body.find_all(['h2', 'p', 'li', 'h3', 'td']):
+            if el.name == 'h2':
+                entries.append({'p': pi, 'h': head, 'a': anchor, 'x': ' '.join(text)[:600]})
+                head, anchor, text = el.get_text(' ', strip=True), el.get('id', ''), []
+            elif not el.find(['p', 'li']):
+                t = el.get_text(' ', strip=True)
+                if t:
+                    text.append(t)
+        entries.append({'p': pi, 'h': head, 'a': anchor, 'x': ' '.join(text)[:600]})
+    inv = (root / 'invests/assets/js/search-index.js').read_text(encoding='utf-8')
+    inv = json.loads(inv[inv.index('{'):inv.rindex('}') + 1])
+    off = len(pages)
+    for pg in inv['pages']:
+        pages.append({'u': 'invests/' + pg['u'], 't': pg['t'],
+                      'g': 'Azqato Invests' + ('' if pg['g'] == 'Home' else ' / ' + pg['g'])})
+    for e in inv['entries']:
+        entries.append(dict(e, p=e['p'] + off))
+    return ('// Generated by tools/build-nav.py: every page\'s sections, for the site search (search.js).\n'
+            'window.SITE_INDEX = ' + json.dumps({'pages': pages, 'entries': entries}, ensure_ascii=False,
+                                                separators=(',', ':')) + ';\n')
 
 
 def main():
@@ -217,6 +287,13 @@ def main():
 
     for name in skipped:
         print('skipped (no NAV marker): %s' % name)
+
+    idx_path = root / 'search-index.js'
+    idx = search_index(root)
+    if not idx_path.exists() or idx_path.read_text(encoding='utf-8') != idx:
+        changed.append('search-index.js')
+        if not args.check:
+            idx_path.write_text(idx, encoding='utf-8', newline='\n')
 
     if not changed:
         print('nav and footer are up to date in every page')

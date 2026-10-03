@@ -257,6 +257,232 @@ nav {
   .site-footer-in { padding: 1.25rem 1rem 1.75rem; }
 }
 
+/* ── SECOND BAR AND SEARCH ── */
+/* Under the top bar on every page but the home page (owner's request,
+   2026-10-03): the page's emoji and name, "Search the site" and the theme
+   button, matching Azqato Invests' bar. As on Invests, the top bar scrolls
+   away and this bar stays. */
+nav:has(+ .site-sub) { position: relative; }
+
+.site-sub {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 60px;
+  padding: 0 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-sub-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  width: 236px;
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.site-sub-mark { font-size: 1.35rem; line-height: 1; }
+
+.site-search-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 1 420px;
+  min-width: 0;
+  height: 40px;
+  padding: 0 10px 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.site-search-btn:hover { border-color: var(--accent); color: var(--text); }
+
+.site-search-btn svg,
+.site-search-box > svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.site-search-text {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.site-search-btn kbd,
+.site-search kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.75rem;
+}
+
+.site-sub-end {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.site-vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.site-search {
+  width: min(640px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(560px, calc(100vh - 112px));
+  margin: 80px auto auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  color: var(--text);
+}
+
+.site-search[open] { display: flex; flex-direction: column; }
+.site-search::backdrop { background: rgba(13, 17, 23, 0.55); }
+
+.site-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  height: 60px;
+  padding: 0 12px 0 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.site-search-input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 1.05rem;
+}
+
+.site-search-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+.site-search-input::placeholder { color: var(--text-muted); }
+
+.site-search-close {
+  flex: none;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.site-results-head {
+  flex: none;
+  padding: 12px 20px 4px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.site-results {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 4px 8px 8px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.site-result {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.site-result[aria-selected="true"] {
+  background: var(--card-hover);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.site-r-crumb { color: var(--text-muted); font-size: 0.75rem; }
+.site-r-title { color: var(--text); font-weight: 600; }
+.site-r-snip { color: var(--text-muted); font-size: 0.875rem; line-height: 1.5; }
+
+.site-search mark {
+  padding: 0 1px;
+  border-radius: 2px;
+  background: rgba(0, 212, 160, 0.25);
+  color: inherit;
+}
+
+.site-search-empty { padding: 12px 20px 20px; }
+
+.site-search-foot {
+  flex: none;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .site-sub { gap: 12px; padding: 0 16px; }
+  .site-sub-brand { width: auto; min-width: 0; }
+  .site-search-btn {
+    flex: none;
+    width: 40px;
+    margin-left: auto;
+    padding: 0;
+    justify-content: center;
+    background: transparent;
+  }
+  .site-search-text { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .site-search-btn kbd { display: none; }
+  .site-sub-end { margin-left: 0; }
+  .site-search { width: calc(100vw - 16px); max-height: calc(100vh - 24px); margin-top: 12px; }
+  .site-search-foot { display: none; }
+}
+
 /* ── NAV RESPONSIVE ── */
 @media (max-width: 860px) {
   .nav-toggle { display: block; }

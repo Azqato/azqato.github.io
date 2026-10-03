@@ -768,6 +768,8 @@ D8 borrows help-center's searchable FAQ and step-by-step guides, admin-dashboard
 
 #### Theme button
 
+**Moved 2026-10-03 (2.14.2, owner's request):** on every page except the home page, the theme button sits in the second bar, which matches Invests: the page's emoji and name (for example "💻 Azqato Codes"), "Search the site" (`/search.js`, which searches every root page and every Invests section through `/search-index.js`; both are written by `tools/build-nav.py`) and the theme button. The top bar shows only "Azqato." and the links, and scrolls away while the second bar stays. The home page keeps one bar, with the theme button at its end. The music page's second bar has no button (it stays dark).
+
 **Moved 2026-10-02 (2.13.7):** the script is now `/theme.js`, shared by every page on azqato.com and Invests. The saved choice is under `azqato-theme` (Invests' old `azqato-invests-theme` still counts). On the root pages the button sits at the end of the slim top bar, beside ☰ on phones.
 
 **Built 2026-10-02 (P2):** assets/js/theme.js. It starts in the visitor's system theme, saves the choice in the visitor's browser, sets the theme in the head before the page draws, and shows the theme it switches to: ☀️ while dark, 🌙 while light, which is Template Interface's convention. Its accessible name says the action ("Switch to light theme").

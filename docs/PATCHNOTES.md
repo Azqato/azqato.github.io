@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.14.2] - 2026-10-02
+
+### Changed
+- Every page except the home page now has a second bar that matches Azqato Invests (owner's request):
+the page's emoji and name (for example "💻 Azqato Codes"), "Search the site" and the theme button. The
+top bar shows only "Azqato." and the links. The home page keeps its single bar.
+
+### Added
+- `search.js` and the generated `search-index.js`: a site search over every root page and every Invests
+section. Opens with the button, "/" or Ctrl+K. `tools/build-nav.py` writes the index and the bar.
+- `docs/OWNER-QUESTIONS.md`: every open question for the owner, in detail.
+
+---
+
 ## [2.14.1] - 2026-10-02
 
 ### Added
