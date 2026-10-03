@@ -2,7 +2,7 @@
 
 Run from anywhere: python scripts/browser.py [--shots DIR]
 Needs Python 3 with Playwright (pip install playwright) and Edge installed
-(Browser Testing in docs/PRD.md: Edge, never Chrome). Serves the folder on a
+(Browser Testing in ../docs/PRD.md (Part 2): Edge, never Chrome). Serves the folder on a
 free local port from a thread, so no server is left running afterwards.
 Reads the site only; writes screenshots when --shots is given.
 

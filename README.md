@@ -15,7 +15,7 @@ The site is twelve pages, each doing one job.
 | **Home** | A short introduction to Azqato across gaming, streaming, investing, music, and web development, plus a grid of links into every other part of the site. |
 | **About** | The longer story: how a love of gaming turned into content creation, the B5TA community, and building things for people to use. |
 | **Discord** | Four community servers with permanent invite links: the main Azqato server, an investing server, the B5TA RuneScape clan, and a League of Legends server. Pick the one that matches your interests and join. |
-| **Invests** | Free investing tools Azqato built, alongside a large hand-picked hub of brokers, screeners, ETF lists, charts, economic data, and learning resources. Nothing here is financial advice. |
+| **Invests** | Azqato Invests, a free investing site at [azqato.com/invests](https://azqato.com/invests/): stock-picking guides and a stock screener, index and ETF methodology with a market overview, a VIX strategy with its dashboard and custom builder, write-ups of six leveraged strategies, and a hand-picked hub of brokers, screeners, ETF lists, charts, economic data, and learning resources, with setup guides and an FAQ. Light and dark themes, search across every page. Nothing here is financial advice. |
 | **Codes** | Prompt libraries and browser-based coding tools for working faster with AI. |
 | **Music** | An animated concert-stage visualizer, a remix you can play in the page that the stage lights genuinely react to, down to the kick, two more DJ mixes, and links to Last.fm, Mixcloud, and the mixes channel on YouTube. |
 | **Links** | Every platform and channel Azqato is on, grouped by category, in one tidy list. |
@@ -33,7 +33,7 @@ Everything on the site is free. The site's own code collects nothing about you: 
 
 - **People who found Azqato through Twitch, YouTube, Discord, or the B5TA RuneScape clan** and want to know where the community lives and what else he makes.
 - **Developers and recruiters** arriving from a GitHub link who want to see the range of projects quickly and open a live demo without cloning anything.
-- **New and experienced investors** looking for the free tools and the curated resource hub on the Invests page.
+- **New and experienced investors** looking for the free tools, the strategy write-ups, and the curated resource hub on Azqato Invests.
 
 ---
 

@@ -2,7 +2,7 @@
 
 Run from anywhere: python scripts/check.py
 Checks every site page (*.html outside _sources/, inventory/ and docs/):
-  - a title that follows Page Titles in docs/PRD.md (brand suffix, 60 characters,
+  - a title that follows Page Titles in ../docs/PRD.md (Part 2) (brand suffix, 60 characters,
     first 30 characters unique, no placeholders; Home leads with the brand);
   - internal links and assets resolve to files;
   - no template demo text survives;
