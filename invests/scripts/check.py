@@ -91,10 +91,36 @@ def found(item, have, ids):
     return not text or text in have
 
 
+REFRESH = re.compile(r'http-equiv="refresh" content="0; url=([^"#]*)(#[^"]*)?"')
+
+
 def pages():
+    """Site pages. A retired address (site.py's MOVED) is a redirect page; it's
+    checked by redirects() instead."""
     for p in sorted(ROOT.rglob("*.html")):
-        if not SKIP_DIRS & set(p.relative_to(ROOT).parts):
+        if not SKIP_DIRS & set(p.relative_to(ROOT).parts) and not REFRESH.search(p.read_text(encoding="utf-8")):
             yield p
+
+
+def redirects():
+    """Each redirect page must reach an existing page and section in one hop."""
+    fails = []
+    for p in sorted(ROOT.rglob("*.html")):
+        if SKIP_DIRS & set(p.relative_to(ROOT).parts):
+            continue
+        t = p.read_text(encoding="utf-8")
+        m = REFRESH.search(t)
+        if not m:
+            continue
+        target = (p.parent / m.group(1)).resolve()
+        rel = p.relative_to(ROOT).as_posix()
+        if not target.exists():
+            fails.append(f"{rel}: redirects to a missing page {m.group(1)}")
+        elif REFRESH.search(target.read_text(encoding="utf-8")):
+            fails.append(f"{rel}: redirects to another redirect {m.group(1)}")
+        elif m.group(2) and f'id="{m.group(2)[1:]}"' not in target.read_text(encoding="utf-8"):
+            fails.append(f"{rel}: target has no section {m.group(2)}")
+    return fails
 
 
 def main():
@@ -146,6 +172,7 @@ def main():
             if missing:
                 fails.append(f"{src}: {len(missing)} inventory items not found on {', '.join(targets)} (first: #{missing[0]['n']} {missing[0]['text'][:60]!r})")
 
+    fails += redirects()
     n = len(parsed)
     for line in notes:
         print("note:", line)

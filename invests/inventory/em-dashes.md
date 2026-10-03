@@ -62,20 +62,20 @@ with its place, the text around it and what replaced it. Lone dashes that stand 
 | vix/index.html | nding can overcome             that decay (em dash) provided the underlying index continues | `-` |
 | vix/index.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
 | vix/index.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |
+| vix/index.html | (em dash) SPDR Bloomberg 1–3 Month T-Bill ETF. Nea | `-` |
+| vix/index.html | (em dash) SPDR S&P 500 ETF. Broad market exposure. | `-` |
+| vix/index.html | (em dash) Invesco Nasdaq-100 ETF. Growth and tech | `-` |
+| vix/index.html | (em dash) ProShares UltraPro QQQ 3× Leveraged ETF. | `-` |
+| vix/index.html | crosses             into a different tier (em dash) either up or down. | `-` |
+| vix/index.html | Free-text entry (em dash) tickers are not yet verified against a l | `-` |
+| vix/index.html | d percentage weights as the core strategy (em dash)         only the ticker per category changes. Re | `-` |
 | vix/index.html (inline script) | const SHORT_LABELS = {     tier1: 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate | `-` |
 | vix/index.html (inline script) | : 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Ele | `-` |
 | vix/index.html (inline script) | er 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) Hig | `-` |
 | vix/index.html (inline script) | er 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme | `-` |
 | vix/index.html (inline script) | 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme Fear',   };   const TIER_CLASSES | `-` |
 | vix/index.html (inline script) | t-known value from localStorage instantly (em dash) no network wait     const cached = getCa | `-` |
-| vix/dashboard.html | (em dash) SPDR Bloomberg 1–3 Month T-Bill ETF. Nea | `-` |
-| vix/dashboard.html | (em dash) SPDR S&P 500 ETF. Broad market exposure. | `-` |
-| vix/dashboard.html | (em dash) Invesco Nasdaq-100 ETF. Growth and tech | `-` |
-| vix/dashboard.html | (em dash) ProShares UltraPro QQQ 3× Leveraged ETF. | `-` |
-| vix/dashboard.html | crosses             into a different tier (em dash) either up or down. | `-` |
-| vix/dashboard.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
-| vix/dashboard.html (inline script) | allocation, cached.value);   }    // Boot (em dash) this script tag sits at the end of the b | `-` |
-| vix/dashboard.html (inline script) | {     paintCached();          // instant (em dash) zero network wait     await refresh(); | `-` |
-| vix/custom.html | Free-text entry (em dash) tickers are not yet verified against a l | `-` |
-| vix/custom.html | d percentage weights as the core strategy (em dash)         only the ticker per category changes. Re | `-` |
-| vix/custom.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
+| vix/index.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
+| vix/index.html (inline script) | allocation, cached.value);   }    // Boot (em dash) this script tag sits at the end of the b | `-` |
+| vix/index.html (inline script) | {     paintCached();          // instant (em dash) zero network wait     await refresh(); | `-` |
+| vix/index.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |

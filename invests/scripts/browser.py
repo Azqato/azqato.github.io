@@ -13,7 +13,7 @@ links; the tools load live data; and each data feed's fallback works when the
 feed is blocked. Exits 1 if any check fails.
 """
 import functools, http.server, importlib.util, pathlib, socketserver, sys, threading
-import sys
+import re
 sys.stdout.reconfigure(encoding="utf-8")  # notes quote page text (for example ↻); Windows' console encoding can't print it
 sys.dont_write_bytecode = True
 from playwright.sync_api import sync_playwright
@@ -222,8 +222,21 @@ def tool_tests(ctx, base):
     print("market:", txt[:200].replace("\n", " "), flush=True)
     notes.append("market overview: " + " ".join(txt.split())[:160])
     p.close()
-    for path in ("vix/dashboard.html", "vix/custom.html", "vix/index.html"):
+    # One VIX page since 2.13.6 (build pass item 12): the strategy, the Dashboard
+    # (#dashboard) and the Custom builder (#custom, its ids prefixed "custom-").
+    for path in ("vix/index.html",):
         p = load(ctx, base, path, "dark", DESKTOP, wait=5000)
+        for sel in ("#vix-value", "#custom-vix-value"):
+            v = p.inner_text(sel).strip()
+            if not re.match(r"^\d+\.\d\d$", v):
+                fail(f"{path}: {sel} shows {v!r}, not a reading")
+        for cv in ("allocationChart", "custom-allocationChart"):
+            if not p.evaluate(f"!!(window.Chart && Chart.getChart('{cv}'))"):
+                fail(f"{path}: chart {cv} didn't draw")
+        rows = p.evaluate("[document.querySelectorAll('#allocation-tbody tr').length, document.querySelectorAll('#custom-allocation-tbody tr').length]")
+        if min(rows) < 1:
+            fail(f"{path}: allocation tables {rows}")
+        notes.append(f"{path}: readings {p.inner_text('#vix-value')} / {p.inner_text('#custom-vix-value')}; table rows {rows}")
         data = p.evaluate("JSON.stringify(window.__VIX_DATA__ || null)")
         cached = p.evaluate("localStorage.getItem('vix_last_known')")
         print(f"{path}: __VIX_DATA__ {data}; cache {cached}", flush=True)
@@ -249,10 +262,10 @@ def fallback_tests(browser, base):
     notes.append("market overview, raw GitHub blocked: " + " ".join(p.inner_text("#pp-article").split())[:160])
     p.close()
     ctx.close()
-    # VIX: block the vix.js feed; vix.js falls back to allorigins, then the cache.
+    # VIX: block the vix.js feed; vix.js falls back to vix.json on raw GitHub, then the cache.
     ctx = browser.new_context()
     ctx.route("https://azqato.github.io/vix/data/vix.js*", lambda r: r.abort())
-    p = load(ctx, base, "vix/dashboard.html", "dark", DESKTOP, blocked=True, wait=12000)
+    p = load(ctx, base, "vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
     notes.append("VIX dashboard, feed blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
     p.close()
     ctx.close()
@@ -261,7 +274,7 @@ def fallback_tests(browser, base):
     ctx.route("https://azqato.github.io/**", lambda r: r.abort())
     ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
     ctx.route("https://api.allorigins.win/**", lambda r: r.abort())
-    p = load(ctx, base, "vix/dashboard.html", "dark", DESKTOP, blocked=True, wait=12000)
+    p = load(ctx, base, "vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
     notes.append("VIX dashboard, all feeds blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
     p.close()
     p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, blocked=True, wait=8000)

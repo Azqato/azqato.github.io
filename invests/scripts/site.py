@@ -36,8 +36,6 @@ PAGES = [
     ("indices/index.html", "stocks/indices.html", "Indices & ETFs", "Indices & ETFs", "doc", None),
     ("indices/market.html", "stocks/market.html", "Market Overview", "Indices & ETFs", "tool", "indices/index.html"),
     ("vix/index.html", "vix/index.html", "VIX Strategy", "VIX Strategy", "doc", None),
-    ("vix/dashboard.html", "vix/strategy.html", "VIX Dashboard", "VIX Strategy", "tool", "vix/index.html"),
-    ("vix/custom.html", "vix/custom.html", "VIX Custom builder", "VIX Strategy", "tool", "vix/index.html"),
     ("leveraged/index.html", "leverage/index.html", "Leveraged Strategies", "Leveraged Strategies", "doc", None),
     ("leveraged/3sig.html", "leverage/3sig.html", "3 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("leveraged/6sig.html", "leverage/6sig.html", "6 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
@@ -74,6 +72,24 @@ for path, src, *_ in PAGES:
     if name == "index.html":
         LINKS[("abs", f"https://azqato.github.io/{repo}/")] = path
         LINKS[("abs", f"https://azqato.github.io/{repo}")] = path
+# One VIX page (P16, build pass item 12, 2026-10-02). The VIX Dashboard and the
+# VIX Custom builder are sections of vix/index.html, in this order, after the
+# strategy. Each tuple: source, section id, heading. The Custom builder shares
+# element ids with the Dashboard, so its ids in COMBINE_RENAME get a "custom-"
+# prefix, in its markup and in its inline script.
+COMBINE = {"vix/index.html": [("vix/strategy.html", "dashboard", "VIX Dashboard"),
+                              ("vix/custom.html", "custom", "VIX Custom builder")]}
+COMBINE_RENAME = {"custom": ["active-tier", "allocation-breakdown", "allocation-table", "allocation-tbody", "allocationChart",
+                             "chart-legend", "chart-section", "refresh-btn", "tier-banner", "vix-feed", "vix-status",
+                             "vix-timestamp", "vix-value"]}
+# Retired page addresses, each now a redirect page to its new place (Invests:
+# Deprecation and Removal). Never reuse these addresses for other content.
+MOVED = {"vix/dashboard.html": "vix/index.html#dashboard", "vix/custom.html": "vix/index.html#custom"}
+for _page, _parts in COMBINE.items():
+    for _src, _sid, _ in _parts:
+        _repo, _name = _src.split("/")
+        LINKS[(_repo, _name)] = f"{_page}#{_sid}"
+        LINKS[("abs", f"https://azqato.github.io/{_repo}/{_name}")] = f"{_page}#{_sid}"
 for u in ("https://azqato.com/invests", "https://azqato.github.io/invests.html"):
     LINKS[("abs", u)] = "index.html"
 COMPOSER_OLD = re.compile(r"^https://azqato\.github\.io/composer/?(.*)$")
@@ -222,7 +238,7 @@ def map_href(href, repo, page):
         key = ("abs", base.rstrip("/") if base.rstrip("/") + "/" != base or ("abs", base) not in LINKS else base)
         for k in (("abs", base), ("abs", base.rstrip("/"))):
             if k in LINKS:
-                return rel(page, LINKS[k]) + frag
+                return link_to(page, LINKS[k], frag)
         return href
     if repo == "azqato.github.io":
         name = base[:-5] if base.endswith(".html") else base
@@ -232,10 +248,17 @@ def map_href(href, repo, page):
             return rel(page, "index.html") + frag
         return f"https://azqato.com/{name}{frag}"
     if (repo, base) in LINKS:
-        return rel(page, LINKS[(repo, base)]) + frag
+        return link_to(page, LINKS[(repo, base)], frag)
     if base == "" and frag:
         return frag
     return href
+
+
+def link_to(page, target, frag):
+    """A link to a page that may be a section of another (COMBINE): the link's
+    own #fragment wins, otherwise the section's."""
+    path, _, sec = target.partition("#")
+    return rel(page, path) + (frag or ("#" + sec if sec else ""))
 
 
 def slug(text, used):
@@ -864,11 +887,9 @@ def build_page(entry, search):
         h1 = wrap.find("h1")
         anchor = h1.find_parent("section") or h1
         anchor.insert_after(BeautifulSoup(FAQ_FILTER, "html.parser"))
+    for src2, sid, heading in COMBINE.get(page, []):
+        scripts, styles = combine_part(page, wrap, src2, sid, heading, scripts, styles)
     notes = merge_footers(wrap, repo)
-    if page == "vix/custom.html":
-        # The reading and tier first (UI review), then the ticker inputs, then the
-        # chart and table they drive (author's request, 2026-10-02).
-        wrap.find(id="chart-section").insert_before(wrap.find(id="customize").extract())
     dash_tree(wrap, page)
     ensure_ids(wrap)
     title = TITLES.get(page, f"{label} - {BRAND}")
@@ -900,6 +921,57 @@ def build_page(entry, search):
     index_page(page, label, group, wrap, search)
 
 
+def combine_part(page, wrap, src, sid, heading, scripts, styles):
+    """Append another source page to this one as a section (COMBINE)."""
+    soup, body, scripts2, styles2, _ = extract(src, page)
+    part = soup.new_tag("section", attrs={"class": "site-part", "id": sid, "aria-labelledby": f"{sid}-title"})
+    for n in list(body.children):
+        part.append(n.extract())
+    if sid == "custom":
+        # The reading and tier first (UI review), then the ticker inputs, then the
+        # chart and table they drive (author's request, 2026-10-02).
+        part.find(id="chart-section").insert_before(part.find(id="customize").extract())
+    rename = COMBINE_RENAME.get(sid, [])
+    for el in part.find_all(id=True):
+        if el["id"] in rename:
+            el["id"] = f"{sid}-{el['id']}"
+    for attr in ("for", "aria-labelledby", "aria-describedby", "aria-controls", "href"):
+        for el in part.find_all(attrs={attr: True}):
+            v = el[attr]
+            if attr == "href":
+                if v.startswith("#") and v[1:] in rename:
+                    el[attr] = f"#{sid}-{v[1:]}"
+            else:
+                el[attr] = " ".join(f"{sid}-{x}" if x in rename else x for x in v.split())
+    # One h1 per page: the part's h1 becomes its h2 and the rest move down a level.
+    for lvl in (5, 4, 3, 2):
+        for h in part.find_all(f"h{lvl}"):
+            h.name = f"h{lvl + 1}"
+    h1 = part.find("h1")
+    if h1:
+        h1.name = "h2"
+        h1["id"] = f"{sid}-title"
+    else:
+        h = soup.new_tag("h2", attrs={"id": f"{sid}-title"})
+        h.string = heading
+        part.insert(0, h)
+    wrap.append(part)
+    seen = {x["src"] for x in scripts if x["src"]}
+    for x in scripts2:
+        if x["src"]:
+            if x["src"] in seen:
+                continue
+            seen.add(x["src"])
+        elif rename:
+            js = x["body"]
+            for r in rename:
+                js = js.replace(f"getElementById('{r}')", f"getElementById('{sid}-{r}')")
+            js = js.replace("initChart('allocationChart'", f"initChart('{sid}-allocationChart'")
+            x = dict(x, body=js)
+        scripts.append(x)
+    return scripts, styles + [x for x in styles2 if x not in styles]
+
+
 def merge_footers(wrap, repo):
     """One footer per page (UI review). The source footers that only repeat the
     site footer ("Built by Azqato", "Educational use only. Not financial advice.")
@@ -917,7 +989,15 @@ def merge_footers(wrap, repo):
             disc.decompose()
         elif not f.select_one(".footer-cta"):
             f["class"] = f.get("class", []) + ["site-dup"]
-    return "".join("\n    " + n for n in notes)
+    # A combined page (COMBINE) carries each source's footer: a repeat of an
+    # earlier one stays in the page, hidden like the other duplicates.
+    seen = set()
+    for f in wrap.select(".src-footer"):
+        t = f.get_text(" ", strip=True)
+        if t in seen and "site-dup" not in f.get("class", []):
+            f["class"] = f.get("class", []) + ["site-dup"]
+        seen.add(t)
+    return "".join("\n    " + n for n in dict.fromkeys(notes))
 
 
 def index_page(page, label, group, wrap, search):
@@ -931,6 +1011,24 @@ def index_page(page, label, group, wrap, search):
         elif el.name != "h1" and not el.find(["p", "li", "td", "dt", "dd"]):
             entry["x"] += " " + el.get_text(" ", strip=True)
     search["entries"].append(entry)
+
+
+REDIRECT_PAGE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moved - {brand}</title>
+<!-- Generated by scripts/site.py (MOVED). This address moved; never reuse it. -->
+<link rel="canonical" href="{canonical}">
+<meta http-equiv="refresh" content="0; url={url}">
+<script>location.replace("{url}");</script>
+</head>
+<body>
+<p>This page moved: <a href="{url}">{url}</a>.</p>
+</body>
+</html>
+"""
 
 
 def main():
@@ -954,8 +1052,14 @@ def main():
                                       + urls + "</urlset>\n", encoding="utf-8", newline="\n")
     mp = {}
     for path, src, *_ in PAGES:
-        repo, name = src.split("/")
-        mp.setdefault(f"{repo}-{name[:-5]}.json", []).append(path)
+        for s2 in [src] + [c[0] for c in COMBINE.get(path, [])]:
+            repo, name = s2.split("/")
+            mp.setdefault(f"{repo}-{name[:-5]}.json", []).append(path)
+    for old, new in MOVED.items():
+        target, sec = new.split("#")
+        url = rel(old, target) + "#" + sec
+        (ROOT / old).write_text(REDIRECT_PAGE.format(brand=BRAND, canonical=page_url(target), url=url),
+                                encoding="utf-8", newline="\n")
     (ROOT / "inventory/map.json").write_text(json.dumps(mp, indent=1) + "\n", encoding="utf-8", newline="\n")
     lines = ["# Em dashes replaced", "", "Generated by scripts/site.py (Question 14). Each em dash used as punctuation in moved text,",
              "with its place, the text around it and what replaced it. Lone dashes that stand for a missing value are kept.", "",

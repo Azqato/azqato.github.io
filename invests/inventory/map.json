@@ -25,10 +25,10 @@
   "vix/index.html"
  ],
  "vix-strategy.json": [
-  "vix/dashboard.html"
+  "vix/index.html"
  ],
  "vix-custom.json": [
-  "vix/custom.html"
+  "vix/index.html"
  ],
  "leverage-index.json": [
   "leveraged/index.html"

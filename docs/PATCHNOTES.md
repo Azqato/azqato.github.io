@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.6] - 2026-10-02
+
+### Changed
+- Azqato Invests: one VIX page (build pass, item 12). `/invests/vix/` now holds the strategy, the VIX
+Dashboard (`#dashboard`) and the VIX Custom builder (`#custom`), with nothing cut. The old Dashboard and
+Custom builder addresses redirect to their sections. Invests has 19 pages.
+- `invests/scripts/site.py`: `COMBINE`, `COMBINE_RENAME` and `MOVED`; `check.py` verifies redirect
+pages; `browser.py` tests both tools on the one page.
+- `docs/PRD.md` Part 2, P16 and Invests: Deprecation and Removal.
+
+---
+
 ## [2.13.5] - 2026-10-02
 
 ### Changed
