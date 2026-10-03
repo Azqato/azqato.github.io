@@ -5,6 +5,16 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.15.1] - 2026-10-03
+
+### Changed
+- VIX Strategy is one page again, at `invests/indices/vix/` (owner's request): the VIX method page is
+folded back in, so the method, the dashboard, the custom builder and the risk notes sit together.
+`invests/vix/`, `vix/method.html`, `vix/dashboard.html` and `vix/custom.html` redirect straight
+there (redirect pages, plus 301s in `_redirects`).
+
+---
+
 ## [2.15.0] - 2026-10-03
 
 The owner's answers to docs/OWNER-QUESTIONS.md.

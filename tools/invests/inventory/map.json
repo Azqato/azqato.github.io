@@ -24,14 +24,13 @@
   "indices/market.html"
  ],
  "vix-index.json": [
-  "vix/index.html",
-  "vix/method.html"
+  "indices/vix/index.html"
  ],
  "vix-strategy.json": [
-  "vix/index.html"
+  "indices/vix/index.html"
  ],
  "vix-custom.json": [
-  "vix/index.html"
+  "indices/vix/index.html"
  ],
  "leverage-index.json": [
   "leveraged/index.html"

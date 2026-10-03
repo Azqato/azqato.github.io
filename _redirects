@@ -17,3 +17,8 @@
 /projects.html  /projects/  301
 /support.html  /support/  301
 /youtube.html  /youtube/  301
+# VIX Strategy moved into Indices & ETFs (2.15.1). Its dashboard and custom
+# addresses keep their redirect pages, which carry the #section.
+/invests/vix/              /invests/indices/vix/  301
+/invests/vix/index.html    /invests/indices/vix/  301
+/invests/vix/method.html   /invests/indices/vix/  301

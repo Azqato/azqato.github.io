@@ -230,7 +230,7 @@ def tool_tests(ctx, base):
     p.close()
     # One VIX page since 2.13.6 (build pass item 12): the strategy, the Dashboard
     # (#dashboard) and the Custom builder (#custom, its ids prefixed "custom-").
-    for path in ("vix/index.html",):
+    for path in ("indices/vix/index.html",):
         p = load(ctx, base, path, "dark", DESKTOP, wait=5000)
         for sel in ("#vix-value", "#custom-vix-value"):
             v = p.inner_text(sel).strip()
@@ -271,7 +271,7 @@ def fallback_tests(browser, base):
     # VIX: block the vix.js feed; vix.js falls back to vix.json on raw GitHub, then the cache.
     ctx = browser.new_context()
     ctx.route("https://azqato.github.io/vix/data/vix.js*", lambda r: r.abort())
-    p = load(ctx, base, "vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
+    p = load(ctx, base, "indices/vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
     notes.append("VIX dashboard, feed blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
     p.close()
     ctx.close()
@@ -280,7 +280,7 @@ def fallback_tests(browser, base):
     ctx.route("https://azqato.github.io/**", lambda r: r.abort())
     ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
     ctx.route("https://api.allorigins.win/**", lambda r: r.abort())
-    p = load(ctx, base, "vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
+    p = load(ctx, base, "indices/vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
     notes.append("VIX dashboard, all feeds blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
     p.close()
     p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, blocked=True, wait=8000)

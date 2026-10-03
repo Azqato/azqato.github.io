@@ -13,7 +13,7 @@
 
   var me = document.currentScript;
   var ROOT = me ? me.getAttribute("src").replace(/search\.js$/, "") : "";
-  var POPULAR = ["invests/stocks/screener.html", "invests/vix/index.html", "projects/index.html", "discord/index.html"];
+  var POPULAR = ["invests/stocks/screener.html", "invests/indices/vix/index.html", "projects/index.html", "discord/index.html"];
 
   var openBtn = document.querySelector(".site-search-btn");
   if (!openBtn) return;

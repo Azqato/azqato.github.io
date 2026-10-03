@@ -146,7 +146,7 @@ FOOTER_INVESTS = [
     ('invests/index.html', 'Azqato Invests'),
     ('invests/stocks/index.html', 'Individual Stocks'),
     ('invests/indices/index.html', 'Indices & ETFs'),
-    ('invests/vix/index.html', 'VIX Strategy'),
+    ('invests/indices/vix/index.html', 'VIX Strategy'),
     ('invests/leveraged/index.html', 'Leveraged Strategies'),
     ('invests/resources/index.html', 'Investing Resources'),
 ]

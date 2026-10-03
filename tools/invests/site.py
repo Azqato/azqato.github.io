@@ -41,10 +41,9 @@ PAGES = [
     ("indices/index.html", "stocks/indices.html", "Indices & ETFs", "Indices & ETFs", "doc", None),
     ("indices/method.html", "stocks/indices.html", "Index method", "Indices & ETFs", "doc", "indices/index.html"),
     ("indices/market.html", "stocks/market.html", "Market Overview", "Indices & ETFs", "tool", "indices/index.html"),
-    # VIX Strategy is one page since P16, so it sits in Indices & ETFs (owner's
-    # request, 2026-10-03). Its address is unchanged.
-    ("vix/index.html", "vix/index.html", "VIX Strategy", "Indices & ETFs", "doc", "indices/index.html"),
-    ("vix/method.html", "vix/index.html", "VIX method", "Indices & ETFs", "doc", "vix/index.html"),
+    # VIX Strategy is one page in Indices & ETFs, at indices/vix/ (owner's
+    # requests, 2026-10-03). Its method stays on the page; no separate Method page.
+    ("indices/vix/index.html", "vix/index.html", "VIX Strategy", "Indices & ETFs", "doc", "indices/index.html"),
     ("leveraged/index.html", "leverage/index.html", "Leveraged Strategies", "Leveraged Strategies", "doc", None),
     ("leveraged/3sig.html", "leverage/3sig.html", "3 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("leveraged/6sig.html", "leverage/6sig.html", "6 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
@@ -68,8 +67,7 @@ TITLES.update({
     "stocks/philosophy.html": f"Stock Investing Philosophy - {BRAND}",
     "stocks/screener.html": f"Stock Screener: Nasdaq 100, S&P 500 - {BRAND}",
     "indices/method.html": f"Index & ETF Method: When to Buy - {BRAND}",
-    "vix/index.html": f"VIX Strategy: Fear Is a Signal - {BRAND}",
-    "vix/method.html": f"VIX Strategy Method: 5 Tiers - {BRAND}",
+    "indices/vix/index.html": f"VIX Strategy: Fear Is a Signal - {BRAND}",
     "leveraged/3sig.html": f"3 Sig Leveraged ETF Strategy - {BRAND}",
     "leveraged/6sig.html": f"6 Sig Leveraged ETF Strategy - {BRAND}",
     "leveraged/9sig.html": f"9 Sig Leveraged ETF Strategy - {BRAND}",
@@ -88,7 +86,6 @@ DESCS = {
     "indices/index.html": "When to buy index funds and ETFs: VIX action levels, AAII sentiment, RSI timing, DCA vs lump-sum math, and quality metrics like expense ratio.",
     "indices/method.html": "The index and ETF method in full: fund types, DCA vs lump sum, the VIX, RSI and 52-week timing, AAII sentiment, and fund quality.",
     "indices/market.html": "A same-day market snapshot: major indices, factor and sector ETFs, commodities, Treasury yields, leveraged ETFs and crypto, refreshed three times a trading day.",
-    "vix/method.html": "Why buy-and-hold struggles, why the VIX is mean-reverting, and the 5 VIX tiers that set the 4-ETF allocation.",
     "leveraged/3sig.html": "The 3 Sig quarterly value-averaging strategy by Jason Kelly: a 3% quarterly target manages a stock index fund against a bond buffer.",
     "leveraged/tqqq-ftlt.html": "TQQQ For The Long Term: a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ and TLT.",
     "resources/faq.html": "37 practical answers on long-term stock investing: when to sell, how many stocks to hold, PEG vs P/E, VIX timing, DCA vs lump sum and IPO timing.",
@@ -122,14 +119,16 @@ for path, src, *_ in PAGES:
 # strategy. Each tuple: source, section id, heading. The Custom builder shares
 # element ids with the Dashboard, so its ids in COMBINE_RENAME get a "custom-"
 # prefix, in its markup and in its inline script.
-COMBINE = {"vix/index.html": [("vix/strategy.html", "dashboard", "VIX Dashboard"),
+COMBINE = {"indices/vix/index.html": [("vix/strategy.html", "dashboard", "VIX Dashboard"),
                               ("vix/custom.html", "custom", "VIX Custom builder")]}
 COMBINE_RENAME = {"custom": ["active-tier", "allocation-breakdown", "allocation-table", "allocation-tbody", "allocationChart",
                              "chart-legend", "chart-section", "refresh-btn", "tier-banner", "vix-feed", "vix-status",
                              "vix-timestamp", "vix-value"]}
 # Retired page addresses, each now a redirect page to its new place (Invests:
 # Deprecation and Removal). Never reuse these addresses for other content.
-MOVED = {"vix/dashboard.html": "vix/index.html#dashboard", "vix/custom.html": "vix/index.html#custom"}
+# Retired addresses, each pointing straight at its final place (never chained).
+MOVED = {"vix/dashboard.html": "indices/vix/index.html#dashboard", "vix/custom.html": "indices/vix/index.html#custom",
+         "vix/index.html": "indices/vix/index.html", "vix/method.html": "indices/vix/index.html"}
 for _page, _parts in COMBINE.items():
     for _src, _sid, _ in _parts:
         _repo, _name = _src.split("/")
@@ -411,7 +410,7 @@ def split_invests(body, part, soup, page):
         a["href"] = "https://azqato.com/discord/"
     if part == "home":
         cards = {"Stocks": "stocks/index.html", "Leveraged Strategies": "leveraged/index.html",
-                 "VIX Strategy": "vix/index.html", "Stock Screener": "stocks/screener.html"}
+                 "VIX Strategy": "indices/vix/index.html", "Stock Screener": "stocks/screener.html"}
         for a in projects.select("a.project-card"):
             name = a.h3.get_text(" ", strip=True).replace("→", "").strip()
             if name in cards:
@@ -518,8 +517,7 @@ MARGIN_CARDS = """<div class="metric-card">
 </div>"""
 # One h1 per page (SEO review S1): pages whose source has none.
 ADD_H1 = {"stocks/index.html": "Individual Stocks", "stocks/screener.html": "Screener",
-          "stocks/method.html": "The Stock Method", "indices/method.html": "The Index & ETF Method",
-          "vix/method.html": "The VIX Strategy Method"}
+          "stocks/method.html": "The Stock Method", "indices/method.html": "The Index & ETF Method"}
 # "Related" links at the end of a page (SEO review S5).
 _LEV = [("leveraged/3sig.html", "3 Sig"), ("leveraged/6sig.html", "6 Sig"), ("leveraged/9sig.html", "9 Sig"),
         ("leveraged/tqqq-ftlt.html", "TQQQ FTLT"), ("leveraged/holy-grail.html", "Holy Grail"), ("leveraged/hfea.html", "HFEA")]
@@ -558,18 +556,7 @@ SPLIT = {
                   ("indices/method.html#section-aaii", "Sentiment", "The AAII survey as a contrarian signal."),
                   ("indices/method.html#section-quality", "Fund quality", "Returns, yield and expense ratio."),
                   ("indices/market.html", "Market Overview", "The live market table."),
-                  ("vix/index.html", "VIX Strategy", "The live VIX reading and a 5-tier ETF strategy.")],
-    },
-    "vix/index.html": {
-        "method": "vix/method.html",
-        "move": ["problem", "insight", "strategy", "why-now"],
-        "drop": ["hero"],
-        "after": ("section", "hero"),
-        "button": None,
-        "cards": [("vix/method.html", "The Method", "Why buy-and-hold struggles, and the 5 tiers."),
-                  ("vix/index.html#dashboard", "VIX Dashboard", "Today's tier and allocation."),
-                  ("vix/index.html#custom", "Custom builder", "Your own tiers and tickers."),
-                  ("vix/index.html#risk", "Risk Disclosure", "Read this before acting on any tier.")],
+                  ("indices/vix/index.html", "VIX Strategy", "The live VIX reading and a 5-tier ETF strategy.")],
     },
 }
 METHOD_OF = {v["method"]: k for k, v in SPLIT.items()}
@@ -664,7 +651,7 @@ GROUP_ICONS = {"Individual Stocks": "📈", "Indices & ETFs": "📊", "VIX Strat
 
 def favicon(page):
     group = next((p[3] for p in PAGES if p[0] == page), None)
-    icon = "\u26A1" if page.startswith("vix/") else GROUP_ICONS.get(group, "\U0001F4B0")
+    icon = "\u26A1" if page.startswith("indices/vix/") else GROUP_ICONS.get(group, "\U0001F4B0")
     svg = f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>{icon}</text></svg>"
     return "data:image/svg+xml," + svg.replace("<", "%3C").replace(">", "%3E").replace("#", "%23")
 
@@ -1268,8 +1255,8 @@ def main():
             repo, name = s2.split("/")
             mp.setdefault(f"{repo}-{name[:-5]}.json", []).append(path)
     for old, new in MOVED.items():
-        target, sec = new.split("#")
-        url = rel(old, target) + "#" + sec
+        target, _, sec = new.partition("#")
+        url = rel(old, target) + ("#" + sec if sec else "")
         (ROOT / old).write_text(REDIRECT_PAGE.format(brand=BRAND, canonical=page_url(target), url=url),
                                 encoding="utf-8", newline="\n")
     (HERE / "inventory/map.json").write_text(json.dumps(mp, indent=1) + "\n", encoding="utf-8", newline="\n")

@@ -49,35 +49,33 @@ with its place, the text around it and what replaced it. Lone dashes that stand 
 | indices/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         var sign = p > 0 ? "+" : ""; | `– (placeholder)` |
 | indices/market.html (inline script) | (p === null // p === undefined) return "(em dash)";         return p.toFixed(3) + "%"; | `– (placeholder)` |
 | indices/market.html (inline script) | (c === null // c === undefined) return "(em dash)";         var sign = c > 0 ? "+" : ""; | `– (placeholder)` |
-| vix/index.html | ure to growth ETFs when market fear peaks (em dash)           and pulls back when complacency sets in. | `-` |
-| vix/index.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
-| vix/index.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |
-| vix/index.html | (em dash) SPDR Bloomberg 1–3 Month T-Bill ETF. Nea | `-` |
-| vix/index.html | (em dash) SPDR S&P 500 ETF. Broad market exposure. | `-` |
-| vix/index.html | (em dash) Invesco Nasdaq-100 ETF. Growth and tech | `-` |
-| vix/index.html | (em dash) ProShares UltraPro QQQ 3× Leveraged ETF. | `-` |
-| vix/index.html | crosses             into a different tier (em dash) either up or down. | `-` |
-| vix/index.html | Free-text entry (em dash) tickers are not yet verified against a l | `-` |
-| vix/index.html | d percentage weights as the core strategy (em dash)         only the ticker per category changes. Re | `-` |
-| vix/index.html (inline script) | const SHORT_LABELS = {     tier1: 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate | `-` |
-| vix/index.html (inline script) | : 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Ele | `-` |
-| vix/index.html (inline script) | er 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) Hig | `-` |
-| vix/index.html (inline script) | er 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme | `-` |
-| vix/index.html (inline script) | 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme Fear',   };   const TIER_CLASSES | `-` |
-| vix/index.html (inline script) | t-known value from localStorage instantly (em dash) no network wait     const cached = getCa | `-` |
-| vix/index.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
-| vix/index.html (inline script) | allocation, cached.value);   }    // Boot (em dash) this script tag sits at the end of the b | `-` |
-| vix/index.html (inline script) | {     paintCached();          // instant (em dash) zero network wait     await refresh(); | `-` |
-| vix/index.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
-| vix/method.html | uring the market's most important moments (em dash) the crashes that         precede the fas | `-` |
-| vix/method.html | espond to opportunity. It rides fear down (em dash) but doesn't             press its advant | `-` |
-| vix/method.html | ded.             The opportunity is there (em dash) if you are positioned for it. | `-` |
-| vix/method.html | prices. It is not a directional predictor (em dash)         it is a precise, real-time measure of co | `-` |
-| vix/method.html | the market recovers (em dash) it is whether you are         positioned | `-` |
-| vix/method.html | "Be greedy when others are fearful." (em dash) Warren Buffett | `-` |
-| vix/method.html | T-Bills and toward leveraged growth ETFs (em dash) maximizing recovery         capture prec | `-` |
-| vix/method.html | semiconductor, and cloud computing (em dash) sectors at the center of a         multi | `-` |
-| vix/method.html | s             dominate QQQ's top holdings (em dash) and the capital expenditure is | `-` |
-| vix/method.html | nding can overcome             that decay (em dash) provided the underlying index continues | `-` |
-| vix/method.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
-| vix/method.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |
+| indices/vix/index.html | ure to growth ETFs when market fear peaks (em dash)           and pulls back when complacency sets in. | `-` |
+| indices/vix/index.html | uring the market's most important moments (em dash) the crashes that         precede the fas | `-` |
+| indices/vix/index.html | espond to opportunity. It rides fear down (em dash) but doesn't             press its advant | `-` |
+| indices/vix/index.html | ded.             The opportunity is there (em dash) if you are positioned for it. | `-` |
+| indices/vix/index.html | prices. It is not a directional predictor (em dash)         it is a precise, real-time measure of co | `-` |
+| indices/vix/index.html | the market recovers (em dash) it is whether you are         positioned | `-` |
+| indices/vix/index.html | "Be greedy when others are fearful." (em dash) Warren Buffett | `-` |
+| indices/vix/index.html | T-Bills and toward leveraged growth ETFs (em dash) maximizing recovery         capture prec | `-` |
+| indices/vix/index.html | semiconductor, and cloud computing (em dash) sectors at the center of a         multi | `-` |
+| indices/vix/index.html | s             dominate QQQ's top holdings (em dash) and the capital expenditure is | `-` |
+| indices/vix/index.html | nding can overcome             that decay (em dash) provided the underlying index continues | `-` |
+| indices/vix/index.html | You             must be prepared to hold (em dash) or add (em dash) through drawdowns of this | `-` |
+| indices/vix/index.html | must be prepared to hold (em dash) or add (em dash) through drawdowns of this             ma | `-` |
+| indices/vix/index.html | (em dash) SPDR Bloomberg 1–3 Month T-Bill ETF. Nea | `-` |
+| indices/vix/index.html | (em dash) SPDR S&P 500 ETF. Broad market exposure. | `-` |
+| indices/vix/index.html | (em dash) Invesco Nasdaq-100 ETF. Growth and tech | `-` |
+| indices/vix/index.html | (em dash) ProShares UltraPro QQQ 3× Leveraged ETF. | `-` |
+| indices/vix/index.html | crosses             into a different tier (em dash) either up or down. | `-` |
+| indices/vix/index.html | Free-text entry (em dash) tickers are not yet verified against a l | `-` |
+| indices/vix/index.html | d percentage weights as the core strategy (em dash)         only the ticker per category changes. Re | `-` |
+| indices/vix/index.html (inline script) | const SHORT_LABELS = {     tier1: 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate | `-` |
+| indices/vix/index.html (inline script) | : 'Tier 1 (em dash) Low Fear',     tier2: 'Tier 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Ele | `-` |
+| indices/vix/index.html (inline script) | er 2 (em dash) Moderate Fear',     tier3: 'Tier 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) Hig | `-` |
+| indices/vix/index.html (inline script) | er 3 (em dash) Elevated Fear',     tier4: 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme | `-` |
+| indices/vix/index.html (inline script) | 'Tier 4 (em dash) High Fear',     tier5: 'Tier 5 (em dash) Extreme Fear',   };   const TIER_CLASSES | `-` |
+| indices/vix/index.html (inline script) | t-known value from localStorage instantly (em dash) no network wait     const cached = getCa | `-` |
+| indices/vix/index.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
+| indices/vix/index.html (inline script) | allocation, cached.value);   }    // Boot (em dash) this script tag sits at the end of the b | `-` |
+| indices/vix/index.html (inline script) | {     paintCached();          // instant (em dash) zero network wait     await refresh(); | `-` |
+| indices/vix/index.html (inline script) | imestampEl.textContent = 'Unable to fetch (em dash) check connection';       setStatus('erro | `-` |
