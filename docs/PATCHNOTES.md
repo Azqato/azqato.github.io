@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.14.0] - 2026-10-02
+
+### Changed
+- Azqato Invests folded into the main structure (build pass, item 8): its generator, checks and
+inventories moved from `invests/scripts/` and `invests/inventory/` to `tools/invests/`. The pages and
+their addresses are unchanged.
+- Invests' azqato.com strip takes its links from `tools/build-nav.py`, relative to each page.
+- `docs/PRD.md`: the folder map is brought up to date (items 5, 7, 8 and 20); Part 2, P14 is marked done.
+
+---
+
 ## [2.13.9] - 2026-10-02
 
 ### Changed

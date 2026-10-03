@@ -1,6 +1,6 @@
 """Read-only checks for the Azqato Invests site. Changes nothing.
 
-Run from anywhere: python scripts/check.py
+Run from anywhere: python tools/invests/check.py
 Checks every site page (*.html outside _sources/, inventory/ and docs/):
   - a title that follows Page Titles in ../docs/PRD.md (Part 2) (brand suffix, 60 characters,
     first 30 characters unique, no placeholders; Home leads with the brand);
@@ -14,7 +14,11 @@ Exits 1 if any check fails.
 import html.parser, json, pathlib, re, sys
 from urllib.parse import urlparse, unquote
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
+# The site pages are in invests/ at the repository root; this folder
+# (tools/invests/) holds the scripts, the source snapshots and the inventories
+# (build pass item 8, 2.14.0).
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parent.parent / "invests"
 SKIP_DIRS = {"_sources", "inventory", "docs", "scripts", ".git", "assets"}
 BRAND = "Azqato Invests"
 SEP = " - "
@@ -162,10 +166,10 @@ def main():
         if dashes:
             fails.append(f"{rel}: {dashes} em dash(es) in the page; replace them under Writing Style (Questions 14 and 19)")
 
-    mp = ROOT / "inventory" / "map.json"
+    mp = HERE / "inventory" / "map.json"
     if mp.exists():
         for src, targets in json.loads(mp.read_text(encoding="utf-8")).items():
-            inv = json.loads((ROOT / "inventory" / src).read_text(encoding="utf-8"))
+            inv = json.loads((HERE / "inventory" / src).read_text(encoding="utf-8"))
             have = squash(" ".join(" ".join(parsed[t].text) for t in targets if t in parsed))
             ids = set().union(*(parsed[t].ids for t in targets if t in parsed))
             missing = [i for i in inv["items"] if i["n"] not in REMOVED.get(src, set()) and not found(i, have, ids)]

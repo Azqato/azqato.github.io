@@ -257,24 +257,29 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── README.md                 - public front door, general-reader oriented
 ├── LICENSE.md                - copyright and terms of use; all rights reserved, source-available
 ├── robots.txt                - fully open to all crawlers, deliberately; points at the sitemap
-├── sitemap.xml               - all 12 pages, lastmod taken from git
+├── sitemap.xml               - every root page, at its clean address
 ├── index.html                - landing page: intro, Discord CTA, explore grid
-├── about.html                - bio and pitch card
-├── discord.html              - four community server cards
+│   (Since 2.13.8, clean addresses: each page below is name/index.html, served at
+│    azqato.com/name/; the old name.html is a redirect page to it.)
+├── about/index.html          - bio and pitch card
+├── discord/index.html        - four community server cards
 ├── invests.html              - redirect page to invests/ (since v2.11.0)
-├── _redirects                - Cloudflare Pages rules: /invests and /invests.html to /invests/
-├── invests/                  - Azqato Invests, a self-contained 21-page site with its own
-│                               generator and checks; its docs are Part 2 of this file
-│                               (merged 2026-10-02; the main rules win, D22); built by invests/scripts/site.py
-├── codes.html                - AI tooling: Prompts, Tools, GitHub
-├── music.html                - stage visualizer, native track player, Mixcloud embeds, platform links
-├── links.html                - every platform, grouped
-├── projects.html             - filterable project grid, driven by the PROJECTS array
-├── youtube.html              - four channel cards
-├── support.html              - Buy Me a Coffee plus seven affiliate cards
-├── accounts.html             - gaming profiles (not in nav)
-├── privacy-policy.html       - policy and disclaimers (not in nav)
-├── styles.css                - shared tokens, reset, nav, footer
+├── _redirects                - Cloudflare rules: /invests, /invests.html and each old /name.html, one hop
+├── invests/                  - Azqato Invests, 19 pages; its docs are Part 2 of this file
+│                               (merged 2026-10-02; the main rules win, D22); built by
+│                               tools/invests/site.py (since 2.14.0)
+├── codes/index.html          - AI tooling: Prompts, Tools, GitHub
+├── music/index.html          - stage visualizer, native track player, Mixcloud embeds, platform links
+├── music/viz.js              - the music page's script (since 2.13.9)
+├── links/index.html          - every platform, grouped
+├── projects/index.html       - filterable project grid, driven by the PROJECTS array
+├── youtube/index.html        - four channel cards
+├── support/index.html        - Buy Me a Coffee plus seven affiliate cards
+├── accounts/index.html       - gaming profiles (not in nav)
+├── privacy-policy/index.html - policy and disclaimers (not in nav)
+├── *.html (10)               - redirect pages from the old addresses (since 2.13.8)
+├── styles.css                - shared tokens (dark and light), reset, nav, footer
+├── theme.js                  - light and dark themes for every page (since 2.13.7)
 ├── audio/
 │   └── womanchild-azqato-remix.mp3  - the one same-origin track; drives the visualizer (6.1 MB)
 ├── .gitignore                - env-file patterns, plus the local-only brand folder
@@ -282,7 +287,10 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── .githooks/
 │   └── pre-commit            - em-dash writing-style guard
 ├── tools/
-│   └── build-nav.py          - stamps the shared nav into every page; output is committed
+│   ├── build-nav.py          - stamps the shared nav into every page; output is committed
+│   └── invests/              - Invests' generator and checks (site.py, check.py, browser.py,
+│                               inventory.py, snapshot.py) and its inventories; _sources/ is
+│                               local only (since 2.14.0, build pass item 8)
 ├── .vscode/
 │   └── settings.json         - editor chat settings
 ├── img/                      - 15 files, 5 referenced by pages, 10 unreferenced
@@ -293,7 +301,7 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
     └── TODO.md               - open work and unresolved decisions; not an instruction list
 
 Untracked and local only (present in the working tree, not in git):
-├── music/                    - local test-track folder for the paused player branch
+├── music/*.mp3, desktop.ini  - local test track beside the tracked music page
 ├── test-local-audio.bat      - launches Chrome with file-access restrictions relaxed
 ├── brand/                    - brand and merchandise concept folder, see below
 │   ├── 00-brand-foundation.md      - mascot traits, palette, lanes, voice
@@ -1469,7 +1477,7 @@ Every item from Roadmap at a glance except Later, smallest first, each broken in
 | 5 | Top bar and theme button on every page | The light palette and new tokens in `styles.css`; swap literal colors for tokens on the pages that have them (`music.html` 137, `projects.html` 34, `support.html` 23, a few elsewhere); the nav template in `tools/build-nav.py` becomes the slim bar with ☀️/🌙 beside ☰ on phones; one shared theme script (system theme first, choice remembered); the visualizer stays dark; check all 12 pages in both themes | **Done 2026-10-02:** Done 2.13.7 |
 | 7 | Clean addresses | Move 11 pages into folders, each `.html` left as a redirect page; fix relative paths one level deeper; nav links point at `folder/index.html` so opening from disk works (on azqato.com each click then takes one redirect to the clean address, as `.html` links do today; on azqato.github.io the address bar shows `/folder/index.html`, and canonical tags keep search engines on the clean form); update canonicals, sitemap.xml and og:url; check every old address and opening from disk | **Done 2026-10-02:** Done 2.13.8 |
 | 20 | `music.html`'s script to `viz.js` | Move about 1,900 lines unchanged; test the visualizer, the audio reaction and every mode in Edge; confirm the page weight drops | **Done 2026-10-02:** Done 2.13.9 |
-| 8 | Fold Invests in | Move its scripts and inventories to `tools/invests/` and fix their paths; Invests takes the shared palette and top bar; rerun `site.py`, `check.py` and `browser.py`; the pages and addresses stay | L |
+| 8 | Fold Invests in | Move its scripts and inventories to `tools/invests/` and fix their paths; Invests takes the shared palette and top bar; rerun `site.py`, `check.py` and `browser.py`; the pages and addresses stay | **Done 2026-10-02:** Done 2.14.0 |
 | 13 | Landing pages and SEO (drafts only) | Audit all 21 pages (titles, descriptions, headings, internal links); draft four landing pages and four "Method" pages; the owner reviews them together | L |
 | Review | Full review | The owner reviews the live site and Invests' drafted sections, after item 15 | Owner |
 
@@ -3208,6 +3216,8 @@ Runs after P10, whenever the author decides to clean out the old repos. Each rep
 4. **Delete the empty github.com/Azqato/invests repository** once testing of the live site is finished (author's decision, 2026-10-02). It was never pushed to and isn't needed for hosting. **Done:** by the 2026-10-02 audit, `gh api repos/Azqato/invests` answered 404 while logged in as Azqato, so the repository is gone.
 
 #### P14. Fold invests into azqato.com's structure (later; design needed; ask first)
+
+**Done 2026-10-02 (main 2.14.0, build pass item 8).** The generator, checks and inventories moved from `invests/scripts/` and `invests/inventory/` to `tools/invests/` (the snapshots in `_sources/` moved with them and stay out of git). Run them as `python tools/invests/site.py`, `check.py` and `browser.py`; where this Part says `scripts/x.py`, read `tools/invests/x.py`. The pages and their addresses haven't changed. Invests already uses the shared palette and `/theme.js` (item 5). Its azqato.com strip now takes its links from `tools/build-nav.py`'s list, relative, so it opens from disk; its own bar (search, theme button) stays, because the strip is hidden on phones. These scripts were never pages, so the old file addresses get no redirects.
 
 **Docs part done 2026-10-02:** these docs merged into the main repository's docs (this PRD is Part 2 of docs/PRD.md; D22). The pages, generator and inventories haven't moved. The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
 
