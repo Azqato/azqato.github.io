@@ -1397,7 +1397,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | # | Item | Where it's detailed | Status |
 |---|---|---|---|
 | 1 | Review the live Azqato Invests site and list changes | Part 2, P7.9 (in P13.2) | **Checked 2026-10-03 (2.15.3):** all 21 live pages, desktop and phone, both themes: 0 errors, 0 failed requests, 0 sideways scroll; 79 outside links, one down (Zacks, OWNER-QUESTIONS Q12). The owner's own read-through is what remains |
-| 2 | Review Invests' drafted sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ | Part 2, P7.10 (in P13.2) | **Brought up to date 2026-10-03 (2.15.3):** every section checked against the site; goals, stories and criteria all met; FAQ answers 3, 6, 10 and 12 corrected; D23 added. Waiting on the owner's sign-off on the tenets and the press release quote (OWNER-QUESTIONS Q11) |
+| 2 | Review Invests' drafted sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ | Part 2, P7.10 (in P13.2) | **Brought up to date 2026-10-03 (2.15.3):** every section checked against the site; goals, stories and criteria all met; FAQ answers 3, 6, 10 and 12 corrected; D23 added. **Done 2026-10-03:** the owner kept the tenets and the quote as they are (Q11) |
 | 3 | Paste two or three live URLs into Discord and check the cards | docs/TODO.md | **Done 2026-10-02:** the owner checked them; the cards look right |
 
 **Next: one site, one look (owner's requests, 2026-10-02).** These touch every page, so they're best done together, in this order.
@@ -2576,7 +2576,7 @@ Added by the 2026-10-01 audit:
 
 ## Invests: Tenets
 
-Drafted by the 2026-10-01 audit from the core rule and the decisions, in priority order: when two conflict, the higher one wins. The author may reorder or reword them (Question 15). **Reviewed 2026-10-03 (P7.10, Claude):** the five that remain match how the site is built today; the owner's sign-off on the order and wording is the one open point (docs/OWNER-QUESTIONS.md, Q11).
+Drafted by the 2026-10-01 audit from the core rule and the decisions, in priority order: when two conflict, the higher one wins. The author may reorder or reword them (Question 15). **Reviewed 2026-10-03 (P7.10, Claude):** the five that remain match how the site is built today; the owner kept their order and wording (Q11, 2026-10-03).
 
 1. **Preserve before polish.** Nothing from the four sources is cut, trimmed or summarized without the author's sign-off, even when it's repetitive, out of date (D19) or awkward to fit the template. When content and layout disagree, the layout changes. A cleaner page that lost a paragraph is a failed move.
 2. **Push only on the owner's word.** **Changed 2026-10-02 (owner's review):** the site is live; work is finished and verified locally and pushed only when the owner says so. Earlier title and text: **Local until told otherwise.** Nothing is pushed, published or deployed until the author says so (D20), not even a fix for something broken on a live site. Work is finished and verified locally, then waits. A ready change that sits unpublished costs nothing that can't be recovered; a publish can't be taken back.

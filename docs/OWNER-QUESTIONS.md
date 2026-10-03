@@ -209,6 +209,8 @@ Settled by your 2026-10-03 request: every page except the home page now has the 
 
 ## Q11. Sign off the Invests tenets and press release (new, 2026-10-03)
 
+**Answered 2026-10-03: recommended.** Tenets and the labeled quote stay as they are.
+
 **Background.** Roadmap item 2 (P7.10) asked you to review the drafted Invests sections in PRD Part 2. I brought every section up to date with the site (2.15.3): goals, user stories and success criteria are all met; four FAQ answers were out of date and are corrected. Two things are opinions only you can give:
 
 1. **Tenets (PRD Part 2, Invests: Tenets).** In priority order: 1 Preserve before polish; 2 Push only on the owner's word; 4 Reuse the feeds, don't move the pipelines; 5 Template structure, source content; 6 No accounts, no tracking. (3 was removed by D22.) **Recommendation:** keep them as they are.
@@ -218,17 +220,23 @@ Settled by your 2026-10-03 request: every page except the home page now has the 
 
 ## Q12. One Resources link is down: Zacks (new, 2026-10-03)
 
+**Answered 2026-10-03: recommended (A).** Re-check on or after 2026-10-10; remove it then if it still fails.
+
 **Background.** The live review checked all 79 outside links. Nine refused a script but open fine in a browser. One, "Make money trading the earnings calendar" (finance.zacks.com/make-money-trading-earnings-calendar-11148.html, Resources), returns 503 (server unavailable) even in a browser.
 
 **Options.** A: wait a week and re-check; a 503 is often temporary (**recommended**). B: remove it now, like C3 and C4.
 
 ## Q13. FAQ topic group names (built 2.15.3; rename if you like)
 
+**Answered 2026-10-03: keep.**
+
 You approved S7 ("yes to everything"), and its premise turned out wrong: the FAQ had no groups to label. So I made seven groups from the questions as they already run, without moving or rewording any question: **The long-term mindset** (1 to 6), **How markets move** (7, 8), **Researching a company** (9 to 12), **What makes a company worth owning** (13 to 19), **Timing and signals** (20 to 23), **ETFs, leverage and how to invest** (24 to 27), **Managing your portfolio** (28 to 37). The filter box hides a group when none of its questions match.
 
 **Answer with:** "Q13: keep", or new names.
 
 ## Item 1: your own read-through of the live site
+
+**Paused 2026-10-03 by the owner; next up.**
 
 The automated review is done and clean (all 21 pages, desktop and phone, light and dark, no errors). What a script can't judge is whether you like what you read. When you have time, browse azqato.com/invests/ and send me anything you want changed, in any form.
 
