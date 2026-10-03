@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.5] - 2026-10-02
+
+### Changed
+- The old stocks, vix and leverage sites now redirect to Azqato Invests (build pass, item 9; D7): 19
+pages across those three repos (stocks v5.0.0, vix v2.0.0, leverage v2.0.0), each in one hop to its
+new page on azqato.com/invests/. Their data files and scheduled jobs are unchanged. The old vix
+Dashboard and Custom builder go straight to their sections of the one VIX page (item 12).
+- `leveraged-strategies/index.html`: the old `/leveraged-strategies/` address, a 404 since the repo
+rename, now redirects to Leveraged Strategies too.
+- `projects.html`: the VIX, stocks and leverage cards' demo links open the Invests pages directly.
+- `docs/PRD.md` Part 2, Invests: Deprecation and Removal: the list marked done.
+
+---
+
 ## [2.13.4] - 2026-10-02
 
 ### Fixed
