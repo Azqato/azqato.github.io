@@ -37,7 +37,7 @@ with its place, the text around it and what replaced it. Lone dashes that stand 
 | assets/js/vix/strategy.js | –35 (em dash) Elevated Fear',   tier4: 'VIX 35–45 (em dash) High Fear',   tier5: 'VIX > 45 (em dash) Extreme | `-` |
 | assets/js/vix/strategy.js | IX 35–45 (em dash) High Fear',   tier5: 'VIX > 45 (em dash) Extreme Fear (Crisis)', };  function get | `-` |
 | assets/js/vix/vix.js | is is a plain global // read, not a fetch (em dash) works identically under file://, a local | `-` |
-| assets/js/vix/vix.js | ce/chart/%5EVIX', ];  // localStorage key (em dash) persists across tabs, pages, and browser | `-` |
+| assets/js/vix/vix.js | n/data/vix.json', ];  // localStorage key (em dash) persists across tabs, pages, and browser | `-` |
 | assets/js/vix/vix.js | { value, timestamp, fromCache, stale }   (em dash) on success (live or cached) //   { value | `-` |
 | assets/js/vix/vix.js | lue: null, timestamp: null, error: true } (em dash) total failure, no cache async function f | `-` |
 | assets/js/vix/vix.js | le: false };   }    // All fetches failed (em dash) return stale cache rather than showing a | `-` |
