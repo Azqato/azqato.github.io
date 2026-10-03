@@ -1422,11 +1422,26 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | # | Item | Where it's detailed |
 |---|---|---|
 | 16 | v2.9.0: full native catalog (moved to Later by the owner, 2026-10-02; waiting on the owner's audio files) | v2.9.0, below |
-| 17 | v3.0.0: contact / hire-me section | Below |
-| 18 | GitHub API integration (low priority) | Below |
-| 19 | A progress dashboard | Future updates, below |
+| 17 | v3.0.0: contact / hire-me section, pointing to https://github.com/Azqato/azqato.github.io/issues (owner, 2026-10-02) | Below |
+| 18 | ~~GitHub API integration (low priority)~~ Dropped for now (owner, 2026-10-02) | Below |
+| 19 | ~~A progress dashboard~~ Dropped for now (owner, 2026-10-02) | Future updates, below |
 | 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below |
 | 21 | A brand per section and an emoji per page (favicon and title icon), the lion for the home page and any page without its own (owner's decision, 2026-10-02) | This list; to be written up as a Future update |
+
+**Owner's answers for the next build pass (2026-10-02).** Recorded before building so the pass needs no further questions:
+
+- **Theme (item 5):** phones keep the ☰ dropdown with the ☀️/🌙 button beside it; a first visit follows the system theme; the light colors are DESIGN.md's One palette for the whole site. The music visualizer stays dark in both themes; the page around it follows the theme. Discord hover color: `#4752c4` everywhere.
+- **Emoji and brands (item 21):** Home 🦁, About 🙋, Discord 💬, Invests 💰, Codes 💻, Music 🎧, Links 🔗, Projects 🛠️, YouTube 📺, Support ☕, Gaming Accounts 🎮, Privacy 🔒; Invests sections: Individual Stocks 📈, Indices & ETFs 📊, VIX Strategy ⚡, Leveraged Strategies 🚀, Resources 📚. Any page without its own uses the lion. Section brands in the top bar: Azqato Invests, Azqato Music and Azqato Codes; every other page shows "Azqato."
+- **Footer (item 6):** "© 2026 Azqato" plus links to every major section, following SEO practice (plain crawlable links, descriptive text). No sitemap link: search engines find sitemap.xml through robots.txt.
+- **Clean addresses (item 7):** folders (`discord/index.html`, with `discord.html` as a redirect page). Opening pages straight from disk must keep working, so internal links point at `folder/index.html` the way Invests' do.
+- **Invests (item 8):** scripts and inventories move to `tools/invests/`; Invests keeps its own layout but takes the shared palette and top bar, recolored in the same pass as item 5.
+- **Old sites (items 9, 10):** the owner allows changes to the stocks, vix and leverage repos; `/leveraged-strategies/` also redirects; the vix job also writes `vix.json` as a second source and the blocked allorigins fallback goes.
+- **Corrections (item 11):** remove the two dead Resources links; the Holy Grail figures load live from Composer Atlas on every page load, with a cached default when it can't be reached; all corrections go to the owner as one list.
+- **One VIX page (item 12):** `/invests/vix/` with the strategy, then the live dashboard, then the custom builder, with jump links; the old dashboard and custom addresses redirect.
+- **Landing pages (item 13):** each group's first page becomes a short landing page (what the section is, 3 to 5 cards, a "start here" button); its long text moves to a "Method" page in the group; reviewed all together.
+- **Main site (items 14, 15, 20):** thumbnails get compressed copies and the originals stay; smoke tests are a local script; `music.html`'s script moves to `viz.js` in this pass.
+- **Later or dropped:** the full music catalog is Later (item 16). The contact section (item 17) points to https://github.com/Azqato/azqato.github.io/issues. GitHub stats (18) and the progress dashboard (19) are dropped for now.
+- **Pushing:** after each item is done and checked.
 
 **Owner decisions that aren't work:** one brand or two; where the mascot came from; whether to start reading the Cloudflare analytics (docs/TODO.md). **Answered 2026-10-02 by the owner:** (1) brand: several brands, one per section, with a different emoji for each page; the home page and any page without its own use the lion. (2) The mascot is a lion because the owner likes cats. (3) Cloudflare analytics: much later.
 
@@ -2172,6 +2187,7 @@ Concrete instructions for whoever works on this next, human or model.
   > **Replaced in v2.9.9.** This entry previously read: "**Never claim in copy that the music visualizer reacts to the audio.** It does not, and Tenet 6 applies to marketing copy first." That was written before the native player shipped and had become the opposite of the truth, contradicting both the README and the External FAQ. A rule that forbids a true statement is worse than no rule.
 - **Never commit `test-local-audio.bat` or anything under `music/`.** The batch file launches a browser with web security disabled, and the audio files are multi-gigabyte.
 - **Never introduce `innerHTML` with a value from outside the file.** The one existing use is safe only because its data is hardcoded.
+- **Use as few GitHub Actions as possible** (owner's rule, 2026-10-02). Tests and checks run as local scripts; GitHub Pages' own build is the only automation this repository relies on. A new Action needs the owner's say-so and a recorded reason.
 - **Never push to `main` without reading the diff.** There is no staging, no review, and no CI. The push is the release.
 
 ## How to verify a change
