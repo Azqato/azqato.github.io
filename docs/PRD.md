@@ -1427,7 +1427,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | 17 | v3.0.0: contact / hire-me section, pointing to https://github.com/Azqato/azqato.github.io/issues (owner, 2026-10-02) | Below |
 | 18 | ~~GitHub API integration (low priority)~~ Dropped for now (owner, 2026-10-02) | Below |
 | 19 | ~~A progress dashboard~~ Dropped for now (owner, 2026-10-02) | Future updates, below |
-| 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below |
+| 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below. **Done 2.13.9:** `music/viz.js` |
 | 15d | Smoke-test script, `tools/smoke.py`, run locally (moved from the build pass by the owner, 2026-10-02) | The next build pass, below |
 | 21 | A brand per section and an emoji per page (favicon and title icon), the lion for the home page and any page without its own (owner's decision, 2026-10-02) | This list; to be written up as a Future update |
 
@@ -1468,7 +1468,7 @@ Every item from Roadmap at a glance except Later, smallest first, each broken in
 | 12 | One VIX page | Merge the three pages into `/invests/vix/` (strategy, then dashboard, then builder, with jump links), keeping everything (core rule); the old addresses become redirects; update the sidebar, search, sitemap and inventories; run `check.py` and `browser.py` | **Done 2026-10-02:** 2.13.6. One page at /invests/vix/: strategy, #dashboard, #custom; old addresses redirect to the sections; check.py and browser.py cover it (Part 2, P16) (M) |
 | 5 | Top bar and theme button on every page | The light palette and new tokens in `styles.css`; swap literal colors for tokens on the pages that have them (`music.html` 137, `projects.html` 34, `support.html` 23, a few elsewhere); the nav template in `tools/build-nav.py` becomes the slim bar with ☀️/🌙 beside ☰ on phones; one shared theme script (system theme first, choice remembered); the visualizer stays dark; check all 12 pages in both themes | **Done 2026-10-02:** Done 2.13.7 |
 | 7 | Clean addresses | Move 11 pages into folders, each `.html` left as a redirect page; fix relative paths one level deeper; nav links point at `folder/index.html` so opening from disk works (on azqato.com each click then takes one redirect to the clean address, as `.html` links do today; on azqato.github.io the address bar shows `/folder/index.html`, and canonical tags keep search engines on the clean form); update canonicals, sitemap.xml and og:url; check every old address and opening from disk | **Done 2026-10-02:** Done 2.13.8 |
-| 20 | `music.html`'s script to `viz.js` | Move about 1,900 lines unchanged; test the visualizer, the audio reaction and every mode in Edge; confirm the page weight drops | L |
+| 20 | `music.html`'s script to `viz.js` | Move about 1,900 lines unchanged; test the visualizer, the audio reaction and every mode in Edge; confirm the page weight drops | **Done 2026-10-02:** Done 2.13.9 |
 | 8 | Fold Invests in | Move its scripts and inventories to `tools/invests/` and fix their paths; Invests takes the shared palette and top bar; rerun `site.py`, `check.py` and `browser.py`; the pages and addresses stay | L |
 | 13 | Landing pages and SEO (drafts only) | Audit all 21 pages (titles, descriptions, headings, internal links); draft four landing pages and four "Method" pages; the owner reviews them together | L |
 | Review | Full review | The owner reviews the live site and Invests' drafted sections, after item 15 | Owner |

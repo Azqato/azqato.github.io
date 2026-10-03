@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.13.9] - 2026-10-02
+
+### Changed
+- The music page's script (2,325 lines: visualizer, player, animated favicon) moved unchanged to
+`music/viz.js` (build pass, item 20). The page drops from 119.7 KB to 17.4 KB, and the script is cached
+on its own. Checked in Edge: all ten modes animate, the track plays, Pause works, no errors.
+
+---
+
 ## [2.13.8] - 2026-10-02
 
 ### Changed
