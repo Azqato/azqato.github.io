@@ -1,6 +1,6 @@
 # DESIGN - Azqato Invests
 
-How Azqato Invests looks and behaves: the visual rules, the components and the reasons behind them. There's no site code yet, so this describes the planned design. Its values were read from the Template Interface templates chosen in D8, at commit 61acfcb, on 2026-10-01. The PRD's verification checklist shows what has been checked against site code (nothing yet).
+How Azqato Invests looks and behaves: the visual rules, the components and the reasons behind them. **Audit 2026-10-02:** the site is built and live; sections marked Built, Updated or Superseded describe it as it is, and the rest records the plan. Original text: There's no site code yet, so this describes the planned design. Its values were read from the Template Interface templates chosen in D8, at commit 61acfcb, on 2026-10-01. The PRD's verification checklist shows what has been checked against site code (nothing yet).
 
 The Design details and Template ratings sections moved here from README.md word for word on 2026-10-01. Everything else was written by that day's documentation audit from the template code; text that sets something new, rather than recording what the templates do, says so.
 
@@ -157,7 +157,7 @@ All are maximum widths, so each applies at that width and below.
 | 1150px | The "On this page" column hides and an inline list appears at the top of the article; two columns |
 | 1000px | The top bar's status line hides (a demo part) |
 | 900px | One column. The sidebar becomes a drawer, `min(320px, 86vw)` wide, that slides in from the left over a scrim when the menu button is pressed; the menu and close buttons appear |
-| 640px | The top bar's right-hand group hides; search becomes a 40px icon button; headings and code shrink (see Typography); cards and the pager stack into one column; the search dialog goes full width |
+| 640px | The top bar's right-hand group hides; search becomes a 40px icon button; headings and code shrink (see Typography); cards and the pager stack into one column; the search dialog goes full width. (Since v1.0.1 the pager wraps rather than stacking; see Breadcrumbs and pager.) |
 | 400px | The logo's tag hides; step numbers shrink to 26px |
 
 ### Home (wiki-portal)
@@ -201,12 +201,16 @@ The template keeps its demo pages in one file and switches between them by URL h
 
 **Built 2026-10-02 (P2):** labeled "Site sections"; Home first, then the five groups, with the six leveraged strategies indented under Leveraged strategies; a card at the foot says "Educational use only. Not financial advice.", carried from the source sidebars.
 
+**Updated 2026-10-02 (v1.0.1, v1.1.0):** the groups are Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources, each a collapsible `<details>` that starts open only when it holds the current page. In the four topic groups the first entry is the landing page, listed as "Overview"; nothing is indented. The sidebar is a full-height flex column and the note sits at its foot (`.site-sidebar-foot`), on two lines: "Educational use only." and "Not financial advice." When open groups fill the sidebar, the note follows them, 32px below. At 900px and below an "Azqato.com" group holds azqato.com's links.
+
 
 The five sections, Learn, Tools, Strategies, Resources and FAQ, as groups (D12). The current page is marked with the pale accent background, deep accent text, weight 600 and an accent edge. Composer Atlas, Net Worth Tracker and Automate Fundamentals never appear here (D18). At 900px and below the sidebar becomes a drawer. Its label, "Documentation" in the template, needs a name that fits this site (not decided).
 
 ### Breadcrumbs and pager
 
 Breadcrumbs show where the page sits (for example Strategies, then Leveraged strategies, then 3 Sig). The pager links to the previous and next pages; planned to follow the sidebar's order.
+
+**Updated 2026-10-02 (v1.0.1, v1.1.0):** breadcrumbs read Home, then the group (linked to its landing page), then the page; a landing page shows Home, then its own name. The pager follows the sidebar order. Each pager button fits its text (at least 200px): Previous sits at the left edge and Next at the right, also when either is alone (Home has only Next, the FAQ only Previous); they wrap onto two lines on phones instead of stacking into one column. Home and Resources keep the same 32px gap above the pager as every other page.
 
 ### Article content
 
@@ -223,7 +227,7 @@ The right-hand column on reading pages, marking the section in view. At 1150px a
 
 ### Search
 
-The search button opens a dialog, also opened with / or Ctrl+K. Results show a title, a breadcrumb and a snippet, with matches highlighted. Here it searches all 21 pages. How the template builds its search index wasn't read (its script.js); decide how this site builds one when the shell is built.
+The search button opens a dialog, also opened with / or Ctrl+K. Results show a title, a breadcrumb and a snippet, with matches highlighted. Here it searches all 21 pages. How the template builds its search index wasn't read (its script.js); decide how this site builds one when the shell is built. **Built 2026-10-02 (P2):** scripts/site.py generates assets/js/search-index.js from every page, loaded the first time search opens; before typing, the dialog suggests four pages (the Screener, VIX Strategy, Stock metrics and the FAQ).
 
 ### Buttons
 
@@ -267,7 +271,7 @@ D8 borrows help-center's searchable FAQ and step-by-step guides, admin-dashboard
 - ☀️/🌙 in the top bar (D10).
 - The site starts in the visitor's system theme and switches when the button is pressed; the choice is saved in the visitor's own browser (PRD Assumptions).
 - Planned by the 2026-10-01 audit: apply the saved theme with a small script in the page head, before the page is drawn, so it never flashes the wrong theme first.
-- Not decided: whether the button shows the current theme's emoji or the one it switches to.
+- Not decided: whether the button shows the current theme's emoji or the one it switches to. **Decided (P2):** the one it switches to, as built above.
 - It needs an accessible name that says what it does, such as "Switch to dark theme", because an emoji alone isn't a clear name.
 
 ### Icons
@@ -280,7 +284,7 @@ D8 borrows help-center's searchable FAQ and step-by-step guides, admin-dashboard
 - **Level:** WCAG AA, the level Template Interface targets on every page and template. Assumed to mean WCAG 2.2 (Question 11).
 - **Contrast:** 4.5:1 for body text; 3:1 for large text (1.5rem and up, or bold at 1.25rem and up); 3:1 for focus rings and for the edges of controls against what's behind them.
 
-**Measured pairings.** Computed on 2026-10-01 with the WCAG formula, from the token values. All the text pairings pass AA except white on the dark accent, which the dark theme must not use.
+**Measured pairings.** Computed on 2026-10-01 with the WCAG formula, from the token values. All the text pairings pass AA except white on the dark accent, which the dark theme must not use. **Audit 2026-10-02:** the dark rows below measure the shared theme.css tokens; the built dark theme uses documentation-site's own dark palette instead (How the two themes fit together), whose contrast scripts/browser.py checks on every page in both themes.
 
 | Theme | Pairing | Ratio |
 |---|---|---|
@@ -335,7 +339,7 @@ The site map in the PRD lists every page and its source.
 - `documentation-site` keeps its seven demo pages in one HTML file and switches between them by URL hash. This site gets one file per page, so every page has its own address and the redirects in D7 have somewhere to land.
 - Tool pages drop the "On this page" column so the screener's table gets the full width.
 - The template's demo-only parts come out: the API keys button, API status line, code-language tabs and the page-feedback form, which needs a server. They belong to the template, not the sources, so the core rule doesn't cover them.
-- None of the 21 templates has a dark mode, so the dark theme is built on top of the template's shared color tokens.
+- None of the 21 templates has a dark mode, so the dark theme is built on top of the template's shared color tokens. (Superseded: documentation-site gained its own dark mode at commit ed840da, which this site uses; see How the two themes fit together.)
 - If D9 stays: azqato.com is dark-only today (background `#0d1117`, accent `#00d4a0`), so its nav needs a light version for this site's light mode. azqato.com's pages get the nav from `tools/build-nav.py`, which only reaches pages in the azqato.github.io repo, so this site would carry its own copy of the nav, with links pointing back to azqato.com.
 - The 💰 favicon uses the same inline-SVG emoji technique azqato.com uses for its 🦁.
 

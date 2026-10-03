@@ -1,6 +1,6 @@
 # UI-REVIEW.md - Azqato Invests
 
-A review of the user interface, the author's decisions on it, and what was built (v0.16.0, 2026-10-02). The findings below are kept as they were found; the "Done" section says what changed for each.
+A review of the user interface, the author's decisions on it, and what was built (v0.16.0, 2026-10-02). The findings below are kept as they were found; the "Done" section says what changed for each. **Audit 2026-10-02:** a record. Later changes: the pager buttons fit their text and the sidebar note sits at the sidebar's foot (v1.0.1), and the sidebar groups became Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources (v1.1.0); see PATCHNOTES.md.
 
 ## How the review was done
 
@@ -15,7 +15,7 @@ A review of the user interface, the author's decisions on it, and what was built
 
 ## Author's decisions (2026-10-02)
 
-Decided in the brainstorming session; nothing is built yet.
+Decided in the brainstorming session; all built in v0.16.0 (Done, below).
 
 | Topic | Decision |
 |---|---|

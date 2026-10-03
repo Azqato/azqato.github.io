@@ -22,7 +22,7 @@ Not acting, or delay in acting, against any use of the Work is not a licence, a 
 
 ## PERMISSION
 
-To ask for any use this file does not grant, open an issue in this repository's public issue tracker on GitHub: https://github.com/Azqato/invests/issues. The repository is not public yet, so the tracker opens when it is. Until then, no use beyond what AI, SEARCH, AND AUTOMATED ACCESS allows is permitted.
+To ask for any use this file does not grant, open an issue in this repository's public issue tracker on GitHub: https://github.com/Azqato/azqato.github.io/issues.
 
 ## PLATFORM TERMS
 

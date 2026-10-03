@@ -1,6 +1,6 @@
 # Hosting options - Azqato Invests
 
-Written 2026-10-02 at the author's request, for Question 18 in PRD.md (where the site lives, and what happens to azqato.com/invests). Nothing here has been done; it is analysis for a decision. The author's stated preference: azqato.com/invests should be this site.
+Written 2026-10-02 at the author's request, for Question 18 in PRD.md (where the site lives, and what happens to azqato.com/invests). Nothing here has been done; it is analysis for a decision. The author's stated preference: azqato.com/invests should be this site. **Audit 2026-10-02:** this is now a record. Option D was chosen and carried out: the site is the `invests/` folder of the azqato.github.io repository, live at https://azqato.com/invests/ since 2026-10-02. The separate invests repository was retired and github.com/Azqato/invests no longer exists.
 
 ## What every option has to satisfy
 

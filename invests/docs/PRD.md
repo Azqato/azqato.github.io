@@ -1,10 +1,10 @@
 # PRD - Azqato Invests
 
-This is the product requirements document for Azqato Invests: one site, in its own repo, that merges the stocks, vix and leverage sites with the current invests.html page, built on the documentation-site template. It's the main reference for anyone working on the project, person or AI model. It holds the whole plan, the technical setup, the standing rules and how work is done here, so the project can be understood without reading any code.
+This is the product requirements document for Azqato Invests: one site (since 2026-10-02 the `invests/` folder of the azqato.github.io repository, D21; first planned for its own repo) that merges the stocks, vix and leverage sites with the current invests.html page, built on the documentation-site template. It's the main reference for anyone working on the project, person or AI model. It holds the whole plan, the technical setup, the standing rules and how work is done here, so the project can be understood without reading any code.
 
 - **Stage:** live since 2026-10-02 at https://azqato.com/invests/, as the `invests/` folder of the azqato.github.io repository, which is this project's single source of truth (Repository Hygiene). See Roadmap, Current phase, for what's next. Earlier text: planning is done apart from a few open points (see Risks and Open Questions). No site files exist yet. Where this document describes the site, it describes the plan, not code; the verification checklist in the Roadmap shows which sections have been checked, and against what.
-- **Last documentation audit:** 2026-10-01 (see Documentation audits). The next audit starts from this date.
-- **Other documents:** [README.md](../README.md) is the short public front door. [DESIGN.md](DESIGN.md) covers how the site looks. [PATCHNOTES.md](PATCHNOTES.md) logs every change. [TODO.md](TODO.md) is the author's ideas list. [LICENSE.md](../LICENSE.md) sets the terms of use.
+- **Last documentation audit:** 2026-10-02 (see Documentation audits). The next audit starts from this date.
+- **Other documents:** [README.md](../README.md) is the short public front door. [DESIGN.md](DESIGN.md) covers how the site looks. [PATCHNOTES.md](PATCHNOTES.md) logs every change. [TODO.md](TODO.md) is the author's ideas list. [LICENSE.md](../LICENSE.md) sets the terms of use. [UI-REVIEW.md](UI-REVIEW.md) records the 2026-10-02 UI review and [HOSTING.md](HOSTING.md) the hosting options (both records).
 - **Where the plan came from:** until 2026-10-01 the whole plan lived in README.md. The documentation audit on that date moved it here and into DESIGN.md word for word. Text marked "Added by the 2026-10-01 audit" is new.
 
 ## Core rule: preserve everything
@@ -71,8 +71,8 @@ Personas drafted by the 2026-10-01 audit from the plan; the descriptions are ill
 - No cutting, trimming or summarizing content without the author's sign-off (core rule).
 - No build step and no Node.js (Assumptions).
 - No features that need a server, such as the template's page-feedback form, comments or a mailing list (Design details in DESIGN.md; template ratings).
-- No rules, docs or design taken from azqato.github.io (D5).
-- Nothing pushed, published or deployed until the author says so (D20).
+- No rules, docs or design taken from azqato.github.io (D5). **Audit 2026-10-02:** D5 was superseded by D21, and the author has since asked for azqato.com's colors (P15) and for the two sites' docs to merge; this stands only until those changes are made.
+- Nothing pushed, published or deployed until the author says so (D20). (Launch go-ahead given 2026-10-02; each push still waits for the author's word.)
 
 ## User stories
 
@@ -94,7 +94,7 @@ Personas drafted by the 2026-10-01 audit from the plan; the descriptions are ill
 
 ### MVP (must ship)
 
-Everything in the Site map, with the core rule's inventory check passed for each page:
+Everything in the Site map, with the core rule's inventory check passed for each page. **Shipped 2026-10-02** apart from the redirects (moved to P13). Since v1.1.0 the groups named below are Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources (D12, Site map); the list keeps the plan's names:
 
 - **Shell, on every page:** the top bar with the 💰 Azqato Invests name, search across every page and the ☀️/🌙 theme button (D10, D11); the sidebar with Learn, Tools, Strategies, Resources and FAQ (D12); breadcrumbs and previous/next links; an "On this page" list on reading pages but not on tool pages. azqato.com's top nav above it all, if D9 stays.
 - **Home** (wiki-portal layout): the intro and "Join the Discord" button from invests.html, tiles into each section, and all 7 project cards with their text (D14, D18).
@@ -110,7 +110,8 @@ Everything in the Site map, with the core rule's inventory check passed for each
 
 - Correct out-of-date content across the site, for example the Holy Grail page's missing factsheet numbers, which Composer Atlas now has (D19).
 - Link HFEA to its entry in Atlas's community database once the way to link it is settled (To settle).
-- sitemap.xml and robots.txt, once the site has pages and an address (D4).
+- sitemap.xml and robots.txt, once the site has pages and an address (D4). (Done: sitemap.xml generated; the main repository's robots.txt lists it.)
+- The post-launch items P13 to P17 under the Roadmap's Future updates.
 - Retire the old repos (added 2026-10-02, at the author's request; much later, when the author decides to clean them out): the stocks and vix repos become redirects to this site plus data feeds only (P12).
 - Ideas from docs/TODO.md, turned into Roadmap entries only with the author's say-so (Working Practice).
 
@@ -119,8 +120,8 @@ Everything in the Site map, with the core rule's inventory check passed for each
 - **Static files only.** Plain HTML, CSS and JavaScript, with no build step, no Node.js, and Python only for scripts (Assumptions). There's no server, so nothing that needs one (forms that submit, accounts, comments) is possible.
 - **No data feeds in this repo (author's rule, 2026-10-02; D21).** This repo only displays the site. It holds no data files, no scheduled jobs or GitHub Actions that fetch or generate data, and no scripts that pull market data into it. All data is read at page load from the feed repos (stocks and vix), which run on their own. The only automation allowed here is the GitHub Pages or Cloudflare Pages build that publishes the site. A new data need goes into a feed repo, never here.
 - **The data stays where it is.** Stock data is read from raw.githubusercontent.com/Azqato/stocks/main/data/ and the VIX reading from azqato.github.io/vix/data/vix.js (D6). The VIX file can't come from raw GitHub, which serves it as plain text with `X-Content-Type-Options: nosniff`, so browsers won't run it (Background findings).
-- **Hosting.** azqato.com serves only the azqato.github.io repo, as a Cloudflare Pages build, so this repo needs its own hosting or extra Cloudflare setup (Background findings). The address isn't decided (D4).
-- **Local only.** Nothing is pushed, published or deployed until the author says so (D20). That includes the D7 redirects, which change the live source sites.
+- **Hosting.** azqato.com serves only the azqato.github.io repo, as a Cloudflare Pages build, so this repo needs its own hosting or extra Cloudflare setup (Background findings). The address isn't decided (D4). **Audit 2026-10-02:** settled by D21: the site is a folder of that repository, served by its Cloudflare Pages build at https://azqato.com/invests/ and by GitHub Pages at azqato.github.io/invests/.
+- **Local only.** Nothing is pushed, published or deployed until the author says so (D20). That includes the D7 redirects, which change the live source sites. (The site itself went live on the author's go-ahead, 2026-10-02.)
 - **Content.** The core rule overrides everything: nothing from the sources is cut, trimmed or summarized without sign-off. The author's private project stays out of any public docs (D2, Assumptions).
 - **Templates.** The design comes from Template Interface, the author's private template repo. Its documentation-site template keeps all its demo pages in one file switched by URL hash, so it has to be split into one file per page (Design details in DESIGN.md). Its shared tokens in theme.css are never redefined (DESIGN.md).
 - **People and time.** One maintainer. The plan sets no deadline or budget.
@@ -157,7 +158,7 @@ Drafted by the 2026-10-01 audit from the core rule and the decisions, in priorit
 
 1. **Preserve before polish.** Nothing from the four sources is cut, trimmed or summarized without the author's sign-off, even when it's repetitive, out of date (D19) or awkward to fit the template. When content and layout disagree, the layout changes. A cleaner page that lost a paragraph is a failed move.
 2. **Local until told otherwise.** Nothing is pushed, published or deployed until the author says so (D20), not even a fix for something broken on a live site. Work is finished and verified locally, then waits. A ready change that sits unpublished costs nothing that can't be recovered; a publish can't be taken back.
-3. **This repo sets its own rules.** Azqato Invests is independent (D5). Where azqato.github.io's docs, rules or design say something different, this repo's docs win. azqato.github.io is a source of facts, such as where a feed lives, never of rules.
+3. **This repo sets its own rules.** (**Audit 2026-10-02:** D5 was superseded by D21, so this tenet no longer matches the decisions; it waits for the author's review, P7.10.) Azqato Invests is independent (D5). Where azqato.github.io's docs, rules or design say something different, this repo's docs win. azqato.github.io is a source of facts, such as where a feed lives, never of rules.
 4. **Reuse the feeds, don't move the pipelines.** Pages read the data the stocks and vix repos already publish, even when that's awkward, like loading the VIX reading from another site (D6). A second copy of a pipeline is a second thing to keep running.
 5. **Template structure, source content.** Layout, navigation and styling come from the chosen Template Interface templates (D8); words, numbers, links and warnings come from the sources. Template demo content always comes out, and source content never does.
 6. **No accounts, no tracking.** If a feature needs sign-in, a server or a way to follow visitors, it's out, even when it would make success easier to measure. Anything the site keeps stays in the visitor's own browser.
@@ -169,15 +170,15 @@ Drafted by the 2026-10-01 audit from the core rule and the decisions, in priorit
 | D1 | Scope | Merge [stocks](https://github.com/Azqato/stocks), [vix](https://github.com/Azqato/vix), [leverage](https://github.com/Azqato/leverage) and the current [invests.html](https://github.com/Azqato/azqato.github.io/blob/main/invests.html) into one site, Azqato Invests |
 | D2 | Scope | Net Worth Tracker and the author's private project stay separate. Net Worth Tracker keeps its card on the home page; the private project stays private, as its own README requires. **Changed 2026-10-02 (P9.6):** the private project's name was taken out, because this repository will be public; the decision itself is unchanged, and the earlier wording isn't repeated here for the same reason |
 | D3 | Scope | Everything follows the core rule above |
-| D4 | Hosting | **Changed 2026-10-01.** The site's address isn't decided yet (see To settle); azqato.github.io links to it. **Decided 2026-10-01:** azqato.github.io/invests/, a GitHub Pages project site from a public repository named `invests` (Question 1). Before: the home address was azqato.github.io/invests.html, served as azqato.com/invests |
-| D5 | Hosting | **Changed 2026-10-01.** Azqato Invests is its own independent repo, and this folder becomes it. azqato.github.io only links here; its rules, docs and design don't apply to this site. Before: the code lived in the azqato.github.io repo, with invests.html as the home page and the other pages in an `invests/` folder |
+| D4 | Hosting | **Changed 2026-10-01.** The site's address isn't decided yet (see To settle); azqato.github.io links to it. **Decided 2026-10-01:** azqato.github.io/invests/, a GitHub Pages project site from a public repository named `invests` (Question 1). Before: the home address was azqato.github.io/invests.html, served as azqato.com/invests. **Changed 2026-10-02 (D21):** https://azqato.com/invests/, the `invests/` folder of the azqato.github.io repository |
+| D5 | Hosting | **Changed 2026-10-01.** Azqato Invests is its own independent repo, and this folder becomes it. azqato.github.io only links here; its rules, docs and design don't apply to this site. Before: the code lived in the azqato.github.io repo, with invests.html as the home page and the other pages in an `invests/` folder. **Superseded 2026-10-02 by D21:** the site lives in the azqato.github.io repository after all, in its own `invests/` folder with its own docs |
 | D6 | Hosting | The data pipelines stay in the stocks and vix repos. The new pages read the stock data from GitHub, as the screener already does, and the VIX reading from the vix site (see Background findings) |
 | D7 | Hosting | Every old page under azqato.github.io/stocks/, /vix/ and /leverage/ redirects to its new home. The old repos stay for data and history |
 | D8 | Design | `documentation-site` for every inner page and `wiki-portal`'s directory layout for the home page, borrowing `help-center`'s searchable FAQ and step-by-step guides, `admin-dashboard`'s summary tiles and table styling for the tools, and `blog-article`'s reading-progress bar. The design comes from these Template Interface templates, not from azqato.github.io |
 | D9 | Design | Every page shows azqato.com's top nav (Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support) above the site's own top bar and sidebar. **To re-check:** this was decided when the site was going to live in the azqato.github.io repo (see To settle). **Confirmed 2026-10-01:** keep it |
 | D10 | Design | Light and dark themes, switched with a ☀️/🌙 button |
 | D11 | Design | The site's icon is 💰 |
-| D12 | Content | Pages are grouped by topic: Learn, Tools, Strategies, Resources and FAQ (see Site map) |
+| D12 | Content | **Changed 2026-10-02 (v1.1.0, the author's request):** pages are grouped by what the visitor invests in: Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources, each topic group opening on its landing page (see Site map). Before: Pages are grouped by topic: Learn, Tools, Strategies, Resources and FAQ (see Site map) |
 | D13 | Content | All 15 curated resource categories come over with every link, referral links included, and the affiliate disclosure |
 | D14 | Content | The home page keeps the "Join the Discord" button and all 7 project cards |
 | D15 | Composer Atlas | When the site refers to a Composer.trade strategy, it links to [Composer Atlas](https://composeratlas.com) |
@@ -185,7 +186,7 @@ Drafted by the 2026-10-01 audit from the core rule and the decisions, in priorit
 | D17 | Composer Atlas | Only Composer strategies link to Atlas. Concepts are explained on this site, without Atlas links |
 | D18 | Other projects | Composer Atlas, Net Worth Tracker and Automate Fundamentals appear as home page cards and in-page links, never in the sidebar |
 | D19 | Content | Out-of-date content moves over as it is, and a roadmap item added later corrects all of it. For example, the Holy Grail page says no factsheet data was available, but Composer Atlas now has the numbers |
-| D20 | Working practice | Once development starts, everything stays local until you say otherwise: nothing is pushed, published or deployed (decided 2026-10-01) |
+| D20 | Working practice | Once development starts, everything stays local until you say otherwise: nothing is pushed, published or deployed (decided 2026-10-01). The author gave the go-ahead to publish on 2026-10-02; every later push still needs the author's word |
 | D21 | Hosting | **Changed again 2026-10-02 (Question 18, option D):** the site moves into the azqato.github.io repository, for now as one self-contained `invests/` folder (pages, assets, scripts, inventories and docs), served at https://azqato.com/invests/ by that repository's Cloudflare Pages build (and at azqato.github.io/invests/ by GitHub Pages). Separate repositories were only for the first build and testing. This local repository keeps its own history; the main repository gets the files as a new commit. Folding the files into the main site's own structure is a later step. The stocks and vix repositories still hold the data. Before: **Changed 2026-10-02:** the stocks repository stays the data source and is not the host. The site lives in its own new public repository named `invests` (D4, D5) with no data feeds in it; the stock data workflows and files stay in stocks (D6), and the site reads them from azqato.github.io/stocks/data/, which is the same origin as azqato.github.io/invests/. The stocks repository keeps GitHub Pages on for its data folder while its old pages become D7 redirects. Before: at publish time the author renames the [stocks](https://github.com/Azqato/stocks) repository to `invests`, and it becomes Azqato Invests: the new site replaces its pages, while its data workflows, data files and history stay. This serves the site at azqato.github.io/invests/ (D4) without a new repository, and the stock data becomes same-repo files (updates D6 for stock data; the VIX reading still comes from the vix site). GitHub Pages doesn't redirect after a rename, so a new, small `stocks` repository holds the D7 redirect pages for the old azqato.github.io/stocks/ addresses. Nothing is renamed until the author's go-ahead (D20) |
 
 ## Site map
@@ -217,9 +218,9 @@ Home                                index.html, from invests.html
     └── FAQ                         resources/faq.html, from stocks/faq.html
 ```
 
-**On every page:** the site's top bar with 💰 Azqato Invests, search across every page and the ☀️/🌙 button, under azqato.com's top nav if D9 stays.
+**On every page:** the site's top bar with 💰 Azqato Invests, search across every page and the ☀️/🌙 button, under azqato.com's top nav (D9).
 
-**Home** (wiki-portal layout): the intro and "Join the Discord" button from invests.html, tiles into each section, and all 7 project cards with their text. The four cards that pointed to the old sites (Stocks, Stock Screener, VIX Strategy, Leveraged Strategies) now link inside the site; Automate Fundamentals, Composer Atlas and Net Worth Tracker link out.
+**Home** (wiki-portal layout): the intro and "Join the Discord" button from invests.html, tiles into each section, and all 7 project cards with their text. (Since v0.16.0: one grid of 10 cards, the 7 project cards plus Market Overview & VIX tools, Curated Resources and FAQ; DESIGN.md, Home page.) The four cards that pointed to the old sites (Stocks, Stock Screener, VIX Strategy, Leveraged Strategies) now link inside the site; Automate Fundamentals, Composer Atlas and Net Worth Tracker link out.
 
 **Inner pages** (documentation-site layout): the sidebar with the five sections, and the page itself with breadcrumbs, an "On this page" list and previous/next links.
 
@@ -232,7 +233,7 @@ DESIGN.md describes each layout in detail.
 | stocks | [azqato.github.io/stocks](https://azqato.github.io/stocks/) | 9: home, Philosophy, Metrics, Index & ETF methodology, Screener, Market Overview, FAQ, Finviz guide, Seeking Alpha guide | 6 GitHub Actions workflows: stock and ETF data daily, Market Overview 3 times a weekday, statements and index constituents weekly. The sixth, alert-on-failure.yml, is the failure alert (added 2026-10-01, Question 13; its trigger is read in P1 refreshes) |
 | vix | [azqato.github.io/vix](https://azqato.github.io/vix/) | 3: About, Dashboard, Custom | 1 workflow updates the VIX reading 8 times a weekday |
 | leverage | [azqato.github.io/leverage](https://azqato.github.io/leverage/) | 7: home, 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail, HFEA | None |
-| invests.html | [azqato.com/invests](https://azqato.com/invests) | 1: intro with a Discord button, 7 project cards, 15 categories of curated links (some are referral links) | None |
+| invests.html | [azqato.com/invests](https://azqato.com/invests) (since 2026-10-02 a redirect to this site) | 1: intro with a Discord button, 7 project cards, 15 categories of curated links (some are referral links) | None |
 
 20 pages in total. All four are plain HTML, CSS and JavaScript with no build step.
 
@@ -258,7 +259,7 @@ invests.html and the leverage pages link to azqato.github.io/composer, a GitHub 
 
 ## Background findings
 
-- **azqato.com only serves the azqato.github.io repo (affects D4).** azqato.com/invests is byte-for-byte the repo's invests.html, but azqato.com/stocks/, /vix/ and /leverage/ return 404. That repo's own docs say azqato.com is a Cloudflare Pages build of it, separate from GitHub Pages. A site in its own repo won't appear on azqato.com unless Cloudflare is set up to serve it too.
+- **azqato.com only serves the azqato.github.io repo (affects D4).** azqato.com/invests is byte-for-byte the repo's invests.html, but azqato.com/stocks/, /vix/ and /leverage/ return 404. That repo's own docs say azqato.com is a Cloudflare Pages build of it, separate from GitHub Pages. A site in its own repo won't appear on azqato.com unless Cloudflare is set up to serve it too. (Resolved by D21: the site is a folder of that repo.)
 - **Moot since the D5 change: a page and a folder can share the name `invests`.** This was checked for the old D5. In the azqato.github.io repo, music.html sits next to a music/ folder, and both azqato.com/music and azqato.github.io/music serve the page.
 - **The screener and Market Overview already load their data from GitHub (behind D6)** (raw.githubusercontent.com/Azqato/stocks/main/data/), with a local copy as fallback. Pages elsewhere can read the same feeds without moving any pipelines.
 - **The VIX reading can't come from raw GitHub (affects D6).** The VIX pages load it as a script, `data/vix.js`. raw.githubusercontent.com serves files as plain text with `X-Content-Type-Options: nosniff`, so browsers refuse to run them as scripts. azqato.github.io/vix/data/vix.js serves the same file as JavaScript, and the vix site stays up anyway to hold the D7 redirects.
@@ -280,7 +281,9 @@ Added by the 2026-10-01 audit:
 
 **Update 2026-10-02, restructured (v1.1.0):** the sidebar groups are now Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources (Site map), at new addresses, without redirects (author's decision: live about an hour). The D7 redirect list under Deprecation and Removal points at the new addresses.
 
-Next, in order: P7.9 (the author reviews the live site); then the post-launch list under Future updates (P13); later P11, P12 and P14.
+**Update 2026-10-02, documentation audit (v1.1.1):** README.md, LICENSE.md and every file in docs/ checked against the live site and brought up to date; the findings are under Documentation Versus Reality (entries 13 to 17). The empty github.com/Azqato/invests repository is gone (P13.4). Next, at the author's request: merge these docs into the main repository's docs ("full re-read of everything and ingestion planning" first).
+
+Next, in order: P7.9 (the author reviews the live site); then the post-launch list under Future updates (P13); later P11, P12 and P14 to P17.
 
 **Update 2026-10-02, hosting decided (v0.18.0):** Question 18 answered with option D: the site merges into the azqato.github.io repository as an `invests/` folder, at https://azqato.com/invests/ (D21). Canonical links, og:url and sitemap.xml now use azqato.com's clean addresses (no .html). This repository's history was rewritten to remove the private project's name (Question 16). The files are committed to the main repository locally; nothing is pushed.
 
@@ -334,7 +337,7 @@ Next, in order: P7.9 (the author reviews the live site); then the post-launch li
    5. Tools: screener, Market Overview, VIX Dashboard and Custom builder, reading the existing data feeds.
    6. Check every page against its inventory (core rule). Switching the old addresses to redirects means publishing, so it waits for your go-ahead (D20).
 
-Steps 1 and 2 were completed on 2026-10-01: the author said to resume, and the documentation audit moved the plan into these docs.
+Steps 1 and 2 were completed on 2026-10-01: the author said to resume, and the documentation audit moved the plan into these docs. All four steps are done (2026-10-02); this list is kept as the record. What's next is under Current phase.
 
 ### Milestones
 
@@ -348,8 +351,8 @@ Steps 1 and 2 were completed on 2026-10-01: the author said to resume, and the d
 | M6 | Learn and FAQ | After M5 | Complete 2026-10-02 (P4) |
 | M7 | Strategies | After M6 | Complete 2026-10-02 (P5) |
 | M8 | Tools | After M7 | Complete 2026-10-02 (P6) |
-| M9 | Inventory check of every page | After M8 | In Progress: P7 checks and P8 done 2026-10-02; P7.9 and P7.10 wait for the author |
-| M10 | Publish, with the D7 redirects | When the author says (D20) | In Progress: P9 (the publish plan) done 2026-10-02; P10 waits for the author's go-ahead and Questions 16 and 17 |
+| M9 | Inventory check of every page | After M8 | In Progress: P7 checks and P8 done 2026-10-02; P7.9 (now a review of the live site) and P7.10 wait for the author |
+| M10 | Publish, with the D7 redirects | When the author says (D20) | Published 2026-10-02 (P10 steps 1 to 3); the D7 redirects moved to P13 |
 | M11 | Out-of-date content corrected (D19) | After launch | Planned |
 
 ### Feature breakdown per milestone
@@ -410,7 +413,7 @@ Needs: the author's go-ahead to build.
 2. **Decide about version control.** Ask Question 5 (the repository). Whatever the answer, nothing is pushed (D20).
    1. If the author wants a local git repository now: initialize it with `main` as the default branch, add `.gitattributes` (`* text=auto eol=lf`), and make a first commit of the docs. Update Repository Hygiene's current state.
    2. If not: work continues in the OneDrive folder, and each phase starts by copying the folder as a backup.
-3. **Fix the folder layout.** Proposed, pending Question 3: one folder per section so each page has a short address.
+3. **Fix the folder layout.** Proposed, pending Question 3: one folder per section so each page has a short address. (Superseded by v1.1.0; the current layout is under Folder structure.)
 
    ```
    index.html                      Home
@@ -754,13 +757,37 @@ Runs after P10, whenever the author decides to clean out the old repos. Each rep
 3. Remove the leverage sites' pages the same way, as redirects (D7).
 4. Record each change in PATCHNOTES.md and in the old repos' own notes.
 
+#### P13. Post-launch list (added 2026-10-02, at the author's request)
+
+1. **D7 redirects for the 19 old addresses (on the roadmap; ask before starting, it changes the stocks, vix and leverage repos).** Each old page becomes a redirect page to its new address, keeping every data file serving (stocks `data/`, vix `data/vix.js`). Per page: the old title, `<link rel="canonical" href="NEW">`, `<meta http-equiv="refresh" content="0; url=NEW">`, `<script>location.replace("NEW" + location.hash)</script>` and a plain link. Check each lands in one hop. The list is under Deprecation and Removal. The old sites are served under azqato.github.io (and under azqato.com only if those repos have their own Cloudflare setup; check before writing the redirects).
+2. **The author's review of the live site (P7.9)**, then P7.10 (the drafted PRD sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ).
+3. **Two dead outside links on Resources (on the roadmap),** from the old invests.html: dividendstocksonline.com (expired certificate) and www.denvercondomania.com (times out). Source content, so fixed or removed only with the author's approval (P11).
+4. **Delete the empty github.com/Azqato/invests repository** once testing of the live site is finished (author's decision, 2026-10-02). It was never pushed to and isn't needed for hosting. **Done:** by the 2026-10-02 audit, `gh api repos/Azqato/invests` answered 404 while logged in as Azqato, so the repository is gone.
+
+#### P14. Fold invests into azqato.com's structure (later; design needed; ask first)
+
+The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
+
+#### P17. SEO and landing-page review of every page (added 2026-10-02, owner's request; ask first)
+
+Review the content of all 21 pages against SEO best practice: one clear topic and search intent per page, a descriptive title and meta description, one h1 and a sensible heading order, internal links between related pages, and a reasonable length. In particular, consider turning each group's landing page (Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies) into a short landing page with clear calls to action into its pages, instead of carrying the whole method at once; the long text would move to its own page in the group. That changes source content, so it needs the author's approval page by page (core rule, D19), and it fits with P11's corrections pass and P16 (one VIX page).
+
+#### P15. Adopt azqato.com's colors (added 2026-10-02, owner's request; ask first)
+
+Move the site's colors to azqato.com's palette (the tokens in the main repository's styles.css), so Invests and the main site look like one site. Before changing anything, ask the author which current colors to keep for things that carry meaning: for example the emerald accent and links, the VIX tier colors (calm to panic), gains and losses (green and red) in the Screener and Market Overview, the leverage risk notices, and the Discord button. Keep WCAG AA contrast in both themes (DESIGN.md, Data colors). Pairs with the main PRD's Future update for the shared top bar and theme button, which needs a light palette for the main site.
+
+#### P16. Combine the three VIX pages (added 2026-10-02, owner's request; ask first)
+
+The VIX Strategy, VIX Dashboard and VIX Custom builder explain and run one strategy across three pages. Combine them into one VIX page (or one page with sections or tabs), keeping every item from all three (core rule). Settle first: one page or a landing page with two tools; which address survives; redirects for the others (Deprecation and Removal). Related: the navigation restructure (2026-10-02 proposal), which first groups the three together.
+
 ### Verification checklist
 
-Each PRD and DESIGN.md section that describes the code, and when it was last checked in full against the code. Every section was checked against the built site on 2026-10-02 (P8.1); what didn't match is under Documentation Versus Reality.
+Each PRD and DESIGN.md section that describes the code, and when it was last checked in full against the code. Every section was checked against the built site on 2026-10-02 (P8.1); what didn't match is under Documentation Versus Reality. The 2026-10-02 documentation audit (after v1.1.0) rechecked the rows marked "Audit".
 
 | Section | Status |
 |---|---|
-| PRD: Folder structure (current tree) | Verified 2026-10-02 against the folder listing (P8) |
+| PRD: Folder structure (current tree) | Audit 2026-10-02: matches the folder after v1.1.0 |
+| PRD: Site map | Audit 2026-10-02: matches the page list in scripts/site.py (v1.1.0) |
 | PRD: Repository Hygiene (current state) | Updated 2026-10-02: lives in the azqato.github.io repository as `invests/` (single source of truth); `.gitattributes` and `.gitignore` present; the separate repository is retired |
 | PRD: What's being merged (source page lists) | Verified 2026-10-02 against fresh snapshots of stocks, vix, leverage and azqato.github.io (P7.1) |
 | PRD: System architecture | Verified 2026-10-02 against scripts/site.py and the built pages |
@@ -771,14 +798,14 @@ Each PRD and DESIGN.md section that describes the code, and when it was last che
 | PRD: Third-party integrations | Verified 2026-10-02 against the hosts the built pages request |
 | PRD: Performance requirements | Verified 2026-10-02 with Lighthouse on Home, the Screener and 9 Sig (P7.6) |
 | PRD: Security | Verified 2026-10-02 (P7.8) |
-| PRD: Runbook | Verified 2026-10-02: every local command was run; Deploy and Rollback are written but not run (D20) |
+| PRD: Runbook | Audit 2026-10-02: every local command was run; Deploy was run for v2.11.0 to v2.11.3 of the main repository; Rollback not needed yet |
 | PRD: Page Titles and Social Sharing Tags | Verified 2026-10-02 by script on all 21 pages (P7.4) |
-| PRD: Deprecation and Removal (public surface) | Verified 2026-10-02 against the snapshots' page lists; nothing published |
+| PRD: Deprecation and Removal (public surface) | Audit 2026-10-02: the 21 live addresses, the retired pre-v1.1.0 addresses and the D7 list checked against sitemap.xml and the snapshots' page lists |
 | DESIGN: Color palette | Verified 2026-10-02: docs.css and theme.css carry the recorded values; contrast tested in both themes by browser.py |
 | DESIGN: Typography | Verified 2026-10-02, including the 12px floor and the table fonts (v0.16.0) |
 | DESIGN: Spacing system | Verified 2026-10-02 against docs.css (`--pp-top` 60px, `--pp-rail-w` 260px, `--pp-radius` 6px) |
 | DESIGN: Breakpoints | Verified 2026-10-02: docs.css uses 1150, 1000, 900, 640 and 400px; site.css adds rules at 900 and 640px; Home uses the inner pages' breakpoints, not wiki-portal's (Documentation Versus Reality, entry 11) |
-| DESIGN: Component patterns | Verified 2026-10-02; the Home, Footer and Sidebar notes were out of date and are marked there (entry 11) |
+| DESIGN: Component patterns | Audit 2026-10-02: Sidebar, Breadcrumbs and pager, Search and Theme button updated for v1.0.1 and v1.1.0 |
 | DESIGN: Accessibility standards | Verified 2026-10-02 (P7.5): skip link, focus order, drawer and search focus, landmarks |
 | DESIGN: Animation and motion | Verified 2026-10-02: docs.css and theme.css carry the reduced-motion rules |
 | DESIGN: Theme switching and icon | Verified 2026-10-02 against assets/js/theme.js and the favicon in scripts/site.py |
@@ -791,7 +818,7 @@ Every metric has to work without tracking (Assumptions). The targets were set by
 - **Acquisition:**
   - Search impressions and clicks. Target: baseline over the first 8 weeks after launch. Measured with Google Search Console and Bing Webmaster Tools, which count on the search engine's side (site ownership has to be verified first). Monthly.
   - Page views by referrer (Discord, azqato.com, search). Target: baseline after launch. Host aggregate statistics, if available. Monthly.
-- **Engagement:** page views per section (Learn, Tools, Strategies, Resources, FAQ). Target: baseline after launch. Host aggregate statistics, if available. Monthly.
+- **Engagement:** page views per section (Learn, Tools, Strategies, Resources, FAQ; since v1.1.0 Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources). Target: baseline after launch. Host aggregate statistics, if available. Monthly.
 - **Retention:** not measured. Counting returning visitors needs a way to recognize them, which the no-tracking assumption rules out.
 - **Performance:**
 
@@ -802,11 +829,11 @@ Every metric has to work without tracking (Assumptions). The targets were set by
 | Broken internal links | 0 | Link check in the same run | Before each major update is finished |
 | LCP, CLS, TBT | LCP 2.5 s or less, CLS 0.1 or less, TBT 200 ms or less, mobile | Lighthouse against the local server in Edge: by hand in DevTools, or `npx lighthouse` with `CHROME_PATH` set to Edge (Runbook; used for P7 on 2026-10-02) | Before each major update is finished |
 | Data freshness | VIX: the vix pipeline's latest value; stocks: the stocks pipeline's latest data | Compare the timestamp a page shows with the newest data commit in the source repo | Before each major update is finished; weekly after launch |
-| Uptime | Set once a host is chosen | The host's status page or an external monitor, to be chosen | After launch |
+| Uptime | Set once a host is chosen (now Cloudflare Pages and GitHub Pages; target not set) | The host's status page or an external monitor, to be chosen | After launch |
 
 ## Runbook
 
-Rewritten 2026-10-02 (P8.3) from what was actually run. Deploy and Rollback are written for P10 and haven't been run (D20).
+Rewritten 2026-10-02 (P8.3) from what was actually run. Deploy and Rollback are written for P10 and haven't been run (D20). **Audit 2026-10-02:** Deploy has been run for every push since launch; Rollback hasn't been needed.
 
 ### Prerequisites
 
@@ -853,7 +880,7 @@ Locally: `git revert <commit>`. Once pushed: revert the commit in the azqato.git
 
 ### Environment configs
 
-Two, once published: local (`python -m http.server` from the repository root) and production (GitHub Pages at https://azqato.github.io/invests/, not deployed). The differences that matter are listed under Verification Environment; the base path is the main one, and every link and fetch here is relative or absolute https, so both work.
+Two: local (`python -m http.server` from `invests/` or the repository root) and production, which is two hosts building the same `main`: Cloudflare Pages at https://azqato.com/invests/ (canonical) and GitHub Pages at https://azqato.github.io/invests/. The differences that matter are listed under Verification Environment; the base path is the main one, and every link and fetch here is relative or absolute https, so both work.
 
 ### Environment variable reference
 
@@ -876,7 +903,7 @@ None. The site needs no environment variables, keys or secrets. The source repos
 
 ### Monitoring
 
-Nothing is live, so there are no logs or uptime alerts yet. Once published, GitHub Pages shows each deploy under the repository's Actions tab ("pages build and deployment"); a failed deploy shows there and the previous version stays up. The data comes from the stocks and vix repos' GitHub Actions; their runs and failures show in each repo's Actions tab. stocks has a workflow called alert-on-failure.yml, whose trigger and target weren't read in this audit.
+No uptime alerts are set up. Each push to the azqato.github.io repository deploys twice: Cloudflare Pages lists each build in its dashboard, and GitHub Pages shows each under the repository's Actions tab ("pages build and deployment"); a failed deploy shows there and the previous version stays up. The post-deploy comparison in Deploy step 4 is the check that a change arrived. The data comes from the stocks and vix repos' GitHub Actions; their runs and failures show in each repo's Actions tab. stocks has a workflow called alert-on-failure.yml, whose trigger and target weren't read in this audit.
 
 ## Technical Requirements
 
@@ -886,7 +913,7 @@ A static, multi-page website with no server code and no database. Each page is i
 
 ```
 Visitor's browser
-├── pages, CSS and JavaScript   from azqato.github.io/invests/ (GitHub Pages, D21; not published yet)
+├── pages, CSS and JavaScript   from azqato.com/invests/ (Cloudflare Pages) or azqato.github.io/invests/ (GitHub Pages), D21
 ├── stock data (JSON)           from raw.githubusercontent.com/Azqato/stocks/main/data/,
 │                               falling back to azqato.github.io/stocks/data/
 │                               written by the stocks repo's GitHub Actions
@@ -976,7 +1003,7 @@ There's no API; the site only reads files. This is how the source sites do it to
 
 ### State management
 
-No application state lives anywhere but the open page and the visitor's browser storage: the theme choice (planned) and the two data caches above. No cookies: none of the scanned stocks and vix pages uses `document.cookie`, and the plan adds none. The site sends no visitor data anywhere beyond the ordinary requests a browser makes for files (see Security).
+No application state lives anywhere but the open page and the visitor's browser storage: the theme choice and the data caches above. No cookies: none of the scanned stocks and vix pages uses `document.cookie`, and the plan adds none. The site sends no visitor data anywhere beyond the ordinary requests a browser makes for files (see Security).
 
 ### Third-party integrations
 
@@ -997,7 +1024,7 @@ Set by the 2026-10-01 audit; no rule existed. Targets for a mobile Lighthouse ru
 
 ### Known technical debt
 
-None in this repo yet. Planned compromises, each with what the correct solution would be:
+None in this repo yet. Planned compromises, each with what the correct solution would be. **Audit 2026-10-02:** the azqato.com nav copy exists (`AZQATO_NAV` in scripts/site.py) and is the live drift risk; the Chart.js hash and the stocks fallback are done (P6); the rest stand.
 
 - **A copy of azqato.com's nav, if D9 stays.** It can drift from what tools/build-nav.py stamps onto azqato.com. Correct: generate it from the same page list, or drop D9.
 - **The VIX reading depends on another site.** If azqato.github.io/vix stops serving data/vix.js, the reading falls back to a third-party relay. Correct: a feed this site can load directly, such as JSON with CORS headers published by the vix repo. That's a change to the vix repo, so it's the author's call.
@@ -1022,7 +1049,7 @@ Read from the code and the git history on 2026-10-02 (P8.3).
 
 **Git:**
 
-- One branch, `main`; no remote yet (D20).
+- One branch, `main`; no remote yet (D20). (Since 2026-10-02: the azqato.github.io repository's `main`, pushed to GitHub on the author's word. Commit there as Azqato, staging files by name; its pre-commit hook blocks em dashes and skips `invests/inventory/`.)
 - Commit messages: a short plain summary in sentence case, no prefix or ticket number (for example "VIX Custom: categories above the allocation, tighter heading"), with a body when the change needs explaining, and a `Co-Authored-By` trailer when an AI model helped.
 - The generated pages are committed with the change that generated them.
 
@@ -1033,7 +1060,7 @@ Read from the code and the git history on 2026-10-02 (P8.3).
 - The plan addresses the author as "you".
 - The plan's headings are in sentence case. The PRD's required sections keep the names the documentation prompt gives them.
 - No em dashes (see Writing Style).
-- PATCHNOTES.md uses semantic versioning. Until the site launches, versions stay below 1.0.0: a minor version for a change to the plan, docs or site, and a patch version for a small fix (set by the 2026-10-01 audit).
+- PATCHNOTES.md uses semantic versioning. Until the site launches, versions stay below 1.0.0: a minor version for a change to the plan, docs or site, and a patch version for a small fix (set by the 2026-10-01 audit). The site launched as v1.0.0 on 2026-10-02; the same minor and patch rule continues. Each invests change is also summarized in the main repository's docs/PATCHNOTES.md.
 
 ## Writing Style
 
@@ -1045,29 +1072,6 @@ No rule existed, so the default was adopted on 2026-10-01. It covers the docs, t
 - Leave any instance the text needs in order to mean anything, such as a rule naming the character it prohibits.
 - Tone: direct and functional, plain declarative sentences, no marketing language, no filler openings.
 - Text moved from the sources comes over as it is (core rule), with one exception the author approved on 2026-10-01 (Question 14): em dashes in moved text are replaced under this rule, the wording otherwise unchanged, and every replacement is listed in PATCHNOTES.md. scripts/check.py fails on any em dash in page text.
-#### P13. Post-launch list (added 2026-10-02, at the author's request)
-
-1. **D7 redirects for the 19 old addresses (on the roadmap; ask before starting, it changes the stocks, vix and leverage repos).** Each old page becomes a redirect page to its new address, keeping every data file serving (stocks `data/`, vix `data/vix.js`). Per page: the old title, `<link rel="canonical" href="NEW">`, `<meta http-equiv="refresh" content="0; url=NEW">`, `<script>location.replace("NEW" + location.hash)</script>` and a plain link. Check each lands in one hop. The list is under Deprecation and Removal. The old sites are served under azqato.github.io (and under azqato.com only if those repos have their own Cloudflare setup; check before writing the redirects).
-2. **The author's review of the live site (P7.9)**, then P7.10 (the drafted PRD sections: tenets, personas, user stories, goals, success criteria, metrics, press release, FAQ).
-3. **Two dead outside links on Resources (on the roadmap),** from the old invests.html: dividendstocksonline.com (expired certificate) and www.denvercondomania.com (times out). Source content, so fixed or removed only with the author's approval (P11).
-4. **Delete the empty github.com/Azqato/invests repository** once testing of the live site is finished (author's decision, 2026-10-02). It was never pushed to and isn't needed for hosting.
-
-#### P14. Fold invests into azqato.com's structure (later; design needed; ask first)
-
-The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
-
-#### P17. SEO and landing-page review of every page (added 2026-10-02, owner's request; ask first)
-
-Review the content of all 21 pages against SEO best practice: one clear topic and search intent per page, a descriptive title and meta description, one h1 and a sensible heading order, internal links between related pages, and a reasonable length. In particular, consider turning each group's landing page (Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies) into a short landing page with clear calls to action into its pages, instead of carrying the whole method at once; the long text would move to its own page in the group. That changes source content, so it needs the author's approval page by page (core rule, D19), and it fits with P11's corrections pass and P16 (one VIX page).
-
-#### P15. Adopt azqato.com's colors (added 2026-10-02, owner's request; ask first)
-
-Move the site's colors to azqato.com's palette (the tokens in the main repository's styles.css), so Invests and the main site look like one site. Before changing anything, ask the author which current colors to keep for things that carry meaning: for example the emerald accent and links, the VIX tier colors (calm to panic), gains and losses (green and red) in the Screener and Market Overview, the leverage risk notices, and the Discord button. Keep WCAG AA contrast in both themes (DESIGN.md, Data colors). Pairs with the main PRD's Future update for the shared top bar and theme button, which needs a light palette for the main site.
-
-#### P16. Combine the three VIX pages (added 2026-10-02, owner's request; ask first)
-
-The VIX Strategy, VIX Dashboard and VIX Custom builder explain and run one strategy across three pages. Combine them into one VIX page (or one page with sections or tabs), keeping every item from all three (core rule). Settle first: one page or a landing page with two tools; which address survives; redirects for the others (Deprecation and Removal). Related: the navigation restructure (2026-10-02 proposal), which first groups the three together.
-
 - Record each sweep in PATCHNOTES.md: how many instances were found, and where. The 2026-10-01 sweep found none.
 
 ## Browser Testing
@@ -1088,10 +1092,10 @@ No rule existed, so the default was adopted on 2026-10-01, alongside D20.
 - Verify locally, never against production, unless a request explicitly asks for a production check. Run the change from the local server (Runbook). Production is where a change is confirmed to have arrived, not where it's tested.
 - Testing against production means the change has already shipped, so the test only shows what visitors already see. It also puts load or test data on a live system, and turns a failure into a rollback instead of a fix made before pushing.
 - Verifying functionality is local. Confirming a deploy landed is a separate step after a push: fetch the deployed files and check they match what was verified locally. That's a comparison, not a test, and it isn't an exception to this rule.
-- For now D20 goes further: nothing is pushed, published or deployed at all until the author says so.
+- For now D20 goes further: nothing is pushed, published or deployed at all until the author says so. (Since launch: each push needs the author's word.)
 - Known differences between local and production, each of which can hide a bug until the site is deployed:
   - **Base path.** If the site is served from a subfolder, as the stocks, vix and leverage sites are under azqato.github.io, links and fetches that start with `/` reach the domain root in production but the repository root locally. Use relative links.
-  - **Extensionless addresses.** azqato.com, a Cloudflare Pages build, answers /page.html with a 307 redirect to /page; Python's `http.server` doesn't. If this site's host does the same, check links and redirects against the host's behavior.
+  - **Extensionless addresses.** azqato.com, a Cloudflare Pages build, answers /page.html with a 307 redirect to /page; Python's `http.server` doesn't. If this site's host does the same, check links and redirects against the host's behavior. (It does: the canonical addresses drop `.html`, and the post-deploy comparison fetches the clean form.)
   - **Pages opened from disk.** A page opened from file:// behaves differently from both the local server and production (Runbook).
   - **Caching.** The host and GitHub may cache vix.js and the data files, while local tests see fresh files. A stale reading in production may be caching rather than a bug (cache lifetimes not measured).
 - Never point a destructive or state-changing check at production: no writes, deletes, test records, or anything that sends mail or a webhook. If something can only be exercised against a live system, stop and ask.
@@ -1119,15 +1123,15 @@ No earlier testing rule existed, so nothing was replaced. The default was adopte
 ## Security
 
 - **Authentication model:** none. There are no accounts or sign-in (Assumptions).
-- **Authorization model:** none. Every page is public once published; until then, nothing is reachable from outside (D20).
-- **Data storage:** only in the visitor's browser: the theme choice (planned), the cached Market Overview feed and the last VIX reading (`vix_last_known`). None of it is personal data, nothing leaves the browser, and there are no cookies.
+- **Authorization model:** none. Every page is public once published; until then, nothing is reachable from outside (D20). Since 2026-10-02 everything in `invests/` is public, including docs/, scripts/ and inventory/ (P14).
+- **Data storage:** only in the visitor's browser: the theme choice (`azqato-invests-theme`), the cached Market Overview and screener feeds and the last VIX reading (`vix_last_known`). None of it is personal data, nothing leaves the browser, and there are no cookies.
 - **Environment variables and secrets:** the site needs none, and none are in this repo (checked 2026-10-01, and again by pattern search on 2026-10-02, P7.8). The source repos' workflows keep their own settings.
 - **Third-party trust:** loading a page makes the visitor's browser contact raw.githubusercontent.com and azqato.github.io, and on the VIX pages cdn.jsdelivr.net. If the VIX fallback runs, it also contacts api.allorigins.win, which relays the request to Yahoo Finance. Each receives what any web request carries: the visitor's IP address, browser user agent and possibly the referring page. Nothing else is sent. Clicking an outbound link (Composer Atlas, Discord, brokers and the other resources) takes the visitor to that site.
 - **Known attack surface:**
   - Chart.js from jsDelivr without an integrity hash: a tampered CDN file would run on the VIX pages. Mitigation today: the version is pinned in the URL (4.4.0). Planned: add an integrity hash or serve a copy from this site (Known technical debt). **Done (P6):** both VIX tools load it with a sha384 integrity hash and `crossorigin="anonymous"`.
   - Data from the feeds and the allorigins relay: if a page inserts fetched text as HTML, a tampered response could inject script. Checked 2026-10-01 (P1): the screener (12 uses in screener.js) and Market Overview (1 use) build rows and cards with `innerHTML` from feed values such as tickers and category names, without escaping; the VIX scripts don't use `innerHTML`. The feeds are the author's own pipeline, so the risk is low; escape feed values when these tools move (P6), and prefer `textContent` and number parsing over `innerHTML`. **Fixed 2026-10-02 (P7.8):** scripts/site.py wraps every stock feed's `res.json()` in `azqClean()`, which strips `<` and `>` from each text value before the page uses it, so feed text can't add markup. The VIX tools insert only numbers and their own labels.
   - Links that open in a new tab should carry `rel="noopener"`. Current browsers imply it, but being explicit costs nothing. Checked 2026-10-02 (P7.8): every one does.
-  - Template Interface is a private repo. Copying its files here publishes them if this repo is ever made public (Question 5). The repository will be public long term (2026-10-02), so this needs the author's answer before it is (Question 16).
+  - Template Interface is a private repo. Copying its files here publishes them if this repo is ever made public (Question 5). The repository will be public long term (2026-10-02), so this needs the author's answer before it is (Question 16). (Answered: publish them; they are public in the azqato.github.io repository.)
 - **Dependency policy:** no package manager. The one third-party library, Chart.js, is pinned to an exact version in its URL. Default set by the 2026-10-01 audit: pin exact versions, add integrity hashes, review third-party files at each major update, and check the Chart.js version against its security advisories when the VIX pages move.
 
 ## Repository Hygiene
@@ -1170,12 +1174,12 @@ The project had no licence. The default posture was adopted on 2026-10-01 and wr
 - **No licence without its text:** a bare licence name with no licence file behind it is an ambiguity, not a grant.
 - **What LICENSE.md doesn't claim:** it doesn't override platform terms (a host's own view and fork rights operate independently and aren't enlarged); it doesn't claim third-party data (market prices, index readings, statements, constituent lists, Chart.js, linked sites); and it doesn't restrict fair use or fair dealing.
 - **Domain disclaimer:** NOT FINANCIAL ADVICE, including that leveraged strategies can lose money quickly, that backtests and past results don't predict future returns, and that some links are referral links.
-- **Permission requests** go to this repository's public issue tracker on GitHub. The repository isn't published, so there's no tracker yet; LICENSE.md says so, and the address gets added once it exists (Question 7).
+- **Permission requests** go to this repository's public issue tracker on GitHub. The repository isn't published, so there's no tracker yet; LICENSE.md says so, and the address gets added once it exists (Question 7). **Audit 2026-10-02:** LICENSE.md pointed at github.com/Azqato/invests/issues, which no longer exists; it now points at https://github.com/Azqato/azqato.github.io/issues, the repository the site lives in, which the main site's own LICENSE.md also uses.
 - **Machine-readable layer:** when the site gets a robots.txt of its own, it stays fully open (`User-agent: *` and `Allow: /`) with a comment saying that's deliberate, and LICENSE.md is authoritative if the two ever disagree. LICENSE.md already says so.
 
 ## Social Sharing Tags
 
-No rule existed for this site, so the default was adopted on 2026-10-01. There are no pages yet, so nothing has been checked; this is the rule pages are built to. It's a policy record: changing a page's head is a separate change.
+No rule existed for this site, so the default was adopted on 2026-10-01. There are no pages yet, so nothing has been checked; this is the rule pages are built to. (Pages exist since 2026-10-02; see the checks below.) It's a policy record: changing a page's head is a separate change.
 
 - Every shareable page carries six tags: og:title, og:description, og:url, og:type, og:site_name and twitter:card. og:title, og:description and og:url are written per page. og:type is "website" on every page. og:site_name is the same everywhere: "Azqato Invests" by default, 14 characters (Question 6).
 - og:url is the page's own absolute https address, never a relative path and never the site root. The domain comes from what the project has once D4 is decided (the sitemap, a CNAME file, robots.txt or the deploy config), used exactly as written and never guessed. Until then, no page can have a correct og:url.
@@ -1187,13 +1191,13 @@ No rule existed for this site, so the default was adopted on 2026-10-01. There a
 - Excluded from sharing tags: error pages such as a 404, mockups, scratch or work-in-progress files, and anything left out of the sitemap or marked noindex. None exist yet; list them here as they appear.
 - **Compliance checks** (read and report; counts by script, not by eye): all six tags on every page that should have them; og:title 70 characters or fewer, og:description 200 or fewer, og:site_name 20 or fewer, with the count reported for anything over the target budgets; every og:url absolute, https and unique across the site; no og:title containing the og:site_name; where og:image exists, its width, height and alt tags exist, its URL is absolute and its file is in the repository; where it doesn't, twitter:card is "summary".
 
-**Checked 2026-10-02 (P7.4, P9.2), by script on all 21 pages:** all six tags present on every page; og:url absolute, https and unique (https://azqato.github.io/invests/ plus the page's path, with folder pages ending in `/`), matching the canonical link; og:site_name "Azqato Invests" (14 characters); no og:image, so twitter:card is "summary" everywhere. Nothing is excluded: there's no 404 page or draft page.
+**Checked 2026-10-02 (P7.4, P9.2), by script on all 21 pages:** all six tags present on every page; og:url absolute, https and unique (https://azqato.github.io/invests/ plus the page's path, with folder pages ending in `/`; since v0.18.0 https://azqato.com/invests/ plus the page's path without `.html`), matching the canonical link; og:site_name "Azqato Invests" (14 characters); no og:image, so twitter:card is "summary" everywhere. Nothing is excluded: there's no 404 page or draft page.
 
 **Starting point from the source**, read 2026-10-01 and counted by script. invests.html, which becomes Home and Resources, carries: og:title "Free Investing Tools and a Curated Resource Hub" (47 characters, within budget, no site name); og:description identical to its meta description, "Free investing tools built by Azqato, plus a hand-picked hub of brokers, screeners, ETF lists, charts and economic data. Nothing here is financial advice." (154 characters: over the 150 target, under the 200 maximum); og:type "website"; og:site_name "Azqato"; twitter:card "summary"; og:url and canonical `https://azqato.com/invests`. Those values were written for azqato.com, under azqato.github.io's rules. Home's tags get written when Home is built, with these as the starting point.
 
 ## Page Titles
 
-No rule existed for this site, so the default was adopted on 2026-10-01. There are no pages yet; this is a policy record, and changing a title is a separate change.
+No rule existed for this site, so the default was adopted on 2026-10-01. There are no pages yet; this is a policy record, and changing a title is a separate change. (Pages exist since 2026-10-02; check.py checks every title. Since v1.1.0 the landing pages are titled by their group, for example "Individual Stocks - Azqato Invests"; the old "Learn - Azqato Invests" is gone.)
 
 - The shape is "<page name> - Azqato Invests". The first 30 characters must identify the page on their own, and the whole title is 60 characters or fewer, counting the 3-character " - " separator. Truncation removes from the end, so front-loading the page name satisfies both limits.
 - The brand goes last, because the favicon already marks the tab. The home page inverts this, and only the home page: there the brand leads. Proposed home title: "Azqato Invests - Investing Tools and Resources" (46 characters), which keeps the wording of invests.html's own title, "Investing Tools and Resources - Azqato".
@@ -1217,23 +1221,23 @@ No rule existed for this site, so the default was adopted on 2026-10-01. There a
 - Public facing: a published page address. Removing or moving one leaves a redirect to whatever replaces it, so the old address keeps resolving.
 - Internal: the files that build the site, and anything else not reachable from outside. A source file isn't public facing even when its name appears in an address, because the address is the contract, not the file. Removing one is a plain delete: no redirect, no stub file, no tombstone.
 
-The deploy boundary is the published site: a page is public facing once its address has been published. Nothing in this repo has been published, so today everything here is internal.
+The deploy boundary is the published site: a page is public facing once its address has been published. Nothing in this repo has been published, so today everything here is internal. **Audit 2026-10-02:** published since 2026-10-02, so the 21 page addresses are public facing.
 
 **Mechanism.** Not decided; it depends on the host (D4). Some static hosts offer redirect rules. GitHub Pages has no server-side redirects, so a moved page there is replaced by a small HTML page that sends visitors on (to confirm when the host is chosen). The D7 redirects live in the old repos, since those serve the old addresses, and the vix repo must keep serving data/vix.js after its pages redirect (D6). The reasoning is recorded here so it isn't relitigated: old addresses are shared in bookmarks, Discord messages and search results, and a broken one is lost traffic and a broken promise.
 
 **Public surface.**
 
-- This repo: nothing yet. Nothing is published; once it is, the 21 addresses in sitemap.xml are the public surface.
+- This repo: nothing yet. Nothing is published; once it is, the 21 addresses in sitemap.xml are the public surface. (Since 2026-10-02: the 21 addresses in sitemap.xml, under https://azqato.com/invests/. The files under docs/, scripts/ and inventory/ are reachable too but aren't pages.)
 - Governed by D7, the old addresses in the source repos:
   - azqato.github.io/stocks/: index.html, philosophy.html, metrics.html, indices.html, finviz.html, seekingalpha.html, screener.html, market.html, faq.html
   - azqato.github.io/vix/: index.html, strategy.html, custom.html
   - azqato.github.io/leverage/: index.html, 3sig.html, 6sig.html, 9sig.html, tqqq-ftlt.html, holy-grail.html, hfea.html
-- Open: azqato.com/invests (invests.html in the azqato.github.io repo). Whether it becomes a redirect, keeps a card, or gets a nav item is on To settle (D4). Now Question 17, with a recommendation.
+- Open: azqato.com/invests (invests.html in the azqato.github.io repo). Whether it becomes a redirect, keeps a card, or gets a nav item is on To settle (D4). Now Question 17, with a recommendation. (Settled: a redirect page plus `_redirects` rules, owned by the main repository.)
 - Not this site's surface: the data addresses the pages read (raw GitHub and azqato.github.io/vix/data/vix.js), which belong to the source repos and stay (D6).
 
 **The D7 redirect list (P9.4, 2026-10-02).** Each old address goes to its new page in one hop. Not done: it changes the live source sites, so it waits for P10 and the author's go-ahead (D20).
 
-| Old address (azqato.github.io/...) | New address (azqato.github.io/invests/...) |
+| Old address (azqato.github.io/...) | New address (azqato.com/invests/...; links drop `.html`) |
 |---|---|
 | stocks/ (index.html) | stocks/ |
 | stocks/philosophy.html | stocks/philosophy.html |
@@ -1255,13 +1259,13 @@ The deploy boundary is the published site: a page is public facing once its addr
 | leverage/holy-grail.html | leveraged/holy-grail.html |
 | leverage/hfea.html | leveraged/hfea.html |
 
-A 20th, outside D7 and waiting on Question 17: azqato.github.io/invests.html (azqato.com/invests), whose content became Home and Resources.
+A 20th, outside D7 and waiting on Question 17: azqato.github.io/invests.html (azqato.com/invests), whose content became Home and Resources. (Done 2026-10-02 in the main repository.)
 
 **Mechanism (decided for GitHub Pages, P9.4).** GitHub Pages has no server-side redirects, so each old page is replaced in its own repo by a small HTML file carrying the old page's title, a `<link rel="canonical">` to the new address, `<meta http-equiv="refresh" content="0; url=NEW">`, a `location.replace(NEW + location.hash)` script so `#section` links survive, and a plain link to the new page for anyone with scripts and refresh off. This is one hop: the old address answers 200 and sends the browser straight to the new page. Search engines treat an immediate meta refresh like a permanent redirect. The vix repo keeps serving data/vix.js and the stocks repo keeps data/ (D6, D21); only the HTML pages change. Old in-page anchors don't map one to one everywhere, so the hash is carried as it is and lands at the top of the page if the section's id changed.
 
-**Compatibility entries.** Once any exist, they're permanent, never chained (each redirect reaches a real page in one hop), and never reused to point at different content, since a reused address silently serves the wrong thing.
+**Compatibility entries.** Once any exist, they're permanent, never chained (each redirect reaches a real page in one hop), and never reused to point at different content, since a reused address silently serves the wrong thing. The one so far, invests.html to invests/, belongs to the main repository and is recorded in its docs.
 
-**Retired items.** None yet.
+**Retired items.** The first page addresses, live for about an hour on 2026-10-02 and retired without redirects by the author's decision in v1.1.0: learn/ (index, philosophy, metrics, indices, finviz, seekingalpha), tools/ (screener, market, vix-dashboard, vix-custom), strategies/ (vix, leveraged/ and its six pages) and faq.html. Their pages live on at the addresses in the Site map. They now answer 404; don't reuse them for different content.
 
 **Historical records.** Patch notes and decision history, such as the "Before:" text in D4 and D5, are never rewritten when something is removed.
 
@@ -1283,6 +1287,11 @@ The code is the truth about what is; the docs are the truth about what was inten
 | 10 | 2026-10-02 | Security: the screener and Market Overview put feed text into the page unescaped, to be fixed in P6 | Still unescaped after P6 | The code | Resolved 2026-10-02 (P7.8): `azqClean()` in scripts/site.py |
 | 11 | 2026-10-02 | DESIGN.md: Home has content up to 1120px, section tiles then project cards, and wiki-portal's breakpoints; inner pages cap content at 760px; the footer's content "isn't decided" | Since v0.16.0 every page runs to 1400px, Home is one grid of 10 cards on the inner pages' breakpoints, and the footer holds the brand, notice, links and the VIX disclaimer lines | The code | Resolved 2026-10-02: DESIGN.md marks each as superseded, with the old text kept |
 | 12 | 2026-10-02 | `.gitignore`'s comment names tools/snapshot.py | The script is scripts/snapshot.py | The folder | Resolved 2026-10-02: comment corrected |
+| 13 | 2026-10-02 (audit) | README.md, the PRD's Constraints, Runbook, Monitoring, Security, Deprecation and Removal, and DESIGN.md's intro describe the site as not published | Live at https://azqato.com/invests/ since 2026-10-02 | The live site | Resolved by the audit: each marked with the current state, original text kept |
+| 14 | 2026-10-02 (audit) | P13 to P17 belong under Future updates | They had been inserted inside Writing Style, splitting its last bullet off | The file | Resolved by the audit: moved under Future updates after P12 |
+| 15 | 2026-10-02 (audit) | LICENSE.md: permission requests go to github.com/Azqato/invests/issues | That repository returns 404 (deleted) | GitHub | Resolved by the audit: LICENSE.md points at the azqato.github.io issue tracker |
+| 16 | 2026-10-02 (audit) | D5, Tenet 3, Non-goals and Working Practice: this site takes no rules, docs or design from azqato.github.io | D21 put the site in that repository, and the author has asked for its colors (P15) and for the docs to merge | The author's decisions | Open: marked in each place; for the author's review (P7.10) and the docs merge |
+| 17 | 2026-10-02 (audit) | DESIGN.md: sidebar groups, breadcrumbs, pager and a 640px pager stack; D12 and the Site map's old groups | v1.0.1 and v1.1.0 changed all of them | The code | Resolved by the audit: updated, with the earlier text kept |
 
 ## Risks and Open Questions
 
@@ -1307,9 +1316,9 @@ The code is the truth about what is; the docs are the truth about what was inten
 - The data addresses: the VIX pages break if pointed at raw GitHub (nosniff).
 - Docs that name the author's private project. Its name was removed on 2026-10-02 (P9.6) because the repository will be public; keep it out (Assumptions). Earlier commits in this repository's local history still contain it (Question 16).
 
-**Work in progress:** none in this repo. It isn't a repository, so there are no uncommitted changes, branches or stubs. **2026-10-02:** it is a repository now, on `main`, with everything committed; no branches or stubs. In the sources, stocks and vix are under active development (above).
+**Work in progress:** none in this repo. It isn't a repository, so there are no uncommitted changes, branches or stubs. **2026-10-02:** it is a repository now, on `main`, with everything committed; no branches or stubs. **Audit 2026-10-02:** `invests/` is fully committed and pushed in the azqato.github.io repository; next is merging these docs into the main repository's docs. In the sources, stocks and vix are under active development (above).
 
-**Uncertain, not checked:** if this repo were published as a GitHub Pages project site named `invests`, it would sit at azqato.github.io/invests/, beside azqato.github.io's own invests.html at azqato.github.io/invests. How GitHub Pages resolves the two wasn't checked. Still unchecked on 2026-10-02: it can only be seen once the project site exists. Question 17 recommends retiring invests.html as a redirect, which removes the question.
+**Uncertain, not checked:** if this repo were published as a GitHub Pages project site named `invests`, it would sit at azqato.github.io/invests/, beside azqato.github.io's own invests.html at azqato.github.io/invests. How GitHub Pages resolves the two wasn't checked. Still unchecked on 2026-10-02: it can only be seen once the project site exists. Question 17 recommends retiring invests.html as a redirect, which removes the question. (Removed: invests.html is a redirect, and the site lives in the same repository.)
 
 **From the plan:**
 
@@ -1371,7 +1380,7 @@ How anyone, person or AI model, works on this project. These are instructions, n
 
 - Never cut, trim or summarize source content without the author's sign-off. The author called the core rule very important, and lost content is the failure this project exists to avoid.
 - Never push, publish or deploy without the author's say-so (D20). A publish can't be taken back from caches, search engines or the people who saw it.
-- Never take rules, docs or design from azqato.github.io (D5). It's a separate project with different decisions, and copying its rules would silently override this repo's.
+- Never take rules, docs or design from azqato.github.io (D5). It's a separate project with different decisions, and copying its rules would silently override this repo's. (Unless the author asks, as for P15 and the docs merge; Documentation Versus Reality, entry 16.)
 - Never change the stocks, vix or leverage repos, or azqato.github.io outside `invests/`, as part of work here unless the author asks. Where the two meet (nav, sitemap, robots, redirects), update both sets of docs; the main repository's own docs (docs/PRD.md, DESIGN.md, PATCHNOTES.md) govern everything outside `invests/`. They keep the data and the live sites running (D6, D7).
 - Never correct out-of-date content while moving it (D19). The move is checked against unchanged text, and corrections come later in one pass.
 - Never add tracking, accounts, or anything that needs a server. The site has none by design (Assumptions, Non-goals).
@@ -1391,7 +1400,7 @@ How anyone, person or AI model, works on this project. These are instructions, n
 **docs/TODO.md:**
 
 - Check docs/TODO.md before pushing an update to production. While nothing is pushed (D20), check it when a major update is finished instead.
-- Once the project has a remote, fetch first and check whether docs/TODO.md changed there (for example, edited in the browser). If it did, bring that change in before pushing, so the author's edit is never overwritten.
+- Once the project has a remote (it has, since 2026-10-02), fetch first and check whether docs/TODO.md changed there (for example, edited in the browser). If it did, bring that change in before pushing, so the author's edit is never overwritten.
 - If it holds ideas, ask the author every time whether to turn them into Roadmap updates. On a yes, follow five steps. Never build anything from an idea without an answer.
   1. Gather: read everything the idea points to. For a link, make at most two attempts: the session's web fetch tool, then one headless Edge load with a normal browser user agent. Never log in, use the author's accounts or cookies, or go through a mirror or scraper. If a source can't be read in full, ask the author for its text, listing each unreadable source by author and link with what little was read; never guess a source's content from its link, title or preview.
   2. Interpret: work out which concept is meant. One note may hold several, or none worth pursuing.
@@ -1404,11 +1413,12 @@ How anyone, person or AI model, works on this project. These are instructions, n
 
 **Verification checklist:** when an update changes an area of the code, check that area's PRD or DESIGN.md section against the code in the same session, record any discrepancy under Documentation Versus Reality, and mark the section verified, with the date, on the Roadmap's checklist. Check only the sections the update touches, never the whole list at once.
 
-**CLAUDE.md:** the project has none, so there are no CLAUDE.md rules to record.
+**CLAUDE.md:** the project has none, so there are no CLAUDE.md rules to record. (Checked 2026-10-02: neither does the azqato.github.io repository.)
 
 ## Documentation audits
 
 - **2026-10-01, the first audit.** Run with the documentation prompt (azqato.github.io/prompts/p/documentation.html) on this folder as the independent repo, after the author approved it. It surveyed the folder (README.md only); read the plan in full; checked it against the prompt's rules; and read the sources the plan depends on: Template Interface at commit 61acfcb (the shared CSS, documentation-site, wiki-portal, and the accessibility section of its DESIGN.md), the page and workflow lists of stocks, vix and leverage on GitHub, the external hosts and browser storage in their pages, and invests.html's head tags. It created docs/PRD.md, DESIGN.md, PATCHNOTES.md, TODO.md and LICENSE.md, rewrote README.md as the front door, and moved the plan word for word. It created no robots.txt, sitemap.xml, CLAUDE.md, ignore file or attributes file, and ran no version control command. Details are in PATCHNOTES.md under v0.2.0.
+- **2026-10-02, the second audit (v1.1.1),** at the author's request, as the first step of merging these docs into the main repository's docs. It read README.md, LICENSE.md and every file in docs/ in full and checked them against the live site, the page list in scripts/site.py, the folder, GitHub (github.com/Azqato/invests is gone; the azqato.github.io tracker is open) and the main repository. It rewrote README.md for the live site, pointed LICENSE.md's permission route at the azqato.github.io tracker, moved P13 to P17 out of Writing Style, and marked every out-of-date statement with the current state while keeping the original text. Findings: Documentation Versus Reality, entries 13 to 17. It changed no page or script.
 - **How the next audit finds what changed:** read the date above, then list the commits newer than it (once the folder is a git repository: `git log --since=2026-10-01`) or, until then, the files modified after it. Check the PRD and DESIGN.md sections those changes touch, as well as running the rules check and the quick factual checks.
 - **How audits run:** steps 1 to 3 are read-only (no writes, installs, builds or state-changing version control commands). The whole audit is one pass in one session, with no questions asked during the run and no subagents; questions are collected at the end, with the default applied meanwhile. Nothing the author wrote is overwritten: the original text stays, the observation goes next to it, and the difference is marked as a discrepancy. Every audit ends with a PATCHNOTES.md entry and a new date in this section.
 
@@ -1424,11 +1434,11 @@ ONLINE, launch date to be set. Azqato today launched Azqato Invests, a free webs
 
 **The problem.** Following an investing strategy means keeping track of a lot: one site for the screener, another for today's VIX reading, a third for the strategy's rules, and a pile of bookmarks for everything else. Azqato's own material had the same problem. The screener, the VIX strategy and the leveraged strategy guides each lived on a separate site, and a separate page on azqato.com linked them all.
 
-**The solution.** Azqato Invests groups everything by what you're trying to do: Learn, Tools, Strategies, Resources and FAQ. A sidebar shows where you are, a search box finds any page, and a sun and moon button switches between light and dark. The tools read the same automatically updated data as before, so the numbers stay current. Strategies that run on Composer link straight to their pages on Composer Atlas, where you can check the backtested numbers yourself.
+**The solution.** Azqato Invests groups everything by what you're trying to do: Learn, Tools, Strategies, Resources and FAQ. [Since v1.1.0: Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources.] A sidebar shows where you are, a search box finds any page, and a sun and moon button switches between light and dark. The tools read the same automatically updated data as before, so the numbers stay current. Strategies that run on Composer link straight to their pages on Composer Atlas, where you can check the backtested numbers yourself.
 
 **What a user says.** "I used to keep four tabs open just to check the VIX and look up the rules," said Sam Rivera, a part-time investor who follows the VIX strategy (a fictional user, for illustration). "Now it's one site, and when I search for something, it's there."
 
-**Get started.** Visit Azqato Invests (address to be announced), start with Learn if you're new, and join the Discord from the home page.
+**Get started.** Visit Azqato Invests (address to be announced; now https://azqato.com/invests/), start with Learn if you're new, and join the Discord from the home page.
 
 **About Azqato.** Azqato builds free websites and investing tools, and runs a Discord community. Azqato's projects are linked from azqato.com.
 
@@ -1438,20 +1448,20 @@ ONLINE, launch date to be set. Azqato today launched Azqato Invests, a free webs
 
 1. **What is Azqato Invests?** A free website that brings Azqato's investing tools, guides, strategy write-ups and curated links together in one place. It replaces four separate sites: stocks, vix, leverage and the investing page on azqato.com.
 2. **Who is it for?** People who manage their own investments or are learning how: beginners who want plain explanations and setup guides, and more experienced investors who use screeners, follow the VIX or look at leveraged strategies. It also serves Azqato's Discord community.
-3. **How do I use it?** Pick a section from the sidebar, or search from the top bar. New investors usually start with Learn, then try the Tools and read the Strategies; Resources lists outside sites by category, and the FAQ answers common questions.
+3. **How do I use it?** Pick a section from the sidebar, or search from the top bar. New investors usually start with Individual Stocks or Indices & ETFs; the VIX and leveraged sections explain those strategies, and Resources holds the curated links, the setup guides and the FAQ.
 4. **What does it cost?** Nothing. There's no account, sign-up or paid tier.
-5. **When and where is it available?** It isn't live yet; the address and launch date aren't decided. Until it launches, everything is on the existing sites, linked from the README. Once live, anyone with a browser can use it, with no sign-up.
+5. **When and where is it available?** At https://azqato.com/invests/, live since 2026-10-02. Anyone with a browser can use it, with no sign-up.
 6. **Where does the data come from, and how fresh is it?** From automated jobs in Azqato's stocks and vix repositories. Stock and ETF data updates daily, the Market Overview three times a weekday, statements and index constituents weekly, and the VIX reading eight times a weekday. If the VIX feed can't be reached, the VIX pages fall back to Yahoo Finance's data.
 7. **Does it track me or store my data?** No tracking and no accounts. Your browser keeps three things locally: your theme choice, and cached copies of the latest market overview and VIX reading so pages load quickly. None of it is sent anywhere.
 8. **Is this financial advice?** No. The site explains strategies and shows data; it doesn't tell you what to buy or sell. Leveraged strategies in particular can lose money quickly, and past or backtested results don't predict future returns.
 9. **Are any links sponsored?** Some links in Resources are referral links, which can earn Azqato a reward if you sign up. The page says so.
-10. **What happens to the old stocks, vix and leverage sites?** Once the new site is published, their pages will redirect to the matching new pages, so old links keep working. The repositories behind them stay, because they produce the data.
+10. **What happens to the old stocks, vix and leverage sites?** They stay up for now; later their pages will redirect to the matching new pages, so old links keep working. The repositories behind them stay, because they produce the data.
 11. **Why do some strategies link to Composer Atlas?** Strategies that run on Composer link to their page on Composer Atlas, a separate site where you can see their backtested numbers. Strategies that don't run on Composer, such as 3 Sig, 6 Sig and 9 Sig, don't.
 12. **Why does some information look out of date?** Content moved over exactly as it was, so nothing was lost in the move. A correction pass comes later; for example, the Holy Grail page says no factsheet data was available, but Composer Atlas now has the numbers.
 13. **What doesn't it do?** It has no accounts, no portfolio tracking (Azqato's Net Worth Tracker is a separate project), no trading and no personal advice, and nothing that needs a server, such as comments or a newsletter.
 14. **What do I need to use it?** A current version of Edge, Chrome, Firefox or Safari, on a phone or a computer. Nothing to install.
 15. **How is it different from other investing sites?** It's free with no sign-up, it shows the risks next to each strategy, its tools read data that updates automatically, and it keeps everything under one menu and one search.
-16. **How do I get help or report a problem?** Join the Discord from the home page. If the site's repository is made public, its issue tracker will take reports too.
+16. **How do I get help or report a problem?** Join the Discord from the home page, or open an issue at https://github.com/Azqato/azqato.github.io/issues.
 17. **Can I reuse the content?** All rights are reserved. Search engines and AI assistants may index, quote, summarize and cite it, with attribution appreciated; anything else needs permission (see LICENSE.md).
 
 ### Internal stakeholder questions
@@ -1459,4 +1469,4 @@ ONLINE, launch date to be set. Azqato today launched Azqato Invests, a free webs
 1. **Why merge the sites instead of improving each one?** One site means one design, one navigation and one search to maintain instead of four, and visitors find everything without knowing which site holds it. The data pipelines don't move (D6), so the cost is the move itself, which the core rule's inventory check keeps safe.
 2. **How will we know it worked?** Every inventory item present on every moved page, all 21 pages reachable and searchable, current data in the tools, zero console errors, and the old addresses redirecting once published (Success criteria). After launch, traffic baselines, where the host can provide them without tracking (Metrics).
 3. **What comes after launch?** The correction pass for out-of-date content (D19), HFEA's Composer Atlas link, and whatever the author adds to TODO.md and approves into the Roadmap.
-4. **What does it cost to run?** No servers and no paid services are planned. The data pipelines already run in the stocks and vix repos. Hosting cost depends on the host chosen under D4.
+4. **What does it cost to run?** No servers and no paid services are planned. The data pipelines already run in the stocks and vix repos. Hosting is the main site's existing Cloudflare Pages and GitHub Pages builds, at no extra cost.

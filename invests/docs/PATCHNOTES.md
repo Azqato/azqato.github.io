@@ -2,6 +2,20 @@
 
 Every change to this project, newest first. Versions follow semantic versioning and stay below 1.0.0 until the site launches (see Conventions in PRD.md). Dates come from the system clock.
 
+## v1.1.1 - 2026-10-02 - Documentation audit
+
+### Changed
+
+- README.md rewritten for the live site: the address, the five sections as they are now, the status, and the doc list (HOSTING.md marked as a record).
+- LICENSE.md: permission requests go to https://github.com/Azqato/azqato.github.io/issues; github.com/Azqato/invests no longer exists.
+- PRD.md: every statement that described the site as unpublished, the old section names or the separate repository is marked with the current state, original text kept (Decisions D4, D5, D12, D20; Constraints; Feature list; Runbook; Monitoring; Security; Deprecation and Removal, including the retired pre-v1.1.0 addresses; Press Release and FAQ facts). Roadmap items P13 to P17 moved from inside Writing Style to Future updates; P13.4 (delete the empty repository) marked done. New Documentation Versus Reality entries 13 to 17 and a new entry under Documentation audits.
+- DESIGN.md: the intro, Sidebar, Breadcrumbs and pager, Search, Theme button, the 640px breakpoint and the measured pairings note brought up to date for v1.0.1 and v1.1.0.
+- HOSTING.md and UI-REVIEW.md marked as records, with what came after.
+
+### Tested
+
+- Docs only: no page or script changed, so no browser test (Testing Cadence). `python scripts/check.py` still passes.
+
 ## v1.1.0 - 2026-10-02 - Sections by topic
 
 ### Changed
