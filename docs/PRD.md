@@ -2613,6 +2613,7 @@ Drafted by the 2026-10-01 audit from the core rule and the decisions, in priorit
 | D22 | Working practice | **Decided 2026-10-02 by the author:** the main site's rules, docs and design are the most up to date rules and win where they differ from this Part. Supersedes D5 and Tenet 3. This Part's docs merged into the main docs the same day (Documentation Process) |
 | D23 | Content | **Decided 2026-10-03 by the owner:** VIX Strategy is one page inside Indices & ETFs, at `/invests/indices/vix/` (2.15.1); Individual Stocks and Indices & ETFs are landing pages with cards, each with a Method page holding the moved sections word for word (2.15.0); the stock method has 12 metrics, and `check.py` keeps every page saying so (Q7); the FAQ has seven topic groups, headings only (S7, 2.15.3) |
 | D24 | Feature | **Decided 2026-10-05 by the owner:** a browser 9 Sig Calculator in Leveraged Strategies, after 9 Sig (2.16.0): data in localStorage only, Excel/CSV/JSON export, Import of its own files and outside sheets (inputs only, everything recalculated); numbers checked against the community 9-SIG sheet in `browser.py`. Plan: docs/9SIG-CALCULATOR.md |
+| D25 | Design | **Decided 2026-10-05 by the owner:** the site's colors follow the Template Interface Color Standard 1.0 (2.17.0): one `colors.css` of `--ti-color-*` roles, emerald accent at the standard's grades, success green for gains, white light canvas with a gray-blue surface; dark text colors one grade lighter (30) so they pass on tints |
 
 ## Invests: Site map
 

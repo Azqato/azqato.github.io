@@ -1,75 +1,44 @@
-/* ── THEME ── */
-/* One palette for the whole site, dark and light (docs/DESIGN.md, One palette
-   for the whole site; build pass item 5). theme.js sets data-theme on <html>
-   before the first paint: the visitor's saved choice, else their system
-   theme. Without scripts, the system theme still applies through the media
-   query. Dark is the base. */
+@import url("colors.css");
+
+/* ── THEME ──
+   The colors live in colors.css (Template Interface Color Standard; 2.17.0).
+   These older names point at its roles so the pages keep working. theme.js
+   sets data-theme on <html> before the first paint: the visitor's saved
+   choice, else their system theme. */
 :root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --border: #3a4a43;
-  --accent: #00d4a0;
-  --accent-hover: #00e6b0;
-  --on-accent: #0d1117;
-  --green: #3fb950;
-  --purple: #bc8cff;
-  --orange: #ffa657;
-  --amber: #f0b45a;
-  --red: #f85149;
-  --blue: #58a6ff;
-  --text: #e6edf3;
-  --text-muted: #9fb1a8;
-  --card-hover: #1c2128;
-  --tag-bg: #21262d;
-  --nav-bg: rgba(13, 17, 23, 0.85);
-  --nav-menu-bg: rgba(13, 17, 23, 0.97);
-  color-scheme: dark;
+  --bg: var(--ti-color-canvas);
+  --surface: var(--ti-color-surface);
+  --border: var(--ti-color-border);
+  --border-strong: var(--ti-color-border-strong);
+  --accent: var(--ti-color-accent);
+  --accent-hover: var(--ti-color-accent-hover);
+  --on-accent: var(--ti-color-on-accent);
+  --green: var(--ti-color-success);
+  --purple: var(--ti-color-purple);
+  --orange: var(--ti-color-orange);
+  --amber: var(--ti-color-warning);
+  --red: var(--ti-color-danger);
+  --blue: var(--ti-color-blue);
+  --text: var(--ti-color-text);
+  --text-muted: var(--ti-color-text-muted);
+  --card-hover: var(--ti-color-hover);
+  --tag-bg: var(--ti-color-hover);
+  --nav-bg: var(--ti-color-canvas);
+  --nav-menu-bg: var(--ti-color-canvas);
 }
 
-:root[data-theme="light"] {
-  --bg: #f6f8fa;
-  --surface: #f6f8fa;
-  --border: #d0d7de;
-  --accent: #007a5e;
-  --accent-hover: #00664e;
-  --on-accent: #ffffff;
-  --green: #116329;
-  --purple: #8250df;
-  --orange: #bc4c00;
-  --amber: #9a6700;
-  --red: #cf222e;
-  --blue: #0969da;
-  --text: #1f2328;
-  --text-muted: #59636e;
-  --card-hover: #eaeef2;
-  --tag-bg: #eaeef2;
-  --nav-bg: rgba(246, 248, 250, 0.88);
-  --nav-menu-bg: rgba(246, 248, 250, 0.98);
-  color-scheme: light;
+/* Links inside running text are underlined (standard rule 3). */
+main p a:not([class]),
+main li a:not([class]) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    --bg: #f6f8fa;
-    --surface: #f6f8fa;
-    --border: #d0d7de;
-    --accent: #007a5e;
-    --accent-hover: #00664e;
-    --on-accent: #ffffff;
-    --green: #116329;
-    --purple: #8250df;
-    --orange: #bc4c00;
-    --amber: #9a6700;
-    --red: #cf222e;
-    --blue: #0969da;
-    --text: #1f2328;
-    --text-muted: #59636e;
-    --card-hover: #eaeef2;
-    --tag-bg: #eaeef2;
-    --nav-bg: rgba(246, 248, 250, 0.88);
-    --nav-menu-bg: rgba(246, 248, 250, 0.98);
-    color-scheme: light;
-  }
+/* Edges a person needs to see to use a control: 3:1 (standard rule 2). */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea {
+  border-color: var(--border-strong);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -450,7 +419,7 @@ nav:has(+ .site-sub) { position: relative; }
 .site-search mark {
   padding: 0 1px;
   border-radius: 2px;
-  background: rgba(0, 212, 160, 0.25);
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
   color: inherit;
 }
 

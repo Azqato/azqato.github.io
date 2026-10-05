@@ -50,6 +50,11 @@ A page that needs an extra token (for example `--discord`, `--spotify`, `--coffe
 
 ### One palette for the whole site (decided 2026-10-02)
 
+**Superseded 2026-10-05 (2.17.0):** the colors are now `colors.css`, the Template Interface Color Standard
+1.0's roles (`--ti-color-*`), shared by azqato.com and Invests. Style with the roles; the older names below
+are aliases. Rules: text 4.5:1 and control edges 3:1 in both themes; status colors only for status, with a
+word or icon; gains are success, never the accent; links in text underlined. The values below are the record.
+
 The owner picked these on 2026-10-02 (PRD Part 2, P15; Roadmap at a glance, item 4), one color per role, from a side-by-side comparison of azqato.com's and Invests' colors. They become the tokens for both halves of the site when items 5 to 8 are built; until then the tables above and Azqato Invests Visual System describe what is live. Contrast is measured against the page background with the WCAG formula.
 
 **Live 2026-10-02 (2.13.7, build pass item 5).** styles.css carries these as tokens: dark on `:root`, light on `:root[data-theme="light"]` and, for visitors without scripts, under `prefers-color-scheme: light`. New tokens: `--on-accent` (text on an accent fill), `--amber`, `--red`, `--blue`, `--nav-bg`, `--nav-menu-bg`. Changes from the table, made after the contrast audit: light `--green` `#116329` (`#1a7f37` was 4.36:1); dark `--border` `#3a4a43` and `--text-muted` `#9fb1a8`. Invests maps documentation-site's `--pp-*` tokens to these in invests/assets/css/site.css. One shared script, `/theme.js`, sets the theme before the first paint for every page (Theme button). music.html stays dark and has no button (`data-theme-lock="dark"`): the owner's "the visualizer stays dark". Known before this pass and unchanged: the Projects page's dark C# and HTML tags measure 3.42 and 4.09:1 (owner review).

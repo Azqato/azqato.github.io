@@ -308,8 +308,8 @@
 
     /* Play/pause for the stage animation. Separated from the mode pills so it
        reads as a control over the whole scene rather than another mode. */
-    .motion-btn { border-color: rgba(0, 212, 160, 0.45); color: var(--accent); margin-right: 0.35rem; }
-    .motion-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 212, 160, 0.1); }
+    .motion-btn { border-color: color-mix(in srgb, var(--accent) 45%, transparent); color: var(--accent); margin-right: 0.35rem; }
+    .motion-btn:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
     .mode-controls {
       position: fixed;

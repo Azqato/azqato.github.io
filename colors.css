@@ -1,0 +1,132 @@
+/* ── COLORS ──
+   The one color file for azqato.com and Azqato Invests (2.17.0), following the
+   Template Interface Color Standard 1.0 (wireframe/standards/color). Style with
+   these roles only; every older name (--bg, --accent, --color-*, --pp-*) points
+   here. Light is the base; dark follows the system setting, and theme.js's
+   data-theme on <html> overrides it. Dark is screen only, so print is light.
+
+   The accent is Azqato's emerald rebuilt at the standard's grades (section 7):
+   60 on light, 40 on dark, 50 for the focus ring, 5 and 90 for the tint.
+   Gains use success, never the accent. In dark, text colors (accent, status,
+   data) sit one grade lighter, at 30: grade 40 passes on the page but not on
+   the tinted badges and callouts the site puts them on. Fills (accent-bg)
+   stay at 40. Data colors are palette grade 60 on
+   light and 40 on dark, so text in them passes 4.5:1 on the canvas. Other
+   companies' brand colors (Discord, Spotify, YouTube...) stay on their pages. */
+
+:root {
+  --ti-color-canvas: #ffffff;
+  --ti-color-surface: #e8eef6;
+  --ti-color-hover: #dde3ea;
+  --ti-color-text: #20252a;
+  --ti-color-text-muted: #5c6168;
+  --ti-color-border: #bac0c7;
+  --ti-color-border-strong: #71767d;
+  --ti-color-accent: #046e55;
+  --ti-color-accent-hover: #035843;
+  --ti-color-accent-bg: #046e55;
+  --ti-color-on-accent: #ffffff;
+  --ti-color-accent-muted: #dbf5eb;
+  --ti-color-success: #00712a;
+  --ti-color-warning: #795d00;
+  --ti-color-danger: #c5001a;
+  --ti-color-info: #005cc9;
+  --ti-color-focus: #1a8568;
+
+  /* Status tints, for banners and badges with status text on them. */
+  --ti-color-success-muted: #d6f6da;
+  --ti-color-warning-muted: #fcedc8;
+  --ti-color-danger-muted: #ffe9e6;
+  --ti-color-info-muted: #e4efff;
+
+  /* Data and strategy colors. */
+  --ti-color-blue: #005cc9;
+  --ti-color-teal: #006d6a;
+  --ti-color-green: #00712a;
+  --ti-color-yellow: #795d00;
+  --ti-color-orange: #9b4a00;
+  --ti-color-red: #c5001a;
+  --ti-color-pink: #b4226d;
+  --ti-color-purple: #7e3bcb;
+  --ti-color-brown: #805838;
+
+  color-scheme: light;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ti-color-canvas: #13171c;
+    --ti-color-surface: #20252a;
+    --ti-color-hover: #1a1f24;
+    --ti-color-text: #e8eef6;
+    --ti-color-text-muted: #878c93;
+    --ti-color-border: #363a40;
+    --ti-color-border-strong: #71767d;
+    --ti-color-accent: #09ba8c;
+    --ti-color-accent-hover: #15d8a4;
+    --ti-color-accent-bg: #0a9f78;
+    --ti-color-on-accent: #13171c;
+    --ti-color-accent-muted: #012a1f;
+    --ti-color-success: #0abd4d;
+    --ti-color-warning: #cb9e00;
+    --ti-color-danger: #ff7d73;
+    --ti-color-info: #68a5ff;
+    --ti-color-focus: #1a8568;
+    --ti-color-success-muted: #002b0b;
+    --ti-color-warning-muted: #2f2200;
+    --ti-color-danger-muted: #510005;
+    --ti-color-info-muted: #002253;
+    --ti-color-blue: #68a5ff;
+    --ti-color-teal: #00b7b3;
+    --ti-color-green: #0abd4d;
+    --ti-color-yellow: #cb9e00;
+    --ti-color-orange: #ff811a;
+    --ti-color-red: #ff7d73;
+    --ti-color-pink: #ff75b1;
+    --ti-color-purple: #b98fff;
+    --ti-color-brown: #c79c79;
+    color-scheme: dark;
+  }
+}
+
+@media screen {
+  :root[data-theme="dark"] {
+    --ti-color-canvas: #13171c;
+    --ti-color-surface: #20252a;
+    --ti-color-hover: #1a1f24;
+    --ti-color-text: #e8eef6;
+    --ti-color-text-muted: #878c93;
+    --ti-color-border: #363a40;
+    --ti-color-border-strong: #71767d;
+    --ti-color-accent: #09ba8c;
+    --ti-color-accent-hover: #15d8a4;
+    --ti-color-accent-bg: #0a9f78;
+    --ti-color-on-accent: #13171c;
+    --ti-color-accent-muted: #012a1f;
+    --ti-color-success: #0abd4d;
+    --ti-color-warning: #cb9e00;
+    --ti-color-danger: #ff7d73;
+    --ti-color-info: #68a5ff;
+    --ti-color-focus: #1a8568;
+    --ti-color-success-muted: #002b0b;
+    --ti-color-warning-muted: #2f2200;
+    --ti-color-danger-muted: #510005;
+    --ti-color-info-muted: #002253;
+    --ti-color-blue: #68a5ff;
+    --ti-color-teal: #00b7b3;
+    --ti-color-green: #0abd4d;
+    --ti-color-yellow: #cb9e00;
+    --ti-color-orange: #ff811a;
+    --ti-color-red: #ff7d73;
+    --ti-color-pink: #ff75b1;
+    --ti-color-purple: #b98fff;
+    --ti-color-brown: #c79c79;
+    color-scheme: dark;
+  }
+}
+
+/* The standard's focus ring, everywhere. */
+:focus-visible {
+  outline: 2px solid var(--ti-color-focus);
+  outline-offset: 2px;
+}

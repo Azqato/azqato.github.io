@@ -1,3 +1,5 @@
+@import url("../../../colors.css");
+
 /* Azqato Invests: this site's own styles, on top of Template Interface's
    documentation-site (docs.css). No theme.css token is redefined, per the
    template contract. Sections: skip link, azqato.com's nav, shell changes,
@@ -13,7 +15,7 @@
   padding: 8px 14px;
   border-radius: var(--pp-radius);
   background: var(--pp-emerald-fill);
-  color: #fff;
+  color: var(--ti-color-on-accent);
   font-weight: 600;
   text-decoration: none;
 }
@@ -23,14 +25,13 @@
 }
 
 /* ---------- azqato.com's nav (D9) ----------
-   azqato.com is dark-only; its colors are the shared theme tokens. The light
-   version uses the site's light palette. */
+   Its colors are the colors.css roles, in both themes (2.17.0). */
 
 .site-azqato {
-  --az-bg: #ffffff;
-  --az-text: #55625c;
-  --az-hover: #13201b;
-  --az-accent: #0b7a52;
+  --az-bg: var(--ti-color-canvas);
+  --az-text: var(--ti-color-text-muted);
+  --az-hover: var(--ti-color-text);
+  --az-accent: var(--ti-color-accent);
   display: flex;
   align-items: center;
   gap: 20px;
@@ -40,13 +41,6 @@
   background: var(--az-bg);
   font-size: 0.875rem;
   overflow-x: auto;
-}
-
-:root[data-theme="dark"] .site-azqato {
-  --az-bg: var(--color-canvas);
-  --az-text: var(--color-text-secondary);
-  --az-hover: var(--color-text-primary);
-  --az-accent: var(--color-accent);
 }
 
 .site-azqato-logo {
@@ -241,23 +235,25 @@
   color: var(--pp-text);
 }
 
-:root[data-theme="light"] .pp-page .src-stocks,
-:root[data-theme="light"] .pp-page .src-leverage {
-  --color-positive: #116329;
-  --color-negative: #a40e26;
-  --color-warning: #7d4e00;
-  --color-purple: #8250df;
-  --color-strat-3sig: #0969da;
-  --color-strat-6sig: #9a6700;
-  --color-strat-9sig: #0550ae;
-  --color-strat-hfea: #bc4c00;
-  --color-strat-ftlt: #1a7f37;
-  --color-strat-grail: #8250df;
-  --color-tier-splus: #6639ba;
-  --color-tier-s: #116329;
-  --color-tier-a: #1a7f37;
-  --color-tier-b: #7d4e00;
-  --color-tier-c: #a40e26;
+/* Data colors: the palette's grade 60 in light, 40 in dark (colors.css), so
+   they read on the page in both themes; gains are success, losses danger. */
+html:root .pp-page .src-stocks,
+html:root .pp-page .src-leverage {
+  --color-positive: var(--ti-color-success);
+  --color-negative: var(--ti-color-danger);
+  --color-warning: var(--ti-color-warning);
+  --color-purple: var(--ti-color-purple);
+  --color-strat-3sig: var(--ti-color-blue);
+  --color-strat-6sig: var(--ti-color-yellow);
+  --color-strat-9sig: var(--ti-color-pink);
+  --color-strat-hfea: var(--ti-color-orange);
+  --color-strat-ftlt: var(--ti-color-green);
+  --color-strat-grail: var(--ti-color-purple);
+  --color-tier-splus: var(--ti-color-purple);
+  --color-tier-s: var(--ti-color-green);
+  --color-tier-a: var(--ti-color-teal);
+  --color-tier-b: var(--ti-color-yellow);
+  --color-tier-c: var(--ti-color-red);
 }
 
 /* Contrast fixes found by scripts/browser.py (2026-10-02). */
@@ -267,18 +263,18 @@
 
 /* The source's red badge text was 4.1:1 on its tint in dark; GitHub's lighter red passes. */
 :root[data-theme="dark"] .pp-page .src-stocks .badge-negative {
-  color: #ff7b72;
+  color: var(--ti-color-danger);
 }
 
 /* On the shared palette's darker background (build pass item 5) the badge
    tints read darker too: the red above fell to 4.47:1 and the source's green
    to 3.92:1. GitHub's lighter red and green pass. */
 :root[data-theme="dark"] .pp-page .src-stocks .badge-negative {
-  color: #ffa198;
+  color: var(--ti-color-danger);
 }
 
 :root[data-theme="dark"] .pp-page .src-stocks .badge-good {
-  color: #56d364;
+  color: var(--ti-color-success);
 }
 
 /* The template's .callout is a flex row; the leverage sources' callouts are blocks. */
@@ -300,27 +296,25 @@
   color: var(--pp-text);
 }
 
-:root[data-theme="light"] .pp-page .src-vix {
-  --accent-green: #047857;
-  --accent-amber: #92400e;
-  --accent-blue: #1d4ed8;
-  --accent-red: #b91c1c;
-  --accent-orange: #c2410c;
-  --accent-glow: transparent;
-  --tier1-color: #1d4ed8;
-  --tier2-color: #047857;
-  --tier3-color: #b45309;
-  --tier4-color: #c2410c;
-  --tier5-color: #b91c1c;
-  --color-bil: #1d4ed8;
-  --color-spy: #047857;
-  --color-qqq: #92400e;
-  --color-tqqq: #b91c1c;
+html:root .pp-page .src-vix {
+  --accent-green: var(--ti-color-success);
+  --accent-amber: var(--ti-color-warning);
+  --accent-blue: var(--ti-color-blue);
+  --accent-red: var(--ti-color-danger);
+  --accent-orange: var(--ti-color-orange);
+  --tier1-color: var(--ti-color-blue);
+  --tier2-color: var(--ti-color-green);
+  --tier3-color: var(--ti-color-yellow);
+  --tier4-color: var(--ti-color-orange);
+  --tier5-color: var(--ti-color-red);
+  --color-bil: var(--ti-color-blue);
+  --color-spy: var(--ti-color-green);
+  --color-qqq: var(--ti-color-yellow);
+  --color-tqqq: var(--ti-color-red);
 }
 
-/* Black on the light theme's darker green fails contrast; white passes. */
-:root[data-theme="light"] .pp-page .src-vix .btn-primary {
-  color: #fff;
+:root[data-theme="light"] .pp-page .src-vix {
+  --accent-glow: transparent;
 }
 
 .pp-page .src-invests {
@@ -396,7 +390,7 @@
 }
 
 :root:not([data-theme="dark"]) .pp-page .src-vix .hero-headline {
-  background: linear-gradient(140deg, var(--pp-ink) 0%, #2f3d37 100%);
+  background: linear-gradient(140deg, var(--pp-ink) 0%, var(--pp-muted) 100%);
   -webkit-background-clip: text;
   background-clip: text;
 }
@@ -883,49 +877,86 @@
    through their mappings; their data colors (tiers, gains and losses, strategy
    colors) keep their meanings. */
 
-.pp-page {
-  --pp-bg: #f6f8fa;
-  --pp-rail: #f6f8fa;
-  --pp-hover: #eaeef2;
-  --pp-line: #d0d7de;
-  --pp-line-strong: #d0d7de;
-  --pp-ink: #1f2328;
-  --pp-text: #1f2328;
-  --pp-muted: #59636e;
-  --pp-emerald: #007a5e;
-  --pp-emerald-deep: #00664e;
-  --pp-emerald-fill: #007a5e;
-  --pp-emerald-fill-deep: #00664e;
-  --pp-emerald-pale: #ddf1ea;
-  --pp-emerald-line: #9fd5c3;
-  --pp-code-inline-bg: #eaeef2;
-  --pp-code-inline-line: #d0d7de;
-  --pp-amber: #9a6700;
-  --pp-red: #cf222e;
-  --pp-blue: #0969da;
-  --pp-blue-fill: #0969da;
+/* Since 2.17.0 the palette is colors.css (Template Interface Color Standard),
+   shared with azqato.com; every template and source token points at its roles.
+   The selector outranks the template's dark block and the light legibility
+   block above, which stay as the record. */
+html:root .pp-page.pp-page {
+  --pp-bg: var(--ti-color-canvas);
+  --pp-rail: var(--ti-color-surface);
+  --pp-hover: var(--ti-color-hover);
+  --pp-line: var(--ti-color-border);
+  --pp-line-strong: var(--ti-color-border-strong);
+  --pp-ink: var(--ti-color-text);
+  --pp-text: var(--ti-color-text);
+  --pp-muted: var(--ti-color-text-muted);
+  --pp-emerald: var(--ti-color-accent);
+  --pp-emerald-deep: var(--ti-color-accent-hover);
+  --pp-emerald-fill: var(--ti-color-accent-bg);
+  --pp-emerald-fill-deep: var(--ti-color-accent-hover);
+  --pp-emerald-pale: var(--ti-color-accent-muted);
+  --pp-emerald-line: color-mix(in srgb, var(--ti-color-accent) 45%, var(--ti-color-canvas));
+  --pp-on-accent: var(--ti-color-on-accent);
+  --pp-code-inline-bg: var(--ti-color-surface);
+  --pp-code-inline-line: var(--ti-color-border);
+  --pp-amber: var(--ti-color-warning);
+  --pp-amber-ink: var(--ti-color-warning);
+  --pp-amber-bg: var(--ti-color-warning-muted);
+  --pp-amber-line: color-mix(in srgb, var(--ti-color-warning) 45%, var(--ti-color-canvas));
+  --pp-red: var(--ti-color-danger);
+  --pp-blue: var(--ti-color-info);
+  --pp-blue-fill: var(--ti-color-info);
+  --pp-blue-pale: var(--ti-color-info-muted);
+  --pp-mark: var(--ti-color-warning-muted);
+  /* theme.css (base.css and components.css use these) */
+  --color-canvas: var(--ti-color-canvas);
+  --color-surface: var(--ti-color-surface);
+  --color-border-default: var(--ti-color-border);
+  --color-border-muted: var(--ti-color-border);
+  --color-text-primary: var(--ti-color-text);
+  --color-text-secondary: var(--ti-color-text-muted);
+  --color-text-tertiary: var(--ti-color-text-muted);
+  --color-accent: var(--ti-color-accent);
+  --color-accent-emphasis: var(--ti-color-accent-hover);
+  --color-accent-muted: var(--ti-color-accent-muted);
+  --color-danger: var(--ti-color-danger);
+  --color-warning: var(--ti-color-warning);
+  --color-success: var(--ti-color-success);
 }
 
-@media screen {
-  :root[data-theme="dark"] .pp-page {
-    --pp-bg: #0d1117;
-    --pp-rail: #161b22;
-    --pp-hover: #1c2128;
-    --pp-line: #3a4a43;
-    --pp-line-strong: #3a4a43;
-    --pp-ink: #e6edf3;
-    --pp-text: #e6edf3;
-    --pp-muted: #9fb1a8;
-    --pp-emerald: #00d4a0;
-    --pp-emerald-deep: #00e6b0;
-    --pp-emerald-pale: #0d3d31;
-    --pp-emerald-line: #1f4a37;
-    --pp-code-inline-bg: #161b22;
-    --pp-code-inline-line: #3a4a43;
-    --pp-amber: #f0b45a;
-    --pp-red: #f85149;
-    --pp-blue: #58a6ff;
-  }
+/* Text on the accent fill: the on-accent role, dark text in dark mode. */
+.pp-page .pp-btn--solid,
+.pp-page .pp-btn--solid:hover,
+.pp-page .pp-step-n,
+.pp-page .pp-method,
+
+html:root .pp-page .src-vix .btn-primary {
+  color: var(--ti-color-on-accent);
+}
+
+.pp-page .pp-logo-mark path {
+  stroke: var(--ti-color-on-accent);
+}
+
+/* Buttons are the accent, not the success green. */
+html:root .pp-page .src-vix .btn-primary,
+.pp-page .button--primary {
+  background: var(--ti-color-accent-bg);
+  color: var(--ti-color-on-accent);
+}
+
+html:root .pp-page .src-vix .btn-primary:hover,
+.pp-page .button--primary:hover {
+  background: var(--ti-color-accent-hover);
+}
+
+/* Controls need a 3:1 edge (standard rule 2). */
+.pp-page .pp-btn,
+.pp-page .pp-input,
+.pp-page input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.pp-page select,
+.pp-page textarea {
+  border-color: var(--ti-color-border-strong);
 }
 
 /* ---------- FAQ topic groups (SEO review S7, 2026-10-03) ----------
@@ -945,3 +976,8 @@
 
 /* Link to the 9 Sig Calculator under the 3, 6 and 9 Sig headings (2.16.0). */
 .site-tool-link { border-left: 3px solid var(--pp-emerald); background: var(--pp-emerald-pale); padding: 10px 14px; border-radius: 4px; margin: 0 0 1.2em; }
+
+/* The focus ring is the focus role (colors.css). */
+.pp-page :focus-visible {
+  outline-color: var(--ti-color-focus);
+}

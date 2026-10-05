@@ -5,6 +5,30 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.17.0] - 2026-10-05
+
+### Changed
+- Colors follow the Template Interface Color Standard 1.0 across azqato.com and Invests (owner approved
+every recommendation of the gap analysis). One file, `colors.css`, holds the standard's roles
+(`--ti-color-*`); `styles.css`, `theme.css`'s `--color-*`, the `--pp-*` palette and the source sections'
+tokens all point at it. Light is a white page with gray-blue panels; dark is the standard's gray.
+- Accent: Azqato's emerald rebuilt at the standard's grades: `#046e55` light; dark fills `#0a9f78`, dark
+text `#09ba8c`. Focus ring `#1a8568` everywhere, on azqato.com too.
+- Gains are the success green, not the accent (calculator); buttons are the accent, not green (VIX).
+- Data and strategy colors (tiers, strategies, VIX tiers, language tags) are palette grade 60 in light and
+30 in dark. In dark, all text colors sit at grade 30 so they pass on tinted badges and callouts too.
+
+### Fixed
+- Control borders (inputs, selects, buttons) now 3:1 (were 1.36:1 light, 2.02:1 dark).
+- Blue text on blue callouts (was 4.44:1); text on the accent fill uses the on-accent role in dark.
+- Links in running text on azqato.com are underlined.
+- Calculator preview box used the solid accent as its background; now the tint.
+
+Other companies' brand colors (Discord, Spotify, Buy Me a Coffee, YouTube) and the brand catalog page
+keep their own values. Contrast checked on all 23 Invests pages and 12 azqato.com pages, both themes.
+
+---
+
 ## [2.16.0] - 2026-10-05
 
 ### Added

@@ -229,7 +229,7 @@
       background: var(--card-hover);
       border-color: var(--accent);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 212, 160, 0.08);
+      box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 8%, transparent);
     }
 
     .project-card:hover::before {
@@ -274,7 +274,7 @@
     .card-link:hover {
       border-color: var(--accent);
       color: var(--accent);
-      background: rgba(0, 212, 160, 0.08);
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
     }
 
     .card-name {
@@ -311,19 +311,17 @@
       color: var(--text-muted);
     }
 
-    .tag.lang-js    { color: #e8c840; border-color: rgba(232,200,64,0.3); background: rgba(232,200,64,0.08); }
-    .tag.lang-ts    { color: #3178c6; border-color: rgba(49,120,198,0.3); background: rgba(49,120,198,0.08); }
-    .tag.lang-py    { color: #3572a5; border-color: rgba(53,114,165,0.3); background: rgba(53,114,165,0.08); }
-    .tag.lang-cs    { color: #2fb31a; border-color: rgba(23,134,0,0.3);   background: rgba(23,134,0,0.08);   }
-    .tag.lang-html  { color: #f26b47; border-color: rgba(227,76,38,0.3);  background: rgba(227,76,38,0.08);  }
-    .tag.lang-css   { color: #563d7c; border-color: rgba(86,61,124,0.3);  background: rgba(86,61,124,0.08);  }
-    .tag.lang-go    { color: #00add8; border-color: rgba(0,173,216,0.3);  background: rgba(0,173,216,0.08);  }
-    .tag.lang-rust  { color: #dea584; border-color: rgba(222,165,132,0.3);background: rgba(222,165,132,0.08);}
-    .tag.lang-java  { color: #b07219; border-color: rgba(176,114,25,0.3); background: rgba(176,114,25,0.08); }
-    /* Light theme: several language colors are too pale to read on a light
-       page, so the tag text uses the body color and keeps its tinted border
-       and background (build pass item 5). */
-    :root[data-theme="light"] .tag[class*="lang-"] { color: var(--text); }
+    .tag.lang-js    { color: var(--ti-color-yellow); border-color: color-mix(in srgb, var(--ti-color-yellow) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-ts    { color: var(--ti-color-blue); border-color: color-mix(in srgb, var(--ti-color-blue) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-py    { color: var(--ti-color-teal); border-color: color-mix(in srgb, var(--ti-color-teal) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-cs    { color: var(--ti-color-green); border-color: color-mix(in srgb, var(--ti-color-green) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-html  { color: var(--ti-color-orange); border-color: color-mix(in srgb, var(--ti-color-orange) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-css   { color: var(--ti-color-purple); border-color: color-mix(in srgb, var(--ti-color-purple) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-go    { color: var(--ti-color-blue); border-color: color-mix(in srgb, var(--ti-color-blue) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-rust  { color: var(--ti-color-brown); border-color: color-mix(in srgb, var(--ti-color-brown) 35%, transparent); background: var(--ti-color-canvas); }
+    .tag.lang-java  { color: var(--ti-color-orange); border-color: color-mix(in srgb, var(--ti-color-orange) 35%, transparent); background: var(--ti-color-canvas); }
+    /* Language colors are the palette's data colors (colors.css), which pass
+       4.5:1 on the page in both themes (2.17.0). */
 
     .card-footer {
       display: flex;

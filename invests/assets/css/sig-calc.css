@@ -27,11 +27,11 @@
 .sc-grid > details, .sc-grid > .sc-preview, .sc-grid > .sc-actions, .sc-grid > .sc-error { grid-column: 1 / -1; }
 .sc-field label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: 4px; }
 .sc-field input, .sc-field select { width: 100%; box-sizing: border-box; padding: 8px 10px; font: inherit; color: var(--pp-ink); background: var(--pp-bg); border: 1px solid var(--pp-line-strong); border-radius: 6px; }
-.sc-field input:focus, .sc-field select:focus { outline: 2px solid var(--pp-emerald); outline-offset: 1px; }
+.sc-field input:focus, .sc-field select:focus { outline: 2px solid var(--ti-color-focus); outline-offset: 1px; }
 .sc-help { color: var(--pp-muted); font-size: .85rem; margin: 4px 0 0; }
 .sc-more > summary { color: var(--pp-emerald-deep); font-weight: 600; margin: 4px 0; }
 .sc-more .sc-grid { margin-top: 8px; }
-.sc-preview:not(:empty) { border-left: 3px solid var(--pp-emerald); background: var(--pp-emerald-fill); padding: 8px 12px; border-radius: 4px; }
+.sc-preview:not(:empty) { border-left: 3px solid var(--pp-emerald); background: var(--pp-emerald-pale); padding: 8px 12px; border-radius: 4px; }
 .sc-preview p { margin: .25em 0; }
 .sc-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; }
 .sc-error { color: var(--pp-red); margin: 6px 0 0; }
@@ -46,7 +46,7 @@
 .sc-tile-label { font-size: .8rem; color: var(--pp-muted); }
 .sc-tile-value { font-size: 1.35rem; font-weight: 700; color: var(--pp-ink); font-variant-numeric: tabular-nums; }
 .sc-tile-sub { font-size: .8rem; color: var(--pp-muted); }
-.sc .sc-up { color: var(--pp-emerald-deep); }
+.sc .sc-up { color: var(--ti-color-success); }
 .sc .sc-down { color: var(--pp-red); }
 
 .sc-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin: 12px 0; }
@@ -75,7 +75,7 @@
 .sc-table-bar { margin: 0 0 8px; }
 .sc-check { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
 .sc-table-wrap { overflow-x: auto; max-width: 100%; border: 1px solid var(--pp-line); border-radius: 8px; }
-.sc-table-wrap:focus { outline: 2px solid var(--pp-emerald); }
+.sc-table-wrap:focus { outline: 2px solid var(--ti-color-focus); }
 .sc-table { border-collapse: separate; border-spacing: 0; font-size: .85rem; font-variant-numeric: tabular-nums; white-space: nowrap; width: 100%; }
 .sc-table th, .sc-table td { padding: 6px 10px; border-bottom: 1px solid var(--pp-line); text-align: right; background: var(--pp-bg); }
 .sc-table thead th { position: sticky; top: 0; font-weight: 600; color: var(--pp-ink); border-bottom-color: var(--pp-line-strong); }
