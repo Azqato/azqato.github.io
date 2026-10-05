@@ -1427,6 +1427,12 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | 14 | v2.9.5: no pulsing unless the fire is firing | v2.9.5, below | Small |
 | 15 | Defect list: optimize the four `youtube.html` thumbnails; `build-nav.py --check` in the pre-commit hook; pause the render loop on `document.hidden`; Playwright smoke tests; mobile audit of `music.html` | Current phase, below | Small to medium each |
 
+**Next: bring in Tools and Prompts (owner's request, 2026-10-05)**
+
+| # | Item | Where it's detailed | Size |
+|---|---|---|---|
+| 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | This list; to be planned as its own pass | Large; design needed |
+
 **Later**
 
 | # | Item | Where it's detailed |
