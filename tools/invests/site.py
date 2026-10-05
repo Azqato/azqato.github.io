@@ -741,8 +741,17 @@ def topbar(page):
     return f"""<a class="site-skip" href="#pp-main">Skip to content</a>
 <nav class="site-azqato" aria-label="Azqato.com">
   <a class="site-azqato-logo" href="{up(page)}index.html">Azqato<span>.</span></a>
-  <ul>{nav}</ul>
+  <ul id="site-azqato-links">{nav}</ul>
+  <button class="site-azqato-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-azqato-links">☰</button>
 </nav>
+<script>
+(function () {{
+  var nav = document.querySelector(".site-azqato"), btn = nav.querySelector(".site-azqato-toggle");
+  function set(open) {{ nav.classList.toggle("is-open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }}
+  btn.addEventListener("click", function () {{ set(!nav.classList.contains("is-open")); }});
+  document.addEventListener("click", function (e) {{ if (!nav.contains(e.target) || e.target.tagName === "A") set(false); }});
+}})();
+</script>
 <header class="pp-top">
   <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>

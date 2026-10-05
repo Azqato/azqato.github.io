@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.17.1] - 2026-10-05
+
+### Fixed
+- Invests' top bar is now the same as azqato.com's on every page (owner's request): 53px tall (was 44),
+the same logo size, font and link spacing; the second bar was already 60px on both. On phones the bar
+stays, with the same menu button, instead of hiding (its links were in the sidebar).
+
+---
+
 ## [2.17.0] - 2026-10-05
 
 ### Changed
