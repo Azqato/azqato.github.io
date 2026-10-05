@@ -942,3 +942,6 @@
 .pp-page .site-faq-group:first-child > h2 {
   padding-top: 1rem;
 }
+
+/* Link to the 9 Sig Calculator under the 3, 6 and 9 Sig headings (2.16.0). */
+.site-tool-link { border-left: 3px solid var(--pp-emerald); background: var(--pp-emerald-pale); padding: 10px 14px; border-radius: 4px; margin: 0 0 1.2em; }

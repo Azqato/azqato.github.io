@@ -48,6 +48,8 @@ PAGES = [
     ("leveraged/3sig.html", "leverage/3sig.html", "3 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("leveraged/6sig.html", "leverage/6sig.html", "6 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("leveraged/9sig.html", "leverage/9sig.html", "9 Sig", "Leveraged Strategies", "doc", "leveraged/index.html"),
+    # Written for this site (no old page to move): source in tools/invests/pages/.
+    ("leveraged/9sig-calculator.html", "own/9sig-calculator.html", "9 Sig Calculator", "Leveraged Strategies", "tool", "leveraged/index.html"),
     ("leveraged/tqqq-ftlt.html", "leverage/tqqq-ftlt.html", "TQQQ FTLT", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("leveraged/holy-grail.html", "leverage/holy-grail.html", "Holy Grail", "Leveraged Strategies", "doc", "leveraged/index.html"),
     ("leveraged/hfea.html", "leverage/hfea.html", "HFEA", "Leveraged Strategies", "doc", "leveraged/index.html"),
@@ -107,7 +109,7 @@ AZQATO_NAV = [(label, None if path == "invests/index.html" else path) for path, 
 LINKS = {}
 for path, src, *_ in PAGES:
     repo, name = src.split("/")
-    if repo == "azqato.github.io":
+    if repo in ("azqato.github.io", "own"):
         continue
     LINKS[(repo, name)] = path
     LINKS[("abs", f"https://azqato.github.io/{repo}/{name}")] = path
@@ -152,8 +154,12 @@ CHROME = {
                               "on-this-page-label", "anchor-link", "sidebar-disclaimer", "content-wrap"]},
     "azqato.github.io": {"remove": ["body > nav"], "keep": [], "unwrap": [],
                          "css_drop": ["nav-inner", "nav-logo", "nav-toggle", "nav-links"]},
+    "own": {"remove": [], "keep": [], "unwrap": [], "css_drop": []},
 }
-SCOPE = {"stocks": "src-stocks", "vix": "src-vix", "leverage": "src-leverage", "azqato.github.io": "src-invests"}
+SCOPE = {"stocks": "src-stocks", "vix": "src-vix", "leverage": "src-leverage", "azqato.github.io": "src-invests", "own": "src-own"}
+# Pages written for this site, not moved from an old one (the 9 Sig Calculator).
+# Their scripts and styles live in invests/assets/js/own/ and assets/css/.
+OWN = HERE / "pages"
 
 EM = "\u2014"
 dash_log = []
@@ -315,7 +321,8 @@ def slug(text, used):
 
 
 def read_source(src):
-    return BeautifulSoup((SRC / src).read_text(encoding="utf-8"), "html.parser")
+    path = OWN / src[4:] if src.startswith("own/") else SRC / src
+    return BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
 
 
 def extract(src, page):
@@ -1075,6 +1082,13 @@ def build_page(entry, search):
         h1 = article.new_tag("h1")
         h1.string = ADD_H1[page]
         (wrap.select_one(".content-inner") or wrap.select_one(".src-main") or wrap).insert(0, h1)
+    if page in ("leveraged/3sig.html", "leveraged/6sig.html", "leveraged/9sig.html"):
+        # The 9 Sig Calculator (2.16.0) runs all three targets; point to it under the heading.
+        h1 = wrap.find("h1")
+        assert h1, (page, "no h1 for the calculator link")
+        h1.insert_after(BeautifulSoup('<p class="site-tool-link"><strong>Track your own plan:</strong> the '
+                                      '<a href="9sig-calculator.html">9 Sig Calculator</a> works out each quarter&rsquo;s '
+                                      'signal line and trade, and exports to Excel.</p>', "html.parser"))
     if page in RELATED:
         r = rel(page, "")
         links = ", ".join(f'<a href="{r}{u}">{esc(t)}</a>' for u, t in RELATED[page])
@@ -1096,7 +1110,7 @@ def build_page(entry, search):
     desc = fix_dashes(desc, page + " (description)")
     inline_css = "".join(scope_css(s, SCOPE[repo], set(CHROME[repo]["css_drop"])) for s in styles)
     inline_css = min_font(fix_dashes(inline_css, page + " (inline style)"))
-    extra = [] if repo == "azqato.github.io" else [f"src-{repo}.css"]
+    extra = [] if repo == "azqato.github.io" else ["sig-calc.css"] if repo == "own" else [f"src-{repo}.css"]
     toc = "" if kind != "doc" else """<aside class="pp-toc" aria-labelledby="pp-toc-title">
   <p class="pp-toc-title" id="pp-toc-title">On this page</p>
   <ul class="pp-toc-list" id="pp-toc-list"></ul>
@@ -1283,6 +1297,8 @@ def main():
     mp = {}
     for path, src, *_ in PAGES:
         for s2 in [src] + [c[0] for c in COMBINE.get(path, [])]:
+            if s2.startswith("own/"):
+                continue  # nothing old to preserve
             repo, name = s2.split("/")
             mp.setdefault(f"{repo}-{name[:-5]}.json", []).append(path)
     for old, new in MOVED.items():

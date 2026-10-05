@@ -5,6 +5,28 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.16.0] - 2026-10-05
+
+### Added
+- 9 Sig Calculator at `/invests/leveraged/9sig-calculator` (owner's request; plan in docs/9SIG-CALCULATOR.md).
+A quarterly journal in the browser: settings (start amounts, new cash, 9/6/3% target, bond reserve, tickers),
+a quarter form with a live preview of the trade, a "This quarter" card with next quarter's signal line, a
+dashboard (tiles, return, drawdown, total assets and split charts, all statistics), and a table with key or
+all columns. Follows the 9 Sig page's rules: signal line, 90% throttle, 30 Down, Spike Reset; your own action
+overrides the suggestion. Several plans; everything kept in this browser's localStorage.
+- Import (.xlsx, .csv, or a backup .json, including the community 9-SIG Google Sheet downloaded as Excel):
+only the inputs are read, with a preview and a choice of a new plan or replacing the current one.
+- Export to Excel (Quarters, Summary and Settings sheets), CSV, and a JSON backup. No libraries: the xlsx is
+written and read in `assets/js/own/sig-xlsx.js`.
+- A "Track your own plan" link under the 3, 6 and 9 Sig headings.
+- `browser.py`: the engine checked against the sheet's rounds 0 to 3 (bond shares, cash, totals, round 3
+signal line), plus the page's form, export, import round trip and storage.
+
+### Changed
+- `site.py` builds pages written for this site from `tools/invests/pages/` ("own" sources).
+
+---
+
 ## [2.15.3] - 2026-10-03
 
 ### Added

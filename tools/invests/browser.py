@@ -252,6 +252,56 @@ def tool_tests(ctx, base):
         p.close()
 
 
+# The 9 Sig Calculator's numbers, checked against the community 9-SIG sheet
+# (docs/9SIG-CALCULATOR.md): rounds 0 to 3 of its 300,000 / 200,000 example.
+SIG_SETTINGS = {"stock": 300000, "bond": 200000, "contribution": 3000, "target": 0.09, "throttle": 0.10,
+                "stockTicker": "TQQQ", "bondTicker": "AGG"}
+SIG_QUARTERS = [("2017-01-31", 6.14, 108.29), ("2017-03-31", 8.00, 108.49),
+                ("2017-06-30", 8.14, 109.51), ("2017-09-29", 9.52, 109.59)]
+SIG_GOLDEN = [(1846, 96.66, 500000.00), (2448, 165.16, 594248.68), (2245, 79.44, 605494.39), (2519, 149.12, 669632.18)]
+
+
+def calculator_tests(ctx, base):
+    path = "leveraged/9sig-calculator.html"
+    p = load(ctx, base, path, "light", DESKTOP, wait=800)
+    qs = [{"date": d, "price": a, "bondPrice": b, "command": "auto"} for d, a, b in SIG_QUARTERS]
+    out = p.evaluate("([s, q]) => SigEngine.compute(s, q).rows.map(r => [r.bondShares, +r.cash.toFixed(2), +r.total.toFixed(2), r.signal])", [SIG_SETTINGS, qs])
+    for i, (got, want) in enumerate(zip(out, SIG_GOLDEN)):
+        if got[0] != want[0] or abs(got[1] - want[1]) > 0.011 or abs(got[2] - want[2]) > 0.011:
+            fail(f"calculator round {i}: got {got[:3]}, the sheet has {list(want)}")
+    if abs(out[3][3] - 393425.85) > 0.011:
+        fail(f"calculator round 3 signal line {out[3][3]:.2f}, the sheet has 393425.85")
+    # The page itself: fill settings and quarters through the form.
+    for k in ("stock", "bond", "contribution"):
+        p.fill(f"#sc-{k}", str(SIG_SETTINGS[k]))
+    for d, a, b in SIG_QUARTERS:
+        p.fill("#sc-date", d); p.fill("#sc-price", str(a)); p.fill("#sc-bond-price", str(b))
+        p.click("#sc-add-btn")
+    rows = p.locator("#sc-table tbody tr").count()
+    tiles = p.inner_text("#sc-tiles")
+    if rows != 4 or "$669,632" not in tiles:
+        fail(f"calculator page: {rows} table rows; tiles {tiles[:80]!r}")
+    if p.locator("#sc-charts svg").count() < 4:
+        fail("calculator page: charts didn't draw")
+    # Export to Excel, then import it back as a new plan: the totals must match.
+    with p.expect_download() as dl:
+        p.click("#sc-export-xlsx")
+    f = dl.value.path()
+    p.set_input_files("#sc-import-file", files=[{"name": "round-trip.xlsx", "mimeType": "application/octet-stream", "buffer": pathlib.Path(f).read_bytes()}])
+    p.wait_for_selector("#sc-import-go", timeout=5000)
+    p.click("#sc-import-go")
+    p.wait_for_timeout(300)
+    plans = p.locator("#sc-plan option").count()
+    tiles2 = p.inner_text("#sc-tiles")
+    if plans != 2 or "$669,632" not in tiles2:
+        fail(f"calculator import round trip: {plans} plans; tiles {tiles2[:80]!r}")
+    p.reload(); p.wait_for_timeout(500)
+    if p.locator("#sc-plan option").count() != 2:
+        fail("calculator: plans not kept in localStorage after a reload")
+    notes.append(f"calculator: golden rounds 0-3 match; page, export and import round trip ok ({tiles2.split(chr(10))[1] if chr(10) in tiles2 else tiles2[:30]})")
+    p.close()
+
+
 def fallback_tests(browser, base):
     # Screener: block raw GitHub; the fallback at azqato.github.io/stocks/data/ should serve.
     ctx = browser.new_context()
@@ -310,6 +360,7 @@ def main():
                 print("checked", path, flush=True)
             shell_tests(ctx, base)
             tool_tests(ctx, base)
+            calculator_tests(browser.new_context(accept_downloads=True), base)
             ctx.close()
             fallback_tests(browser, base)
             browser.close()

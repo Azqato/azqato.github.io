@@ -1128,6 +1128,13 @@ Not changed: the leveraged pages' tables keep their layout; with the wider colum
 
 ---
 
+#### 9 Sig Calculator (2.16.0)
+Styles in `invests/assets/css/sig-calc.css`, scoped to `.sc`, colors only from the `--pp-*` tokens so both themes
+follow. Cards with the "This quarter" card tinted emerald; numbers in tabular figures; gains emerald, losses red,
+Hold and Reset rows amber. Charts are inline SVG (no library). The wide table scrolls inside its own box with the
+Date column frozen; the page itself never scrolls sideways on a phone. Danger buttons use a red border, not red
+text (contrast on the dark button).
+
 ## Image Assets
 
 All images live in `img/` at the project root. Profile and thumbnail images render with `object-fit: cover`; the About avatar is a circle (`border-radius: 50%`).

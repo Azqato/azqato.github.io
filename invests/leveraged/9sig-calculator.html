@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9 Sig Calculator - Azqato Invests</title>
+<meta name="description" content="A free 9 Sig calculator in your browser: log each quarter&#x27;s prices and it works out the signal line, the trade, your holdings, return and drawdown. Export to Excel; nothing leaves your device.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="9 Sig Calculator - Azqato Invests">
+<meta property="og:description" content="A free 9 Sig calculator in your browser: log each quarter&#x27;s prices and it works out the signal line, the trade, your holdings, return and drawdown. Export to Excel; nothing leaves your device.">
+<meta property="og:url" content="https://azqato.com/invests/leveraged/9sig-calculator">
+<link rel="canonical" href="https://azqato.com/invests/leveraged/9sig-calculator">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚀%3C/text%3E%3C/svg%3E">
+<script src="../../theme.js"></script>
+<link rel="stylesheet" href="../assets/css/theme.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/docs.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/sig-calc.css">
+</head>
+<body class="pp-page site-page is-tool" data-root="../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="../../index.html">Azqato<span>.</span></a>
+  <ul><li><a href="../../index.html">Home</a></li><li><a href="../../about/index.html">About</a></li><li><a href="../../discord/index.html">Discord</a></li><li><a href="../index.html" aria-current="true">Invests</a></li><li><a href="../../codes/index.html">Codes</a></li><li><a href="../../music/index.html">Music</a></li><li><a href="../../links/index.html">Links</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../youtube/index.html">YouTube</a></li><li><a href="../../support/index.html">Support</a></li></ul>
+</nav>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-individual-stocks">Individual Stocks</summary><ul aria-labelledby="pp-g-individual-stocks"><li><a href="../stocks/index.html">Overview</a></li><li><a href="../stocks/method.html">Stock method</a></li><li><a href="../stocks/philosophy.html">Philosophy</a></li><li><a href="../stocks/metrics.html">Stock metrics</a></li><li><a href="../stocks/screener.html">Screener</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-indices-etfs">Indices & ETFs</summary><ul aria-labelledby="pp-g-indices-etfs"><li><a href="../indices/index.html">Overview</a></li><li><a href="../indices/method.html">Index method</a></li><li><a href="../indices/market.html">Market Overview</a></li><li><a href="../indices/vix/index.html">VIX Strategy</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-leveraged-strategies">Leveraged Strategies</summary><ul aria-labelledby="pp-g-leveraged-strategies"><li><a href="../leveraged/index.html">Overview</a></li><li><a href="../leveraged/3sig.html">3 Sig</a></li><li><a href="../leveraged/6sig.html">6 Sig</a></li><li><a href="../leveraged/9sig.html">9 Sig</a></li><li><a href="../leveraged/9sig-calculator.html" aria-current="page">9 Sig Calculator</a></li><li><a href="../leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li><a href="../leveraged/holy-grail.html">Holy Grail</a></li><li><a href="../leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../resources/index.html">Curated resources</a></li><li><a href="../resources/finviz.html">Finviz setup guide</a></li><li><a href="../resources/seekingalpha.html">Seeking Alpha setup guide</a></li><li><a href="../resources/faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="../../index.html">Home</a></li><li><a href="../../about/index.html">About</a></li><li><a href="../../discord/index.html">Discord</a></li><li><a href="../../codes/index.html">Codes</a></li><li><a href="../../music/index.html">Music</a></li><li><a href="../../links/index.html">Links</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../youtube/index.html">YouTube</a></li><li><a href="../../support/index.html">Support</a></li></ul></details>
+  <div class="site-sidebar-foot"><div class="pp-sidebar-card"><p><strong>Educational use only.</strong><br>Not financial advice.</p></div></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../leveraged/index.html">Leveraged Strategies</a></li><li><span aria-current="page">9 Sig Calculator</span></li></ol></nav>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-own">
+
+<div class="src-main sc">
+<header class="sc-intro">
+<p class="sc-kicker">Tool · Quarterly journal</p>
+<h1>9 Sig Calculator</h1>
+<p class="sc-lead">Log each quarter's closing prices and the calculator works out the signal line, the trade, your holdings, and how the plan is doing. It follows the rules on the <a href="9sig.html">9 Sig page</a>, and runs 3 Sig and 6 Sig too. Everything stays in this browser; export it to Excel at any time.</p>
+<p class="sc-plan-bar">
+<label for="sc-plan">Plan</label>
+<select id="sc-plan"></select>
+<button class="pp-btn" id="sc-plan-new" type="button">New plan</button>
+<button class="pp-btn" id="sc-plan-rename" type="button">Rename</button>
+</p>
+</header>
+<section aria-labelledby="sc-now-title" class="sc-now" id="this-quarter">
+<h2 id="sc-now-title">This quarter</h2>
+<div aria-live="polite" id="sc-now"></div>
+</section>
+<section aria-labelledby="sc-settings-title" class="sc-card" id="settings">
+<details id="sc-settings-box" open="">
+<summary><h2 id="sc-settings-title">Settings</h2><span class="sc-summary-hint" id="sc-settings-hint"></span></summary>
+<form class="sc-grid" id="sc-settings" novalidate="">
+<div class="sc-field"><label for="sc-stock">Starting stock amount</label><input id="sc-stock" inputmode="decimal" min="0" name="stock" placeholder="6000" step="any" type="number"/><p class="sc-help">Usually 60% of what you start with.</p></div>
+<div class="sc-field"><label for="sc-bond">Starting bond amount</label><input id="sc-bond" inputmode="decimal" min="0" name="bond" placeholder="4000" step="any" type="number"/><p class="sc-help">Usually 40%. The split is the plan's base, used by every reset.</p></div>
+<div class="sc-field"><label for="sc-contribution">New cash each quarter</label><input id="sc-contribution" inputmode="decimal" min="0" name="contribution" placeholder="3000" step="any" type="number"/><p class="sc-help">Goes into bonds; half of it raises the signal line.</p></div>
+<div class="sc-field"><label for="sc-target">Quarterly target</label><select id="sc-target" name="target"><option value="0.09">9% (9 Sig)</option><option value="0.06">6% (6 Sig)</option><option value="0.03">3% (3 Sig)</option></select></div>
+<div class="sc-field"><label for="sc-throttle">Bond reserve on a buy</label><select id="sc-throttle" name="throttle"><option value="0.10">10% (buys use at most 90%)</option><option value="0">None</option><option value="0.20">20%</option></select><p class="sc-help">The 90% Buying Power Throttle.</p></div>
+<div class="sc-field"><label for="sc-stock-ticker">Stock fund</label><input autocapitalize="characters" id="sc-stock-ticker" list="sc-stock-list" name="stockTicker" placeholder="TQQQ"/><datalist id="sc-stock-list"><option value="TQQQ"><option value="QLD"><option value="QQQ"><option value="MVV"><option value="IJR"></option></option></option></option></option></datalist></div>
+<div class="sc-field"><label for="sc-bond-ticker">Bond fund</label><input autocapitalize="characters" id="sc-bond-ticker" list="sc-bond-list" name="bondTicker" placeholder="AGG"/><datalist id="sc-bond-list"><option value="AGG"><option value="BND"><option value="SCHZ"><option value="SGOV"><option value="USFR"><option value="BOXX"></option></option></option></option></option></option></datalist></div>
+</form>
+</details>
+</section>
+<section aria-labelledby="sc-add-title" class="sc-card" id="add-quarter">
+<h2 id="sc-add-title">Add a quarter</h2>
+<p class="sc-help" id="sc-add-help">Enter the closing prices on the last trading day of the quarter. The first row is your starting position.</p>
+<form class="sc-grid" id="sc-add" novalidate="">
+<div class="sc-field"><label for="sc-date">Quarter end</label><input id="sc-date" name="date" required="" type="date"/></div>
+<div class="sc-field"><label for="sc-price"><span data-ticker="stock">Stock</span> close</label><input id="sc-price" inputmode="decimal" min="0" name="price" required="" step="any" type="number"/></div>
+<div class="sc-field"><label for="sc-bond-price"><span data-ticker="bond">Bond</span> close</label><input id="sc-bond-price" inputmode="decimal" min="0" name="bondPrice" required="" step="any" type="number"/></div>
+<div class="sc-field"><label for="sc-income">Dividends or interest</label><input id="sc-income" inputmode="decimal" min="0" name="income" placeholder="0" step="any" type="number"/></div>
+<div class="sc-field"><label for="sc-command">Action</label><select id="sc-command" name="command"><option value="auto">Follow the rules (suggested)</option><option value="signal">Trade the signal</option><option value="hold">Hold (skip a sell)</option><option value="rebalance">Reset to the base split</option></select></div>
+<details class="sc-more"><summary>Different fill prices</summary>
+<div class="sc-grid">
+<div class="sc-field"><label for="sc-fill"><span data-ticker="stock">Stock</span> trade price</label><input id="sc-fill" inputmode="decimal" min="0" name="fill" step="any" type="number"/><p class="sc-help">Leave blank to use the close.</p></div>
+<div class="sc-field"><label for="sc-bond-fill"><span data-ticker="bond">Bond</span> trade price</label><input id="sc-bond-fill" inputmode="decimal" min="0" name="bondFill" step="any" type="number"/></div>
+</div>
+</details>
+<div aria-live="polite" class="sc-preview" id="sc-preview"></div>
+<p class="sc-actions"><button class="pp-btn pp-btn--solid" id="sc-add-btn" type="submit">Add quarter</button> <button class="pp-btn" hidden="" id="sc-cancel" type="button">Cancel edit</button></p>
+<p class="sc-error" id="sc-add-error" role="alert"></p>
+</form>
+</section>
+<section aria-labelledby="sc-dash-title" class="sc-card" id="dashboard">
+<h2 id="sc-dash-title">Dashboard</h2>
+<p class="sc-headline" id="sc-headline"></p>
+<div class="sc-tiles" id="sc-tiles"></div>
+<div class="sc-charts" id="sc-charts"></div>
+<details class="sc-more"><summary>All statistics</summary><div id="sc-stats"></div></details>
+</section>
+<section aria-labelledby="sc-table-title" class="sc-card" id="quarters">
+<h2 id="sc-table-title">Quarters</h2>
+<p class="sc-table-bar"><label class="sc-check"><input id="sc-all-cols" type="checkbox"/> Show every column</label></p>
+<div aria-labelledby="sc-table-title" class="sc-table-wrap" role="region" tabindex="0"><table class="sc-table" id="sc-table"></table></div>
+</section>
+<section aria-labelledby="sc-data-title" class="sc-card" id="data">
+<h2 id="sc-data-title">Import and export</h2>
+<p class="sc-help">Your plans are saved in this browser only. Clearing your browser data, or using a private window, loses them, so download a backup now and then. Files you import are read in this browser and never uploaded.</p>
+<p class="sc-actions">
+<button class="pp-btn pp-btn--solid" id="sc-import-btn" type="button">Import</button>
+<input accept=".xlsx,.csv,.json,application/json,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden="" id="sc-import-file" type="file"/>
+<button class="pp-btn" id="sc-export-xlsx" type="button">Export to Excel</button>
+<button class="pp-btn" id="sc-export-csv" type="button">Export CSV</button>
+<button class="pp-btn" id="sc-export-json" type="button">Download backup</button>
+<button class="pp-btn sc-danger" id="sc-clear" type="button">Delete this plan</button>
+</p>
+<p class="sc-help">Import takes this calculator's own files (backup, Excel or CSV) or your own spreadsheet as .xlsx or .csv, including the community 9-SIG Google Sheet (File, Download, Microsoft Excel). Only the inputs are read: dates, prices, actions, fill prices and income. Everything else is recalculated.</p>
+<div class="sc-import" hidden="" id="sc-import-preview"></div>
+</section>
+<section aria-labelledby="sc-notes-title" class="sc-card sc-notes" id="how-it-works">
+<h2 id="sc-notes-title">How it works</h2>
+<ul>
+<li><strong>Signal line:</strong> last quarter's stock balance × (1 + the target), plus half of this quarter's new cash. Above the line, sell the surplus into bonds; below it, buy the shortfall from bonds.</li>
+<li><strong>Bond reserve:</strong> a buy uses at most 90% of the bond balance (with the 10% setting), plus any spare cash. A buy cut short is counted as a bond shortage.</li>
+<li><strong>30 Down:</strong> when the stock closes a quarter at least 30% below its highest quarterly close of the past two years, the next two sell signals are skipped (Hold), and the third resets the plan to its base split. The rule lapses after two years.</li>
+<li><strong>Spike Reset:</strong> after a quarter in which the stock gained 100% or more, with 30 Down off, if the stock would still be 60% to 100% of the plan after the normal trade, the plan resets to its base split.</li>
+<li><strong>Your choice wins.</strong> The action is a suggestion; pick another and the calculator follows what you actually did.</li>
+<li><strong>Rounding:</strong> stock shares are fractional; bond trades are whole shares, with the remainder kept as cash.</li>
+<li><strong>Annualized return</strong> compares today's total with everything you've put in, over the whole period. Money added late counts for the full period, so with large contributions it reads lower than your true rate; treat it as a rough guide.</li>
+</ul>
+<p class="sc-legal">An independent tool built from the rules published on the <a href="9sig.html">9 Sig page</a>. Not affiliated with Jason Kelly or The Kelly Letter; for the official plan and its current signals, subscribe at <a href="https://jasonkelly.com" rel="noopener" target="_blank">jasonkelly.com</a>. Layout inspired by a community 9-SIG spreadsheet shared on r/TQQQ. Educational use only. Not financial advice.</p>
+</section>
+</div>
+
+
+
+</div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../leveraged/9sig.html"><small>Previous</small><span>9 Sig</span></a><a class="pp-pager-link pp-pager-link--next" href="../leveraged/tqqq-ftlt.html"><small>Next</small><span>TQQQ FTLT</span></a></nav>
+</main>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../resources/index.html">Curated resources</a> · <a href="../resources/faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/own/sig-engine.js"></script>
+<script src="../assets/js/own/sig-xlsx.js"></script>
+<script src="../assets/js/own/sig-calc.js"></script>
+</body>
+</html>
