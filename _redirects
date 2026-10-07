@@ -35,3 +35,12 @@
 /invests/vix/              /invests/indices/vix/  301
 /invests/vix/index.html    /invests/indices/vix/  301
 /invests/vix/method.html   /invests/indices/vix/  301
+
+# Old addresses Search Console still reports as 404 (2.17.3).
+/home                     /                        301
+/Twitter                  https://twitter.com/azqato  301
+/twitter                  https://twitter.com/azqato  301
+/stocks                   /invests/stocks/         301
+/stocks/*                 /invests/stocks/         301
+/leveraged-strategies     /invests/leveraged/      301
+/leveraged-strategies/*   /invests/leveraged/      301

@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.17.3] - 2026-10-07
+
+### Fixed
+- Search Console's four 404s now redirect (301) on Cloudflare: `/home` to the home page, `/Twitter` to
+https://twitter.com/azqato, `/stocks/` to `/invests/stocks/`, and `/leveraged-strategies/` straight to
+`/invests/leveraged/` (it was a redirect page). Cloudflare's www-to-root and Always Use HTTPS are on (owner).
+
+---
+
 ## [2.17.2] - 2026-10-07
 
 ### Fixed
