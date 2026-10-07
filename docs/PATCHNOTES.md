@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.17.2] - 2026-10-07
+
+### Fixed
+- Search Console, "Alternate page with proper canonical tag": the 10 root pages answered at both `/about`
+and `/about/` on Cloudflare. `_redirects` now sends the no-slash form to the slash form (301), as `/invests`
+already did. The canonical tags were already right; this removes the duplicate address.
+
+Still reported, and expected: `www.azqato.com` and `http://` copies (need Cloudflare redirect settings,
+owner's dashboard) and the `azqato.github.io` copy (a second host by design; its canonical points here).
+
+---
+
 ## [2.17.1] - 2026-10-05
 
 ### Fixed

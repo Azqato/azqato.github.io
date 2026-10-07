@@ -17,6 +17,19 @@
 /projects.html  /projects/  301
 /support.html  /support/  301
 /youtube.html  /youtube/  301
+# Each page has one address (2.17.2): Cloudflare also served /about as well as
+# /about/, which Search Console reported as "Alternate page with proper
+# canonical tag". The no-slash form now redirects, as /invests already does.
+/about  /about/  301
+/accounts  /accounts/  301
+/codes  /codes/  301
+/discord  /discord/  301
+/links  /links/  301
+/music  /music/  301
+/privacy-policy  /privacy-policy/  301
+/projects  /projects/  301
+/support  /support/  301
+/youtube  /youtube/  301
 # VIX Strategy moved into Indices & ETFs (2.15.1). Its dashboard and custom
 # addresses keep their redirect pages, which carry the #section.
 /invests/vix/              /invests/indices/vix/  301
