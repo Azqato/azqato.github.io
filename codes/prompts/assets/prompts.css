@@ -31,8 +31,19 @@
   line-height: 1.6;
 }
 
-/* The note for AI agents under each prompt (new here: it was the old share page). */
-.pr-site .pr-agents { margin-top: 28px; font-size: .85rem; color: var(--color-text-secondary); overflow-wrap: anywhere; }
+/* The note for AI agents under each prompt: in the page for agents that fetch
+   it, hidden from people (owner, 2026-10-08), as the original showed none. */
+.pr-site .pr-agents {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* Reset / base */
 
