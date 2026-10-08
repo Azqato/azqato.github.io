@@ -1148,6 +1148,19 @@ python scripts/build-nav.py --check   # report drift, write nothing, exit 1 if a
 
 Running it with no nav change prints `nav is up to date in every page` and writes nothing, which doubles as a check that all 12 navs still match.
 
+Two more generators, for the sections moved in under item 22. Same principle: their output is committed, and the pages work if they are deleted.
+
+```bash
+python scripts/tools-site/migrate.py   # one-time: ../tools (the old repo) into tools/; rerunning overwrites edits
+python scripts/prompts/build.py        # prompts/md/*.md into prompts/ (pages, sitemap block, redirects)
+python scripts/prompts/build.py --check
+python scripts/build-nav.py            # always last: nav, footer, icons and search for every page
+python scripts/tools-site/browser.py   # Tools: every page, both themes, each tool's main action
+python scripts/prompts/browser.py      # Prompts: every page, both themes, search, Expand, Copy
+```
+
+**Adding a prompt.** Write `prompts/md/<slug>.md` in the old site's format (frontmatter `title`, `description`, `meta`, optional `hidden: true`; a description; `## Prompt`; the prompt in one fenced block), add the slug to `ORDER` in `scripts/prompts/build.py`, then run the build, `build-nav.py` and the browser test. To rename or remove one, add the old slug to `RETIRED` so its address redirects; never reuse a slug. The prompt sources are exempt from the em dash hook (they are kept word for word); their pages are not.
+
 The closest thing to a build check is confirming page weight before pushing:
 
 ```powershell
@@ -1433,7 +1446,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
-| 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | `docs/TOOLS-PROMPTS.md` | Phase 1 done 2026-10-08; plan waiting on the owner's six answers |
+| 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | `docs/TOOLS-PROMPTS.md` | Built locally 2026-10-08 (branch `item-22-tools-prompts`), waiting on the owner's review; then rollout and the old repos (D26) |
 
 **Later**
 
@@ -2622,6 +2635,7 @@ Drafted by the 2026-10-01 audit from the core rule and the decisions, in priorit
 | D23 | Content | **Decided 2026-10-03 by the owner:** VIX Strategy is one page inside Indices & ETFs, at `/invests/indices/vix/` (2.15.1); Individual Stocks and Indices & ETFs are landing pages with cards, each with a Method page holding the moved sections word for word (2.15.0); the stock method has 12 metrics, and `check.py` keeps every page saying so (Q7); the FAQ has seven topic groups, headings only (S7, 2.15.3) |
 | D24 | Feature | **Decided 2026-10-05 by the owner:** a browser 9 Sig Calculator in Leveraged Strategies, after 9 Sig (2.16.0): data in localStorage only, Excel/CSV/JSON export, Import of its own files and outside sheets (inputs only, everything recalculated); numbers checked against the community 9-SIG sheet in `browser.py`. Plan: docs/9SIG-CALCULATOR.md |
 | D25 | Design | **Decided 2026-10-05 by the owner:** the site's colors follow the Template Interface Color Standard 1.0 (2.17.0): one `colors.css` of `--ti-color-*` roles, emerald accent at the standard's grades, success green for gains, white light canvas with a gray-blue surface; dark text colors one grade lighter (30) so they pass on tints |
+| D26 | Content | **Decided 2026-10-08 by the owner:** Azqato's Tools and Azqato's Prompts move into azqato.com at `/tools/` and `/prompts/` (item 22): Tools first; Tools' saved data (Markdown draft, Wash Sale log, bookmarks) starts empty here, with no notice; the prompts are written here from now on (`prompts/md/`) and the prompts repo is retired after the move; both take the site's colors; the prompts dashboard stays out. Built locally on branch `item-22-tools-prompts`; nothing rolls out and neither old repo changes until the owner has reviewed it working. Plan: docs/TOOLS-PROMPTS.md |
 
 ## Invests: Site map
 

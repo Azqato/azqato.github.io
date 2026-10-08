@@ -5,6 +5,30 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.18.0] - unreleased (local branch `item-22-tools-prompts`)
+
+### Added
+- **Azqato's Tools at `/tools/`** (item 22): the ten browser tools and their list, moved from
+github.com/Azqato/tools word for word by `scripts/tools-site/migrate.py`, with the shared nav, footer, search
+and colors. Each tool has a clean address (`/tools/link-cleaner/`); the old file names redirect. The list's
+VIX Strategy and Nasdaq 100 Screener now open their Invests pages. `scripts/tools-site/browser.py` tests it.
+- **Azqato's Prompts at `/prompts/`**: the 24 prompts, moved word for word into `prompts/md/`, where they are
+written from now on. `scripts/prompts/build.py` gives each a real page (`/prompts/mobile-responsive-audit/`)
+holding its description and full text, with Expand and Copy as before; Copy's pointer now names azqato.com.
+The plain Markdown is published at `/prompts/md/<slug>.md`. `scripts/prompts/browser.py` tests it.
+- Both sections are in the footer, the site search and the sitemap; Codes and Projects link to them here.
+
+### Changed
+- The build scripts folder is `scripts/` (was `tools/`), so `/tools/` can be the Tools section.
+
+### Fixed
+- Tools: tool pages ran edge to edge on phones (`.page` reset `.wrap`'s side padding); now padded.
+- `build-nav.py` added a second theme.js line to pages two folders deep on every run.
+
+Not yet done, by the owner's instruction: rollout (push), and the old repos' redirects and retirement.
+
+---
+
 ## [2.17.3] - 2026-10-07
 
 ### Fixed
