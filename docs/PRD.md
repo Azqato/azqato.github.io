@@ -1433,7 +1433,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
-| 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | This list; to be planned as its own pass | Large; design needed |
+| 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | `docs/TOOLS-PROMPTS.md` | Phase 1 done 2026-10-08; plan waiting on the owner's six answers |
 
 **Later**
 
