@@ -1226,3 +1226,9 @@ body.tl { background: var(--tl-page); }
     scroll-behavior: auto !important;
   }
 }
+
+.tl .wrap { margin-left: 0; padding-left: 24px; }
+body.tl .site-footer-in { margin-left: 0; padding-left: 24px; }
+@media (max-width: 860px) {
+  .tl .wrap, body.tl .site-footer-in { padding-left: 16px; }
+}

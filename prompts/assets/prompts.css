@@ -503,7 +503,7 @@
     height: auto;
     max-height: none;
     overflow: visible;
-    padding: 14px 0;
+    padding: 14px 0 14px 16px;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;

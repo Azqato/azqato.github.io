@@ -176,7 +176,7 @@ HEAD = """<!DOCTYPE html>
 
 
 def sidebar(prompts, current, up):
-    """The old site's sidebar: logo, the Prompts menu button (phones), search,
+    """The old site's sidebar (its logo dropped: the bar above names the section): the Prompts menu button (phones), search,
     Home and every visible prompt, and Support."""
     links = ['          <a href="%s"%s>Home</a>' % (up or './', ' class="active" aria-current="page"' if current is None else '')]
     for p in prompts:
@@ -187,7 +187,6 @@ def sidebar(prompts, current, up):
             ' class="active" aria-current="page"' if current == p['slug'] else '', esc(p['title'])))
     return """      <aside class="sidebar">
         <div class="sidebar-sticky">
-          <a class="sidebar-logo" href="%s">Azqato's Prompts<span class="accent-dot">.</span></a>
           <button class="pr-nav-toggle" id="pr-nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar-nav">Prompts</button>
           <div class="sidebar-search">
             <input type="search" id="prompt-search" placeholder="Search prompts" aria-label="Search prompts" aria-controls="sidebar-nav" autocomplete="off" spellcheck="false" />
@@ -200,7 +199,7 @@ def sidebar(prompts, current, up):
             <a href="%s../support/" class="support-btn">Support</a>
           </div>
         </div>
-      </aside>""" % (up or './', '\n'.join(links), up)
+      </aside>""" % ('\n'.join(links), up)
 
 
 def home(prompts):
