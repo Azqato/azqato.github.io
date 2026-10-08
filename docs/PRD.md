@@ -529,7 +529,7 @@ State is minimal, lives entirely in memory, and does not survive a page load. No
 | Tesla, Twitch Prime, RouteNote, Robinhood, M1 Finance, Public, Lyft | Affiliate referrals | Nothing until the visitor clicks; then the referral code identifies Azqato as the referrer | On click |
 | Discord | Community invites | Nothing until the visitor clicks | On click |
 | Every external link on `invests.html`, `links.html`, `accounts.html`, `youtube.html` | Outbound navigation | Nothing until the visitor clicks | On click |
-| Cat Food Center favicon (`azqato.github.io/Cat-Food-Center/favicon.svg`) | The one `iconUrl` project image on `projects.html` | A request to another GitHub Pages site owned by Azqato | Every `projects.html` load |
+| Cat Food Center favicon (`catfoodcenter.com/favicon.svg`) | The one `iconUrl` project image on `projects.html` | A request to catfoodcenter.com, owned by Azqato | Every `projects.html` load |
 
 No authentication is used with any of these. There are no API keys, tokens, or accounts involved on the site side.
 
