@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Every page on the site. All twelve are public: there is no login, no gated
+  Every page on the site, with Azqato's Tools (tools/, item 22) after the
+  twelve main pages. All are public: there is no login, no gated
   content, and no page that renders differently for a signed-in visitor.
   lastmod is the date of the last commit that changed that page.
   The canonical domain is azqato.com, decided 2026-09-28. See the PRD, Open Question 10.
@@ -68,5 +69,60 @@
     <loc>https://azqato.com/privacy-policy/</loc>
     <lastmod>2026-10-02</lastmod>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/base64-encoder/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/bookmark-manager/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/character-counter/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/favicon-downloader/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/json-formatter/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/link-cleaner/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/markdown-preview/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/password-generator/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/timestamp-converter/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/tools/wash-sale-tracker/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>

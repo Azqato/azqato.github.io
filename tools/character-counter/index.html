@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Character Counter - Azqato's Tools</title>
+  <meta name="description" content="Count characters, words, sentences and paragraphs as you type, and check your text against common platform limits. Runs entirely in your browser." />
+  <link rel="canonical" href="https://azqato.com/tools/character-counter/" />
+  <meta property="og:title" content="Character Counter - Azqato's Tools" />
+  <meta property="og:description" content="Count characters, words, sentences and paragraphs as you type, and check your text against common platform limits. Runs entirely in your browser." />
+  <meta property="og:url" content="https://azqato.com/tools/character-counter/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Azqato" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
+  <script src="../../theme.js"></script>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools/assets/tools.css" />
+</head>
+<body class="tl">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="../../index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../discord/index.html">Discord</a></li>
+        <li><a href="../../invests/index.html">Invests</a></li>
+        <li><a href="../../codes/index.html" class="active">Codes</a></li>
+        <li><a href="../../music/index.html">Music</a></li>
+        <li><a href="../../links/index.html">Links</a></li>
+        <li><a href="../../projects/index.html">Projects</a></li>
+        <li><a href="../../youtube/index.html">YouTube</a></li>
+        <li><a href="../../support/index.html">Support</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </nav>
+  <div class="site-sub">
+    <a class="site-sub-brand" href="../../tools/index.html"><span class="site-sub-mark" aria-hidden="true">🧰</span> Azqato's Tools</a>
+    <button class="site-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <span class="site-search-text">Search the site</span>
+      <kbd aria-hidden="true">/</kbd>
+    </button>
+    <div class="site-sub-end">
+      <button class="theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <script src="../../search.js" defer></script>
+  <!-- /NAV -->
+
+  <main id="main" class="page wrap">
+    <div class="page-head">
+      <div class="crumb"><a href="../">Tools</a> / Character Counter</div>
+      <h1>Character Counter</h1>
+      <p>Paste or type your text and see the counts update as you go. Nothing is uploaded, it all happens in your browser.</p>
+    </div>
+
+    <label class="lbl" for="cc-input">Your text</label>
+    <textarea id="cc-input" class="field" rows="9" spellcheck="false"
+      placeholder="Start typing or paste your text here…"></textarea>
+
+    <div class="cc-actions">
+      <button class="btn" id="cc-paste">Paste from clipboard</button>
+      <button class="btn ghost" id="cc-sample">Try an example</button>
+      <button class="btn ghost" id="cc-clear">Clear</button>
+      <div class="spacer"></div>
+      <button class="btn sm primary" id="cc-copy">Copy stats</button>
+    </div>
+
+    <h2 class="section-label">The numbers</h2>
+    <div class="cc-grid" id="cc-grid"></div>
+    <p class="cc-note" id="cc-note"></p>
+
+    <h2 class="section-label">Against common limits</h2>
+    <div class="cc-limits" id="cc-limits"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-in">
+      <p class="site-footer-brand">Azqato<span>.</span></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul aria-label="Site">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../discord/index.html">Discord</a></li>
+          <li><a href="../../invests/index.html">Invests</a></li>
+          <li><a href="../../codes/index.html">Codes</a></li>
+          <li><a href="../../music/index.html">Music</a></li>
+          <li><a href="../../links/index.html">Links</a></li>
+          <li><a href="../../projects/index.html">Projects</a></li>
+          <li><a href="../../youtube/index.html">YouTube</a></li>
+          <li><a href="../../support/index.html">Support</a></li>
+          <li><a href="../../tools/index.html">Azqato's Tools</a></li>
+          <li><a href="../../accounts/index.html">Gaming Accounts</a></li>
+          <li><a href="../../privacy-policy/index.html">Privacy Policy</a></li>
+        </ul>
+        <ul aria-label="Azqato Invests">
+          <li><a href="../../invests/index.html">Azqato Invests</a></li>
+          <li><a href="../../invests/stocks/index.html">Individual Stocks</a></li>
+          <li><a href="../../invests/indices/index.html">Indices &amp; ETFs</a></li>
+          <li><a href="../../invests/indices/vix/index.html">VIX Strategy</a></li>
+          <li><a href="../../invests/leveraged/index.html">Leveraged Strategies</a></li>
+          <li><a href="../../invests/resources/index.html">Investing Resources</a></li>
+        </ul>
+      </nav>
+      <p class="site-footer-legal">&copy; 2026 Azqato</p>
+    </div>
+  </footer>
+
+
+  <script src="../../tools/assets/js/common.js"></script>
+  <script src="../../tools/assets/js/charactercounter.js"></script>
+  <script>
+    var input = document.getElementById("cc-input");
+    var grid = document.getElementById("cc-grid");
+    var note = document.getElementById("cc-note");
+    var limitBox = document.getElementById("cc-limits");
+    var STORE = "azqato-cc-draft";
+
+    // Character limits measured against `characters` (UTF-16 code units),
+    // which is what each platform actually enforces.
+    var LIMITS = [
+      { name: "X post", max: 280 },
+      { name: "SMS, single message", max: 160 },
+      { name: "Meta description", max: 160 },
+      { name: "Title tag", max: 60 },
+      { name: "Instagram caption", max: 2200 },
+      { name: "LinkedIn post", max: 3000 }
+    ];
+
+    var SAMPLE = [
+      "The best tools disappear while you use them.",
+      "",
+      "You open the tab, do the one thing you came to do, and close it again.",
+      "No account, no cookie banner, no upload. The work happens on your own",
+      "machine and stops there. That is the whole idea behind every tool here,",
+      "and it is why none of them need a server to be useful.",
+      "",
+      "Try editing this text and watch every number update as you type."
+    ].join("\n");
+
+    var STATS = [
+      { key: "characters", label: "Characters" },
+      { key: "charactersNoSpaces", label: "Characters, no spaces" },
+      { key: "words", label: "Words" },
+      { key: "sentences", label: "Sentences" },
+      { key: "paragraphs", label: "Paragraphs" },
+      { key: "lines", label: "Lines" }
+    ];
+
+    var current = null;
+
+    function fmt(n) { return n.toLocaleString(); }
+
+    function renderStats(s) {
+      grid.innerHTML = "";
+      STATS.forEach(function (stat) {
+        var cell = document.createElement("div");
+        cell.className = "cc-stat";
+        var num = document.createElement("div");
+        num.className = "n";
+        num.textContent = fmt(s[stat.key]);
+        var lab = document.createElement("div");
+        lab.className = "l";
+        lab.textContent = stat.label;
+        cell.appendChild(num);
+        cell.appendChild(lab);
+        grid.appendChild(cell);
+      });
+
+      [["Reading time", s.readingSeconds], ["Speaking time", s.speakingSeconds]]
+        .forEach(function (pair) {
+          var cell = document.createElement("div");
+          cell.className = "cc-stat time";
+          var num = document.createElement("div");
+          num.className = "n";
+          num.textContent = formatDuration(pair[1]);
+          var lab = document.createElement("div");
+          lab.className = "l";
+          lab.textContent = pair[0];
+          cell.appendChild(num);
+          cell.appendChild(lab);
+          grid.appendChild(cell);
+        });
+    }
+
+    function renderNote(s) {
+      if (s.codePoints !== s.characters) {
+        note.textContent = "This text contains characters that take two units each, " +
+          "such as emoji. It is " + fmt(s.codePoints) + " characters to a reader but " +
+          fmt(s.characters) + " to a platform counting the limit.";
+        note.style.display = "block";
+      } else {
+        note.style.display = "none";
+      }
+    }
+
+    function renderLimits(s) {
+      limitBox.innerHTML = "";
+      LIMITS.forEach(function (limit) {
+        var used = s.characters;
+        var over = used > limit.max;
+        var pct = Math.min(100, limit.max === 0 ? 0 : used / limit.max * 100);
+
+        var row = document.createElement("div");
+        row.className = "cc-limit" + (over ? " over" : "");
+
+        var head = document.createElement("div");
+        head.className = "cc-limit-head";
+        var name = document.createElement("span");
+        name.textContent = limit.name;
+        var count = document.createElement("span");
+        count.className = "c";
+        count.textContent = over
+          ? fmt(used - limit.max) + " over"
+          : fmt(limit.max - used) + " left";
+        head.appendChild(name);
+        head.appendChild(count);
+
+        var bar = document.createElement("div");
+        bar.className = "cc-bar";
+        var fill = document.createElement("div");
+        fill.className = "cc-fill";
+        fill.style.width = pct + "%";
+        bar.appendChild(fill);
+
+        row.appendChild(head);
+        row.appendChild(bar);
+        limitBox.appendChild(row);
+      });
+    }
+
+    /* Draft saving runs on every keystroke, so the failure toast has to be
+       latched or a full quota would fire it on every key. It re-arms on the
+       next successful save, so a user who frees up space is warned again if it
+       fills a second time. */
+    var saveWarned = false;
+
+    function saveDraft(value) {
+      try {
+        localStorage.setItem(STORE, value);
+        saveWarned = false;
+      } catch (e) {
+        if (!saveWarned) {
+          saveWarned = true;
+          toast("Couldn't save your draft, browser storage may be full");
+        }
+      }
+    }
+
+    function render() {
+      current = countText(input.value);
+      renderStats(current);
+      renderNote(current);
+      renderLimits(current);
+      saveDraft(input.value);
+    }
+
+    input.addEventListener("input", render);
+
+    // restore draft, or start empty
+    var saved = localStorage.getItem(STORE);
+    input.value = saved !== null ? saved : "";
+    render();
+
+    document.getElementById("cc-sample").onclick = function () {
+      input.value = SAMPLE; render(); input.focus();
+    };
+    document.getElementById("cc-clear").onclick = function () {
+      input.value = ""; render(); input.focus();
+    };
+    document.getElementById("cc-copy").onclick = function () {
+      var s = current;
+      var lines = STATS.map(function (stat) {
+        return stat.label + ": " + fmt(s[stat.key]);
+      });
+      lines.push("Reading time: " + formatDuration(s.readingSeconds));
+      lines.push("Speaking time: " + formatDuration(s.speakingSeconds));
+      copyText(lines.join("\n"), "Stats copied to clipboard");
+    };
+    document.getElementById("cc-paste").onclick = function () {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().then(function (t) {
+          input.value = t; render();
+        }).catch(function () { toast("Couldn't read clipboard, paste manually"); });
+      } else {
+        toast("Clipboard not available, paste manually");
+      }
+    };
+
+  </script>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -44,3 +44,27 @@
 /stocks/*                 /invests/stocks/         301
 /leveraged-strategies     /invests/leveraged/      301
 /leveraged-strategies/*   /invests/leveraged/      301
+
+# Azqato's Tools moved in from azqato.github.io/tools (item 22). One address
+# per page, and the old file names (tools/link-cleaner.html) go to the clean one.
+/tools                /tools/   301
+/tools/base64-encoder       /tools/base64-encoder/  301
+/tools/base64-encoder.html  /tools/base64-encoder/  301
+/tools/bookmark-manager       /tools/bookmark-manager/  301
+/tools/bookmark-manager.html  /tools/bookmark-manager/  301
+/tools/character-counter       /tools/character-counter/  301
+/tools/character-counter.html  /tools/character-counter/  301
+/tools/favicon-downloader       /tools/favicon-downloader/  301
+/tools/favicon-downloader.html  /tools/favicon-downloader/  301
+/tools/json-formatter       /tools/json-formatter/  301
+/tools/json-formatter.html  /tools/json-formatter/  301
+/tools/link-cleaner       /tools/link-cleaner/  301
+/tools/link-cleaner.html  /tools/link-cleaner/  301
+/tools/markdown-preview       /tools/markdown-preview/  301
+/tools/markdown-preview.html  /tools/markdown-preview/  301
+/tools/password-generator       /tools/password-generator/  301
+/tools/password-generator.html  /tools/password-generator/  301
+/tools/timestamp-converter       /tools/timestamp-converter/  301
+/tools/timestamp-converter.html  /tools/timestamp-converter/  301
+/tools/wash-sale-tracker       /tools/wash-sale-tracker/  301
+/tools/wash-sale-tracker.html  /tools/wash-sale-tracker/  301

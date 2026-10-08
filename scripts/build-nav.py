@@ -50,9 +50,37 @@ ICONS = {
     'accounts/index.html': '🎮', 'privacy-policy/index.html': '🔒',
 }
 ICON_DEFAULT = '🦁'
+
+# Sections moved in from their own repos (roadmap item 22): every page under
+# the folder gets the section's emoji, second-bar title and home link, and the
+# Codes link is marked active, since Codes is where the nav lists them.
+SECTIONS = {
+    'tools/': {'icon': '🧰', 'bar': "Azqato's Tools", 'active': 'codes/index.html'},
+}
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+
+def section_pages(prefix):
+    return sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / prefix).rglob('index.html'))
+
+
+def section(filename):
+    for prefix, sec in SECTIONS.items():
+        if filename.startswith(prefix):
+            return prefix, sec
+    return None, None
+
+
+def page_label(filename):
+    # A section page's name for search: its <title> without the section suffix.
+    prefix, sec = section(filename)
+    if filename == prefix + 'index.html':
+        return sec['bar']
+    t = re.search(r'<title>(.*?)</title>', (ROOT / filename).read_text(encoding='utf-8'), re.S).group(1)
+    return re.sub(r"\s+-\s+Azqato's Tools$", '', t).strip()
 # The icon link, then the theme script (unless the page is locked dark), are
 # stamped together, so a rerun replaces both instead of adding a script.
-ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="(?:\.\./)?theme.js"></script>)?')
+ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="(?:\.\./)*theme.js"></script>)?')
 
 # Light and dark themes (build pass item 5): theme.js sets the theme before the
 # first paint; the button sits in the bar. music.html stays dark (owner's
@@ -86,7 +114,7 @@ BAR_TITLES = {
 def icon_for(filename):
     return ("<link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' "
             "viewBox='0 0 100 100'><text y='.9em' font-size='90'>%s</text></svg>\" />"
-            % ICONS.get(filename, ICON_DEFAULT)
+            % (section(filename)[1] or {}).get('icon', ICONS.get(filename, ICON_DEFAULT))
             + ('' if filename in THEME_LOCKED else '\n  <script src="%stheme.js"></script>' % up(filename)))
 
 
@@ -139,6 +167,7 @@ SUB_TEMPLATE = """
 # "all the major categories, for SEO"). Two groups: the site, and Azqato
 # Invests' sections. No sitemap link: robots.txt points crawlers at sitemap.xml.
 FOOTER_SITE = PAGES + [
+    ('tools/index.html', "Azqato's Tools"),
     ('accounts/index.html', 'Gaming Accounts'),
     ('privacy-policy/index.html', 'Privacy Policy'),
 ]
@@ -195,17 +224,23 @@ SKIP = set()
 
 def nav_for(filename):
     """Return the nav block for one page, with its own link marked active."""
+    prefix, sec = section(filename)
+    current = sec['active'] if sec else filename
     items = '\n'.join(
         '        <li><a href="%s"%s>%s</a></li>'
-        % (href(filename, target), ' class="active"' if target == filename else '', label)
+        % (href(filename, target), ' class="active"' if target == current else '', label)
         for target, label in PAGES
     )
     theme = '' if filename in THEME_LOCKED else THEME_BUTTON
     if filename == 'index.html':
         # The home page: one bar, with the theme button at its end.
         return TEMPLATE.format(items=items, home='index.html', brand=BRAND_DEFAULT, theme=theme, sub='')
-    sub = SUB_TEMPLATE.format(self='index.html', icon=ICONS.get(filename, ICON_DEFAULT),
-                              name=BAR_TITLES.get(filename, 'Azqato ' + SECTION_NAMES[filename]), up=up(filename),
+    if sec:
+        sub_self, icon, name = href(filename, prefix + 'index.html'), sec['icon'], sec['bar']
+    else:
+        sub_self, icon = 'index.html', ICONS.get(filename, ICON_DEFAULT)
+        name = BAR_TITLES.get(filename, 'Azqato ' + SECTION_NAMES[filename])
+    sub = SUB_TEMPLATE.format(self=sub_self, icon=icon, name=name, up=up(filename),
                               theme=theme.replace('\n        ', '\n      '))
     return TEMPLATE.format(items=items, home=href(filename, 'index.html'), brand=BRAND_DEFAULT, theme='', sub=sub)
 
@@ -218,14 +253,15 @@ def nav_for(filename):
 def search_index(root):
     from bs4 import BeautifulSoup
     pages, entries = [], []
-    for name in ['index.html'] + list(SECTION_NAMES):
+    for name in ['index.html'] + list(SECTION_NAMES) + [p for pre in SECTIONS for p in section_pages(pre)]:
         soup = BeautifulSoup((root / name).read_text(encoding='utf-8'), 'html.parser')
         body = soup.body
         for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas'):
             x.decompose()
-        label = 'Home' if name == 'index.html' else SECTION_NAMES[name]
+        prefix, sec = section(name)
+        label = 'Home' if name == 'index.html' else page_label(name) if sec else SECTION_NAMES[name]
         pi = len(pages)
-        pages.append({'u': name, 't': label, 'g': 'Azqato.com'})
+        pages.append({'u': name, 't': label, 'g': sec['bar'] if sec else 'Azqato.com'})
         h1 = body.find('h1')
         head, text = (h1.get_text(' ', strip=True) if h1 else label), []
         anchor = ''
@@ -263,7 +299,9 @@ def main():
 
     # The home page, then each page in its own folder (clean addresses, build
     # pass item 7). The old root .html files are redirect pages and get nothing.
-    names = ['index.html'] + [t for t, _ in FOOTER_SITE if t != 'index.html' and not t.startswith('invests/')]
+    names = ['index.html'] + [t for t, _ in FOOTER_SITE if t != 'index.html' and not t.startswith('invests/')
+                              and not section(t)[0]]
+    names += [p for pre in SECTIONS for p in section_pages(pre)]
     for name in names:
         path = root / name
         if name in SKIP:

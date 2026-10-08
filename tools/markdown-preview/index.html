@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown Editor - Azqato's Tools</title>
+  <meta name="description" content="Write Markdown and preview the rendered HTML instantly, entirely in your browser." />
+  <link rel="canonical" href="https://azqato.com/tools/markdown-preview/" />
+  <meta property="og:title" content="Markdown Editor - Azqato's Tools" />
+  <meta property="og:description" content="Write Markdown and preview the rendered HTML instantly, entirely in your browser." />
+  <meta property="og:url" content="https://azqato.com/tools/markdown-preview/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Azqato" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
+  <script src="../../theme.js"></script>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools/assets/tools.css" />
+</head>
+<body class="tl">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="../../index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../discord/index.html">Discord</a></li>
+        <li><a href="../../invests/index.html">Invests</a></li>
+        <li><a href="../../codes/index.html" class="active">Codes</a></li>
+        <li><a href="../../music/index.html">Music</a></li>
+        <li><a href="../../links/index.html">Links</a></li>
+        <li><a href="../../projects/index.html">Projects</a></li>
+        <li><a href="../../youtube/index.html">YouTube</a></li>
+        <li><a href="../../support/index.html">Support</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </nav>
+  <div class="site-sub">
+    <a class="site-sub-brand" href="../../tools/index.html"><span class="site-sub-mark" aria-hidden="true">🧰</span> Azqato's Tools</a>
+    <button class="site-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <span class="site-search-text">Search the site</span>
+      <kbd aria-hidden="true">/</kbd>
+    </button>
+    <div class="site-sub-end">
+      <button class="theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <script src="../../search.js" defer></script>
+  <!-- /NAV -->
+
+  <main id="main" class="page wrap">
+    <div class="page-head">
+      <div class="crumb"><a href="../">Tools</a> / Markdown Editor</div>
+      <h1>Markdown Editor</h1>
+      <p>Type Markdown on the left, see it rendered on the right. Nothing is uploaded, it all happens in your browser.</p>
+    </div>
+
+    <div class="md-toolbar">
+      <div class="grp">
+        <button class="md-tool" data-wrap="**" title="Bold">B</button>
+        <button class="md-tool" data-wrap="*" title="Italic" style="font-style:italic">I</button>
+        <button class="md-tool" data-wrap="`" title="Inline code" style="font-family:var(--mono)">&lt;/&gt;</button>
+        <button class="md-tool" data-prefix="# " title="Heading">H</button>
+        <button class="md-tool" data-prefix="- " title="List">&bull; List</button>
+        <button class="md-tool" data-prefix="> " title="Quote">&ldquo; Quote</button>
+        <button class="md-tool" data-link title="Link">Link</button>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn sm" id="btn-sample">Load sample</button>
+      <button class="btn sm" id="btn-clear">Clear</button>
+      <button class="btn sm" id="btn-copy-html">Copy HTML</button>
+      <button class="btn sm primary" id="btn-download">Download .md</button>
+    </div>
+
+    <div class="md-split">
+      <div class="md-pane">
+        <div class="pane-head">
+          <span>Markdown</span>
+          <span id="md-count">0 chars</span>
+        </div>
+        <label class="sr-only" for="md-input">Markdown source</label>
+        <textarea id="md-input" spellcheck="false" placeholder="# Start typing Markdown…"></textarea>
+      </div>
+      <div class="md-pane">
+        <div class="pane-head"><span>Preview</span></div>
+        <div class="md-preview" role="region" aria-label="Rendered preview"><div class="md-body" id="md-output"></div></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-in">
+      <p class="site-footer-brand">Azqato<span>.</span></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul aria-label="Site">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../discord/index.html">Discord</a></li>
+          <li><a href="../../invests/index.html">Invests</a></li>
+          <li><a href="../../codes/index.html">Codes</a></li>
+          <li><a href="../../music/index.html">Music</a></li>
+          <li><a href="../../links/index.html">Links</a></li>
+          <li><a href="../../projects/index.html">Projects</a></li>
+          <li><a href="../../youtube/index.html">YouTube</a></li>
+          <li><a href="../../support/index.html">Support</a></li>
+          <li><a href="../../tools/index.html">Azqato's Tools</a></li>
+          <li><a href="../../accounts/index.html">Gaming Accounts</a></li>
+          <li><a href="../../privacy-policy/index.html">Privacy Policy</a></li>
+        </ul>
+        <ul aria-label="Azqato Invests">
+          <li><a href="../../invests/index.html">Azqato Invests</a></li>
+          <li><a href="../../invests/stocks/index.html">Individual Stocks</a></li>
+          <li><a href="../../invests/indices/index.html">Indices &amp; ETFs</a></li>
+          <li><a href="../../invests/indices/vix/index.html">VIX Strategy</a></li>
+          <li><a href="../../invests/leveraged/index.html">Leveraged Strategies</a></li>
+          <li><a href="../../invests/resources/index.html">Investing Resources</a></li>
+        </ul>
+      </nav>
+      <p class="site-footer-legal">&copy; 2026 Azqato</p>
+    </div>
+  </footer>
+
+
+  <script src="../../tools/assets/js/common.js"></script>
+  <script src="../../tools/assets/js/markdown.js"></script>
+  <script>
+    var input = document.getElementById("md-input");
+    var output = document.getElementById("md-output");
+    var count = document.getElementById("md-count");
+    var STORE = "azqato-md-draft";
+
+    var SAMPLE = [
+      "# Welcome to the Markdown Editor",
+      "",
+      "This editor renders **Markdown as you type**, and it all runs",
+      "*locally* in your browser.",
+      "",
+      "## Features",
+      "",
+      "- Headings, **bold**, *italic*, ~~strikethrough~~",
+      "- `inline code` and fenced blocks",
+      "- [Links](https://example.com) and images",
+      "- Task lists:",
+      "  - [x] Write Markdown",
+      "  - [ ] Profit",
+      "",
+      "> Blockquotes look like this.",
+      "",
+      "```js",
+      "function hello(name) {",
+      "  return `Hi, ${name}!`;",
+      "}",
+      "```",
+      "",
+      "| Tool | Runs locally |",
+      "| ---- | :----------: |",
+      "| Markdown Preview | yes |",
+      "| Favicon Downloader | yes |",
+      ""
+    ].join("\n");
+
+    /* Draft saving runs on every keystroke, so the failure toast has to be
+       latched or a full quota would fire it on every key. It re-arms on the
+       next successful save, so a user who frees up space is warned again if it
+       fills a second time. */
+    var saveWarned = false;
+
+    function saveDraft(value) {
+      try {
+        localStorage.setItem(STORE, value);
+        saveWarned = false;
+      } catch (e) {
+        if (!saveWarned) {
+          saveWarned = true;
+          toast("Couldn't save your draft, browser storage may be full");
+        }
+      }
+    }
+
+    function render() {
+      output.innerHTML = mdToHtml(input.value);
+      count.textContent = input.value.length.toLocaleString() + " chars";
+      saveDraft(input.value);
+    }
+
+    input.addEventListener("input", render);
+
+    // restore draft or load sample on first visit
+    var saved = localStorage.getItem(STORE);
+    input.value = saved !== null ? saved : SAMPLE;
+    render();
+
+    document.getElementById("btn-sample").onclick = function () { input.value = SAMPLE; render(); };
+    document.getElementById("btn-clear").onclick = function () { input.value = ""; render(); input.focus(); };
+    document.getElementById("btn-copy-html").onclick = function () {
+      copyText(mdToHtml(input.value), "HTML copied to clipboard");
+    };
+    document.getElementById("btn-download").onclick = function () {
+      var blob = new Blob([input.value], { type: "text/markdown" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "document.md";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+
+    // toolbar formatting
+    document.querySelectorAll(".md-tool").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var s = input.selectionStart, e = input.selectionEnd;
+        var val = input.value, sel = val.slice(s, e);
+        var before = val.slice(0, s), after = val.slice(e);
+        var newPos = e;
+        if (btn.dataset.wrap) {
+          var w = btn.dataset.wrap;
+          input.value = before + w + (sel || "text") + w + after;
+          newPos = s + w.length + (sel || "text").length + w.length;
+        } else if (btn.dataset.prefix) {
+          var atLineStart = s === 0 || val[s - 1] === "\n";
+          var pad = atLineStart ? "" : "\n";
+          input.value = before + pad + btn.dataset.prefix + (sel || "") + after;
+          newPos = s + pad.length + btn.dataset.prefix.length + sel.length;
+        } else if (btn.dataset.hasOwnProperty("link")) {
+          var label = sel || "text";
+          input.value = before + "[" + label + "](https://)" + after;
+          newPos = s + label.length + 3;
+        }
+        input.focus();
+        input.setSelectionRange(newPos, newPos);
+        render();
+      });
+    });
+
+  </script>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

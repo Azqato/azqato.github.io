@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Generator - Azqato's Tools</title>
+  <meta name="description" content="Generate strong random passwords in your browser using the operating system's cryptographic randomness. Nothing is sent anywhere." />
+  <link rel="canonical" href="https://azqato.com/tools/password-generator/" />
+  <meta property="og:title" content="Password Generator - Azqato's Tools" />
+  <meta property="og:description" content="Generate strong random passwords in your browser using the operating system's cryptographic randomness. Nothing is sent anywhere." />
+  <meta property="og:url" content="https://azqato.com/tools/password-generator/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Azqato" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
+  <script src="../../theme.js"></script>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../tools/assets/tools.css" />
+</head>
+<body class="tl">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="../../index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../discord/index.html">Discord</a></li>
+        <li><a href="../../invests/index.html">Invests</a></li>
+        <li><a href="../../codes/index.html" class="active">Codes</a></li>
+        <li><a href="../../music/index.html">Music</a></li>
+        <li><a href="../../links/index.html">Links</a></li>
+        <li><a href="../../projects/index.html">Projects</a></li>
+        <li><a href="../../youtube/index.html">YouTube</a></li>
+        <li><a href="../../support/index.html">Support</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </nav>
+  <div class="site-sub">
+    <a class="site-sub-brand" href="../../tools/index.html"><span class="site-sub-mark" aria-hidden="true">🧰</span> Azqato's Tools</a>
+    <button class="site-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <span class="site-search-text">Search the site</span>
+      <kbd aria-hidden="true">/</kbd>
+    </button>
+    <div class="site-sub-end">
+      <button class="theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <script src="../../search.js" defer></script>
+  <!-- /NAV -->
+
+  <main id="main" class="page wrap">
+    <div class="page-head">
+      <div class="crumb"><a href="../">Tools</a> / Password Generator</div>
+      <h1>Password Generator</h1>
+      <p>Generate a strong random password. The randomness comes from your operating system, not from a server, and the result is never transmitted.</p>
+    </div>
+
+    <div class="pg-out">
+      <output class="pg-value" id="pg-value"
+              for="pg-length pg-lower pg-upper pg-digits pg-symbols pg-noambig"></output>
+      <button class="icon-btn pg-again" id="pg-again" aria-label="Generate another">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v6h-6"/></svg>
+      </button>
+    </div>
+
+    <div class="pg-meter">
+      <div class="pg-bar"><div class="pg-fill" id="pg-fill"></div></div>
+      <p class="stat-line" id="pg-strength" role="status"></p>
+    </div>
+
+    <div class="pg-controls">
+      <div class="pg-length-row">
+        <label class="lbl" for="pg-length">Length: <b id="pg-length-out">20</b></label>
+        <input type="range" id="pg-length" min="4" max="128" value="20" step="1" />
+      </div>
+
+      <fieldset class="pg-sets">
+        <legend class="lbl">Include</legend>
+        <label class="b64-opt"><input type="checkbox" id="pg-lower" checked /> Lowercase <code>a-z</code></label>
+        <label class="b64-opt"><input type="checkbox" id="pg-upper" checked /> Uppercase <code>A-Z</code></label>
+        <label class="b64-opt"><input type="checkbox" id="pg-digits" checked /> Digits <code>0-9</code></label>
+        <label class="b64-opt"><input type="checkbox" id="pg-symbols" checked /> Symbols</label>
+        <label class="b64-opt"><input type="checkbox" id="pg-noambig" /> No look-alike characters</label>
+      </fieldset>
+    </div>
+
+    <div class="pg-actions">
+      <button class="btn primary" id="pg-generate">Generate</button>
+      <button class="btn" id="pg-copy">Copy</button>
+    </div>
+
+    <p class="ws-note">Strength is the entropy of the generator, not a judgement of the
+      string: it is the right number for a password this tool produced and the wrong
+      number for one a person chose. Turning off look-alike characters removes
+      <code>I l 1 O 0 o</code>, which makes a password easier to read aloud and slightly
+      weaker for its length.</p>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-in">
+      <p class="site-footer-brand">Azqato<span>.</span></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul aria-label="Site">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../discord/index.html">Discord</a></li>
+          <li><a href="../../invests/index.html">Invests</a></li>
+          <li><a href="../../codes/index.html">Codes</a></li>
+          <li><a href="../../music/index.html">Music</a></li>
+          <li><a href="../../links/index.html">Links</a></li>
+          <li><a href="../../projects/index.html">Projects</a></li>
+          <li><a href="../../youtube/index.html">YouTube</a></li>
+          <li><a href="../../support/index.html">Support</a></li>
+          <li><a href="../../tools/index.html">Azqato's Tools</a></li>
+          <li><a href="../../accounts/index.html">Gaming Accounts</a></li>
+          <li><a href="../../privacy-policy/index.html">Privacy Policy</a></li>
+        </ul>
+        <ul aria-label="Azqato Invests">
+          <li><a href="../../invests/index.html">Azqato Invests</a></li>
+          <li><a href="../../invests/stocks/index.html">Individual Stocks</a></li>
+          <li><a href="../../invests/indices/index.html">Indices &amp; ETFs</a></li>
+          <li><a href="../../invests/indices/vix/index.html">VIX Strategy</a></li>
+          <li><a href="../../invests/leveraged/index.html">Leveraged Strategies</a></li>
+          <li><a href="../../invests/resources/index.html">Investing Resources</a></li>
+        </ul>
+      </nav>
+      <p class="site-footer-legal">&copy; 2026 Azqato</p>
+    </div>
+  </footer>
+
+
+  <script src="../../tools/assets/js/common.js"></script>
+  <script src="../../tools/assets/js/passwordgenerator.js"></script>
+  <script>
+    var valueEl = document.getElementById("pg-value");
+    var fillEl = document.getElementById("pg-fill");
+    var strengthEl = document.getElementById("pg-strength");
+    var lengthEl = document.getElementById("pg-length");
+    var lengthOut = document.getElementById("pg-length-out");
+    var boxes = {
+      lower: document.getElementById("pg-lower"),
+      upper: document.getElementById("pg-upper"),
+      digits: document.getElementById("pg-digits"),
+      symbols: document.getElementById("pg-symbols")
+    };
+    var noAmbig = document.getElementById("pg-noambig");
+    var current = "";
+
+    function options() {
+      return {
+        length: parseInt(lengthEl.value, 10),
+        lower: boxes.lower.checked,
+        upper: boxes.upper.checked,
+        digits: boxes.digits.checked,
+        symbols: boxes.symbols.checked,
+        noAmbiguous: noAmbig.checked
+      };
+    }
+
+    function generate() {
+      var res = passwordGenerator.generate(options());
+      if (!res.ok) {
+        current = "";
+        valueEl.textContent = "";
+        valueEl.classList.add("empty");
+        fillEl.style.width = "0%";
+        strengthEl.textContent = res.error;
+        return;
+      }
+      current = res.password;
+      valueEl.textContent = res.password;
+      valueEl.classList.remove("empty");
+      var bits = passwordGenerator.entropy(res.length, res.poolSize);
+      var s = passwordGenerator.strength(bits);
+      fillEl.style.width = Math.min(100, Math.round(bits / 128 * 100)) + "%";
+      fillEl.className = "pg-fill level-" + s.level;
+      strengthEl.textContent = s.label + ", about " + bits + " bits of entropy from a " +
+        res.poolSize + " character pool";
+    }
+
+    lengthEl.addEventListener("input", function () {
+      lengthOut.textContent = lengthEl.value;
+      generate();
+    });
+    Object.keys(boxes).forEach(function (k) {
+      boxes[k].addEventListener("change", generate);
+    });
+    noAmbig.addEventListener("change", generate);
+    document.getElementById("pg-generate").addEventListener("click", generate);
+    document.getElementById("pg-again").addEventListener("click", generate);
+
+    document.getElementById("pg-copy").addEventListener("click", function () {
+      if (current) copyText(current, "Password copied");
+      else toast("Nothing to copy yet");
+    });
+
+    generate();
+  </script>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
