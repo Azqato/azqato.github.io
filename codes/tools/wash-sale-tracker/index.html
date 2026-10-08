@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wash Sale Tracker - Azqato's Tools</title>
+  <meta name="description" content="Track how long each wash sale window has left to run. Add a ticker and the date you traded, and see active and expired windows side by side. Runs entirely in your browser." />
+  <link rel="canonical" href="https://azqato.com/codes/tools/wash-sale-tracker/" />
+  <meta property="og:title" content="Wash Sale Tracker - Azqato's Tools" />
+  <meta property="og:description" content="Track how long each wash sale window has left to run. Add a ticker and the date you traded, and see active and expired windows side by side. Runs entirely in your browser." />
+  <meta property="og:url" content="https://azqato.com/codes/tools/wash-sale-tracker/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Azqato" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
+  <script src="../../../theme.js"></script>
+  <link rel="stylesheet" href="../../../styles.css" />
+  <link rel="stylesheet" href="../../../codes/tools/assets/tools.css" />
+  <link rel="stylesheet" href="../../../codes/assets/codes.css" />
+</head>
+<body class="tl">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="../../../index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="../../../index.html">Home</a></li>
+        <li><a href="../../../about/index.html">About</a></li>
+        <li><a href="../../../discord/index.html">Discord</a></li>
+        <li><a href="../../../invests/index.html">Invests</a></li>
+        <li><a href="../../../codes/index.html" class="active">Codes</a></li>
+        <li><a href="../../../music/index.html">Music</a></li>
+        <li><a href="../../../links/index.html">Links</a></li>
+        <li><a href="../../../projects/index.html">Projects</a></li>
+        <li><a href="../../../youtube/index.html">YouTube</a></li>
+        <li><a href="../../../support/index.html">Support</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </nav>
+  <div class="site-sub">
+    <a class="site-sub-brand" href="../../../codes/tools/index.html"><span class="site-sub-mark" aria-hidden="true">🧰</span> Azqato's Tools</a>
+    <button class="site-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <span class="site-search-text">Search the site</span>
+      <kbd aria-hidden="true">/</kbd>
+    </button>
+    <div class="site-sub-end">
+      <button class="theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <script src="../../../search.js" defer></script>
+  <!-- /NAV -->
+  <!-- CODES -->
+  <div class="cd-shell">
+  <button class="cd-menu-btn" id="cd-menu-btn" type="button" aria-expanded="false" aria-controls="cd-nav">Contents</button>
+  <nav class="cd-sidebar" id="cd-nav" aria-label="Codes sections">
+    <p class="cd-sidebar-title">Contents</p>
+    <div class="cd-group"><ul><li><a href="../../">Home</a></li></ul></div>
+    <details class="cd-group"><summary class="cd-group-label" id="cd-g-prompts">Prompts</summary><ul aria-labelledby="cd-g-prompts"><li><a href="../../prompts/">Overview</a></li><li><a href="../../prompts/add-prompt/">Add Prompt</a></li><li><a href="../../prompts/documentation/">Documentation</a></li><li><a href="../../prompts/mobile-responsive-audit/">Mobile Audit</a></li><li><a href="../../prompts/github-wiki/">GitHub Wiki</a></li><li><a href="../../prompts/prompt-audit/">Prompt Audit</a></li><li><a href="../../prompts/brand-identity/">Brand Identity</a></li><li><a href="../../prompts/ios-simulator/">iOS Simulator</a></li><li><a href="../../prompts/game-setup/">Game Setup</a></li><li><a href="../../prompts/motion-design/">Motion Design</a></li><li><a href="../../prompts/assumption-check/">Assumption Check</a></li><li><a href="../../prompts/progress-dashboard/">Progress Dashboard</a></li><li><a href="../../prompts/launch-video/">Launch Video</a></li><li><a href="../../prompts/animation-performance/">Animation Performance</a></li><li><a href="../../prompts/design-review/">Design Review</a></li><li><a href="../../prompts/landing-page/">Landing Page</a></li><li><a href="../../prompts/score-to-target/">Score to Target</a></li><li><a href="../../prompts/video-to-prompt/">Video to Prompt</a></li><li><a href="../../prompts/frontend-references/">Frontend References</a></li><li><a href="../../prompts/prompt-writing/">Prompt Writing</a></li><li><a href="../../prompts/project-defaults/">Project Defaults</a></li><li><a href="../../prompts/linkedin-audit/">LinkedIn Audit</a></li><li><a href="../../prompts/condense-docs/">Condense Docs</a></li><li><a href="../../prompts/seo-audit/">SEO Audit</a></li><li><a href="../../prompts/ecommerce-site/">E-commerce Site</a></li></ul></details>
+    <details class="cd-group" open><summary class="cd-group-label" id="cd-g-tools">Tools</summary><ul aria-labelledby="cd-g-tools"><li><a href="../../tools/">Overview</a></li><li><a href="../../tools/markdown-preview/">Markdown Editor</a></li><li><a href="../../tools/favicon-downloader/">Favicon Downloader</a></li><li><a href="../../tools/link-cleaner/">Link Cleaner</a></li><li><a href="../../tools/character-counter/">Character Counter</a></li><li><a href="../../tools/wash-sale-tracker/" aria-current="page">Wash Sale Tracker</a></li><li><a href="../../tools/bookmark-manager/">Bookmark Manager</a></li><li><a href="../../tools/base64-encoder/">Base64 Encoder</a></li><li><a href="../../tools/json-formatter/">JSON Formatter</a></li><li><a href="../../tools/password-generator/">Password Generator</a></li><li><a href="../../tools/timestamp-converter/">Timestamp Converter</a></li></ul></details>
+  </nav>
+  <div class="cd-main">
+  <!-- /CODES -->
+
+  <main id="main" class="page wrap">
+    <div class="page-head">
+      <div class="crumb"><a href="../">Tools</a> / Wash Sale Tracker</div>
+      <h1>Wash Sale Tracker</h1>
+      <p>Add the ticker and the date you traded, and the tool counts the 30 day window
+        forward for you. Everything stays in this browser.</p>
+    </div>
+
+    <form class="ws-form" id="ws-form">
+      <div class="ws-field">
+        <label class="lbl" for="ws-ticker">Ticker</label>
+        <input id="ws-ticker" class="field" type="text" autocomplete="off"
+               placeholder="e.g. AAPL" maxlength="12" />
+      </div>
+      <div class="ws-field">
+        <label class="lbl" for="ws-date">Date traded</label>
+        <input id="ws-date" class="field" type="date" />
+      </div>
+      <button class="btn primary" type="submit">Add</button>
+    </form>
+    <p class="ws-note">Pick the date from the calendar or type it in. The window is
+      counted as the trade date plus 30 calendar days, weekends and holidays included.</p>
+
+    <div class="ws-head">
+      <h2 class="section-label">Active Wash Sales</h2>
+      <span class="count" id="ws-active-count"></span>
+    </div>
+    <div id="ws-active"></div>
+
+    <div class="ws-head">
+      <h2 class="section-label">Expired Wash Sales</h2>
+      <span class="count" id="ws-expired-count"></span>
+      <div class="spacer"></div>
+      <button class="btn sm ghost" id="ws-clear" hidden>Clear expired</button>
+    </div>
+    <div id="ws-expired"></div>
+
+    <p class="ws-legal"><strong>This is a record keeping aid, not tax advice.</strong>
+      It tracks dates you enter and counts forward from them. It does not know what you
+      traded, whether a sale was at a loss, or whether a wash sale actually occurred, and
+      it does not account for the 30 days <em>before</em> a sale that the rule also
+      covers. Check anything that matters with your broker's records or an accountant.</p>
+  </main>
+
+  <!-- CODES-END -->
+  <nav class="cd-pager" aria-label="Previous and next page"><a class="cd-pager-link cd-pager-link--prev" href="../../tools/character-counter/"><small>Previous</small><span>Character Counter</span></a><a class="cd-pager-link cd-pager-link--next" href="../../tools/bookmark-manager/"><small>Next</small><span>Bookmark Manager</span></a></nav>
+  </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('cd-menu-btn'), nav = document.getElementById('cd-nav');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <!-- /CODES-END -->
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-in">
+      <p class="site-footer-brand">Azqato<span>.</span></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul aria-label="Site">
+          <li><a href="../../../index.html">Home</a></li>
+          <li><a href="../../../about/index.html">About</a></li>
+          <li><a href="../../../discord/index.html">Discord</a></li>
+          <li><a href="../../../invests/index.html">Invests</a></li>
+          <li><a href="../../../codes/index.html">Codes</a></li>
+          <li><a href="../../../music/index.html">Music</a></li>
+          <li><a href="../../../links/index.html">Links</a></li>
+          <li><a href="../../../projects/index.html">Projects</a></li>
+          <li><a href="../../../youtube/index.html">YouTube</a></li>
+          <li><a href="../../../support/index.html">Support</a></li>
+          <li><a href="../../../codes/tools/index.html">Azqato's Tools</a></li>
+          <li><a href="../../../codes/prompts/index.html">Azqato's Prompts</a></li>
+          <li><a href="../../../accounts/index.html">Gaming Accounts</a></li>
+          <li><a href="../../../privacy-policy/index.html">Privacy Policy</a></li>
+        </ul>
+        <ul aria-label="Azqato Invests">
+          <li><a href="../../../invests/index.html">Azqato Invests</a></li>
+          <li><a href="../../../invests/stocks/index.html">Individual Stocks</a></li>
+          <li><a href="../../../invests/indices/index.html">Indices &amp; ETFs</a></li>
+          <li><a href="../../../invests/indices/vix/index.html">VIX Strategy</a></li>
+          <li><a href="../../../invests/leveraged/index.html">Leveraged Strategies</a></li>
+          <li><a href="../../../invests/resources/index.html">Investing Resources</a></li>
+        </ul>
+      </nav>
+      <p class="site-footer-legal">&copy; 2026 Azqato</p>
+    </div>
+  </footer>
+
+
+  <script src="../../../codes/tools/assets/js/common.js"></script>
+  <script src="../../../codes/tools/assets/js/washsale.js"></script>
+  <script>
+    var form = document.getElementById("ws-form");
+    var tickerEl = document.getElementById("ws-ticker");
+    var dateEl = document.getElementById("ws-date");
+    var activeBox = document.getElementById("ws-active");
+    var expiredBox = document.getElementById("ws-expired");
+    var activeCount = document.getElementById("ws-active-count");
+    var expiredCount = document.getElementById("ws-expired-count");
+    var clearBtn = document.getElementById("ws-clear");
+
+    // First key in the project holding a collection rather than a single value,
+    // so it carries a schema version from the start. Anything that changes the
+    // record shape bumps `v` and reads the old shape before writing the new one.
+    var STORE = "azqato-ws-records";
+    var SCHEMA = 1;
+
+    var records = load();
+
+    function load() {
+      var raw;
+      try { raw = localStorage.getItem(STORE); } catch (e) { return []; }
+      if (!raw) return [];
+      try {
+        var parsed = JSON.parse(raw);
+        if (!parsed || parsed.v !== SCHEMA || !parsed.records) return [];
+        return parsed.records.filter(function (r) {
+          return r && washSale.isValidDate(r.date) && r.ticker;
+        });
+      } catch (e) {
+        // Corrupt or hand-edited storage should cost the user their history,
+        // not the whole page. Start empty rather than throwing on load.
+        return [];
+      }
+    }
+
+    function save() {
+      try {
+        localStorage.setItem(STORE, JSON.stringify({ v: SCHEMA, records: records }));
+      } catch (e) {
+        toast("Couldn't save, storage may be full");
+      }
+    }
+
+    function human(iso) {
+      var p = iso.split("-");
+      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return +p[2] + " " + months[+p[1] - 1] + " " + p[0];
+    }
+
+    function pillFor(days) {
+      var cls = "ws-pill";
+      if (days <= 2) cls += " now";
+      else if (days <= 7) cls += " soon";
+      var text = days === 0 ? "last day"
+        : days === 1 ? "1 day left"
+        : days + " days left";
+      return { cls: cls, text: text };
+    }
+
+    function cell(row, text, cls) {
+      var td = document.createElement("td");
+      if (cls) td.className = cls;
+      td.textContent = text;
+      row.appendChild(td);
+      return td;
+    }
+
+    function table(cols) {
+      var t = document.createElement("table");
+      t.className = "ws-table";
+      var thead = document.createElement("thead");
+      var tr = document.createElement("tr");
+      cols.forEach(function (c) {
+        var th = document.createElement("th");
+        th.textContent = c.label;
+        if (c.cls) th.className = c.cls;
+        th.scope = "col";
+        tr.appendChild(th);
+      });
+      thead.appendChild(tr);
+      t.appendChild(thead);
+      t.appendChild(document.createElement("tbody"));
+      return t;
+    }
+
+    function empty(box, msg) {
+      var p = document.createElement("p");
+      p.className = "ws-empty";
+      p.textContent = msg;
+      box.appendChild(p);
+    }
+
+    function renderActive(rows) {
+      activeBox.innerHTML = "";
+      activeCount.textContent = rows.length === 1 ? "1 window" : rows.length + " windows";
+      if (!rows.length) {
+        empty(activeBox, "Nothing running. Add a trade above and it will appear here " +
+              "until its window closes.");
+        return;
+      }
+      var t = table([
+        { label: "Ticker" },
+        { label: "Traded" },
+        { label: "Expires" },
+        { label: "Remaining" },
+        { label: "Remove", cls: "act" }
+      ]);
+      var body = t.querySelector("tbody");
+      rows.forEach(function (r) {
+        var tr = document.createElement("tr");
+        cell(tr, r.ticker, "tk");
+        cell(tr, human(r.date), "num");
+        cell(tr, human(r.expiry), "num");
+
+        var td = document.createElement("td");
+        var pill = pillFor(r.daysLeft);
+        var span = document.createElement("span");
+        span.className = pill.cls;
+        span.textContent = pill.text;
+        td.appendChild(span);
+        tr.appendChild(td);
+
+        tr.appendChild(removeCell(r));
+        body.appendChild(tr);
+      });
+      activeBox.appendChild(t);
+    }
+
+    function renderExpired(rows) {
+      expiredBox.innerHTML = "";
+      expiredCount.textContent = rows.length === 1 ? "1 window" : rows.length + " windows";
+      clearBtn.hidden = rows.length === 0;
+      if (!rows.length) {
+        empty(expiredBox, "Nothing here yet. Windows move down once they have passed, " +
+              "and stay until you clear them.");
+        return;
+      }
+      var t = table([
+        { label: "Ticker" },
+        { label: "Traded" },
+        { label: "Expired" },
+        { label: "Remove", cls: "act" }
+      ]);
+      var body = t.querySelector("tbody");
+      rows.forEach(function (r) {
+        var tr = document.createElement("tr");
+        cell(tr, r.ticker, "tk");
+        cell(tr, human(r.date), "num");
+        cell(tr, human(r.expiry), "num");
+        tr.appendChild(removeCell(r));
+        body.appendChild(tr);
+      });
+      expiredBox.appendChild(t);
+    }
+
+    function removeCell(r) {
+      var td = document.createElement("td");
+      td.className = "act";
+      var btn = document.createElement("button");
+      btn.className = "ws-x";
+      btn.type = "button";
+      btn.setAttribute("aria-label", "Remove " + r.ticker + " traded " + human(r.date));
+      btn.innerHTML = "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' " +
+        "stroke-width='2' stroke-linecap='round'><path d='M6 6l12 12M18 6 6 18'/></svg>";
+      btn.onclick = function () { remove(r.id); };
+      td.appendChild(btn);
+      return td;
+    }
+
+    function remove(id) {
+      records = records.filter(function (r) { return r.id !== id; });
+      save();
+      render();
+      toast("Removed");
+    }
+
+    function render() {
+      var split = washSale.classify(records);
+      renderActive(split.active);
+      renderExpired(split.expired);
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var ticker = washSale.normalizeTicker(tickerEl.value);
+      var date = dateEl.value;
+
+      if (!ticker) { toast("Enter a ticker"); tickerEl.focus(); return; }
+      if (!washSale.isValidDate(date)) { toast("Pick a date"); dateEl.focus(); return; }
+
+      records.push({
+        id: String(Date.now()) + Math.random().toString(36).slice(2, 7),
+        ticker: ticker,
+        date: date
+      });
+      save();
+      render();
+      tickerEl.value = "";
+      tickerEl.focus();
+      toast(ticker + " added, clear on " + human(washSale.expiryOf(date)));
+    });
+
+    clearBtn.onclick = function () {
+      var split = washSale.classify(records);
+      var n = split.expired.length;
+      if (!n) return;
+      if (!confirm("Remove " + n + " expired " + (n === 1 ? "window" : "windows") +
+                   "? This cannot be undone.")) return;
+      var gone = {};
+      split.expired.forEach(function (r) { gone[r.id] = 1; });
+      records = records.filter(function (r) { return !gone[r.id]; });
+      save();
+      render();
+      toast("Cleared " + n + " expired");
+    };
+
+    // Default the date to today, so the common case is one field and a click.
+    dateEl.value = washSale.today();
+    render();
+
+  </script>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

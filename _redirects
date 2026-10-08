@@ -45,57 +45,57 @@
 /leveraged-strategies     /invests/leveraged/      301
 /leveraged-strategies/*   /invests/leveraged/      301
 
-# Azqato's Tools moved in from azqato.github.io/tools (item 22). One address
-# per page, and the old file names (tools/link-cleaner.html) go to the clean one.
-/tools                /tools/   301
-/tools/base64-encoder       /tools/base64-encoder/  301
-/tools/base64-encoder.html  /tools/base64-encoder/  301
-/tools/bookmark-manager       /tools/bookmark-manager/  301
-/tools/bookmark-manager.html  /tools/bookmark-manager/  301
-/tools/character-counter       /tools/character-counter/  301
-/tools/character-counter.html  /tools/character-counter/  301
-/tools/favicon-downloader       /tools/favicon-downloader/  301
-/tools/favicon-downloader.html  /tools/favicon-downloader/  301
-/tools/json-formatter       /tools/json-formatter/  301
-/tools/json-formatter.html  /tools/json-formatter/  301
-/tools/link-cleaner       /tools/link-cleaner/  301
-/tools/link-cleaner.html  /tools/link-cleaner/  301
-/tools/markdown-preview       /tools/markdown-preview/  301
-/tools/markdown-preview.html  /tools/markdown-preview/  301
-/tools/password-generator       /tools/password-generator/  301
-/tools/password-generator.html  /tools/password-generator/  301
-/tools/timestamp-converter       /tools/timestamp-converter/  301
-/tools/timestamp-converter.html  /tools/timestamp-converter/  301
-/tools/wash-sale-tracker       /tools/wash-sale-tracker/  301
-/tools/wash-sale-tracker.html  /tools/wash-sale-tracker/  301
+# Azqato's Tools moved in from azqato.github.io/tools (item 22), under /codes/tools/. One address
+# per page, and the old file names (codes/tools/link-cleaner.html) go to the clean one.
+/codes/tools                /codes/tools/   301
+/codes/tools/base64-encoder       /codes/tools/base64-encoder/  301
+/codes/tools/base64-encoder.html  /codes/tools/base64-encoder/  301
+/codes/tools/bookmark-manager       /codes/tools/bookmark-manager/  301
+/codes/tools/bookmark-manager.html  /codes/tools/bookmark-manager/  301
+/codes/tools/character-counter       /codes/tools/character-counter/  301
+/codes/tools/character-counter.html  /codes/tools/character-counter/  301
+/codes/tools/favicon-downloader       /codes/tools/favicon-downloader/  301
+/codes/tools/favicon-downloader.html  /codes/tools/favicon-downloader/  301
+/codes/tools/json-formatter       /codes/tools/json-formatter/  301
+/codes/tools/json-formatter.html  /codes/tools/json-formatter/  301
+/codes/tools/link-cleaner       /codes/tools/link-cleaner/  301
+/codes/tools/link-cleaner.html  /codes/tools/link-cleaner/  301
+/codes/tools/markdown-preview       /codes/tools/markdown-preview/  301
+/codes/tools/markdown-preview.html  /codes/tools/markdown-preview/  301
+/codes/tools/password-generator       /codes/tools/password-generator/  301
+/codes/tools/password-generator.html  /codes/tools/password-generator/  301
+/codes/tools/timestamp-converter       /codes/tools/timestamp-converter/  301
+/codes/tools/timestamp-converter.html  /codes/tools/timestamp-converter/  301
+/codes/tools/wash-sale-tracker       /codes/tools/wash-sale-tracker/  301
+/codes/tools/wash-sale-tracker.html  /codes/tools/wash-sale-tracker/  301
 
 # Azqato's Prompts (item 22): one address per page, and retired slugs.
 # Written by scripts/prompts/build.py.
-/prompts  /prompts/  301
-/prompts/add-prompt  /prompts/add-prompt/  301
-/prompts/documentation  /prompts/documentation/  301
-/prompts/mobile-responsive-audit  /prompts/mobile-responsive-audit/  301
-/prompts/github-wiki  /prompts/github-wiki/  301
-/prompts/prompt-audit  /prompts/prompt-audit/  301
-/prompts/brand-identity  /prompts/brand-identity/  301
-/prompts/ios-simulator  /prompts/ios-simulator/  301
-/prompts/game-setup  /prompts/game-setup/  301
-/prompts/motion-design  /prompts/motion-design/  301
-/prompts/assumption-check  /prompts/assumption-check/  301
-/prompts/progress-dashboard  /prompts/progress-dashboard/  301
-/prompts/launch-video  /prompts/launch-video/  301
-/prompts/animation-performance  /prompts/animation-performance/  301
-/prompts/design-review  /prompts/design-review/  301
-/prompts/landing-page  /prompts/landing-page/  301
-/prompts/score-to-target  /prompts/score-to-target/  301
-/prompts/video-to-prompt  /prompts/video-to-prompt/  301
-/prompts/frontend-references  /prompts/frontend-references/  301
-/prompts/prompt-writing  /prompts/prompt-writing/  301
-/prompts/project-defaults  /prompts/project-defaults/  301
-/prompts/linkedin-audit  /prompts/linkedin-audit/  301
-/prompts/condense-docs  /prompts/condense-docs/  301
-/prompts/seo-audit  /prompts/seo-audit/  301
-/prompts/ecommerce-site  /prompts/ecommerce-site/  301
-/prompts/iphone-ipad-simulator  /prompts/ios-simulator/  301
-/prompts/iphone-ipad-simulator/  /prompts/ios-simulator/  301
+/codes/prompts  /codes/prompts/  301
+/codes/prompts/add-prompt  /codes/prompts/add-prompt/  301
+/codes/prompts/documentation  /codes/prompts/documentation/  301
+/codes/prompts/mobile-responsive-audit  /codes/prompts/mobile-responsive-audit/  301
+/codes/prompts/github-wiki  /codes/prompts/github-wiki/  301
+/codes/prompts/prompt-audit  /codes/prompts/prompt-audit/  301
+/codes/prompts/brand-identity  /codes/prompts/brand-identity/  301
+/codes/prompts/ios-simulator  /codes/prompts/ios-simulator/  301
+/codes/prompts/game-setup  /codes/prompts/game-setup/  301
+/codes/prompts/motion-design  /codes/prompts/motion-design/  301
+/codes/prompts/assumption-check  /codes/prompts/assumption-check/  301
+/codes/prompts/progress-dashboard  /codes/prompts/progress-dashboard/  301
+/codes/prompts/launch-video  /codes/prompts/launch-video/  301
+/codes/prompts/animation-performance  /codes/prompts/animation-performance/  301
+/codes/prompts/design-review  /codes/prompts/design-review/  301
+/codes/prompts/landing-page  /codes/prompts/landing-page/  301
+/codes/prompts/score-to-target  /codes/prompts/score-to-target/  301
+/codes/prompts/video-to-prompt  /codes/prompts/video-to-prompt/  301
+/codes/prompts/frontend-references  /codes/prompts/frontend-references/  301
+/codes/prompts/prompt-writing  /codes/prompts/prompt-writing/  301
+/codes/prompts/project-defaults  /codes/prompts/project-defaults/  301
+/codes/prompts/linkedin-audit  /codes/prompts/linkedin-audit/  301
+/codes/prompts/condense-docs  /codes/prompts/condense-docs/  301
+/codes/prompts/seo-audit  /codes/prompts/seo-audit/  301
+/codes/prompts/ecommerce-site  /codes/prompts/ecommerce-site/  301
+/codes/prompts/iphone-ipad-simulator  /codes/prompts/ios-simulator/  301
+/codes/prompts/iphone-ipad-simulator/  /codes/prompts/ios-simulator/  301
 # /PROMPTS

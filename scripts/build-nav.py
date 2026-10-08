@@ -56,8 +56,8 @@ ICON_DEFAULT = '🦁'
 # the folder gets the section's emoji, second-bar title and home link, and the
 # Codes link is marked active, since Codes is where the nav lists them.
 SECTIONS = {
-    'tools/': {'icon': '🧰', 'bar': "Azqato's Tools", 'active': 'codes/index.html'},
-    'prompts/': {'icon': '💬', 'bar': "Azqato's Prompts", 'active': 'codes/index.html'},
+    'codes/tools/': {'icon': '🧰', 'bar': "Azqato's Tools", 'active': 'codes/index.html'},
+    'codes/prompts/': {'icon': '💬', 'bar': "Azqato's Prompts", 'active': 'codes/index.html'},
 }
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -173,8 +173,8 @@ SUB_TEMPLATE = """
 # "all the major categories, for SEO"). Two groups: the site, and Azqato
 # Invests' sections. No sitemap link: robots.txt points crawlers at sitemap.xml.
 FOOTER_SITE = PAGES + [
-    ('tools/index.html', "Azqato's Tools"),
-    ('prompts/index.html', "Azqato's Prompts"),
+    ('codes/tools/index.html', "Azqato's Tools"),
+    ('codes/prompts/index.html', "Azqato's Prompts"),
     ('accounts/index.html', 'Gaming Accounts'),
     ('privacy-policy/index.html', 'Privacy Policy'),
 ]
@@ -263,7 +263,7 @@ def search_index(root):
     for name in ['index.html'] + list(SECTION_NAMES) + [p for pre in SECTIONS for p in section_pages(pre)]:
         soup = BeautifulSoup((root / name).read_text(encoding='utf-8'), 'html.parser')
         body = soup.body
-        for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas, .pr-agents, .pr-site .sidebar'):
+        for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas, .pr-agents, .cd-sidebar, .cd-pager'):
             x.decompose()
         prefix, sec = section(name)
         label = 'Home' if name == 'index.html' else page_label(name) if sec else SECTION_NAMES[name]

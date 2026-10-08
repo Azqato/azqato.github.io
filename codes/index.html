@@ -154,6 +154,7 @@
       .section { padding: 1.5rem 1.25rem 3rem; }
     }
   </style>
+  <link rel="stylesheet" href="../codes/assets/codes.css" />
 </head>
 <body>
 
@@ -191,6 +192,17 @@
   </div>
   <script src="../search.js" defer></script>
   <!-- /NAV -->
+  <!-- CODES -->
+  <div class="cd-shell">
+  <button class="cd-menu-btn" id="cd-menu-btn" type="button" aria-expanded="false" aria-controls="cd-nav">Contents</button>
+  <nav class="cd-sidebar" id="cd-nav" aria-label="Codes sections">
+    <p class="cd-sidebar-title">Contents</p>
+    <div class="cd-group"><ul><li><a href="./" aria-current="page">Home</a></li></ul></div>
+    <details class="cd-group"><summary class="cd-group-label" id="cd-g-prompts">Prompts</summary><ul aria-labelledby="cd-g-prompts"><li><a href="prompts/">Overview</a></li><li><a href="prompts/add-prompt/">Add Prompt</a></li><li><a href="prompts/documentation/">Documentation</a></li><li><a href="prompts/mobile-responsive-audit/">Mobile Audit</a></li><li><a href="prompts/github-wiki/">GitHub Wiki</a></li><li><a href="prompts/prompt-audit/">Prompt Audit</a></li><li><a href="prompts/brand-identity/">Brand Identity</a></li><li><a href="prompts/ios-simulator/">iOS Simulator</a></li><li><a href="prompts/game-setup/">Game Setup</a></li><li><a href="prompts/motion-design/">Motion Design</a></li><li><a href="prompts/assumption-check/">Assumption Check</a></li><li><a href="prompts/progress-dashboard/">Progress Dashboard</a></li><li><a href="prompts/launch-video/">Launch Video</a></li><li><a href="prompts/animation-performance/">Animation Performance</a></li><li><a href="prompts/design-review/">Design Review</a></li><li><a href="prompts/landing-page/">Landing Page</a></li><li><a href="prompts/score-to-target/">Score to Target</a></li><li><a href="prompts/video-to-prompt/">Video to Prompt</a></li><li><a href="prompts/frontend-references/">Frontend References</a></li><li><a href="prompts/prompt-writing/">Prompt Writing</a></li><li><a href="prompts/project-defaults/">Project Defaults</a></li><li><a href="prompts/linkedin-audit/">LinkedIn Audit</a></li><li><a href="prompts/condense-docs/">Condense Docs</a></li><li><a href="prompts/seo-audit/">SEO Audit</a></li><li><a href="prompts/ecommerce-site/">E-commerce Site</a></li></ul></details>
+    <details class="cd-group"><summary class="cd-group-label" id="cd-g-tools">Tools</summary><ul aria-labelledby="cd-g-tools"><li><a href="tools/">Overview</a></li><li><a href="tools/markdown-preview/">Markdown Editor</a></li><li><a href="tools/favicon-downloader/">Favicon Downloader</a></li><li><a href="tools/link-cleaner/">Link Cleaner</a></li><li><a href="tools/character-counter/">Character Counter</a></li><li><a href="tools/wash-sale-tracker/">Wash Sale Tracker</a></li><li><a href="tools/bookmark-manager/">Bookmark Manager</a></li><li><a href="tools/base64-encoder/">Base64 Encoder</a></li><li><a href="tools/json-formatter/">JSON Formatter</a></li><li><a href="tools/password-generator/">Password Generator</a></li><li><a href="tools/timestamp-converter/">Timestamp Converter</a></li></ul></details>
+  </nav>
+  <div class="cd-main">
+  <!-- /CODES -->
 
   <!-- HERO -->
   <section class="hero">
@@ -207,13 +219,13 @@
 
     <div class="project-grid">
 
-      <a class="project-card" href="../prompts/index.html">
+      <a class="project-card" href="prompts/index.html">
         <span class="project-icon">💬</span>
         <h3>Prompts <span class="arrow">→</span></h3>
         <p>A personal library of reusable Claude Code prompts.</p>
       </a>
 
-      <a class="project-card" href="../tools/index.html">
+      <a class="project-card" href="tools/index.html">
         <span class="project-icon">🛠️</span>
         <h3>Tools <span class="arrow">→</span></h3>
         <p>Free, browser-based utilities: favicon downloader, link cleaner, markdown preview, and more.</p>
@@ -227,6 +239,21 @@
 
     </div>
   </section>
+
+  <!-- CODES-END -->
+  <nav class="cd-pager" aria-label="Previous and next page"><a class="cd-pager-link cd-pager-link--next" href="prompts/"><small>Next</small><span>Prompts</span></a></nav>
+  </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('cd-menu-btn'), nav = document.getElementById('cd-nav');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <!-- /CODES-END -->
 
   <!-- FOOTER -->
   <footer class="site-footer">
@@ -244,8 +271,8 @@
           <li><a href="../projects/index.html">Projects</a></li>
           <li><a href="../youtube/index.html">YouTube</a></li>
           <li><a href="../support/index.html">Support</a></li>
-          <li><a href="../tools/index.html">Azqato's Tools</a></li>
-          <li><a href="../prompts/index.html">Azqato's Prompts</a></li>
+          <li><a href="../codes/tools/index.html">Azqato's Tools</a></li>
+          <li><a href="../codes/prompts/index.html">Azqato's Prompts</a></li>
           <li><a href="../accounts/index.html">Gaming Accounts</a></li>
           <li><a href="../privacy-policy/index.html">Privacy Policy</a></li>
         </ul>

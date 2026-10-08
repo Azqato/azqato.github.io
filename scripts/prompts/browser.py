@@ -1,4 +1,4 @@
-"""Browser tests for Azqato's Prompts on azqato.com (/prompts/), in headless Microsoft Edge.
+"""Browser tests for Azqato's Prompts on azqato.com (/codes/prompts/), in headless Microsoft Edge.
 
     python scripts/prompts/browser.py [--shots DIR]
 
@@ -17,7 +17,7 @@ B = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(B)
 
 ROOT = HERE.parent.parent
-PAGES = sorted(p.relative_to(ROOT / "prompts").as_posix() for p in (ROOT / "prompts").rglob("index.html"))
+PAGES = sorted(p.relative_to(ROOT / "codes" / "prompts").as_posix() for p in (ROOT / "codes" / "prompts").rglob("index.html"))
 
 
 def behavior(ctx, base):
@@ -25,9 +25,6 @@ def behavior(ctx, base):
     total = p.locator(".prompt-list-item").count()
     p.fill("#prompt-search", "audit mobile")
     shown = p.evaluate("[...document.querySelectorAll('.prompt-list-item')].filter(a => !a.hidden).map(a => a.textContent)")
-    side = p.evaluate("[...document.querySelectorAll('.sidebar-nav a[data-slug]')].filter(a => !a.hidden).length")
-    if side != 1:
-        B.fail(f"search 'audit mobile': sidebar shows {side} prompts, expected 1")
     if len(shown) != 1 or "Mobile Audit" not in shown[0]:
         B.fail(f"search 'audit mobile': expected Mobile Audit only, got {len(shown)} of {total}")
     p.fill("#prompt-search", "zzzz")
@@ -36,23 +33,27 @@ def behavior(ctx, base):
     p.fill("#prompt-search", "mobile audit")
     p.press("#prompt-search", "Enter")
     p.wait_for_load_state("load")
-    if not p.url.endswith("/prompts/mobile-responsive-audit/"):
+    if not p.url.endswith("/codes/prompts/mobile-responsive-audit/"):
         B.fail(f"Enter did not open the first match: {p.url}")
     p.close()
 
     p = B.load(ctx, base, "mobile-responsive-audit/index.html", "light", B.DESKTOP, wait=500)
-    if p.get_attribute(".sidebar-nav a.active", "data-slug") != "mobile-responsive-audit":
-        B.fail("sidebar does not mark the open prompt")
-    p.fill("#prompt-search", "wiki")
-    if p.evaluate("[...document.querySelectorAll('.sidebar-nav a[data-slug]')].filter(a => !a.hidden).length") != 1:
-        B.fail("sidebar search on a prompt page: 'wiki' should leave GitHub Wiki only")
-    p.fill("#prompt-search", "")
+    # The Codes Contents sidebar (scripts/codes/shell.py): the open prompt is
+    # marked, its group is open, the Tools group is closed, and no search.
+    if p.inner_text(".cd-sidebar a[aria-current=page]") != "Mobile Audit":
+        B.fail("Contents sidebar does not mark the open prompt")
+    if not p.evaluate("document.getElementById('cd-g-prompts').parentElement.open") or             p.evaluate("document.getElementById('cd-g-tools').parentElement.open"):
+        B.fail("Contents sidebar: the Prompts group should be open and Tools closed")
+    if p.query_selector(".cd-sidebar input"):
+        B.fail("Contents sidebar has a search box; search is the second bar's")
+    if "GitHub Wiki" not in p.inner_text(".cd-pager"):
+        B.fail("Previous / Next does not follow the prompt order")
     phone = B.load(ctx, base, "mobile-responsive-audit/index.html", "light", B.PHONE, wait=300)
-    if phone.is_visible(".sidebar-nav"):
-        B.fail("phone: prompt list is open on load")
-    phone.click("#pr-nav-toggle")
-    if not phone.is_visible(".sidebar-nav") or not phone.is_visible("#prompt-search"):
-        B.fail("phone: the Prompts button does not open the list and search")
+    if phone.is_visible("#cd-nav"):
+        B.fail("phone: Contents is open on load")
+    phone.click("#cd-menu-btn")
+    if not phone.is_visible("#cd-nav a[aria-current=page]"):
+        B.fail("phone: the Contents button does not open the list")
     phone.close()
     if p.is_visible("#prompt-body"):
         B.fail("prompt block is not collapsed on load")
@@ -65,12 +66,12 @@ def behavior(ctx, base):
         B.fail("Copy collapsed the prompt")
     clip = p.evaluate("navigator.clipboard.readText()")
     want = ("Review the full prompt on this website, provide a summary of what it does and then ask if I "
-            "would like to run it: https://azqato.com/prompts/mobile-responsive-audit/")
+            "would like to run it: https://azqato.com/codes/prompts/mobile-responsive-audit/")
     if clip != want:
         B.fail(f"Copy pointer is {clip!r}")
     if p.inner_text(".copy-btn") != "Copied!":
         B.fail("Copy shows no confirmation")
-    src = (ROOT / "prompts/md/mobile-responsive-audit.md").read_text(encoding="utf-8")
+    src = (ROOT / "codes/prompts/md/mobile-responsive-audit.md").read_text(encoding="utf-8")
     shown = p.inner_text("#prompt-body code")
     if shown.strip() not in src:
         B.fail("the prompt text on the page differs from the .md file")
@@ -86,7 +87,7 @@ def main():
         shots = sys.argv[sys.argv.index("--shots") + 1]
         pathlib.Path(shots).mkdir(parents=True, exist_ok=True)
     httpd, base = B.serve()
-    base = base.replace("/invests/", "/prompts/")
+    base = base.replace("/invests/", "/codes/prompts/")
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(channel="msedge", headless=True)
@@ -100,9 +101,9 @@ def main():
                             p.click(".code-label")
                             sx = p.evaluate("document.documentElement.scrollWidth - window.innerWidth")
                             if sx > 1:
-                                B.fail(f"prompts/{path} [{theme} {size['width']}px] expanded: scrolls sideways by {sx}px")
+                                B.fail(f"codes/prompts/{path} [{theme} {size['width']}px] expanded: scrolls sideways by {sx}px")
                         if size is B.DESKTOP:
-                            B.contrast(p, f"prompts/{path} [{theme}]")
+                            B.contrast(p, f"codes/prompts/{path} [{theme}]")
                         p.close()
             print(f"checked {len(PAGES)} pages", flush=True)
             behavior(ctx, base)

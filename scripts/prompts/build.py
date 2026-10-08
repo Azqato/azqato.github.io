@@ -29,9 +29,9 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
-OUT = ROOT / 'prompts'
+OUT = ROOT / 'codes' / 'prompts'
 SRC = OUT / 'md'
-SITE = 'https://azqato.com/prompts/'
+SITE = 'https://azqato.com/codes/prompts/'
 
 # The list order, as on the old site (its js/prompts-data.js).
 ORDER = [
@@ -127,7 +127,7 @@ HEAD = """<!DOCTYPE html>
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="data:image/svg+xml,x" />
   <link rel="stylesheet" href="{up}styles.css" />
-  <link rel="stylesheet" href="{up}prompts/assets/prompts.css" />
+  <link rel="stylesheet" href="{up}codes/prompts/assets/prompts.css" />
 </head>
 <body>
 
@@ -135,18 +135,15 @@ HEAD = """<!DOCTYPE html>
   <!-- /NAV -->
 
   <div class="pr-site">
-    <div class="site-wrapper">
-{sidebar}
-      <main class="content" id="main">
+    <main class="content" id="main">
 {main}
-      </main>
-    </div>
+    </main>
   </div>
 
   <!-- FOOTER -->
   </footer>
 
-  <script src="{up}prompts/assets/prompts.js"></script>
+  <script src="{up}codes/prompts/assets/prompts.js"></script>
   <script>
     (function () {{
       var toggle = document.querySelector('.nav-toggle');
@@ -175,33 +172,6 @@ HEAD = """<!DOCTYPE html>
 """
 
 
-def sidebar(prompts, current, up):
-    """The old site's sidebar (its logo dropped: the bar above names the section): the Prompts menu button (phones), search,
-    Home and every visible prompt, and Support."""
-    links = ['          <a href="%s"%s>Home</a>' % (up or './', ' class="active" aria-current="page"' if current is None else '')]
-    for p in prompts:
-        if p['hidden']:
-            continue
-        links.append('          <a href="%s%s/" data-slug="%s" data-desc="%s"%s>%s</a>' % (
-            up, p['slug'], p['slug'], esc(p['description']),
-            ' class="active" aria-current="page"' if current == p['slug'] else '', esc(p['title'])))
-    return """      <aside class="sidebar">
-        <div class="sidebar-sticky">
-          <button class="pr-nav-toggle" id="pr-nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar-nav">Prompts</button>
-          <div class="sidebar-search">
-            <input type="search" id="prompt-search" placeholder="Search prompts" aria-label="Search prompts" aria-controls="sidebar-nav" autocomplete="off" spellcheck="false" />
-          </div>
-          <div class="sidebar-nav" id="sidebar-nav" role="navigation" aria-label="Prompt navigation">
-%s
-          </div>
-          <p class="search-empty" id="search-empty" role="status"></p>
-          <div class="sidebar-support">
-            <a href="%s../support/" class="support-btn">Support</a>
-          </div>
-        </div>
-      </aside>""" % ('\n'.join(links), up)
-
-
 def home(prompts):
     items = '\n'.join(
         '          <a class="prompt-list-item" href="%s/" data-slug="%s"><span class="prompt-list-title">%s</span>'
@@ -212,12 +182,15 @@ def home(prompts):
           <p class="lead">%s</p>
         </section>
         <h2>Prompts</h2>
+        <div class="pr-search">
+          <input type="search" id="prompt-search" placeholder="Search prompts" aria-label="Search prompts" autocomplete="off" spellcheck="false" />
+        </div>
         <div class="prompt-list">
 %s
         </div>
         <p class="search-empty" id="home-empty" role="status"></p>""" % (esc(SITE_INTRO), items)
-    return HEAD.format(source='prompts/md/', title=SITE_NAME, desc=esc(SITE_DESC), url=SITE, alt='',
-                       og='Claude Code Prompts', up='../', main=main, sidebar=sidebar(prompts, None, ''))
+    return HEAD.format(source='codes/prompts/md/', title=SITE_NAME, desc=esc(SITE_DESC), url=SITE, alt='',
+                       og='Claude Code Prompts', up='../../', main=main)
 
 
 def detail(p, prompts):
@@ -250,9 +223,8 @@ def detail(p, prompts):
         title=esc(p['title']), meta=esc(p['meta']), desc_html=p['desc_html'], url=url, md=md, prompt=esc(p['prompt']))
     alt = ('\n  <link rel="alternate" type="text/markdown" href="%s" title="%s prompt (Markdown)" />'
            % (md, esc(p['title'])))
-    return HEAD.format(source='prompts/md/%s.md' % p['slug'], title='%s - %s' % (esc(p['title']), SITE_NAME),
-                       desc=esc(p['description']), url=url, alt=alt, og=esc(p['title']), up='../../', main=main,
-                       sidebar=sidebar(prompts, p['slug'], '../'))
+    return HEAD.format(source='codes/prompts/md/%s.md' % p['slug'], title='%s - %s' % (esc(p['title']), SITE_NAME),
+                       desc=esc(p['description']), url=url, alt=alt, og=esc(p['title']), up='../../../', main=main)
 
 
 def sitemap(prompts, text):
@@ -268,9 +240,10 @@ def sitemap(prompts, text):
 def redirects(text):
     block = ('# Azqato\'s Prompts (item 22): one address per page, and retired slugs.\n'
              '# Written by scripts/prompts/build.py.\n'
-             '/prompts  /prompts/  301\n'
-             + ''.join('/prompts/%s  /prompts/%s/  301\n' % (s, s) for s in ORDER)
-             + ''.join('/prompts/%s  /prompts/%s/  301\n/prompts/%s/  /prompts/%s/  301\n' % (o, n, o, n)
+             '/codes/prompts  /codes/prompts/  301\n'
+             + ''.join('/codes/prompts/%s  /codes/prompts/%s/  301\n' % (s, s) for s in ORDER)
+             + ''.join('/codes/prompts/%s  /codes/prompts/%s/  301\n/codes/prompts/%s/  /codes/prompts/%s/  301\n'
+                       % (o, n, o, n)
                        for o, n in sorted(RETIRED.items()))
              + '# /PROMPTS\n')
     if '# Azqato\'s Prompts (item 22)' in text:
@@ -315,6 +288,9 @@ def main():
 def strip(text):
     text = re.sub(r'<!-- NAV -->.*?<!-- /NAV -->', '', text, flags=re.S)
     text = re.sub(r'<!-- FOOTER -->.*?</footer>', '', text, flags=re.S)
+    # scripts/codes/shell.py wraps every Codes page in the Contents sidebar after this runs.
+    text = re.sub(r'\s*<!-- CODES -->.*?<!-- /CODES -->', '', text, flags=re.S)
+    text = re.sub(r'\s*<!-- CODES-END -->.*?<!-- /CODES-END -->', '', text, flags=re.S)
     text = re.sub(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="(?:\.\./)*theme.js"></script>)?', '', text)
     return text
 

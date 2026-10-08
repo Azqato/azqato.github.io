@@ -71,159 +71,159 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/</loc>
+    <loc>https://azqato.com/codes/tools/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/base64-encoder/</loc>
+    <loc>https://azqato.com/codes/tools/base64-encoder/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/bookmark-manager/</loc>
+    <loc>https://azqato.com/codes/tools/bookmark-manager/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/character-counter/</loc>
+    <loc>https://azqato.com/codes/tools/character-counter/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/favicon-downloader/</loc>
+    <loc>https://azqato.com/codes/tools/favicon-downloader/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/json-formatter/</loc>
+    <loc>https://azqato.com/codes/tools/json-formatter/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/link-cleaner/</loc>
+    <loc>https://azqato.com/codes/tools/link-cleaner/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/markdown-preview/</loc>
+    <loc>https://azqato.com/codes/tools/markdown-preview/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/password-generator/</loc>
+    <loc>https://azqato.com/codes/tools/password-generator/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/timestamp-converter/</loc>
+    <loc>https://azqato.com/codes/tools/timestamp-converter/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/tools/wash-sale-tracker/</loc>
+    <loc>https://azqato.com/codes/tools/wash-sale-tracker/</loc>
     <lastmod>2026-10-08</lastmod>
     <priority>0.6</priority>
   </url>
   <!-- PROMPTS: written by scripts/prompts/build.py -->
   <url>
-    <loc>https://azqato.com/prompts/</loc>
+    <loc>https://azqato.com/codes/prompts/</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/add-prompt/</loc>
+    <loc>https://azqato.com/codes/prompts/add-prompt/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/documentation/</loc>
+    <loc>https://azqato.com/codes/prompts/documentation/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/mobile-responsive-audit/</loc>
+    <loc>https://azqato.com/codes/prompts/mobile-responsive-audit/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/github-wiki/</loc>
+    <loc>https://azqato.com/codes/prompts/github-wiki/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/prompt-audit/</loc>
+    <loc>https://azqato.com/codes/prompts/prompt-audit/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/brand-identity/</loc>
+    <loc>https://azqato.com/codes/prompts/brand-identity/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/ios-simulator/</loc>
+    <loc>https://azqato.com/codes/prompts/ios-simulator/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/game-setup/</loc>
+    <loc>https://azqato.com/codes/prompts/game-setup/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/motion-design/</loc>
+    <loc>https://azqato.com/codes/prompts/motion-design/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/assumption-check/</loc>
+    <loc>https://azqato.com/codes/prompts/assumption-check/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/progress-dashboard/</loc>
+    <loc>https://azqato.com/codes/prompts/progress-dashboard/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/launch-video/</loc>
+    <loc>https://azqato.com/codes/prompts/launch-video/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/animation-performance/</loc>
+    <loc>https://azqato.com/codes/prompts/animation-performance/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/design-review/</loc>
+    <loc>https://azqato.com/codes/prompts/design-review/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/landing-page/</loc>
+    <loc>https://azqato.com/codes/prompts/landing-page/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/score-to-target/</loc>
+    <loc>https://azqato.com/codes/prompts/score-to-target/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/video-to-prompt/</loc>
+    <loc>https://azqato.com/codes/prompts/video-to-prompt/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/frontend-references/</loc>
+    <loc>https://azqato.com/codes/prompts/frontend-references/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/prompt-writing/</loc>
+    <loc>https://azqato.com/codes/prompts/prompt-writing/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/project-defaults/</loc>
+    <loc>https://azqato.com/codes/prompts/project-defaults/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/linkedin-audit/</loc>
+    <loc>https://azqato.com/codes/prompts/linkedin-audit/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/condense-docs/</loc>
+    <loc>https://azqato.com/codes/prompts/condense-docs/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/seo-audit/</loc>
+    <loc>https://azqato.com/codes/prompts/seo-audit/</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/prompts/ecommerce-site/</loc>
+    <loc>https://azqato.com/codes/prompts/ecommerce-site/</loc>
     <priority>0.6</priority>
   </url>
   <!-- /PROMPTS -->

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base64 Encoder - Azqato's Tools</title>
+  <meta name="description" content="Encode text to Base64 and decode it back, with full Unicode support and a URL-safe variant. Runs entirely in your browser." />
+  <link rel="canonical" href="https://azqato.com/codes/tools/base64-encoder/" />
+  <meta property="og:title" content="Base64 Encoder - Azqato's Tools" />
+  <meta property="og:description" content="Encode text to Base64 and decode it back, with full Unicode support and a URL-safe variant. Runs entirely in your browser." />
+  <meta property="og:url" content="https://azqato.com/codes/tools/base64-encoder/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Azqato" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
+  <script src="../../../theme.js"></script>
+  <link rel="stylesheet" href="../../../styles.css" />
+  <link rel="stylesheet" href="../../../codes/tools/assets/tools.css" />
+  <link rel="stylesheet" href="../../../codes/assets/codes.css" />
+</head>
+<body class="tl">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="../../../index.html">Azqato<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="../../../index.html">Home</a></li>
+        <li><a href="../../../about/index.html">About</a></li>
+        <li><a href="../../../discord/index.html">Discord</a></li>
+        <li><a href="../../../invests/index.html">Invests</a></li>
+        <li><a href="../../../codes/index.html" class="active">Codes</a></li>
+        <li><a href="../../../music/index.html">Music</a></li>
+        <li><a href="../../../links/index.html">Links</a></li>
+        <li><a href="../../../projects/index.html">Projects</a></li>
+        <li><a href="../../../youtube/index.html">YouTube</a></li>
+        <li><a href="../../../support/index.html">Support</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </nav>
+  <div class="site-sub">
+    <a class="site-sub-brand" href="../../../codes/tools/index.html"><span class="site-sub-mark" aria-hidden="true">🧰</span> Azqato's Tools</a>
+    <button class="site-search-btn" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <span class="site-search-text">Search the site</span>
+      <kbd aria-hidden="true">/</kbd>
+    </button>
+    <div class="site-sub-end">
+      <button class="theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <script src="../../../search.js" defer></script>
+  <!-- /NAV -->
+  <!-- CODES -->
+  <div class="cd-shell">
+  <button class="cd-menu-btn" id="cd-menu-btn" type="button" aria-expanded="false" aria-controls="cd-nav">Contents</button>
+  <nav class="cd-sidebar" id="cd-nav" aria-label="Codes sections">
+    <p class="cd-sidebar-title">Contents</p>
+    <div class="cd-group"><ul><li><a href="../../">Home</a></li></ul></div>
+    <details class="cd-group"><summary class="cd-group-label" id="cd-g-prompts">Prompts</summary><ul aria-labelledby="cd-g-prompts"><li><a href="../../prompts/">Overview</a></li><li><a href="../../prompts/add-prompt/">Add Prompt</a></li><li><a href="../../prompts/documentation/">Documentation</a></li><li><a href="../../prompts/mobile-responsive-audit/">Mobile Audit</a></li><li><a href="../../prompts/github-wiki/">GitHub Wiki</a></li><li><a href="../../prompts/prompt-audit/">Prompt Audit</a></li><li><a href="../../prompts/brand-identity/">Brand Identity</a></li><li><a href="../../prompts/ios-simulator/">iOS Simulator</a></li><li><a href="../../prompts/game-setup/">Game Setup</a></li><li><a href="../../prompts/motion-design/">Motion Design</a></li><li><a href="../../prompts/assumption-check/">Assumption Check</a></li><li><a href="../../prompts/progress-dashboard/">Progress Dashboard</a></li><li><a href="../../prompts/launch-video/">Launch Video</a></li><li><a href="../../prompts/animation-performance/">Animation Performance</a></li><li><a href="../../prompts/design-review/">Design Review</a></li><li><a href="../../prompts/landing-page/">Landing Page</a></li><li><a href="../../prompts/score-to-target/">Score to Target</a></li><li><a href="../../prompts/video-to-prompt/">Video to Prompt</a></li><li><a href="../../prompts/frontend-references/">Frontend References</a></li><li><a href="../../prompts/prompt-writing/">Prompt Writing</a></li><li><a href="../../prompts/project-defaults/">Project Defaults</a></li><li><a href="../../prompts/linkedin-audit/">LinkedIn Audit</a></li><li><a href="../../prompts/condense-docs/">Condense Docs</a></li><li><a href="../../prompts/seo-audit/">SEO Audit</a></li><li><a href="../../prompts/ecommerce-site/">E-commerce Site</a></li></ul></details>
+    <details class="cd-group" open><summary class="cd-group-label" id="cd-g-tools">Tools</summary><ul aria-labelledby="cd-g-tools"><li><a href="../../tools/">Overview</a></li><li><a href="../../tools/markdown-preview/">Markdown Editor</a></li><li><a href="../../tools/favicon-downloader/">Favicon Downloader</a></li><li><a href="../../tools/link-cleaner/">Link Cleaner</a></li><li><a href="../../tools/character-counter/">Character Counter</a></li><li><a href="../../tools/wash-sale-tracker/">Wash Sale Tracker</a></li><li><a href="../../tools/bookmark-manager/">Bookmark Manager</a></li><li><a href="../../tools/base64-encoder/" aria-current="page">Base64 Encoder</a></li><li><a href="../../tools/json-formatter/">JSON Formatter</a></li><li><a href="../../tools/password-generator/">Password Generator</a></li><li><a href="../../tools/timestamp-converter/">Timestamp Converter</a></li></ul></details>
+  </nav>
+  <div class="cd-main">
+  <!-- /CODES -->
+
+  <main id="main" class="page wrap">
+    <div class="page-head">
+      <div class="crumb"><a href="../">Tools</a> / Base64 Encoder</div>
+      <h1>Base64 Encoder</h1>
+      <p>Encode text to Base64 or decode it back. Accents, emoji and CJK all survive the round trip. Nothing is sent anywhere.</p>
+    </div>
+
+    <div class="b64-modes" role="group" aria-label="Direction">
+      <button class="btn sm primary" id="b64-mode-encode" aria-pressed="true">Encode</button>
+      <button class="btn sm" id="b64-mode-decode" aria-pressed="false">Decode</button>
+    </div>
+
+    <div class="b64-panes">
+      <div class="b64-pane">
+        <label class="lbl" for="b64-input" id="b64-input-label">Text</label>
+        <textarea id="b64-input" class="field" spellcheck="false"
+                  placeholder="Type or paste here"></textarea>
+        <p class="stat-line" id="b64-in-stat"></p>
+      </div>
+      <div class="b64-pane">
+        <p class="lbl" id="b64-output-label">Base64</p>
+        <textarea id="b64-output" class="field" spellcheck="false" readonly
+                  aria-labelledby="b64-output-label"></textarea>
+        <p class="stat-line" id="b64-out-stat"></p>
+      </div>
+    </div>
+
+    <p class="b64-error" id="b64-error" role="alert" hidden></p>
+
+    <div class="b64-actions">
+      <button class="btn primary" id="b64-copy">Copy result</button>
+      <button class="btn" id="b64-swap">Use result as input</button>
+      <button class="btn ghost" id="b64-clear">Clear</button>
+      <label class="b64-opt"><input type="checkbox" id="b64-urlsafe" /> URL-safe alphabet</label>
+    </div>
+
+    <p class="ws-note">The URL-safe variant swaps <code>+</code> and <code>/</code> for
+      <code>-</code> and <code>_</code> and drops the <code>=</code> padding, which is what
+      most URL and filename consumers expect. Decoding accepts either alphabet whichever
+      box it came from.</p>
+
+  </main>
+
+  <!-- CODES-END -->
+  <nav class="cd-pager" aria-label="Previous and next page"><a class="cd-pager-link cd-pager-link--prev" href="../../tools/bookmark-manager/"><small>Previous</small><span>Bookmark Manager</span></a><a class="cd-pager-link cd-pager-link--next" href="../../tools/json-formatter/"><small>Next</small><span>JSON Formatter</span></a></nav>
+  </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('cd-menu-btn'), nav = document.getElementById('cd-nav');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <!-- /CODES-END -->
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer-in">
+      <p class="site-footer-brand">Azqato<span>.</span></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul aria-label="Site">
+          <li><a href="../../../index.html">Home</a></li>
+          <li><a href="../../../about/index.html">About</a></li>
+          <li><a href="../../../discord/index.html">Discord</a></li>
+          <li><a href="../../../invests/index.html">Invests</a></li>
+          <li><a href="../../../codes/index.html">Codes</a></li>
+          <li><a href="../../../music/index.html">Music</a></li>
+          <li><a href="../../../links/index.html">Links</a></li>
+          <li><a href="../../../projects/index.html">Projects</a></li>
+          <li><a href="../../../youtube/index.html">YouTube</a></li>
+          <li><a href="../../../support/index.html">Support</a></li>
+          <li><a href="../../../codes/tools/index.html">Azqato's Tools</a></li>
+          <li><a href="../../../codes/prompts/index.html">Azqato's Prompts</a></li>
+          <li><a href="../../../accounts/index.html">Gaming Accounts</a></li>
+          <li><a href="../../../privacy-policy/index.html">Privacy Policy</a></li>
+        </ul>
+        <ul aria-label="Azqato Invests">
+          <li><a href="../../../invests/index.html">Azqato Invests</a></li>
+          <li><a href="../../../invests/stocks/index.html">Individual Stocks</a></li>
+          <li><a href="../../../invests/indices/index.html">Indices &amp; ETFs</a></li>
+          <li><a href="../../../invests/indices/vix/index.html">VIX Strategy</a></li>
+          <li><a href="../../../invests/leveraged/index.html">Leveraged Strategies</a></li>
+          <li><a href="../../../invests/resources/index.html">Investing Resources</a></li>
+        </ul>
+      </nav>
+      <p class="site-footer-legal">&copy; 2026 Azqato</p>
+    </div>
+  </footer>
+
+
+  <script src="../../../codes/tools/assets/js/common.js"></script>
+  <script src="../../../codes/tools/assets/js/base64encoder.js"></script>
+  <script>
+    var mode = "encode";
+    var inp = document.getElementById("b64-input");
+    var out = document.getElementById("b64-output");
+    var inLabel = document.getElementById("b64-input-label");
+    var outLabel = document.getElementById("b64-output-label");
+    var errEl = document.getElementById("b64-error");
+    var inStat = document.getElementById("b64-in-stat");
+    var outStat = document.getElementById("b64-out-stat");
+    var urlSafe = document.getElementById("b64-urlsafe");
+    var encodeBtn = document.getElementById("b64-mode-encode");
+    var decodeBtn = document.getElementById("b64-mode-decode");
+
+    // Byte length rather than character length, because that is the number
+    // that decides whether Base64 output fits a field somewhere.
+    function byteLen(s) { return new TextEncoder().encode(s).length; }
+
+    function run() {
+      var value = inp.value;
+      if (!value) {
+        out.value = "";
+        errEl.hidden = true;
+        inStat.textContent = "";
+        outStat.textContent = "";
+        return;
+      }
+      if (mode === "encode") {
+        var enc = base64Encoder.encode(value, urlSafe.checked);
+        out.value = enc;
+        errEl.hidden = true;
+        inStat.textContent = byteLen(value) + " bytes in";
+        outStat.textContent = enc.length + " characters out";
+      } else {
+        var res = base64Encoder.decode(value);
+        if (res.ok) {
+          out.value = res.text;
+          errEl.hidden = true;
+          inStat.textContent = value.replace(/\s+/g, "").length + " characters in";
+          outStat.textContent = byteLen(res.text) + " bytes out";
+        } else {
+          out.value = "";
+          errEl.textContent = res.error;
+          errEl.hidden = false;
+          inStat.textContent = "";
+          outStat.textContent = "";
+        }
+      }
+    }
+
+    function setMode(next) {
+      mode = next;
+      var encoding = mode === "encode";
+      encodeBtn.classList.toggle("primary", encoding);
+      decodeBtn.classList.toggle("primary", !encoding);
+      encodeBtn.setAttribute("aria-pressed", String(encoding));
+      decodeBtn.setAttribute("aria-pressed", String(!encoding));
+      inLabel.textContent = encoding ? "Text" : "Base64";
+      outLabel.textContent = encoding ? "Base64" : "Text";
+      // The URL-safe switch only describes how output is written. Decoding
+      // accepts both alphabets unconditionally, so the control would be a lie.
+      urlSafe.disabled = !encoding;
+      run();
+    }
+
+    encodeBtn.addEventListener("click", function () { setMode("encode"); });
+    decodeBtn.addEventListener("click", function () { setMode("decode"); });
+    inp.addEventListener("input", run);
+    urlSafe.addEventListener("change", run);
+
+    document.getElementById("b64-copy").addEventListener("click", function () {
+      if (out.value) copyText(out.value, "Result copied");
+      else toast("Nothing to copy yet");
+    });
+
+    document.getElementById("b64-swap").addEventListener("click", function () {
+      if (!out.value) { toast("Nothing to swap in yet"); return; }
+      inp.value = out.value;
+      setMode(mode === "encode" ? "decode" : "encode");
+    });
+
+    document.getElementById("b64-clear").addEventListener("click", function () {
+      inp.value = "";
+      run();
+      inp.focus();
+    });
+
+    setMode("encode");
+  </script>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function (e) {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

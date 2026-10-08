@@ -1,4 +1,4 @@
-"""Browser tests for Azqato's Tools on azqato.com (/tools/), in headless Microsoft Edge.
+"""Browser tests for Azqato's Tools on azqato.com (/codes/tools/), in headless Microsoft Edge.
 
     python scripts/tools-site/browser.py [--shots DIR]
 
@@ -17,7 +17,7 @@ B = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(B)
 
 ROOT = HERE.parent.parent
-PAGES = sorted(p.relative_to(ROOT / "tools").as_posix() for p in (ROOT / "tools").rglob("index.html"))
+PAGES = sorted(p.relative_to(ROOT / "codes" / "tools").as_posix() for p in (ROOT / "codes" / "tools").rglob("index.html"))
 
 
 def check(page, label, cond, msg):
@@ -90,7 +90,7 @@ def main():
         shots = sys.argv[sys.argv.index("--shots") + 1]
         pathlib.Path(shots).mkdir(parents=True, exist_ok=True)
     httpd, base = B.serve()
-    base = base.replace("/invests/", "/tools/")
+    base = base.replace("/invests/", "/codes/tools/")
     try:
         with sync_playwright() as pw:
             browser = pw.chromium.launch(channel="msedge", headless=True)
@@ -100,7 +100,7 @@ def main():
                     for size in (B.DESKTOP, B.PHONE):
                         p = B.load(ctx, base, path, theme, size, shots, wait=800)
                         if size is B.DESKTOP:
-                            B.contrast(p, f"tools/{path} [{theme}]")
+                            B.contrast(p, f"codes/tools/{path} [{theme}]")
                         p.close()
                 print("checked", path, flush=True)
             tool_tests(ctx, base)

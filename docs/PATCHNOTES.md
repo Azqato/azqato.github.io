@@ -8,15 +8,21 @@ Format: `[version] - YYYY-MM-DD`
 ## [2.18.0] - unreleased (local branch `item-22-tools-prompts`)
 
 ### Added
-- **Azqato's Tools at `/tools/`** (item 22): the ten browser tools and their list, moved from
+- **Azqato's Tools at `/codes/tools/`** (item 22): the ten browser tools and their list, moved from
 github.com/Azqato/tools word for word by `scripts/tools-site/migrate.py`, with the shared nav, footer, search
 and colors. Each tool has a clean address (`/tools/link-cleaner/`); the old file names redirect. The list's
 VIX Strategy and Nasdaq 100 Screener now open their Invests pages. `scripts/tools-site/browser.py` tests it.
-- **Azqato's Prompts at `/prompts/`**: the 24 prompts, moved word for word into `prompts/md/`, where they are
+- **Azqato's Prompts at `/codes/prompts/`**: the 24 prompts, moved word for word into `prompts/md/`, where they are
 written from now on. `scripts/prompts/build.py` gives each a real page (`/prompts/mobile-responsive-audit/`)
 holding its description and full text, with Expand and Copy as before; Copy's pointer now names azqato.com.
 The plain Markdown is published at `/prompts/md/<slug>.md`. `scripts/prompts/browser.py` tests it.
 - Both sections are in the footer, the site search and the sitemap; Codes and Projects link to them here.
+- **Codes laid out like Invests** (owner's request, 2026-10-08): Tools and Prompts now live under Codes, at
+`/codes/tools/` and `/codes/prompts/` (never live at the shorter addresses, so no redirects). Every Codes page has a
+Contents sidebar (Home, then a collapsible Prompts group and Tools group listing every page) and Previous / Next
+links, written by `scripts/codes/shell.py`; on phones it folds behind a Contents button. Each page keeps its
+original interface inside. The old Prompts sidebar and its logo are gone; prompt search sits above the list on the
+Prompts home page, and site search stays in the second bar. Tools use 90% of the width, hero centered.
 
 ### Changed
 - The build scripts folder is `scripts/` (was `tools/`), so `/tools/` can be the Tools section.

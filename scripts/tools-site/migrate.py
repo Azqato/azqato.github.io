@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Move Azqato's Tools (github.com/Azqato/tools) into azqato.com/tools/ (roadmap item 22).
+"""Move Azqato's Tools (github.com/Azqato/tools) into azqato.com/codes/tools/ (roadmap item 22).
 
     python scripts/tools-site/migrate.py [path to the tools repo, default ../tools]
     python scripts/build-nav.py          then stamp the nav, footer and search
@@ -13,7 +13,7 @@ What it does, per page:
 - keeps the page's <main> word for word, and its own scripts;
 - drops the old top bar, footer and early theme script (theme.js, the shared
   nav and footer replace them);
-- gives every page a clean address, tools/<old file name>/;
+- gives every page a clean address, codes/tools/<old file name>/;
 - points links to tools now on azqato.com (the VIX Strategy, the Nasdaq 100
   Screener) at their pages here;
 - rewrites css/style.css onto the site's color roles (colors.css), scoped to
@@ -27,13 +27,13 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
-OUT = ROOT / 'tools'
+OUT = ROOT / 'codes' / 'tools'
 
 # Old addresses of Azqato projects that now live on azqato.com, as links
-# relative to tools/ (the landing page). A tool page adds one more ../.
+# relative to codes/tools/ (the landing page). A tool page adds one more ../.
 MOVED = {
-    'https://azqato.github.io/VIX/': '../invests/indices/vix/',
-    'https://azqato.github.io/stocks/screener.html': '../invests/stocks/screener.html',
+    'https://azqato.github.io/VIX/': '../../invests/indices/vix/',
+    'https://azqato.github.io/stocks/screener.html': '../../invests/stocks/screener.html',
 }
 
 HEAD = """<!DOCTYPE html>
@@ -43,16 +43,16 @@ HEAD = """<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content="{desc}" />
-  <link rel="canonical" href="https://azqato.com/tools/{path}" />
+  <link rel="canonical" href="https://azqato.com/codes/tools/{path}" />
   <meta property="og:title" content="{title}" />
   <meta property="og:description" content="{desc}" />
-  <meta property="og:url" content="https://azqato.com/tools/{path}" />
+  <meta property="og:url" content="https://azqato.com/codes/tools/{path}" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Azqato" />
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="data:image/svg+xml,x" />
   <link rel="stylesheet" href="{up}styles.css" />
-  <link rel="stylesheet" href="{up}tools/assets/tools.css" />
+  <link rel="stylesheet" href="{up}codes/tools/assets/tools.css" />
 </head>
 <body class="tl">
 
@@ -116,10 +116,10 @@ def page(src, name):
     text = src.read_text(encoding='utf-8')
     landing = name == 'index'
     path = '' if landing else name + '/'
-    up = '../' if landing else '../../'
+    up = '../../' if landing else '../../../'
     main = one(r"(<main id=\"main\".*?)\s*<footer", text, name)
     scripts = one(r'</footer>(.*?)</body>', text, name)
-    scripts = scripts.replace('src="js/', 'src="%stools/assets/js/' % up).rstrip() + '\n'
+    scripts = scripts.replace('src="js/', 'src="%scodes/tools/assets/js/' % up).rstrip() + '\n'
     out = HEAD.format(title=one(r'<title>(.*?)</title>', text, name),
                       desc=one(r'<meta name="description" content="(.*?)"', text, name),
                       path=path, up=up, main=links(main, landing), scripts=scripts)
