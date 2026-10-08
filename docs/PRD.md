@@ -1390,7 +1390,7 @@ The proxies available, in descending order of usefulness:
 
 ## Roadmap at a glance
 
-**Status refreshed 2026-10-08:** open items are 1 (the owner's read-through), and 22; Later holds 15d, 16 and 17.
+**Status refreshed 2026-10-08:** open items are 1 (the owner's read-through) and 22; Later holds 15d, 16 and 17.
 
 Organized 2026-10-02 at the owner's request: every open item from both halves of the site in one place, in a suggested order. Each item's detail stays where it was written: Part 1 below, or Part 2, Invests: Roadmap (P numbers). Nothing here is scheduled until the owner says so.
 
