@@ -1,0 +1,78 @@
+/* Azqato's Prompts on azqato.com (item 22). The old site's components (list
+   cards, the prompt block and its Copy and Expand buttons), on the site's
+   color roles (colors.css). Scoped to <main class="pr">. */
+
+.pr { max-width: 860px; margin: 0 auto; padding: 32px 16px 64px; color: var(--ti-color-text); line-height: 1.65; }
+.pr h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.2; margin: 0 0 6px; }
+.pr h2 { font-size: 1.35rem; margin: 32px 0 14px; }
+.pr code { font-family: "SF Mono", "Cascadia Code", Consolas, monospace; font-size: .9em; }
+.pr a { color: var(--ti-color-accent); }
+
+/* Home */
+.pr-hero { padding: 16px 0 8px; }
+.pr-dot { color: var(--ti-color-accent); }
+.pr-lead { color: var(--ti-color-text-muted); font-size: 1.08rem; max-width: 65ch; margin-top: 10px; }
+.pr-search { margin-top: 24px; }
+.pr-search input {
+  width: 100%; max-width: 420px; padding: 10px 14px; font: inherit; color: var(--ti-color-text);
+  background: var(--ti-color-canvas); border: 1px solid var(--ti-color-border-strong); border-radius: 8px;
+}
+.pr-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.pr-list li[hidden] { display: none; }
+.pr-item {
+  position: relative; display: flex; flex-direction: column; padding: 16px;
+  background: var(--ti-color-surface); border: 1px solid var(--ti-color-border); border-radius: 10px;
+  overflow: hidden; text-decoration: none; transition: background .15s ease, border-color .15s ease;
+}
+.pr-item::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--ti-color-accent); opacity: 0; transition: opacity .15s ease;
+}
+.pr-item:hover { background: var(--ti-color-hover); border-color: var(--ti-color-accent); }
+.pr-item:hover::before { opacity: 1; }
+.pr-item-title { color: var(--ti-color-accent); font-weight: 600; }
+.pr-item:hover .pr-item-title { text-decoration: underline; }
+.pr-item-desc { color: var(--ti-color-text-muted); font-size: .9rem; margin-top: 4px; }
+.pr-empty { color: var(--ti-color-text-muted); margin-top: 12px; }
+.pr-empty:empty { display: none; }
+
+/* A prompt */
+.pr-crumb { font-size: .88rem; color: var(--ti-color-text-muted); margin-bottom: 14px; }
+.prompt-meta { display: inline-block; color: var(--ti-color-text-muted); font-size: .85rem; }
+.prompt-description { margin: 24px 0 28px; }
+.prompt-description p, .prompt-description ul, .prompt-description h3 { margin: 0 0 14px; }
+.prompt-description ul { padding-left: 1.25rem; }
+.prompt-description li { margin-bottom: 6px; }
+.prompt-description code { background: var(--ti-color-surface); padding: .1em .35em; border-radius: 4px; }
+
+.code-block-wrapper { background: var(--ti-color-surface); border: 1px solid var(--ti-color-border); border-radius: 10px; overflow: hidden; }
+/* The whole bar toggles, not just the button, so it carries the pointer. */
+.code-block-header {
+  background: var(--ti-color-surface); border-bottom: 1px solid var(--ti-color-border);
+  padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer;
+}
+.code-block-actions { display: flex; align-items: center; gap: 8px; }
+.code-label { color: var(--ti-color-text-muted); font-size: .85rem; }
+.code-block-wrapper.collapsed pre { display: none; }
+.code-block-wrapper.collapsed .code-block-header { border-bottom: none; }
+.code-block-wrapper pre { background: var(--ti-color-canvas); padding: 20px; overflow-x: auto; margin: 0; }
+.code-block-wrapper pre code { font-size: .875rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+.copy-btn, .code-toggle {
+  font: inherit; font-size: .85rem; background: var(--ti-color-canvas); border: 1px solid var(--ti-color-border-strong);
+  border-radius: 6px; padding: 4px 12px; white-space: nowrap; color: var(--ti-color-text); cursor: pointer;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.copy-btn:hover, .code-toggle:hover { border-color: var(--ti-color-accent); color: var(--ti-color-accent); background: var(--ti-color-accent-muted); }
+.copy-btn.copied { color: var(--ti-color-success); border-color: var(--ti-color-success); }
+.copy-btn.copy-failed { color: var(--ti-color-danger); border-color: var(--ti-color-danger); }
+
+.pr-agents { margin-top: 28px; font-size: .85rem; color: var(--ti-color-text-muted); overflow-wrap: anywhere; }
+
+@media (max-width: 600px) {
+  .pr { padding-top: 20px; }
+  .code-block-wrapper pre { padding: 14px; }
+  .code-block-wrapper pre code { font-size: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pr-item, .pr-item::before, .copy-btn, .code-toggle { transition: none; }
+}

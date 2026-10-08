@@ -23,7 +23,10 @@ status=0
 # invests/inventory/ is exempt: Azqato Invests' word-for-word records of its
 # source pages, which its preserve-everything rule checks the moved pages
 # against. They are records, not pages; the pages themselves are checked.
-files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(html|md)$' | grep -v '^invests/inventory/')
+# prompts/md/ is exempt too (item 22): the prompt sources, kept word for word,
+# and the Documentation prompt spells out this very rule ("the &mdash; HTML
+# entity"). Their generated pages under prompts/ are checked.
+files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(html|md)$' | grep -v '^invests/inventory/' | grep -v '^prompts/md/')
 
 for f in $files; do
   content=$(git show ":$f")

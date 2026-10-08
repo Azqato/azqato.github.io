@@ -68,3 +68,34 @@
 /tools/timestamp-converter.html  /tools/timestamp-converter/  301
 /tools/wash-sale-tracker       /tools/wash-sale-tracker/  301
 /tools/wash-sale-tracker.html  /tools/wash-sale-tracker/  301
+
+# Azqato's Prompts (item 22): one address per page, and retired slugs.
+# Written by scripts/prompts/build.py.
+/prompts  /prompts/  301
+/prompts/add-prompt  /prompts/add-prompt/  301
+/prompts/documentation  /prompts/documentation/  301
+/prompts/mobile-responsive-audit  /prompts/mobile-responsive-audit/  301
+/prompts/github-wiki  /prompts/github-wiki/  301
+/prompts/prompt-audit  /prompts/prompt-audit/  301
+/prompts/brand-identity  /prompts/brand-identity/  301
+/prompts/ios-simulator  /prompts/ios-simulator/  301
+/prompts/game-setup  /prompts/game-setup/  301
+/prompts/motion-design  /prompts/motion-design/  301
+/prompts/assumption-check  /prompts/assumption-check/  301
+/prompts/progress-dashboard  /prompts/progress-dashboard/  301
+/prompts/launch-video  /prompts/launch-video/  301
+/prompts/animation-performance  /prompts/animation-performance/  301
+/prompts/design-review  /prompts/design-review/  301
+/prompts/landing-page  /prompts/landing-page/  301
+/prompts/score-to-target  /prompts/score-to-target/  301
+/prompts/video-to-prompt  /prompts/video-to-prompt/  301
+/prompts/frontend-references  /prompts/frontend-references/  301
+/prompts/prompt-writing  /prompts/prompt-writing/  301
+/prompts/project-defaults  /prompts/project-defaults/  301
+/prompts/linkedin-audit  /prompts/linkedin-audit/  301
+/prompts/condense-docs  /prompts/condense-docs/  301
+/prompts/seo-audit  /prompts/seo-audit/  301
+/prompts/ecommerce-site  /prompts/ecommerce-site/  301
+/prompts/iphone-ipad-simulator  /prompts/ios-simulator/  301
+/prompts/iphone-ipad-simulator/  /prompts/ios-simulator/  301
+# /PROMPTS

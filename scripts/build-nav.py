@@ -20,6 +20,7 @@ To change the nav: edit PAGES below, run the script, review `git diff`, commit.
 """
 
 import argparse
+import html
 import json
 import pathlib
 import re
@@ -56,6 +57,7 @@ ICON_DEFAULT = '🦁'
 # Codes link is marked active, since Codes is where the nav lists them.
 SECTIONS = {
     'tools/': {'icon': '🧰', 'bar': "Azqato's Tools", 'active': 'codes/index.html'},
+    'prompts/': {'icon': '💬', 'bar': "Azqato's Prompts", 'active': 'codes/index.html'},
 }
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -77,7 +79,11 @@ def page_label(filename):
     if filename == prefix + 'index.html':
         return sec['bar']
     t = re.search(r'<title>(.*?)</title>', (ROOT / filename).read_text(encoding='utf-8'), re.S).group(1)
-    return re.sub(r"\s+-\s+Azqato's Tools$", '', t).strip()
+    t = html.unescape(t).strip()
+    suffix = ' - ' + sec['bar']
+    return t[:-len(suffix)] if t.endswith(suffix) else t
+
+
 # The icon link, then the theme script (unless the page is locked dark), are
 # stamped together, so a rerun replaces both instead of adding a script.
 ICON_LINK = re.compile(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="(?:\.\./)*theme.js"></script>)?')
@@ -168,6 +174,7 @@ SUB_TEMPLATE = """
 # Invests' sections. No sitemap link: robots.txt points crawlers at sitemap.xml.
 FOOTER_SITE = PAGES + [
     ('tools/index.html', "Azqato's Tools"),
+    ('prompts/index.html', "Azqato's Prompts"),
     ('accounts/index.html', 'Gaming Accounts'),
     ('privacy-policy/index.html', 'Privacy Policy'),
 ]
@@ -256,7 +263,7 @@ def search_index(root):
     for name in ['index.html'] + list(SECTION_NAMES) + [p for pre in SECTIONS for p in section_pages(pre)]:
         soup = BeautifulSoup((root / name).read_text(encoding='utf-8'), 'html.parser')
         body = soup.body
-        for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas'):
+        for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas, .pr-agents'):
             x.decompose()
         prefix, sec = section(name)
         label = 'Home' if name == 'index.html' else page_label(name) if sec else SECTION_NAMES[name]
