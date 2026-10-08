@@ -5,7 +5,7 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
-## [2.18.0] - unreleased (local branch `item-22-tools-prompts`)
+## [2.18.0] - 2026-10-08
 
 ### Added
 - **Azqato's Tools at `/codes/tools/`** (item 22): the ten browser tools and their list, moved from
