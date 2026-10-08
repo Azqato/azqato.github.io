@@ -124,7 +124,7 @@ There are **12** HTML pages.
 
 - **F1: Project Cards.** Icon, name, description, category tags, GitHub link, optional demo link, optional star count, optional last-updated date. Defined in the `PROJECTS` array in `projects.html`. Currently 15 entries.
 - **F2: Tag Filtering.** Auto-generated filter bar built from the union of all `tags` values; real-time hide and show via a `data-hidden` attribute; the project count updates on every filter change.
-- **F3: Navigation.** Sticky nav across all 12 pages: **Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support**. Active state via `class="active"` in the HTML, written by `tools/build-nav.py` from each page's own filename rather than maintained by hand. Below 860 px the link list collapses behind a hamburger toggle (`.nav-toggle`) that opens a dropdown panel; an inline script on each page handles open and close, closing on link click or on an outside click. Every nav item links to a page on this site with a relative path; no external links belong in the top-level nav (see the Navigation Bar section of DESIGN.md). External destinations such as the GitHub org are linked from within a page's own content instead.
+- **F3: Navigation.** Sticky nav across all 12 pages: **Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support**. Active state via `class="active"` in the HTML, written by `scripts/build-nav.py` from each page's own filename rather than maintained by hand. Below 860 px the link list collapses behind a hamburger toggle (`.nav-toggle`) that opens a dropdown panel; an inline script on each page handles open and close, closing on link click or on an outside click. Every nav item links to a page on this site with a relative path; no external links belong in the top-level nav (see the Navigation Bar section of DESIGN.md). External destinations such as the GitHub org are linked from within a page's own content instead.
 - **F4: Hero Sections.** Headline and description on each page, styled consistently. The landing page hero adds a row of interest pills and two CTA buttons.
 - **F5: Near-Zero Dependencies.** Plain HTML, CSS, and JavaScript. No npm packages, no framework, no CDN scripts, no web fonts. Eleven of the twelve pages make zero outbound requests.
 - **F6: About Page.** Bio covering gaming origins, content creation, the B5TA community, and web development. Pitch card with profile photo and signature.
@@ -267,7 +267,7 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── _redirects                - Cloudflare rules: /invests, /invests.html and each old /name.html, one hop
 ├── invests/                  - Azqato Invests, 19 pages; its docs are Part 2 of this file
 │                               (merged 2026-10-02; the main rules win, D22); built by
-│                               tools/invests/site.py (since 2.14.0)
+│                               scripts/invests/site.py (since 2.14.0)
 ├── codes/index.html          - AI tooling: Prompts, Tools, GitHub
 ├── music/index.html          - stage visualizer, native track player, Mixcloud embeds, platform links
 ├── music/viz.js              - the music page's script (since 2.13.9)
@@ -310,7 +310,7 @@ Untracked and local only (present in the working tree, not in git):
 │   ├── README.md                   - ranked index
 │   ├── assets/                     - 100 concept files, one image asset each
 │   └── index.html                  - generated reading page (279 KB)
-├── tools/build-brand-page.py - generates brand/index.html from brand/assets/*.md
+├── scripts/build-brand-page.py - generates brand/index.html from brand/assets/*.md
 └── .claude/settings.local.json - ignored via the user's global gitignore
 ```
 
@@ -318,7 +318,7 @@ Untracked and local only (present in the working tree, not in git):
 publicly from the root, so a committed `brand/` would be readable at `azqato.com/brand/`,
 including supplier notes, priority scores and an open question about the mascot's licensing
 provenance. It is excluded in `.gitignore` rather than merely left unstaged, because a
-`git add .` would otherwise publish it in one keystroke. `tools/build-brand-page.py` is
+`git add .` would otherwise publish it in one keystroke. `scripts/build-brand-page.py` is
 ignored alongside it: it only builds that folder and would be a dangling reference in a
 fresh clone. Reversing the decision is a two-line edit to `.gitignore`.
 
@@ -559,8 +559,8 @@ The 50 KB budget is a real constraint that shaped 11 pages and should keep shapi
 
 | Item | Current shortcut | Correct solution |
 |------|------------------|------------------|
-| Nav toggle script repeated across pages | The roughly 20 line toggle IIFE is still duplicated verbatim in all 12 HTML files. The nav markup itself is no longer duplicated by hand: it is stamped by `tools/build-nav.py` as of v2.8.8. | Either extend the stamp script to cover the script block, or leave it. It has never changed since it was written, so the duplication costs nothing today. |
-| Nav drift is detectable but not enforced | `python tools/build-nav.py --check` reports any page whose nav is out of date, but nothing runs it automatically | Add it to the `pre-commit` hook alongside the em-dash guard, so a hand-edited nav cannot be committed |
+| Nav toggle script repeated across pages | The roughly 20 line toggle IIFE is still duplicated verbatim in all 12 HTML files. The nav markup itself is no longer duplicated by hand: it is stamped by `scripts/build-nav.py` as of v2.8.8. | Either extend the stamp script to cover the script block, or leave it. It has never changed since it was written, so the duplication costs nothing today. |
+| Nav drift is detectable but not enforced | `python scripts/build-nav.py --check` reports any page whose nav is out of date, but nothing runs it automatically | Add it to the `pre-commit` hook alongside the em-dash guard, so a hand-edited nav cannot be committed |
 | `music.html` JS is inline | Roughly 1,900 lines inline, pushing the page to 112 KB | Extract to `viz.js`; it is the only page that would use it, so this trades a request for a cacheable file |
 | Tab-hidden render loop on `music.html` | The visualizer keeps drawing when the tab is in the background, beyond whatever the browser throttles on its own | Pause on `document.hidden` via a `visibilitychange` listener, reusing the `setPlaying()` function added in v2.8.7. Battery and heat, not accessibility. |
 | Only one native track, hardcoded | `audio/womanchild-azqato-remix.mp3` is a single `<audio>` element with its title written into the markup. Adding a second means copying the block. | If more tracks arrive, move to a `TRACKS` array rendered the way `projects.html` renders `PROJECTS`, rather than copying markup a third time |
@@ -749,9 +749,9 @@ The detailed step list under How to Verify a Change still applies; this section 
 | A lockfile is committed | Not applicable. No dependencies, no manifest, no lockfile, by design. See Tenet 2. |
 | Secrets are never committed | Met. `.env*` is ignored with a `!.env.example` re-inclusion. A full scan at the v2.8.5 audit found no key-shaped strings and no `process.env` references, and that remains true. |
 | `/dashboard` is tracked and never ignored | Not applicable. No `/dashboard` exists. If one is ever added, it is tracked, and no ignore rule may match it. |
-| Every ignore entry names something the project produces | Met with one deliberate exception. `brand/` and `tools/build-brand-page.py` both exist locally. `.env*` is preventive rather than descriptive: the project produces no env files and is not expected to. It is kept because the cost of the line is nothing and the cost of one casually committed secret in a public repository is permanent. |
+| Every ignore entry names something the project produces | Met with one deliberate exception. `brand/` and `scripts/build-brand-page.py` both exist locally. `.env*` is preventive rather than descriptive: the project produces no env files and is not expected to. It is kept because the cost of the line is nothing and the cost of one casually committed secret in a public repository is permanent. |
 | Ignoring does not untrack | Met and verified, not assumed. `git ls-files -i -c --exclude-standard` returns nothing, so no file is both tracked and matched by an ignore rule. This check matters because adding a rule to `.gitignore` has no effect on a file git is already tracking, which is a common way to believe something is private when it is published. |
-| Generated output committed on purpose says why | Met. The nav block in all 12 pages is generated by `tools/build-nav.py` and the output is committed deliberately, because the site has no build step and GitHub Pages serves the repository as-is: an ungenerated nav would mean shipping pages with a placeholder. The rule that the nav is never hand-edited is under Never Do These. |
+| Generated output committed on purpose says why | Met. The nav block in all 12 pages is generated by `scripts/build-nav.py` and the output is committed deliberately, because the site has no build step and GitHub Pages serves the repository as-is: an ungenerated nav would mean shipping pages with a placeholder. The rule that the nav is never hand-edited is under Never Do These. |
 | Large binaries are kept out of history | **Partly met, by decision.** `audio/womanchild-azqato-remix.mp3` is 6.1 MB and `img/20260711-0151-37.7601512.gif` is 1.9 MB, both committed. The audio is committed on purpose: it is the one same-origin track, the whole point of the native player, and there is nowhere else to put it on a static host. The GIF falls under the standing rule that nothing in `img/` is deleted. Neither is a mistake, but both are permanent in history, and the practical rule going forward is to think before adding another multi-megabyte file rather than to try to remove these. |
 | The canonical remote and default branch are recorded | Met. Remote `https://github.com/Azqato/azqato.github.io.git`, default branch `main`. There is no second remote, no fork, and no staging branch. The push is the release. |
 
@@ -763,7 +763,7 @@ The detailed step list under How to Verify a Change still applies; this section 
 >
 > The practical consequence: `git add --renormalize .` produced **zero changes**. The "deliberately noisy 12-file commit" that this section, Open Question 13, and the roadmap all warned about did not happen and was never going to. The sequencing advice built on that prediction cost nothing, but it was advice for a problem that did not exist. The lesson is narrow and worth keeping: **`git status` and editor line-ending indicators describe the working tree, not the repository.** Only `git ls-files --eol` answers what is actually committed.
 >
-> The note about `tools/build-nav.py` preserving per-file endings was accurate and that code is still there. It is now belt-and-braces rather than a workaround, and it was left alone.
+> The note about `scripts/build-nav.py` preserving per-file endings was accurate and that code is still there. It is now belt-and-braces rather than a workaround, and it was left alone.
 
 ---
 
@@ -1014,7 +1014,7 @@ Specific enough to answer the question for any given file:
 | `/img/home-hero-profile.jpg`, `logo-cat-avatar.jpg`, `music-logo-small.jpg`, `music-playlist-bangers.jpg`, `music-playlist-addictions.jpg`, `yt-channel-azqato.jpg`, `yt-channel-streams.jpg`, `yt-channel-mixes.jpg`, `yt-channel-chills.jpg`, `20260711-0151-37.7601512.gif` | Asset | Deployed but referenced by nothing in this repository. Treat as public facing anyway if anything outside this repository might hotlink them; treat as internal if not. Unknown, and worth a moment's thought before deleting rather than an assumption. |
 | `/README.md`, `/docs/*.md` | Document | Served as raw files, not rendered. Not linked from any page. |
 | `/.gitignore` | Config | Served if requested; harmless, contains no secrets |
-| `/tools/build-nav.py` | Tooling | Served as a plain text file if requested. Not linked from anywhere, contains no secrets, and is never executed by the host. |
+| `/scripts/build-nav.py` | Tooling | Served as a plain text file if requested. Not linked from anywhere, contains no secrets, and is never executed by the host. |
 | `/.vscode/*`, `/.githooks/*` | Config | Probably not served: GitHub Pages runs Jekyll by default, which excludes dot-directories from its output, and there is no `.nojekyll` file in this repository. This has not been verified against the live site. If it matters, request `https://azqato.github.io/.vscode/recentfedsummary.MD` and see whether it returns 404. |
 
 **Not part of the public surface:** every CSS class, every JavaScript function and variable, every entry in `PROJECTS`, and every section of markup inside a page. These can be renamed or deleted freely.
@@ -1103,7 +1103,7 @@ Everything a developer needs to run this project from a cold start. The README d
 | Git | Any modern version (2.x) | The only hard requirement |
 | A modern browser | Chrome, Firefox, Edge, or Safari, current | For viewing and for DevTools |
 | A text editor | Any. VS Code is what the repository is configured for (`.vscode/settings.json`) | No extensions required |
-| Python 3 | Needed only to change the nav | Runs `tools/build-nav.py`, and `python -m http.server` for a local server. Standard library only, no packages. Any Python 3 version works. |
+| Python 3 | Needed only to change the nav | Runs `scripts/build-nav.py`, and `python -m http.server` for a local server. Standard library only, no packages. Any Python 3 version works. |
 | Node | Optional | Only as an alternative local server via `npx serve`. Nothing in the project requires it. |
 
 There is no runtime to install. No Node version is required, no package manager is required, and there is no `package.json`.
@@ -1139,14 +1139,27 @@ Two caveats for `music.html` on `file://`. The Mixcloud iframes still load (they
 
 There is still no build step. The source files are the deployed files. Nothing is compiled, bundled, minified, or transformed at any point between the editor and the browser, and no command has to run before a deploy.
 
-One optional generator exists. `tools/build-nav.py` stamps the shared nav into every page, and its output is committed like any other edit. It is not a build step in the sense the project has avoided: the repository always contains complete deployable HTML, nothing sits between the source and the browser, and if the script were deleted the site would keep working and the nav would go back to being edited by hand. Run it only when the nav changes:
+One optional generator exists. `scripts/build-nav.py` stamps the shared nav into every page, and its output is committed like any other edit. It is not a build step in the sense the project has avoided: the repository always contains complete deployable HTML, nothing sits between the source and the browser, and if the script were deleted the site would keep working and the nav would go back to being edited by hand. Run it only when the nav changes:
 
 ```bash
-python tools/build-nav.py           # rewrite the nav in all 12 pages
-python tools/build-nav.py --check   # report drift, write nothing, exit 1 if any
+python scripts/build-nav.py           # rewrite the nav in all 12 pages
+python scripts/build-nav.py --check   # report drift, write nothing, exit 1 if any
 ```
 
 Running it with no nav change prints `nav is up to date in every page` and writes nothing, which doubles as a check that all 12 navs still match.
+
+Two more generators, for the sections moved in under item 22. Same principle: their output is committed, and the pages work if they are deleted.
+
+```bash
+python scripts/tools-site/migrate.py   # one-time: ../tools (the old repo) into tools/; rerunning overwrites edits
+python scripts/prompts/build.py        # prompts/md/*.md into prompts/ (pages, sitemap block, redirects)
+python scripts/prompts/build.py --check
+python scripts/build-nav.py            # always last: nav, footer, icons and search for every page
+python scripts/tools-site/browser.py   # Tools: every page, both themes, each tool's main action
+python scripts/prompts/browser.py      # Prompts: every page, both themes, search, Expand, Copy
+```
+
+**Adding a prompt.** Write `prompts/md/<slug>.md` in the old site's format (frontmatter `title`, `description`, `meta`, optional `hidden: true`; a description; `## Prompt`; the prompt in one fenced block), add the slug to `ORDER` in `scripts/prompts/build.py`, then run the build, `build-nav.py` and the browser test. To rename or remove one, add the old slug to `RETIRED` so its address redirects; never reuse a slug. The prompt sources are exempt from the em dash hook (they are kept word for word); their pages are not.
 
 The closest thing to a build check is confirming page weight before pushing:
 
@@ -1292,7 +1305,7 @@ Nothing differs between environments: no feature flags, no environment variables
 | `music.html` shows a plain grid instead of shaders | WebGL2 unavailable, or a shader failed to compile | DevTools Console; look for `GL shader err:`. The fallback is intentional. |
 | `music.html` is sluggish | The unthrottled render loop on an underpowered GPU | No mitigation exists today. This is the reason a pause control is on the future list. |
 | Page weight over 50 KB | Too much inline content added | DevTools Network tab, or the PowerShell size command above |
-| A nav item is missing on one page | The nav was hand-edited instead of stamped | `python tools/build-nav.py --check` names the page, then `python tools/build-nav.py` repairs it |
+| A nav item is missing on one page | The nav was hand-edited instead of stamped | `python scripts/build-nav.py --check` names the page, then `python scripts/build-nav.py` repairs it |
 
 ## Monitoring
 
@@ -1433,7 +1446,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
-| 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | `docs/TOOLS-PROMPTS.md` | Phase 1 done 2026-10-08; plan waiting on the owner's six answers |
+| 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | `docs/TOOLS-PROMPTS.md` | Built locally 2026-10-08 (branch `item-22-tools-prompts`), waiting on the owner's review; then rollout and the old repos (D26) |
 
 **Later**
 
@@ -1444,7 +1457,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | 18 | ~~GitHub API integration (low priority)~~ Dropped for now (owner, 2026-10-02) | Below |
 | 19 | ~~A progress dashboard~~ Dropped for now (owner, 2026-10-02) | Future updates, below |
 | 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below. **Done 2.13.9:** `music/viz.js` |
-| 15d | Smoke-test script, `tools/smoke.py`, run locally (moved from the build pass by the owner, 2026-10-02) | The next build pass, below |
+| 15d | Smoke-test script, `scripts/smoke.py`, run locally (moved from the build pass by the owner, 2026-10-02) | The next build pass, below |
 | 21 | A brand per section and an emoji per page (favicon and title icon), the lion for the home page and any page without its own (owner's decision, 2026-10-02) | **Done 2.13.1** (emoji favicons) |
 
 **Owner's answers for the next build pass (2026-10-02).** Recorded before building so the pass needs no further questions:
@@ -1453,7 +1466,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 - **Emoji and brands (item 21):** Home 🦁, About 🙋, Discord 💬, Invests 💰, Codes 💻, Music 🎧, Links 🔗, Projects 🛠️, YouTube 📺, Support ☕, Gaming Accounts 🎮, Privacy 🔒; Invests sections: Individual Stocks 📈, Indices & ETFs 📊, VIX Strategy ⚡, Leveraged Strategies 🚀, Resources 📚. Any page without its own uses the lion. Section brands in the top bar: Azqato Invests, Azqato Music and Azqato Codes; every other page shows "Azqato."
 - **Footer (item 6):** "© 2026 Azqato" plus links to every major section, following SEO practice (plain crawlable links, descriptive text). No sitemap link: search engines find sitemap.xml through robots.txt.
 - **Clean addresses (item 7):** folders (`discord/index.html`, with `discord.html` as a redirect page). Opening pages straight from disk must keep working, so internal links point at `folder/index.html` the way Invests' do.
-- **Invests (item 8):** scripts and inventories move to `tools/invests/`; Invests keeps its own layout but takes the shared palette and top bar, recolored in the same pass as item 5.
+- **Invests (item 8):** scripts and inventories move to `scripts/invests/`; Invests keeps its own layout but takes the shared palette and top bar, recolored in the same pass as item 5.
 - **Old sites (items 9, 10):** the owner allows changes to the stocks, vix and leverage repos; `/leveraged-strategies/` also redirects; the vix job also writes `vix.json` as a second source and the blocked allorigins fallback goes.
 - **Corrections (item 11):** remove the two dead Resources links; the Holy Grail figures load live from Composer Atlas on every page load, with a cached default when it can't be reached; all corrections go to the owner as one list.
 - **One VIX page (item 12):** `/invests/vix/` with the strategy, then the live dashboard, then the custom builder, with jump links; the old dashboard and custom addresses redirect.
@@ -1470,22 +1483,22 @@ Every item from Roadmap at a glance except Later, smallest first, each broken in
 
 | # | Item | Subtasks | Effort |
 |---|---|---|---|
-| 15b | Block commits with an out-of-date nav | Add `python tools/build-nav.py --check` to `.githooks/pre-commit`; test it with a deliberately stale page | **Done 2026-10-02:** tested with a deliberately stale page (XS) |
+| 15b | Block commits with an out-of-date nav | Add `python scripts/build-nav.py --check` to `.githooks/pre-commit`; test it with a deliberately stale page | **Done 2026-10-02:** tested with a deliberately stale page (XS) |
 | 15c | Pause the visualizer in hidden tabs | Pause and resume the render loop on `visibilitychange`, reusing `setPlaying()`; check it in Edge | **Done 2026-10-02:** visibilitychange pauses and resumes; a Pause stays paused (XS) |
 | 14 | No pulsing unless the fire is firing (v2.9.5) | Gate the four `envLow` and `envBroad` brightness terms on the fire through a 150 to 250 ms eased gate, not a hard switch; confirm a paused or silent track holds steady brightness; re-measure the worst single-frame brightness step (limit 0.0073 at 60 Hz) | **Done 2026-10-02:** already built in 2.9.5 (fireGate, 250 ms eased); found in the end-of-pass check |
 | 15a | Compressed YouTube thumbnails | Make compressed copies of the four images, keeping the originals in `img/`; point `youtube.html` at the copies with `loading="lazy"`; record the bytes saved | **Done 2026-10-02:** four 160 px WebP copies, 2.37 MB to 30 KB, lazy-loaded; originals kept (S) |
-| 6 | New footer on every page | "© 2026 Azqato" plus plain links to every main section (SEO practice: crawlable links, descriptive text; no sitemap link, since robots.txt lists sitemap.xml); stamp it from `tools/build-nav.py` into all 12 pages; match the Invests footer's style; update DESIGN.md | **Done 2026-10-02:** Done 2.13.0 (marker added in the end-of-pass check) |
+| 6 | New footer on every page | "© 2026 Azqato" plus plain links to every main section (SEO practice: crawlable links, descriptive text; no sitemap link, since robots.txt lists sitemap.xml); stamp it from `scripts/build-nav.py` into all 12 pages; match the Invests footer's style; update DESIGN.md | **Done 2026-10-02:** Done 2.13.0 (marker added in the end-of-pass check) |
 | 21 | Emoji and section brands | An emoji favicon and title icon for each of the 12 pages and the Invests sections (list above); "Azqato Invests / Music / Codes" in the top bar on those pages; update the sharing tags if titles change | **Done 2026-10-02:** 2.13.1. Emoji favicons on every page and Invests section; Music and Codes brands in the top bar; titles unchanged (S) |
-| 15d | Smoke-test script | `tools/smoke.py` (local, no GitHub Action): all 12 pages in Edge, both themes, desktop and phone widths; fails on console errors, broken links or sideways scroll; documented in the Runbook | **Moved to Later by the owner, 2026-10-02** (S to M) |
+| 15d | Smoke-test script | `scripts/smoke.py` (local, no GitHub Action): all 12 pages in Edge, both themes, desktop and phone widths; fails on console errors, broken links or sideways scroll; documented in the Runbook | **Moved to Later by the owner, 2026-10-02** (S to M) |
 | 15e | Music page on phones | Test `music.html` from 320 to 480 px; fix layout, tap targets and the stage console; record the results | **Done 2026-10-02:** 2.13.2. Tested 320 to 480 px; console spans the screen, badge hidden, footer three lines, 24 px seek bar on touch (DESIGN, Music page on phones) |
 | 11 | Content corrections | Remove the two dead Resources links; load the Holy Grail figures live from Composer Atlas on every page load with a cached default (first check that Atlas offers the figures in a form the page can fetch; if it doesn't, ask the owner); gather every other correction into one list for the owner | **Done 2026-10-02:** 2.13.3. Dead links removed; Holy Grail figures live from Composer Atlas with a cached default; corrections list C1 to C8 in Part 2, P11, for the owner (M) |
 | 10 | Old repos become data feeds | The vix job also writes `vix.json`; the VIX pages read it as the second source; drop the blocked allorigins fallback; a clear "unavailable" state; confirm the stocks and vix jobs still run | **Done 2026-10-02:** 2.13.4 (vix v1.3.0). vix.json written by the job, read from raw GitHub as the second source; allorigins dropped; 8 s timeout; error state when all fail (Part 2, P12) (M) |
 | 9 | Redirect the old sites | 19 redirect pages across the stocks, vix and leverage repos (old title, canonical, instant redirect, a fallback link); `/leveraged-strategies/` too; every data file keeps serving; after the push, check each old address reaches its page in one hop | **Done 2026-10-02:** 2.13.5 (stocks v5.0.0, vix v2.0.0, leverage v2.0.0). 19 redirect pages plus /leveraged-strategies/, one hop each; data feeds unchanged (Part 2, Invests: Deprecation and Removal) (M) |
 | 12 | One VIX page | Merge the three pages into `/invests/vix/` (strategy, then dashboard, then builder, with jump links), keeping everything (core rule); the old addresses become redirects; update the sidebar, search, sitemap and inventories; run `check.py` and `browser.py` | **Done 2026-10-02:** 2.13.6. One page at /invests/vix/: strategy, #dashboard, #custom; old addresses redirect to the sections; check.py and browser.py cover it (Part 2, P16) (M) |
-| 5 | Top bar and theme button on every page | The light palette and new tokens in `styles.css`; swap literal colors for tokens on the pages that have them (`music.html` 137, `projects.html` 34, `support.html` 23, a few elsewhere); the nav template in `tools/build-nav.py` becomes the slim bar with ☀️/🌙 beside ☰ on phones; one shared theme script (system theme first, choice remembered); the visualizer stays dark; check all 12 pages in both themes | **Done 2026-10-02:** Done 2.13.7 |
+| 5 | Top bar and theme button on every page | The light palette and new tokens in `styles.css`; swap literal colors for tokens on the pages that have them (`music.html` 137, `projects.html` 34, `support.html` 23, a few elsewhere); the nav template in `scripts/build-nav.py` becomes the slim bar with ☀️/🌙 beside ☰ on phones; one shared theme script (system theme first, choice remembered); the visualizer stays dark; check all 12 pages in both themes | **Done 2026-10-02:** Done 2.13.7 |
 | 7 | Clean addresses | Move 11 pages into folders, each `.html` left as a redirect page; fix relative paths one level deeper; nav links point at `folder/index.html` so opening from disk works (on azqato.com each click then takes one redirect to the clean address, as `.html` links do today; on azqato.github.io the address bar shows `/folder/index.html`, and canonical tags keep search engines on the clean form); update canonicals, sitemap.xml and og:url; check every old address and opening from disk | **Done 2026-10-02:** Done 2.13.8 |
 | 20 | `music.html`'s script to `viz.js` | Move about 1,900 lines unchanged; test the visualizer, the audio reaction and every mode in Edge; confirm the page weight drops | **Done 2026-10-02:** Done 2.13.9 |
-| 8 | Fold Invests in | Move its scripts and inventories to `tools/invests/` and fix their paths; Invests takes the shared palette and top bar; rerun `site.py`, `check.py` and `browser.py`; the pages and addresses stay | **Done 2026-10-02:** Done 2.14.0 |
+| 8 | Fold Invests in | Move its scripts and inventories to `scripts/invests/` and fix their paths; Invests takes the shared palette and top bar; rerun `site.py`, `check.py` and `browser.py`; the pages and addresses stay | **Done 2026-10-02:** Done 2.14.0 |
 | 13 | Landing pages and SEO (drafts only) | Audit all 21 pages (titles, descriptions, headings, internal links); draft four landing pages and four "Method" pages; the owner reviews them together | **Done 2026-10-02:** Drafted 2.14.1 (docs/SEO-REVIEW.md); waits on the owner's review |
 | Review | Full review | The owner reviews the live site and Invests' drafted sections, after item 15 | Owner |
 
@@ -1576,7 +1589,7 @@ Beyond that: adding projects and links as they exist, and occasional visual pass
 ### v2.7.0: Code extraction and shared assets (Complete)
 
 - [x] Extract shared CSS into a single `styles.css` across all 12 pages. Done. Page-specific `:root` overrides remain inline by design.
-- [x] Extract the shared nav HTML. Done in v2.8.8, but not by either method this item originally proposed. Both were rejected: JS injection removes the nav entirely without JavaScript, which trades away the site's graceful degradation to fix a maintenance problem that had never produced a broken page, and a real build step puts a toolchain between the source and the deployed artifact. What shipped instead is `tools/build-nav.py`, a stamp script whose output is committed. The nav is defined once in `PAGES`; running the script rewrites the block between `<!-- NAV -->` and `</nav>` in every page. The deployed site is byte-for-byte unchanged, nothing runs at request time, and deleting the script would cost only the convenience.
+- [x] Extract the shared nav HTML. Done in v2.8.8, but not by either method this item originally proposed. Both were rejected: JS injection removes the nav entirely without JavaScript, which trades away the site's graceful degradation to fix a maintenance problem that had never produced a broken page, and a real build step puts a toolchain between the source and the deployed artifact. What shipped instead is `scripts/build-nav.py`, a stamp script whose output is committed. The nav is defined once in `PAGES`; running the script rewrites the block between `<!-- NAV -->` and `</nav>` in every page. The deployed site is byte-for-byte unchanged, nothing runs at request time, and deleting the script would cost only the convenience.
 - [x] Extract active-state detection. Done in v2.8.8 by the same script, which writes `class="active"` onto the link matching each file's own name. The two pages not in the nav (`accounts.html`, `privacy-policy.html`) fall out correctly with no special case, because no entry matches their filename.
 - [x] Add `@media (prefers-reduced-motion: reduce)` to disable hover transforms. Done in v2.8.7, together with the `music.html` play/pause control that Open Question 8 resolved to.
 
@@ -1727,9 +1740,9 @@ Two further points settled themselves once the full specification was read rathe
 
 ### v2.10.1 - Clean up the nav generator's dead SKIP set (XS) - COMPLETE 2026-09-28
 
-`tools/build-nav.py` skips `nav-extraction-test.html` and `reduced-motion-test.html`. Neither file has existed for some time. A two-line deletion with no behavioral change, since the script only ever iterates files that exist. Offered at the audit and deferred with "revisit this later", then pulled back into scope the same day when the owner scheduled the batch below. No sequencing constraint: it touches one script that nothing else in the batch goes near, so it can land first or last.
+`scripts/build-nav.py` skips `nav-extraction-test.html` and `reduced-motion-test.html`. Neither file has existed for some time. A two-line deletion with no behavioral change, since the script only ever iterates files that exist. Offered at the audit and deferred with "revisit this later", then pulled back into scope the same day when the owner scheduled the batch below. No sequencing constraint: it touches one script that nothing else in the batch goes near, so it can land first or last.
 
-**Shipped.** `SKIP` is now `set()` rather than deleted outright, with a comment naming the two files that used to be listed and saying they no longer exist. Keeping the empty set costs one line and is the better shape: the loop that reads it stays as it is, so the next person who needs to exclude a page adds a filename instead of rebuilding the mechanism. `python tools/build-nav.py --check` reports the nav is up to date in every page, which is the same answer it gave before, and that is the point.
+**Shipped.** `SKIP` is now `set()` rather than deleted outright, with a comment naming the two files that used to be listed and saying they no longer exist. Keeping the empty set costs one line and is the better shape: the loop that reads it stays as it is, so the next person who needs to exclude a page adds a filename instead of rebuilding the mechanism. `python scripts/build-nav.py --check` reports the nav is up to date in every page, which is the same answer it gave before, and that is the point.
 
 ### v2.10.2 - .gitattributes and full renormalization (S) - COMPLETE 2026-09-28
 
@@ -1737,7 +1750,7 @@ Two further points settled themselves once the full specification was read rathe
 
 **Shipped as `5070b3b`, and the stated reason turned out to be wrong.** Read the corrected account in Repository Hygiene before trusting the paragraph below. In short: every committed blob was already LF, the CRLF was only on disk, `core.autocrlf=true` was doing the work, and `git add --renormalize .` produced **zero changes**. The file is still worth having, because it moves that guarantee from one machine's local config into the repository where every clone gets it. The original reasoning is kept below unedited, because a wrong premise that produced a right action is worth being able to find.
 
-**Why (as written at the audit, and incorrect).** `music.html` is committed with CRLF while every other text file is LF. Git prints "LF will be replaced by CRLF" on edits, and `tools/build-nav.py` carries deliberate code to preserve whatever ending each file already has rather than normalizing it, which is a workaround for a problem the repository should not have. Byte-comparison checks and headless screenshot diffs are both affected by it.
+**Why (as written at the audit, and incorrect).** `music.html` is committed with CRLF while every other text file is LF. Git prints "LF will be replaced by CRLF" on edits, and `scripts/build-nav.py` carries deliberate code to preserve whatever ending each file already has rather than normalizing it, which is a workaround for a problem the repository should not have. Byte-comparison checks and headless screenshot diffs are both affected by it.
 
 **How.** One file, one command, one commit. **Outcome:** the commit touched exactly one file, the new `.gitattributes` itself. No page was rewritten.
 
@@ -1808,7 +1821,7 @@ Two further points settled themselves once the full specification was read rathe
 
 **Applied by script, with a compliance gate that ran before anything was written.** The gate failed the whole run on: any title over 60 characters, any `og:title` over 70, any description over 200, an `og:title` containing the site name, a non-index title missing the ` - Azqato` suffix, two pages sharing their first 30 characters, or a placeholder title. It passed on the first complete run. That ordering is the part worth copying: a script that validates its own inputs before touching 12 files cannot leave the repository half-edited.
 
-**Verified.** `python tools/build-nav.py --check` clean afterwards, since the nav block sits in all 12 heads. Browser test in headless Edge against a local server on four pages: `index`, `projects`, `music`, `privacy-policy`, all rendering correctly. Still outstanding: paste two or three live URLs into Discord after the push and look at the cards. That is the only check that tests the thing the milestone is actually for, and it cannot be done before deploying.
+**Verified.** `python scripts/build-nav.py --check` clean afterwards, since the nav block sits in all 12 heads. Browser test in headless Edge against a local server on four pages: `index`, `projects`, `music`, `privacy-policy`, all rendering correctly. Still outstanding: paste two or three live URLs into Discord after the push and look at the cards. That is the only check that tests the thing the milestone is actually for, and it cannot be done before deploying.
 
 **Original milestone follows.**
 
@@ -1888,7 +1901,7 @@ And the `og:title` values, which carry no brand because the card prints `og:site
 
 | Item | Why not |
 |------|---------|
-| `tools/build-nav.py` SKIP cleanup | Offered, deferred with "revisit this later". In `docs/TODO.md`. **Done as v2.10.1.** |
+| `scripts/build-nav.py` SKIP cleanup | Offered, deferred with "revisit this later". In `docs/TODO.md`. **Done as v2.10.1.** |
 | Extract `music.html` JS to `viz.js` | Offered, deferred. Large refactor of the visualizer, roughly 1,900 lines, needing a full browser test. Known technical debt, not urgent. |
 | Compress the four oversized thumbnails in `img/` | In `docs/TODO.md`. Compression, never deletion: nothing in `img/` is deleted. |
 | A progress dashboard | See Future Updates below. Deliberately after these items, because it reports on facts that are about to change. |
@@ -1966,9 +1979,9 @@ which host is formally authoritative; it does not change whether the address wor
    descriptions. Major update under Testing Cadence: assumption check plus one browser test in headless
    Edge, right before it ships, then paste two or three live URLs into Discord and look at the cards.
 4. **v2.10.5**, last, because it is judgement rather than mechanism.
-5. **v2.10.1** anywhere; it touches only `tools/build-nav.py`.
+5. **v2.10.1** anywhere; it touches only `scripts/build-nav.py`.
 
-Then run `python tools/build-nav.py --check` at the end, because step 1 rewrites every page and step 3
+Then run `python scripts/build-nav.py --check` at the end, because step 1 rewrites every page and step 3
 edits every head, and the nav block sits in all 12 of them.
 
 ### Recommended path
@@ -2009,7 +2022,7 @@ Proposals that are not yet milestones. Each one states what it is, why it might 
 
 **Why.** The owner prefers how it sits above the main content. One look for the nav on both halves of the site also removes the visible jump between azqato.com and /invests/.
 
-**How.** Port the `.site-azqato` styles (both themes) into styles.css and change the markup tools/build-nav.py stamps into the 12 pages, so the nav stays generated from one list. Keep the mobile dropdown working (the nav toggle script on every page); on phones Invests hides the strip and moves its links into its sidebar, which the main pages don't have, so the phone layout needs its own decision. Ideally the Invests copy then reads the same page list (build-nav.py or a shared file) so the two can't drift (invests PRD, Known technical debt).
+**How.** Port the `.site-azqato` styles (both themes) into styles.css and change the markup scripts/build-nav.py stamps into the 12 pages, so the nav stays generated from one list. Keep the mobile dropdown working (the nav toggle script on every page); on phones Invests hides the strip and moves its links into its sidebar, which the main pages don't have, so the phone layout needs its own decision. Ideally the Invests copy then reads the same page list (build-nav.py or a shared file) so the two can't drift (invests PRD, Known technical debt).
 
 **Size.** Medium: the nav is one stylesheet section, the build-nav.py template and a rerun; the theme button is a small script on every page (or one shared file) plus a full light palette for styles.css, which is the bulk of the work. Then a browser check of all 12 pages in both themes at desktop and phone widths.
 
@@ -2118,7 +2131,7 @@ Every document was compared against the source at the v2.8.5 audit, and again at
 | 29 | The PRD gave `music.html` as "roughly 91,000 bytes" in the Build section while stating 114 KB in nine other places. The shared CSS was given as 2.3 KB. | Code. `music.html` is 114,680 bytes committed; `styles.css` is 2,887 bytes. | Both corrected. **Corrected again on 2026-09-28**: the audit first wrote 117,417 bytes, which was the working-tree copy with CRLF endings. The committed blob, which is what GitHub Pages serves, is 114,680 bytes. The rounded figure is therefore 112 KB, not 114 KB, and the nine other references were updated to match. |
 | 30 | No `.gitattributes`, in a repository where `music.html` is CRLF, everything else is LF, and the nav generator preserves per-file endings on purpose. | Code and configuration. | Not created at the audit, because Repository Hygiene is a policy record rather than an action and the fix is a deliberately noisy 12-file commit. **Decided 2026-09-28: add it and normalize everything.** Scheduled as Roadmap v2.10.2 and recommended to run first, so the whitespace-only diff lands in its own commit instead of contaminating the head edits. Open Question 13 closed. **Shipped 2026-09-28 as `5070b3b`, and the finding itself was wrong.** `git ls-files --eol` shows every committed blob was already LF, `music.html` included; the CRLF was confined to the working tree and `core.autocrlf=true` was doing the normalizing. `git add --renormalize .` produced zero changes. The file is still correct to have, for the better reason that it moves the guarantee out of one machine's local config. See Repository Hygiene. |
 | 31 | The PRD stated that `azqato.com` was probably unrelated to this repository, reasoning that the absence of a `CNAME` file meant this repository does not serve that domain. | The live web. `azqato.com` returns this exact site. Git history shows a `CNAME` was created and then deleted, and all 12 page footers link `azqato.com`. | Answered, and it turned into a bigger question than it was. The domain does serve this site, through Cloudflare. Which of the two hosts is canonical is now Open Question 10, and it blocks the sharing tags. |
-| 32 | `tools/build-nav.py` has a `SKIP` set naming `nav-extraction-test.html` and `reduced-motion-test.html`. Neither file exists. | Code and the filesystem. | Not changed; it is harmless dead configuration in a script, not a documentation defect, and editing a working script was outside this audit's write scope. Logged in `docs/TODO.md`. |
+| 32 | `scripts/build-nav.py` has a `SKIP` set naming `nav-extraction-test.html` and `reduced-motion-test.html`. Neither file exists. | Code and the filesystem. | Not changed; it is harmless dead configuration in a script, not a documentation defect, and editing a working script was outside this audit's write scope. Logged in `docs/TODO.md`. |
 | 36 | Every document stated the site is hosted on GitHub Pages, and the v2.9.9 audit refined that to "Cloudflare proxying in front of GitHub Pages". Both are wrong. | The owner, asked directly on 2026-09-29, plus DNS and response evidence that corroborates it: Cloudflare nameservers, Cloudflare IPs, `cfOrigin;dur=0` on every request, and a 404 that is not GitHub's. | `azqato.com` is a **Cloudflare Pages** deployment, independent of the GitHub Pages one. Corrected as v2.10.7 across the architecture diagram, hosting table, deploy verification, third-party data tables, Security Model, and `privacy-policy.html`, which had been naming the wrong data controller. Three consequences: the deploy-verification step was checking a host that cannot vouch for the canonical domain; the `CNAME` milestone was moot, not blocked; and the "no CSP possible" constraint is false for `azqato.com`, which supports a `_headers` file. |
 | 35 | The 11 non-index canonical and `og:url` tags shipped in v2.10.4 pointed at `https://azqato.com/page.html`, which the canonical domain 307-redirects to `https://azqato.com/page`. The 11 matching `sitemap.xml` entries had the same problem. | The live site, which is the only source that could have answered this. A Cloudflare rule strips the extension; it is not in this repository and is not documented anywhere. | **Fixed the same day as v2.10.6**, before anyone could have shared a link. Both hosts return 200 on the extensionless form, so the repointed URLs are correct on the origin too. Found by checking the deployed site rather than by checking that the deploy landed, which is the distinction now written into the Verification checklist. Internal links still use `.html` and still redirect; that is deliberate and tracked in `docs/TODO.md`. |
 | 34 | All 12 page titles are brand-first with a pipe separator (`Azqato \| Projects`), so every tab truncates to the same visible string and the pixel budget is spent on the one word that is identical everywhere and already shown by the favicon. Two page names, "Welcome" and "Codes", identify nothing to a stranger. | The specification's Page Titles rule, read in full after the owner supplied it. This section had never been recorded in this project, so there was no existing project rule to defer to. | Policy written into the new Page Titles section with the current state of all 12 titles tabulated. **Decided 2026-09-28: fix the titles**, in the same pass as the sharing tags, since both edit the same heads. Replacement titles are specified in Roadmap v2.10.4. Not applied at the audit: changing a title is a page edit, which the specification puts outside an audit. **Applied 2026-09-28** in that milestone. Every title is page-first with a ` - Azqato` suffix; the longest is 38 characters against a 60 character budget; no two share their first 30 characters. "Welcome" and "Codes" became "Azqato - Communities, Projects, Music" and "AI Prompts and Coding Tools - Azqato". Resolved. |
@@ -2193,7 +2206,7 @@ Numbered so they can be answered by reference. When one is answered, fold the an
      Verified at the v2.9.9 audit: `https://azqato.com/` and `https://www.azqato.com/` both return `server: cloudflare` and both contain a `static.cloudflareinsights.com/beacon.min.js` script tag. `https://azqato.github.io/` does not; it is clean. The beacon is not in this repository's source, so nothing was committed by mistake: it is injected at the edge by a Cloudflare setting. That makes the README's "no analytics, and no tracking", the PRD's "No analytics, no cookies set by the site, no tracking pixels", the External FAQ's Why No Analytics answer, and the press release's "collects nothing about the people who use it" all false for anyone who visits the branded domain, which is the domain every page footer links. Either the Cloudflare setting is turned off, or the copy stops claiming no analytics. Tenet 6 does not leave a third option. The README was made precise about this at the audit rather than left false; the underlying decision is still open.
 
 13. ~~**There is no `.gitattributes`, and line endings are already inconsistent.**~~ **Answered 2026-09-28: add it and normalize everything**, accepting the one noisy commit. Shipped the same day as `5070b3b`. **The premise was wrong and the noisy commit never materialized**: every committed blob was already LF and the inconsistency was confined to the working tree, so `git add --renormalize .` changed nothing. The file still earns its place by making the LF guarantee portable instead of dependent on one machine's `core.autocrlf=true`. See Repository Hygiene for the full correction. The original question follows.
-     `music.html` is committed CRLF, everything else is LF, and `tools/build-nav.py` contains deliberate code to preserve each file's existing endings. Adding `* text=auto eol=lf` would normalise this and produce a 12-file diff including a full-file diff on `music.html`. Worth it, or not worth burying the next real diff on that page? See Repository Hygiene.
+     `music.html` is committed CRLF, everything else is LF, and `scripts/build-nav.py` contains deliberate code to preserve each file's existing endings. Adding `* text=auto eol=lf` would normalise this and produce a 12-file diff including a full-file diff on `music.html`. Worth it, or not worth burying the next real diff on that page? See Repository Hygiene.
 
 14. ~~**The sharing-tag specification was truncated before the image rules.**~~ **Answered 2026-09-28: the full specification was read.** The owner supplied its location and it was read in full rather than reconstructed. Two things turned out to be missing rather than one: the image rules (**images are off by default**, no `og:image`, `twitter:card` is `summary`, with the full 1200 by 630 requirement set recorded in case an image policy is adopted later) and an **entire Page Titles section** that this project had never recorded and fails on all 12 pages. Both are now written into this document. The original question follows.
      The prompt this audit's Social Sharing Tags policy was written from was cut off mid-sentence at the image section, so `og:image` and `twitter:image` have no recorded rule: no dimensions, no budgets, no fallback. The policy says so explicitly rather than inventing values, because invented budgets become the standard that every later page is checked against. Supply the rest and the section can be completed. Nothing else in the policy is affected.
@@ -2233,7 +2246,7 @@ Concrete instructions for whoever works on this next, human or model.
 - **Never delete anything from `img/`.** Not an unreferenced file, not an apparent duplicate, not an obvious leftover, no matter how confident an audit is that nothing links it. That folder is the owner's working library and unused is its normal state. Remove a file from it only when the owner asks for that file by name.
 - **Never add a dependency, a CDN script, or a web font** without a decision recorded here first. Tenets 1 and 2 exist to make this a conversation rather than a habit.
 - **Never rename or delete a live `.html` file, `styles.css`, or a referenced image without a compatibility entry.** Inbound links live in Discord messages and video descriptions where they cannot be updated and their breakage cannot be observed.
-- **Never hand-edit the nav or the footer in a page.** Both are generated (the footer since 2.13.0). The nav is generated. Edit `PAGES` in `tools/build-nav.py`, run the script, and commit the result. A hand edit survives until the next run and then vanishes without warning.
+- **Never hand-edit the nav or the footer in a page.** Both are generated (the footer since 2.13.0). The nav is generated. Edit `PAGES` in `scripts/build-nav.py`, run the script, and commit the result. A hand edit survives until the next run and then vanishes without warning.
 - **Never bypass the pre-commit hook** with `--no-verify` except when the text genuinely requires the character it is blocking (a rule quoting itself). The hook exists because a previous audit found violations that a manual search had missed.
 - **Never claim the visualizer reacts to audio it cannot hear.** The claim is now true for the one same-origin track in `audio/`: `music.html` builds a real `AnalyserNode`, calls `createMediaElementSource` on the native player, and drives the lights from `getByteFrequencyData`. It is still false for the Mixcloud and YouTube embeds, whose audio is cross-origin and unreadable, and it is false on `file://`, where the page sets `canRouteAudio` false and shows a note saying so. Say "the track", never "the mixes". Tenet 6 applies to marketing copy first.
   > **Replaced in v2.9.9.** This entry previously read: "**Never claim in copy that the music visualizer reacts to the audio.** It does not, and Tenet 6 applies to marketing copy first." That was written before the native player shipped and had become the opposite of the truth, contradicting both the README and the External FAQ. A rule that forbids a true statement is worse than no rule.
@@ -2260,7 +2273,7 @@ Get-ChildItem *.html | Select-Object Name, Length | Sort-Object Length -Descendi
 
 3. **Open the changed page** and confirm the change renders. Open DevTools Console and confirm it is clean; zero console errors is the standard on every page.
 4. **Resize through both breakpoints.** Drag the window past 860 px to confirm the nav collapses and the hamburger opens, then past 600 px to confirm padding tightens. Use a 375 px device emulation for the mobile check.
-5. **If you touched the nav**, run `python tools/build-nav.py --check` and confirm it prints `nav is up to date in every page`. Then load two or three pages, including one not in the nav (`accounts.html`), and confirm the item list and active state look right.
+5. **If you touched the nav**, run `python scripts/build-nav.py --check` and confirm it prints `nav is up to date in every page`. Then load two or three pages, including one not in the nav (`accounts.html`), and confirm the item list and active state look right.
 6. **If you touched `projects.html`**, click every filter button and confirm the count in the section header matches the visible cards.
 7. **If you touched `music.html`**, watch it for a full 30-second cycle to confirm the mode auto-switch still works, click each visible mode button, and resize the window at least once to confirm `build()` re-lays the stage without artifacts.
 8. **If you added an external link**, click it.
@@ -2622,6 +2635,7 @@ Drafted by the 2026-10-01 audit from the core rule and the decisions, in priorit
 | D23 | Content | **Decided 2026-10-03 by the owner:** VIX Strategy is one page inside Indices & ETFs, at `/invests/indices/vix/` (2.15.1); Individual Stocks and Indices & ETFs are landing pages with cards, each with a Method page holding the moved sections word for word (2.15.0); the stock method has 12 metrics, and `check.py` keeps every page saying so (Q7); the FAQ has seven topic groups, headings only (S7, 2.15.3) |
 | D24 | Feature | **Decided 2026-10-05 by the owner:** a browser 9 Sig Calculator in Leveraged Strategies, after 9 Sig (2.16.0): data in localStorage only, Excel/CSV/JSON export, Import of its own files and outside sheets (inputs only, everything recalculated); numbers checked against the community 9-SIG sheet in `browser.py`. Plan: docs/9SIG-CALCULATOR.md |
 | D25 | Design | **Decided 2026-10-05 by the owner:** the site's colors follow the Template Interface Color Standard 1.0 (2.17.0): one `colors.css` of `--ti-color-*` roles, emerald accent at the standard's grades, success green for gains, white light canvas with a gray-blue surface; dark text colors one grade lighter (30) so they pass on tints |
+| D26 | Content | **Decided 2026-10-08 by the owner:** Azqato's Tools and Azqato's Prompts move into azqato.com at `/tools/` and `/prompts/` (item 22): Tools first; Tools' saved data (Markdown draft, Wash Sale log, bookmarks) starts empty here, with no notice; the prompts are written here from now on (`prompts/md/`) and the prompts repo is retired after the move; both take the site's colors; the prompts dashboard stays out. Built locally on branch `item-22-tools-prompts`; nothing rolls out and neither old repo changes until the owner has reviewed it working. Plan: docs/TOOLS-PROMPTS.md |
 
 ## Invests: Site map
 
@@ -2721,7 +2735,7 @@ Updates, newest first:
 
 **Update 2026-10-02, restructured (v1.1.0):** the sidebar groups are now Individual Stocks, Indices & ETFs, VIX Strategy, Leveraged Strategies and Resources (Site map), at new addresses, without redirects (author's decision: live about an hour). The D7 redirect list under Deprecation and Removal points at the new addresses.
 
-**Update 2026-10-02, live (azqato.github.io v2.11.0 to v2.11.1):** the author gave the go-ahead (D20) and the azqato.github.io repository was pushed. The site is live at https://azqato.com/invests/ and (GitHub Pages) azqato.github.io/invests/. What the merge added outside `invests/`: `invests.html` became a one-file redirect page to `invests/index.html`; a new `_redirects` sends `/invests` and `/invests.html` to `/invests/` with 301 on Cloudflare Pages (GitHub Pages ignores it); the nav (tools/build-nav.py), the Home explore card and the Links page button point at `invests/index.html`; sitemap.xml lists https://azqato.com/invests/ and robots.txt gained `Sitemap: https://azqato.com/invests/sitemap.xml`; the pre-commit hook skips `invests/inventory/`. Links use `index.html` explicitly so they also work from file://, where a folder link shows a directory listing. Post-deploy check (a comparison): the served page and asset files match the local copies byte for byte; /invests and /invests.html answer 301 to /invests/ in one hop; azqato.github.io/invests.html redirects; Home, the Screener and the VIX Dashboard load live data in both themes with no script errors. The separate local repository (`../invests`, last commit `9120a25`) is retired and will be deleted (Repository Hygiene). The working notes from the session that did this (an uncommitted HANDOVER.md) were moved into this document and deleted.
+**Update 2026-10-02, live (azqato.github.io v2.11.0 to v2.11.1):** the author gave the go-ahead (D20) and the azqato.github.io repository was pushed. The site is live at https://azqato.com/invests/ and (GitHub Pages) azqato.github.io/invests/. What the merge added outside `invests/`: `invests.html` became a one-file redirect page to `invests/index.html`; a new `_redirects` sends `/invests` and `/invests.html` to `/invests/` with 301 on Cloudflare Pages (GitHub Pages ignores it); the nav (scripts/build-nav.py), the Home explore card and the Links page button point at `invests/index.html`; sitemap.xml lists https://azqato.com/invests/ and robots.txt gained `Sitemap: https://azqato.com/invests/sitemap.xml`; the pre-commit hook skips `invests/inventory/`. Links use `index.html` explicitly so they also work from file://, where a folder link shows a directory listing. Post-deploy check (a comparison): the served page and asset files match the local copies byte for byte; /invests and /invests.html answer 301 to /invests/ in one hop; azqato.github.io/invests.html redirects; Home, the Screener and the VIX Dashboard load live data in both themes with no script errors. The separate local repository (`../invests`, last commit `9120a25`) is retired and will be deleted (Repository Hygiene). The working notes from the session that did this (an uncommitted HANDOVER.md) were moved into this document and deleted.
 
 **Update 2026-10-02, hosting decided (v0.18.0):** Question 18 answered with option D: the site merges into the azqato.github.io repository as an `invests/` folder, at https://azqato.com/invests/ (D21). Canonical links, og:url and sitemap.xml now use azqato.com's clean addresses (no .html). This repository's history was rewritten to remove the private project's name (Question 16). The files are committed to the main repository locally; nothing is pushed.
 
@@ -3233,9 +3247,9 @@ Runs after P10, whenever the author decides to clean out the old repos. Each rep
 
 #### P14. Fold invests into azqato.com's structure (later; design needed; ask first)
 
-**Done 2026-10-02 (main 2.14.0, build pass item 8).** The generator, checks and inventories moved from `invests/scripts/` and `invests/inventory/` to `tools/invests/` (the snapshots in `_sources/` moved with them and stay out of git). Run them as `python tools/invests/site.py`, `check.py` and `browser.py`; where this Part says `scripts/x.py`, read `tools/invests/x.py`. The pages and their addresses haven't changed. Invests already uses the shared palette and `/theme.js` (item 5). Its azqato.com strip now takes its links from `tools/build-nav.py`'s list, relative, so it opens from disk; its own bar (search, theme button) stays, because the strip is hidden on phones. These scripts were never pages, so the old file addresses get no redirects.
+**Done 2026-10-02 (main 2.14.0, build pass item 8).** The generator, checks and inventories moved from `invests/scripts/` and `invests/inventory/` to `scripts/invests/` (the snapshots in `_sources/` moved with them and stay out of git). Run them as `python scripts/invests/site.py`, `check.py` and `browser.py`; where this Part says `scripts/x.py`, read `scripts/invests/x.py`. The pages and their addresses haven't changed. Invests already uses the shared palette and `/theme.js` (item 5). Its azqato.com strip now takes its links from `scripts/build-nav.py`'s list, relative, so it opens from disk; its own bar (search, theme button) stays, because the strip is hidden on phones. These scripts were never pages, so the old file addresses get no redirects.
 
-**Docs part done 2026-10-02:** these docs merged into the main repository's docs (this PRD is Part 2 of docs/PRD.md; D22). The pages, generator and inventories haven't moved. The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `tools/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
+**Docs part done 2026-10-02:** these docs merged into the main repository's docs (this PRD is Part 2 of docs/PRD.md; D22). The pages, generator and inventories haven't moved. The author intends it but hasn't said how. Settle first: whether the invests pages adopt azqato.com's nav and styles.css or keep their own shell; where the generator, inventories and these docs live (for example `scripts/invests/` and `docs/invests/` in the main repository, so scripts aren't public addresses under /invests/; today `invests/scripts/`, `invests/docs/` and `invests/inventory/` are publicly reachable, and hold nothing private); and whether this PRD merges into the main repository's PRD. Every page address is public now, so any move needs redirects under the removal policy.
 
 #### P15. Adopt azqato.com's colors (added 2026-10-02, owner's request; ask first)
 
@@ -3499,7 +3513,7 @@ Set by the 2026-10-01 audit; no rule existed. Targets for a mobile Lighthouse ru
 
 None in this repo yet. Planned compromises, each with what the correct solution would be. **Audit 2026-10-02:** the azqato.com nav copy exists (`AZQATO_NAV` in scripts/site.py) and is the live drift risk; the Chart.js hash and the stocks fallback are done (P6); the rest stand.
 
-- **A copy of azqato.com's nav, if D9 stays.** It can drift from what tools/build-nav.py stamps onto azqato.com. Correct: generate it from the same page list, or drop D9.
+- **A copy of azqato.com's nav, if D9 stays.** It can drift from what scripts/build-nav.py stamps onto azqato.com. Correct: generate it from the same page list, or drop D9.
 - **The VIX reading depends on another site.** If azqato.github.io/vix stops serving data/vix.js, the reading falls back to a third-party relay. Correct: a feed this site can load directly, such as JSON with CORS headers published by the vix repo. That's a change to the vix repo, so it's the author's call.
 - **A third-party CORS relay (api.allorigins.win) for the VIX fallback.** It can disappear or return anything. Correct: nothing cheap; keep it as the fallback it is and treat its data as untrusted.
 - **Chart.js from a CDN without an integrity hash.** Correct: add a Subresource Integrity hash for 4.4.0, or serve a copy from this site (Question 12).
@@ -3958,8 +3972,8 @@ Written 2026-10-02 at the author's request, for Question 18 in PRD.md (where the
 ### Facts about azqato.github.io (read 2026-10-02)
 
 - Public repository; served by GitHub Pages at azqato.github.io and by a Cloudflare Pages build at azqato.com.
-- Root files: the site's pages (index, about, discord, invests, codes, music, links, projects, youtube, support, accounts, privacy-policy), styles.css, robots.txt, sitemap.xml, img/, audio/, docs/, tools/build-nav.py. No `_redirects` file.
-- tools/build-nav.py stamps the nav onto root-level `*.html` only (`root.glob('*.html')`), so files in a subfolder such as invests/ are left alone. invests.html is in its nav as "Invests".
+- Root files: the site's pages (index, about, discord, invests, codes, music, links, projects, youtube, support, accounts, privacy-policy), styles.css, robots.txt, sitemap.xml, img/, audio/, docs/, scripts/build-nav.py. No `_redirects` file.
+- scripts/build-nav.py stamps the nav onto root-level `*.html` only (`root.glob('*.html')`), so files in a subfolder such as invests/ are left alone. invests.html is in its nav as "Invests".
 - azqato.com answers /page.html with a redirect to /page (Cloudflare Pages behavior, Verification Environment).
 
 **Decided 2026-10-02: option D**, by the author: separate repositories were only for the first build and testing. At first everything sits in one `invests/` folder in the azqato.github.io repository, to be folded into the main site's structure later; this repository keeps its own history.
@@ -4135,7 +4149,7 @@ Exactly five documents: the README at root and four in `/docs`. No sixth file is
 1. When adding a page: add a row to the Site Structure table, the folder tree, and the public surface list in PRD.md, plus a PATCHNOTES entry, plus a README row if it changes what a visitor gets.
 2. When adding a component: document its pattern in DESIGN.md under Component Patterns.
 3. When a CSS value changes: update DESIGN.md in the same commit.
-4. When changing the nav or footer: edit `PAGES` (or `FOOTER_SITE`, `FOOTER_INVESTS`) in `tools/build-nav.py`, run `python tools/build-nav.py`, then update F3 in PRD.md and the Navigation Bar section in DESIGN.md. Never edit the nav inside a page.
+4. When changing the nav or footer: edit `PAGES` (or `FOOTER_SITE`, `FOOTER_INVESTS`) in `scripts/build-nav.py`, run `python scripts/build-nav.py`, then update F3 in PRD.md and the Navigation Bar section in DESIGN.md. Never edit the nav inside a page.
 5. When a roadmap milestone completes: move it in the milestone table and add a PATCHNOTES entry.
 6. When a third-party link changes (affiliate, Discord invite, Buy Me a Coffee, embed): update the relevant data model table and the Third-Party Integrations table, then add a PATCHNOTES entry.
 7. Never create a new `.md` file in `/docs`. The five-document set is closed. Add a section to PRD.md, DESIGN.md, or PATCHNOTES.md instead. `docs/TODO.md` is the one exception and it already exists; it holds open work and unresolved decisions, is not a reference document, and is never consolidated, merged, moved, or deleted. Nothing in it is an instruction to act on.

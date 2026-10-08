@@ -1,0 +1,376 @@
+"""Browser tests for the Azqato Invests site, in headless Microsoft Edge.
+
+Run from anywhere: python scripts/invests/browser.py [--shots DIR]
+Needs Python 3 with Playwright (pip install playwright) and Edge installed
+(Browser Testing in ../docs/PRD.md (Part 2): Edge, never Chrome). Serves the folder on a
+free local port from a thread, so no server is left running afterwards.
+Reads the site only; writes screenshots when --shots is given.
+
+Checks, in both themes: every page loads with no script errors and no failed
+same-site requests; text contrast meets WCAG AA; the shell works (skip link,
+drawer, search, theme button and its saved choice); the FAQ filter and answer
+links; the tools load live data; and each data feed's fallback works when the
+feed is blocked. Exits 1 if any check fails.
+"""
+import functools, http.server, importlib.util, pathlib, socketserver, sys, threading
+import re
+sys.stdout.reconfigure(encoding="utf-8")  # notes quote page text (for example ↻); Windows' console encoding can't print it
+sys.dont_write_bytecode = True
+from playwright.sync_api import sync_playwright
+
+# The site pages are in invests/ at the repository root; this folder
+# (scripts/invests/) holds the scripts, the source snapshots and the inventories
+# (build pass item 8, 2.14.0).
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parent.parent / "invests"
+# scripts/invests/site.py by path: "import site" would find Python's own site module.
+_spec = importlib.util.spec_from_file_location("site_builder", HERE / "site.py")
+_site = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_site)
+PAGES = _site.PAGES
+
+DESKTOP = {"width": 1280, "height": 900}
+PHONE = {"width": 390, "height": 844}
+fails, notes = [], []
+
+CONTRAST_JS = """
+() => {
+  function rgb(s) { const m = s.match(/[\\d.]+/g); return m ? m.map(Number) : [0,0,0,0]; }
+  function lum(c) { const a = c.slice(0,3).map(v => { v /= 255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); });
+    return 0.2126*a[0] + 0.7152*a[1] + 0.0722*a[2]; }
+  function blend(top, bottom) { const a = top[3] === undefined ? 1 : top[3];
+    return [0,1,2].map(i => top[i]*a + bottom[i]*(1-a)).concat([1]); }
+  function bg(el) {
+    const layers = [];
+    for (let e = el; e; e = e.parentElement) {
+      const cs = getComputedStyle(e);
+      if (cs.backgroundImage !== 'none' && !cs.backgroundImage.startsWith('linear-gradient')) return null;
+      const c = rgb(cs.backgroundColor);
+      if (c[3] === undefined) c[3] = 1;
+      if (c[3] > 0) { layers.push(c); if (c[3] >= 1) break; }
+    }
+    let out = [255,255,255,1];
+    if (layers.length && layers[layers.length-1][3] >= 1) out = layers.pop();
+    while (layers.length) out = blend(layers.pop(), out);
+    return out;
+  }
+  const bad = [];
+  const seen = new Set();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let n;
+  while ((n = walker.nextNode())) {
+    if (!n.textContent.trim()) continue;
+    const el = n.parentElement;
+    if (!el || seen.has(el)) continue;
+    seen.add(el);
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height || el.closest('[hidden], dialog:not([open]), .pp-vh, .visually-hidden, .sr-only, .site-skip, [aria-hidden="true"]')) continue;
+    const cs = getComputedStyle(el);
+    if (cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) continue;
+    const b = bg(el);
+    if (!b) continue;
+    const f = blend(rgb(cs.color), b);
+    const l1 = lum(f), l2 = lum(b);
+    const ratio = (Math.max(l1,l2)+0.05) / (Math.min(l1,l2)+0.05);
+    const size = parseFloat(cs.fontSize), weight = parseInt(cs.fontWeight, 10);
+    const large = size >= 24 || (size >= 18.66 && weight >= 700);
+    const need = large ? 3 : 4.5;
+    if (ratio < need) bad.push({ text: n.textContent.trim().slice(0, 40), cls: (el.className && el.className.baseVal === undefined ? el.className : el.tagName), ratio: Math.round(ratio*100)/100, need: need, color: cs.color });
+  }
+  return bad;
+}
+"""
+
+
+class Quiet(http.server.SimpleHTTPRequestHandler):
+    def log_message(self, *args):
+        pass
+
+
+def serve():
+    # The whole main site, with Invests at /invests/ as on azqato.com: the pages
+    # load the site's shared theme.js from one level up (build pass item 5).
+    handler = functools.partial(Quiet, directory=str(ROOT.parent))
+    httpd = socketserver.ThreadingTCPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    return httpd, f"http://127.0.0.1:{httpd.server_address[1]}/invests/"
+
+
+def watch(page, base, errors):
+    page.on("pageerror", lambda e: errors.append(f"script error: {e}"))
+    page.on("console", lambda m: errors.append(f"console {m.type}: {m.text}") if m.type == "error" else None)
+    page.on("requestfailed", lambda r: errors.append(f"request failed: {r.url}") if r.url.startswith(base) else None)
+    page.on("response", lambda r: errors.append(f"HTTP {r.status}: {r.url}") if r.url.startswith(base) and r.status >= 400 else None)
+
+
+def fail(msg):
+    fails.append(msg)
+    print("FAIL:", msg, flush=True)
+
+
+def load(ctx, base, path, theme, size, shots=None, wait=2500, blocked=False):
+    """Open a page; with blocked=True, errors from feeds the test blocks are expected."""
+    page = ctx.new_page()
+    page.set_viewport_size(size)
+    errors = []
+    watch(page, base, errors)
+    page.add_init_script(f"try {{ localStorage.setItem('azqato-theme', '{theme}'); }} catch (e) {{}}")
+    page.goto(base + path, wait_until="load")
+    page.wait_for_timeout(wait)
+    if page.evaluate("document.documentElement.getAttribute('data-theme')") != theme:
+        fail(f"{path} [{theme}]: theme not applied")
+    for e in errors:
+        if blocked and ("Failed to load resource" in e or "allorigins" in e):
+            continue
+        fail(f"{path} [{theme} {size['width']}px]: {e}")
+    sx = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
+    if sx > 1:
+        fail(f"{path} [{theme} {size['width']}px]: page scrolls sideways by {sx}px")
+    if shots:
+        page.screenshot(path=str(pathlib.Path(shots) / f"{path.replace('/', '_')[:-5]}-{theme}-{size['width']}.png"), full_page=False)
+    return page
+
+
+def contrast(page, label):
+    bad = page.evaluate(CONTRAST_JS)
+    seen = set()
+    for b in bad:
+        key = (b["cls"], b["color"])
+        if key in seen:
+            continue
+        seen.add(key)
+        fail(f"{label}: contrast {b['ratio']} (needs {b['need']}) for {b['text']!r} [{b['cls']}, {b['color']}]")
+
+
+def shell_tests(ctx, base):
+    page = ctx.new_page()
+    page.set_viewport_size(PHONE)
+    errors = []
+    watch(page, base, errors)
+    page.goto(base + "stocks/philosophy.html")
+    page.keyboard.press("Tab")
+    if page.evaluate("document.activeElement.className") != "site-skip":
+        fail("skip link: not the first thing Tab reaches")
+    page.keyboard.press("Enter")
+    if page.evaluate("document.activeElement.id") != "pp-main":
+        notes.append("skip link: focus didn't land on main (the address changed to #pp-main)")
+    page.click("#pp-menu-btn")
+    page.wait_for_timeout(300)
+    if page.get_attribute("#pp-menu-btn", "aria-expanded") != "true" or page.evaluate("document.activeElement.id") != "pp-nav-close":
+        fail("drawer: didn't open with focus on its close button")
+    page.keyboard.press("Escape")
+    page.wait_for_timeout(300)
+    if page.get_attribute("#pp-menu-btn", "aria-expanded") != "false" or page.evaluate("document.activeElement.id") != "pp-menu-btn":
+        fail("drawer: Escape didn't close it and return focus to the menu button")
+    page.set_viewport_size(DESKTOP)
+    page.keyboard.press("/")
+    page.wait_for_timeout(800)
+    if not page.evaluate("document.getElementById('pp-search').open"):
+        fail("search: / didn't open it")
+    page.keyboard.type("PEG")
+    page.wait_for_timeout(400)
+    n = page.locator("#pp-results li").count()
+    if not n:
+        fail("search: no results for PEG")
+    with page.expect_navigation():
+        page.keyboard.press("Enter")
+    page.wait_for_timeout(500)
+    if "philosophy.html" in page.url and "#" not in page.url:
+        fail("search: Enter didn't open a result")
+    page.keyboard.press("Control+k")
+    page.wait_for_timeout(500)
+    if not page.evaluate("document.getElementById('pp-search').open"):
+        fail("search: Ctrl+K didn't open it")
+    page.keyboard.press("Escape")
+    for title in ("Screener", "HFEA", "Curated resources", "Seeking Alpha setup guide"):
+        page.keyboard.press("Control+k")
+        page.wait_for_timeout(300)
+        page.fill("#pp-search-input", title)
+        page.wait_for_timeout(300)
+        crumbs = page.locator("#pp-results .pp-r-crumb").all_inner_texts()
+        if not any(c.endswith(title) for c in crumbs):
+            fail(f"search: {title!r} doesn't find its page")
+        page.keyboard.press("Escape")
+    before = page.evaluate("document.documentElement.getAttribute('data-theme')")
+    page.click(".theme-toggle")
+    after = page.evaluate("document.documentElement.getAttribute('data-theme')")
+    label = page.get_attribute(".theme-toggle", "aria-label")
+    page.reload()
+    kept = page.evaluate("document.documentElement.getAttribute('data-theme')")
+    if before == after or kept != after or ("light" if after == "dark" else "dark") not in label:
+        fail(f"theme button: {before} -> {after}, after reload {kept}, label {label!r}")
+    page.goto(base + "resources/faq.html")
+    page.fill("#faq-filter", "palantir")
+    page.wait_for_timeout(500)
+    shown = page.locator(".accordion-item:not([hidden])").count()
+    if not 0 < shown < 37:
+        fail(f"FAQ filter: {shown} questions shown for 'palantir'")
+    page.goto(base + "resources/faq.html#answer-nosell")
+    page.wait_for_timeout(800)
+    if page.get_attribute("[aria-controls='answer-nosell']", "aria-expanded") != "true":
+        fail("FAQ: a link to an answer didn't open it")
+    for e in errors:
+        fail(f"shell tests: {e}")
+    page.close()
+
+
+def tool_tests(ctx, base):
+    p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, wait=6000)
+    rows = p.locator("table tbody tr").count()
+    as_of = p.inner_text("#asOf")
+    print(f"screener: {rows} table rows; {as_of}", flush=True)
+    if rows < 10 or "no data" in as_of:
+        fail(f"screener: data didn't load ({rows} rows, {as_of!r})")
+    notes.append(f"screener shows: {as_of}")
+    p.close()
+    p = load(ctx, base, "indices/market.html", "dark", DESKTOP, wait=6000)
+    txt = p.inner_text("#pp-article")
+    print("market:", txt[:200].replace("\n", " "), flush=True)
+    notes.append("market overview: " + " ".join(txt.split())[:160])
+    p.close()
+    # One VIX page since 2.13.6 (build pass item 12): the strategy, the Dashboard
+    # (#dashboard) and the Custom builder (#custom, its ids prefixed "custom-").
+    for path in ("indices/vix/index.html",):
+        p = load(ctx, base, path, "dark", DESKTOP, wait=5000)
+        for sel in ("#vix-value", "#custom-vix-value"):
+            v = p.inner_text(sel).strip()
+            if not re.match(r"^\d+\.\d\d$", v):
+                fail(f"{path}: {sel} shows {v!r}, not a reading")
+        for cv in ("allocationChart", "custom-allocationChart"):
+            if not p.evaluate(f"!!(window.Chart && Chart.getChart('{cv}'))"):
+                fail(f"{path}: chart {cv} didn't draw")
+        rows = p.evaluate("[document.querySelectorAll('#allocation-tbody tr').length, document.querySelectorAll('#custom-allocation-tbody tr').length]")
+        if min(rows) < 1:
+            fail(f"{path}: allocation tables {rows}")
+        notes.append(f"{path}: readings {p.inner_text('#vix-value')} / {p.inner_text('#custom-vix-value')}; table rows {rows}")
+        data = p.evaluate("JSON.stringify(window.__VIX_DATA__ || null)")
+        cached = p.evaluate("localStorage.getItem('vix_last_known')")
+        print(f"{path}: __VIX_DATA__ {data}; cache {cached}", flush=True)
+        if not data or data == "null":
+            fail(f"{path}: the VIX feed didn't load")
+        notes.append(f"{path}: VIX feed {data}")
+        p.close()
+
+
+# The 9 Sig Calculator's numbers, checked against the community 9-SIG sheet
+# (docs/9SIG-CALCULATOR.md): rounds 0 to 3 of its 300,000 / 200,000 example.
+SIG_SETTINGS = {"stock": 300000, "bond": 200000, "contribution": 3000, "target": 0.09, "throttle": 0.10,
+                "stockTicker": "TQQQ", "bondTicker": "AGG"}
+SIG_QUARTERS = [("2017-01-31", 6.14, 108.29), ("2017-03-31", 8.00, 108.49),
+                ("2017-06-30", 8.14, 109.51), ("2017-09-29", 9.52, 109.59)]
+SIG_GOLDEN = [(1846, 96.66, 500000.00), (2448, 165.16, 594248.68), (2245, 79.44, 605494.39), (2519, 149.12, 669632.18)]
+
+
+def calculator_tests(ctx, base):
+    path = "leveraged/9sig-calculator.html"
+    p = load(ctx, base, path, "light", DESKTOP, wait=800)
+    qs = [{"date": d, "price": a, "bondPrice": b, "command": "auto"} for d, a, b in SIG_QUARTERS]
+    out = p.evaluate("([s, q]) => SigEngine.compute(s, q).rows.map(r => [r.bondShares, +r.cash.toFixed(2), +r.total.toFixed(2), r.signal])", [SIG_SETTINGS, qs])
+    for i, (got, want) in enumerate(zip(out, SIG_GOLDEN)):
+        if got[0] != want[0] or abs(got[1] - want[1]) > 0.011 or abs(got[2] - want[2]) > 0.011:
+            fail(f"calculator round {i}: got {got[:3]}, the sheet has {list(want)}")
+    if abs(out[3][3] - 393425.85) > 0.011:
+        fail(f"calculator round 3 signal line {out[3][3]:.2f}, the sheet has 393425.85")
+    # The page itself: fill settings and quarters through the form.
+    for k in ("stock", "bond", "contribution"):
+        p.fill(f"#sc-{k}", str(SIG_SETTINGS[k]))
+    for d, a, b in SIG_QUARTERS:
+        p.fill("#sc-date", d); p.fill("#sc-price", str(a)); p.fill("#sc-bond-price", str(b))
+        p.click("#sc-add-btn")
+    rows = p.locator("#sc-table tbody tr").count()
+    tiles = p.inner_text("#sc-tiles")
+    if rows != 4 or "$669,632" not in tiles:
+        fail(f"calculator page: {rows} table rows; tiles {tiles[:80]!r}")
+    if p.locator("#sc-charts svg").count() < 4:
+        fail("calculator page: charts didn't draw")
+    # Export to Excel, then import it back as a new plan: the totals must match.
+    with p.expect_download() as dl:
+        p.click("#sc-export-xlsx")
+    f = dl.value.path()
+    p.set_input_files("#sc-import-file", files=[{"name": "round-trip.xlsx", "mimeType": "application/octet-stream", "buffer": pathlib.Path(f).read_bytes()}])
+    p.wait_for_selector("#sc-import-go", timeout=5000)
+    p.click("#sc-import-go")
+    p.wait_for_timeout(300)
+    plans = p.locator("#sc-plan option").count()
+    tiles2 = p.inner_text("#sc-tiles")
+    if plans != 2 or "$669,632" not in tiles2:
+        fail(f"calculator import round trip: {plans} plans; tiles {tiles2[:80]!r}")
+    p.reload(); p.wait_for_timeout(500)
+    if p.locator("#sc-plan option").count() != 2:
+        fail("calculator: plans not kept in localStorage after a reload")
+    notes.append(f"calculator: golden rounds 0-3 match; page, export and import round trip ok ({tiles2.split(chr(10))[1] if chr(10) in tiles2 else tiles2[:30]})")
+    p.close()
+
+
+def fallback_tests(browser, base):
+    # Screener: block raw GitHub; the fallback at azqato.github.io/stocks/data/ should serve.
+    ctx = browser.new_context()
+    ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
+    p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, blocked=True, wait=8000)
+    rows = p.locator("table tbody tr").count()
+    as_of = p.inner_text("#asOf")
+    print(f"screener with raw GitHub blocked: {rows} rows; {as_of}", flush=True)
+    if rows < 10:
+        fail(f"screener fallback: no data with raw GitHub blocked ({as_of!r})")
+    p.close()
+    # Market Overview with raw GitHub blocked.
+    p = load(ctx, base, "indices/market.html", "dark", DESKTOP, blocked=True, wait=8000)
+    notes.append("market overview, raw GitHub blocked: " + " ".join(p.inner_text("#pp-article").split())[:160])
+    p.close()
+    ctx.close()
+    # VIX: block the vix.js feed; vix.js falls back to vix.json on raw GitHub, then the cache.
+    ctx = browser.new_context()
+    ctx.route("https://azqato.github.io/vix/data/vix.js*", lambda r: r.abort())
+    p = load(ctx, base, "indices/vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
+    notes.append("VIX dashboard, feed blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
+    p.close()
+    ctx.close()
+    # Everything blocked, nothing cached: the source's error state should show.
+    ctx = browser.new_context()
+    ctx.route("https://azqato.github.io/**", lambda r: r.abort())
+    ctx.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
+    ctx.route("https://api.allorigins.win/**", lambda r: r.abort())
+    p = load(ctx, base, "indices/vix/index.html", "dark", DESKTOP, blocked=True, wait=12000)
+    notes.append("VIX dashboard, all feeds blocked: " + " ".join(p.inner_text("#vix-feed").split())[:200])
+    p.close()
+    p = load(ctx, base, "stocks/screener.html", "dark", DESKTOP, blocked=True, wait=8000)
+    notes.append("screener, all feeds blocked: " + p.inner_text("#asOf"))
+    p.close()
+    ctx.close()
+
+
+def main():
+    shots = None
+    if "--shots" in sys.argv:
+        shots = sys.argv[sys.argv.index("--shots") + 1]
+        pathlib.Path(shots).mkdir(parents=True, exist_ok=True)
+    httpd, base = serve()
+    expected_feed_errors = ("allorigins", "ERR_FAILED", "net::")
+    try:
+        with sync_playwright() as pw:
+            browser = pw.chromium.launch(channel="msedge", headless=True)
+            ctx = browser.new_context()
+            for path, *_ in PAGES:
+                for theme in ("light", "dark"):
+                    for size in (DESKTOP, PHONE):
+                        p = load(ctx, base, path, theme, size, shots if size is DESKTOP or path in ("index.html", "stocks/screener.html", "stocks/metrics.html") else None)
+                        if size is DESKTOP:
+                            contrast(p, f"{path} [{theme}]")
+                        p.close()
+                print("checked", path, flush=True)
+            shell_tests(ctx, base)
+            tool_tests(ctx, base)
+            calculator_tests(browser.new_context(accept_downloads=True), base)
+            ctx.close()
+            fallback_tests(browser, base)
+            browser.close()
+    finally:
+        httpd.shutdown()
+    for n in notes:
+        print("note:", n)
+    print(f"{len(fails)} failure(s), {len(notes)} note(s)")
+    sys.exit(1 if fails else 0)
+
+
+if __name__ == "__main__":
+    main()

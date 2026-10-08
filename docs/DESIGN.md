@@ -211,7 +211,7 @@ Grids are otherwise fluid rather than breakpoint-driven. They use `repeat(auto-f
 - **No external links in the top-level nav.** Every item in `.nav-links` must resolve to a page on azqato.github.io (or a relative link on the current page). Links to other properties (GitHub, sibling project sites not hosted in this repo) belong on the page itself (a card, a footer credit, a button) rather than in the persistent top-level nav.
 - Current nav order, identical in all 12 pages: **Home, About, Discord, Invests, Codes, Music, Links, Projects, YouTube, Support** (10 items).
 - `accounts.html` and `privacy-policy.html` carry the same nav but are not themselves in it. They are reached from `index.html`'s explore grid and from `links.html`.
-- **The nav markup is generated. Do not hand-edit it.** As of v2.8.8 the block between `<!-- NAV -->` and `</nav>` in every page is stamped by `tools/build-nav.py`. To change the nav, edit the `PAGES` list in that script and run it, then update this section and F3 in PRD.md. A hand edit inside a page survives only until the next run. The active state is applied by the script from each file's own name, so `class="active"` is no longer maintained by hand either.
+- **The nav markup is generated. Do not hand-edit it.** As of v2.8.8 the block between `<!-- NAV -->` and `</nav>` in every page is stamped by `scripts/build-nav.py`. To change the nav, edit the `PAGES` list in that script and run it, then update this section and F3 in PRD.md. A hand edit inside a page survives only until the next run. The active state is applied by the script from each file's own name, so `class="active"` is no longer maintained by hand either.
 
 ### Footer
 
@@ -219,7 +219,7 @@ Grids are otherwise fluid rather than breakpoint-driven. They use `repeat(auto-f
 - Content is one line on every page: `Built by <a href="https://azqato.com/">Azqato</a>.`
 - `music.html` is the exception: its footer is nested inside `.mode-controls`, has a transparent background, and wraps its text in a blurred dark pill so it stays readable over the visualizer.
 
-**Replaced in 2.13.0 (build pass, item 6).** The footer is now `.site-footer`, stamped into all 12 pages by `tools/build-nav.py` between `<!-- FOOTER -->` and `</footer>`, styled after the Azqato Invests footer:
+**Replaced in 2.13.0 (build pass, item 6).** The footer is now `.site-footer`, stamped into all 12 pages by `scripts/build-nav.py` between `<!-- FOOTER -->` and `</footer>`, styled after the Azqato Invests footer:
 - A `--surface` panel with a `--border` top line, `0.875rem`, `--text-muted`; inner width `1100px` like the nav.
 - The `Azqato.` brand, then a `<nav aria-label="Footer">` with two rows of plain links: every site page (the ten nav pages plus Gaming Accounts and Privacy Policy) and Azqato Invests' five sections. The current page's link is marked `aria-current="page"` and shown in `--accent`.
 - `© 2026 Azqato` on its own line. The financial-advice line stays on Invests' own footer.
@@ -499,7 +499,7 @@ Added 2026-10-02 (2.13.1, build pass item 21), from the owner's answers. Each pa
 
 The Invests sections take their section's emoji: Individual Stocks 📈, Indices & ETFs 📊, VIX Strategy ⚡, Leveraged Strategies 🚀, Resources 📚.
 
-The top bar shows a section brand on that section's pages: "🎧 Azqato Music" on `music.html`, "💻 Azqato Codes" on `codes.html` and "💰 Azqato Invests" on the Invests pages. Every other page shows "Azqato.". Page titles are unchanged. The root pages' icons and brands are stamped by `tools/build-nav.py` (`ICONS`, `BRANDS`); the Invests icons come from `invests/scripts/site.py` (`GROUP_ICONS`). Never edit either by hand.
+The top bar shows a section brand on that section's pages: "🎧 Azqato Music" on `music.html`, "💻 Azqato Codes" on `codes.html` and "💰 Azqato Invests" on the Invests pages. Every other page shows "Azqato.". Page titles are unchanged. The root pages' icons and brands are stamped by `scripts/build-nav.py` (`ICONS`, `BRANDS`); the Invests icons come from `invests/scripts/site.py` (`GROUP_ICONS`). Never edit either by hand.
 
 ---
 
@@ -773,7 +773,7 @@ D8 borrows help-center's searchable FAQ and step-by-step guides, admin-dashboard
 
 #### Theme button
 
-**Moved 2026-10-03 (2.14.2, owner's request):** on every page except the home page, the theme button sits in the second bar, which matches Invests: the page's emoji and name (for example "💻 Azqato Codes"), "Search the site" (`/search.js`, which searches every root page and every Invests section through `/search-index.js`; both are written by `tools/build-nav.py`) and the theme button. The top bar shows only "Azqato." and the links, and scrolls away while the second bar stays. The home page keeps one bar, with the theme button at its end. The music page's second bar has no button (it stays dark).
+**Moved 2026-10-03 (2.14.2, owner's request):** on every page except the home page, the theme button sits in the second bar, which matches Invests: the page's emoji and name (for example "💻 Azqato Codes"), "Search the site" (`/search.js`, which searches every root page and every Invests section through `/search-index.js`; both are written by `scripts/build-nav.py`) and the theme button. The top bar shows only "Azqato." and the links, and scrolls away while the second bar stays. The home page keeps one bar, with the theme button at its end. The music page's second bar has no button (it stays dark).
 
 **Moved 2026-10-02 (2.13.7):** the script is now `/theme.js`, shared by every page on azqato.com and Invests. The saved choice is under `azqato-theme` (Invests' old `azqato-invests-theme` still counts). On the root pages the button sits at the end of the slim top bar, beside ☰ on phones.
 
@@ -851,7 +851,7 @@ The site map in the PRD lists every page and its source.
 - Tool pages drop the "On this page" column so the screener's table gets the full width.
 - The template's demo-only parts come out: the API keys button, API status line, code-language tabs and the page-feedback form, which needs a server. They belong to the template, not the sources, so the core rule doesn't cover them.
 - None of the 21 templates has a dark mode, so the dark theme is built on top of the template's shared color tokens. (Superseded: documentation-site gained its own dark mode at commit ed840da, which this site uses; see How the two themes fit together.)
-- If D9 stays: azqato.com is dark-only today (background `#0d1117`, accent `#00d4a0`), so its nav needs a light version for this site's light mode. azqato.com's pages get the nav from `tools/build-nav.py`, which only reaches pages in the azqato.github.io repo, so this site would carry its own copy of the nav, with links pointing back to azqato.com.
+- If D9 stays: azqato.com is dark-only today (background `#0d1117`, accent `#00d4a0`), so its nav needs a light version for this site's light mode. azqato.com's pages get the nav from `scripts/build-nav.py`, which only reaches pages in the azqato.github.io repo, so this site would carry its own copy of the nav, with links pointing back to azqato.com.
 - The 💰 favicon uses the same inline-SVG emoji technique azqato.com uses for its 🦁.
 
 ### Template ratings
@@ -1266,6 +1266,6 @@ Why a control rather than a hard freeze: WCAG 2.2.2 (Pause Stop Hide, Level A) r
 1. Reuse an existing component pattern before inventing a new one. Most new sections are a grid of one of the six card types already documented above.
 2. New shared colors go in `styles.css` as a token. A color used by exactly one page goes in that page's inline `:root`. A one-off brand tint may stay an inline `rgba()`.
 3. Keep the `1100px` max width and the `2rem` / `1.25rem` horizontal padding pair. A section that sets its own width will visibly fail to line up with the nav.
-4. Never hand-edit the nav in a page. Since v2.8.8 it is generated: add the page to `PAGES` in `tools/build-nav.py`, run the script, and commit the result. The script stamps the block between the `<!-- NAV -->` marker and `</nav>` in every root-level page and sets `class="active"` itself. A hand edit survives until the next run and then vanishes without warning. Verify with `python tools/build-nav.py --check`.
+4. Never hand-edit the nav in a page. Since v2.8.8 it is generated: add the page to `PAGES` in `scripts/build-nav.py`, run the script, and commit the result. The script stamps the block between the `<!-- NAV -->` marker and `</nav>` in every root-level page and sets `class="active"` itself. A hand edit survives until the next run and then vanishes without warning. Verify with `python scripts/build-nav.py --check`.
 5. When a CSS value changes in the source, update the matching row in this document in the same commit. That rule predates this audit and is the reason the design system is still legible.
 6. Match the existing dark palette. ~~There is no light theme and none is planned.~~ **Replaced 2026-10-02 (2.13.7):** every page has a light and a dark theme from one palette (One palette for the whole site); build new parts in both and check their contrast in both. (**2026-10-02:** true for the 12 root pages. Azqato Invests has both themes, and the PRD's Future updates bring its theme button to the whole site; PRD Documentation Versus Reality 39.)

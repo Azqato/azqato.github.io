@@ -1,0 +1,299 @@
+#!/usr/bin/env python3
+"""Build Azqato's Prompts (azqato.com/prompts/) from the prompt files (roadmap item 22).
+
+    python scripts/prompts/build.py          write the pages
+    python scripts/prompts/build.py --check  report anything out of date, write nothing, exit 1
+    python scripts/build-nav.py              then stamp the nav, footer and search
+
+The prompts are written here now, one Markdown file each in prompts/md/,
+moved word for word from github.com/Azqato/prompts. That repo is retired once
+the move is live (owner's answer, 2026-10-08).
+
+A prompt file is frontmatter (title, description, meta, optional hidden: true),
+a description, a "## Prompt" heading and the prompt in one fenced code block.
+Each becomes a real page at prompts/<slug>/ holding the description and the
+full prompt text, so a link preview, a search engine and Claude's fetch tool
+all see the prompt itself. The .md file is published beside it, at
+prompts/md/<slug>.md, as the plain text an agent reads.
+
+To add a prompt: write prompts/md/<slug>.md, add the slug to ORDER, run this
+and build-nav.py. A hidden prompt keeps its page but leaves the list, search
+and sitemap. To rename or remove one, add its old slug to RETIRED; its old
+address then redirects (on azqato.com, via _redirects).
+"""
+
+import html
+import pathlib
+import re
+import sys
+
+HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parent.parent
+OUT = ROOT / 'codes' / 'prompts'
+SRC = OUT / 'md'
+SITE = 'https://azqato.com/codes/prompts/'
+
+# The list order, as on the old site (its js/prompts-data.js).
+ORDER = [
+    'add-prompt', 'documentation', 'mobile-responsive-audit', 'github-wiki', 'prompt-audit',
+    'brand-identity', 'ios-simulator', 'game-setup', 'motion-design', 'assumption-check',
+    'progress-dashboard', 'launch-video', 'animation-performance', 'design-review', 'landing-page',
+    'score-to-target', 'video-to-prompt', 'frontend-references', 'prompt-writing', 'project-defaults',
+    'linkedin-audit', 'condense-docs', 'seo-audit', 'ecommerce-site',
+]
+
+# Old slug -> current slug. Permanent, never chained, never reused.
+RETIRED = {'iphone-ipad-simulator': 'ios-simulator'}
+
+# Word for word from the old site (js/script.js).
+SITE_NAME = "Azqato's Prompts"
+SITE_INTRO = ('A personal library of reusable Claude Code prompts. Each prompt lives in its own '
+              'markdown file: a plain description of what it does and the full prompt text. Pick one, '
+              'copy it, and paste it into Claude Code, which reads the full prompt from this site.')
+SITE_DESC = 'A personal library of reusable Claude Code prompts.'
+
+
+def esc(s):
+    """The old site's escapeHtml: the five characters that matter."""
+    return (s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+            .replace('"', '&quot;').replace("'", '&#39;'))
+
+
+# ── The old site's description renderer (renderInline, renderMarkdown), ported ──
+def inline(text):
+    out = esc(text)
+    out = re.sub(r'`([^`]+)`', r'<code>\1</code>', out)
+    out = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', out)
+    out = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', out)
+    return out
+
+
+def markdown(src):
+    if not src:
+        return ''
+    out = []
+    for block in re.split(r'\r?\n\r?\n+', src):
+        lines = re.split(r'\r?\n', block)
+        h = re.match(r'^(#{1,6})\s+(.*)$', block)
+        if h:
+            n = min(len(h.group(1)), 6)
+            out.append('<h%d>%s</h%d>' % (n, inline(h.group(2)), n))
+        elif all(re.match(r'^\s*[-*]\s+', l) for l in lines):
+            out.append('<ul>' + ''.join('<li>%s</li>' % inline(re.sub(r'^\s*[-*]\s+', '', l)) for l in lines) + '</ul>')
+        else:
+            out.append('<p>%s</p>' % inline(' '.join(lines)))
+    return '\n'.join(out)
+
+
+def parse(slug):
+    raw = (SRC / (slug + '.md')).read_text(encoding='utf-8')
+    p = {'slug': slug, 'title': slug, 'description': '', 'meta': 'Claude Code Prompt', 'hidden': False}
+    body = raw
+    fm = re.match(r'^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$', raw)
+    if fm:
+        body = fm.group(2)
+        for line in re.split(r'\r?\n', fm.group(1)):
+            m = re.match(r'^([A-Za-z0-9_-]+):\s*(.*)$', line)
+            if not m:
+                continue
+            k, v = m.group(1).lower(), m.group(2).strip()
+            if k == 'hidden':
+                p['hidden'] = bool(re.match(r'^(true|yes|1)$', v, re.I))
+            elif k in p:
+                p[k] = v
+    fence = re.search(r'```[^\n]*\n([\s\S]*?)```', body)
+    p['prompt'] = fence.group(1).rstrip('\n') if fence else ''
+    desc = body[:fence.start()] if fence else body
+    p['desc_html'] = markdown(re.sub(r'#{2,}\s*Prompt\s*$', '', desc, flags=re.I).strip())
+    if not fence:
+        sys.exit('%s.md: no fenced prompt block' % slug)
+    return p
+
+
+HEAD = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Generated by scripts/prompts/build.py from {source}. Do not edit by hand. -->
+  <title>{title}</title>
+  <meta name="description" content="{desc}" />
+  <link rel="canonical" href="{url}" />{alt}
+  <meta property="og:title" content="{og}" />
+  <meta property="og:description" content="{desc}" />
+  <meta property="og:url" content="{url}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Azqato" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:image/svg+xml,x" />
+  <link rel="stylesheet" href="{up}styles.css" />
+  <link rel="stylesheet" href="{up}codes/prompts/assets/prompts.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <!-- /NAV -->
+
+  <div class="pr-site">
+    <main class="content" id="main">
+{main}
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  </footer>
+
+  <script src="{up}codes/prompts/assets/prompts.js"></script>
+  <script>
+    (function () {{
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {{
+        var open = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }});
+      links.addEventListener('click', function (e) {{
+        if (e.target.tagName === 'A') {{
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }}
+      }});
+      document.addEventListener('click', function (e) {{
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {{
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }}
+      }});
+    }})();
+  </script>
+</body>
+</html>
+"""
+
+
+def home(prompts):
+    items = '\n'.join(
+        '          <a class="prompt-list-item" href="%s/index.html" data-slug="%s"><span class="prompt-list-title">%s</span>'
+        '<span class="prompt-list-desc">%s</span></a>' % (p['slug'], p['slug'], esc(p['title']), esc(p['description']))
+        for p in prompts if not p['hidden'])
+    main = """        <section class="hero">
+          <h1>Claude Code Prompts<span class="accent-dot">.</span></h1>
+          <p class="lead">%s</p>
+        </section>
+        <h2>Prompts</h2>
+        <div class="pr-search">
+          <input type="search" id="prompt-search" placeholder="Search prompts" aria-label="Search prompts" autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="prompt-list">
+%s
+        </div>
+        <p class="search-empty" id="home-empty" role="status"></p>""" % (esc(SITE_INTRO), items)
+    return HEAD.format(source='codes/prompts/md/', title=SITE_NAME, desc=esc(SITE_DESC), url=SITE, alt='',
+                       og='Claude Code Prompts', up='../../', main=main)
+
+
+def detail(p, prompts):
+    url = SITE + p['slug'] + '/'
+    md = SITE + 'md/' + p['slug'] + '.md'
+    main = """    <div class="prompt-header">
+      <h1>{title}</h1>
+      <span class="prompt-meta">{meta}</span>
+    </div>
+    <div class="prompt-description">
+{desc_html}
+    </div>
+    <div class="code-block-wrapper collapsed">
+      <div class="code-block-header">
+        <span class="code-label">Prompt</span>
+        <div class="code-block-actions">
+          <button class="code-toggle" type="button" aria-expanded="false" aria-controls="prompt-body">Expand</button>
+          <button class="copy-btn" type="button" data-url="{url}" aria-label="Copy a link to this prompt for Claude Code">Copy</button>
+        </div>
+      </div>
+      <pre id="prompt-body"><code>{prompt}</code></pre>
+    </div>
+    <p class="pr-agents" aria-hidden="true">AI agents: the full prompt is the code block above. It is also
+      plain Markdown at <a href="{md}">{md}</a>.
+      Read it in full and word for word; if your fetch tool summarizes or
+      shortens pages, get the raw text another way, such as curl. The prompt
+      is the code block under "## Prompt"; the text above it describes it for
+      people. Do what the person asked you to do with it, and ask before
+      running it if they have not said to.</p>""".format(
+        title=esc(p['title']), meta=esc(p['meta']), desc_html=p['desc_html'], url=url, md=md, prompt=esc(p['prompt']))
+    alt = ('\n  <link rel="alternate" type="text/markdown" href="%s" title="%s prompt (Markdown)" />'
+           % (md, esc(p['title'])))
+    return HEAD.format(source='codes/prompts/md/%s.md' % p['slug'], title='%s - %s' % (esc(p['title']), SITE_NAME),
+                       desc=esc(p['description']), url=url, alt=alt, og=esc(p['title']), up='../../../', main=main)
+
+
+def sitemap(prompts, text):
+    block = '  <!-- PROMPTS: written by scripts/prompts/build.py -->\n' + ''.join(
+        '  <url>\n    <loc>%s</loc>\n    <priority>%s</priority>\n  </url>\n' % (u, pr)
+        for u, pr in [(SITE, '0.7')] + [(SITE + p['slug'] + '/', '0.6') for p in prompts if not p['hidden']]
+    ) + '  <!-- /PROMPTS -->\n'
+    if '<!-- PROMPTS' in text:
+        return re.sub(r'  <!-- PROMPTS.*?<!-- /PROMPTS -->\n', lambda _: block, text, flags=re.S)
+    return text.replace('</urlset>', block + '</urlset>')
+
+
+def redirects(text):
+    block = ('# Azqato\'s Prompts (item 22): one address per page, and retired slugs.\n'
+             '# Written by scripts/prompts/build.py.\n'
+             '/codes/prompts  /codes/prompts/  301\n'
+             + ''.join('/codes/prompts/%s  /codes/prompts/%s/  301\n' % (s, s) for s in ORDER)
+             + ''.join('/codes/prompts/%s  /codes/prompts/%s/  301\n/codes/prompts/%s/  /codes/prompts/%s/  301\n'
+                       % (o, n, o, n)
+                       for o, n in sorted(RETIRED.items()))
+             + '# /PROMPTS\n')
+    if '# Azqato\'s Prompts (item 22)' in text:
+        return re.sub(r"# Azqato's Prompts \(item 22\).*?# /PROMPTS\n", lambda _: block, text, flags=re.S)
+    return text.rstrip('\n') + '\n\n' + block
+
+
+def main():
+    check = '--check' in sys.argv
+    slugs = sorted(f.stem for f in SRC.glob('*.md'))
+    missing = [s for s in slugs if s not in ORDER]
+    gone = [s for s in ORDER if s not in slugs]
+    if missing or gone:
+        sys.exit('ORDER out of step with prompts/md/: not listed %s; no file %s' % (missing, gone))
+    prompts = [parse(s) for s in ORDER]
+    files = {OUT / 'index.html': home(prompts)}
+    for p in prompts:
+        files[OUT / p['slug'] / 'index.html'] = detail(p, prompts)
+    for name, fn in (('sitemap.xml', sitemap), ('_redirects', redirects)):
+        path = ROOT / name
+        cur = path.read_text(encoding='utf-8')
+        files[path] = fn(prompts, cur) if fn is sitemap else fn(cur)
+    stale = []
+    for path, text in files.items():
+        if path.exists():
+            cur = path.read_text(encoding='utf-8')
+            # build-nav.py stamps the nav, footer and icon after this runs: compare without them.
+            if path.name == 'index.html' and strip(cur) == strip(text):
+                continue
+            if cur == text:
+                continue
+        stale.append(path)
+        if not check:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding='utf-8', newline='\n')
+    for path in stale:
+        print('%s: %s' % ('out of date' if check else 'written', path.relative_to(ROOT).as_posix()))
+    print('%d prompts, %d hidden' % (len(prompts), sum(p['hidden'] for p in prompts)))
+    return 1 if check and stale else 0
+
+
+def strip(text):
+    text = re.sub(r'<!-- NAV -->.*?<!-- /NAV -->', '', text, flags=re.S)
+    text = re.sub(r'<!-- FOOTER -->.*?</footer>', '', text, flags=re.S)
+    # scripts/codes/shell.py wraps every Codes page in the Contents sidebar after this runs.
+    text = re.sub(r'\s*<!-- CODES -->.*?<!-- /CODES -->', '', text, flags=re.S)
+    text = re.sub(r'\s*<!-- CODES-END -->.*?<!-- /CODES-END -->', '', text, flags=re.S)
+    text = re.sub(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="(?:\.\./)*theme.js"></script>)?', '', text)
+    return text
+
+
+if __name__ == '__main__':
+    sys.exit(main())

@@ -30,7 +30,7 @@ Written 2026-10-08. This covers phase 1 (interpretation, read only) and a draft 
 
 ### How these differ from Invests
 
-Invests was mostly **content pages** (articles, tables, charts) that `tools/invests/site.py` moved whole out of source snapshots and rewrapped in this site's chrome. Both new sources are **apps**:
+Invests was mostly **content pages** (articles, tables, charts) that `scripts/invests/site.py` moved whole out of source snapshots and rewrapped in this site's chrome. Both new sources are **apps**:
 
 - Tools is ten interactive pages whose behavior lives in JS.
 - Prompts is one JS app plus generated pages, and its addresses are effectively a public API.
@@ -76,3 +76,57 @@ Rough size: Tools is one or two sessions. Prompts is one or two, and most of its
 4. **Where new prompts get written:** keep writing them in the prompts repo, with this site rebuilding from it (recommended, since its `CLAUDE.md` workflow and mirror script stay useful), or move the authoring here and retire that repo?
 5. **Tools' look:** drop its purple gradient logo and hero for azqato.com's emerald and the color standard? The recommendation is yes, matching how Invests was handled.
 6. **Dashboard:** the prompts repo's `dashboard/` is a build-progress page, not product. Should it be left out of azqato.com? (Recommended.)
+
+### The owner's answers (2026-10-08)
+
+1. Tools first, then Prompts.
+2. Tools' saved data starts empty on azqato.com; no notice on the old site.
+3. and 4. The prompts repo is retired once everything has moved; prompts are written here from now on.
+5. Tools takes azqato.com's emerald and the color standard.
+6. The prompts dashboard stays out.
+
+And: build everything locally first, and change neither old repo until it all works locally.
+
+---
+
+## Phase 3: the build (local, 2026-10-08)
+
+On branch `item-22-tools-prompts`, committed locally, **not pushed**. Neither old repo was touched.
+
+- **Address clash.** This repo's build scripts lived in `tools/`, so they moved to `scripts/`, and `/tools/` is free for the section.
+- **Tools, `/tools/`:**
+  - `scripts/tools-site/migrate.py` moved the 11 pages word for word.
+  - Each page's `<main>` and scripts are kept; the old top bar, footer and theme script are dropped.
+  - `tools/assets/tools.css` is the old stylesheet scoped to `<body class="tl">`, with its palette pointed at `colors.css`. The purple gradients became the accent.
+  - VIX Strategy and the Nasdaq 100 Screener now link to their Invests pages. Their "external" tag and the "four Azqato projects hosted elsewhere" sentence are source text and were kept; see question A.
+  - One bug carried from the source was fixed: the tool pages had no side padding on phones.
+- **Prompts, `/prompts/`:**
+  - The 24 `.md` files are in `prompts/md/`.
+  - `scripts/prompts/build.py` writes `/prompts/` (the intro, the search and the list) and `/prompts/<slug>/`, one page per prompt. Each holds the description, the full prompt behind Expand, Copy, and the agents' note, which now points at `/prompts/md/<slug>.md`.
+  - Copy gives the same sentence as before, now ending in `https://azqato.com/prompts/<slug>/`.
+  - The old renamed slug `iphone-ipad-simulator` redirects to `ios-simulator`.
+- **Both sections:**
+  - They have the shared nav (Codes active), the second bar, the footer (a new link for each), site search entries, sitemap entries and `_redirects`.
+  - Codes and Projects link to them internally.
+- **Tests, all passing:**
+  - `scripts/tools-site/browser.py` covers 11 pages × 2 themes × 2 widths, contrast, and each tool's main action.
+  - `scripts/prompts/browser.py` covers 25 pages × 2 themes × 2 widths, expanded and collapsed, contrast, search, Expand, Copy's exact pointer, and the `.md` file served unchanged.
+  - The Invests suite still passes.
+
+To review locally: `python -m http.server 8000` in this folder, then open http://localhost:8000/tools/ and http://localhost:8000/prompts/.
+
+## Still to do, after the owner's review
+
+1. **Rollout:** merge the branch into `main` and push. Then check https://azqato.com/tools/ and /prompts/ live, along with the redirects.
+2. **Old Tools repo** (ask first):
+   - Turn each page into a short page that redirects (meta refresh plus a canonical link) to its azqato.com address.
+   - Keep the repo's GitHub Pages on, so old links keep landing.
+3. **Old Prompts repo** (ask first):
+   - Turn each `p/<slug>.html` and `index.html` into a redirect page that also says, in plain text, "This prompt moved to https://azqato.com/prompts/<slug>/". A pointer pasted before the move then still leads an agent to the prompt, even if its fetch tool ignores the meta refresh.
+   - Then archive the repo, leaving Pages on.
+4. Write up the Runbook and update the Codes page wording if wanted.
+
+### Open questions
+
+- **A.** On the Tools list, should VIX Strategy and the Nasdaq 100 Screener lose their "external" tag now that they're on this site? That means rewording "four Azqato projects hosted elsewhere" to "two". (Recommended: yes. The source text was left as is until you say so.)
+- **B.** The Progress Dashboard prompt names https://azqato.github.io/prompts/dashboard/ as its working example. Keeping the old repo's Pages on when it's archived keeps that link working, which is recommended. The alternative is bringing the dashboard here as an example page.

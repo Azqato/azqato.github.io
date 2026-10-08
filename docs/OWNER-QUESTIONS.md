@@ -52,7 +52,7 @@ Written 2026-10-03, at the end of the 2026-10-02 build pass (main 2.13.1 to 2.14
 - The combined VIX page (2.13.6). `azqato.com/invests/vix/dashboard.html` still shows the old separate page there, so nothing is broken yet.
 - The light theme, the new top bar and the shared `theme.js` (2.13.7).
 - Clean addresses (2.13.8). This one matters most: the sitemap, canonical tags and Invests' top bar on GitHub Pages already point at `azqato.com/about/` and the like, and those addresses don't exist on azqato.com until it deploys. Links from azqato.github.io's Invests pages to azqato.com's root pages lead to a 404 until then.
-- `music/viz.js` (2.13.9), the move to `tools/invests/` (2.14.0) and the SEO drafts (2.14.1).
+- `music/viz.js` (2.13.9), the move to `scripts/invests/` (2.14.0) and the SEO drafts (2.14.1).
 
 **What I can see from here.** GitHub records each Cloudflare build as a check called "Workers Builds: azqato":
 
@@ -242,4 +242,4 @@ The automated review is done and clean (all 21 pages, desktop and phone, light a
 
 ## Saved for later (no answer needed now)
 
-- **15d, smoke-test script:** a local `tools/smoke.py` (no GitHub Action) that opens all pages in Edge in both themes, at desktop and phone widths, and fails on errors. Saved for later at your request (2026-10-02). It's listed here only so it isn't forgotten.
+- **15d, smoke-test script:** a local `scripts/smoke.py` (no GitHub Action) that opens all pages in Edge in both themes, at desktop and phone widths, and fails on errors. Saved for later at your request (2026-10-02). It's listed here only so it isn't forgotten.

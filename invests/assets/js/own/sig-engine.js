@@ -1,6 +1,6 @@
 /*
  * Azqato Invests: the Signal plan calculator's engine (9 Sig, also 3 and 6).
- * Pure functions, no page access, so tools/invests/browser.py can test the
+ * Pure functions, no page access, so scripts/invests/browser.py can test the
  * numbers on their own. The rules are the ones published on this site's 9 Sig
  * page (invests/leveraged/9sig.html); docs/9SIG-CALCULATOR.md explains each.
  *

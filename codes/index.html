@@ -154,6 +154,7 @@
       .section { padding: 1.5rem 1.25rem 3rem; }
     }
   </style>
+  <link rel="stylesheet" href="../codes/assets/codes.css" />
 </head>
 <body>
 
@@ -191,6 +192,16 @@
   </div>
   <script src="../search.js" defer></script>
   <!-- /NAV -->
+  <!-- CODES -->
+  <div class="cd-shell">
+  <button class="cd-menu-btn" id="cd-menu-btn" type="button" aria-expanded="false" aria-controls="cd-nav">Contents</button>
+  <nav class="cd-sidebar" id="cd-nav" aria-label="Codes sections">
+    <div class="cd-group"><ul><li><a href="index.html" aria-current="page">Home</a></li></ul></div>
+    <details class="cd-group"><summary class="cd-group-label" id="cd-g-prompts">Prompts</summary><ul aria-labelledby="cd-g-prompts"><li><a href="prompts/index.html">Overview</a></li><li><a href="prompts/add-prompt/index.html">Add Prompt</a></li><li><a href="prompts/documentation/index.html">Documentation</a></li><li><a href="prompts/mobile-responsive-audit/index.html">Mobile Audit</a></li><li><a href="prompts/github-wiki/index.html">GitHub Wiki</a></li><li><a href="prompts/prompt-audit/index.html">Prompt Audit</a></li><li><a href="prompts/brand-identity/index.html">Brand Identity</a></li><li><a href="prompts/ios-simulator/index.html">iOS Simulator</a></li><li><a href="prompts/game-setup/index.html">Game Setup</a></li><li><a href="prompts/motion-design/index.html">Motion Design</a></li><li><a href="prompts/assumption-check/index.html">Assumption Check</a></li><li><a href="prompts/progress-dashboard/index.html">Progress Dashboard</a></li><li><a href="prompts/launch-video/index.html">Launch Video</a></li><li><a href="prompts/animation-performance/index.html">Animation Performance</a></li><li><a href="prompts/design-review/index.html">Design Review</a></li><li><a href="prompts/landing-page/index.html">Landing Page</a></li><li><a href="prompts/score-to-target/index.html">Score to Target</a></li><li><a href="prompts/video-to-prompt/index.html">Video to Prompt</a></li><li><a href="prompts/frontend-references/index.html">Frontend References</a></li><li><a href="prompts/prompt-writing/index.html">Prompt Writing</a></li><li><a href="prompts/project-defaults/index.html">Project Defaults</a></li><li><a href="prompts/linkedin-audit/index.html">LinkedIn Audit</a></li><li><a href="prompts/condense-docs/index.html">Condense Docs</a></li><li><a href="prompts/seo-audit/index.html">SEO Audit</a></li><li><a href="prompts/ecommerce-site/index.html">E-commerce Site</a></li></ul></details>
+    <details class="cd-group"><summary class="cd-group-label" id="cd-g-tools">Tools</summary><ul aria-labelledby="cd-g-tools"><li><a href="tools/index.html">Overview</a></li><li><a href="tools/markdown-preview/index.html">Markdown Editor</a></li><li><a href="tools/favicon-downloader/index.html">Favicon Downloader</a></li><li><a href="tools/link-cleaner/index.html">Link Cleaner</a></li><li><a href="tools/character-counter/index.html">Character Counter</a></li><li><a href="tools/wash-sale-tracker/index.html">Wash Sale Tracker</a></li><li><a href="tools/bookmark-manager/index.html">Bookmark Manager</a></li><li><a href="tools/base64-encoder/index.html">Base64 Encoder</a></li><li><a href="tools/json-formatter/index.html">JSON Formatter</a></li><li><a href="tools/password-generator/index.html">Password Generator</a></li><li><a href="tools/timestamp-converter/index.html">Timestamp Converter</a></li></ul></details>
+  </nav>
+  <div class="cd-main">
+  <!-- /CODES -->
 
   <!-- HERO -->
   <section class="hero">
@@ -207,13 +218,13 @@
 
     <div class="project-grid">
 
-      <a class="project-card" href="https://azqato.github.io/prompts/" target="_blank" rel="noopener">
+      <a class="project-card" href="prompts/index.html">
         <span class="project-icon">💬</span>
         <h3>Prompts <span class="arrow">→</span></h3>
         <p>A personal library of reusable Claude Code prompts.</p>
       </a>
 
-      <a class="project-card" href="https://azqato.github.io/tools/" target="_blank" rel="noopener">
+      <a class="project-card" href="tools/index.html">
         <span class="project-icon">🛠️</span>
         <h3>Tools <span class="arrow">→</span></h3>
         <p>Free, browser-based utilities: favicon downloader, link cleaner, markdown preview, and more.</p>
@@ -227,6 +238,21 @@
 
     </div>
   </section>
+
+  <!-- CODES-END -->
+  <nav class="cd-pager" aria-label="Previous and next page"><a class="cd-pager-link cd-pager-link--next" href="prompts/index.html"><small>Next</small><span>Prompts</span></a></nav>
+  </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('cd-menu-btn'), nav = document.getElementById('cd-nav');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+  <!-- /CODES-END -->
 
   <!-- FOOTER -->
   <footer class="site-footer">
@@ -244,6 +270,8 @@
           <li><a href="../projects/index.html">Projects</a></li>
           <li><a href="../youtube/index.html">YouTube</a></li>
           <li><a href="../support/index.html">Support</a></li>
+          <li><a href="../codes/tools/index.html">Azqato's Tools</a></li>
+          <li><a href="../codes/prompts/index.html">Azqato's Prompts</a></li>
           <li><a href="../accounts/index.html">Gaming Accounts</a></li>
           <li><a href="../privacy-policy/index.html">Privacy Policy</a></li>
         </ul>

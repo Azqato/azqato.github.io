@@ -1,0 +1,1228 @@
+/* Azqato's Tools on azqato.com (item 22). Generated from the old repo's
+   css/style.css by scripts/tools-site/migrate.py: its rules, scoped to
+   <body class="tl">, with its palette pointed at colors.css. */
+
+/* As on the old site, the page sits a step back from its cards: a soft gray
+   page with white cards in light, a dark page with lighter cards in dark. */
+.tl {
+  --tl-page: var(--ti-color-surface);
+  --bg-elev: var(--ti-color-canvas);
+  --bg-inset: var(--ti-color-hover);
+  --border: var(--ti-color-border);
+  --border-strong: var(--ti-color-border-strong);
+  --text: var(--ti-color-text);
+  --text-soft: var(--ti-color-text-muted);
+  --text-faint: var(--ti-color-text-muted);
+  --accent: var(--ti-color-accent);
+  --accent-hover: var(--ti-color-accent-hover);
+  --accent-soft: var(--ti-color-accent-muted);
+  --success: var(--ti-color-success);
+  --danger: var(--ti-color-danger);
+  --shadow: 0 1px 2px rgba(16, 22, 32, .06), 0 8px 24px rgba(16, 22, 32, .06);
+  --shadow-sm: 0 1px 2px rgba(16, 22, 32, .08);
+  --radius: 14px;
+  --radius-sm: 9px;
+  --maxw: 1100px;
+  --mono: "SF Mono", "JetBrains Mono", "Cascadia Code", ui-monospace, Menlo,
+    Consolas, monospace;
+}
+/* The site's reset (styles.css) zeroes every margin and padding; the tools
+   were written against the browser's defaults, so they get those back. Zero
+   specificity, so any spacing a tool sets still wins. */
+.tl main :where(p, h1, h2, h3, h4, ul, ol, dl, dd, figure, blockquote, pre, fieldset, table) { margin: revert; }
+.tl main :where(ul, ol, fieldset, legend) { padding: revert; }
+.tl { accent-color: var(--ti-color-accent); }
+[data-theme="dark"] .tl {
+  --tl-page: var(--ti-color-canvas);
+  --bg-elev: var(--ti-color-surface);
+  --bg-inset: var(--ti-color-canvas);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .35);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+}
+
+body.tl { background: var(--tl-page); }
+.tl main * { box-sizing: border-box; }
+
+
+
+
+
+.tl main a { color: var(--accent); text-decoration: none; }
+.tl main a:hover { text-decoration: underline; }
+
+.tl .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+/* ---- Top bar -------------------------------------------------------------- */
+
+
+
+
+
+
+.tl .spacer { flex: 1; }
+
+
+
+
+.tl .icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: .15s ease;
+}
+.tl .icon-btn:hover { color: var(--text); border-color: var(--border-strong); }
+.tl .icon-btn svg { width: 18px; height: 18px; }
+.tl .icon-btn .moon { display: none; }
+[data-theme="dark"] .tl .icon-btn .sun { display: none; }
+[data-theme="dark"] .tl .icon-btn .moon { display: block; }
+
+/* ---- Buttons -------------------------------------------------------------- */
+.tl .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  color: var(--text);
+  cursor: pointer;
+  transition: .15s ease;
+  white-space: nowrap;
+}
+.tl .btn:hover { border-color: var(--border-strong); text-decoration: none; }
+.tl .btn:active { transform: translateY(1px); }
+.tl .btn svg { width: 16px; height: 16px; }
+.tl .btn.primary {
+  background: var(--ti-color-accent-bg);
+  border-color: var(--ti-color-accent-bg);
+  color: var(--ti-color-on-accent);
+}
+.tl .btn.primary:hover { background: var(--ti-color-accent-hover); border-color: var(--ti-color-accent-hover); }
+.tl .btn.ghost { background: transparent; }
+.tl .btn:disabled { opacity: .5; cursor: not-allowed; }
+.tl .btn.sm { padding: 7px 12px; font-size: .85rem; }
+
+/* ---- Generic surfaces ----------------------------------------------------- */
+.tl .card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.tl .field {
+  width: 100%;
+  font-family: inherit;
+  font-size: .95rem;
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  transition: .15s ease;
+}
+.tl .field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.tl main textarea.field { resize: vertical; line-height: 1.55; }
+
+/* .lbl is element-agnostic on purpose. A <label> is only correct when it names
+   a form control; a read-only output pane needs the same look without the
+   semantics, so it uses <p class="lbl">. */
+.tl .lbl {
+  display: block;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin: 0 0 7px;
+  letter-spacing: .01em;
+}
+
+/* Visible to screen readers, invisible on screen. Used where a control's
+   purpose is obvious in the layout but has no on-screen text to point at. */
+.tl .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Page scaffold -------------------------------------------------------- */
+.tl .page { padding-top: 34px; padding-bottom: 70px; }
+.tl .page-head { margin-bottom: 26px; }
+.tl .page-head .crumb {
+  font-size: .85rem;
+  color: var(--text-faint);
+  margin-bottom: 10px;
+}
+.tl .page-head h1 {
+  margin: 0 0 8px;
+  font-size: 1.9rem;
+  letter-spacing: -.025em;
+}
+.tl .page-head p { margin: 0; color: var(--text-soft); max-width: 65ch; }
+
+.tl .toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--text);
+  color: var(--tl-page);
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-size: .9rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s ease;
+  z-index: 100;
+}
+.tl .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- Footer --------------------------------------------------------------- */
+
+
+
+
+/* ==========================================================================
+   Landing page
+   ========================================================================== */
+.tl .hero { padding: 64px 0 40px; text-align: center; }
+.tl .hero .eyebrow {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.tl .hero h1 {
+  margin: 0 auto 16px;
+  font-size: clamp(2.1rem, 5vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  max-width: 16ch;
+}
+.tl .hero h1 .grad {
+  color: var(--accent);
+}
+.tl .hero p {
+  margin: 0 auto;
+  max-width: 56ch;
+  color: var(--text-soft);
+  font-size: 1.12rem;
+}
+.tl .hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  justify-content: center;
+  margin-top: 26px;
+  color: var(--text-soft);
+  font-size: .9rem;
+  font-weight: 500;
+}
+.tl .hero-badges span { display: inline-flex; align-items: center; gap: 7px; }
+.tl .hero-badges svg { width: 16px; height: 16px; color: var(--success); }
+
+/* The about section and the tools lead were inline `style` attributes until
+   v1.4.1. They are classes now for the reason the rest of the file exists: an
+   inline style cannot respond to a breakpoint or a theme, and it is invisible to
+   anyone reading the stylesheet to find out how the page is built. */
+.tl .about { padding: 60px 0; }
+.tl .about-card {
+  padding: 30px 32px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.tl .about-card .section-label { margin-top: 0; }
+.tl .about-card p {
+  margin: 0 0 12px;
+  color: var(--text-soft);
+}
+.tl .about-card p:last-child { margin-bottom: 0; }
+/* Scoped to .about-card on purpose: `.about-card p` above is (0,1,1) and would
+   otherwise win the colour, leaving this rule silently half-applied. */
+.tl .about-card .about-note {
+  margin: 18px 0 0;
+  font-size: .88rem;
+  color: var(--text-faint);
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.tl .tools-lead {
+  margin: -6px 0 18px;
+  color: var(--text-soft);
+  font-size: .92rem;
+  max-width: 60ch;
+}
+
+.tl .tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+  padding-bottom: 30px;
+}
+.tl .tool-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: .18s ease;
+  color: var(--text);
+}
+.tl .tool-card:hover {
+  text-decoration: none;
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow);
+}
+.tl .tool-card .ticon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.tl .tool-card .ticon svg { width: 24px; height: 24px; }
+.tl .tool-card h3 { margin: 0 0 6px; font-size: 1.12rem; letter-spacing: -.02em; }
+.tl .tool-card h3 .ext-tag {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 999px;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.tl .tool-card p { margin: 0; color: var(--text-soft); font-size: .92rem; flex: 1; }
+.tl .tool-card .go {
+  margin-top: 18px;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tl .tool-card:hover .go { gap: 10px; }
+.tl .tool-card .go svg { width: 15px; height: 15px; transition: .15s ease; }
+
+.tl .section-label {
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin: 10px 0 18px;
+}
+
+/* ==========================================================================
+   Tool: Markdown Editor
+   ========================================================================== */
+.tl .md-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.tl .md-toolbar .grp {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  background: var(--bg-inset);
+  border-radius: 10px;
+}
+.tl .md-tool {
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-family: inherit;
+  font-size: .85rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: .12s ease;
+}
+.tl .md-tool:hover { background: var(--bg-elev); color: var(--text); }
+
+.tl .md-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  min-height: 540px;
+}
+.tl .md-pane {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-elev);
+}
+.tl .md-pane .pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  background: var(--bg-inset);
+  border-bottom: 1px solid var(--border);
+}
+.tl #md-input {
+  flex: 1;
+  border: none;
+  resize: none;
+  padding: 18px;
+  font-family: var(--mono);
+  font-size: .9rem;
+  line-height: 1.6;
+  background: transparent;
+  color: var(--text);
+}
+/* The native outline is dropped because the textarea runs edge to edge inside
+   its pane and an outline would sit half outside it. An inset ring in the same
+   --accent-soft the .field focus state uses replaces it, so the indicator is
+   never removed without a substitute. */
+.tl #md-input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--accent-soft); }
+.tl .md-preview {
+  flex: 1;
+  padding: 22px 24px;
+  overflow-y: auto;
+}
+
+/* rendered markdown */
+.tl .md-body { color: var(--text); word-wrap: break-word; }
+.tl .md-body > *:first-child { margin-top: 0; }
+.tl .md-body h1,
+.tl .md-body h2,
+.tl .md-body h3,
+.tl .md-body h4,
+.tl .md-body h5,
+.tl .md-body h6 {
+  margin: 1.5em 0 .6em; line-height: 1.25; letter-spacing: -.02em;
+}
+.tl .md-body h1 { font-size: 1.8em; padding-bottom: .3em; border-bottom: 1px solid var(--border); }
+.tl .md-body h2 { font-size: 1.45em; padding-bottom: .3em; border-bottom: 1px solid var(--border); }
+.tl .md-body h3 { font-size: 1.2em; }
+.tl .md-body p { margin: 0 0 1em; }
+.tl .md-body a { text-decoration: underline; }
+.tl .md-body ul,
+.tl .md-body ol { margin: 0 0 1em; padding-left: 1.6em; }
+.tl .md-body li { margin: .25em 0; }
+.tl .md-body blockquote {
+  margin: 0 0 1em;
+  padding: .2em 1em;
+  border-left: 4px solid var(--border-strong);
+  color: var(--text-soft);
+}
+.tl .md-body code {
+  font-family: var(--mono);
+  font-size: .88em;
+  background: var(--bg-inset);
+  padding: .15em .4em;
+  border-radius: 5px;
+}
+.tl .md-body pre {
+  background: var(--bg-inset);
+  padding: 14px 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin: 0 0 1em;
+}
+.tl .md-body pre code { background: none; padding: 0; font-size: .85em; }
+.tl .md-body hr { border: none; border-top: 1px solid var(--border); margin: 1.5em 0; }
+.tl .md-body img { max-width: 100%; border-radius: 8px; }
+.tl .md-body table { border-collapse: collapse; width: 100%; margin: 0 0 1em; }
+.tl .md-body th,
+.tl .md-body td { border: 1px solid var(--border); padding: 7px 12px; text-align: left; }
+.tl .md-body th { background: var(--bg-inset); font-weight: 700; }
+.tl .md-body input[type="checkbox"] { margin-right: 6px; }
+
+/* ==========================================================================
+   Tool: Favicon Downloader
+   ========================================================================== */
+.tl .input-row { display: flex; gap: 10px; }
+.tl .input-row .field { flex: 1; }
+@media (max-width: 560px) { .tl .input-row { flex-direction: column; } }
+
+.tl .fav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+}
+.tl .fav-item {
+  text-align: center;
+  padding: 20px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+}
+.tl .fav-item .thumb {
+  height: 84px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+.tl .fav-item .thumb img {
+  image-rendering: -webkit-optimize-contrast;
+  border-radius: 6px;
+  max-height: 84px;
+  max-width: 100%;
+}
+.tl .fav-item .sz { font-weight: 700; font-size: .95rem; }
+.tl .fav-item .src { font-size: .76rem; color: var(--text-faint); margin-bottom: 12px; }
+
+.tl .empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-faint);
+}
+.tl .empty svg { width: 46px; height: 46px; opacity: .5; margin-bottom: 12px; }
+
+/* ==========================================================================
+   Tool: Link Cleaner
+   ========================================================================== */
+.tl .lc-result {
+  margin-top: 22px;
+  display: none;
+}
+.tl .lc-result.show { display: block; }
+.tl .lc-out {
+  font-family: var(--mono);
+  font-size: .92rem;
+  word-break: break-all;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  color: var(--text);
+}
+.tl .lc-removed {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tl .chip {
+  font-family: var(--mono);
+  font-size: .8rem;
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  color: var(--danger);
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+.tl .chip.kept {
+  background: var(--bg-inset);
+  color: var(--text-soft);
+  border-color: var(--border);
+}
+.tl .stat-line {
+  margin-top: 14px;
+  font-size: .88rem;
+  color: var(--text-soft);
+}
+.tl .stat-line b { color: var(--text); }
+
+/* ==========================================================================
+   Tool: Character Counter
+   ========================================================================== */
+.tl #cc-input {
+  font-family: var(--mono);
+  font-size: .9rem;
+  min-height: 190px;
+}
+
+.tl .cc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.tl .cc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+.tl .cc-stat {
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+}
+.tl .cc-stat .n {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+}
+.tl .cc-stat .l {
+  margin-top: 4px;
+  font-size: .82rem;
+  color: var(--text-soft);
+}
+.tl .cc-stat.time { background: var(--bg-inset); }
+.tl .cc-stat.time .n { font-size: 1.25rem; color: var(--accent); }
+
+.tl .cc-note {
+  margin: 14px 0 0;
+  font-size: .85rem;
+  color: var(--text-soft);
+  max-width: 65ch;
+}
+
+.tl .cc-limits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px 22px;
+  padding-bottom: 10px;
+}
+.tl .cc-limit-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: .87rem;
+  color: var(--text-soft);
+  margin-bottom: 7px;
+}
+.tl .cc-limit-head .c { font-weight: 600; color: var(--text); }
+.tl .cc-limit.over .cc-limit-head .c { color: var(--danger); }
+.tl .cc-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.tl .cc-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: .15s ease;
+}
+.tl .cc-limit.over .cc-fill { background: var(--danger); }
+
+@media (max-width: 760px) {
+  .tl .md-split { grid-template-columns: 1fr; min-height: 0; }
+  .tl #md-input { min-height: 280px; }
+  .tl .md-preview { min-height: 280px; }
+  
+  /* Paired with .hide-sm above: the links leave, the button arrives. Editing
+     one without the other strands the navigation. */
+  
+}
+
+/* ---- Wash Sale Tracker ---------------------------------------------------- */
+.tl .ws-form {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.tl .ws-field { flex: 1 1 190px; min-width: 0; }
+.tl .ws-field .field { width: 100%; }
+/* The native date control sizes itself from its own text and ignores width on
+   some engines unless min-width is cleared first. */
+.tl main input[type="date"].field { min-width: 0; }
+
+.tl .ws-note {
+  margin: 0 0 26px;
+  font-size: .85rem;
+  color: var(--text-faint);
+}
+
+.tl .ws-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tl .ws-head .section-label { margin-bottom: 0; }
+.tl .ws-head .count {
+  font-size: .82rem;
+  color: var(--text-faint);
+}
+.tl .ws-head .spacer { flex: 1; }
+
+.tl .ws-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 30px;
+  font-size: .92rem;
+}
+.tl .ws-table th {
+  text-align: left;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding: 0 12px 9px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.tl .ws-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-soft);
+}
+.tl .ws-table tr:last-child td { border-bottom: none; }
+.tl .ws-table .tk {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: .02em;
+}
+.tl .ws-table .num { white-space: nowrap; }
+.tl .ws-table .act { text-align: right; width: 1%; }
+
+/* Days left doubles as the urgency signal, so it is the only coloured thing in
+   the table. Under a week is amber, the last two days are the danger token. */
+.tl .ws-pill {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 700;
+  background: var(--bg-inset);
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+.tl .ws-pill.soon { background: var(--ti-color-warning-muted); color: var(--ti-color-warning); }
+.tl .ws-pill.now { background: var(--ti-color-danger-muted); color: var(--ti-color-danger); }
+
+.tl .ws-x {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-faint);
+  padding: 4px;
+  border-radius: 6px;
+  line-height: 0;
+  transition: .15s ease;
+}
+.tl .ws-x:hover { color: var(--danger); background: var(--bg-inset); }
+.tl .ws-x svg { width: 15px; height: 15px; }
+
+.tl .ws-empty {
+  padding: 26px 4px 34px;
+  color: var(--text-faint);
+  font-size: .92rem;
+}
+
+.tl .ws-legal {
+  margin: 34px 0 0;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-inset);
+  color: var(--text-soft);
+  font-size: .85rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .tl .ws-table .hide-xs { display: none; }
+}
+
+/* ---- Bookmark Manager ----------------------------------------------------- */
+.tl .bm-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.tl .bm-bar .spacer { flex: 1; }
+.tl .bm-search { position: relative; flex: 1 1 240px; max-width: 340px; }
+.tl .bm-search .field { padding-left: 38px; }
+.tl .bm-search svg {
+  position: absolute;
+  left: 12px; top: 50%;
+  width: 16px; height: 16px;
+  margin-top: -8px;
+  color: var(--text-faint);
+  pointer-events: none;
+}
+.tl .bm-stats {
+  margin: 0 0 18px;
+  font-size: .86rem;
+  color: var(--text-faint);
+}
+
+.tl .bm-tree { margin-bottom: 30px; }
+.tl .bm-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+}
+.tl .bm-row:hover { background: var(--bg-inset); }
+.tl .bm-row .grip { flex: 1; display: flex; gap: 8px; align-items: center; min-width: 0; }
+
+.tl .bm-fold {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  color: var(--text);
+  text-align: left;
+  padding: 0;
+  min-width: 0;
+}
+.tl .bm-fold .caret { transition: .15s ease; color: var(--text-faint); flex: none; }
+.tl .bm-fold[aria-expanded="true"] .caret { transform: rotate(90deg); }
+.tl .bm-fold svg { width: 15px; height: 15px; }
+.tl .bm-fold .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tl .bm-fold .c { font-weight: 500; font-size: .82rem; color: var(--text-faint); flex: none; }
+
+.tl .bm-kids {
+  margin-left: 11px;
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+}
+
+/* Editing happens in place, so the fields are invisible until touched. They
+   are real inputs at all times, which is what makes edit-in-place possible
+   without a modal or an edit mode. */
+.tl .bm-inp {
+  font-family: inherit;
+  font-size: .9rem;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 4px 7px;
+  min-width: 0;
+  transition: .15s ease;
+}
+.tl .bm-inp:hover { border-color: var(--border); }
+.tl .bm-inp:focus {
+  outline: none;
+  background: var(--bg-elev);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.tl .bm-inp.name { flex: 0 1 240px; font-weight: 600; }
+.tl .bm-inp.url { flex: 1 1 260px; color: var(--text-faint); font-size: .85rem; }
+.tl .bm-inp.unsafe { color: var(--danger); }
+
+.tl .bm-open,
+.tl .bm-del {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-faint);
+  padding: 5px;
+  border-radius: 6px;
+  line-height: 0;
+  flex: none;
+  transition: .15s ease;
+}
+.tl .bm-open:hover { color: var(--accent); background: var(--bg-elev); }
+.tl .bm-del:hover { color: var(--danger); background: var(--bg-elev); }
+.tl .bm-open svg,
+.tl .bm-del svg { width: 15px; height: 15px; }
+
+.tl .bm-empty {
+  padding: 44px 20px;
+  text-align: center;
+  color: var(--text-faint);
+}
+.tl .bm-hit-path {
+  font-size: .78rem;
+  color: var(--text-faint);
+  flex: none;
+  white-space: nowrap;
+}
+
+/* Native dialog. No library, and it brings its own focus trap and Escape
+   handling, which a hand-rolled panel would have to reimplement badly. */
+.tl .bm-dialog {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  color: var(--text);
+  padding: 26px;
+  max-width: 440px;
+  box-shadow: var(--shadow);
+}
+.tl .bm-dialog::backdrop { background: rgba(10, 13, 18, .45); }
+.tl .bm-dialog h2 { margin: 0 0 10px; font-size: 1.1rem; }
+.tl .bm-dialog p { margin: 0 0 18px; color: var(--text-soft); font-size: .92rem; }
+.tl .bm-dialog .row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+@media (max-width: 620px) {
+  .tl .bm-row { flex-wrap: wrap; }
+  .tl .bm-inp.name,
+.tl .bm-inp.url { flex: 1 1 100%; }
+}
+
+/* ---- Mobile navigation ----------------------------------------------------
+   The topbar links carry .hide-sm and vanish below 760px, which left tool
+   pages with no way to reach Projects or Support on a phone. This is the
+   disclosure menu that replaces them. The button is hidden on desktop, where
+   the links are already visible, so only one of the two is ever present. */
+
+
+
+
+
+
+/* Explicit rather than relying on the browser's [hidden] rule, which a bare
+   display:flex on the class would outrank. */
+
+
+
+
+
+/* ---- Tool search ----------------------------------------------------------
+   Deferred until the grid held eight cards. It now does. Filters on the tool
+   name and its description, so "tracking" finds the Link Cleaner. */
+.tl .tool-search {
+  position: relative;
+  max-width: 420px;
+  margin: 0 0 18px;
+}
+.tl .tool-search .field { padding-left: 40px; }
+.tl .tool-search svg {
+  position: absolute;
+  left: 13px; top: 50%;
+  width: 17px; height: 17px;
+  margin-top: -8.5px;
+  color: var(--text-faint);
+  pointer-events: none;
+}
+.tl .tool-count {
+  margin: 0 0 18px;
+  font-size: .88rem;
+  color: var(--text-faint);
+}
+.tl .tools-empty {
+  grid-column: 1 / -1;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-faint);
+}
+/* .tool-card sets display:flex, which outranks the browser rule for [hidden].
+   Without this the search would hide nothing. Same reason as .nav-menu above. */
+.tl .tool-card[hidden] { display: none; }
+
+/* ---- Base64 Encoder -------------------------------------------------------- */
+.tl .b64-modes { display: flex; gap: 8px; margin-bottom: 18px; }
+
+.tl .b64-panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.tl .b64-pane { min-width: 0; }
+.tl .b64-panes textarea.field {
+  font-family: var(--mono);
+  font-size: .88rem;
+  min-height: 210px;
+  word-break: break-all;
+}
+.tl .b64-panes .stat-line { margin-top: 8px; }
+
+.tl .b64-error {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  background: var(--bg-elev);
+  color: var(--danger);
+  font-size: .9rem;
+}
+
+.tl .b64-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+/* Shared by the checkbox and select rows on three of the four tools added in
+   v1.4.0. It stays under the .b64- prefix because that is where it was first
+   needed, and renaming it would touch four files to no visible end. */
+.tl .b64-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .88rem;
+  color: var(--text-soft);
+  cursor: pointer;
+}
+.tl .b64-opt code {
+  font-family: var(--mono);
+  font-size: .82rem;
+  color: var(--text-faint);
+}
+
+/* ---- JSON Formatter -------------------------------------------------------- */
+.tl .jf-panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.tl .jf-pane { min-width: 0; }
+.tl .jf-panes textarea.field {
+  font-family: var(--mono);
+  font-size: .88rem;
+  min-height: 340px;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+}
+
+.tl .jf-error {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  background: var(--bg-elev);
+}
+.tl .jf-error-msg {
+  margin: 0;
+  color: var(--danger);
+  font-size: .9rem;
+  font-weight: 600;
+}
+/* The caret line only lines up if the glyphs are equal width and the line is
+   not re-wrapped, so this cannot inherit the page font or wrap. */
+.tl .jf-error-line {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-inset);
+  font-family: var(--mono);
+  font-size: .84rem;
+  color: var(--text-soft);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.tl .jf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+}
+.tl .jf-indent {
+  width: auto;
+  padding: 7px 10px;
+  font-size: .85rem;
+}
+
+/* ---- Password Generator ---------------------------------------------------- */
+.tl .pg-out {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-sm);
+}
+.tl .pg-value {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 1.15rem;
+  color: var(--text);
+  word-break: break-all;
+  line-height: 1.5;
+}
+.tl .pg-value.empty::before {
+  content: "No character set selected";
+  color: var(--text-faint);
+  font-family: inherit;
+  font-size: .95rem;
+}
+.tl .pg-again { flex: none; }
+
+.tl .pg-meter { margin-top: 14px; }
+.tl .pg-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-inset);
+  overflow: hidden;
+}
+.tl .pg-fill {
+  height: 100%;
+  width: 0;
+  background: var(--danger);
+  transition: width .15s ease, background .15s ease;
+}
+.tl .pg-fill.level-1 { background: var(--ti-color-orange); }
+.tl .pg-fill.level-2 { background: var(--success); }
+.tl .pg-fill.level-3,
+.tl .pg-fill.level-4 { background: var(--accent); }
+
+.tl .pg-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  margin-top: 26px;
+}
+.tl .pg-length-row input[type="range"] { width: 100%; accent-color: var(--accent); }
+.tl .pg-sets {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.tl .pg-sets legend { padding: 0; }
+
+.tl .pg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* ---- Timestamp Converter --------------------------------------------------- */
+.tl .tc-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.tl .tc-field { min-width: 0; }
+.tl .tc-unit { width: auto; flex: none; }
+/* Same reason as the date control on the Wash Sale Tracker: the native widget
+   sizes from its own text and overflows a grid column without this. */
+.tl main input[type="datetime-local"].field { min-width: 0; }
+
+.tl .tc-error {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  background: var(--bg-elev);
+  color: var(--danger);
+  font-size: .9rem;
+}
+
+.tl .tc-results { margin-top: 26px; }
+.tl .tc-guess {
+  margin: 0 0 14px;
+  font-size: .85rem;
+  color: var(--text-faint);
+}
+.tl .tc-grid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-elev);
+}
+.tl .tc-grid dt,
+.tl .tc-grid dd {
+  margin: 0;
+  padding: 11px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.tl .tc-grid dt:first-of-type,
+.tl .tc-grid dt:first-of-type + dd { border-top: 0; }
+.tl .tc-grid dt {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  background: var(--bg-inset);
+}
+.tl .tc-grid dd { gap: 10px; justify-content: space-between; }
+.tl .tc-grid dd span {
+  font-family: var(--mono);
+  font-size: .88rem;
+  word-break: break-all;
+}
+
+@media (max-width: 760px) {
+  .tl .b64-panes,
+.tl .jf-panes,
+.tl .pg-controls,
+.tl .tc-inputs { grid-template-columns: 1fr; }
+  .tl .jf-panes textarea.field { min-height: 220px; }
+  .tl .tc-grid { grid-template-columns: 1fr; }
+  .tl .tc-grid dt { border-top: 1px solid var(--border); }
+  .tl .tc-grid dt:first-of-type + dd { border-top: 1px solid var(--border); }
+}
+
+/* ---- Skip link ------------------------------------------------------------
+   First focusable element on every page. Off-screen until focused, so it costs
+   sighted users nothing and saves keyboard users the whole topbar. */
+
+
+
+/* ---- Reduced motion -------------------------------------------------------
+   Last block in the file on purpose: it has to win over every transition
+   declared above it, and it is a user preference rather than a component.
+   Durations go to 1ms rather than 0 so that transitionend still fires and any
+   handler waiting on it is not left hanging. */
+@media (prefers-reduced-motion: reduce) {
+  .tl main *,
+.tl main *::before,
+.tl main *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
