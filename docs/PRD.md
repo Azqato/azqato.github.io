@@ -1390,7 +1390,7 @@ The proxies available, in descending order of usefulness:
 
 ## Roadmap at a glance
 
-**Status refreshed 2026-10-08:** open items are 1 (the owner's read-through), the `music/` mobile audit (from 15) and 22; Later holds 15d, 16 and 17.
+**Status refreshed 2026-10-08:** open items are 1 (the owner's read-through), and 22; Later holds 15d, 16 and 17.
 
 Organized 2026-10-02 at the owner's request: every open item from both halves of the site in one place, in a suggested order. Each item's detail stays where it was written: Part 1 below, or Part 2, Invests: Roadmap (P numbers). Nothing here is scheduled until the owner says so.
 
@@ -1427,7 +1427,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
 | 14 | v2.9.5: no pulsing unless the fire is firing | v2.9.5, below | **Done 2.9.5** |
-| 15 | Defect list: optimize the four `youtube.html` thumbnails; `build-nav.py --check` in the pre-commit hook; pause the render loop on `document.hidden`; Playwright smoke tests; mobile audit of `music.html` | Current phase, below | **Done** (thumbnails 2.12.6, hook 2.12.4, hidden-tab pause 2.12.5) except the mobile audit of `music/` |
+| 15 | Defect list: optimize the four `youtube.html` thumbnails; `build-nav.py --check` in the pre-commit hook; pause the render loop on `document.hidden`; Playwright smoke tests; mobile audit of `music.html` | Current phase, below | **Done** (thumbnails 2.12.6, hook 2.12.4, hidden-tab pause 2.12.5); mobile audit of `music/` passed 2026-10-08 (320 to 768px, both themes, no sideways scroll or console errors, 24px seek bar on touch). Smoke tests are 15d, in Later |
 
 **Next: bring in Tools and Prompts (owner's request, 2026-10-05)**
 
