@@ -95,7 +95,6 @@ OPEN = """<!-- CODES -->
   <div class="cd-shell">
   <button class="cd-menu-btn" id="cd-menu-btn" type="button" aria-expanded="false" aria-controls="cd-nav">Contents</button>
   <nav class="cd-sidebar" id="cd-nav" aria-label="Codes sections">
-    <p class="cd-sidebar-title">Contents</p>
     %s
   </nav>
   <div class="cd-main">
