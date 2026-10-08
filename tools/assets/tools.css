@@ -1227,8 +1227,4 @@ body.tl { background: var(--tl-page); }
   }
 }
 
-.tl .wrap { margin-left: 0; padding-left: 24px; }
-body.tl .site-footer-in { margin-left: 0; padding-left: 24px; }
-@media (max-width: 860px) {
-  .tl .wrap, body.tl .site-footer-in { padding-left: 16px; }
-}
+.tl .wrap, body.tl .site-footer-in { max-width: 90%; margin: 0 auto; padding-left: 0; padding-right: 0; }

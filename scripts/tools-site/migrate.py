@@ -238,13 +238,9 @@ def css(src):
     # The page color has its own name, so the shared bars' --bg is untouched.
     out = [x.replace('var(--bg)', 'var(--tl-page)') for x in out]
     out.insert(0, 'body.tl { background: var(--tl-page); }\n')
-    # Owner's request: the tools and the footer sit at the left, lined up with
-    # the brand in the bar above (24px, 16px on phones), not centered.
-    out.append('\n.tl .wrap { margin-left: 0; padding-left: 24px; }\n'
-               'body.tl .site-footer-in { margin-left: 0; padding-left: 24px; }\n'
-               '@media (max-width: 860px) {\n'
-               '  .tl .wrap, body.tl .site-footer-in { padding-left: 16px; }\n'
-               '}\n')
+    # Owner's request: the tools and the footer use 90% of the window rather
+    # than the old narrow column; the hero stays centered within it.
+    out.append('\n.tl .wrap, body.tl .site-footer-in { max-width: 90%; margin: 0 auto; padding-left: 0; padding-right: 0; }\n')
     header = ('/* Azqato\'s Tools on azqato.com (item 22). Generated from the old repo\'s\n'
               '   css/style.css by scripts/tools-site/migrate.py: its rules, scoped to\n'
               '   <body class="tl">, with its palette pointed at colors.css. */\n\n')
