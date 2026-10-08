@@ -93,7 +93,7 @@ It's a **journal and calculator, not a backtester**. Each quarter you type in wh
 
 - **A new tool page: `invests/leveraged/9sig-calculator.html`**, titled "9 Sig Calculator". It sits in the sidebar under Leveraged Strategies, right after 9 Sig. It is listed in the site search and sitemap, and gets the full site shell (top bar, second bar, theme button, footer).
 - The 9 Sig page gets a "Track your own plan: 9 Sig Calculator" link near the top. The 3 Sig and 6 Sig pages get a line that the calculator also runs at 3% and 6%.
-- `tools/invests/site.py` learns one new kind of page: one written for this site rather than moved from an old one. Its source is in `tools/invests/pages/`. That keeps the core rule's inventory check meaningful (there is nothing old to preserve on this page) while the page still gets the generated shell.
+- `scripts/invests/site.py` learns one new kind of page: one written for this site rather than moved from an old one. Its source is in `scripts/invests/pages/`. That keeps the core rule's inventory check meaningful (there is nothing old to preserve on this page) while the page still gets the generated shell.
 
 ### How it's built (the site's rules: no build step, no dependencies)
 
@@ -129,7 +129,7 @@ It's a **journal and calculator, not a backtester**. Each quarter you type in wh
 
 ### Checking it's right
 
-- **Golden test.** Enter the first six quarters of the sheet's sample run (prices from the screenshot) and check the signal line, the trades, the shares and the totals against the sheet's own figures, to the dollar. This goes into `tools/invests/browser.py` so it reruns on every change.
+- **Golden test.** Enter the first six quarters of the sheet's sample run (prices from the screenshot) and check the signal line, the trades, the shares and the totals against the sheet's own figures, to the dollar. This goes into `scripts/invests/browser.py` so it reruns on every change.
 - `check.py` and `browser.py` cover the new page: 0 console errors in both themes, no sideways page scroll on phones, and an export that produces a valid zip.
 - Open the exported `.xlsx` in Excel and confirm it opens without a repair prompt.
 

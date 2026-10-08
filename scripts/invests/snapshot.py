@@ -7,7 +7,7 @@ commit each snapshot came from. Never writes to the source repos.
 import json, pathlib, subprocess, datetime
 
 # The site pages are in invests/ at the repository root; this folder
-# (tools/invests/) holds the scripts, the source snapshots and the inventories
+# (scripts/invests/) holds the scripts, the source snapshots and the inventories
 # (build pass item 8, 2.14.0).
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent / "invests"

@@ -34,7 +34,7 @@ Six questions went to the owner at the v2.9.9 audit and all six came back. They 
 - **The visualizer brightness gate, reserved as v2.9.5.** Roadmap item, deliberately not implemented yet.
 - **Move the remaining two mixes to local audio.** They are still third-party embedded players. The README already says this is the plan.
 - **Extract `music.html`'s inline JavaScript to `viz.js`.** Recorded as known technical debt. The page is 112 KB and roughly 1,900 lines of that is inline script. Offered at the audit and deferred with "revisit this later".
-- ~~**Clean up `tools/build-nav.py`'s `SKIP` set.**~~ **Done as v2.10.1.** Deferred at the audit, then pulled back into the batch the same day. `SKIP` is now an empty set with a comment explaining what used to be in it.
+- ~~**Clean up `scripts/build-nav.py`'s `SKIP` set.**~~ **Done as v2.10.1.** Deferred at the audit, then pulled back into the batch the same day. `SKIP` is now an empty set with a comment explaining what used to be in it.
 - ~~**Consider a `.gitattributes` file.**~~ **Done as v2.10.2.** The predicted twelve-file whitespace diff turned out not to exist; see the note above.
 - **Four thumbnails in `img/` are over 500 KB.** Against the project's own informal target. Compress rather than delete; nothing in `img/` gets deleted.
 

@@ -145,7 +145,7 @@ nav {
 .theme-toggle[hidden] { display: none; }
 
 /* ── FOOTER ── */
-/* Stamped by tools/build-nav.py. Styled after Azqato Invests' footer: a slim
+/* Stamped by scripts/build-nav.py. Styled after Azqato Invests' footer: a slim
    panel with the brand, every major section as a plain link, and the copyright. */
 .site-footer {
   border-top: 1px solid var(--border);

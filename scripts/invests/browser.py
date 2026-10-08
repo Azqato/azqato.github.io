@@ -1,6 +1,6 @@
 """Browser tests for the Azqato Invests site, in headless Microsoft Edge.
 
-Run from anywhere: python tools/invests/browser.py [--shots DIR]
+Run from anywhere: python scripts/invests/browser.py [--shots DIR]
 Needs Python 3 with Playwright (pip install playwright) and Edge installed
 (Browser Testing in ../docs/PRD.md (Part 2): Edge, never Chrome). Serves the folder on a
 free local port from a thread, so no server is left running afterwards.
@@ -19,11 +19,11 @@ sys.dont_write_bytecode = True
 from playwright.sync_api import sync_playwright
 
 # The site pages are in invests/ at the repository root; this folder
-# (tools/invests/) holds the scripts, the source snapshots and the inventories
+# (scripts/invests/) holds the scripts, the source snapshots and the inventories
 # (build pass item 8, 2.14.0).
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent / "invests"
-# tools/invests/site.py by path: "import site" would find Python's own site module.
+# scripts/invests/site.py by path: "import site" would find Python's own site module.
 _spec = importlib.util.spec_from_file_location("site_builder", HERE / "site.py")
 _site = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_site)

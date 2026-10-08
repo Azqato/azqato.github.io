@@ -9,7 +9,7 @@
 # The generator is ignored alongside it because it only builds that folder and
 # would be a dangling reference in a fresh clone.
 brand/
-tools/build-brand-page.py
+scripts/build-brand-page.py
 
-# Python bytecode, written when tools/invests/site.py imports tools/build-nav.py
+# Python bytecode, written when scripts/invests/site.py imports scripts/build-nav.py
 __pycache__/

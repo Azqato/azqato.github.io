@@ -30,7 +30,7 @@ Written 2026-10-08. This covers phase 1 (interpretation, read only) and a draft 
 
 ### How these differ from Invests
 
-Invests was mostly **content pages** (articles, tables, charts) that `tools/invests/site.py` moved whole out of source snapshots and rewrapped in this site's chrome. Both new sources are **apps**:
+Invests was mostly **content pages** (articles, tables, charts) that `scripts/invests/site.py` moved whole out of source snapshots and rewrapped in this site's chrome. Both new sources are **apps**:
 
 - Tools is ten interactive pages whose behavior lives in JS.
 - Prompts is one JS app plus generated pages, and its addresses are effectively a public API.

@@ -1,6 +1,6 @@
 """Read-only checks for the Azqato Invests site. Changes nothing.
 
-Run from anywhere: python tools/invests/check.py
+Run from anywhere: python scripts/invests/check.py
 Checks every site page (*.html outside _sources/, inventory/ and docs/):
   - a title that follows Page Titles in ../docs/PRD.md (Part 2) (brand suffix, 60 characters,
     first 30 characters unique, no placeholders; Home leads with the brand);
@@ -15,7 +15,7 @@ import html.parser, json, pathlib, re, sys
 from urllib.parse import urlparse, unquote
 
 # The site pages are in invests/ at the repository root; this folder
-# (tools/invests/) holds the scripts, the source snapshots and the inventories
+# (scripts/invests/) holds the scripts, the source snapshots and the inventories
 # (build pass item 8, 2.14.0).
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent / "invests"

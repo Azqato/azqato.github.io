@@ -7,8 +7,8 @@ into the HTML, between the PROJECTS markers. The script still draws the
 cards on load, replacing the copy with the same markup, and keeps the
 filtering. Run it after editing PROJECTS:
 
-    python tools/prerender-projects.py          write
-    python tools/prerender-projects.py --check  report only; exit 1 if stale
+    python scripts/prerender-projects.py          write
+    python scripts/prerender-projects.py --check  report only; exit 1 if stale
 """
 
 import pathlib
@@ -32,7 +32,7 @@ def main():
         cards = page.eval_on_selector('#project-grid', 'el => el.innerHTML').strip()
         count = page.eval_on_selector('#project-count', 'el => el.textContent')
         browser.close()
-    block = ('\n      <!-- PROJECTS: written by tools/prerender-projects.py from the PROJECTS array; '
+    block = ('\n      <!-- PROJECTS: written by scripts/prerender-projects.py from the PROJECTS array; '
              'the script redraws it on load. -->\n      ' + cards + '\n      <!-- /PROJECTS -->')
     out = GRID.sub(lambda m: m.group(1) + block + m.group(2), src, count=1)
     out = COUNT.sub(lambda m: m.group(1) + count + m.group(2), out, count=1)
@@ -40,7 +40,7 @@ def main():
         print('projects/index.html: cards are up to date')
         return 0
     if '--check' in sys.argv:
-        print('projects/index.html: cards out of date. Run: python tools/prerender-projects.py')
+        print('projects/index.html: cards out of date. Run: python scripts/prerender-projects.py')
         return 1
     PAGE.write_text(out, encoding='utf-8', newline='\n')
     print('projects/index.html: cards written')
