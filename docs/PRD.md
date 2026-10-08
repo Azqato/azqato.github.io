@@ -1390,6 +1390,8 @@ The proxies available, in descending order of usefulness:
 
 ## Roadmap at a glance
 
+**Status refreshed 2026-10-08:** open items are 1 (the owner's read-through), the `music/` mobile audit (from 15) and 22; Later holds 15d, 16 and 17.
+
 Organized 2026-10-02 at the owner's request: every open item from both halves of the site in one place, in a suggested order. Each item's detail stays where it was written: Part 1 below, or Part 2, Invests: Roadmap (P numbers). Nothing here is scheduled until the owner says so.
 
 **Now (waiting on the owner).** Changed 2026-10-02 by the owner: items 1 and 2 happen as one full review after item 15, and item 3 is done.
@@ -1405,27 +1407,27 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
 | 4 | Pick the colors to keep for both halves (asks the owner first) | Part 2, P15; DESIGN.md, One palette for the whole site | **Done 2026-10-02** |
-| 5 | The Invests top bar and theme button across the whole site, with a light palette for the 12 root pages | Future updates, below | Medium |
-| 6 | The Invests footer across the whole site | Future updates, below | Small |
-| 7 | Clean addresses for every page (`/discord`, not `discord.html`) | Future updates, below | Medium |
-| 8 | Fold the Invests pages, generator and inventories into the main structure (docs part done in 2.12.0) | Part 2, P14 | Large; design needed |
+| 5 | The Invests top bar and theme button across the whole site, with a light palette for the 12 root pages | Future updates, below | **Done 2.13.7** |
+| 6 | The Invests footer across the whole site | Future updates, below | **Done 2.13.0** |
+| 7 | Clean addresses for every page (`/discord`, not `discord.html`) | Future updates, below | **Done 2.13.8** |
+| 8 | Fold the Invests pages, generator and inventories into the main structure (docs part done in 2.12.0) | Part 2, P14 | **Done 2.14.0** |
 
 **Next: Azqato Invests content and the old sites**
 
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
-| 9 | Redirect the 19 old stocks, vix and leverage pages to their new addresses (changes those repos; ask first) | Part 2, P13.1 and Deprecation and Removal (D7) | Medium |
-| 10 | The old repos become data feeds only; a second VIX data source | Part 2, P12 | Medium |
-| 11 | Correct out-of-date content, including the two dead Resources links and the Holy Grail metrics | Part 2, P11 and P13.3 | Medium; each change needs the owner's approval |
-| 12 | Combine the three VIX pages into one | Part 2, P16 | Medium |
+| 9 | Redirect the 19 old stocks, vix and leverage pages to their new addresses (changes those repos; ask first) | Part 2, P13.1 and Deprecation and Removal (D7) | **Done 2.13.5** |
+| 10 | The old repos become data feeds only; a second VIX data source | Part 2, P12 | **Done 2.13.4** |
+| 11 | Correct out-of-date content, including the two dead Resources links and the Holy Grail metrics | Part 2, P11 and P13.3 | **Done 2.13.3** |
+| 12 | Combine the three VIX pages into one | Part 2, P16 | **Done 2.13.6**, then one page under Indices 2.15.1 |
 | 13 | SEO and landing-page review of all 21 pages | Part 2, P17 | **Done:** drafted 2.14.1; built 2.15.0 (S1 to S6, L, M), S7 FAQ groups 2.15.3; VIX moved into Indices & ETFs, one page (2.15.1) |
 
 **Next: the main site**
 
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
-| 14 | v2.9.5: no pulsing unless the fire is firing | v2.9.5, below | Small |
-| 15 | Defect list: optimize the four `youtube.html` thumbnails; `build-nav.py --check` in the pre-commit hook; pause the render loop on `document.hidden`; Playwright smoke tests; mobile audit of `music.html` | Current phase, below | Small to medium each |
+| 14 | v2.9.5: no pulsing unless the fire is firing | v2.9.5, below | **Done 2.9.5** |
+| 15 | Defect list: optimize the four `youtube.html` thumbnails; `build-nav.py --check` in the pre-commit hook; pause the render loop on `document.hidden`; Playwright smoke tests; mobile audit of `music.html` | Current phase, below | **Done** (thumbnails 2.12.6, hook 2.12.4, hidden-tab pause 2.12.5) except the mobile audit of `music/` |
 
 **Next: bring in Tools and Prompts (owner's request, 2026-10-05)**
 
@@ -1443,7 +1445,7 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | 19 | ~~A progress dashboard~~ Dropped for now (owner, 2026-10-02) | Future updates, below |
 | 20 | Extract `music.html`'s script to `viz.js` | Not scheduled, below. **Done 2.13.9:** `music/viz.js` |
 | 15d | Smoke-test script, `tools/smoke.py`, run locally (moved from the build pass by the owner, 2026-10-02) | The next build pass, below |
-| 21 | A brand per section and an emoji per page (favicon and title icon), the lion for the home page and any page without its own (owner's decision, 2026-10-02) | This list; to be written up as a Future update |
+| 21 | A brand per section and an emoji per page (favicon and title icon), the lion for the home page and any page without its own (owner's decision, 2026-10-02) | **Done 2.13.1** (emoji favicons) |
 
 **Owner's answers for the next build pass (2026-10-02).** Recorded before building so the pass needs no further questions:
 
