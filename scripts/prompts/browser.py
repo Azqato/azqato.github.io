@@ -22,13 +22,16 @@ PAGES = sorted(p.relative_to(ROOT / "prompts").as_posix() for p in (ROOT / "prom
 
 def behavior(ctx, base):
     p = B.load(ctx, base, "index.html", "light", B.DESKTOP, wait=500)
-    total = p.locator(".pr-list li").count()
+    total = p.locator(".prompt-list-item").count()
     p.fill("#prompt-search", "audit mobile")
-    shown = p.evaluate("[...document.querySelectorAll('.pr-list li')].filter(li => !li.hidden).map(li => li.textContent)")
+    shown = p.evaluate("[...document.querySelectorAll('.prompt-list-item')].filter(a => !a.hidden).map(a => a.textContent)")
+    side = p.evaluate("[...document.querySelectorAll('.sidebar-nav a[data-slug]')].filter(a => !a.hidden).length")
+    if side != 1:
+        B.fail(f"search 'audit mobile': sidebar shows {side} prompts, expected 1")
     if len(shown) != 1 or "Mobile Audit" not in shown[0]:
         B.fail(f"search 'audit mobile': expected Mobile Audit only, got {len(shown)} of {total}")
     p.fill("#prompt-search", "zzzz")
-    if "No prompts match" not in p.inner_text("#pr-empty"):
+    if "No prompts match" not in p.inner_text("#home-empty"):
         B.fail("search with no match: no message")
     p.fill("#prompt-search", "mobile audit")
     p.press("#prompt-search", "Enter")
@@ -38,6 +41,19 @@ def behavior(ctx, base):
     p.close()
 
     p = B.load(ctx, base, "mobile-responsive-audit/index.html", "light", B.DESKTOP, wait=500)
+    if p.get_attribute(".sidebar-nav a.active", "data-slug") != "mobile-responsive-audit":
+        B.fail("sidebar does not mark the open prompt")
+    p.fill("#prompt-search", "wiki")
+    if p.evaluate("[...document.querySelectorAll('.sidebar-nav a[data-slug]')].filter(a => !a.hidden).length") != 1:
+        B.fail("sidebar search on a prompt page: 'wiki' should leave GitHub Wiki only")
+    p.fill("#prompt-search", "")
+    phone = B.load(ctx, base, "mobile-responsive-audit/index.html", "light", B.PHONE, wait=300)
+    if phone.is_visible(".sidebar-nav"):
+        B.fail("phone: prompt list is open on load")
+    phone.click("#pr-nav-toggle")
+    if not phone.is_visible(".sidebar-nav") or not phone.is_visible("#prompt-search"):
+        B.fail("phone: the Prompts button does not open the list and search")
+    phone.close()
     if p.is_visible("#prompt-body"):
         B.fail("prompt block is not collapsed on load")
     p.click(".code-label")  # the whole bar toggles

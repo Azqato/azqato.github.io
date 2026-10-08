@@ -132,10 +132,12 @@ def page(src, name):
 # The old palette's names, pointed at the site's roles. Names the main
 # stylesheet also defines (--bg, --border, --accent, --text...) get the same
 # value it gives them, so setting them on <body> changes nothing outside main.
-TOKENS = """.tl {
-  --bg: var(--ti-color-canvas);
+TOKENS = """/* As on the old site, the page sits a step back from its cards: a soft gray
+   page with white cards in light, a dark page with lighter cards in dark. */
+.tl {
+  --tl-page: var(--ti-color-surface);
   --bg-elev: var(--ti-color-canvas);
-  --bg-inset: var(--ti-color-surface);
+  --bg-inset: var(--ti-color-hover);
   --border: var(--ti-color-border);
   --border-strong: var(--ti-color-border-strong);
   --text: var(--ti-color-text);
@@ -161,6 +163,9 @@ TOKENS = """.tl {
 .tl main :where(ul, ol, fieldset, legend) { padding: revert; }
 .tl { accent-color: var(--ti-color-accent); }
 [data-theme="dark"] .tl {
+  --tl-page: var(--ti-color-canvas);
+  --bg-elev: var(--ti-color-surface);
+  --bg-inset: var(--ti-color-canvas);
   --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .35);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
 }
@@ -230,6 +235,9 @@ def css(src):
                 scoped = ',\n'.join(x.strip() if inside else scope(x) for x in kept)
                 out.append('%s%s {%s}' % (lead, scoped, decl))
         pos = m.end()
+    # The page color has its own name, so the shared bars' --bg is untouched.
+    out = [x.replace('var(--bg)', 'var(--tl-page)') for x in out]
+    out.insert(0, 'body.tl { background: var(--tl-page); }\n')
     header = ('/* Azqato\'s Tools on azqato.com (item 22). Generated from the old repo\'s\n'
               '   css/style.css by scripts/tools-site/migrate.py: its rules, scoped to\n'
               '   <body class="tl">, with its palette pointed at colors.css. */\n\n')

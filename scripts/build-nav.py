@@ -263,7 +263,7 @@ def search_index(root):
     for name in ['index.html'] + list(SECTION_NAMES) + [p for pre in SECTIONS for p in section_pages(pre)]:
         soup = BeautifulSoup((root / name).read_text(encoding='utf-8'), 'html.parser')
         body = soup.body
-        for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas, .pr-agents'):
+        for x in body.select('nav, .site-sub, footer, script, style, dialog, noscript, iframe, canvas, .pr-agents, .pr-site .sidebar'):
             x.decompose()
         prefix, sec = section(name)
         label = 'Home' if name == 'index.html' else page_label(name) if sec else SECTION_NAMES[name]

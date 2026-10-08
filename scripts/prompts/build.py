@@ -134,9 +134,14 @@ HEAD = """<!DOCTYPE html>
   <!-- NAV -->
   <!-- /NAV -->
 
-  <main id="main" class="pr">
+  <div class="pr-site">
+    <div class="site-wrapper">
+{sidebar}
+      <main class="content" id="main">
 {main}
-  </main>
+      </main>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   </footer>
@@ -170,32 +175,56 @@ HEAD = """<!DOCTYPE html>
 """
 
 
+def sidebar(prompts, current, up):
+    """The old site's sidebar: logo, the Prompts menu button (phones), search,
+    Home and every visible prompt, and Support."""
+    links = ['          <a href="%s"%s>Home</a>' % (up or './', ' class="active" aria-current="page"' if current is None else '')]
+    for p in prompts:
+        if p['hidden']:
+            continue
+        links.append('          <a href="%s%s/" data-slug="%s" data-desc="%s"%s>%s</a>' % (
+            up, p['slug'], p['slug'], esc(p['description']),
+            ' class="active" aria-current="page"' if current == p['slug'] else '', esc(p['title'])))
+    return """      <aside class="sidebar">
+        <div class="sidebar-sticky">
+          <a class="sidebar-logo" href="%s">Azqato's Prompts<span class="accent-dot">.</span></a>
+          <button class="pr-nav-toggle" id="pr-nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar-nav">Prompts</button>
+          <div class="sidebar-search">
+            <input type="search" id="prompt-search" placeholder="Search prompts" aria-label="Search prompts" aria-controls="sidebar-nav" autocomplete="off" spellcheck="false" />
+          </div>
+          <div class="sidebar-nav" id="sidebar-nav" role="navigation" aria-label="Prompt navigation">
+%s
+          </div>
+          <p class="search-empty" id="search-empty" role="status"></p>
+          <div class="sidebar-support">
+            <a href="%s../support/" class="support-btn">Support</a>
+          </div>
+        </div>
+      </aside>""" % (up or './', '\n'.join(links), up)
+
+
 def home(prompts):
     items = '\n'.join(
-        '      <li><a class="pr-item" href="%s/"><span class="pr-item-title">%s</span>'
-        '<span class="pr-item-desc">%s</span></a></li>' % (p['slug'], esc(p['title']), esc(p['description']))
+        '          <a class="prompt-list-item" href="%s/" data-slug="%s"><span class="prompt-list-title">%s</span>'
+        '<span class="prompt-list-desc">%s</span></a>' % (p['slug'], p['slug'], esc(p['title']), esc(p['description']))
         for p in prompts if not p['hidden'])
-    main = """    <section class="pr-hero">
-      <h1>Claude Code Prompts<span class="pr-dot">.</span></h1>
-      <p class="pr-lead">%s</p>
-    </section>
-    <div class="pr-search">
-      <input type="search" id="prompt-search" placeholder="Search prompts" aria-label="Search prompts" aria-controls="pr-list" autocomplete="off" spellcheck="false" />
-    </div>
-    <h2>Prompts</h2>
-    <ul class="pr-list" id="pr-list">
+    main = """        <section class="hero">
+          <h1>Claude Code Prompts<span class="accent-dot">.</span></h1>
+          <p class="lead">%s</p>
+        </section>
+        <h2>Prompts</h2>
+        <div class="prompt-list">
 %s
-    </ul>
-    <p class="pr-empty" id="pr-empty" role="status"></p>""" % (esc(SITE_INTRO), items)
+        </div>
+        <p class="search-empty" id="home-empty" role="status"></p>""" % (esc(SITE_INTRO), items)
     return HEAD.format(source='prompts/md/', title=SITE_NAME, desc=esc(SITE_DESC), url=SITE, alt='',
-                       og='Claude Code Prompts', up='../', main=main)
+                       og='Claude Code Prompts', up='../', main=main, sidebar=sidebar(prompts, None, ''))
 
 
-def detail(p):
+def detail(p, prompts):
     url = SITE + p['slug'] + '/'
     md = SITE + 'md/' + p['slug'] + '.md'
-    main = """    <p class="pr-crumb"><a href="../">Prompts</a> / {title}</p>
-    <div class="prompt-header">
+    main = """    <div class="prompt-header">
       <h1>{title}</h1>
       <span class="prompt-meta">{meta}</span>
     </div>
@@ -223,7 +252,8 @@ def detail(p):
     alt = ('\n  <link rel="alternate" type="text/markdown" href="%s" title="%s prompt (Markdown)" />'
            % (md, esc(p['title'])))
     return HEAD.format(source='prompts/md/%s.md' % p['slug'], title='%s - %s' % (esc(p['title']), SITE_NAME),
-                       desc=esc(p['description']), url=url, alt=alt, og=esc(p['title']), up='../../', main=main)
+                       desc=esc(p['description']), url=url, alt=alt, og=esc(p['title']), up='../../', main=main,
+                       sidebar=sidebar(prompts, p['slug'], '../'))
 
 
 def sitemap(prompts, text):
@@ -259,7 +289,7 @@ def main():
     prompts = [parse(s) for s in ORDER]
     files = {OUT / 'index.html': home(prompts)}
     for p in prompts:
-        files[OUT / p['slug'] / 'index.html'] = detail(p)
+        files[OUT / p['slug'] / 'index.html'] = detail(p, prompts)
     for name, fn in (('sitemap.xml', sitemap), ('_redirects', redirects)):
         path = ROOT / name
         cur = path.read_text(encoding='utf-8')
