@@ -117,17 +117,37 @@
 
 /* ---------- Main column ---------- */
 
-/* The Codes home page sits at the left of the main column, as Invests' home
-   does, rather than centered in it. */
-.cd-main > .hero,
-.cd-main > .section {
-  margin: 0;
-  padding-left: 40px;
-  padding-right: 40px;
+/* Widths as on Invests (docs.css, site.css): the main column has 48px of
+   padding; every page uses the full column, as Invests' home
+   and tool pages do. Each page's own outer
+   width and padding give way to these. */
+.cd-main {
+  padding: 32px 48px 72px;
 }
 
-.cd-main {
-  min-width: 0;
+.cd-main > .hero,
+.cd-main > .section {
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.cd-main > .hero {
+  padding-top: 0.5rem;
+}
+
+.tl .cd-main .wrap,
+.cd-main .pr-site .content {
+  max-width: none;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.cd-main .pr-site .content,
+.tl .cd-main .page {
+  padding-top: 0;
 }
 
 .cd-menu-btn {
@@ -138,9 +158,8 @@
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  margin: 0;
-  padding: 8px 40px 56px;
-  max-width: 1100px;
+  margin: 40px 0 0;
+  padding: 0;
 }
 
 .cd-pager-link {
@@ -248,13 +267,7 @@
     transform: translateY(1px) rotate(-135deg);
   }
 
-  .cd-pager {
-    padding: 8px 16px 40px;
-  }
-
-  .cd-main > .hero,
-  .cd-main > .section {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+  .cd-main {
+    padding: 28px 24px 56px;
   }
 }

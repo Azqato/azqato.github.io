@@ -32,7 +32,7 @@ OUT = ROOT / 'codes' / 'tools'
 # Old addresses of Azqato projects that now live on azqato.com, as links
 # relative to codes/tools/ (the landing page). A tool page adds one more ../.
 MOVED = {
-    'https://azqato.github.io/VIX/': '../../invests/indices/vix/',
+    'https://azqato.github.io/VIX/': '../../invests/indices/vix/index.html',
     'https://azqato.github.io/stocks/screener.html': '../../invests/stocks/screener.html',
 }
 
@@ -102,9 +102,9 @@ def one(pattern, text, name):
 def links(html, landing):
     """Old file links to clean addresses, from tools/ (landing) or tools/<x>/."""
     pre = '' if landing else '../'
-    html = re.sub(r'href="index\.html(#[^"]*)?"', lambda m: 'href="%s%s"' % (pre or './', m.group(1) or ''), html)
+    html = re.sub(r'href="index\.html(#[^"]*)?"', lambda m: 'href="%sindex.html%s"' % (pre, m.group(1) or ''), html)
     html = re.sub(r'href="([a-z0-9-]+)\.html(#[^"]*)?"',
-                  lambda m: 'href="%s%s/%s"' % (pre, m.group(1), m.group(2) or ''), html)
+                  lambda m: 'href="%s%s/index.html%s"' % (pre, m.group(1), m.group(2) or ''), html)
     for old, new in MOVED.items():
         html = re.sub(r'href="%s" target="_blank" rel="noopener"' % re.escape(old),
                       'href="%s%s"' % (pre, new), html)
@@ -238,9 +238,7 @@ def css(src):
     # The page color has its own name, so the shared bars' --bg is untouched.
     out = [x.replace('var(--bg)', 'var(--tl-page)') for x in out]
     out.insert(0, 'body.tl { background: var(--tl-page); }\n')
-    # Owner's request: the tools and the footer use 90% of the window rather
-    # than the old narrow column; the hero stays centered within it.
-    out.append('\n.tl .wrap, body.tl .site-footer-in { max-width: 90%; margin: 0 auto; padding-left: 0; padding-right: 0; }\n')
+    # Widths come from codes/assets/codes.css, as on Invests (owner, 2026-10-08).
     header = ('/* Azqato\'s Tools on azqato.com (item 22). Generated from the old repo\'s\n'
               '   css/style.css by scripts/tools-site/migrate.py: its rules, scoped to\n'
               '   <body class="tl">, with its palette pointed at colors.css. */\n\n')

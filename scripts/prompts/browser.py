@@ -33,7 +33,7 @@ def behavior(ctx, base):
     p.fill("#prompt-search", "mobile audit")
     p.press("#prompt-search", "Enter")
     p.wait_for_load_state("load")
-    if not p.url.endswith("/codes/prompts/mobile-responsive-audit/"):
+    if not p.url.endswith("/codes/prompts/mobile-responsive-audit/index.html"):
         B.fail(f"Enter did not open the first match: {p.url}")
     p.close()
 

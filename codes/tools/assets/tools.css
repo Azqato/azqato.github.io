@@ -1226,5 +1226,3 @@ body.tl { background: var(--tl-page); }
     scroll-behavior: auto !important;
   }
 }
-
-.tl .wrap, body.tl .site-footer-in { max-width: 90%; margin: 0 auto; padding-left: 0; padding-right: 0; }

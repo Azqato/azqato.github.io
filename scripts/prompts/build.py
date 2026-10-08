@@ -174,7 +174,7 @@ HEAD = """<!DOCTYPE html>
 
 def home(prompts):
     items = '\n'.join(
-        '          <a class="prompt-list-item" href="%s/" data-slug="%s"><span class="prompt-list-title">%s</span>'
+        '          <a class="prompt-list-item" href="%s/index.html" data-slug="%s"><span class="prompt-list-title">%s</span>'
         '<span class="prompt-list-desc">%s</span></a>' % (p['slug'], p['slug'], esc(p['title']), esc(p['description']))
         for p in prompts if not p['hidden'])
     main = """        <section class="hero">

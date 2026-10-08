@@ -37,7 +37,7 @@ def cards(page, pattern):
         href, label = m.group(1), re.sub(r'<[^>]+>', '', m.group(2)).strip()
         if href.startswith(('http', '#', '../')):
             continue
-        out.append((href.rstrip('/'), html.unescape(label)))
+        out.append((href.rstrip('/').removesuffix('/index.html'), html.unescape(label)))
     return out
 
 
@@ -54,9 +54,9 @@ def contents():
 
 def rel(here, target):
     """A relative link between two paths under codes/, ending at the folder."""
-    depth = here.count('/')
-    t = target[:-len('index.html')]
-    return '../' * depth + t if (t or depth) else './'
+    # Ends at index.html, as the rest of the site does, so links work when a
+    # page is opened from disk as well as on a server.
+    return '../' * here.count('/') + target
 
 
 def sidebar(here, groups):
