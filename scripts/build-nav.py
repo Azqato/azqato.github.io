@@ -56,7 +56,7 @@ ICON_DEFAULT = '🦁'
 # the folder gets the section's emoji, second-bar title and home link, and the
 # Codes link is marked active, since Codes is where the nav lists them.
 SECTIONS = {
-    'codes/tools/': {'icon': '🧰', 'bar': "Azqato's Tools", 'active': 'codes/index.html'},
+    'codes/tools/': {'icon': '🔧', 'bar': "Azqato's Tools", 'active': 'codes/index.html'},
     'codes/prompts/': {'icon': '💬', 'bar': "Azqato's Prompts", 'active': 'codes/index.html'},
 }
 ROOT = pathlib.Path(__file__).resolve().parent.parent
