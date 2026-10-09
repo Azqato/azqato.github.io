@@ -20,6 +20,7 @@ blocks between the CODES markers, so this is safe to run any number of times.
 """
 
 import html
+import json
 import pathlib
 import re
 import sys
@@ -27,6 +28,8 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 CODES = ROOT / 'codes'
 CSS = 'codes/assets/codes.css'
+SITE = 'https://azqato.com/'
+AUTHOR = {'@type': 'Person', 'name': 'Azqato', 'url': SITE + 'about/'}
 
 
 def cards(page, pattern):
@@ -91,6 +94,48 @@ def pager(here, groups):
     return '<nav class="cd-pager" aria-label="Previous and next page">%s</nav>' % ''.join(links)
 
 
+def url(here):
+    return SITE + 'codes/' + here.removesuffix('index.html')
+
+
+def trail(here, groups):
+    """(label, path) from Codes down to this page; a section's home stands for its group."""
+    out = [('Codes', 'index.html')]
+    for name, items in groups:
+        if name and any(p == here for p, _ in items):
+            out.append((name, items[0][0]))
+            if here != items[0][0]:
+                out.append((dict(items)[here], here))
+    return out
+
+
+def crumbs(here, groups):
+    """Visible breadcrumbs, and the trail plus the page's author as structured data
+    (SEO audit, owner's approval 2026-10-08: the author is Azqato, linking to About)."""
+    steps = trail(here, groups)
+    graph = [{'@type': 'WebPage', 'name': steps[-1][0] if len(steps) > 1 else 'Azqato Codes',
+              'url': url(here), 'author': AUTHOR}]
+    nav = ''
+    if len(steps) > 1:
+        graph.append({'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': i, 'name': n, 'item': url(p)} for i, (n, p) in enumerate(steps, 1)]})
+        lis = ''.join('<li><a href="%s">%s</a></li>' % (rel(here, p), html.escape(n)) for n, p in steps[:-1])
+        nav = ('<nav class="cd-crumbs" aria-label="Breadcrumb"><ol>%s<li><span aria-current="page">%s</span></li>'
+               '</ol></nav>\n  ' % (lis, html.escape(steps[-1][0])))
+    ld = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False)
+    return nav + '<script type="application/ld+json">%s</script>' % ld
+
+
+def byline(here, text):
+    """'By Azqato' under the title of each prompt and of the Codes, Prompts and Tools home pages."""
+    text = re.sub(r'\n<p class="cd-byline">.*?</p>', '', text)
+    if not (here.startswith('prompts/') or here in ('index.html', 'tools/index.html')):
+        return text
+    end = text.index('</h1>', text.index('<!-- /CODES -->')) + len('</h1>')
+    about = '../' * (here.count('/') + 1) + 'about/index.html'
+    return text[:end] + '\n<p class="cd-byline">By <a href="%s" rel="author">Azqato</a></p>' % about + text[end:]
+
+
 OPEN = """<!-- CODES -->
   <div class="cd-shell">
   <button class="cd-menu-btn" id="cd-menu-btn" type="button" aria-expanded="false" aria-controls="cd-nav">Contents</button>
@@ -98,6 +143,7 @@ OPEN = """<!-- CODES -->
     %s
   </nav>
   <div class="cd-main">
+  %s
   <!-- /CODES -->"""
 
 CLOSE = """<!-- CODES-END -->
@@ -125,7 +171,9 @@ def wrap(here, text, groups):
     up = '../' * (here.count('/') + 1)
     if CSS not in text:
         text = text.replace('</head>', '  <link rel="stylesheet" href="%s%s" />\n</head>' % (up, CSS), 1)
-    text = text.replace('<!-- CODES --><!-- /CODES -->', OPEN % '\n    '.join(sidebar(here, groups)), 1)
+    text = text.replace('<!-- CODES --><!-- /CODES -->',
+                        OPEN % ('\n    '.join(sidebar(here, groups)), crumbs(here, groups)), 1)
+    text = byline(here, text)
     return text.replace('<!-- CODES-END --><!-- /CODES-END -->', CLOSE % pager(here, groups), 1)
 
 

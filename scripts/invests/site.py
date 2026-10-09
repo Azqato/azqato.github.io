@@ -88,6 +88,7 @@ DESCS = {
     "indices/index.html": "When to buy index funds and ETFs: VIX action levels, AAII sentiment, RSI timing, DCA vs lump-sum math, and quality metrics like expense ratio.",
     "indices/method.html": "The index and ETF method in full: fund types, DCA vs lump sum, the VIX, RSI and 52-week timing, AAII sentiment, and fund quality.",
     "indices/market.html": "A same-day market snapshot: major indices, factor and sector ETFs, commodities, Treasury yields, leveraged ETFs and crypto, refreshed three times a trading day.",
+    "leveraged/index.html": "A reference library for six leveraged ETF strategy frameworks built around TQQQ: 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail and HFEA. Educational use only.",
     "leveraged/3sig.html": "The 3 Sig quarterly value-averaging strategy by Jason Kelly: a 3% quarterly target manages a stock index fund against a bond buffer.",
     "leveraged/tqqq-ftlt.html": "TQQQ For The Long Term: a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ and TLT.",
     "resources/faq.html": "37 practical answers on long-term stock investing: when to sell, how many stocks to hold, PEG vs P/E, VIX timing, DCA vs lump sum and IPO timing.",
@@ -723,8 +724,22 @@ def head(page, title, desc, kind, scope, extra_css, inline_css):
 <link rel="icon" href="{favicon(page)}">
 <script src="{r}../theme.js"></script>
 {links}
-{style}</head>
+{home_ld(page)}{style}</head>
 """
+
+
+def home_ld(page):
+    """The Invests home as a page of azqato.com, for structured data (SEO audit, 2026-10-08)."""
+    if page != "index.html":
+        return ""
+    url = page_url(page)
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "name": BRAND, "url": url,
+         "author": {"@type": "Person", "name": "Azqato", "url": "https://azqato.com/about/"}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://azqato.com/"},
+            {"@type": "ListItem", "position": 2, "name": BRAND, "item": url}]}]}
+    return f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n'
 
 
 def up(page):
@@ -813,11 +828,18 @@ def crumbs(page, label, group, parent):
         return ""
     r = rel(page, "")
     parts = [f'<li><a href="{r}index.html">Home</a></li>']
+    trail = [("Home", page_url("index.html"))]
     if group and label != group:
         landing = next(p for p, _, _, g, _, _ in PAGES if g == group)
         parts.append(f'<li><a href="{r}{landing}">{esc(group)}</a></li>')
+        trail.append((group, page_url(landing)))
     parts.append(f'<li><span aria-current="page">{esc(label)}</span></li>')
-    return f'<nav class="pp-crumbs" aria-label="Breadcrumb"><ol>{"".join(parts)}</ol></nav>\n'
+    trail.append((label, page_url(page)))
+    # The same trail as structured data (SEO audit, owner's approval 2026-10-08).
+    ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i, "name": n, "item": u} for i, (n, u) in enumerate(trail, 1)]}
+    return (f'<nav class="pp-crumbs" aria-label="Breadcrumb"><ol>{"".join(parts)}</ol></nav>\n'
+            f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n')
 
 
 def pager(page):

@@ -50,7 +50,8 @@ SITE_NAME = "Azqato's Prompts"
 SITE_INTRO = ('A personal library of reusable Claude Code prompts. Each prompt lives in its own '
               'markdown file: a plain description of what it does and the full prompt text. Pick one, '
               'copy it, and paste it into Claude Code, which reads the full prompt from this site.')
-SITE_DESC = 'A personal library of reusable Claude Code prompts.'
+SITE_DESC = ('Reusable Claude Code prompts for audits, docs, design and launches. Each has a plain description '
+             'and the full text: copy one and paste it into Claude Code.')
 
 
 def esc(s):

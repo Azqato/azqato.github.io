@@ -14,7 +14,8 @@
 
 /* Undo the top bar's `nav` rule (styles.css), which matches every <nav>. */
 .cd-sidebar,
-.cd-pager {
+.cd-pager,
+.cd-crumbs {
   position: static;
   z-index: auto;
   background: none;
@@ -271,3 +272,13 @@
     padding: 28px 24px 56px;
   }
 }
+
+/* Breadcrumbs and author line (SEO audit, 2026-10-08), styled like Invests' .pp-crumbs. */
+.cd-crumbs { padding: 0; display: block; height: auto; }
+.cd-crumbs ol { display: flex; flex-wrap: wrap; margin: 0 0 20px; padding: 0; list-style: none; color: var(--ti-color-text-muted); font-size: 0.875rem; }
+.cd-crumbs li + li::before { content: "/"; margin: 0 8px; opacity: 0.6; }
+.cd-crumbs a { color: var(--ti-color-text-muted); text-decoration: none; }
+.cd-crumbs a:hover { text-decoration: underline; }
+.cd-byline { margin: 4px 0 12px; color: var(--ti-color-text-muted); font-size: 0.9rem; }
+.cd-byline a { color: inherit; }
+.cd-main .crumb { display: none; } /* the tool pages' own crumbs, replaced by .cd-crumbs */

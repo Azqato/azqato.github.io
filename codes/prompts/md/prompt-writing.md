@@ -1,6 +1,6 @@
 ---
 title: Prompt Writing
-description: Write a new prompt, or tighten one you already use, so it works with how models actually read, reason, and fail.
+description: Write a new prompt, or tighten one you already use, so it works with how models actually read, reason, and fail, and see why each change helps.
 meta: Claude Code Prompt
 ---
 

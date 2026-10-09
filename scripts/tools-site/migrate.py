@@ -4,10 +4,9 @@
     python scripts/tools-site/migrate.py [path to the tools repo, default ../tools]
     python scripts/build-nav.py          then stamp the nav, footer and search
 
-A one-time move, kept so the conversion can be read and rerun while the old
-repo is still the reference. Once the owner retires that repo, the pages under
-tools/ are this site's own and are edited directly; rerunning this would
-overwrite those edits.
+Retired: the old repo now only redirects here (archived 2026-10-08), so the
+pages under codes/tools/ are this site's own and are edited directly. Kept so
+the conversion can be read; it refuses to run against the redirect site.
 
 What it does, per page:
 - keeps the page's <main> word for word, and its own scripts;
@@ -247,6 +246,10 @@ def css(src):
 
 def main():
     src = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT.parent / 'tools'
+    # Retired 2026-10-08: the old repo now holds only redirect pages, so a rerun
+    # would overwrite the Tools pages with them. Edit codes/tools/ directly.
+    if 'location.replace(' in (src / 'index.html').read_text(encoding='utf-8'):
+        sys.exit('%s is the retired redirect site; edit codes/tools/ directly instead.' % src)
     if (src / 'css' / 'style.css').exists() is False:
         sys.exit('not the tools repo: %s' % src)
     pages = sorted(p.stem for p in src.glob('*.html'))
