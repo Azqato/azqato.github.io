@@ -253,7 +253,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     // longer aligned with the reviewed methodology) and demoted to weight-0
     // context, alongside YTD, net yield, and the 20/100-day MA columns --
     // colored rankings with no points, like P/E FWD in the stock model; AUM
-    // is display-only. With just 10 funds a percentile clamp is far too
+    // is display-only. With a short fund list a percentile clamp is far too
     // coarse, so points are straight rank-linear: the best fund on a metric
     // earns 20, the worst 0, evenly spaced, ties averaged (see the curve
     // selection in computeScoreMap).
@@ -1051,7 +1051,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       }).join("");
 
       $("stockNote").innerHTML = isEtf()
-        ? "Each metric's points come from its rank among the 10 funds (best = full points, worst = 0, " +
+        ? "Each metric's points come from its rank among the funds in this list (best = full points, worst = 0, " +
           "evenly spaced, ties averaged), weighted by pillar: Technicals 50, Performance 50 " +
           "(5-year and 10-year returns count double the 1-year return). A missing metric (–) scores zero. Open <b>Methodology</b> for the full method."
         : "Each metric's points come from its percentile rank vs the " +
