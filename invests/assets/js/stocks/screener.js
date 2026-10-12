@@ -686,9 +686,9 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '<th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>' +
           '<th class="grp-snapshot" data-sort="price">Price</th>' +
           '<th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session\'s close, as of the last daily data refresh">Chg %</th>' +
-          '<th class="grp-growth group-start" data-sort="revTTM">Rev TTM</th>' +
+          '<th class="grp-growth group-start" data-sort="revTTM">Rev Q YoY</th>' +
           '<th class="grp-growth" data-sort="revFwd">Rev FWD</th>' +
-          '<th class="grp-growth" data-sort="epsTTM">EPS TTM</th>' +
+          '<th class="grp-growth" data-sort="epsTTM">EPS Q YoY</th>' +
           '<th class="grp-growth" data-sort="epsFwd" title="GAAP-basis forward EPS growth (current fiscal year). May differ from Seeking Alpha, which uses Non-GAAP consensus.">EPS FWD*</th>' +
           '<th class="grp-valuation group-start" data-sort="peFwd" title="Shown for context and colored by the P/E-vs-growth ranking; the score\'s valuation points come from PEG FWD">P/E FWD</th>' +
           '<th class="grp-valuation" data-sort="pegFwd">PEG FWD</th>' +
@@ -997,8 +997,8 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
 
     // ---- Per-stock breakdown popup ----
     var POPUP_METRICS = [
-      { key: "revTTM",      label: "Revenue Growth TTM", weight: 10, fmt: function (d) { return fmtPct(d.revTTM); } },
-      { key: "epsTTM",      label: "EPS Growth TTM",     weight: 15, fmt: function (d) { return fmtPct(d.epsTTM); } },
+      { key: "revTTM",      label: "Revenue Growth (Q, YoY)", weight: 10, fmt: function (d) { return fmtPct(d.revTTM); } },
+      { key: "epsTTM",      label: "EPS Growth (Q, YoY)",     weight: 15, fmt: function (d) { return fmtPct(d.epsTTM); } },
       { key: "revFwd",      label: "Revenue Growth FWD", weight: 10, fmt: function (d) { return fmtPct(d.revFwd); } },
       { key: "epsFwd",      label: "EPS Growth FWD",     weight: 15, fmt: function (d) { return fmtPct(d.epsFwd); } },
       { key: "pegFwd",      label: "PEG FWD",            weight: 25, fmt: function (d) { return fmtNum(pegDisplay(d)); } },

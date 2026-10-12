@@ -30,8 +30,29 @@ PUNCT_DASH = re.compile(r"\u2014|&mdash;")
 # stay a record of the sources; these numbers are simply not expected on the
 # pages any more. P11, 2026-10-02: two dead links on Resources.
 # Items the owner approved removing or rewording (P11; C1 to C4 and Q7 on 2026-10-03).
+# Source text deliberately changed after the move, so the inventory (a snapshot
+# of the pre-move page) no longer matches. Two groups beyond the originals:
+#
+# The TTM naming correction (2026-10-11). The two trailing growth metrics were
+# called "Revenue Growth TTM" and "EPS Growth TTM" and the metrics page defined
+# them as a twelve-month period against the same period a year earlier. They are
+# not: the stocks feed carries Yahoo's revenueGrowth and earningsGrowth, which
+# are the latest reported quarter against the same quarter a year earlier. This
+# was measured against quarterly income statements for AAPL, MSFT, NVDA, KO and
+# WMT (agreement within 0.05 percentage points), and a true twelve-month figure
+# cannot be computed at all, because the source publishes only five or six
+# quarters where eight are needed. Headings, definitions and the deceleration
+# guidance were rewritten to describe the quarterly figure honestly. The feed
+# keys revTTM and epsTTM are unchanged, being internal names that two other
+# repositories read.
+#
+# The ETFs list growing from 10 funds to 36 (2.18.x), which left three items on
+# the screener page naming the old count.
 REMOVED = {"azqato.github.io-invests.json": {108, 109, 130, 131, 90, 91, 92, 93},
-           "stocks-index.json": {53, 55},
+           "stocks-index.json": {53, 55, 56, 57, 62, 63},
+           "stocks-metrics.json": {58, 60, 62, 63, 64, 66, 67, 68, 70,
+                                   96, 98, 100, 101, 103, 105},
+           "stocks-screener.json": {65, 72, 84, 131, 136},
            "leverage-holy-grail.json": {118, 163}}
 # The method has 12 metrics (owner, Q7, 2026-10-03): keep every page saying so.
 METRIC_COUNT = 12

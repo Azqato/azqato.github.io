@@ -89,20 +89,21 @@
 </div>
 
 <section class="metric-block" id="metric-rev-ttm">
-<h2 id="revenue-growth-ttm">Revenue Growth TTM</h2>
-<p class="metric-subtitle">Trailing Twelve Months Revenue Growth</p>
+<h2 id="revenue-growth-quarter">Revenue Growth (Quarter)</h2>
+<p class="metric-subtitle">Latest Reported Quarter Versus the Same Quarter a Year Earlier</p>
 <p class="metric-label">What it measures</p>
-<p>Revenue is all the money a company brings in from selling its products or services, before any costs are subtracted. It is often called the top line because it sits on the first line of the income statement. TTM stands for trailing twelve months: the most recently completed twelve-month period. Revenue Growth TTM compares that period's revenue to the same period one year earlier. It is backward-looking, reported data, not an estimate, and it answers one question: how fast did this company actually grow?</p>
+<p>Revenue is all the money a company brings in from selling its products or services, before any costs are subtracted. It is often called the top line because it sits on the first line of the income statement. This figure compares the company's most recently reported quarter with the same quarter one year earlier. Comparing like quarter with like quarter is deliberate: a retailer's Christmas quarter tells you nothing useful next to its spring quarter, so measuring against the year-earlier quarter takes seasonality out of the answer. It is backward-looking, reported data, not an estimate, and it answers one question: how fast did this company grow last quarter?</p>
+<p><strong>A note on the name.</strong> Older material on this site called this metric Revenue Growth TTM, for trailing twelve months, and the underlying data feed still carries it under the key <code>revTTM</code>. That name was wrong. The figure has always been a single quarter measured against the year-earlier quarter, never a twelve-month total. The data source publishes only five or six quarters of history, which is not enough to compute a genuine twelve-month-over-twelve-month figure for any company, so a quarterly comparison is both what is available and what has always been shown. Corrected on this page 2026-10-11.</p>
 <p class="metric-label">Why it matters</p>
-<p>TTM revenue growth is ground truth. Forecasts are opinions about the future; TTM is what already happened, taken from the company's own reported results. When TTM growth is strong and speeding up versus the prior year, real customers are spending real money at an increasing rate, which is one of the clearest signals that a business has momentum. When TTM is weak but forward estimates are high, be careful: you are being asked to pay today for execution the company has not yet demonstrated. The gap between what happened and what is promised is a risk you take on as the buyer.</p>
-<p>The most powerful setup is when TTM growth is both high in absolute terms and increasing versus prior periods. That acceleration pattern signals that demand is expanding faster than expected and the business is building rather than plateauing.</p>
-<p>The opposite pattern is just as important to recognize: growth that slows quarter after quarter. A business reporting quarterly revenue growth of +20%, +15%, +10%, +5% is still growing, but each step down says demand is cooling and the business is approaching a plateau. This matters to you as a holder because the market pays a premium price for confident, durable growth. When that confidence weakens, the price investors are willing to pay for each dollar of the company's earnings shrinks, and the stock can fall even while revenue is still rising. Consistent deceleration across four or more quarters is one of the clearest warning signals available.</p>
+<p>Reported growth is ground truth. Forecasts are opinions about the future; this is what already happened, taken from the company's own reported results. When it is strong, real customers are spending real money, which is one of the clearest signals that a business has momentum. When it is weak but forward estimates are high, be careful: you are being asked to pay today for execution the company has not yet demonstrated. The gap between what happened and what is promised is a risk you take on as the buyer.</p>
+<p>Because this is one quarter rather than a full year, it is the more current of the two views and also the noisier one. A single quarter can be flattered or spoiled by something that says little about the business: an acquisition closing, a product launch landing just inside the quarter, a shipment slipping just outside it, or an unusually weak quarter a year earlier making this one look better than it is. Treat one strong or weak quarter as a data point, not a verdict.</p>
+<p>The pattern most worth watching is growth that slows quarter after quarter. A business reporting +20%, +15%, +10%, then +5% is still growing, but each step down says demand is cooling and the business is approaching a plateau. This matters to you as a holder because the market pays a premium price for confident, durable growth. When that confidence weakens, the price investors are willing to pay for each dollar of the company's earnings shrinks, and the stock can fall even while revenue is still rising. Spotting that pattern takes more than the number shown here, which is the latest quarter only: read the company's own reported quarterly history alongside it.</p>
 <p class="metric-label">How to read it</p>
 <div class="how-to-read">
 <ul>
-<li><span class="badge badge-good">Strong</span> TTM above 15% for a growth company, especially if the growth rate is increasing year-over-year</li>
-<li><span class="badge badge-caution">Watch</span> TTM below 10% for a company with high forward expectations (the gap between reality and estimate is a risk)</li>
-<li><span class="badge badge-negative">Red flag</span> Declining TTM revenue growth across consecutive quarters signals momentum loss</li>
+<li><span class="badge badge-good">Strong</span> Above 15% for a growth company, especially if the rate is holding up across several quarters of the company's own history</li>
+<li><span class="badge badge-caution">Watch</span> Below 10% for a company with high forward expectations (the gap between reality and estimate is a risk)</li>
+<li><span class="badge badge-negative">Red flag</span> Growth falling across consecutive quarters signals momentum loss. One soft quarter on its own does not; check the history before concluding</li>
 </ul>
 </div>
 <p class="example-label">Illustrative Example: Revenue Growth Trajectories</p>
@@ -111,7 +112,7 @@
 <thead>
 <tr>
 <th scope="col">Scenario</th>
-<th class="num" scope="col">TTM Growth</th>
+<th class="num" scope="col">Quarterly Growth</th>
 <th class="num" scope="col">FWD Estimate</th>
 <th scope="col">Signal</th>
 </tr>
@@ -199,19 +200,20 @@
 </section>
 
 <section class="metric-block" id="metric-eps-ttm">
-<h2 id="eps-growth-ttm">EPS Growth TTM</h2>
-<p class="metric-subtitle">Trailing Twelve Months Earnings Per Share Growth</p>
+<h2 id="eps-growth-quarter">EPS Growth (Quarter)</h2>
+<p class="metric-subtitle">Latest Reported Quarter's Earnings Per Share Versus the Same Quarter a Year Earlier</p>
 <p class="metric-label">What it measures</p>
-<p>EPS stands for earnings per share: the company's total profit divided by the number of shares that exist. If a company earns $2B in a year and has 1 billion shares, its EPS is $2. (Diluted EPS, the standard version used here, also counts shares that could be created by stock options and similar instruments, making it the more honest denominator.) EPS Growth TTM is the percentage change in that per-share profit over the past twelve months versus the prior-year period. It measures profit growth, not revenue growth, and the two can tell different stories: a company growing revenue at 30% while its costs grow even faster will show strong TTM revenue but weak or negative EPS TTM. That divergence matters.</p>
+<p>EPS stands for earnings per share: the company's total profit divided by the number of shares that exist. If a company earns $2B in a year and has 1 billion shares, its EPS is $2. (Diluted EPS, the standard version used here, also counts shares that could be created by stock options and similar instruments, making it the more honest denominator.) This figure is the percentage change in that per-share profit for the most recently reported quarter against the same quarter a year earlier. It measures profit growth, not revenue growth, and the two can tell different stories: a company growing revenue at 30% while its costs grow even faster will show strong revenue growth but weak or negative EPS growth. That divergence matters.</p>
+<p><strong>A note on the name.</strong> As with Revenue Growth above, this was previously labeled EPS Growth TTM and the data feed still carries the key <code>epsTTM</code>. It is a single quarter against the year-earlier quarter, not a twelve-month figure, and it always was. Corrected on this page 2026-10-11. Because it covers one quarter it is more current but noisier, and it is the more volatile of the two: profit is what is left after costs, so a modest swing in revenue or a single one-off charge moves EPS far more than it moves revenue.</p>
 <p class="metric-label">Why it matters</p>
-<p>Revenue tells you the business is growing. EPS tells you the business is compounding. The goal is not just a company that sells more; it is a company that earns more per share over time. When EPS TTM is strong and growing alongside revenue, the company is becoming more efficient as it scales, not just bigger. That efficiency has a name, operating leverage: costs grow slower than sales, so each new dollar of revenue produces more profit than the last.</p>
-<p>Comparing EPS TTM to P/E FWD (the price you pay for each dollar of next year's expected earnings, explained in its own section below) is also a useful check. If per-share earnings keep growing but the P/E stays low, the market has not yet given the company credit for the quality of those earnings. That is the kind of gap this methodology targets.</p>
+<p>Revenue tells you the business is growing. EPS tells you the business is compounding. The goal is not just a company that sells more; it is a company that earns more per share over time. When EPS growth is strong alongside revenue growth, the company is becoming more efficient as it scales, not just bigger. That efficiency has a name, operating leverage: costs grow slower than sales, so each new dollar of revenue produces more profit than the last.</p>
+<p>Comparing EPS growth to P/E FWD (the price you pay for each dollar of next year's expected earnings, explained in its own section below) is also a useful check. If per-share earnings keep growing but the P/E stays low, the market has not yet given the company credit for the quality of those earnings. That is the kind of gap this methodology targets.</p>
 <p class="metric-label">How to read it</p>
 <div class="how-to-read">
 <ul>
-<li><span class="badge badge-good">Strong</span> EPS TTM growing above 15%, especially alongside healthy revenue growth</li>
+<li><span class="badge badge-good">Strong</span> EPS growing above 15%, especially alongside healthy revenue growth</li>
 <li><span class="badge badge-caution">Watch</span> Revenue growing fast but EPS flat or declining (margin compression, heavy reinvestment, or cost growth outpacing revenue)</li>
-<li><span class="badge badge-negative">Red flag</span> Negative EPS TTM growth despite positive revenue growth; profitability is moving in the wrong direction</li>
+<li><span class="badge badge-negative">Red flag</span> Negative EPS growth despite positive revenue growth; profitability is moving in the wrong direction</li>
 </ul>
 </div>
 <p class="example-label">Illustrative Example: Revenue vs. EPS Growth Divergence</p>

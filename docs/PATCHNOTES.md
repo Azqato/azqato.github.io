@@ -5,6 +5,36 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.18.1] - 2026-10-11
+
+### Fixed
+- **The two trailing growth metrics were named and defined wrongly on every page that mentions them.** They were called
+Revenue Growth TTM and EPS Growth TTM, and the metrics page defined TTM as "the most recently completed twelve-month
+period" compared with "the same period one year earlier". The stocks feed carries Yahoo's `revenueGrowth` and
+`earningsGrowth`, which are the latest reported quarter against the same quarter a year earlier. Measured against
+quarterly income statements for AAPL, MSFT, NVDA, KO and WMT, the feed matched latest-quarter year over year to within
+0.05 percentage points on all five (AAPL 16.40 against 16.36, NVDA 105.90 against 105.85). A true twelve-month figure
+cannot be computed for any company from that source, which publishes only five or six quarters where eight are needed.
+- The screener's columns now read **Rev Q YoY** and **EPS Q YoY**, its score popup reads Revenue Growth (Q, YoY) and EPS
+Growth (Q, YoY), and the scoring-pillar table's first pillar is **Reported** rather than TTM, spelling out that each is
+the latest reported quarter against the same quarter a year earlier.
+- The metrics page's two sections are retitled Revenue Growth (Quarter) and EPS Growth (Quarter), describe the quarterly
+comparison and why the year-earlier quarter is the right comparison (it takes seasonality out), and each carries a note
+naming the old label and the feed key it still uses. The stock method page's two cards match.
+- **The deceleration guidance was actively misleading** and is rewritten. It told readers that "consistent deceleration
+across four or more quarters is one of the clearest warning signals available" and to watch a +20%, +15%, +10%, +5%
+sequence, on a page whose number is a single quarter and cannot show a sequence. It now says to read the company's own
+reported quarterly history alongside it, and the red-flag bullet no longer treats one soft quarter as a trend.
+- The feed keys `revTTM` and `epsTTM` are deliberately unchanged. They are internal names read by this site and by
+Automate Fundamentals, both of which already treat them as quarterly, so renaming them costs a coordinated three-repo
+deploy and gains a reader nothing. Automate Fundamentals' matching Learn pages were corrected in its v0.124.2.
+- The corrections live in `CONTENT_EDITS` and `SCRIPT_EDITS` in `scripts/invests/site.py`, not in `_sources/`, which
+`snapshot.py` regenerates and would silently undo. Each replacement asserts its target is present, so a future snapshot
+that rewords any of this fails the build loudly instead of dropping the fix; tested by rewording a snapshot and
+confirming the build stops.
+- `scripts/invests/check.py` also had three inventory items failing before this change, left over from the ETFs list
+growing from 10 funds to 36. Those are allowlisted alongside the ones this change rewrites, so the suite is green again.
+
 ## [2.18.0] - 2026-10-08
 
 ### Added
