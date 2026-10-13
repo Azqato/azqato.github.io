@@ -216,15 +216,27 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     // metric -- the denominator stays 100, so an incomplete stock can never
     // outscore a complete one (its missing cell renders dark red).
     function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
-    // Refitted 0.22 to 0.13 on 2026-10-12 (stocks feed v5.4.0). The target is ~1
-    // perfect score in the Nasdaq 100 and ~5 in the S&P 500. At 0.22 the live
-    // feeds produced 5 and 12; at 0.13 they produce 2 and 5. The Nasdaq 100
-    // cannot reach 1 at any value, because two names sit in the top percentile
-    // of all six scored metrics and so score 100 even at q = 0.10.
-    // NOTE the direction is counterintuitive: a LARGER q is more generous,
-    // since full marks begin at the (1-q)th percentile.
-    var CLAMP_Q = 0.13; // full marks at the (1-q)th percentile, zero below the qth
-    function pointsFromPct(p) { return clamp(20 * (p - CLAMP_Q) / (1 - 2 * CLAMP_Q), 0, 20); }
+    // The clamp has two ends and they are set independently (2026-10-12).
+    // CLAMP_LO: a metric scores zero at or below this percentile.
+    // CLAMP_HI: it earns full marks at or above the (1 - CLAMP_HI)th percentile.
+    // A single constant used to set both, which was never a decision; it just
+    // fell out of writing one variable, and it forced a forgiving floor and a
+    // reachable ceiling to trade off against each other.
+    //
+    // Why these values. The figure that matters is how many metric cells get
+    // flattened to 0 or 20 and so carry no information about where a company
+    // ranks. At the old symmetric 0.22 that was 45.6% of all cells: a company
+    // in the 2nd percentile and one in the 15th both scored zero. At 0.13/0.22
+    // it is 32.9%, the Domestic median score reads 50 rather than 45, and the
+    // top of the pack is unchanged from the old behaviour (5 perfect scores in
+    // the Nasdaq 100, 12 in the S&P 500).
+    //
+    // NOTE both are counted inward from their own end, so a LARGER value is
+    // harsher at the floor and more generous at the ceiling.
+    var CLAMP_LO = 0.13;   // zero at or below the 13th percentile
+    var CLAMP_HI = 0.22;   // full marks at or above the 78th percentile
+    var CLAMP_SPAN = (1 - CLAMP_HI) - CLAMP_LO;
+    function pointsFromPct(p) { return clamp(20 * (p - CLAMP_LO) / CLAMP_SPAN, 0, 20); }
 
     // `weight` > 0 metrics feed the Score; weight-0 metrics (the P/E-vs-growth
     // context ratio) are ranked only so their cells can be colored by percentile.

@@ -707,14 +707,14 @@
 <thead><tr><th scope="col">Where it ranks</th><th class="num" scope="col">Points (of 20)</th></tr></thead>
 <tbody>
 <tr><td>Bottom 13% (0 to 13th percentile)</td><td class="num">0</td></tr>
-<tr><td>31.5th percentile</td><td class="num">5</td></tr>
-<tr><td>Median (50th percentile)</td><td class="num">10</td></tr>
-<tr><td>68.5th percentile</td><td class="num">15</td></tr>
-<tr><td>Top 13% (87th percentile and up)</td><td class="num">20</td></tr>
+<tr><td>29th percentile</td><td class="num">5</td></tr>
+<tr><td>Median (50th percentile)</td><td class="num">11.4</td></tr>
+<tr><td>62nd percentile</td><td class="num">15</td></tr>
+<tr><td>Top 22% (78th percentile and up)</td><td class="num">20</td></tr>
 </tbody>
 </table>
 </div>
-<p class="table-note">Formula: points = 20 × (percentile - 0.13) ÷ 0.74, capped between 0 and 20, then scaled by the metric's weight. Only the top 13% of a metric earns full marks, so a perfect 100 (the S+ tier) still requires ranking near the top of the list on <i>everything</i>; the clamp is calibrated against the live data so roughly two Nasdaq 100 stocks and five S&amp;P 500 stocks manage it, with more only when rounded scores tie. The table's <b>cell colors follow the same ranking</b>: a green cell is top-of-the-pack on that metric, red is bottom, and amber is in between. <b>A missing value (–) scores zero for that metric and renders dark red</b>: the score is always out of the full 100, so incomplete data can never help a stock.</p>
+<p class="table-note">Formula: points = 20 × (percentile - 0.13) ÷ 0.65, capped between 0 and 20, then scaled by the metric's weight. The two ends are set separately: a metric scores zero only in the bottom 13%, and earns full marks in the top 22%. Those were a single number until 2026-10-12, which forced a forgiving floor and a reachable ceiling to trade off against each other. The floor is the more important of the two, because a cell pinned at 0 or 20 tells you nothing about where a company actually ranks, and a symmetric 22% clamp flattened 45.6% of all cells that way against 32.9% now. A perfect 100 (the S+ tier) still requires ranking near the top of the list on <i>everything</i>: roughly five Nasdaq 100 stocks and twelve S&amp;P 500 stocks manage it, with more only when rounded scores tie. The table's <b>cell colors follow the same ranking</b>: a green cell is top-of-the-pack on that metric, red is bottom, and amber is in between. <b>A missing value (–) scores zero for that metric and renders dark red</b>: the score is always out of the full 100, so incomplete data can never help a stock.</p>
 <h3 id="worked-example-apple-s-peg">Worked example: Apple's PEG</h3>
 <p class="hint">Apple's PEG of about 2.3 is cheaper than roughly 35% of the index. On the curve, the 35th percentile earns 20 × (0.35 - 0.22) ÷ 0.56 = about <b>5 of 20</b>, and since PEG carries the full 25-point valuation pillar, that scales to about <b>6 of its 25 score points</b>. Not because 2.3 fails a fixed bar, but because most other <span class="universe-name">Nasdaq 100</span> names are cheaper. A stock with a PEG in the cheapest 22% of the group would earn the full 25.</p>
 <h3 id="adding-up-and-the-factors-chip">Adding up and the Factors chip</h3>

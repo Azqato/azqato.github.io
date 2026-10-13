@@ -5,6 +5,35 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.21.0] - 2026-10-12
+
+Supersedes 2.20.0 the same day. That release refitted the screener's single clamp constant to 0.13; the owner
+judged it too strict at the top, and revisiting it showed the symmetric form was the problem, not the value.
+
+### Added
+- **The clamp's two ends are now set independently.** `CLAMP_LO` and `CLAMP_HI` replace `CLAMP_Q` in
+`invests/assets/js/stocks/screener.js`: a metric scores zero at or below the `CLAMP_LO`th percentile and full
+marks at or above the (1 - `CLAMP_HI`)th. Live values are 0.13 and 0.22, so zero in the bottom 13% and full marks
+in the top 22%. A single constant set both ends before, which forced a forgiving floor and a reachable ceiling to
+trade off against each other.
+
+### Changed
+- **The screener page's "How a rank becomes points" section** is rewritten for the new curve: 0 points at the
+13th percentile, 5 at the 29th, 11.4 at the median, 15 at the 62nd, 20 at the 78th and up. The note now explains
+why the floor matters more than the ceiling, which is that a cell pinned at 0 or 20 says nothing about where a
+company actually ranks.
+
+### Notes
+- Net effect against the pre-2.20.0 behavior: the Domestic median score rises from 45 to 50, the 90th percentile
+from 77 to 80, and the share of metric cells flattened to 0 or 20 falls from 45.6% to 32.9%. Perfect scores are
+unchanged at roughly five in the Nasdaq 100 and twelve in the S&P 500, so the top of the list reads as it did.
+- Dropping the clamp entirely was measured and rejected: pure rank-linear points need no constants but no stock
+would reach 100 and the top of the pack converges (Domestic 90th percentile falls to 69). The orderings are nearly
+identical either way, Spearman 0.9903, so the clamp's job is separation in the displayed score rather than in the
+ranking.
+- The two values are counted inward from opposite ends, so a larger `CLAMP_LO` is **harsher** and a larger
+`CLAMP_HI` is **more generous**. Worth remembering before anyone touches them again.
+
 ## [2.20.0] - 2026-10-12
 
 ### Changed
