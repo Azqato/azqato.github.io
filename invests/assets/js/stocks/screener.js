@@ -381,8 +381,8 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       if (p === undefined || p === null) return "neg";
       return colorFromPts(p);
     }
-    // Tier list by rank (v3.29.0): S = top 10% of the scored stocks in the
-    // loaded list, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%.
+    // Tier list by rank (v3.29.0; the bands were re-cut and a D added in
+    // v5.8.0, so the live cuts and their measurements are stated below).
     // A ranking, not a buy/sell rating. Boundary ties round UP: every stock
     // whose (rounded) score matches the last stock inside a band joins that
     // band, so a tier only stretches past its quota on identical scores.
@@ -395,7 +395,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     // The sizing rule is that no band should be so large that the label stops
     // narrowing anything down. Measured as the information content of a tier
     // label on the Domestic universe, these cuts reach 2.56 bits of a 2.81-bit
-    // ceiling (91%), against 2.48 of 2.58 for the five-label 10/15/25/25/25
+    // ceiling (91%), against 2.28 of 2.58 for the five-label 10/15/25/25/25
     // they replace, and no band is wider than 21% of the market.
     //
     // D is not cosmetic. Median PEG points collapse from 11.4 of 25 in C to

@@ -5,6 +5,25 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.25.0] - 2026-10-12
+
+### Fixed
+- **The clamp and tier work was one build away from being silently reverted.** `invests/` is rebuilt from the
+read-only snapshot in `scripts/invests/_sources/`, and that snapshot still carries the single symmetric
+`CLAMP_Q` of 0.22 and the original v3.29.0 five-label tier bands. Running `site.py` would have undone the whole
+of 2026-10-12: the clamp split, both rounds of re-cut bands, and the D tier. All of it is now registered in
+`CONTENT_EDITS['stocks/screener.html']` (11 pairs) and `SCRIPT_EDITS['screener.js']` (11 pairs), which is the
+tracked home this script already provides for exactly this hazard. Each pair asserts its target is present, so a
+future snapshot that rewords any of it fails the build loudly instead of dropping the correction.
+- Verified by running the real `apply_edits` over the snapshot: no stale band or clamp string survives, and the
+live `screener.js` is now byte-identical to what the build would produce from the snapshot, so the build is a
+no-op on these regions rather than a revert.
+- **A stale comment in `screener.js` contradicted the code under it.** The block above `TIER_CUTS` still read
+`S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%` while the block immediately below it defined
+the six-band scheme.
+- **A wrong figure in the same comment.** It claimed the five-label scheme it replaced scored 2.48 bits; the
+measurement is 2.28. The PRD and the patch notes had it right.
+
 ## [2.24.1] - 2026-10-12
 
 ### Fixed
