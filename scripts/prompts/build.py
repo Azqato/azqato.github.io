@@ -16,7 +16,7 @@ full prompt text, so a link preview, a search engine and Claude's fetch tool
 all see the prompt itself. The .md file is published beside it, at
 prompts/md/<slug>.md, as the plain text an agent reads.
 
-To add a prompt: write prompts/md/<slug>.md, add the slug to ORDER, run this
+To add a prompt: write codes/prompts/md/<slug>.md, add the slug to ORDER, run this
 and build-nav.py. A hidden prompt keeps its page but leaves the list, search
 and sitemap. To rename or remove one, add its old slug to RETIRED; its old
 address then redirects (on azqato.com, via _redirects).

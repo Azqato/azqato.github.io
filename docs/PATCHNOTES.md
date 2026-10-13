@@ -5,6 +5,26 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.19.0] - 2026-10-12
+
+### Added
+- **Prompts operating notes, `codes/prompts/docs/PRD.md`.** Rewritten from the archived prompts repository's PRD for
+the section as it now runs: where the sources and generated pages live, the content and writing rules every prompt
+follows, title and description budgets, how Copy and Expand behave, adding, editing, hiding, renaming and removing a
+prompt, public and retired addresses, the build and checks, and versioning. Its one idea from the old TODO, a Legal
+Audit prompt, is kept in its Ideas section. The old repository's design notes were not carried over.
+- **The prompts repository's patch notes, v1.0.0 to v1.112.0**, are merged word for word at the end of this file. Its
+separate version line ends there; prompts changes are site versions from this entry on.
+
+### Fixed
+- The Add Prompt prompt described the old repository's process (`prompts-data.js`, the README list, its own patch
+notes). It now points to the prompts PRD and the site's patch notes, and its description says what it does today.
+- The site PRD's runbook and "Adding a prompt" gave the sources as `prompts/md/`; they are `codes/prompts/md/`. It now
+links the prompts PRD for the full process. The same path is fixed in the build script's header comment.
+- Both runbooks left out `scripts/codes/shell.py`, which has to run after the prompts build or the pages lose the
+Contents sidebar. It is now listed. `build.py --check` is dropped from the runbook: since the shell was added it
+reports every prompt page out of date even on a clean tree. The prompts PRD records this as a known issue.
+
 ## [2.18.1] - 2026-10-11
 
 ### Fixed
@@ -2654,3 +2674,2100 @@ Reconstructed by the 2026-10-01 audit; the folder has no version history.
 #### Removed
 
 - From the points to settle: where this site's docs live in the azqato.github.io repo, moot once the site became its own repo. The design detail about extending azqato.github.io's tools/build-nav.py to pages in an `invests/` folder was replaced by one saying this site would carry its own copy of the nav, if D9 stays.
+
+## Azqato's Prompts history (v1.0.0 to v1.112.0, before the move)
+
+Azqato's Prompts' own PATCHNOTES.md from the archived Azqato/prompts repository, merged word for word (merged 2026-10-12); headings moved down a level and version headings prefixed "Prompts". Its versions were a separate line; from 2.19.0 prompts changes are main entries above. File names here (`prompts-data.js`, `p/`, `docs/PRD.md` and so on) mean that repository's files; the current process is in `codes/prompts/docs/PRD.md`.
+
+All notable changes to this project are documented here. Entries are listed in reverse chronological order. Each version entry includes the version number, date, and a summary of what changed.
+
+---
+
+### Prompts v1.112.0 - 2026-10-07
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- E-commerce Site prompt (`prompts/ecommerce-site.md`, share page `p/ecommerce-site.html`). It builds a landing page, a filterable catalogue, product pages, and a cart drawer from one product data file. Every feature is described in the prompt itself: sold-out options kept visible and labelled, delivery and returns under Add to cart, a free-delivery threshold in the cart, removable filter chips, and where focus lands after each action. It asks about the shop first, never invents proof, keeps payment keys in environment variables, and shows a plain notice instead of checkout when no provider is chosen.
+- README line, mirror, sitemap. PRD Future update 25; DESIGN 1.15.2 (focus-stop count).
+
+#### Notes
+
+Combined from three of the author's wireframe templates (E-commerce Product Page, Landing Page, E-commerce Storefront), chosen from a rating of the whole library. Readers cannot see the templates, so nothing in the prompt refers to them. Checked against the Prompt Content Rules: no push or publish instruction, and no account of the author's.
+
+---
+
+### Prompts v1.111.0 - 2026-10-04
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Brand Identity, Phase 3: after the render checks it builds `brand/concepts/index.html`, a page that shows every concept side by side on light and dark, with the lockup, the symbol at 16, 32, and 96px, a one-line intent, and a link to the render check. It gives the page's path before asking for a pick, and adds any new concept or color variation asked for at the pick.
+- PRD Future update 24.
+
+#### Notes
+
+Found in the M21 test run on Template Interface (v0.18.0 there): the prompt asked for a pick with no way to see the concepts together, and the author asked for one. The full run otherwise worked as written: all eight phases, the offline Brand Design page, and a 14-slide deck that passed its checks. Checked against the Prompt Content Rules: no push or publish instruction, and no account of the author's.
+
+---
+
+### Prompts v1.110.0 - 2026-10-04
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Brand Identity gains Phase 8: `brand/index.html`, a committed client deck that presents the whole brand project in a consulting style. It is 16:9 slides with action titles, section trackers, footers, and source lines, with a switch to a scrolling report view and one slide per printed page. Fourteen slides run from the title and executive summary to next steps and an appendix, all drawn from the docs and `brand/`. It links to `presentation.html` and never to the uncommitted offline Brand Design page. It ends on a headless Edge check of both views. The description now mentions the deck (141 characters), and the intro paragraph says eight phases.
+- README's Brand Identity line mentions the deck. PRD Future update 23.
+
+#### Notes
+
+From the author's Template Interface TODO list, item 2 (2026-09-27), with their answers on 2026-10-04: a separate front page rather than a replacement for `presentation.html`, both a deck and a report view, committed, and tested by running the prompt on Template Interface. Checked against the Prompt Content Rules: no push or publish instruction, and no account of the author's.
+
+---
+
+### Prompts v1.109.0 - 2026-10-03
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- SEO Audit, the twenty-third prompt. It measures a built site against the technical search checklist (rendering, robots.txt, sitemap, noindex, redirects, 404s, canonicals, titles and descriptions, one H1, structured data, breadcrumbs, orphan pages, images, Core Web Vitals), shows a plan and waits for a yes, fixes what code can fix, reruns every check, and lists what only the reader can do. Description 145 characters. Checked against the Prompt Content Rules: it forbids committing, pushing, and deploying, and names no account of the author's.
+
+#### Changed
+
+- README lists the new prompt. PRD counts and Future update 22; DESIGN.md's focus-stop count (1.15.1).
+
+#### Notes
+
+From a pasted post listing twenty SEO fixes. Two facts were checked by web search on 2026-10-03, because they postdate or may postdate the model's training: Google retired FAQ rich results for all sites on 2026-05-07 (FAQPage markup is still read but earns no rich result), and the Core Web Vitals thresholds are LCP 2.5s, INP 200ms, and CLS 0.1. The post's "load in under 2 seconds" and "add FAQ schema" were adjusted to match.
+
+---
+
+### Prompts v1.108.0 - 2026-10-03
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Condense Docs prompt, revised from its first run (v1.107.0):
+  - A new step 0 makes the pass undoable. It checks git status, records the starting commit, and stops if a doc has uncommitted changes. It never commits, stashes, or resets. Outside git, it copies the docs elsewhere first. The report says how to review or restore each file. The author suggested this.
+  - Read finds the docs' own rules about keeping history (keep resolved rows, never delete, completeness first) and raises each as a question. On this site three such rules were found only by chance.
+  - Read also runs the scripts that read the docs and saves their counts, to compare afterwards.
+  - The ledger allows one row for a repeating pattern, with its count. It adds "dated audit result" as a kind.
+  - It treats a version table that repeats the changelog as a duplicate.
+  - It lists instructions that write to a structure being removed, and updates them. Ones in files it must leave alone become questions.
+  - A standing question asks whether conflicts are fixed to what the code shows. With a yes, it may read just enough code to settle a number.
+  - Proof gains three checks: every version in removed history has a changelog entry, section references resolve across documents, and term matching ignores case.
+  - The report adds the undo commands and each file's difference from its estimate.
+- Documentation prompt: "update afterwards (patch notes, version history)" now says "(patch notes, and the version line)". It never required a version table; this site's PRD did.
+- `js/prompts-data.js` resynced.
+
+---
+
+### Prompts v1.107.0 - 2026-10-03
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+The first run of the Condense Docs prompt on this repository. The docs were condensed and nothing was removed: every cut passage was mapped to where its information lives, and a script checked each one.
+
+#### Changed
+
+- `docs/PRD.md` 45,500 words to about 26,000. Sections 18 and 19 keep only open items; their resolved rows and answered questions are recorded in the patch notes of the releases that resolved them. Section 27's built Future updates and finished Scoped sections keep their titles, `**Built in vX**` lines, differing decisions, and sources; the full proposals are in their releases' patch notes. Section 36 is now a link to this file instead of a table repeating it, and section 30's folder tree a link to section 13's. About sixty "since vX" phrases became present-tense statements.
+- Three project rules changed, on the author's answers: tenet 4 and section 18 no longer keep resolved rows; section 19 removes an answered question once it is folded in; section 33's "Completeness beats brevity" became "Every fact kept once, in its home". Releases now bump the PRD version line instead of adding a version history row.
+- `docs/DESIGN.md` 1.15.0: history phrasing moved here, two "Corrected in v1.28.0" paragraphs and a duplicated bullet removed.
+
+#### Fixed
+
+Seventeen conflicts between copies, each resolved to what the code shows: search described as absent in PRD sections 5, 21, 26, and 35; share pages 29 lines, not 21; `index.html` 56 lines, `css/style.css` 676, `js/script.js` 470; section 30's tree of 52 files and 18 prompts (63 and 22); the mirror called hand-maintained and unenforced; twenty-six focus stops, not fourteen; section 10b's 21 strings; "mandatory" browser checks after every change in PRD 29 and DESIGN 12c, against section 20; section 14 saying DESIGN does not describe the error view; section 16's "four places" and "exactly four files"; the stale debt row on DESIGN's template; DESIGN's two `.sidebar-nav` max-heights (`100dvh - 140px`) and its old Copy `aria-label`; and the README calling the Documentation prompt a whole-codebase read.
+
+---
+
+### Prompts v1.106.0 - 2026-10-03
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- Condense Docs, the twenty-second prompt. It shortens a project's documentation without losing information: docs describe the present, each fact lives in one place with links from the others, history moves to the changelog, finished roadmap items become a short Done list, and the reasons behind decisions stay. Before removing anything it shows a ledger of every cut passage and where its information will live, and waits for a yes; afterwards a script checks every row. Kept separate from the Documentation prompt, which checks the docs against the code.
+
+#### Changed
+
+- README lists the new prompt. PRD counts and Future update 21; DESIGN.md's focus-stop count (1.14.1).
+
+---
+
+### Prompts v1.105.0 - 2026-09-30
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- `tools/dashboard.py` builds this repository's progress dashboard from its sources, with the standard library only. Steps, questions, and stuck items come from the new `dashboard/state.json`; the latest results from git; the latest release from this file; the roadmap from PRD section 27. `tools/dashboard.css` holds the styles it inlines.
+- The dashboard's Roadmap now shows everything: every milestone with its scoped findings, every Future update, every deferred item, and every verification checklist row, with completed items dimmed.
+- A "May be stale" banner, shown by one small inline script when no progress has been recorded for 30 minutes and the task is not finished.
+- Under each section, the source it reads. A source that cannot be read is named rather than shown as empty.
+
+#### Changed
+
+- The Progress Dashboard prompt is rewritten around a generated page: one source per section, a small generator in the project's own language, atomic writes only on change, honest times (last recorded in the top bar, generated in the footer), the stale banner, the full roadmap, folding any existing status page in, and a verify step. New description and intro.
+- `CLAUDE.md`: the dashboard rule now says to update `state.json` and run the generator after every step, and never edit the page by hand.
+- PRD sections 13, 20, and 27; Future update 20 added.
+
+#### Fixed
+
+- The dashboard never highlighted the step in progress: the page used a class the stylesheet did not define.
+
+---
+
+### Prompts v1.104.0 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- Search. With twenty-one prompts the list was no longer quick to scan, so a search box now sits at the top of the prompt list, and inside the Prompts menu on phones.
+  - It filters the sidebar links, and the home cards when the home view is showing, by title and description as you type. Every word must appear, in any order and any case.
+  - Enter opens the first match. Escape clears the box, and a second Escape closes the phone menu.
+  - With no match, "No prompts match" is shown and announced to screen readers.
+  - The query is kept while you move between prompts, and not saved across a reload.
+- PRD section 10b describes it.
+
+#### Fixed
+
+- The Prompts menu chevron added in v1.99.0 animated its rotation, which DESIGN.md section 12b forbids (only color, border, background, and opacity may transition). It now flips instantly.
+- DESIGN.md's focus-stop count below 1024px, which said four with the menu closed; it is three.
+
+#### Changed
+
+- PRD: open question 11 answered; the Search milestone complete; the non-goal on search reversed; the prompt-count metric has no fixed ceiling; the FAQ, feature list, and line counts updated. DESIGN.md 1.14.0.
+
+---
+
+### Prompts v1.103.0 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- LinkedIn Audit prompt, the twenty-first, with its share page, built from a post of seven LinkedIn prompts the author pasted. The seven are merged into one run written to a single offer:
+  - it asks for the profile (LinkedIn's "Save to PDF" export, or pasted text) and the offer, audience, proof, and posting rate, and never signs in to LinkedIn or fetches the profile;
+  - it scores photo, banner, headline, about, featured, experience, and recommendations out of ten against tests fixed before scoring, lists what confuses a stranger, and names the one fix that matters most;
+  - it then writes ten headlines (the best three explained, one to test first), an about summary, three featured items, experience bullets that start with a result, a banner line, twelve post ideas over four weeks with a comment strategy, and two recommendation requests;
+  - it uses only results the person gives, leaves `[number]` placeholders rather than inventing figures, counts character limits (220, 2,600, 2,000) by script, and ends with a scorecard table and the counts.
+- PRD Future update 19 records it, and open question 11 asks whether to build search now that the library passes roughly twenty prompts.
+
+#### Changed
+
+- README lists the new prompt. PRD prompt and file counts updated (twenty-one prompts, 58 files). DESIGN.md 1.13.2 updates the focus-stop count to twenty-four on a wide screen.
+
+---
+
+### Prompts v1.102.0 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- Project Defaults prompt, the twentieth, with its share page. It gives a project the Documentation prompt's rules and structure in one quick pass, without reviewing the code or the existing documents:
+  - creates /docs, the four documents, and docs/TODO.md where missing, with every required section as a heading and the line "Not yet written. A Documentation run fills this in.";
+  - writes the standing policies into the PRD (writing style, browser testing, verification environment, testing cadence, repository hygiene, licensing, sharing tags and page titles for a site, deprecation and removal, working practice) plus a verification checklist;
+  - adds robots.txt, LICENSE.md, and sitemap.xml only where missing and where the conditions allow.
+- The project's own rules and documents are the source of truth: existing text is never changed, documents are never moved or merged, and every clash with a default is listed as a numbered question.
+- It fetches the Documentation prompt for the exact wording of each default, so the defaults are kept in one place.
+- PRD Future update 18 records it, built in this version.
+
+#### Changed
+
+- README lists the new prompt. Prompt counts in the PRD updated to twenty, and DESIGN.md 1.13.1 updates the focus-stop count (twenty-three on a wide screen, four below 1024px).
+- PRD section 30: the markup row's line counts corrected (`index.html` 52 lines, share pages 29 lines).
+
+---
+
+### Prompts v1.101.0 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Every share page gives AI agents clearer instructions. The old line ended "and follow it", which an agent could read as "run it now", against the Copy button's "ask if I would like to run it". The body now:
+  - shows the prompt's description beside its title, since fetch tools drop the head where the description lived;
+  - says the page only links to the prompt, and gives the one raw Markdown URL;
+  - says to read the prompt in full and word for word, and to use curl if the fetch tool summarizes or shortens pages (Claude Code's passes pages through a small model);
+  - says the prompt is the code block under "## Prompt", and the text above it is for people;
+  - says to do what the person asked, and ask before running it if they have not said to.
+- Checked with Claude Code's own fetch tool against the live Launch Video page: the head tags were dropped and the body text, with the URL, was kept.
+- `tools/prompts-mirror.py` writes the new text; all nineteen share pages resynced. PRD sections 13 and 32a updated.
+
+---
+
+### Prompts v1.100.1 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Documentation prompt: removed "Fetch the full prompt first, in case this one was cut off: …" from the end of its opening paragraph. Since v1.100.0 the Copy button sends Claude to the prompt's page, which links the full raw Markdown, so the line is no longer needed.
+
+---
+
+### Prompts v1.100.0 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- The Copy button on every prompt copies a short pointer instead of the full prompt text. There is no full-text option, since every tool these prompts are used with can fetch a page. For Launch Video it copies:
+
+  `Review the full prompt on this website, provide a summary of what it does and then ask if I would like to run it: https://azqato.github.io/prompts/p/launch-video.html`
+
+  The link is the prompt's public share page, so the person pasting it can see it goes to this site. The agent fetches that page and follows the raw Markdown link it names (v1.98.0). The link always uses the live address, even when the site is opened from disk.
+- `js/script.js`: new `SITE_URL`, `COPY_POINTER`, and `publicUrl()`; the button's `aria-label` and failure text updated. The home page intro and README describe the new behavior.
+- Launch Video prompt: the video, plan, and share copy now go in a `brag/` folder rather than `brag-output/`. If /brag has no option for the folder, Claude renames `brag-output/` to `brag/` when it finishes.
+- PRD section 10 records the pointer format as the rule for every prompt; sections 4, 13, and 23 follow. DESIGN.md 1.13.0, section 7.
+
+---
+
+### Prompts v1.99.0 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Fixed
+
+- On phones and tablets the prompts were hard to read because the navigation filled the screen. Below 1024px the sidebar became a sticky top bar that wrapped all nineteen prompt links, so it grew with every prompt added and stayed pinned over the text. Measured in headless Edge at 477px wide, the bar was 398px tall and the prompt heading began 418px down.
+- The prompt list is now a menu. The top bar holds the logo, a **Prompts** button, and Support, and is 65px tall at every width below 1024px. The button opens the list beneath the bar as one column that scrolls inside itself; picking a prompt or pressing Escape closes it. The button carries `aria-expanded` and `aria-controls`.
+- Found by running the site's Mobile Responsive Audit prompt at 375, 700, 900, 1023, 1150, 1440, and 1920px. No width had horizontal overflow before or after, closed or open, and nothing changed at 1024px and above.
+
+#### Changed
+
+- `index.html`, `js/script.js` (`setMenuOpen()`, `initMenu()`), and the 1023px block of `css/style.css`.
+- DESIGN.md 1.12.0: sections 7 and 9 describe the menu. PRD: Future update 17, built; sections 4, 13, and 23 updated.
+- docs/TODO.md reset; its "fix mobile" idea became Future update 17.
+
+---
+
+### Prompts v1.98.0 - 2026-09-29
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Fixed
+
+- AI agents could not read a prompt from its share page. `p/<slug>.html` forwards to `index.html#/<slug>`, where JavaScript loads the prompt, and an agent's fetch runs no JavaScript; the `.md` files are not on Pages either. Every share page now points to the prompt's raw Markdown on GitHub (`main`), in two places:
+  - in the head, a `<link rel="alternate" type="text/markdown">` right after the meta description;
+  - in the body, a visible line: "AI agents: fetch the prompt as plain Markdown at <URL> and follow it.", since text-converting fetch tools drop head tags.
+- People in a browser are still forwarded to the prompt as before.
+
+#### Changed
+
+- `tools/prompts-mirror.py` builds the raw URL from each prompt's slug and writes both links; all nineteen share pages resynced.
+- PRD section 32a records the rule; sections 13 and 20 updated.
+
+---
+
+### Prompts v1.97.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- Prompt Writing prompt, the nineteenth: it writes a new prompt, or reviews one already in use, against ten rules drawn from how language models work, then explains each change in a line and offers to try the prompt once on a real case.
+- PRD section 11, Prompt Writing Rules: nine rules for every prompt (facts from the context, not memory; investigate before concluding; exact work goes to tools; a way to say "I don't know"; show the output's shape; end on a check that can pass or fail; scoring that cannot be gamed; a focused prompt; and supplying what a model cannot know about itself). Section 12 step 3 now checks them.
+- PRD section 20, Reference notes: the author's notes on a video about how language models are built, the source of the rules. The file stays local, excluded through `.git/info/exclude`, so it is never published.
+- PRD Future update 16 records the work, built in this version.
+
+#### Changed
+
+- Audited all eighteen existing prompts against the new rules. Thirteen already met them. Five were tightened:
+  - Add Prompt: ends by running the project's checks and saying which passed, with length limits counted by script.
+  - GitHub Wiki: a new Step 5 checks by script that every link between pages resolves and every page is in the sidebar, reports what changed and what could not be checked, and says not to push the wiki.
+  - Mobile Responsive Audit: ends with a report of every width and page checked, the measurements, the fixes, and the gaps.
+  - Brand Identity: contrast ratios are computed with a script from the hex values, not estimated.
+  - Documentation: title and sharing-tag lengths are counted by script, and patch-note dates come from the system clock.
+- DESIGN.md section 10: focus-stop count updated for nineteen prompts (twenty-two stops). DESIGN.md is now 1.11.10.
+- docs/TODO.md reset to its empty placeholder; its one idea became Future update 16.
+
+---
+
+### Prompts v1.96.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Documentation prompt: description and intro rewritten in plain, benefit-first language: what running it gives you (a project anyone can pick up, four clear documents, your own rules and ideas kept, defaults only where nothing is decided, no extra cost on a large project), in one paragraph instead of four long, technical ones.
+- Documentation prompt: less weight on TODO.md at the start. The intro now mentions it in one clause; steps 2 and 5 no longer name it (step 5's closing sentence about TODO questions and discrepancies is removed); and the survey paragraph only name it and point to its section. The details (never consolidated or moved, moving a list kept elsewhere, not acting on ideas during the audit, reporting whether it was read) now live in the `/docs/TODO.md` section.
+- Documentation prompt: the "Fetch the full prompt first" sentence now ends the opening paragraph, in the author's wording, instead of standing above it.
+- Documentation prompt: removed the progress dashboard. Its folder-structure line and its ignore-file rule are gone, so the prompt sets documentation defaults only. It also no longer adds a Roadmap entry proposing a dashboard, nor keeps a separate rule for an existing dashboard section in CLAUDE.md.
+- Progress Dashboard prompt: now carries the two rules moved out of the Documentation prompt: the dashboard is never added to an ignore file, and where the project's docs describe its folder structure, dashboard/ is listed there as a project file that is never merged into the docs. Its standing rule is also recorded in the PRD's working-practice section where there is one, and an existing rule in CLAUDE.md is left as it is.
+
+---
+
+### Prompts v1.95.1 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Documentation prompt: the fetch-first instruction is now one sentence: fetch the full prompt first, in case the pasted one was cut off, with only the raw file linked. The `blob` link and the fallback wording are gone.
+
+---
+
+### Prompts v1.95.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Documentation prompt: pasting it into Claude Code could cut it off, since it is about 70 KB. Its first line now tells Claude to fetch the full, latest version from `https://raw.githubusercontent.com/Azqato/prompts/main/prompts/documentation.md` (the raw form of `https://github.com/Azqato/prompts/blob/main/prompts/documentation.md`, which is also named), follow the fenced block under its "## Prompt" heading, and prefer it wherever it differs from the pasted text. If the fetch fails, Claude carries on with what was pasted and says at the start of its summary that it may be incomplete and where the pasted text ended. The intro explains why.
+
+#### Notes
+
+The raw address is used first because the `blob` address returns GitHub's web page around the file rather than the file itself. The prompt now depends on `prompts/documentation.md` staying at that path on `main`, so renaming or moving it should be treated like retiring a public address.
+
+---
+
+### Prompts v1.94.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Brand Identity prompt: it now begins with a read-only pass. Claude reads every markdown documentation file in the project in full (README, CLAUDE.md, PRD, DESIGN, patch notes or changelog, and any other `.md` that describes the project, skipping dependency folders and build output) to understand the current state of the site, without creating, editing, or moving anything and without asking questions yet. It notes what bears on the brand: the product, audience, tone of voice, existing logo, colors, fonts, tokens, and style rules, the site's current look and pages, past design decisions and their reasons, anything that must not change, and the project's working rules. Disagreements between documents are noted, not resolved. It summarizes its findings with the file each came from, and Phase 1 builds on that summary instead of re-reading the same files.
+- The intro describes the pass.
+
+---
+
+### Prompts v1.93.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Brand Identity prompt: the Brand Design page's "What it shows" gains a fourth section, **Other brand images**, so nothing made over time is missed, including files from an earlier run of the prompt or from other work. It looks through the rest of `brand/` (concepts, mockups, the guidelines PDF, the presentation) and the site's own asset folders for logos, symbols, wordmarks, favicons, app and touch icons, share images, social banners, and web manifests, skipping dependency folders, build output, and caches. It lists only files that exist now, grouped by where they live, with each file's path shown. On the gated page these files are copied into the build under `brand/other/`, so the file handler still accepts only paths inside the brand folders.
+
+---
+
+### Prompts v1.92.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Brand Identity prompt: the Brand Design page is now always built, with no question at the end. Its form depends on the site:
+  - A site with a signed-in area for internal pages: the gated page as in v1.91.0, behind the same access check, with the protected file handler and its tests.
+  - A public site with no way to restrict a page, or no site at all: an offline page, `brand/brand-design.html`. It is one self-contained file that opens by double-click and links to each file by relative path. It lists the files as they were when written, since a page opened from disk cannot read its folder; running the phase again refreshes it. It uses the new brand's own palette. It is added to `.gitignore` (creating the file with only that line if there is none), so it is never committed or published, and it is checked opened from disk and absent from `git status`.
+  - Claude says which form it chose and why.
+- The intro, the scope rule, and the README describe both forms. The prompt now has seven phases.
+
+---
+
+### Prompts v1.91.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Brand Identity prompt: a new optional Phase 7 adds a Brand Design showcase page to the reader's site, so their team can preview, open, and download every file in `brand/` without opening the repository. It runs only if the reader says yes, since it is the one part of the prompt that changes the project; the scope rule and intro say so.
+  - Placement: next to the site's other internal pages, behind the same access check. If the site has no protected area, it asks where to put the page rather than making brand files public.
+  - Content: one section per brand folder (logo system, brand kit, render checks), each a responsive grid of 150px preview tiles with open and download links. Files meant for dark backgrounds preview on the brand's dark color. Files are read from disk on each request, so new ones appear without code changes.
+  - Safety: files are copied into the build output and served through one protected handler that accepts only paths inside the brand folders and returns 404 for anything else, with tests for an empty path, an outside path, `../` traversal, a lookalike `brandx/` folder, and a missing file.
+  - Styling uses the site's own tokens and works at phone width. It finishes by updating the project's PRD, patch notes, and README, and by a local headless browser check, including that a signed-out visitor is refused.
+- The specification named one framework's handler syntax and build folder; the prompt keeps those as examples so it works on any stack.
+- README: the Brand Identity description mentions the optional page.
+
+---
+
+### Prompts v1.90.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- `CLAUDE.md` default rules: headless Edge stays for local checks, with one named exception, a single load of a link a `docs/TODO.md` idea points to when the web fetch tool cannot read it, never signed in. Open question 10 is answered, and PRD section 20 matches.
+- Roadmap: the skip-to-content link and copy-result live region are scheduled for the next session. Search keeps its trigger of roughly twenty prompts (eighteen today).
+
+---
+
+### Prompts v1.89.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Added
+
+- **Frontend References**: a setup prompt that writes a standing "Frontend references" rule into CLAUDE.md, at user scope (recommended) or for the current project. Claude uses seven outside references only when building a new page, when told something looks bad, or when one is named: a DESIGN.md from Refero Styles or awesome-design-md for style, Component Gallery (and, optionally, 21st.dev) for components, Kinetics for motion, whatships and HyperFrames for demo videos, and Impeccable for a final pass. The project's own design system comes first; nothing is installed or called without asking; nothing is filled in from memory; each site is dated 2026-09-28 with what its terms allow. Future update 15.
+
+#### Changed
+
+- PRD section 21: prompts may name third-party sites they use directly as a resource. A list of links for browsing is still out of scope. This supersedes the earlier reading in update 3.
+- README, PRD, and DESIGN counts updated for eighteen prompts and 52 files.
+
+---
+
+### Prompts v1.88.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Roadmap: the new idea in `docs/TODO.md`, a list of eight frontend reference sites, is researched and proposed as Future update 15: a Frontend References prompt that writes a standing rule into CLAUDE.md, with the reuse terms each site states, a choice of user or project scope, and three open questions. It is a proposal; nothing is built.
+- `docs/TODO.md` is back to its placeholder, since the idea now lives in the Roadmap.
+
+---
+
+### Prompts v1.87.0 - 2026-09-28
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+Five new prompts and two improvements, adapted from Meng To's `mengto/skills` repository (MIT licence). Each is written in this site's own words, with the parts tied to Codex, to one person's accounts, or to committing and pushing left out.
+
+#### Added
+
+- **Design Review**: a read-only review of a site's design. Every finding cites the exact element, is classed as a quality defect or as decoration with no job, and is ranked P0 to P3; the fix is removal first. No AI-authorship guesses, no taste score, no redesign.
+- **Video to Prompt**: reads a screen recording with ffprobe and ffmpeg, frame by frame at each beat, and writes one prompt detailed enough to rebuild it, including mobile and reduced-motion behavior. Uses stitched viewport captures for full-page stills.
+- **Score to Target**: an anchored rubric written before scoring, items scored separately from real evidence, and rounds of fixes until every item reaches the bar, with no rounding up. Independent judging is optional.
+- **Animation Performance**: measures offscreen CSS animations and canvas or WebGL loops at several scroll positions, pauses what is offscreen, fixes leaks in cleanup, and re-measures. Commits nothing.
+- **Landing Page**: landing and pricing modes. Asks for the one action, audience, objections, and real proof, then writes the outline, copy, FAQ, and indexing advice. Missing proof stays a marked placeholder.
+
+#### Changed
+
+- Brand Identity: concepts and the brand kit are checked for one focal point, a job for every effect, and nothing that could be pasted onto an unrelated brand.
+- Mobile Responsive Audit: screenshots are taken before, at the key moment, and after in the same framing, looked at before being trusted, and labelled as phone-width browser checks rather than device tests.
+- README, PRD sections 13, 18, 21, 27, and 30, and DESIGN section 10 updated for seventeen prompts and 50 files.
+
+#### Notes
+
+Seven more of the repository's ideas were considered and left out: skills that commit and push (section 11 forbids it), one that manages several sessions, ones tied to the author's own accounts or game, and about seventy style cards and effect recipes, which are parts for a build rather than prompts.
+
+---
+
+### Prompts v1.86.0 - 2026-09-27
+
+Updated by: Claude (Opus 5.5), at the author's request.
+
+#### Changed
+
+- Documentation prompt: says how to handle CLAUDE.md. Claude Code loads it automatically only from the project root (or `.claude/CLAUDE.md`), so an audit that folded it into the PRD would silently drop the project's rules. It is now a Project File: kept at the root and never consolidated, moved, or deleted. Each of its rules is recorded in the PRD's Working Practice, with a line saying CLAUDE.md is the copy Claude reads and that the two change together, and any difference between them is flagged under Questions rather than resolved. A CLAUDE.md that is a single `@docs/CLAUDE.md` import is accepted where it exists but never created unprompted, and the audit creates no CLAUDE.md unless its own rules need one.
+- Documentation prompt: CLAUDE.md added to the folder tree and to the list of files that stay at the root; the intro and the Working Practice spec mention it.
+- Launch Video prompt: rendering now defaults to Hyperframes' own Chrome headless shell, installed (after asking) into the Hyperframes cache with `npx hyperframes browser ensure`, and never the Chrome or Edge already on the machine. The prompt checks with `npx hyperframes browser path` that the renderer points into that cache, and stops rather than rendering with a system browser. Edge was tried and does not work, so the prompt says not to substitute it. The pinned build also keeps the rendered video the same on every machine.
+- This repository: `CLAUDE.md` gains a Default rules section (no subagents; headless Edge only, for local checks; no state-changing checks against production; fetch and check docs/TODO.md before pushing; update the PRD and patch notes after every change). PRD section 20 records it.
+
+---
+
+### Prompts v1.85.0 - 2026-09-27
+
+#### Changed
+
+- Roadmap: Search moved from Deferred to a planned milestone. The trigger stays the same: it will be built when the library passes roughly twenty prompts (twelve today).
+
+---
+
+### Prompts v1.84.0 - 2026-09-27
+
+Builds Future update 7 from the ideas list: a prompt that uses the `latent-spaces/brag` repository directly instead of any version of it written here.
+
+#### Added
+
+- `prompts/launch-video.md`, the Launch Video prompt, with its share page `p/launch-video.html`. It installs the open-source `/brag` Claude Code plugin once and runs it to make a launch video of the reader's project, with music, sound effects, and share copy, in a `brag-output/` folder. It builds no video pipeline of its own and copies none of the plugin's files.
+  - Full workflow, at the author's choice: it always runs `/brag --full`, because on Opus 5.5 `/brag` otherwise switches itself to the lighter `/brag-slim`. It checks for Node.js 22 or newer, ffmpeg, and the Hyperframes command line, and asks before installing anything missing.
+  - Installed at user scope, at the author's choice, so every project on the machine and any other prompt can use it without installing it again. Claude runs `claude plugin marketplace add latent-spaces/brag` and `claude plugin install brag@brag` (user scope is that command's default), or, where it cannot run the `claude` command, gives the reader the two `/plugin` commands and the scope to choose. The commands were checked against the Claude Code plugin documentation rather than recalled.
+  - It says how to update the plugin, since plugins from third-party marketplaces do not update themselves, asks once for tone, format, length, music, sound effects, voiceover, and title with defaults drawn from the project, and asks whether `brag-output/` should be kept out of version control.
+  - Audited against PRD section 11: no push, commit, or publish instruction, and no reference to the author's accounts. Naming the plugin's public repository is the point of the prompt and takes no action on any account.
+- The README lists it.
+
+#### Changed
+
+- Motion Design prompt: its introduction points to Launch Video for a story-style video of a whole project, as the two make different kinds of video.
+- PRD: Future update 7 marked built, with the two decisions that differ from its recommendation. Twelve prompts and 40 files in sections 13, 16, 18, 23, and 30. The verification checklist's repository structure line re-checked against `git ls-files` after the addition. `sitemap.xml` now lists twelve share pages, written by the mirror sync.
+- DESIGN.md 1.11.7: the focus-stop count for twelve prompts is fifteen.
+
+---
+
+### Prompts v1.83.0 - 2026-09-27
+
+#### Changed
+
+- Ideas list: the entry about using the `latent-spaces/brag` repository directly became PRD section 27, Future update 7, "Launch Video: run the /brag skill directly", and was removed from `docs/TODO.md`, which is back to its placeholder. Nothing is built yet; the update waits for the author's decision.
+- Finding recorded with it: nothing was lost. The site never used the repository directly. Future update 2 (v1.66.0) took only the launch copy and alt text idea from its README into the Motion Design prompt, and kept that prompt's own renderer by choice. Motion Design is a different kind of video, not a version of `/brag`.
+
+---
+
+### Prompts v1.82.0 - 2026-09-27
+
+#### Fixed
+
+- This site's dashboard showed its last step, "Push and confirm the Roadmap is live", as in progress after the task had finished. That step could only be marked done after the push, and the dashboard only reaches the live site through a push, so the final update never went live. The page was republished with every step done and the final summary.
+
+#### Changed
+
+- Progress Dashboard prompt, new default rule: where a task ends with the project being published, the final update (every step done, the summary at the top) is written before publishing, so the finished page goes live with the rest. Publishing, and confirming that something is live, are never steps on the page, since the live copy could never show them done; they are reported in the conversation instead. The rule does not tell the reader to publish anything, which stays their decision (PRD section 11).
+
+---
+
+### Prompts v1.81.0 - 2026-09-27
+
+#### Changed
+
+- Documentation prompt: when a project has no progress dashboard, the Roadmap entry it adds now proposes building one by running the Progress Dashboard prompt, linked by its share page (`/p/progress-dashboard.html`). The entry does not restate the dashboard's layout, branding, or rules, so a change to the dashboard is made in one prompt only. The description of the CLAUDE.md section it keeps was shortened for the same reason.
+- Kept in the Documentation prompt on purpose: `/dashboard` in the enforced folder tree, and the Repository Hygiene rule that it is public project content and never ignored. Those are rules about the repository, which that prompt owns.
+
+#### Notes
+
+The link is to a public page and takes no action on any account, so it is within PRD section 11. If the Progress Dashboard prompt is ever renamed, its old share page must redirect to the new one (section 32), or this link breaks.
+
+---
+
+### Prompts v1.80.0 - 2026-09-27
+
+Future dashboards made with the Progress Dashboard prompt now match this site's dashboard in layout, while keeping each project's own branding.
+
+#### Changed
+
+- Progress Dashboard prompt, layout: "choose the panels for this task" is replaced by one fixed layout, written out in full: sidebar with section counts (a scrolling strip below 900px, no script), sticky top bar with the update time and percent complete, four summary figures, a progress card, tables for steps, questions, stuck items, and results, a Roadmap section wherever the project's docs keep one (re-read on every update, never copied by hand), a footer, empty states that keep the layout still, and status pills that carry a word as well as a color. This site's dashboard is linked as a working example, but the written lines are the specification, so the prompt works when the page cannot be reached. The link is read-only and takes no action on any account, so it stays within the portability rule in PRD section 11.
+- Progress Dashboard prompt, branding: the dashboard changes layout and structure only. Where CLAUDE.md records no dashboard style, Claude takes the colors and fonts from the project's existing branding (its design doc, CSS custom properties or theme file, and brand files), fills any gap from the nearest brand color, shows where each color came from, and records it in CLAUDE.md after confirmation. It asks for colors only where the project has no branding. The example's gold-on-black colors are never copied. The density question is gone, since the layout now fixes it.
+- Fonts: the brand's fonts lead each font stack with system fallbacks, and are never downloaded or linked, keeping the page free of network requests.
+
+#### Notes
+
+This site's own dashboard keeps its gold-on-black palette, which is the style recorded in `CLAUDE.md` and which the prompt reads first.
+
+---
+
+### Prompts v1.79.0 - 2026-09-27
+
+#### Added
+
+- `dashboard/index.html`: a Roadmap section, read from PRD section 27 each time the page is built, so it cannot drift from the PRD. It lists the milestones not yet complete, every Future updates entry marked built (with its version) or proposed (with the first clause of its recommendation), and the deferred items, above a card with the verification checklist meter (2 of 32 sections verified) and the count of ideas in `docs/TODO.md`. The sidebar links to it, with a count of open milestones and proposed updates.
+
+#### Changed
+
+- PRD section 27: Future updates 1 to 5 each gained a `**Built in v1.66.0.**` line, matching entry 6. Until now only the paragraph above them said they had shipped, which a reader landing on one entry, or the dashboard, could not see. Section 20 records that a built entry always gets that line.
+- `CLAUDE.md`: the recorded layout includes the Roadmap section.
+- Status pills no longer capitalise their text automatically, which had turned version numbers into "V1.66.0".
+
+---
+
+### Prompts v1.78.0 - 2026-09-27
+
+#### Changed
+
+- `dashboard/index.html`: rebuilt on the layout of the author's admin-dashboard template. A sidebar with the brand, the current task, and section links with counts; a sticky top bar with a live dot, the update time, and the percent complete; four summary figures; a progress card; and tables for steps, questions, stuck items, and results, with word-and-color status pills and empty states. The colors stay the ones `CLAUDE.md` records (near-black, `#141414` panels, gold to amber), at the author's request, instead of the template's graphite and amber.
+- The template's shared stylesheets and script are not linked. The page must load nothing from the network, so only the styles it uses are written inline, and the template's drawer, which needs a script, becomes a scrolling strip of section links below 900px.
+- `CLAUDE.md`: the layout recorded beside the style, so later dashboards match. PRD section 20 notes it.
+
+#### Notes
+
+Checked at desktop width and inside a 375px frame. Headless Edge on Windows will not size its window below about 490px, so a phone-width screenshot needs the page in a narrow frame; at the asked-for 390px the screenshot was cropped, not overflowing.
+
+---
+
+### Prompts v1.77.0 - 2026-09-27
+
+#### Changed
+
+- Progress Dashboard prompt: removed the cleanup rule for projects set up under the old `.dashboard/` layout (moving the old folder and removing its `.gitignore` line). The prompt now names only `dashboard/`.
+- Documentation prompt: the enforced folder tree shows `/dashboard` at the root, marked public, for projects that keep one. The Repository Hygiene bullet says only that `/dashboard` is public project content, tracked, never ignored, and never consolidated; the discrepancy check for `.dashboard/` is gone. The two other mentions now read `/dashboard/index.html`, one calling it a public progress page instead of a live one.
+- Unchanged on purpose: the Documentation prompt's general `.gitignore` rules (secrets, build output, lockfiles), which have nothing to do with the dashboard.
+
+---
+
+### Prompts v1.76.0 - 2026-09-27
+
+Finishes the v1.74.0 change that made the progress dashboard public, which left four places in the Progress Dashboard prompt still written for a private page.
+
+#### Changed
+
+- Description: "a public HTML dashboard" instead of "a live" one.
+- The introduction and the Dashboard rules now say the copy on disk is the live one, and the published copy shows the state as of the last time the project was published, which is the reader's decision.
+- Latest results list files with paths relative to the project root, so no local path reaches the public page.
+- Claude gives the page's public address as well as its path, where the project is published somewhere it can name.
+- The standing-rule line written into CLAUDE.md now says the page is published and nothing private goes on it, so a later session reading only that line still keeps it clean.
+
+---
+
+### Prompts v1.75.0 - 2026-09-27
+
+#### Added
+
+- PRD section 27, Verification checklist: the 32 PRD and DESIGN.md sections that describe the code, each marked verified with a date or not yet verified. Two are verified: the repository structure in sections 13 and 30, checked against `git ls-files` (38 files, seven folders). The rest are checked a section at a time as later updates touch them.
+- PRD section 20: the rule that does that checking, in its own subsection.
+
+#### Notes
+
+- The author confirmed the licence's one grant: the prompts may be copied, adapted, and run, and not republished as a collection. No change to `LICENSE.md`.
+- Considered and not done: telling the Progress Dashboard prompt to keep its build script inside `dashboard/`. The folder is now public, so the script would be published with it, and it would assume every project has Python. Editing the page directly is enough for most tasks.
+
+---
+
+### Prompts v1.74.0 - 2026-09-27
+
+The progress dashboard is now public, so progress on a long task can be watched from the live site.
+
+#### Changed
+
+- Progress Dashboard prompt: the page lives at `dashboard/index.html` instead of `.dashboard/index.html`, and is tracked and published with the project instead of ignored. New rules: nothing private on the page (no secrets, keys, personal details, or private paths; questions about those stay in the conversation), a `noindex` tag since it is a working page, `progress-dashboard/` if `dashboard/` is already taken, and cleanup of the older setup (move a `.dashboard/` page, remove the ignore line, and remove `.gitignore` if that leaves it empty). The standing-rule line names the new path.
+- Documentation prompt: the Repository Hygiene default now treats `dashboard/` as project content, never ignored and never consolidated, and reports a leftover `.dashboard/` or an ignore line for either as a discrepancy. Its other mentions of the path updated.
+- This site: the dashboard moved to `dashboard/index.html` and is live at `/prompts/dashboard/`. `.gitignore` removed, since its only entry is gone and the Repository Hygiene rule says a project that generates nothing carries no ignore file. `CLAUDE.md` and PRD sections 13, 20, 30, and 32 updated.
+
+#### Notes
+
+The rename was required, not a style choice: GitHub Pages builds with Jekyll unless a `.nojekyll` file is present, and Jekyll skips folders whose names start with a dot, which is why `/prompts/.gitignore` already returned 404. The live page shows the state as of the last push; the ten-second reload only shows something new between pushes when opened from disk.
+
+---
+
+### Prompts v1.73.0 - 2026-09-27
+
+The Documentation prompt now sets a project up rather than verifying all of it at once. On another project of about 150 source files, the old full crawl was estimated at 400,000 to 700,000 tokens, and the run stopped to ask for a smaller scope, against the prompt's own rule.
+
+#### Changed
+
+- Documentation prompt, goal and steps: the goal is the right files, structure, sections, and standing rules, with the docs checked against the code where that is cheap. Step 1 surveys the codebase (listing, manifests, configuration, entry points, routing, data models, build and deploy files) instead of reading everything, and finds what changed since the last audit. Step 3 checks in three passes: the rules check against the prompt, quick factual checks (folder tree, tech stack, Runbook commands, the newest patch notes entry against the latest commit), then the sections touched by changes since the last audit. Where a live public site exists, a one-off spot check of its public pages is allowed. Step 4 fixes every gap in the same run, and writes unchecked sections from the survey with their claims marked uncertain.
+- New verification checklist in the Roadmap spec: every PRD and DESIGN.md section that describes the code, marked verified with a date or not yet verified. A new Working Practice rule has each later update check the sections it touches, never the whole list at once.
+- New cost paragraph: no reading every file, no offering a choice of scope, no time or token estimates, and every gap confirmed by reading the file before it is reported, not from a search result.
+- Ideas files under another name: moved only when the ideas are all the file holds. A mixed file has its ideas copied into docs/TODO.md and is left untouched, with a question about emptying it. Instructions inside it are recorded as ideas and not carried out.
+- Sitemaps: where a site has none, one is created listing only the pages reachable without signing in, named in robots.txt where the project owns it, with a comment if the production address is not live yet.
+- Logic fixes found while checking: writes are now limited to the files the prompt names, which now includes the root files and style fixes it had always asked for (the old wording limited them to the documentation files). Conventions come from a sample of files. The writing style sweep uses searches. The PRD records the audit's date, so the next audit can find what changed.
+- Introduction and description rewritten to match. PRD section 33 describes the new process.
+
+#### Notes
+
+This site's own PRD has no verification checklist yet. The next audit of this site adds it.
+
+---
+
+### Prompts v1.72.0 - 2026-09-27
+
+#### Changed
+
+- Documentation prompt: the one-pass paragraph now says to do the whole audit in the session, without spawning subagents, parallel agents, or background tasks, however large the codebase. The introduction says the same in a phrase. Mirror and share page resynced.
+
+---
+
+### Prompts v1.71.0 - 2026-09-27
+
+Answers the questions from the v1.70.0 audit, and adopts the progress dashboard to test it here.
+
+#### Added
+
+- `sitemap.xml` at the root: the site root and all eleven live share pages, twelve URLs, with no `lastmod` so a sync does not change it needlessly. Answers open question 9.
+- `LICENSE.md` at the root, answering open question 7. The Documentation prompt's default (all rights reserved, source-available, AI and search referencing permitted, training by request, no waiver, permission requests on the GitHub issue tracker, platform and third-party notes, no warranty), adjusted by one grant: anyone may copy, adapt, and run the prompts on their own projects. The default grants nothing, but PRD section 11 already said the prompts "may be reused by anyone", and an existing rule wins over a default. Republishing the prompts as a library, product, course, or dataset is not granted.
+- `CLAUDE.md` at the root: the progress dashboard rule for long tasks and its style (dark, medium density, gold `#FFB800` with a gold-to-amber gradient, taken from the look of 1000xstocks.com), recorded at the author's request to test the Progress Dashboard prompt on real work. This release was its first task.
+- `.gitignore`: the repository's first ignore file, with one entry, `.dashboard/`.
+- `docs/PRD.md` section 32b, Licensing, and a section 20 subsection on the progress dashboard.
+
+#### Changed
+
+- `tools/prompts-mirror.py`: `--sync` now writes `sitemap.xml` and the check fails if it is missing or stale. Its closing reminder now says to browser-test only a major update, matching section 20, instead of after every sync. The sitemap's comment avoids a double hyphen, which XML forbids inside comments; the first version wrote `--sync` there and failed to parse.
+- `docs/PRD.md`: open questions 6 (the copy button, confirmed working by the author), 7, and 9 answered. Sections 13 and 30 describe the new root files and the ignore file, with the file count at 38. Section 27 entry 6 records the dashboard as built against its recommendation, and why. Section 29 notes that `--sync` writes the sitemap. Section 32 lists `sitemap.xml`, `LICENSE.md`, and the configuration files in the public surface table.
+- `README.md`: one line under Author on what the licence allows.
+
+#### Notes
+
+`tools/prompts-mirror.py` changed, so this is a major update under PRD section 20. An assumption check and a browser test from disk ran once before pushing.
+
+---
+
+### Prompts v1.70.0 - 2026-09-27
+
+A full documentation audit, run with the site's own Documentation prompt as of v1.69.0, in one pass.
+
+#### Changed
+
+- `docs/PRD.md` section 33: step 4 of After any documentation change now defers to section 20's Testing Cadence. The Documentation prompt replaces a browser rule that runs after every change and gives no project-specific reason. The old wording was: "Load `index.html` from disk and confirm the site still works, if anything outside `/docs` was touched." A prompt edit touches files outside `/docs` and is still minor under section 20, so the two rules disagreed. Recorded as discrepancy 18.
+- `docs/PRD.md` section 33: Running an audit describes the one-pass run, the closing Questions list, and how `docs/TODO.md` ideas and the progress dashboard proposal are handled, and records this run as the last.
+- `docs/PRD.md` section 27: the self-audit milestone, planned since v1.38.0, is complete, with a note on where each of its six findings stands. Two milestones added for the ideas list and its first batch. The current phase mentions the ideas list and the eleven prompts. Future updates entry 6 proposes a progress dashboard for this repository, as the prompt requires for a project without one, and recommends against it for now, since tasks here rarely reach its threshold.
+- `docs/PRD.md` section 19: open question 9, whether to add a `sitemap.xml` now that eleven share pages exist, with none created meanwhile. The marker-search note now accounts for `docs/TODO.md`, whose name matches a literal search for TODO.
+- `docs/PRD.md` section 18: discrepancies 18 and 19, both resolved, and the list of what this audit checked and found accurate.
+
+#### Fixed
+
+- `docs/DESIGN.md` 1.11.6: section 4a called the stylesheet 536 lines; it is 569. Discrepancy 19.
+
+#### Notes
+
+Checked and found accurate: the prompt mirror, all eleven share pages' tags and titles, the per-route title logic, the stylesheet's section order and breakpoints, the file and line counts, and the README's required sections. The writing style sweep across all 34 tracked files found no violation: the one literal em dash and five HTML entity forms are the known instances that name the forms they prohibit, and no double dash is used as punctuation. Nothing outside `/docs` changed, so no browser test or assumption check was needed.
+
+---
+
+### Prompts v1.69.1 - 2026-09-27
+
+#### Fixed
+
+- `docs/PRD.md` sections 13 and 30: the file count is 34, not 32. v1.66.0 added the Progress Dashboard and Assumption Check prompts and their share pages, four files, but the count rose by only the two prompts. Found by comparing the stated count with `git ls-files` during a documentation check.
+
+---
+
+### Prompts v1.69.0 - 2026-09-27
+
+#### Changed
+
+- `prompts/documentation.md`: the audit now runs in one go. It no longer stops to ask during the run: it applies the prompt's defaults, and where none applies it takes the most conservative option (keep the existing text, mark the point as a discrepancy or uncertain, and create, move, or delete nothing hard to undo). Every question it raises goes into a numbered Questions list at the end of the step 5 summary, each with the default applied meanwhile and where it is recorded, so they can be answered by number afterwards.
+  - `docs/TODO.md` ideas are no longer asked about after step 3. They stay untouched and are listed among the closing questions; on a yes afterwards, the five-step process runs as before.
+  - Later sessions still ask about the ideas every time before pushing, as the author set in v1.61.0.
+  - The page description matches.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.68.0 - 2026-09-27
+
+#### Changed
+
+- `prompts/documentation.md`: where a project's `CLAUDE.md` has no Progress dashboard section, the audit no longer asks about one, which v1.67.0 had it do. It adds an entry under "Future updates" in the PRD Roadmap proposing a live progress page for long tasks, with what, why, how, size, open questions, and a recommendation for that project, unless the Roadmap already covers it. The author decides in a later session, as with every Roadmap entry. A declined entry moves to the Roadmap's deferred items with the reason, so later audits do not propose it again. An existing section is still kept unchanged and recorded in Working Practice.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.67.0 - 2026-09-27
+
+#### Changed
+
+- `prompts/documentation.md`: two small additions for projects that use the Progress Dashboard prompt.
+  - The consolidation sweep keeps a "Progress dashboard" section in `CLAUDE.md` (a style, or a standing rule for long tasks) unchanged, and records it in the PRD's Working Practice, so a documentation run never removes a choice the author made. Where there is none, the audit asks once, with its other questions, whether the author wants one. On a yes it shows the `CLAUDE.md` lines and writes them once confirmed. On a no it creates nothing and records the decision, with the date, in Working Practice so later audits do not ask again. The dashboard stays opt-in, since a rule turned on by default would spend usage on every long task in every project.
+  - Repository Hygiene treats `.dashboard/` as a one-session working folder: listed as ignored when it exists, never described as project content, and reported as a discrepancy if it is not ignored or is already tracked.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.66.0 - 2026-09-27
+
+Builds all five Future updates proposed in v1.64.0.
+
+#### Added
+
+- `prompts/progress-dashboard.md`: the Progress Dashboard prompt, the tenth. Claude keeps `.dashboard/index.html` for a long task, a single self-contained page that opens by double-click and reloads every ten seconds, showing the steps and their status, anything stuck, questions waiting for the reader with the default it will take, and the latest results. Claude maintains it in the same session: no agents, subagents, or plugins are installed, at the author's request, where the source idea used a separate agent. It asks for a style once and records it in `CLAUDE.md`, keeps working on the default when a question waits, and asks before writing a standing rule for long tasks, showing the lines first.
+- `prompts/assumption-check.md`: the Assumption Check prompt, the eleventh. Read-only: Claude lists its assumptions about the code for the current task, marked verified (with file and line) or guessed (with the reason), checks the cheap guesses, proposes the smallest fix or check for the rest, and stops for review.
+- `p/progress-dashboard.html` and `p/assumption-check.html`: their share pages, generated by `tools/prompts-mirror.py`.
+- `README.md`: both prompts added to What You Will Find Here.
+
+#### Changed
+
+- `prompts/motion-design.md`:
+  - Optional effects in Build: liquid glass (a cloned scene through three displacement maps), goo, an iris, a flood transition, and footage loaded all-intra as a blob URL.
+  - Four key stills shown before the full build, after the beat map.
+  - Sound effects may now be downloaded from a free library whose license allows commercial use without attribution, as the author chose, with each file's source and license in `sounds/CREDITS.md`. Music is still never downloaded.
+  - The mix is normalized to -14 LUFS, and the render is scanned for single-frame pops.
+  - Four gotchas: `backdrop-filter: url()` in Chromium, flood timing, `visibility: visible` under a hidden parent, and video seeking on a simple local server.
+  - States are suggested so the sequence shows what the project does, photos or footage and references are optional inputs, and the report ends with neutral launch copy and alt text.
+- `prompts/brand-identity.md` and `prompts/game-setup.md`: an optional references question. Claude reads what it can, asks for screenshots of what it cannot open, and says which qualities it takes from each.
+- `prompts/documentation.md`: Testing Cadence now covers an assumption check as well as the browser test. Right before a major update ships, the change's assumptions are listed as verified or guessed, the cheap guesses are checked, and the rest are shown, then the browser test runs once. A large change that depends on something unread checks that one thing first. Shipping is defined for projects that are never pushed or deployed and run from local files: the moment the major update is finished. Minor updates get neither check. The summary now lists any claim written from inference rather than from reading the code. Working Practice and the page description match.
+- `docs/PRD.md`: section 20 adopts the assumption check before the browser test for a major update. Section 27 records all five updates as shipped, with the decisions taken. Prompt and file counts updated in sections 13, 16, 23, 30, and 32a, the folder tree gains both files, and the section 23 focus-stop count is now fourteen.
+- `docs/DESIGN.md` 1.11.5: the section 10 focus-stop count updated to fourteen.
+- `js/prompts-data.js`: resynced, with the two new entries appended last.
+
+#### Notes
+
+Both new prompts were audited against the Prompt Content Rules in PRD section 11: no instruction to push, commit, or publish, and no reference to the author's accounts. Their descriptions are 145 and 147 characters. No site code changed, so this is a minor update under section 20 and shipped on the mirror check.
+
+---
+
+### Prompts v1.65.0 - 2026-09-27
+
+#### Changed
+
+- `prompts/documentation.md`: the `docs/TODO.md` template now shows the format instead of an empty comment: one idea bullet with a source bullet indented beneath it, both in angle brackets. The prompt treats them as a placeholder, never an idea, so a list holding only the placeholder is empty, and it puts the placeholder back when the last idea is removed.
+- `docs/TODO.md` and `docs/PRD.md` section 20: the same placeholder and rule for this repository.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.64.0 - 2026-09-27
+
+#### Changed
+
+- `docs/PRD.md` section 27: a new "Future updates" part with five proposed updates, turned from the ideas list's first item, which asked for six posts on X to be analyzed. X could not be read, so the author pasted their text; the one repository linked was read directly. The entries:
+  1. Motion Design: optional effects (liquid glass, goo, iris, flood transitions, footage), a single-frame pop scan and -14 LUFS loudness, and four new gotchas. From the @twoclipping post.
+  2. Motion Design: launch copy and alt text, and states that tell the project's story. From the @shiri_shh post and the `latent-spaces/brag` README.
+  3. Design references asked for in Brand Identity, Motion Design, and Game Setup, with no link directory on the site. From the @himanshubuildss and @vullnetademaj posts.
+  4. A new Progress Dashboard prompt. From the @Voxyz_ai post.
+  5. A new Assumption Check prompt. From the @kloss_xyz post.
+- `docs/TODO.md`: the item removed, since the Roadmap and these notes now hold it. The list is empty.
+
+---
+
+### Prompts v1.63.0 - 2026-09-27
+
+#### Changed
+
+- `prompts/documentation.md`: the Gather step for `docs/TODO.md` ideas now says how hard to try before asking. Turning six posts on X into Roadmap updates, three read attempts failed or returned only a title. A link now gets at most two attempts: the web fetch tool, then one headless Edge load with a normal browser user agent. Logging in, using the author's accounts or cookies, and third-party mirrors or scrapers are ruled out. An error, a login wall, or only a title or preview counts as unreadable. Claude then asks for the text of every unreadable source in one message, listed by author and link, or asks straight away if the author says to skip the attempts.
+- `docs/PRD.md` section 20: the same rule for this repository.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.62.0 - 2026-09-27
+
+#### Changed
+
+- `prompts/documentation.md`: an idea in `docs/TODO.md` is now treated as a brief for Claude to work out, not text to copy into the Roadmap. v1.61.0 said to add each idea "written as a planned update", which would have turned a note such as "analyze these six posts" into a Roadmap entry saying the same thing. On the author's yes, each idea now goes through five steps:
+  - **Gather:** read what it points to, and ask for the text of any source that cannot be read, such as a post behind a login, rather than guessing from the link.
+  - **Interpret:** work out the concept the author means.
+  - **Relate:** judge how it applies to the project.
+  - **Propose:** write one or more updates in Claude's own words, each with what, why, how, rough size, open questions, and a recommendation (which may be not to do it), ending with a "Based on:" line naming its sources.
+  - **Report:** remove the idea, log which entries it became, and list them in the summary for the author to edit. The author chose to have entries written and then reported, rather than approved as drafts first.
+
+  The TODO.md template, the audit rule, the later-session rule in Working Practice, the summary requirement, and the page description are updated to match.
+- `docs/PRD.md` section 20 and `docs/TODO.md`: the same process and template wording for this repository.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.61.0 - 2026-09-27
+
+#### Added
+
+- `docs/TODO.md`: the author's list of ideas for future updates. It began as `PROMPTS.md` at the root, created in the GitHub editor, and was moved here with `git mv` and put in the new template. Of its two items, the request to change the Documentation prompt is done in this release and removed; the request to analyze six posts for prompts stays until the author decides whether it goes in the Roadmap.
+
+#### Changed
+
+- `prompts/documentation.md`: two additions.
+  - **`docs/TODO.md`.** The prompt creates it from a fixed template if it is missing, adds it to the folder tree, and exempts it from the consolidation sweep, so it is never merged, moved, or deleted. A list found under another name, such as `PROMPTS.md`, is moved to it with its ideas. The file belongs to the author, so Claude adds nothing to it and puts its own suggestions in the Roadmap. Its ideas are never built directly: the audit asks whether to move them into a "Future updates" part of the PRD Roadmap, removes each one moved and logs where it went, then asks whether to work on any now. A Working Practice rule carries this to every later session: check the list only when about to push (or when a major update is finished, where nothing is pushed), fetch first so an edit made on GitHub is never overwritten, and ask every time. The summary reports what happened to it.
+  - **Testing Cadence**, a new default beside Browser Testing and Verification Environment. It runs the browser test in headless Edge once, right before a major update ships, and never between edits. A major update changes behavior, layout, scripts, styles, routing, the build, or dependencies; wording, docs, and data are minor and need only cheap non-browser checks. Unlike the other defaults, it replaces an existing rule requiring a browser test after every change, where that rule gives no project-specific reason, because an earlier version of this prompt may have written it. The old wording is quoted in the patch notes, and a rule with a real reason is kept and flagged instead.
+  - The page description covers both.
+- `docs/PRD.md` section 20: adopts the new cadence. A browser test from disk in headless Edge now runs only before a major update, meaning a change to `index.html`, the stylesheet, the script, the mirror tool, or the page template. Prompt text and docs ship on the mirror check alone. This replaces the every-change browser check in force from v1.0 to v1.60.0, whose wording was: "Then open `index.html` from disk, not from a server, and check the home list, one prompt page, the copy button, and a direct hash link. The script catches mirror drift and malformed prompt files; it cannot catch a rendering or layout problem, so it replaces none of this. Loading the page is still the only real test this project has." A new subsection sets the ideas-list check before every push.
+- `docs/PRD.md` section 30: the four-file rule now names `docs/TODO.md` as its one exception, and the folder trees and file counts in sections 13 and 30 include it. The count is 30.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.60.0 - 2026-09-25
+
+#### Added
+
+- `prompts/motion-design.md`: the Motion Design prompt, the ninth in the library. It makes a short, looping UI motion video entirely in code: one shape morphing through eight to twelve interface states, driven by an on-screen cursor, in time with a song.
+  - It reads the project first, so the states, colors, and font can come from the project's own UI, and flags any doc rule it would break, offering to update the docs, work in a separate `motion/` folder, or stop.
+  - It asks once for the states, the color scheme, a royalty-free song the reader supplies (it never downloads music), the format (square, 16:9, or 9:16), the length, and the font, follows up on anything unclear, and shows the states on the song's beat grid for approval before writing code.
+  - Every style is computed from time in a `seek(t)` function, with closed-form springs summed per target change, so any frame renders exactly and the last frame matches the first. The tab indicator and toggle knob stretch by riding different springs on each edge, and drags follow the cursor directly. A `?preview` mode scrubs the animation with the song playing.
+  - Beats come from librosa, or from numpy and the stated tempo. Neither detects downbeats, so the reader confirms beat 1 by ear. Interface sounds are synthesized or supplied, and placed by their measured peaks.
+  - A contact sheet with one frame per beat is checked before the full render. The render takes four Playwright screenshots per frame, blends them with ffmpeg `tmix` and `framestep` for motion blur at 60fps, and encodes an H.264 MP4 with the mixed audio. The loop join is checked for stutter.
+- `p/motion-design.html`: its share page, generated by `tools/prompts-mirror.py`.
+- `README.md`: the prompt added to What You Will Find Here.
+
+#### Changed
+
+- `js/prompts-data.js`: resynced, with the new entry appended last.
+- `docs/PRD.md`: prompt and file counts updated in sections 13, 16, 23, 30, and 32a, the folder tree gains the new file, and the section 23 focus-stop count is now twelve.
+- `docs/DESIGN.md` 1.11.4: the section 10 focus-stop count updated to twelve.
+
+#### Notes
+
+The details most likely to have changed since the model's training data were confirmed by web search on 2026-09-25: Geist is under the SIL Open Font License and installs locally from `@fontsource/geist`; `librosa.beat.beat_track` returns beats and a tempo estimate but no downbeats, which is why the prompt asks the reader to confirm beat 1; and ffmpeg's `tmix` averages frames with equal weights by default, so `tmix=frames=4` followed by `framestep=4` turns 240 subframes a second into 60fps with motion blur.
+
+Audited against the Prompt Content Rules in PRD section 11: no instruction to push, commit, or publish, and no reference to the author's accounts. The description is 135 characters.
+
+---
+
+### Prompts v1.59.0 - 2026-09-24
+
+#### Changed
+
+- `prompts/game-setup.md`: Phase 1 now checks the project's docs for rules the prompt would break, and says so before anything else.
+  - The rules it looks for: no build step, no npm dependencies, running from `file://` with no server, and a strict Content Security Policy.
+  - The reasons it gives for each: browsers block JavaScript modules and asset loading from `file://`, so a three.js game needs at least a local server. A game also needs `connect-src 'self'` to load assets, `'wasm-unsafe-eval'` for Rapier and the model decoders, and `worker-src blob:` for the decoder workers.
+  - Each conflict is quoted with its file and line, at the top of the Phase 1 message. The reader chooses to update the docs (confirming the wording first), adapt within the rule at a stated cost (no build step means no TypeScript, no model compression, and no test tooling), or stop.
+  - Nothing is changed or built until the reader answers. The page description says so.
+- `js/prompts-data.js`: resynced.
+
+#### Notes
+
+This came from the author asking whether a game made with this prompt could live within this site's own constraints. The answer was partly: a built game can be hosted on GitHub Pages with no server, but it cannot run from `file://`, without dependencies, or without a build step, which are exactly the rules a project like this one writes into its docs.
+
+---
+
+### Prompts v1.58.0 - 2026-09-24
+
+#### Changed
+
+- `prompts/game-setup.md`: the prompt now asks rather than guesses when it lacks information.
+  - Phase 1's one message adds a Documentation item: what the existing docs are missing, out of date on, or contradict about the game, and the details only the reader can supply, such as the game's name, audience, or story.
+  - If the answers leave the core loop, the controls, or the win and lose conditions unclear, it asks a short follow-up instead of inventing them, and Phase 2 does not start until the game is clear enough to build.
+  - The closing docs update asks for any missing information before writing, and never fills a gap with invented details.
+  - Before this, Phase 1 already asked once and waited, but vague answers could be filled in by the model, and the docs were written at the end without a check.
+  - The page description says so.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.57.0 - 2026-09-24
+
+#### Added
+
+- `prompts/game-setup.md`: the Game Setup prompt, the eighth in the library. It sets up a three.js browser game and builds a small playable vertical slice on top of it.
+  - It reads the project, then asks once about the game: genre, camera, core loop, desktop or mobile, `WebGPURenderer` or `WebGLRenderer`, plain three.js or React Three Fiber, physics, and art direction, each with a recommended default.
+  - The setup: Vite and strict TypeScript; separate modules for the engine, input, audio, assets, game logic, and UI; a fixed-step loop with interpolation, a clamped frame delta, and a pause when the tab is hidden; a state machine from boot to game over; action-based input across keyboard, mouse, gamepad, and touch, with remapping; compressed glTF assets with disposal checked against `renderer.info`; unlocked Web Audio; versioned saves; recovery from a lost graphics context; a stated performance budget; accessibility defaults; and a debug mode behind `?debug`.
+  - After one checkpoint it builds the smallest complete core loop (menu, play, win or lose, restart) and verifies it with type checks, Vitest unit tests, and a Playwright smoke test that fails on console errors and saves screenshots, which it looks at.
+  - It tells the model to check the installed three.js version's docs instead of relying on memory, since the API changes often, and it deploys nothing.
+- `p/game-setup.html`: its share page, generated by `tools/prompts-mirror.py`.
+- `README.md`: the prompt added to What You Will Find Here.
+
+#### Changed
+
+- `js/prompts-data.js`: resynced, with the new entry appended last.
+- `docs/PRD.md`: prompt and file counts updated in sections 13, 16, 23, 30, and 32a, the folder tree gains the new file, and the section 23 focus-stop count is now eleven.
+- `docs/DESIGN.md` 1.11.3: the section 10 focus-stop count updated to eleven.
+
+#### Notes
+
+Brainstormed with the author, who chose the name. The three.js details most likely to have changed since the model's training data were confirmed by web search on 2026-09-24: `WebGPURenderer` imports from `three/webgpu` with automatic WebGL2 fallback, custom shaders on it are written in TSL because `ShaderMaterial` and `onBeforeCompile` do not carry over, and SwiftShader in a headless browser provides WebGL but no WebGPU adapter. The renderer question and the smoke test instructions were written to match.
+
+Audited against the Prompt Content Rules in PRD section 11: no instruction to push, commit, or publish (the prompt forbids deploying), and no reference to the author's accounts. The description is 140 characters.
+
+---
+
+### Prompts v1.56.0 - 2026-09-23
+
+#### Changed
+
+- Renamed the iPhone and iPad Simulator prompt to **iOS Simulator**, at the author's request for a two-word title. iOS Simulator is Apple's own name for the tool the prompt runs, and it covers iPhone and iPad alike. The description and prompt text are unchanged.
+- `prompts/iphone-ipad-simulator.md` became `prompts/ios-simulator.md`, moved with `git mv` so its history follows.
+- `p/ios-simulator.html`: the new share page, generated by `tools/prompts-mirror.py`.
+- `p/iphone-ipad-simulator.html`: retired rather than deleted, because it has been a public address since v1.54.0. It now carries the retired marker and forwards to `index.html#/ios-simulator` in one hop, with tags describing the renamed prompt. It is the first share page to be retired.
+- `README.md`: the prompt's bullet uses the new name.
+- `docs/PRD.md`: the retired items table in section 32 gains the rename, the file counts in sections 13 and 30 are now 25, and the folder trees note the retired page.
+- `js/prompts-data.js`: resynced under the new slug.
+
+---
+
+### Prompts v1.55.0 - 2026-09-23
+
+#### Changed
+
+- `prompts/iphone-ipad-simulator.md`: Step 1 now checks for macOS before anything else. The iOS Simulator is part of Xcode, which runs only on macOS, and there is no iOS emulator for Windows or Linux, so before this the prompt would have failed on its first `xcodebuild`. On a non-Mac it now installs nothing, identifies the project type, and explains the three routes, marking which fit: a rented cloud Mac, where the full prompt runs; a cloud simulator build streamed to a browser simulator such as Appetize.io, which the reader can click through but which the prompt's automated checks cannot drive; and Expo Go on a real iPhone, for Expo and React Native apps only. Running macOS in a virtual machine on non-Apple hardware is left out, since Apple's license does not allow it. The page description says the prompt needs a Mac and what it does otherwise.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.54.0 - 2026-09-23
+
+#### Added
+
+- `prompts/iphone-ipad-simulator.md`: the iPhone and iPad Simulator prompt, the seventh in the library. It checks the Mac and the installed Xcode, installs what is missing, builds the reader's app for the iOS Simulator, and launches it on the smallest, a standard, and the largest iPhone. Every main screen is screenshotted in light and dark mode and at the largest accessibility text size, and the screenshots are looked at, not assumed. It works with native Xcode projects, Swift packages, and Expo, React Native, Flutter, and Capacitor apps, and ends with a report of each problem, its screenshot, its likely cause in the code, and a proposed fix.
+  - It asks once, before installing anything, whether to include **iPad** (suggested when the app targets it): the smallest and largest iPads, all four orientations, Split View, Slide Over, and Stage Manager, and keyboard and pointer support.
+  - And whether to include **iPhone Duo**, Apple's foldable: the Xcode 27.1 beta installed alongside the current Xcode, both displays, and each fold pose. It requires Apple silicon and macOS 26.6 or later.
+  - Its ground rules: it never handles the reader's Apple ID password, keeps any existing Xcode, builds for the simulator only and signs, uploads, or submits nothing, installs dependencies as locked, and changes no app code beyond the minimum a new SDK needs to build until the reader chooses the fixes.
+- `p/iphone-ipad-simulator.html`: its share page, generated by `tools/prompts-mirror.py`.
+- `README.md`: the prompt added to What You Will Find Here.
+
+#### Changed
+
+- `js/prompts-data.js`: resynced, with the new entry appended last.
+- `docs/PRD.md`: prompt and file counts updated in sections 13, 16, 23, 30, and 32a, the folder tree gains the new file, and the section 23 focus-stop count is now ten.
+- `docs/DESIGN.md` 1.11.2: the section 10 focus-stop count updated to ten.
+
+#### Notes
+
+Written from a social media post announcing that the Xcode 27.1 beta can install an iPhone Duo simulator, build an app, and launch it. At the author's request the prompt covers regular iPhone development, with iPad and iPhone Duo as options it asks about. The Xcode 27.1 beta, its iPhone Duo simulator, and the Apple silicon and macOS 26.6 requirements were confirmed by web search on 2026-09-23, since they postdate the model's training data. The post also named another vendor's model and tool; the prompt is written for Claude Code and names neither.
+
+Audited against the Prompt Content Rules in PRD section 11: no instruction to push, commit, or publish, no reference to the author's accounts, and every sign-in left to the reader. The description is 144 characters.
+
+---
+
+### Prompts v1.53.0 - 2026-09-23
+
+#### Changed
+
+- `prompts/brand-identity.md`: now six phases. The author has marked this the prompt's final revision.
+  - **New Phase 5, Brand kit**, in `brand/kit/`: a 1200x630 link preview image, a 400x400 profile picture that survives a circular crop, X (1500x500) and LinkedIn (1584x396) banners, `tokens.css` and `tokens.json` with the palette and type, a WCAG contrast table in DESIGN, an email signature PNG at twice its display size (most mail clients do not show SVG), and a `site.webmanifest` that is created but not linked, per the scope rule. Each image is rendered from SVG and passes the render check.
+  - **Phase 4** gains a favicon that switches to a lighter variant in dark mode, and 192px regular and maskable icons for the manifest.
+  - **Phase 6, Presentation** (formerly Phase 5): gets print styles and is also saved as `brand/brand-guidelines.pdf` with headless Edge, the file to hand to a printer or collaborator.
+  - The render check now covers Phases 3 to 6, and the page description covers the kit and the PDF.
+- `README.md`: the Brand Identity bullet mentions the kit and the PDF.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.52.0 - 2026-09-23
+
+#### Changed
+
+- `prompts/brand-identity.md`: Phase 5 mockups. If the reader has placed mockup photos in `brand/mockups/`, the logo is set onto them, matching each photo's perspective and lighting, and the presentation references them by relative path. Without photos, the mockups are built in CSS and SVG as before, but now with 3D perspective tilts, soft layered shadows, paper, card, and fabric textures, and lighting gradients, because flat vector mockups read as diagrams rather than objects. Downloading stock images was considered and ruled out: licensing is unclear, it needs the network, and it would bring in files the reader did not choose. The logo files themselves stay SVG only, since every other format is made from them. The page description explains both routes.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.51.0 - 2026-09-23
+
+#### Changed
+
+- `prompts/brand-identity.md`: revised after a line-by-line review with the author. Each change below answers one question from that review; the prompt's structure, phases, and tone are otherwise as written.
+  - **Render check.** A new section, used in Phases 3, 4, and 5, has every logo judged from a rendered image rather than its SVG code: a contact sheet at 16, 32, and 512px, in color and grayscale, on light and dark, screenshotted in headless Microsoft Edge (Chrome if Edge is missing) and then looked at. Before this the legibility check had no method, so it could only ever pass.
+  - **Concept A** takes its palette from the brief (one or two colors plus black and white) instead of a fixed black, white, and gold, which ignored the brief's color constraints and is itself a luxury cliché.
+  - **Concept B** sets the name in an open-license typeface and customizes one or two details, instead of hand-drawing letterforms as SVG paths, which models do poorly. The typeface and its license are recorded in DESIGN.
+  - **Existing brand.** The brief gains an `[existing brand]` field. When one is found, Phase 3 adds a fourth concept, D. Evolved, which refines the current brand, and A, B, and C take it only as a suggestion.
+  - **Phase 4 specs.** Adds `favicon.ico`, keeps app icon marks inside the central 80% so masked crops cannot cut them, gives the 1024 icon a solid background (the App Store rejects transparency), and sets a minimum line and gap of about 1mm for embroidery. When no image converter is installed, PNGs are rendered in headless Edge, and anything still missing is listed with the command to produce it.
+  - **Presentation fonts.** The page loads the brand typeface from Google Fonts as its only external link, which resolves the conflict between "self-contained" and a type specimen. The finished page is screenshotted and reviewed.
+  - **Scope rule.** The prompt must not change the project's site or app. Everything stays in `brand/` and the two `## Brand Identity` sections until the reader decides how to use it.
+  - The page description's three paragraphs are updated to match. The frontmatter description is unchanged.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.50.0 - 2026-09-23
+
+#### Removed
+
+- `prompts/brand-identity.md`: the `Input from the user: $ARGUMENTS` line. `$ARGUMENTS` is filled in only when a prompt is saved as a slash command; pasted from this site it arrived as literal text, which is why v1.48.0 had to tell the reader to replace it. Nothing is lost: Phase 1 already reads the project for the brand details and asks in one message for anything it cannot find.
+- `prompts/brand-identity.md`: the page's last paragraph, which explained the placeholder. Its other sentence, that the prompt pauses for gaps in the brief and for the concept choice, repeated the first paragraph.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.49.0 - 2026-09-23
+
+#### Changed
+
+- `prompts/brand-identity.md`: Phase 1 now reads `PRD.md` and `DESIGN.md` as well as the README, `CLAUDE.md`, `package.json`, landing page copy, and existing brand or style files before filling in the brief. A project with a product document usually already states its audience, its purpose, and any color or font constraints, which are four of the brief's six fields. The page description lists the two new files. Written as `DESIGN.md` rather than `Design.md`, matching the rest of the prompt since v1.48.0.
+- `js/prompts-data.js`: resynced.
+
+---
+
+### Prompts v1.48.0 - 2026-09-23
+
+#### Added
+
+- `prompts/brand-identity.md`: the Brand Identity prompt, the sixth in the library. It runs a brand identity project in five phases: a brand brief built from the project's own files, a competitive analysis of five to eight brands in the industry, three hand-written SVG logo concepts for the reader to choose from, a full logo system in `brand/logo/` checked at 16px, in grayscale, and on light and dark backgrounds, and a self-contained presentation page, `brand/presentation.html`, with mockups, palette, type specimen, and rationale. Its written output goes into a `## Brand Identity` section of `docs/PRD.md` and `docs/DESIGN.md`.
+- `p/brand-identity.html`: its share page, generated by `tools/prompts-mirror.py`.
+- `README.md`: the prompt added to What You Will Find Here.
+
+#### Changed
+
+- The supplied prompt text was changed in two ways, both mechanical. `docs/Design.md` became `docs/DESIGN.md` throughout, to match the file the Documentation prompt produces; on a case-sensitive file system the two names would be separate files. Line breaks lost when the text was pasted were restored where two sentences had run together, such as "usage guidelines) If either file". No wording was changed.
+- `js/prompts-data.js`: resynced, with the new entry appended last.
+- `docs/PRD.md`: prompt and file counts updated in sections 13, 16, 23, 30, and 32a, the folder tree gains the new file, and the section 23 focus-stop count is now nine.
+- `docs/DESIGN.md` 1.11.1: the section 10 focus-stop count corrected to nine.
+
+#### Notes
+
+Audited against the Prompt Content Rules in PRD section 11 before publishing: no instruction to push, commit, or publish, and no reference to the author's accounts or services. The description is 146 characters, inside the 150 character sharing target. The prompt's `$ARGUMENTS` line is left as written, since it is where a reader puts their brand details; the page description says to replace it, and that the prompt will ask if it is left in.
+
+Verified from `file://` in headless Edge: the home list shows six cards with Brand Identity last, the prompt page renders with its title, four description paragraphs, and the full 71-line prompt, and the share page forwards to it. The mirror check passes with no notes.
+
+---
+
+### Prompts v1.47.0 - 2026-09-23
+
+#### Removed
+
+- `js/script.js`: the Copy link button added in v1.46.0. Beside Copy it was confusing: two buttons both labelled Copy, one copying the prompt and one a link, made the page's main action less obvious. The copy code returned to its v1.45.0 form, and the `SITE_URL` constant, used only by Copy link, went with it.
+- `css/style.css`: `.link-btn`, and the `max-width: 400px` media query that existed only to fit a third button in the header bar at 320px.
+
+#### Changed
+
+- `README.md`: the sharing sentence now says to copy the address from the browser.
+- `docs/PRD.md`: sections 8, 10, 10a, 13, 14, 15, 23, 27, 29, 30, 31, 32, and 32a updated. Section 32a records why the button was removed.
+- `docs/DESIGN.md` 1.11: the Copy link spec and the 400px breakpoint removed.
+
+#### Notes
+
+Sharing still works as it did in v1.46.0. The share pages and their tags are unchanged, and over https the address bar still shows `p/<slug>.html`, which is the link that gets copied and previews as the prompt. Opening the site from disk shows the `#/` address instead, as before.
+
+Verified locally before pushing. Over `python -m http.server` the header bar shows Expand and Copy, the address bar is rewritten, the title carries the site name, and a click on Copy does not toggle the block. The bar was measured in the DOM at 320, 375, 414, 768, 1024, 1280, and 1920px without the removed media query: one line and no horizontal overflow at each. From `file://` a prompt page renders with the same two buttons.
+
+---
+
+### Prompts v1.46.0 - 2026-09-23
+
+#### Added
+
+- `p/`: one generated share page per visible prompt, `p/<slug>.html`. Each carries that prompt's `og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, and `twitter:card`, a `<title>` in the form "Prompt Audit - Azqato's Prompts", and a meta refresh plus a plain link forwarding to `index.html#/<slug>`. A link renderer never sees the `#/<slug>` part of a URL and runs no script, so until now every prompt link previewed as the home page, observed in Discord on 2026-09-23. A share page is a real file at a real path, so a renderer can read it. Its Content Security Policy is `default-src 'none'`, since it loads nothing.
+- `index.html`: the same six tags, describing the site. `og:title` is "Claude Code Prompts", the home heading, so it does not repeat `og:site_name`.
+- `js/script.js`: a Copy link button in the prompt header bar, between the collapse toggle and Copy. It copies the published https share address whatever the page was opened from, and reports success and failure exactly as Copy does, through the same code path.
+- `js/script.js`: over http and https the address bar is rewritten to the view's share address after rendering, with `history.replaceState()`, so copying from the address bar gives the same link as Copy link. The router now reads the slug from a `p/<slug>.html` path when there is no hash, and listens for `popstate` as well as `hashchange`, guarded so one navigation renders once. On `file://` the browser forbids the rewrite and the hash route stays.
+- `tools/prompts-mirror.py`: writes the share pages on `--sync` and checks them. The check fails on a missing page, a page that differs by a byte from what its prompt would generate, a page with no visible prompt that is not marked retired, a title over 70 characters or containing the site name, and a description over 200 characters or not ending on a full stop. Titles over 60 and descriptions over 150 are printed as notes. `--sync` never deletes a share page.
+- `docs/PRD.md` section 32a: the Social Sharing Tags and Page Titles policy, covering the share pages, the six tags, the budgets, the title form, how the share address reaches the person sharing, and how a share page is retired.
+
+#### Changed
+
+- Prompt page titles now carry the site name: "Documentation - Azqato's Prompts" rather than "Documentation". Finding 5 of the self-audit in PRD section 27.
+- Three prompt descriptions were over the 150 character sharing target and were tightened, and Prompt Audit's, already inside it, was reworded to lead with what it finds. This also changes the home page cards, since they show the same text. All five now run 140 to 149 characters.
+  - Documentation, 186 to 141: "Scan a whole codebase and consolidate its documentation into four files: a README, plus a detailed PRD, design guide, and changelog in /docs."
+  - GitHub Wiki, 202 to 148: "Build or update a repository's GitHub wiki from its documentation, curated into Home, Product Overview, Patch Notes, and other pages with a sidebar."
+  - Mobile Responsive Audit, 170 to 148: "Check every page at seven screen widths for overflow and layout bugs, fix the root causes, and verify with DOM measurements rather than screenshots."
+  - Prompt Audit, 148 to 149: "Find the instructions in a project's prompts, skills, and CLAUDE.md files that were written for older models, and fix the ones that now hold it back."
+- `css/style.css`: `.link-btn` joins the shared button rule and both copy states. The shared rule gains `white-space: nowrap`, the header bar a 12px gap between its label and its buttons, and a new `max-width: 400px` query trims the bar's padding, the button gap, and the buttons' padding, so the label and three buttons fit one line at 320px.
+- `README.md`: one sentence on Copy link, in What This Is.
+- `js/prompts-data.js`: resynced.
+- `docs/PRD.md`: sections 8, 9, 10, 10a, 12, 13, 14, 15, 16, 17, 20, 23, 27, 28, 29, 30, 31, and 32 updated for the share pages, the new button, and the address rewrite. Section 12 gains a sixth step in Renaming and in Removing, because a prompt now has one public address of its own. Open question 8 is answered, and self-audit findings 3 and 5 are closed. The roadmap milestone is complete.
+- `docs/DESIGN.md` 1.10: Copy link specced, the third breakpoint documented, and the button inventory, CSS structure, and shell template updated.
+
+#### Fixed
+
+- `docs/PRD.md` section 20, "Where to look first": the prompt edit row still sent the reader to "the README table and tree", which the README has not had since v1.26.0. It is the same stale instruction discrepancy 17 recorded in four other places, surviving in a fifth. Now names the README prompt list.
+- `docs/PRD.md` and `docs/DESIGN.md`: the `index.html`, `css/style.css`, and `js/script.js` line counts, which had drifted, corrected in place under the mechanical-fact exception.
+
+#### Notes
+
+Verified before pushing. Locally over `python -m http.server`: a share page forwards to its prompt and the address bar is rewritten back to the share address; a hash route is rewritten to its share address; home is rewritten to the root; a sidebar click from a rewritten address routes and rewrites again; the back button returns to the previous prompt; a click on Copy link does not toggle the collapse. From `file://`: a share page forwards, and the prompt renders with the new title and all three buttons. The header bar was measured in the DOM at 320, 375, 414, 768, 1024, 1280, and 1920px, one line and no horizontal overflow at each. The mirror check was run against a planted orphan page, the same page marked retired, and a hand-edited share page, and failed, passed, and failed as it should.
+
+Not verified: how any particular service renders the cards. That depends on the service, and is checked by pasting a link after the deploy.
+
+---
+
+### Prompts v1.45.0 - 2026-09-23
+
+#### Changed
+
+- `prompts/prompt-audit.md`: the command is now `/claude-api prompt-audit and apply the proposed changes`. The bare `/claude-api prompt-audit` produced a report and a proposed diff and edited nothing, because the skill's audit guide applies edits only when the request explicitly asks for them. With the added words it edits the files directly for every high- and medium-confidence finding, and leaves low-confidence findings in the report untouched.
+- `prompts/prompt-audit.md`: the card description now says the command fixes what it finds, and the page body says so too. The page now advises running it on a committed working tree, because nothing pauses for approval and the edits can land before the report is on screen, so `git diff` is where they are reviewed and reverted. It also says how to get the report alone: drop "and apply the proposed changes" and run the bare `/claude-api prompt-audit`, which edits nothing.
+- `README.md`: the Prompt Audit line now says it fixes the patterns rather than reporting them.
+- `js/prompts-data.js`: resynced.
+
+#### Notes
+
+The wording was tested before publishing, twice. In this repository the request routed to the audit guide and ran without pausing, but found nothing to apply, since v1.43.0 already had. In a second project it made real edits, with four observations recorded here. It applied only high- and medium-confidence findings, and every edit traced to a reported finding. It applied the edits before presenting the report, which the page now warns about. It initially left the low-confidence findings out of its report, which was caught and corrected in that session. And it also updated that project's own PRD and patch notes, because that project's instruction file requires docs to match every change, which is the project's rule operating rather than the audit reaching outside its scope.
+
+With words after it the request is no longer a bare subcommand, so the skill reaches the audit through its general routing rather than its subcommand table. Both tests show that routing holds, but it depends on the skill's wording, which can change between Claude Code versions without this page knowing.
+
+---
+
+### Prompts v1.44.0 - 2026-09-23
+
+#### Added
+
+- `docs/PRD.md` section 27: a roadmap milestone and a scoped item, "Per-prompt social sharing cards". A link to a prompt should render a card with that prompt's title and a short summary. Today every prompt link renders the site's generic card, observed in Discord on 2026-09-23 with the Prompt Audit link. The item records the cause, the standard, a proposed approach, the decisions needed first, and how to verify it.
+  - The cause is the architecture, not only the missing tags. A link renderer requests the URL without its `#` fragment and runs no JavaScript, so every prompt link is the same `index.html` to it, and tags in that file can describe only the home page.
+  - The standard is the Social Sharing Tags default from the Documentation prompt, since this PRD states no sharing policy of its own. The item spells out how each rule applies here: six tags, a unique absolute `og:url` per prompt, no site name in `og:title`, a 150 to 200 character description in complete sentences, and no images.
+  - The proposed approach is one generated static share page per prompt, with the tags and a meta refresh to the prompt's hash route. It is generated and verified by `tools/prompts-mirror.py`, so no dependency is added and the Content Security Policy stays unchanged.
+  - The decisions needed first are the share path shape, which becomes a permanent public address once pasted anywhere; whether to tighten the existing descriptions, four of which exceed the 150 character target and one the 200 ceiling, or add a separate short field; and how the share URL reaches someone copying from the address bar.
+
+#### Fixed
+
+- `docs/PRD.md` section 27, finding 3 of the self-audit: it said the Social Sharing Tags default asks for a marketing-focused tone that section 11 prohibits. It never did. The prompt has asked for an educational tone since v1.37.0, and the phrase appears only in that finding. A correction was added beside the original text rather than replacing it, so the record shows what was believed and when.
+
+#### Changed
+
+- `docs/PRD.md` section 19, open question 8: now points at the new roadmap item, which settles the canonical domain half of the question from section 17 and proposes an answer to the architecture half.
+
+---
+
+### Prompts v1.43.0 - 2026-09-23
+
+#### Changed
+
+- `prompts/documentation.md`: five instructions removed or rewritten after a `/claude-api prompt-audit` pass found them written in a register that current models over-apply, or contradicting another line of the same prompt.
+  - The read-only paragraph no longer says "Do not skip a step because it looks obvious or because you think you already know the answer". The rule that a step which finds nothing must say so stays, since that is an output requirement rather than a push.
+  - Step 5, "Do not skip any document. Every single file in /docs must be reviewed and updated", was removed and step 6 became step 5. It repeated step 2, and "must be updated" contradicted the Merge rule, which leaves text alone where the code agrees with it.
+  - "Be thorough." and "When in doubt, include it." were removed from the completeness paragraph. The reasoning around them, completeness over brevity in `/docs` and why, is unchanged and still carries the quality bar.
+  - "1) Consolidate all of the files in docs into 4 main documents" was removed and the list renumbered. It restated the scan paragraph directly above it with a narrower scope (`/docs` only, where the scan covers the whole project), so the two gave different instructions for the same step.
+  - The README rule "Be as thorough as possible while ensuring readability" now reads "Cover every required section, and where completeness and readability pull apart, brevity wins", since the old wording pointed in two directions at once.
+
+#### Fixed
+
+- `prompts/prompt-audit.md`: the page description said the command would "remove" dated patterns. It proposes changes and applies them only when asked, which is what the page body and the README already said. The v1.42.0 notes claimed this wording had been corrected; it had been corrected in the body but not in the description.
+- Discrepancy 17 is now fully corrected. v1.42.0 fixed the stale README Files table instruction in Adding step 5 only. The same instruction survived in `docs/PRD.md` Renaming step 3, Removing step 3, and the section 16 binding rules list, and in the `prompts/add-prompt.md` page description. All four now name the prompt list under "What You Will Find Here". The v1.42.0 entry and its version history row are left as written, as section 33 requires.
+
+#### Notes
+
+The audit found nothing written for a specific older model, no retired model names, and no API code, tool definitions, or skill files. The other prompts were left unchanged. Five low-confidence items were reported and not edited: three uses of emphasis that carry a stated reason, and two factual claims with no verification date (the headless minimum viewport in Mobile Audit and the renderer clip lengths in the Social Sharing Tags section).
+
+---
+
+### Prompts v1.42.0 - 2026-09-23
+
+#### Added
+
+- `prompts/prompt-audit.md`: the **Prompt Audit** prompt, the fifth in the library and the first whose prompt is a single command rather than a block of text. `/claude-api prompt-audit` runs the built-in skill's audit over a project's skills, its `CLAUDE.md` and `AGENTS.md` instruction files, its tool descriptions, and any standalone prompts, and reports the patterns written for an earlier generation of model that now hold a current one back.
+- `js/prompts-data.js`: the mirrored entry, appended, so the prompt sorts last in the sidebar and the home list.
+- `README.md`: a line for it under "What You Will Find Here", written for a general reader like the four beside it.
+
+#### Changed
+
+- Four counts in `docs/PRD.md` that a fifth prompt made stale: the project is 15 files rather than 14 in section 13, `prompts/` holds five `.md` files rather than four in the section 13 tree, the section 23 note that a taxonomy is unnecessary now says five prompts, and section 30 says fifteen files. The section 30 tree lists the new file. All corrected in place under the mechanical-fact exception in section 33, since a count carries no intent.
+- The section 16 line recording that no prompt instructs its reader to push now covers five prompts, with the new one verified on 2026-09-23 and the original four left at their 2026-08-23 date, since that verification happened then and the record says when.
+
+#### Fixed
+
+- Section 12 of `docs/PRD.md`, step 5 of Adding Prompts, said to "add a row to the Files table and the file structure tree in `README.md`". The README has carried neither since v1.26.0 rewrote it for a general reader and moved all structure into the PRD. The instruction had outlived the thing it described for sixteen releases and was only caught because adding the fifth prompt exercised the step for the first time since the rewrite. Logged as discrepancy 17 and corrected rather than left flagged, because the intent, keeping the README's prompt list in step with the data file, survived intact and only the mechanism changed.
+
+#### Notes
+
+The description was written from the pasted tip but does not repeat two things in it. The tip named a specific model version as the reason to run the audit, which is left out: a version number in a published prompt description ages with that version, and the reason to run this is that instruction files accumulate, which is true regardless of what shipped. The tip also said the command "removes" anti-patterns; the description says it reports them and proposes changes, which is what the skill actually does.
+
+`prompt-audit` was verified as a real subcommand before the page was written rather than taken on faith from the tip, since publishing a command that does not exist is the one failure a prompt library cannot recover from. It is non-interactive, establishes its own scope and target model, states its assumptions rather than stopping to ask, and produces a report.
+
+---
+
+### Prompts v1.41.0 - 2026-09-18
+
+#### Added
+
+- `prompts/documentation.md`: a **Repository Hygiene** section, placed after Security because it is the enforcement and verification side of a sentence Security already carries, that no secret is hardcoded and every environment variable is listed but never its value. The default is stated outright: the repository carries an ignore file and a `.gitattributes`, commits its lockfile, keeps every secret out of history, and names its default branch `main`.
+- Nine rules behind that default, each with its reasoning: secrets kept out by an ignore rule with `.env*` and a `!.env.example` negation so the key-name file travels and the value file never does; an ignore file wherever anything is generated; lockfiles committed rather than ignored; every ignore entry naming something the project actually produces; ignoring not untracking; generated output committed on purpose being recorded rather than forbidden; line endings pinned; large binaries kept out of history; and the remote, default branch, and history notes recorded in the PRD.
+- A verification sub-list of seven read-only checks, including the one that cannot be answered by reading a file: no tracked file matches a pattern the ignore file claims to exclude.
+- `.gitignore` and `.gitattributes` in the enforced folder structure tree, with a paragraph on the way they differ from every other root file: a nested copy of either is legitimate rather than a mistake, because version control reads an ignore or attributes file in any directory and applies it downward, which is how one part of a repository narrows a rule the root file sets. An audit that finds one in a subdirectory records what it does and leaves it there, the same treatment a sitemap named on a `Sitemap:` line already gets.
+- Section 27 of `docs/PRD.md`: finding 6 in the self-audit entry, recording that this is the first default in the prompt that this repository already satisfied.
+
+#### Fixed
+
+- The findings in section 27 of `docs/PRD.md` ran 1, 2, 3, 5, 4, 6. Finding 5 was inserted above finding 4 in v1.40.0 by anchoring on the wrong paragraph, which went unnoticed because nothing reads that list in order until a sixth entry arrives. Resequenced. No wording changed.
+- Section 30 of `docs/PRD.md` said "Thirteen files, five folders". The repository has tracked 14 since `.gitattributes` landed in v1.36.0, and section 13 was corrected then while this copy was missed. Corrected in place under the mechanical-fact exception in section 33, since a file count carries no intent. This is the third time the same pattern has produced a stale fact, and the same technique caught it: grep for the thing that changed rather than trusting that the section already edited was the only mention.
+
+#### Notes
+
+The section was researched rather than written from memory, and the research changed four things. A blanket `eol=lf` breaks a Windows batch script, so the rule now pairs the repository-wide setting with an explicit `eol=crlf` for formats that need it; the first draft would have shipped that defect. The `.env*` and `!.env.example` negation replaced a vaguer instruction to keep secrets out. Lockfiles got their own rule, because the inversion people actually commit is ignoring the dependency directory and the lockfile that pins it together. And the ignore file is now described as prevention rather than protection, since treating it as a security control is how a project ends up with one and no scanning.
+
+Two boundaries are stated rather than left implied. Commit message style and branching pattern stay with Conventions, which reads them from the history, so that no two sections govern one topic. And a secret found in history is reported with a rotation recommendation, never remediated: rewriting history is destructive, it is outside the audit's write scope, and it does not undo an exposure that became public the moment it was pushed.
+
+This repository already met the default before the section existed, which has not happened with any other policy added to this prompt. It has no ignore file and section 13 already explains why, which is exactly what the "a project that generates nothing says so" clause asks for. `.gitattributes` pins `* text=auto eol=lf`, and the reasoning that section generalises came from this project in v1.36.0. `js/prompts-data.js` is the generated-output-committed-on-purpose case, and section 13 already names what regenerates it and what keeps it in step.
+
+The prompt block is now 51,144 characters, up from 43,713. It has grown 124 percent this session, from 22,785. That number is recorded each release rather than acted on, and the rule for what would ever come out still does not exist.
+
+---
+
+### Prompts v1.40.0 - 2026-09-09
+
+#### Added
+
+- `prompts/documentation.md`: a **Page Titles** section, placed after Social Sharing Tags because the two share a layer, a condition, and a field. Both govern what a page says about itself in its head, both apply only where the project serves a site, and both have an opinion about the same brand string. The default sets the shape `<unique page name> - <brand>` under two limits: the first 30 characters must identify the page on their own, and the whole title stays at 60 or fewer.
+- The two numbers are stated as measuring different things rather than as a compromise. Truncation removes from the end, so a title is read at two lengths at once: the first 30 characters are what survives a crowded tab strip, and the full 60 is what a search result renders. Front-loading satisfies both, so nothing has to be traded off. The front budget is 30 rather than 50 because a tab is measured in pixels, and a title of capitals and wide letters fills the same physical tab as a longer one in lowercase.
+- The uniqueness rule is written against the first 30 characters rather than against the whole title. Two titles that differ only after character 30 are the same title as far as a tab is concerned, so requiring unique titles is the weaker test and requiring unique prefixes is the one that matters.
+- A verification sub-list of six read-only checks, covering presence, length, prefix uniqueness with collisions reported as pairs, separator consistency, brand placement, and per-route title reading on a client-rendered site. The last of those exists because a title set once in the head and never updated passes a source check and fails in a browser.
+- Section 27 of `docs/PRD.md`: a fifth finding in the self-audit entry, recording that this site now falls under a policy it only half meets.
+
+#### Notes
+
+Three decisions were put to the author while the section was drafted, and all three are recorded here because each rules out a reading someone would otherwise reach for later.
+
+The hard limit is 30 on the front of the title and 60 on the whole, not 30 on the whole. A 30-character total was considered and rejected on arithmetic: `Azqato's Prompts - ` costs 19 characters before the page name begins, so a 30-character ceiling leaves 11 for the page name and two of this site's four prompts already do not fit. The only way to reach 30 total is to drop the brand from every page, which removes it from exactly the two places it was earning its keep, the search result and the bookmark. Truncation past 30 is not a failure under this rule, it is the mechanism working: what gets eaten is the brand, which the favicon has already said.
+
+The homepage rule states the principle and stops. It leads with the brand, and whether anything follows is the project's call, with the bare site name and no separator named explicitly as a valid answer where the brand is already what people search for. The cost of the bare name is recorded next to it, since the homepage is usually the page where a stranger in a search result most needs telling what the site is.
+
+The checks are a sub-list rather than one prose bullet, which is a departure from Social Sharing Tags. Deprecation and Removal already nests a sub-list at the same indent, so the form is not new to the prompt, and a list of assertions is easier to work through mechanically than the same assertions in a paragraph.
+
+The prompt block is now 43,713 characters, up from 38,086. It has grown 92 percent this session, from 22,785 at the start. That is worth watching rather than acting on: every section added has been a policy the author asked for, but a prompt long enough that a reader skims it stops being enforced, and there is no rule yet for what would ever come out.
+
+---
+
+### Prompts v1.39.1 - 2026-09-08
+
+#### Changed
+
+- `prompts/documentation.md`: The sorting instruction now names the two kinds in the sentence that introduces them: "sort them into two kinds: Documentation Files and Project Files". Previously the reader met the categories only in the two sentences that followed and had to infer that a sort into named buckets was being described.
+- Capitalised the two later uses to match, so the terms read as defined labels rather than as ordinary noun phrases. A named category that changes case between uses looks like two different things.
+
+#### Notes
+
+The prompt block is now 38,086 characters, up from 38,047.
+
+---
+
+### Prompts v1.39.0 - 2026-09-08
+
+#### Changed
+
+- `prompts/documentation.md`: The codebase scan line now tells the audit to scan the whole project for markdown and text files, not only `/docs`, and to sort what it finds into two kinds before consolidating anything. Documentation files are folded into the four main documents. Project files stay where they are, meaning anything a tool, a platform, or the product itself depends on, such as `LICENSE.md` or a markdown file that ships as content rather than describing it. A doc that is genuinely better maintained where it sits stays there and gets a pointer from the PRD.
+- The sorting rule is what makes the wider scan safe. Consolidation removes the original, so widening the search without a test for what must not be absorbed would turn a documentation pass into something that can delete a dependency. The test given is whether anything other than a reader depends on the file.
+- The clause about a markdown file that ships as content is the one this repository needs most. All four prompts are `.md` files that read exactly like documents, and an audit run here without that sentence could fold `prompts/*.md` into the PRD and delete the product.
+
+#### Notes
+
+Applied as a single-line change to the existing scan instruction rather than as a rewrite of numbered item 1, which is where this rule was first drafted. Placing it in the scan line puts it before the consolidation steps, which is the order it has to run in.
+
+The author's text read "Documentation Files gets consolidated". Corrected to "Documentation files get consolidated" for subject-verb agreement and to match the lower-case "Project files" in the next sentence. No other wording was changed.
+
+The pasted source also had the blank line removed between the `PRD.md` description and the `---` that follows it. Not applied, and treated as a copy-paste artifact rather than an edit: in markdown, text directly above `---` becomes a setext heading. It renders harmlessly inside the fenced block on the site, but the prompt is copied into other contexts where it would not.
+
+The prompt block is now 38,047 characters, up from 37,543.
+
+---
+
+### Prompts v1.38.0 - 2026-09-07
+
+A planning release. No behaviour changed and no file outside `/docs` was touched.
+
+#### Added
+
+- Section 27 of `docs/PRD.md`: a **Scoped** subsection recording the self-audit of this project against the documentation standard as it stands at v1.37.0, and a milestone row for it. The prompt gained six sections since this project was last audited against it in v1.27.0, and the gap had never been written down.
+- The findings of the partial read-only pass run on 2026-09-07, recorded in that subsection rather than discarded. The pass was stopped before anything was written, so these are observations with their reasoning attached, not decisions:
+  - `robots.txt` must **not** be created in this repository. The site is served from `https://azqato.github.io/prompts/`, a subdirectory rather than an origin, so a file at this root would deploy to `/prompts/robots.txt` where no crawler reads it. The governing `https://azqato.github.io/robots.txt` belongs to a different repository and returned 404 when checked. This is the outcome the prompt's own subdirectory clause prescribes.
+  - `sitemap.xml` would be valid at this root, since a sitemap covers URLs under its own location and `/prompts/` is the whole site, but it could hold only one URL. Every route here is a fragment and a crawler never sees a fragment.
+  - The social sharing tags collide with an existing rule. The default asks for a marketing-focused description; section 11 prohibits marketing language. Section 11 wins under the prompt's own precedence rule, and the collision is noted as something worth addressing in the prompt, since any project with a house style will hit it.
+  - `LICENSE.md` remains open question 7 and was deliberately not acted on.
+
+#### Changed
+
+- Open question 8 in section 19 now points at the roadmap entry, so a reader arriving at the question finds the scheduled work rather than a dead end.
+
+#### Notes
+
+The audit was scoped out at the author's request rather than deferred on its merits, so it is a planned milestone rather than a Deferred entry. The distinction matters in section 27: Deferred items carry a reason they will not be done.
+
+---
+
+### Prompts v1.37.0 - 2026-09-07
+
+#### Added
+
+- `prompts/documentation.md`: A **Social Sharing Tags** section, placed after Licensing because the two cover the same layer, what a page tells a machine about itself rather than what it shows a reader. The default requires six tags on every shareable page (`og:title`, `og:description`, `og:url`, `og:type`, `og:site_name`, `twitter:card`), sets character budgets of 60/150/20 with hard ceilings of 70/200, turns images off by default, and lists the pages that are deliberately excluded. Like every policy in that prompt it yields to a rule the project already states, and it applies only where the project actually serves a site, the same condition already attached to `robots.txt` and `sitemap.xml`.
+- The section is written as a policy record rather than an instruction to edit pages. The audit reads the tags that exist, writes the rule into the PRD, and reports any page that fails it as a discrepancy. This is deliberate: the prompt's read-only guarantee for steps 1 through 3 is followed by a write scope limited to the four documentation files, so a section that told the model to rewrite every page head would contradict the constraint the prompt states most strictly. The compliance checks are recorded as checks to run, and are explicitly read-and-report.
+- Section 19 of `docs/PRD.md`: open question 8. This site now falls under a policy it does not meet. `index.html` carries a `<meta name="description">` and nothing else, so a pasted link renders from the title tag alone.
+
+#### Changed
+
+- The prompt's page description in `prompts/documentation.md` now lists Social Sharing Tags among the required PRD sections, keeping the description and the prompt body in agreement.
+
+#### Notes
+
+The source text supplied for this section named a specific chat platform as the rendering target. That naming is generalised in the prompt to "one chat platform" and "the strictest renderer", with the reasoning kept intact, on the same grounds section 11 applies to services and accounts: a prompt is copied into other projects, and a rule that names a product ages with that product. The behaviour it is written against, a narrow card that falls back to the title tag, is what actually matters and is stated directly.
+
+The prompt block is now 37,543 characters, up from 31,766.
+
+---
+
+### Prompts v1.36.1 - 2026-08-24
+
+A follow-through release. v1.36.0 added `.gitattributes` and documented the decision, but left five other places in `docs/PRD.md` describing the state before it.
+
+#### Fixed
+
+- Section 13 said the project is 13 files and that there is no `.gitattributes`, in a paragraph explaining the consequence of not having one. It is now 14 files, and that paragraph describes what the file does and why the mirror needs it. The tree lists it.
+- Discrepancy 15 in section 18 ended with "whether to pin LF with a `.gitattributes` is open question 5". Marked resolved, with the note that `tools/prompts-mirror.py` still normalizes line endings and that this is now redundant on purpose rather than load-bearing.
+- The deploy comparison in section 20 instructed normalizing line endings before comparing local against deployed, because `core.autocrlf` rewrites the working tree. That is no longer true of a current checkout. It now says the comparison is valid as it stands, and that normalizing anyway costs nothing and keeps the check correct against a clone made before v1.36.0.
+- The technical debt table in section 30 still carried the missing `.gitattributes` as open debt. Struck out as fixed, which makes four struck rows.
+- Four stale line counts, corrected in place under the mechanical-fact exception in section 33 rather than flagged, since a line count carries no intent: `css/style.css` is 567 lines rather than 540, in three places across sections 13 and 30, and `index.html` is 42 lines rather than 31, in section 20 of this document and section 12c of `docs/DESIGN.md`. Both had been stale since v1.28.0 added the Content Security Policy and the copy button's failed state.
+
+#### Notes
+
+Worth recording why this release exists at all. The v1.36.0 change was one new file and a closed open question, which is about as small as a change gets here, and it still left five statements in the PRD false and four numbers wrong. The reason is that this document deliberately repeats facts across sections so each one can be read on its own, which section 33 states as the standard. The cost of that standard is exactly this: a fact that changes has to be chased through every place it appears, and the copy nobody was editing is the one that goes stale. Discrepancy 16, logged in v1.29.0, was the same failure with the same cause. The check that catches it is grepping for the thing that changed rather than trusting that the section it was changed in was the only one mentioning it.
+
+#### Verified
+
+- Grepped for `gitattributes`, `autocrlf`, and every stale line count across all tracked files, then read each match rather than assuming the replacement was right.
+- Re-rendered in Edge across all six routes. Unchanged, as expected: documentation only.
+- `tools/prompts-mirror.py` clean.
+
+---
+
+### Prompts v1.36.0 - 2026-08-24
+
+Closes open question 5, which has been open since v1.28.0.
+
+#### Added
+
+- `.gitattributes`, pinning `* text=auto eol=lf`. A checkout now produces LF on any machine, whatever its `core.autocrlf` is set to. This repository stores LF, so nothing about the stored content changes; what changes is that the working tree can no longer disagree with it.
+- The file carries a comment explaining why, because the reason is not obvious from the rule. The line breaks inside the `raw` strings in `js/prompts-data.js` are JSON escape sequences rather than real newlines, so git never rewrites them. Under `core.autocrlf=true` and with no `.gitattributes`, a checkout therefore produced CRLF source files under `prompts/` while their mirrored copies stayed LF, and the two stopped matching byte for byte with nothing actually wrong.
+
+#### Notes
+
+The counter-argument recorded in section 19 was that `tools/prompts-mirror.py` already normalizes line endings on both sides, so the problem was handled. That was true, and it was judged insufficient for two reasons.
+
+The failure mode is silent rather than loud. A literal comparison does not error, it reports a difference that is not there, and the natural response to the mirror check reporting drift on all four prompts is to run `--sync` and rewrite a file that was already correct.
+
+And normalizing inside the tool puts the burden on every tool that touches these files, rather than on the repository. It had already cost two debugging cycles, both in this project: it broke the first version of the mirror script in v1.28.0, discovered only because a file had just been restored with `git checkout`; and in v1.35.0 a `git checkout` mid-session left an edit script unable to match its own target text, which surfaced as an unhelpful "not unique (0)" assertion rather than as anything mentioning line endings.
+
+The deployed site is unaffected either way, since GitHub Pages serves what the repository stores and that was always LF.
+
+#### Verified
+
+- Tested against a real checkout rather than by reading the rule. Both `prompts/documentation.md` and `js/prompts-data.js` were deleted and restored with `git checkout`, which is the exact operation that produced CRLF before. Both came back LF, and `tools/prompts-mirror.py` passed clean afterwards: four prompts, no orphans, all frontmatter present. That is the scenario that broke the first mirror script, so it is the one worth testing.
+- Re-rendered in Edge across all six routes. Unchanged, as expected: no file the browser loads was modified.
+
+---
+
+### Prompts v1.35.0 - 2026-08-24
+
+#### Changed
+
+- `prompts/documentation.md`: The enforced folder structure now shows `sitemap.xml` at the repository root and excludes it from the rule that moves stray files into `/docs`, alongside the README, the licence, and `robots.txt`.
+
+#### Added
+
+- The reasoning that separates a sitemap from the two files listed beside it, because treating all three as one rule is how an audit either moves a working file or leaves a broken one alone. `robots.txt` is root by requirement: crawlers read it from the origin root and nowhere else. `sitemap.xml` is root by default: a sitemap is scope-limited by its own location, so one at `/docs/sitemap.xml` may only list URLs under `/docs/` and entries outside that path are ignored, while one at the root can list the whole site. That makes the root the position that is always correct without being the only correct one.
+- The cross-submission exception, which is the part that changes what an audit should do. A sitemap named on a `Sitemap:` line in `robots.txt` is trusted for the entire host wherever it sits. So a sitemap outside the root is valid exactly when robots.txt points at it, and an audit that finds one there checks for that line rather than assuming the file is broken or relocating it. The same condition as `robots.txt` applies throughout: this is only relevant where the project actually serves a site.
+
+#### Verified
+
+- Re-rendered in Edge across all six routes. Every route unchanged, all four prompt pages open collapsed and toggle correctly, no error view. The Documentation prompt matches its source fenced block exactly, confirming the mirror carries the edit.
+- `tools/prompts-mirror.py` resynced and passed clean.
+
+---
+
+### Prompts v1.34.0 - 2026-08-24
+
+#### Changed
+
+- `prompts/documentation.md`: The enforced folder structure now shows `LICENSE.md`. The licensing policy added in v1.33.0 already said the file goes at the repository root, but the structure diagram did not list it, so the two could be read as disagreeing and the diagram is the part a model follows literally.
+- `LICENSE.md` is excluded from the rule that moves stray documentation into `/docs`, alongside the README. It is root only for the same reason the README is: it is one of the two files a person or a tool expects to find without looking. Stated explicitly in the prompt because hosting platforms detect a licence by looking in specific locations, the repository root is the most widely recognised of them, and a licence filed under `/docs` may not be detected at all.
+
+- `robots.txt` is listed at the root as well, and excluded from the same move rule. This one is a hard requirement rather than a convention: crawlers fetch it from exactly one address, the origin root, and read it from nowhere else, so a copy under `/docs` is not a robots policy at all, it is an unreferenced text file. The licensing policy added in v1.33.0 already required `robots.txt` to stay open and consistent with the licence, but said nothing about where it lives, which left the one detail that determines whether it does anything.
+
+#### Added
+
+- A never-move rule for licences. Where a project already has a licence file, under any name and in any location, it stays exactly where it is and is documented in place. An existing licence is a decision the project already made, and this audit records those rather than overruling them. `LICENSE.md` is created only where no licence exists.
+- Two conditions on `robots.txt`, since the structure diagram would otherwise read as an instruction to create one everywhere. It applies only where the project actually serves a site: a library or a CLI has no origin to put one on and should not get one. And where a site is served from a subdirectory of a larger domain, the PRD says so, because the robots.txt governing it belongs to the domain owner and may not be the project's to write. This project is an example: it serves from `/prompts/` under a domain whose root it does not own.
+
+#### Notes
+
+This release was written once with the file under `/docs`, then reverted before it was committed and rewritten with it at the root. The `/docs` version had a real problem: the structure rule would have relocated an existing root licence, which can stop a repository being reported as licensed. The reasoning survived the reversal and is now the justification for keeping it at the root rather than for moving it, which is why this note exists at all: the argument is worth more than the position it was first written to support.
+
+#### Verified
+
+- Re-rendered in Edge across all six routes, unchanged. The Documentation prompt matches its source fenced block exactly. Mirror check clean.
+
+---
+
+### Prompts v1.33.1 - 2026-08-24
+
+#### Changed
+
+- `prompts/documentation.md`: The licensing policy now names the licence file as `LICENSE.md` rather than as a plain text file, at all five places it referred to one. The licence is a document people read, it belongs to the same markdown doc set as the four files this audit already writes, and every platform that detects a licence file recognises the `.md` extension, so nothing is lost by it.
+
+#### Verified
+
+- Re-rendered in Edge across all six routes, unchanged. The Documentation prompt is 29,137 characters and matches its source fenced block exactly. Mirror check clean.
+
+---
+
+### Prompts v1.33.0 - 2026-08-24
+
+A licensing default policy for the Documentation prompt, supplied by the author.
+
+#### Added
+
+- `prompts/documentation.md`: A **Licensing** section, placed after Security since both concern what a project asserts rather than how it is built. Like every policy in this prompt it yields to what the project already has: where a project has a well defined licence, the audit names it, points at the file, and states what it permits, and the default applies only where there is no licence or where a bare licence name sits in a README with no licence text behind it.
+- The default posture is all rights reserved, source-available rather than open source. Publish a LICENSE that grants nothing, because the repository is published so it can be read and publishing is not a grant. The reasoning is the part that makes the rule usable: a permission given to everyone cannot easily be withdrawn from one person, and the goal is usually not to stop copying but to retain the ability to act against a specific bad actor. Those two goals conflict the moment the licence hands out broad permissions.
+- The NO WAIVER clause is called out as load-bearing, since a long history of tolerating copies is the first thing an infringer points at. Also stated: the asymmetry rule, that widening a grant is one sentence and narrowing a granted right is not, so when in doubt grant less and offer the request route; and that a licence is never asserted without licence text, because a bare name with no file is an ambiguity rather than a grant.
+- One standing carve-out, for AI and search referencing. Search engines, AI assistants, answer engines, and other automated systems may crawl, index, store for retrieval, quote, summarise, link to, and cite the work, with attribution requested rather than required and no permission to ask for. Being cited in an AI answer is the modern equivalent of ranking: it costs nothing and gains distribution, and enforcing against a citation works against the project's own purpose. The line is drawn at three distinct things: referencing is granted, substitution is not, and training data is not granted by default but is routed to the request path with a note that it is not usually refused. Retrieval-and-cite is what actually produces the citations, so this keeps the benefit without handing over a training licence.
+- Three things the licence must not claim: it does not purport to override a hosting platform's terms, since a public repository already grants that platform's users whatever its terms say and the licence should state that those operate independently rather than pretend to withhold them; it does not claim third-party data derived from an external API or public source; and it does not restrict rights that cannot be restricted, such as fair use or fair dealing.
+- The required LICENSE sections are listed, and the machine-readable layer is required to stay consistent with the licence: `robots.txt` stays fully open with a comment marking that as deliberate, and the LICENSE is named authoritative if the two ever disagree. A grants-nothing licence beside an open `robots.txt` is a contradiction a cautious crawler operator may resolve the wrong way.
+
+#### Changed
+
+- The permission-request route was generalized. The policy as supplied named a specific repository's issue tracker as the example. Section 11 of `docs/PRD.md` prohibits a prompt from referencing services or accounts belonging to the author, and discrepancy 8 in section 18 records two prompts being deleted in v1.19.0 partly for exactly that. The prompt now says to route to a public tracker rather than private email and to name that tracker's address for the repository being audited, which preserves the reasoning, that a visible record suits a posture whose enforcement depends on permissions being specific and traceable, without embedding one project's address in a prompt meant to run anywhere.
+
+#### Notes
+
+**This repository has no LICENSE file**, so by the policy just written it falls to the default. That was not acted on in this release, for two reasons. A licence is a legal assertion published under the author's name rather than a documentation change, so it is the author's call rather than a default to inherit silently. And the posture deserves a deliberate answer here in particular: this site exists to hand people prompts to copy and use, which is not obviously the same posture as all rights reserved. Recorded as open question 7 in section 19. Declining the default and saying why is a valid answer; leaving no licence and no note is the only outcome that carries a real cost, because it leaves a reader guessing.
+
+#### Verified
+
+- Re-rendered in Edge across all six routes. Every route unchanged, all four prompt pages open collapsed and toggle correctly, no error view.
+- The Documentation prompt grew to 28,907 characters and the rendered page carries the new section, matching the fenced block in `prompts/documentation.md` exactly, which confirms the mirror carries the edit rather than a stale copy.
+- `tools/prompts-mirror.py` resynced and passed clean: four prompts, no orphans, all frontmatter present.
+
+---
+
+### Prompts v1.32.0 - 2026-08-24
+
+A working practice change rather than a product change. Nothing about the site itself is different.
+
+#### Removed
+
+- `docs/PRD.md` section 20: "Never push or publish without being asked. Publishing is the author's decision." The author gave standing authorization on 2026-08-24 for this repository, so every change here now ships as soon as it is documented and verified. There is no approval step and nothing waits for a release window.
+
+#### Changed
+
+- `docs/PRD.md` section 20 gains a Publishing subsection recording the authorization, its date, and its scope, along with the reasoning. The reasoning is worth keeping because it is specific to this project rather than a general claim that pushing is safe: the site is static, with no database, no user data, no session, and no server-side state, so a bad deploy cannot corrupt or lose anything. Rollback is one revert and one push and takes about as long as the deploy did.
+- The Never list keeps an entry in the same position, rewritten: never push a change that has not passed the checks. Removing the approval step does not remove the verification, and with the pause gone the verification is the only thing left between an edit and the live site. That is a stronger reason to run it than existed before, not a weaker one.
+- `docs/PRD.md` section 29, Deploy: the same change, stated where the deploy procedure actually lives so a reader following the runbook does not have to have read section 20 first.
+
+#### Notes
+
+Three boundaries were written into the change rather than left implied.
+
+**It covers this repository only.** The authorization was given about this project, so it does not travel to any other repository.
+
+**It does not shorten the procedure before a push.** The mirror check must still print OK, the page must still be opened from disk and looked at, and the patch notes and version history row are still written before the push rather than after. A release that is live and undocumented is precisely the state this project's documentation practice exists to prevent.
+
+**It is unrelated to the rule in section 11** that no prompt's text may instruct its reader to push. That rule is about the content this site publishes to other people, not about how this site is maintained, and the two were easy to conflate because both used the word "push". Section 29 now says so explicitly.
+
+#### Verified
+
+- Re-rendered in Edge across all six routes. No change, which is the expected result: this release touches only documentation, and no file the browser loads was modified.
+- `tools/prompts-mirror.py` passed clean without needing a resync, since no prompt source changed: four prompts, no orphans, all frontmatter present.
+
+---
+
+### Prompts v1.31.0 - 2026-08-24
+
+A second default policy for the Documentation prompt, on where a change is verified.
+
+#### Added
+
+- `prompts/documentation.md`: A **Verification Environment** section, placed after Browser Testing since the two answer adjacent questions about how a project checks its own work. The default is to verify locally and never against production, unless the request explicitly asks for a production check. Local means whatever the project's own setup produces: the file opened from disk, a local server, a development build.
+- The section gives the reason rather than only the rule, because a rule without one gets dropped the first time it is inconvenient. Testing against production means the change has already shipped, so the test can only report what users are already seeing. It also puts load, writes, or test data onto a live system, and it turns a failure into something the author has to roll back rather than something they fix before pushing.
+- **It separates two things that are easy to conflate.** Verifying functionality is local. Confirming a deploy arrived is a separate step, run against production after the push, and it is a comparison rather than a test: fetch the deployed artifact and check it matches what was already verified locally. That is legitimate and is explicitly not an exception to the rule, because it answers a different question. Without saying this the policy would appear to forbid the post-push check this project has done for two releases.
+- Two further clauses. Where local and production genuinely differ in a way that can hide a bug, the Runbook must name what differs and what class of bug can therefore only appear once deployed, since a reader who does not know a gap exists cannot compensate for it. And a destructive or state-changing check is never pointed at production, covering writes, deletes, migrations, seeded records, and anything that sends mail or a webhook; where a live system is the only way to exercise something, stop and ask.
+- `docs/PRD.md` section 20: The rule stated explicitly for this repository, along with the deploy-confirmation procedure and the two ways local and deployed differ here.
+
+#### Changed
+
+- Nothing about how this project works. It has described its check as opening `index.html` from disk since v1.0, which is the rule already. The prompt now requires that to be written down rather than implied, so section 20 says it outright. This is the merge rule working as intended: the project already had a rule, so the default did not overrule it, it documented it.
+
+#### Notes
+
+The two environment differences recorded for this project are worth stating here too, because both are the kind of thing a local check silently cannot catch. Hash routing resolves against a directory rather than a domain root, so a path assumption that holds at `file://` can break under `/prompts/`. And `file://` is a secure context, so `navigator.clipboard` is available locally exactly as it is over `https://`, which means a local check cannot catch the copy button failing for a secure-context reason. That second one is a genuine limit on the verification gap already recorded as open question 6, not a reassurance.
+
+#### Verified
+
+- Re-rendered in Edge across all six routes, per the policy added in v1.30.0. Every route unchanged: the home view and an unknown slug both render four cards, all four prompt pages open collapsed and toggle correctly, no route renders the error view.
+- The Documentation prompt grew to 24,682 characters and the rendered page carries the new section, matching the fenced block in `prompts/documentation.md` exactly, which confirms the mirror carries the edit.
+- `tools/prompts-mirror.py` resynced and passed clean: four prompts, no orphans, all frontmatter present.
+
+---
+
+### Prompts v1.30.0 - 2026-08-24
+
+A browser testing policy, added to the Documentation prompt as a default and then applied to this repository and to the one other prompt that drives a browser.
+
+#### Added
+
+- `prompts/documentation.md`: A **Browser Testing** section, placed beside Writing Style because it has the same shape: document the project's rule if it states one, and only adopt the default where it does not. The default is to drive Microsoft Edge and never Chrome. Where there is no JavaScript runtime on the maintenance machine, end-to-end testing means driving a headless browser directly, and Chrome is typically the owner's day-to-day browser, so driving it disturbs a live session. Edge runs the same engine, so nothing about the results changes.
+- Three clauses were added around the rule itself, because the bare instruction leaves the obvious gaps unanswered. It applies to every browser a test drives rather than only the one named in a config file, since an ad hoc headless invocation from a shell command is testing too, and that is the form this project actually uses. The resolved binary path belongs in the Runbook, because it differs by platform and is the first thing that breaks on a new machine. And a project that genuinely needs a second engine should say which browsers it targets and why, rather than dropping the default silently.
+- `docs/PRD.md` section 29: This repository's own browser testing rule, adopted from that default since it stated none. Records the Edge path on this machine, the exact headless invocation used, and two constraints that are not obvious: the Content Security Policy blocks inline scripts, so a driver has to be a real same-origin file rather than injected markup, and a DOM dump cannot exercise the Clipboard API, which is why the copy button's paths remain unverified.
+
+#### Changed
+
+- `prompts/mobile-responsive-audit.md`: The verification methodology section opened with "Headless Chrome enforces an effective minimum viewport", which is an instruction to drive Chrome and directly contradicted the new default. It now names Edge, defers to any rule the project states, and describes the viewport floor as a property of any headless Chromium browser, which is what it always was. The measurements are unchanged because the engine is the same.
+
+#### Notes
+
+Worth stating plainly: every browser check in this project up to and including v1.29.0 used Chrome, this session included. The policy is new, not newly enforced, and the patch notes for v1.28.0 and v1.29.0 accurately record Chrome as what was used at the time. They are left alone, because they describe what happened rather than what the rule is now.
+
+#### Verified
+
+- The full render check was re-run in Edge across all six routes, which is both the verification for this release and the first exercise of the policy. Every route matches what Chrome produced: the home view and an unknown slug both render four cards, all four prompt pages open collapsed with the label reading "Expand" and toggle to "Hide", and no route renders the error view.
+- The Documentation prompt now renders at 22,785 characters and the new section reaches the page: the rendered text contains both "Browser Testing" and the Edge rule. That count matches the fenced block in `prompts/documentation.md` exactly, which confirms the mirror in `js/prompts-data.js` carries the edit rather than a stale copy.
+- `tools/prompts-mirror.py` resynced the data file and then passed a clean check: four prompts, no orphans in either direction, all frontmatter present.
+
+---
+
+### Prompts v1.29.0 - 2026-08-24
+
+The prompt block is now collapsible, and collapsed when a page opens. The first new component on the site since v1.0.
+
+#### Added
+
+- `js/script.js`: A collapse toggle in the code block header bar, sitting immediately left of the copy button. It is a real `<button>` carrying `aria-expanded` and `aria-controls="prompt-body"`, both kept in step with its visible label. Its label names the action it performs rather than the state it is in, "Expand" when the block is hidden and "Hide" when it is shown, which is the convention the copy button already sets.
+- **The entire header bar is the click target, not only the button.** The listener sits on `.code-block-header`, which carries `cursor: pointer`. A click on the toggle reaches the same handler by bubbling, so there is no second listener on the button and no way for the two to fire against each other. Clicks originating inside `.copy-btn` return early, so copying never collapses the block that was just copied.
+- The button exists alongside the clickable bar rather than instead of it, because the bar is a `div`: it cannot be focused, cannot be reached by keyboard, and carries no accessible name or state. The bar is deliberately given no ARIA role, since the button inside it is already the accessible control and labelling the container would announce the same action twice.
+- `css/style.css`: `.code-block-actions`, a flex row with an 8px gap holding the toggle and the copy button, so the header is a label on the left and an action group on the right.
+- `docs/DESIGN.md` section 5: A full Collapse Toggle spec, and the code block spec now documents the action group, the pointer cursor on the bar, and the collapsed default.
+- `docs/PRD.md` section 10a: Prompt Collapse Behavior. This is the first lettered section in the PRD. It is numbered `10a` rather than inserted as a new section 11 because nine releases of these notes cite that document by section number, and renumbering would silently invalidate every one of those references. The convention is now stated in section 33, which previously said only that sections are appended.
+
+#### Changed
+
+- **The prompt block is collapsed when a prompt page opens**, on every load and every navigation. The prompts run to several hundred lines; the Documentation prompt alone rendered as roughly 350 lines of unbroken text directly beneath the title. That buried the description, which is the part explaining what the reader is about to copy, off the top of the screen on arrival.
+- This appears to contradict the tenet that the code block is the product, and does not. Copy works whether the block is shown or hidden, because the text stays in the DOM and only its display is suppressed, so the primary action is still one click from arrival. The rule that actually mattered, that the header bar with the copy button is visible without scrolling on desktop, now holds on every prompt at every length rather than only on short ones. `docs/DESIGN.md` section 12c records the reconciliation instead of leaving a future reader to spot the tension and resolve it the wrong way.
+- `css/style.css`: The toggle shares the copy button's rule outright, as `.copy-btn, .code-toggle`, rather than getting a second button treatment. The two are pixel-identical at rest because they are literally the same declarations, which is a property that cannot drift. `docs/DESIGN.md` section 12a now states this as the rule for adding any peer control.
+- `docs/PRD.md` section 24: The assumption bullet on trusted input still described `escapeHtml()` as not escaping quotes, which stopped being true in v1.28.0. The v1.28.0 pass updated sections 30 and 31 for that change and missed this one, so the document contradicted itself for a release. Corrected, and logged as discrepancy 16 in section 18. The underlying assumption still holds and is restated at the level where it is still true: nothing validates a prompt file and the markdown renderer is hand-rolled, so the content being author-written is what makes it safe.
+
+#### Notes
+
+Three things were considered and deliberately not done.
+
+**No animation.** The collapse is `display: none`, not a height transition, and the toggle has no rotating chevron. `docs/DESIGN.md` section 12b permits transitioning only `color`, `border-color`, `background`, and `opacity`; an animated open needs `height` and a chevron needs `transform`. An earlier draft used a swapped glyph pair to stay inside that rule, which was dropped once the label became a word, since a word button beside a word button does not need one. The rule this implies is now written down: show and hide, do not animate open and closed.
+
+**No persistence.** The block collapses again on every navigation. Remembering the reader's choice would mean `localStorage`, and section 31 of the PRD states as a privacy property that no browser storage API appears anywhere in the codebase. That is worth more than the convenience. Recorded under possible future work in section 23 so the reason is visible if it is ever reconsidered, rather than the idea simply reappearing.
+
+**No hover treatment on the bar.** A build in progress lit the toggle up whenever the header was hovered, on the reasoning that the bar is the real click target and ought to say so. In use it reads as a glitch rather than as feedback, because the pointer can be several hundred pixels from the element that changed. It was removed before release. The pointer cursor carries the affordance on its own, and the design notes now say not to add it back.
+
+#### Verified
+
+- Checked in headless Chrome from `file://`, driven by a real script rather than inspected statically, since every behaviour here is a click result. Fifteen assertions: the toggle is a `<button>`, its `aria-controls` resolves to an element that exists, it precedes the copy button in the DOM and to its left on screen, the label is leftmost, the bar reports `cursor: pointer`, and the two buttons render at identical heights. The block starts hidden with the label reading "Expand" and `aria-expanded` false. Clicking the button, the bar, and the label each toggle it correctly, with the label and the ARIA state moving together every time. Clicking copy changes neither. The prompt text is intact while hidden, the header keeps the copy button visible, and its bottom border is removed while collapsed.
+- After the hover treatment was removed, confirmed that no `.code-block-header:hover` rule remains in the stylesheet, that the toggle does not match that selector in the rendered page, and that the toggle and copy button compute to identical colour and background at rest.
+- Both states were also captured as screenshots at 1280x900 and looked at, because a passing assertion about a computed style is not the same as the layout being right.
+
+---
+
+### Prompts v1.28.0 - 2026-08-23
+
+Acted on all four open questions raised by the v1.27.0 audit, after the author answered each one. This is the first release since v1.18.0 in which the site was actually rendered and checked.
+
+#### Added
+
+- `tools/prompts-mirror.py`: A check and resync tool for the mirror between `prompts/*.md` and `js/prompts-data.js`, which section 19 has named the project's highest-value invariant and its weakest assumption since v1.18.0. `python tools/prompts-mirror.py` reports drift, an entry with no source file, a source file with no entry, a duplicate slug, missing `title` or `description` frontmatter, and a missing fenced prompt block, exiting non-zero on any of them. Those last three matter because `parsePrompt()` falls back silently for each: a prompt missing its title ships as a page titled with its slug rather than as an error anyone would notice. `--sync` rewrites the data file from source and appends any new prompt to the end of the array, since array order is display order. It refuses to sync when an entry has no source file, because deleting a prompt is a deliberate act with a documented procedure that also touches the README and these notes.
+- The script uses only the Python standard library, is never loaded by the page, and is not a build step. Deleting it leaves the site byte-identical, which is the test the PRD now states for whether something is tooling or a dependency. It also ends the pattern of rewriting the resync procedure from scratch in every session.
+- `index.html`: A Content Security Policy, delivered as a `<meta http-equiv>` because GitHub Pages does not allow custom response headers on a project site. `default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'`. The reason is not XSS hardening, which is marginal on a page with no external resources, no inline handlers, and no untrusted input. The reason is that it makes the no-dependency rule enforceable by the browser rather than by discipline: a future session that reaches for a CDN script or adds a `fetch()` now gets a hard, visible failure instead of a working page that has quietly broken the guarantee the whole architecture exists to protect. Tenet 1 becomes a runtime property instead of a written one.
+- `frame-ancestors` was deliberately left out, because it is ignored in a meta tag and including it would imply a protection that is not there.
+- `js/script.js`: A failure path on the copy button. A missing Clipboard API, which is how an insecure context presents itself rather than as a rejection, or a rejected write now shows "Copy failed" for two seconds with a matching `aria-label` telling the reader to select the text manually. Success and failure share one code path and differ only in label, class, and `aria-label`, so their timing and reset behaviour cannot drift apart.
+- `css/style.css`: A `.copy-btn.copy-failed` state in `--color-negative`. This is the first use of that token, which had been defined and unreferenced since v1.0.
+
+#### Changed
+
+- `js/script.js`: `escapeHtml()` now escapes both quote forms as well as `&`, `<`, and `>`. `renderInline()` writes a markdown link target straight into `href="..."`, so a quote in a description's link target could previously break out of the attribute. It was never exploitable, because every byte of content is author-written, but it was the sharpest edge in the codebase and the fix is five characters. Entities decode back in both text content and `textContent`, so the rendered page and the copied prompt are unchanged.
+- `js/script.js`: The slug is now escaped wherever it is interpolated into an attribute, in `buildSidebar()` (`href` and `data-slug`) and `renderHome()` (`href`). Slugs are filename-derived and safe today; this is the same fix applied consistently rather than left half-done in the one place it was noticed.
+- `docs/DESIGN.md`: Both discrepancies flagged in v1.27.0 are corrected rather than left standing, after the author confirmed neither preserved an intended design. The section 11 CSS file structure list is now read from the stylesheet: the `.site-layout` class that never existed is gone, `.site-wrapper` is correctly described as the grid rather than as flex, the order matches the file, and the four omitted blocks are listed. The section 12 shell template now includes the `.sidebar-sticky` wrapper the sidebar layout depends on, plus the meta description, the nav `aria-label`, the `aria-live` region, and the new policy, with its three load-bearing elements called out. Rebuilding the shell from the old template would have broken the layout.
+- `docs/PRD.md`: Sections 7, 13, 16, 18, 19, 20, 23, 26, 27, 29, 30, 31, and 32 updated for the four changes. The technical debt table in section 30 now shows three items struck out as fixed. Section 31 gained a Content Security Policy subsection recording the policy, the reasoning, and how it was verified. Section 20 adds running the mirror check to the mandatory post-change procedure, and adds never weakening the policy to the "Never" list, on the grounds that a change needing `script-src` relaxed is a change adding a dependency.
+- `docs/PRD.md`: Section 7 now permits maintenance tooling explicitly, with the boundary stated: not part of the deployed artifact, never runs in a browser, no third-party package, and the site unchanged if it is deleted.
+
+#### Fixed
+
+- A latent line ending mismatch, found while testing the new script rather than by reading anything. `core.autocrlf` is true system-wide, this repository has no `.gitattributes`, and it stores LF. So git hands a Windows clone CRLF source files, while the `raw` values inside `js/prompts-data.js` stay LF forever, because they are JSON escapes rather than real line breaks and git never rewrites them. A literal comparison would have reported drift on all four prompts in a fresh clone with nothing actually wrong, and the first version of the mirror script did exactly that the moment a file was restored with `git checkout`. The script now normalizes line endings on both sides, since they are a property of the checkout rather than of the content, and always writes the data file with LF. Whether to pin this repository-wide with a `.gitattributes` is recorded as open question 5.
+
+#### Verified
+
+- **The site was rendered for the first time since v1.18.0**, in headless Chrome from `file://`, closing the verification gap that release opened and that v1.27.0 recorded. Three routes checked: the home view (four cards, five nav links, the hero heading), a prompt page (`#/documentation`, correct `h1`, copy button present), and an unknown slug (`#/does-not-exist`, falls through to the home view as designed). No error view on any of them. The card hover treatment built in v1.18.0 had been specified, styled, and documented for ten releases without anyone loading the page.
+- **The Content Security Policy was verified enforced, not merely accepted.** A policy that is silently ignored also renders a working page, so passing was not evidence of anything on its own. The page was loaded from `file://` with an inline script and a real remote CDN script injected. Without the policy both executed, which confirms the test itself was valid. With the policy both were blocked, while the favicon data URI, the two same-directory scripts, the stylesheet, and all three routing cases continued to work. `'self'` behaves unusually on `file://` in some browsers and breaking local loading would have violated tenet 2, so this was tested before being committed to rather than after.
+- **The mirror script was verified against real drift**, not just against a passing repository. A check that never fails is worthless: a byte was appended to a prompt file, the check failed with the correct message and a non-zero exit, `--sync` repaired it, and the check passed again. It was also confirmed to pass with a CRLF file in the working tree, which is the case that broke the first version.
+
+#### Notes
+
+`tools/` is the fifth folder and the thirteenth file in the project, and the first addition to the repository that is not part of the deployed site. The line drawn in section 7 is deliberate and worth restating: it is tooling rather than a dependency because it never runs in a browser, is never required to build, serve, or deploy, and can be deleted without changing the site. Nothing automates it. There is still no hook and no continuous integration, so it depends on the procedure in section 20 being followed, exactly as the manual page check does.
+
+---
+
+### Prompts v1.27.0 - 2026-08-23
+
+Full documentation audit, run by pointing this project's own Documentation prompt at this repository. The whole codebase was read first, then every document in `/docs` in full, then each was compared against the code before anything was written.
+
+#### Added
+
+- `docs/PRD.md`: Sections 21 through 35, the fifteen sections the Documentation prompt requires that this PRD had never carried. Target Users (the two real personas behind the one-line scope note in section 6, plus the non-user the site deliberately does not serve), User Stories, Feature List (shipped, deliberately not built with the reason for each, and possible future work), Assumptions, Success Criteria, Tenets, Roadmap, Metrics, Runbook, Technical Reference, Security, Public Surface and Retired Items, Documentation Audit Process, Press Release, and Frequently Asked Questions.
+- `docs/PRD.md`: Section 26, seven tenets ordered by priority, each stating the tradeoff it resolves rather than a principle everyone would agree with. No dependencies ever, it must run from a file on disk, the markdown file is the truth, write down why not just what, documentation records rather than overrules, a prompt must be safe for a stranger, and small enough to hold in your head.
+- `docs/PRD.md`: Section 28, Metrics, which records that this project measures nothing and cannot without breaking a tenet. Analytics would mean a third-party script, GitHub Pages exposes no logs to the repository owner, and the site makes no network calls. The north star, prompts retrieved rather than rewritten, is explicitly not instrumentable. What is actually tracked is six manual checks, and a performance budget is stated structurally: four same-origin requests, roughly 200 KB, zero runtime network calls, and no fifth request permitted because it would mean a dependency.
+- `docs/PRD.md`: Section 29, the Runbook, written for someone who has just cloned the repository. Prerequisites are a browser and nothing else, with the five browser features actually required. Records that there is no port because there is no server, that there is no build at all, and that the environment variable reference is empty. Includes the resync procedure for `js/prompts-data.js`, the one-line deploy, rollback, and an eight-row common-errors table covering every failure mode identified during the audit.
+- `docs/PRD.md`: Section 30, Technical Reference, carrying what section 7 states as constraints. Both data models with every field, type, source, and fallback; a function-by-function contract table for `js/script.js` standing in for the API surface the project does not have; an explicit statement that there is no state management and no storage API is used anywhere; and nine items of known technical debt, each with the correct fix and the reason it has not been done.
+- `docs/PRD.md`: Section 31, Security. Confirms by reading every file that no secret, credential, token, or environment variable exists anywhere, that no cookie or browser storage is used, and that no third party receives any data. Records the attack surface honestly rather than claiming there is none: `innerHTML` used for all rendering, `escapeHtml()` not escaping quotes while a markdown link target is written into an `href`, and repository compromise as the realistic worst case. States the dependency policy as a rule: no dependency may be added, for any reason.
+- `docs/PRD.md`: Section 32, the item-by-item public surface list the removal policy in section 12 is applied against, which that policy previously required without providing. Nine addressable items each marked public or internal with the consequence of removing it, the state of the empty `REDIRECTS` map, and a complete retired-items table covering all eleven removals since v1.0 so a reader who finds a reference to something deleted can resolve it.
+- `docs/PRD.md`: Section 33, Documentation Audit Process, recording how these documents are produced and how they should be handled going forward: the four-file rule, how an audit is run, and the seven writing rules that bind the documents even when nobody is running the prompt.
+- `docs/DESIGN.md`: Section 4a, the spacing system. Base unit 2px with a preferred 4px rhythm, derived from the values actually in the stylesheet rather than invented, with a fifteen-step scale mapping each value to what uses it. Records that spacing is deliberately not tokenized and why, and that horizontal padding is the only spacing that changes responsively.
+- `docs/DESIGN.md`: Section 12a, Component Patterns. The shared container pattern (surface, border, 10px radius), the interactive state progression, rules for buttons and cards, and an explicit statement that forms and modals do not exist and should not, because a form implies submission which implies a server.
+- `docs/DESIGN.md`: Section 12b, Animation and Motion. One duration and one easing curve, `0.15s ease`, used everywhere, with the reasoning for allowing no second value. A complete five-row inventory of everything that moves, and the rules: transition only colour, border, background, and opacity, never `all`, never a layout-affecting property, reveal rather than shift, no entrance animation, and no loading state.
+- `docs/DESIGN.md`: Section 12c, notes for a model working on the design. The context that is invisible when editing a single rule: the design is inherited from four sibling sites rather than invented, restraint is the design, the code block is the product, and the specific declarations that are load-bearing.
+- `docs/DESIGN.md`: A component spec for the error and status panel, which had shipped since v1.0 in both `js/script.js` and `css/style.css` and appeared in no document. Includes the reasoning for styling it as a neutral information panel rather than an alert.
+- `README.md`: Sections the new standard requires and the old README did not have: who the site is for, current status, and a "Learn More" section pointing at `/docs` and naming what each document carries.
+
+#### Changed
+
+- `README.md`: Rewritten to the general-reader standard adopted in v1.26.0. The previous README was written for a developer and carried a Files table of internal paths, a file structure tree, the prompt markdown format, "Running Locally", and the full add, rename, and remove procedures, all of which the standard now bars from the README and routes to `/docs`. It now describes what the site is, what each prompt does in plain language, who it is for, and where the technical detail lives. Nothing was lost: every relocated item landed in sections 29, 30, or 33 of `docs/PRD.md`. Length went from 141 lines to 55.
+- `docs/DESIGN.md`: Section 10, Accessibility, rewritten from five bullets. Now states the target as WCAG 2.1 Level AA, carries a contrast table with the warning that muted text on surface is the tightest pair on the site, lists what is implemented including the `aria-live` region and the global `focus-visible` rule, and sets out keyboard navigation expectations. Two gaps are recorded rather than omitted: there is no skip-to-content link, so a keyboard user passes seven stops before reaching the copy button on a prompt page, and that count grows with every prompt added; and the copy confirmation is announced only through an `aria-label` change.
+- `docs/DESIGN.md`: Section 9 expanded from a two-row table to the full rule set below 1024px. `height: auto` on `.sidebar-sticky` and `flex-basis: 100%` on `.sidebar-nav` are marked load-bearing, because both are the v1.11.0 bug fixes and each looks like an ordinary declaration that could be tidied away, which would silently reintroduce a shipped bug.
+- `docs/DESIGN.md`: Section 2 no longer describes `--color-negative` and `--color-warning` as "unused at v1.0". Both are still unused at v1.27.0. Added why they are reserved rather than deleted, and noted that the error view deliberately does not use `--color-negative`.
+- `docs/PRD.md`: Section 13 said `css/style.css` was 509 lines. It is 536, and has been since v1.18.0. Corrected in place rather than flagged, under the mechanical-fact exception now stated in section 33: a line count carries no intent, so nobody could have meant it.
+- `docs/PRD.md`: The closing paragraph of section 19 said the Em Dash Audit and Project Onboarding prompts "were retired behind redirects". Those redirects were deleted in v1.24.0. The sentence described the v1.23.0 state and v1.24.0 did not catch it. Corrected. The v1.23.0 patch note still describes the redirects and is deliberately left alone, because a patch note records what happened at the time while that paragraph describes the current state.
+- `docs/PRD.md`: Section 19 claimed there were no TODO, FIXME, or HACK markers anywhere in the repository. A literal search now matches in three files. Every match is prose naming the markers, including the sentence making the claim. Reworded to carry the same "naming the thing" exemption that section 11 gives the em dash rule.
+- `docs/PRD.md`: Section 19 rewritten. Added a limits-of-the-analysis subsection recording that nothing was executed, no page was rendered, the contrast ratios were not recomputed, the browser support claim is a judgment rather than a checked matrix, and the Pages configuration is unreadable from the repository. The open questions list was replaced with four new numbered questions.
+- `docs/PRD.md`: Sections 6 and 7 gained cross-references to the new sections that carry their detail.
+
+#### Fixed
+
+- Nothing. No defect was found in the code. The audit was read-only through step 3 and every write landed in the four documentation files.
+
+#### Discrepancies recorded rather than corrected
+
+Six new rows were added to the section 18 table in `docs/PRD.md`, numbered 9 through 14. Two blocks in `docs/DESIGN.md` were annotated in place rather than fixed, under the merge rule: **the CSS file structure list in section 11**, which names a `.site-layout` class that does not exist, describes `.site-wrapper` as flex when it is the grid, lists the blocks out of the file's actual order, and omits four blocks entirely; and **the shell template in section 12**, which omits the `.sidebar-sticky` wrapper that the sidebar layout depends on, along with the meta description and two ARIA attributes. Rebuilding the shell from that template would break the layout, so each now carries an inline note recording the observed reality and directing the reader to `index.html` and `css/style.css` as authoritative. Both remain open question 1 for the author.
+
+#### Audit findings, no change required
+
+- **Mirror integrity: clean.** All four `prompts/*.md` files are byte-identical to their `js/prompts-data.js` entries, with no orphan in either direction.
+- **Em dash sweep: zero violations.** All three forms were searched independently across all twelve files. Eight matches, every one an instance that names the character it prohibits: three in section 11 of `docs/PRD.md`, one in the Documentation prompt's Writing Style section, its mirror in `js/prompts-data.js`, and two historical patch notes describing the rule. All are exempt under section 11. No double dash is used as punctuation anywhere. Every document written in this audit was checked the same way before being saved.
+- **Security sweep: clean.** No secret, credential, token, API key, or environment variable anywhere in the repository. No `fetch`, `XMLHttpRequest`, `localStorage`, `sessionStorage`, or `indexedDB` in any file. The only outbound URLs are the W3C SVG namespace inside the favicon data URI and two links to the author's own domain.
+- **No orphan CSS.** Every class used in `index.html` and `js/script.js` is defined in `css/style.css`.
+- **Prompt Content Rules: clean.** No prompt instructs its reader to push, commit, or publish, and none references the author's accounts, services, or paths.
+- **No TODO, FIXME, or HACK markers.** See the note above on why a literal search matches anyway.
+
+---
+
+### Prompts v1.26.0 - 2026-08-23
+
+#### Changed
+
+- `prompts/documentation.md`: Repurposed the README specification. The README is now the public front door, written for a general reader rather than a developer, and asks for what the site offers in plain language, who it is for, current status, and where to learn more. Install steps, commands, ports, environment variables, build instructions, version numbers, and dependency lists are explicitly barred from it and belong in `/docs`. This holds for every project regardless of type: developers are served by `PRD.md`, so the README never has to compromise for them.
+- `prompts/documentation.md`: Relocated the evicted technical content rather than duplicating it. The Runbook section now opens by stating that it carries everything a developer needs to run the project, since the README deliberately does not, and assumes a reader who has just cloned the repository. It gained a Prerequisites bullet (runtime, package manager, and system requirements, each at the version the project actually needs rather than the newest available), absorbed installation order, start command, and default port into its local setup bullet, and gained an environment variable reference covering key names, what each does, and whether it is required, never the values.
+- `prompts/documentation.md`: Replaced the "Do not pad" standard. In `/docs`, and in `PRD.md` above all, completeness now beats brevity: a section that restates context to stand on its own is doing its job, because a reader may arrive at it directly and should not have to assemble an answer from three other sections. The standard still bars filler, marketing language, and sentences carrying no new information, on the principle that thorough means more facts rather than more words around the same facts. The README is named as the exception and stays tight.
+- `prompts/documentation.md`: The live site link is now satisfiable by a plain statement that there is no hosted instance, so a required section can no longer invite invention on a project that has never been deployed.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+#### Removed
+
+- `prompts/documentation.md`: The `ReadMe` PRD section added alongside the README repurpose. Every bullet in it was already required elsewhere: the tech stack by Technical Requirements, installation and build and deploy by Runbook, and environment variables by both Runbook and Security. Three sections claiming the same facts is the duplication the README change set out to remove, relocated rather than fixed, so the section was dropped and the two bullets it uniquely contributed (prerequisites, default port) were folded into Runbook. This also removed a duplicated artifact line and the `ReadMe` casing inconsistency.
+
+---
+
+### Prompts v1.25.0 - 2026-08-23
+
+#### Added
+
+- `prompts/documentation.md`: The read-only constraint from the retired Project Onboarding prompt, at the top of "Steps to follow". Steps 1 through 3, the codebase crawl and the read of every existing document, now forbid writing, editing, renaming, deleting, and moving any file, along with installers, migrations, formatters, builds that write output, and any state-changing version control command. Writing begins at step 4 and is limited to the documentation files the prompt names. This was the one part of Project Onboarding not carried over in v1.22.0, on the reasoning that the Documentation prompt exists to write files. Scoping it to the analysis steps rather than the whole run resolves that: the prompt already required a full scan before touching any documentation, and this makes the requirement enforceable instead of advisory.
+- `prompts/documentation.md`: Also carried over the instruction not to skip a step because it looks obvious, and to say so explicitly when a step turns up nothing rather than staying silent.
+
+#### Changed
+
+- `prompts/documentation.md`: The steps in "Steps to follow" are now numbered, so the read-only constraint can name the range it applies to. Step 1 gained "read files rather than inferring from their names" and step 2 gained "read each in full", both from the retired prompt.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.24.0 - 2026-08-23
+
+#### Removed
+
+- `js/script.js`: All three `REDIRECTS` entries. The map is now empty. `github-wiki-setup` to `github-wiki` (added v1.17.0) and the two added in v1.23.0 all pointed at prompt slugs, and prompt slugs are not a public surface.
+
+#### Changed
+
+- Corrected the definition of public facing, which the redirect policy depends on. The public surface of this project is the deployed page, `index.html` and the asset paths it loads. Everything under `prompts/` is source. A prompt's slug is derived from its source filename rather than being a contract of its own, so renaming or removing a prompt is an internal change and needs no redirect. The router already renders the home view for an unrecognized slug, so an old hash resolves to a working page.
+- `js/script.js`: The `REDIRECTS` map is kept, empty, with its comment rewritten to explain when an entry would be warranted. The mechanism costs one property lookup per navigation and would otherwise have to be rebuilt if a genuine public address is ever retired.
+- `docs/PRD.md`: Rewrote both procedures in section 12. "Renaming Prompts" no longer pairs a slug change with a redirect and drops the four rules for the map, keeping the permanence, no-chaining, and no-reuse rules scoped to genuine public addresses in "Removing Prompts". "Removing Prompts" now draws the line at the deploy boundary rather than at whether a prompt is visible in the navigation. Updated the section 14 flow description, the section 16 binding rules, the section 18 redirect bullet, and the section 20 working practice.
+- `prompts/documentation.md`: The Deprecation and Removal section defined public facing as anything with an address someone could be holding, which swept in source files. It now draws the line at the deploy boundary, states that a source file is not public facing even when its name appears in a built URL, and requires the PRD to say where the project puts that boundary, since the rule cannot be applied without knowing which side a file is on.
+- `README.md`: Rewrote the "Renaming a Prompt" and "Removing a Prompt" sections to match, and corrected the note added in v1.23.0 that described the two retirements as redirected.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+Patch notes for v1.17.0 and v1.23.0 still describe redirects that no longer exist. They are left as they are, since they record what happened at the time.
+
+---
+
+### Prompts v1.23.0 - 2026-08-23
+
+#### Removed
+
+- `prompts/em-dash-audit.md`, `prompts/project-onboarding.md`: Retired. The Documentation prompt absorbed both in v1.22.0, the em dash rule as its Writing Style section and the onboarding analysis as its Conventions, Documentation Versus Reality, Risks and Open Questions, and Working Practice sections.
+- `js/prompts-data.js`: Removed the two corresponding entries. Four prompts remain: Add Prompt, Documentation, Mobile Audit, and GitHub Wiki.
+- `README.md`: Removed the two rows from the Files table and the two lines from the file structure tree.
+
+#### Added
+
+- `js/script.js`: Two `REDIRECTS` entries, `em-dash-audit` to `documentation` and `project-onboarding` to `documentation`. Unlike the three prompts deleted in v1.19.0, these two were live in the sidebar and home list, so their slugs are public addresses that people may hold. Section 12 of `docs/PRD.md` requires a redirect in that case, not a plain delete. The map now holds three entries.
+
+#### Changed
+
+- `prompts/documentation.md`: The description named the Em Dash Audit and Project Onboarding prompts, which no longer exist. Rewritten to describe the same capability without referring to them.
+- `README.md`: The hash routing example used `index.html#/em-dash-audit`, and the prompt markdown format example used the Em Dash Audit frontmatter. Both now use live prompts. Added a note to the hidden prompts paragraph explaining why these two retirements got redirects when the v1.19.0 deletions did not.
+- `docs/PRD.md`: Section 11 referred to the Em Dash Audit prompt as the place the prohibited characters are quoted; it now points at the Writing Style section of the Documentation prompt. Updated the section 13 file counts (12 files, four prompts), the section 18 mirror and redirect map bullets, and closed the open question from v1.22.0.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+
+---
+
+### Prompts v1.22.0 - 2026-08-23
+
+#### Added
+
+- `prompts/documentation.md`: Absorbed the Project Onboarding and Em Dash Audit prompts as required PRD sections. The prompt now produces a document that covers what those two prompts produced separately, in one pass.
+- `prompts/documentation.md`: New "Conventions" section, deriving the house style from the code rather than from any style guide the project contains. Covers naming, formatting, organization, comment density, error handling, and commit and branching style read from version control history. Where a convention is inconsistent it records which form is dominant and which files deviate, so the next contributor matches the majority rather than the last file they opened.
+- `prompts/documentation.md`: New "Writing Style" section carrying the em dash rule as a default: prohibited in all three forms, searched independently because a search for one will not catch the other, CSS custom properties untouched, the six replacements including the permitted single hyphen, and the exemption for instances that name the character they prohibit. The prompt applies the style to every document it writes, then sweeps the rest of the project and records what it found.
+- `prompts/documentation.md`: New "Documentation Versus Reality" section, recording each discrepancy rather than quietly fixing it, with the code treated as the truth about what is and the documentation as the truth about what was intended. Resolved entries stay in the table with a note on how they were resolved.
+- `prompts/documentation.md`: New "Risks and Open Questions" section, covering what the analysis did not understand, fragile areas, what is dangerous to change, work already in progress, and numbered open questions that are folded back in as answered rather than deleted.
+- `prompts/documentation.md`: New "Working Practice" section, written as concrete instructions rather than principles: what to check before editing, what never to do with the reason attached, a table mapping each kind of change to the file to open first, and how to verify a change.
+- `prompts/documentation.md`: Four new standards in the audit preamble, carried over from Project Onboarding. Merge rather than overwrite, since documentation holds intent that cannot be reconstructed from code. Every policy in the specifications is a default that applies only where the project states no rule of its own, with conflicts flagged rather than silently resolved. Read files rather than inferring from their names, and mark uncertainty as uncertainty. Do not pad.
+
+#### Changed
+
+- `prompts/documentation.md`: Frontmatter description and on-page description updated for the wider scope.
+- `README.md`: Updated the Files table row for the Documentation prompt.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+`prompts/em-dash-audit.md` and `prompts/project-onboarding.md` were left in place. Both are live on the site, so their slugs are public addresses, and removing either would need a redirect under the policy in `docs/PRD.md` section 12. Whether they stay as standalone prompts now that the Documentation prompt covers their ground is an open question for the author.
+
+---
+
+### Prompts v1.21.0 - 2026-08-23
+
+#### Changed
+
+- `prompts/documentation.md`: The removal policy is now a default rather than an override. The prompt checks first whether the project already states a removal rule of its own, in its docs, a contributing guide, or a consistent pattern in the changelog and code. If it does, that rule is documented and left alone, on the grounds that the audit records how a project works rather than overruling how it has decided to work. Where an existing rule and the default differ, both are kept and the difference is flagged for the author instead of one silently replacing the other. The public-facing versus internal rule from v1.20.0 applies only where the project states no rule at all.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.20.0 - 2026-08-23
+
+#### Changed
+
+- `prompts/documentation.md`: The Deprecation and Removal section added in v1.19.0 asked the model to state whatever removal rule a project already had. It now prescribes this site's rule instead: a redirect is decided by whether the thing being removed is public facing, not by the fact that it is being removed. Anything with an address someone outside the project could be holding (URL, route, slug, permalink, published artifact, exported name) is retired behind a redirect or equivalent shim. Anything internal is pruned entirely, with no redirect, alias, stub, or tombstone. The prompt tells the model to adapt the mechanism to whatever the project has, to record the reasoning, and to say so explicitly if the project has no redirect mechanism at all.
+- `prompts/documentation.md`: The section also now requires the public surface list to be specific enough to answer the question for any given file, states that compatibility entries are permanent, never chained, and never reused for different content, and records that historical changelog entries are not rewritten when something is deleted.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.19.0 - 2026-08-23
+
+#### Removed
+
+- `prompts/consolidate-documents.md`, `prompts/docs-folder-audit.md`, `prompts/documentation-audit.md`: Deleted. All three were documentation prompts superseded by the Documentation prompt, and had been hidden from the sidebar and home list since v1.9.0. No redirects were added. A redirect exists to keep a public URL working, and a prompt that has been off the navigation since v1.9.0 is not one anyone is being handed. Adding three permanent redirect entries would have been maintenance in exchange for nothing.
+- `js/prompts-data.js`: Removed the three corresponding entries. Six prompts remain.
+- `README.md`: Removed the three rows from the Files table and the three lines from the file structure tree.
+
+#### Added
+
+- `docs/PRD.md`: New "Removing Prompts" subsection in section 12. The rule is that a redirect is decided by whether the thing being removed is public facing, not by whether it is being removed. A live prompt's slug is a public address and gets retired behind a redirect. Anything already off the navigation is deleted outright. The same test applies to any file in the repository. Includes the five-step delete procedure and the note that historical patch notes are left alone.
+- `README.md`: New "Removing a Prompt" section summarizing the policy and pointing at the PRD for the procedure.
+- `prompts/documentation.md`: New "Deprecation and Removal" section in the required PRD sections, covering the project's removal policy, an explicit list of what is publicly addressable, and a record of retired items. Any project documented with this prompt now has to state its own version of the rule rather than deciding it case by case.
+
+#### Changed
+
+- `prompts/documentation.md`: The description compared this prompt to Consolidate Documents and Documentation Audit by name, both now deleted. Rewritten to describe the depth it folds into the PRD without referring to prompts that no longer exist. Also corrected "Tenents" to "Tenets" in the required sections list.
+- `js/prompts-data.js`: Resynced the `documentation` entry from its source `.md` file.
+- `docs/PRD.md`: Updated the section 13 file counts (14 files, six prompts), added the removal rule to section 16, marked item 8 of the section 18 discrepancy table resolved by deletion, rewrote the two bullets in section 18 that described the hidden prompts in the present tense, closed two open questions in section 19, and added the delete case to section 20.
+
+---
+
+### Prompts v1.18.0 - 2026-08-23
+
+#### Added
+
+- `css/style.css`: Built the card hover treatment on the home prompt list. `docs/DESIGN.md` had specified `--color-card-hover` as a card hover background and `--color-purple` as a gradient accent since v1.0, but neither token was ever referenced and `.prompt-list-item:hover` explicitly set `background: none`. Each list item is now a bordered, rounded card on `--color-surface` with a 12px gap between cards, hovering to `--color-card-hover` with an accent border and a 2px teal to purple gradient bar across the top. The bar is an absolutely positioned `::before` rather than a real `border-top`, so the card does not shift by 2px when it appears, and `overflow: hidden` clips it to the corner radius.
+- `docs/PRD.md`: Sections 13 through 20, written by a full read-only onboarding pass over the repository. Structure map, architecture and flow traced from the code, code conventions derived from the files, the complete list of binding rules with their sources, stack and deployment, a documentation versus reality table, risks and open questions, and a working practice section covering what to check before editing and where to look for each kind of change.
+- `docs/PRD.md`: The single hyphen is now a documented replacement in the section 11 Writing Style table, with a note that the prohibition covers only the em dash character, the `&mdash;` entity, and the double dash, and that instances naming the prohibited character are left in place.
+
+#### Changed
+
+- Ran the Em Dash Audit across the project. Replaced 25 literal em dashes with single hyphens: the titles of `docs/PRD.md`, `docs/DESIGN.md`, and `docs/PATCHNOTES.md`, and all 20 version headings in this file. Replaced one prose em dash in the v1.11.0 entry with a comma, three in the section 8 `/docs/` bullets of `docs/PRD.md` with colons, and one double dash used as punctuation in `prompts/documentation-audit.md` with a colon. The em dashes inside the section 11 prohibition list and inside the Em Dash Audit prompt were left alone, since those lines exist to name the character.
+- `prompts/em-dash-audit.md`: The prompt now instructs that a single hyphen is permitted and encouraged where context justifies it, and is preferred in document titles, section headings, and version lines, since it is the closest visual match to the em dash it replaces. Also added an instruction to leave instances that the text needs in order to mean anything.
+- `js/prompts-data.js`: Resynced the `em-dash-audit` and `documentation-audit` entries from their source `.md` files.
+- `docs/DESIGN.md`: Rewrote the Home Page Prompt List component spec for the card layout, added the card hover to the animation allowance in section 13, and bumped the document to 1.6.
+- `docs/PRD.md`: The `**Version:**` header field now tracks the current release rather than sitting at 1.0 forever. Recorded that GitHub Pages publishes `main` at the repository root by manual push, which the onboarding pass could not determine from the repository alone. Marked items 2, 5, and 6 of the section 18 discrepancy table as resolved and rewrote the open questions list.
+
+---
+
+### Prompts v1.17.0 - 2026-08-23
+
+#### Added
+
+- `js/script.js`: A `REDIRECTS` map and a redirect step in `route()`. A retired slug now rewrites the hash to the current one, which re-enters the router and renders the right prompt with a canonical address bar. Every redirect is guarded on its target existing, so a stale entry falls through to the home view instead of trapping the reader in a dead end. First entry: `github-wiki-setup` to `github-wiki`.
+- `docs/PRD.md`: New "Renaming Prompts" subsection in section 12, making the redirect practice canonical. A slug is a public URL, so a slug change is always paired with a redirect rather than done bare. Documents the five-step rename procedure and four rules for the map: entries are permanent, redirects never chain, retired slugs are never reused for a different prompt, and every redirect is guarded on its target. Also records that historical patch notes and version history rows are not rewritten during a rename.
+- `README.md`: New "Renaming a Prompt" section summarizing the practice and pointing at the PRD for the full procedure.
+
+#### Changed
+
+- `prompts/github-wiki-setup.md` renamed to `prompts/github-wiki.md`, with the slug changed from `github-wiki-setup` to `github-wiki` so it matches the title set in v1.16.0. Renamed with `git mv` to preserve file history. The old URL (`index.html#/github-wiki-setup`) keeps working through the new redirect map. This is the rename that v1.16.0 deliberately deferred for lack of a redirect mechanism.
+- `js/prompts-data.js`: Updated the slug for that entry. The `raw` value was resynced from the renamed `.md` file rather than hand-edited.
+- `README.md`: Updated the Files table and file structure tree to the new filename.
+- `css/style.css`: Widened the content area. `--content-max` changed from a flat `820px` to `max(820px, calc(75vw - 56px))`, so the content block measures 75vw on wide screens while the 820px floor holds line length steady on laptops. The floor also protects the layout below the 1023px breakpoint, where the sidebar collapses to a full-width top nav and a bare `75vw` would have shrunk the content instead of widening it. Mobile rendering is unchanged.
+- `docs/DESIGN.md`: Updated the Content Area max width spec and documented why the `max()` floor is load-bearing.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.16.0 - 2026-08-23
+
+#### Changed
+
+- `prompts/github-wiki-setup.md`: Renamed the prompt from "GitHub Wiki Sync" to "GitHub Wiki". The frontmatter `description` and body were left as they are, since both still describe the prompt accurately. The slug stays `github-wiki-setup` so existing direct links (`index.html#/github-wiki-setup`) keep working, and the filename is unchanged.
+- `js/prompts-data.js`: Resynced the `github-wiki-setup` entry from its source `.md` file.
+- `README.md`: Updated the Files table description to the new title.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+Earlier patch notes and version history rows that mention "GitHub Wiki Sync" were deliberately left alone. They are a record of what the prompt was called at the time.
+
+---
+
+### Prompts v1.15.0 - 2026-08-23
+
+#### Added
+
+- `prompts/project-onboarding.md`: Ninth prompt, "Project Onboarding". Puts a model through an eight-phase, read-only intake of an unfamiliar project before it is allowed to change anything: structure map, identity and purpose, a full read of every documentation file, technical foundation (dependencies, scripts, build, test, deploy), architecture traced from real entry points rather than from the docs, conventions derived from the code itself, a documentation-versus-reality cross-check, and an explicit risks-and-unknowns pass. Phases 1 through 8 forbid all writes, installs, and state-changing version control commands.
+- The deliverable is not a chat briefing. Everything established is merged into `PRD.md`, the single file the prompt is permitted to write, so the understanding survives the session. The merge is additive: it preserves intent and rationale that cannot be reconstructed from code, matches the PRD's existing heading structure and tone, and where findings contradict the PRD it keeps both and marks the conflict for a human to resolve rather than silently correcting the document from code. No other file is touched, including the README and these patch notes; errors found elsewhere are reported instead.
+- `js/prompts-data.js`: Regenerated to include `project-onboarding`.
+
+#### Changed
+
+- `README.md`: Added `prompts/project-onboarding.md` to the Files table and the file structure tree.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.14.0 - 2026-07-06
+
+#### Changed
+
+- `prompts/github-wiki-setup.md`: Renamed the "Changelog" wiki page to "Patch Notes" (`Patch-Notes.md`) throughout the prompt's frontmatter description, on-page description, and prompt text, to match this site's own terminology (`docs/PATCHNOTES.md`) rather than the more generic "Changelog" label.
+- `js/prompts-data.js`: Regenerated to mirror the renamed page.
+
+---
+
+### Prompts v1.13.0 - 2026-07-06
+
+#### Changed
+
+- `prompts/github-wiki-setup.md`: Reworked into "GitHub Wiki Sync" (title and description regenerated to match). Added an update mode: if the wiki repo already exists, the prompt pulls the current pages, diffs them against the README, PRD, PATCHNOTES, DESIGN, and any other project docs, and summarizes outdated sections, missing features, stale links, and content drift before editing anything. Page creation is no longer a fixed set beyond Home, Product Overview, and Changelog; the prompt now uses judgment on wiki information architecture, creating pages like FAQ, Roadmap, Architecture, Getting Started, Troubleshooting, or API Reference wherever a topic is distinct and cohesive. Added a step to create or keep a `_Sidebar.md` page in sync with the full current page structure.
+- `js/prompts-data.js`: Regenerated to mirror the reworked `github-wiki-setup.md`.
+- Also caught and fixed two more em dashes in the prompt's body text, in the Product Overview and Changelog descriptions, that were missed in the previous pass, replacing both with parentheses per the site's em dash prohibition.
+- `README.md`: Updated the `github-wiki-setup.md` Files table description to match the reworked prompt.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.12.0 - 2026-07-06
+
+#### Added
+
+- `prompts/github-wiki-setup.md`: Eighth prompt, "GitHub Wiki Setup". Reviews every documentation markdown file in a project, then sets up a GitHub wiki sourced from them. Checks first whether the wiki repo is initialized (GitHub only creates it after one manual page is added via the web UI) and stops to ask if it isn't. Curates, rather than dumps verbatim, content into a Home page (overview plus table of contents), a Product Overview page (stable current-state PRD sections), a Changelog page (condensed patch notes), and any other page mapping to a distinct PRD section. Rewrites internal/planning language for a public audience and drops internal-only notes.
+- `js/prompts-data.js`: Regenerated to include `github-wiki-setup`.
+
+#### Changed
+
+- `README.md`: Added `prompts/github-wiki-setup.md` to the Files table and file structure tree.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.11.0 - 2026-07-05
+
+#### Fixed
+
+- `css/style.css`: Ran the Mobile Audit prompt against the live site (headless Chrome via CDP, `scrollWidth`/`clientWidth`/`getBoundingClientRect()` measurements at 375–1920px, not screenshots) and found the mobile/tablet header (< 1024px) was badly broken. Root cause: `.sidebar-sticky` sets `height: 100vh` for the desktop vertical sidebar, and the `@media (max-width: 1023px)` block that converts it into a horizontal header never reset that height, so the header stayed full-viewport-tall with its logo/nav/support button vertically centered inside, pushing all page content roughly 1200px below the fold on a typical mobile screen. Added `height: auto` to `.sidebar-sticky` in that media query.
+- `css/style.css`: Secondary bug in the same header: `.sidebar-nav` shared its row with `.sidebar-logo` instead of dropping to its own line, squeezing the 5 nav links into a ~150px-wide column that stacked one link per row instead of wrapping across the full width (the existing `margin-bottom` on `.sidebar-logo` already implied the intended layout was logo-then-nav-below). Added `flex-basis: 100%` to `.sidebar-nav` in the same media query so it wraps full-width beneath the logo.
+- No page-level horizontal overflow, `overflow` shorthand conflicts, bare `1fr` grid overflow, flex `min-width: auto` overflow, or margin/gap double-spacing were found anywhere else at any of the seven audited breakpoints across the home page and all seven prompt detail pages.
+
+---
+
+### Prompts v1.10.0 - 2026-07-05
+
+#### Added
+
+- `prompts/mobile-responsive-audit.md`: Seventh prompt, "Mobile Audit". Audits every page of a site at seven fixed breakpoints (375px to 1920px) for horizontal overflow, container overflow, unwrapped toolbars, modal sizing, and clipped text. Targets four specific CSS bug patterns: the `overflow` shorthand canceling `overflow-x`, bare `1fr` grid tracks forcing page overflow from wide content, flexbox children ignoring their parent's width due to default `min-width: auto`, and doubled spacing from `margin` stacking with a flex/grid `gap`. Verifies fixes by injecting a debug script to read `scrollWidth`/`clientWidth` and bounding rectangles rather than relying on screenshots, since headless browsers enforce a minimum viewport width. Flags any fix that changes content presentation for a design decision before implementation, and ends by updating the project's existing changelog and planning docs.
+- `js/prompts-data.js`: Regenerated to include `mobile-responsive-audit`.
+
+#### Changed
+
+- `README.md`: Added `prompts/mobile-responsive-audit.md` to the Files table and file structure tree.
+- `docs/PRD.md`: Recorded this release in the version history.
+
+---
+
+### Prompts v1.9.0 - 2026-06-27
+
+#### Added
+
+- `js/script.js`: Support for an optional `hidden` frontmatter flag on prompts. `parsePrompt` reads `hidden` (true/yes/1), and `buildSidebar` and `renderHome` skip any prompt where it is set. `findPrompt` and routing are unchanged, so hidden prompts stay reachable by direct link (`index.html#/<slug>`).
+
+#### Changed
+
+- `prompts/consolidate-documents.md`, `prompts/docs-folder-audit.md`, `prompts/documentation-audit.md`: Added `hidden: true` to the frontmatter. These three prompts are retired from the sidebar and home list but kept on the backend; existing direct links still resolve. The newer Documentation prompt supersedes them in the navigation.
+- `js/prompts-data.js`: Regenerated to mirror the three `hidden: true` frontmatter additions.
+- `README.md`: Noted which prompts are hidden from navigation and still reachable by direct link.
+- `docs/PRD.md`: Documented the `hidden` frontmatter flag in the navigation and prompt markdown sections, and recorded the release in the version history.
+- `docs/DESIGN.md`: Documented the optional `hidden: true` key in the prompt markdown template and version history.
+
+---
+
+### Prompts v1.8.0 - 2026-06-27
+
+#### Added
+
+- `prompts/documentation.md`: Sixth prompt. The most comprehensive of the documentation prompts. Crawls the entire codebase first, then consolidates all documentation into four core files (README.md at the root; PRD.md, DESIGN.md, and PATCHNOTES.md in `/docs`), creates any missing files, and enforces the correct folder structure. Folds the full depth of a larger doc suite into a single PRD with required sections for Tenets, Roadmap, Metrics, Runbook, Technical Requirements, Security, a Press Release, and an FAQ, so the project can be understood from `/docs` alone without reading code.
+- `js/prompts-data.js`: Regenerated to include `documentation`.
+
+#### Changed
+
+- `README.md`: Added `prompts/documentation.md` to the Files table and file structure tree.
+- `docs/PRD.md`: Added an "Adding Prompts" process note documenting the standing workflow for adding a new prompt and keeping documentation in sync, and recorded this release in the version history.
+
+---
+
+### Prompts v1.7.0 - 2026-06-14
+
+#### Added
+
+- `prompts/docs-folder-audit.md`: Fifth prompt. Audits every document in `/docs` against the current codebase. Crawls all files first to build a complete picture of the project, then reviews each doc in `/docs` for outdated, missing, or inaccurate content and rewrites it. Ends with a per-file summary of what changed and why.
+- `js/prompts-data.js`: Regenerated to include `docs-folder-audit`.
+
+#### Changed
+
+- `README.md`: Added `prompts/docs-folder-audit.md` to the Files table and file structure tree.
+
+---
+
+### Prompts v1.6.0 - 2026-06-13
+
+#### Changed
+
+- `style.css` → `css/style.css`: Moved stylesheet into a dedicated `css/` subfolder.
+- `prompts-data.js` → `js/prompts-data.js`: Moved prompt data file into a dedicated `js/` subfolder.
+- `script.js` → `js/script.js`: Moved main script into the `js/` subfolder.
+- `index.html`: Updated `<link>` and `<script>` references to reflect new asset paths (`css/style.css`, `js/prompts-data.js`, `js/script.js`).
+- `README.md`: Updated Files table and file structure tree to reflect new `css/` and `js/` folder layout.
+- `docs/DESIGN.md`: Updated shell template, CSS file structure heading, and version history.
+
+---
+
+### Prompts v1.5.0 - 2026-06-13
+
+#### Added
+
+- `prompts/add-prompt.md`: Fourth prompt. A meta-prompt for adding new prompts to the site. Accepts a raw prompt text and instructs Claude Code to generate the title and one-line description, create the markdown file in `prompts/`, mirror it into `prompts-data.js`, update the Files table in `README.md`, and add a version entry to `docs/PATCHNOTES.md`.
+- `prompts-data.js`: Regenerated to include `add-prompt`.
+
+#### Changed
+
+- `README.md`: Added `prompts/add-prompt.md` to the Files table and file structure tree.
+
+---
+
+### Prompts v1.4.0 - 2026-06-13
+
+#### Added
+
+- `prompts/consolidate-documents.md`: Third prompt. Consolidates all project documentation into four core files: README.md at the root, and PRD.md, DESIGN.md, and PATCHNOTES.md inside `/docs`. Creates any missing files with required sections. Enforces the correct folder structure and moves misplaced files. A leaner alternative to the Documentation Audit prompt, targeting four documents instead of eleven.
+- `prompts-data.js`: Regenerated to include `consolidate-documents`.
+
+#### Changed
+
+- `README.md`: Added `prompts/consolidate-documents.md` to the Files table and file structure tree.
+
+---
+
+### Prompts v1.3.0 - 2026-06-13
+
+#### Changed
+
+- `index.html`: Sidebar logo updated from "Prompts." to "Azqato's Prompts." Added Support button to the bottom of the sidebar, linking to `https://azqato.github.io/support.html` in a new tab.
+- `script.js`: Homepage h1 updated from "Prompts." to "Claude Code Prompts." (teal dot preserved). Browser tab title updated to "Azqato's Prompts" on home view. Prompt pages now set the tab title to just the prompt name, with no site suffix.
+- `style.css`: `.sidebar-sticky` changed from `max-height: 100vh` to `height: 100vh` with `display: flex; flex-direction: column` so the Support button pins to the bottom via `margin-top: auto`. `.sidebar-nav` gains `flex: 1` to fill available space. Added `.sidebar-support` and `.support-btn` styles with hover state matching the site's teal accent. Mobile breakpoint updated to flow the support button inline with nav links.
+- `docs/DESIGN.md`: Updated sidebar spec, navigation spec (support button added), hero section spec, shell template, and version history.
+- `docs/PRD.md`: Updated navigation section to document the support button.
+- `README.md`: Project title updated to "Azqato's Prompts".
+
+---
+
+### Prompts v1.2.0 - 2026-06-13
+
+#### Changed
+
+- `prompts/em-dash-audit.md`: Removed "Finally, push everything to GitHub." from the prompt text. Prompts are shared publicly and must not instruct users to push to any remote repository. Rewrote the closing instruction to: "After making these changes, ensure the patch notes and documentation files are all up to date describing the changes you just made." Updated the frontmatter description and on-page description paragraph to remove all mention of pushing to GitHub.
+- `prompts-data.js`: Regenerated to mirror the updated `em-dash-audit.md`.
+- `docs/PRD.md`: Added a Prompt Content Rules section to the Writing Style rules. Documents that prompts must not include GitHub push instructions or any account-specific actions, and requires this to be audited before any new prompt is published.
+
+---
+
+### Prompts v1.1.0 - 2026-06-13
+
+#### Added
+
+- `prompts/documentation-audit.md`: Second prompt. Runs a full documentation audit on any project: reads all source files and existing docs, then creates or updates the complete suite of eleven documents (README, PRD, TRD, DESIGN, PATCHNOTES, PRFAQ, TENETS, METRICS, ROADMAP, SECURITY, RUNBOOK) to their required specifications. Also enforces the correct folder structure, moving any misplaced files into `/docs`.
+
+#### Removed
+
+- `first prompt example.txt.txt`: Source text for the first prompt. Content is now canonical in `prompts/em-dash-audit.md`. No longer needed.
+- `message.txt`: Source text for the documentation audit prompt. Content is now canonical in `prompts/documentation-audit.md`. No longer needed.
+
+#### Changed
+
+- `prompts-data.js`: Regenerated to include both `em-dash-audit` and `documentation-audit`.
+- `docs/PATCHNOTES.md`: Corrected v1.0.0 design decisions note about footer (period is not teal; it inherits the muted text color).
+
+---
+
+### Prompts v1.0.0 - 2026-06-13
+
+**Initial release.**
+
+#### Added
+
+- `index.html`: Single-page shell (sidebar, content area, footer). Renders the home view and every prompt view via hash-based routing. No per-prompt HTML files.
+- `prompts/em-dash-audit.md`: First prompt, authored in markdown. Documents the full em dash audit workflow for Claude Code projects, covering both the literal Unicode character and the `&mdash;` HTML entity form, double dash punctuation handling, CSS custom property exceptions, and context-sensitive replacement rules (comma, colon, semicolon, parentheses, period). Includes instructions to update `docs/PRD.md` with a Writing Style section and push all changes to GitHub after the audit is complete.
+- `prompts-data.js`: Embedded copy of every prompt markdown file as `window.PROMPTS_DATA`, loaded via a `<script>` tag. This lets the site read prompt content with no server, so it runs by opening `index.html` directly (`file://`) while keeping the `.md` files as the readable source.
+- `style.css`: Full design system stylesheet. Implements the Azqato brand system: `#0d1117` background, `#161b22` surface, `#00d4a0` teal accent, system font stack, CSS Grid sidebar layout, code block component, copy button with state transitions, home page prompt list, hero section, responsive breakpoints at 1024px and 768px, reduced motion support.
+- `script.js`: Parses the embedded prompt markdown (frontmatter, description, fenced prompt block), builds the sidebar dynamically, handles hash routing, and provides copy-to-clipboard behavior using the native Clipboard API. On click, reads the rendered `<code>` element's text content, writes it to clipboard, updates the button label to "Copied!" for 2 seconds, then resets to "Copy".
+- `README.md`: Project overview, how-it-works, files table, docs table, file structure, prompt markdown format, design summary, running locally instructions, and instructions for adding new prompts.
+- `docs/PRD.md`: Product requirements. Covers problem statement, solution, goals, non-goals, audience, technical requirements, page structure, navigation, copy button behavior, writing style rules (em dash prohibition in all forms, replacement guidelines, general tone), and prompt addition workflow.
+- `docs/DESIGN.md`: Full design specification. Covers design direction, color system with all CSS custom property tokens, typography scale, layout grid, sidebar spec, content area spec, code block component spec, copy button spec, home page prompt list spec, hero section spec, favicon, signature elements, navigation states, footer, responsive behavior, accessibility requirements, CSS file structure, architecture and templates, and what-not-to-do rules.
+- `docs/PATCHNOTES.md`: This file.
+
+#### Design Decisions
+
+- Prompts are authored as markdown files in `prompts/`, not as hand-written HTML. Adding a prompt is a content task, not an HTML task.
+- The site runs with zero dependencies and no server. Because browsers block `fetch()` on `file://`, prompt markdown is embedded in `prompts-data.js` and loaded with a `<script>` tag, which the browser permits from local disk. The `.md` files remain the canonical, readable source and `prompts-data.js` mirrors them.
+- Inherited the Azqato brand system directly from the Stocks methodology site and ComposerAtlas. Consistent accent color (`#00d4a0`), surface colors, sidebar layout, and `h2::before` vertical bar are intentional cross-site design continuity.
+- Footer reads "Built by Azqato." with only the wordmark "Azqato" as a teal link. The trailing period sits outside the link and inherits the muted text color, so it is neither colored nor clickable.
+- No syntax highlighting at v1.0. Prompt text is plain monospace. The goal is readability and copy speed, not code presentation.
+- Code block header bar pattern (label left, copy button right) mirrors common documentation site conventions (Stripe, Tailwind, GitHub) and provides instant affordance for the primary user action.
+- Emoji favicon (`💬`) chosen to distinguish the Prompts site from other Azqato properties visually in browser tabs while remaining zero-dependency.
