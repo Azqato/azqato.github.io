@@ -5,6 +5,22 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.26.0] - 2026-10-12
+
+### Added
+- **A `Data` column** in the screener, next to Factors, showing `n/6`: how many of the six scored metrics the
+company actually publishes. Sortable, and flagged amber when anything is unreported. The score breakdown popup
+spells it out when anything is missing.
+- A missing metric scores zero against a denominator fixed at 100, so without this a low score cannot be read: a
+company that reports everything and ranks badly looks identical to one nobody covers. Across the bottom of the
+market, the share of names missing at least one metric runs 24% in C, 38% in D and 59% in F.
+- `computeScoreMap` already counted this and discarded the number, so nothing new is computed and no score, rank
+or tier changes. The `Azqato Screen` group header widens from 3 columns to 4 in both layouts.
+
+### Changed
+- All of it is registered in `site.py`'s `CONTENT_EDITS` and `SCRIPT_EDITS` alongside the clamp and tier work, so
+a rebuild from the `_sources` snapshot cannot drop it.
+
 ## [2.25.0] - 2026-10-12
 
 ### Fixed

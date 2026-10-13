@@ -354,11 +354,16 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           sum += p * (m.weight / 20);
           if (p >= 15) passes++; // upper part of the pack on that metric
         });
-        if (!have) { out[t] = { pct: null, passes: 0, total: 0, parts: pts[t], pctiles: pcts[t] }; return; }
+        if (!have) { out[t] = { pct: null, passes: 0, total: 0, reported: 0, parts: pts[t], pctiles: pcts[t] }; return; }
         out[t] = {
           pct: Math.round(sum / totalWeight * 100),
           passes: passes,
           total: scoredCount, // fixed denominator: a missing metric is a miss, not a pass
+          // How many metrics the company actually publishes. A missing one
+          // is a hard zero, so without this a low score cannot be read: a
+          // fully reported company that ranks badly and one nobody covers
+          // look identical. The bottom of the market is mostly the latter.
+          reported: have,
           parts: pts[t],   // percentile points per metric (0-20 scale), for cell coloring
           pctiles: pcts[t] // raw percentiles, for the per-stock breakdown popup
         };
@@ -472,10 +477,10 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       return universe().map(function (s) {
         var t = s[0];
         var d = data[t] || {};
-        var sc = sm[t] || { pct: null, passes: 0, total: 0, parts: {} };
+        var sc = sm[t] || { pct: null, passes: 0, total: 0, reported: 0, parts: {} };
         var r = {
           ticker: t, name: s[1], d: d, parts: sc.parts || {},
-          score: sc.pct, passes: sc.passes, total: sc.total,
+          score: sc.pct, passes: sc.passes, total: sc.total, reported: sc.reported,
           tier: sc.pct === null ? "none" : tiers[t],
           price: d.price,
           changePct: isNum(d.changePct) ? d.changePct : null,
@@ -511,6 +516,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
         }
         if (k === "tier") { av = TIER_RANK[a.tier]; bv = TIER_RANK[b.tier]; }
         else if (k === "factors") { av = a.total ? a.passes / a.total : -1; bv = b.total ? b.passes / b.total : -1; }
+        else if (k === "reported") { av = a.total ? a.reported : -1; bv = b.total ? b.reported : -1; }
         else { av = a[k]; bv = b[k]; }
         // For valuation columns a negative P/E or PEG is "worst" (unprofitable),
         // so sort it like a very high value rather than a cheap low one.
@@ -710,7 +716,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     var HEADS = {
       stock: {
         group: '<th class="col-ticker"></th>' +
-          '<th class="g-screen group-start" colspan="3">Azqato Screen</th>' +
+          '<th class="g-screen group-start" colspan="4">Azqato Screen</th>' +
           '<th class="grp-snapshot group-start" colspan="3">Snapshot</th>' +
           '<th class="grp-growth group-start" colspan="4">Growth</th>' +
           '<th class="grp-valuation group-start" colspan="3">Valuation</th>' +
@@ -720,6 +726,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '<th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = next 20%, C = next 20%, D = next 20%, F = bottom 20%. Boundary ties round up.">Tier</th>' +
           '<th data-sort="score">Score</th>' +
           '<th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 percentile points)">Factors</th>' +
+          '<th data-sort="reported" title="How many of the 6 scored metrics this company actually publishes. A missing metric scores zero, so a low score can mean a weak company or simply an uncovered one; 6/6 means the score is fully measured.">Data</th>' +
           '<th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>' +
           '<th class="grp-snapshot" data-sort="price">Price</th>' +
           '<th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session\'s close, as of the last daily data refresh">Chg %</th>' +
@@ -738,7 +745,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       },
       etf: {
         group: '<th class="col-ticker"></th>' +
-          '<th class="g-screen group-start" colspan="3">Azqato Screen</th>' +
+          '<th class="g-screen group-start" colspan="4">Azqato Screen</th>' +
           '<th class="grp-snapshot group-start" colspan="3">Snapshot</th>' +
           '<th class="grp-performance group-start" colspan="4">Performance</th>' +
           '<th class="grp-income group-start" colspan="3">Income &amp; Cost</th>' +
@@ -748,6 +755,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '<th class="left group-start" data-sort="tier" title="Rank within this fund list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = next 20%, C = next 20%, D = next 20%, F = bottom 20%. Boundary ties round up.">Tier</th>' +
           '<th data-sort="score">Score</th>' +
           '<th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 rank points)">Factors</th>' +
+          '<th data-sort="reported" title="How many of the 6 scored metrics this company actually publishes. A missing metric scores zero, so a low score can mean a weak company or simply an uncovered one; 6/6 means the score is fully measured.">Data</th>' +
           '<th class="grp-snapshot group-start" data-sort="aum" title="Assets under management">AUM</th>' +
           '<th class="grp-snapshot" data-sort="price">Price</th>' +
           '<th class="grp-snapshot" data-sort="changePct" title="Change vs the prior session\'s close, as of the last daily data refresh">Chg %</th>' +
@@ -904,6 +912,12 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           TIER_COLOR[r.tier] + '"></span></span></span>';
       }
       var factorsCell = r.total ? '<span class="factors">' + r.passes + "/" + r.total + "</span>" : '<span class="muted">–</span>';
+      // Flagged amber whenever anything is unreported, because that is the
+      // case where the score understates the company rather than judging it.
+      var coverageCell = r.total
+        ? '<span class="coverage' + (r.reported < r.total ? " partial" : "") + '">' +
+          r.reported + "/" + r.total + "</span>"
+        : '<span class="muted">–</span>';
       // International leads with the company name (local-exchange tickers like
       // 005930.KS aren't recognizable); every other universe keeps ticker-first.
       var tickerCellHtml = isNameFirst()
@@ -912,7 +926,8 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       return '<td class="col-ticker' + (isNameFirst() ? ' name-first' : '') + '">' + tickerCellHtml + '</td>' +
         '<td class="left group-start"><span class="verdict v-' + r.tier + '">' + TIER_LABEL[r.tier] + '</span></td>' +
         '<td>' + scoreCell + '</td>' +
-        '<td>' + factorsCell + '</td>';
+        '<td>' + factorsCell + '</td>' +
+        '<td>' + coverageCell + '</td>';
     }
 
     function rowHtml(r) { return isEtf() ? rowHtmlEtf(r) : rowHtmlStock(r); }
@@ -1073,7 +1088,11 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       // table row; every other universe keeps the ticker as the title.
       $("stockTitle").textContent = isNameFirst() ? nm : ticker;
       $("stockSub").innerHTML = (isNameFirst() ? ticker : nm) + ' &middot; <span class="verdict v-' + tier + '">' + tlabel +
-        '</span> &middot; Score ' + (sc.pct === null ? "–" : sc.pct) + "/100";
+        '</span> &middot; Score ' + (sc.pct === null ? "–" : sc.pct) + "/100" +
+        (sc.total && sc.reported < sc.total
+          ? ' &middot; <span class="coverage partial">' + sc.reported + " of " + sc.total +
+            " metrics reported</span>"
+          : "");
 
       $("stockRows").innerHTML = (isEtf() ? ETF_POPUP_METRICS : POPUP_METRICS).map(function (m) {
         var pp = sc.parts[m.key];
