@@ -620,7 +620,7 @@
 </tr>
 <tr class="head-row">
 <th class="left col-ticker" data-sort="ticker">Ticker</th>
-<th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>
+<th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-70%, C = 70-90%, F = bottom 10%. Boundary ties round up.">Tier</th>
 <th data-sort="score">Score</th>
 <th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 percentile points)">Factors</th>
 <th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>
@@ -682,11 +682,11 @@
 <span><span class="verdict v-sp">S+</span> perfect 100</span>
 <span><span class="verdict v-s">S</span> top 10%</span>
 <span><span class="verdict v-a">A</span> next 10%</span>
-<span><span class="verdict v-b">B</span> 20–50%</span>
-<span><span class="verdict v-c">C</span> 50–75%</span>
-<span><span class="verdict v-f">F</span> bottom 25%</span>
+<span><span class="verdict v-b">B</span> 20–70%</span>
+<span><span class="verdict v-c">C</span> 70–90%</span>
+<span><span class="verdict v-f">F</span> bottom 10%</span>
 </p>
-<p class="hint">Tier sizes are fixed by rank, so a 100-stock list always has about 10 S, 10 A, 30 B, 25 C, and 25 F stocks, and the S&amp;P 500 scales the same percentages to 500. The only exception is a tie: when stocks at a boundary share the same rounded score, they all round up into the higher tier. <b>S+</b> sits above the bands: any stock that scores a perfect <b>100 of 100</b> earns it, and the scoring curve is calibrated so that is roughly one stock in the Nasdaq 100 and five in the S&amp;P 500 at a time.</p>
+<p class="hint">Tier sizes are fixed by rank, so a 100-stock list always has about 10 S, 10 A, 50 B, 20 C, and 10 F stocks, and the S&amp;P 500 scales the same percentages to 500. B is deliberately the largest band: it is the middle of the pack, and most of any market sits there. F is reserved for the worst tenth, so it means something when you see it. The only exception is a tie: when stocks at a boundary share the same rounded score, they all round up into the higher tier. <b>S+</b> sits above the bands: any stock that scores a perfect <b>100 of 100</b> earns it, which is about 1 stock in 150 and the one tier whose size depends on the scoring curve rather than on rank.</p>
 <h3 id="the-four-pillars">The four pillars</h3>
 <div class="table-wrap">
 <table>
@@ -757,7 +757,7 @@
 <h3 id="how-a-rank-becomes-points-2">How a rank becomes points</h3>
 <p class="hint">With a short, hand-picked list of funds, the stock universes' percentile curve would be too coarse, so this list uses straight rank points: on each metric the <b>best fund earns the full weight, the worst earns 0</b>, and the funds between are spaced evenly (ties share the average). A missing value (–) scores zero and renders dark red; the score is always out of the full 100. Cell colors follow the same ranks: green is the top of the pack on that metric (15 of 20 rank points or better), red is the bottom (5 or less), amber is in between.</p>
 <h3 id="tiers-on-a-10-fund-list">Tiers on a 10-fund list</h3>
-<p class="hint">The same rank bands as the stock lists apply: <span class="verdict v-s">S</span> top 10% · <span class="verdict v-a">A</span> next 10% · <span class="verdict v-b">B</span> 20–50% · <span class="verdict v-c">C</span> 50–75% · <span class="verdict v-f">F</span> bottom 25%, ties round up, and a perfect 100 earns <span class="verdict v-sp">S+</span>. On 10 funds that is roughly 1 S, 1 A, 3 B, 3 C, and 2 F at any moment. An F here means the bottom of this list <i>right now</i>: usually a strong fund that has already run up (a high RSI, near the top of its range), not a broken product. Because half the score is timing, tiers in this universe move with the market: a broad selloff can lift a fund up the list without anything changing inside it. That is by design; the score doubles as a deployment-timing dial.</p>
+<p class="hint">The same rank bands as the stock lists apply: <span class="verdict v-s">S</span> top 10% · <span class="verdict v-a">A</span> next 10% · <span class="verdict v-b">B</span> 20–70% · <span class="verdict v-c">C</span> 70–90% · <span class="verdict v-f">F</span> bottom 10%, ties round up, and a perfect 100 earns <span class="verdict v-sp">S+</span>. On 10 funds that is roughly 1 S, 1 A, 5 B, 2 C, and 1 F at any moment. An F here means the bottom of this list <i>right now</i>: usually a strong fund that has already run up (a high RSI, near the top of its range), not a broken product. Because half the score is timing, tiers in this universe move with the market: a broad selloff can lift a fund up the list without anything changing inside it. That is by design; the score doubles as a deployment-timing dial.</p>
 <h3 id="where-the-list-comes-from">Where the list comes from</h3>
 <p class="hint">A fixed, owner-curated list of 36 funds: QQQ, SPY, DIA, IWM, VTI, VXUS, VUG, VIG, VTV, SPMO, RWL, SPHQ, SPHB, FNDF, MGV, VBR, SCHD, RSP, VBK, ISCG, FNDB, FNDX, SCHB, IMCG, XLG, SPGP, ILCG, IUSG, IVW, SPYG, SCHG, IWF, VONG, MGK, IWY, and MLRG. It is not synced to any index; changes to it are deliberate edits. The data refreshes each trading day from Yahoo Finance. See the <a href="../indices/method.html" rel="noopener" target="_blank">Indices methodology</a> for the doctrine behind the technical signals, including the RSI and 52-week-range frameworks these scores apply.</p>
 </div>

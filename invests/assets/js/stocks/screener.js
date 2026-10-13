@@ -388,7 +388,14 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     // band, so a tier only stretches past its quota on identical scores.
     // On top of the bands, a perfect 100/100 earns S+ (v3.30.0) -- those
     // stocks come out of the S band's headcount, they don't push it down.
-    var TIER_CUTS = [["s", 0.10], ["a", 0.20], ["b", 0.50], ["c", 0.75]]; // f = the rest
+    // Cumulative percentile cuts, owner's distribution (2026-10-12): S the top
+    // 10%, A the next 10%, B the next 50%, C the next 20%, F the bottom 10%.
+    // B was 30% and C and F were 25% each until then, which made F a quarter of
+    // the market; a tier that holds a quarter of everything says very little.
+    // B is now explicitly the middle of the pack and F is reserved for the worst
+    // tenth. S+ remains a score of exactly 100 rather than a rank cut, by owner
+    // decision, so it is the one tier the clamp still governs.
+    var TIER_CUTS = [["s", 0.10], ["a", 0.20], ["b", 0.70], ["c", 0.90]]; // f = the rest
     function computeTierMap(sm) {
       var order = Object.keys(sm)
         .filter(function (t) { return sm[t].pct !== null; })

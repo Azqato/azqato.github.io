@@ -5,6 +5,25 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.22.0] - 2026-10-12
+
+### Changed
+- **New tier bands on the stock screener** (owner's distribution). `TIER_CUTS` in
+`invests/assets/js/stocks/screener.js` becomes `[s 0.10, a 0.20, b 0.70, c 0.90]`: S is still the top 10% and A the
+next 10%, but B goes from 30% to 50%, C from 25% to 20%, and F from 25% to 10%. The old split made F a quarter of
+the market, and a tier that holds a quarter of everything says very little about anything in it. B is now the
+middle of the pack and F is reserved for the worst tenth.
+- The tier legend, the Tier column tooltip, the band explanation and the ETF universe's copy are updated to match,
+including the per-100 counts (about 10 S, 10 A, 50 B, 20 C and 10 F).
+
+### Notes
+- Measured on the live feeds: the Domestic universe lands at 9.4% S, 10.6% A, 49.9% B, 19.9% C and 9.6% F against
+targets of 10/10/50/20/10, the drift being boundary ties rounding up.
+- Nothing is demoted. Exactly two transitions happen: names move C to B and F to C, 35.3% of Domestic labels in all.
+No score and no ranking changes, because tier cuts are applied to the finished ranking and cannot feed back into it.
+- **S+ is unchanged**: still any stock scoring a perfect 100, not a rank cut. It stays the only tier whose size
+depends on the scoring curve rather than on rank.
+
 ## [2.21.0] - 2026-10-12
 
 Supersedes 2.20.0 the same day. That release refitted the screener's single clamp constant to 0.13; the owner
