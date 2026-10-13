@@ -216,7 +216,14 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     // metric -- the denominator stays 100, so an incomplete stock can never
     // outscore a complete one (its missing cell renders dark red).
     function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
-    var CLAMP_Q = 0.22; // full marks at the (1-q)th percentile, zero below the qth
+    // Refitted 0.22 to 0.13 on 2026-10-12 (stocks feed v5.4.0). The target is ~1
+    // perfect score in the Nasdaq 100 and ~5 in the S&P 500. At 0.22 the live
+    // feeds produced 5 and 12; at 0.13 they produce 2 and 5. The Nasdaq 100
+    // cannot reach 1 at any value, because two names sit in the top percentile
+    // of all six scored metrics and so score 100 even at q = 0.10.
+    // NOTE the direction is counterintuitive: a LARGER q is more generous,
+    // since full marks begin at the (1-q)th percentile.
+    var CLAMP_Q = 0.13; // full marks at the (1-q)th percentile, zero below the qth
     function pointsFromPct(p) { return clamp(20 * (p - CLAMP_Q) / (1 - 2 * CLAMP_Q), 0, 20); }
 
     // `weight` > 0 metrics feed the Score; weight-0 metrics (the P/E-vs-growth

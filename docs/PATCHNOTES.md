@@ -5,6 +5,29 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.20.0] - 2026-10-12
+
+### Changed
+- **The stock screener's percentile clamp is refitted, which moves nearly every score on the site.**
+`CLAMP_Q` in `invests/assets/js/stocks/screener.js` goes from 0.22 to 0.13, so a metric now scores zero at or
+below the 13th percentile and full marks at the 87th and up, where it used to be the 22nd and the 78th. The median
+still scores exactly half. The clamp is documented as calibrated so roughly one Nasdaq 100 and five S&P 500 stocks
+reach a perfect 100; as the feeds' data changed it had drifted to 5 and 12. At 0.13 it produces 2 and 5.
+- **The screener page's "How a rank becomes points" section** now matches the code: the curve table, the formula,
+and the calibration sentence, which says two Nasdaq 100 stocks rather than one. The Nasdaq 100 cannot be brought
+to one at any clamp value, because MU and SNDK rank in the top percentile of all six scored metrics and score 100
+even at 0.10.
+
+### Notes
+- Measured impact: 2,920 of 3,465 Domestic scores moved, 91 of 100 in the Nasdaq 100, 437 of 500 in the S&P 500,
+in a band of -10 to +9 points with a mean of -0.2 and 310 Domestic tier changes. Scores are percentile ranks, so
+refitting cannot move the average much; it tightens the top, and the names that fall are those that had been taking
+full marks from the 78th percentile upward.
+- The direction is counterintuitive and worth remembering before anyone touches it again: a **larger** `CLAMP_Q`
+is more generous, because full marks begin at the (1 - q)th percentile.
+- The matching constant in the stocks feed repo (`scripts/analyze_etf_holdings.py`) was changed in the same pass,
+and that repo's v5.4.0 notes carry the full sweep.
+
 ## [2.19.1] - 2026-10-12
 
 ### Fixed
