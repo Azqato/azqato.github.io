@@ -452,7 +452,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           r.pctVs20dma = d.pctVs20dma; r.pctVs100dma = d.pctVs100dma; r.pctVs200dma = d.pctVs200dma;
         } else {
           r.revTTM = d.revTTM; r.revFwd = d.revFwd; r.epsTTM = d.epsTTM; r.epsFwd = d.epsFwd;
-          r.peFwd = d.peFwd; r.pegFwd = pegDisplay(d); r.cash = d.cash; r.debt = d.debt;
+          r.peTTM = d.peTTM; r.peFwd = d.peFwd; r.pegFwd = pegDisplay(d); r.cash = d.cash; r.debt = d.debt;
           r.cashDebt = cashDebtRatio(d); r.marketCap = d.marketCap;
           r.netCashMc = netCashToMktCap(d);
           r.cur = d.cur; // native currency code (International universe only; USD elsewhere)
@@ -477,7 +477,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
         else { av = a[k]; bv = b[k]; }
         // For valuation columns a negative P/E or PEG is "worst" (unprofitable),
         // so sort it like a very high value rather than a cheap low one.
-        if (k === "peFwd" || k === "pegFwd") {
+        if (k === "peTTM" || k === "peFwd" || k === "pegFwd") {
           if (typeof av === "number" && av <= 0) av = Infinity;
           if (typeof bv === "number" && bv <= 0) bv = Infinity;
         }
@@ -676,7 +676,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '<th class="g-screen group-start" colspan="3">Azqato Screen</th>' +
           '<th class="grp-snapshot group-start" colspan="3">Snapshot</th>' +
           '<th class="grp-growth group-start" colspan="4">Growth</th>' +
-          '<th class="grp-valuation group-start" colspan="2">Valuation</th>' +
+          '<th class="grp-valuation group-start" colspan="3">Valuation</th>' +
           '<th class="grp-balance group-start" colspan="4">Balance Sheet</th>' +
           '<th class="grp-snapshot group-start" colspan="1"></th>',
         head: '<th class="left col-ticker" data-sort="ticker">Ticker</th>' +
@@ -690,7 +690,8 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '<th class="grp-growth" data-sort="revFwd">Rev FWD</th>' +
           '<th class="grp-growth" data-sort="epsTTM">EPS Q YoY</th>' +
           '<th class="grp-growth" data-sort="epsFwd" title="GAAP-basis forward EPS growth (current fiscal year). May differ from Seeking Alpha, which uses Non-GAAP consensus.">EPS FWD*</th>' +
-          '<th class="grp-valuation group-start" data-sort="peFwd" title="Shown for context and colored by the P/E-vs-growth ranking; the score\'s valuation points come from PEG FWD">P/E FWD</th>' +
+          '<th class="grp-valuation group-start" data-sort="peTTM" title="Trailing P/E: price over the last 12 months of earnings. Context only, not scored">P/E</th>' +
+          '<th class="grp-valuation" data-sort="peFwd" title="Shown for context and colored by the P/E-vs-growth ranking; the score\'s valuation points come from PEG FWD">P/E FWD</th>' +
           '<th class="grp-valuation" data-sort="pegFwd">PEG FWD</th>' +
           '<th class="grp-balance group-start" data-sort="cash">Total Cash</th>' +
           '<th class="grp-balance" data-sort="debt">Total Debt</th>' +
@@ -915,7 +916,8 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
         '<td class="grp-growth ' + colorScored(r.parts.revFwd) + '">' + fmtPct(r.revFwd) + '</td>' +
         '<td class="grp-growth ' + colorScored(r.parts.epsTTM) + '">' + fmtPct(r.epsTTM) + '</td>' +
         '<td class="grp-growth ' + colorScored(r.parts.epsFwd) + '">' + fmtPct(r.epsFwd) + '</td>' +
-        '<td class="grp-valuation group-start ' + colorFromPts(r.parts.peVsG) + '">' + fmtNum(r.peFwd) + '</td>' +
+        '<td class="grp-valuation group-start">' + fmtNum(r.peTTM) + '</td>' +
+        '<td class="grp-valuation ' + colorFromPts(r.parts.peVsG) + '">' + fmtNum(r.peFwd) + '</td>' +
         '<td class="grp-valuation ' + colorScored(r.parts.pegFwd) + '">' + fmtNum(r.pegFwd) + '</td>' +
         '<td class="grp-balance group-start ' + colorScored(r.parts.cashDebt) + '">' + fmtMoney(r.cash, r.cur) + '</td>' +
         '<td class="grp-balance">' + fmtMoney(r.debt, r.cur) + '</td>' +
