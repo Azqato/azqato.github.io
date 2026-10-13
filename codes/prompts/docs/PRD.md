@@ -5,7 +5,7 @@ and the steps for adding, changing and retiring prompts. Site-wide rules (deploy
 live in the site's own [docs/PRD.md](../../../docs/PRD.md); this file covers only what is specific to prompts and
 points there for the rest.
 
-Last updated 2026-10-12, site version 2.19.0.
+Last updated 2026-10-12, site version 2.19.1.
 
 ---
 
@@ -156,21 +156,20 @@ The Add Prompt prompt (`md/add-prompt.md`) walks Claude through these steps from
 Run from the site root:
 
 ```bash
-python scripts/prompts/build.py           # pages, sitemap block, redirects block
-python scripts/codes/shell.py             # then: the Contents sidebar, crumbs and Previous / Next
+python scripts/prompts/build.py           # pages, sitemap block, redirects block, then the Contents sidebar
 python scripts/build-nav.py               # always last: nav, footer, search
+python scripts/prompts/build.py --check   # exits 1 if any generated page or block is out of date
 python scripts/build-nav.py --check       # nav and footer match everywhere
 python scripts/prompts/browser.py         # every page, both themes, desktop and phone
 ```
 
-Skipping `shell.py` leaves the pages without the Contents sidebar, and the browser test fails. `build.py --check` is
-not in the list: it compares against pages without the shell, so it reports every page out of date even when all is
-well (known issue as of 2026-10-12). Until it is fixed, the browser test is the real check.
+When the build writes a page it reruns `scripts/codes/shell.py` itself, so the Contents sidebar, crumbs and byline are
+never lost. `--check` ignores what `shell.py` and `build-nav.py` add, so it passes on a clean tree.
 
 The build stops if `ORDER` and the files in `md/` disagree. The browser test runs headless Edge and covers each page in
 both themes at both widths with contrast checks, search, the Contents sidebar and Previous / Next, the collapsed start,
 Expand, the exact Copy pointer, that Copy never collapses the prompt, that the page text matches its source, and that a
-source file is served unchanged. A change is ready when the nav check and the browser test pass.
+source file is served unchanged. A change is ready when all three checks pass.
 
 ## 9. Versions and patch notes
 

@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.19.1] - 2026-10-12
+
+### Fixed
+- **`scripts/prompts/build.py --check` reported every prompt page out of date on a clean tree.** It compared pages
+without the Codes shell, but missed two things `shell.py` adds (the `codes.css` link and the byline) and the blank lines
+the shell leaves behind. It now ignores all three and passes when nothing has changed.
+- **A prompts build could strip the Contents sidebar.** The build wrote pages without it and relied on
+`scripts/codes/shell.py` being run by hand afterwards. It now reruns the shell itself whenever it writes a page.
+Rebuilding a deleted page gives a byte-identical file.
+- The prompts PRD and the site PRD runbook describe the new order and restore `--check` to the checks.
+
 ## [2.19.0] - 2026-10-12
 
 ### Added

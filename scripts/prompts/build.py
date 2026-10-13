@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build Azqato's Prompts (azqato.com/prompts/) from the prompt files (roadmap item 22).
 
-    python scripts/prompts/build.py          write the pages
+    python scripts/prompts/build.py          write the pages (and rerun scripts/codes/shell.py)
     python scripts/prompts/build.py --check  report anything out of date, write nothing, exit 1
     python scripts/build-nav.py              then stamp the nav, footer and search
 
@@ -17,7 +17,7 @@ all see the prompt itself. The .md file is published beside it, at
 prompts/md/<slug>.md, as the plain text an agent reads.
 
 To add a prompt: write codes/prompts/md/<slug>.md, add the slug to ORDER, run this
-and build-nav.py. A hidden prompt keeps its page but leaves the list, search
+(it reruns scripts/codes/shell.py) and build-nav.py. A hidden prompt keeps its page but leaves the list, search
 and sitemap. To rename or remove one, add its old slug to RETIRED; its old
 address then redirects (on azqato.com, via _redirects).
 """
@@ -282,6 +282,11 @@ def main():
             path.write_text(text, encoding='utf-8', newline='\n')
     for path in stale:
         print('%s: %s' % ('out of date' if check else 'written', path.relative_to(ROOT).as_posix()))
+    if stale and not check:
+        # A freshly written page has no Contents sidebar: add it now, so the step cannot be missed.
+        sys.path.insert(0, str(ROOT / 'scripts' / 'codes'))
+        import shell
+        shell.main()
     print('%d prompts, %d hidden' % (len(prompts), sum(p['hidden'] for p in prompts)))
     return 1 if check and stale else 0
 
@@ -292,8 +297,11 @@ def strip(text):
     # scripts/codes/shell.py wraps every Codes page in the Contents sidebar after this runs.
     text = re.sub(r'\s*<!-- CODES -->.*?<!-- /CODES -->', '', text, flags=re.S)
     text = re.sub(r'\s*<!-- CODES-END -->.*?<!-- /CODES-END -->', '', text, flags=re.S)
+    text = re.sub(r'\n\s*<link rel="stylesheet" href="(?:\.\./)*codes/assets/codes\.css" />', '', text)
+    text = re.sub(r'\n<p class="cd-byline">.*?</p>', '', text)
     text = re.sub(r'<link rel="icon" href="data:image/svg\+xml,[^"]*" />(\s*<script src="(?:\.\./)*theme.js"></script>)?', '', text)
-    return text
+    # The blocks above leave different blank lines behind; they do not matter.
+    return re.sub(r'\n\s*\n', '\n', text)
 
 
 if __name__ == '__main__':
