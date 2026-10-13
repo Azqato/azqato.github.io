@@ -389,13 +389,18 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     // On top of the bands, a perfect 100/100 earns S+ (v3.30.0) -- those
     // stocks come out of the S band's headcount, they don't push it down.
     // Cumulative percentile cuts, owner's distribution (2026-10-12): S the top
-    // 10%, A the next 10%, B the next 50%, C the next 20%, F the bottom 10%.
-    // B was 30% and C and F were 25% each until then, which made F a quarter of
-    // the market; a tier that holds a quarter of everything says very little.
-    // B is now explicitly the middle of the pack and F is reserved for the worst
-    // tenth. S+ remains a score of exactly 100 rather than a rank cut, by owner
+    // 10%, A the next 15%, B the next 25%, C the next 25%, F the bottom 25%.
+    //
+    // The sizing rule is that no band should be so large that the label stops
+    // narrowing anything down. Measured as the information content of a tier
+    // label on the Domestic universe: these cuts give 2.28 bits against 2.23
+    // for the 10/10/30/25/25 they replace and 2.00 for a 10/10/50/20/10
+    // arrangement tried earlier the same day, which put half the market in B.
+    // The ceiling with six labels is 2.58 bits, reached only by equal buckets.
+    //
+    // S+ remains a score of exactly 100 rather than a rank cut, by owner
     // decision, so it is the one tier the clamp still governs.
-    var TIER_CUTS = [["s", 0.10], ["a", 0.20], ["b", 0.70], ["c", 0.90]]; // f = the rest
+    var TIER_CUTS = [["s", 0.10], ["a", 0.25], ["b", 0.50], ["c", 0.75]]; // f = the rest
     function computeTierMap(sm) {
       var order = Object.keys(sm)
         .filter(function (t) { return sm[t].pct !== null; })

@@ -5,6 +5,28 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.23.0] - 2026-10-12
+
+### Changed
+- **Tier bands settle at S 10%, A 15%, B 25%, C 25%, F 25%** (owner's distribution). `TIER_CUTS` in
+`invests/assets/js/stocks/screener.js` becomes `[s 0.10, a 0.25, b 0.50, c 0.75]`.
+- **This reverts 2.22.0 the same day.** That release shrank F from a quarter of the market to a tenth, on the
+argument that a band holding a quarter of everything says little about anything in it. The argument was right and
+the fix was wrong: it put half the market in B, failing the same test twice as badly.
+- **The sizing rule is now written down** in the source and on the page: no band may grow so large that the label
+stops narrowing anything down. Measured as the information content of a tier label on the Domestic universe, these
+cuts give 2.28 bits against 2.23 for the original and 2.00 for 2.22.0's arrangement, with a 2.58-bit ceiling.
+- The tier legend, the Tier column tooltip, the band explanation and the ETF universe copy match the new bands and
+per-100 counts (about 10 S, 15 A, 25 B, 25 C and 25 F).
+
+### Notes
+- Domestic lands at 9.4% S, 15.8% A, 24.4% B, 25.1% C and 24.6% F. No band exceeds 25%.
+- No score and no ranking changes: tier cuts apply to the finished ranking and cannot feed back into it.
+- A D band was evaluated and rejected. It would not separate the two populations in F (genuinely shrinking
+companies, and companies nobody publishes estimates for), because a D of the bottom 10-25% would itself be half
+missing-data cases. That ambiguity is a data problem rather than a tier problem.
+- S+ is unchanged: still any stock scoring a perfect 100, not a rank cut.
+
 ## [2.22.0] - 2026-10-12
 
 ### Changed
