@@ -299,7 +299,8 @@ html:root .pp-page .src-leverage {
   --color-tier-s: var(--ti-color-green);
   --color-tier-a: var(--ti-color-teal);
   --color-tier-b: var(--ti-color-yellow);
-  --color-tier-c: var(--ti-color-red);
+  --color-tier-c: var(--ti-color-orange);
+  --color-tier-d: var(--ti-color-red);
 }
 
 /* Contrast fixes found by scripts/browser.py (2026-10-02). */

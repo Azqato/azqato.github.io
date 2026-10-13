@@ -389,18 +389,23 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     // On top of the bands, a perfect 100/100 earns S+ (v3.30.0) -- those
     // stocks come out of the S band's headcount, they don't push it down.
     // Cumulative percentile cuts, owner's distribution (2026-10-12): S the top
-    // 10%, A the next 15%, B the next 25%, C the next 25%, F the bottom 25%.
+    // 10%, A the next 10%, B the next 20%, C the next 20%, D the next 20%,
+    // F the bottom 20%.
     //
     // The sizing rule is that no band should be so large that the label stops
     // narrowing anything down. Measured as the information content of a tier
-    // label on the Domestic universe: these cuts give 2.28 bits against 2.23
-    // for the 10/10/30/25/25 they replace and 2.00 for a 10/10/50/20/10
-    // arrangement tried earlier the same day, which put half the market in B.
-    // The ceiling with six labels is 2.58 bits, reached only by equal buckets.
+    // label on the Domestic universe, these cuts reach 2.56 bits of a 2.81-bit
+    // ceiling (91%), against 2.48 of 2.58 for the five-label 10/15/25/25/25
+    // they replace, and no band is wider than 21% of the market.
+    //
+    // D is not cosmetic. Median PEG points collapse from 11.4 of 25 in C to
+    // 0.6 of 25 in D, so the C/D line is where valuation support disappears;
+    // the share of names missing at least one metric runs 24% in C, 38% in D
+    // and 59% in F, so the band also separates weak from unmeasured.
     //
     // S+ remains a score of exactly 100 rather than a rank cut, by owner
     // decision, so it is the one tier the clamp still governs.
-    var TIER_CUTS = [["s", 0.10], ["a", 0.25], ["b", 0.50], ["c", 0.75]]; // f = the rest
+    var TIER_CUTS = [["s", 0.10], ["a", 0.20], ["b", 0.40], ["c", 0.60], ["d", 0.80]]; // f = the rest
     function computeTierMap(sm) {
       var order = Object.keys(sm)
         .filter(function (t) { return sm[t].pct !== null; })
@@ -455,7 +460,8 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     var TIER_COLOR = {
       sp: "var(--color-tier-splus)",
       s: "var(--color-tier-s)", a: "var(--color-tier-a)", b: "var(--color-tier-b)",
-      c: "var(--color-tier-c)", f: "var(--color-negative)", none: "var(--color-border)"
+      c: "var(--color-tier-c)", d: "var(--color-tier-d)",
+      f: "var(--color-negative)", none: "var(--color-border)"
     };
 
     // ---- Build a renderable row model ----
@@ -711,7 +717,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '<th class="grp-balance group-start" colspan="4">Balance Sheet</th>' +
           '<th class="grp-snapshot group-start" colspan="1"></th>',
         head: '<th class="left col-ticker" data-sort="ticker">Ticker</th>' +
-          '<th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>' +
+          '<th class="left group-start" data-sort="tier" title="Rank within the loaded list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = next 20%, C = next 20%, D = next 20%, F = bottom 20%. Boundary ties round up.">Tier</th>' +
           '<th data-sort="score">Score</th>' +
           '<th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 percentile points)">Factors</th>' +
           '<th class="grp-snapshot group-start" data-sort="marketCap">Mkt Cap</th>' +
@@ -739,7 +745,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '<th class="grp-technicals group-start" colspan="5">Technicals</th>' +
           '<th class="grp-snapshot group-start" colspan="1"></th>',
         head: '<th class="left col-ticker" data-sort="ticker">Fund</th>' +
-          '<th class="left group-start" data-sort="tier" title="Rank within this 10-fund list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%. Boundary ties round up.">Tier</th>' +
+          '<th class="left group-start" data-sort="tier" title="Rank within this fund list: S+ = a perfect 100 score, S = top 10%, A = next 10%, B = next 20%, C = next 20%, D = next 20%, F = bottom 20%. Boundary ties round up.">Tier</th>' +
           '<th data-sort="score">Score</th>' +
           '<th data-sort="factors" title="Number of the 6 scored metrics ranking in the upper part of the pack (15+ of 20 rank points)">Factors</th>' +
           '<th class="grp-snapshot group-start" data-sort="aum" title="Assets under management">AUM</th>' +
@@ -883,7 +889,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       render();
     }
 
-    var TIER_LABEL = { sp: "S+", s: "S", a: "A", b: "B", c: "C", f: "F", none: "NO DATA" };
+    var TIER_LABEL = { sp: "S+", s: "S", a: "A", b: "B", c: "C", d: "D", f: "F", none: "NO DATA" };
 
     function isNameFirst() { return !!UNIVERSES[universeMode].nameFirst; }
 

@@ -5,6 +5,29 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.24.0] - 2026-10-12
+
+### Changed
+- **A D tier is added, and the bands become S 10%, A 10%, B 20%, C 20%, D 20%, F 20%.** `TIER_CUTS` in
+`invests/assets/js/stocks/screener.js` becomes `[s 0.10, a 0.20, b 0.40, c 0.60, d 0.80]`, with `TIER_LABEL` and
+`TIER_COLOR` gaining a `d` entry.
+- **The tier color ramp shifts to stay monotonic.** C moves from light red to orange (`--color-tier-c` is now
+`--ti-color-orange`, `#f0883e` in `src-stocks.css`) and D inherits the light red C used to own (new
+`--color-tier-d`, `#ffa198`), with a matching `.v-d` badge rule on the screener page.
+- **Two stale tier tooltips are fixed.** The stock and ETF table header rows emit their own `title` text from
+JavaScript, and both still described the original scheme (A = next 10%, B = 20-50%, C = 50-75%, F = bottom 25%).
+Every earlier copy edit touched the static HTML and missed them, so the page showed two different band definitions
+depending on where you hovered.
+- The tier legend, the Tier column tooltip, the band explanation and the ETF universe copy match the new bands and
+per-100 counts (about 10 S, 10 A, 20 B, 20 C, 20 D and 20 F), plus a new paragraph on what the C and D line means.
+
+### Notes
+- Domestic lands at 0.7% S+, 9.4% S, 10.6% A, 20.8% B, 18.6% C, 20.6% D and 19.4% F. No band exceeds 20.8%.
+- Measured against the sizing rule, these cuts reach 91.3% of the information ceiling for six labels against
+88.3% for the five-label scheme they replace.
+- The C and D line is where valuation support disappears: median PEG points fall from 11.4 of 25 in C to 0.6 in D.
+- No score and no ranking changes: tier cuts apply to the finished ranking and cannot feed back into it.
+
 ## [2.23.0] - 2026-10-12
 
 ### Changed
