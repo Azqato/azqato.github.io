@@ -5,6 +5,16 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.27.0] - 2026-10-14
+
+### Added
+- **A new prompt, App Performance** (`codes/prompts/app-performance/`): measure where an app is really slow at
+startup, opening screens, loading content and scrolling, fix the biggest gaps one at a time, and keep a fix only if
+repeated before and after runs prove it. Built from the author's brief and rewritten to the section's writing rules:
+it reads the project first, times everything with a script (median and spread of 3 or more runs), asks rather than
+guesses when something cannot be measured, forbids passing by removing features, and ends with a per-fix table and
+the checks run. It sits after Animation Performance in the list, so the list now holds 25 prompts.
+
 ## [2.26.0] - 2026-10-12
 
 ### Added

@@ -37,7 +37,7 @@ SITE = 'https://azqato.com/codes/prompts/'
 ORDER = [
     'add-prompt', 'documentation', 'mobile-responsive-audit', 'github-wiki', 'prompt-audit',
     'brand-identity', 'ios-simulator', 'game-setup', 'motion-design', 'assumption-check',
-    'progress-dashboard', 'launch-video', 'animation-performance', 'design-review', 'landing-page',
+    'progress-dashboard', 'launch-video', 'animation-performance', 'app-performance', 'design-review', 'landing-page',
     'score-to-target', 'video-to-prompt', 'frontend-references', 'prompt-writing', 'project-defaults',
     'linkedin-audit', 'condense-docs', 'seo-audit', 'ecommerce-site',
 ]
