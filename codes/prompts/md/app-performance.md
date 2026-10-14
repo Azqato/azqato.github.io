@@ -10,7 +10,7 @@ Claude measures before it changes anything. It reads the project, works out what
 
 It then fixes one thing at a time, smallest owner first, and benchmarks after each fix the same way as before. A fix stays only if its numbers improve beyond the normal run-to-run noise; anything else is undone. Nothing is made faster by removing a feature or content.
 
-It ends with a before and after table for every fix, the tests and build it ran, and a plain list of what it could not measure.
+It ends with a before and after table for every fix, the tests and build it ran, and a plain list of what it could not measure. Every optimization it found but did not ship goes into the project's roadmap, with its measured cost and likely fix, so nothing found is lost.
 
 ## Prompt
 
@@ -56,6 +56,11 @@ Report, in this order:
 3. The final before and after for startup, each screen, content loading and scrolling.
 4. The checks run and whether each passed.
 5. What is left: gaps not fixed, and why.
+6. The roadmap entries you added.
 
-Do not commit anything.
+Update the roadmap
+- Find the project's roadmap: a roadmap file, a roadmap section in its PRD or planning docs, or a TODO list. Read it first and follow its format.
+- Add every optimization you identified but did not ship: the gaps left in step 5, fixes that were undone, and ideas too large for this pass. For each, give the screen or flow, the measured cost (or "not measured"), the likely fix, and a rough size of the work.
+- Do not duplicate an entry that is already there; update it with the new numbers instead.
+- If the project has no roadmap, ask me where to put these before creating a new file.
 ```

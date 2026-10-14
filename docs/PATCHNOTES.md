@@ -5,6 +5,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.27.1] - 2026-10-14
+
+### Changed
+- **App Performance** now ends by adding every optimization it found but did not ship to the project's roadmap
+(the screen or flow, its measured cost, the likely fix and a rough size), updating existing entries instead of
+duplicating them, and asking where to put them if the project has no roadmap. It replaces the closing line that
+said not to commit.
+
 ## [2.27.0] - 2026-10-14
 
 ### Added
