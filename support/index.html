@@ -430,12 +430,12 @@
         <span class="affiliate-link-btn">Subscribe Free &rarr;</span>
       </a>
 
-      <a class="affiliate-card" href="https://www.routenote.com/rn/referral/2fcd201c" target="_blank" rel="noopener">
+      <a class="affiliate-card" href="https://www.routenote.com/rn/referral/2fcd201c" data-code="2fcd201c" target="_blank" rel="noopener">
         <div class="affiliate-logo" style="background: rgba(255,107,0,0.12); border: 1px solid rgba(255,107,0,0.3);">🎵</div>
         <span class="affiliate-name">RouteNote</span>
         <span class="affiliate-promo">Referral Code: 2fcd201c</span>
         <p class="affiliate-desc">Free music distribution to Spotify, Apple Music, and every major platform. Enter referral code 2fcd201c when you sign up.</p>
-        <span class="affiliate-link-btn">Use Referral &rarr;</span>
+        <span class="affiliate-link-btn">Copy Code &amp; Open &rarr;</span>
       </a>
 
       <a class="affiliate-card" href="https://join.robinhood.com/robertg273/" target="_blank" rel="noopener">
@@ -462,12 +462,12 @@
         <span class="affiliate-link-btn">Get $20 Free &rarr;</span>
       </a>
 
-      <a class="affiliate-card" href="https://www.composer.trade/" target="_blank" rel="noopener">
+      <a class="affiliate-card" href="https://www.composer.trade/" data-code="fczMHII-TRADE" target="_blank" rel="noopener">
         <div class="affiliate-logo" style="background: rgba(76,175,80,0.15); border: 1px solid rgba(76,175,80,0.3);">🤖</div>
         <span class="affiliate-name">Composer</span>
         <span class="affiliate-promo">Referral Code: fczMHII-TRADE</span>
         <p class="affiliate-desc">Build and automate rules-based trading strategies. Enter referral code fczMHII-TRADE when you sign up and you could get $50.</p>
-        <span class="affiliate-link-btn">Use Referral &rarr;</span>
+        <span class="affiliate-link-btn">Copy Code &amp; Open &rarr;</span>
       </a>
 
       <a class="affiliate-card" href="https://www.lyft.com/invite/ROBGOLDY630855" target="_blank" rel="noopener">
@@ -537,6 +537,20 @@
         }
       });
     })();
+  </script>
+  <script>
+    // Cards with a referral code copy it on click, then open the site as usual.
+    document.querySelectorAll('.affiliate-card[data-code]').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var code = card.getAttribute('data-code'), btn = card.querySelector('.affiliate-link-btn');
+        var done = function () {
+          var was = btn.innerHTML;
+          btn.textContent = 'Code copied: ' + code;
+          setTimeout(function () { btn.innerHTML = was; }, 2500);
+        };
+        if (navigator.clipboard) navigator.clipboard.writeText(code).then(done, function () {});
+      });
+    });
   </script>
 </body>
 </html>
