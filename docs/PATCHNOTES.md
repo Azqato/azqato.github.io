@@ -5,6 +5,18 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.28.0] - 2026-10-16
+
+### Added
+- **A new prompt, URL Structure** (`codes/prompts/url-structure/`): audit a site's URLs against one standard
+(lowercase hyphenated paths, plural collections, one folder per area with an overview page, one canonical address
+per page), then, after approval, move pages one area at a time with tested redirects, and navigation, sitemap and
+canonical tags to match. Built from the author's draft with these changes: one trailing-slash form chosen by what
+the host serves natively, instead of always none; redirect pages where the host cannot send a 301; an offer to add
+a redirect-check script when the site has no tests, instead of stopping; routes, links and the crawl counted with a
+script; unknown external links marked unknown; one hop for every redirect, including existing ones; and approval
+before editing the project's instructions file. It sits after SEO Audit, so the list now holds 26 prompts.
+
 ## [2.27.1] - 2026-10-14
 
 ### Changed
