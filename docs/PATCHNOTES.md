@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.29.0] - 2026-10-16
+
+### Changed
+- **URL Structure** reworked after a field run on a local-only static site of about 1,070 pages, where several
+parts assumed a hosted site. It now works out how the site runs first (hosted with redirects, static hosting only,
+or local only), and applies the standard by mode: local-only sites get relative links that name the file, no
+redirects, canonicals, sitemap or lowercase catch-all, and old files deleted once nothing outside links in.
+- Every page except the home page now lives in its own folder, even a single page. A clean-root rule moves
+stylesheets, scripts, images and fonts under one assets folder, with unused files proposed for deletion only after
+a scripted check and approval.
+- The audit now flags hand-written menus so all navigation is generated from one source, lists exceptions to the
+standard as narrow, approved patterns (such as case-sensitive video IDs), and the checks include a from-disk link
+check and a navigation-matches-source check. The report adds the hosting mode, exceptions and the root cleanup.
+
 ## [2.28.0] - 2026-10-16
 
 ### Added
