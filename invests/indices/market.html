@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Market Overview - Azqato Invests</title>
-<meta name="description" content="A same-day market snapshot: major indices, factor and sector ETFs, commodities, Treasury yields, leveraged ETFs and crypto, refreshed three times a trading day.">
+<meta name="description" content="A same-day market snapshot: major indices, broad-market, bond, size, factor and sector ETFs, commodities, Treasury yields, the Fed Funds Rate and CPI, leveraged ETFs and crypto, with 52-week ranges and 10-day RSI, refreshed three times a trading day.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Azqato Invests">
 <meta property="og:title" content="Market Overview - Azqato Invests">
-<meta property="og:description" content="A same-day market snapshot: major indices, factor and sector ETFs, commodities, Treasury yields, leveraged ETFs and crypto, refreshed three times a trading day.">
+<meta property="og:description" content="A same-day market snapshot: major indices, broad-market, bond, size, factor and sector ETFs, commodities, Treasury yields, the Fed Funds Rate and CPI, leveraged ETFs and crypto, with 52-week ranges and 10-day RSI, refreshed three times a trading day.">
 <meta property="og:url" content="https://azqato.com/invests/indices/market">
 <link rel="canonical" href="https://azqato.com/invests/indices/market">
 <meta name="twitter:card" content="summary">
@@ -104,6 +104,24 @@
       color: var(--color-text-secondary);
       margin-top: 8px;
 }
+.src-stocks .market-card-range { margin-top: 10px;
+}
+.src-stocks .market-range-bar { position: relative; height: 4px; border-radius: 2px; background: var(--color-border);
+}
+.src-stocks .market-range-dot { position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--color-text-primary); transform: translate(-50%, -50%);
+}
+.src-stocks .market-range-labels { display: flex; justify-content: space-between; gap: 4px; margin-top: 4px;
+      font-size: 0.75rem; color: var(--color-text-secondary); font-variant-numeric: tabular-nums;
+}
+.src-stocks .market-card-rsi { margin-top: 8px; font-size: 0.8rem; color: var(--color-text-secondary);
+}
+.src-stocks .market-card-rsi.overbought { color: var(--color-negative);
+}
+.src-stocks .market-card-rsi.oversold { color: var(--color-positive);
+}
+.src-stocks .market-card-asof { margin-top: 6px; font-size: 0.75rem; color: var(--color-text-secondary);
+}
 @media (max-width: 480px) {
 .src-stocks .market-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;
 }
@@ -174,7 +192,7 @@
 <div class="content-inner">
 <div class="guide-intro">
 <h1>Market Overview</h1>
-<p>A same-day snapshot across Indices, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Refreshed three times per trading day (shortly after the open, midday, and shortly after the close) so it reads as a live check-in, not a stale close-of-business number.</p>
+<p>A same-day snapshot across Indices, Broad Market, Bond Funds, Market Cap, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Each card shows its 52-week range and 10-day RSI (79 or above reads as overbought, 31 or below as oversold). Refreshed three times per trading day (shortly after the open, midday, and shortly after the close) so it reads as a live check-in, not a stale close-of-business number.</p>
 <div class="hero-badge market-asof"><span id="marketAsOfEmoji">🕒</span> <span id="marketAsOf">Loading market data…</span></div>
 </div>
 <div class="market-stale-banner" id="marketStaleBanner" style="margin-top: 28px;">
@@ -264,14 +282,50 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       // change is a point-delta (e.g. "+0.030"), not a percent-of-percent --
       // computing changePct on a yield would make a 0.03-point move on a
       // 4.539 base read as a misleading "+0.66%".
-      function fmtYield(p) {
+      // dp: the feed's display decimals (2 for the Fed Funds Rate, 1 for
+      // CPI); Treasury yields keep the original 3.
+      function fmtYield(p, dp) {
         if (p === null || p === undefined) return "–";
-        return p.toFixed(3) + "%";
+        return p.toFixed(dp == null ? 3 : dp) + "%";
       }
-      function fmtYieldChange(c) {
+      function fmtYieldChange(c, dp) {
         if (c === null || c === undefined) return "–";
         var sign = c > 0 ? "+" : "";
-        return sign + c.toFixed(3);
+        return sign + c.toFixed(dp == null ? 3 : dp);
+      }
+      function isNum(n) { return typeof n === "number" && isFinite(n); }
+
+      // FRED readings are dated: CPI is monthly (the feed marks it
+      // freq "monthly"; its date is the 1st), the Fed Funds Rate lags a
+      // day or two. Read as UTC so the date does not slip back a day
+      // west of Greenwich.
+      function fmtAsOf(iso, monthly) {
+        var d = new Date(iso + "T00:00:00Z");
+        if (isNaN(d)) return iso;
+        return d.toLocaleDateString(undefined, monthly
+          ? { month: "short", year: "numeric", timeZone: "UTC" }
+          : { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+      }
+
+      // 52-week range bar, 10-day RSI and as-of line, under the change row.
+      function extrasHtml(q, pct) {
+        var out = "";
+        if (isNum(q.low52) && isNum(q.high52) && q.high52 > q.low52) {
+          var pos = Math.max(0, Math.min(100, (q.price - q.low52) / (q.high52 - q.low52) * 100));
+          var f = pct ? function (v) { return fmtYield(v, q.dp); } : fmtPrice;
+          out += '<div class="market-card-range" title="52-week range: low ' + f(q.low52) + ', high ' + f(q.high52) + '">' +
+            '<div class="market-range-bar"><span class="market-range-dot" style="left:' + pos.toFixed(1) + '%"></span></div>' +
+            '<div class="market-range-labels"><span>' + f(q.low52) + '</span><span>52W</span><span>' + f(q.high52) + '</span></div>' +
+          '</div>';
+        }
+        if (isNum(q.rsi10)) {
+          var zone = q.rsi10 >= 79 ? "overbought" : q.rsi10 <= 31 ? "oversold" : "";
+          out += '<div class="market-card-rsi ' + zone + '" title="10-day RSI. 79 or above: overbought. 31 or below: oversold.">' +
+            'RSI (10D) <b>' + q.rsi10.toFixed(1) + '</b>' + (zone ? " · " + zone.charAt(0).toUpperCase() + zone.slice(1) : "") +
+          '</div>';
+        }
+        if (q.asOf) out += '<div class="market-card-asof">As of ' + fmtAsOf(q.asOf, q.freq === "monthly") + '</div>';
+        return out;
       }
 
       function dirClass(delta) {
@@ -296,11 +350,12 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           return '<div class="market-card ' + ydir + '">' +
             '<div class="market-card-name">' + (q.name || ticker) + '</div>' +
             '<div class="market-card-ticker">' + ticker + '</div>' +
-            '<div class="market-card-price">' + fmtYield(q.price) + '</div>' +
+            '<div class="market-card-price">' + fmtYield(q.price, q.dp) + '</div>' +
             '<div class="market-card-change">' +
               '<span class="market-card-arrow">' + arrow(ydir) + '</span>' +
-              '<span>' + fmtYieldChange(q.change) + '</span>' +
+              '<span>' + fmtYieldChange(q.change, q.dp) + '</span>' +
             '</div>' +
+            extrasHtml(q, true) +
           '</div>';
         }
         var dir = dirClass(q.changePct);
@@ -313,6 +368,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
             '<span>' + fmtChange(q.change) + '</span>' +
             '<span>(' + fmtPct(q.changePct) + ')</span>' +
           '</div>' +
+          extrasHtml(q, false) +
         '</div>';
       }
 

@@ -48,12 +48,17 @@ PUNCT_DASH = re.compile(r"\u2014|&mdash;")
 #
 # The ETFs list growing from 10 funds to 36 (2.18.x), which left three items on
 # the screener page naming the old count.
+#
+# Market Overview's intro (2026-10-18), which listed the old categories; the
+# list gained Broad Market, Bond Funds and Size, and cards gained a 52-week
+# range and 10-day RSI, which the intro now names.
 REMOVED = {"azqato.github.io-invests.json": {108, 109, 130, 131, 90, 91, 92, 93},
            "stocks-index.json": {53, 55, 56, 57, 62, 63},
            "stocks-metrics.json": {58, 60, 62, 63, 64, 66, 67, 68, 70,
                                    96, 98, 100, 101, 103, 105},
            "stocks-screener.json": {65, 72, 84, 131, 136},
-           "leverage-holy-grail.json": {118, 163}}
+           "leverage-holy-grail.json": {118, 163},
+           "stocks-market.json": {29}}
 # The method has 12 metrics (owner, Q7, 2026-10-03): keep every page saying so.
 METRIC_COUNT = 12
 PLACEHOLDERS = {"untitled", "document", "home", "index", "introduction - parcelpoint docs"}

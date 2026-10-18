@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.30.0] - 2026-10-18
+
+### Added
+- **Market Overview** (`invests/indices/market/`): every card shows a 52-week range bar with a dot at today's
+price and the low and high beneath, plus a 10-day RSI line, red at 79 or above (overbought) and green at 31 or
+below (oversold). Treasury yields show the range but no RSI.
+- Bonds gains the Fed Funds Rate, CPI and Core CPI (year over year), from FRED, each with an "As of" date: the day
+for Fed Funds, the month for the monthly CPI pair.
+
+### Changed
+- The categories now lead with Indices, Broad Market, Bond Funds and Market Cap, reorganized in the Stocks data feed
+(v5.10.0). The page reads the new fields from the same feed. The intro and search description were updated.
+- `check.py` allows the Market Overview inline script's stocks-market inventory item to change.
+
 ## [2.29.0] - 2026-10-16
 
 ### Changed

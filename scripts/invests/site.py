@@ -87,7 +87,7 @@ DESCS = {
     "stocks/screener.html": "An interactive screener that ranks the Nasdaq 100, S&P 500, the whole US market and more against the Azqato methodology. Updated daily; runs in your browser.",
     "indices/index.html": "When to buy index funds and ETFs: VIX action levels, AAII sentiment, RSI timing, DCA vs lump-sum math, and quality metrics like expense ratio.",
     "indices/method.html": "The index and ETF method in full: fund types, DCA vs lump sum, the VIX, RSI and 52-week timing, AAII sentiment, and fund quality.",
-    "indices/market.html": "A same-day market snapshot: major indices, factor and sector ETFs, commodities, Treasury yields, leveraged ETFs and crypto, refreshed three times a trading day.",
+    "indices/market.html": "A same-day market snapshot: major indices, broad-market, bond, size, factor and sector ETFs, commodities, Treasury yields, the Fed Funds Rate and CPI, leveraged ETFs and crypto, with 52-week ranges and 10-day RSI, refreshed three times a trading day.",
     "leveraged/index.html": "A reference library for six leveraged ETF strategy frameworks built around TQQQ: 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail and HFEA. Educational use only.",
     "leveraged/3sig.html": "The 3 Sig quarterly value-averaging strategy by Jason Kelly: a 3% quarterly target manages a stock index fund against a bond buffer.",
     "leveraged/tqqq-ftlt.html": "TQQQ For The Long Term: a daily rules-based algorithm using SPY's 200-day SMA and 10-day RSI to rotate among TQQQ, UVXY, TECL, UPRO, SQQQ and TLT.",
@@ -420,6 +420,86 @@ CONTENT_EDITS = {
          '<div class="metric-card-name">Revenue Growth (Quarter)</div>\n                <p class="metric-card-def">Actual top-line growth in the latest reported quarter against the same quarter a year earlier. Confirms the business is growing in reality, not just in projections.</p>'),
         ('<div class="metric-card-name">EPS Growth TTM</div>\n                <p class="metric-card-def">Earnings per share growth over the past twelve months. Confirms revenue growth is translating into actual profit growth.</p>',
          '<div class="metric-card-name">EPS Growth (Quarter)</div>\n                <p class="metric-card-def">Earnings per share growth in the latest reported quarter against the same quarter a year earlier. Confirms revenue growth is translating into actual profit growth.</p>'),
+    ],
+    # Market Overview (2026-10-18): a 52-week range bar and a 10-day RSI on
+    # every card, plus the Fed Funds Rate, CPI and Core CPI in Bonds. The data
+    # comes from the stocks feed (scripts/fetch_market_overview.py there:
+    # low52, high52, rsi10, and asOf/dp on the FRED entries); this only draws
+    # it. RSI bands are 79/31, matching the leveraged strategies. The category intro also follows
+    # the reorganised list (Broad Market, Bond Funds and Market Cap are new).
+    'stocks/market.html': [
+        ('<p>A same-day snapshot across Indices, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto.',
+         '<p>A same-day snapshot across Indices, Broad Market, Bond Funds, Market Cap, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Each card shows its 52-week range and 10-day RSI (79 or above reads as overbought, 31 or below as oversold).'),
+        ('    @media (max-width: 480px) {\n      .market-grid {',
+         '    .market-card-range { margin-top: 10px; }\n'
+         '    .market-range-bar { position: relative; height: 4px; border-radius: 2px; background: var(--color-border); }\n'
+         '    .market-range-dot { position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50%;\n'
+         '      background: var(--color-text-primary); transform: translate(-50%, -50%); }\n'
+         '    .market-range-labels { display: flex; justify-content: space-between; gap: 4px; margin-top: 4px;\n'
+         '      font-size: 0.75rem; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }\n'
+         '    .market-card-rsi { margin-top: 8px; font-size: 0.8rem; color: var(--color-text-secondary); }\n'
+         '    .market-card-rsi.overbought { color: var(--color-negative); }\n'
+         '    .market-card-rsi.oversold { color: var(--color-positive); }\n'
+         '    .market-card-asof { margin-top: 6px; font-size: 0.75rem; color: var(--color-text-secondary); }\n\n'
+         '    @media (max-width: 480px) {\n      .market-grid {'),
+        ('      function fmtYield(p) {\n        if (p === null || p === undefined) return "\u2014";\n        return p.toFixed(3) + "%";\n      }\n'
+         '      function fmtYieldChange(c) {\n        if (c === null || c === undefined) return "\u2014";\n        var sign = c > 0 ? "+" : "";\n        return sign + c.toFixed(3);\n      }\n',
+         '      // dp: the feed\'s display decimals (2 for the Fed Funds Rate, 1 for\n'
+         '      // CPI); Treasury yields keep the original 3.\n'
+         '      function fmtYield(p, dp) {\n        if (p === null || p === undefined) return "\u2014";\n        return p.toFixed(dp == null ? 3 : dp) + "%";\n      }\n'
+         '      function fmtYieldChange(c, dp) {\n        if (c === null || c === undefined) return "\u2014";\n        var sign = c > 0 ? "+" : "";\n        return sign + c.toFixed(dp == null ? 3 : dp);\n      }\n'
+         '      function isNum(n) { return typeof n === "number" && isFinite(n); }\n\n'
+         '      // FRED readings are dated: CPI is monthly (the feed marks it\n'
+         '      // freq "monthly"; its date is the 1st), the Fed Funds Rate lags a\n'
+         '      // day or two. Read as UTC so the date does not slip back a day\n'
+         '      // west of Greenwich.\n'
+         '      function fmtAsOf(iso, monthly) {\n'
+         '        var d = new Date(iso + "T00:00:00Z");\n'
+         '        if (isNaN(d)) return iso;\n'
+         '        return d.toLocaleDateString(undefined, monthly\n'
+         '          ? { month: "short", year: "numeric", timeZone: "UTC" }\n'
+         '          : { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });\n'
+         '      }\n\n'
+         '      // 52-week range bar, 10-day RSI and as-of line, under the change row.\n'
+         '      function extrasHtml(q, pct) {\n'
+         '        var out = "";\n'
+         '        if (isNum(q.low52) && isNum(q.high52) && q.high52 > q.low52) {\n'
+         '          var pos = Math.max(0, Math.min(100, (q.price - q.low52) / (q.high52 - q.low52) * 100));\n'
+         '          var f = pct ? function (v) { return fmtYield(v, q.dp); } : fmtPrice;\n'
+         '          out += \'<div class="market-card-range" title="52-week range: low \' + f(q.low52) + \', high \' + f(q.high52) + \'">\' +\n'
+         '            \'<div class="market-range-bar"><span class="market-range-dot" style="left:\' + pos.toFixed(1) + \'%"></span></div>\' +\n'
+         '            \'<div class="market-range-labels"><span>\' + f(q.low52) + \'</span><span>52W</span><span>\' + f(q.high52) + \'</span></div>\' +\n'
+         '          \'</div>\';\n'
+         '        }\n'
+         '        if (isNum(q.rsi10)) {\n'
+         '          var zone = q.rsi10 >= 79 ? "overbought" : q.rsi10 <= 31 ? "oversold" : "";\n'
+         '          out += \'<div class="market-card-rsi \' + zone + \'" title="10-day RSI. 79 or above: overbought. 31 or below: oversold.">\' +\n'
+         '            \'RSI (10D) <b>\' + q.rsi10.toFixed(1) + \'</b>\' + (zone ? " \u00b7 " + zone.charAt(0).toUpperCase() + zone.slice(1) : "") +\n'
+         '          \'</div>\';\n'
+         '        }\n'
+         '        if (q.asOf) out += \'<div class="market-card-asof">As of \' + fmtAsOf(q.asOf, q.freq === "monthly") + \'</div>\';\n'
+         '        return out;\n'
+         '      }\n'),
+        ("            '<div class=\"market-card-price\">' + fmtYield(q.price) + '</div>' +\n"
+         "            '<div class=\"market-card-change\">' +\n"
+         "              '<span class=\"market-card-arrow\">' + arrow(ydir) + '</span>' +\n"
+         "              '<span>' + fmtYieldChange(q.change) + '</span>' +\n"
+         "            '</div>' +\n"
+         "          '</div>';",
+         "            '<div class=\"market-card-price\">' + fmtYield(q.price, q.dp) + '</div>' +\n"
+         "            '<div class=\"market-card-change\">' +\n"
+         "              '<span class=\"market-card-arrow\">' + arrow(ydir) + '</span>' +\n"
+         "              '<span>' + fmtYieldChange(q.change, q.dp) + '</span>' +\n"
+         "            '</div>' +\n"
+         "            extrasHtml(q, true) +\n"
+         "          '</div>';"),
+        ("            '<span>(' + fmtPct(q.changePct) + ')</span>' +\n"
+         "          '</div>' +\n"
+         "        '</div>';",
+         "            '<span>(' + fmtPct(q.changePct) + ')</span>' +\n"
+         "          '</div>' +\n"
+         "          extrasHtml(q, false) +\n"
+         "        '</div>';"),
     ],
 }
 
