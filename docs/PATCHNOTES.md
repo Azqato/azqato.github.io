@@ -5,6 +5,11 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.30.1] - 2026-10-18
+
+### Changed
+- **Market Overview**: the RSI line reads "10D RSI:" and is centered in each card.
+
 ## [2.30.0] - 2026-10-18
 
 ### Added

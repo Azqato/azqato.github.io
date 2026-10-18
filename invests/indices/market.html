@@ -114,7 +114,7 @@
 .src-stocks .market-range-labels { display: flex; justify-content: space-between; gap: 4px; margin-top: 4px;
       font-size: 0.75rem; color: var(--color-text-secondary); font-variant-numeric: tabular-nums;
 }
-.src-stocks .market-card-rsi { margin-top: 8px; font-size: 0.8rem; color: var(--color-text-secondary);
+.src-stocks .market-card-rsi { margin-top: 8px; text-align: center; font-size: 0.8rem; color: var(--color-text-secondary);
 }
 .src-stocks .market-card-rsi.overbought { color: var(--color-negative);
 }
@@ -321,7 +321,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
         if (isNum(q.rsi10)) {
           var zone = q.rsi10 >= 79 ? "overbought" : q.rsi10 <= 31 ? "oversold" : "";
           out += '<div class="market-card-rsi ' + zone + '" title="10-day RSI. 79 or above: overbought. 31 or below: oversold.">' +
-            'RSI (10D) <b>' + q.rsi10.toFixed(1) + '</b>' + (zone ? " · " + zone.charAt(0).toUpperCase() + zone.slice(1) : "") +
+            '10D RSI: <b>' + q.rsi10.toFixed(1) + '</b>' + (zone ? " · " + zone.charAt(0).toUpperCase() + zone.slice(1) : "") +
           '</div>';
         }
         if (q.asOf) out += '<div class="market-card-asof">As of ' + fmtAsOf(q.asOf, q.freq === "monthly") + '</div>';
