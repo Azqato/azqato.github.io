@@ -229,8 +229,11 @@ def detail(p, prompts):
 
 
 def sitemap(prompts, text):
+    # Keep the dates scripts/sitemap-lastmod.py stamped; it runs after this.
+    dates = dict(re.findall(r'<loc>([^<]+)</loc>\s*<lastmod>([^<]+)</lastmod>', text))
     block = '  <!-- PROMPTS: written by scripts/prompts/build.py -->\n' + ''.join(
-        '  <url>\n    <loc>%s</loc>\n    <priority>%s</priority>\n  </url>\n' % (u, pr)
+        '  <url>\n    <loc>%s</loc>\n%s    <priority>%s</priority>\n  </url>\n'
+        % (u, '    <lastmod>%s</lastmod>\n' % dates[u] if u in dates else '', pr)
         for u, pr in [(SITE, '0.7')] + [(SITE + p['slug'] + '/', '0.6') for p in prompts if not p['hidden']]
     ) + '  <!-- /PROMPTS -->\n'
     if '<!-- PROMPTS' in text:

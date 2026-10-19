@@ -5,6 +5,19 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.30.4] - 2026-10-18
+
+### Fixed
+- **Sitemap dates.** 22 `lastmod` dates in `sitemap.xml` were up to two weeks behind their pages, and the 27 prompt
+pages and 22 Invests pages had none. Every URL in both sitemaps now has one. A review found nothing else to fix:
+every indexable page is listed, redirect and noindex pages are not, and all 71 URLs return 200 with no redirect.
+
+### Added
+- `scripts/sitemap-lastmod.py`, run last in the build chain (after `build-nav.py`): stamps each URL in
+`sitemap.xml` and `invests/sitemap.xml` with its page's last commit date, or today if the page has uncommitted
+changes. `--check` reports stale dates. `prompts/build.py` and `invests/site.py` keep existing dates when they
+rewrite their part of the sitemap, so their checks still pass.
+
 ## [2.30.3] - 2026-10-18
 
 ### Fixed

@@ -1590,7 +1590,13 @@ def main():
         encoding="utf-8", newline="\n")
     # sitemap.xml for the published address. robots.txt belongs at the origin
     # (azqato.github.io), which this site doesn't own; see the PRD Runbook.
-    urls = "".join(f"  <url><loc>{page_url(path)}</loc></url>\n" for path, *_ in PAGES)
+    # Keep the dates scripts/sitemap-lastmod.py stamped; it runs after this.
+    sm = ROOT / "sitemap.xml"
+    dates = dict(re.findall(r"<loc>([^<]+)</loc><lastmod>([^<]+)</lastmod>",
+                            sm.read_text(encoding="utf-8") if sm.exists() else ""))
+    urls = "".join(f"  <url><loc>{page_url(path)}</loc>"
+                   + (f"<lastmod>{dates[page_url(path)]}</lastmod>" if page_url(path) in dates else "")
+                   + "</url>\n" for path, *_ in PAGES)
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       + urls + "</urlset>\n", encoding="utf-8", newline="\n")

@@ -257,7 +257,8 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
 ├── README.md                 - public front door, general-reader oriented
 ├── LICENSE.md                - copyright and terms of use; all rights reserved, source-available
 ├── robots.txt                - fully open to all crawlers, deliberately; points at the sitemap
-├── sitemap.xml               - every root page, at its clean address
+├── sitemap.xml               - every root page, at its clean address, each with a lastmod from
+│                               scripts/sitemap-lastmod.py
 ├── index.html                - landing page: intro, Discord CTA, explore grid
 │   (Since 2.13.8, clean addresses: each page below is name/index.html, served at
 │    azqato.com/name/; the old name.html is a redirect page to it.)
@@ -1155,7 +1156,8 @@ python scripts/tools-site/migrate.py   # one-time: ../tools (the old repo) into 
 python scripts/prompts/build.py        # codes/prompts/md/*.md into codes/prompts/ (pages, sitemap block, redirects)
 python scripts/prompts/build.py --check
 python scripts/codes/shell.py          # after migrate.py: the Codes Contents sidebar (build.py runs it itself)
-python scripts/build-nav.py            # always last: nav, footer, icons and search for every page
+python scripts/build-nav.py            # nav, footer, icons and search for every page
+python scripts/sitemap-lastmod.py      # last: <lastmod> on every URL in both sitemaps, from git (--check to verify)
 python scripts/tools-site/browser.py   # Tools: every page, both themes, each tool's main action
 python scripts/prompts/browser.py      # Prompts: every page, both themes, search, Expand, Copy
 ```
