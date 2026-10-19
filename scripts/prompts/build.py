@@ -39,7 +39,7 @@ ORDER = [
     'brand-identity', 'ios-simulator', 'game-setup', 'motion-design', 'assumption-check',
     'progress-dashboard', 'launch-video', 'animation-performance', 'app-performance', 'design-review', 'landing-page',
     'score-to-target', 'video-to-prompt', 'frontend-references', 'prompt-writing', 'project-defaults',
-    'linkedin-audit', 'condense-docs', 'seo-audit', 'url-structure', 'ecommerce-site',
+    'linkedin-audit', 'condense-docs', 'seo-audit', 'url-structure', 'ecommerce-site', 'brand-tinted-neutrals',
 ]
 
 # Old slug -> current slug. Permanent, never chained, never reused.

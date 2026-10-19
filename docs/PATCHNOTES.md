@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.31.0] - 2026-10-19
+
+### Added
+- **A new prompt, Brand-Tinted Neutrals** (`codes/prompts/brand-tinted-neutrals/`): replaces an interface's pure
+greys with a near-white to near-black scale tinted by the brand's base color, used for every background, surface,
+border and text color. Made our own from a shared design tip: it audits every neutral with a script first, builds
+the scale in OKLCH at low chroma so it reads as tinted rather than colored, checks every pair at 4.5:1 for text and
+3:1 for borders in both themes, leaves status and accent colors alone (so gains and losses stay clear on trading
+screens), and stops with a swatch page for approval before changing anything.
+- The Codes sidebar and search list it on every page; the sitemap and `_redirects` gain its address.
+
 ## [2.30.5] - 2026-10-18
 
 ### Fixed
