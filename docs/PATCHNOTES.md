@@ -5,6 +5,12 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.30.5] - 2026-10-18
+
+### Fixed
+- **Market Overview**: the RSI band name ("Extreme Oversold" and the rest) sits on its own line under "10D RSI:",
+instead of wrapping mid-label on narrow cards. Every card's RSI is now exactly two lines, at desktop and phone widths.
+
 ## [2.30.4] - 2026-10-18
 
 ### Fixed
