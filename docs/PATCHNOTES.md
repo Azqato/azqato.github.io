@@ -5,6 +5,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.30.2] - 2026-10-18
+
+### Changed
+- **Market Overview**: the 10-day RSI uses Composer Atlas's five bands and colors: Extreme Overbought (79 and up),
+Overbought (70), Neutral (42 to 70), Oversold (29 to 42) and Extreme Oversold (below 29), each named on the card.
+Every color is 5.3:1 or better on the cards in both themes; the dark values live in `invests/assets/css/site.css`.
+
 ## [2.30.1] - 2026-10-18
 
 ### Changed

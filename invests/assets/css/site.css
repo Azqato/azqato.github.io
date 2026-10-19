@@ -324,6 +324,16 @@ html:root .pp-page .src-leverage {
   color: var(--ti-color-success);
 }
 
+/* Market Overview's RSI bands in dark: Composer Atlas's dark RSI colors
+   (light ones are inline in the page, from scripts/invests/site.py). All
+   6.5:1 or better on the dark card. */
+:root[data-theme="dark"] .pp-page .src-stocks .market-card {
+  --rsi-xob: #ffaaa4;
+  --rsi-ob: #f78a83;
+  --rsi-os: #52c98a;
+  --rsi-xos: #00e676;
+}
+
 /* The template's .callout is a flex row; the leverage sources' callouts are blocks. */
 .pp-page .src-leverage .callout {
   display: block;

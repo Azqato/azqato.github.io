@@ -425,11 +425,11 @@ CONTENT_EDITS = {
     # every card, plus the Fed Funds Rate, CPI and Core CPI in Bonds. The data
     # comes from the stocks feed (scripts/fetch_market_overview.py there:
     # low52, high52, rsi10, and asOf/dp on the FRED entries); this only draws
-    # it. RSI bands are 79/31, matching the leveraged strategies. The category intro also follows
+    # it. RSI bands and colors match Composer Atlas's RSI page (79/70/42/29), all 5.3:1 or better on our cards. The category intro also follows
     # the reorganised list (Broad Market, Bond Funds and Market Cap are new).
     'stocks/market.html': [
         ('<p>A same-day snapshot across Indices, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto.',
-         '<p>A same-day snapshot across Indices, Broad Market, Bond Funds, Market Cap, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Each card shows its 52-week range and 10-day RSI (79 or above reads as overbought, 31 or below as oversold).'),
+         '<p>A same-day snapshot across Indices, Broad Market, Bond Funds, Market Cap, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Each card shows its 52-week range and 10-day RSI, from extreme overbought (79 and up) through overbought (70), neutral (42 to 70) and oversold (below 42) to extreme oversold (below 29).'),
         ('    @media (max-width: 480px) {\n      .market-grid {',
          '    .market-card-range { margin-top: 10px; }\n'
          '    .market-range-bar { position: relative; height: 4px; border-radius: 2px; background: var(--color-border); }\n'
@@ -438,8 +438,11 @@ CONTENT_EDITS = {
          '    .market-range-labels { display: flex; justify-content: space-between; gap: 4px; margin-top: 4px;\n'
          '      font-size: 0.75rem; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }\n'
          '    .market-card-rsi { margin-top: 8px; text-align: center; font-size: 0.8rem; color: var(--color-text-secondary); }\n'
-         '    .market-card-rsi.overbought { color: var(--color-negative); }\n'
-         '    .market-card-rsi.oversold { color: var(--color-positive); }\n'
+         '    .market-card { --rsi-xob: #9f0013; --rsi-ob: #c5001a; --rsi-os: #00712a; --rsi-xos: #005a20; }\n'
+         '    .market-card-rsi.rsi-xob { color: var(--rsi-xob); font-weight: 700; }\n'
+         '    .market-card-rsi.rsi-ob { color: var(--rsi-ob); }\n'
+         '    .market-card-rsi.rsi-os { color: var(--rsi-os); }\n'
+         '    .market-card-rsi.rsi-xos { color: var(--rsi-xos); font-weight: 700; }\n'
          '    .market-card-asof { margin-top: 6px; font-size: 0.75rem; color: var(--color-text-secondary); }\n\n'
          '    @media (max-width: 480px) {\n      .market-grid {'),
         ('      function fmtYield(p) {\n        if (p === null || p === undefined) return "\u2014";\n        return p.toFixed(3) + "%";\n      }\n'
@@ -472,9 +475,11 @@ CONTENT_EDITS = {
          '          \'</div>\';\n'
          '        }\n'
          '        if (isNum(q.rsi10)) {\n'
-         '          var zone = q.rsi10 >= 79 ? "overbought" : q.rsi10 <= 31 ? "oversold" : "";\n'
-         '          out += \'<div class="market-card-rsi \' + zone + \'" title="10-day RSI. 79 or above: overbought. 31 or below: oversold.">\' +\n'
-         '            \'10D RSI: <b>\' + q.rsi10.toFixed(1) + \'</b>\' + (zone ? " \u00b7 " + zone.charAt(0).toUpperCase() + zone.slice(1) : "") +\n'
+         '          var r = q.rsi10;\n'
+         '          var band = r >= 79 ? ["rsi-xob", "Extreme Overbought"] : r >= 70 ? ["rsi-ob", "Overbought"] :\n'
+         '            r >= 42 ? ["", "Neutral"] : r >= 29 ? ["rsi-os", "Oversold"] : ["rsi-xos", "Extreme Oversold"];\n'
+         '          out += \'<div class="market-card-rsi \' + band[0] + \'" title="10-day RSI. 79 and up: extreme overbought. 70 to 79: overbought. 42 to 70: neutral. 29 to 42: oversold. Below 29: extreme oversold.">\' +\n'
+         '            \'10D RSI: <b>\' + r.toFixed(1) + \'</b> \u00b7 \' + band[1] +\n'
          '          \'</div>\';\n'
          '        }\n'
          '        if (q.asOf) out += \'<div class="market-card-asof">As of \' + fmtAsOf(q.asOf, q.freq === "monthly") + \'</div>\';\n'

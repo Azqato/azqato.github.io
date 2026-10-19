@@ -116,9 +116,15 @@
 }
 .src-stocks .market-card-rsi { margin-top: 8px; text-align: center; font-size: 0.8rem; color: var(--color-text-secondary);
 }
-.src-stocks .market-card-rsi.overbought { color: var(--color-negative);
+.src-stocks .market-card { --rsi-xob: #9f0013; --rsi-ob: #c5001a; --rsi-os: #00712a; --rsi-xos: #005a20;
 }
-.src-stocks .market-card-rsi.oversold { color: var(--color-positive);
+.src-stocks .market-card-rsi.rsi-xob { color: var(--rsi-xob); font-weight: 700;
+}
+.src-stocks .market-card-rsi.rsi-ob { color: var(--rsi-ob);
+}
+.src-stocks .market-card-rsi.rsi-os { color: var(--rsi-os);
+}
+.src-stocks .market-card-rsi.rsi-xos { color: var(--rsi-xos); font-weight: 700;
 }
 .src-stocks .market-card-asof { margin-top: 6px; font-size: 0.75rem; color: var(--color-text-secondary);
 }
@@ -192,7 +198,7 @@
 <div class="content-inner">
 <div class="guide-intro">
 <h1>Market Overview</h1>
-<p>A same-day snapshot across Indices, Broad Market, Bond Funds, Market Cap, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Each card shows its 52-week range and 10-day RSI (79 or above reads as overbought, 31 or below as oversold). Refreshed three times per trading day (shortly after the open, midday, and shortly after the close) so it reads as a live check-in, not a stale close-of-business number.</p>
+<p>A same-day snapshot across Indices, Broad Market, Bond Funds, Market Cap, Factors, Industries, Commodities, Bonds, Leveraged ETFs, and Crypto. Each card shows its 52-week range and 10-day RSI, from extreme overbought (79 and up) through overbought (70), neutral (42 to 70) and oversold (below 42) to extreme oversold (below 29). Refreshed three times per trading day (shortly after the open, midday, and shortly after the close) so it reads as a live check-in, not a stale close-of-business number.</p>
 <div class="hero-badge market-asof"><span id="marketAsOfEmoji">🕒</span> <span id="marketAsOf">Loading market data…</span></div>
 </div>
 <div class="market-stale-banner" id="marketStaleBanner" style="margin-top: 28px;">
@@ -319,9 +325,11 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
           '</div>';
         }
         if (isNum(q.rsi10)) {
-          var zone = q.rsi10 >= 79 ? "overbought" : q.rsi10 <= 31 ? "oversold" : "";
-          out += '<div class="market-card-rsi ' + zone + '" title="10-day RSI. 79 or above: overbought. 31 or below: oversold.">' +
-            '10D RSI: <b>' + q.rsi10.toFixed(1) + '</b>' + (zone ? " · " + zone.charAt(0).toUpperCase() + zone.slice(1) : "") +
+          var r = q.rsi10;
+          var band = r >= 79 ? ["rsi-xob", "Extreme Overbought"] : r >= 70 ? ["rsi-ob", "Overbought"] :
+            r >= 42 ? ["", "Neutral"] : r >= 29 ? ["rsi-os", "Oversold"] : ["rsi-xos", "Extreme Oversold"];
+          out += '<div class="market-card-rsi ' + band[0] + '" title="10-day RSI. 79 and up: extreme overbought. 70 to 79: overbought. 42 to 70: neutral. 29 to 42: oversold. Below 29: extreme oversold.">' +
+            '10D RSI: <b>' + r.toFixed(1) + '</b> · ' + band[1] +
           '</div>';
         }
         if (q.asOf) out += '<div class="market-card-asof">As of ' + fmtAsOf(q.asOf, q.freq === "monthly") + '</div>';
