@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.30.3] - 2026-10-18
+
+### Fixed
+- **Google search showed a generic globe instead of the site icon.** Every page's icon was a `data:` URI, which
+Google's favicon crawler ignores, and `/favicon.ico` was a 404. Added real 🦁 files: `/favicon.ico` (48, 32 and
+16 px), `img/favicon-192.png` and `img/apple-touch-icon.png`, linked from the home page ahead of the emoji icon,
+so browser tabs are unchanged. Google reads the home page's icon for the whole site.
+- `search-index.js` regenerated; it was behind the pages.
+
 ## [2.30.2] - 2026-10-18
 
 ### Changed
