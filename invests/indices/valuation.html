@@ -118,16 +118,17 @@
 </table>
 </div>
 <p aria-live="polite" class="iv-updated" id="iv-updated"></p>
+<p class="iv-updated">n/m: not meaningful. The index's companies lost more in total than they earned, so there are no net earnings to divide by.</p>
 <h2 id="method">How it's calculated</h2>
 <ul>
-<li><strong>Trailing P/E</strong> is the index's total market cap divided by its companies' net income over the last 12 months.</li>
+<li><strong>Trailing P/E</strong> is the index's total market cap divided by its companies' total net income over the last 12 months.</li>
 <li><strong>Forward P/E</strong> divides the same market cap by expected earnings: for each company, the average of analysts' estimates for this fiscal year and next.</li>
 <li><strong>Weighting:</strong> bigger companies count for more, as they do in the index. The Dow is price-weighted, so it adds up share prices and earnings per share instead.</li>
-<li><strong>Losses:</strong> every company's market cap counts, but only profits count as earnings. A company losing money adds to the price you pay and nothing to the earnings, the way most index providers treat it. Each row shows how many members are profitable.</li>
+<li><strong>Losses count:</strong> a company's losses are subtracted from the others' profits, so the P/E is what the whole index costs against what the whole index earns. When losses outweigh profits the result is n/m. Each row shows how many members are profitable.</li>
 <li><strong>Expected earnings growth</strong> is the trailing P/E divided by the forward P/E, minus 1. Because the forward estimate reaches into next year, it covers more than 12 months of growth.</li>
 <li><strong>Data:</strong> prices, market caps and earnings from Yahoo Finance, through the same weekly feed as the <a href="../stocks/screener.html">Screener</a>. Members come from the S&amp;P 500 and Nasdaq 100 lists, SSGA's DIA fund for the Dow, and Vanguard's VTWO fund for the Russell 2000. Updated every Monday, from Friday's close.</li>
 </ul>
-<p><strong>How it compares with published figures.</strong> Index P/Es vary by source, because each uses its own estimates and its own rules for losses and one-off gains. Checked against the Wall Street Journal's table in October 2026, these figures were within about 7% for the S&amp;P 500, Nasdaq 100 and Dow. The Russell 2000 reads lower, by about a quarter on trailing and a third on forward: over 40% of its companies lose money, and in total its losses outweigh its profits, so its P/E depends almost entirely on how losses and one-off charges are treated.</p>
+<p><strong>How it compares with published figures.</strong> Index P/Es vary by source, because each uses its own estimates and its own rules for losses and one-off gains. Checked against the Wall Street Journal's table in October 2026, most of these figures were within about 10%, and the Russell 2000's forward P/E within 4%. Its trailing P/E was n/m here: over 40% of its companies lost money in the last year, and their losses outweighed the rest's profits. Published figures that still show one usually leave out one-off charges or loss-making companies.</p>
 <p>Analysts' estimates tend to run optimistic, so the growth column is what they expect, not what will happen. Educational use only. Not financial advice.</p>
 </div>
 
@@ -162,7 +163,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
 
 (function () {
   var FEED = "https://azqato.github.io/stocks/data/index_valuation.json";
-  function fmt(n) { return typeof n === "number" && isFinite(n) ? n.toFixed(2) : "–"; }
+  function fmt(n) { return typeof n === "number" && isFinite(n) ? n.toFixed(2) : "n/m"; }
   function cell(row, text, cls) {
     var td = document.createElement("td");
     if (cls) td.className = cls;
@@ -185,7 +186,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       cell(tr, "→", "iv-arrow").setAttribute("aria-hidden", "true");
       cell(tr, fmt(x.forwardPE), "iv-fwd");
       var g = x.growthPct;
-      cell(tr, typeof g === "number" ? (g > 0 ? "+" : "") + g.toFixed(1) + "%" : "–",
+      cell(tr, typeof g === "number" ? (g > 0 ? "+" : "") + g.toFixed(1) + "%" : "n/m",
            typeof g === "number" ? (g >= 0 ? "iv-up" : "iv-down") : "");
       body.appendChild(tr);
     });

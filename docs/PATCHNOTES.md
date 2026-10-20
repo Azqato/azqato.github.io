@@ -5,6 +5,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.32.2] - 2026-10-20
+
+### Changed
+- **Index Valuation** follows Stocks v5.11.2: losses are netted against profits, and a P/E with negative total
+earnings shows as n/m, with a note under the table. The Russell 2000's forward P/E is now within 4% of WSJ's; its
+trailing P/E shows n/m. Method notes and the WSJ comparison updated.
+
 ## [2.32.1] - 2026-10-20
 
 ### Changed
