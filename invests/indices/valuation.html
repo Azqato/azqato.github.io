@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Index Valuation - Azqato Invests</title>
+<meta name="description" content="Trailing and forward P/E for the S&amp;P 500, Nasdaq 100, Dow and Russell 2000, calculated from their member stocks, with the earnings growth analysts expect. Updated weekly.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azqato Invests">
+<meta property="og:title" content="Index Valuation - Azqato Invests">
+<meta property="og:description" content="Trailing and forward P/E for the S&amp;P 500, Nasdaq 100, Dow and Russell 2000, calculated from their member stocks, with the earnings growth analysts expect. Updated weekly.">
+<meta property="og:url" content="https://azqato.com/invests/indices/valuation">
+<link rel="canonical" href="https://azqato.com/invests/indices/valuation">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
+<script src="../../theme.js"></script>
+<link rel="stylesheet" href="../assets/css/theme.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/docs.css">
+<link rel="stylesheet" href="../assets/css/site.css">
+<style>
+.src-own .iv-table-wrap { overflow-x: auto; margin: 20px 0 8px;
+}
+.src-own .iv-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;
+}
+.src-own .iv-table th,
+.src-own .iv-table td { padding: 12px 10px; text-align: right; border-bottom: 1px solid var(--ti-color-border); white-space: nowrap;
+}
+.src-own .iv-table th:first-child,
+.src-own .iv-table td:first-child { text-align: left; white-space: normal;
+}
+.src-own .iv-table th { font-size: 0.8rem; font-weight: 600; color: var(--ti-color-text-muted);
+}
+.src-own .iv-table td.iv-arrow { color: var(--ti-color-text-muted); padding-left: 0; padding-right: 0; text-align: center;
+}
+.src-own .iv-fwd { font-weight: 700;
+}
+.src-own .iv-up { color: var(--ti-color-success); font-weight: 700;
+}
+.src-own .iv-down { color: var(--ti-color-danger); font-weight: 700;
+}
+.src-own .iv-count { display: block; font-size: 0.75rem; color: var(--ti-color-text-muted);
+}
+.src-own .iv-updated { font-size: 0.85rem; color: var(--ti-color-text-muted);
+}
+@media (max-width: 600px) {
+.src-own .iv-table th,
+.src-own .iv-table td { padding: 10px 5px;
+}
+.src-own .iv-table th { white-space: normal; vertical-align: bottom;
+}
+.src-own .iv-table th:nth-child(3),
+.src-own .iv-table td.iv-arrow { display: none;
+}
+}
+</style>
+</head>
+<body class="pp-page site-page is-tool" data-root="../">
+<a class="site-skip" href="#pp-main">Skip to content</a>
+<nav class="site-azqato" aria-label="Azqato.com">
+  <a class="site-azqato-logo" href="../../index.html">Azqato<span>.</span></a>
+  <ul id="site-azqato-links"><li><a href="../../index.html">Home</a></li><li><a href="../../about/index.html">About</a></li><li><a href="../../discord/index.html">Discord</a></li><li><a href="../index.html" aria-current="true">Invests</a></li><li><a href="../../codes/index.html">Codes</a></li><li><a href="../../music/index.html">Music</a></li><li><a href="../../links/index.html">Links</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../youtube/index.html">YouTube</a></li><li><a href="../../support/index.html">Support</a></li></ul>
+  <button class="site-azqato-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-azqato-links">☰</button>
+</nav>
+<script>
+(function () {
+  var nav = document.querySelector(".site-azqato"), btn = nav.querySelector(".site-azqato-toggle");
+  function set(open) { nav.classList.toggle("is-open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }
+  btn.addEventListener("click", function () { set(!nav.classList.contains("is-open")); });
+  document.addEventListener("click", function (e) { if (!nav.contains(e.target) || e.target.tagName === "A") set(false); });
+})();
+</script>
+<header class="pp-top">
+  <button class="pp-menu-btn" id="pp-menu-btn" type="button" aria-expanded="false" aria-controls="pp-nav">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <span class="pp-vh">Open navigation</span>
+  </button>
+  <a class="pp-logo site-logo" href="../index.html">
+    <span class="site-logo-mark" aria-hidden="true">💰</span>
+    <span class="pp-logo-name">Azqato Invests</span>
+  </a>
+  <button class="pp-search-btn" id="pp-search-open" type="button" aria-haspopup="dialog" aria-keyshortcuts="/ Control+K">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span class="pp-search-btn-text">Search the site</span>
+    <kbd aria-hidden="true">/</kbd>
+  </button>
+  <div class="pp-top-end">
+    <button class="pp-theme-btn theme-toggle" type="button" aria-label="Switch theme"><span class="theme-toggle-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="pp-shell">
+<nav class="pp-sidebar" id="pp-nav" aria-label="Site sections">
+  <div class="pp-sidebar-head">
+    <p class="pp-sidebar-title">Contents</p>
+    <button class="pp-nav-close" id="pp-nav-close" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      <span class="pp-vh">Close navigation</span>
+    </button>
+  </div>
+  <div class="pp-group"><ul><li><a href="../index.html">Home</a></li></ul></div><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-individual-stocks">Individual Stocks</summary><ul aria-labelledby="pp-g-individual-stocks"><li><a href="../stocks/index.html">Overview</a></li><li><a href="../stocks/method.html">Stock method</a></li><li><a href="../stocks/philosophy.html">Philosophy</a></li><li><a href="../stocks/metrics.html">Stock metrics</a></li><li><a href="../stocks/screener.html">Screener</a></li></ul></details><details class="pp-group site-group" open><summary class="pp-group-label" id="pp-g-indices-etfs">Indices & ETFs</summary><ul aria-labelledby="pp-g-indices-etfs"><li><a href="../indices/index.html">Overview</a></li><li><a href="../indices/method.html">Index method</a></li><li><a href="../indices/market.html">Market Overview</a></li><li><a href="../indices/valuation.html" aria-current="page">Index Valuation</a></li><li><a href="../indices/vix/index.html">VIX Strategy</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-leveraged-strategies">Leveraged Strategies</summary><ul aria-labelledby="pp-g-leveraged-strategies"><li><a href="../leveraged/index.html">Overview</a></li><li><a href="../leveraged/3sig.html">3 Sig</a></li><li><a href="../leveraged/6sig.html">6 Sig</a></li><li><a href="../leveraged/9sig.html">9 Sig</a></li><li><a href="../leveraged/9sig-calculator.html">9 Sig Calculator</a></li><li><a href="../leveraged/tqqq-ftlt.html">TQQQ FTLT</a></li><li><a href="../leveraged/holy-grail.html">Holy Grail</a></li><li><a href="../leveraged/hfea.html">HFEA</a></li></ul></details><details class="pp-group site-group"><summary class="pp-group-label" id="pp-g-resources">Resources</summary><ul aria-labelledby="pp-g-resources"><li><a href="../resources/index.html">Curated resources</a></li><li><a href="../resources/finviz.html">Finviz setup guide</a></li><li><a href="../resources/seekingalpha.html">Seeking Alpha setup guide</a></li><li><a href="../resources/faq.html">FAQ</a></li></ul></details><details class="pp-group site-group site-azqato-group"><summary class="pp-group-label" id="pp-g-azqato">Azqato.com</summary><ul aria-labelledby="pp-g-azqato"><li><a href="../../index.html">Home</a></li><li><a href="../../about/index.html">About</a></li><li><a href="../../discord/index.html">Discord</a></li><li><a href="../../codes/index.html">Codes</a></li><li><a href="../../music/index.html">Music</a></li><li><a href="../../links/index.html">Links</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../youtube/index.html">YouTube</a></li><li><a href="../../support/index.html">Support</a></li></ul></details>
+  <div class="site-sidebar-foot"><div class="pp-sidebar-card"><p><strong>Educational use only.</strong><br>Not financial advice.</p></div></div>
+</nav>
+<div class="pp-scrim" id="pp-scrim" hidden></div>
+<main class="pp-main" id="pp-main" tabindex="-1">
+<nav class="pp-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="../indices/index.html">Indices &amp; ETFs</a></li><li><span aria-current="page">Index Valuation</span></li></ol></nav>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://azqato.com/invests/"}, {"@type": "ListItem", "position": 2, "name": "Indices & ETFs", "item": "https://azqato.com/invests/indices/"}, {"@type": "ListItem", "position": 3, "name": "Index Valuation", "item": "https://azqato.com/invests/indices/valuation"}]}</script>
+<article class="pp-article" id="pp-article">
+<div class="site-src src-own">
+
+<div class="src-main iv">
+<h1>Index Valuation</h1>
+<p>What each major index costs today against the earnings of the companies in it, over the last year (trailing P/E) and in analysts' estimates ahead (forward P/E). A forward P/E below the trailing one means earnings are expected to grow; the last column shows by how much.</p>
+<div class="iv-table-wrap">
+<table aria-describedby="iv-updated" class="iv-table">
+<thead><tr><th scope="col">Index</th><th scope="col">Trailing P/E</th><th scope="col"><span class="visually-hidden">to</span></th><th scope="col">Forward P/E</th><th scope="col">Expected earnings growth</th></tr></thead>
+<tbody id="iv-rows"><tr><td colspan="5">Loading…</td></tr></tbody>
+</table>
+</div>
+<p aria-live="polite" class="iv-updated" id="iv-updated"></p>
+<h2 id="method">How it's calculated</h2>
+<ul>
+<li><strong>Trailing P/E</strong> is the index's total market cap divided by its companies' earnings over the last 12 months.</li>
+<li><strong>Forward P/E</strong> divides the same market cap by expected earnings: for each company, the average of analysts' estimates for this fiscal year and next.</li>
+<li><strong>Weighting:</strong> bigger companies count for more, as they do in the index. The Dow is price-weighted, so it adds up share prices and earnings per share instead.</li>
+<li><strong>Profitable companies only</strong>, for both numbers, so the two compare like with like. Each row shows how many members that is.</li>
+<li><strong>Expected earnings growth</strong> is the trailing P/E divided by the forward P/E, minus 1. Because the forward estimate reaches into next year, it covers more than 12 months of growth.</li>
+<li><strong>Data:</strong> prices, market caps and earnings from Yahoo Finance, through the same weekly feed as the <a href="../stocks/screener.html">Screener</a>. Members come from the S&amp;P 500 and Nasdaq 100 lists, SSGA's DIA fund for the Dow, and Vanguard's VTWO fund for the Russell 2000. Updated every Monday, from Friday's close.</li>
+</ul>
+<p><strong>How it compares with published figures.</strong> Index P/Es vary by source, because each uses its own estimates and its own rules for losses and one-off gains. Checked against the Wall Street Journal's table in October 2026, these figures were within about 6% for the S&amp;P 500, Nasdaq 100 and Dow. The Russell 2000 differs a lot: over 40% of its companies lose money, and in total its losses outweigh its profits, so its P/E depends almost entirely on how losses are treated. Here it reflects its profitable companies only.</p>
+<p>Analysts' estimates tend to run optimistic, so the growth column is what they expect, not what will happen. Educational use only. Not financial advice.</p>
+</div>
+
+</div>
+</article>
+<nav class="pp-pager" aria-label="Previous and next page"><a class="pp-pager-link pp-pager-link--prev" href="../indices/market.html"><small>Previous</small><span>Market Overview</span></a><a class="pp-pager-link pp-pager-link--next" href="../indices/vix/index.html"><small>Next</small><span>VIX Strategy</span></a></nav>
+</main>
+</div>
+<footer class="pp-footer">
+  <div class="pp-footer-in">
+    <p class="pp-footer-brand">💰 Azqato Invests</p>
+    <p>Educational use only. Not financial advice. Some links are referral links.</p>
+    <p><a href="../resources/index.html">Curated resources</a> · <a href="../resources/faq.html">FAQ</a> · Built by <a href="https://azqato.com/">Azqato</a></p>
+  </div>
+</footer>
+
+<dialog class="pp-search" id="pp-search" aria-labelledby="pp-search-label">
+  <div class="pp-search-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <label class="pp-vh" id="pp-search-label" for="pp-search-input">Search the site</label>
+    <input class="pp-search-input" id="pp-search-input" type="text" role="combobox" aria-expanded="true" aria-controls="pp-results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search every page">
+    <button class="pp-search-close" id="pp-search-close" type="button">Esc<span class="pp-vh"> Close search</span></button>
+  </div>
+  <p class="pp-results-head" id="pp-results-head">Popular</p>
+  <ul class="pp-results" id="pp-results" role="listbox" aria-labelledby="pp-results-head"></ul>
+  <p class="pp-vh" id="pp-search-count" role="status"></p>
+  <p class="pp-search-foot"><kbd>Up</kbd> <kbd>Down</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+</dialog>
+<script src="../assets/js/site.js"></script>
+<script>/* Azqato Invests: feed text is shown as HTML, so angle brackets are dropped from it. */
+function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, ''); if (v && typeof v === 'object') { for (var k in v) v[k] = azqClean(v[k]); } return v; }
+
+(function () {
+  var FEED = "https://azqato.github.io/stocks/data/index_valuation.json";
+  function fmt(n) { return typeof n === "number" && isFinite(n) ? n.toFixed(2) : "–"; }
+  function cell(row, text, cls) {
+    var td = document.createElement("td");
+    if (cls) td.className = cls;
+    td.textContent = text;
+    row.appendChild(td);
+    return td;
+  }
+  function render(d) {
+    var body = document.getElementById("iv-rows");
+    body.textContent = "";
+    d.indices.forEach(function (x) {
+      var tr = document.createElement("tr");
+      var name = cell(tr, x.name);
+      var count = document.createElement("span");
+      count.className = "iv-count";
+      count.textContent = x.trailingCount + " of " + x.members + " companies profitable"
+        + (x.weighting === "price" ? " · price-weighted" : "");
+      name.appendChild(count);
+      cell(tr, fmt(x.trailingPE));
+      cell(tr, "→", "iv-arrow").setAttribute("aria-hidden", "true");
+      cell(tr, fmt(x.forwardPE), "iv-fwd");
+      var g = x.growthPct;
+      cell(tr, typeof g === "number" ? (g > 0 ? "+" : "") + g.toFixed(1) + "%" : "–",
+           typeof g === "number" ? (g >= 0 ? "iv-up" : "iv-down") : "");
+      body.appendChild(tr);
+    });
+    var when = new Date(d.updated);
+    document.getElementById("iv-updated").textContent = "Updated " + (isNaN(when) ? d.updated
+      : when.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + ". Refreshed weekly.";
+  }
+  async function load() {
+    try {
+      var res = await fetch(FEED, { cache: "no-cache" });
+      if (!res.ok) throw new Error(res.status);
+      render(azqClean(await res.json()));
+    } catch (e) {
+      document.getElementById("iv-rows").innerHTML = '<tr><td colspan="5">Could not load the data. Please try again later.</td></tr>';
+    }
+  }
+  load();
+})();
+</script>
+</body>
+</html>

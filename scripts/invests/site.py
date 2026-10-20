@@ -41,6 +41,7 @@ PAGES = [
     ("indices/index.html", "stocks/indices.html", "Indices & ETFs", "Indices & ETFs", "doc", None),
     ("indices/method.html", "stocks/indices.html", "Index method", "Indices & ETFs", "doc", "indices/index.html"),
     ("indices/market.html", "stocks/market.html", "Market Overview", "Indices & ETFs", "tool", "indices/index.html"),
+    ("indices/valuation.html", "own/valuation.html", "Index Valuation", "Indices & ETFs", "tool", "indices/index.html"),
     # VIX Strategy is one page in Indices & ETFs, at indices/vix/ (owner's
     # requests, 2026-10-03). Its method stays on the page; no separate Method page.
     ("indices/vix/index.html", "vix/index.html", "VIX Strategy", "Indices & ETFs", "doc", "indices/index.html"),
@@ -87,6 +88,7 @@ DESCS = {
     "stocks/screener.html": "An interactive screener that ranks the Nasdaq 100, S&P 500, the whole US market and more against the Azqato methodology. Updated daily; runs in your browser.",
     "indices/index.html": "When to buy index funds and ETFs: VIX action levels, AAII sentiment, RSI timing, DCA vs lump-sum math, and quality metrics like expense ratio.",
     "indices/method.html": "The index and ETF method in full: fund types, DCA vs lump sum, the VIX, RSI and 52-week timing, AAII sentiment, and fund quality.",
+    "indices/valuation.html": "Trailing and forward P/E for the S&P 500, Nasdaq 100, Dow and Russell 2000, calculated from their member stocks, with the earnings growth analysts expect. Updated weekly.",
     "indices/market.html": "A same-day market snapshot: major indices, broad-market, bond, size, factor and sector ETFs, commodities, Treasury yields, the Fed Funds Rate and CPI, leveraged ETFs and crypto, with 52-week ranges and 10-day RSI, refreshed three times a trading day.",
     "leveraged/index.html": "A reference library for six leveraged ETF strategy frameworks built around TQQQ: 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail and HFEA. Educational use only.",
     "leveraged/3sig.html": "The 3 Sig quarterly value-averaging strategy by Jason Kelly: a 3% quarterly target manages a stock index fund against a bond buffer.",
@@ -1411,7 +1413,7 @@ def build_page(entry, search):
     desc = fix_dashes(desc, page + " (description)")
     inline_css = "".join(scope_css(s, SCOPE[repo], set(CHROME[repo]["css_drop"])) for s in styles)
     inline_css = min_font(fix_dashes(inline_css, page + " (inline style)"))
-    extra = [] if repo == "azqato.github.io" else ["sig-calc.css"] if repo == "own" else [f"src-{repo}.css"]
+    extra = [] if repo == "azqato.github.io" else (["sig-calc.css"] if page.startswith("leveraged/9sig") else []) if repo == "own" else [f"src-{repo}.css"]
     toc = "" if kind != "doc" else """<aside class="pp-toc" aria-labelledby="pp-toc-title">
   <p class="pp-toc-title" id="pp-toc-title">On this page</p>
   <ul class="pp-toc-list" id="pp-toc-list"></ul>

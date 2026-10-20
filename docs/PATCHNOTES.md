@@ -5,6 +5,19 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.32.0] - 2026-10-20
+
+### Added
+- **Index Valuation** (`invests/indices/valuation.html`, in Indices & ETFs after Market Overview): trailing P/E,
+forward P/E and expected earnings growth for the S&P 500, Nasdaq 100, Dow and Russell 2000, with how many members
+are profitable. Growth shows green when earnings are expected to rise. Reads the Stocks feed's new weekly
+`index_valuation.json` (Stocks v5.11.0). The page explains the method and how it compares with WSJ's table,
+including why the Russell 2000 differs. Source: `scripts/invests/pages/valuation.html`.
+
+### Changed
+- `site.py` adds `sig-calc.css` only to the 9 Sig Calculator, not to every own page.
+- PRD: Index Valuation added to the tools list.
+
 ## [2.31.0] - 2026-10-19
 
 ### Added

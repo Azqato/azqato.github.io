@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://azqato.com/invests/</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/stocks/</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/stocks/method</loc><lastmod>2026-10-11</lastmod></url>
-  <url><loc>https://azqato.com/invests/stocks/philosophy</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/stocks/metrics</loc><lastmod>2026-10-11</lastmod></url>
+  <url><loc>https://azqato.com/invests/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/stocks/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/stocks/method</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/stocks/philosophy</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/stocks/metrics</loc><lastmod>2026-10-20</lastmod></url>
   <url><loc>https://azqato.com/invests/stocks/screener</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://azqato.com/invests/indices/</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/indices/method</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/indices/market</loc><lastmod>2026-10-18</lastmod></url>
-  <url><loc>https://azqato.com/invests/indices/vix/</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/3sig</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/6sig</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/9sig</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/9sig-calculator</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/tqqq-ftlt</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/holy-grail</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/leveraged/hfea</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/resources/</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/resources/finviz</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/resources/seekingalpha</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://azqato.com/invests/resources/faq</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://azqato.com/invests/indices/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/indices/method</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/indices/market</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/indices/valuation</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/indices/vix/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/3sig</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/6sig</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/9sig</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/9sig-calculator</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/tqqq-ftlt</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/holy-grail</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/leveraged/hfea</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/resources/</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/resources/finviz</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/resources/seekingalpha</loc><lastmod>2026-10-20</lastmod></url>
+  <url><loc>https://azqato.com/invests/resources/faq</loc><lastmod>2026-10-20</lastmod></url>
 </urlset>
