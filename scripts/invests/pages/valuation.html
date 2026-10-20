@@ -6,9 +6,9 @@
 <meta name="description" content="Trailing and forward P/E for the S&amp;P 500, Nasdaq 100, Dow and Russell 2000, calculated from every member stock, with the earnings growth analysts expect. Updated weekly.">
 <style>
   .iv-table-wrap { overflow-x: auto; margin: 20px 0 8px; }
-  .iv-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-  .iv-table th, .iv-table td { padding: 12px 10px; text-align: right; border-bottom: 1px solid var(--ti-color-border); white-space: nowrap; }
-  .iv-table th:first-child, .iv-table td:first-child { text-align: left; white-space: normal; }
+  .iv-table-wrap table.iv-table { width: auto; max-width: 100%; margin: 0; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .iv-table th, .iv-table td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--ti-color-border); white-space: nowrap; }
+  .iv-table th:first-child, .iv-table td:first-child { text-align: left; white-space: normal; padding-right: 32px; }
   .iv-table th { font-size: 0.8rem; font-weight: 600; color: var(--ti-color-text-muted); }
   .iv-table td.iv-arrow { color: var(--ti-color-text-muted); padding-left: 0; padding-right: 0; text-align: center; }
   .iv-fwd { font-weight: 700; }
@@ -17,7 +17,8 @@
   .iv-count { display: block; font-size: 0.75rem; color: var(--ti-color-text-muted); }
   .iv-updated { font-size: 0.85rem; color: var(--ti-color-text-muted); }
   @media (max-width: 600px) {
-    .iv-table th, .iv-table td { padding: 10px 5px; }
+    .iv-table-wrap table.iv-table { width: 100%; }
+    .iv-table th, .iv-table td, .iv-table td:first-child { padding: 10px 5px; }
     .iv-table th { white-space: normal; vertical-align: bottom; }
     .iv-table th:nth-child(3), .iv-table td.iv-arrow { display: none; }
   }
@@ -39,25 +40,24 @@
 </table>
 </div>
 <p class="iv-updated" id="iv-updated" aria-live="polite"></p>
-<p class="iv-updated">n/m: not meaningful. The index's companies lost more in total than they earned, so there are no net earnings to divide by.</p>
 
 <h2 id="method">How it's calculated</h2>
 <ul>
 <li><strong>Trailing P/E</strong> is the index's total market cap divided by its companies' total net income over the last 12 months.</li>
 <li><strong>Forward P/E</strong> divides the same market cap by expected earnings: for each company, the average of analysts' estimates for this fiscal year and next.</li>
 <li><strong>Weighting:</strong> bigger companies count for more, as they do in the index. The Dow is price-weighted, so it adds up share prices and earnings per share instead.</li>
-<li><strong>Losses count:</strong> a company's losses are subtracted from the others' profits, so the P/E is what the whole index costs against what the whole index earns. When losses outweigh profits the result is n/m. Each row shows how many members are profitable.</li>
+<li><strong>Losses count:</strong> a company's losses are subtracted from the others' profits, so the P/E is what the whole index costs against what the whole index earns. For the trailing P/E, each company's loss counts up to 5% of its market cap, so a few very large losses (often one-off write-downs) can't swamp the index. Each row shows how many members are profitable.</li>
 <li><strong>Expected earnings growth</strong> is the trailing P/E divided by the forward P/E, minus 1. Because the forward estimate reaches into next year, it covers more than 12 months of growth.</li>
 <li><strong>Data:</strong> prices, market caps and earnings from Yahoo Finance, through the same weekly feed as the <a href="../stocks/screener.html">Screener</a>. Members come from the S&amp;P 500 and Nasdaq 100 lists, SSGA's DIA fund for the Dow, and Vanguard's VTWO fund for the Russell 2000. Updated every Monday, from Friday's close.</li>
 </ul>
-<p><strong>How it compares with published figures.</strong> Index P/Es vary by source, because each uses its own estimates and its own rules for losses and one-off gains. Checked against the Wall Street Journal's table in October 2026, most of these figures were within about 10%, and the Russell 2000's forward P/E within 4%. Its trailing P/E was n/m here: over 40% of its companies lost money in the last year, and their losses outweighed the rest's profits. Published figures that still show one usually leave out one-off charges or loss-making companies.</p>
+<p><strong>How it compares with published figures.</strong> Index P/Es vary by source, because each uses its own estimates and its own rules for losses and one-off gains. Checked against the Wall Street Journal's table in October 2026, most of these figures were within about 10%, and the Russell 2000's within about 5%. Over 40% of the Russell 2000's companies lost money in the last year, and with every loss counted in full, its losses outweighed the rest's profits. The 5% cap on each loss stands in for the one-off charges that published figures usually leave out.</p>
 <p>Analysts' estimates tend to run optimistic, so the growth column is what they expect, not what will happen. Educational use only. Not financial advice.</p>
 
 </main>
 <script>
 (function () {
   var FEED = "data/index_valuation.json";
-  function fmt(n) { return typeof n === "number" && isFinite(n) ? n.toFixed(2) : "n/m"; }
+  function fmt(n) { return typeof n === "number" && isFinite(n) ? n.toFixed(2) : "–"; }
   function cell(row, text, cls) {
     var td = document.createElement("td");
     if (cls) td.className = cls;
@@ -80,7 +80,7 @@
       cell(tr, "→", "iv-arrow").setAttribute("aria-hidden", "true");
       cell(tr, fmt(x.forwardPE), "iv-fwd");
       var g = x.growthPct;
-      cell(tr, typeof g === "number" ? (g > 0 ? "+" : "") + g.toFixed(1) + "%" : "n/m",
+      cell(tr, typeof g === "number" ? (g > 0 ? "+" : "") + g.toFixed(1) + "%" : "–",
            typeof g === "number" ? (g >= 0 ? "iv-up" : "iv-down") : "");
       body.appendChild(tr);
     });

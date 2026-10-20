@@ -5,6 +5,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.32.3] - 2026-10-20
+
+### Changed
+- **Index Valuation table is tighter**: it sizes to its content and sits to the left instead of spanning the full
+width (full width on phones). The site-wide `.pp-article .site-src table` rule needed a more specific selector.
+- **No more n/m** (Stocks v5.11.3): the trailing P/E caps each loss at 5% of market cap, putting the Russell 2000 at
+33.02 against WSJ's 34.62. The n/m note is gone, and the method notes and the WSJ comparison are updated.
+
 ## [2.32.2] - 2026-10-20
 
 ### Changed
