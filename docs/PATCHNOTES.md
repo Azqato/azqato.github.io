@@ -5,6 +5,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.32.1] - 2026-10-20
+
+### Changed
+- **Index Valuation method notes** match Stocks v5.11.1: every company's market cap counts but only profits count
+as earnings, and trailing earnings are net income. The comparison with WSJ now reads within about 7% for the S&P 500,
+Nasdaq 100 and Dow, and explains the Russell 2000's smaller remaining gap.
+
 ## [2.32.0] - 2026-10-20
 
 ### Added
