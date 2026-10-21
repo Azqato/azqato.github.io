@@ -324,6 +324,16 @@ html:root .pp-page .src-leverage {
   color: var(--ti-color-success);
 }
 
+/* Earnings Calendar's FOMC and report-time colors in dark (light is inline in the page). */
+:root[data-theme="dark"] .pp-page .src-own .ec {
+  --ec-fed: #c4a5ff;
+  --ec-fed-bg: #2a1e47;
+  --ec-bmo: #e3b341;
+  --ec-bmo-bg: #3a2e10;
+  --ec-amc: #8fa8ff;
+  --ec-amc-bg: #1d2747;
+}
+
 /* Market Overview's RSI bands in dark: Composer Atlas's dark RSI colors
    (light ones are inline in the page, from scripts/invests/site.py). All
    6.5:1 or better on the dark card. */

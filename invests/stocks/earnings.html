@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Earnings Calendar - Azqato Invests</title>
-<meta name="description" content="This week&#x27;s earnings reports for about 3,600 US stocks, before the open and after the close, with a search for any company&#x27;s next report date. Updated daily.">
+<meta name="description" content="A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC meeting days and a search for any company&#x27;s next report date. Updated daily.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Azqato Invests">
 <meta property="og:title" content="Earnings Calendar - Azqato Invests">
-<meta property="og:description" content="This week&#x27;s earnings reports for about 3,600 US stocks, before the open and after the close, with a search for any company&#x27;s next report date. Updated daily.">
+<meta property="og:description" content="A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC meeting days and a search for any company&#x27;s next report date. Updated daily.">
 <meta property="og:url" content="https://azqato.com/invests/stocks/earnings">
 <link rel="canonical" href="https://azqato.com/invests/stocks/earnings">
 <meta name="twitter:card" content="summary">
@@ -28,37 +28,90 @@
 }
 .src-own .ec-search input:focus-visible { outline: 2px solid var(--ti-color-focus); outline-offset: 1px;
 }
-.src-own .ec-results { list-style: none; padding: 0; margin: 8px 0 0; max-width: 560px;
+.src-own .ec-results { list-style: none; padding: 0; margin: 8px 0 0; max-width: 620px;
 }
 .src-own .ec-results li { margin: 0; display: flex; gap: 12px; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--ti-color-border);
 }
-.src-own .ec-weeks { display: flex; gap: 8px; margin: 24px 0 4px;
+.src-own .ec-bar { display: flex; align-items: center; gap: 10px; margin: 24px 0 10px; flex-wrap: wrap;
 }
-.src-own .ec-weeks button { font: inherit; font-size: 0.9rem; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--ti-color-border-strong); background: transparent; color: var(--ti-color-text); cursor: pointer;
+.src-own .ec-bar h2 { margin: 0; min-width: 9.5em; font-size: 1.3rem;
 }
-.src-own .ec-weeks button[aria-pressed="true"] { background: var(--ti-color-accent); border-color: var(--ti-color-accent); color: var(--ti-color-canvas); font-weight: 600;
+.src-own .ec-bar button { font: inherit; font-size: 0.9rem; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--ti-color-border-strong); background: transparent; color: var(--ti-color-text); cursor: pointer;
 }
-.src-own .ec-day { margin: 20px 0 0; padding-top: 4px;
+.src-own .ec-bar button:focus-visible { outline: 2px solid var(--ti-color-focus); outline-offset: 1px;
 }
-.src-own .ec-day h3 { margin: 0 0 6px; font-size: 1.05rem;
+.src-own .ec-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--ti-color-border); border-left: 1px solid var(--ti-color-border); border-radius: 10px; overflow: hidden;
 }
-.src-own .ec-today { font-size: 0.75rem; font-weight: 700; color: var(--ti-color-accent); margin-left: 6px;
+.src-own .ec-dh { padding: 6px 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ti-color-text-muted); background: var(--ti-color-surface); border-right: 1px solid var(--ti-color-border); border-bottom: 1px solid var(--ti-color-border);
 }
-.src-own .ec-slot { margin: 6px 0 10px;
+.src-own .ec-cell { min-height: 110px; min-width: 0; padding: 6px 8px; font-size: 0.8rem; border-right: 1px solid var(--ti-color-border); border-bottom: 1px solid var(--ti-color-border);
 }
-.src-own .ec-slot-label { font-size: 0.8rem; font-weight: 600; color: var(--ti-color-text-muted); margin: 0 0 4px;
+.src-own .ec-cell.out { background: var(--ti-color-surface); color: var(--ti-color-text-muted);
 }
-.src-own .ec-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px;
+.src-own .ec-cell.today { background: color-mix(in srgb, var(--ti-color-accent) 10%, transparent);
 }
-.src-own .ec-list li { margin: 0; padding: 4px 10px; border: 1px solid var(--ti-color-border); border-radius: 6px; font-size: 0.9rem;
+.src-own .ec-cell.has { cursor: pointer;
+}
+.src-own .ec-cell.has:hover,
+.src-own .ec-cell.sel,
+.src-own .ec-cell:focus-visible { outline: 2px solid var(--ti-color-accent); outline-offset: -2px;
+}
+.src-own .ec-d { display: flex; justify-content: space-between; gap: 4px; font-weight: 700; margin-bottom: 2px;
+}
+.src-own .ec-cell.today .ec-d span:first-child { background: var(--ti-color-accent); color: var(--ti-color-canvas); border-radius: 999px; padding: 0 7px;
+}
+.src-own .ec-cnt { font-weight: 400; font-size: 0.75rem; color: var(--ti-color-text-muted);
+}
+.src-own .ec-nm { display: block; margin: 0 0 2px; padding: 0 5px; border-radius: 4px; line-height: 1.5; background: var(--ti-color-surface); color: var(--ti-color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.src-own .ec-more { display: block; margin-top: 2px; font-size: 0.75rem; font-weight: 600; color: var(--ti-color-accent);
+}
+.src-own .ec-fed { display: block; margin: 2px 0 4px; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ec-fed); background: var(--ec-fed-bg);
 }
 .src-own .ec-t { font-weight: 700;
 }
 .src-own .ec-n { color: var(--ti-color-text-muted);
 }
-.src-own .ec-est { font-size: 0.75rem; color: var(--ti-color-text-muted);
+.src-own .ec-detail { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--ti-color-border); border-radius: 10px; background: var(--ti-color-surface);
+}
+.src-own .ec-detail h3 { margin: 0 0 8px; font-size: 1rem;
+}
+.src-own .ec-detail ul { list-style: none; padding: 0; margin: 0; columns: 2 280px;
+}
+.src-own .ec-detail li { margin: 0; padding: 3px 0; break-inside: avoid; font-size: 0.88rem;
+}
+.src-own .ec-fedline { margin: 0 0 8px; padding: 6px 10px; border-radius: 6px; font-size: 0.88rem; font-weight: 600; color: var(--ec-fed); background: var(--ec-fed-bg);
 }
 .src-own .ec-note { font-size: 0.85rem; color: var(--ti-color-text-muted);
+}
+.src-own .ec-nm.bmo,
+.src-own .ec-tm.bmo { background: var(--ec-bmo-bg); color: var(--ec-bmo);
+}
+.src-own .ec-nm.amc,
+.src-own .ec-tm.amc { background: var(--ec-amc-bg); color: var(--ec-amc);
+}
+.src-own .ec-nm .ec-n { color: inherit; opacity: 0.85;
+}
+.src-own .ec-tm { padding: 0 5px; border-radius: 4px; font-size: 0.8rem;
+}
+.src-own .ec-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 8px 0; font-size: 0.82rem; color: var(--ti-color-text-muted);
+}
+.src-own .ec-legend .ec-tm { font-weight: 600;
+}
+.src-own .ec { --ec-fed: #6d28d9; --ec-fed-bg: #f1eafe; --ec-bmo: #9a6700; --ec-bmo-bg: #fff4d6; --ec-amc: #3a5ccc; --ec-amc-bg: #e7ecfd;
+}
+@media (max-width: 700px) {
+.src-own .ec-cell { min-height: 60px; padding: 4px;
+}
+.src-own .ec-d { display: block;
+}
+.src-own .ec-cnt { display: block;
+}
+.src-own .ec-nm,
+.src-own .ec-more { display: none;
+}
+.src-own .ec-fed { font-size: 0.75rem; padding: 1px 3px;
+}
 }
 </style>
 </head>
@@ -116,26 +169,30 @@
 
 <div class="src-main ec">
 <h1>Earnings Calendar</h1>
-<p>Which companies report earnings this week, and when: before the market opens or after it closes. Search for any company to see its next report date.</p>
+<p>When companies report earnings, biggest first, with the Federal Reserve's rate meetings marked. Click a day for its full list, or search for any company's next report date.</p>
 <div class="ec-search">
 <label for="ec-q">Find a company</label>
 <input autocomplete="off" id="ec-q" placeholder="Ticker or name, e.g. AAPL or Apple" spellcheck="false" type="search"/>
 </div>
 <p aria-live="polite" class="ec-note" id="ec-search-status"></p>
 <ul class="ec-results" id="ec-results"></ul>
-<h2 id="week-heading">This week</h2>
-<div aria-label="Week" class="ec-weeks" role="group">
-<button aria-pressed="true" id="ec-this" type="button">This week</button>
-<button aria-pressed="false" id="ec-next" type="button">Next week</button>
+<div class="ec-bar">
+<button aria-label="Previous month" id="ec-prev" type="button">‹</button>
+<h2 id="ec-title">Calendar</h2>
+<button aria-label="Next month" id="ec-next" type="button">›</button>
+<button id="ec-today" type="button">Today</button>
 </div>
-<div aria-live="polite" id="ec-week"><p>Loading…</p></div>
+<div class="ec-legend"><span class="ec-tm bmo">Before the open</span><span class="ec-tm amc">After the close</span><span class="ec-tm">Time not announced</span></div>
+<div id="ec-cal"><p>Loading…</p></div>
+<div aria-live="polite" id="ec-detail"></div>
 <p class="ec-note" id="ec-updated"></p>
 <h2 id="about">About the dates</h2>
 <ul>
-<li><strong>Coverage:</strong> about 3,600 US-listed stocks, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday.</li>
+<li><strong>Coverage:</strong> about 3,000 US-listed stocks, including foreign companies that trade in the US, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday. Each day lists the largest companies by market cap first.</li>
 <li><strong>Before the open</strong> means the report comes out before trading starts at 9:30 am Eastern; <strong>after the close</strong> means after 4:00 pm. Some companies don't announce the time.</li>
 <li><strong>Estimated</strong> dates are Yahoo Finance's guess from past reports, until the company confirms. Companies can move their dates, so check the company's investor relations page before you rely on one.</li>
-<li><strong>Data:</strong> Yahoo Finance. Educational use only. Not financial advice.</li>
+<li><strong>FOMC meetings</strong> are the Federal Reserve's scheduled rate meetings, from its published calendar. The decision comes on the second day at 2:00 pm Eastern; meetings marked with projections also release the Fed's economic forecasts.</li>
+<li><strong>Data:</strong> Yahoo Finance and the Federal Reserve. Educational use only. Not financial advice.</li>
 </ul>
 </div>
 
@@ -170,129 +227,136 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
 
 (function () {
   var FEED = "https://azqato.github.io/stocks/data/earnings_calendar.json";
-  var TIME = { bmo: "Before the open", amc: "After the close" };
-  var reports = [];
-  var week = 0;
+  var MAX = 8; // names shown in a day before "+N more"
+  var reports = [], fomc = [], cur = null, sel = null;
 
-  // Dates are compared as YYYY-MM-DD strings in US Eastern time.
+  // All dates are YYYY-MM-DD strings in US Eastern time.
   function etToday() {
-    var p = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
-    return p;
+    return new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
   }
-  function addDays(iso, n) {
-    var d = new Date(iso + "T12:00:00Z");
-    d.setUTCDate(d.getUTCDate() + n);
-    return d.toISOString().slice(0, 10);
+  function add(iso, n) { var d = new Date(iso + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+  function dow(iso) { return new Date(iso + "T12:00:00Z").getUTCDay(); }
+  function fmt(iso, o) { return new Date(iso + "T12:00:00Z").toLocaleDateString(undefined, Object.assign({ timeZone: "UTC" }, o)); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function when(r) { return r.time === "bmo" ? "before the open" : r.time === "amc" ? "after the close" : "time not announced"; }
+  function onDay(day) {
+    return reports.filter(function (r) { return r.d === day; })
+      .sort(function (a, b) { return (b.c || 0) - (a.c || 0) || (a.t < b.t ? -1 : 1); });
   }
-  function weekStart(iso) {
-    // Monday of the trading week; on a weekend, the coming week.
-    var dow = new Date(iso + "T12:00:00Z").getUTCDay();
-    return addDays(iso, dow === 0 ? 1 : dow === 6 ? 2 : 1 - dow);
+  function fedOn(day) {
+    for (var i = 0; i < fomc.length; i++) {
+      var f = fomc[i];
+      if (day === f.start) return { short: "FOMC meeting, day 1", long: "FOMC meeting begins (two-day meeting)." };
+      if (day === f.end) return { short: "FOMC rate decision", long: "FOMC rate decision: statement at 2:00 pm ET, press conference at 2:30 pm" + (f.sep ? ", with new economic projections." : ".") };
+    }
+    return null;
   }
-  function label(iso, opts) {
-    return new Date(iso + "T12:00:00Z").toLocaleDateString(undefined, Object.assign({ timeZone: "UTC" }, opts));
-  }
-  function el(tag, cls, text) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text != null) e.textContent = text;
-    return e;
-  }
-  function chip(r) {
-    var li = el("li");
-    li.appendChild(el("span", "ec-t", r.t));
-    li.appendChild(document.createTextNode(" "));
-    li.appendChild(el("span", "ec-n", r.n));
-    if (r.est) li.appendChild(el("span", "ec-est", " (estimated)"));
-    return li;
+  function nameLine(cls, r) {
+    var x = el(cls ? "span" : "li", cls);
+    x.appendChild(el("span", "ec-t", r.t + " "));
+    x.appendChild(el("span", cls ? "ec-n" : null, r.n));
+    return x;
   }
 
-  function renderWeek() {
-    var box = document.getElementById("ec-week");
-    var today = etToday();
-    var mon = addDays(weekStart(today), 7 * week);
+  function draw() {
+    var box = document.getElementById("ec-cal"), today = etToday(), month = cur.slice(0, 7);
     box.textContent = "";
-    document.getElementById("week-heading").textContent = (week ? "Next week" : "This week") + ": "
-      + label(mon, { month: "short", day: "numeric" }) + " to " + label(addDays(mon, 4), { month: "short", day: "numeric" });
-    for (var i = 0; i < 5; i++) {
-      var day = addDays(mon, i);
-      var todays = reports.filter(function (r) { return r.d === day; });
-      var sec = el("section", "ec-day");
-      var h = el("h3", null, label(day, { weekday: "long", month: "short", day: "numeric" }));
-      if (day === today) h.appendChild(el("span", "ec-today", "TODAY"));
-      sec.appendChild(h);
-      if (!todays.length) sec.appendChild(el("p", "ec-note", "No reports scheduled."));
-      [["bmo", TIME.bmo], ["amc", TIME.amc], [null, "Time not announced"]].forEach(function (slot) {
-        var list = todays.filter(function (r) { return (r.time || null) === slot[0]; });
-        if (!list.length) return;
-        var wrap = el("div", "ec-slot");
-        wrap.appendChild(el("p", "ec-slot-label", slot[1] + " (" + list.length + ")"));
-        var ul = el("ul", "ec-list");
-        list.forEach(function (r) { ul.appendChild(chip(r)); });
-        wrap.appendChild(ul);
-        sec.appendChild(wrap);
-      });
-      box.appendChild(sec);
+    document.getElementById("ec-title").textContent = fmt(cur, { month: "long", year: "numeric" });
+    var g = el("div", "ec-grid");
+    ["Mon", "Tue", "Wed", "Thu", "Fri"].forEach(function (x) { g.appendChild(el("div", "ec-dh", x)); });
+    var w0 = dow(cur), mon = add(cur, 1 - (w0 === 0 ? 7 : w0));
+    for (; mon.slice(0, 7) <= month; mon = add(mon, 7)) {
+      if (add(mon, 4).slice(0, 7) < month) continue;
+      for (var i = 0; i < 5; i++) (function (day) {
+        var out = day.slice(0, 7) !== month, list = out ? [] : onDay(day), fed = out ? null : fedOn(day);
+        var c = el("div", "ec-cell" + (out ? " out" : "") + (list.length || fed ? " has" : "") + (day === today ? " today" : "") + (day === sel ? " sel" : ""));
+        var top = el("div", "ec-d");
+        top.appendChild(el("span", null, fmt(day, { day: "numeric" })));
+        if (list.length) top.appendChild(el("span", "ec-cnt", list.length + " report" + (list.length > 1 ? "s" : "")));
+        c.appendChild(top);
+        if (fed) c.appendChild(el("span", "ec-fed", "◆ " + fed.short));
+        list.slice(0, MAX).forEach(function (r) { c.appendChild(nameLine("ec-nm" + (r.time ? " " + r.time : ""), r)); });
+        if (list.length > MAX) c.appendChild(el("span", "ec-more", "+" + (list.length - MAX) + " more"));
+        if (list.length || fed) {
+          c.tabIndex = 0;
+          c.setAttribute("role", "button");
+          c.setAttribute("aria-label", fmt(day, { weekday: "long", month: "long", day: "numeric" }) + ": " + list.length + " reports" + (fed ? ", " + fed.short : ""));
+          c.setAttribute("aria-expanded", String(day === sel));
+          var go = function () { sel = sel === day ? null : day; draw(); if (sel) document.getElementById("ec-detail").scrollIntoView({ block: "nearest", behavior: "smooth" }); };
+          c.addEventListener("click", go);
+          c.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+        }
+        g.appendChild(c);
+      })(add(mon, i));
     }
+    box.appendChild(g);
+    drawDetail();
   }
+
+  function drawDetail() {
+    var det = document.getElementById("ec-detail");
+    det.textContent = "";
+    if (!sel || sel.slice(0, 7) !== cur.slice(0, 7)) return;
+    var list = onDay(sel), fed = fedOn(sel), dv = el("div", "ec-detail");
+    dv.appendChild(el("h3", null, fmt(sel, { weekday: "long", month: "long", day: "numeric" }) + (list.length ? " · " + list.length + " report" + (list.length > 1 ? "s" : "") : "")));
+    if (fed) dv.appendChild(el("p", "ec-fedline", "◆ " + fed.long));
+    if (list.length) {
+      var ul = el("ul");
+      list.forEach(function (r) { var li = nameLine(null, r); li.appendChild(el("span", "ec-n", " · ")); li.appendChild(el("span", "ec-tm" + (r.time ? " " + r.time : ""), when(r) + (r.est ? " (estimated)" : ""))); ul.appendChild(li); });
+      dv.appendChild(ul);
+    }
+    det.appendChild(dv);
+  }
+
+  function step(n) { var d = new Date(cur + "T12:00:00Z"); d.setUTCMonth(d.getUTCMonth() + n, 1); cur = d.toISOString().slice(0, 10); draw(); }
 
   function renderSearch() {
     var q = document.getElementById("ec-q").value.trim().toLowerCase();
-    var ul = document.getElementById("ec-results");
-    var status = document.getElementById("ec-search-status");
+    var ul = document.getElementById("ec-results"), status = document.getElementById("ec-search-status");
     ul.textContent = "";
     if (!q) { status.textContent = ""; return; }
-    var hits = reports.filter(function (r) {
-      return r.t.toLowerCase() === q || r.t.toLowerCase().indexOf(q) === 0 || r.n.toLowerCase().indexOf(q) !== -1;
-    });
+    var hits = reports.filter(function (r) { return r.t.toLowerCase().indexOf(q) === 0 || r.n.toLowerCase().indexOf(q) !== -1; });
     hits.sort(function (a, b) {
       var ea = a.t.toLowerCase() === q ? 0 : 1, eb = b.t.toLowerCase() === q ? 0 : 1;
-      return ea - eb || (a.d < b.d ? -1 : a.d > b.d ? 1 : 0);
+      return ea - eb || (b.c || 0) - (a.c || 0);
     });
-    status.textContent = hits.length ? (hits.length > 20 ? "Showing 20 of " + hits.length + " matches." : "")
+    status.textContent = hits.length ? (hits.length > 20 ? "Showing the 20 largest of " + hits.length + " matches." : "")
       : "No upcoming report found. The company may not have announced its next date yet, or it isn't among the US stocks covered.";
     hits.slice(0, 20).forEach(function (r) {
-      var li = el("li");
-      var left = el("span");
-      left.appendChild(el("span", "ec-t", r.t));
-      left.appendChild(document.createTextNode(" "));
+      var li = el("li"), left = el("span"), w = fmt(r.d, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+      left.appendChild(el("span", "ec-t", r.t + " "));
       left.appendChild(el("span", "ec-n", r.n));
-      var when = label(r.d, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
-      if (r.e) when += " to " + label(r.e, { month: "short", day: "numeric" });
-      if (r.time) when += ", " + TIME[r.time].toLowerCase();
-      if (r.est) when += " (estimated)";
+      if (r.e) w += " to " + fmt(r.e, { month: "short", day: "numeric" });
+      if (r.time) w += ", " + when(r);
+      if (r.est) w += " (estimated)";
       li.appendChild(left);
-      li.appendChild(el("span", null, when));
+      li.appendChild(el("span", null, w));
       ul.appendChild(li);
     });
   }
 
-  function setWeek(n) {
-    week = n;
-    document.getElementById("ec-this").setAttribute("aria-pressed", String(n === 0));
-    document.getElementById("ec-next").setAttribute("aria-pressed", String(n === 1));
-    renderWeek();
-  }
-
   async function load() {
+    cur = etToday().slice(0, 8) + "01";
     try {
       var res = await fetch(FEED, { cache: "no-cache" });
       if (!res.ok) throw new Error(res.status);
       var d = azqClean(await res.json());
       reports = d.reports || [];
-      var when = new Date(d.updated);
-      document.getElementById("ec-updated").textContent = "Updated " + (isNaN(when) ? d.updated
-        : when.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + ". "
+      fomc = d.fomc || [];
+      var u = new Date(d.updated);
+      document.getElementById("ec-updated").textContent = "Updated " + (isNaN(u) ? d.updated
+        : u.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + ". "
         + reports.length.toLocaleString() + " upcoming reports.";
-      renderWeek();
+      draw();
       renderSearch();
     } catch (e) {
-      document.getElementById("ec-week").innerHTML = "<p>Could not load the calendar. Please try again later.</p>";
+      document.getElementById("ec-cal").innerHTML = "<p>Could not load the calendar. Please try again later.</p>";
     }
   }
   document.getElementById("ec-q").addEventListener("input", renderSearch);
-  document.getElementById("ec-this").addEventListener("click", function () { setWeek(0); });
-  document.getElementById("ec-next").addEventListener("click", function () { setWeek(1); });
+  document.getElementById("ec-prev").addEventListener("click", function () { step(-1); });
+  document.getElementById("ec-next").addEventListener("click", function () { step(1); });
+  document.getElementById("ec-today").addEventListener("click", function () { cur = etToday().slice(0, 8) + "01"; sel = null; draw(); });
   load();
 })();
 </script>

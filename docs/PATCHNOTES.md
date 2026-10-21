@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.34.0] - 2026-10-20
+
+### Changed
+- **Earnings Calendar is now a month calendar** (the owner's option D): a Mon-Fri month grid with prev/next/Today. Each day
+lists company names, biggest market cap first, up to 8 and then "+N more", colored amber for before the open, blue for
+after the close and grey when the time isn't announced, with a legend. Clicking a day opens every report below the whole
+grid. On phones the cells show counts. Today is a light tint. Search sorts by exact ticker, then market cap.
+- **FOMC meetings** marked on the calendar (day 1 and the rate decision), from the Stocks feed's new `fomc` list (v5.12.1).
+- Coverage now reads about 3,000 US-listed stocks (US-dollar listings only). Dark FOMC and report-time colors are in
+`invests/assets/css/site.css`.
+
 ## [2.33.0] - 2026-10-20
 
 ### Added
