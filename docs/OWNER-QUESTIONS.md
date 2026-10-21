@@ -36,7 +36,7 @@ Written 2026-10-03, at the end of the 2026-10-02 build pass (main 2.13.1 to 2.14
 | Q5 | Projects page language tags below contrast | Low |
 | Q6 | Music page: dark only, no theme button | Low (confirm what's built) |
 | Q7 | Individual Stocks: "12 metrics" or "10 metrics" | Low |
-| Q8 | `test-local-audio.bat` points at the old music address | Low (local file only) |
+| Q8 | `test-local-audio.bat` points at the old music address | Resolved 2026-10-20: file deleted |
 | Q9 | Trailing slash in the new addresses | Low (confirm what's built) |
 | Q10 | The theme button's place | Resolved 2026-10-03 |
 | Later | 15d, smoke-test script | Saved for later at your request; listed so it isn't lost |
@@ -190,6 +190,7 @@ After you approve, I build it all in one pass, and the inventory check confirms 
 
 - This script opens `music.html` in a relaxed Chrome window to test the audio. Since 2.13.8, the page lives at `music/index.html`, and `music.html` forwards to it, so the script still works, with one extra hop.
 - **Options:** A, I update the script's last line to `music\index.html` (recommended; it's a one-line local change). B, leave it.
+- **Resolved 2026-10-20:** deleted at the owner's request. The page handles local audio itself, and a local server is the supported way to test.
 
 ---
 

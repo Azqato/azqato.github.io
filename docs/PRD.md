@@ -301,9 +301,8 @@ No npm packages. No `package.json`. No lockfile. No CDN scripts. No external fon
     ├── PATCHNOTES.md         - versioned changelog
     └── TODO.md               - open work and unresolved decisions; not an instruction list
 
-Untracked and local only (present in the working tree, not in git):
-├── music/*.mp3, desktop.ini  - local test track beside the tracked music page
-├── test-local-audio.bat      - launches Chrome with file-access restrictions relaxed
+Ignored and local only (present in the working tree, not in git; see .gitignore):
+├── music/*.mp3, desktop.ini  - the owner's source audio beside the tracked music page
 ├── brand/                    - brand and merchandise concept folder, see below
 │   ├── 00-brand-foundation.md      - mascot traits, palette, lanes, voice
 │   ├── 01-prior-art-and-prompt-rules.md - findings from the music project
@@ -699,9 +698,9 @@ This applies to every browser a test drives, not only one named in a config file
 | Microsoft Edge | `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe` |
 | Google Chrome | `C:\Program Files\Google\Chrome\Application\chrome.exe` (do not drive) |
 
-The Edge path above was verified on this machine at the v2.9.9 audit: the binary exists and is 5,403,976 bytes, dated 2026-09-24. The Chrome path is taken from `test-local-audio.bat`, where it is known to be correct.
+The Edge path above was verified on this machine at the v2.9.9 audit: the binary exists and is 5,403,976 bytes, dated 2026-09-24.
 
-**Existing deviation, recorded not overruled.** `test-local-audio.bat` in the working tree (untracked) launches Chrome, not Edge, with `--allow-file-access-from-files`, `--disable-web-security`, and a throwaway `--user-data-dir` under `%TEMP%`, pointed at `music.html`. It exists to test the paused native audio player against a local file. It predates this policy. It does use a separate user-data directory, so it does not touch the owner's live Chrome profile, which is the specific harm the policy guards against. If it is revived when `feature/native-audio-player` resumes, switching it to `msedge.exe` is a one-word change and should be made then.
+**Former deviation, removed.** `test-local-audio.bat`, an untracked script that launched Chrome with `--disable-web-security` to test local audio, was deleted on 2026-10-20 (2.35.2). Test the music page over a local server instead. If a relaxed browser is ever needed again, use Edge with a throwaway `--user-data-dir`.
 
 No second browser engine is targeted. The site is not tested against Firefox or Safari automatically; cross-browser checks are manual and occasional.
 
@@ -938,7 +937,7 @@ The Mixcloud embeds are the only automatic third-party data flow on the site, an
 
 **Affiliate link integrity.** Affiliate URLs are hardcoded and never validated at runtime. A wrong or hijacked URL would be invisible to the site and visible only to the visitor. Mitigation is process: review every change to `support.html` before pushing, and click each link monthly (see Monitoring).
 
-**Local test tooling.** `test-local-audio.bat` launches Chrome with `--disable-web-security`. That is a genuinely dangerous flag: a browser started that way ignores same-origin policy for every site it visits, not just `music.html`. It is mitigated by the throwaway `--user-data-dir` and by the comment in the file telling the user not to browse with that window. It is untracked and therefore never deployed. Do not remove those two mitigations, and do not commit the file.
+**Local test tooling.** The old `test-local-audio.bat`, which launched Chrome with the dangerous `--disable-web-security` flag, was deleted on 2026-10-20. Don't recreate it; serve the site over http to test audio.
 
 **Content Security Policy.** None is set. **The reason changed on 2026-09-29 and the old one no longer holds.** This used to say a CSP was impossible because GitHub Pages cannot send custom response headers. That is still true of `azqato.github.io`, but the canonical domain runs on Cloudflare Pages, which supports a `_headers` file, so a CSP on `azqato.com` is perfectly possible and simply has not been written. It remains acceptable to go without on a static site with no user input, and the practical benefit would still be limited to constraining the Mixcloud frame, which is itself scheduled for removal in v2.9.0. The difference is that this is now a choice.
 
@@ -2178,7 +2177,7 @@ No file in the repository contains a `TODO`, `FIXME`, `HACK`, or `XXX` marker. T
 
 ## Work in progress at audit time
 
-- **Untracked in the working tree:** `music/` (the owner's local source audio, including the file that became `audio/womanchild-azqato-remix.mp3`) and `test-local-audio.bat` (launches Chrome with web security disabled so a `file://` load can route local audio). Neither is committed and neither should be. The batch file is a workaround for a problem now handled in the page itself, and serving over http is the supported route; see the Build section.
+- **Untracked in the working tree:** `music/` (the owner's local source audio, including the file that became `audio/womanchild-azqato-remix.mp3`). It is not committed and should not be; since 2.35.2 `.gitignore` covers it. (`test-local-audio.bat`, a Chrome workaround for local audio, was deleted on 2026-10-20; serving over http is the supported route; see the Build section.)
 - **Unmerged branch:** `feature/native-audio-player`, pushed to GitHub, complete but unshippable. Documented above.
 - **Half-finished milestone:** v2.7.0, CSS extracted, nav not.
 - **Dead code in the tree:** five hidden visualizer modes (Bars, Volumetric, Origami, Ghost, Noise) whose buttons are `display:none` and which the auto-cycle skips. The modes are complete and working, just not exposed; they are hidden by choice, not broken.
@@ -2225,7 +2224,7 @@ Concrete instructions for whoever works on this next, human or model.
 1. **Read the page you are about to change, in full.** They are 6 KB to 24 KB; there is no excuse for skimming. `music.html` is the exception at 112 KB: read the section you are touching plus `build()`, because almost everything depends on `lay`.
 2. **Check whether the change touches the nav.** If it does, it touches 12 files, and missing one is the single most common defect in this repository's history.
 3. **Confirm the pre-commit hook is live:** `git config core.hooksPath` should print `.githooks`. If it prints nothing, the writing policy is not being enforced in your clone.
-4. **Check `git status`.** `music/` and `test-local-audio.bat` are expected to be untracked. Anything else unexpected deserves a look before you add files.
+4. **Check `git status`.** The owner's `music/*.mp3` and `desktop.ini` are ignored, so the status should be clean. Anything else unexpected deserves a look before you add files.
 
 ## Which document to read first
 

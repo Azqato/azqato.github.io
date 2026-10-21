@@ -5,6 +5,22 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.35.3] - 2026-10-20
+
+### Changed
+- **Earnings Calendar marks only the FOMC Rate Decision** (the meeting's second day), capitalized that way; the
+"meeting, day 1" marker is gone. About text and description updated.
+
+## [2.35.2] - 2026-10-20
+
+### Removed
+- **`test-local-audio.bat`** (local only, never committed): it launched Chrome with web security disabled to test local
+audio, which the music page now handles itself. PRD and OWNER-QUESTIONS (Q8) updated.
+
+### Changed
+- **`.gitignore` covers `music/*.mp3` and `desktop.ini`**, so the owner's local source audio no longer shows as untracked
+and can't be committed by accident.
+
 ## [2.35.1] - 2026-10-20
 
 ### Changed

@@ -13,3 +13,8 @@ scripts/build-brand-page.py
 
 # Python bytecode, written when scripts/invests/site.py imports scripts/build-nav.py
 __pycache__/
+
+# The owner's local source audio beside the music page (the published copy is
+# in audio/), and Windows folder-settings files.
+music/*.mp3
+desktop.ini
