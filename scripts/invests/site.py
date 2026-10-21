@@ -89,7 +89,7 @@ DESCS = {
     "stocks/screener.html": "An interactive screener that ranks the Nasdaq 100, S&P 500, the whole US market and more against the Azqato methodology. Updated daily; runs in your browser.",
     "indices/index.html": "When to buy index funds and ETFs: VIX action levels, AAII sentiment, RSI timing, DCA vs lump-sum math, and quality metrics like expense ratio.",
     "indices/method.html": "The index and ETF method in full: fund types, DCA vs lump sum, the VIX, RSI and 52-week timing, AAII sentiment, and fund quality.",
-    "stocks/earnings.html": "A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC meeting days and a search for any company's next report date. Updated daily.",
+    "stocks/earnings.html": "A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC rate decisions and a search for any company's next report date. Updated daily.",
     "indices/valuation.html": "Trailing and forward P/E for the S&P 500, Nasdaq 100, Dow and Russell 2000, calculated from their member stocks, with the earnings growth analysts expect. Updated weekly.",
     "indices/market.html": "A same-day market snapshot: major indices, broad-market, bond, size, factor and sector ETFs, commodities, Treasury yields, the Fed Funds Rate and CPI, leveraged ETFs and crypto, with 52-week ranges and 10-day RSI, refreshed three times a trading day.",
     "leveraged/index.html": "A reference library for six leveraged ETF strategy frameworks built around TQQQ: 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail and HFEA. Educational use only.",

@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Earnings Calendar - Azqato Invests</title>
-<meta name="description" content="A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC meeting days and a search for any company&#x27;s next report date. Updated daily.">
+<meta name="description" content="A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC rate decisions and a search for any company&#x27;s next report date. Updated daily.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Azqato Invests">
 <meta property="og:title" content="Earnings Calendar - Azqato Invests">
-<meta property="og:description" content="A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC meeting days and a search for any company&#x27;s next report date. Updated daily.">
+<meta property="og:description" content="A month calendar of earnings reports for about 3,000 US stocks, biggest companies first, with FOMC rate decisions and a search for any company&#x27;s next report date. Updated daily.">
 <meta property="og:url" content="https://azqato.com/invests/stocks/earnings">
 <link rel="canonical" href="https://azqato.com/invests/stocks/earnings">
 <meta name="twitter:card" content="summary">
@@ -209,7 +209,7 @@
 <li><strong>Coverage:</strong> about 3,000 US-listed stocks, including foreign companies that trade in the US, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday. Each day lists the largest companies by market cap first. The buttons above the calendar narrow it to one index or fund list, starting with the Nasdaq 100; All shows every covered stock. Search always looks across all of them.</li>
 <li><strong>Before the open</strong> means the report comes out before trading starts at 9:30 am Eastern; <strong>after the close</strong> means after 4:00 pm. Some companies don't announce the time.</li>
 <li><strong>Estimated</strong> dates are Yahoo Finance's guess from past reports, until the company confirms. Companies can move their dates, so check the company's investor relations page before you rely on one.</li>
-<li><strong>FOMC meetings</strong> are the Federal Reserve's scheduled rate meetings, from its published calendar. The decision comes on the second day at 2:00 pm Eastern; meetings marked with projections also release the Fed's economic forecasts.</li>
+<li><strong>FOMC Rate Decision</strong> marks the day the Federal Reserve announces its rate decision, at 2:00 pm Eastern, from its published meeting calendar. Some meetings also release the Fed's economic projections.</li>
 <li><strong>Data:</strong> Yahoo Finance and the Federal Reserve. Educational use only. Not financial advice.</li>
 </ul>
 </div>
@@ -265,8 +265,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
   function fedOn(day) {
     for (var i = 0; i < fomc.length; i++) {
       var f = fomc[i];
-      if (day === f.start) return { short: "FOMC meeting, day 1", long: "FOMC meeting begins (two-day meeting)." };
-      if (day === f.end) return { short: "FOMC rate decision", long: "FOMC rate decision: statement at 2:00 pm ET, press conference at 2:30 pm" + (f.sep ? ", with new economic projections." : ".") };
+      if (day === f.end) return { short: "FOMC Rate Decision", long: "FOMC Rate Decision: statement at 2:00 pm ET, press conference at 2:30 pm" + (f.sep ? ", with new economic projections." : ".") };
     }
     return null;
   }
