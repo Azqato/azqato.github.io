@@ -5,6 +5,11 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.35.1] - 2026-10-20
+
+### Changed
+- **Earnings Calendar opens on Nasdaq 100** instead of S&P 500 (owner's request).
+
 ## [2.35.0] - 2026-10-20
 
 ### Added

@@ -193,8 +193,8 @@
 <button id="ec-today" type="button">Today</button>
 </div>
 <div aria-label="Show companies in" class="ec-uni" role="group">
-<button aria-pressed="true" data-u="s" type="button">S&amp;P 500</button>
-<button aria-pressed="false" data-u="n" type="button">Nasdaq 100</button>
+<button aria-pressed="false" data-u="s" type="button">S&amp;P 500</button>
+<button aria-pressed="true" data-u="n" type="button">Nasdaq 100</button>
 <button aria-pressed="false" data-u="g" type="button">Growth</button>
 <button aria-pressed="false" data-u="v" type="button">Value</button>
 <button aria-pressed="false" data-u="d" type="button">Dividend</button>
@@ -206,7 +206,7 @@
 <p class="ec-note" id="ec-updated"></p>
 <h2 id="about">About the dates</h2>
 <ul>
-<li><strong>Coverage:</strong> about 3,000 US-listed stocks, including foreign companies that trade in the US, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday. Each day lists the largest companies by market cap first. The buttons above the calendar narrow it to one index or fund list, starting with the S&amp;P 500; All shows every covered stock. Search always looks across all of them.</li>
+<li><strong>Coverage:</strong> about 3,000 US-listed stocks, including foreign companies that trade in the US, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday. Each day lists the largest companies by market cap first. The buttons above the calendar narrow it to one index or fund list, starting with the Nasdaq 100; All shows every covered stock. Search always looks across all of them.</li>
 <li><strong>Before the open</strong> means the report comes out before trading starts at 9:30 am Eastern; <strong>after the close</strong> means after 4:00 pm. Some companies don't announce the time.</li>
 <li><strong>Estimated</strong> dates are Yahoo Finance's guess from past reports, until the company confirms. Companies can move their dates, so check the company's investor relations page before you rely on one.</li>
 <li><strong>FOMC meetings</strong> are the Federal Reserve's scheduled rate meetings, from its published calendar. The decision comes on the second day at 2:00 pm Eastern; meetings marked with projections also release the Fed's economic forecasts.</li>
@@ -247,7 +247,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
   var FEED = "https://azqato.github.io/stocks/data/earnings_calendar.json";
   var MAX = 8; // names shown in a day before "+N more"
   var reports = [], fomc = [], cur = null, sel = null;
-  var uni = "s"; // universe filter: a letter in each report's "u", or "" for all
+  var uni = "n"; // universe filter: a letter in each report's "u", or "" for all
 
   // All dates are YYYY-MM-DD strings in US Eastern time.
   function etToday() {
