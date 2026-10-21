@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.35.0] - 2026-10-20
+
+### Added
+- **Earnings Calendar universe filter**: buttons for S&P 500 (the default), Nasdaq 100, Growth, Value, Dividend and All,
+from the Stocks feed's new `u` codes (v5.12.2). Search still covers every stock.
+
+### Changed
+- **Earnings Calendar shows full weeks**, Sunday to Saturday as in sample B, with weekends lightly shaded.
+
 ## [2.34.0] - 2026-10-20
 
 ### Changed

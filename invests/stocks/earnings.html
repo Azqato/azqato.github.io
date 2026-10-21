@@ -40,13 +40,15 @@
 }
 .src-own .ec-bar button:focus-visible { outline: 2px solid var(--ti-color-focus); outline-offset: 1px;
 }
-.src-own .ec-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--ti-color-border); border-left: 1px solid var(--ti-color-border); border-radius: 10px; overflow: hidden;
+.src-own .ec-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--ti-color-border); border-left: 1px solid var(--ti-color-border); border-radius: 10px; overflow: hidden;
 }
 .src-own .ec-dh { padding: 6px 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ti-color-text-muted); background: var(--ti-color-surface); border-right: 1px solid var(--ti-color-border); border-bottom: 1px solid var(--ti-color-border);
 }
 .src-own .ec-cell { min-height: 110px; min-width: 0; padding: 6px 8px; font-size: 0.8rem; border-right: 1px solid var(--ti-color-border); border-bottom: 1px solid var(--ti-color-border);
 }
 .src-own .ec-cell.out { background: var(--ti-color-surface); color: var(--ti-color-text-muted);
+}
+.src-own .ec-cell.wknd { background: color-mix(in srgb, var(--ti-color-surface) 60%, transparent);
 }
 .src-own .ec-cell.today { background: color-mix(in srgb, var(--ti-color-accent) 10%, transparent);
 }
@@ -93,6 +95,14 @@
 .src-own .ec-nm .ec-n { color: inherit; opacity: 0.85;
 }
 .src-own .ec-tm { padding: 0 5px; border-radius: 4px; font-size: 0.8rem;
+}
+.src-own .ec-uni { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px;
+}
+.src-own .ec-uni button { font: inherit; font-size: 0.85rem; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--ti-color-border-strong); background: transparent; color: var(--ti-color-text); cursor: pointer;
+}
+.src-own .ec-uni button[aria-pressed="true"] { background: var(--ti-color-accent); border-color: var(--ti-color-accent); color: var(--ti-color-canvas); font-weight: 600;
+}
+.src-own .ec-uni button:focus-visible { outline: 2px solid var(--ti-color-focus); outline-offset: 1px;
 }
 .src-own .ec-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 8px 0; font-size: 0.82rem; color: var(--ti-color-text-muted);
 }
@@ -182,13 +192,21 @@
 <button aria-label="Next month" id="ec-next" type="button">›</button>
 <button id="ec-today" type="button">Today</button>
 </div>
+<div aria-label="Show companies in" class="ec-uni" role="group">
+<button aria-pressed="true" data-u="s" type="button">S&amp;P 500</button>
+<button aria-pressed="false" data-u="n" type="button">Nasdaq 100</button>
+<button aria-pressed="false" data-u="g" type="button">Growth</button>
+<button aria-pressed="false" data-u="v" type="button">Value</button>
+<button aria-pressed="false" data-u="d" type="button">Dividend</button>
+<button aria-pressed="false" data-u="" type="button">All</button>
+</div>
 <div class="ec-legend"><span class="ec-tm bmo">Before the open</span><span class="ec-tm amc">After the close</span><span class="ec-tm">Time not announced</span></div>
 <div id="ec-cal"><p>Loading…</p></div>
 <div aria-live="polite" id="ec-detail"></div>
 <p class="ec-note" id="ec-updated"></p>
 <h2 id="about">About the dates</h2>
 <ul>
-<li><strong>Coverage:</strong> about 3,000 US-listed stocks, including foreign companies that trade in the US, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday. Each day lists the largest companies by market cap first.</li>
+<li><strong>Coverage:</strong> about 3,000 US-listed stocks, including foreign companies that trade in the US, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday. Each day lists the largest companies by market cap first. The buttons above the calendar narrow it to one index or fund list, starting with the S&amp;P 500; All shows every covered stock. Search always looks across all of them.</li>
 <li><strong>Before the open</strong> means the report comes out before trading starts at 9:30 am Eastern; <strong>after the close</strong> means after 4:00 pm. Some companies don't announce the time.</li>
 <li><strong>Estimated</strong> dates are Yahoo Finance's guess from past reports, until the company confirms. Companies can move their dates, so check the company's investor relations page before you rely on one.</li>
 <li><strong>FOMC meetings</strong> are the Federal Reserve's scheduled rate meetings, from its published calendar. The decision comes on the second day at 2:00 pm Eastern; meetings marked with projections also release the Fed's economic forecasts.</li>
@@ -229,6 +247,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
   var FEED = "https://azqato.github.io/stocks/data/earnings_calendar.json";
   var MAX = 8; // names shown in a day before "+N more"
   var reports = [], fomc = [], cur = null, sel = null;
+  var uni = "s"; // universe filter: a letter in each report's "u", or "" for all
 
   // All dates are YYYY-MM-DD strings in US Eastern time.
   function etToday() {
@@ -240,7 +259,7 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function when(r) { return r.time === "bmo" ? "before the open" : r.time === "amc" ? "after the close" : "time not announced"; }
   function onDay(day) {
-    return reports.filter(function (r) { return r.d === day; })
+    return reports.filter(function (r) { return r.d === day && (!uni || (r.u || "").indexOf(uni) !== -1); })
       .sort(function (a, b) { return (b.c || 0) - (a.c || 0) || (a.t < b.t ? -1 : 1); });
   }
   function fedOn(day) {
@@ -263,13 +282,12 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
     box.textContent = "";
     document.getElementById("ec-title").textContent = fmt(cur, { month: "long", year: "numeric" });
     var g = el("div", "ec-grid");
-    ["Mon", "Tue", "Wed", "Thu", "Fri"].forEach(function (x) { g.appendChild(el("div", "ec-dh", x)); });
-    var w0 = dow(cur), mon = add(cur, 1 - (w0 === 0 ? 7 : w0));
+    ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach(function (x) { g.appendChild(el("div", "ec-dh", x)); });
+    var mon = add(cur, -dow(cur)); // the Sunday starting the month's first week
     for (; mon.slice(0, 7) <= month; mon = add(mon, 7)) {
-      if (add(mon, 4).slice(0, 7) < month) continue;
-      for (var i = 0; i < 5; i++) (function (day) {
+      for (var i = 0; i < 7; i++) (function (day) {
         var out = day.slice(0, 7) !== month, list = out ? [] : onDay(day), fed = out ? null : fedOn(day);
-        var c = el("div", "ec-cell" + (out ? " out" : "") + (list.length || fed ? " has" : "") + (day === today ? " today" : "") + (day === sel ? " sel" : ""));
+        var c = el("div", "ec-cell" + (out ? " out" : "") + (i === 0 || i === 6 ? " wknd" : "") + (list.length || fed ? " has" : "") + (day === today ? " today" : "") + (day === sel ? " sel" : ""));
         var top = el("div", "ec-d");
         top.appendChild(el("span", null, fmt(day, { day: "numeric" })));
         if (list.length) top.appendChild(el("span", "ec-cnt", list.length + " report" + (list.length > 1 ? "s" : "")));
@@ -353,6 +371,13 @@ function azqClean(v) { if (typeof v === 'string') return v.replace(/[<>]/g, '');
       document.getElementById("ec-cal").innerHTML = "<p>Could not load the calendar. Please try again later.</p>";
     }
   }
+  document.querySelectorAll(".ec-uni button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      uni = b.getAttribute("data-u");
+      document.querySelectorAll(".ec-uni button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      draw();
+    });
+  });
   document.getElementById("ec-q").addEventListener("input", renderSearch);
   document.getElementById("ec-prev").addEventListener("click", function () { step(-1); });
   document.getElementById("ec-next").addEventListener("click", function () { step(1); });
