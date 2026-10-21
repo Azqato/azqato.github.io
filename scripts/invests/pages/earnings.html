@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Earnings Calendar</title>
+<meta name="description" content="This week's earnings reports for about 3,600 US stocks, before the open and after the close, with a search for any company's next report date. Updated daily.">
+<style>
+  .ec-search { margin: 20px 0 8px; max-width: 420px; }
+  .ec-search label { display: block; font-weight: 600; margin-bottom: 6px; }
+  .ec-search input { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; color: var(--ti-color-text); background: var(--ti-color-surface); border: 1px solid var(--ti-color-border-strong); border-radius: 8px; }
+  .ec-search input:focus-visible { outline: 2px solid var(--ti-color-focus); outline-offset: 1px; }
+  .ec-results { list-style: none; padding: 0; margin: 8px 0 0; max-width: 560px; }
+  .ec-results li { margin: 0; display: flex; gap: 12px; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--ti-color-border); }
+  .ec-weeks { display: flex; gap: 8px; margin: 24px 0 4px; }
+  .ec-weeks button { font: inherit; font-size: 0.9rem; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--ti-color-border-strong); background: transparent; color: var(--ti-color-text); cursor: pointer; }
+  .ec-weeks button[aria-pressed="true"] { background: var(--ti-color-accent); border-color: var(--ti-color-accent); color: var(--ti-color-canvas); font-weight: 600; }
+  .ec-day { margin: 20px 0 0; padding-top: 4px; }
+  .ec-day h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .ec-today { font-size: 0.75rem; font-weight: 700; color: var(--ti-color-accent); margin-left: 6px; }
+  .ec-slot { margin: 6px 0 10px; }
+  .ec-slot-label { font-size: 0.8rem; font-weight: 600; color: var(--ti-color-text-muted); margin: 0 0 4px; }
+  .ec-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .ec-list li { margin: 0; padding: 4px 10px; border: 1px solid var(--ti-color-border); border-radius: 6px; font-size: 0.9rem; }
+  .ec-t { font-weight: 700; }
+  .ec-n { color: var(--ti-color-text-muted); }
+  .ec-est { font-size: 0.75rem; color: var(--ti-color-text-muted); }
+  .ec-note { font-size: 0.85rem; color: var(--ti-color-text-muted); }
+</style>
+</head>
+<body>
+<!-- Source of invests/stocks/earnings.html, written for this site (owner's
+     request, 2026-10-20). The shell comes from scripts/invests/site.py; the
+     data from the Stocks repo's data/earnings_calendar.json, built with the
+     stock data. -->
+<main class="ec">
+
+<h1>Earnings Calendar</h1>
+<p>Which companies report earnings this week, and when: before the market opens or after it closes. Search for any company to see its next report date.</p>
+
+<div class="ec-search">
+<label for="ec-q">Find a company</label>
+<input id="ec-q" type="search" placeholder="Ticker or name, e.g. AAPL or Apple" autocomplete="off" spellcheck="false">
+</div>
+<p class="ec-note" id="ec-search-status" aria-live="polite"></p>
+<ul class="ec-results" id="ec-results"></ul>
+
+<h2 id="week-heading">This week</h2>
+<div class="ec-weeks" role="group" aria-label="Week">
+<button type="button" id="ec-this" aria-pressed="true">This week</button>
+<button type="button" id="ec-next" aria-pressed="false">Next week</button>
+</div>
+<div id="ec-week" aria-live="polite"><p>Loading&hellip;</p></div>
+<p class="ec-note" id="ec-updated"></p>
+
+<h2 id="about">About the dates</h2>
+<ul>
+<li><strong>Coverage:</strong> about 3,600 US-listed stocks, the same set as the <a href="screener.html">Screener</a>. Big index members are refreshed every weekday after the close; the rest every Sunday.</li>
+<li><strong>Before the open</strong> means the report comes out before trading starts at 9:30 am Eastern; <strong>after the close</strong> means after 4:00 pm. Some companies don't announce the time.</li>
+<li><strong>Estimated</strong> dates are Yahoo Finance's guess from past reports, until the company confirms. Companies can move their dates, so check the company's investor relations page before you rely on one.</li>
+<li><strong>Data:</strong> Yahoo Finance. Educational use only. Not financial advice.</li>
+</ul>
+
+</main>
+<script>
+(function () {
+  var FEED = "data/earnings_calendar.json";
+  var TIME = { bmo: "Before the open", amc: "After the close" };
+  var reports = [];
+  var week = 0;
+
+  // Dates are compared as YYYY-MM-DD strings in US Eastern time.
+  function etToday() {
+    var p = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+    return p;
+  }
+  function addDays(iso, n) {
+    var d = new Date(iso + "T12:00:00Z");
+    d.setUTCDate(d.getUTCDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function weekStart(iso) {
+    // Monday of the trading week; on a weekend, the coming week.
+    var dow = new Date(iso + "T12:00:00Z").getUTCDay();
+    return addDays(iso, dow === 0 ? 1 : dow === 6 ? 2 : 1 - dow);
+  }
+  function label(iso, opts) {
+    return new Date(iso + "T12:00:00Z").toLocaleDateString(undefined, Object.assign({ timeZone: "UTC" }, opts));
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function chip(r) {
+    var li = el("li");
+    li.appendChild(el("span", "ec-t", r.t));
+    li.appendChild(document.createTextNode(" "));
+    li.appendChild(el("span", "ec-n", r.n));
+    if (r.est) li.appendChild(el("span", "ec-est", " (estimated)"));
+    return li;
+  }
+
+  function renderWeek() {
+    var box = document.getElementById("ec-week");
+    var today = etToday();
+    var mon = addDays(weekStart(today), 7 * week);
+    box.textContent = "";
+    document.getElementById("week-heading").textContent = (week ? "Next week" : "This week") + ": "
+      + label(mon, { month: "short", day: "numeric" }) + " to " + label(addDays(mon, 4), { month: "short", day: "numeric" });
+    for (var i = 0; i < 5; i++) {
+      var day = addDays(mon, i);
+      var todays = reports.filter(function (r) { return r.d === day; });
+      var sec = el("section", "ec-day");
+      var h = el("h3", null, label(day, { weekday: "long", month: "short", day: "numeric" }));
+      if (day === today) h.appendChild(el("span", "ec-today", "TODAY"));
+      sec.appendChild(h);
+      if (!todays.length) sec.appendChild(el("p", "ec-note", "No reports scheduled."));
+      [["bmo", TIME.bmo], ["amc", TIME.amc], [null, "Time not announced"]].forEach(function (slot) {
+        var list = todays.filter(function (r) { return (r.time || null) === slot[0]; });
+        if (!list.length) return;
+        var wrap = el("div", "ec-slot");
+        wrap.appendChild(el("p", "ec-slot-label", slot[1] + " (" + list.length + ")"));
+        var ul = el("ul", "ec-list");
+        list.forEach(function (r) { ul.appendChild(chip(r)); });
+        wrap.appendChild(ul);
+        sec.appendChild(wrap);
+      });
+      box.appendChild(sec);
+    }
+  }
+
+  function renderSearch() {
+    var q = document.getElementById("ec-q").value.trim().toLowerCase();
+    var ul = document.getElementById("ec-results");
+    var status = document.getElementById("ec-search-status");
+    ul.textContent = "";
+    if (!q) { status.textContent = ""; return; }
+    var hits = reports.filter(function (r) {
+      return r.t.toLowerCase() === q || r.t.toLowerCase().indexOf(q) === 0 || r.n.toLowerCase().indexOf(q) !== -1;
+    });
+    hits.sort(function (a, b) {
+      var ea = a.t.toLowerCase() === q ? 0 : 1, eb = b.t.toLowerCase() === q ? 0 : 1;
+      return ea - eb || (a.d < b.d ? -1 : a.d > b.d ? 1 : 0);
+    });
+    status.textContent = hits.length ? (hits.length > 20 ? "Showing 20 of " + hits.length + " matches." : "")
+      : "No upcoming report found. The company may not have announced its next date yet, or it isn't among the US stocks covered.";
+    hits.slice(0, 20).forEach(function (r) {
+      var li = el("li");
+      var left = el("span");
+      left.appendChild(el("span", "ec-t", r.t));
+      left.appendChild(document.createTextNode(" "));
+      left.appendChild(el("span", "ec-n", r.n));
+      var when = label(r.d, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+      if (r.e) when += " to " + label(r.e, { month: "short", day: "numeric" });
+      if (r.time) when += ", " + TIME[r.time].toLowerCase();
+      if (r.est) when += " (estimated)";
+      li.appendChild(left);
+      li.appendChild(el("span", null, when));
+      ul.appendChild(li);
+    });
+  }
+
+  function setWeek(n) {
+    week = n;
+    document.getElementById("ec-this").setAttribute("aria-pressed", String(n === 0));
+    document.getElementById("ec-next").setAttribute("aria-pressed", String(n === 1));
+    renderWeek();
+  }
+
+  async function load() {
+    try {
+      var res = await fetch(FEED, { cache: "no-cache" });
+      if (!res.ok) throw new Error(res.status);
+      var d = await res.json();
+      reports = d.reports || [];
+      var when = new Date(d.updated);
+      document.getElementById("ec-updated").textContent = "Updated " + (isNaN(when) ? d.updated
+        : when.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + ". "
+        + reports.length.toLocaleString() + " upcoming reports.";
+      renderWeek();
+      renderSearch();
+    } catch (e) {
+      document.getElementById("ec-week").innerHTML = "<p>Could not load the calendar. Please try again later.</p>";
+    }
+  }
+  document.getElementById("ec-q").addEventListener("input", renderSearch);
+  document.getElementById("ec-this").addEventListener("click", function () { setWeek(0); });
+  document.getElementById("ec-next").addEventListener("click", function () { setWeek(1); });
+  load();
+})();
+</script>
+</body>
+</html>

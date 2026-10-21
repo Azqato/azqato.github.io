@@ -2544,7 +2544,7 @@ Everything in the Site map, with the core rule's inventory check passed for each
 - **Learn:** the landing page plus Philosophy, Stock metrics, Index & ETF methodology, the Finviz setup guide and the Seeking Alpha setup guide, from stocks.
 - **FAQ:** from stocks, searchable as you type (D8, borrowed from help-center).
 - **Strategies:** VIX Strategy (from vix), and the leveraged strategies landing page with 3 Sig, 6 Sig, 9 Sig, TQQQ FTLT, Holy Grail and HFEA (from leverage). TQQQ FTLT, Holy Grail and HFEA keep their full write-ups, with Composer Atlas links (D15, D16).
-- **Tools:** Screener and Market Overview (from stocks), Index Valuation (own page, reading the stocks feed's `index_valuation.json`, added 2026-10-20), VIX Dashboard and VIX Custom builder (from vix), reading the existing data feeds (D6).
+- **Tools:** Screener and Market Overview (from stocks), Index Valuation (own page, reading the stocks feed's `index_valuation.json`, added 2026-10-20), Earnings Calendar (own page, reading `earnings_calendar.json`, added 2026-10-20), VIX Dashboard and VIX Custom builder (from vix), reading the existing data feeds (D6).
 - **Themes:** light and dark, starting from the visitor's system theme, with the choice saved in their browser (D10, Assumptions).
 - **Redirects:** every old page under azqato.github.io/stocks/, /vix/ and /leverage/ redirects to its new home (D7). This means publishing, so it waits for the author's go-ahead (D20).
 

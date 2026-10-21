@@ -5,6 +5,15 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.33.0] - 2026-10-20
+
+### Added
+- **Earnings Calendar** (`invests/stocks/earnings.html`, in Individual Stocks after Screener): this week's reports
+by day, split into before the open, after the close and time not announced, with a Next week toggle and a TODAY
+marker. A search box finds any covered company's next report date by ticker or name. Estimated dates are labeled.
+Reads the Stocks feed's new `earnings_calendar.json` (Stocks v5.12.0), about 3,600 US stocks; big index members
+refresh every weekday, the rest on Sundays. Source: `scripts/invests/pages/earnings.html`.
+
 ## [2.32.4] - 2026-10-20
 
 ### Added
