@@ -5,6 +5,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.32.4] - 2026-10-20
+
+### Added
+- **Index Valuation: "How to read it"**, above the method: positive expected growth is normal (estimates run
+optimistic); growth shrinking toward zero or turning negative is the warning sign, since recessions usually come with
+falling earnings, though falling earnings don't always mean a recession.
+
 ## [2.32.3] - 2026-10-20
 
 ### Changed
