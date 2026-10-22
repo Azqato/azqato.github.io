@@ -127,11 +127,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/add-prompt/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://azqato.com/codes/prompts/documentation/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
@@ -152,12 +147,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/mobile-responsive-audit/</loc>
+    <loc>https://azqato.com/codes/prompts/add-prompt/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/github-wiki/</loc>
+    <loc>https://azqato.com/codes/prompts/prompt-writing/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
@@ -167,7 +162,32 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/brand-identity/</loc>
+    <loc>https://azqato.com/codes/prompts/mobile-responsive-audit/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/design-review/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/assumption-check/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/score-to-target/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/app-performance/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/animation-performance/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
@@ -182,52 +202,27 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/motion-design/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://azqato.com/codes/prompts/assumption-check/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://azqato.com/codes/prompts/progress-dashboard/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/launch-video/</loc>
+    <loc>https://azqato.com/codes/prompts/github-wiki/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/animation-performance/</loc>
+    <loc>https://azqato.com/codes/prompts/brand-identity/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/app-performance/</loc>
+    <loc>https://azqato.com/codes/prompts/brand-tinted-neutrals/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/design-review/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://azqato.com/codes/prompts/landing-page/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://azqato.com/codes/prompts/score-to-target/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://azqato.com/codes/prompts/video-to-prompt/</loc>
+    <loc>https://azqato.com/codes/prompts/motion-design/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
@@ -237,17 +232,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/prompt-writing/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://azqato.com/codes/prompts/linkedin-audit/</loc>
-    <lastmod>2026-10-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://azqato.com/codes/prompts/url-structure/</loc>
+    <loc>https://azqato.com/codes/prompts/landing-page/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>
@@ -257,7 +242,22 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://azqato.com/codes/prompts/brand-tinted-neutrals/</loc>
+    <loc>https://azqato.com/codes/prompts/url-structure/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/launch-video/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/video-to-prompt/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://azqato.com/codes/prompts/linkedin-audit/</loc>
     <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
   </url>

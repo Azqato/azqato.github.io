@@ -28,6 +28,10 @@
       c.hidden = !ok;
       if (ok) shown++;
     });
+    // A category heading hides with the last of its prompts.
+    [].forEach.call(document.querySelectorAll(".prompt-cat"), function (s) {
+      s.hidden = !s.querySelector(".prompt-list-item:not([hidden])");
+    });
     var msg = document.getElementById("home-empty");
     if (msg) msg.textContent = shown ? "" : "No prompts match “" + q + "”.";
   }

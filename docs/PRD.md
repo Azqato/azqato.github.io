@@ -1161,7 +1161,7 @@ python scripts/tools-site/browser.py   # Tools: every page, both themes, each to
 python scripts/prompts/browser.py      # Prompts: every page, both themes, search, Expand, Copy
 ```
 
-**Adding a prompt.** The full process and the rules every prompt follows are in [codes/prompts/docs/PRD.md](../codes/prompts/docs/PRD.md). In short: write `codes/prompts/md/<slug>.md` in the old site's format (frontmatter `title`, `description`, `meta`, optional `hidden: true`; a description; `## Prompt`; the prompt in one fenced block), add the slug to `ORDER` in `scripts/prompts/build.py`, then run the build (it reruns `scripts/codes/shell.py` itself), `build-nav.py` and the browser test. To rename or remove one, add the old slug to `RETIRED` so its address redirects; never reuse a slug. The prompt sources are exempt from the em dash hook (they are kept word for word); their pages are not.
+**Adding a prompt.** The full process and the rules every prompt follows are in [codes/prompts/docs/PRD.md](../codes/prompts/docs/PRD.md). In short: write `codes/prompts/md/<slug>.md` in the old site's format (frontmatter `title`, `description`, `meta`, optional `hidden: true`; a description; `## Prompt`; the prompt in one fenced block), add the slug to its category in `CATEGORIES` in `scripts/prompts/build.py`, then run the build (it reruns `scripts/codes/shell.py` itself), `build-nav.py` and the browser test. To rename or remove one, add the old slug to `RETIRED` so its address redirects; never reuse a slug. The prompt sources are exempt from the em dash hook (they are kept word for word); their pages are not.
 
 The closest thing to a build check is confirming page weight before pushing:
 

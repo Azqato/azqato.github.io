@@ -46,8 +46,15 @@ def cards(page, pattern):
 
 def contents():
     """The groups, as lists of (path under codes/, label)."""
-    prompts = [('prompts/%s/index.html' % h, t) for h, t in cards(
-        'prompts/index.html', r'<a class="prompt-list-item" href="([^"]+)"[^>]*><span class="prompt-list-title">(.*?)</span>')]
+    # The Prompts page lists its prompts under category headings; each heading
+    # becomes a (None, name) row, drawn as a small label inside the group.
+    page = (CODES / 'prompts/index.html').read_text(encoding='utf-8')
+    prompts = []
+    for name, body in re.findall(r'<h3 class="prompt-cat-title"[^>]*>(.*?)</h3>(.*?)</section>', page, re.S):
+        prompts.append((None, html.unescape(name)))
+        prompts += [('prompts/%s/index.html' % h.rstrip('/').removesuffix('/index.html'), html.unescape(t))
+                    for h, t in re.findall(r'<a class="prompt-list-item" href="([^"]+)"[^>]*>'
+                                           r'<span class="prompt-list-title">(.*?)</span>', body)]
     tools = [('tools/%s/index.html' % h, t) for h, t in cards(
         'tools/index.html', r'<a class="tool-card[^"]*" href="([^"]+)"[^>]*>.*?<h3[^>]*>(.*?)</h3>')]
     return [('', [('index.html', 'Home')]),
@@ -65,7 +72,8 @@ def rel(here, target):
 def sidebar(here, groups):
     parts = []
     for name, items in groups:
-        lis = ''.join('<li><a href="%s"%s>%s</a></li>' % (rel(here, p), ' aria-current="page"' if p == here else '',
+        lis = ''.join('<li class="cd-sub">%s</li>' % html.escape(label) if p is None else
+                      '<li><a href="%s"%s>%s</a></li>' % (rel(here, p), ' aria-current="page"' if p == here else '',
                                                         html.escape(label)) for p, label in items)
         if not name:
             parts.append('<div class="cd-group"><ul>%s</ul></div>' % lis)
@@ -79,7 +87,7 @@ def sidebar(here, groups):
 
 def pager(here, groups):
     flat = [(p, label if p != 'prompts/index.html' and p != 'tools/index.html' else g)
-            for g, items in groups for p, label in items]
+            for g, items in groups for p, label in items if p]
     flat = [(p, 'Codes home' if p == 'index.html' else label) for p, label in flat]
     i = [p for p, _ in flat].index(here)
     links = []
@@ -181,7 +189,7 @@ def main():
     check = '--check' in sys.argv
     groups = contents()
     stale = []
-    for here in [p for _, items in groups for p, _ in items]:
+    for here in [p for _, items in groups for p, _ in items if p]:
         path = CODES / here
         cur = path.read_text(encoding='utf-8', newline='')
         out = wrap(here, cur.replace('\r\n', '\n'), groups)
@@ -193,7 +201,7 @@ def main():
                 path.write_text(out, encoding='utf-8', newline='')
     for here in stale:
         print('%s: codes/%s' % ('out of date' if check else 'written', here))
-    print('%d pages in Codes' % sum(len(items) for _, items in groups))
+    print('%d pages in Codes' % sum(1 for _, items in groups for p, _ in items if p))
     return 1 if check and stale else 0
 
 

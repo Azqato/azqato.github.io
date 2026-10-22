@@ -16,7 +16,7 @@ full prompt text, so a link preview, a search engine and Claude's fetch tool
 all see the prompt itself. The .md file is published beside it, at
 prompts/md/<slug>.md, as the plain text an agent reads.
 
-To add a prompt: write codes/prompts/md/<slug>.md, add the slug to ORDER, run this
+To add a prompt: write codes/prompts/md/<slug>.md, add the slug to a list in CATEGORIES, run this
 (it reruns scripts/codes/shell.py) and build-nav.py. A hidden prompt keeps its page but leaves the list, search
 and sitemap. To rename or remove one, add its old slug to RETIRED; its old
 address then redirects (on azqato.com, via _redirects).
@@ -34,14 +34,19 @@ SRC = OUT / 'md'
 SITE = 'https://azqato.com/codes/prompts/'
 
 # The list order, as on the old site (its js/prompts-data.js).
-ORDER = [
-    'add-prompt', 'documentation', 'project-defaults', 'condense-docs', 'seo-audit',
-    'mobile-responsive-audit', 'github-wiki', 'prompt-audit',
-    'brand-identity', 'ios-simulator', 'game-setup', 'motion-design', 'assumption-check',
-    'progress-dashboard', 'launch-video', 'animation-performance', 'app-performance', 'design-review', 'landing-page',
-    'score-to-target', 'video-to-prompt', 'frontend-references', 'prompt-writing',
-    'linkedin-audit', 'url-structure', 'ecommerce-site', 'brand-tinted-neutrals',
+# The Prompts page and the Codes sidebar list the prompts under these headings,
+# in this order (owner's grouping, 2026-10-22). ORDER is the flat list.
+CATEGORIES = [
+    ('Documentation', ['documentation', 'project-defaults', 'condense-docs', 'seo-audit']),
+    ('Prompts', ['add-prompt', 'prompt-writing', 'prompt-audit']),
+    ('Audits and quality', ['mobile-responsive-audit', 'design-review', 'assumption-check', 'score-to-target']),
+    ('Build, test and performance', ['app-performance', 'animation-performance', 'ios-simulator', 'game-setup',
+                                     'progress-dashboard', 'github-wiki']),
+    ('Design and brand', ['brand-identity', 'brand-tinted-neutrals', 'motion-design', 'frontend-references',
+                          'landing-page', 'ecommerce-site', 'url-structure']),
+    ('Video and content', ['launch-video', 'video-to-prompt', 'linkedin-audit']),
 ]
+ORDER = [slug for _, slugs in CATEGORIES for slug in slugs]
 
 # Old slug -> current slug. Permanent, never chained, never reused.
 RETIRED = {'iphone-ipad-simulator': 'ios-simulator'}
@@ -175,10 +180,15 @@ HEAD = """<!DOCTYPE html>
 
 
 def home(prompts):
+    by = {p['slug']: p for p in prompts if not p['hidden']}
     items = '\n'.join(
-        '          <a class="prompt-list-item" href="%s/index.html" data-slug="%s"><span class="prompt-list-title">%s</span>'
-        '<span class="prompt-list-desc">%s</span></a>' % (p['slug'], p['slug'], esc(p['title']), esc(p['description']))
-        for p in prompts if not p['hidden'])
+        '        <section class="prompt-cat" aria-labelledby="cat-%d">\n'
+        '          <h3 class="prompt-cat-title" id="cat-%d">%s</h3>\n'
+        '          <div class="prompt-list">\n%s\n          </div>\n        </section>' % (n, n, esc(name), '\n'.join(
+            '            <a class="prompt-list-item" href="%s/index.html" data-slug="%s"><span class="prompt-list-title">%s</span>'
+            '<span class="prompt-list-desc">%s</span></a>' % (p['slug'], p['slug'], esc(p['title']), esc(p['description']))
+            for p in (by[s] for s in slugs if s in by)))
+        for n, (name, slugs) in enumerate(CATEGORIES, 1) if any(s in by for s in slugs))
     main = """        <section class="hero">
           <h1>Claude Code Prompts<span class="accent-dot">.</span></h1>
           <p class="lead">%s</p>
@@ -187,9 +197,7 @@ def home(prompts):
         <div class="pr-search">
           <input type="search" id="prompt-search" placeholder="Search prompts" aria-label="Search prompts" autocomplete="off" spellcheck="false" />
         </div>
-        <div class="prompt-list">
 %s
-        </div>
         <p class="search-empty" id="home-empty" role="status"></p>""" % (esc(SITE_INTRO), items)
     return HEAD.format(source='codes/prompts/md/', title=SITE_NAME, desc=esc(SITE_DESC), url=SITE, alt='',
                        og='Claude Code Prompts', up='../../', main=main)

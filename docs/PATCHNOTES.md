@@ -5,6 +5,16 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.38.0] - 2026-10-22
+
+### Added
+- **Prompt categories** (owner's grouping): Documentation (Documentation, Project Defaults, Condense Docs, SEO Audit),
+Prompts, Audits and quality, Build, test and performance, Design and brand, and Video and content. The Prompts page
+lists each under its heading (a heading hides when search leaves it empty), and the Codes sidebar shows the same
+headings as small labels inside the Prompts group. Previous / Next follows the new order. `CATEGORIES` in
+`scripts/prompts/build.py` is the one list; `ORDER` is derived from it, and `scripts/codes/shell.py` reads the headings
+from the Prompts page.
+
 ## [2.37.0] - 2026-10-22
 
 ### Removed

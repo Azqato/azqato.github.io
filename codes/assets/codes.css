@@ -59,6 +59,15 @@
   text-decoration: none;
 }
 
+.cd-group .cd-sub {
+  padding: 10px 10px 2px;
+  color: var(--ti-color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .cd-group a:hover {
   background: var(--ti-color-hover);
   color: var(--ti-color-text);

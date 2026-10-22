@@ -24,7 +24,7 @@ versions, and the old history sits at the end of [docs/PATCHNOTES.md](../../../d
 | Path | What it is |
 |---|---|
 | `codes/prompts/md/<slug>.md` | The source of each prompt. The only file edited by hand to change a prompt. Also served publicly as is. |
-| `scripts/prompts/build.py` | Turns the sources into pages. Holds `ORDER` (list order) and `RETIRED` (old slugs and where they now point). |
+| `scripts/prompts/build.py` | Turns the sources into pages. Holds `CATEGORIES` (the category headings and the list order within each; `ORDER` is derived from it) and `RETIRED` (old slugs and where they now point). |
 | `codes/prompts/index.html` | The list page. Generated. |
 | `codes/prompts/<slug>/index.html` | One page per prompt. Generated. |
 | `codes/prompts/assets/` | `prompts.js` (search, Expand, Copy) and the section's styles. Edited by hand. |
@@ -120,7 +120,8 @@ prompt has little to write.
 1. Pick a slug: lowercase, hyphenated, short, and never one that is or was in use (check `RETIRED`).
 2. Write `codes/prompts/md/<slug>.md` in the format above.
 3. Check the text against section 3. Count the title and description lengths with a script.
-4. Add the slug to `ORDER` in `scripts/prompts/build.py` where it should appear in the list.
+4. Add the slug to the right category in `CATEGORIES` in `scripts/prompts/build.py`, where it should appear in that
+   category's list. The Prompts page and the Codes sidebar both show it under that heading.
 5. Run the build and checks (section 8).
 6. Add a site patch-notes entry (section 9).
 
@@ -131,10 +132,10 @@ The Add Prompt prompt (`md/add-prompt.md`) walks Claude through these steps from
 - **Editing** a prompt: change its `.md` file, rerun the build and checks, and add a patch-notes entry.
 - **Hiding:** add `hidden: true`. The page stays live at its address but leaves the list, search and the sitemap. Use it
   for a prompt that is still linked from somewhere but should no longer be offered.
-- **Renaming:** `git mv` the source to the new slug, update `ORDER`, and add `'<old>': '<new>'` to `RETIRED`. The build
+- **Renaming:** `git mv` the source to the new slug, update `CATEGORIES`, and add `'<old>': '<new>'` to `RETIRED`. The build
   writes a 301 from the old address. Search the site for the old slug and title and fix anything that describes the
   present.
-- **Removing:** delete the source, take it out of `ORDER`, and add it to `RETIRED` pointing at the list page or the
+- **Removing:** delete the source, take it out of `CATEGORIES`, and add it to `RETIRED` pointing at the list page or the
   nearest replacement. Its address is public, so it is retired, never just dropped.
 - `RETIRED` entries are permanent, never chain (point at the final page directly) and are never reused.
 - Past patch notes keep the names a prompt had at the time. They are a record, not a description of now.
@@ -166,7 +167,7 @@ python scripts/prompts/browser.py         # every page, both themes, desktop and
 When the build writes a page it reruns `scripts/codes/shell.py` itself, so the Contents sidebar, crumbs and byline are
 never lost. `--check` ignores what `shell.py` and `build-nav.py` add, so it passes on a clean tree.
 
-The build stops if `ORDER` and the files in `md/` disagree. The browser test runs headless Edge and covers each page in
+The build stops if `CATEGORIES` and the files in `md/` disagree. The browser test runs headless Edge and covers each page in
 both themes at both widths with contrast checks, search, the Contents sidebar and Previous / Next, the collapsed start,
 Expand, the exact Copy pointer, that Copy never collapses the prompt, that the page text matches its source, and that a
 source file is served unchanged. A change is ready when all three checks pass.
