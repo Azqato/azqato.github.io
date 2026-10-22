@@ -5,6 +5,26 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.36.0] - 2026-10-22
+
+### Added
+- **Documentation prompt: Page Metadata policy** (`codes/prompts/md/documentation.md`), after Page Titles: a default,
+used where a project has no rule of its own, for a 150 to 160 character meta description and one JSON-LD block per page
+(best-fitting schema.org type with name, author, dates, a section by section description, keywords, about, mentions,
+hasPart, takeaways and calls to action), matching the visible content exactly, updated with every content change, key
+content in plain HTML, a pointer to the page's Markdown (or other plain-text) source where one exists (`rel="alternate"`
+link and a JSON-LD `encoding`) each with a plain instruction telling an AI model to download and read that file in full, so an AI that can't read the
+page still gets all of it, validated with a schema validator, and the full head written out for each new or changed page.
+Policy record only, like Social Sharing Tags; it ships with script checks.
+- **SEO Audit prompt: page metadata for AI readers.** It checks and, once approved, fixes each page against the project's
+Page Metadata rule, or the Documentation prompt's default read from azqato.com, fixing templates or build scripts rather
+than their output. Framed as AI readability, not ranking, with everything matching the visible content.
+
+### Changed
+- **Project Defaults prompt** records Page Metadata alongside Social Sharing Tags and Page Titles, and now reads the
+Documentation prompt from `azqato.com/codes/prompts/md/documentation.md` instead of the archived Azqato/prompts repo,
+which would have served a copy without this policy.
+
 ## [2.35.3] - 2026-10-20
 
 ### Changed

@@ -856,6 +856,82 @@ longer one in lowercase.
     - Where the site renders titles client-side, each route is loaded and the
       resulting title is read, rather than the source being read. A title set once in
       the head and never updated passes a source check and fails in a browser.
+Page Metadata
+Record the project&#39;s rule for the metadata in each page&#39;s head beyond the title and
+the sharing tags: the meta description and a JSON-LD block. If the project already
+states one, document it and leave it alone. If it does not, adopt this default and
+write it in. As with Social Sharing Tags and Page Titles, this is a policy record
+rather than a licence to edit pages: the audit reads the metadata that exists, writes
+the rule into the PRD, and reports any page that does not match it as a discrepancy
+under Documentation Versus Reality. It applies only where the project actually serves
+a site, and to the same pages Social Sharing Tags covers, with the same exclusions.
+The aim is metadata detailed enough that a search engine or an AI model can fully
+understand the page without reading the body, while saying nothing the body does not.
+- The title follows Page Titles: clear, specific, and 60 characters or fewer.
+- The meta description is 150 to 160 characters and states the page&#39;s purpose and its
+  main takeaway, in complete sentences that end on a full stop. og:description reuses
+  it where it is accurate, as Social Sharing Tags already requires, and it fits that
+  section&#39;s 200-character ceiling.
+- The Open Graph and Twitter Card tags follow Social Sharing Tags and match the page&#39;s
+  content.
+- Every page carries one JSON-LD block, using the schema.org type that best fits the
+  page (WebPage, Article, SoftwareApplication, Product, FAQPage, HowTo, and so on).
+  It includes:
+    - name, author, datePublished, and dateModified.
+    - description: a detailed, section by section account of everything on the page,
+      including its facts, figures, steps, features, prices, and conclusions. This is
+      a different field from the meta description, which stays short.
+    - keywords: every topic the page covers.
+    - about and mentions: every key entity, product, or concept on the page.
+    - hasPart: each major section, with its heading and a detailed explanation of
+      its content.
+    - All key takeaways and any calls to action the page makes.
+- The metadata matches the visible content exactly. No keyword stuffing, and no
+  claim, figure, or entity that is not on the page. Read it from the page, never infer
+  it from a filename, the same rule as everywhere else in this audit.
+- Whenever a page&#39;s content changes, its metadata changes in the same commit,
+  including dateModified. Metadata that describes a previous version of a page is a
+  discrepancy, not a style issue.
+- Important content is in the HTML as served, not only rendered by JavaScript, so a
+  crawler that does not run scripts still sees it. Where content is loaded or built at
+  runtime, the page still states in plain HTML what it shows and how, and the JSON-LD
+  describes that rather than values that change after load.
+- Where the page&#39;s full content also exists in a plain-text form an AI can read
+  directly, such as the Markdown file a page is built from, the metadata points to
+  it, so a model that cannot read the page (because the content is rendered by
+  JavaScript, or its tools fetch only a summary) can still get all of it. The head
+  carries `&lt;link rel=&quot;alternate&quot; type=&quot;text/markdown&quot; href=&quot;...&quot;&gt;` with the absolute
+  URL of that file, the JSON-LD names it as an `encoding` (a MediaObject with
+  contentUrl and encodingFormat &quot;text/markdown&quot;), and the visible page links it too.
+  None of these is a bare link. Each says, in plain words, what the file is and what
+  to do with it, written to the AI model reading the page: that the file holds the
+  page&#39;s complete content, that a model which cannot read the page, or whose tools
+  return only a summary, should download that file and read it in full, word for
+  word, before summarising or acting on it, and that the file is the source of truth
+  where the two differ. The alternate link&#39;s title attribute says this in one line,
+  the JSON-LD encoding&#39;s description says it in full, the start of the JSON-LD
+  description repeats it with the URL, and the visible link sits beside a short
+  sentence saying the same thing to people and machines alike.
+  Where a site publishes no such file, the JSON-LD description and hasPart carry the
+  whole content instead, as above.
+- Every JSON-LD block is validated with a schema validator (such as the Schema Markup
+  Validator at validator.schema.org, or Google&#39;s Rich Results Test) before publishing.
+- When a page is created or its head is changed, write out its complete head section,
+  so the title, description, sharing tags, and JSON-LD are reviewed together rather
+  than one field at a time.
+- Record the checks that decide whether a page complies. These checks read and report;
+  they do not rewrite.
+    - Every page in scope has a meta description of 150 to 160 characters and exactly
+      one JSON-LD block, with the counts done by a script.
+    - Every JSON-LD block parses as JSON and has a schema.org @type, name, author,
+      datePublished, dateModified, description, keywords, and hasPart.
+    - dateModified is not older than the page file&#39;s last change in version control.
+    - Every hasPart heading matches a heading visible on the page.
+    - Every page built from a Markdown or other plain-text source has the alternate
+      link and the JSON-LD encoding, both pointing at an address that loads, and each
+      carries the reading instruction rather than the URL alone.
+    - Where the project can run one, a schema validator passes every block; where it
+      cannot, say so rather than reporting a pass.
 Deprecation and Removal
 - Removal policy: first check whether the project already has a removal rule of its
   own, stated in its docs, in a contributing guide, or established by a consistent

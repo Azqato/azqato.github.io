@@ -31,6 +31,7 @@ Audit this site for search engines and fix what the code can fix. Goal: every pa
 - Title and meta description: every page has its own; titles about 60 characters or fewer, descriptions about 150 to 160, no duplicates across pages. Count with a script.
 - Headings: exactly one H1 per page, saying what the page is; no skipped heading levels.
 - Structured data: valid JSON-LD where it fits the content (Organization or Person, Article, Product, BreadcrumbList). FAQ markup no longer earns a rich result in Google; add it only where the page has a real FAQ, and never as a ranking tactic.
+- Page metadata for AI readers: use the project's Page Metadata rule from its PRD. Where it has none, fetch the Documentation prompt and read its Page Metadata section in full, word for word: https://azqato.com/codes/prompts/md/documentation.md (if your fetch tool summarizes pages, use curl; if you cannot read it in full, say so and skip this item). Check each page against that rule, including the pointer to a Markdown or other plain-text source with its reading instruction for AI models. This is for AI models that cannot read the page, not for ranking: search engines do not rank a page higher for long structured data, and markup that claims anything the page does not show can be treated as spam, so everything must match the visible content.
 - Breadcrumbs: on any site more than one level deep, visible breadcrumbs with matching BreadcrumbList markup.
 - Orphan pages: pages in the sitemap or routes that no other page links to.
 - Images: every meaningful image has alt text describing it, decorative ones have empty alt. Large images are served in WebP or AVIF at the size displayed, with width and height set.
@@ -44,6 +45,7 @@ Audit this site for search engines and fix what the code can fix. Goal: every pa
 
 4. Fix
 - Apply the approved fixes, smallest first. Follow the project's own rules and conventions; where a fix would break one (for example a no-build-step rule), say so and skip it.
+- Where pages are generated from templates or a build script, apply metadata fixes there rather than to the output, so every page gets them and a rebuild does not undo them.
 - Never invent content: no made-up author, credentials, reviews, testimonials, or statistics. Where something only I can supply is missing, leave a marked placeholder and list it.
 - Do not commit, push, or deploy.
 

@@ -11,7 +11,7 @@ Sets up the ground rules and the documentation skeleton a project needs, without
 ```
 Set up this project's standing rules and documentation structure, using sensible defaults. This is not an audit: do not review the codebase, and do not check existing documents against the code. The project's own rules and documents are the source of truth. The defaults only fill the gaps.
 
-The defaults are defined in the Documentation prompt. Before writing anything, fetch it and read it in full, word for word: https://raw.githubusercontent.com/Azqato/prompts/main/prompts/documentation.md. If your fetch tool summarizes or shortens pages, get the raw text another way, such as curl. If you cannot read it in full, stop and tell me. Use its folder structure, required sections, templates, and policy wording exactly. Do not run its audit steps.
+The defaults are defined in the Documentation prompt. Before writing anything, fetch it and read it in full, word for word: https://azqato.com/codes/prompts/md/documentation.md. If your fetch tool summarizes or shortens pages, get the raw text another way, such as curl. If you cannot read it in full, stop and tell me. Use its folder structure, required sections, templates, and policy wording exactly. Do not run its audit steps.
 
 Run the whole setup in one pass without stopping to ask me anything. Where a decision is needed, take the default. Where there is none, take the most conservative option: keep existing text, and create, move, or delete nothing that cannot easily be undone. Do all the work yourself in this session, with no subagents.
 
@@ -36,7 +36,7 @@ For each policy below, if the project has its own rule, record that rule under t
 - Testing Cadence
 - Repository Hygiene (a policy record only; do not create or edit an ignore file)
 - Licensing. Create LICENSE.md at the root only where the project has no licence of any kind, under the default posture. An existing licence file stays exactly where it is.
-- Social Sharing Tags and Page Titles, only where the project serves a site. Record the rule; do not edit any page.
+- Social Sharing Tags, Page Titles, and Page Metadata (meta description, JSON-LD, and the pointer to a plain-text source with its reading instruction), only where the project serves a site. Record the rule; do not edit any page.
 - Deprecation and Removal
 - Working Practice, including the docs/TODO.md rule, the verification checklist rule, and each rule in CLAUDE.md, with a line saying CLAUDE.md is the copy Claude reads and the two change together
 - Under the Roadmap, a verification checklist listing every PRD and DESIGN.md section that describes the code, each marked not yet verified
