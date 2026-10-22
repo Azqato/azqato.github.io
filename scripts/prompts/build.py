@@ -35,11 +35,12 @@ SITE = 'https://azqato.com/codes/prompts/'
 
 # The list order, as on the old site (its js/prompts-data.js).
 ORDER = [
-    'add-prompt', 'documentation', 'mobile-responsive-audit', 'github-wiki', 'prompt-audit',
+    'add-prompt', 'documentation', 'project-defaults', 'condense-docs', 'seo-audit',
+    'mobile-responsive-audit', 'github-wiki', 'prompt-audit',
     'brand-identity', 'ios-simulator', 'game-setup', 'motion-design', 'assumption-check',
     'progress-dashboard', 'launch-video', 'animation-performance', 'app-performance', 'design-review', 'landing-page',
-    'score-to-target', 'video-to-prompt', 'frontend-references', 'prompt-writing', 'project-defaults',
-    'linkedin-audit', 'condense-docs', 'seo-audit', 'url-structure', 'ecommerce-site', 'brand-tinted-neutrals',
+    'score-to-target', 'video-to-prompt', 'frontend-references', 'prompt-writing',
+    'linkedin-audit', 'url-structure', 'ecommerce-site', 'brand-tinted-neutrals',
 ]
 
 # Old slug -> current slug. Permanent, never chained, never reused.

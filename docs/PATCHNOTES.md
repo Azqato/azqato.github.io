@@ -5,6 +5,19 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.37.0] - 2026-10-22
+
+### Removed
+- **docs/TODO.md is no longer part of the prompt standards** (owner's request). The Documentation prompt drops the
+TODO.md section (template, ideas-to-Roadmap steps), its place in the folder tree, the rules check, and the Working
+Practice rule; Project Defaults no longer creates it or records its rule. An existing TODO or ideas file is treated as a
+Project File: left where it is, unchanged, never created or folded into the four documents. This site's own
+docs/TODO.md is unaffected.
+
+### Changed
+- **Prompt order**: Project Defaults, Condense Docs and SEO Audit now follow Documentation in the Prompts list and
+navigation (`ORDER` in `scripts/prompts/build.py`).
+
 ## [2.36.0] - 2026-10-22
 
 ### Added

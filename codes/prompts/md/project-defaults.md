@@ -4,7 +4,7 @@ description: Give any project clear house rules and a ready docs folder in one q
 meta: Claude Code Prompt
 ---
 
-Sets up the ground rules and the documentation skeleton a project needs, without the full review the Documentation prompt does. It puts the four documents and the ideas list in place with their headings, writes the standing rules (patch notes on every change, when to test, how to handle secrets, licensing, and the rest) into the PRD, and adds the root files a site needs. Anything the project has already decided wins: its own rules and documents are kept exactly as they are, the defaults only fill the gaps, and any clash is listed for you rather than changed. It reads no source code and checks nothing against it, so it is quick on any project; the sections it cannot write without that review get a placeholder heading, ready for a Documentation run later.
+Sets up the ground rules and the documentation skeleton a project needs, without the full review the Documentation prompt does. It puts the four documents in place with their headings, writes the standing rules (patch notes on every change, when to test, how to handle secrets, licensing, and the rest) into the PRD, and adds the root files a site needs. Anything the project has already decided wins: its own rules and documents are kept exactly as they are, the defaults only fill the gaps, and any clash is listed for you rather than changed. It reads no source code and checks nothing against it, so it is quick on any project; the sections it cannot write without that review get a placeholder heading, ready for a Documentation run later.
 
 ## Prompt
 
@@ -24,7 +24,6 @@ Run the whole setup in one pass without stopping to ask me anything. Where a dec
 - Create /docs if it is missing. Leave existing files where they are: do not move, merge, rename, or delete any document, including one that the Documentation prompt would move into /docs. List those under Questions instead.
 - For each of README.md, docs/PRD.md, docs/DESIGN.md, and docs/PATCHNOTES.md: if it does not exist, create it with every required section from the Documentation prompt as a heading, each followed by one line: "Not yet written. A Documentation run fills this in." If it exists, add only the required headings it lacks, with the same line, and change none of its existing text.
 - Fill in what needs no review: the project name, and in the README, the live site link or a plain statement that there is no hosted instance, where the files you read give it. Mark anything you are unsure of as uncertain.
-- docs/TODO.md: if missing, create it with the exact template the Documentation prompt gives. If an ideas list exists elsewhere, leave it and list it under Questions.
 - docs/PATCHNOTES.md: if it has no entries, add a first one, v0.1.0 unless the project already states a version, dated from the system clock, recording this setup.
 - CLAUDE.md: do not create one if it is missing. If it exists, leave it unchanged.
 
@@ -38,7 +37,7 @@ For each policy below, if the project has its own rule, record that rule under t
 - Licensing. Create LICENSE.md at the root only where the project has no licence of any kind, under the default posture. An existing licence file stays exactly where it is.
 - Social Sharing Tags, Page Titles, and Page Metadata (meta description, JSON-LD, and the pointer to a plain-text source with its reading instruction), only where the project serves a site. Record the rule; do not edit any page.
 - Deprecation and Removal
-- Working Practice, including the docs/TODO.md rule, the verification checklist rule, and each rule in CLAUDE.md, with a line saying CLAUDE.md is the copy Claude reads and the two change together
+- Working Practice, including the verification checklist rule, and each rule in CLAUDE.md, with a line saying CLAUDE.md is the copy Claude reads and the two change together
 - Under the Roadmap, a verification checklist listing every PRD and DESIGN.md section that describes the code, each marked not yet verified
 Where a project's rule and a default differ, keep the project's rule and list the difference under Questions. Never replace one with the other.
 
