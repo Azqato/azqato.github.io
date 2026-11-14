@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.39.1] - 2026-11-14
+
+### Changed
+- **Weekly Investing Report: Market mood replaces CNN Fear & Greed** (owner's rule: everything on the page must be
+fetchable, with nothing sent by hand each week; CNN blocks automated fetches). Five indicators, this week against last
+week: S&P 500 against its 125-day average, the share of S&P 500 stocks above their 200-day average, the VIX and its gap
+to its 50-day average, SPY minus TLT over 20 days, and the high-yield bond spread from FRED with its 1-year average.
+For Nov 13: 0.4% below, 67.1%, 19.3 (11% above), -0.7 pts and 3.20%.
+
+### Added
+- **Explain buttons** on each of the report's five sections, opening an in-page popup written for a reader with no
+investing background: what the section is, what it means, guidelines to keep in mind, where the data comes from and
+how it is calculated, and takeaways. The Export leaves the buttons out, since a printed page has nothing to click.
+
 ## [2.39.0] - 2026-11-14
 
 ### Added

@@ -53,6 +53,16 @@
   .btn { font:inherit; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text); cursor:pointer; }
   .btn:hover { border-color:var(--muted); }
   .slide { margin-top:36px; }
+  .sh { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:4px; }
+  .sh h2 { margin:0; }
+  .explain { font-size:0.8rem; padding:4px 12px; }
+  dialog { max-width:680px; width:calc(100% - 32px); max-height:85vh; padding:0; border:1px solid var(--line); border-radius:12px; background:var(--bg); color:var(--text); }
+  dialog::backdrop { background:rgba(0,0,0,.55); }
+  .dh { position:sticky; top:0; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:16px 20px; background:var(--bg); border-bottom:1px solid var(--line); }
+  .dh h3 { margin:0; font-size:1.1rem; }
+  .db { padding:4px 20px 20px; }
+  .db h4 { margin:18px 0 4px; font-size:0.95rem; }
+  .db p { margin:0; line-height:1.65; }
   footer { color:var(--muted); font-size:0.78rem; margin-top:40px; border-top:1px solid var(--line); padding-top:12px; }
   @media (max-width:640px) { .two, .comp { grid-template-columns:1fr; } .sent { grid-template-columns:1fr 1fr; } }
 </style>
@@ -65,34 +75,20 @@
 </div>
 
 <section class="slide">
-<h2>Major indices</h2>
+<div class="sh"><h2>Major indices</h2><button class="btn explain" type="button" data-x="indices">Explain</button></div>
 <p class="lede">Price change from last Friday's close and from the last close of 2025. Price only; dividends are not included.</p>
 <div class="card wrap"><table id="idx"></table></div>
 </section>
 
 <section class="slide">
-<h2>CNN Fear &amp; Greed Index</h2>
-<p class="lede">CNN's 0 to 100 reading of market mood, built from seven indicators.</p>
-<div class="card">
-  <div class="two">
-    <div class="big"><div class="k">This week</div><div class="v fe">39</div><div class="lab fe">Fear</div></div>
-    <div class="big"><div class="k">Last week</div><div class="v ef">24</div><div class="lab ef">Extreme Fear</div></div>
-  </div>
-  <div class="scale" style="margin-top:4px">1 month ago: <span class="ne">Neutral 45</span> · 1 year ago: <span class="ef">Extreme Fear 24</span></div>
-  <div class="comp">
-    <div>Market Momentum = <b class="ef">Extreme Fear</b></div><div>Put and Call Options = <b>–</b></div>
-    <div>Stock Price Strength = <b class="fe">Fear</b></div><div>Market Volatility = <b>–</b></div>
-    <div>Stock Price Breadth = <b>–</b></div><div>Safe Haven Demand = <b>–</b></div>
-    <div>Junk Bond Demand = <b>–</b></div>
-  </div>
-  <div class="scale"><span class="ef">0-25 Extreme Fear</span><span class="fe">26-44 Fear</span><span class="ne">45-55 Neutral</span><span class="gr">56-75 Greed</span><span class="eg">76-100 Extreme Greed</span></div>
-  <div class="todo">Demo: five indicator ratings still to fill in from CNN's page.</div>
-  <div class="src">As of Friday's close (CNN, last updated Nov 13, 6:59 pm ET). Source: CNN Business, Fear &amp; Greed Index.</div>
-</div>
+<div class="sh"><h2>Market mood</h2><button class="btn explain" type="button" data-x="mood">Explain</button></div>
+<p class="lede">Five readings of how investors are positioned, each measured the same way every week. A reading describes the market; it is not a forecast.</p>
+<div class="card wrap"><table id="mood"></table></div>
+<div class="src">Sources: Yahoo Finance (S&amp;P 500, VIX, SPY, TLT and the S&amp;P 500 members); ICE BofA US High Yield Index option-adjusted spread from the Federal Reserve Bank of St. Louis (FRED), whose latest reading is <span id="hyDate"></span>.</div>
 </section>
 
 <section class="slide">
-<h2>AAII Investor Sentiment</h2>
+<div class="sh"><h2>AAII Investor Sentiment</h2><button class="btn explain" type="button" data-x="aaii">Explain</button></div>
 <p class="lede">The AAII Sentiment Survey asks individual investors where they think the market is heading in the next six months.</p>
 <div class="card">
   <div class="hl"><span class="bull">1-Year Bullish High: 49.5% (1/14/2026)</span><span class="bear">1-Year Bearish High: 53.3% (9/16/2026)</span></div>
@@ -107,23 +103,88 @@
 </section>
 
 <section class="slide">
-<h2>Bond yields</h2>
+<div class="sh"><h2>Bond yields</h2><button class="btn explain" type="button" data-x="yields">Explain</button></div>
 <p class="lede">US Treasury yields. Changes are in basis points (100 bps = 1 percentage point).</p>
 <div class="card wrap"><table id="yld"></table></div>
 </section>
 
 <section class="slide">
-<h2>Oil, gold and crypto</h2>
+<div class="sh"><h2>Oil, gold and crypto</h2><button class="btn explain" type="button" data-x="cmd">Explain</button></div>
 <p class="lede">Futures for oil and gold. Crypto trades around the clock, so its price is the latest at fetch time.</p>
 <div class="tiles" id="cmd"></div>
 <h3 class="sub2">Volatility and the dollar</h3>
 <div class="tiles" id="oth"></div>
 </section>
 
+<template id="x-indices" data-title="Major indices, explained">
+<h4>What it is</h4>
+<p>An index is a list of companies whose stock prices are combined into one number, so you can see how a whole part of the market is doing at a glance. You can't buy an index itself, but you can buy a fund that holds every company in it. The four funds in this table are among the biggest: SPY follows the S&amp;P 500 (500 large US companies), QQQ follows the Nasdaq 100 (the 100 largest non-financial companies on the Nasdaq exchange, many of them tech companies), IWM follows the Russell 2000 (2,000 smaller US companies), and DIA follows the Dow Jones (30 large, well-known companies).</p>
+<h4>What it means</h4>
+<p>"This week" is how much the fund's price changed from last Friday's close to this Friday's close. "Year to date" is how much it has changed since the last trading day of last year. A positive number means the price went up, and a negative one means it went down. Comparing the four shows which part of the market led: if QQQ rose the most, large tech companies did best that week; if IWM led, smaller companies did.</p>
+<h4>Guidelines to keep in mind</h4>
+<p>One week is a very short time. It is normal for stock prices to rise or fall a few percent in a week for no lasting reason, so year to date gives better context than a single week. Over many decades, US stocks have grown about 10% a year on average with dividends included, but that average includes years with big losses. Compare funds against each other rather than reading too much into one number on its own.</p>
+<h4>Where the data comes from</h4>
+<p>Closing prices come from Yahoo Finance. The weekly change is this Friday's close divided by last Friday's close, minus 1, shown as a percent. Year to date works the same way, using the close on the last trading day of last year. These are price changes only: dividends are not included, so a fund that pays dividends returned a little more than the number shown.</p>
+<h4>Takeaways</h4>
+<p>Think of this table as the scoreboard. It tells you what happened, not what will happen next. Long-term results come mostly from time spent invested rather than from any one week, so a strong or weak week is a reason to understand what moved, not a reason on its own to change a plan.</p>
+</template>
+
+<template id="x-mood" data-title="Market mood, explained">
+<h4>What it is</h4>
+<p>Investors are people, and how confident or nervous they feel shows up in prices. This section tracks five measurements that tend to change when investors as a group are feeling confident or worried. Each one is measured the same way every week, so you can compare this week to last week fairly.</p>
+<h4>What it means</h4>
+<p><b>Momentum</b> compares the S&amp;P 500 with its average price over the last 125 trading days (about six months); above the average means prices have been climbing. <b>Breadth</b> is the share of the 500 companies trading above their own 200-day average; a high number means most companies are rising together, and a low one means a few big companies are carrying the index. <b>Volatility</b> is the VIX, which measures how big the market's swings are expected to be over the next 30 days; it is often called the "fear gauge," with readings under 20 usually calm and over 30 usually stressed. <b>Safe-haven demand</b> compares stocks (SPY) with long-term government bonds (TLT) over 20 trading days; when people are worried they move money into bonds, so a negative number means bonds did better. <b>Junk bond demand</b> is the extra interest that companies with weaker finances must pay to borrow, compared with the government; that gap widens when lenders get nervous.</p>
+<h4>Guidelines to keep in mind</h4>
+<p>No single reading tells the whole story. Look at whether the five agree: if most point the same way, the mood is clear; if they disagree, the market is mixed. Extremes matter more than readings near the middle. Mood describes how people feel right now, and it can change quickly; historically, very fearful periods have often come near market lows, but mood has never been a reliable way to pick the exact day to buy or sell.</p>
+<h4>Where the data comes from</h4>
+<p>Momentum, breadth, volatility and safe-haven demand are calculated from Yahoo Finance closing prices. Momentum is the S&amp;P 500 divided by its 125-day average, minus 1. Breadth counts how many S&amp;P 500 members closed above their 200-day average. The VIX gap is the VIX divided by its 50-day average, minus 1. Safe-haven demand is SPY's 20-day return minus TLT's 20-day return. The junk bond spread is the ICE BofA US High Yield Index option-adjusted spread, published daily by the Federal Reserve Bank of St. Louis (FRED).</p>
+<h4>Takeaways</h4>
+<p>Mood moves much faster than the businesses underneath it. A company does not become half as valuable because investors had a nervous week, which is why these readings are best used to understand the headlines, and to notice when your own feelings are simply following the crowd.</p>
+</template>
+
+<template id="x-aaii" data-title="AAII Investor Sentiment, explained">
+<h4>What it is</h4>
+<p>The American Association of Individual Investors (AAII) is a nonprofit group for everyday investors. Since 1987 it has asked its members the same question every week: do you think the stock market will be higher, about the same, or lower six months from now? "Bullish" means they expect it to go up, "bearish" means they expect it to go down, and "neutral" means they expect little change.</p>
+<h4>What it means</h4>
+<p>The three percentages add up to 100% and show how the people who answered are leaning. Comparing them with the historical average shows whether this week is unusual: over time, about 37.5% have been bullish, 31% neutral and 31.5% bearish. When the bearish number is far above its average, individual investors are more pessimistic than usual, and when the bullish number is far above, they are more optimistic than usual.</p>
+<h4>Guidelines to keep in mind</h4>
+<p>Many investors read this survey as a "contrarian" signal: extreme pessimism has often shown up near market lows and extreme optimism near highs, because by the time almost everyone is scared, many have already sold. That pattern is loose, not a rule. The survey is a few hundred people who chose to answer, so a single week can jump around; the trend over several weeks says more than any one reading.</p>
+<h4>Where the data comes from</h4>
+<p>Every number in this section is published by AAII at aaii.com/sentimentsurvey. Each survey week ends on a Wednesday and the results come out on Thursday. The page shows this week, last week, three weeks ago, AAII's historical averages, and the highest bullish and bearish readings of the past year exactly as AAII reports them; nothing is recalculated.</p>
+<h4>Takeaways</h4>
+<p>This survey is a mirror of how regular investors feel. It is most useful as a check on your own emotions: if you feel the urge to sell when everyone is gloomy, or to buy because everyone is excited, this is a reminder that the crowd's mood is already part of the price.</p>
+</template>
+
+<template id="x-yields" data-title="Bond yields, explained">
+<h4>What it is</h4>
+<p>When the US government needs to borrow money, it sells bonds called Treasuries. A bond is a loan: you give the government money now, it pays you interest, and it pays the money back on a set date. The yield is the yearly interest rate a buyer earns by holding the bond until that date. Treasuries come in different lengths, from 3 months to 30 years, and this table shows four of them.</p>
+<h4>What it means</h4>
+<p>When a yield goes up, borrowing becomes more expensive across the economy, because mortgages, car loans and company loans are priced off these rates; savers, on the other hand, earn more. Changes are shown in basis points, where 100 basis points equals 1 percentage point, so "+29 bps" means the yield rose by 0.29 points. Short-term yields mostly follow the interest rate set by the Federal Reserve, while long-term yields reflect what investors expect for growth and inflation over many years. Normally longer bonds pay more; when short-term yields are higher than long-term ones, the "yield curve" is called inverted, which has often, but not always, come before a recession.</p>
+<h4>Guidelines to keep in mind</h4>
+<p>A move of 10 to 20 basis points in a week is notable, and 50 or more is large. Bond prices and yields move in opposite directions, like a seesaw: when yields rise, the price of existing bonds falls. Rising yields can weigh on stock prices, especially fast-growing companies, because a safe 5% from the government makes riskier investments look less attractive by comparison. The 10-year yield is the one most people watch, since mortgage rates tend to follow it.</p>
+<h4>Where the data comes from</h4>
+<p>The yields come from Yahoo Finance, which carries the Cboe Treasury yield indexes for the 13-week bill and the 5, 10 and 30-year notes and bonds. The change is this Friday's yield minus last Friday's (or minus the year-end yield, for year to date), multiplied by 100 to put it in basis points. The 2-year yield is left out for now because its data source was returning stale values.</p>
+<h4>Takeaways</h4>
+<p>Interest rates are the price of money, and they touch nearly everything: what a home costs to finance, what a savings account pays, and how investors value stocks. When the headlines say rates moved, this table shows by how much and for which lengths of loan.</p>
+</template>
+
+<template id="x-cmd" data-title="Oil, gold, crypto, volatility and the dollar, explained">
+<h4>What it is</h4>
+<p>This section tracks important prices outside the stock market. Oil is shown two ways: WTI, the US benchmark, and Brent, the global one. Gold is the metal people have used to store value for thousands of years. Bitcoin and Ethereum are the two largest cryptocurrencies, which are digital assets with no company or government behind them. The VIX measures how much the stock market is expected to swing, and the US Dollar Index measures the dollar against six major currencies, such as the euro and the Japanese yen.</p>
+<h4>What it means</h4>
+<p>Oil prices flow into gas prices and the cost of shipping almost everything, so they affect inflation. Gold often rises when people are worried or when they expect money to lose value. Crypto prices move mainly on investor demand and can swing far more than stocks. A higher VIX means bigger swings are expected. A stronger dollar makes imports and foreign travel cheaper for Americans, but makes US goods more expensive abroad, which can hurt companies that sell overseas.</p>
+<h4>Guidelines to keep in mind</h4>
+<p>These prices are much jumpier than the major stock indexes: a 10% week is ordinary for Bitcoin and not unusual for oil. Look for connections rather than reading each number alone. Rising oil can push up inflation, which can push up bond yields; gold and the dollar often move in opposite directions. Futures prices for oil and gold can differ slightly from the prices quoted in the news, which may use a different contract.</p>
+<h4>Where the data comes from</h4>
+<p>All prices come from Yahoo Finance. Oil and gold are the front-month futures contracts (CL=F for WTI, BZ=F for Brent, GC=F for gold). Bitcoin and Ethereum trade around the clock, every day, so their prices are the latest available when the report is made. The VIX is Cboe's volatility index, and the dollar index is the ICE US Dollar Index. Each change is the latest price divided by last Friday's (or year-end) price, minus 1.</p>
+<h4>Takeaways</h4>
+<p>These markets are the background to the stock market. When stocks have a strange week, the explanation is often here: an oil price jump, a sudden rush into gold, or a sharp move in the dollar. Reading them together gives a fuller picture than any one of them alone.</p>
+</template>
+<dialog id="dlg" aria-labelledby="dlgT"><div class="dh"><h3 id="dlgT"></h3><button class="btn" type="button" id="dlgX" aria-label="Close">Close</button></div><div class="db" id="dlgB"></div></dialog>
 <footer>Information only, not advice. Prices from Yahoo Finance. Preview, not yet linked from the site.</footer>
 </main>
 <script>
-var D = {"rows": [{"t": "SPY", "n": "S&P 500 (SPY)", "g": "idx", "last": 754.3699951171875, "wk": 735.2899780273438, "ye": 681.9199829101562, "d": "2026-11-13"}, {"t": "QQQ", "n": "Nasdaq 100 (QQQ)", "g": "idx", "last": 679.8900146484375, "wk": 656.0999755859375, "ye": 614.3099975585938, "d": "2026-11-13"}, {"t": "IWM", "n": "Russell 2000 (IWM)", "g": "idx", "last": 277.5400085449219, "wk": 273.6700134277344, "ye": 246.16000366210938, "d": "2026-11-13"}, {"t": "DIA", "n": "Dow Jones 30 (DIA)", "g": "idx", "last": 523.1500244140625, "wk": 512.219970703125, "ye": 480.57000732421875, "d": "2026-11-13"}, {"t": "^IRX", "n": "3-Month Treasury", "g": "yld", "last": 4.122000217437744, "wk": 4.0, "ye": 3.546999931335449, "d": "2026-11-13"}, {"t": "^FVX", "n": "5-Year Treasury", "g": "yld", "last": 4.980999946594238, "wk": 4.6479997634887695, "ye": 3.7219998836517334, "d": "2026-11-13"}, {"t": "^TNX", "n": "10-Year Treasury", "g": "yld", "last": 5.1539998054504395, "wk": 4.859000205993652, "ye": 4.163000106811523, "d": "2026-11-13"}, {"t": "^TYX", "n": "30-Year Treasury", "g": "yld", "last": 5.480999946594238, "wk": 5.260000228881836, "ye": 4.840000152587891, "d": "2026-11-13"}, {"t": "CL=F", "n": "Crude oil (WTI)", "g": "cmd", "last": 88.55999755859375, "wk": 90.83000183105469, "ye": 57.41999816894531, "d": "2026-11-13"}, {"t": "BZ=F", "n": "Crude oil (Brent)", "g": "cmd", "last": 95.83999633789062, "wk": 98.31999969482422, "ye": 60.849998474121094, "d": "2026-11-13"}, {"t": "GC=F", "n": "Gold", "g": "cmd", "last": 3886.300048828125, "wk": 4074.89990234375, "ye": 4341.10009765625, "d": "2026-11-13"}, {"t": "BTC-USD", "n": "Bitcoin", "g": "cmd", "last": 67182.3984375, "wk": 75746.9296875, "ye": 87508.828125, "d": "2026-11-14"}, {"t": "ETH-USD", "n": "Ethereum", "g": "cmd", "last": 1898.8399658203125, "wk": 2235.04736328125, "ye": 2967.03759765625, "d": "2026-11-14"}, {"t": "^VIX", "n": "VIX (volatility)", "g": "oth", "last": 19.299999237060547, "wk": 25.639999389648438, "ye": 14.949999809265137, "d": "2026-11-13"}, {"t": "DX-Y.NYB", "n": "US Dollar Index", "g": "oth", "last": 103.41000366210938, "wk": 102.30000305175781, "ye": 98.27999877929688, "d": "2026-11-13"}], "fetched": "2026-11-13 23:56"};
+var D = {"rows": [{"t": "SPY", "n": "S&P 500 (SPY)", "g": "idx", "last": 754.3699951171875, "wk": 735.2899780273438, "ye": 681.9199829101562, "d": "2026-11-13"}, {"t": "QQQ", "n": "Nasdaq 100 (QQQ)", "g": "idx", "last": 679.8900146484375, "wk": 656.0999755859375, "ye": 614.3099975585938, "d": "2026-11-13"}, {"t": "IWM", "n": "Russell 2000 (IWM)", "g": "idx", "last": 277.5400085449219, "wk": 273.6700134277344, "ye": 246.16000366210938, "d": "2026-11-13"}, {"t": "DIA", "n": "Dow Jones 30 (DIA)", "g": "idx", "last": 523.1500244140625, "wk": 512.219970703125, "ye": 480.57000732421875, "d": "2026-11-13"}, {"t": "^IRX", "n": "3-Month Treasury", "g": "yld", "last": 4.122000217437744, "wk": 4.0, "ye": 3.546999931335449, "d": "2026-11-13"}, {"t": "^FVX", "n": "5-Year Treasury", "g": "yld", "last": 4.980999946594238, "wk": 4.6479997634887695, "ye": 3.7219998836517334, "d": "2026-11-13"}, {"t": "^TNX", "n": "10-Year Treasury", "g": "yld", "last": 5.1539998054504395, "wk": 4.859000205993652, "ye": 4.163000106811523, "d": "2026-11-13"}, {"t": "^TYX", "n": "30-Year Treasury", "g": "yld", "last": 5.480999946594238, "wk": 5.260000228881836, "ye": 4.840000152587891, "d": "2026-11-13"}, {"t": "CL=F", "n": "Crude oil (WTI)", "g": "cmd", "last": 88.55999755859375, "wk": 90.83000183105469, "ye": 57.41999816894531, "d": "2026-11-13"}, {"t": "BZ=F", "n": "Crude oil (Brent)", "g": "cmd", "last": 95.83999633789062, "wk": 98.31999969482422, "ye": 60.849998474121094, "d": "2026-11-13"}, {"t": "GC=F", "n": "Gold", "g": "cmd", "last": 3886.300048828125, "wk": 4074.89990234375, "ye": 4341.10009765625, "d": "2026-11-13"}, {"t": "BTC-USD", "n": "Bitcoin", "g": "cmd", "last": 67182.3984375, "wk": 75746.9296875, "ye": 87508.828125, "d": "2026-11-14"}, {"t": "ETH-USD", "n": "Ethereum", "g": "cmd", "last": 1898.8399658203125, "wk": 2235.04736328125, "ye": 2967.03759765625, "d": "2026-11-14"}, {"t": "^VIX", "n": "VIX (volatility)", "g": "oth", "last": 19.299999237060547, "wk": 25.639999389648438, "ye": 14.949999809265137, "d": "2026-11-13"}, {"t": "DX-Y.NYB", "n": "US Dollar Index", "g": "oth", "last": 103.41000366210938, "wk": 102.30000305175781, "ye": 98.27999877929688, "d": "2026-11-13"}], "fetched": "2026-11-13 23:56", "mood": {"momentum": [-0.4294736819061673, -2.792735369046684], "volatility": [19.299999237060547, 25.639999389648438, 11.47563233068205, 51.51872882276778], "safehaven": [-0.7438103928870343, -11.053620385061237], "breadth": [67.13709677419355, 58.87096774193549, 496], "junk": [3.2, 3.42, 2.897671755725191, "2026-11-12"]}};
 var WEEK = "Week ending Friday, November 13, 2026";
 function pct(a, b) { return (a / b - 1) * 100; }
 function sg(n, d, u) { return (n >= 0 ? "+" : "") + n.toFixed(d) + (u || ""); }
@@ -146,8 +207,36 @@ function tiles(g) {
     return "<div class='tile'><div class='k'>" + r.n + "</div><div class='v'>" + money(r.last) + "</div><div class='d'>Week <span class='" + c(w) + "'>" + sg(w, 2, "%") + "</span> · YTD <span class='" + c(y) + "'>" + sg(y, 2, "%") + "</span></div></div>";
   }).join("");
 }
+// Market mood: each row is a measured fact, this week against last week.
+var M = D.mood;
+function ab(n, d, u) { return Math.abs(n).toFixed(d) + (u || "") + (n >= 0 ? " above" : " below"); }
+var MOOD = [
+  ["Momentum", "S&amp;P 500 against its 125-day average", ab(M.momentum[0], 1, "%"), ab(M.momentum[1], 1, "%")],
+  ["Breadth", "S&amp;P 500 stocks above their 200-day average", M.breadth[0].toFixed(1) + "%", M.breadth[1].toFixed(1) + "%"],
+  ["Volatility", "VIX, and its gap to its 50-day average", M.volatility[0].toFixed(1) + " (" + ab(M.volatility[2], 0, "%") + ")", M.volatility[1].toFixed(1) + " (" + ab(M.volatility[3], 0, "%") + ")"],
+  ["Safe-haven demand", "Stocks (SPY) minus Treasuries (TLT), 20-day return", sg(M.safehaven[0], 1, " pts"), sg(M.safehaven[1], 1, " pts")],
+  ["Junk bond demand", "High-yield bond spread over Treasuries (1-year average " + M.junk[2].toFixed(2) + "%)", M.junk[0].toFixed(2) + "%", M.junk[1].toFixed(2) + "%"]
+];
+document.getElementById("mood").innerHTML = "<tr><th>Indicator</th><th style='text-align:left'>What it measures</th><th>This week</th><th>Last week</th></tr>" + MOOD.map(function (r) {
+  return "<tr><td><b>" + r[0] + "</b></td><td style='text-align:left;white-space:normal;color:var(--muted)'>" + r[1] + "</td><td>" + r[2] + "</td><td>" + r[3] + "</td></tr>";
+}).join("");
+document.getElementById("hyDate").textContent = new Date(M.junk[3] + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 document.getElementById("cmd").innerHTML = tiles("cmd");
 document.getElementById("oth").innerHTML = tiles("oth");
+
+// ---- Explain: a plain-language popup per section ----
+var dlg = document.getElementById("dlg");
+document.querySelectorAll(".explain").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var t = document.getElementById("x-" + b.dataset.x);
+    document.getElementById("dlgT").textContent = t.dataset.title;
+    document.getElementById("dlgB").innerHTML = t.innerHTML;
+    dlg.showModal();
+    dlg.scrollTop = 0;
+  });
+});
+document.getElementById("dlgX").addEventListener("click", function () { dlg.close(); });
+dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); }); // a click on the backdrop closes it
 
 // ---- Export: a self-contained US Letter report, one section per page ----
 // Each page is built from the live section's own markup, so the export can
@@ -174,7 +263,7 @@ function buildReport() {
   var n = slides.length;
   var pages = slides.map(function (s, i) {
     return "<section class='page'><header class='top'><div class='brand'>Azqato Invests<small>Weekly Investing Report</small></div>" +
-      "<div class='meta'>" + esc(WEEK) + "<br>Prices as of " + esc(D.fetched) + "</div></header>" + s.innerHTML +
+      "<div class='meta'>" + esc(WEEK) + "<br>Prices as of " + esc(D.fetched) + "</div></header>" + s.innerHTML.replace(/<button class="btn explain"[^>]*>Explain<\/button>/g, "") +
       "<footer><span>Information only, not advice. Prices from Yahoo Finance.</span><span>Page " + (i + 1) + " of " + n + "</span></footer></section>";
   }).join("");
   return "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Weekly Investing Report, " + esc(WEEK.replace("Week ending ", "")) + "</title>" +
