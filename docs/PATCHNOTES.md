@@ -5,6 +5,49 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.40.0] - 2026-11-14
+
+### Added
+- **Weekly Investing Report expands to nine pages built from the Index & ETF Method** (owner's plan, approved
+2026-11-14: no opinions, each reading's zone and the method's "What It Signals" text with a link, no "Recommended
+Posture"; every label one word):
+  - **This week**: a summary of facts from every page, on page 1 above Major indices.
+  - **AAII**: the bearish zone on a scale, this week against 1W, 3W or 4W back and the long-run average, the spread,
+weeks in a row with bearish above bullish and above 50%, the 1-year bearish high and a trend chart.
+  - **VIX** gets its own page: zone, 1W and 1M change, past-year percentile, 52-week range, term structure (VIX
+against VIX3M), days in each zone over the past year and a 3-month chart.
+  - **Timing signals** for the 10 major funds and, on a second page, the 11 sector funds: RSI(14), 52-week range
+position and the gap to the 200-day average, each labeled Strong, Neutral or Caution from the method's "What Strong
+Signals Look Like" table. Each fund also gets an "x of 5 Strong" count that includes the VIX and AAII, the combined
+AAII and VIX tier, and the method's dollar-cost-averaging caveat in its own words.
+  - **Sectors**: the 11 Select Sector SPDR funds, using the same columns as Major indices and sorted by the week's change.
+  - **"What the numbers show"** boxes, written by rules, on the AAII, VIX, Timing and Sectors pages.
+  - **VT** in Major indices, and a leader line for growth, value and dividend funds (VUG, VTV, VIG) over 1W, 1M and YTD.
+  - **The generator now lives in the repo** (`scripts/invests/weekly/`): `fetch.py` gets the numbers, `build.py`
+renders the page, and `check_export.py` fails if any Export page overflows the Letter sheet. `aaii_import.py` takes
+the owner's one-time AAII history download into a git-ignored folder. From then on the page also shows the bearish
+percentile since 1987 and past S&P 500 returns after weeks with bearish above 50%, marked "past results, not a
+forecast". Only those calculated figures are published, never the raw history.
+- **Index & ETF Method**: labels for the bands the method left open, approved by the owner: RSI 60 to 70 "Elevated",
+75% to 90% of the 52-week range "Upper", and "a few %" around the 200-day average defined as within 2%.
+
+### Changed
+- **Major indices returns are total returns** (dividends reinvested), the same basis as the ETF screener; they
+had been price only.
+- **Market mood** drops its VIX row, and the dollar tile page drops its VIX tile, now that the VIX has its own page.
+
+## [2.39.2] - 2026-11-14
+
+### Changed
+- **Weekly Investing Report** (owner's requests):
+  - **Major indices** adds five Vanguard funds: Growth (VUG), Value (VTV), Dividend (VIG), Domestic (VTI) and
+International (VXUS). The section's Explain popup describes each one. The table drops Price and shows Ticker,
+1W, 1M, 6M, YTD, 1Y, 5Y and 10Y price changes, each ending at Friday's close (a start date on a weekend or holiday
+uses the last close before it).
+  - **AAII Investor Sentiment** moves up to second, after Major indices.
+  - **Every change is colored by its sign**, green up and red down: bond yield changes, a new Change column in Market
+mood (this week minus last week), signed mood readings, and AAII's change from last week.
+
 ## [2.39.1] - 2026-11-14
 
 ### Changed

@@ -18,3 +18,8 @@ __pycache__/
 # in audio/), and Windows folder-settings files.
 music/*.mp3
 desktop.ini
+
+# The owner's one-time AAII sentiment history download (AAII member data),
+# imported by scripts/invests/weekly/aaii_import.py. Only statistics calculated
+# from it are published on the weekly report, never the history itself.
+scripts/invests/weekly/private/

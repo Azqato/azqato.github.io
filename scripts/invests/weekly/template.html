@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Unlisted preview (roadmap item 23): no page links here and it is left out of the sitemap and search until the owner launches it. -->
+<!-- Built by scripts/invests/weekly/build.py from template.html, explain.html and data/<friday>.json; edit those, not this file. -->
+<meta name="robots" content="noindex">
+<title>Weekly Investing Report - Azqato Invests</title>
+<style id="base">
+  :root { --bg:#ffffff; --card:#f9fafb; --text:#1f2328; --muted:#6b7280; --line:#e5e7eb; --up:#15803d; --down:#dc2626; --zs:#bbf7d0; --zn:#e5e7eb; --zn2:#d1d5db; --zc:#fecaca; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h2 { font-size:1.15rem; margin:0 0 4px; }
+  h3 { font-size:1rem; margin:0; }
+  a { color:inherit; }
+  .lede { color:var(--muted); font-size:0.88rem; margin:0 0 14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+  .wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+  th, td { padding:9px 10px; text-align:right; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { font-size:0.75rem; color:var(--muted); font-weight:600; }
+  th:first-child, td:first-child { text-align:left; }
+  tr:last-child td { border-bottom:0; }
+  .fn { color:var(--muted); font-size:0.8em; }
+  .up { color:var(--up); } .down { color:var(--down); } .mut { color:var(--muted); }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .tile .k { font-size:0.8rem; color:var(--muted); }
+  .tile .v { font-size:1.6rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .tile .d { font-size:0.85rem; font-variant-numeric:tabular-nums; }
+  .sub2 { font-size:0.95rem; margin:22px 0 10px; }
+  .sent { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; text-align:center; }
+  .sent > div { padding:8px 4px; }
+  .sent .k { font-weight:600; margin-bottom:6px; }
+  .sent .now { outline:2px solid var(--text); outline-offset:-2px; border-radius:8px; }
+  .wow { font-size:0.78rem; color:var(--muted); margin-top:4px; }
+  .bull { color:var(--up); } .bear { color:var(--down); } .neut { color:var(--muted); }
+  .hl { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:0.88rem; margin-bottom:14px; }
+  .src { color:var(--muted); font-size:0.75rem; margin-top:8px; }
+  .facts { margin:0; padding-left:20px; } .facts li { margin:3px 0; }
+  .lead { font-size:0.85rem; margin:10px 0 0; }
+  .ana { border:1px solid var(--line); border-left:4px solid var(--text); border-radius:8px; padding:10px 14px; font-size:0.86rem; margin-top:14px; background:var(--bg); }
+  .ana b:first-child { display:block; font-size:0.72rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+  .quote { font-size:0.82rem; color:var(--muted); margin:12px 0 0; }
+  .mx { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-top:14px; }
+  .mx > div { border:1px solid var(--line); border-radius:8px; padding:8px 10px; background:var(--bg); }
+  .mx .k { font-size:0.72rem; color:var(--muted); }
+  .mx .v { font-size:1.05rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .mx .d { font-size:0.76rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .zbar { position:relative; margin:34px 0 4px; }
+  .zseg { display:flex; height:14px; border-radius:7px; overflow:hidden; }
+  .zseg span { display:block; height:100%; }
+  .zs { background:var(--zs); } .zn { background:var(--zn); } .zn2 { background:var(--zn2); } .zc { background:var(--zc); }
+  .zlab { display:flex; font-size:0.68rem; color:var(--muted); margin-top:3px; }
+  .zlab span { text-align:center; overflow:hidden; white-space:nowrap; }
+  .zm { position:absolute; bottom:4px; transform:translateX(-50%); font-size:0.72rem; font-weight:700; text-align:center; white-space:nowrap; line-height:1.1; }
+  .zm::after { content:""; display:block; width:2px; height:22px; margin:2px auto 0; background:var(--text); }
+  .zm.prev { font-weight:400; color:var(--muted); }
+  .zm.prev::after { background:var(--muted); }
+  .chart svg { display:block; width:100%; height:auto; }
+  .chart text { font-size:11px; fill:var(--muted); }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-size:0.75rem; color:var(--muted); margin-top:4px; }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:-1px; }
+  .s-strong { color:var(--up); font-weight:600; } .s-caution { color:var(--down); font-weight:600; } .s-neutral { color:var(--muted); }
+  .key { font-size:0.75rem; color:var(--muted); margin-top:10px; }
+  .duo { display:grid; grid-template-columns:1fr 1.15fr; gap:18px; align-items:start; }
+  .big { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
+  .big .v { font-size:2.4rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .big .lab { font-weight:700; font-size:1.1rem; }
+</style>
+<style>
+  @media (prefers-color-scheme: dark) { :root { --bg:#0f1216; --card:#181c22; --text:#e6edf3; --muted:#9198a1; --line:#2d333b; --up:#4ade80; --down:#f87171; --zs:#14532d; --zn:#2d333b; --zn2:#3d444d; --zc:#7f1d1d; } }
+  main { max-width:960px; margin:0 auto; padding:32px 16px 64px; }
+  .head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+  h1 { font-size:1.7rem; margin:0; }
+  .sub { color:var(--muted); margin:4px 0 0; }
+  .btn { font:inherit; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text); cursor:pointer; }
+  .btn:hover { border-color:var(--muted); }
+  .slide { margin-top:36px; }
+  .sh { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:4px; }
+  .sh h2, .sh h3 { margin:0; }
+  .sh.s3 { margin-top:22px; }
+  .explain { font-size:0.8rem; padding:4px 12px; }
+  dialog { max-width:680px; width:calc(100% - 32px); max-height:85vh; padding:0; border:1px solid var(--line); border-radius:12px; background:var(--bg); color:var(--text); }
+  dialog::backdrop { background:rgba(0,0,0,.55); }
+  .dh { position:sticky; top:0; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:16px 20px; background:var(--bg); border-bottom:1px solid var(--line); }
+  .dh h3 { margin:0; font-size:1.1rem; }
+  .db { padding:4px 20px 20px; }
+  .db h4 { margin:18px 0 4px; font-size:0.95rem; }
+  .db p { margin:0 0 8px; line-height:1.65; }
+  footer { color:var(--muted); font-size:0.78rem; margin-top:40px; border-top:1px solid var(--line); padding-top:12px; }
+  @media (max-width:640px) { .sent, .mx { grid-template-columns:1fr 1fr; } .duo { grid-template-columns:1fr; } .zlab { font-size:0.6rem; } }
+</style>
+</head>
+<body>
+<main>
+<div class="head">
+  <div><h1>Weekly Investing Report</h1><p class="sub">__SUB__</p></div>
+  <button class="btn" id="export" type="button" title="Download the report as a US Letter HTML file, one section per page">⬇ Export</button>
+</div>
+__SECTIONS__
+__EXPLAIN__
+<dialog id="dlg" aria-labelledby="dlgT"><div class="dh"><h3 id="dlgT"></h3><button class="btn" type="button" id="dlgX" aria-label="Close">Close</button></div><div class="db" id="dlgB"></div></dialog>
+<footer>Information only, not advice. Prices from Yahoo Finance, sentiment from AAII, the high-yield spread from FRED. Preview, not yet linked from the site.</footer>
+</main>
+<script>
+var WEEK = "__WEEK__", FETCHED = "__FETCHED__";
+
+// ---- Explain: a plain-language popup per section ----
+var dlg = document.getElementById("dlg");
+document.querySelectorAll(".explain").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var t = document.getElementById("x-" + b.dataset.x);
+    document.getElementById("dlgT").textContent = t.dataset.title;
+    document.getElementById("dlgB").innerHTML = t.innerHTML;
+    dlg.showModal();
+    dlg.scrollTop = 0;
+  });
+});
+document.getElementById("dlgX").addEventListener("click", function () { dlg.close(); });
+dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); }); // a click on the backdrop closes it
+
+// ---- Export: a self-contained US Letter report, one section per page ----
+// Each page is built from the live section's own markup, so the export can
+// never disagree with the report. The base styles carry over in light colors
+// only (the dark-mode block is not copied), so the file prints as it shows.
+var PRINT_CSS =
+  "@page { size: letter; margin: 0; }" +
+  "* { -webkit-print-color-adjust:exact; print-color-adjust:exact; }" +
+  "body { background:#e5e7eb; }" +
+  ".page { width:8.5in; height:11in; padding:0.55in 0.6in; margin:0.3in auto; background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.15); display:flex; flex-direction:column; overflow:hidden; }" +
+  "@media print { body { background:#fff; } .page { margin:0; box-shadow:none; break-after:page; } .page:last-child { break-after:auto; } }" +
+  ".page > * { flex-shrink:0; }" +
+  "header.top { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:20px; }" +
+  ".brand { font-weight:700; font-size:11pt; } .brand small { display:block; font-weight:400; color:var(--muted); font-size:8.5pt; }" +
+  ".meta { text-align:right; color:var(--muted); font-size:8.5pt; }" +
+  ".page h2 { font-size:20pt; margin-bottom:4px; } .page h3 { font-size:13pt; } .page .sh.s3 { margin-top:16px; } .page .lede { font-size:10pt; margin-bottom:12px; }" +
+  ".page td, .page th { padding:7px 6px; } .page td { font-size:10.5pt; } .page th { font-size:8.5pt; }" +
+  ".page .tile .v { font-size:18pt; } .page .tile .k, .page .tile .d { font-size:9.5pt; }" +
+  ".page .tiles { grid-template-columns:repeat(3, 1fr); } .page .sub2 { font-size:12pt; margin-top:20px; }" +
+  ".page .card { padding:14px; } .page .ana, .page .facts { font-size:9.5pt; } .page .quote, .page .key, .page .src, .page .lead { font-size:8.5pt; }" +
+  ".page .mx .v { font-size:12pt; } .page .mx > div { padding:6px 9px; } .page .sent { font-size:10pt; } .page .sent > div { padding:4px; }" +
+  ".page .zbar { margin-top:28px; } .page .sub2 { margin:14px 0 6px; } .page .chart svg { max-height:1.35in; } .page .tt td { padding:5px 6px; } .page .tt th { padding:4px 6px; } .page .mx { gap:8px; margin-top:10px; }" +
+  ".page footer { margin-top:auto; display:flex; justify-content:space-between; color:var(--muted); font-size:7.5pt; border-top:1px solid var(--line); padding-top:6px; }";
+function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+function buildReport() {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var n = slides.length;
+  var pages = slides.map(function (s, i) {
+    return "<section class='page'><header class='top'><div class='brand'>Azqato Invests<small>Weekly Investing Report</small></div>" +
+      "<div class='meta'>" + esc(WEEK) + "<br>Prices as of " + esc(FETCHED) + "</div></header>" + s.innerHTML.replace(/<button class="btn explain"[^>]*>Explain<\/button>/g, "") +
+      "<footer><span>Information only, not advice. Yahoo Finance, AAII and FRED data.</span><span>Page " + (i + 1) + " of " + n + "</span></footer></section>";
+  }).join("");
+  return "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Weekly Investing Report, " + esc(WEEK.replace("Week ending ", "")) + "</title>" +
+    "<style>" + document.getElementById("base").textContent + PRINT_CSS + "</style></head><body>" + pages + "</body></html>";
+}
+document.getElementById("export").addEventListener("click", function () {
+  var url = URL.createObjectURL(new Blob([buildReport()], { type: "text/html" }));
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "Weekly Investing Report " + FETCHED.slice(0, 10) + ".html";
+  a.click();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+});
+</script>
+</body>
+</html>

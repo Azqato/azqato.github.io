@@ -1,0 +1,13 @@
+{
+ "source": "AAII Sentiment Survey, aaii.com/sentimentsurvey. Each reading is the survey week ending on that Wednesday, copied as published. Add each Thursday's new reading here, and update 'published' from the same page.",
+ "published": {
+  "avg": {"bull": 37.5, "neut": 31.0, "bear": 31.5},
+  "hi1y": {"bull": [49.5, "2026-01-14"], "neut": [31.4, "2026-03-04"], "bear": [53.3, "2026-09-16"]}
+ },
+ "weeks": [
+  {"d": "2026-10-21", "bull": 36.9, "neut": 17.3, "bear": 45.8},
+  {"d": "2026-10-28", "bull": 37.8, "neut": 20.7, "bear": 41.4},
+  {"d": "2026-11-04", "bull": 34.1, "neut": 17.5, "bear": 48.4},
+  {"d": "2026-11-11", "bull": 30.8, "neut": 17.8, "bear": 51.4}
+ ]
+}
