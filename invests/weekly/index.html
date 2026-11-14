@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Unlisted preview (roadmap item 23): no page links here and it is left out of the sitemap and search until the owner launches it. -->
+<meta name="robots" content="noindex">
+<title>Weekly Investing Report - Azqato Invests</title>
+<style id="base">
+  :root { --bg:#ffffff; --card:#f9fafb; --text:#1f2328; --muted:#6b7280; --line:#e5e7eb; --up:#15803d; --down:#dc2626; --ef:#dc2626; --f:#ea580c; --n:#6b7280; --g:#65a30d; --eg:#15803d; --todo:#b45309; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h2 { font-size:1.15rem; margin:0 0 4px; }
+  .lede { color:var(--muted); font-size:0.88rem; margin:0 0 14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; }
+  .wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+  th, td { padding:9px 10px; text-align:right; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { font-size:0.75rem; color:var(--muted); font-weight:600; }
+  th:first-child, td:first-child { text-align:left; }
+  tr:last-child td { border-bottom:0; }
+  .up { color:var(--up); } .down { color:var(--down); }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .tile .k { font-size:0.8rem; color:var(--muted); }
+  .tile .v { font-size:1.6rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .tile .d { font-size:0.85rem; font-variant-numeric:tabular-nums; }
+  .sub2 { font-size:0.95rem; margin:22px 0 10px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .big { text-align:center; padding:8px 0; }
+  .big .k { color:var(--muted); font-size:0.85rem; }
+  .big .v { font-size:2.4rem; font-weight:700; }
+  .big .lab { font-weight:600; }
+  .comp { display:grid; grid-template-columns:1fr 1fr; gap:4px 24px; margin-top:16px; font-size:0.9rem; }
+  .comp b { font-weight:600; }
+  .scale { display:flex; flex-wrap:wrap; gap:4px 14px; justify-content:center; font-size:0.78rem; margin-top:14px; }
+  .ef { color:var(--ef); } .fe { color:var(--f); } .ne { color:var(--n); } .gr { color:var(--g); } .eg { color:var(--eg); }
+  .sent { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; text-align:center; }
+  .sent > div { padding:8px 4px; }
+  .sent .k { font-weight:600; margin-bottom:6px; }
+  .sent .now { outline:2px solid var(--text); outline-offset:-2px; border-radius:8px; }
+  .bull { color:var(--up); } .bear { color:var(--down); } .neut { color:var(--muted); }
+  .hl { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:0.88rem; margin-bottom:14px; }
+  .todo { border:1px dashed var(--todo); color:var(--todo); border-radius:8px; padding:8px 12px; font-size:0.82rem; margin-top:12px; }
+  .src { color:var(--muted); font-size:0.75rem; margin-top:8px; }
+</style>
+<style>
+  @media (prefers-color-scheme: dark) { :root { --bg:#0f1216; --card:#181c22; --text:#e6edf3; --muted:#9198a1; --line:#2d333b; --up:#4ade80; --down:#f87171; --ef:#f87171; --f:#fb923c; --n:#9198a1; --g:#a3e635; --eg:#4ade80; --todo:#fbbf24; } }
+  main { max-width:960px; margin:0 auto; padding:32px 16px 64px; }
+  .head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+  h1 { font-size:1.7rem; margin:0; }
+  .sub { color:var(--muted); margin:4px 0 0; }
+  .btn { font:inherit; font-weight:600; font-size:0.9rem; padding:8px 16px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text); cursor:pointer; }
+  .btn:hover { border-color:var(--muted); }
+  .slide { margin-top:36px; }
+  footer { color:var(--muted); font-size:0.78rem; margin-top:40px; border-top:1px solid var(--line); padding-top:12px; }
+  @media (max-width:640px) { .two, .comp { grid-template-columns:1fr; } .sent { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+<main>
+<div class="head">
+  <div><h1>Weekly Investing Report</h1><p class="sub" id="sub"></p></div>
+  <button class="btn" id="export" type="button" title="Download the report as a US Letter HTML file, one section per page">⬇ Export</button>
+</div>
+
+<section class="slide">
+<h2>Major indices</h2>
+<p class="lede">Price change from last Friday's close and from the last close of 2025. Price only; dividends are not included.</p>
+<div class="card wrap"><table id="idx"></table></div>
+</section>
+
+<section class="slide">
+<h2>CNN Fear &amp; Greed Index</h2>
+<p class="lede">CNN's 0 to 100 reading of market mood, built from seven indicators.</p>
+<div class="card">
+  <div class="two">
+    <div class="big"><div class="k">This week</div><div class="v fe">39</div><div class="lab fe">Fear</div></div>
+    <div class="big"><div class="k">Last week</div><div class="v ef">24</div><div class="lab ef">Extreme Fear</div></div>
+  </div>
+  <div class="scale" style="margin-top:4px">1 month ago: <span class="ne">Neutral 45</span> · 1 year ago: <span class="ef">Extreme Fear 24</span></div>
+  <div class="comp">
+    <div>Market Momentum = <b class="ef">Extreme Fear</b></div><div>Put and Call Options = <b>–</b></div>
+    <div>Stock Price Strength = <b class="fe">Fear</b></div><div>Market Volatility = <b>–</b></div>
+    <div>Stock Price Breadth = <b>–</b></div><div>Safe Haven Demand = <b>–</b></div>
+    <div>Junk Bond Demand = <b>–</b></div>
+  </div>
+  <div class="scale"><span class="ef">0-25 Extreme Fear</span><span class="fe">26-44 Fear</span><span class="ne">45-55 Neutral</span><span class="gr">56-75 Greed</span><span class="eg">76-100 Extreme Greed</span></div>
+  <div class="todo">Demo: five indicator ratings still to fill in from CNN's page.</div>
+  <div class="src">As of Friday's close (CNN, last updated Nov 13, 6:59 pm ET). Source: CNN Business, Fear &amp; Greed Index.</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>AAII Investor Sentiment</h2>
+<p class="lede">The AAII Sentiment Survey asks individual investors where they think the market is heading in the next six months.</p>
+<div class="card">
+  <div class="hl"><span class="bull">1-Year Bullish High: 49.5% (1/14/2026)</span><span class="bear">1-Year Bearish High: 53.3% (9/16/2026)</span></div>
+  <div class="sent">
+    <div><div class="k">3 weeks ago<br><small class="neut">Oct 21</small></div><div class="bull">Bullish 36.9%</div><div class="neut">Neutral 17.3%</div><div class="bear">Bearish 45.8%</div></div>
+    <div><div class="k">Last week<br><small class="neut">Nov 4</small></div><div class="bull">Bullish 34.1%</div><div class="neut">Neutral 17.5%</div><div class="bear">Bearish 48.4%</div></div>
+    <div class="now"><div class="k">This week<br><small class="neut">Nov 11</small></div><div class="bull">Bullish 30.8%</div><div class="neut">Neutral 17.8%</div><div class="bear">Bearish 51.4%</div></div>
+    <div><div class="k">Historical average<br><small class="neut">since 1987</small></div><div class="bull">Bullish 37.5%</div><div class="neut">Neutral 31.0%</div><div class="bear">Bearish 31.5%</div></div>
+  </div>
+  <div class="src">Bull-bear spread this week: −20.6 points. Survey weeks end on Wednesday. Source: American Association of Individual Investors, Sentiment Survey (aaii.com/sentimentsurvey).</div>
+</div>
+</section>
+
+<section class="slide">
+<h2>Bond yields</h2>
+<p class="lede">US Treasury yields. Changes are in basis points (100 bps = 1 percentage point).</p>
+<div class="card wrap"><table id="yld"></table></div>
+</section>
+
+<section class="slide">
+<h2>Oil, gold and crypto</h2>
+<p class="lede">Futures for oil and gold. Crypto trades around the clock, so its price is the latest at fetch time.</p>
+<div class="tiles" id="cmd"></div>
+<h3 class="sub2">Volatility and the dollar</h3>
+<div class="tiles" id="oth"></div>
+</section>
+
+<footer>Information only, not advice. Prices from Yahoo Finance. Preview, not yet linked from the site.</footer>
+</main>
+<script>
+var D = {"rows": [{"t": "SPY", "n": "S&P 500 (SPY)", "g": "idx", "last": 754.3699951171875, "wk": 735.2899780273438, "ye": 681.9199829101562, "d": "2026-11-13"}, {"t": "QQQ", "n": "Nasdaq 100 (QQQ)", "g": "idx", "last": 679.8900146484375, "wk": 656.0999755859375, "ye": 614.3099975585938, "d": "2026-11-13"}, {"t": "IWM", "n": "Russell 2000 (IWM)", "g": "idx", "last": 277.5400085449219, "wk": 273.6700134277344, "ye": 246.16000366210938, "d": "2026-11-13"}, {"t": "DIA", "n": "Dow Jones 30 (DIA)", "g": "idx", "last": 523.1500244140625, "wk": 512.219970703125, "ye": 480.57000732421875, "d": "2026-11-13"}, {"t": "^IRX", "n": "3-Month Treasury", "g": "yld", "last": 4.122000217437744, "wk": 4.0, "ye": 3.546999931335449, "d": "2026-11-13"}, {"t": "^FVX", "n": "5-Year Treasury", "g": "yld", "last": 4.980999946594238, "wk": 4.6479997634887695, "ye": 3.7219998836517334, "d": "2026-11-13"}, {"t": "^TNX", "n": "10-Year Treasury", "g": "yld", "last": 5.1539998054504395, "wk": 4.859000205993652, "ye": 4.163000106811523, "d": "2026-11-13"}, {"t": "^TYX", "n": "30-Year Treasury", "g": "yld", "last": 5.480999946594238, "wk": 5.260000228881836, "ye": 4.840000152587891, "d": "2026-11-13"}, {"t": "CL=F", "n": "Crude oil (WTI)", "g": "cmd", "last": 88.55999755859375, "wk": 90.83000183105469, "ye": 57.41999816894531, "d": "2026-11-13"}, {"t": "BZ=F", "n": "Crude oil (Brent)", "g": "cmd", "last": 95.83999633789062, "wk": 98.31999969482422, "ye": 60.849998474121094, "d": "2026-11-13"}, {"t": "GC=F", "n": "Gold", "g": "cmd", "last": 3886.300048828125, "wk": 4074.89990234375, "ye": 4341.10009765625, "d": "2026-11-13"}, {"t": "BTC-USD", "n": "Bitcoin", "g": "cmd", "last": 67182.3984375, "wk": 75746.9296875, "ye": 87508.828125, "d": "2026-11-14"}, {"t": "ETH-USD", "n": "Ethereum", "g": "cmd", "last": 1898.8399658203125, "wk": 2235.04736328125, "ye": 2967.03759765625, "d": "2026-11-14"}, {"t": "^VIX", "n": "VIX (volatility)", "g": "oth", "last": 19.299999237060547, "wk": 25.639999389648438, "ye": 14.949999809265137, "d": "2026-11-13"}, {"t": "DX-Y.NYB", "n": "US Dollar Index", "g": "oth", "last": 103.41000366210938, "wk": 102.30000305175781, "ye": 98.27999877929688, "d": "2026-11-13"}], "fetched": "2026-11-13 23:56"};
+var WEEK = "Week ending Friday, November 13, 2026";
+function pct(a, b) { return (a / b - 1) * 100; }
+function sg(n, d, u) { return (n >= 0 ? "+" : "") + n.toFixed(d) + (u || ""); }
+function c(n) { return n > 0 ? "up" : n < 0 ? "down" : ""; }
+function money(n) { return n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function grp(g) { return D.rows.filter(function (r) { return r.g === g; }); }
+document.getElementById("sub").textContent = WEEK + ". Prices fetched " + D.fetched + " (local time).";
+document.getElementById("idx").innerHTML = "<tr><th>Fund</th><th>Price</th><th>This week</th><th>Year to date</th></tr>" + grp("idx").map(function (r) {
+  var w = pct(r.last, r.wk), y = pct(r.last, r.ye);
+  return "<tr><td>" + r.n + "</td><td>" + money(r.last) + "</td><td class='" + c(w) + "'>" + sg(w, 2, "%") + "</td><td class='" + c(y) + "'>" + sg(y, 2, "%") + "</td></tr>";
+}).join("");
+// Yields carry no good/bad color: a rising yield is not a gain or a loss.
+document.getElementById("yld").innerHTML = "<tr><th>Maturity</th><th>Yield</th><th>This week</th><th>Year to date</th></tr>" + grp("yld").map(function (r) {
+  var w = (r.last - r.wk) * 100, y = (r.last - r.ye) * 100;
+  return "<tr><td>" + r.n + "</td><td>" + r.last.toFixed(2) + "%</td><td>" + sg(w, 0, " bps") + "</td><td>" + sg(y, 0, " bps") + "</td></tr>";
+}).join("");
+function tiles(g) {
+  return grp(g).map(function (r) {
+    var w = pct(r.last, r.wk), y = pct(r.last, r.ye);
+    return "<div class='tile'><div class='k'>" + r.n + "</div><div class='v'>" + money(r.last) + "</div><div class='d'>Week <span class='" + c(w) + "'>" + sg(w, 2, "%") + "</span> · YTD <span class='" + c(y) + "'>" + sg(y, 2, "%") + "</span></div></div>";
+  }).join("");
+}
+document.getElementById("cmd").innerHTML = tiles("cmd");
+document.getElementById("oth").innerHTML = tiles("oth");
+
+// ---- Export: a self-contained US Letter report, one section per page ----
+// Each page is built from the live section's own markup, so the export can
+// never disagree with the report. The base styles carry over in light colors
+// only (the dark-mode block is not copied), so the file prints as it shows.
+var PRINT_CSS =
+  "@page { size: letter; margin: 0; }" +
+  "* { -webkit-print-color-adjust:exact; print-color-adjust:exact; }" +
+  "body { background:#e5e7eb; }" +
+  ".page { width:8.5in; height:11in; padding:0.6in; margin:0.3in auto; background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.15); display:flex; flex-direction:column; overflow:hidden; }" +
+  "@media print { body { background:#fff; } .page { margin:0; box-shadow:none; break-after:page; } .page:last-child { break-after:auto; } }" +
+  "header.top { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:28px; }" +
+  ".brand { font-weight:700; font-size:11pt; } .brand small { display:block; font-weight:400; color:var(--muted); font-size:8.5pt; }" +
+  ".meta { text-align:right; color:var(--muted); font-size:8.5pt; }" +
+  ".page h2 { font-size:22pt; margin-bottom:6px; } .page .lede { font-size:11pt; margin-bottom:22px; }" +
+  ".page td, .page th { padding:12px 10px; } .page td { font-size:13pt; } .page th { font-size:9pt; }" +
+  ".page .tile .v { font-size:20pt; } .page .tile .k, .page .tile .d { font-size:10pt; }" +
+  ".page .tiles { grid-template-columns:repeat(3, 1fr); } .page .sub2 { font-size:13pt; margin-top:28px; }" +
+  ".page .big .v { font-size:44pt; } .page .comp { font-size:11.5pt; gap:8px 24px; margin-top:28px; } .page .sent { font-size:11.5pt; }" +
+  ".page footer { margin-top:auto; display:flex; justify-content:space-between; color:var(--muted); font-size:7.5pt; border-top:1px solid var(--line); padding-top:6px; }";
+function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+function buildReport() {
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var n = slides.length;
+  var pages = slides.map(function (s, i) {
+    return "<section class='page'><header class='top'><div class='brand'>Azqato Invests<small>Weekly Investing Report</small></div>" +
+      "<div class='meta'>" + esc(WEEK) + "<br>Prices as of " + esc(D.fetched) + "</div></header>" + s.innerHTML +
+      "<footer><span>Information only, not advice. Prices from Yahoo Finance.</span><span>Page " + (i + 1) + " of " + n + "</span></footer></section>";
+  }).join("");
+  return "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Weekly Investing Report, " + esc(WEEK.replace("Week ending ", "")) + "</title>" +
+    "<style>" + document.getElementById("base").textContent + PRINT_CSS + "</style></head><body>" + pages + "</body></html>";
+}
+document.getElementById("export").addEventListener("click", function () {
+  var url = URL.createObjectURL(new Blob([buildReport()], { type: "text/html" }));
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "Weekly Investing Report " + D.fetched.slice(0, 10) + ".html";
+  a.click();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+});
+</script>
+</body>
+</html>
