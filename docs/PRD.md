@@ -1405,7 +1405,7 @@ The proxies available, in descending order of usefulness:
 
 ## Roadmap at a glance
 
-**Status refreshed 2026-10-08:** open items are 1 (the owner's read-through) and 22; Later holds 15d, 16 and 17.
+**Status refreshed 2026-10-08:** open items are 1 (the owner's read-through) and 22; Later holds 15d, 16 and 17. **Added 2026-11-13:** item 23, the Weekly Investing Report.
 
 Organized 2026-10-02 at the owner's request: every open item from both halves of the site in one place, in a suggested order. Each item's detail stays where it was written: Part 1 below, or Part 2, Invests: Roadmap (P numbers). Nothing here is scheduled until the owner says so.
 
@@ -1449,6 +1449,12 @@ Organized 2026-10-02 at the owner's request: every open item from both halves of
 | # | Item | Where it's detailed | Size |
 |---|---|---|---|
 | 22 | Bring the two other azqato.github.io repos into azqato.com the way Invests was: https://azqato.github.io/tools and https://azqato.github.io/prompts/. Same approach: phases (interpretation, plan, build), source text preserved word for word, a generator under `tools/<section>/` with inventories and checks, the shared top bars, footer and `colors.css`, clean addresses, search entries, and redirects from the old addresses (those repos change; ask first) | `docs/TOOLS-PROMPTS.md` | Built locally 2026-10-08 (branch `item-22-tools-prompts`), waiting on the owner's review; then rollout and the old repos (D26) |
+
+**Next: Azqato Invests weekly report (owner's request, 2026-11-13)**
+
+| # | Item | Where it's detailed | Size |
+|---|---|---|---|
+| 23 | Create a Weekly Investing Report: covers topics that change week on week, such as AAII investor sentiment, how much SPY, QQQ, IWM and DIA are up or down over the last week and year to date, and more. Updated after the market closes every Friday. Goal: inform viewers on what is going on in the markets. No opinion, just useful information. Claude Code updates it each week when the owner asks, not automated at first | This row (owner's words, 2026-11-13) | Not started; scope and page location to be planned with the owner |
 
 **Later**
 

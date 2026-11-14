@@ -5,6 +5,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.38.1] - 2026-11-13
+
+### Added
+- **Roadmap item 23: Weekly Investing Report** (owner's request). A weekly Invests page on what changed in the
+markets: AAII investor sentiment, SPY, QQQ, IWM and DIA over the last week and year to date, and more. Updated after
+Friday's close by Claude Code when the owner asks, not automated at first. No opinion, just information. Recorded in
+`docs/PRD.md`, Roadmap at a glance; nothing built yet.
+
 ## [2.38.0] - 2026-10-22
 
 ### Added
