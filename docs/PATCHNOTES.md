@@ -5,6 +5,14 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.40.1] - 2026-11-14
+
+### Changed
+- **Weekly Investing Report: the VIX and AAII zone bars use a fear scale** (owner's request): green for calm, grey in
+the middle, then deepening red as fear rises, for both the bars and the VIX days-in-each-zone strip. They had used the
+method's Strong/Caution colors, which painted high fear green and read like a buy signal. The zone names on those
+pages use the same scale. The Timing signals tables keep Strong (green) and Caution (red), shown with the word.
+
 ## [2.40.0] - 2026-11-14
 
 ### Added

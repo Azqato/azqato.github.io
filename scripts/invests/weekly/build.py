@@ -162,21 +162,28 @@ def returns_table(rows):
     return f"<div class='card wrap'><table class='tt'>{h}</table></div>"
 
 
+# Fear-scale colors for the VIX and AAII bands (owner, 2026-11-14): calm is
+# green, the middle grey, rising fear red. Deliberately not the method's
+# Strong/Caution colors, which would paint high fear green and read as "buy";
+# those stay on the Timing signals tables, where the word is shown with them.
+FEAR_TONES = ["zs", "zn", "zc", "zc2", "zc3"]
+FEAR_TEXT = ["up", "mut", "down", "down", "down"]
+
+
+def fear_class(label, bands):
+    return FEAR_TEXT[[b[1] for b in bands].index(label)]
+
+
 def zone_bar(bands, lo, hi, marks, fmt):
-    """A horizontal scale split into the method's bands, with markers.
-    bands: [(upper, label, signal)], marks: [(value, text, is_previous)]."""
+    """A horizontal scale split into the method's bands, with markers, colored
+    as a fear scale. bands: [(upper, label, signal)], marks: [(value, text, is_previous)]."""
     segs, labs, start = "", "", lo
-    tone = {"strong": "zs", "neutral": "zn", "caution": "zc"}
-    flip = False
-    for b in bands:
+    for i, b in enumerate(bands):
         end = min(b[0], hi)
         if end <= start:
             continue
         w = (end - start) / (hi - lo) * 100
-        cls = tone[b[2]]
-        if cls == "zn":  # alternate two greys so neighbouring neutral bands stay distinct
-            cls = "zn2" if flip else "zn"
-            flip = not flip
+        cls = FEAR_TONES[i]
         segs += f"<span class='{cls}' style='width:{w:.2f}%'></span>"
         labs += f"<span style='width:{w:.2f}%'>{E(b[1])}</span>"
         start = end
@@ -296,7 +303,7 @@ def build(D):
         mx.append(("8-week average", f"{sum(w['bear'] for w in W) / len(W):.1f}%", f"bearish; bullish {sum(w['bull'] for w in W) / len(W):.1f}%"))
     mx.append(("1-year bearish high", f"<span class='bear'>{hi['bear'][0]:.1f}%</span>", f"{day(hi['bear'][1], True)}; bullish high {hi['bull'][0]:.1f}%"))
     if len(mx) < 4:
-        mx.insert(0, ("Zone", f"<span class='s-{asig}'>{az}</span>", f"bearish {arange}"))
+        mx.insert(0, ("Zone", f"<span class='{fear_class(az, AAII_BANDS)}'>{az}</span>", f"bearish {arange}"))
     mx = mx[:4]
     mxh = "<div class='mx'>" + "".join(f"<div><div class='k'>{k}</div><div class='v'>{v}</div><div class='d'>{d}</div></div>" for k, v, d in mx) + "</div>"
     abar = zone_bar([(b[0], b[1], b[2]) for b in AAII_BANDS], 10, 70,
@@ -355,7 +362,7 @@ def build(D):
     vmxh = "<div class='mx'>" + "".join(f"<div><div class='k'>{k}</div><div class='v'>{v}</div><div class='d'>{d}</div></div>" for k, v, d in vmx) + "</div>"
     vbar = zone_bar([(b[0], b[1], b[2]) for b in VIX_BANDS], 10, 50, [(V["cur"], f"{V['cur']:.1f}", False), (V["w1"], f"{V['w1']:.1f}", True)], None)
     days = V["days"]
-    tones = ["zc", "zn", "zn2", "zs", "zs"]
+    tones = FEAR_TONES
     dbar = "<div class='zseg' style='height:20px'>" + "".join(
         f"<span class='{tones[i]}' style='width:{n / V['n'] * 100:.2f}%' title='{VIX_BANDS[i][1]}: {n} days'></span>" for i, n in enumerate(days) if n) + "</div>"
     dleg = "<div class='legend'>" + "".join(f"<span><i class='sw {tones[i]}'></i>{VIX_BANDS[i][1]} {n}</span>" for i, n in enumerate(days)) + "<span>(trading days)</span></div>"
@@ -373,7 +380,7 @@ def build(D):
         "<section class='slide'>" + head("VIX: the fear gauge", "vix")
         + "<p class='lede'>The market's expectation of how much the S&amp;P 500 will swing over the next 30 days, priced from options. The method treats it as its most actionable timing signal for index funds.</p>"
         + "<div class='card'>"
-        + f"<div class='big'><span class='v'>{V['cur']:.1f}</span><span class='lab s-{vsig}'>{vz}</span><span class='mut'>VIX {vrange}, week ending {day(D['friday'], True)}</span></div>"
+        + f"<div class='big'><span class='v'>{V['cur']:.1f}</span><span class='lab {fear_class(vz, VIX_BANDS)}'>{vz}</span><span class='mut'>VIX {vrange}, week ending {day(D['friday'], True)}</span></div>"
         + vbar + vmxh
         + "<h3 class='sub2'>Days in each zone, past year</h3>" + dbar + dleg
         + "<h3 class='sub2'>Last three months</h3>" + vchart
