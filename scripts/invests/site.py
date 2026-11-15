@@ -63,6 +63,15 @@ PAGES = [
 # Grouped by what the visitor invests in (restructure, 2026-10-02): each group's
 # first page is its landing page; the sidebar lists it as "Overview" in the
 # topic groups.
+# Pages built outside site.py, linked into the sidebar, sitemap and search:
+# (path, sidebar label, group, search text). The Weekly Investing Report is
+# built by scripts/invests/weekly/build.py (roadmap item 23, launched 2.41.0).
+EXTRA_PAGES = [
+    ("weekly/index.html", "Weekly Report", "Indices & ETFs",
+     "Weekly Investing Report: every Friday, major index and sector returns, AAII sentiment, the VIX, "
+     "RSI, 52-week range and 200-day timing signals, market mood, bond yields, commodities and crypto, "
+     "with a printable US Letter export."),
+]
 GROUPS = ["Individual Stocks", "Indices & ETFs", "Leveraged Strategies", "Resources"]
 TITLES = {"index.html": f"{BRAND} - Investing Tools and Resources"}
 # Longer titles, topic first (SEO review S2, owner's approval 2026-10-03).
@@ -701,12 +710,12 @@ def split_invests(body, part, soup, page):
                 a["href"] = "https://composeratlas.com/"
         # One grid (UI review, Home): this site's sections first, then the
         # outside projects. Every source card is kept; three are added for the
-        # sections no source card covers.
+        # sections no source card covers, and the Weekly Investing Report (2.41.0).
         grid = projects.select_one(".project-grid")
         found = {a.h3.get_text(" ", strip=True).replace("\u2192", "").strip(): a for a in grid.select("a.project-card")}
         added = BeautifulSoup(home_cards(page), "html.parser")
         extra = {a.h3.get_text(" ", strip=True).replace("\u2192", "").strip(): a for a in added.select("a.project-card")}
-        order = ["Stocks", "Stock Screener", "Market Overview & VIX tools", "VIX Strategy", "Leveraged Strategies",
+        order = ["Stocks", "Stock Screener", "Market Overview & VIX tools", "VIX Strategy", "Weekly Investing Report", "Leveraged Strategies",
                  "Curated Resources", "FAQ", "Automate Fundamentals", "ComposerAtlas", "Net Worth Tracker"]
         cards = [found.pop(n, None) or extra.pop(n) for n in order]
         cards += list(found.values())  # any card the source adds later
@@ -723,6 +732,7 @@ def home_cards(page):
     source's own card markup."""
     cards = [
         ("\U0001F9F0", "Market Overview & VIX tools", "indices/market.html", "A same-day market snapshot, the live VIX Dashboard and the VIX Custom builder."),
+        ("\U0001F4C5", "Weekly Investing Report", "weekly/index.html", "Each Friday's returns, sentiment, VIX and timing signals in one report, with a printable export."),
         ("\U0001F4DA", "Curated Resources", "resources/index.html", "A hand-picked hub of platforms, screeners, education and data, in 15 categories."),
         ("\u2753", "FAQ", "resources/faq.html", "Answers to common questions about the methodology, the tools and the strategies."),
     ]
@@ -836,7 +846,8 @@ SPLIT = {
                   ("indices/method.html#section-aaii", "Sentiment", "The AAII survey as a contrarian signal."),
                   ("indices/method.html#section-quality", "Fund quality", "Returns, yield and expense ratio."),
                   ("indices/market.html", "Market Overview", "The live market table."),
-                  ("indices/vix/index.html", "VIX Strategy", "The live VIX reading and a 5-tier ETF strategy.")],
+                  ("indices/vix/index.html", "VIX Strategy", "The live VIX reading and a 5-tier ETF strategy."),
+                  ("weekly/index.html", "Weekly Report", "Each Friday's returns, sentiment and timing signals, with a printable export.")],
     },
 }
 METHOD_OF = {v["method"]: k for k, v in SPLIT.items()}
@@ -1072,6 +1083,7 @@ def sidebar(page):
         gid = "pp-g-" + slug(g, set())
         members = [(p, label, parent) for p, _, label, grp, _, parent in PAGES if grp == g]
         lis = "".join(item(p, "Overview" if label == g else label) for p, label, parent in members)
+        lis += "".join(item(p, label) for p, label, grp, _ in EXTRA_PAGES if grp == g)
         # Groups that don't hold this page start closed (UI review, Sidebar).
         opened = " open" if any(p == page for p, _, _ in members) else ""
         groups.append(f'<details class="pp-group site-group"{opened}><summary class="pp-group-label" id="{gid}">{g}</summary>'
@@ -1587,6 +1599,9 @@ def main():
     search = {"pages": [], "entries": []}
     for entry in PAGES:
         build_page(entry, search)
+    for path, label, group, text in EXTRA_PAGES:
+        search["pages"].append({"u": path, "t": label, "g": group})
+        search["entries"].append({"p": len(search["pages"]) - 1, "h": label, "a": "", "x": text})
     for e in search["entries"]:
         e["x"] = re.sub(r"\s+", " ", e["x"]).strip()
     (ROOT / "assets/js/search-index.js").write_text(
@@ -1601,7 +1616,7 @@ def main():
                             sm.read_text(encoding="utf-8") if sm.exists() else ""))
     urls = "".join(f"  <url><loc>{page_url(path)}</loc>"
                    + (f"<lastmod>{dates[page_url(path)]}</lastmod>" if page_url(path) in dates else "")
-                   + "</url>\n" for path, *_ in PAGES)
+                   + "</url>\n" for path in [p for p, *_ in PAGES] + [p for p, *_ in EXTRA_PAGES])
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                       + urls + "</urlset>\n", encoding="utf-8", newline="\n")

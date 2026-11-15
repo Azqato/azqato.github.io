@@ -5,8 +5,9 @@ Reads data/<friday>.json (written by fetch.py), renders every section, fills
 template.html with them and the popups in explain.html, and writes
 invests/weekly/index.html. Changes nothing else.
 
-The page is roadmap item 23 in docs/PRD.md: an unlisted preview (noindex, no
-links to it, not in the sitemaps) that Claude Code updates when the owner asks.
+The page is roadmap item 23 in docs/PRD.md, launched in 2.41.0: the Invests
+sidebar, Home, the Indices & ETFs page, the sitemap and search link to it
+(EXTRA_PAGES in scripts/invests/site.py). Claude Code updates it when the owner asks.
 
 The labels follow the Index & ETF Method page (invests/indices/method.html):
 the VIX and AAII action levels, the three technical timing signals, the
@@ -191,7 +192,7 @@ def zone_bar(bands, lo, hi, marks, fmt):
     for v, text, prev in sorted(marks, key=lambda x: not x[2]):
         x = max(0, min(100, (v - lo) / (hi - lo) * 100))
         m += f"<div class='zm{' prev' if prev else ''}' style='left:{x:.2f}%'>{'' if prev else E(text)}</div>"
-    return f"<div class='zbar'>{m}<div class='zseg'>{segs}</div><div class='zlab'>{labs}</div></div>"
+    return f"<div class='zbar'><div class='ztrack'>{m}<div class='zseg'>{segs}</div></div><div class='zlab'>{labs}</div></div>"
 
 
 def line_chart(series, ymin, ymax, guides, w=640, h=170, labels=None):

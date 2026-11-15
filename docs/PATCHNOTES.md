@@ -5,6 +5,20 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.41.0] - 2026-11-14
+
+### Added
+- **Weekly Investing Report launched in the Invests navigation** (owner's request): a "Weekly Report" link in the
+sidebar under Indices & ETFs on every page, a "Weekly Investing Report" card on Home (after VIX Strategy), a seventh
+card on the Indices & ETFs page, and a search entry. `/invests/weekly/` is now in `invests/sitemap.xml`, and the page
+drops `noindex`, gains a description and canonical, and opens with a breadcrumb back to Invests, Indices & ETFs and
+the Index method. The page stays standalone (built by `scripts/invests/weekly/build.py`, not by `site.py`);
+`site.py` links it through a new `EXTRA_PAGES` list. The "Preview, not yet linked from the site" footer is gone.
+
+### Fixed
+- **Weekly report zone-bar markers sat on the zone names** in the export and on the page: the value label and tick
+were placed against the whole bar block, names included. They now sit on the bar itself, with the label above it.
+
 ## [2.40.1] - 2026-11-14
 
 ### Changed
