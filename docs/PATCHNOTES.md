@@ -5,6 +5,38 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.42.0] - 2026-11-15
+
+### Changed
+- **Weekly Investing Report reorganized into seven sections** (owner's review, 2026-11-15): This Week, Returns,
+Sentiment (AAII Survey and Market Mood), VIX, Signals, Rates and Other Markets, each with a one-word title and an
+Explain popup. The site page keeps a lede, notes and sources on every section; the Export (US Letter) leaves them out.
+- **This Week opens with an Executive Summary**, written each week in a Claude Code session and stored in
+`scripts/invests/weekly/data/summary/<friday>.json`. If a week has no file, the page shows the rule-based bullets
+instead.
+- **Returns** covers 12 major funds (Equal Weight RSP after DIA, Small-Cap Value VBR after VIG) and the 11 sector
+funds in one table.
+- **Status column on Returns and Other Markets**: each price against its 200-day average. Rising (green) means more
+than 5% above it, Falling (red) more than 5% below, otherwise Steady. The owner chose 5% for every asset after a
+10-year test showed a 2% band almost never reads Steady for crypto and natural gas. The Signals page keeps the Index &
+ETF Method's own 2% rule.
+- **Rates**: Treasury, TIPS and muni yields; policy, mortgage and inflation rates; and a yield curve section in a fixed
+order (10Y minus 2Y, 30Y minus 10Y, 2Y minus Fed funds, 10Y minus Fed funds, 30Y minus Fed funds, Real Fed Funds).
+The yield curve gaps read Steepening, Flattening or Steady (a 10 bps move over 1 month) and are not colored. Only
+Inverted shows in red. **Real Fed Funds** is the Fed funds rate minus CPI inflation over the past 12 months, and reads
+"Behind" in red below zero. The 10Y minus 3M, 2Y minus 3M, 5Y minus 2Y and 5Y minus Fed funds gaps are gone.
+- **Other Markets** (was Oil, gold, crypto and the dollar) is one table with a Price column, in three groups:
+  - **Commodities**: WTI and Brent crude, natural gas, gold, silver, platinum and copper.
+  - **Currency**: the US Dollar Index, plus PHLX indexes for the Euro, Japanese Yen, British Pound, Canadian Dollar
+and Swiss Franc. The Chinese Yuan and Korean Won are built from their dollar rates so that they move the same way.
+  - **Crypto**: 11 coins, from Bitcoin to Litecoin.
+- **Text color**: black body text and subtitles in light mode, on every page.
+
+### Added
+- **`scripts/invests/weekly/demo.py`** writes the Export view to Downloads so changes can be checked before they go
+live. `--mock-invert` previews the inversion callout, and `--check` runs the export checks on a demo.
+`check_export.py` takes an optional path.
+
 ## [2.41.0] - 2026-11-14
 
 ### Added

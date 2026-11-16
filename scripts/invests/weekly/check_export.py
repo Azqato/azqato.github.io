@@ -1,6 +1,7 @@
 """Check the built Weekly Investing Report. Changes nothing in the repository.
 
-Usage, from anywhere, after build.py:  python scripts/invests/weekly/check_export.py
+Usage, from anywhere, after build.py:  python scripts/invests/weekly/check_export.py [PATH]
+(PATH: a demo built with build.py --demo; default invests/weekly/index.html)
 Needs: pip install playwright && python -m playwright install chromium
 
 Opens invests/weekly/index.html in a headless browser and fails (exit 1) if:
@@ -16,7 +17,7 @@ import pathlib, sys, tempfile
 from playwright.sync_api import sync_playwright
 
 ROOT = pathlib.Path(__file__).resolve().parents[3]
-PAGE = (ROOT / "invests" / "weekly" / "index.html").as_uri()
+PAGE = (pathlib.Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ROOT / "invests" / "weekly" / "index.html").as_uri()
 
 
 def main():
@@ -42,7 +43,7 @@ def main():
             e = b.new_page(viewport={"width": 900, "height": 1100})
             e.on("pageerror", lambda x: errs.append(str(x)))
             e.goto(f.as_uri())
-            titles = e.evaluate("[...document.querySelectorAll('.page h2')].map(h=>h.textContent)")
+            titles = e.evaluate("[...document.querySelectorAll('.page')].map(p=>p.querySelector('h2').textContent)")
             over = e.evaluate("[...document.querySelectorAll('.page')].map(p=>p.scrollHeight-p.clientHeight)")
             spare = e.evaluate("[...document.querySelectorAll('.page')].map(p=>{var f=p.querySelector('footer');"
                                "return Math.round(f.getBoundingClientRect().top-f.previousElementSibling.getBoundingClientRect().bottom)})")

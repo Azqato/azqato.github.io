@@ -38,9 +38,9 @@ FRED_HY = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=BAMLH0A0HYM2"
 # yields, cmd = oil, gold and crypto tiles, oth = the dollar tile.
 TICKERS = [
     ("SPY", "S&P 500 (SPY)", "idx"), ("QQQ", "Nasdaq 100 (QQQ)", "idx"),
-    ("IWM", "Russell 2000 (IWM)", "idx"), ("DIA", "Dow Jones 30 (DIA)", "idx"),
+    ("IWM", "Russell 2000 (IWM)", "idx"), ("DIA", "Dow Jones 30 (DIA)", "idx"), ("RSP", "Equal Weight (RSP)", "idx"),
     ("VUG", "Growth (VUG)", "idx"), ("VTV", "Value (VTV)", "idx"),
-    ("VIG", "Dividend (VIG)", "idx"), ("VT", "World (VT)", "idx"),
+    ("VIG", "Dividend (VIG)", "idx"), ("VBR", "Small-Cap Value (VBR)", "idx"), ("VT", "World (VT)", "idx"),
     ("VTI", "Domestic (VTI)", "idx"), ("VXUS", "International (VXUS)", "idx"),
     ("XLK", "Technology (XLK)", "sec"), ("XLC", "Communication (XLC)", "sec"),
     ("XLY", "Consumer discretionary (XLY)", "sec"), ("XLP", "Consumer staples (XLP)", "sec"),
@@ -50,12 +50,22 @@ TICKERS = [
     ("XLRE", "Real estate (XLRE)", "sec"),
     ("^IRX", "3-Month Treasury", "yld"), ("^FVX", "5-Year Treasury", "yld"),
     ("^TNX", "10-Year Treasury", "yld"), ("^TYX", "30-Year Treasury", "yld"),
-    ("CL=F", "Crude oil (WTI)", "cmd"), ("BZ=F", "Crude oil (Brent)", "cmd"),
-    ("GC=F", "Gold", "cmd"), ("BTC-USD", "Bitcoin", "cmd"), ("ETH-USD", "Ethereum", "cmd"),
-    ("DX-Y.NYB", "US Dollar Index", "oth"),
+    ("CL=F", "Crude oil (WTI)", "cmd"), ("BZ=F", "Crude oil (Brent)", "cmd"), ("NG=F", "Natural gas", "cmd"),
+    ("GC=F", "Gold", "cmd"), ("SI=F", "Silver", "cmd"), ("PL=F", "Platinum", "cmd"), ("HG=F", "Copper", "cmd"),
+    ("BTC-USD", "Bitcoin", "cmd"), ("ETH-USD", "Ethereum", "cmd"), ("BNB-USD", "BNB", "cmd"), ("XRP-USD", "XRP", "cmd"),
+    ("SOL-USD", "Solana", "cmd"), ("TRX-USD", "TRON", "cmd"), ("DOGE-USD", "Dogecoin", "cmd"), ("ZEC-USD", "Zcash", "cmd"),
+    ("ADA-USD", "Cardano", "cmd"), ("XMR-USD", "Monero", "cmd"), ("LTC-USD", "Litecoin", "cmd"),
+    ("DX-Y.NYB", "US Dollar", "oth"),
+    # Currencies (owner, 2026-11-15), each as its own index pulled like the
+    # Dollar Index: the PHLX currency indexes, each currency's value in US
+    # cents (the yen per 100 yen), so a rise means that currency got stronger.
+    # Yahoo has none for the yuan or the won, so those two are built the same
+    # way from Yahoo's exchange rates (see FX_INDEX).
+    ("CNY-IDX", "Chinese Yuan", "oth"), ("^XDE", "Euro", "oth"), ("^XDN", "Japanese Yen", "oth"), ("^XDB", "British Pound", "oth"),
+    ("KRW-IDX", "Korean Won", "oth"), ("^XDC", "Canadian Dollar", "oth"), ("^XDS", "Swiss Franc", "oth"),
 ]
 FUNDS = {"idx", "sec"}
-CRYPTO = {"BTC-USD", "ETH-USD"}
+CRYPTO = {t for t, _, _ in TICKERS if t.endswith("-USD")}
 EOD = pd.Timedelta(hours=23, minutes=59)
 
 
@@ -105,25 +115,162 @@ def technicals(t, fri):
             "ma200": (last / ma - 1) * 100 if ma else None}
 
 
+def spans_of(fri):
+    """The start of each period the returns tables show, ending at Friday."""
+    return {"w": fri - pd.Timedelta(days=7), "m1": fri - pd.DateOffset(months=1), "m6": fri - pd.DateOffset(months=6),
+            "ytd": pd.Timestamp(fri.year - 1, 12, 31), "y1": fri - pd.DateOffset(years=1),
+            "y5": fri - pd.DateOffset(years=5), "y10": fri - pd.DateOffset(years=10)}
+
+
+def yield_changes(h, last, ref):
+    """A yield's change over each period, in basis points (owner, 2026-11-15:
+    the same periods as the returns tables), measured back from ref, the date
+    of the yield's own latest reading."""
+    return {k: round((last - at(h, day)) * 100, 2) for k, day in spans_of(ref).items()}
+
+
+def fred(series):
+    """A FRED series from its free CSV, as a date-indexed float Series."""
+    raw = urllib.request.urlopen(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}", timeout=30).read().decode()
+    rows = list(csv.reader(io.StringIO(raw)))[1:]
+    return pd.Series({pd.Timestamp(d): float(v) for d, v in rows if v not in ("", ".")}).sort_index()
+
+
+# Yields from FRED (owner, 2026-11-15): the Treasury maturities Yahoo lacks,
+# TIPS real yields, the yield curve, the Fed funds rate and mortgage rates.
+# FRED posts most daily readings the next business day, so a Saturday fetch
+# usually has Thursday's; mortgage rates are weekly, on Thursdays. Each row
+# keeps its own date and its changes are measured back from that date.
+FRED_ROWS = [
+    ("DGS1MO", "1-Month Treasury", "yld"), ("DGS6MO", "6-Month Treasury", "yld"), ("DGS1", "1-Year Treasury", "yld"),
+    ("DGS2", "2-Year Treasury", "yld"), ("DGS7", "7-Year Treasury", "yld"), ("DGS20", "20-Year Treasury", "yld"),
+    ("DFII5", "5-Year TIPS", "tips"), ("DFII10", "10-Year TIPS", "tips"), ("DFII30", "30-Year TIPS", "tips"),
+    # Yield curve, in this fixed order (owner, 2026-11-15), Real Fed Funds last.
+    ("T10Y2Y", "10Y − 2Y", "curve"), ("DGS30-DGS10", "30Y − 10Y", "curve"), ("DGS2-DFF", "2Y − Fed Funds", "curve"),
+    ("T10YFF", "10Y − Fed Funds", "curve"), ("DGS30-DFF", "30Y − Fed Funds", "curve"), ("FF-CPI", "Real Fed Funds", "curve"),
+    ("DFF", "Fed Funds Rate", "rates"), ("MORTGAGE30US", "30-year mortgage", "rates"), ("MORTGAGE15US", "15-year mortgage", "rates"),
+    # Credit card and car loan rates (owner, 2026-11-15): the Fed's quarterly
+    # survey of banks (G.19), readings dated Feb, May, Aug and Nov.
+    ("TERMCBCCINTNS", "Credit card", "rates"), ("RIFLPBCIANM60NM", "60-month car loan", "rates"),
+]
+# Quarterly rows measure their changes back from Friday, not from their own
+# date, so a quarter's move shows only in the periods it falls inside.
+QUARTERLY = {"TERMCBCCINTNS", "RIFLPBCIANM60NM"}
+
+
+def ff_cpi():
+    """The real Fed funds rate (owner, 2026-11-15; was Fed funds plus 1 point):
+    the Fed funds rate minus CPI inflation over 12 months. Each CPI month
+    counts from the start of the next month (October's from November 1), so
+    it uses the same CPI month as the CPI row (owner, 2026-11-15)."""
+    ff = fred("DFF")
+    c = fred("CPIAUCSL")
+    yoy = (c / c.shift(12) - 1) * 100
+    yoy.index = yoy.index + pd.DateOffset(months=1)
+    y = yoy.reindex(ff.index.union(yoy.index)).ffill().reindex(ff.index)
+    return (ff - y).dropna().round(2)
+
+
+CUSTOM = {"FF-CPI": ff_cpi}
+
+
+def fred_rows(fri):
+    rows = []
+    for t, n, g in FRED_ROWS:
+        # "A-B" is a gap FRED has no series for (owner, 2026-11-15: 30-year
+        # minus 10-year), built from the two daily yields.
+        if t in CUSTOM:
+            h = CUSTOM[t]()
+        elif "-" in t:
+            a, b = t.split("-")
+            h = (fred(a) - fred(b)).dropna().round(2)
+        else:
+            h = fred(t)
+        cur = upto(h, fri)
+        last, ref = float(cur.iloc[-1]), cur.index[-1]
+        base = fri if t in QUARTERLY else ref
+        rows.append(dict(t=t, n=n, g=g, last=last, wk=at(h, base - pd.Timedelta(days=7)), ye=at(h, pd.Timestamp(fri.year - 1, 12, 31)),
+                         d=str(ref.date()), bps=yield_changes(h, last, base), src="FRED", q=t in QUARTERLY))
+        print(t, rows[-1]["d"], last)
+    return rows
+
+
+def muni(fri):
+    """Munis (owner, 2026-11-15): no free source keeps a muni yield history, so
+    the row is MUB, the iShares National Muni Bond ETF: its yield from Yahoo as
+    of the fetch, and its total return over each period, in basis points
+    (+1.00% = +100 bps), to this Friday's close."""
+    h = closes("MUB", "11y", adjust=True)
+    last = float(upto(h, fri).iloc[-1])
+    y = yf.Ticker("MUB").info.get("yield")
+    ret = {k: round((last / float(upto(h, day).iloc[-1]) - 1) * 10000) for k, day in spans_of(fri).items()}
+    print("MUB", y, ret)
+    return [dict(t="MUB", n="Muni (MUB)", g="muni", last=round(y * 100, 2) if y else None, d=str(fri.date()), bps=ret, ret=True)]
+
+
+def breakeven(fri):
+    """FRED's 10-year breakeven inflation rate (T10YIE): the 10-year Treasury
+    yield minus the 10-year TIPS yield, both from the same day."""
+    h = upto(fred("T10YIE"), fri)
+    return [float(h.iloc[-1]), str(h.index[-1].date())]
+
+
+# Inflation (owner, 2026-11-15): CPI from the Bureau of Labor Statistics and
+# PCE from the Bureau of Economic Analysis, both monthly, through FRED.
+INFLATION = [("CPIAUCSL", "CPI"), ("PCEPI", "PCE")]
+
+
+def inflation(fri):
+    """Each measure's 12-month rate for its latest month, and how far that rate
+    moved over the bond table's periods, in basis points (1W is not measured:
+    the figures are monthly). YTD is against last December's rate."""
+    out = []
+    for t, n in INFLATION:
+        h = upto(fred(t), fri)
+        yoy = (h / h.shift(12) - 1) * 100
+        last = float(yoy.iloc[-1])
+        back = lambda k: round((last - float(yoy.iloc[-1 - k])) * 100, 2)
+        dec = float(yoy[yoy.index <= pd.Timestamp(fri.year - 1, 12, 1)].iloc[-1])
+        out.append({"t": t, "n": n, "month": str(h.index[-1].date()), "yoy": round(last, 3), "prev": round(float(yoy.iloc[-2]), 3),
+                    "mom": round((float(h.iloc[-1]) / float(h.iloc[-2]) - 1) * 100, 3),
+                    "bps": {"w": None, "m1": back(1), "m6": back(6), "ytd": round((last - dec) * 100, 2),
+                            "y1": back(12), "y5": back(60), "y10": back(120)}})
+        print(t, out[-1])
+    return out
+
+
+# Built currency indexes: (Yahoo rate in units per dollar, scale). The yuan is
+# US cents per yuan; the won, like the PHLX yen index, US cents per 100 won.
+FX_INDEX = {"CNY-IDX": ("CNY=X", 100), "KRW-IDX": ("KRW=X", 10000)}
+
+
 def prices(fri):
     prev, ye = fri - pd.Timedelta(days=7), pd.Timestamp(fri.year - 1, 12, 31)
-    spans = {"w": prev, "m1": fri - pd.DateOffset(months=1), "m6": fri - pd.DateOffset(months=6),
-             "ytd": ye, "y1": fri - pd.DateOffset(years=1), "y5": fri - pd.DateOffset(years=5),
-             "y10": fri - pd.DateOffset(years=10)}
+    spans = spans_of(fri)
     rows = []
     for t, n, g in TICKERS:
         fund = g in FUNDS
-        h = closes(t, "11y" if fund else "2y", adjust=fund)
+        other = g in ("cmd", "oth")  # owner, 2026-11-15: the Returns table's periods too
+        if t in FX_INDEX:
+            src, k = FX_INDEX[t]
+            h = k / closes(src, "11y", adjust=False)
+        else:
+            h = closes(t, "11y" if fund or other or g == "yld" else "2y", adjust=fund)
         cur = h if t in CRYPTO else upto(h, fri)
         last = float(cur.iloc[-1])
         r = dict(t=t, n=n, g=g, last=last, wk=at(h, prev), ye=at(h, ye), d=str(cur.index[-1].date()))
-        if fund:  # total return over each span; None when the fund is too young
+        if fund or other:  # total return (funds) or price change over each span; None when too young
             r["ch"] = {}
             for k, day in spans.items():
                 s = upto(h, day)
                 young = s.empty or (h.index[0] - day).days > 21
                 r["ch"][k] = None if young else round((last / float(s.iloc[-1]) - 1) * 100, 4)
+        if fund:
             r["tech"] = technicals(t, fri)
+        elif other:  # gap to the 200-day average, for Status (owner, 2026-11-15)
+            r["ma200"] = round((last / float(cur.iloc[-200:].mean()) - 1) * 100, 4) if len(cur) >= 200 else None
+        if g == "yld":
+            r["bps"] = yield_changes(h, last, fri)
         rows.append(r)
         print(t, r["d"], round(last, 3))
     return rows
@@ -141,7 +288,25 @@ def vix_block(fri):
             "lo": [float(year.min()), str(year.idxmin().date())], "hi": [float(year.max()), str(year.idxmax().date())],
             "pct": float((year < cur).mean() * 100), "days": zones, "n": len(year),
             "v3m": [float(v3.iloc[-1]), at(v3, fri - pd.Timedelta(days=7))],
-            "chart": [[str(d.date()), round(float(x), 2)] for d, x in v.iloc[-63:].items()]}
+            "chart": [[str(d.date()), round(float(x), 2)] for d, x in year.items()],
+            "all": vix_all(fri), "days_all": vix_days_all(fri)}
+
+
+def vix_days_all(fri):
+    """Trading days in each VIX zone over Yahoo's full daily history (1990 on),
+    zoned as in vix_block (owner, 2026-11-15)."""
+    zones = [0, 0, 0, 0, 0]
+    for x in upto(closes("^VIX", "max", False), fri):
+        zones[0 if x < 15 else 1 if x < 25 else 2 if x < 35 else 3 if x <= 45 else 4] += 1
+    return zones
+
+
+def vix_all(fri):
+    """The VIX's weekly close (each week's last daily close) from the start of
+    Yahoo's history (1990) to this Friday, for the all-time chart (owner,
+    2026-11-15)."""
+    v = upto(closes("^VIX", "max", False), fri).resample("W-FRI").last().dropna()
+    return [[str(d.date()), round(float(x), 2)] for d, x in v.items()]
 
 
 def mood(fri):
@@ -261,7 +426,7 @@ def forward(W, fri):
 
 def main(friday):
     fri = pd.Timestamp(friday)
-    d = {"rows": prices(fri), "fetched": dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
+    d = {"rows": prices(fri) + fred_rows(fri) + muni(fri), "breakeven": breakeven(fri), "inflation": inflation(fri), "fetched": dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
          "mood": mood(fri), "vix": vix_block(fri), "aaii": aaii_block(fri), "friday": friday}
     out = HERE / "data" / f"{friday}.json"
     out.write_text(json.dumps(d, indent=1) + "\n", encoding="utf-8", newline="\n")

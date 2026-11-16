@@ -1,6 +1,9 @@
 """Build the Weekly Investing Report page from one week's saved data.
 
 Usage, from anywhere:  python scripts/invests/weekly/build.py 2026-11-13
+To try changes before they go live:  build.py 2026-11-13 --demo PATH
+writes a standalone copy to PATH instead (the site's links made absolute, a
+"Demo" note on top) and leaves invests/weekly/index.html alone.
 Reads data/<friday>.json (written by fetch.py), renders every section, fills
 template.html with them and the popups in explain.html, and writes
 invests/weekly/index.html. Changes nothing else.
@@ -18,7 +21,7 @@ within 2% of the 200-day average "Average". Every label is one word. The
 report describes; it gives no posture or advice (owner's rule), so it shows the
 method's "What It Signals" text but never its "Recommended Posture".
 """
-import datetime as dt, html, json, pathlib, sys
+import math, os, re, datetime as dt, html, json, pathlib, sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent.parent
@@ -149,18 +152,49 @@ def short(r):
     return r["n"].rsplit(" (", 1)[0]
 
 
+CRYPTO_SUFFIX = "-USD"  # Yahoo crypto tickers, e.g. BTC-USD
 SPANS = [("w", "1W"), ("m1", "1M"), ("m6", "6M"), ("ytd", "YTD"), ("y1", "1Y"), ("y5", "5Y"), ("y10", "10Y")]
 
 
-def returns_table(rows):
-    h = "<tr><th>Ticker</th>" + "".join(f"<th>{s[1]}</th>" for s in SPANS) + "</tr>"
+# Status on the returns tables (owner, 2026-11-15): the past month's total
+# return, Rising at +2% or more (green), Falling at -2% or less (red),
+# otherwise Steady. Prices, so up is green, as in the change columns.
+def ret_status(v):
+    """Status (owner, 2026-11-15): the price against its 200-day average (for
+    funds the same gap as the Signals page): Rising more than 5% above, Falling
+    more than 5% below, otherwise Steady. The owner chose 5% for every asset over
+    the method's 2%, after a 10-year test showed 2% almost never reads Steady
+    for crypto and natural gas."""
+    if v is None:
+        return "<td class='mut'>n/a</td>"
+    return "<td class='up'>Rising</td>" if v > 5 else "<td class='down'>Falling</td>" if v < -5 else "<td>Steady</td>"
+
+
+def returns_table(sections, named=False):
+    """One table split into sections like the bond table (owner, 2026-11-15):
+    sections is [(title, rows)], each title heading its own header row. named
+    labels rows by name alone, for assets whose tickers mean little (CL=F),
+    and adds a Price column (owner, 2026-11-15)."""
+    h = ""
+    for i, (title, rows) in enumerate(sections):
+        h += (f"<tr{'' if i == 0 else chr(32) + 'class=' + chr(39) + 'tsub' + chr(39)}><th>{title}</th>"
+              + ("<th>Price</th>" if named else "") + "".join(f"<th>{s[1]}</th>" for s in SPANS) + "<th>Status</th></tr>") + returns_rows(rows, named)
+    return f"<div class='card wrap'><table class='tt'>{h}</table></div>"
+
+
+def returns_rows(rows, named=False):
+    h = ""
     for r in rows:
-        h += f"<tr><td><b>{E(r['t'])}</b> <span class='fn'>{E(short(r))}</span></td>"
+        if named:  # prices of 1,000 or more without cents, to fit the page
+            price = f"{r['last']:,.0f}" if r["last"] >= 1000 else f"{r['last']:.4f}" if r["last"] < 1 else money(r["last"])
+            h += f"<tr><td><b>{E(r['n'])}</b></td><td><b>{price}</b></td>"
+        else:
+            h += f"<tr><td><b>{E(r['t'])}</b> <span class='fn'>{E(short(r))}</span></td>"
         for k, _ in SPANS:
             v = r["ch"][k]
             h += "<td class='mut'>n/a</td>" if v is None else f"<td class='{cl(v)}'>{sg(v, 1, '%')}</td>"
-        h += "</tr>"
-    return f"<div class='card wrap'><table class='tt'>{h}</table></div>"
+        h += ret_status(r["tech"]["ma200"] if "tech" in r else r.get("ma200")) + "</tr>"
+    return h
 
 
 # Fear-scale colors for the VIX and AAII bands (owner, 2026-11-14): calm is
@@ -195,9 +229,13 @@ def zone_bar(bands, lo, hi, marks, fmt):
     return f"<div class='zbar'><div class='ztrack'>{m}<div class='zseg'>{segs}</div></div><div class='zlab'>{labs}</div></div>"
 
 
-def line_chart(series, ymin, ymax, guides, w=640, h=170, labels=None):
-    """series: [(points [(x_label, y)], css color)]. guides: [(y, text)]."""
-    pl, pr, pt, pb = 34, 26, 8, 20
+def line_chart(series, ymin, ymax, guides, w=640, h=170, labels=None, tick=None, marks=(), ticks=None):
+    """series: [(points [(x_label, y)], css color)]. guides: [(y, text)].
+    tick formats the x labels (default: day). marks: [(index, text, below)] points on the first series,
+    each drawn as a grey dashed line across the chart at its level, labeled at its right end
+    (below is unused).
+    ticks: the indexes to label on the x axis (default: about six, evenly spaced)."""
+    pl, pr, pt, pb = 34, (70 if marks else 26), 8, 32
     n = max(len(s[0]) for s in series)
     X = lambda i: pl + (w - pl - pr) * (i / (n - 1) if n > 1 else 0.5)
     Y = lambda y: pt + (h - pt - pb) * (1 - (y - ymin) / (ymax - ymin))
@@ -207,13 +245,22 @@ def line_chart(series, ymin, ymax, guides, w=640, h=170, labels=None):
                 f"<text x='{pl - 4}' y='{Y(y) + 4:.1f}' text-anchor='end'>{E(text)}</text>")
     for pts, color in series:
         d = " ".join(f"{'M' if i == 0 else 'L'}{X(i):.1f},{Y(p[1]):.1f}" for i, p in enumerate(pts))
-        out += f"<path d='{d}' fill='none' stroke='{color}' stroke-width='2.2' stroke-linejoin='round'/>"
+        # Dense lines (more points than pixels) are drawn thinner so they stay smooth.
+        sw = 2.2 if len(pts) <= 300 else 1.3
+        out += f"<path d='{d}' fill='none' stroke='{color}' stroke-width='{sw}' stroke-linejoin='round' stroke-linecap='round'/>"
         if len(pts) <= 12:
             out += "".join(f"<circle cx='{X(i):.1f}' cy='{Y(p[1]):.1f}' r='3' fill='{color}'/>" for i, p in enumerate(pts))
     pts = series[0][0]
+    for i, text, below in marks:
+        y = Y(pts[i][1])
+        # High and low marks are a line across the chart at that level, in their
+        # subtle grey (owner, 2026-11-15).
+        out += f"<line x1='{pl}' x2='{w - pr}' y1='{y:.1f}' y2='{y:.1f}' stroke='var(--muted)' stroke-width='1' stroke-dasharray='5 3' opacity='0.7'/>"
+        # Labeled at the line's right end (owner, 2026-11-15).
+        out += f"<text x='{w - pr + 5}' y='{y + 4:.1f}' text-anchor='start' font-weight='600'>{E(text)}</text>"
     step = max(1, (len(pts) - 1) // 5) if len(pts) > 8 else 1
-    for i in range(0, len(pts), step):
-        out += f"<text x='{X(i):.1f}' y='{h - 4}' text-anchor='middle'>{E(day(pts[i][0]))}</text>"
+    for i in (ticks if ticks is not None else range(0, len(pts), step)):
+        out += f"<text x='{X(i):.1f}' y='{h - 4}' text-anchor='middle'>{E((tick or day)(pts[i][0]))}</text>"
     return f"<div class='chart'>{out}</svg></div>"
 
 
@@ -249,33 +296,16 @@ def build(D):
     sbest = max(sec, key=lambda r: r["ch"]["w"])
     sworst = min(sec, key=lambda r: r["ch"]["w"])
     tnx = next(r for r in rows if r["t"] == "^TNX")
-    tbp = (tnx["last"] - tnx["wk"]) * 100
     top = max(idx, key=lambda r: r["sig"]["strong"])["sig"]["strong"]
     tops = [r["t"] for r in idx if r["sig"]["strong"] == top]
     cauts = [r["t"] for r in idx if r["sig"]["caution"]]
-    facts = [
-        f"{ups} of {len(idx)} major funds rose this week. {best['t']} did best ({sg(best['ch']['w'], 1, '%')}) and {worst['t']} trailed ({sg(worst['ch']['w'], 1, '%')}).",
-        f"The VIX {'fell' if V['cur'] < V['w1'] else 'rose'} from {V['w1']:.1f} to {V['cur']:.1f}"
-        + (f", moving from the {vz1} zone to the {vz} zone." if vz1 != vz else f", staying in the {vz} zone."),
-        f"AAII bearish sentiment is {cur['bear']:.1f}% ({az})" + (f", {'up' if d1 >= 0 else 'down'} {abs(d1):.1f} points from last week" if d1 is not None else "")
-        + (f". Bearish has outnumbered bullish for {atleast(bb_exact)}{plural(bb, 'week')} in a row." if bb else "."),
-        f"Combined AAII and VIX signal: Tier {T} ({TIERS[T][0]}).",
-        f"Timing signals: the most Strong readings any major fund shows is {top} of 5"
-        + (f" ({', '.join(tops)})." if len(tops) <= 3 else f" ({len(tops)} of {len(idx)} funds).")
-        + (f" {', '.join(cauts)} {'has' if len(cauts) == 1 else 'have'} a Caution reading." if cauts else " None has a Caution reading."),
-        f"Sectors: {short(sbest)} led ({sg(sbest['ch']['w'], 1, '%')}) and {short(sworst).lower()} trailed ({sg(sworst['ch']['w'], 1, '%')}).",
-        f"The 10-year Treasury yield ended at {tnx['last']:.2f}%, {sg(tbp, 0, ' bps')} on the week.",
-    ]
-    S["summary"] = (
-        "<section class='slide'>" + head("This week", "summary")
-        + "<p class='lede'>The week in a few facts, each taken from a page of this report. They describe what happened; they are not advice.</p>"
-        + "<div class='card'><ul class='facts'>" + "".join(f"<li>{E(f)}</li>" for f in facts) + "</ul></div>"
-        + head("Major indices", "indices", 3, " s3")
-        + "<p class='lede'>Total return (price change plus dividends reinvested) over each period, ending at this Friday's close. The last six are Vanguard funds that split the market by style, dividends and region.</p>"
-        + returns_table(idx)
-        + "<p class='lead'><b>Leader, growth vs value vs dividend:</b> "
+    # ===== 1b. Stock Returns (owner, 2026-11-15: renamed from Major indices
+    # and sectors): one table, indices then sectors, built below once the sector
+    # figures are worked out.
+    idx_lead = (
+        "<p class='lead'><b>Leader, growth vs value vs dividend:</b> "
         + " &nbsp;·&nbsp; ".join(f"{lab} {E(short(lead[k]))} ({lead[k]['t']} {ch(lead[k]['ch'][k], 1, '%')})" for k, lab in (("w", "1W"), ("m1", "1M"), ("ytd", "YTD")))
-        + "</p></section>")
+        + "</p>")
 
     # ===== 2. AAII
     avg, hi, W = A["avg"], A["hi1y"], A["weeks"]
@@ -294,7 +324,7 @@ def build(D):
                 + f"<td class='mut'>{base}</td></tr>")
     atable = f"<div class='wrap'><table class='tt'>{at_}</table></div>"
     mx = [
-        ("Change in bearish", (ch(d1) if d1 is not None else "n/a") + " <span class='mut' style='font-size:.7em'>1W</span>",
+        ("Change in bearish", (ch(d1) if d1 is not None else "n/a") + " <span class='mut' style='font-size:max(12px, .7em)'>1W</span>",
          (f"{ch(dk)} over {A['span']} weeks" if dk is not None else "")),
         ("In a row", f"{atleast(bb_exact)}{plural(bb, 'week')}", f"bearish above bullish; {plural(b50, 'week')} above 50%"),
     ]
@@ -337,17 +367,19 @@ def build(D):
     if A["pct"] is not None:
         a_pts.append(f"It is higher than {A['pct']:.0f}% of all weekly readings since {A['first'][:4]}.")
     a_pts.append("The method gives more weight to several weeks in a row at an extreme than to a single week.")
-    S["aaii"] = (
-        "<section class='slide'>" + head("AAII Investor Sentiment", "aaii")
+    # AAII and market mood share one page (owner, 2026-11-15): each is a
+    # sub-section; the page is assembled with the market mood section.
+    aaii_part = (
+        head("AAII Survey", "aaii", 3, " s3")
         + "<p class='lede'>Individual investors' six-month outlook, surveyed weekly. The method reads the bearish share as a contrarian signal.</p>"
         + "<div class='card'>"
         + f"<div class='duo'><div>{atable}</div><div>{trend}</div></div>" + abar + mxh + fwd
         + f"<p class='quote'><b>The method on {az} ({arange} bearish):</b> “{E(AAII_SAYS[az])}” {method_link('aaii-sentiment-action-levels')}</p>"
         + ana([E(p) for p in a_pts])
-        + f"<div class='src'>Survey week ending {day(cur['d'], True)}. Spread is bullish minus bearish, in points. The grey tick on the bar is last week. "
+        + f"<div class='src webonly'>Survey week ending {day(cur['d'], True)}. Spread is bullish minus bearish, in points. The grey tick on the bar is last week. "
         + "Source: American Association of Individual Investors, Sentiment Survey (aaii.com/sentimentsurvey)"
         + (". Averages, highs and percentiles calculated from AAII's full history.</div>" if A["hist"] else ". Averages and 1-year highs as AAII publishes them.</div>")
-        + "</div></section>")
+        + "</div>")
 
     # ===== 3. VIX
     v3, v3w = V["v3m"]
@@ -355,20 +387,32 @@ def build(D):
     term = "Inverted" if ratio >= 1 else "Normal"
     gap50 = M["volatility"][2]
     vmx = [
-        ("Change", ch(V["cur"] - V["w1"]) + " <span class='mut' style='font-size:.75em'>1W</span>", f"{ch(V['cur'] - V['m1'])} over 1M (from {V['m1']:.1f})"),
+        ("Change", ch(V["cur"] - V["w1"]) + " <span class='mut' style='font-size:max(12px, .75em)'>1W</span>", f"{ch(V['cur'] - V['m1'])} over 1M (from {V['m1']:.1f})"),
         ("Past-year percentile", f"{V['pct']:.0f}th", f"higher than {V['pct']:.0f}% of the last {V['n']} trading days"),
-        ("52-week range", f"{V['lo'][0]:.1f} to {V['hi'][0]:.1f}", f"low {day(V['lo'][1], True)}, high {day(V['hi'][1], True)}"),
+        ("Past-year range", f"{V['lo'][0]:.1f} to {V['hi'][0]:.1f}", f"low {day(V['lo'][1], True)}, high {day(V['hi'][1], True)}"),
         ("Term structure", f"<span class='{'s-caution' if term == 'Inverted' else 's-neutral'}'>{term}</span>", f"VIX {V['cur']:.1f} vs 3-month VIX {v3:.1f}"),
     ]
     vmxh = "<div class='mx'>" + "".join(f"<div><div class='k'>{k}</div><div class='v'>{v}</div><div class='d'>{d}</div></div>" for k, v, d in vmx) + "</div>"
     vbar = zone_bar([(b[0], b[1], b[2]) for b in VIX_BANDS], 10, 50, [(V["cur"], f"{V['cur']:.1f}", False), (V["w1"], f"{V['w1']:.1f}", True)], None)
     days = V["days"]
     tones = FEAR_TONES
-    dbar = "<div class='zseg' style='height:20px'>" + "".join(
-        f"<span class='{tones[i]}' style='width:{n / V['n'] * 100:.2f}%' title='{VIX_BANDS[i][1]}: {n} days'></span>" for i, n in enumerate(days) if n) + "</div>"
-    dleg = "<div class='legend'>" + "".join(f"<span><i class='sw {tones[i]}'></i>{VIX_BANDS[i][1]} {n}</span>" for i, n in enumerate(days)) + "<span>(trading days)</span></div>"
-    vchart = line_chart([(V["chart"], "var(--text)")], 10, max(40, max(p[1] for p in V["chart"]) + 2), [(15, "15"), (25, "25"), (35, "35")], h=125,
-                        labels="VIX daily close, last three months")
+
+    def days_bar(days):
+        n_all = sum(days)
+        bar = "<div class='zseg' style='height:20px'>" + "".join(
+            f"<span class='{tones[i]}' style='width:{n / n_all * 100:.2f}%' title='{VIX_BANDS[i][1]}: {n:,} days'></span>" for i, n in enumerate(days) if n) + "</div>"
+        return bar + "<div class='legend'>" + "".join(f"<span><i class='sw {tones[i]}'></i>{VIX_BANDS[i][1]} {n:,}</span>" for i, n in enumerate(days)) + "<span>(trading days)</span></div>"
+
+    dbar, dleg = days_bar(days), ""
+    # All time (owner, 2026-11-15): the same zones over the full daily history.
+    dall = ("<h3 class='sub2'>Days in each zone, all time</h3>" + days_bar(V["days_all"])) if V.get("days_all") else ""
+    cv = [p[1] for p in V["chart"]]
+    lo_i, hi_i = cv.index(min(cv)), cv.index(max(cv))
+    VH = 135  # VIX chart height
+    vchart = line_chart([(V["chart"], "var(--text)")], 0, max(40, max(cv) + 4), [(0, "0"), (15, "15"), (25, "25"), (35, "35")], h=VH,
+                        labels="VIX daily close, past year",
+                        tick=lambda s: f"{dt.date.fromisoformat(s):%b} '{dt.date.fromisoformat(s):%y}",
+                        marks=[(lo_i, f"Low {cv[lo_i]:.1f}", True), (hi_i, f"High {cv[hi_i]:.1f}", False)])
     common = max(range(5), key=lambda i: days[i])
     v_pts = [f"The VIX closed the week at {V['cur']:.1f}, in the {vz} zone ({vrange}), {'down' if V['cur'] < V['w1'] else 'up'} {abs(V['cur'] - V['w1']):.1f} points from {V['w1']:.1f} a week ago"
              + (f", when it was in the {vz1} zone." if vz1 != vz else "."),
@@ -377,25 +421,46 @@ def build(D):
              f"It sits {abs(gap50):.0f}% {'above' if gap50 >= 0 else 'below'} its 50-day average.",
              f"The VIX is {'above' if ratio >= 1 else 'below'} the 3-month VIX ({v3:.1f}), so expected swings over the next month are {'larger' if ratio >= 1 else 'smaller'} than over the next three months"
              + (f"; a week ago the order was the other way round ({V['w1']:.1f} against {v3w:.1f})." if (ratio >= 1) != (ratio1 >= 1) else ".")]
+    vall = ""
+    if V.get("all"):
+        VA = V["all"]
+        top = max(range(len(VA)), key=lambda k: VA[k][1])
+        bot = min(range(len(VA)), key=lambda k: VA[k][1])
+        vall = (f"<h3 class='sub2'>Weekly close, {VA[0][0][:4]} to {VA[-1][0][:4]}</h3>"
+                + line_chart([(VA, "var(--text)")], 0, VA[top][1] + 22,
+                             [(v, str(v)) for v in range(0, int(VA[top][1]) + 20, 20)], h=VH, labels="VIX weekly close since 1990",
+                             tick=lambda s: s[:4], marks=[(bot, f"Low {VA[bot][1]:.1f}", True), (top, f"High {VA[top][1]:.1f}", False)],
+                             ticks=[k for k in range(len(VA)) if int(VA[k][0][:4]) % 5 == 0 and (k == 0 or VA[k - 1][0][:4] != VA[k][0][:4])])
+)
     S["vix"] = (
-        "<section class='slide'>" + head("VIX: the fear gauge", "vix")
+        "<section class='slide'>" + head("VIX", "vix")
         + "<p class='lede'>The market's expectation of how much the S&amp;P 500 will swing over the next 30 days, priced from options. The method treats it as its most actionable timing signal for index funds.</p>"
         + "<div class='card'>"
         + f"<div class='big'><span class='v'>{V['cur']:.1f}</span><span class='lab {fear_class(vz, VIX_BANDS)}'>{vz}</span><span class='mut'>VIX {vrange}, week ending {day(D['friday'], True)}</span></div>"
         + vbar + vmxh
-        + "<h3 class='sub2'>Days in each zone, past year</h3>" + dbar + dleg
-        + "<h3 class='sub2'>Last three months</h3>" + vchart
+        + "<h3 class='sub2'>Days in each zone, past year</h3>" + dbar + dleg + dall
+        + "<h3 class='sub2'>Daily close, past year</h3>" + vchart
+        # All time (owner, 2026-11-15): weekly closes since 1990.
+        + vall
         + f"<p class='quote'><b>The method on {vz} (VIX {vrange}):</b> “{E(VIX_SAYS[vz])}” {method_link('vix-action-levels')}</p>"
         + ana([E(p) for p in v_pts])
-        + "<div class='src'>The grey tick on the bar is last week. Source: Cboe VIX and VIX3M indexes, daily closes from Yahoo Finance.</div>"
+        + "<div class='src webonly'>The grey tick on the bar is last week. Source: Cboe VIX and VIX3M indexes, daily closes from Yahoo Finance.</div>"
         + "</div></section>")
 
     # ===== 4 and 6. Timing signals
     def cell(v, s, txt):
         return f"<td><span class='s-{s[1]}'>{txt} {s[0]}</span></td>" if s else "<td class='mut'>n/a</td>"
 
-    def timing_table(fs):
-        h = "<tr><th>Ticker</th><th>RSI (14)</th><th>52-week range</th><th>vs 200-day</th><th>Strong</th><th>Caution</th></tr>"
+    def timing_table(sections):
+        """One table split into sections like Stock Returns (owner, 2026-11-15)."""
+        h = ""
+        for i, (title, fs) in enumerate(sections):
+            h += (f"<tr{'' if i == 0 else chr(32) + 'class=' + chr(39) + 'tsub' + chr(39)}><th>{title}</th>"
+                  "<th>RSI (14)</th><th>52-week range</th><th>vs 200-day</th><th>Strong</th><th>Caution</th></tr>") + timing_rows(fs)
+        return f"<div class='card wrap'><table class='tt'>{h}</table></div>"
+
+    def timing_rows(fs):
+        h = ""
         for r in fs:
             t, s = r["tech"], r["sig"]
             h += (f"<tr><td><b>{E(r['t'])}</b> <span class='fn'>{E(short(r))}</span></td>"
@@ -404,7 +469,7 @@ def build(D):
                   + cell(t["ma200"], s["ma"], sg(t["ma200"], 1, "%") if t["ma200"] is not None else "")
                   + f"<td><b class='{'s-strong' if s['strong'] else 'mut'}'>{s['strong']} of 5</b></td>"
                   + f"<td><span class='{'s-caution' if s['caution'] else 'mut'}'>{s['caution']}</span></td></tr>")
-        return f"<div class='card wrap'><table class='tt'>{h}</table></div>"
+        return h
 
     market = ("<div class='mx' style='grid-template-columns:repeat(3,1fr);margin:0 0 14px'>"
               + f"<div><div class='k'>VIX</div><div class='v'>{V['cur']:.1f} <span class='s-{vsig}'>{vz}</span></div><div class='d'>{SIG[vsig]}: strong above 35, caution below 15</div></div>"
@@ -433,26 +498,27 @@ def build(D):
 
     t_pts = timing_points(idx, "major funds")
     t_pts.append(f"The combined AAII and VIX reading is Tier {T} ({TIERS[T][0]}): AAII bearish is {cur['bear']:.1f}% and the VIX is {V['cur']:.1f}.")
-    S["timing"] = (
-        "<section class='slide'>" + head("Timing signals: major funds", "timing")
-        + "<p class='lede'>The method's five timing signals for index funds: two market-wide (VIX and AAII) and three for each fund (RSI, 52-week range position, and price against the 200-day average).</p>"
-        + market + timing_table(idx) + key + dca + ana([E(p) for p in t_pts]) + "</section>")
     s_pts = timing_points(sec, "sector funds")
-    S["sectiming"] = (
-        "<section class='slide'>" + head("Timing signals: sectors", "timing")
-        + "<p class='lede'>The same three fund signals for the 11 sector funds. The method says to apply the VIX and RSI timing signals “more aggressively for sector funds” because a single industry can fall further and for longer than the whole market.</p>"
-        + market + timing_table(sorted(sec, key=lambda r: (-r["sig"]["strong"], r["sig"]["caution"], r["t"]))) + key + ana([E(p) for p in s_pts]) + "</section>")
+    # Major funds and sectors on one page (owner, 2026-11-15).
+    S["timing"] = (
+        "<section class='slide dense'>" + head("Signals", "timing")
+        + "<p class='lede'>The method's five timing signals for index funds: two market-wide (VIX and AAII) and three for each fund (RSI, 52-week range position, and price against the 200-day average). "
+        "For the 11 sector funds the method says to apply the VIX and RSI signals “more aggressively” because a single industry can fall further and for longer than the whole market.</p>"
+        + market + timing_table([("Indices", idx), ("Sectors", sorted(sec, key=lambda r: (-r["sig"]["strong"], r["sig"]["caution"], r["t"])))])
+        + key + dca + ana([E(p) for p in t_pts] + [E(p) for p in s_pts]) + "</section>")
 
     # ===== 5. Sector returns
     srt = sorted(sec, key=lambda r: -r["ch"]["w"])
     sup = sum(r["ch"]["w"] > 0 for r in sec)
     ytd_best = max(sec, key=lambda r: r["ch"]["ytd"])
-    S["sectors"] = (
-        "<section class='slide'>" + head("Sectors", "sectors")
-        + "<p class='lede'>The 11 Select Sector SPDR funds, which together hold the S&amp;P 500 split by industry. Total return over each period, sorted by this week's change.</p>"
-        + returns_table(srt)
-        + ana([E(f"{sup} of 11 sectors rose this week. {short(srt[0])} led ({sg(srt[0]['ch']['w'], 1, '%')}) and {short(srt[-1]).lower()} trailed ({sg(srt[-1]['ch']['w'], 1, '%')})."),
-               E(f"Year to date, {short(ytd_best).lower()} leads ({sg(ytd_best['ch']['ytd'], 1, '%')}).")])
+    S["indices"] = (
+        "<section class='slide dense'>" + head("Returns", "indices")
+        + "<p class='lede'>Total return over each period, price change plus dividends reinvested, for 12 major funds and the 11 sector funds that make up the S&amp;P 500.</p>"
+        + returns_table([("Indices", idx), ("Sectors", srt)])
+        + idx_lead
+        + "<p class='key webonly'>Sectors are the 11 Select Sector SPDR funds, which together make up the S&amp;P 500, sorted by this week's change. "
+        "<button class='btn explain' type='button' data-x='sectors'>Explain sectors</button></p>"
+        + "<div class='src webonly'>Total return: price change plus dividends reinvested, to this Friday's close.<span> Status is the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
         + "</section>")
 
     # ===== 7. Market mood
@@ -467,55 +533,333 @@ def build(D):
     mt = "<tr><th>Indicator</th><th style='text-align:left'>What it measures</th><th>This week</th><th>Last week</th><th>Change</th></tr>" + "".join(
         f"<tr><td><b>{a}</b></td><td style='text-align:left;white-space:normal;color:var(--muted)'>{b}</td><td>{c}</td><td>{d}</td><td class='{cl(e)}'>{sg(e, f, g)}</td></tr>"
         for a, b, c, d, e, f, g in MOOD)
-    S["mood"] = (
-        "<section class='slide'>" + head("Market mood", "mood")
+    S["aaii"] = (
+        "<section class='slide'><div class='sh'><h2>Sentiment</h2></div>" + aaii_part
+        + head("Market Mood", "mood", 3, " s3")
         + "<p class='lede'>Four readings of how investors are positioned, each measured the same way every week. The VIX has its own page. A reading describes the market; it is not a forecast.</p>"
         + f"<div class='card wrap'><table>{mt}</table></div>"
         + f"<div class='src'>Sources: Yahoo Finance (S&amp;P 500, SPY, TLT and the S&amp;P 500 members); ICE BofA US High Yield Index option-adjusted spread from the Federal Reserve Bank of St. Louis (FRED), whose latest reading is {day(M['junk'][3], True)}.</div>"
         + "</section>")
 
     # ===== 8. Bond yields
-    yt = "<tr><th>Maturity</th><th>Yield</th><th>This week</th><th>Year to date</th></tr>" + "".join(
-        f"<tr><td>{E(r['n'])}</td><td>{r['last']:.2f}%</td><td class='{cl(r['last'] - r['wk'])}'>{sg((r['last'] - r['wk']) * 100, 0, ' bps')}</td><td class='{cl(r['last'] - r['ye'])}'>{sg((r['last'] - r['ye']) * 100, 0, ' bps')}</td></tr>"
-        for r in grp("yld"))
+    # The same periods as the returns tables (owner, 2026-11-15), as changes in basis points.
+    # Rows whose latest reading is older than Friday (FRED's lag, weekly
+    # mortgage rates): the note under the table gives the dates (no marks, owner 2026-11-15).
+
+    # Inversion (owner, 2026-11-15): a Treasury or TIPS yield below that of any
+    # shorter maturity is inverted and its yield shows red; otherwise green. A
+    # yield curve row is inverted when its gap is below zero.
+    months = lambda r: int(r["n"].split("-")[0]) * (1 if "Month" in r["n"] else 12) if r["n"][:1].isdigit() else 0
+    inverted, over = {}, {}
+    for g in ("yld", "tips"):
+        top = None
+        for r in sorted(grp(g), key=months):
+            inverted[r["t"]] = top is not None and r["last"] < top["last"]
+            if inverted[r["t"]]:
+                over[r["t"]] = top
+            top = r if top is None or r["last"] > top["last"] else top
+    # Real Fed Funds is not a yield gap: below zero it is "Behind" (CPI
+    # inflation above the Fed funds rate), not Inverted (owner, 2026-11-15).
+    REAL = "FF-CPI"
+    for r in grp("curve"):
+        inverted[r["t"]] = r["last"] < 0 and r["t"] != REAL
+
+    # Policy, mortgage and inflation rows (owner, 2026-11-15): Status is the
+    # direction over the past month, Rising or Falling at 10 bps or more,
+    # otherwise Steady. Not colored: higher rates help savers and cost borrowers.
+    trend = lambda m: "Rising" if m >= 10 else "Falling" if m <= -10 else "Steady"
+    # Status colors (owner, 2026-11-15): Rising red, Falling green, Steady in
+    # the normal text color.
+    stat = lambda w: f"<td class='{'down' if w == 'Rising' else 'up' if w == 'Falling' else ''}'>{w}</td>"
+
+    def ylabel(n):
+        """Short labels (owner, 2026-11-15): 10-Year Treasury -> 10Y, 5-Year TIPS
+        -> 5Y TIPS, 30-year mortgage -> 30Y Mortgage, 60-month car loan -> 60M Car Loan."""
+        n = re.sub(r"(\d+)-[Yy]ear", r"\1Y", re.sub(r"(\d+)-[Mm]onth", r"\1M", n.replace(" Treasury", "")))
+        return " ".join(w[:1].upper() + w[1:] for w in n.split(" "))
+
+    def yrow(r):
+        name = ylabel(r["n"])
+        level = f"{sg(r['last'], 2)}" if r["g"] == "curve" else "n/a" if r["last"] is None else f"{r['last']:.2f}%"
+        # The muni row's changes are MUB's total return in bps (owner,
+        # 2026-11-15): a gain means muni prices rose and yields fell, so it is
+        # green, and its Status reads the yield direction from the 1M return.
+        up = 1 if r.get("ret") else -1
+        # Policy and mortgage rates show their reading's month, like CPI and PCE (owner, 2026-11-15).
+        when = f" <span class='fn'>{dt.date.fromisoformat(r['d']):%b}</span>" if r["g"] == "rates" else ""
+        # Yield curve rows (owner, 2026-11-15): changes are not colored, and
+        # Status reads Steepening or Flattening at 10 bps or more over the past
+        # month, uncolored; only Inverted (or Behind, for Real Fed Funds)
+        # is red. Real Fed Funds keeps Rising and Falling, as it is not a gap.
+        curve = r["g"] == "curve"
+        cell = lambda v: "" if curve else cl(up * round(v))
+        if inverted.get(r["t"]):
+            status = "<td class='down'>Inverted</td>"
+        elif r["t"] == REAL and r["last"] < 0:
+            status = "<td class='down'>Behind</td>"
+        elif curve:
+            m = r["bps"]["m1"]
+            word = ("Rising" if m >= 10 else "Falling" if m <= -10 else "Steady") if r["t"] == REAL else                    ("Steepening" if m >= 10 else "Flattening" if m <= -10 else "Steady")
+            status = f"<td>{word}</td>"
+        else:
+            status = stat(trend(-r['bps']['m1'] if r.get("ret") else r['bps']['m1']))
+        return (f"<tr><td><b>{E(name)}</b>{when}</td><td><b>{level}</b></td>"
+                + "".join(f"<td class='{cell(r['bps'][k])}'>{sg(r['bps'][k], 0) if round(r['bps'][k]) else '+0'}</td>" for k, _ in SPANS)
+                + status + "</tr>")
+
+    # Inflation (owner, 2026-11-15): monthly, so it changes about once a month.
+    # Change colors (owner, 2026-11-15): a rise in a yield, spread or rate is red
+    # and a fall green, as a rising yield means a falling bond price; inflation
+    # follows the same rule, and so do the yield curve gaps (owner, 2026-11-15).
+    # A zero change shows as +0.
+    # Headline CPI and PCE only (owner, 2026-11-15: no core rows), in the same
+    # section as the policy and mortgage rates.
+    INF = [r for r in D.get("inflation") or [] if r["t"] in ("CPIAUCSL", "PCEPI")]
+    mon = lambda s: f"{dt.date.fromisoformat(s):%b %Y}"
+    cpi = next((r for r in INF if r["t"] == "CPIAUCSL"), None)
+
+    def irow(r):
+        cells = "".join("<td>+0</td>" if r["bps"][k] is None else f"<td class='{cl(-round(r['bps'][k]))}'>{sg(r['bps'][k], 0) if round(r['bps'][k]) else '+0'}</td>" for k, _ in SPANS)
+        return f"<tr><td><b>{E(r['n'])}</b> <span class='fn'>{dt.date.fromisoformat(r['month']):%b}</span></td><td><b>{r['yoy']:.2f}%</b></td>{cells}{stat(trend(r['bps']['m1']))}</tr>"
+
+    ycols = "".join(f"<th>{s[1]}</th>" for s in SPANS)
+    TP = grp("tips")
+    # Each section sorted from the lowest level to the highest (owner,
+    # 2026-11-15); ties keep the shorter maturity first.
+    def section(g):
+        rs = grp(g) + (grp("tips") + grp("muni") if g == "yld" else [])  # TIPS share the Treasury section (owner, 2026-11-15)
+        # The yield curve keeps fetch.py's fixed order (owner, 2026-11-15).
+        out = [((i if g == "curve" else r["last"] or 0), months(r) if g == "yld" else 0, yrow(r)) for i, r in enumerate(rs)]
+        if g == "rates":
+            out += [(r["yoy"], 0, irow(r)) for r in INF]
+        return "".join(h for _, _, h in sorted(out, key=lambda x: x[:2]))
+    yt = f"<tr><th>Treasury, TIPS and munis</th><th>Yield</th>{ycols}<th>Status</th></tr>" + section("yld")
+    for g, title, col in (("rates", "Policy, mortgage and inflation rates", "Rate"), ("curve", "Yield curve", "Gap")):
+        if grp(g) or (g == "rates" and INF):
+            yt += f"<tr class='tsub'><th>{title}</th><th>{col}</th>{ycols}<th>Status</th></tr>" + section(g)
+    # The full notes stay on the website page; the export leaves them out
+    # (owner, 2026-11-15) to make room for the table.
+    late = sorted({r["d"] for r in rows if r["g"] in ("yld", "tips", "curve", "rates") and r["d"] != D["friday"] and not r.get("q")})
+    be = D.get("breakeven")
+    yld_note = ("<div class='webonly'><p class='key'>TIPS (Treasury Inflation-Protected Securities) pay a yield on top of inflation, a “real” yield."
+                + (f" The 10-year breakeven rate (10-year Treasury minus 10-year TIPS, same day) is {be[0]:.2f}% on {day(be[1], True)}: "
+                   "roughly the yearly inflation the bond market expects." if be else "")
+                + " Muni (MUB) is the iShares National Muni Bond ETF: its yield as of the fetch, and its total return over each period in bps (+100 bps = +1%), green when its price rose. The yield curve rows are the gap between two yields in points; below zero means inverted. Real Fed Funds is the Fed funds rate minus CPI inflation over 12 months. "
+                "Changes are red when a yield or rate rose (a rising yield means a falling bond price) and green when it fell. Status is Inverted (red) when a yield is below a shorter maturity's, or a gap is below zero, and that comes first. "
+                "Otherwise it is the move over the past month: Rising (red) or Falling (green) at 10 bps or more, otherwise Steady. "
+                "The yield curve rows are not colored: a gap is Steepening when it widened by 10 bps or more over the past month, Flattening when it narrowed by that much, otherwise Steady; "
+                "Real Fed Funds is Behind (red) below zero, when CPI inflation is above the Fed funds rate. Mortgage rates are Freddie Mac's weekly survey averages; credit card (accounts paying interest) and car loan rates are the Fed's quarterly survey of banks.</p>"
+                "<div class='src'>The 3-month, 5, 10 and 30-year Treasury yields from Yahoo Finance (Cboe indexes) at this Friday's close; the rest from FRED, including CPI (Bureau of Labor Statistics) and PCE (Bureau of Economic Analysis). "
+                + (f"FRED's daily figures are its latest reading ({' or '.join(day(d, True) for d in late)}), with changes measured back from that date." if late else "") + "</div></div>")
+    # Inversion callout (owner, 2026-11-15): whenever any yield or gap is
+    # inverted, a red callout above the table names each one. It is data, so
+    # it stays in the export; the history line is for the website only.
+    bad = [r for r in rows if inverted.get(r["t"])]
+    alert = ""
+    if bad:
+        nm_ = lambda r: ylabel(r["n"])
+        items = [f"the {nm_(r)} yield, {r['last']:.2f}%, is below the {nm_(over[r['t']])} yield, {over[r['t']]['last']:.2f}%" if r["t"] in over
+                 else f"{r['n']} is {sg(r['last'], 2)} points" for r in sorted(bad, key=lambda r: r["g"] != "curve")]
+        alert = ("<div class='alert'><p class='alert-h'>Inverted</p><ul>" + "".join(f"<li>{E(i[0].upper() + i[1:])}.</li>" for i in items) + "</ul>"
+                 "<p class='webonly alert-n'>An inverted yield curve, short-term yields above long-term ones, has often, but not always, come before a recession.</p></div>")
     S["yields"] = (
-        "<section class='slide'>" + head("Bond yields", "yields")
-        + "<p class='lede'>US Treasury yields. Changes are in basis points (100 bps = 1 percentage point).</p>"
-        + f"<div class='card wrap'><table>{yt}</table></div></section>")
+        "<section class='slide dense xdense'>" + head("Rates", "yields")
+        + "<p class='lede'>Treasury, TIPS and muni yields, the rates that set borrowing costs, inflation and the yield curve. Changes over each period are in basis points (100 bps = 1 percentage point).</p>"
+        + alert + f"<div class='card wrap'><table class='tt'>{yt}</table></div>" + yld_note + "</section>")
 
-    # ===== 9. Oil, gold, crypto and the dollar
-    def tiles(g):
-        out = ""
-        for r in grp(g):
-            w, y = (r["last"] / r["wk"] - 1) * 100, (r["last"] / r["ye"] - 1) * 100
-            out += (f"<div class='tile'><div class='k'>{E(r['n'])}</div><div class='v'>{money(r['last'])}</div>"
-                    f"<div class='d'>Week {ch(w, 2, '%')} · YTD {ch(y, 2, '%')}</div></div>")
-        return out
-
+    # ===== 9. Other (owner, 2026-11-15): one Returns-style table with
+    # Commodities, Currency and Crypto sections, plus price; price change, as
+    # none of them pay out.
+    COM = [r for r in grp("cmd") if not r["t"].endswith(CRYPTO_SUFFIX)]
+    CRY = [r for r in grp("cmd") if r["t"].endswith(CRYPTO_SUFFIX)]
     S["cmd"] = (
-        "<section class='slide'>" + head("Oil, gold, crypto and the dollar", "cmd")
-        + "<p class='lede'>Futures for oil and gold. Crypto trades around the clock, so its price is the latest at fetch time.</p>"
-        + f"<div class='tiles'>{tiles('cmd')}</div><h3 class='sub2'>The dollar</h3><div class='tiles'>{tiles('oth')}</div></section>")
+        "<section class='slide dense'>" + head("Other Markets", "cmd")
+        + "<p class='lede'>Futures for energy and metals, the dollar index and major currencies, and crypto, which trades around the clock.</p>"
+        + returns_table([("Commodities", COM), ("Currency", grp("oth")), ("Crypto", CRY)], named=True)
+        + "<div class='src webonly'>Price change from Yahoo Finance: commodities and currencies to this Friday's close, crypto to the latest price at fetch time. "
+        "Each currency is its own index: the PHLX currency indexes for the euro, yen, pound, Canadian dollar and Swiss franc, and the yuan and won built the same way from Yahoo's exchange rates; "
+        "each is the currency's value in US cents (the yen and won per 100), so a rise means that currency got stronger."
+        "<span> Status is the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
+        + "</section>")
 
-    order = ["summary", "aaii", "vix", "timing", "sectors", "sectiming", "mood", "yields", "cmd"]
-    return "\n".join(S[k] for k in order)
+    # ===== 1. This week (owner, 2026-11-15): two bullets per page of the report,
+    # the page's main takeaway and then added context. Facts only, no advice.
+    pct = lambda n, d=1: sg(n, d, "%")
+    rose = lambda n: "rose" if n >= 0 else "fell"
+    lst = lambda xs: ", ".join(xs[:-1]) + " and " + xs[-1] if len(xs) > 1 else (xs[0] if xs else "")
+    CAUSE = [("rsi", "RSI above 70"), ("pos", "top 10% of the 52-week range"), ("ma", "over 2% below the 200-day")]
+
+    def cautions(fs):
+        parts = []
+        for k, why in CAUSE:
+            ts = [r["t"] for r in fs if r["sig"][k] and r["sig"][k][1] == "caution"]
+            if ts:
+                parts.append(f"{lst(ts)} ({why})")
+        return "Caution: " + "; ".join(parts) + "." if parts else "No Caution readings."
+
+    def strongest(fs, what):
+        top = max(r["sig"]["strong"] for r in fs)
+        tops = [r["t"] for r in fs if r["sig"]["strong"] == top]
+        return f"no {what} has more than {top} of 5 Strong signals" + (f" ({lst(tops)})" if len(tops) <= 3 else "")
+
+    def pulls(fs):
+        pb = [r["t"] for r in fs if r["sig"]["rsi"] and r["sig"]["rsi"][1] == "strong"]
+        return f" RSI 45 or below: {lst(pb) if len(pb) <= 4 else f'{len(pb)} of {len(fs)}'}." if pb else " None has RSI at 45 or below."
+
+    # Major indices
+    dn1 = [r for r in idx if r["ch"]["m1"] < 0]
+    wm1 = min(idx, key=lambda r: r["ch"]["m1"])
+    lag = min(gvd, key=lambda r: r["ch"]["ytd"])
+    tw_idx = (f"{ups} of {len(idx)} major funds rose this week, {best['t']} the most ({pct(best['ch']['w'])}); "
+              f"{sup} of 11 sectors rose, led by {short(srt[0]).lower()} ({pct(srt[0]['ch']['w'])}).",
+              (f"Over 1 month {len(dn1)} of {len(idx)} are lower, {wm1['t']} the most ({pct(wm1['ch']['m1'])})" if dn1 else f"All {len(idx)} are higher over the past month")
+              + f"; YTD {short(lead['ytd']).lower()} ({lead['ytd']['t']} {pct(lead['ytd']['ch']['ytd'])}) leads {short(lag).lower()} ({lag['t']} {pct(lag['ch']['ytd'])}), "
+              f"and {short(ytd_best).lower()} leads the sectors ({pct(ytd_best['ch']['ytd'])}).")
+    # AAII
+    tw_aaii = (f"Bearish sentiment is {cur['bear']:.1f}%, in the {az} zone ({arange})"
+               + (f", {'up' if d1 >= 0 else 'down'} {abs(d1):.1f} points from last week." if d1 is not None else "."),
+               (f"Bearish has topped bullish for {atleast(bb_exact)}{plural(bb, 'week')} in a row"
+                + (f", and this is {'the first week' if b50 == 1 else f'week {b50}'} above 50%" if b50 else "") if bb else "Bullish is at or above bearish this week")
+               + f"; the bull-bear spread of {sg(spread)} is {abs(spread - avg['spread']):.1f} points {'below' if spread < avg['spread'] else 'above'} its long-run average ({sg(avg['spread'])}).")
+    # VIX
+    tw_vix = (f"The VIX {rose(V['cur'] - V['w1'])} {abs(V['cur'] - V['w1']):.1f} points to {V['cur']:.1f}"
+              + (f", moving from the {vz1} zone to the {vz} zone." if vz1 != vz else f", staying in the {vz} zone."),
+              f"Lower than today on {V['pct']:.0f}% of the past year's trading days (range {V['lo'][0]:.1f} to {V['hi'][0]:.1f}); "
+              f"{'above' if ratio >= 1 else 'below'} the 3-month VIX ({v3:.1f}), {'the reverse of the usual order' if ratio >= 1 else 'the usual order'}.")
+    # Timing signals
+    tw_timing = (f"AAII and VIX combined: Tier {T} ({TIERS[T][0]}); {strongest(idx, 'major fund')}.",
+                 cautions(idx) + pulls(idx))
+    tw_sectiming = (f"{strongest(sec, 'sector fund')[0].upper()}{strongest(sec, 'sector fund')[1:]}.",
+                    cautions(sec) + pulls(sec))
+    # Market mood
+    mo, br, sh, jk = M["momentum"], M["breadth"], M["safehaven"], M["junk"]
+    tw_mood = (f"{br[0]:.0f}% of S&P 500 stocks are above their 200-day average ({'up' if br[0] >= br[1] else 'down'} from {br[1]:.0f}%); "
+               f"the index is {abs(mo[0]):.1f}% {'above' if mo[0] >= 0 else 'below'} its 125-day average.",
+               f"Over 20 days stocks {'beat' if sh[0] >= 0 else 'trailed'} Treasuries by {abs(sh[0]):.1f} points; the high-yield spread is {jk[0]:.2f}%, "
+               f"{'down' if jk[0] < jk[1] else 'up' if jk[0] > jk[1] else 'unchanged'} from {jk[1]:.2f}% ({jk[2]:.2f}% 1-year average).")
+    # Bond yields
+    Y = grp("yld")
+    c2 = next((r for r in grp("curve") if r["t"] == "T10Y2Y"), None)
+    yup = [r for r in Y if r["bps"]["w"] > 0]
+    ymax = max(Y, key=lambda r: abs(r["bps"]["w"]))
+    n_inv = sum(1 for v in inverted.values() if v)
+    tw_yld = (f"The 10-year Treasury yield ended at {tnx['last']:.2f}%, {sg(tnx['bps']['w'], 0, ' bps')} this week and {sg(tnx['bps']['ytd'], 0, ' bps')} year to date"
+              + (f"; {n_inv} {'yield or gap is' if n_inv == 1 else 'yields or gaps are'} inverted." if n_inv else "; no part of the yield curve is inverted."),
+              (f"All {len(Y)} maturities rose" if len(yup) == len(Y) else "All maturities fell" if not yup else f"{len(yup)} of {len(Y)} maturities rose")
+              + f", the {ymax['n'].replace(' Treasury', '').lower()} the most ({sg(ymax['bps']['w'], 0, ' bps')})"
+              + (f"; the 10-year is {abs(c2['last']):.2f} points {'above' if c2['last'] >= 0 else 'below'} the 2-year" if c2 else "")
+              + (f"; CPI inflation is {cpi['yoy']:.1f}% ({mon(cpi['month'])})." if cpi else "."))
+    # Commodities and the dollar
+    C = COM + grp("oth")
+    wk = lambda r: r["ch"]["w"]
+    yt = lambda r: r["ch"]["ytd"]
+    cap = lambda s: s[0].upper() + s[1:]
+    nm = lambda r: {"CL=F": "WTI oil", "BZ=F": "Brent oil", "DX-Y.NYB": "the US dollar"}.get(r["t"], r["n"] if r["t"].endswith(CRYPTO_SUFFIX) else r["n"].lower())
+    big = max(C, key=lambda r: abs(wk(r)))
+    named = [r for r in C if r["t"] in ("CL=F", "GC=F", "DX-Y.NYB") and r is not big]
+    yb, yw = max(COM, key=yt), min(COM, key=yt)  # the commodities only, as the bullet says
+    tw_cmd = (f"{cap(nm(big))} {rose(wk(big))} {abs(wk(big)):.1f}% this week, the biggest commodity move; " + lst([f"{nm(r)} {pct(wk(r))}" for r in named]) + ".",
+              f"In commodities, year to date {nm(yb)} leads ({pct(yt(yb))}) and {nm(yw)} trails ({pct(yt(yw))}).")
+    # Crypto
+    btc = next(r for r in CRY if r["t"] == "BTC-USD")
+    eth = next((r for r in CRY if r["t"] == "ETH-USD"), None)
+    cbig = max(CRY, key=lambda r: abs(wk(r)))
+    cdown = sum(wk(r) < 0 for r in CRY)
+    cyb, cyw = max(CRY, key=yt), min(CRY, key=yt)
+    tw_crypto = ((f"All {len(CRY)} coins fell" if cdown == len(CRY) else f"All {len(CRY)} coins rose" if not cdown else f"{cdown} of {len(CRY)} coins fell")
+                 + f" this week: Bitcoin {pct(wk(btc))}" + (f", Ethereum {pct(wk(eth))}" if eth else "")
+                 + f", {nm(cbig)} the most ({pct(wk(cbig))}).",
+                 f"In crypto, year to date {nm(cyb)} leads ({pct(yt(cyb))}) and {nm(cyw)} trails ({pct(yt(cyw))}).")
+
+    order = ["summary", "indices", "aaii", "vix", "timing", "yields", "cmd"]
+    # 2 to 4 bullets per page (owner, 2026-11-15): clauses joined by "; " become
+    # their own bullets, and a section with more than 4 joins its last ones.
+    semis = lambda *xs: [p.rstrip(".") for x in xs for p in x.split("; ")]
+
+    def bullets(parts):
+        parts = parts[:3] + ["; ".join(parts[3:])] if len(parts) > 4 else parts
+        return [p[0].upper() + p[1:] + ("" if p.endswith(".") else ".") for p in parts]
+
+    TW = [("Returns", bullets(semis(*tw_idx))),
+          ("Sentiment", bullets([tw_aaii[0], tw_aaii[1], tw_mood[0], tw_mood[1]])),
+          ("VIX", bullets([tw_vix[0]] + semis(tw_vix[1]))),
+          ("Signals", bullets([tw_timing[0] + " " + tw_sectiming[0], "Major funds: " + tw_timing[1], "Sectors: " + tw_sectiming[1]])),
+          ("Rates", bullets(semis(*tw_yld))),
+          ("Other Markets", bullets([tw_cmd[0], tw_crypto[0], tw_cmd[1], tw_crypto[1]]))]
+    assert all(2 <= len(b) <= 4 for _, b in TW)
+    # Executive summary (owner, 2026-11-15): four lines across the report,
+    # facts only, before the page-by-page summaries.
+    spy = next(r for r in idx if r["t"] == "SPY")
+    s_best, s_worst = max(sec, key=lambda r: r["ch"]["w"]), min(sec, key=lambda r: r["ch"]["w"])
+    EXEC = [
+        f"The S&P 500 (SPY) {rose(spy['ch']['w'])} {abs(spy['ch']['w']):.1f}% this week and is {pct(spy['ch']['ytd'])} year to date; {sum(r['ch']['w'] > 0 for r in idx)} of {len(idx)} major funds rose.",
+        f"Among sectors, {short(s_best)} ({s_best['t']}) led at {pct(s_best['ch']['w'])} and {short(s_worst)} ({s_worst['t']}) trailed at {pct(s_worst['ch']['w'])}.",
+        f"The VIX is {V['cur']:.1f} ({vz}) and AAII bearish sentiment is {cur['bear']:.1f}% ({az}); combined, Tier {T} ({TIERS[T][0]}).",
+        f"The 10-year Treasury yield is {tnx['last']:.2f}% ({sg(tnx['bps']['w'], 0, ' bps')} this week)"
+        + (f"; {n_inv} {'yield or gap is' if n_inv == 1 else 'yields or gaps are'} inverted." if n_inv else "; no part of the yield curve is inverted."),
+    ]
+    # The week's written summary (owner, 2026-11-15): Claude Code writes
+    # data/summary/<friday>.json, 2 to 5 parts shown as one paragraph, with each weekly
+    # update. Without it the factual bullets above are used.
+    sf = HERE / "data" / "summary" / f"{D['friday']}.json"
+    if sf.exists():
+        EXEC = json.loads(sf.read_text(encoding="utf-8"))
+        assert 2 <= len(EXEC) <= 5, "the executive summary takes 2 to 5 parts"
+    S["summary"] = (
+        "<section class='slide'>" + head("This Week", "summary")
+        + "<div class='card tw'><div class='twg exec'><p class='twh'>Executive Summary</p>" + f"<p class='para'>{E(' '.join(EXEC))}</p>" + "</div>" + "".join(
+            f"<div class='twg'><p class='twh'><a class='twl' href='#p-{k}'>{E(t)} <span>page {i}</span></a></p><ul class='facts'>" + "".join(f"<li{' class=' + chr(39) + 'main' + chr(39) if j == 0 else ''}>{E(x)}</li>" for j, x in enumerate(bs)) + "</ul></div>"
+            for i, ((t, bs), k) in enumerate(zip(TW, order[1:]), 2))
+        + "</div></section>")
+    # Each page gets an id so the This Week headings can link to it (owner,
+    # 2026-11-15); the export carries the ids onto its pages.
+    return "\n".join(S[k].replace("<section class='slide", f"<section id='p-{k}' class='slide", 1) for k in order)
 
 
-def main(friday):
+SITE = "https://azqato.com/invests/"
+DEMO_NOTE = ("<p style='margin:0 0 14px;padding:8px 12px;border:1px dashed var(--muted);border-radius:8px;font-size:0.85rem;color:var(--muted)'>"
+             "<b>Demo</b>: proposed changes, not yet on azqato.com.</p>")
+
+
+def main(friday, demo=None):
     D = json.loads((HERE / "data" / f"{friday}.json").read_text(encoding="utf-8"))
+    if os.environ.get("WEEKLY_MOCK_INVERT"):
+        # Demo only (demo.py --mock-invert): a made-up inversion to preview the
+        # callout. Never used for the live page.
+        assert demo, "the mock inversion is for demos only"
+        for r in D["rows"]:
+            if r["t"] == "^TNX":
+                r["last"] = 4.60
+            if r["t"] == "T10Y2Y":
+                r["last"] = -0.26
     d = dt.date.fromisoformat(friday)
     week = f"Week ending Friday, {d:%B} {d.day}, {d.year}"
     page = (HERE / "template.html").read_text(encoding="utf-8")
     fill = {"__SECTIONS__": build(D), "__EXPLAIN__": (HERE / "explain.html").read_text(encoding="utf-8").strip(),
-            "__SUB__": E(f"{week}. Prices fetched {D['fetched']} (local time)."), "__WEEK__": week, "__FETCHED__": D["fetched"]}
+            # Subtitle (owner, 2026-11-15): the same as the export header, a
+            # link to the Discord and the Friday's date.
+            "__SUB__": "<a class='discord' href='https://discord.gg/6bnZFtNd5p'>Discord</a> · " + E(f"{d:%B} {d.day}, {d.year}"), "__WEEK__": week, "__FETCHED__": D["fetched"]}
     for k, v in fill.items():
         assert page.count(k) == 1, k
         page = page.replace(k, v)
+    if demo:
+        for rel, url in (("../indices/method.html", SITE + "indices/method"), ("../indices/index.html", SITE + "indices/"),
+                         ("../index.html", SITE)):
+            page = page.replace(f'href="{rel}', f'href="{url}').replace(f"href='{rel}", f"href='{url}")
+        assert 'href="../' not in page and "href='../" not in page, "a relative site link is left in the demo"
+        page = page.replace('<nav class="crumbs"', DEMO_NOTE + '<nav class="crumbs"', 1)
+        pathlib.Path(demo).write_text(page, encoding="utf-8", newline="\n")
+        print("wrote demo", demo, "for", week)
+        return
     OUT.write_text(page, encoding="utf-8", newline="\n")
     print("wrote", OUT.relative_to(ROOT), "for", week)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    args = sys.argv[1:]
+    if len(args) == 3 and args[1] == "--demo":
+        main(args[0], args[2])
+    elif len(args) == 1:
+        main(args[0])
+    else:
         sys.exit(__doc__)
-    main(sys.argv[1])
