@@ -5,6 +5,23 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.43.0] - 2026-11-16
+
+### Changed
+- **Secondary text is easier to read across the site** (owner's request): the shared secondary text color in
+`colors.css` is now close to the main text color, `#d6dce3` in dark and `#2c3137` in light (was `#878c93`, which
+measured 4.56:1 on dark cards, and `#5c6168`). It applies to every page that loads `colors.css`: Home, the other main
+pages, Codes and all of Invests. The Weekly Investing Report and the Brand page keep their own palettes. The rule is
+recorded in `docs/DESIGN.md`.
+- **Tools page** (`/codes/tools/`):
+  - lists only the ten tools hosted here that run in the browser. The Nasdaq 100 Screener, Net Worth Tracker, VIX
+Strategy and Protein Tracker cards are gone; they stay on the Projects page, and the first two in Invests. The new
+rule is in `docs/TOOLS-PROMPTS.md`.
+  - The intro is left-aligned, the title "Free tools that just work." sits on one line, the intro paragraph is
+capped at 85 characters wide, and the "Why these tools?" box sits at the left.
+  - Card descriptions, the list's lead line and the "Why these tools?" text go up to 16px with more line spacing.
+The title's letter spacing is looser.
+
 ## [2.42.0] - 2026-11-15
 
 ### Changed

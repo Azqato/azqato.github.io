@@ -75,6 +75,8 @@ The owner picked these on 2026-10-02 (PRD Part 2, P15; Roadmap at a glance, item
 
 Every text color passes AA (4.5:1) on its background in both themes. On the light hover color, warning, info and second-accent text fall to 4.2 to 4.45:1, so colored text inside a hovered row needs a check when it's built.
 
+**Readability rule (owner, 2026-11-16, 2.43.0): everything must be easy to read.** Secondary text (`--ti-color-text-muted` in `colors.css`, used by every page that loads it) is now close to the main text color: `#d6dce3` in dark (11.2:1 on cards) and `#2c3137` in light (13.1:1 on white), a touch softer than headings so they still stand out. Before, it was `#878c93` (4.56:1 on dark cards) and `#5c6168`. Aim for secondary text at 7:1 or better and body copy at 16px; small text never under 12px. The Weekly Investing Report and the Brand page keep their own palettes and need their own pass.
+
 ### Page-scoped tokens (declared inline on the pages that need them)
 
 | Token             | Hex Value   | Declared on                                          | Use                                        |

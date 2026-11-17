@@ -16,6 +16,8 @@ Written 2026-10-08. This covers phase 1 (interpretation, read only) and a draft 
 - **Data:** the Markdown draft, Wash Sale log and bookmarks are saved in `localStorage` under the `azqato.github.io` origin. **On azqato.com that is a different origin, so saved data does not carry over.** Users would start empty.
 - **Docs:** README, PRD, DESIGN and PATCHNOTES. It has had a full accessibility pass. Friend Finder is on its roadmap.
 
+**Rule (owner, 2026-11-16): the Tools page lists only tools hosted on this site that run entirely in the browser.** No links to projects hosted elsewhere and no pages from other sections (such as Invests), so no "external" tags. Those projects are listed on the Projects page instead. A new tool joins the list only when it is built under `codes/tools/` and runs on the visitor's device; update the counts in the hero, the list's lead line and the no-results message when one is added or removed.
+
 ### Prompts (azqato.github.io/prompts)
 
 - **What it is:** a library of 24 Claude Code prompts. It is a single-page app: `index.html` with hash routes (`#/slug`) and a search box. Each prompt's description shows first, and the full text sits behind Expand.
@@ -128,5 +130,5 @@ To review locally: `python -m http.server 8000` in this folder, then open http:/
 
 ### Open questions
 
-- **A.** On the Tools list, should VIX Strategy and the Nasdaq 100 Screener lose their "external" tag now that they're on this site? That means rewording "four Azqato projects hosted elsewhere" to "two". (Recommended: yes. The source text was left as is until you say so.)
+- **A.** ~~On the Tools list, should VIX Strategy and the Nasdaq 100 Screener lose their "external" tag?~~ **Resolved 2026-11-16:** all four external cards were removed under the rule above (Tools: only local, in-browser tools).
 - **B.** The Progress Dashboard prompt names https://azqato.github.io/prompts/dashboard/ as its working example. Keeping the old repo's Pages on when it's archived keeps that link working, which is recommended. The alternative is bringing the dashboard here as an example page.
