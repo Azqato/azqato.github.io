@@ -111,6 +111,10 @@ E = html.escape
 
 
 def sg(n, d=1, u=""):
+    # A value that rounds to zero shows no sign (sense check, 2026-11-20: a
+    # spread change of -0.004 read "−0.0").
+    if round(n, d) == 0:
+        return f"{0:.{d}f}{u}"
     return ("+" if n >= 0 else "−") + f"{abs(n):.{d}f}{u}"
 
 
@@ -119,7 +123,7 @@ def cl(n):
 
 
 def ch(n, d=1, u=""):
-    return f"<span class='{cl(n)}'>{sg(n, d, u)}</span>"
+    return f"<span class='{cl(round(n, d))}'>{sg(n, d, u)}</span>"
 
 
 def day(s, year=False):
@@ -159,12 +163,22 @@ SPANS = [("w", "1W"), ("m1", "1M"), ("m6", "6M"), ("ytd", "YTD"), ("y1", "1Y"), 
 # Status on the returns tables (owner, 2026-11-15): the past month's total
 # return, Rising at +2% or more (green), Falling at -2% or less (red),
 # otherwise Steady. Prices, so up is green, as in the change columns.
-def ret_status(v):
-    """Status (owner, 2026-11-15): the price against its 200-day average (for
-    funds the same gap as the Signals page): Rising more than 5% above, Falling
-    more than 5% below, otherwise Steady. The owner chose 5% for every asset over
-    the method's 2%, after a 10-year test showed 2% almost never reads Steady
-    for crypto and natural gas."""
+def ret_status(v, rng=None):
+    """Status, the first that applies (owner, 2026-11-20), for every asset:
+    Bear, 20% or more below its 52-week closing high (red); Correction, 10% or
+    more below it (red); Bull, 20% or more above its 52-week closing low (green),
+    which by then means within 10% of the high. Otherwise the price against its
+    200-day average (owner, 2026-11-15; for funds the same gap as the Signals
+    page): Rising more than 5% above, Falling more than 5% below, otherwise
+    Steady. The 5% band: a 10-year test showed the method's 2% almost never reads
+    Steady for crypto and natural gas."""
+    if rng:
+        if rng["hi"] <= -20:
+            return "<td class='down'>Bear</td>"
+        if rng["hi"] <= -10:
+            return "<td class='down'>Correction</td>"
+        if rng["lo"] >= 20:
+            return "<td class='up'>Bull</td>"
     if v is None:
         return "<td class='mut'>n/a</td>"
     return "<td class='up'>Rising</td>" if v > 5 else "<td class='down'>Falling</td>" if v < -5 else "<td>Steady</td>"
@@ -193,7 +207,7 @@ def returns_rows(rows, named=False):
         for k, _ in SPANS:
             v = r["ch"][k]
             h += "<td class='mut'>n/a</td>" if v is None else f"<td class='{cl(v)}'>{sg(v, 1, '%')}</td>"
-        h += ret_status(r["tech"]["ma200"] if "tech" in r else r.get("ma200")) + "</tr>"
+        h += ret_status(r["tech"]["ma200"] if "tech" in r else r.get("ma200"), r.get("range")) + "</tr>"
     return h
 
 
@@ -273,6 +287,7 @@ def build(D):
     cur = A["weeks"][-1]
     vz, vsig, vrange = vix_band(V["cur"])
     vz1 = vix_band(V["w1"])[0]
+    vtop, vbot = V["cur"] >= V["hi"][0], V["cur"] <= V["lo"][0]  # a past-year high or low reads as such, not "100%"
     az, asig, arange = aaii_band(cur["bear"])
     T = tier(V["cur"], cur["bear"])
     for r in idx + sec:
@@ -388,7 +403,9 @@ def build(D):
     gap50 = M["volatility"][2]
     vmx = [
         ("Change", ch(V["cur"] - V["w1"]) + " <span class='mut' style='font-size:max(12px, .75em)'>1W</span>", f"{ch(V['cur'] - V['m1'])} over 1M (from {V['m1']:.1f})"),
-        ("Past-year percentile", f"{V['pct']:.0f}th", f"higher than {V['pct']:.0f}% of the last {V['n']} trading days"),
+        ("Past-year percentile", *(("Highest", f"the highest close of the last {V['n']} trading days") if vtop
+                                    else ("Lowest", f"the lowest close of the last {V['n']} trading days") if vbot
+                                    else (f"{V['pct']:.0f}th", f"higher than {V['pct']:.0f}% of the last {V['n']} trading days"))),
         ("Past-year range", f"{V['lo'][0]:.1f} to {V['hi'][0]:.1f}", f"low {day(V['lo'][1], True)}, high {day(V['hi'][1], True)}"),
         ("Term structure", f"<span class='{'s-caution' if term == 'Inverted' else 's-neutral'}'>{term}</span>", f"VIX {V['cur']:.1f} vs 3-month VIX {v3:.1f}"),
     ]
@@ -417,7 +434,8 @@ def build(D):
     v_pts = [f"The VIX closed the week at {V['cur']:.1f}, in the {vz} zone ({vrange}), {'down' if V['cur'] < V['w1'] else 'up'} {abs(V['cur'] - V['w1']):.1f} points from {V['w1']:.1f} a week ago"
              + (f", when it was in the {vz1} zone." if vz1 != vz else "."),
              f"A month ago it was {V['m1']:.1f}.",
-             f"Over the past year it was lower than today on {V['pct']:.0f}% of trading days, and it spent {days[common]} of {V['n']} days in the {VIX_BANDS[common][1]} zone.",
+             ("It is the highest close of the past year" if vtop else "It is the lowest close of the past year" if vbot
+              else f"Over the past year it was lower than today on {V['pct']:.0f}% of trading days") + f", and it spent {days[common]} of {V['n']} days in the {VIX_BANDS[common][1]} zone.",
              f"It sits {abs(gap50):.0f}% {'above' if gap50 >= 0 else 'below'} its 50-day average.",
              f"The VIX is {'above' if ratio >= 1 else 'below'} the 3-month VIX ({v3:.1f}), so expected swings over the next month are {'larger' if ratio >= 1 else 'smaller'} than over the next three months"
              + (f"; a week ago the order was the other way round ({V['w1']:.1f} against {v3w:.1f})." if (ratio >= 1) != (ratio1 >= 1) else ".")]
@@ -481,6 +499,8 @@ def build(D):
     dca = ("<p class='quote'><b>From the method:</b> “The VIX, RSI, and AAII sentiment framework is a tool for deploying a pool of cash you already have more opportunistically. "
            "It is not a reason to stop or delay your regular contributions.” " + method_link("dollar-cost-averaging", "Dollar-cost averaging") + "</p>")
 
+    cap_ = lambda t: t[0].upper() + t[1:]
+
     def timing_points(fs, what):
         n = len(fs)
         cnt = lambda k, lab: [r["t"] for r in fs if r["sig"][k] and r["sig"][k][0] == lab]
@@ -491,8 +511,10 @@ def build(D):
         tops = [r["t"] for r in fs if r["sig"]["strong"] == top]
         lst = lambda xs: ", ".join(xs) if xs else "none"
         p = [f"RSI is at 45 or below for {len(pull)} of {n} {what} ({lst(pull)})" + (f"; {len(over)} {'is' if len(over) == 1 else 'are'} above 70 ({lst(over)})." if over else "; none is above 70.")]
-        p.append(f"{len(high)} {'sits' if len(high) == 1 else 'sit'} in the top 10% of the 52-week range ({lst(high)}) and {len(lower)} in the lower 25%" + (f" ({lst(lower)})." if lower else "."))
-        p.append(f"{len(above)} {'is' if len(above) == 1 else 'are'} more than 2% above the 200-day average and {len(below)} more than 2% below" + (f" ({lst(below)})." if below else "."))
+        num = lambda xs: str(len(xs)) if xs else "none"
+        p.append(f"{cap_(num(high))} {'sits' if len(high) == 1 else 'sit'} in the top 10% of the 52-week range" + (f" ({lst(high)})" if high else "")
+                 + f" and {num(lower)} in the lower 25%" + (f" ({lst(lower)})." if lower else "."))
+        p.append(f"{cap_(num(above))} {'is' if len(above) == 1 else 'are'} more than 2% above the 200-day average and {num(below)} more than 2% below" + (f" ({lst(below)})." if below else "."))
         p.append(f"Most Strong readings: {lst(tops)} ({top} of 5)." + (" No fund can reach 5 this week, because the VIX and AAII are both Neutral." if vsig != "strong" and asig != "strong" else ""))
         return p
 
@@ -518,7 +540,7 @@ def build(D):
         + idx_lead
         + "<p class='key webonly'>Sectors are the 11 Select Sector SPDR funds, which together make up the S&amp;P 500, sorted by this week's change. "
         "<button class='btn explain' type='button' data-x='sectors'>Explain sectors</button></p>"
-        + "<div class='src webonly'>Total return: price change plus dividends reinvested, to this Friday's close.<span> Status is the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
+        + "<div class='src webonly'>Total return: price change plus dividends reinvested, to this Friday's close.<span> Status, the first that applies: Bear (red) 20% or more below the 52-week closing high; Correction (red) 10% or more below it; Bull (green) 20% or more above the 52-week closing low; otherwise the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
         + "</section>")
 
     # ===== 7. Market mood
@@ -550,14 +572,31 @@ def build(D):
     # shorter maturity is inverted and its yield shows red; otherwise green. A
     # yield curve row is inverted when its gap is below zero.
     months = lambda r: int(r["n"].split("-")[0]) * (1 if "Month" in r["n"] else 12) if r["n"][:1].isdigit() else 0
+    # Same day only (sense check, 2026-11-20): Yahoo's yields are this Friday's
+    # close and FRED's are a day or more older, so in a week rates moved fast a
+    # Friday yield could look inverted against a Thursday one. Each yield is
+    # read on the date every maturity in its group has; a Yahoo yield uses its
+    # FRED series ("same") for that day. A yield with no reading that day is left out.
+    def on(r, d):
+        if r["d"] == d:
+            return r["last"]
+        s_ = r.get("same")
+        return s_["last"] if s_ and s_["d"] == d else None
+
     inverted, over = {}, {}
     for g in ("yld", "tips"):
+        rs = sorted(grp(g), key=months)
+        if not rs:
+            continue
+        d0 = min(r["d"] for r in rs)
         top = None
-        for r in sorted(grp(g), key=months):
-            inverted[r["t"]] = top is not None and r["last"] < top["last"]
+        for r in rs:
+            v = on(r, d0)
+            inverted[r["t"]] = top is not None and v is not None and v < top[1]
             if inverted[r["t"]]:
-                over[r["t"]] = top
-            top = r if top is None or r["last"] > top["last"] else top
+                over[r["t"]] = (top[0], v, top[1], d0)
+            if v is not None and (top is None or v > top[1]):
+                top = (r, v)
     # Real Fed Funds is not a yield gap: below zero it is "Behind" (CPI
     # inflation above the Fed funds rate), not Inverted (owner, 2026-11-15).
     REAL = "FF-CPI"
@@ -658,7 +697,7 @@ def build(D):
     alert = ""
     if bad:
         nm_ = lambda r: ylabel(r["n"])
-        items = [f"the {nm_(r)} yield, {r['last']:.2f}%, is below the {nm_(over[r['t']])} yield, {over[r['t']]['last']:.2f}%" if r["t"] in over
+        items = [f"on {day(over[r['t']][3])}, the {nm_(r)} yield, {over[r['t']][1]:.2f}%, was below the {nm_(over[r['t']][0])} yield, {over[r['t']][2]:.2f}%" if r["t"] in over
                  else f"{r['n']} is {sg(r['last'], 2)} points" for r in sorted(bad, key=lambda r: r["g"] != "curve")]
         alert = ("<div class='alert'><p class='alert-h'>Inverted</p><ul>" + "".join(f"<li>{E(i[0].upper() + i[1:])}.</li>" for i in items) + "</ul>"
                  "<p class='webonly alert-n'>An inverted yield curve, short-term yields above long-term ones, has often, but not always, come before a recession.</p></div>")
@@ -679,7 +718,7 @@ def build(D):
         + "<div class='src webonly'>Price change from Yahoo Finance: commodities and currencies to this Friday's close, crypto to the latest price at fetch time. "
         "Each currency is its own index: the PHLX currency indexes for the euro, yen, pound, Canadian dollar and Swiss franc, and the yuan and won built the same way from Yahoo's exchange rates; "
         "each is the currency's value in US cents (the yen and won per 100), so a rise means that currency got stronger."
-        "<span> Status is the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
+        "<span> Status, the first that applies: Bear (red) 20% or more below the 52-week closing high; Correction (red) 10% or more below it; Bull (green) 20% or more above the 52-week closing low; otherwise the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
         + "</section>")
 
     # ===== 1. This week (owner, 2026-11-15): two bullets per page of the report,
@@ -710,11 +749,27 @@ def build(D):
     dn1 = [r for r in idx if r["ch"]["m1"] < 0]
     wm1 = min(idx, key=lambda r: r["ch"]["m1"])
     lag = min(gvd, key=lambda r: r["ch"]["ytd"])
-    tw_idx = (f"{ups} of {len(idx)} major funds rose this week, {best['t']} the most ({pct(best['ch']['w'])}); "
-              f"{sup} of 11 sectors rose, led by {short(srt[0]).lower()} ({pct(srt[0]['ch']['w'])}).",
-              (f"Over 1 month {len(dn1)} of {len(idx)} are lower, {wm1['t']} the most ({pct(wm1['ch']['m1'])})" if dn1 else f"All {len(idx)} are higher over the past month")
-              + f"; YTD {short(lead['ytd']).lower()} ({lead['ytd']['t']} {pct(lead['ytd']['ch']['ytd'])}) leads {short(lag).lower()} ({lag['t']} {pct(lag['ch']['ytd'])}), "
-              f"and {short(ytd_best).lower()} leads the sectors ({pct(ytd_best['ch']['ytd'])}).")
+    # Sense check (owner, 2026-11-20): when nothing rose, "0 of 12 rose, VBR
+    # the most (−6.0%)" read wrong; the wording follows how many rose.
+    def updown(n_up, n, what, top, name):
+        v = pct(top["ch"]["w"])
+        if n_up == 0:
+            return f"all {n} {what} fell this week, and {name} fell the least ({v})"
+        if n_up == n:
+            return f"all {n} {what} rose this week, {name} the most ({v})"
+        return f"{n_up} of {n} {what} rose this week, {name} the most ({v})"
+
+    def leads(r, k):  # "leads" when it gained, "held up best" when even the leader fell
+        return f"leads ({pct(r['ch'][k])})" if r["ch"][k] > 0 else f"held up best ({pct(r['ch'][k])})"
+
+    tw_idx = (updown(ups, len(idx), "major funds", best, best["t"]) + "; "
+              + updown(sup, 11, "sectors", srt[0], short(srt[0]).lower()) + ".",
+              (f"Over 1 month all {len(idx)} are lower, {wm1['t']} the most ({pct(wm1['ch']['m1'])})" if len(dn1) == len(idx)
+               else f"Over 1 month {len(dn1)} of {len(idx)} are lower, {wm1['t']} the most ({pct(wm1['ch']['m1'])})" if dn1
+               else f"All {len(idx)} are higher over the past month")
+              + f"; YTD {short(lead['ytd']).lower()} ({lead['ytd']['t']} {pct(lead['ytd']['ch']['ytd'])}) "
+              + (f"leads {short(lag).lower()}" if lead["ytd"]["ch"]["ytd"] > lag["ch"]["ytd"] else f"is level with {short(lag).lower()}")
+              + f" ({lag['t']} {pct(lag['ch']['ytd'])}), and among sectors {short(ytd_best).lower()} {leads(ytd_best, 'ytd')}.")
     # AAII
     tw_aaii = (f"Bearish sentiment is {cur['bear']:.1f}%, in the {az} zone ({arange})"
                + (f", {'up' if d1 >= 0 else 'down'} {abs(d1):.1f} points from last week." if d1 is not None else "."),
@@ -724,8 +779,10 @@ def build(D):
     # VIX
     tw_vix = (f"The VIX {rose(V['cur'] - V['w1'])} {abs(V['cur'] - V['w1']):.1f} points to {V['cur']:.1f}"
               + (f", moving from the {vz1} zone to the {vz} zone." if vz1 != vz else f", staying in the {vz} zone."),
-              f"Lower than today on {V['pct']:.0f}% of the past year's trading days (range {V['lo'][0]:.1f} to {V['hi'][0]:.1f}); "
-              f"{'above' if ratio >= 1 else 'below'} the 3-month VIX ({v3:.1f}), {'the reverse of the usual order' if ratio >= 1 else 'the usual order'}.")
+              (f"Its highest close of the past year (range {V['lo'][0]:.1f} to {V['hi'][0]:.1f}); " if vtop
+               else f"Its lowest close of the past year (range {V['lo'][0]:.1f} to {V['hi'][0]:.1f}); " if vbot
+               else f"Lower than today on {V['pct']:.0f}% of the past year's trading days (range {V['lo'][0]:.1f} to {V['hi'][0]:.1f}); ")
+              + f"{'above' if ratio >= 1 else 'below'} the 3-month VIX ({v3:.1f}), {'the reverse of the usual order' if ratio >= 1 else 'the usual order'}.")
     # Timing signals
     tw_timing = (f"AAII and VIX combined: Tier {T} ({TIERS[T][0]}); {strongest(idx, 'major fund')}.",
                  cautions(idx) + pulls(idx))
@@ -746,7 +803,7 @@ def build(D):
     tw_yld = (f"The 10-year Treasury yield ended at {tnx['last']:.2f}%, {sg(tnx['bps']['w'], 0, ' bps')} this week and {sg(tnx['bps']['ytd'], 0, ' bps')} year to date"
               + (f"; {n_inv} {'yield or gap is' if n_inv == 1 else 'yields or gaps are'} inverted." if n_inv else "; no part of the yield curve is inverted."),
               (f"All {len(Y)} maturities rose" if len(yup) == len(Y) else "All maturities fell" if not yup else f"{len(yup)} of {len(Y)} maturities rose")
-              + f"; the biggest move was the {ymax['n'].replace(' Treasury', '').lower()} ({sg(ymax['bps']['w'], 0, ' bps')})"
+              + f", and the biggest move was the {ymax['n'].replace(' Treasury', '').lower()} ({sg(ymax['bps']['w'], 0, ' bps')})"
               + (f"; the 10-year is {abs(c2['last']):.2f} points {'above' if c2['last'] >= 0 else 'below'} the 2-year" if c2 else "")
               + (f"; CPI inflation is {cpi['yoy']:.1f}% ({mon(cpi['month'])})." if cpi else "."))
     # Commodities and the dollar
@@ -759,7 +816,7 @@ def build(D):
     named = [r for r in C if r["t"] in ("CL=F", "GC=F", "DX-Y.NYB") and r is not big]
     yb, yw = max(COM, key=yt), min(COM, key=yt)  # the commodities only, as the bullet says
     tw_cmd = (f"{cap(nm(big))} {rose(wk(big))} {abs(wk(big)):.1f}% this week, the biggest commodity move; " + lst([f"{nm(r)} {pct(wk(r))}" for r in named]) + ".",
-              f"In commodities, year to date {nm(yb)} leads ({pct(yt(yb))}) and {nm(yw)} trails ({pct(yt(yw))}).")
+              f"In commodities, year to date {nm(yb)} {leads(yb, 'ytd')} and {nm(yw)} trails ({pct(yt(yw))}).")
     # Crypto
     btc = next(r for r in CRY if r["t"] == "BTC-USD")
     eth = next((r for r in CRY if r["t"] == "ETH-USD"), None)
@@ -769,7 +826,7 @@ def build(D):
     tw_crypto = ((f"All {len(CRY)} coins fell" if cdown == len(CRY) else f"All {len(CRY)} coins rose" if not cdown else f"{cdown} of {len(CRY)} coins fell")
                  + f" this week: Bitcoin {pct(wk(btc))}" + (f", Ethereum {pct(wk(eth))}" if eth else "")
                  + f", {nm(cbig)} the most ({pct(wk(cbig))}).",
-                 f"In crypto, year to date {nm(cyb)} leads ({pct(yt(cyb))}) and {nm(cyw)} trails ({pct(yt(cyw))}).")
+                 f"In crypto, year to date {nm(cyb)} {leads(cyb, 'ytd')} and {nm(cyw)} trails ({pct(yt(cyw))}).")
 
     order = ["summary", "indices", "aaii", "vix", "timing", "yields", "cmd"]
     # 2 to 4 bullets per page (owner, 2026-11-15): clauses joined by "; " become
@@ -792,8 +849,9 @@ def build(D):
     spy = next(r for r in idx if r["t"] == "SPY")
     s_best, s_worst = max(sec, key=lambda r: r["ch"]["w"]), min(sec, key=lambda r: r["ch"]["w"])
     EXEC = [
-        f"The S&P 500 (SPY) {rose(spy['ch']['w'])} {abs(spy['ch']['w']):.1f}% this week and is {pct(spy['ch']['ytd'])} year to date; {sum(r['ch']['w'] > 0 for r in idx)} of {len(idx)} major funds rose.",
-        f"Among sectors, {short(s_best)} ({s_best['t']}) led at {pct(s_best['ch']['w'])} and {short(s_worst)} ({s_worst['t']}) trailed at {pct(s_worst['ch']['w'])}.",
+        f"The S&P 500 (SPY) {rose(spy['ch']['w'])} {abs(spy['ch']['w']):.1f}% this week and is {pct(spy['ch']['ytd'])} year to date; "
+        + ("none of the" if not ups else "all" if ups == len(idx) else f"{ups} of the") + f" {len(idx)} major funds rose.",
+        f"Among sectors, {short(s_best)} ({s_best['t']}) {'led at' if s_best['ch']['w'] > 0 else 'fell the least,'} {pct(s_best['ch']['w'])} and {short(s_worst)} ({s_worst['t']}) {'trailed at' if s_worst['ch']['w'] > 0 else 'fell the most,'} {pct(s_worst['ch']['w'])}.",
         f"The VIX is {V['cur']:.1f} ({vz}) and AAII bearish sentiment is {cur['bear']:.1f}% ({az}); combined, Tier {T} ({TIERS[T][0]}).",
         f"The 10-year Treasury yield is {tnx['last']:.2f}% ({sg(tnx['bps']['w'], 0, ' bps')} this week)"
         + (f"; {n_inv} {'yield or gap is' if n_inv == 1 else 'yields or gaps are'} inverted." if n_inv else "; no part of the yield curve is inverted."),
@@ -830,6 +888,8 @@ def main(friday, demo=None):
         for r in D["rows"]:
             if r["t"] == "^TNX":
                 r["last"] = 4.60
+                if r.get("same"):
+                    r["same"]["last"] = 4.60
             if r["t"] == "T10Y2Y":
                 r["last"] = -0.26
     d = dt.date.fromisoformat(friday)

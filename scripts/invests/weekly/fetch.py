@@ -31,6 +31,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent.parent.parent
 SP500 = ROOT.parent / "Stocks" / "data" / "sp500.json"
 AAII_PUBLIC = HERE / "data" / "aaii.json"
+# FRED series for the yields taken from Yahoo, for a same-day inversion test.
+SAME = {"^IRX": "DGS3MO", "^FVX": "DGS5", "^TNX": "DGS10", "^TYX": "DGS30"}
 AAII_PRIVATE = HERE / "private" / "aaii-history.csv"
 FRED_HY = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=BAMLH0A0HYM2"
 
@@ -113,6 +115,21 @@ def technicals(t, fri):
     return {"rsi": rsi14(c), "lo": lo, "hi": hi,
             "pos": (last - lo) / (hi - lo) * 100 if hi > lo else None,
             "ma200": (last / ma - 1) * 100 if ma else None}
+
+
+def range52(t, last_day, last=None):
+    """How far the price sits from its 52-week closing high and low, in % (owner,
+    2026-11-20: Bear, Correction and Bull). Prices, not total return: the last
+    252 daily closes up to last_day. For crypto, last is the price at fetch time."""
+    if t in FX_INDEX:
+        src, k = FX_INDEX[t]
+        h = k / closes(src, "2y", adjust=False)
+    else:
+        h = closes(t, "2y", adjust=False)
+    y = upto(h, pd.Timestamp(last_day)).iloc[-252:]
+    last = float(y.iloc[-1]) if last is None else last
+    hi, lo = max(float(y.max()), last), min(float(y.min()), last)
+    return {"hi": round((last / hi - 1) * 100, 4), "lo": round((last / lo - 1) * 100, 4)}
 
 
 def spans_of(fri):
@@ -265,12 +282,17 @@ def prices(fri):
                 s = upto(h, day)
                 young = s.empty or (h.index[0] - day).days > 21
                 r["ch"][k] = None if young else round((last / float(s.iloc[-1]) - 1) * 100, 4)
+        r["range"] = range52(t, r["d"], last if t in CRYPTO else None) if fund or other else None
         if fund:
             r["tech"] = technicals(t, fri)
         elif other:  # gap to the 200-day average, for Status (owner, 2026-11-15)
             r["ma200"] = round((last / float(cur.iloc[-200:].mean()) - 1) * 100, 4) if len(cur) >= 200 else None
         if g == "yld":
             r["bps"] = yield_changes(h, last, fri)
+            # The same maturity from FRED on its latest day (sense check,
+            # 2026-11-20), so build.py can test for inversion on one day only.
+            sm = upto(fred(SAME[t]), fri)
+            r["same"] = {"t": SAME[t], "d": str(sm.index[-1].date()), "last": float(sm.iloc[-1])}
         rows.append(r)
         print(t, r["d"], round(last, 3))
     return rows

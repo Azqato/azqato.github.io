@@ -5,6 +5,35 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.44.0] - 2026-11-20
+
+### Changed
+- **Weekly report Status shows bear markets, corrections and bull markets** (owner's request). On Returns and Other
+Markets, the first that applies: Bear (red), 20% or more below the 52-week closing high; Correction (red), 10% or more
+below it; Bull (green), 20% or more above the 52-week closing low; otherwise the 200-day status as before (Rising,
+Steady or Falling). Measured on prices over the last 252 closes; `fetch.py` stores each row's distance from its high
+and low as `range`. The source notes and Explain popups describe the order. This week SPY and QQQ read Correction,
+XLK Bear and XLV Bull.
+- **Export tables on dense pages use 4px cell padding** (was 6px) so the wider Status words fit on the Other Markets
+page.
+
+## [2.43.3] - 2026-11-20
+
+### Fixed
+- **Weekly report: inverted yields are tested on one day only.** Yahoo's 3-month, 5, 10 and 30-year yields are
+Friday's close and FRED's other maturities are a day older, so in a week rates fell fast on Friday the page flagged
+four inversions that were not there. Each yield is now compared on the date every maturity has, using FRED's own series
+for the Yahoo maturities that day (`fetch.py` stores it as `same`). This week one inversion remains: on Nov 19 the
+30-year (5.40%) was below the 20-year (5.43%). The callout now names the date.
+- **Weekly report wording sense-checked for weeks when everything falls** (owner's request): "All 12 major funds fell
+this week, and VBR fell the least" instead of "0 of 12 rose, VBR the most"; "held up best" instead of "leads" for a
+negative year-to-date figure; "none" instead of "0 ... (none)" in the Signals box; "Its highest close of the past year"
+instead of "lower than today on 100%"; the fallback summary bullets follow the same rules; and a value that rounds to
+zero shows as 0.0, not −0.0.
+
+### Changed
+- **The weekly update now includes a sense check of the whole page** before publishing, recorded in the PRD (item 23).
+
 ## [2.43.2] - 2026-11-20
 
 ### Changed
