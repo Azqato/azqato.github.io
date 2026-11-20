@@ -5,6 +5,16 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.43.2] - 2026-11-20
+
+### Changed
+- **Weekly Investing Report updated for the week ending November 20, 2026**: this week's AAII reading (survey week
+ending November 18) and a new Executive Summary in `data/summary/2026-11-20.json`.
+
+### Fixed
+- **Weekly report Rates bullet**: "1 of 10 maturities rose, the 5-year the most (-28 bps)" read as if the 5-year had
+risen. It now says "the biggest move was the 5-year".
+
 ## [2.43.1] - 2026-11-20
 
 ### Changed

@@ -746,7 +746,7 @@ def build(D):
     tw_yld = (f"The 10-year Treasury yield ended at {tnx['last']:.2f}%, {sg(tnx['bps']['w'], 0, ' bps')} this week and {sg(tnx['bps']['ytd'], 0, ' bps')} year to date"
               + (f"; {n_inv} {'yield or gap is' if n_inv == 1 else 'yields or gaps are'} inverted." if n_inv else "; no part of the yield curve is inverted."),
               (f"All {len(Y)} maturities rose" if len(yup) == len(Y) else "All maturities fell" if not yup else f"{len(yup)} of {len(Y)} maturities rose")
-              + f", the {ymax['n'].replace(' Treasury', '').lower()} the most ({sg(ymax['bps']['w'], 0, ' bps')})"
+              + f"; the biggest move was the {ymax['n'].replace(' Treasury', '').lower()} ({sg(ymax['bps']['w'], 0, ' bps')})"
               + (f"; the 10-year is {abs(c2['last']):.2f} points {'above' if c2['last'] >= 0 else 'below'} the 2-year" if c2 else "")
               + (f"; CPI inflation is {cpi['yoy']:.1f}% ({mon(cpi['month'])})." if cpi else "."))
     # Commodities and the dollar
