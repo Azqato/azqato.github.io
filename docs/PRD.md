@@ -370,7 +370,7 @@ Each server is a static `.server-card` block. There is no JavaScript data model.
 </div>
 ```
 
-Current servers: Azqato (`discord.gg/sKGKC3JFSE`), Azqato Invests (`discord.gg/WeCNCJ4x7S`), B5TA (`discord.gg/E2TA9xp`), League of Azqato (`discord.gg/yHtHYgR`).
+Current servers: Azqato (`discord.gg/sKGKC3JFSE`), Azqato Invests (`discord.com/invite/6bnZFtNd5p`, updated 2026-11-20), B5TA (`discord.gg/E2TA9xp`), League of Azqato (`discord.gg/yHtHYgR`).
 
 ### Affiliate Card (defined in `support.html` static HTML)
 

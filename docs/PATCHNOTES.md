@@ -5,6 +5,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.43.1] - 2026-11-20
+
+### Changed
+- **Azqato Invests Discord invite** is now `https://discord.com/invite/6bnZFtNd5p` (owner's request): the Join Server
+button on the Discord page (was `discord.gg/WeCNCJ4x7S`) and the Discord links on the Weekly Investing Report and its
+export (same invite, was the `discord.gg/6bnZFtNd5p` form). The PRD's server list is updated.
+
 ## [2.43.0] - 2026-11-16
 
 ### Changed

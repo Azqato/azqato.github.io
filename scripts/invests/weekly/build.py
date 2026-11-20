@@ -838,7 +838,7 @@ def main(friday, demo=None):
     fill = {"__SECTIONS__": build(D), "__EXPLAIN__": (HERE / "explain.html").read_text(encoding="utf-8").strip(),
             # Subtitle (owner, 2026-11-15): the same as the export header, a
             # link to the Discord and the Friday's date.
-            "__SUB__": "<a class='discord' href='https://discord.gg/6bnZFtNd5p'>Discord</a> · " + E(f"{d:%B} {d.day}, {d.year}"), "__WEEK__": week, "__FETCHED__": D["fetched"]}
+            "__SUB__": "<a class='discord' href='https://discord.com/invite/6bnZFtNd5p'>Discord</a> · " + E(f"{d:%B} {d.day}, {d.year}"), "__WEEK__": week, "__FETCHED__": D["fetched"]}
     for k, v in fill.items():
         assert page.count(k) == 1, k
         page = page.replace(k, v)
