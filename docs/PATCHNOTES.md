@@ -5,6 +5,13 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.44.2] - 2026-11-20
+
+### Fixed
+- **Weekly report Status is decided on the figure as shown**, rounded to one decimal, so the label always matches the
+bracket: -19.96% shows as "(-20.0%)" and now reads Bear, not Correction. The same applies at -10%, +20% and the 5%
+200-day band. No label changed this week.
+
 ## [2.44.1] - 2026-11-20
 
 ### Changed

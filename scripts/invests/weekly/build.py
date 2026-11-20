@@ -180,6 +180,12 @@ def ret_status(v, rng=None):
     # as one, "Bear (-26.0%)", however wide the table is.
     def td(c, word, n):
         return f"<td class='{c} st'>{word}</td><td class='{c} pc'>({sg(n, 1, '%')})</td>"
+    # Decide on the figure as shown, to one decimal, so the label always agrees
+    # with the bracket: -19.96% shows as (-20.0%) and so reads Bear (owner, 2026-11-20).
+    if rng:
+        rng = {k: round(x, 1) for k, x in rng.items()}
+    if v is not None:
+        v = round(v, 1)
     if rng:
         if rng["hi"] <= -20:
             return td("down", "Bear", rng["hi"])
