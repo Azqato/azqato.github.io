@@ -1539,7 +1539,7 @@
   },
   {
    "t": "T10Y2Y",
-   "n": "10Y − 2Y",
+   "n": "10Y - 2Y",
    "g": "curve",
    "last": 0.29,
    "wk": 0.27,
@@ -1559,7 +1559,7 @@
   },
   {
    "t": "DGS30-DGS10",
-   "n": "30Y − 10Y",
+   "n": "30Y - 10Y",
    "g": "curve",
    "last": 0.36,
    "wk": 0.33,
@@ -1579,7 +1579,7 @@
   },
   {
    "t": "DGS2-DFF",
-   "n": "2Y − Fed Funds",
+   "n": "2Y - Fed Funds",
    "g": "curve",
    "last": 0.88,
    "wk": 0.98,
@@ -1599,7 +1599,7 @@
   },
   {
    "t": "T10YFF",
-   "n": "10Y − Fed Funds",
+   "n": "10Y - Fed Funds",
    "g": "curve",
    "last": 1.16,
    "wk": 1.22,
@@ -1619,7 +1619,7 @@
   },
   {
    "t": "DGS30-DFF",
-   "n": "30Y − Fed Funds",
+   "n": "30Y - Fed Funds",
    "g": "curve",
    "last": 1.52,
    "wk": 1.55,

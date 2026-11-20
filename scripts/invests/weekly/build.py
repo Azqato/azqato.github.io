@@ -112,10 +112,10 @@ E = html.escape
 
 def sg(n, d=1, u=""):
     # A value that rounds to zero shows no sign (sense check, 2026-11-20: a
-    # spread change of -0.004 read "−0.0").
+    # spread change of -0.004 read "-0.0").
     if round(n, d) == 0:
         return f"{0:.{d}f}{u}"
-    return ("+" if n >= 0 else "−") + f"{abs(n):.{d}f}{u}"
+    return ("+" if n >= 0 else "-") + f"{abs(n):.{d}f}{u}"
 
 
 def cl(n):
@@ -172,16 +172,24 @@ def ret_status(v, rng=None):
     page): Rising more than 5% above, Falling more than 5% below, otherwise
     Steady. The 5% band: a 10-year test showed the method's 2% almost never reads
     Steady for crypto and natural gas."""
+    # The figure that decided it follows in brackets, in its own "%" column
+    # (owner, 2026-11-20):
+    # "Bear (-29.6%)" from the high, "Bull (+24.1%)" from the low, and the
+    # 200-day gap for Rising, Steady and Falling.
+    # The % cell is left-aligned next to the word (class pc) so the pair reads
+    # as one, "Bear (-26.0%)", however wide the table is.
+    def td(c, word, n):
+        return f"<td class='{c} st'>{word}</td><td class='{c} pc'>({sg(n, 1, '%')})</td>"
     if rng:
         if rng["hi"] <= -20:
-            return "<td class='down'>Bear</td>"
+            return td("down", "Bear", rng["hi"])
         if rng["hi"] <= -10:
-            return "<td class='down'>Correction</td>"
+            return td("down", "Correction", rng["hi"])
         if rng["lo"] >= 20:
-            return "<td class='up'>Bull</td>"
+            return td("up", "Bull", rng["lo"])
     if v is None:
-        return "<td class='mut'>n/a</td>"
-    return "<td class='up'>Rising</td>" if v > 5 else "<td class='down'>Falling</td>" if v < -5 else "<td>Steady</td>"
+        return "<td class='mut st'>n/a</td><td class='pc'></td>"
+    return td("up", "Rising", v) if v > 5 else td("down", "Falling", v) if v < -5 else td("", "Steady", v)
 
 
 def returns_table(sections, named=False):
@@ -192,7 +200,7 @@ def returns_table(sections, named=False):
     h = ""
     for i, (title, rows) in enumerate(sections):
         h += (f"<tr{'' if i == 0 else chr(32) + 'class=' + chr(39) + 'tsub' + chr(39)}><th>{title}</th>"
-              + ("<th>Price</th>" if named else "") + "".join(f"<th>{s[1]}</th>" for s in SPANS) + "<th>Status</th></tr>") + returns_rows(rows, named)
+              + ("<th>Price</th>" if named else "") + "".join(f"<th>{s[1]}</th>" for s in SPANS) + "<th class='st'>Status</th><th class='pc'>%</th></tr>") + returns_rows(rows, named)
     return f"<div class='card wrap'><table class='tt'>{h}</table></div>"
 
 
@@ -540,7 +548,7 @@ def build(D):
         + idx_lead
         + "<p class='key webonly'>Sectors are the 11 Select Sector SPDR funds, which together make up the S&amp;P 500, sorted by this week's change. "
         "<button class='btn explain' type='button' data-x='sectors'>Explain sectors</button></p>"
-        + "<div class='src webonly'>Total return: price change plus dividends reinvested, to this Friday's close.<span> Status, the first that applies: Bear (red) 20% or more below the 52-week closing high; Correction (red) 10% or more below it; Bull (green) 20% or more above the 52-week closing low; otherwise the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
+        + "<div class='src webonly'>Total return: price change plus dividends reinvested, to this Friday's close.<span> Status, the first that applies, with the figure that decided it in the % column: Bear (red) 20% or more below the 52-week closing high; Correction (red) 10% or more below it; Bull (green) 20% or more above the 52-week closing low; otherwise the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
         + "</section>")
 
     # ===== 7. Market mood
@@ -718,7 +726,7 @@ def build(D):
         + "<div class='src webonly'>Price change from Yahoo Finance: commodities and currencies to this Friday's close, crypto to the latest price at fetch time. "
         "Each currency is its own index: the PHLX currency indexes for the euro, yen, pound, Canadian dollar and Swiss franc, and the yuan and won built the same way from Yahoo's exchange rates; "
         "each is the currency's value in US cents (the yen and won per 100), so a rise means that currency got stronger."
-        "<span> Status, the first that applies: Bear (red) 20% or more below the 52-week closing high; Correction (red) 10% or more below it; Bull (green) 20% or more above the 52-week closing low; otherwise the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
+        "<span> Status, the first that applies, with the figure that decided it in the % column: Bear (red) 20% or more below the 52-week closing high; Correction (red) 10% or more below it; Bull (green) 20% or more above the 52-week closing low; otherwise the price against its 200-day average: Rising (green) more than 5% above, Falling (red) more than 5% below, otherwise Steady.</span></div>"
         + "</section>")
 
     # ===== 1. This week (owner, 2026-11-15): two bullets per page of the report,
@@ -750,7 +758,7 @@ def build(D):
     wm1 = min(idx, key=lambda r: r["ch"]["m1"])
     lag = min(gvd, key=lambda r: r["ch"]["ytd"])
     # Sense check (owner, 2026-11-20): when nothing rose, "0 of 12 rose, VBR
-    # the most (−6.0%)" read wrong; the wording follows how many rose.
+    # the most (-6.0%)" read wrong; the wording follows how many rose.
     def updown(n_up, n, what, top, name):
         v = pct(top["ch"]["w"])
         if n_up == 0:

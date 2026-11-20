@@ -163,8 +163,8 @@ FRED_ROWS = [
     ("DGS2", "2-Year Treasury", "yld"), ("DGS7", "7-Year Treasury", "yld"), ("DGS20", "20-Year Treasury", "yld"),
     ("DFII5", "5-Year TIPS", "tips"), ("DFII10", "10-Year TIPS", "tips"), ("DFII30", "30-Year TIPS", "tips"),
     # Yield curve, in this fixed order (owner, 2026-11-15), Real Fed Funds last.
-    ("T10Y2Y", "10Y − 2Y", "curve"), ("DGS30-DGS10", "30Y − 10Y", "curve"), ("DGS2-DFF", "2Y − Fed Funds", "curve"),
-    ("T10YFF", "10Y − Fed Funds", "curve"), ("DGS30-DFF", "30Y − Fed Funds", "curve"), ("FF-CPI", "Real Fed Funds", "curve"),
+    ("T10Y2Y", "10Y - 2Y", "curve"), ("DGS30-DGS10", "30Y - 10Y", "curve"), ("DGS2-DFF", "2Y - Fed Funds", "curve"),
+    ("T10YFF", "10Y - Fed Funds", "curve"), ("DGS30-DFF", "30Y - Fed Funds", "curve"), ("FF-CPI", "Real Fed Funds", "curve"),
     ("DFF", "Fed Funds Rate", "rates"), ("MORTGAGE30US", "30-year mortgage", "rates"), ("MORTGAGE15US", "15-year mortgage", "rates"),
     # Credit card and car loan rates (owner, 2026-11-15): the Fed's quarterly
     # survey of banks (G.19), readings dated Feb, May, Aug and Nov.

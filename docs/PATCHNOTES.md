@@ -5,6 +5,17 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.44.1] - 2026-11-20
+
+### Changed
+- **Weekly report Status has a "%" column** (owner's request): the figure that decided the label, in brackets, next to
+it: the distance from the 52-week high for Bear and Correction, from the 52-week low for Bull, and from the 200-day
+average for Rising, Steady and Falling, e.g. "Correction (-19.9%)". The % column is left-aligned against the label so
+the two read as one. The source notes and Returns Explain popup describe it.
+- **Negative numbers use a regular hyphen** (owner: no long dashes), not the Unicode minus sign, everywhere in the
+weekly report, including the yield curve rows ("10Y - 2Y").
+- **Export tables on dense pages** use 10pt text and 3px cell padding so the extra column fits.
+
 ## [2.44.0] - 2026-11-20
 
 ### Changed
