@@ -5,6 +5,37 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.45.1] - 2026-11-20
+
+### Changed
+- **Every change named in the weekly report's text carries its sign** (owner's request): a minus for a drop and a plus
+for a rise, e.g. "Gold dropped -8.9% and Bitcoin -13.6%", "The VIX rose +16.6 points", "up +18.7% this year". It
+applies to the rule-written bullets and "What the numbers show" boxes (`pv()`, `fv()` and `yv()` in `build.py`) and to this week's
+Executive Summary. Levels ("Bearish sentiment is 42.2%") and distances ("14.9 points below its average") stay unsigned.
+- **Every significant market event in the Executive Summary is called out in bold** (owner's request), with no cap:
+an event qualifies when it is rare for that asset by its own history (a past-year high or low, one of its worst or best
+weeks in 5+ years, a main index or sector entering Correction or Bear; full rules in PRD item 23). Only the
+called-out figure or key words are bold ("from 19.3 to 35.9"), the sentence says why it is rare, and every callout is
+colored by what it means for the market, red for losses or rising fear and green for gains or easing fear (`**r:...**`
+and `**g:...**` in the summary file). This week's summary gains a part on the indexes:
+SPY, the Dow and the Russell 2000 entered a correction, QQQ is a tenth of a point from a bear market, tech is in one
+(-26.2%) and communication services is +0.1% above its past-year low. It also calls out SPY and QQQ's week (among their
+worst since 2008), the VIX at its past-year high, gold's second-worst week in 10 years with gold, silver and platinum at
+past-year lows, Bitcoin +0.7% above its low with five other coins at theirs, and the dollar within 0.1% of its high.
+- **In a week when every fund or sector fell, This Week names the one that fell the most** (owner's request):
+"All 12 major funds fell this week, and QQQ fell the most (-10.5%)" and "All 11 sectors fell this week, and technology
+fell the most (-12.5%)", instead of the one that fell the least.
+- **Every value named in the report's text takes the color it has in its table** (owner's request), in the Executive
+Summary, the This Week bullets and the "What the numbers show" boxes: price changes green up and red down, yield changes
+red up, zones and tiers in their scale colors, Status figures in their Status color. **Bold marks only the key
+figures**: the This Week bullets no longer bold the whole first line, only its headline move and zone ("The VIX rose
+**+16.6** points to 35.9, moving from the Moderate zone to the **High** zone").
+- **Rising fear is red in the tables too:** a rise in the bearish share (AAII table and Change in bearish), in the VIX
+(Change) and in the high-yield spread (Market Mood) is now red, and a fall green; they were colored by sign. The
+Explain panels say so.
+- **The Export's This Week page is 15px tighter** (1px less between groups, 2px less card padding) so the longer
+summary fits on one sheet; the text stays 12px.
+
 ## [2.45.0] - 2026-11-20
 
 ### Changed
