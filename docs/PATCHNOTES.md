@@ -5,6 +5,26 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.44.3] - 2026-11-20
+
+### Changed
+- **Every Treasury and TIPS yield on the weekly report is now this Friday's close** (owner: update everything). All ten
+Treasury maturities and the TIPS yields come from the U.S. Treasury's daily yield curves (home.treasury.gov), which it
+publishes the same afternoon; FRED, which carries the same curves a day or more later, supplies the history. The 3-month,
+5, 10 and 30-year rows no longer use Yahoo's Cboe yield indexes (Yahoo's 3-month figure is a discount rate, 4.12%
+against the Treasury's 4.32%). The 10Y - 2Y and 10Y - Fed Funds gaps and the 10-year breakeven are built from the same
+daily yields. The Rates source note names any row with no Friday reading yet: this week the Fed funds rate and the gaps
+built on it (Thursday's, as FRED posts Friday's on Monday). The high-yield spread is also Thursday's, named in the
+Market Mood note.
+- **This week's report refetched in full**: the 10-year yield is 4.92% (-23 bps), not 4.91% (-24 bps); the 2-year 4.63%
+and 5-year 4.71%, so the 5-year is not inverted against the 2-year (it only looked it when Friday's 5-year sat next to
+Thursday's 2-year). The one inversion is the 30-year (5.31%) below the 20-year (5.34%) on Friday. Crypto prices are the
+latest at fetch time. The Executive Summary's 10-year and Bitcoin figures were updated to match.
+
+### Documented
+- **Weekly update rule (owner, 2026-11-20): update everything.** Every figure is refreshed to the report's Friday; any
+source with no Friday reading yet is named to the owner before publishing. PRD item 23.
+
 ## [2.44.2] - 2026-11-20
 
 ### Fixed

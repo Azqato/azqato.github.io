@@ -32,7 +32,6 @@ ROOT = HERE.parent.parent.parent
 SP500 = ROOT.parent / "Stocks" / "data" / "sp500.json"
 AAII_PUBLIC = HERE / "data" / "aaii.json"
 # FRED series for the yields taken from Yahoo, for a same-day inversion test.
-SAME = {"^IRX": "DGS3MO", "^FVX": "DGS5", "^TNX": "DGS10", "^TYX": "DGS30"}
 AAII_PRIVATE = HERE / "private" / "aaii-history.csv"
 FRED_HY = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=BAMLH0A0HYM2"
 
@@ -50,8 +49,6 @@ TICKERS = [
     ("XLI", "Industrials (XLI)", "sec"), ("XLE", "Energy (XLE)", "sec"),
     ("XLB", "Materials (XLB)", "sec"), ("XLU", "Utilities (XLU)", "sec"),
     ("XLRE", "Real estate (XLRE)", "sec"),
-    ("^IRX", "3-Month Treasury", "yld"), ("^FVX", "5-Year Treasury", "yld"),
-    ("^TNX", "10-Year Treasury", "yld"), ("^TYX", "30-Year Treasury", "yld"),
     ("CL=F", "Crude oil (WTI)", "cmd"), ("BZ=F", "Crude oil (Brent)", "cmd"), ("NG=F", "Natural gas", "cmd"),
     ("GC=F", "Gold", "cmd"), ("SI=F", "Silver", "cmd"), ("PL=F", "Platinum", "cmd"), ("HG=F", "Copper", "cmd"),
     ("BTC-USD", "Bitcoin", "cmd"), ("ETH-USD", "Ethereum", "cmd"), ("BNB-USD", "BNB", "cmd"), ("XRP-USD", "XRP", "cmd"),
@@ -146,11 +143,53 @@ def yield_changes(h, last, ref):
     return {k: round((last - at(h, day)) * 100, 2) for k, day in spans_of(ref).items()}
 
 
+# Treasury and TIPS yields to this Friday (owner, 2026-11-20: update
+# everything). FRED posts the Treasury's daily par yield curves a day or more
+# late, but the Treasury publishes them the same afternoon. FRED keeps the
+# history; any newer days come from the Treasury's own CSVs. Same figures:
+# FRED's DGS and DFII series are these curves.
+TREASURY_COL = {"DGS1MO": "1 Mo", "DGS3MO": "3 Mo", "DGS6MO": "6 Mo", "DGS1": "1 Yr", "DGS2": "2 Yr", "DGS5": "5 Yr",
+                "DGS7": "7 Yr", "DGS10": "10 Yr", "DGS20": "20 Yr", "DGS30": "30 Yr"}
+TREASURY_REAL = {"DFII5": "5 YR", "DFII7": "7 YR", "DFII10": "10 YR", "DFII20": "20 YR", "DFII30": "30 YR"}
+_cache, _own = {}, {}
+
+
+def treasury(kind):
+    """The Treasury's daily par yield curve ("daily_treasury_yield_curve") or
+    real yield curve ("daily_treasury_real_yield_curve") for this year and last,
+    as {column: Series}."""
+    if kind not in _cache:
+        out = {}
+        for year in (dt.date.today().year - 1, dt.date.today().year):
+            url = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/"
+                   f"{year}/all?type={kind}&field_tdr_date_value={year}&page&_format=csv")
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            rows = list(csv.DictReader(io.StringIO(urllib.request.urlopen(req, timeout=30).read().decode("utf-8-sig"))))
+            for r in rows:
+                day = pd.Timestamp(dt.datetime.strptime(r["Date"], "%m/%d/%Y"))
+                for k, v in r.items():
+                    if k != "Date" and v not in ("", None):
+                        out.setdefault(k, {})[day] = float(v)
+        _cache[kind] = {k: pd.Series(v).sort_index() for k, v in out.items()}
+    return _cache[kind]
+
+
 def fred(series):
-    """A FRED series from its free CSV, as a date-indexed float Series."""
+    """A FRED series from its free CSV, as a date-indexed float Series. For a
+    Treasury or TIPS yield, days the Treasury has published since FRED's last
+    reading are added from the Treasury's CSV."""
+    if series in _cache:
+        return _cache[series]
     raw = urllib.request.urlopen(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}", timeout=30).read().decode()
     rows = list(csv.reader(io.StringIO(raw)))[1:]
-    return pd.Series({pd.Timestamp(d): float(v) for d, v in rows if v not in ("", ".")}).sort_index()
+    h = pd.Series({pd.Timestamp(d): float(v) for d, v in rows if v not in ("", ".")}).sort_index()
+    _own[series] = h.index[-1]
+    col = TREASURY_COL.get(series) or TREASURY_REAL.get(series)
+    if col:
+        t = treasury("daily_treasury_yield_curve" if series in TREASURY_COL else "daily_treasury_real_yield_curve")[col]
+        h = pd.concat([h, t[t.index > h.index[-1]]])
+    _cache[series] = h
+    return h
 
 
 # Yields from FRED (owner, 2026-11-15): the Treasury maturities Yahoo lacks,
@@ -159,8 +198,10 @@ def fred(series):
 # usually has Thursday's; mortgage rates are weekly, on Thursdays. Each row
 # keeps its own date and its changes are measured back from that date.
 FRED_ROWS = [
-    ("DGS1MO", "1-Month Treasury", "yld"), ("DGS6MO", "6-Month Treasury", "yld"), ("DGS1", "1-Year Treasury", "yld"),
-    ("DGS2", "2-Year Treasury", "yld"), ("DGS7", "7-Year Treasury", "yld"), ("DGS20", "20-Year Treasury", "yld"),
+    ("DGS1MO", "1-Month Treasury", "yld"), ("DGS3MO", "3-Month Treasury", "yld"), ("DGS6MO", "6-Month Treasury", "yld"),
+    ("DGS1", "1-Year Treasury", "yld"), ("DGS2", "2-Year Treasury", "yld"), ("DGS5", "5-Year Treasury", "yld"),
+    ("DGS7", "7-Year Treasury", "yld"), ("DGS10", "10-Year Treasury", "yld"), ("DGS20", "20-Year Treasury", "yld"),
+    ("DGS30", "30-Year Treasury", "yld"),
     ("DFII5", "5-Year TIPS", "tips"), ("DFII10", "10-Year TIPS", "tips"), ("DFII30", "30-Year TIPS", "tips"),
     # Yield curve, in this fixed order (owner, 2026-11-15), Real Fed Funds last.
     ("T10Y2Y", "10Y - 2Y", "curve"), ("DGS30-DGS10", "30Y - 10Y", "curve"), ("DGS2-DFF", "2Y - Fed Funds", "curve"),
@@ -188,7 +229,10 @@ def ff_cpi():
     return (ff - y).dropna().round(2)
 
 
-CUSTOM = {"FF-CPI": ff_cpi}
+# The 10Y - 2Y and 10Y - Fed Funds gaps are built from the daily yields like
+# the others, so they reach Friday with the Treasury's figures; the ids stay.
+CUSTOM = {"FF-CPI": ff_cpi, "T10Y2Y": lambda: (fred("DGS10") - fred("DGS2")).dropna().round(2),
+          "T10YFF": lambda: (fred("DGS10") - fred("DFF")).dropna().round(2)}
 
 
 def fred_rows(fri):
@@ -207,9 +251,16 @@ def fred_rows(fri):
         last, ref = float(cur.iloc[-1]), cur.index[-1]
         base = fri if t in QUARTERLY else ref
         rows.append(dict(t=t, n=n, g=g, last=last, wk=at(h, base - pd.Timedelta(days=7)), ye=at(h, pd.Timestamp(fri.year - 1, 12, 31)),
-                         d=str(ref.date()), bps=yield_changes(h, last, base), src="FRED", q=t in QUARTERLY))
+                         d=str(ref.date()), bps=yield_changes(h, last, base), q=t in QUARTERLY,
+                         src="Treasury" if (t in TREASURY_COL or t in TREASURY_REAL) and ref > fred_last(t) else "FRED"))
         print(t, rows[-1]["d"], last)
     return rows
+
+
+def fred_last(t):
+    """FRED's own latest date for a series, before any Treasury days were added."""
+    fred(t)
+    return _own[t]
 
 
 def muni(fri):
@@ -226,9 +277,10 @@ def muni(fri):
 
 
 def breakeven(fri):
-    """FRED's 10-year breakeven inflation rate (T10YIE): the 10-year Treasury
-    yield minus the 10-year TIPS yield, both from the same day."""
-    h = upto(fred("T10YIE"), fri)
+    """The 10-year breakeven inflation rate: the 10-year Treasury yield minus the
+    10-year TIPS yield, both from the same day (FRED's T10YIE, built here from
+    the two yields so it reaches Friday with the Treasury's figures)."""
+    h = upto((fred("DGS10") - fred("DFII10")).dropna().round(2), fri)
     return [float(h.iloc[-1]), str(h.index[-1].date())]
 
 
@@ -287,12 +339,6 @@ def prices(fri):
             r["tech"] = technicals(t, fri)
         elif other:  # gap to the 200-day average, for Status (owner, 2026-11-15)
             r["ma200"] = round((last / float(cur.iloc[-200:].mean()) - 1) * 100, 4) if len(cur) >= 200 else None
-        if g == "yld":
-            r["bps"] = yield_changes(h, last, fri)
-            # The same maturity from FRED on its latest day (sense check,
-            # 2026-11-20), so build.py can test for inversion on one day only.
-            sm = upto(fred(SAME[t]), fri)
-            r["same"] = {"t": SAME[t], "d": str(sm.index[-1].date()), "last": float(sm.iloc[-1])}
         rows.append(r)
         print(t, r["d"], round(last, 3))
     return rows

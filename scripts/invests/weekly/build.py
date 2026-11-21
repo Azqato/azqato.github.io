@@ -324,7 +324,7 @@ def build(D):
     lead = {k: max(gvd, key=lambda r: r["ch"][k]) for k in ("w", "m1", "ytd")}
     sbest = max(sec, key=lambda r: r["ch"]["w"])
     sworst = min(sec, key=lambda r: r["ch"]["w"])
-    tnx = next(r for r in rows if r["t"] == "^TNX")
+    tnx = next(r for r in rows if r["t"] in ("DGS10", "^TNX"))  # ^TNX in data before 2.44.3
     top = max(idx, key=lambda r: r["sig"]["strong"])["sig"]["strong"]
     tops = [r["t"] for r in idx if r["sig"]["strong"] == top]
     cauts = [r["t"] for r in idx if r["sig"]["caution"]]
@@ -586,11 +586,11 @@ def build(D):
     # shorter maturity is inverted and its yield shows red; otherwise green. A
     # yield curve row is inverted when its gap is below zero.
     months = lambda r: int(r["n"].split("-")[0]) * (1 if "Month" in r["n"] else 12) if r["n"][:1].isdigit() else 0
-    # Same day only (sense check, 2026-11-20): Yahoo's yields are this Friday's
-    # close and FRED's are a day or more older, so in a week rates moved fast a
-    # Friday yield could look inverted against a Thursday one. Each yield is
-    # read on the date every maturity in its group has; a Yahoo yield uses its
-    # FRED series ("same") for that day. A yield with no reading that day is left out.
+    # Same day only (sense check, 2026-11-20): every yield in a group is read
+    # on the earliest date the group has, so a yield from one day is never
+    # compared with another's from a different day. Since 2.44.3 all Treasury
+    # and TIPS yields come from the Treasury's same-day curves, so normally
+    # that is Friday. A yield with no reading that day is left out.
     def on(r, d):
         if r["d"] == d:
             return r["last"]
@@ -692,7 +692,10 @@ def build(D):
             yt += f"<tr class='tsub'><th>{title}</th><th>{col}</th>{ycols}<th>Status</th></tr>" + section(g)
     # The full notes stay on the website page; the export leaves them out
     # (owner, 2026-11-15) to make room for the table.
-    late = sorted({r["d"] for r in rows if r["g"] in ("yld", "tips", "curve", "rates") and r["d"] != D["friday"] and not r.get("q")})
+    # Daily rows with no reading for this Friday yet (owner, 2026-11-20: every
+    # figure is this week's or named). Mortgage rates are weekly, dated Thursday.
+    lag = [r for r in rows if r["g"] in ("yld", "tips", "curve", "rates") and r["d"] != D["friday"] and not r.get("q") and not r["t"].startswith("MORTGAGE")]
+    late = sorted({r["d"] for r in lag})
     be = D.get("breakeven")
     yld_note = ("<div class='webonly'><p class='key'>TIPS (Treasury Inflation-Protected Securities) pay a yield on top of inflation, a “real” yield."
                 + (f" The 10-year breakeven rate (10-year Treasury minus 10-year TIPS, same day) is {be[0]:.2f}% on {day(be[1], True)}: "
@@ -702,8 +705,9 @@ def build(D):
                 "Otherwise it is the move over the past month: Rising (red) or Falling (green) at 10 bps or more, otherwise Steady. "
                 "The yield curve rows are not colored: a gap is Steepening when it widened by 10 bps or more over the past month, Flattening when it narrowed by that much, otherwise Steady; "
                 "Real Fed Funds is Behind (red) below zero, when CPI inflation is above the Fed funds rate. Mortgage rates are Freddie Mac's weekly survey averages; credit card (accounts paying interest) and car loan rates are the Fed's quarterly survey of banks.</p>"
-                "<div class='src'>The 3-month, 5, 10 and 30-year Treasury yields from Yahoo Finance (Cboe indexes) at this Friday's close; the rest from FRED, including CPI (Bureau of Labor Statistics) and PCE (Bureau of Economic Analysis). "
-                + (f"FRED's daily figures are its latest reading ({' or '.join(day(d, True) for d in late)}), with changes measured back from that date." if late else "") + "</div></div>")
+                "<div class='src'>Treasury and TIPS yields are the U.S. Treasury's daily yield curves (home.treasury.gov) at this Friday's close, with their history from FRED; "
+                "the other rates from FRED, including CPI (Bureau of Labor Statistics) and PCE (Bureau of Economic Analysis). "
+                + (f"Not yet published for this Friday: {', '.join(ylabel(r['n']) for r in lag)}, shown at the latest reading ({' or '.join(day(d, True) for d in late)}), with changes measured back from that date." if late else "") + "</div></div>")
     # Inversion callout (owner, 2026-11-15): whenever any yield or gap is
     # inverted, a red callout above the table names each one. It is data, so
     # it stays in the export; the history line is for the website only.
@@ -900,10 +904,8 @@ def main(friday, demo=None):
         # callout. Never used for the live page.
         assert demo, "the mock inversion is for demos only"
         for r in D["rows"]:
-            if r["t"] == "^TNX":
+            if r["t"] == "DGS10":
                 r["last"] = 4.60
-                if r.get("same"):
-                    r["same"]["last"] = 4.60
             if r["t"] == "T10Y2Y":
                 r["last"] = -0.26
     d = dt.date.fromisoformat(friday)
