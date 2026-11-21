@@ -188,14 +188,14 @@ def ret_status(v, rng=None):
         v = round(v, 1)
     if rng:
         if rng["hi"] <= -20:
-            return td("down", "Bear", rng["hi"])
+            return td("k-r3", "Bear", rng["hi"])
         if rng["hi"] <= -10:
-            return td("down", "Correction", rng["hi"])
+            return td("k-r2", "Correction", rng["hi"])
         if rng["lo"] >= 20:
-            return td("up", "Bull", rng["lo"])
+            return td("k-g3", "Bull", rng["lo"])
     if v is None:
         return "<td class='mut st'>n/a</td><td class='pc'></td>"
-    return td("up", "Rising", v) if v > 5 else td("down", "Falling", v) if v < -5 else td("", "Steady", v)
+    return td("k-g1", "Rising", v) if v > 5 else td("k-r1", "Falling", v) if v < -5 else td("", "Steady", v)
 
 
 def returns_table(sections, named=False):
@@ -230,7 +230,17 @@ def returns_rows(rows, named=False):
 # Strong/Caution colors, which would paint high fear green and read as "buy";
 # those stay on the Timing signals tables, where the word is shown with them.
 FEAR_TONES = ["zs", "zn", "zc", "zc2", "zc3"]
-FEAR_TEXT = ["up", "mut", "down", "down", "down"]
+# Every step of a scale has its own color (owner, 2026-11-20): the shades k-g1
+# (dark green) to k-g3 (bright green) and k-r1 (dark red) to k-r3 (bright red),
+# brighter for the more extreme end.
+FEAR_TEXT = ["k-g2", "mut", "k-r1", "k-r2", "k-r3"]
+# Timing signal labels: RSI, 52-week range and 200-day, each step its own color
+# (owner, 2026-11-20: Oversold bright green, Pullback dark green, Elevated dark
+# red, Overbought bright red). The Strong and Caution counts are unchanged.
+LABEL_TONE = {"Oversold": "k-g3", "Pullback": "k-g1", "Neutral": "mut", "Elevated": "k-r1", "Overbought": "k-r3",
+              "Lower": "k-g3", "Middle": "mut", "Upper": "k-r1", "High": "k-r3",
+              "Above": "k-g2", "Average": "mut", "Below": "k-r2"}
+TIER_TONE = {0: "mut", 1: "k-g1", 2: "k-g2", 3: "k-g3"}
 
 
 def fear_class(label, bands):
@@ -481,7 +491,7 @@ def build(D):
 
     # ===== 4 and 6. Timing signals
     def cell(v, s, txt):
-        return f"<td><span class='s-{s[1]}'>{txt} {s[0]}</span></td>" if s else "<td class='mut'>n/a</td>"
+        return f"<td><span class='{LABEL_TONE[s[0]]}'>{txt} {s[0]}</span></td>" if s else "<td class='mut'>n/a</td>"
 
     def timing_table(sections):
         """One table split into sections like Stock Returns (owner, 2026-11-15)."""
@@ -503,10 +513,19 @@ def build(D):
                   + f"<td><span class='{'s-caution' if s['caution'] else 'mut'}'>{s['caution']}</span></td></tr>")
         return h
 
+    # Signal tiles (owner, 2026-11-20): the signal in bold, then in plain words
+    # what the reading means to the method. Describes, never advises.
+    VIX_SAY = {"strong": "The VIX is above 35: fear is high enough that the method counts it as a Strong timing signal.",
+               "neutral": "The VIX is between 15 and 35, its normal range, so the method gives no signal either way.",
+               "caution": "The VIX is below 15: investors are calm enough that the method counts it as a Caution signal."}
+    AAII_SAY = {"strong": "More than 60% of investors are bearish: pessimism is high enough that the method counts it as a Strong timing signal.",
+                "neutral": "Bearish sentiment is between 25% and 60%, so the method gives no signal either way.",
+                "caution": "Fewer than 25% of investors are bearish: optimism is high enough that the method counts it as a Caution signal."}
+    say = lambda sig, txt: f"<b class='s-{sig}'>{SIG[sig]} signal.</b> {txt[sig]}"
     market = ("<div class='mx' style='grid-template-columns:repeat(3,1fr);margin:0 0 14px'>"
-              + f"<div><div class='k'>VIX</div><div class='v'>{V['cur']:.1f} <span class='s-{vsig}'>{vz}</span></div><div class='d'>{SIG[vsig]}: strong above 35, caution below 15</div></div>"
-              + f"<div><div class='k'>AAII bearish</div><div class='v'>{cur['bear']:.1f}% <span class='s-{asig}'>{az}</span></div><div class='d'>{SIG[asig]}: strong above 60%, caution below 25%</div></div>"
-              + f"<div><div class='k'>Combined AAII and VIX</div><div class='v'>Tier {T} <span class='{'s-strong' if T else 's-neutral'}'>{TIERS[T][0]}</span></div><div class='d'>{E(TIERS[T][1])}</div></div>"
+              + f"<div><div class='k'>VIX</div><div class='v'>{V['cur']:.1f} <span class='s-{vsig}'>{vz}</span></div><div class='d'>{say(vsig, VIX_SAY)}</div></div>"
+              + f"<div><div class='k'>AAII bearish</div><div class='v'>{cur['bear']:.1f}% <span class='s-{asig}'>{az}</span></div><div class='d'>{say(asig, AAII_SAY)}</div></div>"
+              + f"<div><div class='k'>Combined AAII and VIX</div><div class='v'>Tier {T} <span class='{TIER_TONE[T]}'>{TIERS[T][0]}</span></div><div class='d'>{E(TIERS[T][1])}</div></div>"
               + "</div>")
     key = ("<p class='key'>Labels follow the method's “What Strong Signals Look Like” table. Strong: RSI 45 or below, lower 25% of the 52-week range, more than 2% above the 200-day average. "
            "Caution: RSI above 70, top 10% of the range, more than 2% below the 200-day average. Counts include the VIX and AAII. " + method_link("section-timing", "The timing signals") + "</p>")
@@ -623,7 +642,7 @@ def build(D):
     trend = lambda m: "Rising" if m >= 10 else "Falling" if m <= -10 else "Steady"
     # Status colors (owner, 2026-11-15): Rising red, Falling green, Steady in
     # the normal text color.
-    stat = lambda w: f"<td class='{'down' if w == 'Rising' else 'up' if w == 'Falling' else ''}'>{w}</td>"
+    stat = lambda w: f"<td class='{'k-r1' if w == 'Rising' else 'k-g1' if w == 'Falling' else ''}'>{w}</td>"
 
     def ylabel(n):
         """Short labels (owner, 2026-11-15): 10-Year Treasury -> 10Y, 5-Year TIPS
@@ -647,9 +666,9 @@ def build(D):
         curve = r["g"] == "curve"
         cell = lambda v: "" if curve else cl(up * round(v))
         if inverted.get(r["t"]):
-            status = "<td class='down'>Inverted</td>"
+            status = "<td class='k-r3'>Inverted</td>"
         elif r["t"] == REAL and r["last"] < 0:
-            status = "<td class='down'>Behind</td>"
+            status = "<td class='k-r2'>Behind</td>"
         elif curve:
             m = r["bps"]["m1"]
             word = ("Rising" if m >= 10 else "Falling" if m <= -10 else "Steady") if r["t"] == REAL else                    ("Steepening" if m >= 10 else "Flattening" if m <= -10 else "Steady")

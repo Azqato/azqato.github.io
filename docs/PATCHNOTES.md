@@ -5,6 +5,23 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.45.0] - 2026-11-20
+
+### Changed
+- **Every step of every color scale on the weekly report has its own color** (owner's rule). Six shades, from dark to
+bright green and dark to bright red, with the brighter shade for the more extreme step: RSI Oversold bright green,
+Pullback dark green, Neutral grey, Elevated dark red, Overbought bright red; 52-week range Lower bright green, Middle
+grey, Upper dark red, High bright red; Returns and Other Markets Status Bull bright green, Rising dark green, Steady
+plain, Falling dark red, Correction red, Bear bright red; Rates Falling dark green, Rising dark red, Behind red,
+Inverted bright red; VIX and AAII zone names Complacent/Optimism green, then dark red, red and bright red for
+Elevated/Concern, High/Fear and Crisis/Extreme; the combined tier Moderate, Strong and Maximum from dark to bright
+green. Elevated and Upper are now dark red, though the method still counts them as neutral, not Caution. Light-mode
+bright green and bright red are below the 4.5:1 text contrast in DESIGN.md (about 2.2:1 and 3:1), accepted for the
+bright/dark distinction.
+- **Signals tiles describe the reading in plain words** (owner's request): "**Strong signal.** The VIX is above 35:
+fear is high enough that the method counts it as a Strong timing signal." in place of "Strong: strong above 35,
+caution below 15", with matching Neutral and Caution sentences for the VIX and AAII.
+
 ## [2.44.3] - 2026-11-20
 
 ### Changed
