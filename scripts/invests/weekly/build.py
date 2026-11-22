@@ -908,6 +908,24 @@ def build(D):
                  + [f"on {day(d0_)}, the {nm_(l)} yield, {lv:.2f}%, was below the {nm_(s_)} yield, {sv:.2f}%" for l, lv, s_, sv, d0_ in pairs])
         alert = ("<div class='alert'><p class='alert-h'>Inverted</p><ul>" + "".join(f"<li>{E(i[0].upper() + i[1:])}.</li>" for i in items) + "</ul>"
                  "<p class='webonly alert-n'>An inverted yield curve, short-term yields above long-term ones, has often, but not always, come before a recession.</p></div>")
+    # The same inversions, as short phrases for This Week (owner, 2026-11-22:
+    # only the 2, 10 and 30-year yields count, and when they invert, call it out).
+    CURVE_PAIR = {"T10Y2Y": ("10Y", "2Y"), "DGS30-DGS10": ("30Y", "10Y")}
+    key_inv = list(dict.fromkeys([(ylabel(l["n"]), ylabel(s_["n"])) for l, _, s_, _, _ in pairs] + [CURVE_PAIR[r["t"]] for r in bad]))
+    # GDP shrinking two quarters in a row (owner, 2026-11-22: "a massive
+    # callout"): a red alert above the table and a bold line in This Week.
+    gdp = next((r for r in ECO if r["t"].startswith("A191")), None)
+    run = []
+    for d_, v_ in reversed((gdp or {}).get("hist") or []):
+        if v_ >= 0:
+            break
+        run.insert(0, (d_, v_))
+    qlab = lambda d_: (lambda d: f"Q{(d.month - 1) // 3 + 1} {d.year}")(dt.date.fromisoformat(d_))
+    if len(run) >= 2:
+        alert = ("<div class='alert'><p class='alert-h'>GDP shrank " + ("two" if len(run) == 2 else str(len(run))) + " quarters in a row</p><ul>"
+                 + "<li>Real GDP growth was " + " and ".join(f"{sg(v_, 1, '%')} in {qlab(d_)}" for d_, v_ in run) + ", at an annual pace.</li></ul>"
+                 "<p class='webonly alert-n'>Two quarters of shrinking GDP in a row is a common rule of thumb for a recession; the official U.S. call comes later, from the National Bureau of Economic Research.</p></div>"
+                 + alert)
     S["yields"] = (
         "<section class='slide dense xdense'>" + head("Rates", "yields")
         + "<p class='lede'>Treasury, TIPS and muni yields, the rates that set borrowing costs, inflation, GDP growth, unemployment and the yield curve. Changes over each period are in basis points (100 bps = 1 percentage point).</p>"
@@ -1069,9 +1087,8 @@ def build(D):
     c2 = next((r for r in grp("curve") if r["t"] == "T10Y2Y"), None)
     yup = [r for r in Y if r["bps"]["w"] > 0]
     ymax = max(Y, key=lambda r: abs(r["bps"]["w"]))
-    n_inv = sum(1 for v in inverted.values() if v)
     tw_yld = (f"The 10-year Treasury yield ended at {tnx['last']:.2f}%, {B(yv(tnx['bps']['w']))} this week and {yv(tnx['bps']['ytd'])} year to date"
-              + (f"; {n_inv} {'yield or gap is' if n_inv == 1 else 'yields or gaps are'} {C('k-r3', 'inverted')}." if n_inv else "; no part of the yield curve is inverted."),
+              + ("; " + " and ".join(B(C('k-r3', f'the {a} yield is below the {b}')) for a, b in key_inv) + "." if key_inv else "; the 2, 10 and 30-year yields are not inverted."),
               (f"All {len(Y)} maturities rose" if len(yup) == len(Y) else "All maturities fell" if not yup else f"{len(yup)} of {len(Y)} maturities rose")
               + f", and the biggest move was the {ymax['n'].replace(' Treasury', '').lower()} ({yv(ymax['bps']['w'])})"
               + (f"; the 10-year is {abs(c2['last']):.2f} points {'above' if c2['last'] >= 0 else 'below'} the 2-year" if c2 else "")
@@ -1112,7 +1129,9 @@ def build(D):
           ("Sentiment", bullets([tw_aaii[0], tw_aaii[1], tw_mood[0], tw_mood[1]])),
           ("VIX", bullets([tw_vix[0]] + semis(tw_vix[1]))),
           ("Signals", bullets([tw_timing[0] + " " + tw_sectiming[0], "Major funds: " + tw_timing[1], "Sectors: " + tw_sectiming[1]])),
-          ("Rates", bullets(semis(*tw_yld))),
+          ("Rates", bullets(([f"{B(C('k-r3', 'GDP shrank ' + ('two' if len(run) == 2 else str(len(run))) + ' quarters in a row'))}: real GDP growth was "
+                              + " and ".join(f"{C('down', sg(v_, 1, '%'))} in {qlab(d_)}" for d_, v_ in run) + "."] if len(run) >= 2 else [])
+                             + semis(*tw_yld))),
           *([("Inflation", bullets(tw_infl))] if tw_infl else []),
           ("Other Markets", bullets([tw_cmd[0], tw_crypto[0], tw_cmd[1], tw_crypto[1]]))]
     assert all(2 <= len(b) <= 4 for _, b in TW)
@@ -1126,7 +1145,7 @@ def build(D):
         f"Among sectors, {short(s_best)} ({s_best['t']}) {'led at' if s_best['ch']['w'] > 0 else 'fell the least,'} {pv(s_best['ch']['w'])} and {short(s_worst)} ({s_worst['t']}) {'trailed at' if s_worst['ch']['w'] > 0 else 'fell the most,'} {pv(s_worst['ch']['w'])}.",
         f"The VIX is {V['cur']:.1f} ({zn(vz, VIX_BANDS)}) and AAII bearish sentiment is {bear_s} ({zn(az, AAII_BANDS)}); combined, Tier {T} ({C(TIER_TONE[T], TIERS[T][0])}).",
         f"The 10-year Treasury yield is {tnx['last']:.2f}% ({yv(tnx['bps']['w'])} this week)"
-        + (f"; {n_inv} {'yield or gap is' if n_inv == 1 else 'yields or gaps are'} inverted." if n_inv else "; no part of the yield curve is inverted."),
+        + ("; " + " and ".join(f"the {a} yield is below the {b}" for a, b in key_inv) + "." if key_inv else "; the 2, 10 and 30-year yields are not inverted."),
     ]
     # The week's written summary (owner, 2026-11-15): Claude Code writes
     # data/summary/<friday>.json, 2 to 5 parts shown as one paragraph, with each weekly
@@ -1168,6 +1187,11 @@ def main(friday, demo=None):
                 r["last"] = 4.60
             if r["t"] == "T10Y2Y":
                 r["last"] = -0.26
+        # and two made-up quarters of shrinking GDP (owner, 2026-11-22)
+        for e in D.get("econ") or []:
+            if e["t"].startswith("A191") and e.get("hist"):
+                e["hist"][-2][1], e["hist"][-1][1] = -0.6, -1.2
+                e["last"] = -1.2
     d = dt.date.fromisoformat(friday)
     week = f"Week ending Friday, {d:%B} {d.day}, {d.year}"
     page = (HERE / "template.html").read_text(encoding="utf-8")

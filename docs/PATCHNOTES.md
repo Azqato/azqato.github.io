@@ -5,6 +5,19 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.46.1] - 2026-11-22
+
+### Added
+- **GDP shrinking two quarters in a row is called out** (owner's request): when real GDP growth is below zero for two
+quarters running, a red alert opens the Rates page ("GDP shrank two quarters in a row", with each quarter's figure) and
+a bold red line opens the This Week Rates group. The fetch now keeps each economy row's last four readings (`hist` in
+`econ()`). `demo.py --mock-invert` previews it with made-up quarters of -0.6% and -1.2%.
+
+### Changed
+- **This Week only counts inversions among the 2, 10 and 30-year yields** (owner's request), like the Inverted alert:
+"1 yield or gap is inverted" (this week, 30Y below 20Y) now reads "The 2, 10 and 30-year yields are not inverted".
+When one of them does invert, This Week calls it out in bold red ("The 10Y yield is below the 2Y").
+
 ## [2.46.0] - 2026-11-22
 
 ### Added

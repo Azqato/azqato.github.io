@@ -3,7 +3,7 @@ before they go live. Changes nothing in the repository.
 
 Usage, from anywhere:  python scripts/invests/weekly/demo.py 2026-11-13 [PATH]
 PATH defaults to the owner's Downloads/weekly-report-demo.html.
---mock-invert previews the inversion callout with made-up yields (10-year 4.60%,
+--mock-invert previews the inversion and shrinking-GDP callouts with made-up figures (GDP -0.6% and -1.2%; 10-year 4.60%,
 10-year minus 2-year -0.26), written by default to weekly-report-demo-inverted.html.
 Needs: pip install playwright && python -m playwright install chromium
 

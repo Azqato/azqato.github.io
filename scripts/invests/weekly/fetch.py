@@ -338,7 +338,10 @@ def econ(fri):
         m, last = h.index[-1], float(h.iloc[-1])
         back = lambda k: round((last - float(h[h.index <= m - pd.DateOffset(months=k)].iloc[-1])) * 100, 2)
         dec = float(h[h.index <= pd.Timestamp(fri.year - 1, 12, 1)].iloc[-1])
+        # The last four readings, so a run of shrinking quarters can be called
+        # out (owner, 2026-11-22: two quarters of negative GDP growth in a row).
         out.append({"t": t, "n": n, "q": q, "month": str(m.date()), "last": last,
+                    "hist": [[str(d.date()), float(v)] for d, v in h.iloc[-4:].items()],
                     "bps": {"w": None, "m1": back(1), "m6": back(6), "ytd": round((last - dec) * 100, 2),
                             "y1": back(12), "y5": back(60), "y10": back(120)}})
         print(t, out[-1])
