@@ -72,6 +72,7 @@
 # Azqato's Prompts (item 22): one address per page, and retired slugs.
 # Written by scripts/prompts/build.py.
 /codes/prompts  /codes/prompts/  301
+/codes/prompts/website-setup  /codes/prompts/website-setup/  301
 /codes/prompts/documentation  /codes/prompts/documentation/  301
 /codes/prompts/project-defaults  /codes/prompts/project-defaults/  301
 /codes/prompts/condense-docs  /codes/prompts/condense-docs/  301

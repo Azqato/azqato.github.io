@@ -46,8 +46,15 @@ def behavior(ctx, base):
         B.fail("Contents sidebar: the Prompts group should be open and Tools closed")
     if p.query_selector(".cd-sidebar input"):
         B.fail("Contents sidebar has a search box; search is the second bar's")
-    if "GitHub Wiki" not in p.inner_text(".cd-pager"):
-        B.fail("Previous / Next does not follow the prompt order")
+    # The neighbours come from the build's own order, so the check follows
+    # any regrouping of CATEGORIES (it hard-coded GitHub Wiki before 2026-11-22).
+    _bs = importlib.util.spec_from_file_location("prompts_build", HERE / "build.py")
+    PB = importlib.util.module_from_spec(_bs); _bs.loader.exec_module(PB)
+    titles = {s_: PB.re.search(r"^title: (.*)$", (PB.SRC / f"{s_}.md").read_text(encoding="utf-8"), PB.re.M).group(1) for s_ in PB.ORDER}
+    k = PB.ORDER.index("mobile-responsive-audit")
+    pager = p.inner_text(".cd-pager")
+    if any(titles[s_] not in pager for s_ in PB.ORDER[max(k - 1, 0):k + 2:2]):
+        B.fail(f"Previous / Next does not follow the prompt order: {pager!r}")
     phone = B.load(ctx, base, "mobile-responsive-audit/index.html", "light", B.PHONE, wait=300)
     if phone.is_visible("#cd-nav"):
         B.fail("phone: Contents is open on load")

@@ -37,6 +37,7 @@ SITE = 'https://azqato.com/codes/prompts/'
 # The Prompts page and the Codes sidebar list the prompts under these headings,
 # in this order (owner's grouping, 2026-10-22). ORDER is the flat list.
 CATEGORIES = [
+    ('Start here', ['website-setup']),  # first in the list and sidebar (owner, 2026-11-22)
     ('Documentation', ['documentation', 'project-defaults', 'condense-docs', 'seo-audit']),
     ('Prompts', ['add-prompt', 'prompt-writing', 'prompt-audit']),
     ('Audits and quality', ['mobile-responsive-audit', 'design-review', 'assumption-check', 'score-to-target']),

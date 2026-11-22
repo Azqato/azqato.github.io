@@ -5,7 +5,7 @@ and the steps for adding, changing and retiring prompts. Site-wide rules (deploy
 live in the site's own [docs/PRD.md](../../../docs/PRD.md); this file covers only what is specific to prompts and
 points there for the rest.
 
-Last updated 2026-10-12, site version 2.19.1.
+Last updated 2026-11-22, site version 2.47.0.
 
 ---
 
@@ -69,6 +69,13 @@ link. These rules keep a prompt safe to hand to a stranger and keep it working w
 - **Third-party sites are allowed when the prompt itself uses them**, for example a public tool or reference the prompt
   sends Claude to. Check that the site is live and that its terms allow the use, note the date checked in the patch
   notes, and have the prompt ask before installing anything.
+- **Design standards for web pages** (owner, 2026-11-22). A prompt that builds, reviews or audits a web page points to
+  the Template Interface Web Design Standard (https://templateinterface.com/standards/web-design/) and Color Standard
+  (https://templateinterface.com/standards/color/) and tells Claude to read both in full with curl. It links them and
+  copies in only what its own job needs: mobile, desktop and print each checked at 320 to 1920 px and on US Letter
+  paper, by rendering and measuring; color roles that pass in light and dark mode; the 8.5x11 print rules; and a hidden
+  brief for AI agents at the end of each page. A build prompt says do it, a review or audit prompt says check and
+  report. So far: Mobile Audit (checks) and Project Defaults (records the rule).
 
 ### Writing
 

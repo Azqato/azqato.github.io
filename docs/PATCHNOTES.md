@@ -5,6 +5,40 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.47.0] - 2026-11-22
+
+### Added
+- **New prompt: Website Setup** (owner's request), in a new first category, Start here, so it is the second link in
+the Prompts sidebar after Overview and leads the Prompts page (`codes/prompts/md/website-setup.md`). It builds a website from the ground up by running eight of this site's prompts
+in order: Project Defaults, Documentation, Assumption Check, URL Structure, Landing Page, Design Review, Mobile Audit,
+then App Performance or Animation Performance, whichever fits (it recommends one and asks). It first adds a Roadmap
+checklist to the README linking each step, downloads and reads each prompt in full before running it, skips any task
+the session already did in an earlier step (such as reading the docs) unless a file has changed since, ticks each step
+when its checks pass, and asks before the next one. It never commits, pushes or publishes.
+
+### Changed
+- **Mobile Audit follows the Template Interface Web Design Standard and Color Standard** (owner's request;
+`codes/prompts/md/mobile-responsive-audit.md`). It reads both in full first, then checks three surfaces: screens at
+eight widths (320px added, set by device emulation because headless windows clamp near 500px, plus a 20px sweep
+between them), color (roles rather than raw values, and WCAG contrast measured by script in light and dark mode against
+the standard's required pairings), and print on US Letter paper (ink on white including the margins, no controls,
+navigation, live state or decoration, hidden tab content printed, a header and footer on every sheet in `@page` margin
+boxes with a named-page section title and "Page N of M", nothing split across a break, no fixed paper size), checked
+in a headless Edge PDF page by page. It also checks each page for a hidden brief for AI agents, and asks before adding
+one, before changing print header wording, and before adding a color role. The report adds contrast ratios, PDF page
+counts and titles, and the standard's checklist.
+- **Project Defaults records a Design Standards rule for sites** (owner's request; `codes/prompts/md/project-defaults.md`):
+the two standards, the three surfaces and widths, color roles in both modes, the 8.5x11 print rules and the brief for
+AI agents, written into the PRD as a default where the project has no rule of its own. It edits no pages.
+- Both standards were checked live on 2026-11-22 (templateinterface.com/standards/web-design/, version 1.0, and
+/standards/color/, version 1.0). The site invites copying its tokens and shows no terms page; the prompts only link to
+it and have Claude read it.
+
+### Fixed
+- **The prompts browser test reads Previous / Next from the build's order** (`scripts/prompts/browser.py`). It still
+expected GitHub Wiki beside Mobile Audit, the order from before the prompts were grouped into categories, so it failed
+on a correct page.
+
 ## [2.46.1] - 2026-11-22
 
 ### Added
