@@ -223,7 +223,7 @@ def ff_cpi():
     it uses the same CPI month as the CPI row (owner, 2026-11-15)."""
     ff = fred("DFF")
     c = fred("CPIAUCSL")
-    yoy = (c / c.shift(12) - 1) * 100
+    yoy = yoy12(c)
     yoy.index = yoy.index + pd.DateOffset(months=1)
     y = yoy.reindex(ff.index.union(yoy.index)).ffill().reindex(ff.index)
     return (ff - y).dropna().round(2)
@@ -289,6 +289,14 @@ def breakeven(fri):
 INFLATION = [("CPIAUCSL", "CPI"), ("PCEPI", "PCE")]
 
 
+def yoy12(h):
+    """Inflation over 12 months: each month's index against the same calendar
+    month a year earlier, never 12 rows back (2026-11-22: BLS published no
+    October 2025 CPI, so counting rows compared later months with 13 months
+    before). A month with no reading a year earlier has no rate."""
+    return ((h / h.shift(freq=pd.DateOffset(months=12)).reindex(h.index)) - 1).dropna() * 100
+
+
 def inflation(fri):
     """Each measure's 12-month rate for its latest month, and how far that rate
     moved over the bond table's periods, in basis points (1W is not measured:
@@ -296,15 +304,65 @@ def inflation(fri):
     out = []
     for t, n in INFLATION:
         h = upto(fred(t), fri)
-        yoy = (h / h.shift(12) - 1) * 100
+        yoy = yoy12(h)
+        m = yoy.index[-1]  # the latest month with a 12-month rate
         last = float(yoy.iloc[-1])
-        back = lambda k: round((last - float(yoy.iloc[-1 - k])) * 100, 2)
+        # k calendar months back, or the nearest earlier month with a rate
+        back = lambda k: round((last - float(yoy[yoy.index <= m - pd.DateOffset(months=k)].iloc[-1])) * 100, 2)
         dec = float(yoy[yoy.index <= pd.Timestamp(fri.year - 1, 12, 1)].iloc[-1])
-        out.append({"t": t, "n": n, "month": str(h.index[-1].date()), "yoy": round(last, 3), "prev": round(float(yoy.iloc[-2]), 3),
-                    "mom": round((float(h.iloc[-1]) / float(h.iloc[-2]) - 1) * 100, 3),
+        prev = m - pd.DateOffset(months=1)
+        out.append({"t": t, "n": n, "month": str(m.date()), "yoy": round(last, 3), "prev": round(float(yoy[yoy.index <= prev].iloc[-1]), 3),
+                    "mom": round((float(h[m]) / float(h[prev]) - 1) * 100, 3) if prev in h.index else None,
                     "bps": {"w": None, "m1": back(1), "m6": back(6), "ytd": round((last - dec) * 100, 2),
                             "y1": back(12), "y5": back(60), "y10": back(120)}})
         print(t, out[-1])
+    return out
+
+
+# The economy (owner, 2026-11-22): real GDP growth from the Bureau of Economic
+# Analysis (quarterly, the change from the quarter before at an annual pace,
+# the headline figure) and the unemployment rate from the Bureau of Labor
+# Statistics (monthly), both through FRED, in the Rates table.
+ECON = [("A191RL1Q225SBEA", "GDP Growth", True), ("UNRATE", "Unemployment", False)]
+
+
+def econ(fri):
+    """Each measure's latest reading and how far it moved over the bond table's
+    periods, in basis points, like the inflation rows: k months before the
+    reading's own month, or the nearest earlier reading (for GDP, the quarter
+    that covers that month). 1W is not measured. YTD is against the last
+    reading for last December or before."""
+    out = []
+    for t, n, q in ECON:
+        h = upto(fred(t), fri)
+        m, last = h.index[-1], float(h.iloc[-1])
+        back = lambda k: round((last - float(h[h.index <= m - pd.DateOffset(months=k)].iloc[-1])) * 100, 2)
+        dec = float(h[h.index <= pd.Timestamp(fri.year - 1, 12, 1)].iloc[-1])
+        out.append({"t": t, "n": n, "q": q, "month": str(m.date()), "last": last,
+                    "bps": {"w": None, "m1": back(1), "m6": back(6), "ytd": round((last - dec) * 100, 2),
+                            "y1": back(12), "y5": back(60), "y10": back(120)}})
+        print(t, out[-1])
+    return out
+
+
+def inflation_10y(fri):
+    """The Inflation page's chart (owner, 2026-11-22): 10 years of monthly CPI
+    and core CPI inflation over 12 months (BLS, CPIAUCSL and CPILFESL) and the
+    Fed funds rate's monthly average (FEDFUNDS), all through FRED, ending at
+    CPI's latest month, plus the 30, 10 and 2-year Treasury yields' monthly
+    averages. A month the Fed funds average is not out for yet is
+    left out of that line."""
+    cpi, core, ff = yoy12(upto(fred("CPIAUCSL"), fri)), yoy12(upto(fred("CPILFESL"), fri)), upto(fred("FEDFUNDS"), fri)
+    # Every calendar month to CPI's latest, with None where a series has no
+    # rate (no October 2025 CPI, so no rate for it or for October 2026), so the
+    # chart shows a gap, not a join.
+    months = pd.date_range(end=upto(fred("CPIAUCSL"), fri).index[-1], periods=121, freq="MS")
+    pick = lambda s: [[str(m.date())[:7], round(float(s[m]), 2) if m in s.index else None] for m in months]
+    # Treasury yields for the page's second chart (owner, 2026-11-22): each
+    # month's average of the daily 30, 10 and 2-year yields, over the same months.
+    avg = lambda t: upto(fred(t), fri).resample("MS").mean()
+    out = {"cpi": pick(cpi), "core": pick(core), "ff": pick(ff), "y30": pick(avg("DGS30")), "y10": pick(avg("DGS10")), "y2": pick(avg("DGS2"))}
+    print("inflation_10y", {k: (v[0], v[-1], len(v), [m for m, x in v if x is None]) for k, v in out.items()})
     return out
 
 
@@ -494,7 +552,7 @@ def forward(W, fri):
 
 def main(friday):
     fri = pd.Timestamp(friday)
-    d = {"rows": prices(fri) + fred_rows(fri) + muni(fri), "breakeven": breakeven(fri), "inflation": inflation(fri), "fetched": dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
+    d = {"rows": prices(fri) + fred_rows(fri) + muni(fri), "breakeven": breakeven(fri), "inflation": inflation(fri), "inflation_10y": inflation_10y(fri), "econ": econ(fri), "fetched": dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
          "mood": mood(fri), "vix": vix_block(fri), "aaii": aaii_block(fri), "friday": friday}
     out = HERE / "data" / f"{friday}.json"
     out.write_text(json.dumps(d, indent=1) + "\n", encoding="utf-8", newline="\n")

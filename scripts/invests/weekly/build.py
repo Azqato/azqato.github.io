@@ -367,6 +367,82 @@ def line_chart(series, ymin, ymax, guides, w=640, h=170, labels=None, tick=None,
     return f"<div class='chart'>{out}</svg></div>"
 
 
+def month_chart(months, series, w=740, h=370, labels=None):
+    """A monthly line chart on one % axis (owner, 2026-11-22: CPI, core CPI and
+    the Fed funds rate over 10 years). months: ["YYYY-MM"]. series: [(name,
+    values with None for a missing month, css color, decimals in the end label)].
+    A missing month breaks the line, bridged by a dotted segment. Each line ends
+    in a dot; its latest value is labelled at the left, in the line's color, at
+    the end of a dotted guide across the chart (owner, 2026-11-22). The left axis has a tick every 0.25%. The
+    current year is widened so each month carries its number (1 = January);
+    a shaded band marks it. Hovering a month shows every value for it."""
+    pl, pr, pt, pb = 54, 14, 8, 40
+    vals = [v for _, vs, _, _ in series for v in vs if v is not None]
+    ymin, ymax = min(0, math.floor(min(vals))), max(2, math.ceil(max(vals) / 2) * 2)
+    n, W = len(months), w - pl - pr
+    j0 = max(i for i, m in enumerate(months) if m.endswith("-01"))  # this year's January
+    step = 16 if n - 1 - j0 >= 1 else 0  # px per month this year (owner, 2026-11-22)
+    Wa = W - step * (n - 1 - j0)
+    X = lambda i: pl + Wa * i / j0 if i <= j0 else pl + Wa + step * (i - j0)
+    Y = lambda y: pt + (h - pt - pb) * (1 - (y - ymin) / (ymax - ymin))
+    out = f"<svg viewBox='0 0 {w} {h}' role='img' aria-label='{E(labels or 'chart')}'>"
+    if step:
+        out += f"<rect x='{X(j0) - step / 2:.1f}' y='{pt}' width='{X(n - 1) - X(j0) + step:.1f}' height='{h - pt - pb}' style='fill:var(--text);fill-opacity:0.035'/>"
+    # Each line's latest value sits on the left, beside the axis (owner,
+    # 2026-11-22), nudged apart; an axis label it would cover is left out.
+    tags = sorted([Y(v), f"{v:.{dp}f}%", color] for _, vs, color, dp in series for v in [next(v for v in reversed(vs) if v is not None)])
+    for j in range(1, len(tags)):
+        tags[j][0] = max(tags[j][0], tags[j - 1][0] + 14)
+    for y in range(int(ymin), int(ymax) + 1, 2):
+        out += f"<line x1='{pl}' x2='{w - pr}' y1='{Y(y):.1f}' y2='{Y(y):.1f}' stroke='var(--line)' stroke-dasharray='4 4'/>"
+        if all(abs(Y(y) - t[0]) >= 13 for t in tags):
+            out += f"<text x='{pl - 9}' y='{Y(y) + 4:.1f}' text-anchor='end'>{y}%</text>"
+    for y, t, color in tags:
+        out += f"<text x='{pl - 9}' y='{y + 4:.1f}' text-anchor='end' style='fill:{color};font-weight:600'>{t}</text>"
+    # A tick every 0.25% on the left axis (owner, 2026-11-22), longer at each whole %.
+    out += f"<line x1='{pl}' x2='{pl}' y1='{pt}' y2='{h - pb}' stroke='var(--muted)' stroke-width='1'/>"
+    for q in range(int(ymin * 4), int(ymax * 4) + 1):
+        out += f"<line x1='{pl - (6 if q % 4 == 0 else 3)}' x2='{pl}' y1='{Y(q / 4):.1f}' y2='{Y(q / 4):.1f}' stroke='var(--muted)' stroke-width='1'/>"
+    for i, m in enumerate(months):  # a year label each January of an even year
+        if m.endswith("-01") and int(m[:4]) % 2 == 0 and i < j0 - 6:
+            out += f"<text x='{X(i):.1f}' y='{h - 6}' text-anchor='middle'>{m[:4]}</text>"
+    if step:  # this year: each month by number, the year under them
+        for i in range(j0, n):
+            out += f"<text x='{X(i):.1f}' y='{h - 24}' text-anchor='middle'>{int(months[i][5:])}</text>"
+        out += f"<text x='{(X(j0) + X(n - 1)) / 2:.1f}' y='{h - 6}' text-anchor='middle'>{months[j0][:4]}</text>"
+    # A dotted guide across the chart at each line's latest value, in its
+    # color (owner, 2026-11-22), drawn under the lines.
+    for name, vs, color, dp in series:
+        v = next(v for v in reversed(vs) if v is not None)
+        out += f"<line x1='{pl}' x2='{w - pr}' y1='{Y(v):.1f}' y2='{Y(v):.1f}' stroke='{color}' stroke-width='1' stroke-dasharray='2 3' stroke-opacity='0.8'/>"
+    for name, vs, color, dp in series:
+        d, pen = "", "M"
+        for i, v in enumerate(vs):
+            if v is None:
+                pen = "M"
+                continue
+            d += f"{pen}{X(i):.1f},{Y(v):.1f} "
+            pen = "L"
+        out += f"<path d='{d.strip()}' fill='none' stroke='{color}' stroke-width='2' stroke-linejoin='round' stroke-linecap='round'/>"
+        # A month with no data inside the line is bridged with a dotted
+        # segment (owner, 2026-11-22), so the gap reads as "not reported".
+        have = [i for i, v in enumerate(vs) if v is not None]
+        for a, b in zip(have, have[1:]):
+            if b - a > 1:
+                out += (f"<line x1='{X(a):.1f}' y1='{Y(vs[a]):.1f}' x2='{X(b):.1f}' y2='{Y(vs[b]):.1f}' stroke='{color}' "
+                        "stroke-width='2' stroke-dasharray='1 4' stroke-linecap='round'/>")
+        k = max(have)
+        out += f"<circle cx='{X(k):.1f}' cy='{Y(vs[k]):.1f}' r='4.5' fill='{color}' style='stroke:var(--card)' stroke-width='2'/>"
+    # Hover: one band per month, with every value for it.
+    for i, m in enumerate(months):
+        x0 = (X(i - 1) + X(i)) / 2 if i else X(i)
+        x1 = (X(i) + X(i + 1)) / 2 if i < n - 1 else X(i)
+        tip = f"{dt.date.fromisoformat(m + '-01'):%b %Y}: " + ", ".join(
+            f"{name} {'n/a' if vs[i] is None else f'{vs[i]:.2f}%'}" for name, vs, _, _ in series)
+        out += f"<rect class='hov' x='{x0:.1f}' y='{pt}' width='{max(x1 - x0, 1):.2f}' height='{h - pt - pb}'><title>{E(tip)}</title></rect>"
+    return f"<div class='chart'>{out}</svg></div>"
+
+
 # ---------------------------------------------------------------- the sections
 def build(D):
     rows = D["rows"]
@@ -635,7 +711,7 @@ def build(D):
     ytd_best = max(sec, key=lambda r: r["ch"]["ytd"])
     S["indices"] = (
         "<section class='slide dense'>" + head("Returns", "indices")
-        + "<p class='lede'>Total return over each period, price change plus dividends reinvested, for 12 major funds and the 11 sector funds that make up the S&amp;P 500.</p>"
+        + "<p class='lede'>Total return over each period, price change plus dividends reinvested, for 12 major funds and the 11 sector funds that make up the S&amp;P 500. Status reads Correction when a fund is 10% or more below its past-year high, Bear at 20% or more, and Bull when it is 20% or more above its past-year low.</p>"
         + returns_table([("Indices", idx), ("Sectors", srt)])
         + idx_lead
         + "<p class='key webonly'>Sectors are the 11 Select Sector SPDR funds, which together make up the S&amp;P 500, sorted by this week's change. "
@@ -761,6 +837,20 @@ def build(D):
         cells = "".join("<td>+0</td>" if r["bps"][k] is None else f"<td class='{cl(-round(r['bps'][k]))}'>{sg(r['bps'][k], 0) if round(r['bps'][k]) else '+0'}</td>" for k, _ in SPANS)
         return f"<tr><td><b>{E(r['n'])}</b> <span class='fn'>{dt.date.fromisoformat(r['month']):%b}</span></td><td><b>{r['yoy']:.2f}%</b></td>{cells}{stat(trend(r['bps']['m1']))}</tr>"
 
+    # GDP growth and unemployment (owner, 2026-11-22), with the inflation rows.
+    # Faster GDP growth is good news, so its rises are green and its Status
+    # Rising green; a rise in unemployment is red, like a rate.
+    ECO = D.get("econ") or []
+
+    def erow(r):
+        up = 1 if r["t"].startswith("A191") else -1
+        cells = "".join("<td>+0</td>" if r["bps"][k] is None else f"<td class='{cl(up * round(r['bps'][k]))}'>{sg(r['bps'][k], 0) if round(r['bps'][k]) else '+0'}</td>" for k, _ in SPANS)
+        d = dt.date.fromisoformat(r["month"])
+        when = f"Q{(d.month - 1) // 3 + 1}" if r["q"] else f"{d:%b}"
+        w = trend(r["bps"]["m1"])
+        status = f"<td class='{'k-g1' if w == 'Rising' else 'k-r1' if w == 'Falling' else ''}'>{w}</td>" if up > 0 else stat(w)
+        return f"<tr><td><b>{E(r['n'])}</b> <span class='fn'>{when}</span></td><td><b>{r['last']:.2f}%</b></td>{cells}{status}</tr>"
+
     ycols = "".join(f"<th>{s[1]}</th>" for s in SPANS)
     TP = grp("tips")
     # Each section sorted from the lowest level to the highest (owner,
@@ -770,10 +860,10 @@ def build(D):
         # The yield curve keeps fetch.py's fixed order (owner, 2026-11-15).
         out = [((i if g == "curve" else r["last"] or 0), months(r) if g == "yld" else 0, yrow(r)) for i, r in enumerate(rs)]
         if g == "rates":
-            out += [(r["yoy"], 0, irow(r)) for r in INF]
+            out += [(r["yoy"], 0, irow(r)) for r in INF] + [(r["last"], 0, erow(r)) for r in ECO]
         return "".join(h for _, _, h in sorted(out, key=lambda x: x[:2]))
     yt = f"<tr><th>Treasury, TIPS and munis</th><th>Yield</th>{ycols}<th>Status</th></tr>" + section("yld")
-    for g, title, col in (("rates", "Policy, mortgage and inflation rates", "Rate"), ("curve", "Yield curve", "Gap")):
+    for g, title, col in (("rates", "Policy, mortgage, inflation and the economy", "Rate"), ("curve", "Yield curve", "Gap")):
         if grp(g) or (g == "rates" and INF):
             yt += f"<tr class='tsub'><th>{title}</th><th>{col}</th>{ycols}<th>Status</th></tr>" + section(g)
     # The full notes stay on the website page; the export leaves them out
@@ -790,25 +880,98 @@ def build(D):
                 "Changes are red when a yield or rate rose (a rising yield means a falling bond price) and green when it fell. Status is Inverted (red) when a yield is below a shorter maturity's, or a gap is below zero, and that comes first. "
                 "Otherwise it is the move over the past month: Rising (red) or Falling (green) at 10 bps or more, otherwise Steady. "
                 "The yield curve rows are not colored: a gap is Steepening when it widened by 10 bps or more over the past month, Flattening when it narrowed by that much, otherwise Steady; "
-                "Real Fed Funds is Behind (red) below zero, when CPI inflation is above the Fed funds rate. Mortgage rates are Freddie Mac's weekly survey averages; credit card (accounts paying interest) and car loan rates are the Fed's quarterly survey of banks.</p>"
+                "Real Fed Funds is Behind (red) below zero, when CPI inflation is above the Fed funds rate. "
+                "GDP Growth is real GDP's growth in its latest quarter at an annual pace; it is the other way round: a rise, and Rising, are green, a fall red. Its 1M column compares it with the quarter before. "
+                "Unemployment is the share of the labor force without a job and looking for one, monthly. Mortgage rates are Freddie Mac's weekly survey averages; credit card (accounts paying interest) and car loan rates are the Fed's quarterly survey of banks.</p>"
                 "<div class='src'>Treasury and TIPS yields are the U.S. Treasury's daily yield curves (home.treasury.gov) at this Friday's close, with their history from FRED; "
-                "the other rates from FRED, including CPI (Bureau of Labor Statistics) and PCE (Bureau of Economic Analysis). "
+                "the other rates from FRED, including CPI and unemployment (Bureau of Labor Statistics, UNRATE) and PCE and GDP growth (Bureau of Economic Analysis, A191RL1Q225SBEA). "
                 + (f"Not yet published for this Friday: {', '.join(ylabel(r['n']) for r in lag)}, shown at the latest reading ({' or '.join(day(d, True) for d in late)}), with changes measured back from that date." if late else "") + "</div></div>")
     # Inversion callout (owner, 2026-11-15): whenever any yield or gap is
     # inverted, a red callout above the table names each one. It is data, so
     # it stays in the export; the history line is for the website only.
-    bad = [r for r in rows if inverted.get(r["t"])]
+    # Only an inversion among the 2, 10 and 30-year yields raises the alert
+    # (owner, 2026-11-22); others still read Inverted in the table.
+    KEY = {"DGS2": 2, "DGS10": 10, "DGS30": 30}
+    ky = {r["t"]: r for r in grp("yld") if r["t"] in KEY}
+    pairs = []
+    if len(ky) == 3:
+        d0 = min(r["d"] for r in ky.values())
+        for lt, st in (("DGS10", "DGS2"), ("DGS30", "DGS2"), ("DGS30", "DGS10")):
+            lv, sv = on(ky[lt], d0), on(ky[st], d0)
+            if lv is not None and sv is not None and lv < sv:
+                pairs.append((ky[lt], lv, ky[st], sv, d0))
+    bad = [r for r in grp("curve") if inverted.get(r["t"]) and r["t"] in ("T10Y2Y", "DGS30-DGS10")]
     alert = ""
-    if bad:
+    if bad or pairs:
         nm_ = lambda r: ylabel(r["n"])
-        items = [f"on {day(over[r['t']][3])}, the {nm_(r)} yield, {over[r['t']][1]:.2f}%, was below the {nm_(over[r['t']][0])} yield, {over[r['t']][2]:.2f}%" if r["t"] in over
-                 else f"{r['n']} is {sg(r['last'], 2)} points" for r in sorted(bad, key=lambda r: r["g"] != "curve")]
+        items = ([f"{r['n']} is {sg(r['last'], 2)} points" for r in bad]
+                 + [f"on {day(d0_)}, the {nm_(l)} yield, {lv:.2f}%, was below the {nm_(s_)} yield, {sv:.2f}%" for l, lv, s_, sv, d0_ in pairs])
         alert = ("<div class='alert'><p class='alert-h'>Inverted</p><ul>" + "".join(f"<li>{E(i[0].upper() + i[1:])}.</li>" for i in items) + "</ul>"
                  "<p class='webonly alert-n'>An inverted yield curve, short-term yields above long-term ones, has often, but not always, come before a recession.</p></div>")
     S["yields"] = (
         "<section class='slide dense xdense'>" + head("Rates", "yields")
-        + "<p class='lede'>Treasury, TIPS and muni yields, the rates that set borrowing costs, inflation and the yield curve. Changes over each period are in basis points (100 bps = 1 percentage point).</p>"
+        + "<p class='lede'>Treasury, TIPS and muni yields, the rates that set borrowing costs, inflation, GDP growth, unemployment and the yield curve. Changes over each period are in basis points (100 bps = 1 percentage point).</p>"
         + alert + f"<div class='card wrap'><table class='tt'>{yt}</table></div>" + yld_note + "</section>")
+
+    # ===== 8b. Inflation (owner, 2026-11-22): CPI, core CPI and the Fed funds
+    # rate, monthly over the past 10 years, on one chart. Data files from
+    # before 2026-11-22 have no history, so the page is left out for them.
+    H10 = D.get("inflation_10y")
+    tw_infl = None
+    if H10:
+        months = [m for m, _ in H10["cpi"]]
+        cpi_v, core_v, ff_v = ([v for _, v in H10[k]] for k in ("cpi", "core", "ff"))
+        last = lambda vs: max(i for i, v in enumerate(vs) if v is not None)
+        kc, kf = last(cpi_v), last(ff_v)
+        mlab = lambda i: f"{dt.date.fromisoformat(months[i] + '-01'):%B %Y}"
+        hi = lambda vs: (lambda t: (t[0], -t[1]))(max((v, -i) for i, v in enumerate(vs) if v is not None))  # the first month at the high
+        lo = lambda vs: min((v, i) for i, v in enumerate(vs) if v is not None)
+        yr = lambda vs, k: vs[k] - vs[k - 12] if k >= 12 and vs[k - 12] is not None else None
+        gap = ff_v[kc] - cpi_v[kc] if ff_v[kc] is not None else None
+        ichart = month_chart(months, [("CPI", cpi_v, "var(--c1)", 1), ("Core CPI", core_v, "var(--c2)", 1), ("Fed funds", ff_v, "var(--c3)", 2)],
+                             labels="CPI and core CPI inflation over 12 months and the Fed funds rate, monthly, past 10 years")
+        ileg = ("<div class='legend' style='margin:0 0 4px;justify-content:center'>" + "".join(f"<span><i class='sw' style='background:var(--{c})'></i>{n}</span>"
+                for c, n in (("c1", "CPI inflation"), ("c2", "Core CPI inflation"), ("c3", "Fed Funds Rate")))
+                + "</div>")  # no legend entry for the dotted gap (owner, 2026-11-22)
+        # Treasury yields (owner, 2026-11-22): a second chart on the page, the
+        # 30, 10 and 2-year yields' monthly averages over the same months.
+        ych, y_pts = "", []
+        if H10.get("y10"):
+            y30, y10, y2 = ([v for _, v in H10[k]] for k in ("y30", "y10", "y2"))
+            ky = last(y10)
+            # A blank line between the two charts (owner, 2026-11-22).
+            ych = ("<h3 class='sub2' style='margin-top:1.6em'>Fed Funds Rate vs Yields</h3>"
+                   + "<div class='legend' style='margin:0 0 4px;justify-content:center'>" + "".join(f"<span><i class='sw' style='background:var(--{c})'></i>{n}</span>"
+                     for c, n in (("c4", "30-year"), ("c5", "10-year"), ("c6", "2-year"), ("c3", "Fed Funds Rate"))) + "</div>"
+                   + month_chart(months, [("30Y", y30, "var(--c4)", 2), ("10Y", y10, "var(--c5)", 2), ("2Y", y2, "var(--c6)", 2), ("Fed funds", ff_v, "var(--c3)", 2)],  # Fed funds added (owner, 2026-11-22)
+                                 labels="30, 10 and 2-year Treasury yields and the Fed funds rate, monthly average, past 10 years"))
+            (h10, i10), (l10, j10) = hi(y10), lo(y10)
+            tops = [n for n, vs in (("30-year", y30), ("10-year", y10), ("2-year", y2)) if hi(vs)[1] == ky]
+            y_pts = [f"In {mlab(ky)} the 30-year Treasury yield averaged {y30[ky]:.2f}%, the 10-year {y10[ky]:.2f}% and the 2-year {y2[ky]:.2f}%"
+                     + (f"; for the {' and the '.join(tops)}, the highest monthly average of the past 10 years." if tops else "."),
+                     f"Over the past 10 years the 10-year yield's monthly average ranged from {l10:.2f}% ({mlab(j10)}) to {h10:.2f}% ({mlab(i10)})."]
+        (hc, ic), (hk, ik), (hf, jf), (lf, mf) = hi(cpi_v), hi(core_v), hi(ff_v), lo(ff_v)
+        missing = [i for i, v in enumerate(cpi_v) if v is None]
+        i_pts = [f"CPI inflation was {cpi_v[kc]:.1f}% over the 12 months to {mlab(kc)} and core CPI {core_v[kc]:.1f}%; the Fed funds rate averaged {ff_v[kf]:.2f}% in {mlab(kf)}.",
+                 f"Over the past 10 years CPI inflation peaked at {hc:.1f}% ({mlab(ic)}) and core CPI at {hk:.1f}% ({mlab(ik)}).",
+                 f"The Fed funds rate ranged from {lf:.2f}% ({mlab(mf)}) to {hf:.2f}% ({mlab(jf)}).",
+                 (f"In {mlab(kc)} the Fed funds rate was {abs(gap):.2f} points {'above' if gap >= 0 else 'below'} CPI inflation." if gap is not None else "")]
+        if missing:
+            i_pts.append(f"There is no CPI rate for {' or '.join(mlab(i) for i in missing)}: BLS published no October 2025 CPI, after the 2025 lapse in federal funding, "
+                         "so that month and the same month a year later have no 12-month rate.")
+        S["infl"] = (
+            "<section class='slide'>" + head("Inflation", "infl")
+            + "<p class='lede'>Consumer price inflation over 12 months, with and without food and energy, against the Fed funds rate the Federal Reserve sets, month by month over the past 10 years. The second chart sets the Fed funds rate against the 30, 10 and 2-year Treasury yields over the same months.</p>"
+            + "<div class='card'>" + "<h3 class='sub2' style='margin-top:0'>Fed Funds Rate vs CPI</h3>" + ileg + ichart + ych + ana([rich(p) for p in i_pts + y_pts if p])
+            + "<div class='src webonly'>Hover a month for its figures. CPI is the Consumer Price Index for all urban consumers and core CPI the same without food and energy, both seasonally adjusted, "
+            "from the Bureau of Labor Statistics; each month's index against the same month a year earlier. The Fed funds rate is the effective rate's monthly average, from the Federal Reserve. "
+            "Treasury yields are each month's average of the daily 30, 10 and 2-year yields, from the U.S. Treasury. "
+            "All through FRED (CPIAUCSL, CPILFESL, FEDFUNDS, DGS30, DGS10, DGS2).</div>"
+            + "</div></section>")
+        tw_infl = [f"CPI inflation was {cpi_v[kc]:.1f}% over the 12 months to {mlab(kc)}"
+                   + (f", {'up' if yr(cpi_v, kc) >= 0 else 'down'} {B(fv(yr(cpi_v, kc), 2, ' points'))} from a year earlier" if yr(cpi_v, kc) is not None else "")
+                   + f", and core CPI {core_v[kc]:.1f}%.",
+                   f"The Fed funds rate averaged {ff_v[kf]:.2f}% in {mlab(kf)}."]
 
     # ===== 9. Other (owner, 2026-11-15): one Returns-style table with
     # Commodities, Currency and Crypto sections, plus price; price change, as
@@ -817,7 +980,7 @@ def build(D):
     CRY = [r for r in grp("cmd") if r["t"].endswith(CRYPTO_SUFFIX)]
     S["cmd"] = (
         "<section class='slide dense'>" + head("Other Markets", "cmd")
-        + "<p class='lede'>Futures for energy and metals, the dollar index and major currencies, and crypto, which trades around the clock.</p>"
+        + "<p class='lede'>Futures for energy and metals, the dollar index and major currencies, and crypto, which trades around the clock. Each shows its price and its change over the same periods as the funds, with the same Status.</p>"
         + returns_table([("Commodities", COM), ("Currency", grp("oth")), ("Crypto", CRY)], named=True)
         + "<div class='src webonly'>Price change from Yahoo Finance: commodities and currencies to this Friday's close, crypto to the latest price at fetch time. "
         "Each currency is its own index: the PHLX currency indexes for the euro, yen, pound, Canadian dollar and Swiss franc, and the yuan and won built the same way from Yahoo's exchange rates; "
@@ -912,7 +1075,8 @@ def build(D):
               (f"All {len(Y)} maturities rose" if len(yup) == len(Y) else "All maturities fell" if not yup else f"{len(yup)} of {len(Y)} maturities rose")
               + f", and the biggest move was the {ymax['n'].replace(' Treasury', '').lower()} ({yv(ymax['bps']['w'])})"
               + (f"; the 10-year is {abs(c2['last']):.2f} points {'above' if c2['last'] >= 0 else 'below'} the 2-year" if c2 else "")
-              + (f"; CPI inflation is {cpi['yoy']:.1f}% ({mon(cpi['month'])})." if cpi else "."))
+              # CPI has its own group when the Inflation page is shown (owner, 2026-11-22).
+              + (f"; CPI inflation is {cpi['yoy']:.1f}% ({mon(cpi['month'])})." if cpi and not H10 else "."))
     # Commodities and the dollar
     CM = COM + grp("oth")
     wk = lambda r: r["ch"]["w"]
@@ -935,7 +1099,7 @@ def build(D):
                  + f", {nm(cbig)} the most ({pv(wk(cbig))}).",
                  f"In crypto, year to date {nm(cyb)} {leads(cyb, 'ytd')} and {nm(cyw)} trails ({pv(yt(cyw))}).")
 
-    order = ["summary", "indices", "aaii", "vix", "timing", "yields", "cmd"]
+    order = ["summary", "indices", "aaii", "vix", "timing", "yields"] + (["infl"] if tw_infl else []) + ["cmd"]
     # 2 to 4 bullets per page (owner, 2026-11-15): clauses joined by "; " become
     # their own bullets, and a section with more than 4 joins its last ones.
     semis = lambda *xs: [p.rstrip(".") for x in xs for p in x.split("; ")]
@@ -949,6 +1113,7 @@ def build(D):
           ("VIX", bullets([tw_vix[0]] + semis(tw_vix[1]))),
           ("Signals", bullets([tw_timing[0] + " " + tw_sectiming[0], "Major funds: " + tw_timing[1], "Sectors: " + tw_sectiming[1]])),
           ("Rates", bullets(semis(*tw_yld))),
+          *([("Inflation", bullets(tw_infl))] if tw_infl else []),
           ("Other Markets", bullets([tw_cmd[0], tw_crypto[0], tw_cmd[1], tw_crypto[1]]))]
     assert all(2 <= len(b) <= 4 for _, b in TW)
     # Executive summary (owner, 2026-11-15): four lines across the report,
@@ -977,6 +1142,7 @@ def build(D):
         assert 2 <= len(EXEC) <= 5, "the executive summary takes 2 to 5 parts"
     S["summary"] = (
         "<section class='slide'>" + head("This Week", "summary")
+        + "<p class='lede'>The week at a glance: a short summary of what stood out, then the main facts from each page of the report. Each heading links to its page for the full figures.</p>"
         + "<div class='card tw'><div class='twg exec'><p class='twh'>Executive Summary</p>" + f"<p class='para'>{rich(' '.join(EXEC))}</p>" + "</div>" + "".join(
             f"<div class='twg'><p class='twh'><a class='twl' href='#p-{k}'>{E(t)} <span>page {i}</span></a></p><ul class='facts'>" + "".join(f"<li>{rich(x)}</li>" for x in bs) + "</ul></div>"
             for i, ((t, bs), k) in enumerate(zip(TW, order[1:]), 2))

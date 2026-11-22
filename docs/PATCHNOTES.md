@@ -5,6 +5,42 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.46.0] - 2026-11-22
+
+### Added
+- **Inflation page in the weekly report** (owner's request), after Rates, with two monthly charts over the past 10
+years (FRED: CPIAUCSL, CPILFESL, FEDFUNDS, DGS30, DGS10, DGS2; `inflation_10y()` in `fetch.py`, `month_chart()` in
+`build.py`):
+  - **Fed Funds Rate vs CPI:** CPI and core CPI inflation over 12 months against the Fed funds rate's monthly average.
+  - **Fed Funds Rate vs Yields:** the 30, 10 and 2-year Treasury yields' monthly averages against the Fed funds rate.
+  - Each line ends in a dot, and its latest value is labelled on the left, in the line's color, at the end of a dotted
+    guide across the chart. The left axis has a tick every 0.25%. This year is widened and shaded so each month
+    carries its number (1 = January). A month with no data (BLS published no October 2025 CPI) is bridged with a
+    dotted segment. Hovering a month shows every value for it.
+  - Chart colors avoid green and red, which stay reserved for good and bad (owner's request): CPI blue, core CPI
+    magenta, Fed funds gold, 30-year sky blue, 10-year purple, 2-year magenta, checked for colorblind and normal-vision
+    separation in light and dark mode.
+  - An Inflation group in This Week, a "What the numbers show" box and an Explain panel.
+- **GDP growth and unemployment in the Rates table** (owner's request), with the inflation rows in a section now called
+"Policy, mortgage, inflation and the economy" (FRED: A191RL1Q225SBEA from the Bureau of Economic Analysis, UNRATE from
+the Bureau of Labor Statistics; `econ()` in `fetch.py`). GDP growth is the latest quarter at an annual pace; it is
+colored the other way round (a rise, and Rising, are green), and its 1M column compares it with the quarter before.
+
+### Changed
+- **The Export's page titles sit centered in the header** (owner's request), at full size across its two lines,
+instead of on a line of their own; titles inside a page (AAII Survey, Market Mood) stay where they are.
+- **Every website section opens with its title and a two-sentence description** (owner's request); This Week gains
+one, and Returns, Rates, Inflation and Other Markets were completed or updated.
+- **The Inverted alert on Rates only appears for the 2, 10 and 30-year yields** (owner's request): 10Y below 2Y, 30Y
+below 2Y or 30Y below 10Y, or the 10Y - 2Y or 30Y - 10Y gap below zero. Other inversions (this week, 30Y below 20Y)
+still read Inverted in the table's Status column.
+
+### Fixed
+- **CPI and PCE inflation over 12 months compare the same calendar month a year earlier** (`yoy12()` in `fetch.py`).
+BLS published no October 2025 CPI, so counting back 12 rows had compared later months with 13 months before. The
+Rates page's CPI is now 3.7% for September (was 4.1% for October, which has no official 12-month rate), and Real Fed
+Funds is +0.16 (was -0.20, Behind).
+
 ## [2.45.1] - 2026-11-20
 
 ### Changed
