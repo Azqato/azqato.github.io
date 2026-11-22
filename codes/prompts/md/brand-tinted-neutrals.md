@@ -17,6 +17,7 @@ Replace the pure greys in this interface with a neutral scale tinted by the bran
 
 Read first
 - Read the project's own instructions, README and design docs before acting, and follow any color, theme or accessibility rules they set.
+- Read the Template Interface Color Standard in full (https://templateinterface.com/standards/color/, with its roles as data at https://templateinterface.com/standards/color/data.js) and section 4 of the Web Design Standard on print (https://templateinterface.com/standards/web-design/). Download the raw files with curl; a fetch tool that summarizes drops the tables. If they cannot be read, say so and carry on. Where they and the project's rules disagree, quote both and ask.
 - Find where colors are defined: CSS custom properties, a theme or tokens file, a Tailwind or framework config, a design-system package, or values written inline.
 - Find the brand's base color in those sources. If there is more than one candidate, or none, stop and ask me which to use.
 - Work out which themes the interface has (light, dark, or both) and how the theme is chosen.
@@ -30,8 +31,8 @@ Build the scale
 - Generate 10 to 12 steps from near-white to near-black, in a perceptual color space (OKLCH, or CIELAB if OKLCH is not available), all with the brand color's hue.
 - Keep the tint low: chroma about 0.005 to 0.02 in OKLCH, or the equivalent. Use the lowest chroma at the lightest and darkest steps and a little more in the middle steps, so white and black read as tinted white and tinted black, never as pale or deep brand color.
 - The lightest step must still read as white and the darkest as black. If the result looks colored rather than tinted, lower the chroma.
-- Map each role from the audit to one step in each theme, for example: page background, surface and raised surface; border and divider; primary, secondary and muted text.
-- Check every text and background pair, and every border against its background, with the WCAG formula, in both themes: text at least 4.5:1, large text and control borders at least 3:1. Where a pair fails, choose a different step rather than lowering the bar.
+- Map each role from the audit to one step in each theme, using the Color Standard's role names where the project has none of its own: canvas, surface, text, text-muted, border (decorative), border-strong (control outlines), plus the accent and status roles, which keep their colors.
+- Check every text and background pair, and every border against its background, with the WCAG formula, in both themes: text at least 4.5:1, large text, control borders (border-strong) and the focus ring at least 3:1; decorative dividers have no minimum. Cover every required pairing the Color Standard lists. Where a pair fails, choose a different step rather than lowering the bar.
 - Check that the status colors still read clearly against the new backgrounds and pass 4.5:1 where they are used as text. Report any that change from passing to failing.
 
 Proposal (then stop)
@@ -49,6 +50,7 @@ Apply, after approval
 Verify
 - Screenshot the main screens before and after, in both themes and at phone width, and compare them. The change should be felt, not seen: if a screen now looks blue (or whatever the brand color is) rather than neutral, lower the chroma and repeat.
 - Rerun the contrast check against the applied colors on the real pages, not only the swatch page.
+- Print a main page to a US Letter PDF with headless Edge (--print-to-pdf --no-pdf-header-footer), once with the screen in light mode and once in dark, and look at every sheet: print stays dark ink on white, so check the new tokens did not bring a tinted or dark background, or pale text, onto paper.
 - Search the code again for pure greys and inline colors that were missed.
 - Run the project's tests, lint and build.
 

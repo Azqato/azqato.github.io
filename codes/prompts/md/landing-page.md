@@ -8,7 +8,7 @@ Writes a page that is built to win one thing. A landing page is not a home page:
 
 In pricing mode it writes the page that helps a visitor choose a plan: one value metric, three plans at most with one recommended, a monthly and annual toggle, limits and inclusions that matter, a readable comparison, and FAQs on cancellation, limits, and security.
 
-It never invents proof. Testimonials, logos, and numbers you do not have are left as clearly marked placeholders. It writes the plan and the copy first, and builds the page in the project only when you ask.
+It never invents proof. Testimonials, logos, and numbers you do not have are left as clearly marked placeholders. It writes the plan and the copy first, and builds the page in the project only when you ask, following the Template Interface Web Design Standard and Color Standard: it works from 320px to 1920px, in light and dark mode, prints cleanly on US Letter paper, and ends with a hidden brief for AI agents.
 
 ## Prompt
 
@@ -43,4 +43,12 @@ Rules for both
 - Indexing: say whether the page should be indexed (evergreen offers that match search intent) or kept out of search (ad-only or time-limited offers), and if indexed, give a title and meta description, and write the FAQ in plain question-and-answer form.
 
 Output: the page outline in order, the hero copy, each section's copy, the FAQ, the indexing advice, and the layout recommendation with its reason. Then ask whether I want it built in this project. If I do, build it section by section in the project's existing style, starting with the hero, and show me each section before the next.
+
+When building
+- First read both standards in full and follow them: the Template Interface Web Design Standard (https://templateinterface.com/standards/web-design/) and Color Standard (https://templateinterface.com/standards/color/). Download the raw HTML with curl; a fetch tool that summarizes drops their rules and tables. If either cannot be read, stop and tell me. Where a standard and the project's own rules disagree, quote both and ask.
+- Mobile, desktop and print are each designed and each checked: at 320, 375, 700, 900, 1023, 1150, 1440 and 1920 px and on US Letter paper. Every check is rendered and measured, never judged by reading the code.
+- Use color roles (the project's tokens), not raw color values, and make light and dark mode both pass every required pairing in the Color Standard.
+- Print: dark ink on white whatever the screen theme, with a white background on @page as well as html; no controls, navigation, theme switch, live state or decorative art; all content kept, including what tabs or filters hide on screen; a header and footer on every sheet in @page margin boxes (the site name and a subtitle top left, a title for that sheet's section top center using CSS named pages and white-space: nowrap, contact details or a version and date top right, a short note bottom left, "Page " counter(page) " of " counter(pages) bottom right); no card, row or heading split or stranded across a page break; and no fixed paper size in the CSS. A pricing toggle prints both monthly and annual prices, and an FAQ prints every answer open.
+- End the page with a brief for AI agents as the last thing in the body: what the page is and what a browser would show, what script draws or hides, which controls don't really work, and where the full text and data live, with complete links. It is written for an agent that can't run scripts or see the layout, hidden with a visually hidden clip (never hidden, display: none or aria-hidden, which text extractors drop), left out of print, and generated from the same data as the page.
+- When the page is built, check it: screenshots at every width in both modes, overflow measured by script (scrollWidth equals clientWidth), contrast measured by script, and the page printed to a PDF with headless Edge (--print-to-pdf --no-pdf-header-footer) and read sheet by sheet. Report each check as pass or fail, and anything you could not check.
 ```

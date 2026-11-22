@@ -5,6 +5,28 @@ Format: `[version] - YYYY-MM-DD`
 
 ---
 
+## [2.48.0] - 2026-11-22
+
+### Changed
+- **Five more prompts follow the Template Interface Web Design Standard and Color Standard** (owner's request), each
+fitted to its job and each telling Claude to read both standards in full with curl:
+  - **Design Review** checks eight widths from 320px to 1920px (320 and 375 by device emulation), light and dark mode,
+  and a US Letter PDF read sheet by sheet, and adds color (roles, contrast against the required pairings), print, and
+  the brief for AI agents to what it looks for. It stays read-only.
+  - **Landing Page** gains a When building section: the eight widths and Letter paper, color roles in both modes, the
+  print rules (a pricing toggle prints both prices, an FAQ prints open), the brief for AI agents, and a pass or fail
+  check of each once built.
+  - **E-commerce Site** replaces "works from 360px" with the standard's widths and surfaces, adds color roles, print
+  rules for a shop (cart drawer, filters, toasts and stock words stay off paper) and a brief for AI agents built from the
+  product data, and prints three page types to PDF in its verify step.
+  - **Brand-Tinted Neutrals** maps roles to the Color Standard's names, separates decorative borders (no minimum) from
+  control borders (3:1), checks every required pairing, and checks that print stays ink on white.
+  - **Documentation** gets a Design Standards default policy after Page Metadata, recorded rather than checked, like
+  the other page policies. **Project Defaults** now writes that default instead of carrying its own copy, so the wording
+  has one home.
+- Left as they are, since the standards don't fit their job: SEO Audit, Frontend References, Brand Identity and Progress
+Dashboard (reasons in `codes/prompts/docs/PRD.md`, section 3).
+
 ## [2.47.0] - 2026-11-22
 
 ### Added

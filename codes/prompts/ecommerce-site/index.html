@@ -79,6 +79,7 @@
     <div class="prompt-description">
 <p>Sets up an online shop in three parts that work together. A landing page that sells the shop and its best product to someone who has never heard of it. A catalogue where visitors filter, search, sort, and compare. A product page that answers a buyer&#39;s last questions beside the Add to cart button. A cart drawer runs across all three, so a buyer never loses their place.</p>
 <p>Everything is described in the prompt itself, down to the small behaviors that make a shop feel trustworthy: sold-out options that stay visible and say so, delivery and returns answered under the button, a free-delivery threshold in the cart, filter chips you can remove one at a time, and focus that goes back where it was when a drawer closes. It works in whatever framework the project already uses, or a plain HTML, CSS, and JavaScript site if there is none.</p>
+<p>It follows the Template Interface Web Design Standard and Color Standard: every page works from 320px to 1920px, in light and dark mode, prints as a clean US Letter reading copy, and ends with a hidden brief for AI agents generated from the product data.</p>
 <p>Claude asks about the shop first and waits. It never invents reviews, ratings, customer counts, or logos: anything you do not have yet is a marked placeholder. Checkout is connected to the payment provider you choose, or left as a clear notice that nothing is charged until you connect one.</p>
     </div>
     <div class="code-block-wrapper collapsed">
@@ -102,6 +103,7 @@
 - Any subscription or repeat order: if so, the renewal terms.
 
 2. Read the project
+- Both standards, in full, before building: the Template Interface Web Design Standard (https://templateinterface.com/standards/web-design/) and Color Standard (https://templateinterface.com/standards/color/). Download the raw HTML with curl; a fetch tool that summarizes drops their rules and tables. If either cannot be read, stop and tell me. Where a standard and the project&#39;s own rules disagree, quote both and ask.
 - Framework, styling approach, existing pages, and any design rules or brand. Build in the project&#39;s own style and conventions; with nothing there, use plain HTML, CSS, and JavaScript with no build step.
 - Keep one product data file (JSON or a module) as the single source for every page: id, name, category, price, sale price, options with their own price and stock (in, low, out), rating, description, details, care, and photos with alt text. Every page reads from it.
 
@@ -148,7 +150,10 @@
 - Subscription products show the renewal price, how often it renews, and how to cancel right beside the subscribe button.
 - Checkout: connect to the provider I chose using its own hosted checkout, with keys read from environment variables and never written into the code. With no provider, the checkout button shows a notice that nothing was ordered or charged.
 - Every image has alt text naming the product and the option shown; decorative images have empty alt. Photos have width and height set and are served in WebP or AVIF at the size displayed.
-- Works from 360px wide up with no sideways scrolling, buttons at least 44px tall, visible focus on everything, and colour contrast of at least 4.5:1 for text.
+- Mobile, desktop and print are each designed and each checked: at 320, 375, 700, 900, 1023, 1150, 1440 and 1920 px and on US Letter paper, with no sideways scrolling, buttons at least 44px tall, and visible focus on everything. Every check is rendered and measured, never judged by reading the code.
+- Colours come from roles (tokens), never raw values, and light and dark mode both pass every required pairing in the Color Standard.
+- Print: dark ink on white whatever the screen theme, with a white background on @page as well as html; no controls, navigation, theme switch, live state or decorative art; all content kept, including what tabs or filters hide on screen; a header and footer on every sheet in @page margin boxes (the site name and a subtitle top left, a title for that sheet&#39;s section top center using CSS named pages and white-space: nowrap, contact details or a version and date top right, a short note bottom left, &quot;Page &quot; counter(page) &quot; of &quot; counter(pages) bottom right); no card, row or heading split or stranded across a page break; and no fixed paper size in the CSS. The cart drawer, filters, quick add, toasts, the announcement bar and the newsletter form stay off paper, and so do stock words and sale countdowns, which will be wrong tomorrow. Every expandable section and every option prints open.
+- Every page ends with a brief for AI agents as the last thing in the body: what the page is and what a browser would show, what script draws or hides, which controls don&#39;t really work, and where the full text and data live, with complete links. It is written for an agent that can&#39;t run scripts or see the layout, hidden with a visually hidden clip (never hidden, display: none or aria-hidden, which text extractors drop), left out of print, and generated from the same data as the page: here, from the product data file.
 - Any motion respects reduced-motion settings.
 - Each page has its own title and meta description, and product pages carry Product structured data with the real price and stock.
 - Do not commit, push, or deploy.
@@ -156,6 +161,7 @@
 8. Verify
 - Run the site locally and walk through it at a phone width and a desktop width: land, filter, search, sort, open quick view, choose options on a product page, try a sold-out option, add to the cart, change quantity, remove an item, reload, and check out.
 - Do the same walk with the keyboard only, and check where focus lands after each action.
+- Check every page at each width above in light and dark mode: screenshots looked at, and overflow measured by script (scrollWidth equals clientWidth). Measure contrast by script. Print the landing page, the catalogue and a product page to PDF with headless Edge (--print-to-pdf --no-pdf-header-footer) and read every sheet.
 - Fix what fails, and walk it again.
 
 Report
